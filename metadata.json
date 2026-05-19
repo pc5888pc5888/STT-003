@@ -1,0 +1,8 @@
+{
+  "name": "策略智庫數位出版 STT Press",
+  "description": "策略智庫數位出版 STT Press | 策略智庫智慧治理 Strategic Think Tank Smart Governance - 莊鈞翔博士 Eric Chuang, Ph.D. 官方平台",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
