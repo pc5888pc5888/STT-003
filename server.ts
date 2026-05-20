@@ -23,27 +23,31 @@ async function startServer() {
       app.use(express.static(distPath));
     }
   } else {
-    // Production serving logic: prioritize static files
-    app.use(express.static(distPath, { index: false }));
+    // Production serving logic: serve all static files automatically
+    app.use(express.static(distPath));
 
     app.get("*", (req, res) => {
-      if (req.path.startsWith("/api/")) return res.status(404).json({ error: "Not Found" });
-
-      // Support multi-page .html entries and SPA fallback
-      const reqPath = req.path === '/' ? '/index.html' : req.path;
-      const htmlFile = reqPath.endsWith('.html') ? reqPath : `${reqPath}.html`;
-      const fullPath = path.join(distPath, htmlFile);
-
-      if (fs.existsSync(fullPath) && fs.statSync(fullPath).isFile()) {
-        return res.sendFile(fullPath);
+      if (req.path.startsWith("/api/")) {
+        return res.status(404).json({ error: "Not Found" });
       }
 
+      // If requested path does not have an extension, check if matching .html file exists
+      const ext = path.extname(req.path);
+      if (!ext) {
+        const checkPath = req.path === "/" ? "/index" : req.path;
+        const htmlFile = `${checkPath.replace(/\/$/, "")}.html`;
+        const fullHtmlPath = path.join(distPath, htmlFile);
+        if (fs.existsSync(fullHtmlPath) && fs.statSync(fullHtmlPath).isFile()) {
+          return res.sendFile(fullHtmlPath);
+        }
+      }
+
+      // Default fallback to index.html for SPA routing
       const indexPath = path.join(distPath, "index.html");
       if (fs.existsSync(indexPath)) {
-        res.sendFile(indexPath);
-      } else {
-        res.status(404).send("Initializing...");
+        return res.sendFile(indexPath);
       }
+      res.status(404).send("Initializing...");
     });
   }
 

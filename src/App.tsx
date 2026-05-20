@@ -110,11 +110,12 @@ export default function App() {
   };
 
   const navItems = [
-    { id: "home", labelZh: "首頁", labelEn: "HOME", icon: HomeIcon },
-    { id: "governance", labelZh: "治理入口", labelEn: "GOVERNANCE", icon: Landmark },
-    { id: "about", labelZh: "關於平台", labelEn: "ABOUT PLATFORM", icon: Shield },
-    { id: "columns", labelZh: "智庫觀點", labelEn: "INSIGHTS", icon: Newspaper },
-    { id: "service-portal", labelZh: "聯絡我們", labelEn: "CONTACT", icon: Mail },
+    { id: "governance", labelZh: "法理入口", labelEn: "GOVERNANCE", icon: Landmark },
+    { id: "columns", labelZh: "法律研究", labelEn: "LEGAL RESEARCH", icon: Scale },
+    { id: "books", labelZh: "治理出版", labelEn: "PUBLICATION", icon: BookText },
+    { id: "papers", labelZh: "學術體系", labelEn: "ACADEMIC EXCELLENCE", icon: GraduationCap },
+    { id: "gcsda", labelZh: "策略發展學會", labelEn: "STRATEGY FORUM", icon: Users },
+    { id: "about", labelZh: "智庫主權", labelEn: "ABOUT STT", icon: Shield },
   ];
 
   return (
@@ -140,9 +141,15 @@ export default function App() {
           {/* Desktop Nav */}
           <div className="hidden xl:flex items-center h-full">
             {navItems.map((item, idx) => {
-              const href = item.id === 'service-portal' ? 'governance.html' : 
-                          item.id === 'columns' ? 'insights.html' : 
-                          `${item.id.toLowerCase()}.html`;
+              const hrefMap: Record<string, string> = {
+                'governance': 'governance.html',
+                'columns': 'insights.html',
+                'books': 'books.html',
+                'papers': 'papers.html',
+                'gcsda': 'gcsda.html',
+                'about': 'about.html',
+              };
+              const href = hrefMap[item.id] || `${item.id.toLowerCase()}.html`;
               return (
                 <div key={item.id} className="flex h-full items-center">
                   {idx === 0 && <div className="h-10 w-px bg-white/10"></div>}
@@ -177,18 +184,40 @@ export default function App() {
             })}
 
             {/* Action Buttons */}
-            <div className="flex items-center gap-2.5 ml-8">
-              <button 
-                onClick={() => setIsLoginModalOpen(true)}
-                className="bg-gradient-to-br from-gold-300 via-gold-500 to-gold-600 hover:from-gold-200 hover:to-gold-500 text-black px-4 py-2 rounded flex flex-col items-center justify-center gap-0 group transition-all shadow-lg"
+            <div className="flex items-center gap-4 ml-8">
+              <a 
+                href="contact.html"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setCurrentPage('service-portal');
+                  window.history.pushState({}, '', 'contact.html');
+                }}
+                className="bg-gradient-to-br from-[#e6c84c] via-gold-500 to-[#b89530] hover:brightness-110 text-black px-5 py-3.5 rounded-lg flex flex-col items-center justify-center gap-0 group transition-all shadow-lg font-sans border-0 cursor-pointer no-underline"
               >
                 <div className="flex items-center gap-1.5 mb-0.5 whitespace-nowrap">
-                  <Crown className="w-3.5 h-3.5" />
-                  <span className="text-[12px] font-bold tracking-tight">核心系統登入</span>
-                  <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
+                  <Crown className="w-3.5 h-3.5 text-black" strokeWidth={1.5} />
+                  <span className="text-[14px] font-bold tracking-[0.05em] leading-none">治理委託</span>
+                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform text-black" strokeWidth={1.5} />
                 </div>
-                <span className="text-[5px] font-mono font-black tracking-widest opacity-60 uppercase">SYSTEM LOGIN</span>
-              </button>
+                <span className="text-[7px] font-mono font-black tracking-[0.15em] opacity-80 uppercase leading-none">GOVERNANCE ENGAGEMENT</span>
+              </a>
+
+              <a 
+                href="contact.html"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setCurrentPage('service-portal');
+                  window.history.pushState({}, '', 'contact.html');
+                }}
+                className="border border-gold-400/40 text-gold-400 hover:bg-gold-400/5 px-5 py-3.5 rounded-lg flex flex-col items-center justify-center gap-0 group transition-all shadow-lg font-sans cursor-pointer no-underline"
+              >
+                <div className="flex items-center gap-1.5 mb-0.5 whitespace-nowrap">
+                  <Mail className="w-3.5 h-3.5 text-gold-400" strokeWidth={1.5} />
+                  <span className="text-[14px] font-bold tracking-[0.05em] leading-none">聯絡智庫</span>
+                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform text-gold-400" strokeWidth={1.5} />
+                </div>
+                <span className="text-[7px] font-mono font-black tracking-[0.15em] opacity-80 uppercase leading-none">CONTACT STT</span>
+              </a>
             </div>
           </div>
 
@@ -265,9 +294,15 @@ export default function App() {
             >
               <div className="flex flex-col p-8 gap-6">
                 {navItems.map((item) => {
-                  const href = item.id === 'service-portal' ? 'contact.html' : 
-                              item.id === 'columns' ? 'insights.html' : 
-                              `${item.id}.html`;
+                  const hrefMap: Record<string, string> = {
+                    'governance': 'governance.html',
+                    'columns': 'insights.html',
+                    'books': 'books.html',
+                    'papers': 'papers.html',
+                    'gcsda': 'gcsda.html',
+                    'about': 'about.html',
+                  };
+                  const href = hrefMap[item.id] || `${item.id.toLowerCase()}.html`;
                   return (
                     <a
                       key={item.id}
@@ -290,6 +325,53 @@ export default function App() {
                     </a>
                   );
                 })}
+
+                {/* Mobile action links */}
+                <div className="border-t border-gold-400/10 pt-6 mt-2 flex flex-col gap-4">
+                  <a 
+                    href="contact.html"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setCurrentPage('service-portal');
+                      setIsMenuOpen(false);
+                      window.history.pushState({}, '', 'contact.html');
+                    }}
+                    className="bg-gradient-to-br from-[#e6c84c] via-gold-500 to-[#b89530] text-black px-6 py-4 rounded-lg flex items-center justify-between group no-underline"
+                  >
+                    <div className="flex items-center gap-2">
+                      <Crown className="w-5 h-5 text-black" strokeWidth={1.5} />
+                      <span className="text-base font-bold">治理委託</span>
+                    </div>
+                    <span className="text-[8px] font-mono font-black tracking-widest uppercase opacity-80">GOVERNANCE ENGAGEMENT</span>
+                  </a>
+                  <a 
+                    href="contact.html"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setCurrentPage('service-portal');
+                      setIsMenuOpen(false);
+                      window.history.pushState({}, '', 'contact.html');
+                    }}
+                    className="border border-gold-400/40 text-gold-400 px-6 py-4 rounded-lg flex items-center justify-between group no-underline"
+                  >
+                    <div className="flex items-center gap-2">
+                      <Mail className="w-5 h-5 text-gold-400" strokeWidth={1.5} />
+                      <span className="text-base font-bold">聯絡智庫</span>
+                    </div>
+                    <span className="text-[8px] font-mono font-black tracking-widest uppercase opacity-80">CONTACT STT</span>
+                  </a>
+                  {/* Discreet Core system login */}
+                  <button 
+                    onClick={() => {
+                      setIsMenuOpen(false);
+                      setIsLoginModalOpen(true);
+                    }}
+                    className="text-white/20 hover:text-white/40 text-[10px] uppercase tracking-widest text-center mt-4 flex items-center justify-center gap-1.5 cursor-pointer bg-transparent border-0"
+                  >
+                    <Crown className="w-3 h-3" />
+                    <span>System Login</span>
+                  </button>
+                </div>
               </div>
             </motion.div>
           )}
@@ -359,13 +441,14 @@ export default function App() {
             <div className="lg:col-span-4 border-l border-white/10 lg:pl-12 lg:pr-8">
               <h4 className="text-gold-400 text-sm font-medium tracking-[0.4em] uppercase mb-12">EXPLORE</h4>
               
-              <div className="space-y-8">
+              <div className="space-y-6">
                 {[
-                  { id: 'columns', zh: "法遵專欄", en: "Compliance Column", icon: Scale, href: "insights.html" },
-                  { id: 'books', zh: "數位出版", en: "Digital Publication", icon: BookOpen, href: "books.html" },
-                  { id: 'papers', zh: "學術卓越", en: "Academic Excellence", icon: GraduationCap, href: "papers.html" },
-                  { id: 'gcsda', zh: "策略發展與會", en: "Strategy Forum", icon: Users, href: "gcsda.html" },
-                  { id: 'about', zh: "關於智庫", en: "About STT", icon: Library, href: "about.html" },
+                  { id: "governance", zh: "法理入口", en: "GOVERNANCE", icon: Landmark, href: "governance.html" },
+                  { id: "columns", zh: "法律研究", en: "LEGAL RESEARCH", icon: Scale, href: "insights.html" },
+                  { id: "books", zh: "治理出版", en: "PUBLICATION", icon: BookText, href: "books.html" },
+                  { id: "papers", zh: "學術體系", en: "ACADEMIC EXCELLENCE", icon: GraduationCap, href: "papers.html" },
+                  { id: "gcsda", zh: "策略發展學會", en: "STRATEGY FORUM", icon: Users, href: "gcsda.html" },
+                  { id: "about", zh: "智庫主權", en: "ABOUT STT", icon: Shield, href: "about.html" },
                 ].map((item, idx) => (
                   <a 
                     key={idx}

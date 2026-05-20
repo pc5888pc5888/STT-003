@@ -19,15 +19,16 @@ export default function Home({ onNavigate }: { onNavigate: (page: string) => voi
         <div className="container mx-auto px-6 relative z-10 flex-grow flex flex-col justify-center">
           <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-0">
             {/* Left Content */}
-            <div className="w-full lg:w-[55%] space-y-12">
+            <div className="w-full lg:w-[48%] space-y-12">
               <motion.div
                 initial={{ opacity: 0, x: -30 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 1.2 }}
                 className="space-y-6"
               >
-                <h1 className="text-4xl md:text-5xl lg:text-[60px] font-display font-light leading-[1.2] text-white">
-                  當制度開始失序； <span className="text-gold-400 font-medium">治理</span>便成為企業最後的秩序。
+                <h1 className="text-4xl md:text-5xl lg:text-[56px] font-serif font-light leading-[1.4] text-white/95 max-w-[14em] tracking-wider">
+                  當制度開始失序；<br />
+                  <span className="text-gold-400 font-normal">治理</span>便成為企業最後的秩序。
                 </h1>
                 <div className="w-16 h-[1px] bg-gold-400/40 my-8"></div>
                 <div className="space-y-4">
@@ -44,30 +45,55 @@ export default function Home({ onNavigate }: { onNavigate: (page: string) => voi
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5, duration: 1 }}
-                className="flex flex-wrap gap-8"
+                className="space-y-10"
               >
-                <a 
-                  href="governance.html"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    onNavigate('service-portal');
-                    window.history.pushState({}, '', 'governance.html');
-                  }}
-                  className="bg-gradient-to-br from-gold-300 via-gold-500 to-gold-600 hover:brightness-110 text-black px-12 py-5 rounded flex items-center gap-4 group transition-all font-bold shadow-2xl no-underline"
-                >
-                  進入治理架構 <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
-                </a>
-                <a 
-                  href="about.html"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    onNavigate('about');
-                    window.history.pushState({}, '', 'about.html');
-                  }}
-                  className="px-12 py-5 rounded border border-gold-400/40 text-gold-400 hover:bg-gold-400/5 transition-all font-bold flex items-center gap-4 no-underline"
-                >
-                  探索 STT 智庫 <ArrowRight className="w-5 h-5" />
-                </a>
+                <div className="flex flex-wrap gap-8">
+                  <a 
+                    href="governance.html"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      onNavigate('service-portal');
+                      window.history.pushState({}, '', 'governance.html');
+                    }}
+                    className="bg-gradient-to-br from-gold-300 via-gold-500 to-gold-600 hover:brightness-110 text-black px-12 py-5 rounded flex items-center gap-4 group transition-all font-bold shadow-2xl no-underline"
+                  >
+                    進入治理架構 <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
+                  </a>
+                  <a 
+                    href="about.html"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      onNavigate('about');
+                      window.history.pushState({}, '', 'about.html');
+                    }}
+                    className="px-12 py-5 rounded border border-gold-400/40 text-gold-400 hover:bg-gold-400/5 transition-all font-bold flex items-center gap-4 no-underline"
+                  >
+                    探索 STT 智庫 <ArrowRight className="w-5 h-5" />
+                  </a>
+                </div>
+
+                {/* Core Focus Areas positioned directly under buttons */}
+                <div className="flex items-center gap-3 sm:gap-6 pt-10 border-t border-white/5 max-w-3xl overflow-x-auto scrollbar-none">
+                  {[
+                    { en: "Governance Systems", zh: "治理系統" },
+                    { en: "Decision Architecture", zh: "決策架構" },
+                    { en: "Family & Enterprise Governance", zh: "家族與企業治理" }
+                  ].map((item, i) => (
+                    <div 
+                      key={i} 
+                      className={`flex-1 flex flex-col items-center md:items-start justify-center text-center md:text-left group px-2 sm:px-4 ${
+                        i !== 2 ? 'border-r border-white/10' : ''
+                      }`}
+                    >
+                      <span className="font-serif text-[12px] sm:text-[13px] md:text-[14px] lg:text-[15px] font-light text-gold-200/90 tracking-wide transition-colors group-hover:text-gold-300 leading-normal mb-1 whitespace-nowrap">
+                        {item.en}
+                      </span>
+                      <span className="font-serif text-[13px] sm:text-[14px] md:text-[15px] lg:text-[16px] font-light text-white/70 tracking-[0.2em] transition-colors group-hover:text-white leading-normal pl-[0.2em] whitespace-nowrap">
+                        {item.zh}
+                      </span>
+                    </div>
+                  ))}
+                </div>
               </motion.div>
             </div>
 
@@ -76,60 +102,37 @@ export default function Home({ onNavigate }: { onNavigate: (page: string) => voi
               initial={{ opacity: 0, x: 30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 1.5, ease: "easeOut" }}
-              className="w-full lg:w-[45%] flex justify-center lg:justify-end relative"
+              className="w-full lg:w-[52%] flex justify-center lg:justify-end items-end relative"
             >
-              <div className="relative group">
+              <div className="relative flex flex-row items-end justify-center lg:justify-end">
                 <img 
-                  src="/images/portrait-suit.png" 
+                  src="/portrait-read.png" 
                   alt="Dr. Eric Chuang" 
-                  className="w-full max-w-[480px] h-auto relative z-10 drop-shadow-[0_0_50px_rgba(0,0,0,0.8)]"
+                  className="w-[260px] xs:w-[310px] sm:w-[360px] md:w-[410px] lg:w-[450px] xl:w-[530px] h-auto relative z-10 drop-shadow-[0_0_50px_rgba(0,0,0,0.8)] transform translate-x-6 xs:translate-x-10 sm:translate-x-12 md:translate-x-16 lg:translate-x-24 xl:translate-x-28"
                   referrerPolicy="no-referrer"
                 />
                 
-                {/* Name Label */}
-                <div className="absolute -bottom-16 right-0 lg:-right-8 px-6 py-4 text-right z-20">
-                  <div className="flex flex-col items-end">
-                    <p className="text-white text-2xl font-display tracking-widest transition-colors mb-2">
-                      莊鈞翔 <span className="text-white/40 text-sm font-light">． 博士</span>
-                    </p>
-                    <div className="font-signature text-[84px] leading-none text-gold-400/80 pointer-events-none drop-shadow-[0_2px_20px_rgba(0,0,0,0.9)] whitespace-nowrap mb-4 pr-2">
-                      Eric Chuang, Ph.D.
-                    </div>
-                    <div className="flex items-center justify-end gap-3 opacity-40">
-                      <div className="h-px w-10 bg-gold-400/30"></div>
-                      <p className="text-white text-[11px] tracking-[0.2em] font-light">
-                        企業策略顧問 | 治理制度設計者 | 智庫創辦人
-                      </p>
-                    </div>
-                  </div>
+                {/* Signature aligned side-by-side to the right, bottom-aligned with character */}
+                <div className="ml-3 sm:ml-5 md:ml-6 lg:ml-8 mb-6 sm:mb-10 md:mb-12 lg:mb-16 z-20 flex flex-col items-start w-[100px] xs:w-[130px] sm:w-[165px] md:w-[190px] lg:w-[220px] xl:w-[260px] shrink-0">
+                  <img 
+                    src="/signature-eric001.png" 
+                    alt="Eric Chuang, Ph.D. Signature" 
+                    className="w-full h-auto drop-shadow-[0_2px_15px_rgba(0,0,0,0.9)] opacity-95"
+                    referrerPolicy="no-referrer"
+                  />
                 </div>
               </div>
             </motion.div>
           </div>
         </div>
 
-        {/* Bottom Bar Content - Core Focus Areas */}
-        <div className="container mx-auto px-6 pb-12 relative z-10">
-          <div className="flex flex-col md:flex-row items-center border-t border-white/10 pt-10">
-            {[
-              { en: "Governance Systems", zh: "治理系統" },
-              { en: "Decision Architecture", zh: "決策架構" },
-              { en: "Family & Enterprise Governance", zh: "家族與企業治理" }
-            ].map((item, i) => (
-              <div key={i} className={`flex-1 flex flex-col items-center gap-3 group px-12 ${i !== 2 ? 'border-r border-white/10' : ''}`}>
-                <span className="text-white/30 text-[10px] uppercase tracking-[0.4em] font-medium group-hover:text-gold-400 transition-colors whitespace-nowrap">{item.en}</span>
-                <span className="text-white/60 text-2xl font-light font-display group-hover:text-white transition-colors tracking-widest">{item.zh}</span>
-              </div>
-            ))}
-          </div>
-        </div>
       </section>
 
       {/* 2. Governance Portal - Portal Section */}
       <section className="strategic-bg-container py-32 border-y border-white/5">
         <div 
           className="strategic-bg-image" 
-          style={{ backgroundImage: "url('/images/首頁底圖002.png')" }}
+          style={{ backgroundImage: "url('/images/bg-portal-columns.png')" }}
         ></div>
         <div className="strategic-bg-overlay"></div>
 
@@ -178,16 +181,16 @@ export default function Home({ onNavigate }: { onNavigate: (page: string) => voi
                 route: "service-portal"
               }
             ].map((card, i) => (
-              <div key={i} className="group bg-zinc-950/80 p-8 border border-white/5 hover:border-gold-600/30 transition-all duration-500 backdrop-blur-sm">
-                <div className="flex justify-between items-start mb-12">
-                  <span className="text-[10px] text-gold-600/40 font-mono tracking-widest">{card.id}</span>
+              <div key={i} className="group bg-zinc-950/80 p-8 border border-white/5 hover:border-gold-600/30 transition-all duration-500 backdrop-blur-sm flex flex-col items-center text-center">
+                <div className="w-full flex-col flex items-center mb-10">
+                  <span className="text-[10px] text-gold-600/40 font-mono tracking-widest mb-3 block">{card.id}</span>
                   <div className="text-gold-600 opacity-60 group-hover:opacity-100 transition-opacity">{card.icon}</div>
                 </div>
                 <h3 className="text-2xl font-display text-white mb-6 leading-tight">{card.title}</h3>
-                <p className="text-stone-500 text-xs font-light leading-relaxed mb-8">{card.desc}</p>
-                <div className="space-y-3 mb-10">
+                <p className="text-stone-500 text-xs font-light leading-relaxed mb-8 max-w-[280px]">{card.desc}</p>
+                <div className="space-y-3 mb-10 flex flex-col items-center">
                   {card.items.map((item, idx) => (
-                    <div key={idx} className="flex items-center gap-3 text-[10px] text-stone-400">
+                    <div key={idx} className="flex items-center gap-2.5 text-[10px] text-stone-400">
                       <ShieldCheck className="w-3 h-3 text-gold-600/50" />
                       {item}
                     </div>
@@ -200,7 +203,7 @@ export default function Home({ onNavigate }: { onNavigate: (page: string) => voi
                     onNavigate(card.route);
                     window.history.pushState({}, '', card.route === 'service-portal' ? 'governance.html' : `${card.route}.html`);
                   }}
-                  className="w-full py-3 bg-gold-600/10 border border-gold-600/20 text-gold-500 text-[10px] font-bold tracking-widest uppercase group-hover:bg-gold-600 group-hover:text-black transition-all no-underline text-center flex items-center justify-center"
+                  className="w-full py-3 bg-gold-600/10 border border-gold-600/20 text-gold-500 text-[10px] font-bold tracking-widest uppercase group-hover:bg-gold-600 group-hover:text-black transition-all no-underline text-center flex items-center justify-center mt-auto"
                 >
                   進入 {card.title} {card.id === "03" ? "專欄" : "系統"} <ArrowRight className="inline ml-1 w-3 h-3" />
                 </a>
@@ -226,7 +229,7 @@ export default function Home({ onNavigate }: { onNavigate: (page: string) => voi
       <section className="strategic-bg-container py-40 border-t border-white/5">
         <div 
           className="strategic-bg-image" 
-          style={{ backgroundImage: "url('/images/首頁底圖003.png')" }}
+          style={{ backgroundImage: "url('/images/bg-platform-chess.png')" }}
         ></div>
         <div className="strategic-bg-overlay"></div>
         <div className="container mx-auto px-6 relative z-10">
@@ -280,7 +283,7 @@ export default function Home({ onNavigate }: { onNavigate: (page: string) => voi
       <section className="strategic-bg-container py-32">
         <div 
           className="strategic-bg-image" 
-          style={{ backgroundImage: "url('/images/首頁底圖004.png')" }}
+          style={{ backgroundImage: "url('/images/bg-strategist-spotlight.png')" }}
         ></div>
         <div className="strategic-bg-overlay"></div>
 
@@ -338,8 +341,18 @@ export default function Home({ onNavigate }: { onNavigate: (page: string) => voi
       </section>
 
       {/* 5. Governance Insights Section */}
-      <section className="py-32 bg-black border-t border-white/5">
-        <div className="container mx-auto px-6">
+      <section className="strategic-bg-container py-32 bg-[#050505] border-t border-white/5">
+        <div 
+          className="strategic-bg-image opacity-30" 
+          style={{ 
+            backgroundImage: "url('/images/bg-insights-globe.png')",
+            backgroundPosition: "right top",
+            backgroundRepeat: "no-repeat",
+            backgroundSize: "600px"
+          }}
+        ></div>
+        <div className="strategic-bg-overlay bg-[#050505]/30"></div>
+        <div className="container mx-auto px-6 relative z-10">
           <div className="flex justify-between items-end mb-20">
              <div className="space-y-4">
                 <p className="text-gold-600 text-[10px] tracking-[0.5em] uppercase font-bold">GOVERNANCE INSIGHTS</p>
