@@ -6,7 +6,7 @@ export default function Home({ onNavigate }: { onNavigate: (page: string) => voi
   return (
     <div className="bg-[#050505] min-h-screen text-stone-200">
       {/* 1. Hero Section - Redesigned based on screenshot */}
-      <section className="relative min-h-screen flex flex-col pt-24 overflow-hidden">
+      <section className="relative h-screen flex flex-col pt-20 overflow-hidden">
         {/* Background Image */}
         <div 
           className="absolute inset-0 bg-cover bg-center z-0" 
@@ -27,17 +27,14 @@ export default function Home({ onNavigate }: { onNavigate: (page: string) => voi
                 className="space-y-6"
               >
                 <h1 className="text-4xl md:text-5xl lg:text-[56px] font-serif font-light leading-[1.4] text-white/95 max-w-[14em] tracking-wider">
-                  當制度開始失序；<br />
-                  <span className="text-gold-400 font-normal">治理</span>便成為企業最後的秩序。
-                </h1>
+                  ?�制度�?始失序�?<br />
+                  <span className="text-gold-400 font-normal">治�?</span>便�??��?業�?後�?秩�???                </h1>
                 <div className="w-16 h-[1px] bg-gold-400/40 my-8"></div>
                 <div className="space-y-4">
                   <p className="text-xl md:text-2xl font-sans font-light text-white/70 leading-tight">
-                    以治理設計決策的邊界，
-                  </p>
+                    以治?�設計決策�??��?�?                  </p>
                   <p className="text-xl md:text-2xl font-sans font-light text-white/70 leading-tight">
-                    讓企業在不確定中保持穩定與信任。
-                  </p>
+                    讓�?業在不確定中保�?穩�??�信任�?                  </p>
                 </div>
               </motion.div>
 
@@ -57,7 +54,7 @@ export default function Home({ onNavigate }: { onNavigate: (page: string) => voi
                     }}
                     className="bg-gradient-to-br from-gold-300 via-gold-500 to-gold-600 hover:brightness-110 text-black px-12 py-5 rounded flex items-center gap-4 group transition-all font-bold shadow-2xl no-underline"
                   >
-                    進入治理架構 <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
+                    ?�入治�??��? <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
                   </a>
                   <a 
                     href="about.html"
@@ -68,16 +65,16 @@ export default function Home({ onNavigate }: { onNavigate: (page: string) => voi
                     }}
                     className="px-12 py-5 rounded border border-gold-400/40 text-gold-400 hover:bg-gold-400/5 transition-all font-bold flex items-center gap-4 no-underline"
                   >
-                    探索 STT 智庫 <ArrowRight className="w-5 h-5" />
+                    ?�索 STT ?�庫 <ArrowRight className="w-5 h-5" />
                   </a>
                 </div>
 
                 {/* Core Focus Areas positioned directly under buttons */}
                 <div className="flex items-center gap-3 sm:gap-6 pt-10 border-t border-white/5 max-w-3xl overflow-x-auto scrollbar-none">
                   {[
-                    { en: "Governance Systems", zh: "治理系統" },
-                    { en: "Decision Architecture", zh: "決策架構" },
-                    { en: "Family & Enterprise Governance", zh: "家族與企業治理" }
+                    { en: "Governance Systems", zh: "治�?系統" },
+                    { en: "Decision Architecture", zh: "決�??��?" },
+                    { en: "Family & Enterprise Governance", zh: "家�??��?業治?? }
                   ].map((item, i) => (
                     <div 
                       key={i} 
@@ -139,45 +136,44 @@ export default function Home({ onNavigate }: { onNavigate: (page: string) => voi
         <div className="container mx-auto px-6 relative z-10">
           <div className="text-center space-y-4 mb-24">
             <p className="text-gold-600 text-[10px] tracking-[0.5em] uppercase font-bold">PORTALS OF INTERPRETATION</p>
-            <h2 className="text-5xl font-display text-white">治理入口</h2>
+            <h2 className="text-5xl font-display text-white">治�??�口</h2>
             <p className="text-stone-500 max-w-2xl mx-auto italic">
-              不是提供建議，而是協助建立不可動搖的治理秩序與文明架構。
-            </p>
-            <p className="text-stone-400 text-sm">選擇您目前關注的治理領域，進入相應的專業場域，我們將協助您釐清問題本質，建立可長期運作的治理系統。</p>
+              不是?��?建議，而是?�助建�?不可?��??�治?�秩序�??��??��???            </p>
+            <p className="text-stone-400 text-sm">?��??�目?��?注�?治�??��?，進入?��??��?業場?��??�們�??�助?��?清�?題本質�?建�??�長?��?作�?治�?系統??/p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
               { 
                 id: "01", 
-                title: "企業治理與策略判讀", 
+                title: "企業治�??��??�判讀", 
                 icon: <Landmark className="w-8 h-8" />,
-                desc: "整合策略、風險、制度與架構，協助企業建立長期競爭優勢與治理秩序。", 
-                items: ["策略治理", "董事會治理", "制度架構", "風險管理"],
+                desc: "?��?策略?�風?�、制度�??��?，�??��?業建立長?�競?�優?��?治�?秩�???, 
+                items: ["策略治�?", "????�治??, "?�度?��?", "風險管�?"],
                 route: "service-portal" 
               },
               { 
                 id: "02", 
-                title: "家族治理與企業接班", 
+                title: "家�?治�??��?業接??, 
                 icon: <Users className="w-8 h-8" />,
-                desc: "建立家族信任與治理制度，確保財富、價值與使命的永續傳承。", 
-                items: ["家族信任系統", "接班計畫", "財富治理", "家族憲章"],
+                desc: "建�?家�?信任?�治?�制度�?確�?財�??�價?��?使命?�永續傳?��?, 
+                items: ["家�?信任系統", "?�班計畫", "財�?治�?", "家�??��?"],
                 route: "success"
               },
               { 
                 id: "03", 
-                title: "內在法遵 Internal Compliance", 
+                title: "?�在法遵 Internal Compliance", 
                 icon: <Scale className="w-8 h-8" />,
-                desc: "從制度內化合規意識，打造企業不可動搖的合規文化。", 
-                items: ["內部控制", "法遵機制", "稽核機制", "合規文化"],
+                desc: "從制度內?��?規�?識�??�造�?業�??��??��??��??��???, 
+                items: ["?�部?�制", "法遵機制", "稽核機制", "?��??��?"],
                 route: "internal-compliance"
               },
               { 
                 id: "04", 
                 title: "ESGAI Governance System", 
                 icon: <Brain className="w-8 h-8" />,
-                desc: "AI 治理輔助系統，提供決策門控、風險辨識與治理支援。", 
-                items: ["決策門控", "風險辨識", "治理框架", "制度支援"],
+                desc: "AI 治�?輔助系統，�?供決策�??�、風?�辨識�?治�??�援??, 
+                items: ["決�??�??, "風險辨�?", "治�?框架", "?�度?�援"],
                 route: "service-portal"
               }
             ].map((card, i) => (
@@ -205,7 +201,7 @@ export default function Home({ onNavigate }: { onNavigate: (page: string) => voi
                   }}
                   className="w-full py-3 bg-gold-600/10 border border-gold-600/20 text-gold-500 text-[10px] font-bold tracking-widest uppercase group-hover:bg-gold-600 group-hover:text-black transition-all no-underline text-center flex items-center justify-center mt-auto"
                 >
-                  進入 {card.title} {card.id === "03" ? "專欄" : "系統"} <ArrowRight className="inline ml-1 w-3 h-3" />
+                  ?�入 {card.title} {card.id === "03" ? "專�?" : "系統"} <ArrowRight className="inline ml-1 w-3 h-3" />
                 </a>
               </div>
             ))}
@@ -240,11 +236,9 @@ export default function Home({ onNavigate }: { onNavigate: (page: string) => voi
                 <span className="text-gold-600 text-[10px] tracking-[0.5em] uppercase font-bold">POSITIONING</span>
               </div>
               <h2 className="text-5xl md:text-6xl font-display text-white leading-tight">
-                不是顧問公司； 而是<span className="metallic-gold-text">治理文明平台</span>。
-              </h2>
+                不是顧�??�司�??�是<span className="metallic-gold-text">治�??��?平台</span>??              </h2>
               <p className="text-stone-400 text-lg leading-relaxed max-w-xl">
-                在不確定的時代，企業需要的不是更多建議，而是一套能守住秩序、創造價值的治理系統。
-              </p>
+                ?��?確�??��?�??企業?�要�?不是?��?建議，而是一套能守�?秩�??�創?�價?��?治�?系統??              </p>
               
               <div className="space-y-4 pt-8">
                 <div className="metallic-gold-text text-4xl font-display font-medium">Eric Chuang</div>
@@ -255,12 +249,12 @@ export default function Home({ onNavigate }: { onNavigate: (page: string) => voi
             <div className="w-full lg:w-1/2 relative">
                <div className="grid grid-cols-2 gap-8 relative z-10">
                   {[
-                    { label: "治理秩序", sub: "Governance Order" },
-                    { label: "決策系統", sub: "Decision Systems" },
-                    { label: "長期信任", sub: "Institutional Trust" },
-                    { label: "法遵治理", sub: "Compliance Governance" },
-                    { label: "家族傳承", sub: "Family Succession" },
-                    { label: "高階策略整合", sub: "Executive Alliance" }
+                    { label: "治�?秩�?", sub: "Governance Order" },
+                    { label: "決�?系統", sub: "Decision Systems" },
+                    { label: "?��?信任", sub: "Institutional Trust" },
+                    { label: "法遵治�?", sub: "Compliance Governance" },
+                    { label: "家�??�承", sub: "Family Succession" },
+                    { label: "高�?策略?��?", sub: "Executive Alliance" }
                   ].map((p, i) => (
                     <div key={i} className="flex flex-col gap-1 border-b border-white/5 pb-4">
                       <p className="text-lg text-white font-display">{p.label}</p>
@@ -271,8 +265,7 @@ export default function Home({ onNavigate }: { onNavigate: (page: string) => voi
                
                <div className="mt-20 border border-white/10 p-8 bg-zinc-950/50 backdrop-blur-sm">
                   <p className="text-stone-300 italic text-sm leading-relaxed">
-                    「STT 不只是提供建議，而是協助企業建立不可動搖的治理秩序與文明架構。」
-                  </p>
+                    ?�STT 不只?��?供建議�??�是?�助企業建�?不可?��??�治?�秩序�??��??��??��?                  </p>
                </div>
             </div>
           </div>
@@ -280,7 +273,7 @@ export default function Home({ onNavigate }: { onNavigate: (page: string) => voi
       </section>
 
       {/* 4. The Strategist Section */}
-      <section className="strategic-bg-container py-32">
+      <section className="strategic-bg-container h-screen flex items-center">
         <div 
           className="strategic-bg-image" 
           style={{ backgroundImage: "url('/images/bg-strategist-spotlight.png')" }}
@@ -303,20 +296,19 @@ export default function Home({ onNavigate }: { onNavigate: (page: string) => voi
              <div className="w-full lg:w-1/2 space-y-12">
                <div className="space-y-4">
                  <p className="text-gold-600 text-[10px] tracking-[0.5em] uppercase font-bold">THE STRATEGIST</p>
-                 <h2 className="text-5xl font-display text-white">治理判讀者</h2>
+                 <h2 className="text-5xl font-display text-white">治�??��???/h2>
                  <p className="text-stone-400">
-                   莊鈞翔博士長期致力於建立高信任、可長期存續的治理文明架構；透過對「決策秩序」的深度校準，為企業預判策略風險與利潤風險。
-                 </p>
+                   ?��?翔�?士長?�致?�於建�?高信任、可?��?存�??�治?��??�架構�??��?對「決策秩序」�?深度?��?，為企業?�判策略風險?�利潤風?��?                 </p>
                </div>
 
                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-8">
                   {[
-                    { label: "企業治理與法治合規", icon: <ShieldCheck className="w-5 h-5 text-gold-600" /> },
-                    { label: "家族傳承與長期治理", icon: <Users className="w-5 h-5 text-gold-600" /> },
-                    { label: "決策結構與內在秩序", icon: <Scale className="w-5 h-5 text-gold-600" /> },
-                    { label: "數位法治與 AI 治理", icon: <Brain className="w-5 h-5 text-gold-600" /> },
-                    { label: "組織秩序之對策判讀", icon: <Globe className="w-5 h-5 text-gold-600" /> },
-                    { label: "高信任治理文明架構", icon: <Award className="w-5 h-5 text-gold-600" /> }
+                    { label: "企業治�??��?治�?�?, icon: <ShieldCheck className="w-5 h-5 text-gold-600" /> },
+                    { label: "家�??�承?�長?�治??, icon: <Users className="w-5 h-5 text-gold-600" /> },
+                    { label: "決�?結�??�內?�秩�?, icon: <Scale className="w-5 h-5 text-gold-600" /> },
+                    { label: "?��?法治??AI 治�?", icon: <Brain className="w-5 h-5 text-gold-600" /> },
+                    { label: "組�?秩�?之�?策判讀", icon: <Globe className="w-5 h-5 text-gold-600" /> },
+                    { label: "高信任治?��??�架�?, icon: <Award className="w-5 h-5 text-gold-600" /> }
                   ].map((item, i) => (
                     <div key={i} className="flex items-center gap-4 group">
                       <div className="p-2 border border-white/5 bg-zinc-950 group-hover:border-gold-600/30 transition-all">
@@ -329,10 +321,9 @@ export default function Home({ onNavigate }: { onNavigate: (page: string) => voi
 
                <div className="p-10 border-l border-gold-600 bg-zinc-950/40 relative">
                   <p className="text-stone-300 italic text-lg leading-relaxed">
-                    「治理的本質，不是控制，而是確保秩序與信任長期存在。」
-                  </p>
+                    ?�治?��??�質，�??�控?��??�是確�?秩�??�信任長?��??�。�?                  </p>
                   <div className="mt-6 flex items-center gap-4">
-                     <div className="text-stone-500 font-display italic">— 莊鈞翔博士</div>
+                     <div className="text-stone-500 font-display italic">???��?翔�?�?/div>
                   </div>
                </div>
              </div>
@@ -356,8 +347,8 @@ export default function Home({ onNavigate }: { onNavigate: (page: string) => voi
           <div className="flex justify-between items-end mb-20">
              <div className="space-y-4">
                 <p className="text-gold-600 text-[10px] tracking-[0.5em] uppercase font-bold">GOVERNANCE INSIGHTS</p>
-                <h2 className="text-5xl font-display text-white">智庫觀點</h2>
-                <p className="text-stone-500">深入探討治理、策略與法律的關鍵議題，提供專業洞見與實務指引。</p>
+                <h2 className="text-5xl font-display text-white">?�庫觀�?/h2>
+                <p className="text-stone-500">深入?��?治�??��??��?法�??��??�議題�??��?專業洞�??�實?��?引�?/p>
              </div>
              <a 
                href="insights.html"
