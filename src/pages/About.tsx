@@ -5,11 +5,17 @@ import { Shield, GraduationCap, Quote } from "lucide-react";
 
 export default function About() {
   return (
-    <div className="min-h-screen bg-[#050505] text-white selection:bg-white/20 selection:text-white">
+    <div 
+      className="min-h-screen bg-[#050505] text-white selection:bg-white/20 selection:text-white"
+      style={{ transform: "scale(0.89)", transformOrigin: "top center", overflowX: "hidden" }}
+    >
       <div className="container mx-auto px-6 max-w-7xl">
         
         {/* Hero Section - Refined Proportions to match Columns style */}
-        <section className="relative min-h-[95vh] flex items-center overflow-hidden border-b border-white/5 mb-32 pt-24 lg:pt-0">
+        <section 
+          className="relative min-h-[95vh] flex items-center overflow-hidden border-b border-white/5 mb-32 pt-24 lg:pt-0"
+          style={{ transform: "scale(0.75)", transformOrigin: "top center", marginBottom: "-25vh" }}
+        >
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -23,12 +29,11 @@ export default function About() {
                   <span className="text-gold-500 font-sans font-black text-xs uppercase tracking-[0.5em]">Founder's Profile</span>
                 </div>
                 <div className="relative w-full max-w-2xl transform lg:-translate-x-4">
-                  <img 
-                    src="/images/stt_press_eric_name.png" 
-                    alt="莊鈞翔 博士" 
-                    className="w-full h-auto drop-shadow-[0_10px_40px_rgba(212,175,55,0.2)]"
-                    referrerPolicy="no-referrer"
-                  />
+                  <div>
+                    <p style={{ fontSize: "1.1rem", fontWeight: "bold", color: "#ffffff", fontFamily: "Georgia, serif" }}>Strategist & Scholar Eric Chuang, Ph.D.</p>
+                    <p style={{ fontSize: "1rem", letterSpacing: "0.3em", color: "#ffffff" }}>企 業 策 略 顧 問 ｜ 學 術 出 版 家</p>
+                    <h1 style={{ fontSize: "2.8rem", color: "#C9A84C", fontWeight: "bold", margin: "16px 0" }}>莊 鈞 翔 博 士</h1>
+                  </div>
                 </div>
               </div>
               
@@ -42,8 +47,8 @@ export default function About() {
 
               <div className="h-px w-32 bg-gold-900/40"></div>
 
-              <div className="space-y-10 max-w-4xl">
-                <p className="text-2xl md:text-3xl font-serif text-white/80 leading-relaxed font-light italic border-l border-gold-600/20 pl-10">
+              <div className="space-y-10 max-w-4xl" style={{ textAlign: "left", marginLeft: "0" }}>
+                <p className="text-2xl md:text-3xl font-serif text-white/80 leading-relaxed font-light italic" style={{ textAlign: "left", marginLeft: "0", paddingLeft: "0" }}>
                   「最堅固的商業帝國，往往崩塌於領導者內在秩序的失衡；真正的策劃，始於內在法治張力的建立與校準。」
                 </p>
               </div>
@@ -62,6 +67,7 @@ export default function About() {
                     alt="莊鈞翔 博士" 
                     className="w-full h-auto max-h-[75vh] lg:max-h-[85vh] object-contain object-bottom portrait-render drop-shadow-[0_0_60px_rgba(212,175,55,0.15)]"
                     referrerPolicy="no-referrer"
+                    style={{ transform: "scale(1)" }}
                   />
                   {/* Cinematic Bottom Fade */}
                   <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black via-black/80 to-transparent z-10 pointer-events-none"></div>

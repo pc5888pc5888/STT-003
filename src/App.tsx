@@ -34,6 +34,19 @@ export default function App() {
           'contact': 'service-portal'
         };
         setCurrentPage(pageMap[targetPage] || targetPage);
+
+        if (targetPage === 'governance') {
+          setTimeout(() => {
+            const element = document.getElementById('governance');
+            if (element) {
+              if ((window as any).lenis) {
+                (window as any).lenis.scrollTo(element, { offset: -80 });
+              } else {
+                element.scrollIntoView({ behavior: 'smooth' });
+              }
+            }
+          }, 300);
+        }
       }
     };
 
@@ -49,6 +62,10 @@ export default function App() {
 
   // Update hash when page changes
   useEffect(() => {
+    if (currentPage === 'home' && window.location.hash === '#governance') {
+      // Keep #governance hash if we navigated to governance
+      return;
+    }
     window.location.hash = currentPage;
   }, [currentPage]);
 
@@ -81,12 +98,25 @@ export default function App() {
     };
   }, []);
 
-  // Scroll to top on page change
+  // Scroll to top on page change, or to section for governance portal
   useEffect(() => {
-    if ((window as any).lenis) {
-      (window as any).lenis.scrollTo(0, { immediate: true });
+    if (currentPage === "governance") {
+      setTimeout(() => {
+        const element = document.getElementById("governance");
+        if (element) {
+          if ((window as any).lenis) {
+            (window as any).lenis.scrollTo(element, { offset: -80 });
+          } else {
+            element.scrollIntoView({ behavior: "smooth" });
+          }
+        }
+      }, 150);
     } else {
-      window.scrollTo(0, 0);
+      if ((window as any).lenis) {
+        (window as any).lenis.scrollTo(0, { immediate: true });
+      } else {
+        window.scrollTo(0, 0);
+      }
     }
   }, [currentPage]);
 
@@ -94,23 +124,23 @@ export default function App() {
 
   const renderPage = () => {
     switch (currentPage) {
-      case "home": return <Home onNavigate={setCurrentPage} />;
+      case "home": return <Home onNavigate={setCurrentPage} currentPage={currentPage} />;
       case "about": return <About />;
       case "columns": return <Columns />;
       case "books": return <Books onNavigate={setCurrentPage} />;
-      case "governance": 
+      case "governance": return <Home onNavigate={setCurrentPage} currentPage={currentPage} />;
       case "internal-compliance": return <InternalCompliance />;
       case "service-portal": return <ServicePortal />;
       case "success": return <Success />;
       case "papers": return <Papers />;
       case "gcsda": return <GCSDA />;
       case "article-index": return <ArticleIndex />;
-      default: return <Home onNavigate={setCurrentPage} />;
+      default: return <Home onNavigate={setCurrentPage} currentPage={currentPage} />;
     }
   };
 
   const navItems = [
-    { id: "governance", labelZh: "法理入口", labelEn: "GOVERNANCE", icon: Landmark },
+    { id: "governance", labelZh: "治理入口", labelEn: "GOVERNANCE", icon: Landmark },
     { id: "columns", labelZh: "法律研究", labelEn: "LEGAL RESEARCH", icon: Scale },
     { id: "books", labelZh: "治理出版", labelEn: "PUBLICATION", icon: BookText },
     { id: "papers", labelZh: "學術體系", labelEn: "ACADEMIC EXCELLENCE", icon: GraduationCap },
@@ -407,30 +437,26 @@ export default function App() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-0">
             
             {/* Left Section: Brand & Slogan */}
-            <div className="lg:col-span-4 space-y-8 pr-8">
-              <div className="flex flex-col gap-6">
-                <div className="relative w-40 h-40 lg:w-48 lg:h-48">
+            <div className="lg:col-span-4 space-y-8 pr-8 flex flex-col items-center lg:items-start text-center lg:text-left">
+              <div className="flex flex-col gap-6 items-center lg:items-start">
+                <div className="relative w-40 h-40 lg:w-48 lg:h-48 flex justify-center lg:justify-start">
                   {/* Seal Logo */}
                   <img 
                     src="/images/logo-seal-footer.png" 
                     alt="STT Press Seal" 
                     className="w-full h-full object-contain filter drop-shadow-[0_0_15px_rgba(230,200,76,0.2)]" 
                   />
-                  {/* Mirror reflection effect below */}
-                  <div className="absolute -bottom-16 left-0 w-full h-full scale-y-[-0.3] opacity-10 pointer-events-none blur-[2px]">
-                    <img src="/images/logo-seal-footer.png" alt="" className="w-full h-full object-contain" />
-                  </div>
                 </div>
                 
-                <div className="space-y-4">
-                  <h3 className="text-3xl lg:text-4xl font-serif text-[#e6c84c] tracking-tight">
+                <div className="space-y-4 flex flex-col items-center lg:items-start w-full">
+                  <h3 className="text-3xl lg:text-4xl font-serif text-[#e6c84c] tracking-tight w-full">
                     STT Governance
                   </h3>
-                  <p className="text-white text-lg lg:text-xl font-display tracking-widest">
+                  <p className="text-white text-lg lg:text-xl font-display tracking-widest w-full">
                     策略為先 &nbsp;|&nbsp; 治理為本 &nbsp;|&nbsp; 管理為終
                   </p>
-                  <div className="w-12 h-px bg-[#e6c84c]/40"></div>
-                  <p className="text-white/40 max-w-sm font-sans text-sm leading-loose font-light">
+                  <div className="w-12 h-px bg-[#e6c84c]/40 mx-auto lg:mx-0"></div>
+                  <p className="text-white/40 max-w-sm font-sans text-sm leading-loose font-light mx-auto lg:mx-0">
                     協助領導者在變革中實現專業長青，我們將企業治理的嚴謹法遵精神，轉化為個人心智運作的底層邏輯。
                   </p>
                 </div>
@@ -443,7 +469,7 @@ export default function App() {
               
               <div className="space-y-6">
                 {[
-                  { id: "governance", zh: "法理入口", en: "GOVERNANCE", icon: Landmark, href: "governance.html" },
+                  { id: "governance", zh: "治理入口", en: "GOVERNANCE", icon: Landmark, href: "governance.html" },
                   { id: "columns", zh: "法律研究", en: "LEGAL RESEARCH", icon: Scale, href: "insights.html" },
                   { id: "books", zh: "治理出版", en: "PUBLICATION", icon: BookText, href: "books.html" },
                   { id: "papers", zh: "學術體系", en: "ACADEMIC EXCELLENCE", icon: GraduationCap, href: "papers.html" },
