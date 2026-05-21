@@ -286,7 +286,7 @@ export default function Home({ onNavigate }: { onNavigate: (page: string) => voi
                 <div className="relative group">
                   <div className="absolute -inset-4 bg-gold-600/10 blur-2xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-1000"></div>
                    <img 
-                      src="/images/portrait-phd.png" 
+                      src="/images/portrait-open.png" 
                       alt="Dr. Eric Strategic Reading" 
                       className="w-full h-auto portrait-render"
                    />
