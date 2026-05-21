@@ -106,7 +106,7 @@ export default function Home({ onNavigate }: { onNavigate: (page: string) => voi
             >
               <div className="relative flex flex-row items-end justify-center lg:justify-end">
                 <img 
-                  src="/portrait-read.png" 
+                  src="/images/portrait-open.png"
                   alt="Dr. Eric Chuang" 
                   className="w-[260px] xs:w-[310px] sm:w-[360px] md:w-[410px] lg:w-[450px] xl:w-[530px] h-auto relative z-10 drop-shadow-[0_0_50px_rgba(0,0,0,0.8)] transform translate-x-6 xs:translate-x-10 sm:translate-x-12 md:translate-x-16 lg:translate-x-24 xl:translate-x-28"
                   referrerPolicy="no-referrer"
