@@ -113,7 +113,7 @@ export default function Home({ onNavigate, currentPage }: { onNavigate: (page: s
             >
               <div className="relative flex flex-row items-end justify-center lg:justify-end">
                 <img 
-                  src="/images/portrait-open.png" 
+                  src="/images/portrait-read.png" 
                   alt="Dr. Eric Chuang" 
                   className="w-[260px] xs:w-[310px] sm:w-[360px] md:w-[410px] lg:w-[450px] xl:w-[530px] relative z-10 top-0 drop-shadow-[0_0_50px_rgba(0,0,0,0.8)] transform translate-x-6 xs:translate-x-10 sm:translate-x-12 md:translate-x-16 lg:translate-x-24 xl:translate-x-28"
                   style={{ height: "100%", maxHeight: "100vh", objectFit: "contain", objectPosition: "bottom" }}
@@ -327,7 +327,7 @@ export default function Home({ onNavigate, currentPage }: { onNavigate: (page: s
                 <div className="relative group h-full max-h-[75vh]">
                   <div className="absolute -inset-4 bg-gold-600/10 blur-2xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-1000"></div>
                    <img 
-                      src="/images/portrait-read.png" 
+                      src="/images/portrait-open.png" 
                       alt="?Šé?ç¿”å?å£? 
                       style={{ width: "100%", height: "auto", objectFit: "contain", objectPosition: "center bottom" }}
                       referrerPolicy="no-referrer"
@@ -456,4 +456,5 @@ function GradmarkIcon({ className }: { className?: string }) {
     </svg>
   );
 }
+
 
