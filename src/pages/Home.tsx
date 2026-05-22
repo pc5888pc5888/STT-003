@@ -7,8 +7,8 @@ export default function Home({ onNavigate, currentPage }: { onNavigate: (page: s
     <div className="bg-[#050505] min-h-screen text-stone-200">
       {/* 1. Hero Section - Redesigned based on screenshot */}
       <section 
-        className="relative h-[100vh] max-h-[100vh] flex flex-col pt-[2vh] pb-[2vh] overflow-hidden justify-start"
-        style={{ transform: "scale(0.88)", transformOrigin: "top center", marginBottom: "-12vh", height: "100vh", maxHeight: "100vh", overflow: "hidden" }}
+        className="relative flex flex-col pt-4 lg:pt-0 bg-[#050505] overflow-hidden justify-end border-b border-white/5 pb-0 lg:h-[calc(100vh-80px)] lg:min-h-0"
+        style={{ minHeight: "calc(100vh - 80px)" }}
       >
         {/* Background Image */}
         <div 
@@ -19,26 +19,24 @@ export default function Home({ onNavigate, currentPage }: { onNavigate: (page: s
           <div className="absolute inset-0 bg-gradient-to-r from-black via-black/40 to-transparent"></div>
         </div>
         
-        <div className="container mx-auto px-6 relative z-10 flex-grow flex flex-col justify-start">
-          <div className="flex flex-col lg:flex-row items-start gap-12 lg:gap-0 pt-2 lg:pt-0">
+        <div className="container mx-auto px-6 relative z-10 flex-grow flex flex-col justify-end h-full">
+          <div className="flex flex-col lg:flex-row items-end gap-12 lg:gap-0 pt-4 lg:pt-0 w-full h-full">
             {/* Left Content */}
-            <div className="w-full lg:w-[48%] space-y-6">
+            <div className="w-full lg:w-[48%] flex flex-col justify-center space-y-5 lg:space-y-6 py-6 lg:py-8 lg:self-center">
               <motion.div
                 initial={{ opacity: 0, x: -30 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 1.2 }}
-                className="space-y-4"
+                className="space-y-3 lg:space-y-4"
               >
-                <h1 className="text-[28px] xs:text-3xl md:text-[40px] lg:text-[48px] font-serif font-light leading-[1.4] text-white/95 max-w-none tracking-wider">
-                  <div>?�制度�?始失序�?</div>
-                  <div><span className="text-gold-400 font-normal">治�?</span>便�??��?業�?後�?秩�???/div>
-                </h1>
-                <div className="w-16 h-[1px] bg-gold-400/40 my-4"></div>
-                <div className="space-y-2">
-                  <p className="text-base md:text-[20px] font-sans font-light text-white/70 leading-tight">
-                    以治?�設計決策�??��?�?                  </p>
-                  <p className="text-base md:text-[20px] font-sans font-light text-white/70 leading-tight">
-                    讓�?業在不確定中保�?穩�??�信任�?                  </p>
+                <h1 className="text-[30px] sm:text-[38px] md:text-[44px] lg:text-[45px] xl:text-[52px] font-serif font-light leading-[1.3] text-white tracking-widest max-w-[13.5em]">
+                  ? 制度 ?始失序 ?<span className="text-[#e6c84c] font-normal">治 ?</span>便 ??  ?業 ?後 ?秩 ???                </h1>
+                <div className="w-16 h-[1px] bg-[#e6c84c]/40 my-3 lg:my-4"></div>
+                <div className="space-y-1.5">
+                  <p className="text-sm sm:text-base md:text-[18px] font-sans font-light text-white/70 leading-tight">
+                    以治? 設計決策 ??  ? ?                  </p>
+                  <p className="text-sm sm:text-base md:text-[18px] font-sans font-light text-white/70 leading-tight">
+                    讓 ?業在不確定中保 ?穩 ?? 信任 ?                  </p>
                 </div>
               </motion.div>
 
@@ -46,7 +44,7 @@ export default function Home({ onNavigate, currentPage }: { onNavigate: (page: s
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5, duration: 1 }}
-                className="space-y-5"
+                className="space-y-6 lg:space-y-8"
               >
                 <div className="flex flex-wrap gap-4">
                   <a 
@@ -56,15 +54,15 @@ export default function Home({ onNavigate, currentPage }: { onNavigate: (page: s
                       const element = document.getElementById('positioning');
                       if (element) {
                         if ((window as any).lenis) {
-                          (window as any).lenis.scrollTo(element, { offset: -80 });
+                           (window as any).lenis.scrollTo(element, { offset: -80 });
                         } else {
                           element.scrollIntoView({ behavior: 'smooth' });
                         }
                       }
                     }}
-                    className="bg-gradient-to-br from-gold-300 via-gold-500 to-gold-600 hover:brightness-110 text-black px-8 py-3.5 rounded flex items-center gap-3 group transition-all font-bold shadow-2xl no-underline text-sm md:text-base"
+                    className="bg-gradient-to-br from-[#e6c84c] via-gold-500 to-gold-600 hover:brightness-110 text-black px-8 py-3.5 rounded flex items-center gap-3 group transition-all font-bold shadow-2xl no-underline text-sm md:text-base cursor-pointer"
                   >
-                    ?�入治�??��? <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    ? 入治 ??  ? <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </a>
                   <a 
                     href="about.html"
@@ -73,18 +71,18 @@ export default function Home({ onNavigate, currentPage }: { onNavigate: (page: s
                       onNavigate('about');
                       window.history.pushState({}, '', 'about.html');
                     }}
-                    className="px-8 py-3.5 rounded border border-gold-400/40 text-gold-400 hover:bg-gold-400/5 transition-all font-bold flex items-center gap-3 no-underline text-sm md:text-base"
+                    className="px-8 py-3.5 rounded border border-[#e6c84c]/40 text-[#e6c84c] hover:bg-[#e6c84c]/5 transition-all font-bold flex items-center gap-3 no-underline text-sm md:text-base cursor-pointer"
                   >
-                    ?�索 STT ?�庫 <ArrowRight className="w-4 h-4" />
+                    ? 索 STT ? 庫 <ArrowRight className="w-4 h-4" />
                   </a>
                 </div>
 
                 {/* Core Focus Areas positioned directly under buttons */}
                 <div className="flex items-center gap-1.5 sm:gap-3 pt-5 border-t border-white/5 max-w-3xl overflow-x-auto scrollbar-none">
                   {[
-                    { en: "Governance Systems", zh: "治�?系統" },
-                    { en: "Decision Architecture", zh: "決�??��?" },
-                    { en: "Family & Enterprise Governance", zh: "家�??��?業治?? }
+                    { en: "Governance Systems", zh: "治 ?系統" },
+                    { en: "Decision Architecture", zh: "決 ??  ?" },
+                    { en: "Family & Enterprise Governance", zh: "家 ??  ?業治?? }
                   ].map((item, i) => (
                     <div 
                       key={i} 
@@ -109,23 +107,21 @@ export default function Home({ onNavigate, currentPage }: { onNavigate: (page: s
               initial={{ opacity: 0, x: 30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 1.5, ease: "easeOut" }}
-              className="w-full lg:w-[52%] flex justify-center lg:justify-end items-start relative"
+              className="w-full lg:w-[52%] flex justify-end items-end relative h-[420px] sm:h-[520px] lg:h-[70vh] xl:h-[75vh] max-h-[640px] overflow-visible"
             >
-              <div className="relative flex flex-row items-end justify-center lg:justify-end">
-                <img 
-                  src="/images/portrait-read.png" 
-                  alt="Dr. Eric Chuang" 
-                  className="w-[260px] xs:w-[310px] sm:w-[360px] md:w-[410px] lg:w-[450px] xl:w-[530px] relative z-10 top-0 drop-shadow-[0_0_50px_rgba(0,0,0,0.8)] transform translate-x-6 xs:translate-x-10 sm:translate-x-12 md:translate-x-16 lg:translate-x-24 xl:translate-x-28"
-                  style={{ height: "100%", maxHeight: "100vh", objectFit: "contain", objectPosition: "bottom" }}
-                  referrerPolicy="no-referrer"
-                />
+              <div className="relative w-full h-full flex items-end justify-end overflow-visible">
+<img
+                  src="/images/portrait-read.png"""""
+  alt="Dr. Eric Chuang"
+  style={{ display: 'block', width: '100%', height: '100%', objectFit: 'cover' }}
+/>
                 
-                {/* Signature aligned side-by-side to the right, bottom-aligned with character */}
-                <div className="ml-3 sm:ml-5 md:ml-6 lg:ml-8 mb-6 sm:mb-10 md:mb-12 lg:mb-16 z-20 flex flex-col items-start w-[100px] xs:w-[130px] sm:w-[165px] md:w-[190px] lg:w-[220px] xl:w-[260px] shrink-0">
+                {/* Signature and Credentials overlay, positioned precisely as seen in the screenshot */}
+                <div className="absolute bottom-8 sm:bottom-12 lg:bottom-16 right-0 sm:right-4 xl:right-12 z-20 flex flex-col items-start bg-transparent pl-4 pb-4">
                   <img 
                     src="/signature-eric001.png" 
                     alt="Eric Chuang, Ph.D. Signature" 
-                    className="w-full h-auto drop-shadow-[0_2px_15px_rgba(0,0,0,0.9)] opacity-95"
+                    className="w-36 sm:w-48 lg:w-64 h-auto drop-shadow-[0_2px_15px_rgba(0,0,0,0.9)] opacity-95 transition-all"
                     referrerPolicy="no-referrer"
                   />
                 </div>
@@ -139,13 +135,13 @@ export default function Home({ onNavigate, currentPage }: { onNavigate: (page: s
       {/* 2. Governance Portal - Portal Section */}
       <section 
         id="governance" 
-        className={`strategic-bg-container border-y border-white/5 ${currentPage === "governance" ? "pt-[2vh] pb-[2vh]" : "py-32"}`}
-        style={currentPage === "governance" ? { 
+        className="strategic-bg-container border-y border-white/5 pt-12 pb-12"
+        style={{ 
           transform: "scale(0.88)", 
           transformOrigin: "top center", 
-          height: "calc(100vh / 0.88)", 
-          overflow: "hidden" 
-        } : undefined}
+          minHeight: "calc(100vh / 0.88)",
+          marginBottom: "-12vh"
+        }}
       >
         <div 
           className="strategic-bg-image" 
@@ -153,74 +149,76 @@ export default function Home({ onNavigate, currentPage }: { onNavigate: (page: s
         ></div>
         <div className="strategic-bg-overlay"></div>
 
-        <div className={`container mx-auto px-6 relative z-10 ${currentPage === "governance" ? "h-full flex flex-col justify-between py-2" : ""}`}>
-          <div className={`text-center ${currentPage === "governance" ? "space-y-1.5" : "space-y-4 mb-24"}`} style={currentPage === "governance" ? { paddingBottom: "16px" } : undefined}>
+        <div className="container mx-auto px-6 relative z-10 min-h-full flex flex-col justify-between py-2">
+          <div className="text-center space-y-1.5 pb-4">
             <p className="text-gold-600 text-[10px] tracking-[0.5em] uppercase font-bold">PORTALS OF INTERPRETATION</p>
-            <h2 className={`${currentPage === "governance" ? "text-4xl" : "text-5xl"} font-display text-white`}>治�??�口</h2>
+            <h2 className="text-4xl font-display text-white">治 ?? 口</h2>
             <p className="text-stone-500 max-w-2xl mx-auto italic text-xs">
-              不是?��?建議，而是?�助建�?不可?��??�治?�秩序�??��??��???            </p>
-            <p className={`text-stone-400 max-w-2xl mx-auto leading-relaxed ${currentPage === "governance" ? "text-[11px]" : "text-sm"}`}>?��??�目?��?注�?治�??��?，進入?��??��?業場?��??�們�??�助?��?清�?題本質�?建�??�長?��?作�?治�?系統??/p>
+              不是?  ?建議，而是? 助建 ?不可?  ?? 治? 秩序 ??  ??  ???            </p>
+            <p className="text-stone-400 max-w-2xl mx-auto leading-relaxed text-[11px]">?  ?? 目?  ?注 ?治 ??  ?，進入?  ??  ?業場?  ?? 們 ?? 助?  ?清 ?題本質 ?建 ?? 長?  ?作 ?治 ?系統??/p>
           </div>
 
-          <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 ${currentPage === "governance" ? "gap-4 flex-grow items-center" : "gap-6"}`} style={currentPage === "governance" ? { paddingTop: "24px", paddingBottom: "24px" } : undefined}>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {[
               { 
                 id: "01", 
-                title: "企業治�??��??�判讀", 
-                icon: <Landmark className="w-8 h-8" />,
-                desc: "?��?策略?�風?�、制度�??��?，�??��?業建立長?�競?�優?��?治�?秩�???, 
-                items: ["策略治�?", "????�治??, "?�度?��?", "風險管�?"],
-                route: "service-portal" 
+                title: "企業治 ??  ?? 判讀", 
+                icon: <Landmark className="w-8 h-8 md:w-9 md:h-9" />,
+                desc: "?  ?策略? 風? 、制度 ??  ?， ??  ?業建立長? 競? 優?  ?治 ?秩 ???, 
+                items: ["策略治 ?", "???? 治??, "? 度?  ?", "風險管 ?"],
+                route: "service-portal",
+                btnText: "? 入 企業治 ??  ?? 判讀 系統"
               },
               { 
                 id: "02", 
-                title: "家�?治�??��?業接??, 
-                icon: <Users className="w-8 h-8" />,
-                desc: "建�?家�?信任?�治?�制度�?確�?財�??�價?��?使命?�永續傳?��?, 
-                items: ["家�?信任系統", "?�班計畫", "財�?治�?", "家�??��?"],
-                route: "success"
+                title: "家 ?治 ??  ?業接??, 
+                icon: <Users className="w-8 h-8 md:w-9 md:h-9" />,
+                desc: "建 ?家 ?信任? 治? 制度 ?確 ?財 ?? 價?  ?使命? 永續傳?  ?, 
+                items: ["家 ?信任系統", "? 班計畫", "財 ?治 ?", "家 ??  ?"],
+                route: "success",
+                btnText: "? 入 家 ?治 ??  ?業接??系統"
               },
               { 
                 id: "03", 
-                title: "?�在法遵 Internal Compliance", 
-                icon: <Scale className="w-8 h-8" />,
-                desc: "從制度內?��?規�?識�??�造�?業�??��??��??��??��???, 
-                items: ["?�部?�制", "法遵機制", "稽核機制", "?��??��?"],
-                route: "internal-compliance"
+                title: "? 在法遵 Internal Compliance", 
+                icon: <Scale className="w-8 h-8 md:w-9 md:h-9" />,
+                desc: "從制度內?  ?規 ?識 ?? 造 ?業 ??  ??  ??  ??  ???, 
+                items: ["? 部? 制", "法遵機制", "稽核機制", "?  ??  ?"],
+                route: "internal-compliance",
+                btnText: "? 入 ? 在法遵 INTERNAL COMPLIANCE 專 ?"
               },
               { 
                 id: "04", 
                 title: "ESGAI Governance System", 
-                icon: <Brain className="w-8 h-8" />,
-                desc: "AI 治�?輔助系統，�?供決策�??�、風?�辨識�?治�??�援??, 
-                items: ["決�??�??, "風險辨�?", "治�?框架", "?�度?�援"],
-                route: "service-portal"
+                icon: <Brain className="w-8 h-8 md:w-9 md:h-9" />,
+                desc: "AI 治 ?輔助系統， ?供決策 ?? 、風? 辨識 ?治 ?? 援??, 
+                items: ["決 ?? ??, "風險辨 ?", "治 ?框架", "? 度? 援"],
+                route: "service-portal",
+                btnText: "? 入 ESGAI GOVERNANCE SYSTEM 系統"
               }
             ].map((card, i) => (
               <div 
                 key={i} 
-                className={`group bg-zinc-950/80 border border-white/5 hover:border-gold-600/30 transition-all duration-500 backdrop-blur-sm flex flex-col items-center text-center h-full justify-between ${
-                  currentPage === "governance" ? "p-4" : "p-8"
-                }`}
-                style={currentPage === "governance" ? { padding: "16px" } : undefined}
+                className="group bg-zinc-950/80 border border-white/5 hover:border-gold-600/30 transition-all duration-500 backdrop-blur-sm flex flex-col items-center text-center h-full justify-between p-4"
+                style={{ padding: "16px" }}
               >
-                <div className={`w-full flex-col flex items-center ${currentPage === "governance" ? "" : "mb-10"}`} style={currentPage === "governance" ? { marginBottom: "8px" } : undefined}>
-                  <span className={`text-[10px] text-gold-600/40 font-mono tracking-widest block ${currentPage === "governance" ? "mb-1" : "mb-3"}`}>{card.id}</span>
+                <div className="w-full flex-col flex items-center mb-2">
+                  <span className="text-[10px] text-gold-600/40 font-mono tracking-widest block mb-1">{card.id}</span>
                   <div className="text-gold-600 opacity-60 group-hover:opacity-100 transition-opacity">{card.icon}</div>
                 </div>
-                <h3 className={`font-display text-white leading-tight ${currentPage === "governance" ? "text-xl" : "text-2xl mb-6"}`} style={currentPage === "governance" ? { marginTop: "8px", marginBottom: "8px" } : undefined}>{card.title}</h3>
+                <h3 className="font-display text-white leading-tight text-xl font-medium mt-2 mb-2">{card.title}</h3>
                 <p 
-                  className={`text-stone-500 text-xs font-light leading-relaxed max-w-[280px] ${currentPage === "governance" ? "mb-4" : "mb-8"}`}
-                  style={currentPage === "governance" ? { fontSize: "15px", lineHeight: "1.5" } : undefined}
+                  className="text-stone-500 text-xs font-light leading-relaxed max-w-[280px] mb-4"
+                  style={{ fontSize: "14px", lineHeight: "1.5" }}
                 >
                   {card.desc}
                 </p>
-                <div className={`flex flex-col items-center ${currentPage === "governance" ? "" : "space-y-3 mb-10"}`}>
+                <div className="flex flex-col items-center mb-4">
                   {card.items.map((item, idx) => (
                     <div 
                       key={idx} 
-                      className={`flex items-center gap-2 text-stone-400 ${currentPage === "governance" ? "text-[10px]" : "text-[10px] gap-2.5"}`}
-                      style={currentPage === "governance" ? { margin: "4px 0", padding: "4px 0", fontSize: "12.5px", lineHeight: "1.5" } : undefined}
+                      className="flex items-center gap-2 text-stone-400 text-[10px] my-1"
+                      style={{ fontSize: "12.5px", lineHeight: "1.5" }}
                     >
                       <ShieldCheck className="w-3 h-3 text-gold-600/50" />
                       {item}
@@ -234,18 +232,16 @@ export default function Home({ onNavigate, currentPage }: { onNavigate: (page: s
                     onNavigate(card.route);
                     window.history.pushState({}, '', card.route === 'service-portal' ? 'governance.html' : `${card.route}.html`);
                   }}
-                  className={`w-full bg-gold-600/10 border border-gold-600/20 text-gold-500 text-[10px] font-bold tracking-widest uppercase group-hover:bg-gold-600 group-hover:text-black transition-all no-underline text-center flex items-center justify-center ${
-                    currentPage === "governance" ? "py-2" : "mt-auto py-3"
-                  }`}
-                  style={currentPage === "governance" ? { marginTop: "12px" } : undefined}
+                  className="w-full mt-auto bg-gold-600/10 border border-gold-600/20 text-gold-500 font-bold tracking-widest uppercase group-hover:bg-gold-600 group-hover:text-black transition-all no-underline text-center flex items-center justify-center py-2.5 text-[11px]"
+                  style={{ marginTop: "12px" }}
                 >
-                  ?�入 {card.title} {card.id === "03" ? "專�?" : "系統"} <ArrowRight className="inline ml-1 w-3 h-3" />
+                  {card.btnText} <ArrowRight className="inline ml-1.5 w-3 h-3" />
                 </a>
               </div>
             ))}
           </div>
 
-          <div className={`flex justify-center gap-12 text-[10px] uppercase font-bold tracking-[0.3em] text-gold-600/50 ${currentPage === "governance" ? "mt-6" : "mt-20"}`}>
+          <div className="flex justify-center gap-12 text-[10px] uppercase font-bold tracking-[0.3em] text-gold-600/50 mt-6">
             <p className="flex items-center gap-3 opacity-80 hover:opacity-100 cursor-default transition-all">
                <ShieldCheck className="w-3 h-3" /> Governance First
             </p>
@@ -274,9 +270,9 @@ export default function Home({ onNavigate, currentPage }: { onNavigate: (page: s
                 <span className="text-gold-600 text-[10px] tracking-[0.5em] uppercase font-bold">POSITIONING</span>
               </div>
               <h2 className="text-5xl md:text-6xl font-display text-white leading-tight">
-                不是顧�??�司�??�是<span className="metallic-gold-text">治�??��?平台</span>??              </h2>
+                不是顧 ?? 司 ?? 是<span className="metallic-gold-text">治 ??  ?平台</span>??              </h2>
               <p className="text-stone-400 text-lg leading-relaxed max-w-xl">
-                ?��?確�??��?�??企業?�要�?不是?��?建議，而是一套能守�?秩�??�創?�價?��?治�?系統??              </p>
+                ?  ?確 ??  ? ??企業? 要 ?不是?  ?建議，而是一套能守 ?秩 ?? 創? 價?  ?治 ?系統??              </p>
               
               <div className="space-y-4 pt-8">
                 <div className="metallic-gold-text text-4xl font-display font-medium">Eric Chuang</div>
@@ -287,12 +283,12 @@ export default function Home({ onNavigate, currentPage }: { onNavigate: (page: s
             <div className="w-full lg:w-1/2 relative">
                <div className="grid grid-cols-2 gap-8 relative z-10">
                   {[
-                    { label: "治�?秩�?", sub: "Governance Order" },
-                    { label: "決�?系統", sub: "Decision Systems" },
-                    { label: "?��?信任", sub: "Institutional Trust" },
-                    { label: "法遵治�?", sub: "Compliance Governance" },
-                    { label: "家�??�承", sub: "Family Succession" },
-                    { label: "高�?策略?��?", sub: "Executive Alliance" }
+                    { label: "治 ?秩 ?", sub: "Governance Order" },
+                    { label: "決 ?系統", sub: "Decision Systems" },
+                    { label: "?  ?信任", sub: "Institutional Trust" },
+                    { label: "法遵治 ?", sub: "Compliance Governance" },
+                    { label: "家 ?? 承", sub: "Family Succession" },
+                    { label: "高 ?策略?  ?", sub: "Executive Alliance" }
                   ].map((p, i) => (
                     <div key={i} className="flex flex-col gap-1 border-b border-white/5 pb-4">
                       <p className="text-lg text-white font-display">{p.label}</p>
@@ -303,7 +299,7 @@ export default function Home({ onNavigate, currentPage }: { onNavigate: (page: s
                
                <div className="mt-20 border border-white/10 p-8 bg-zinc-950/50 backdrop-blur-sm">
                   <p className="text-stone-300 italic text-sm leading-relaxed">
-                    ?�STT 不只?��?供建議�??�是?�助企業建�?不可?��??�治?�秩序�??��??��??��?                  </p>
+                    ? STT 不只?  ?供建議 ?? 是? 助企業建 ?不可?  ?? 治? 秩序 ??  ??  ??  ?                  </p>
                </div>
             </div>
           </div>
@@ -312,8 +308,8 @@ export default function Home({ onNavigate, currentPage }: { onNavigate: (page: s
 
       {/* 4. The Strategist Section */}
       <section 
-        className="strategic-bg-container py-12 lg:py-16" 
-        style={{ maxHeight: "85vh", overflow: "hidden" }}
+        className="strategic-bg-container relative border-y border-white/5 pt-12 lg:pt-24 pb-0 overflow-hidden flex flex-col justify-end" 
+        style={{ minHeight: "max(650px, 80vh)" }}
       >
         <div 
           className="strategic-bg-image" 
@@ -321,51 +317,60 @@ export default function Home({ onNavigate, currentPage }: { onNavigate: (page: s
         ></div>
         <div className="strategic-bg-overlay"></div>
 
-        <div className="container mx-auto px-6 relative z-10 h-full flex items-center">
-          <div className="flex flex-col-reverse lg:flex-row gap-12 lg:gap-16 items-center h-full w-full">
-             <div className="w-full lg:w-1/2 h-full flex items-end justify-center overflow-hidden">
-                <div className="relative group h-full max-h-[75vh]">
-                  <div className="absolute -inset-4 bg-gold-600/10 blur-2xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-1000"></div>
-                   <img 
-                      src="/images/portrait-open.png" 
-                      alt="?��?翔�?�? 
-                      style={{ width: "100%", height: "auto", objectFit: "contain", objectPosition: "center bottom" }}
-                      referrerPolicy="no-referrer"
-                    />
+        {/* Vertical Text Sidebar on the far left */}
+        <div className="absolute left-6 top-1/2 -translate-y-1/2 hidden xl:flex flex-col items-center gap-6 z-20">
+          <div className="w-px h-24 bg-[#e6c84c]/20"></div>
+          <span className="font-mono text-[9px] tracking-[0.4em] text-white/30 uppercase whitespace-nowrap [writing-mode:vertical-lr] select-none">
+            STRATEGIC THINK TANK PLATFORM
+          </span>
+          <div className="w-1.5 h-1.5 rounded-full bg-[#e6c84c]/40"></div>
+          <div className="w-px h-12 bg-[#e6c84c]/20"></div>
+        </div>
+
+        <div className="container mx-auto px-6 relative z-10 flex-grow flex flex-col justify-end h-full">
+          <div className="flex flex-col-reverse lg:flex-row gap-12 lg:gap-16 items-center lg:items-stretch h-full w-full">
+             <div className="w-full lg:w-1/2 flex items-end justify-center lg:justify-start relative z-10 h-full">
+                <div className="relative group w-full max-w-[480px] sm:max-w-[540px] lg:max-w-none flex justify-center lg:justify-start items-end h-[420px] sm:h-[520px] lg:h-[70vh] xl:h-[75vh] max-h-[640px]">
+                  <div className="absolute -inset-4 bg-gold-600/5 blur-3xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-1000"></div>
+<img
+  src="/images/portrait-open.png"
+  alt="?  ?翔 ? ?
+  style={{ display: 'block', width: '100%', height: '100%', objectFit: 'cover' }}
+/>
                 </div>
              </div>
 
-             <div className="w-full lg:w-1/2 space-y-8 py-4 font-sans">
+             <div className="w-full lg:w-1/2 flex flex-col justify-center space-y-6 lg:space-y-8 py-8 lg:py-16 font-sans text-left z-10 lg:pl-4">
                <div className="space-y-3">
-                 <p className="text-gold-600 text-[10px] tracking-[0.5em] uppercase font-bold">THE STRATEGIST</p>
-                 <h2 className="text-4xl lg:text-5xl font-display text-white">治�??��???/h2>
-                 <p className="text-stone-400 text-sm leading-relaxed">
-                   ?��?翔�?士長?�致?�於建�?高信任、可?��?存�??�治?��??�架構�??��?對「決策秩序」�?深度?��?，為企業?�判策略風險?�利潤風?��?                 </p>
+                 <p className="text-[#e6c84c] text-[10px] tracking-[0.5em] uppercase font-bold">THE STRATEGIST</p>
+                 <h2 className="text-4xl lg:text-5xl font-serif text-white tracking-wide font-normal">治 ??  ???/h2>
+                 <p className="text-stone-400 text-sm sm:text-base leading-relaxed max-w-xl font-light">
+                   ?  ?翔 ?士長? 致? 於建 ?高信任、可?  ?存 ?? 治?  ?? 架構 ??  ?對「決策秩序」 ?深度?  ?，為企業? 判策略風險? 利潤風?  ?                 </p>
                </div>
 
-               <div className="grid grid-cols-1 md:grid-cols-2 gap-5 pt-4">
+               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6 pt-4 max-w-xl">
                   {[
-                    { label: "企業治�??��?治�?�?, icon: <ShieldCheck className="w-5 h-5 text-gold-600" /> },
-                    { label: "家�??�承?�長?�治??, icon: <Users className="w-5 h-5 text-gold-600" /> },
-                    { label: "決�?結�??�內?�秩�?, icon: <Scale className="w-5 h-5 text-gold-600" /> },
-                    { label: "?��?法治??AI 治�?", icon: <Brain className="w-5 h-5 text-gold-600" /> },
-                    { label: "組�?秩�?之�?策判讀", icon: <Globe className="w-5 h-5 text-gold-600" /> },
-                    { label: "高信任治?��??�架�?, icon: <Award className="w-5 h-5 text-gold-600" /> }
+                    { label: "企業治 ??  ?治 ? ?, icon: <ShieldCheck className="w-4 h-4 text-[#e6c84c]" /> },
+                    { label: "家 ?? 承? 長? 治??, icon: <Users className="w-4 h-4 text-[#e6c84c]" /> },
+                    { label: "決 ?結 ?? 內? 秩 ?, icon: <Scale className="w-4 h-4 text-[#e6c84c]" /> },
+                    { label: "?  ?法治??AI 治 ?", icon: <Brain className="w-4 h-4 text-[#e6c84c]" /> },
+                    { label: "組 ?秩 ?之 ?策判讀", icon: <Globe className="w-4 h-4 text-[#e6c84c]" /> },
+                    { label: "高信任治?  ?? 架 ?, icon: <Award className="w-4 h-4 text-[#e6c84c]" /> }
                   ].map((item, i) => (
-                    <div key={i} className="flex items-center gap-4 group">
-                      <div className="p-2 border border-white/5 bg-zinc-950 group-hover:border-gold-600/30 transition-all">
+                    <div key={i} className="flex items-center gap-3.5 group">
+                      <div className="p-1.5 border border-white/5 bg-zinc-950/80 group-hover:border-[#e6c84c]/30 group-hover:bg-zinc-900 transition-all">
                         {item.icon}
                       </div>
-                      <span className="text-sm font-sans text-stone-300 group-hover:text-white transition-colors">{item.label}</span>
+                      <span className="text-sm sm:text-[14.5px] font-sans font-light text-stone-300 group-hover:text-white transition-colors tracking-wide">{item.label}</span>
                     </div>
                   ))}
                </div>
 
-               <div className="border-l border-gold-600 bg-zinc-950/40 relative" style={{ padding: "12px" }}>
-                  <p className="text-stone-300 italic text-base leading-relaxed">
-                     ?�治?��??�質，�??�控?��??�是確�?秩�??�信任長?��??�。�?                  </p>
-                  <div className="mt-4 flex items-center gap-4">
-                     <div className="text-stone-500 font-display italic">???��?翔�?�?/div>
+               <div className="border-l border-[#e6c84c] bg-zinc-950/40 max-w-xl" style={{ padding: "16px 20px" }}>
+                  <p className="text-stone-300 italic text-sm sm:text-base leading-relaxed">
+                     ? 治?  ?? 質， ?? 控?  ?? 是確 ?秩 ?? 信任長?  ?? 。 ?                  </p>
+                  <div className="mt-3 flex items-center gap-4">
+                     <div className="text-stone-500 font-serif text-xs sm:text-sm font-medium">???  ?翔 ? ?/div>
                   </div>
                </div>
              </div>
@@ -389,8 +394,8 @@ export default function Home({ onNavigate, currentPage }: { onNavigate: (page: s
           <div className="flex justify-between items-end mb-20">
              <div className="space-y-4">
                 <p className="text-gold-600 text-[10px] tracking-[0.5em] uppercase font-bold">GOVERNANCE INSIGHTS</p>
-                <h2 className="text-5xl font-display text-white">?�庫觀�?/h2>
-                <p className="text-stone-500">深入?��?治�??��??��?法�??��??�議題�??��?專業洞�??�實?��?引�?/p>
+                <h2 className="text-5xl font-display text-white">? 庫觀 ?/h2>
+                <p className="text-stone-500">深入?  ?治 ??  ??  ?法 ??  ?? 議題 ??  ?專業洞 ?? 實?  ?引 ?/p>
              </div>
              <a 
                href="insights.html"

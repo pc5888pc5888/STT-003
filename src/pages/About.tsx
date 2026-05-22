@@ -7,14 +7,14 @@ export default function About() {
   return (
     <div 
       className="min-h-screen bg-[#050505] text-white selection:bg-white/20 selection:text-white"
-      style={{ transform: "scale(0.89)", transformOrigin: "top center", overflowX: "hidden" }}
+      style={{ overflowX: "hidden" }}
     >
       <div className="container mx-auto px-6 max-w-7xl">
         
-        {/* Hero Section - Refined Proportions to match Columns style */}
+        {/* Hero Section - Refined Proportions with appropriate main scale */}
         <section 
-          className="relative min-h-[95vh] flex items-center overflow-hidden border-b border-white/5 mb-32 pt-24 lg:pt-0"
-          style={{ transform: "scale(0.75)", transformOrigin: "top center", marginBottom: "-25vh" }}
+          className="relative min-h-[92vh] flex items-center overflow-hidden border-b border-white/5 mb-24 pt-24 lg:pt-0"
+          style={{ transform: "scale(0.92)", transformOrigin: "top center", marginBottom: "-8vh" }}
         >
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
@@ -26,18 +26,24 @@ export default function About() {
               <div className="space-y-6">
                 <div className="flex items-center gap-4">
                   <span className="h-[2px] w-12 bg-gold-600"></span>
-                  <span className="text-gold-500 font-sans font-black text-xs uppercase tracking-[0.5em]">Founder's Profile</span>
+                  <span className="text-gold-500 font-sans font-black text-xs uppercase tracking-[0.5em]">FOUNDER'S PROFILE</span>
                 </div>
-                <div className="relative w-full max-w-2xl transform lg:-translate-x-4">
+                <div className="relative w-full max-w-2xl">
                   <div>
-                    <p style={{ fontSize: "1.1rem", fontWeight: "bold", color: "#ffffff", fontFamily: "Georgia, serif" }}>Strategist & Scholar Eric Chuang, Ph.D.</p>
-                    <p style={{ fontSize: "1rem", letterSpacing: "0.3em", color: "#ffffff" }}>企 業 策 略 顧 問 ｜ 學 術 出 版 家</p>
-                    <h1 style={{ fontSize: "2.8rem", color: "#C9A84C", fontWeight: "bold", margin: "16px 0" }}>莊 鈞 翔 博 士</h1>
+                    <p style={{ fontSize: "1.6rem", fontWeight: "bold", color: "#ffffff", fontFamily: "Georgia, serif" }}>
+                      Strategist & Scholar Eric Chuang, Ph.D.
+                    </p>
+                    <p style={{ fontSize: "1.2rem", letterSpacing: "0.3em", color: "#ffffff", marginTop: "12px" }}>
+                      企 業 策 略 顧 問 ｜ 學 術 出 版 家
+                    </p>
+                    <h1 style={{ fontSize: "4.2rem", color: "#C9A84C", fontWeight: "bold", margin: "16px 0", letterSpacing: "0.05em" }}>
+                      莊 鈞 翔 博 士
+                    </h1>
                   </div>
                 </div>
               </div>
               
-              <div className="flex flex-wrap gap-4">
+              <div className="flex flex-wrap gap-4 pt-2">
                 {["逢甲大學商學博士", "GCSDA 創會理事長", "策略智庫出版人"].map(tag => (
                   <span key={tag} className="px-6 py-3 border border-white/10 text-white/50 text-[10px] font-bold tracking-[0.3em] uppercase bg-white/5 rounded-none backdrop-blur-sm hover:border-gold-500/50 hover:text-gold-500 transition-all cursor-default">
                     {tag}
@@ -45,16 +51,14 @@ export default function About() {
                 ))}
               </div>
 
-              <div className="h-px w-32 bg-gold-900/40"></div>
-
-              <div className="space-y-10 max-w-4xl" style={{ textAlign: "left", marginLeft: "0" }}>
-                <p className="text-2xl md:text-3xl font-serif text-white/80 leading-relaxed font-light italic" style={{ textAlign: "left", marginLeft: "0", paddingLeft: "0" }}>
+              <div className="space-y-10 max-w-4xl" style={{ textAlign: "left", marginLeft: "0", marginTop: "40px" }}>
+                <p className="font-serif text-stone-300 leading-relaxed font-light" style={{ fontSize: "1.45rem", textAlign: "left", marginLeft: "0", paddingLeft: "0" }}>
                   「最堅固的商業帝國，往往崩塌於領導者內在秩序的失衡；真正的策劃，始於內在法治張力的建立與校準。」
                 </p>
               </div>
             </div>
             
-            <div className="lg:col-span-5 h-full relative flex items-end justify-center lg:justify-end">
+            <div className="lg:col-span-5 h-[75vh] lg:h-[85vh] relative flex items-end justify-center lg:justify-end">
               <motion.div 
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -65,17 +69,16 @@ export default function About() {
                   <img 
                     src="/images/portrait-phd.png" 
                     alt="莊鈞翔 博士" 
-                    className="w-full h-auto max-h-[75vh] lg:max-h-[85vh] object-contain object-bottom portrait-render drop-shadow-[0_0_60px_rgba(212,175,55,0.15)]"
+                    className="w-full h-full object-contain object-bottom portrait-render drop-shadow-[0_0_60px_rgba(212,175,55,0.15)]"
                     referrerPolicy="no-referrer"
-                    style={{ transform: "scale(1)" }}
                   />
                   {/* Cinematic Bottom Fade */}
-                  <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black via-black/80 to-transparent z-10 pointer-events-none"></div>
+                  <div className="absolute inset-x-0 bottom-0 h-1/4 bg-gradient-to-t from-black via-black/80 to-transparent z-10 pointer-events-none"></div>
                   {/* Standardized Contributor Label */}
                   <ContributorLabel 
                     title="SCHOLAR & STRATEGIST" 
                     name="莊鈞翔 博士"
-                    className="absolute bottom-20 right-4 lg:right-0" 
+                    className="absolute bottom-16 right-4 lg:right-0 shadow-[0_20px_40px_rgba(0,0,0,0.8)]" 
                   />
                 </div>
               </motion.div>
