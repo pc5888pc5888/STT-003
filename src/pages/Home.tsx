@@ -111,7 +111,7 @@ export default function Home({ onNavigate, currentPage }: { onNavigate: (page: s
             >
               <div className="relative w-full h-full flex items-end justify-end overflow-visible">
 <img
-                  src="/images/portrait-read.png"""""
+                  src="/images/portrait-read.png"
   alt="Dr. Eric Chuang"
   style={{ display: 'block', width: '100%', height: '100%', objectFit: 'cover' }}
 />
@@ -119,7 +119,7 @@ export default function Home({ onNavigate, currentPage }: { onNavigate: (page: s
                 {/* Signature and Credentials overlay, positioned precisely as seen in the screenshot */}
                 <div className="absolute bottom-8 sm:bottom-12 lg:bottom-16 right-0 sm:right-4 xl:right-12 z-20 flex flex-col items-start bg-transparent pl-4 pb-4">
                   <img 
-                    src="/signature-eric001.png" 
+                    src="/images/portrait-read.png"
                     alt="Eric Chuang, Ph.D. Signature" 
                     className="w-36 sm:w-48 lg:w-64 h-auto drop-shadow-[0_2px_15px_rgba(0,0,0,0.9)] opacity-95 transition-all"
                     referrerPolicy="no-referrer"
@@ -333,7 +333,7 @@ export default function Home({ onNavigate, currentPage }: { onNavigate: (page: s
                 <div className="relative group w-full max-w-[480px] sm:max-w-[540px] lg:max-w-none flex justify-center lg:justify-start items-end h-[420px] sm:h-[520px] lg:h-[70vh] xl:h-[75vh] max-h-[640px]">
                   <div className="absolute -inset-4 bg-gold-600/5 blur-3xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-1000"></div>
 <img
-  src="/images/portrait-read.png"
+  src="/images/portrait-open.png"
   alt="?  ?翔 ? ?
   style={{ display: 'block', width: '100%', height: '100%', objectFit: 'cover' }}
 />
