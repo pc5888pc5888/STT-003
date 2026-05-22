@@ -333,7 +333,7 @@ export default function Home({ onNavigate, currentPage }: { onNavigate: (page: s
                 <div className="relative group w-full max-w-[480px] sm:max-w-[540px] lg:max-w-none flex justify-center lg:justify-start items-end h-[420px] sm:h-[520px] lg:h-[70vh] xl:h-[75vh] max-h-[640px]">
                   <div className="absolute -inset-4 bg-gold-600/5 blur-3xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-1000"></div>
 <img
-  src="/images/portrait-open.png"
+  src="/images/portrait-read.png"
   alt="?  ?翔 ? ?
   style={{ display: 'block', width: '100%', height: '100%', objectFit: 'cover' }}
 />
