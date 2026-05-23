@@ -67,7 +67,7 @@ export default function About() {
               >
                 <div className="relative h-full w-full max-w-[500px] lg:max-w-none flex items-end justify-end">
                   <img 
-                    src="/images/portrait-open.png" 
+                    src="/images/portrait-003.png" 
                     alt="莊鈞翔 博士" 
                     className="w-full h-full object-contain object-bottom portrait-render drop-shadow-[0_0_60px_rgba(212,175,55,0.15)]"
                     referrerPolicy="no-referrer"

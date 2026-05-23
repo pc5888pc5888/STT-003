@@ -163,8 +163,8 @@ export default function App() {
             }}
             aria-label="回首頁"
           >
-              <div className="relative w-40 lg:w-56 h-12 flex-shrink-0">
-               <img src="/images/logo-header.png" alt="STT Press Logo" className="w-full h-full object-contain transition-transform group-hover:scale-[1.02]" />
+              <div className="relative w-44 sm:w-52 lg:w-[260px] h-14 lg:h-[70px] flex items-center flex-shrink-0">
+               <img src="/images/logo-header.png?v=20260522_v2" alt="STT Press Logo" className="w-full h-full object-contain transition-transform group-hover:scale-[1.02]" />
             </div>
           </a>
 
@@ -442,7 +442,7 @@ export default function App() {
                 <div className="relative w-40 h-40 lg:w-48 lg:h-48 flex justify-center lg:justify-start">
                   {/* Seal Logo */}
                   <img 
-                    src="/images/logo-seal-footer.png" 
+                    src="/images/logo-seal-footer.png?v=20260522_v2" 
                     alt="STT Press Seal" 
                     className="w-full h-full object-contain filter drop-shadow-[0_0_15px_rgba(230,200,76,0.2)]" 
                   />

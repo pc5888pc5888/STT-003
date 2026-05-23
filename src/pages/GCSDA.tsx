@@ -108,7 +108,7 @@ export default function GCSDA() {
             {/* The primary logo already contains the slogan; do not repeat textual slogans in the UI layer. */}
             <div className="w-full max-w-[650px] flex justify-center mb-16 px-4">
               <img 
-                src="/images/學會logo圖文.png" 
+                src="/images/gcsda-logo.png" 
                 alt="中華企業策略永續發展學會" 
                 className="w-full h-auto object-contain mix-blend-screen drop-shadow-[0_0_80px_rgba(212,175,55,0.15)]" 
                 referrerPolicy="no-referrer"
@@ -161,7 +161,7 @@ export default function GCSDA() {
                  <div className="relative group overflow-hidden">
                    {/* Refined Group Photo with Masking for perfect dark-theme integration */}
                    <img 
-                     src="/images/gcsda_team_2026.png" 
+                     src="/images/group-001.png" 
                      alt="中華企業策略永續發展學會 策略智庫全體專家成員" 
                      className="w-full h-auto drop-shadow-2xl transition-all duration-[20s] ease-out scale-[1.01] group-hover:scale-[1.03] opacity-95 group-hover:opacity-100"
                      style={{ 
@@ -182,10 +182,10 @@ export default function GCSDA() {
                  <div className="absolute bottom-0 left-0 right-0 z-10 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8">
                     {[
                       { role: "理事", name: "林柏劭", title: "律師" },
-                      { role: "理事", name: "劉煒達", title: "律師" },
                       { role: "理事", name: "林政男", title: "律師" },
-                      { role: "理事", name: "高毓謙", title: "律師" },
+                      { role: "理事", name: "劉煒達", title: "律師" },
                       { role: "創會理事長", name: "莊鈞翔", title: "博士", highlight: true },
+                      { role: "理事", name: "高毓謙", title: "律師" },
                       { role: "秘書長", name: "黃朝福", title: "會計師" },
                       { role: "理事", name: "謝秉錡", title: "律師" },
                       { role: "理事", name: "賴祺元", title: "律師" }

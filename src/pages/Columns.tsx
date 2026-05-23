@@ -126,7 +126,7 @@ export default function Columns() {
               
               <div className="relative pt-4 max-w-[600px] mx-auto lg:mx-0">
                 <img 
-                  src="/images/STT-Press-Law-Header.png" 
+                  src="/images/stt-word-001.png?v=20260522" 
                   alt="STT Press Law Strategic Review" 
                   className="w-full h-auto object-contain drop-shadow-[0_0_50px_rgba(212,175,55,0.2)]"
                   referrerPolicy="no-referrer"

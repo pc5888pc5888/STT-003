@@ -27,7 +27,7 @@ export default function Papers() {
               
               <div className="relative w-full max-w-4xl py-4 lg:py-6">
                 <img 
-                  src="/images/logo字樣06.png" 
+                  src="/images/stt-word-003.png.png" 
                   alt="學術研究：卓越引領策略新典範" 
                   className="w-full h-auto drop-shadow-[0_20px_50px_rgba(212,175,55,0.3)] filter brightness-110 contrast-110"
                   referrerPolicy="no-referrer"
@@ -57,7 +57,7 @@ export default function Papers() {
             >
               <div className="relative h-full w-full max-w-[500px] lg:max-w-none flex items-end justify-end">
                 <img 
-                  src="/images/Eric-Chuang-03.png" 
+                  src="/images/portrait-005.png.png" 
                   alt="莊鈞翔 博士" 
                   className="w-full h-auto max-h-[75vh] lg:max-h-[85vh] object-contain object-bottom filter drop-shadow-[0_0_60px_rgba(212,175,55,0.15)] contrast-[1.1] brightness-[1.1]"
                   referrerPolicy="no-referrer"

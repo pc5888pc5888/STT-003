@@ -62,7 +62,7 @@ export default function Books({ onNavigate }: { onNavigate: (page: string) => vo
                 
                 <div className="relative pt-4 max-w-[600px] mx-auto lg:mx-0">
                   <img 
-                    src="/images/STT-Press-Digital-Header.png" 
+                    src="/images/stt-word-002.png" 
                     alt="STT Press 2026年度戰略鉅獻" 
                     className="w-full h-auto object-contain drop-shadow-[0_0_50px_rgba(212,175,55,0.2)]"
                     referrerPolicy="no-referrer"
@@ -110,7 +110,7 @@ export default function Books({ onNavigate }: { onNavigate: (page: string) => vo
                 
                 <div className="relative h-full w-full flex items-end justify-end">
                   <img 
-                    src="/images/Eric-Chuang-06.png" 
+                    src="/images/portrait-004.png" 
                     alt="Dr. Eric Chuang" 
                     className="h-auto max-h-[75vh] lg:max-h-[90vh] w-full object-contain object-bottom filter drop-shadow-[0_0_80px_rgba(212,175,55,0.15)] contrast-[1.1] brightness-[1.02]"
                     referrerPolicy="no-referrer"

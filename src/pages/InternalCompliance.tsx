@@ -172,7 +172,7 @@ export default function InternalCompliance() {
                 <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-full w-full bg-gold-400/10 blur-[120px] rounded-full pointer-events-none group-hover:bg-gold-400/20 transition-all duration-1000"></div>
                 
                 <img 
-                  src="/images/書001.png" 
+                  src="/images/paper_internal_compliance_002.png" 
                   alt="Internal Compliance Book Cover" 
                   className="w-full max-w-md mx-auto drop-shadow-[0_40px_80px_rgba(212,175,55,0.4)] transition-transform duration-1000 group-hover:scale-105 group-hover:-translate-y-4"
                   referrerPolicy="no-referrer"
@@ -379,7 +379,7 @@ export default function InternalCompliance() {
             <div className="relative flex justify-center lg:justify-start items-end h-[600px]">
               <div className="relative h-full aspect-[3/4] flex items-end">
                   <img 
-                    src="/images/Eric-Chuang-09.png" 
+                    src="/images/portrait-006.png" 
                     alt="Author Dr. Chuang" 
                     className="h-full w-auto object-contain object-bottom drop-shadow-2xl"
                     referrerPolicy="no-referrer"
