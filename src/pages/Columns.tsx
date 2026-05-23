@@ -26,45 +26,34 @@ const ArticleCard: FC<{ article: Article, index: number }> = ({ article, index }
     <motion.div
       ref={ref}
       style={{ opacity, y }}
-      className="group cursor-pointer border-b border-gold-900/10 pb-16 last:border-0 hover:bg-gold-400/[0.01] -mx-4 px-4 transition-all rounded-lg"
+      className="group cursor-pointer border-b border-gold-900/10 pb-12 last:border-0 hover:bg-gold-400/[0.01] -mx-4 px-4 transition-all rounded-lg"
       onClick={() => article.url && window.open(article.url, '_blank')}
     >
-      <div className="grid grid-cols-1 md:grid-cols-12 gap-10 items-center">
-        <div className="md:col-span-4 aspect-[16/10] overflow-hidden rounded-sm border border-gold-900/20 group-hover:border-gold-400/30 transition-colors relative">
-          <img 
-            src={article.image} 
-            alt={article.title} 
-            className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-1000"
-            referrerPolicy="no-referrer"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+      <div className="space-y-4 py-4 max-w-4xl">
+        <div className="flex items-center gap-4 text-[10px] font-black tracking-widest uppercase">
+          <span className={`px-3 py-1 border rounded-full transition-colors ${categoryStyles[article.category] || "border-gold-600/30 text-gold-600"}`}>
+            {article.category}
+          </span>
+          <span className="opacity-40 text-stone-500">{article.date}</span>
+          <div className="flex-grow"></div>
+          <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity text-gold-500">
+             <Sparkles size={10} />
+             <span className="text-[8px]">DIGITAL CANON</span>
+          </div>
         </div>
-        <div className="md:col-span-8 space-y-4">
-          <div className="flex items-center gap-4 text-[10px] font-black tracking-widest uppercase">
-            <span className={`px-3 py-1 border rounded-full transition-colors ${categoryStyles[article.category] || "border-gold-600/30 text-gold-600"}`}>
-              {article.category}
-            </span>
-            <span className="opacity-40 text-stone-500">{article.date}</span>
-            <div className="flex-grow"></div>
-            <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity text-gold-500">
-               <Sparkles size={10} />
-               <span className="text-[8px]">DIGITAL CANON</span>
-            </div>
-          </div>
-          <h3 className="text-2xl lg:text-3xl font-display font-light text-stone-200 group-hover:text-gold-400 transition-colors leading-tight">
-            {article.title}
-          </h3>
-          <p className="text-stone-500 font-sans font-light leading-relaxed line-clamp-2 italic text-sm">
-            {article.excerpt}
-          </p>
-          <div className="flex items-center gap-4 text-gold-600 font-sans text-[10px] font-black uppercase tracking-[0.4em] group-hover:text-gold-200 transition-colors pt-2">
-             深入解析 <ArrowRight className="w-3 h-3 translate-x-0 group-hover:translate-x-2 transition-transform" />
-          </div>
+        <h3 className="text-2xl lg:text-3xl font-display font-light text-stone-200 group-hover:text-gold-400 transition-colors leading-tight">
+          {article.title}
+        </h3>
+        <p className="text-stone-400 font-sans font-light leading-relaxed line-clamp-2 text-sm">
+          {article.excerpt}
+        </p>
+        <div className="flex items-center gap-4 text-gold-600 font-sans text-[10px] font-black uppercase tracking-[0.4em] group-hover:text-gold-200 transition-colors pt-2">
+           深入解析 <ArrowRight className="w-3 h-3 translate-x-0 group-hover:translate-x-2 transition-transform" />
         </div>
       </div>
     </motion.div>
   );
-}
+};
 
 export default function Columns() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);

@@ -211,44 +211,22 @@ export default function Books({ onNavigate }: { onNavigate: (page: string) => vo
             >
               <div className="space-y-12 group">
                 <div 
-                  className="ornate-frame p-4 bg-gold-400/[0.02] group-hover:bg-gold-400/[0.08] transition-all duration-700 shadow-2xl shadow-gold-400/5 hover:shadow-gold-400/10 cursor-pointer"
+                  className="p-4 bg-transparent transition-all duration-700 cursor-pointer group"
                   onClick={() => handleBookClick(book.id)}
                 >
-                  <div className="relative aspect-[3/4] overflow-hidden bg-gradient-to-b from-[#1a1a1a] to-black rounded-lg">
-                    <div className="w-full h-full flex items-center justify-center p-4">
+                  <div className="relative aspect-[3/4] overflow-visible bg-transparent transition-all duration-300">
+                    <div className="w-full h-full flex items-center justify-center p-2 rounded-lg relative">
+                      {/* Subtle golden ambient glow behind the transparent book */}
+                      <div className="absolute inset-4 bg-gold-600/10 blur-[40px] rounded-full opacity-0 group-hover:opacity-100 transition-all duration-700 pointer-events-none"></div>
                       <img 
                         src={book.cover} 
                         alt={book.title} 
-                        className="h-[95%] w-auto object-contain opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700 drop-shadow-[0_15px_35px_rgba(0,0,0,0.6)]"
+                        className="h-[95%] w-auto object-contain opacity-95 group-hover:opacity-100 group-hover:scale-[1.04] transition-all duration-700 drop-shadow-[0_20px_40px_rgba(0,0,0,0.85)] relative z-10"
                         referrerPolicy="no-referrer"
                         onError={(e) => {
                           (e.target as HTMLImageElement).src = `https://picsum.photos/seed/${book.id}/800/1200`;
                         }}
                       />
-                    </div>
-                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center p-8 text-center backdrop-blur-[2px] gap-4">
-                      {book.id === "b1" && (
-                        <button 
-                          className="prestige-button bg-gold-400 text-black border border-gold-400/30 w-full"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            onNavigate("internal-compliance");
-                          }}
-                        >
-                          <Landmark className="inline-block mr-3 h-5 w-5" /> 走入至聖所
-                        </button>
-                      )}
-                      {book.previewUrl && (
-                        <button 
-                          className="prestige-button bg-black text-gold-400 border border-gold-400/30 w-full"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            setPreviewUrl(book.previewUrl!);
-                          }}
-                        >
-                          <Eye className="inline-block mr-3 h-5 w-5" /> 立即試閱
-                        </button>
-                      )}
                     </div>
                   </div>
                 </div>
@@ -294,14 +272,12 @@ export default function Books({ onNavigate }: { onNavigate: (page: string) => vo
                             深入了解
                           </button>
                           <div className="grid grid-cols-2 gap-4">
-                            <a 
-                              href={book.previewUrl}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="prestige-button border border-gold-400/20 text-white/80 hover:border-gold-400 py-4 flex items-center justify-center no-underline font-black uppercase text-[10px] tracking-widest"
+                            <button 
+                              onClick={() => setPreviewUrl(book.previewUrl || null)}
+                              className="prestige-button border border-gold-400/20 text-white/80 hover:border-gold-400 py-4 flex items-center justify-center font-black uppercase text-[10px] tracking-widest bg-transparent cursor-pointer"
                             >
                               試閱
-                            </a>
+                            </button>
                             <a 
                               href="https://p.ecpay.com.tw/201592D"
                               target="_blank"

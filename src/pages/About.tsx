@@ -13,8 +13,7 @@ export default function About() {
         
         {/* Hero Section - Refined Proportions with appropriate main scale */}
         <section 
-          className="relative min-h-[92vh] flex items-center overflow-hidden border-b border-white/5 mb-24 pt-24 lg:pt-0"
-          style={{ transform: "scale(0.92)", transformOrigin: "top center", marginBottom: "-8vh" }}
+          className="about-hero-section relative min-h-[92vh] flex items-center overflow-hidden border-b border-white/5 mb-24 pt-24 lg:pt-0"
         >
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
@@ -28,16 +27,16 @@ export default function About() {
                   <span className="h-[2px] w-12 bg-gold-600"></span>
                   <span className="text-gold-500 font-sans font-black text-xs uppercase tracking-[0.5em]">FOUNDER'S PROFILE</span>
                 </div>
-                <div className="relative w-full max-w-2xl">
-                  <div>
-                    <p style={{ fontSize: "1.6rem", fontWeight: "bold", color: "#ffffff", fontFamily: "Georgia, serif" }}>
+                <div className="relative w-full max-w-2xl px-1">
+                  <div className="space-y-4">
+                    <p className="text-lg sm:text-2xl lg:text-[1.6rem] font-bold text-white font-serif leading-tight">
                       Strategist & Scholar Eric Chuang, Ph.D.
                     </p>
-                    <p style={{ fontSize: "1.2rem", letterSpacing: "0.3em", color: "#ffffff", marginTop: "12px" }}>
-                      企 業 策 略 顧 問 ｜ 學 術 出 版 家
+                    <p className="text-xs sm:text-base lg:text-[1.2rem] tracking-[0.15em] sm:tracking-[0.3em] text-stone-300 font-sans">
+                      企業策略顧問 ｜ 學術出版家
                     </p>
-                    <h1 style={{ fontSize: "4.2rem", color: "#C9A84C", fontWeight: "bold", margin: "16px 0", letterSpacing: "0.05em" }}>
-                      莊 鈞 翔 博 士
+                    <h1 className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-[4.2rem] text-[#C9A84C] font-bold my-4 tracking-[0.05em] whitespace-nowrap break-keep">
+                      莊鈞翔 博士
                     </h1>
                   </div>
                 </div>
@@ -67,7 +66,7 @@ export default function About() {
               >
                 <div className="relative h-full w-full max-w-[500px] lg:max-w-none flex items-end justify-end">
                   <img 
-                    src="/images/portrait-003.png" 
+                    src="/images/portrait-007.png" 
                     alt="莊鈞翔 博士" 
                     className="w-full h-full object-contain object-bottom portrait-render drop-shadow-[0_0_60px_rgba(212,175,55,0.15)]"
                     referrerPolicy="no-referrer"

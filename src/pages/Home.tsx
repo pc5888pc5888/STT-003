@@ -34,7 +34,7 @@ export default function Home({ onNavigate, currentPage }: { onNavigate: (page: s
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.6 }}
-            className="relative flex flex-col pt-4 lg:pt-0 bg-[#050505] overflow-hidden justify-end border-b border-white/5 pb-0 h-[calc(100vh-80px)] min-h-[calc(100vh-80px)]"
+            className="relative flex flex-col pt-4 lg:pt-0 bg-[#050505] lg:overflow-hidden justify-end border-b border-white/5 pb-0 h-auto lg:h-[calc(100vh-80px)] min-h-[calc(100vh-80px)]"
           >
             {/* Background Image */}
             <div 
@@ -45,14 +45,14 @@ export default function Home({ onNavigate, currentPage }: { onNavigate: (page: s
               <div className="absolute inset-0 bg-gradient-to-r from-black via-black/40 to-transparent"></div>
             </div>
             
-            <div className="container mx-auto px-6 relative z-10 flex-grow flex flex-col justify-end h-full">
-              <div className="flex flex-col lg:flex-row items-end lg:justify-between gap-12 lg:gap-4 pt-4 lg:pt-0 w-full h-full">
+            <div className="container mx-auto px-4 md:px-6 relative z-10 flex-grow flex flex-col justify-end h-full">
+              <div className="flex flex-col-reverse md:flex-row items-end md:justify-between gap-12 md:gap-4 lg:gap-4 pt-4 lg:pt-0 w-full h-full">
                 {/* Left Content */}
-                <div className="w-full lg:w-[43%] flex flex-col justify-center space-y-5 lg:space-y-6 py-6 lg:py-8 lg:self-center">
+                <div className="w-full md:w-1/2 lg:w-[43%] flex flex-col justify-center space-y-5 lg:space-y-6 py-6 md:py-8 lg:self-center">
                   <div className="space-y-3 lg:space-y-4">
-                    <h1 className="text-[20px] xs:text-[24px] sm:text-[30px] md:text-[34px] lg:text-[36px] xl:text-[42px] font-serif font-light leading-[1.35] text-white tracking-widest max-w-none">
-                      <span className="block whitespace-nowrap">當制度開始失序；</span>
-                      <span className="block mt-1 sm:mt-2 whitespace-nowrap">
+                    <h1 className="text-[1.8rem] md:text-[2.2rem] lg:text-[36px] xl:text-[42px] font-serif font-light leading-[1.35] text-white tracking-widest max-w-none">
+                      <span className="block md:inline lg:block whitespace-normal md:whitespace-nowrap">當制度開始失序；</span>
+                      <span className="block md:inline lg:block mt-1 sm:mt-2 whitespace-normal md:whitespace-nowrap">
                         <span className="text-[#e6c84c] font-normal">治理</span>便成為企業最後的秩序。
                       </span>
                     </h1>
@@ -68,16 +68,16 @@ export default function Home({ onNavigate, currentPage }: { onNavigate: (page: s
                   </div>
 
                   <div className="space-y-6 lg:space-y-8">
-                    <div className="flex flex-wrap gap-4">
+                    <div className="flex flex-col sm:flex-row flex-wrap gap-4 w-full">
                       <button 
                         onClick={() => goToSection('governance')}
-                        className="bg-gradient-to-br from-[#e6c84c] via-gold-500 to-gold-600 hover:brightness-110 text-black px-8 py-3.5 rounded flex items-center gap-3 group transition-all font-bold shadow-2xl no-underline text-sm md:text-base cursor-pointer border-0"
+                        className="w-full sm:w-auto bg-gradient-to-br from-[#e6c84c] via-gold-500 to-gold-600 hover:brightness-110 text-black px-8 py-3.5 rounded flex items-center justify-center gap-3 group transition-all font-bold shadow-2xl no-underline text-sm md:text-base cursor-pointer border-0"
                       >
                         進入治理架構 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                       </button>
                       <button 
                         onClick={() => onNavigate('about')}
-                        className="px-8 py-3.5 rounded border border-[#e6c84c]/40 text-[#e6c84c] hover:bg-[#e6c84c]/5 transition-all font-bold flex items-center gap-3 no-underline text-sm md:text-base cursor-pointer bg-transparent border-0"
+                        className="w-full sm:w-auto px-8 py-3.5 rounded border border-[#e6c84c]/40 text-[#e6c84c] hover:bg-[#e6c84c]/5 transition-all font-bold flex items-center justify-center gap-3 no-underline text-sm md:text-base cursor-pointer bg-transparent border-0"
                       >
                         探索 STT 智庫 <ArrowRight className="w-4 h-4" />
                       </button>
@@ -109,25 +109,23 @@ export default function Home({ onNavigate, currentPage }: { onNavigate: (page: s
                 </div>
 
                 {/* Right Portrait */}
-                <div className="w-full lg:w-[55%] flex justify-end items-end relative h-[420px] sm:h-[520px] lg:h-[70vh] xl:h-[75vh] max-h-[640px] overflow-visible">
-                  <div className="relative w-full h-full flex items-end justify-end overflow-visible">
+                <div className="w-full md:w-1/2 lg:w-[55%] flex justify-center md:justify-end items-end relative h-[280px] xs:h-[340px] sm:h-[440px] md:h-auto lg:h-[70vh] xl:h-[75vh] max-h-[640px] overflow-visible">
+                  <div className="relative w-full h-[280px] xs:h-[340px] sm:h-[440px] md:h-full flex items-end justify-center md:justify-end overflow-visible">
                     <img
-                      src="/images/portrait-002.png"
+                      src="/images/portrait-001.png"
                       alt="Dr. Eric Chuang"
                       style={{ 
                         display: 'block', 
                         width: 'auto', 
-                        height: '100%', 
                         objectFit: 'contain', 
                         objectPosition: 'bottom center',
-                        transform: 'scale(1.265) translateX(-60px)',
                         transformOrigin: 'bottom center',
                         pointerEvents: 'none'
                       }}
-                      className="max-w-none relative z-10 mr-16 sm:mr-24 lg:mr-32 xl:mr-36 transition-all"
+                      className="hero-portrait h-[280px] xs:h-[340px] sm:h-[440px] md:h-full max-w-full md:max-w-none relative z-10 md:mr-12 lg:mr-32 xl:mr-36 transition-all pb-4 md:pb-0"
                     />
                     
-                    <div className="absolute bottom-12 sm:bottom-16 lg:bottom-24 right-0 sm:right-4 lg:right-4 xl:right-8 z-20 flex flex-col items-start bg-transparent pointer-events-none select-none">
+                    <div className="absolute bottom-4 xs:bottom-6 sm:bottom-10 md:bottom-16 lg:bottom-24 right-0 sm:right-4 lg:right-4 xl:right-8 z-20 flex flex-col items-start bg-transparent pointer-events-none select-none">
                       <img 
                         src="/signature-eric001.png" 
                         alt="Eric Chuang, Ph.D. Signature" 
@@ -150,7 +148,7 @@ export default function Home({ onNavigate, currentPage }: { onNavigate: (page: s
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.6 }}
-            className="strategic-bg-container border-y border-white/5 w-full h-[calc(100vh-80px)] min-h-[calc(100vh-80px)] overflow-hidden flex flex-col justify-center py-6"
+            className="strategic-bg-container border-y border-white/5 w-full h-auto lg:h-[calc(100vh-80px)] min-h-[calc(100vh-80px)] lg:overflow-hidden flex flex-col justify-center py-12 lg:py-6"
           >
             <div 
               className="strategic-bg-image" 
@@ -158,7 +156,7 @@ export default function Home({ onNavigate, currentPage }: { onNavigate: (page: s
             ></div>
             <div className="strategic-bg-overlay"></div>
 
-            <div className="container mx-auto px-6 relative z-10 h-full flex flex-col justify-between py-2 max-w-7xl">
+            <div className="container mx-auto px-4 md:px-6 relative z-10 h-full flex flex-col justify-between py-2 max-w-7xl">
               <div className="text-center space-y-1 pb-2">
                 <p className="text-gold-600 text-[10px] tracking-[0.5em] uppercase font-bold">PORTALS OF INTERPRETATION</p>
                 <h2 className="text-3xl sm:text-4xl font-display text-white">治理入口</h2>
@@ -170,7 +168,7 @@ export default function Home({ onNavigate, currentPage }: { onNavigate: (page: s
                 </p>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 w-full">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 w-full">
                 {[
                   { 
                     id: "01", 
@@ -211,7 +209,7 @@ export default function Home({ onNavigate, currentPage }: { onNavigate: (page: s
                 ].map((card, i) => (
                   <div 
                     key={i} 
-                    className="group bg-zinc-950/80 border border-white/5 hover:border-gold-600/30 transition-all duration-500 backdrop-blur-sm flex flex-col items-center text-center justify-between p-4 flex-1"
+                    className="group bg-zinc-950/80 border border-white/5 hover:border-gold-600/30 transition-all duration-500 backdrop-blur-sm flex flex-col items-center text-center justify-between p-4 flex-1 w-full"
                   >
                     <div className="w-full flex-col flex items-center mb-2">
                       <span className="text-[10px] text-gold-600/40 font-mono tracking-widest block mb-1">{card.id}</span>
@@ -257,7 +255,7 @@ export default function Home({ onNavigate, currentPage }: { onNavigate: (page: s
                 ))}
               </div>
 
-              <div className="flex justify-center gap-12 text-[10px] uppercase font-bold tracking-[0.3em] text-gold-600/50 mt-4">
+              <div className="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-12 text-[10px] uppercase font-bold tracking-[0.3em] text-gold-600/50 mt-4">
                 <p className="flex items-center gap-2 opacity-80 hover:opacity-100 cursor-default transition-all">
                    <ShieldCheck className="w-3 h-3" /> Governance First
                 </p>
@@ -280,14 +278,14 @@ export default function Home({ onNavigate, currentPage }: { onNavigate: (page: s
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.6 }}
-            className="strategic-bg-container w-full h-[calc(100vh-80px)] min-h-[calc(100vh-80px)] overflow-hidden flex flex-col justify-center py-8"
+            className="strategic-bg-container w-full h-auto lg:h-[calc(100vh-80px)] min-h-[calc(100vh-80px)] lg:overflow-hidden flex flex-col justify-center py-12 lg:py-8"
           >
             <div 
               className="strategic-bg-image" 
               style={{ backgroundImage: "url('/images/bg-platform-chess.png')" }}
             ></div>
             <div className="strategic-bg-overlay"></div>
-            <div className="container mx-auto px-6 relative z-10 max-w-7xl">
+            <div className="container mx-auto px-4 md:px-6 relative z-10 max-w-7xl">
               <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 xl:gap-24 items-center">
                 
                 {/* Left Column */}
@@ -358,7 +356,7 @@ export default function Home({ onNavigate, currentPage }: { onNavigate: (page: s
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.6 }}
-            className="strategic-bg-container relative border-y border-white/5 w-full h-[calc(100vh-80px)] min-h-[calc(100vh-80px)] overflow-hidden flex flex-col justify-end"
+            className="strategic-bg-container relative border-y border-white/5 w-full h-auto lg:h-[calc(100vh-80px)] min-h-[calc(100vh-80px)] lg:overflow-hidden flex flex-col justify-end py-12 lg:py-0"
           >
             <div 
               className="strategic-bg-image" 
@@ -366,12 +364,12 @@ export default function Home({ onNavigate, currentPage }: { onNavigate: (page: s
             ></div>
             <div className="strategic-bg-overlay"></div>
 
-            <div className="container mx-auto px-6 relative z-10 h-full flex flex-col justify-end max-w-7xl">
+            <div className="container mx-auto px-4 md:px-6 relative z-10 h-full flex flex-col justify-end max-w-7xl">
               <div className="flex flex-col-reverse lg:flex-row gap-12 lg:gap-16 xl:gap-24 items-center lg:items-stretch h-full w-full justify-between">
                  
                  {/* Left Column (Portrait) */}
-                 <div className="w-full lg:w-[42%] flex items-end justify-center lg:justify-start relative z-10 h-full">
-                    <div className="relative group w-[440px] max-w-full flex justify-center items-end h-[420px] sm:h-[520px] lg:h-[70vh] xl:h-[75vh] max-h-[640px]">
+                 <div className="w-full lg:w-[42%] flex items-end justify-center lg:justify-start relative z-10 h-auto lg:h-full">
+                    <div className="relative group w-[440px] max-w-full flex justify-center items-end h-[280px] xs:h-[340px] sm:h-[440px] md:h-auto lg:h-[70vh] xl:h-[75vh] max-h-[640px]">
                       <div className="absolute -inset-4 bg-gold-600/5 blur-3xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-1000 z-0"></div>
                       
                       {/* Perfectly centered vertical gold thin frame design directly behind the portrait */}
@@ -385,19 +383,17 @@ export default function Home({ onNavigate, currentPage }: { onNavigate: (page: s
                       </div>
 
                       <img
-                        src="/images/portrait-001.png"
+                        src="/images/portrait-002.png"
                         alt="莊鈞翔博士"
                         style={{ 
                           display: 'block', 
                           width: 'auto', 
-                          height: '100%', 
                           objectFit: 'contain', 
                           objectPosition: 'bottom center',
-                          transform: 'scale(1.265) translateX(-25px)',
                           transformOrigin: 'bottom center'
                         }}
                         onClick={() => goToSection('insights')}
-                        className="max-w-none relative z-10 cursor-pointer hover:scale-[1.285] hover:brightness-110 transition-all duration-300"
+                        className="strategist-portrait h-[280px] xs:h-[340px] sm:h-[440px] md:h-full max-w-full md:max-w-none relative z-10 cursor-pointer hover:brightness-110 transition-all duration-300"
                       />
 
                       {/* Floating overlay click indicator */}
@@ -405,7 +401,7 @@ export default function Home({ onNavigate, currentPage }: { onNavigate: (page: s
                         點擊肖像 進入智庫觀點 ➔
                       </div>
                     </div>
-                 </div>
+                  </div>
 
                  {/* Right Column (Text / Info) */}
                  <div className="w-full lg:w-[54%] flex flex-col justify-center space-y-4 lg:space-y-6 py-6 lg:py-10 font-sans text-left z-10 lg:pl-4">
@@ -458,7 +454,7 @@ export default function Home({ onNavigate, currentPage }: { onNavigate: (page: s
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.6 }}
-            className="strategic-bg-container w-full h-[calc(100vh-80px)] min-h-[calc(100vh-80px)] overflow-hidden flex flex-col justify-center py-10 bg-[#050505] border-t border-white/5"
+            className="strategic-bg-container w-full h-auto lg:h-[calc(100vh-80px)] min-h-[calc(100vh-80px)] lg:overflow-hidden flex flex-col justify-center py-12 lg:py-10 bg-[#050505] border-t border-white/5"
           >
             <div 
               className="strategic-bg-image opacity-30" 
@@ -470,8 +466,8 @@ export default function Home({ onNavigate, currentPage }: { onNavigate: (page: s
               }}
             ></div>
             <div className="strategic-bg-overlay bg-[#050505]/30"></div>
-            <div className="container mx-auto px-6 relative z-10 h-full flex flex-col justify-center max-w-7xl">
-              <div className="flex justify-between items-end mb-10">
+            <div className="container mx-auto px-4 md:px-6 relative z-10 h-full flex flex-col justify-center max-w-7xl">
+              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-6 sm:gap-4 mb-10">
                  <div className="space-y-2">
                     <p className="text-gold-600 text-[10px] tracking-[0.5em] uppercase font-bold">GOVERNANCE INSIGHTS</p>
                     <h2 className="text-4xl font-display text-white">智庫觀點</h2>
@@ -485,7 +481,7 @@ export default function Home({ onNavigate, currentPage }: { onNavigate: (page: s
                  </button>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {articles.slice(0, 3).map((article, i) => (
                   <div 
                     key={i} 
@@ -508,7 +504,7 @@ export default function Home({ onNavigate, currentPage }: { onNavigate: (page: s
                       </p>
                     </div>
                     <div className="flex justify-between items-center pt-4 border-t border-white/5">
-                       <button className="text-[9px] font-bold text-gold-600 tracking-widest uppercase flex items-center gap-2 bg-transparent border-0">
+                       <button className="text-[9px] font-bold text-[#e6c84c] tracking-widest uppercase flex items-center gap-2 bg-transparent border-0 cursor-pointer">
                           READ JOURNAL <ArrowRight className="w-3 h-3" />
                        </button>
                        <BookOpen className="w-3.5 h-3.5 text-stone-700" />

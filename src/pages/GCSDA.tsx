@@ -179,7 +179,7 @@ export default function GCSDA() {
                  </div>
                  
                  {/* OVERLAY PANEL - IDENTIFYING THE EXPERTS */}
-                 <div className="absolute bottom-0 left-0 right-0 z-10 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8">
+                 <div className="relative lg:absolute lg:bottom-0 lg:left-0 lg:right-0 z-10 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 border-t border-white/5 lg:border-t-0">
                     {[
                       { role: "理事", name: "林柏劭", title: "律師" },
                       { role: "理事", name: "林政男", title: "律師" },

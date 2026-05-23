@@ -160,6 +160,11 @@ export default function App() {
               e.preventDefault();
               setCurrentPage('home');
               window.history.pushState({}, '', 'index.html');
+              if ((window as any).lenis) {
+                (window as any).lenis.scrollTo(0, { immediate: false });
+              } else {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }
             }}
             aria-label="回首頁"
           >
@@ -216,12 +221,9 @@ export default function App() {
             {/* Action Buttons */}
             <div className="flex items-center gap-4 ml-8">
               <a 
-                href="contact.html"
-                onClick={(e) => {
-                  e.preventDefault();
-                  setCurrentPage('service-portal');
-                  window.history.pushState({}, '', 'contact.html');
-                }}
+                href="https://lin.ee/yJrCTeo"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="bg-gradient-to-br from-[#e6c84c] via-gold-500 to-[#b89530] hover:brightness-110 text-black px-5 py-3.5 rounded-lg flex flex-col items-center justify-center gap-0 group transition-all shadow-lg font-sans border-0 cursor-pointer no-underline"
               >
                 <div className="flex items-center gap-1.5 mb-0.5 whitespace-nowrap">
@@ -233,12 +235,7 @@ export default function App() {
               </a>
 
               <a 
-                href="contact.html"
-                onClick={(e) => {
-                  e.preventDefault();
-                  setCurrentPage('service-portal');
-                  window.history.pushState({}, '', 'contact.html');
-                }}
+                href="mailto:pc5888@gmail.com"
                 className="border border-gold-400/40 text-gold-400 hover:bg-gold-400/5 px-5 py-3.5 rounded-lg flex flex-col items-center justify-center gap-0 group transition-all shadow-lg font-sans cursor-pointer no-underline"
               >
                 <div className="flex items-center gap-1.5 mb-0.5 whitespace-nowrap">
@@ -359,13 +356,10 @@ export default function App() {
                 {/* Mobile action links */}
                 <div className="border-t border-gold-400/10 pt-6 mt-2 flex flex-col gap-4">
                   <a 
-                    href="contact.html"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      setCurrentPage('service-portal');
-                      setIsMenuOpen(false);
-                      window.history.pushState({}, '', 'contact.html');
-                    }}
+                    href="https://lin.ee/yJrCTeo"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => setIsMenuOpen(false)}
                     className="bg-gradient-to-br from-[#e6c84c] via-gold-500 to-[#b89530] text-black px-6 py-4 rounded-lg flex items-center justify-between group no-underline"
                   >
                     <div className="flex items-center gap-2">
@@ -375,13 +369,8 @@ export default function App() {
                     <span className="text-[8px] font-mono font-black tracking-widest uppercase opacity-80">GOVERNANCE ENGAGEMENT</span>
                   </a>
                   <a 
-                    href="contact.html"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      setCurrentPage('service-portal');
-                      setIsMenuOpen(false);
-                      window.history.pushState({}, '', 'contact.html');
-                    }}
+                    href="mailto:pc5888@gmail.com"
+                    onClick={() => setIsMenuOpen(false)}
                     className="border border-gold-400/40 text-gold-400 px-6 py-4 rounded-lg flex items-center justify-between group no-underline"
                   >
                     <div className="flex items-center gap-2">

@@ -5,15 +5,7 @@ import { Button } from "@/components/ui/button";
 export default function ServicePortal() {
   return (
     <div 
-      className="bg-black text-[#F8F7F4]" 
-      style={{ 
-        transform: "scale(0.82)", 
-        transformOrigin: "top center", 
-        height: "calc(100vh / 0.82)", 
-        overflow: "hidden", 
-        paddingTop: 0,
-        paddingBottom: "2vh"
-      }}
+      className="service-portal-container bg-black text-[#F8F7F4] pt-0 pb-[2vh]"
     >
       <div className="container mx-auto px-6 max-w-4xl space-y-10">
         
