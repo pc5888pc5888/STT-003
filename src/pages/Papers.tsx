@@ -27,7 +27,7 @@ export default function Papers() {
               
               <div className="relative w-full max-w-4xl py-4 lg:py-6">
                 <img 
-                  src="/images/stt-word-003.png.png" 
+                  src="/images/stt-word-003.png" 
                   alt="學術研究：卓越引領策略新典範" 
                   className="w-full h-auto drop-shadow-[0_20px_50px_rgba(212,175,55,0.3)] filter brightness-110 contrast-110"
                   referrerPolicy="no-referrer"
