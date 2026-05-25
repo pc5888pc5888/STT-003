@@ -3,16 +3,37 @@ import { motion, AnimatePresence } from "motion/react";
 import { ArrowRight, ShieldCheck, Users, Scale, Landmark, Brain, BookOpen, Globe, Award } from "lucide-react";
 import { articles } from "../data/mockData";
 
-export default function Home({ onNavigate, currentPage }: { onNavigate: (page: string) => void; currentPage?: string }) {
-  const [activeSection, setActiveSection] = useState<'hero' | 'governance' | 'positioning' | 'strategist' | 'insights'>('hero');
+export default function Home({ 
+  onNavigate, 
+  currentPage,
+  activeSection: propActiveSection,
+  setActiveSection: propSetActiveSection
+}: { 
+  onNavigate: (page: string) => void; 
+  currentPage?: string;
+  activeSection?: 'hero' | 'governance' | 'positioning' | 'strategist' | 'insights';
+  setActiveSection?: (section: 'hero' | 'governance' | 'positioning' | 'strategist' | 'insights') => void;
+}) {
+  const [internalActiveSection, setInternalActiveSection] = useState<'hero' | 'governance' | 'positioning' | 'strategist' | 'insights'>('hero');
+  const activeSection = propActiveSection !== undefined ? propActiveSection : internalActiveSection;
+  const setActiveSection = propSetActiveSection !== undefined ? propSetActiveSection : setInternalActiveSection;
+  const [activeImage, setActiveImage] = useState<string | null>(null);
+  const [imageError, setImageError] = useState(false);
+
+  useEffect(() => {
+    setImageError(false);
+  }, [activeImage]);
 
   useEffect(() => {
     if (currentPage === "governance") {
       setActiveSection("governance");
     } else if (currentPage === "home") {
-      setActiveSection("hero");
+      // Only default to hero if we are not explicitly navigating to one of the custom sub-sections
+      if (propActiveSection !== "positioning" && propActiveSection !== "strategist" && propActiveSection !== "insights") {
+        setActiveSection("hero");
+      }
     }
-  }, [currentPage]);
+  }, [currentPage, propActiveSection]);
 
   // Handle section transition and sync header nav state
   const goToSection = (section: 'hero' | 'governance' | 'positioning' | 'strategist' | 'insights') => {
@@ -176,8 +197,9 @@ export default function Home({ onNavigate, currentPage }: { onNavigate: (page: s
                     icon: <Landmark className="w-8 h-8 md:w-9 md:h-9" />,
                     desc: "整合策略、風險、制度與架構，協助企業建立長期競爭優勢與治理秩序。", 
                     items: ["策略治理", "董事會治理", "制度架構", "風險管理"],
-                    route: "service-portal",
-                    btnText: "進入 企業治理與策略判讀 系統"
+                    route: "corporate-governance",
+                    btnText: "進入 企業治理策略判讀 系統",
+                    image: "/images/Corporate Governance Strategy Interpretation02.png"
                   },
                   { 
                     id: "02", 
@@ -185,8 +207,9 @@ export default function Home({ onNavigate, currentPage }: { onNavigate: (page: s
                     icon: <Users className="w-8 h-8 md:w-9 md:h-9" />,
                     desc: "建立家族信任與治理制度，確保財富、價值與使命的永續傳承。", 
                     items: ["家族信任系統", "接班計畫", "財富治理", "家族憲章"],
-                    route: "success",
-                    btnText: "進入 家族治理與企業接班 系統"
+                    route: "family-governance",
+                    btnText: "進入 家族治理與企業接班 系統",
+                    image: "/images/Family Office02.png"
                   },
                   { 
                     id: "03", 
@@ -195,7 +218,8 @@ export default function Home({ onNavigate, currentPage }: { onNavigate: (page: s
                     desc: "從制度內化合規意識，打造企業不可動搖的合規文化。", 
                     items: ["內部控制", "法遵機制", "稽核機制", "合規文化"],
                     route: "internal-compliance",
-                    btnText: "進入 內在法遵 INTERNAL COMPLIANCE 專欄"
+                    btnText: "進入 內在法遵 INTERNAL COMPLIANCE 專欄",
+                    image: "/images/internal compliance02.png"
                   },
                   { 
                     id: "04", 
@@ -203,8 +227,9 @@ export default function Home({ onNavigate, currentPage }: { onNavigate: (page: s
                     icon: <Brain className="w-8 h-8 md:w-9 md:h-9" />,
                     desc: "AI 治理輔助系統，提供決策門控、風險辨識與治理支援。", 
                     items: ["決策門控", "風險辨識", "治理框架", "制度支援"],
-                    route: "service-portal",
-                    btnText: "進入 ESGAI GOVERNANCE SYSTEM 系統"
+                    route: "esgai",
+                    btnText: "進入 ESGAI GOVERNANCE SYSTEM 系統",
+                    image: "/images/ESGAI02.png"
                   }
                 ].map((card, i) => (
                   <div 
@@ -231,26 +256,12 @@ export default function Home({ onNavigate, currentPage }: { onNavigate: (page: s
                       ))}
                     </div>
 
-                    {card.id === "01" ? (
-                      <button 
-                        onClick={() => goToSection('positioning')}
-                        className="w-full mt-auto bg-gold-600/10 border border-gold-600/20 text-gold-500 font-bold tracking-widest uppercase hover:bg-gold-600 hover:text-black transition-all text-center flex items-center justify-center py-2 text-[11px] cursor-pointer"
-                      >
-                        {card.btnText} <ArrowRight className="inline ml-1.5 w-3 h-3" />
-                      </button>
-                    ) : (
-                      <a 
-                        href={card.route === 'service-portal' ? 'governance.html' : `${card.route}.html`}
-                        onClick={(e) => {
-                          e.preventDefault();
-                          onNavigate(card.route);
-                          window.history.pushState({}, '', card.route === 'service-portal' ? 'governance.html' : `${card.route}.html`);
-                        }}
-                        className="w-full mt-auto bg-gold-600/10 border border-gold-600/20 text-gold-500 font-bold tracking-widest uppercase hover:bg-gold-600 hover:text-black transition-all no-underline text-center flex items-center justify-center py-2 text-[11px]"
-                      >
-                        {card.btnText} <ArrowRight className="inline ml-1.5 w-3 h-3" />
-                      </a>
-                    )}
+                    <button 
+                      onClick={() => onNavigate(card.route)}
+                      className="w-full mt-auto bg-gold-600/10 border border-gold-600/20 text-gold-500 font-bold tracking-widest uppercase hover:bg-gold-600 hover:text-black transition-all text-center flex items-center justify-center py-2 text-[11px] cursor-pointer"
+                    >
+                      {card.btnText} <ArrowRight className="inline ml-1.5 w-3 h-3" />
+                    </button>
                   </div>
                 ))}
               </div>
@@ -525,6 +536,78 @@ export default function Home({ onNavigate, currentPage }: { onNavigate: (page: s
     <div className="bg-[#050505] min-h-screen text-stone-200">
       <AnimatePresence mode="wait">
         {renderActiveSection()}
+      </AnimatePresence>
+
+      {/* Elegant Full-screen Image Portal Modal */}
+      <AnimatePresence>
+        {activeImage && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setActiveImage(null)}
+            className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-black/95 backdrop-blur-xl p-4 md:p-8 cursor-pointer"
+          >
+            {/* Close Button */}
+            <button
+              onClick={() => setActiveImage(null)}
+              className="absolute top-6 right-6 text-stone-400 hover:text-gold-400 transition-colors bg-white/5 hover:bg-white/10 p-3 rounded-full border border-white/10 z-50 cursor-pointer"
+              aria-label="關閉"
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+
+            {/* Image Container with entrance motion */}
+            <motion.div
+              initial={{ scale: 0.95, y: 15 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.95, y: 15 }}
+              transition={{ type: "spring", damping: 25, stiffness: 180 }}
+              className="relative max-h-[85vh] max-w-[95vw] lg:max-w-4xl flex flex-col items-center shadow-[0_25px_60px_-15px_rgba(230,200,76,0.15)] rounded-lg overflow-hidden border border-gold-600/20 bg-zinc-950 p-6 md:p-10 text-center"
+              onClick={(e) => e.stopPropagation()} // Prevent closing when clicking the image box
+            >
+              {!imageError ? (
+                <img
+                  src={activeImage}
+                  alt="治理系統解說"
+                  className="max-h-[65vh] w-auto object-contain rounded"
+                  referrerPolicy="no-referrer"
+                  onError={() => setImageError(true)}
+                />
+              ) : (
+                <div className="flex flex-col items-center justify-center py-12 px-6 max-w-lg">
+                  <div className="w-16 h-16 rounded-full bg-gold-400/10 border border-gold-400/20 flex items-center justify-center mb-6">
+                    <svg className="w-8 h-8 text-gold-400 animate-pulse" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+                    </svg>
+                  </div>
+                  <h3 className="text-lg font-medium text-stone-100 tracking-wider mb-3">
+                    【系統提示：請上傳專欄圖片】
+                  </h3>
+                  <p className="text-stone-400 text-sm leading-relaxed mb-6">
+                    我們已為您將此按鈕正確配置好連結。請將正確的圖片重新命為：
+                  </p>
+                  <div className="bg-white/5 border border-white/10 px-4 py-2.5 rounded font-mono text-xs text-gold-400 select-all mb-6 break-all">
+                    {activeImage.substring(activeImage.lastIndexOf('/') + 1)}
+                  </div>
+                  <p className="text-stone-500 text-xs leading-relaxed">
+                    並點擊左側檔案樹，將圖片上傳或拖曳至 <span className="font-mono text-stone-300">/public/images/</span> 資料夾。
+                    上傳完成後，系統將會在此立即完美呈現！
+                  </p>
+                </div>
+              )}
+              
+              <div className="w-full text-center py-2.5 mt-4 border-t border-white/5">
+                <p className="text-[11px] text-stone-400 tracking-[0.2em] uppercase font-mono mb-1">STT Press · SYSTEM DEPLOYMENT PREVIEW</p>
+                <p className="text-[10px] text-gold-500/60 tracking-[0.1em]">
+                  {imageError ? "請於左側目錄補上圖片後重新整理，或點擊任意處、右上角關閉" : "點擊任意黑底處或右上角關閉"}
+                </p>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
       </AnimatePresence>
     </div>
   );

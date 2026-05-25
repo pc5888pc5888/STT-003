@@ -7,7 +7,11 @@ import Columns from "./pages/Columns";
 import Books from "./pages/Books";
 import Papers from "./pages/Papers";
 import GCSDA from "./pages/GCSDA";
-import InternalCompliance from "./pages/InternalCompliance";
+import InternalComplianceBook from "./pages/InternalCompliance";
+import CorporateGovernance from "./pages/CorporateGovernance";
+import FamilyGovernance from "./pages/FamilyGovernance";
+import InternalCompliancePortal from "./pages/InternalCompliancePortal";
+import ESGAI from "./pages/ESGAI";
 import ServicePortal from "./pages/ServicePortal";
 import Success from "./pages/Success";
 import ArticleIndex from "./pages/ArticleIndex";
@@ -17,14 +21,25 @@ import { AccessibilityWidget } from "./components/AccessibilityWidget";
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState("home");
+  const [homeSection, setHomeSection] = useState<'hero' | 'governance' | 'positioning' | 'strategist' | 'insights'>('hero');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const handleNavigate = (page: string) => {
+    const validSections = ['hero', 'governance', 'positioning', 'strategist', 'insights'];
+    if (validSections.includes(page)) {
+      setHomeSection(page as any);
+      setCurrentPage('home');
+    } else {
+      setCurrentPage(page);
+    }
+  };
 
   useEffect(() => {
     const handleHashAndPathChange = () => {
       const hash = window.location.hash.replace('#', '');
       const path = window.location.pathname.replace('/', '').replace('.html', '');
       
-      const validPages = ['home', 'about', 'columns', 'books', 'internal-compliance', 'service-portal', 'success', 'papers', 'gcsda', 'article-index', 'governance', 'insights', 'contact'];
+      const validPages = ['home', 'about', 'columns', 'books', 'internal-compliance', 'service-portal', 'success', 'papers', 'gcsda', 'article-index', 'governance', 'insights', 'contact', 'corporate-governance', 'family-governance', 'internal-compliance-book', 'esgai'];
       
       const targetPage = hash || path;
       
@@ -124,18 +139,22 @@ export default function App() {
 
   const renderPage = () => {
     switch (currentPage) {
-      case "home": return <Home onNavigate={setCurrentPage} currentPage={currentPage} />;
+      case "home": return <Home onNavigate={handleNavigate} currentPage={currentPage} activeSection={homeSection} setActiveSection={setHomeSection} />;
       case "about": return <About />;
       case "columns": return <Columns />;
-      case "books": return <Books onNavigate={setCurrentPage} />;
-      case "governance": return <Home onNavigate={setCurrentPage} currentPage={currentPage} />;
-      case "internal-compliance": return <InternalCompliance />;
+      case "books": return <Books onNavigate={handleNavigate} />;
+      case "governance": return <Home onNavigate={handleNavigate} currentPage={currentPage} activeSection={homeSection} setActiveSection={setHomeSection} />;
+      case "internal-compliance": return <InternalCompliancePortal onNavigate={handleNavigate} />;
+      case "internal-compliance-book": return <InternalComplianceBook />;
+      case "corporate-governance": return <CorporateGovernance onNavigate={handleNavigate} />;
+      case "family-governance": return <FamilyGovernance onNavigate={handleNavigate} />;
+      case "esgai": return <ESGAI onNavigate={handleNavigate} />;
       case "service-portal": return <ServicePortal />;
       case "success": return <Success />;
       case "papers": return <Papers />;
       case "gcsda": return <GCSDA />;
       case "article-index": return <ArticleIndex />;
-      default: return <Home onNavigate={setCurrentPage} currentPage={currentPage} />;
+      default: return <Home onNavigate={handleNavigate} currentPage={currentPage} activeSection={homeSection} setActiveSection={setHomeSection} />;
     }
   };
 
@@ -158,6 +177,7 @@ export default function App() {
             href="index.html"
             onClick={(e) => {
               e.preventDefault();
+              setHomeSection('hero');
               setCurrentPage('home');
               window.history.pushState({}, '', 'index.html');
               if ((window as any).lenis) {

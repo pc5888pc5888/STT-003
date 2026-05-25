@@ -29,7 +29,7 @@ export default function Books({ onNavigate }: { onNavigate: (page: string) => vo
 
   const handleBookClick = (bookId: string) => {
     if (bookId === "b1") {
-      onNavigate("internal-compliance");
+      onNavigate("internal-compliance-book");
     }
   };
 
@@ -267,7 +267,7 @@ export default function Books({ onNavigate }: { onNavigate: (page: string) => vo
                         <>
                           <button 
                             className="prestige-button w-full border border-gold-400/40 bg-gold-400/5 py-4 font-black uppercase text-[10px] tracking-widest"
-                            onClick={() => onNavigate("internal-compliance")}
+                            onClick={() => onNavigate("internal-compliance-book")}
                           >
                             深入了解
                           </button>
