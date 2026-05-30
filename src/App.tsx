@@ -36,21 +36,51 @@ export default function App() {
 
   useEffect(() => {
     const handleHashAndPathChange = () => {
-      const hash = window.location.hash.replace('#', '');
-      const path = window.location.pathname.replace('/', '').replace('.html', '');
+      const urlParams = new URLSearchParams(window.location.search);
+      const appParams = urlParams.get('appParams') || urlParams.get('page');
       
-      const validPages = ['home', 'about', 'columns', 'books', 'internal-compliance', 'service-portal', 'success', 'papers', 'gcsda', 'article-index', 'governance', 'insights', 'contact', 'corporate-governance', 'family-governance', 'internal-compliance-book', 'esgai'];
+      const hash = window.location.hash.replace('#', '').split('?')[0];
+      const path = window.location.pathname.replace('/', '').replace('.html', '').split('?')[0];
       
-      const targetPage = hash || path;
+      const validPages = [
+        'home', 'about', 'columns', 'books', 
+        'internal-compliance', 'internal-compliance-pillars', 'internal-compliance-simulator', 'internal-compliance-academic', 
+        'service-portal', 'success', 'papers', 'gcsda', 'article-index', 'governance', 'insights', 'contact', 
+        'corporate-governance', 'corporate-governance-modules', 'corporate-governance-simulator', 'corporate-governance-academic',
+        'family-governance', 'family-governance-framework', 'family-governance-stages', 'family-governance-academic',
+        'internal-compliance-book', 
+        'esgai', 'esgai-features', 'esgai-console', 'esgai-academic',
+        'esg-ai', 'esg-ai-features', 'esg-ai-console', 'esg-ai-academic',
+        'positioning', 'strategist', 'hero'
+      ];
+      
+      let targetPage = "home";
+      if (hash && validPages.includes(hash)) {
+        targetPage = hash;
+      } else if (appParams && validPages.includes(appParams)) {
+        targetPage = appParams;
+      } else if (path && validPages.includes(path)) {
+        targetPage = path;
+      } else {
+        return;
+      }
       
       if (validPages.includes(targetPage)) {
         const pageMap: Record<string, string> = {
           'insights': 'columns',
           'contact': 'service-portal'
         };
-        setCurrentPage(pageMap[targetPage] || targetPage);
-
-        if (targetPage === 'governance') {
+        const resolvedPage = pageMap[targetPage] || targetPage;
+        
+        const homeSections = ['hero', 'governance', 'positioning', 'strategist'];
+        if (homeSections.includes(resolvedPage)) {
+          setHomeSection(resolvedPage as any);
+          setCurrentPage('home');
+        } else {
+          setCurrentPage(resolvedPage);
+        }
+        
+        if (resolvedPage === 'governance') {
           setTimeout(() => {
             const element = document.getElementById('governance');
             if (element) {
@@ -77,12 +107,12 @@ export default function App() {
 
   // Update hash when page changes
   useEffect(() => {
-    if (currentPage === 'home' && window.location.hash === '#governance') {
-      // Keep #governance hash if we navigated to governance
-      return;
+    if (currentPage === 'home') {
+      window.location.hash = homeSection;
+    } else {
+      window.location.hash = currentPage;
     }
-    window.location.hash = currentPage;
-  }, [currentPage]);
+  }, [currentPage, homeSection]);
 
   useEffect(() => {
     const lenis = new Lenis({
@@ -144,11 +174,27 @@ export default function App() {
       case "columns": return <Columns />;
       case "books": return <Books onNavigate={handleNavigate} />;
       case "governance": return <Home onNavigate={handleNavigate} currentPage={currentPage} activeSection={homeSection} setActiveSection={setHomeSection} />;
-      case "internal-compliance": return <InternalCompliancePortal onNavigate={handleNavigate} />;
+      case "internal-compliance": return <InternalCompliancePortal onNavigate={handleNavigate} activeSection="intro" />;
+      case "internal-compliance-pillars": return <InternalCompliancePortal onNavigate={handleNavigate} activeSection="pillars" />;
+      case "internal-compliance-simulator": return <InternalCompliancePortal onNavigate={handleNavigate} activeSection="simulator" />;
+      case "internal-compliance-academic": return <InternalCompliancePortal onNavigate={handleNavigate} activeSection="academic" />;
       case "internal-compliance-book": return <InternalComplianceBook onNavigate={handleNavigate} />;
-      case "corporate-governance": return <CorporateGovernance onNavigate={handleNavigate} />;
-      case "family-governance": return <FamilyGovernance onNavigate={handleNavigate} />;
-      case "esgai": return <ESGAI onNavigate={handleNavigate} />;
+      case "corporate-governance": return <CorporateGovernance onNavigate={handleNavigate} activeSection="intro" />;
+      case "corporate-governance-modules": return <CorporateGovernance onNavigate={handleNavigate} activeSection="modules" />;
+      case "corporate-governance-simulator": return <CorporateGovernance onNavigate={handleNavigate} activeSection="simulator" />;
+      case "corporate-governance-academic": return <CorporateGovernance onNavigate={handleNavigate} activeSection="academic" />;
+      case "family-governance": return <FamilyGovernance onNavigate={handleNavigate} activeSection="intro" />;
+      case "family-governance-framework": return <FamilyGovernance onNavigate={handleNavigate} activeSection="framework" />;
+      case "family-governance-stages": return <FamilyGovernance onNavigate={handleNavigate} activeSection="stages" />;
+      case "family-governance-academic": return <FamilyGovernance onNavigate={handleNavigate} activeSection="academic" />;
+      case "esgai":
+      case "esg-ai": return <ESGAI onNavigate={handleNavigate} activeSection="intro" />;
+      case "esgai-features":
+      case "esg-ai-features": return <ESGAI onNavigate={handleNavigate} activeSection="features" />;
+      case "esgai-console":
+      case "esg-ai-console": return <ESGAI onNavigate={handleNavigate} activeSection="console" />;
+      case "esgai-academic":
+      case "esg-ai-academic": return <ESGAI onNavigate={handleNavigate} activeSection="academic" />;
       case "service-portal": return <ServicePortal />;
       case "success": return <Success />;
       case "papers": return <Papers onNavigate={handleNavigate} />;
