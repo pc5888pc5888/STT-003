@@ -1,6 +1,7 @@
 import { motion } from "motion/react";
 import { Clock, Brain, FastForward, Target, Map, Download, Landmark, Scroll, Layers, Award, Info, ChevronRight, Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { ContributorLabel } from "../components/ContributorLabel";
 
 export default function InternalCompliance() {
   const recommenders = [
@@ -376,13 +377,24 @@ export default function InternalCompliance() {
       <section className="py-40 border-t border-gold-400/10">
         <div className="container mx-auto px-6 max-w-6xl">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
-            <div className="relative flex justify-center lg:justify-start items-end h-[600px]">
-              <div className="relative h-full aspect-[3/4] flex items-end">
+            <div className="relative flex justify-center lg:justify-start items-end h-[600px] overflow-visible">
+              <div className="relative h-full aspect-[3/4] flex items-end justify-center lg:justify-start">
+                  {/* Cinematic Light Beam */}
+                  <div className="absolute right-0 bottom-0 w-[120%] h-[120%] bg-gradient-to-tr from-gold-600/10 via-transparent to-transparent -rotate-12 pointer-events-none"></div>
+
                   <img 
                     src="/images/portrait-006.png" 
-                    alt="Author Dr. Chuang" 
-                    className="h-full w-auto object-contain object-bottom drop-shadow-2xl"
+                    alt="Dr. Eric Chuang" 
+                    className="h-full w-auto object-contain object-bottom filter drop-shadow-[0_0_50px_rgba(212,175,55,0.1)] contrast-[1.1]"
                     referrerPolicy="no-referrer"
+                  />
+                  {/* Integration Scrim - Strengthened */}
+                  <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black via-black/90 to-transparent pointer-events-none z-10"></div>
+
+                  {/* Unified High-Prestige Calligraphy Signature Watermark */}
+                  <ContributorLabel 
+                    title="FOUNDER & SCHOLAR" 
+                    className="absolute bottom-12 md:bottom-16 right-6 z-20"
                   />
               </div>
             </div>

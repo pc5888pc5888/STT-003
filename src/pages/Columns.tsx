@@ -171,7 +171,7 @@ export default function Columns() {
                 {/* Standardized Contributor Label */}
                 <ContributorLabel 
                   title="Main Contributor" 
-                  className="absolute bottom-24 right-6" 
+                  className="absolute bottom-12 md:bottom-16 right-6" 
                 />
               </div>
             </motion.div>

@@ -119,14 +119,11 @@ export default function Books({ onNavigate }: { onNavigate: (page: string) => vo
                   {/* Integration Gradient */}
                   <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black via-black/95 to-transparent z-10 pointer-events-none"></div>
 
-                  {/* Standardized Contributor Label - Fixed Positioning to avoid clipping */}
-                  <div className="absolute bottom-24 right-12 lg:right-16 z-20 transform scale-110 origin-right">
-                    <ContributorLabel 
-                      title="Author & Visionary" 
-                      name="莊鈞翔 博士"
-                      className="shadow-[0_20px_50px_rgba(0,0,0,0.8)]" 
-                    />
-                  </div>
+                  {/* Standardized Contributor Label - Golden Calligraphy Signature */}
+                  <ContributorLabel 
+                    title="Author & Visionary" 
+                    className="absolute bottom-12 md:bottom-16 right-6" 
+                  />
                 </div>
               </motion.div>
             </div>

@@ -57,27 +57,29 @@ export default function About() {
               </div>
             </div>
             
-            <div className="lg:col-span-5 h-[75vh] lg:h-[85vh] relative flex items-end justify-center lg:justify-end">
+            <div className="lg:col-span-5 h-[75vh] lg:h-[85vh] relative flex items-end justify-center lg:justify-end overflow-visible">
               <motion.div 
-                initial={{ opacity: 0, x: 20 }}
+                initial={{ opacity: 0, x: 60 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
                 className="relative h-full w-full flex items-end justify-center lg:justify-end"
               >
                 <div className="relative h-full w-full max-w-[500px] lg:max-w-none flex items-end justify-end">
+                  {/* Cinematic Light Beam */}
+                  <div className="absolute right-0 bottom-0 w-[120%] h-[120%] bg-gradient-to-tr from-gold-600/10 via-transparent to-transparent -rotate-12 pointer-events-none"></div>
+
                   <img 
                     src="/images/portrait-007.png" 
-                    alt="莊鈞翔 博士" 
-                    className="w-full h-full object-contain object-bottom portrait-render drop-shadow-[0_0_60px_rgba(212,175,55,0.15)]"
+                    alt="Dr. Eric Chuang" 
+                    className="w-full h-auto max-h-[75vh] lg:max-h-[90vh] object-contain object-bottom filter drop-shadow-[0_0_50px_rgba(212,175,55,0.1)] contrast-[1.1]"
                     referrerPolicy="no-referrer"
                   />
                   {/* Cinematic Bottom Fade */}
-                  <div className="absolute inset-x-0 bottom-0 h-1/4 bg-gradient-to-t from-black via-black/80 to-transparent z-10 pointer-events-none"></div>
+                  <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black via-black/95 to-transparent z-10 pointer-events-none"></div>
                   {/* Standardized Contributor Label */}
                   <ContributorLabel 
                     title="SCHOLAR & STRATEGIST" 
-                    name="莊鈞翔 博士"
-                    className="absolute bottom-16 right-4 lg:right-0 shadow-[0_20px_40px_rgba(0,0,0,0.8)]" 
+                    className="absolute bottom-16 md:bottom-20 right-6" 
                   />
                 </div>
               </motion.div>

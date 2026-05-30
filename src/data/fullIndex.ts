@@ -13,6 +13,12 @@ export const fullArticleIndex: IndexSection[] = [
   {
     period: "2026 年（最新時論）",
     articles: [
+      { id: "NEW-3", title: "【最新法律專欄】「一筆千億遺產，台灣政府課得到嗎？」從尹衍樑身後，看台灣遺產稅制的真實邊界", url: "https://94m.com.tw/articles/30c072?from_admin=true" },
+      { id: "NEW-4", title: "【最新法律專欄】「同樣是華人高資產家族，為何他選擇把財富留在新加坡？」觀台灣、新加坡、香港、日本的傳承稅制比較，以及合法合規的規劃工具全解析", url: "https://94m.com.tw/articles/2bf8ea?from_admin=true" },
+      { id: "NEW-5", title: "【最新法律專欄】「千億集團的傳承困局，保單贈與遺囑能解套嗎？」企業主股東的傳承框架解析：看見冰山的形狀，理解它水面下的重量", url: "https://94m.com.tw/articles/873721?from_admin=true" },
+      { id: "NEW-6", title: "【最新法律專欄】「專業光環下的司法背叛？」法律專業人員涉入組織犯罪、洩密與洗錢之刑事责任與倫理重構", url: "https://94m.com.tw/articles/68fcd5?from_admin=true" },
+      { id: "NEW-7", title: "【最新法律專欄】「當 AI 走進 LINE 智慧客服！」自動聊天機器人與新型數位詐騙時代", url: "https://94m.com.tw/articles/1ff3f5?from_admin=true" },
+      { id: "NEW-8", title: "【最新法律專欄】「AI 工業化詐騙演算法軍備競賽下的企業治理主權與制度防禦！」觀近九百億財損的社會病理探討《打詐新條例》實務下的戰略性轉向", url: "https://94m.com.tw/articles/3d93ec?from_admin=true" },
       { id: "NEW-1", title: "【四萬點下的企業決策責任重構 • 從市場狂熱中奪回治理主權】論董事注意義務之質變與預防型內控之必要性", url: "https://94m.com.tw/articles/6fe7f6" },
       { id: "NEW-2", title: "【治理主權的陷落與重構】生成式 AI 蔓延與資本市場時代下的雙重治理革命", url: "https://94m.com.tw/articles/fdf1ea" },
       { id: "001", title: "工廠特定登記制度套利與產業正義危機：2026 碳費元年下基礎的價差", url: "https://94m.com.tw/articles/0dc0e4" },

@@ -1,23 +1,28 @@
 import { motion } from "motion/react";
 
 interface Props {
-  title: string;
+  title?: string;
   name?: string;
   className?: string;
 }
 
-export const ContributorLabel = ({ title, name = "莊鈞翔 博士", className = "" }: Props) => {
+export const ContributorLabel = ({ className = "" }: Props) => {
   return (
     <motion.div 
-      initial={{ opacity: 0, x: 20 }}
-      whileInView={{ opacity: 1, x: 0 }}
+      initial={{ opacity: 0, scale: 0.95, y: 10 }}
+      whileInView={{ opacity: 1, scale: 1, y: 0 }}
       viewport={{ once: true }}
-      className={`bg-zinc-950/95 backdrop-blur-xl border-r-[6px] border-gold-400 py-6 px-10 shadow-[0_20px_50px_rgba(0,0,0,0.5)] z-20 ${className}`}
+      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+      className={`z-20 flex flex-col items-start bg-transparent pointer-events-none select-none ${className}`}
     >
-       <div className="flex flex-col items-end text-right">
-          <span className="text-gold-500 text-[10px] font-black tracking-[0.5em] uppercase mb-1 whitespace-nowrap">{title}</span>
-          <span className="text-white text-3xl font-display font-light whitespace-nowrap">{name}</span>
-       </div>
+      <div className="relative">
+        <img 
+          src="/signature-eric001.png" 
+          alt="Dr. Eric Chuang Signature" 
+          className="w-40 sm:w-48 lg:w-56 xl:w-64 h-auto drop-shadow-[0_4px_18px_rgba(0,0,0,0.92)] opacity-95 transition-all filter contrast-[1.1] brightness-[1.1]"
+          referrerPolicy="no-referrer"
+        />
+      </div>
     </motion.div>
   );
 };

@@ -162,7 +162,7 @@ export default function App() {
     { id: "governance", labelZh: "治理入口", labelEn: "GOVERNANCE", icon: Landmark },
     { id: "columns", labelZh: "法律研究", labelEn: "LEGAL RESEARCH", icon: Scale },
     { id: "books", labelZh: "治理出版", labelEn: "PUBLICATION", icon: BookText },
-    { id: "papers", labelZh: "學術體系", labelEn: "ACADEMIC EXCELLENCE", icon: GraduationCap },
+    { id: "papers", labelZh: "學術策展", labelEn: "ACADEMIC CURATION", icon: GraduationCap },
     { id: "gcsda", labelZh: "策略發展學會", labelEn: "STRATEGY FORUM", icon: Users },
     { id: "about", labelZh: "智庫主權", labelEn: "ABOUT STT", icon: Shield },
   ];
@@ -481,7 +481,7 @@ export default function App() {
                   { id: "governance", zh: "治理入口", en: "GOVERNANCE", icon: Landmark, href: "governance.html" },
                   { id: "columns", zh: "法律研究", en: "LEGAL RESEARCH", icon: Scale, href: "insights.html" },
                   { id: "books", zh: "治理出版", en: "PUBLICATION", icon: BookText, href: "books.html" },
-                  { id: "papers", zh: "學術體系", en: "ACADEMIC EXCELLENCE", icon: GraduationCap, href: "papers.html" },
+                  { id: "papers", zh: "學術策展", en: "ACADEMIC CURATION", icon: GraduationCap, href: "papers.html" },
                   { id: "gcsda", zh: "策略發展學會", en: "STRATEGY FORUM", icon: Users, href: "gcsda.html" },
                   { id: "about", zh: "智庫主權", en: "ABOUT STT", icon: Shield, href: "about.html" },
                 ].map((item, idx) => (
