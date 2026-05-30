@@ -105,7 +105,7 @@ export default function InternalCompliancePortal({ onNavigate }: { onNavigate?: 
     },
   ];
 
-  const [activeTabSection, setActiveTabSection] = useState<'intro' | 'pillars' | 'simulator'>('intro');
+  const [activeTabSection, setActiveTabSection] = useState<'intro' | 'pillars' | 'simulator' | 'academic'>('intro');
 
   return (
     <div id="internal-compliance-portal-page" className="min-h-screen lg:h-[calc(100vh-80px)] lg:overflow-hidden bg-[#050505] text-white flex flex-col justify-between selection:bg-gold-400 selection:text-black font-sans relative">
@@ -143,6 +143,13 @@ export default function InternalCompliancePortal({ onNavigate }: { onNavigate?: 
             className={`px-4.5 py-1.5 text-[10px] md:text-[11px] font-bold tracking-[0.15em] uppercase rounded-lg transition-all duration-300 border-0 cursor-pointer ${activeTabSection==='simulator' ? 'bg-gradient-to-br from-[#e6c84c] via-gold-500 to-[#b89530] text-black shadow-lg shadow-gold-500/15' : 'text-stone-400 hover:text-white bg-transparent'}`}
           >
             防禦決策模擬
+          </button>
+          <button 
+            type="button"
+            onClick={() => setActiveTabSection('academic')}
+            className={`px-4.5 py-1.5 text-[10px] md:text-[11px] font-bold tracking-[0.15em] uppercase rounded-lg transition-all duration-300 border-0 cursor-pointer ${activeTabSection==='academic' ? 'bg-gradient-to-br from-[#e6c84c] via-gold-500 to-[#b89530] text-black shadow-lg shadow-gold-500/15' : 'text-stone-400 hover:text-white bg-transparent'}`}
+          >
+            學術著作文獻
           </button>
         </div>
       </div>
@@ -207,22 +214,32 @@ export default function InternalCompliancePortal({ onNavigate }: { onNavigate?: 
                 </div>
               </div>
 
-              {/* Right Column */}
-              <div className="lg:col-span-12 xl:col-span-5 flex justify-center lg:justify-end relative pb-6 lg:pb-0 h-[220px] sm:h-[300px]">
-                {/* 3D Glass shield visual node rings */}
-                <div className="relative w-64 h-64 sm:w-80 sm:h-80 flex items-center justify-center border border-gold-400/20 rounded-full bg-gradient-to-br from-zinc-950 via-zinc-900/60 to-black/95 backdrop-blur-3xl shadow-[0_45px_90px_rgba(0,0,0,0.95),_0_0_50px_rgba(230,200,76,0.05)]">
-                  <div 
-                    className="absolute inset-0 opacity-[0.22] bg-cover bg-center rounded-full pointer-events-none mix-blend-color-dodge" 
-                    style={{ backgroundImage: "url('/images/background_image_001.png')" }}
+              {/* Right Column: High-Prestige Theme Portrait with Signature (No books, no circular avatar, no awkward badges) */}
+              <div className="lg:col-span-12 xl:col-span-5 flex justify-center xl:justify-end relative pb-6 lg:pb-0 h-[380px] sm:h-[460px] lg:h-[480px] xl:h-[520px] overflow-visible">
+                <div className="relative w-full h-full flex items-end justify-center xl:justify-end overflow-visible">
+                  {/* Subtle ambient backglow */}
+                  <div className="absolute w-72 h-72 bg-[#e6c84c]/[0.04] rounded-full blur-[100px] pointer-events-none bottom-10 right-0 z-0" />
+                  
+                  {/* High Prestige Portrait Image */}
+                  <img 
+                    src="/images/Eric-Chuang-12.png" 
+                    alt="莊鈞翔 博士" 
+                    className="h-full w-auto object-contain object-bottom relative z-10 filter drop-shadow-[0_15px_35px_rgba(0,0,0,0.6)] contrast-[1.05]"
+                    referrerPolicy="no-referrer"
                   />
-
-                  {/* Central Glow lock node */}
-                  <div className="w-24 h-24 rounded-full border-2 border-gold-400 bg-zinc-950 flex flex-col items-center justify-center relative z-20 shadow-[0_0_40px_rgba(230,200,76,0.25)]">
-                    <Scale className="w-8 h-8 text-gold-400 mb-1" />
-                    <span className="text-[8px] font-mono tracking-[0.2em] text-[#e6c84c] font-bold uppercase font-sans">LAW SHIELD</span>
+                  
+                  {/* Cinematic Bottom Fade to blend portrait smoothly */}
+                  <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black via-black/45 to-transparent z-15 pointer-events-none" />
+                  
+                  {/* Signature Overlay at bottom right */}
+                  <div className="absolute bottom-6 right-4 sm:right-8 md:right-12 lg:right-4 xl:right-6 z-20 pointer-events-none select-none">
+                    <img 
+                      src="/signature-eric001.png" 
+                      alt="莊鈞翔 博士 簽名" 
+                      className="w-32 sm:w-40 xl:w-44 h-auto drop-shadow-[0_2px_12px_rgba(0,0,0,0.95)] opacity-95 transition-all"
+                      referrerPolicy="no-referrer"
+                    />
                   </div>
-
-                  <div className="absolute w-[200px] h-[200px] border border-dashed border-gold-400/15 rounded-full animate-[spin_30s_linear_infinite]" />
                 </div>
               </div>
             </motion.div>
@@ -381,6 +398,118 @@ export default function InternalCompliancePortal({ onNavigate }: { onNavigate?: 
                     </motion.div>
                   )}
 
+                </div>
+              </div>
+            </motion.div>
+          )}
+
+          {activeTabSection === 'academic' && (
+            <motion.div 
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4 }}
+              className="w-full max-w-4xl mx-auto space-y-6"
+            >
+              {/* Back Button to Papers Hall */}
+              {onNavigate && (
+                <button
+                  type="button"
+                  onClick={() => onNavigate('papers')}
+                  className="flex items-center gap-1.5 text-gold-450 hover:text-white transition-colors font-mono text-[10px] tracking-wider uppercase bg-transparent border-0 cursor-pointer outline-none"
+                >
+                  ← 返回學術策展大廳 (Back to Exhibition Hall)
+                </button>
+              )}
+
+              {/* High-Prestige Academic Curation Card */}
+              <div className="bg-zinc-950/90 border border-gold-400/20 rounded-2xl p-6 sm:p-8 space-y-6 shadow-2xl relative overflow-hidden text-left">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-gold-400/[0.03] rounded-full blur-2xl pointer-events-none" />
+                
+                <div className="flex flex-col md:flex-row gap-6 items-start">
+                  {/* Left Column: Cover and Action Buttons */}
+                  <div className="w-full md:w-1/3 space-y-4">
+                    <div className="aspect-[3/4] w-full max-w-[200px] mx-auto bg-stone-900 rounded-xl border border-gold-400/20 shadow-lg relative group overflow-hidden">
+                      <img 
+                        src="/images/paper_customer_relationship.png" 
+                        alt="顧客關係管理對服務永續之探討 論文封面" 
+                        className="w-full h-full object-cover group-hover:scale-105 transition-all duration-500"
+                        referrerPolicy="no-referrer"
+                      />
+                    </div>
+
+                    <div className="space-y-2 pt-2">
+                      <a 
+                        href="https://heyzine.com/flip-book/5a08b85184.html"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-full bg-[#e6c84c]/10 hover:bg-[#e6c84c] hover:text-black border border-gold-400/25 text-[#e6c84c] text-[10px] font-sans font-bold tracking-[0.11em] py-2.5 uppercase rounded text-center block transition-all no-underline"
+                      >
+                        📖 線上翻頁電子書預覽
+                      </a>
+                      <a 
+                        href="/papers/phd3.zip"
+                        download
+                        className="w-full bg-stone-900 hover:bg-stone-800 border border-white/10 text-stone-200 text-[10px] font-sans font-bold tracking-[0.11em] py-2.5 uppercase rounded text-center block transition-all no-underline"
+                      >
+                        📥 下載論文 ZIP / PDF
+                      </a>
+                    </div>
+                  </div>
+
+                  {/* Right Column: Title and Content */}
+                  <div className="w-full md:w-2/3 space-y-4 flex flex-col justify-between">
+                    <div className="space-y-3">
+                      <div className="flex flex-wrap items-center gap-2">
+                        <span className="bg-[#e6c84c]/10 border border-[#e6c84c]/30 text-[#e6c84c] px-2 py-0.5 rounded text-[8px] font-mono uppercase tracking-widest font-bold">THEME III ∥ 博士學位研究著作</span>
+                        <span className="text-stone-500 text-[9px] font-mono">文獻編號：PHD3</span>
+                      </div>
+                      
+                      <h3 className="text-lg sm:text-xl font-serif text-stone-100 leading-tight">
+                        顧客關係管理對服務永續之探討：以 A 國際法律事務所為例
+                      </h3>
+                      <p className="text-stone-400 text-[10.5px] font-mono leading-relaxed tracking-wide">
+                        Discussion on Customer Relationship Management in Service Sustainability: A Case Study of A International Attorney Firm
+                      </p>
+
+                      <div className="text-[11px] text-stone-400 py-2 border-y border-white/5 font-sans flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                        <div className="space-y-1 text-left">
+                          <div>
+                            <strong className="text-stone-300">研究生 ∥ </strong> 莊鈞翔 博士 ∥ 指導教授：翁慈青 博士
+                          </div>
+                          <div>
+                            <strong className="text-stone-300">關鍵字 ∥ </strong> 顧客關係管理、永續服務、法律服務、國際法律事務所、關係治理
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-2.5 bg-white/[0.02] border border-white/5 py-1 px-3 rounded-lg shrink-0 select-none self-start sm:self-center">
+                          <div className="w-10 h-10 rounded-full border border-gold-400/30 overflow-hidden bg-stone-900 shadow animate-fade-in">
+                            <img 
+                              src="/images/Eric-Chuang-12.png" 
+                              alt="莊鈞翔 博士" 
+                              className="w-full h-full object-cover scale-110 object-top"
+                              referrerPolicy="no-referrer"
+                            />
+                          </div>
+                          <div className="text-left leading-tight">
+                            <span className="block text-[8px] text-gold-400 font-mono tracking-wider">AUTHOR</span>
+                            <span className="block text-xs font-serif font-semibold text-stone-200">莊鈞翔 博士</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="space-y-2 pt-1 text-[#F8F7F4]/90 font-serif text-[11.5px] leading-relaxed">
+                        <strong className="text-gold-400 text-[10px] tracking-widest uppercase font-mono block">摘要 ∥ abstract</strong>
+                        <p className="font-light text-stone-300">
+                          本研究探討國際法律事務所如何運用顧客關係管理來實現服務永續，並以 A 知名國際法律事務所為例，分析其在顧客關係管理上的具體做法和成效。
+                        </p>
+                        <p className="font-light text-stone-300">
+                          本研究指出 A 國際法律事務所在顧客關係管理上之實踐，包括顧客管理、顧客溝通、顧客服務、顧客回饋等方面，並評估了其在提升顧客服務品質和忠誠度、增加業務營收和市場佔有率、降低營運成本和風險等方面的成效。
+                        </p>
+                        <p className="font-light text-stone-300">
+                          同時，本研究創新提出實施「法律服務紀錄書」之核心方法；此制度能顯著協助客戶針對原本具高度無形、深奧之法律與智權交付過程，產生清晰的「可視性」及「可量化」成果，確立服務深度黏性，順利達成法律服務之長期永續委任！
+                        </p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </motion.div>

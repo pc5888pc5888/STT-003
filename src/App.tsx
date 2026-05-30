@@ -151,7 +151,7 @@ export default function App() {
       case "esgai": return <ESGAI onNavigate={handleNavigate} />;
       case "service-portal": return <ServicePortal />;
       case "success": return <Success />;
-      case "papers": return <Papers />;
+      case "papers": return <Papers onNavigate={handleNavigate} />;
       case "gcsda": return <GCSDA />;
       case "article-index": return <ArticleIndex />;
       default: return <Home onNavigate={handleNavigate} currentPage={currentPage} activeSection={homeSection} setActiveSection={setHomeSection} />;
@@ -386,7 +386,7 @@ export default function App() {
                       <Crown className="w-5 h-5 text-black" strokeWidth={1.5} />
                       <span className="text-base font-bold">治理委託</span>
                     </div>
-                    <span className="text-[8px] font-mono font-black tracking-widest uppercase opacity-80">GOVERNANCE ENGAGEMENT</span>
+                    <span className="text-[8px] font-mono font-black tracking-widest uppercase opacity-80 whitespace-nowrap">GOVERNANCE ENGAGEMENT</span>
                   </a>
                   <a 
                     href="mailto:pc5888@gmail.com"

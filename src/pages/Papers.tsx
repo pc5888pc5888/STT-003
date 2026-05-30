@@ -155,7 +155,7 @@ const themeDetails: Record<string, {
   }
 };
 
-export default function Papers() {
+export default function Papers({ onNavigate }: { onNavigate?: (page: string) => void }) {
   const [selectedTheme, setSelectedTheme] = useState<string | null>(null);
   const [showPhd3Warning, setShowPhd3Warning] = useState(false);
   const [activeSubTab, setActiveSubTab] = useState<"insight" | "pains" | "simulator" | "resource">("insight");
@@ -431,9 +431,16 @@ export default function Papers() {
                     viewport={{ once: true }}
                     transition={{ delay: idx * 0.1, duration: 0.8 }}
                     onClick={() => {
-                      setSelectedTheme(theme.id);
-                      setActiveSubTab("insight");
-                      window.scrollTo({ top: 0, behavior: "smooth" });
+                      if (onNavigate) {
+                        if (theme.id === "theme1") onNavigate("family-governance");
+                        else if (theme.id === "theme2") onNavigate("corporate-governance");
+                        else if (theme.id === "theme3") onNavigate("internal-compliance");
+                        else if (theme.id === "theme4") onNavigate("esgai");
+                      } else {
+                        setSelectedTheme(theme.id);
+                        setActiveSubTab("insight");
+                        window.scrollTo({ top: 0, behavior: "smooth" });
+                      }
                     }}
                     className={`relative p-8 rounded-lg border bg-gradient-to-br ${theme.color} hover:border-gold-400/40 transition-all duration-500 cursor-pointer group flex flex-col justify-between h-full shadow-[0_10px_35px_rgba(0,0,0,0.7)] hover:shadow-[0_15px_45px_rgba(212,175,55,0.08)]`}
                   >

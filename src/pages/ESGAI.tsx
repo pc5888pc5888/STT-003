@@ -125,7 +125,7 @@ export default function ESGAI({ onNavigate }: { onNavigate?: (page: string) => v
     },
   ];
 
-  const [activeTabSection, setActiveTabSection] = useState<'intro' | 'features' | 'console'>('intro');
+  const [activeTabSection, setActiveTabSection] = useState<'intro' | 'features' | 'console' | 'academic'>('intro');
 
   return (
     <div id="esgai-page" className="min-h-screen lg:h-[calc(100vh-80px)] lg:overflow-hidden bg-[#050505] text-white flex flex-col justify-between selection:bg-gold-400 selection:text-black font-sans relative">
@@ -163,6 +163,13 @@ export default function ESGAI({ onNavigate }: { onNavigate?: (page: string) => v
             className={`px-4.5 py-1.5 text-[10px] md:text-[11px] font-bold tracking-[0.15em] uppercase rounded-lg transition-all duration-300 border-0 cursor-pointer ${activeTabSection==='console' ? 'bg-gradient-to-br from-[#e6c84c] via-gold-500 to-[#b89530] text-black shadow-lg shadow-gold-500/15' : 'text-stone-400 hover:text-white bg-transparent'}`}
           >
             實時智能門控
+          </button>
+          <button 
+            type="button"
+            onClick={() => setActiveTabSection('academic')}
+            className={`px-4.5 py-1.5 text-[10px] md:text-[11px] font-bold tracking-[0.15em] uppercase rounded-lg transition-all duration-300 border-0 cursor-pointer ${activeTabSection==='academic' ? 'bg-gradient-to-br from-[#e6c84c] via-gold-500 to-[#b89530] text-black shadow-lg shadow-gold-500/15' : 'text-stone-400 hover:text-white bg-transparent'}`}
+          >
+            學術著作文獻
           </button>
         </div>
       </div>
@@ -226,63 +233,32 @@ export default function ESGAI({ onNavigate }: { onNavigate?: (page: string) => v
                 </div>
               </div>
 
-              {/* Right Column: Orbiting ESG-AI Nodes Diagram */}
-              <div className="lg:col-span-5 flex justify-center lg:justify-end relative pr-4 [perspective:1500px]">
-                {/* Main high-tech ring panel with 3D tilts and depth */}
-                <div className="relative w-80 h-80 sm:w-96 sm:h-96 flex items-center justify-center border border-gold-400/20 rounded-full bg-gradient-to-br from-zinc-950 via-zinc-900/60 to-black/95 backdrop-blur-3xl shadow-[0_45px_90px_rgba(0,0,0,0.95),_0_0_50px_rgba(230,200,76,0.05)] [transform:rotateX(12deg)_rotateY(-8deg)] hover:[transform:rotateX(4deg)_rotateY(-2deg)] transition-all duration-700 ease-out">
+              {/* Right Column: High-Prestige Theme Portrait with Signature (No books, no circular avatar, no awkward badges) */}
+              <div className="lg:col-span-12 xl:col-span-5 flex justify-center xl:justify-end relative pb-6 lg:pb-0 h-[380px] sm:h-[460px] lg:h-[480px] xl:h-[520px] overflow-visible">
+                <div className="relative w-full h-full flex items-end justify-center xl:justify-end overflow-visible">
+                  {/* Subtle ambient backglow */}
+                  <div className="absolute w-72 h-72 bg-[#e6c84c]/[0.04] rounded-full blur-[100px] pointer-events-none bottom-10 right-0 z-0" />
                   
-                  <div 
-                    className="absolute inset-0 opacity-[0.22] bg-cover bg-center rounded-full pointer-events-none mix-blend-color-dodge" 
-                    style={{ backgroundImage: "url('/images/background_image_002.png')" }}
+                  {/* High Prestige Portrait Image */}
+                  <img 
+                    src="/images/Eric-Chuang-13.png" 
+                    alt="莊鈞翔 博士" 
+                    className="h-full w-auto object-contain object-bottom relative z-10 filter drop-shadow-[0_15px_35px_rgba(0,0,0,0.6)] contrast-[1.05]"
+                    referrerPolicy="no-referrer"
                   />
-
-                  {/* Central Glowing AI core node */}
-                  <div className="w-20 h-20 rounded-full border-2 border-[#e6c84c] bg-zinc-950 flex flex-col items-center justify-center relative z-20 shadow-[0_0_40px_rgba(230,200,76,0.35)]">
-                    <span className="text-xl font-black font-mono text-[#e6c84c] tracking-widest">STT</span>
-                    <span className="text-[7px] font-mono tracking-[0.2em] text-[#e6c84c]/85 text-center uppercase font-bold mt-1">CORE ENGINE</span>
-                    <div className="absolute inset-[-4px] border border-[#e6c84c]/20 rounded-full animate-ping" />
+                  
+                  {/* Cinematic Bottom Fade to blend portrait smoothly */}
+                  <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black via-black/45 to-transparent z-15 pointer-events-none" />
+                  
+                  {/* Signature Overlay at bottom right */}
+                  <div className="absolute bottom-6 right-4 sm:right-8 md:right-12 lg:right-4 xl:right-6 z-20 pointer-events-none select-none">
+                    <img 
+                      src="/signature-eric001.png" 
+                      alt="莊鈞翔 博士 簽名" 
+                      className="w-32 sm:w-40 xl:w-44 h-auto drop-shadow-[0_2px_12px_rgba(0,0,0,0.95)] opacity-95 transition-all"
+                      referrerPolicy="no-referrer"
+                    />
                   </div>
-
-                  {/* 4 Orbiting ESG-AI nodes */}
-                  {[
-                    { label: "E", name: "環境治理", nameEn: "ENVIRONMENTAL", angle: 0 },
-                    { label: "S", name: "社會信任", nameEn: "SOCIAL VALUE", angle: 90 },
-                    { label: "G", name: "公司自律", nameEn: "GOVERNANCE", angle: 180 },
-                    { label: "AI", name: "智慧核心", nameEn: "INTELLIGENCE", angle: 270 }
-                  ].map((node, idx) => {
-                    const rad = (node.angle * Math.PI) / 180;
-                    const distance = 115; // responsive radius distance 
-                    const x = Math.cos(rad) * distance;
-                    const y = Math.sin(rad) * distance;
-
-                    return (
-                      <div 
-                        key={idx}
-                        className="absolute flex flex-col items-center justify-center"
-                        style={{ transform: `translate(${x}px, ${y}px)` }}
-                      >
-                        {/* Golden Laser Line to center */}
-                        <div 
-                          className="absolute w-0.5 bg-gradient-to-t from-gold-500/30 via-gold-400/10 to-transparent origin-bottom"
-                          style={{ 
-                            height: `${distance}px`, 
-                            transform: `rotate(${node.angle + 90}deg) translateY(-${distance / 2}px)`,
-                          }}
-                        />
-                        
-                        {/* Massive 3D bubble */}
-                        <div className="w-14 h-14 rounded-full border border-gold-400/70 bg-gradient-to-br from-zinc-800 via-zinc-950 to-stone-900 flex flex-col items-center justify-center z-20 hover:scale-110 hover:border-gold-200 transition-all duration-300 shadow-[0_10px_20px_rgba(0,0,0,0.95)] relative cursor-pointer group">
-                          <span className="text-[#e6c84c] text-lg font-black font-mono tracking-wider">{node.label}</span>
-                        </div>
-                        {/* Label window underneath */}
-                        <div className="bg-gradient-to-b from-zinc-900 to-black px-2 py-1 rounded-lg border border-gold-400/20 mt-1.5 z-10 shadow-[0_8px_16px_rgba(0,0,0,0.95)] max-w-[90px] text-center">
-                          <p className="text-[9px] font-sans font-black text-stone-100 whitespace-nowrap leading-none">{node.name}</p>
-                        </div>
-                      </div>
-                    );
-                  })}
-
-                  <div className="absolute w-[230px] h-[230px] border border-dashed border-gold-400/20 rounded-full animate-[spin_40s_linear_infinite]" />
                 </div>
               </div>
             </motion.div>
@@ -466,6 +442,118 @@ export default function ESGAI({ onNavigate }: { onNavigate?: (page: string) => v
                     )}
                   </div>
 
+                </div>
+              </div>
+            </motion.div>
+          )}
+
+          {activeTabSection === 'academic' && (
+            <motion.div 
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4 }}
+              className="w-full max-w-4xl mx-auto space-y-6"
+            >
+              {/* Back Button to Papers Hall */}
+              {onNavigate && (
+                <button
+                  type="button"
+                  onClick={() => onNavigate('papers')}
+                  className="flex items-center gap-1.5 text-gold-450 hover:text-white transition-colors font-mono text-[10px] tracking-wider uppercase bg-transparent border-0 cursor-pointer outline-none"
+                >
+                  ← 返回學術策展大廳 (Back to Exhibition Hall)
+                </button>
+              )}
+
+              {/* High-Prestige Academic Curation Card */}
+              <div className="bg-zinc-950/90 border border-gold-400/20 rounded-2xl p-6 sm:p-8 space-y-6 shadow-2xl relative overflow-hidden text-left">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-gold-400/[0.03] rounded-full blur-2xl pointer-events-none" />
+                
+                <div className="flex flex-col md:flex-row gap-6 items-start">
+                  {/* Left Column: Cover and Action Buttons */}
+                  <div className="w-full md:w-1/3 space-y-4">
+                    <div className="aspect-[3/4] w-full max-w-[200px] mx-auto bg-stone-900 rounded-xl border border-gold-400/20 shadow-lg relative group overflow-hidden">
+                      <img 
+                        src="/images/paper_personality_innovation.png" 
+                        alt="不同世代企業家人格特質與績效之影響 論文封面" 
+                        className="w-full h-full object-cover group-hover:scale-105 transition-all duration-500"
+                        referrerPolicy="no-referrer"
+                      />
+                    </div>
+
+                    <div className="space-y-2 pt-2">
+                      <a 
+                        href="https://heyzine.com/flip-book/b7ec1c6436.html"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-full bg-[#e6c84c]/10 hover:bg-[#e6c84c] hover:text-black border border-gold-400/25 text-[#e6c84c] text-[10px] font-sans font-bold tracking-[0.11em] py-2.5 uppercase rounded text-center block transition-all no-underline"
+                      >
+                        📖 線上翻頁電子書預覽
+                      </a>
+                      <a 
+                        href="/papers/m1.pdf"
+                        download
+                        className="w-full bg-stone-900 hover:bg-stone-800 border border-white/10 text-stone-200 text-[10px] font-sans font-bold tracking-[0.11em] py-2.5 uppercase rounded text-center block transition-all no-underline"
+                      >
+                        📥 下載論文 PDF 成果
+                      </a>
+                    </div>
+                  </div>
+
+                  {/* Right Column: Title and Content */}
+                  <div className="w-full md:w-2/3 space-y-4 flex flex-col justify-between">
+                    <div className="space-y-3">
+                      <div className="flex flex-wrap items-center gap-2">
+                        <span className="bg-[#e6c84c]/10 border border-[#e6c84c]/30 text-[#e6c84c] px-2 py-0.5 rounded text-[8px] font-mono uppercase tracking-widest font-bold">THEME IV ∥ 碩士學位研究著作</span>
+                        <span className="text-stone-500 text-[9px] font-mono">文獻編號：M1</span>
+                      </div>
+                      
+                      <h3 className="text-lg sm:text-xl font-serif text-stone-100 leading-tight">
+                        不同世代企業家人格特質、創新能力對企業經營績效之影響-以領導風格為中介變數
+                      </h3>
+                      <p className="text-stone-400 text-[10.5px] font-mono leading-relaxed tracking-wide">
+                        The Relationship among Personality Traits of Different Generation Entrepreneurs, Innovation Ability and Performance – Leadership Style as an Intermediary Variable
+                      </p>
+
+                      <div className="text-[11px] text-stone-400 py-2 border-y border-white/5 font-sans flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                        <div className="space-y-1 text-left">
+                          <div>
+                            <strong className="text-stone-300">研究生 ∥ </strong> 莊鈞翔 博士 ∥ 指導教授：劉自強 博士、張旭玲 博士
+                          </div>
+                          <div>
+                            <strong className="text-stone-300">關鍵字 ∥ </strong> 人格特質、創新能力、經營績效、領導風格、中介調和
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-2.5 bg-white/[0.02] border border-white/5 py-1 px-3 rounded-lg shrink-0 select-none self-start sm:self-center">
+                          <div className="w-10 h-10 rounded-full border border-gold-400/30 overflow-hidden bg-stone-900 shadow animate-fade-in">
+                            <img 
+                              src="/images/Eric-Chuang-13.png" 
+                              alt="莊鈞翔 博士" 
+                              className="w-full h-full object-cover scale-110 object-top"
+                              referrerPolicy="no-referrer"
+                            />
+                          </div>
+                          <div className="text-left leading-tight">
+                            <span className="block text-[8px] text-gold-400 font-mono tracking-wider">AUTHOR</span>
+                            <span className="block text-xs font-serif font-semibold text-stone-200">莊鈞翔 博士</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="space-y-2 pt-1 text-[#F8F7F4]/90 font-serif text-[11.5px] leading-relaxed">
+                        <strong className="text-gold-400 text-[10px] tracking-widest uppercase font-mono block">摘要 ∥ abstract</strong>
+                        <p className="font-light text-stone-300">
+                          在世代交替之際，企業要如何發展一向是企業繼承人與董事會所面臨的核心議題，也是策略管理不可忽略的研究課題。本研究旨在探討企業家第二代接班或企業拔擢專業經理人，研究不同世代下，企業家人格特質、創新能力，如何因為不同領導風格調和對企業經營績效產生的實質影響。
+                        </p>
+                        <p className="font-light text-stone-300">
+                          本研究以精密精確問卷調查法，對中部地區國際扶輪社之資深企業家及領導群體回收上百份問卷，並進行中介與相關性分析。
+                        </p>
+                        <p className="font-light text-stone-300">
+                          科學結果表明：人格特質和創新能力對領導能力與方向具有極顯著的正向影響。而此領導能動性對最終績效能力具有完美承前啟後的中介引領。在多變局與激烈的代際更新中，依據不同的人格和創新能量，彈性配對並中介調節變革型與交易型風格，能為企業經營績效與轉型發展奠定決定性的防禦優勢！
+                        </p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </motion.div>

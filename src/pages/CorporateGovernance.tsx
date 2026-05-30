@@ -103,7 +103,7 @@ export default function CorporateGovernance({ onNavigate }: { onNavigate?: (page
   };
 
   const currentReport = getStrategicReport();
-  const [activeTab, setActiveTab] = useState<'intro' | 'modules' | 'simulator'>('intro');
+  const [activeTab, setActiveTab] = useState<'intro' | 'modules' | 'simulator' | 'academic'>('intro');
 
   return (
     <div id="corporate-governance-page" className="min-h-screen lg:h-[calc(100vh-80px)] lg:overflow-hidden bg-[#050505] text-white flex flex-col justify-between selection:bg-gold-400 selection:text-black font-sans relative">
@@ -137,7 +137,13 @@ export default function CorporateGovernance({ onNavigate }: { onNavigate?: (page
             onClick={() => setActiveTab('simulator')}
             className={`px-4.5 py-1.5 text-[10px] md:text-[11px] font-bold tracking-[0.15em] uppercase rounded-lg transition-all duration-300 border-0 cursor-pointer ${activeTab==='simulator' ? 'bg-gradient-to-br from-[#e6c84c] via-gold-500 to-[#b89530] text-black shadow-lg shadow-gold-500/15' : 'text-stone-400 hover:text-white bg-transparent'}`}
           >
-            智慧效能模擬
+            智慧效效模擬
+          </button>
+          <button 
+            onClick={() => setActiveTab('academic')}
+            className={`px-4.5 py-1.5 text-[10px] md:text-[11px] font-bold tracking-[0.15em] uppercase rounded-lg transition-all duration-300 border-0 cursor-pointer ${activeTab==='academic' ? 'bg-gradient-to-br from-[#e6c84c] via-gold-500 to-[#b89530] text-black shadow-lg shadow-gold-500/15' : 'text-stone-400 hover:text-white bg-transparent'}`}
+          >
+            學術著作文獻
           </button>
         </div>
       </div>
@@ -200,59 +206,31 @@ export default function CorporateGovernance({ onNavigate }: { onNavigate?: (page
                 </div>
               </div>
 
-              {/* Right Column: 3D Chess Board panel */}
-              <div className="lg:col-span-5 flex justify-center lg:justify-end relative pr-4 [perspective:1500px]">
-                <div className="relative border-2 border-gold-400/30 p-5 bg-gradient-to-br from-zinc-950 via-zinc-900/90 to-black backdrop-blur-3xl rounded-3xl max-w-md w-full shadow-[0_45px_90px_rgba(0,0,0,0.95),_0_0_50px_rgba(230,200,76,0.1)] border-t-gold-400/60 [transform:rotateX(10deg)_rotateY(-6deg)] hover:[transform:rotateX(3deg)_rotateY(-2deg)] transition-all duration-700 ease-out">
-                  <div className="absolute -top-8 -right-8 w-40 h-40 bg-[#e6c84c]/5 rounded-full blur-3xl pointer-events-none" />
+              {/* Right Column: High-Prestige Theme Portrait with Signature (No books, no circular avatar, no awkward badges) */}
+              <div className="lg:col-span-12 xl:col-span-5 flex justify-center xl:justify-end relative pb-6 lg:pb-0 h-[380px] sm:h-[460px] lg:h-[480px] xl:h-[520px] overflow-visible">
+                <div className="relative w-full h-full flex items-end justify-center xl:justify-end overflow-visible">
+                  {/* Subtle ambient backglow */}
+                  <div className="absolute w-72 h-72 bg-[#e6c84c]/[0.04] rounded-full blur-[100px] pointer-events-none bottom-10 right-0 z-0" />
                   
-                  <div 
-                    className="absolute inset-0 opacity-[0.25] bg-cover bg-center rounded-3xl pointer-events-none mix-blend-color-dodge" 
-                    style={{ backgroundImage: "url('/images/background_image_001.png')" }}
+                  {/* High Prestige Portrait Image */}
+                  <img 
+                    src="/images/Eric-Chuang-11.png" 
+                    alt="莊鈞翔 博士" 
+                    className="h-full w-auto object-contain object-bottom relative z-10 filter drop-shadow-[0_15px_35px_rgba(0,0,0,0.6)] contrast-[1.05]"
+                    referrerPolicy="no-referrer"
                   />
-
-                  <div className="border border-gold-400/25 p-5 sm:p-6 rounded-2xl space-y-4 bg-zinc-950/60 relative z-10 backdrop-blur-md">
-                    <div className="flex items-center justify-between border-b border-gold-500/25 pb-3">
-                      <div className="flex items-center gap-2">
-                        <span className="w-2 h-2 rounded-full bg-[#e6c84c] drop-shadow-[0_0_12px_rgba(230,200,76,0.9)] animate-pulse" />
-                        <span className="text-[10px] font-mono tracking-[0.2em] text-[#e6c84c] uppercase font-bold">STT CHESS BOARD PROTOCOL</span>
-                      </div>
-                      <div className="flex items-center gap-1 bg-emerald-500/20 border border-emerald-500/30 px-2.5 py-0.5 rounded">
-                        <span className="text-[8px] font-mono font-bold text-emerald-400">ACTIVE SYSTEM</span>
-                      </div>
-                    </div>
-                    
-                    <div className="grid grid-cols-4 gap-2.5 p-4 bg-black/90 border-2 border-gold-500/40 rounded-xl relative overflow-hidden shadow-[inset_0_6px_25px_rgba(230,200,76,0.15)]">
-                      <div className="absolute inset-0 bg-gradient-to-tr from-gold-500/[0.08] to-transparent pointer-events-none" />
-                      {Array.from({ length: 8 }).map((_, gi) => (
-                        <div 
-                          key={gi} 
-                          className={`h-10 border-2 border-gold-500/10 flex items-center justify-center relative rounded-lg shadow-[0_4px_12px_rgba(0,0,0,0.6)] transition-all duration-300 ${
-                            gi % 3 === 0 ? "bg-gradient-to-br from-gold-500/15 to-gold-600/5 border-gold-500/40 shadow-[0_0_15px_rgba(230,200,76,0.1)]" : "bg-zinc-950/90"
-                          }`}
-                        >
-                          {gi === 0 && <span className="w-2 h-2 rounded-full bg-[#e6c84c] animate-pulse shadow-[0_0_10px_rgba(230,200,76,0.8)]" />}
-                          {gi === 3 && <span className="text-base font-serif text-gold-400 font-bold drop-shadow-[0_2px_6px_rgba(0,0,0,0.8)]">🔱</span>}
-                          {gi === 5 && <span className="text-base font-serif text-gold-400 font-bold drop-shadow-[0_2px_6px_rgba(0,0,0,0.8)]">👑</span>}
-                        </div>
-                      ))}
-                    </div>
-
-                    <div className="space-y-2.5">
-                      {[
-                        { label: "獨立常設常務董事結構建立", num: "01", en: "Establishment of active Audit structures" },
-                        { label: "重大投資策略案動態博弈法遵測試", num: "02", en: "Investment risk simulation gate logic" }
-                      ].map((sub, sidx) => (
-                        <div key={sidx} className="p-2.5 bg-zinc-950/95 border border-gold-400/10 rounded-xl flex items-start gap-3">
-                          <div className="w-7 h-7 rounded-lg bg-gold-400/10 flex items-center justify-center shrink-0 border border-gold-400/20">
-                            <span className="text-[10px] font-mono font-bold text-gold-400">{sub.num}</span>
-                          </div>
-                          <div className="space-y-0.5">
-                            <h4 className="text-xs font-bold font-sans text-white">{sub.label}</h4>
-                            <p className="text-[8px] text-stone-500 font-mono tracking-wider uppercase">{sub.en}</p>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
+                  
+                  {/* Cinematic Bottom Fade to blend portrait smoothly */}
+                  <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black via-black/45 to-transparent z-15 pointer-events-none" />
+                  
+                  {/* Signature Overlay at bottom right */}
+                  <div className="absolute bottom-6 right-4 sm:right-8 md:right-12 lg:right-4 xl:right-6 z-20 pointer-events-none select-none">
+                    <img 
+                      src="/signature-eric001.png" 
+                      alt="莊鈞翔 博士 簽名" 
+                      className="w-32 sm:w-40 xl:w-44 h-auto drop-shadow-[0_2px_12px_rgba(0,0,0,0.95)] opacity-95 transition-all"
+                      referrerPolicy="no-referrer"
+                    />
                   </div>
                 </div>
               </div>
@@ -417,6 +395,115 @@ export default function CorporateGovernance({ onNavigate }: { onNavigate?: (page
                     >
                       申請客製化深度診斷 <ChevronRight className="w-3 h-3 inline pb-0.5 ml-1" />
                     </a>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          )}
+
+          {activeTab === 'academic' && (
+            <motion.div 
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4 }}
+              className="w-full max-w-4xl mx-auto space-y-6"
+            >
+              {/* Back Button to Papers Hall */}
+              {onNavigate && (
+                <button
+                  type="button"
+                  onClick={() => onNavigate('papers')}
+                  className="flex items-center gap-1.5 text-gold-450 hover:text-white transition-colors font-mono text-[10px] tracking-wider uppercase bg-transparent border-0 cursor-pointer outline-none"
+                >
+                  ← 返回學術策展大廳 (Back to Exhibition Hall)
+                </button>
+              )}
+
+              {/* High-Prestige Academic Curation Card */}
+              <div className="bg-zinc-950/90 border border-gold-400/20 rounded-2xl p-6 sm:p-8 space-y-6 shadow-2xl relative overflow-hidden text-left">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-gold-400/[0.03] rounded-full blur-2xl pointer-events-none" />
+                
+                <div className="flex flex-col md:flex-row gap-6 items-start">
+                  {/* Left Column: Cover and Action Buttons */}
+                  <div className="w-full md:w-1/3 space-y-4">
+                    <div className="aspect-[3/4] w-full max-w-[200px] mx-auto bg-stone-900 rounded-xl border border-gold-400/20 shadow-lg relative group overflow-hidden">
+                      <img 
+                        src="/images/paper_corporate_governance.png" 
+                        alt="企業策略導入公司治理法遵精神 論文封面" 
+                        className="w-full h-full object-cover group-hover:scale-105 transition-all duration-500"
+                        referrerPolicy="no-referrer"
+                      />
+                    </div>
+
+                    <div className="space-y-2 pt-2">
+                      <a 
+                        href="https://heyzine.com/flip-book/dec98b2e5b.html"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-full bg-[#e6c84c]/10 hover:bg-[#e6c84c] hover:text-black border border-gold-400/25 text-[#e6c84c] text-[10px] font-sans font-bold tracking-[0.11em] py-2.5 uppercase rounded text-center block transition-all no-underline"
+                      >
+                        📖 線上翻頁電子書預覽
+                      </a>
+                      <a 
+                        href="/papers/phd2.pdf"
+                        download
+                        className="w-full bg-stone-900 hover:bg-stone-800 border border-white/10 text-stone-200 text-[10px] font-sans font-bold tracking-[0.11em] py-2.5 uppercase rounded text-center block transition-all no-underline"
+                      >
+                        📥 下載論文 PDF 成果
+                      </a>
+                    </div>
+                  </div>
+
+                  {/* Right Column: Title and Content */}
+                  <div className="w-full md:w-2/3 space-y-4 flex flex-col justify-between">
+                    <div className="space-y-3">
+                      <div className="flex flex-wrap items-center gap-2">
+                        <span className="bg-[#e6c84c]/10 border border-[#e6c84c]/30 text-[#e6c84c] px-2 py-0.5 rounded text-[8px] font-mono uppercase tracking-widest font-bold">THEME II ∥ 博士學位研究著作</span>
+                        <span className="text-stone-500 text-[9px] font-mono">文獻編號：PHD2</span>
+                      </div>
+                      
+                      <h3 className="text-lg sm:text-xl font-serif text-stone-100 leading-tight">
+                        企業策略導入公司治理法遵精神：以外部法律顧問團隊協助為例
+                      </h3>
+                      <p className="text-stone-400 text-[10.5px] font-mono leading-relaxed tracking-wide">
+                        Introducing corporate governance in law compliance into business strategy: a case study of external legal advisory teams
+                      </p>
+
+                      <div className="text-[11px] text-stone-400 py-2 border-y border-white/5 font-sans flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                        <div className="space-y-1 text-left">
+                          <div>
+                            <strong className="text-stone-300">研究生 ∥ </strong> 莊鈞翔 博士
+                          </div>
+                          <div>
+                            <strong className="text-stone-300">關鍵字 ∥ </strong> 企業策略、法律風險、公司治理、企業永續、預防法學
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-2.5 bg-white/[0.02] border border-white/5 py-1 px-3 rounded-lg shrink-0 select-none self-start sm:self-center">
+                          <div className="w-10 h-10 rounded-full border border-gold-400/30 overflow-hidden bg-stone-900 shadow animate-fade-in">
+                            <img 
+                              src="/images/Eric-Chuang-11.png" 
+                              alt="莊鈞翔 博士" 
+                              className="w-full h-full object-cover scale-110 object-top"
+                              referrerPolicy="no-referrer"
+                            />
+                          </div>
+                          <div className="text-left leading-tight">
+                            <span className="block text-[8px] text-gold-400 font-mono tracking-wider">AUTHOR</span>
+                            <span className="block text-xs font-serif font-semibold text-stone-200">莊鈞翔 博士</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="space-y-2 pt-1 text-[#F8F7F4]/90 font-serif text-[11.5px] leading-relaxed">
+                        <strong className="text-gold-400 text-[10px] tracking-widest uppercase font-mono block">摘要 ∥ abstract</strong>
+                        <p className="font-light text-stone-300">
+                          本研究將公司治理法遵精神延伸運用於臺灣企業，企業負責人藉由外部專業法律團隊之協助，提供企業長期企業經營策略、降低企業法律風險、協助企業談判磋商等，同時給予企業內部控制管理評估、營運管理評量、企業經營佈局之策略建議，讓企業遵循各項法令制度，進而提升內部營運管理，讓企業負責人凡事做出正確無誤地決策，往永續經營目標邁進。
+                        </p>
+                        <p className="font-light text-stone-300">
+                          透過全球疫情事件，以及近期的中美貿易大戰延續等事件持續發生下，深刻呈現企業未來所面臨的企業營運風險管理的困難度。因此，本研究強烈建議企業導入建置「企業策略預防法學」之主動思維，化合規程序為最高利潤防火牆與競爭溢價。
+                        </p>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
