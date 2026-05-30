@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { phdPapers, masterPapers } from "../data/mockData";
-import { ContributorLabel } from "../components/ContributorLabel";
 import { PaperCard } from "../components/PaperCard";
 import { 
   FileText, 
@@ -395,12 +394,16 @@ export default function Papers() {
                       
                       {/* Integration Scrim - Strengthened */}
                       <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black via-black/90 to-transparent pointer-events-none z-10"></div>
-                      
-                      {/* Standardized Contributor Label */}
-                      <ContributorLabel 
-                        title="商學博士 ∥ PHD IN BUSINESS" 
-                        className="absolute bottom-12 md:bottom-16 right-6" 
-                      />
+
+                      {/* Clean Signature Overlay */}
+                      <div className="absolute bottom-6 md:bottom-12 right-6 md:right-8 z-20 pointer-events-none select-none">
+                        <img 
+                          src="/signature-eric001.png" 
+                          alt="Dr. Eric Chuang Signature" 
+                          className="w-32 sm:w-44 lg:w-52 h-auto drop-shadow-[0_2px_15px_rgba(0,0,0,0.9)] opacity-95 transition-all"
+                          referrerPolicy="no-referrer"
+                        />
+                      </div>
                     </div>
                   </motion.div>
                 </div>
@@ -594,12 +597,16 @@ export default function Papers() {
                     
                     {/* Integration Scrim - Strengthened */}
                     <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black via-black/90 to-transparent pointer-events-none z-10"></div>
-                    
-                    {/* Standard Master Curation Badge */}
-                    <ContributorLabel 
-                      title="AUTHOR & VISIONARY" 
-                      className="absolute bottom-12 md:bottom-16 right-6 z-20"
-                    />
+
+                    {/* Clean Signature Overlay */}
+                    <div className="absolute bottom-6 md:bottom-12 right-6 md:right-8 z-20 pointer-events-none select-none">
+                      <img 
+                        src="/signature-eric001.png" 
+                        alt="Dr. Eric Chuang Signature" 
+                        className="w-32 sm:w-44 lg:w-52 h-auto drop-shadow-[0_2px_15px_rgba(0,0,0,0.9)] opacity-95 transition-all"
+                        referrerPolicy="no-referrer"
+                      />
+                    </div>
                   </div>
                 </div>
               </motion.div>

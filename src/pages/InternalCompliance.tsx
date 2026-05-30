@@ -1,9 +1,8 @@
 import { motion } from "motion/react";
 import { Clock, Brain, FastForward, Target, Map, Download, Landmark, Scroll, Layers, Award, Info, ChevronRight, Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { ContributorLabel } from "../components/ContributorLabel";
 
-export default function InternalCompliance() {
+export default function InternalCompliance({ onNavigate }: { onNavigate?: (page: string) => void }) {
   const recommenders = [
     "許茂新 | 國家科學及技術委員會中部科學園區管理局 局長",
     "楊世和 | 大智澈見管理顧問公司 執行顧問 / 台灣麥當勞前營運 副總裁",
@@ -102,6 +101,16 @@ export default function InternalCompliance() {
         </div>
 
         <div className="container mx-auto px-6 relative z-10 max-w-7xl">
+          {onNavigate && (
+            <motion.button
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              onClick={() => onNavigate('books')}
+              className="mb-8 bg-zinc-900/80 hover:bg-zinc-800 text-gold-400 hover:text-gold-300 border border-gold-400/20 hover:border-gold-400/50 px-4 py-2 rounded-lg flex items-center gap-2 transition-all font-sans text-xs tracking-wider uppercase cursor-pointer bg-transparent"
+            >
+              ← 返回治理出版 (Back to Publications)
+            </motion.button>
+          )}
           <div className="flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
             
             {/* Left Content Column */}
@@ -391,11 +400,15 @@ export default function InternalCompliance() {
                   {/* Integration Scrim - Strengthened */}
                   <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black via-black/90 to-transparent pointer-events-none z-10"></div>
 
-                  {/* Unified High-Prestige Calligraphy Signature Watermark */}
-                  <ContributorLabel 
-                    title="FOUNDER & SCHOLAR" 
-                    className="absolute bottom-12 md:bottom-16 right-6 z-20"
-                  />
+                  {/* Clean Signature Overlay */}
+                  <div className="absolute bottom-6 md:bottom-12 right-6 md:right-8 z-20 pointer-events-none select-none">
+                    <img 
+                      src="/signature-eric001.png" 
+                      alt="Dr. Eric Chuang Signature" 
+                      className="w-32 sm:w-44 lg:w-52 h-auto drop-shadow-[0_2px_15px_rgba(0,0,0,0.9)] opacity-95 transition-all"
+                      referrerPolicy="no-referrer"
+                    />
+                  </div>
               </div>
             </div>
             <div className="space-y-12">

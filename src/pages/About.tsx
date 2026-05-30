@@ -1,5 +1,4 @@
 import { motion } from "motion/react";
-import { ContributorLabel } from "../components/ContributorLabel";
 import { SignatureHeader } from "../components/SignatureHeader";
 import { Shield, GraduationCap, Quote } from "lucide-react";
 
@@ -76,11 +75,16 @@ export default function About() {
                   />
                   {/* Cinematic Bottom Fade */}
                   <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black via-black/95 to-transparent z-10 pointer-events-none"></div>
-                  {/* Standardized Contributor Label */}
-                  <ContributorLabel 
-                    title="SCHOLAR & STRATEGIST" 
-                    className="absolute bottom-16 md:bottom-20 right-6" 
-                  />
+                  
+                  {/* Clean Signature Overlay */}
+                  <div className="absolute bottom-6 md:bottom-12 right-6 md:right-8 z-20 pointer-events-none select-none">
+                    <img 
+                      src="/signature-eric001.png" 
+                      alt="Dr. Eric Chuang Signature" 
+                      className="w-32 sm:w-44 lg:w-52 h-auto drop-shadow-[0_2px_15px_rgba(0,0,0,0.9)] opacity-95 transition-all"
+                      referrerPolicy="no-referrer"
+                    />
+                  </div>
                 </div>
               </motion.div>
             </div>

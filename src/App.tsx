@@ -145,7 +145,7 @@ export default function App() {
       case "books": return <Books onNavigate={handleNavigate} />;
       case "governance": return <Home onNavigate={handleNavigate} currentPage={currentPage} activeSection={homeSection} setActiveSection={setHomeSection} />;
       case "internal-compliance": return <InternalCompliancePortal onNavigate={handleNavigate} />;
-      case "internal-compliance-book": return <InternalComplianceBook />;
+      case "internal-compliance-book": return <InternalComplianceBook onNavigate={handleNavigate} />;
       case "corporate-governance": return <CorporateGovernance onNavigate={handleNavigate} />;
       case "family-governance": return <FamilyGovernance onNavigate={handleNavigate} />;
       case "esgai": return <ESGAI onNavigate={handleNavigate} />;
@@ -251,7 +251,7 @@ export default function App() {
                   <span className="text-[14px] font-bold tracking-[0.05em] leading-none">治理委託</span>
                   <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform text-black" strokeWidth={1.5} />
                 </div>
-                <span className="text-[7px] font-mono font-black tracking-[0.15em] opacity-80 uppercase leading-none">GOVERNANCE ENGAGEMENT</span>
+                <span className="text-[7px] font-mono font-black tracking-[0.15em] opacity-80 uppercase leading-none whitespace-nowrap">GOVERNANCE ENGAGEMENT</span>
               </a>
 
               <a 
@@ -263,7 +263,7 @@ export default function App() {
                   <span className="text-[14px] font-bold tracking-[0.05em] leading-none">聯絡智庫</span>
                   <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform text-gold-400" strokeWidth={1.5} />
                 </div>
-                <span className="text-[7px] font-mono font-black tracking-[0.15em] opacity-80 uppercase leading-none">CONTACT STT</span>
+                <span className="text-[7px] font-mono font-black tracking-[0.15em] opacity-80 uppercase leading-none whitespace-nowrap">CONTACT STT</span>
               </a>
             </div>
           </div>

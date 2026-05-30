@@ -29,7 +29,7 @@ export default function Home({
       setActiveSection("governance");
     } else if (currentPage === "home") {
       // Only default to hero if we are not explicitly navigating to one of the custom sub-sections
-      if (propActiveSection !== "positioning" && propActiveSection !== "strategist" && propActiveSection !== "insights") {
+      if (propActiveSection !== "positioning" && propActiveSection !== "strategist" && propActiveSection !== "insights" && propActiveSection !== "governance") {
         setActiveSection("hero");
       }
     }
@@ -38,11 +38,7 @@ export default function Home({
   // Handle section transition and sync header nav state
   const goToSection = (section: 'hero' | 'governance' | 'positioning' | 'strategist' | 'insights') => {
     setActiveSection(section);
-    if (section === 'hero') {
-      onNavigate('home');
-    } else if (section === 'governance') {
-      onNavigate('governance');
-    }
+    onNavigate(section);
   };
 
   const renderActiveSection = () => {
@@ -91,7 +87,7 @@ export default function Home({
                   <div className="space-y-6 lg:space-y-8">
                     <div className="flex flex-col sm:flex-row flex-wrap gap-4 w-full">
                       <button 
-                        onClick={() => goToSection('governance')}
+                        onClick={() => goToSection('positioning')}
                         className="w-full sm:w-auto bg-gradient-to-br from-[#e6c84c] via-gold-500 to-gold-600 hover:brightness-110 text-black px-8 py-3.5 rounded flex items-center justify-center gap-3 group transition-all font-bold shadow-2xl no-underline text-sm md:text-base cursor-pointer border-0"
                       >
                         進入治理架構 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />

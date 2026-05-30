@@ -1,12 +1,43 @@
 import express from "express";
 import path from "path";
 import fs from "fs";
+import AdmZip from "adm-zip";
 
 async function startServer() {
   const app = express();
   const PORT = 3000;
 
   app.get("/api/health", (_, res) => res.status(200).json({ status: "ok" }));
+
+  app.get("/api/download-source-zip", (req, res) => {
+    try {
+      const zip = new AdmZip();
+      const workspaceDir = process.cwd();
+      
+      const files = fs.readdirSync(workspaceDir);
+      for (const file of files) {
+        // Skip node_modules, .git, and build artifacts to keep the download small and clean
+        if (file === "node_modules" || file === ".git" || file === "dist" || file === "package-lock.json") {
+          continue;
+        }
+        const fullPath = path.join(workspaceDir, file);
+        const stat = fs.statSync(fullPath);
+        if (stat.isDirectory()) {
+          zip.addLocalFolder(fullPath, file);
+        } else if (stat.isFile()) {
+          zip.addLocalFile(fullPath);
+        }
+      }
+      
+      const buffer = zip.toBuffer();
+      res.setHeader("Content-Type", "application/zip");
+      res.setHeader("Content-Disposition", 'attachment; filename="stt-governance-source.zip"');
+      res.send(buffer);
+    } catch (err: any) {
+      console.error("ZIP bundle error:", err);
+      res.status(500).send("Failed to bundle source: " + err.message);
+    }
+  });
 
   const distPath = path.resolve(process.cwd(), "dist");
 
