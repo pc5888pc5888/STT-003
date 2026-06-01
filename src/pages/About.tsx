@@ -152,9 +152,9 @@ export default function About() {
               
               {/* SLIDE 0: sovereignty (主旨聲明) */}
               {currentSlide === 0 && (
-                <div className="flex flex-row w-full" style={{ height: 'calc(100vh - 160px)', overflow: 'hidden' }}>
+                <div className="flex flex-row w-full" style={{ height: 'calc(100vh - 160px)', overflow: 'hidden' }}">
                   {/* Left Content Column */}
-                  <div className="w-full lg:w-[54%] flex flex-col justify-start text-left pr-0 lg:pr-8 overflow-hidden" style={{ paddingTop: 'clamp(10px, 2vh, 32px)' }}>
+                  <div className="w-full lg:w-[54%] flex flex-col justify-start text-left pr-0 lg:pr-8 overflow-hidden" style={{ paddingTop: 'clamp(10px, 2vh, 32px)' }}">
                     
                     {/* Title Area */}
                     <div className="flex-shrink-0 w-full overflow-hidden">
@@ -205,29 +205,32 @@ export default function About() {
                   </div>
 
                   {/* Right Portrait Column */}
-                  <div className="hidden lg:flex lg:w-[46%] items-end justify-end relative overflow-hidden flex-shrink-0">
-                    <img
-                      src="/images/Eric-Chuang-15.png"
-                      alt="Dr. Eric Chuang Portrait"
-                      className="w-auto object-contain object-bottom relative z-10"
-                      style={{ height: '100%', maxHeight: '100%', filter: 'contrast(1.05)' }}
+                  <div className="w-full lg:w-[45%] flex-[1.2] lg:flex-[0_0_auto] flex items-end justify-center lg:justify-end relative min-h-0 h-[280px] sm:h-[400px] lg:h-full overflow-hidden lg:overflow-visible">
+                    {/* Spotlight gradient effect */}
+                    <div className="absolute -bottom-16 right-0 w-[350px] lg:w-[500px] h-[350px] lg:h-[500px] bg-[#e6c84c]/5 rounded-full blur-[100px] pointer-events-none z-0"></div>
+
+                    <img 
+                      src="/images/Eric-Chuang-15.png" 
+                      alt="Dr. Eric Chuang Portrait" 
+                      className="max-w-full max-h-full w-auto object-contain relative z-10 filter drop-shadow-[0_0_55px_rgba(230,200,76,0.18)] contrast-[1.1]"
+                      style={{ 
+                        objectPosition: 'bottom right',
+                        transformOrigin: 'bottom right'
+                      }}
                       referrerPolicy="no-referrer"
                     />
-                    <div className="absolute bottom-8 right-4 z-20 pointer-events-none select-none text-right flex flex-col items-end gap-1">
-                      <img
-                        src="/images/signature-eric001.png"
-                        alt="Signature"
-                        className="h-auto opacity-95"
-                        style={{ width: 'clamp(120px, 10vw, 200px)', filter: 'drop-shadow(0 2px 10px rgba(0,0,0,0.95))' }}
+                    
+                    {/* Bottom Fade - Seamless Matching Page Background (especially on mobile) */}
+                    <div className="absolute inset-x-0 bottom-0 h-16 sm:h-24 bg-gradient-to-t from-[#050505] via-[#050505]/80 to-transparent z-10 pointer-events-none lg:hidden"></div>
+
+                    {/* Signature Overlay */}
+                    <div className="absolute bottom-4 right-0 lg:-right-4 xl:right-4 z-20 pointer-events-none select-none">
+                      <img 
+                        src="/signature-eric001.png" 
+                        alt="Dr. Eric Chuang Signature" 
+                        className="w-24 sm:w-36 lg:w-48 xl:w-60 max-w-[80vw] h-auto drop-shadow-[0_2px_12px_rgba(0,0,0,0.95)] opacity-95"
                         referrerPolicy="no-referrer"
                       />
-                      <div className="text-right mt-1 drop-shadow-[0_2px_8px_rgba(0,0,0,1)]">
-                        <p className="text-[#e6c84c] text-sm font-serif font-bold tracking-widest leading-none">莊鈞翔 博士</p>
-                        <p className="text-stone-300 text-[10px] font-mono tracking-widest uppercase mt-0.5 leading-none">ERIC CHUANG, Ph.D.</p>
-                        <p className="text-zinc-400 text-[9px] tracking-widest mt-1 opacity-90 leading-relaxed font-light">
-                          企業策略資深顧問 ｜ 治理制度設計者 ｜ 策略智庫創辦人
-                        </p>
-                      </div>
                     </div>
                   </div>
                 </div>
@@ -235,9 +238,9 @@ export default function About() {
 
               {/* SLIDE 1: positions (現任職務與組織) */}
               {currentSlide === 1 && (
-                <div className="flex flex-row w-full" style={{ height: 'calc(100vh - 160px)', overflow: 'hidden' }}>
+                <div className="flex flex-row w-full" style={{ height: 'calc(100vh - 160px)', overflow: 'hidden' }}">
                   {/* Left Content Column */}
-                  <div className="w-full lg:w-[58%] flex flex-col text-left pr-6 overflow-hidden" style={{ paddingTop: 'clamp(8px, 1.5vh, 24px)' }}>
+                  <div className="w-full lg:w-[58%] flex flex-col text-left pr-6 overflow-hidden" style={{ paddingTop: 'clamp(8px, 1.5vh, 24px)' }}">
                     <div className="space-y-1">
                       <div className="flex items-center gap-2">
                         <span className="h-[2px] w-6 bg-[#e6c84c]"></span>
@@ -313,27 +316,33 @@ export default function About() {
                   </div>
 
                   {/* Right Portrait Column */}
-                  <div className="hidden lg:flex lg:w-[42%] items-end justify-end relative overflow-hidden flex-shrink-0">
-                    <img
-                      src="/images/Eric-Chuang-17.png"
-                      alt="Dr. Eric Chuang Position Portrait"
-                      className="w-auto object-contain object-bottom relative z-10"
-                      style={{ height: '100%', maxHeight: '100%', filter: 'contrast(1.05)' }}
-                      referrerPolicy="no-referrer"
-                    />
-                    <div className="absolute bottom-6 right-6 z-20 pointer-events-none select-none text-right flex flex-col items-end gap-1 font-sans">
-                      <img
-                        src="/images/signature-eric001.png"
-                        alt="Signature"
-                        className="w-32 lg:w-40 h-auto drop-shadow-[0_2px_12px_rgba(0,0,0,0.95)] opacity-95"
+                  <div className="lg:col-span-5 h-[340px] sm:h-[400px] lg:h-[78vh] xl:h-[84vh] self-end relative flex items-end justify-center lg:justify-end overflow-visible">
+                    <div className="relative h-full w-full max-w-[400px] lg:max-w-none flex items-end justify-center lg:justify-end">
+                      <div className="absolute -bottom-16 -right-16 w-[350px] sm:w-[500px] h-[350px] sm:h-[500px] bg-[#e6c84c]/4 rounded-full blur-[140px] pointer-events-none z-0"></div>
+                      <img 
+                        src="/images/Eric-Chuang-17.png" 
+                        alt="Dr. Eric Chuang Position Portrait" 
+                        className="w-full h-auto max-h-[100%] object-bottom object-contain filter drop-shadow-[0_0_55px_rgba(230,200,76,0.15)] contrast-[1.05]"
                         referrerPolicy="no-referrer"
                       />
-                      <div className="text-right mt-1 drop-shadow-[0_2px_8px_rgba(0,0,0,1)]">
-                        <p className="text-[#e6c84c] text-sm font-serif font-bold tracking-widest leading-none">莊鈞翔 博士</p>
-                        <p className="text-stone-300 text-[10px] font-mono tracking-widest uppercase mt-0.5 leading-none">ERIC CHUANG, Ph.D.</p>
-                        <p className="text-zinc-400 text-[9px] tracking-widest mt-1 opacity-90 leading-relaxed font-light">
-                          企業策略資深顧問 ｜ 治理制度設計者 ｜ 策略智庫創辦人
-                        </p>
+                      {/* Bottom Fade - Seamless Matching Page Background */}
+                      <div className="absolute inset-x-0 bottom-0 h-1/4 bg-gradient-to-t from-[#050505] via-[#050505]/95 to-transparent z-10 pointer-events-none"></div>
+                      
+                      {/* Signature & Title Overlay */}
+                      <div className="absolute bottom-6 right-6 z-20 pointer-events-none select-none text-right flex flex-col items-end gap-1 font-sans">
+                        <img 
+                          src="/signature-eric001.png" 
+                          alt="Dr. Eric Chuang Signature" 
+                          className="w-32 sm:w-36 lg:w-[136px] h-auto drop-shadow-[0_2px_12px_rgba(0,0,0,0.95)] opacity-95 transition-all"
+                          referrerPolicy="no-referrer"
+                        />
+                        <div className="text-right mt-1.5 drop-shadow-[0_2px_8px_rgba(0,0,0,1)]">
+                          <p className="text-[#e6c84c] text-sm sm:text-base font-serif font-bold tracking-widest leading-none">莊鈞翔 博士</p>
+                          <p className="text-stone-300 text-[10px] sm:text-[11px] font-mono tracking-widest uppercase mt-0.5 leading-none">ERIC CHUANG, Ph.D.</p>
+                          <p className="text-zinc-400 text-[8.5px] sm:text-[9.5px] tracking-widest mt-1 opacity-90 leading-relaxed font-light">
+                            企業策略資深顧問 ｜ 治理制度設計者 ｜ 策略智庫創辦人
+                          </p>
+                        </div>
                       </div>
                     </div>
                   </div>
