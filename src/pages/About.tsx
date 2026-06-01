@@ -152,9 +152,9 @@ export default function About() {
               
               {/* SLIDE 0: sovereignty (主旨聲明) */}
               {currentSlide === 0 && (
-                <div className="flex flex-col lg:flex-row items-center justify-between w-full h-[calc(100vh-180px)] lg:h-[calc(100vh-140px)] gap-6 lg:gap-12 min-h-0 pt-2 lg:pt-4">
+                <div className="flex flex-row w-full">
                   {/* Left Content Column */}
-                  <div className="w-full lg:w-[55%] flex flex-col justify-center text-left self-center py-2 overflow-hidden h-full flex-1 lg:flex-none">
+                  <div className="w-full lg:w-[54%] flex flex-col justify-start text-left pr-0 lg:pr-8 overflow-hidden">
                     
                     {/* Title Area */}
                     <div className="flex-shrink-0 w-full overflow-hidden">
