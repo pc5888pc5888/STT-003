@@ -210,7 +210,7 @@ export default function App() {
     { id: "books", labelZh: "治理出版", labelEn: "PUBLICATION", icon: BookText },
     { id: "papers", labelZh: "學術策展", labelEn: "ACADEMIC CURATION", icon: GraduationCap },
     { id: "gcsda", labelZh: "策略發展學會", labelEn: "STRATEGY FORUM", icon: Users },
-    { id: "about", labelZh: "智庫主權", labelEn: "ABOUT STT", icon: Shield },
+    { id: "about", labelZh: "思想主權", labelEn: "SOVEREIGNTY OF THOUGHT", icon: Shield },
   ];
 
   return (
@@ -234,7 +234,7 @@ export default function App() {
             }}
             aria-label="回首頁"
           >
-              <div className="relative w-44 sm:w-52 lg:w-[260px] h-14 lg:h-[70px] flex items-center flex-shrink-0">
+              <div className="relative w-40 lg:w-56 h-10 lg:h-12 flex items-center flex-shrink-0">
                <img src="/images/logo-header.png?v=20260522_v2" alt="STT Press Logo" className="w-full h-full object-contain transition-transform group-hover:scale-[1.02]" />
             </div>
           </a>
@@ -529,7 +529,7 @@ export default function App() {
                   { id: "books", zh: "治理出版", en: "PUBLICATION", icon: BookText, href: "books.html" },
                   { id: "papers", zh: "學術策展", en: "ACADEMIC CURATION", icon: GraduationCap, href: "papers.html" },
                   { id: "gcsda", zh: "策略發展學會", en: "STRATEGY FORUM", icon: Users, href: "gcsda.html" },
-                  { id: "about", zh: "智庫主權", en: "ABOUT STT", icon: Shield, href: "about.html" },
+                  { id: "about", zh: "思想主權", en: "SOVEREIGNTY OF THOUGHT", icon: Shield, href: "about.html" },
                 ].map((item, idx) => (
                   <a 
                     key={idx}

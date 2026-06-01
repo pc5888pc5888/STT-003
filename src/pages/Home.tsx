@@ -64,6 +64,7 @@ export default function Home({
             
             <div className="container mx-auto px-4 md:px-6 relative z-10 flex-grow flex flex-col justify-end h-full">
               <div className="flex flex-col-reverse md:flex-row items-end md:justify-between gap-12 md:gap-4 lg:gap-4 pt-4 lg:pt-0 w-full h-full">
+                
                 {/* Left Content */}
                 <div className="w-full md:w-1/2 lg:w-[43%] flex flex-col justify-center space-y-5 lg:space-y-6 py-6 md:py-8 lg:self-center">
                   <div className="space-y-3 lg:space-y-4">
