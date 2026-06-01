@@ -226,7 +226,7 @@ export default function About() {
                     {/* Signature Overlay */}
                     <div className="absolute bottom-4 right-0 lg:-right-4 xl:right-4 z-20 pointer-events-none select-none">
                       <img 
-                        src="/signature-eric001.png" 
+                        src="/images/signature-eric001.png" 
                         alt="Dr. Eric Chuang Signature" 
                         className="w-24 sm:w-36 lg:w-48 xl:w-60 max-w-[80vw] h-auto drop-shadow-[0_2px_12px_rgba(0,0,0,0.95)] opacity-95"
                         referrerPolicy="no-referrer"
@@ -331,7 +331,7 @@ export default function About() {
                       {/* Signature & Title Overlay */}
                       <div className="absolute bottom-6 right-6 z-20 pointer-events-none select-none text-right flex flex-col items-end gap-1 font-sans">
                         <img 
-                          src="/signature-eric001.png" 
+                          src="/images/signature-eric001.png" 
                           alt="Dr. Eric Chuang Signature" 
                           className="w-32 sm:w-36 lg:w-[136px] h-auto drop-shadow-[0_2px_12px_rgba(0,0,0,0.95)] opacity-95 transition-all"
                           referrerPolicy="no-referrer"
@@ -429,7 +429,7 @@ export default function About() {
                       {/* Signature & Title Overlay */}
                       <div className="absolute bottom-6 right-6 z-20 pointer-events-none select-none text-right flex flex-col items-end gap-1 font-sans">
                         <img 
-                          src="/signature-eric001.png" 
+                          src="/images/signature-eric001.png" 
                           alt="Dr. Eric Chuang Signature" 
                           className="w-32 sm:w-36 lg:w-[136px] h-auto drop-shadow-[0_2px_12px_rgba(0,0,0,0.95)] opacity-95 transition-all"
                           referrerPolicy="no-referrer"
@@ -501,7 +501,7 @@ export default function About() {
                       {/* Signature & Title Overlay */}
                       <div className="absolute bottom-6 right-6 z-20 pointer-events-none select-none text-right flex flex-col items-end gap-1 font-sans">
                         <img 
-                          src="/signature-eric001.png" 
+                          src="/images/signature-eric001.png" 
                           alt="Dr. Eric Chuang Signature" 
                           className="w-32 sm:w-36 lg:w-[136px] h-auto drop-shadow-[0_2px_12px_rgba(0,0,0,0.95)] opacity-95 transition-all"
                           referrerPolicy="no-referrer"
@@ -616,7 +616,7 @@ export default function About() {
                       {/* Signature & Title Overlay */}
                       <div className="absolute bottom-6 right-6 z-20 pointer-events-none select-none text-right flex flex-col items-end gap-1 font-sans">
                         <img 
-                          src="/signature-eric001.png" 
+                          src="/images/signature-eric001.png" 
                           alt="Dr. Eric Chuang Signature" 
                           className="w-32 sm:w-36 lg:w-[136px] h-auto drop-shadow-[0_2px_12px_rgba(0,0,0,0.95)] opacity-95 transition-all"
                           referrerPolicy="no-referrer"
@@ -722,7 +722,7 @@ export default function About() {
                       {/* Signature & Title Overlay */}
                       <div className="absolute bottom-6 right-6 z-20 pointer-events-none select-none text-right flex flex-col items-end gap-1 font-sans">
                         <img 
-                          src="/signature-eric001.png" 
+                          src="/images/signature-eric001.png" 
                           alt="Dr. Eric Chuang Signature" 
                           className="w-32 sm:w-36 lg:w-[136px] h-auto drop-shadow-[0_2px_12px_rgba(0,0,0,0.95)] opacity-95 transition-all"
                           referrerPolicy="no-referrer"
