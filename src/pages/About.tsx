@@ -152,9 +152,9 @@ export default function About() {
               
               {/* SLIDE 0: sovereignty (主旨聲明) */}
               {currentSlide === 0 && (
-                <div className="flex flex-row w-full" style={{ height: 'calc(100vh - 160px)', overflow: 'hidden' }}">
+                <div className="flex flex-col lg:flex-row items-center justify-between w-full h-[calc(100vh-180px)] lg:h-[calc(100vh-140px)] gap-6 lg:gap-12 min-h-0 pt-2 lg:pt-4">
                   {/* Left Content Column */}
-                  <div className="w-full lg:w-[54%] flex flex-col justify-start text-left pr-0 lg:pr-8 overflow-hidden" style={{ paddingTop: 'clamp(10px, 2vh, 32px)' }}">
+                  <div className="w-full lg:w-[55%] flex flex-col justify-center text-left self-center py-2 overflow-hidden h-full flex-1 lg:flex-none">
                     
                     {/* Title Area */}
                     <div className="flex-shrink-0 w-full overflow-hidden">
@@ -238,9 +238,9 @@ export default function About() {
 
               {/* SLIDE 1: positions (現任職務與組織) */}
               {currentSlide === 1 && (
-                <div className="flex flex-row w-full" style={{ height: 'calc(100vh - 160px)', overflow: 'hidden' }}">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start pt-4 lg:pt-[4.5rem]">
                   {/* Left Content Column */}
-                  <div className="w-full lg:w-[58%] flex flex-col text-left pr-6 overflow-hidden" style={{ paddingTop: 'clamp(8px, 1.5vh, 24px)' }}">
+                  <div className="lg:col-span-7 space-y-4 text-left py-2">
                     <div className="space-y-1">
                       <div className="flex items-center gap-2">
                         <span className="h-[2px] w-6 bg-[#e6c84c]"></span>
