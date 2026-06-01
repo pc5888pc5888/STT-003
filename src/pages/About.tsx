@@ -65,7 +65,7 @@ export default function About() {
     <div
       className="bg-[#050505] text-white selection:bg-gold-400/30 selection:text-white flex flex-col"
       id="about-viewport-container"
-      style={{ height: '100vh', overflow: 'hidden' }}
+      style={{ height: 'calc(100vh - 80px)', overflow: 'hidden' }}
     >
       {/* 左側垂直文字 */}
       <div className="fixed left-6 top-1/2 -translate-y-1/2 z-40 hidden xl:flex flex-col items-start gap-4 select-none pointer-events-none">
