@@ -152,83 +152,76 @@ export default function About() {
               
               {/* SLIDE 0: sovereignty (主旨聲明) */}
               {currentSlide === 0 && (
-                <div className="flex flex-col lg:flex-row items-center justify-between w-full h-[calc(100vh-180px)] lg:h-[calc(100vh-140px)] gap-6 lg:gap-12 min-h-0 pt-2 lg:pt-4">
+                <div
+                  className="flex flex-col lg:flex-row w-full"
+                  style={{ height: 'calc(100vh - 160px)', overflow: 'hidden' }}
+                >
                   {/* Left Content Column */}
-                  <div className="w-full lg:w-[55%] flex flex-col justify-center text-left self-center py-2 overflow-hidden h-full flex-1 lg:flex-none">
-                    
-                    {/* Title Area */}
-                    <div className="flex-shrink-0 w-full overflow-hidden">
-                      <div className="flex items-center gap-2 lg:gap-3 mb-2 lg:mb-4">
-                        <div className="w-8 lg:w-12 h-px bg-[#e6c84c]"></div>
-                        <span className="text-[#e6c84c] text-[10px] sm:text-[11px] lg:text-sm tracking-[0.25em] font-medium uppercase font-sans whitespace-nowrap">
-                          SOVEREIGNTY OF THOUGHT <span className="mx-1 sm:mx-2">|</span> 思想主權
+                  <div className="w-full lg:w-[54%] flex flex-col justify-between text-left py-4 lg:py-6 pr-0 lg:pr-8 overflow-hidden">
+                    {/* 上半：前綴 + 標題 + 職稱 */}
+                    <div>
+                      {/* 前綴標題 */}
+                      <div className="flex items-center gap-3 mb-3 lg:mb-5">
+                        <div className="w-10 h-px bg-[#e6c84c] flex-shrink-0"></div>
+                        <span className="text-[#e6c84c] text-[10px] lg:text-[11px] tracking-[0.3em] font-medium uppercase font-sans whitespace-nowrap">
+                          SOVEREIGNTY OF THOUGHT | 思想主權
                         </span>
                       </div>
-                      <h1 className="text-[20px] sm:text-2xl lg:text-3xl xl:text-[40px] 2xl:text-[46px] font-serif text-[#e6c84c] tracking-wider md:tracking-wide mb-2 lg:mb-3 xl:mb-4 leading-tight lg:leading-[1.15] whitespace-nowrap">
+                      {/* 大標題 */}
+                      <h1 className="font-serif text-[#e6c84c] tracking-wider leading-tight mb-2 lg:mb-3 whitespace-nowrap overflow-hidden text-ellipsis"
+                        style={{ fontSize: 'clamp(20px, 2.8vw, 42px)' }}>
                         策略判讀的權威與思想的轉譯者
                       </h1>
-
-                      <div className="mb-2 lg:mb-4 xl:mb-5 space-y-1">
-                        <p className="text-white font-sans font-light text-xs sm:text-sm lg:text-base tracking-wider whitespace-nowrap">
-                          企業策略家暨法遵顧問 <span className="mx-1">|</span> 學術出版家
+                      {/* 職稱與姓名 */}
+                      <div className="mb-3 lg:mb-5 space-y-1">
+                        <p className="text-white font-sans font-light text-xs lg:text-sm tracking-wider whitespace-nowrap">
+                          企業策略家暨法遵顧問 | 學術出版家
                         </p>
-                        <p className="text-[#e6c84c] font-serif text-[14px] sm:text-lg lg:text-xl xl:text-[26px] 2xl:text-[30px] tracking-widest pt-1 whitespace-nowrap">
+                        <p className="text-[#e6c84c] font-serif tracking-widest whitespace-nowrap"
+                          style={{ fontSize: 'clamp(14px, 1.6vw, 26px)' }}>
                           莊鈞翔 博士 CHUANG CHUN HSIANG Ph.D.
                         </p>
                       </div>
-                    </div>
-
-                    {/* Body Content */}
-                    <div className="flex flex-col min-h-0 flex-1 justify-around py-1 lg:py-2">
-                      <p className="font-sans text-[#EBE7DF]/95 text-[11px] sm:text-[12px] md:text-[13px] lg:text-[15px] leading-relaxed sm:leading-[1.6] lg:leading-[1.8] tracking-wider antialiased p-3 lg:p-4 border-l-2 border-[#e6c84c]/75 italic bg-zinc-950/45">
-                        「在商業決策與治理博弈中，不應存在任何模糊空間；無懈可擊的學術分數、高素質的法遵精神、頂尖國際威權認證與紮實研究，才是捍衛委託人思想主權的堅實基石；我們始終秉持絕對真實的誠信操守，將學術卓越與實務脈動深層整合，輔助優質企業走在領先未來的安全航道上。」
-                      </p>
-                      
-                      <ul className="text-stone-300 font-sans font-light text-[11px] sm:text-[11px] lg:text-[14px] xl:text-[15px] leading-relaxed sm:leading-[1.6] lg:leading-[1.8] list-disc pl-4 lg:pl-6 space-y-1.5 lg:space-y-3 my-2 lg:my-3">
-                        <li className="pl-1 text-justify">
+                      {/* 引言區塊 */}
+                      <div className="border-l-2 border-[#e6c84c]/75 bg-zinc-950/45 p-3 lg:p-4 mb-3 lg:mb-4">
+                        <p className="font-sans text-[#EBE7DF]/90 text-[11px] lg:text-[14px] leading-relaxed lg:leading-[1.75] tracking-wider italic">
+                          　　在商業決策與治理博弈中，不應存在任何模糊空間；無懈可擊的學術分數、高素質的法遵精神、頂尖國際威權認證與紮實研究，才是捍衛委託人思想主權的堅實基石；我們始終秉持絕對真實的誠信操守，將學術卓越與實務脈動深層整合，輔助優質企業走在領先未來的安全航道上。」
+                        </p>
+                      </div>
+                      {/* Bullet points */}
+                      <ul className="text-stone-300 font-sans font-light text-[11px] lg:text-[13px] leading-relaxed list-disc pl-4 lg:pl-6 space-y-2 mb-3 lg:mb-4">
+                        <li className="pl-1">
                           莊博士深耕企業策略與營運管理領域逾二十年，以法學與商學雙重專業為基石，將學術智慧與實務經驗融會貫通，致力於為華人企業提供精準且具前瞻性的解決方案。
                         </li>
-                        <li className="pl-1 text-justify">
+                        <li className="pl-1">
                           莊博士演講積上千場、數千小時演講紀錄，過去於大學擔任兼任助理教授，致力推廣公司治理法遵教育。
                         </li>
                       </ul>
-
-                      <div className="flex-shrink-0 mt-1 lg:mt-2">
-                        <p className="text-[#e6c84c] font-serif italic text-[9px] sm:text-[11px] lg:text-[13px] xl:text-[14px] tracking-wide inline-block">
-                          「你不需要完美，你只需要可靠被信賴。」 
-                          <span className="ml-1 sm:ml-2 border-b border-[#e6c84c]/50 pb-0.5 inline-block text-[#e6c84c]">
-                            --- 內在法遵 Internal Compliance《為你的內心，打造一座不可侵犯的至聖所》
-                          </span>
-                        </p>
-                      </div>
                     </div>
+                    {/* 底部結語 */}
+                    <p className="text-[#e6c84c] font-serif italic text-[10px] lg:text-[13px] tracking-wide flex-shrink-0">
+                      「你不需要完美，你只需要可被信賴。」
+                      <span className="border-b border-[#e6c84c]/50 pb-0.5 ml-1">
+                        --- 內在法遵 Internal Compliance《為你的內心，打造一座不可侵犯的至聖所》
+                      </span>
+                    </p>
                   </div>
 
                   {/* Right Portrait Column */}
-                  <div className="w-full lg:w-[45%] flex-[1.2] lg:flex-[0_0_auto] flex items-end justify-center lg:justify-end relative min-h-0 h-[280px] sm:h-[400px] lg:h-full overflow-hidden lg:overflow-visible">
-                    {/* Spotlight gradient effect */}
-                    <div className="absolute -bottom-16 right-0 w-[350px] lg:w-[500px] h-[350px] lg:h-[500px] bg-[#e6c84c]/5 rounded-full blur-[100px] pointer-events-none z-0"></div>
-
-                    <img 
-                      src="/images/Eric-Chuang-15.png" 
-                      alt="Dr. Eric Chuang Portrait" 
-                      className="max-w-full max-h-full w-auto object-contain relative z-10 filter drop-shadow-[0_0_55px_rgba(230,200,76,0.18)] contrast-[1.1]"
-                      style={{ 
-                        objectPosition: 'bottom right',
-                        transformOrigin: 'bottom right'
-                      }}
+                  <div className="hidden lg:flex lg:w-[46%] items-end justify-end relative overflow-hidden flex-shrink-0">
+                    <div className="absolute -bottom-8 right-0 w-[400px] h-[400px] bg-[#e6c84c]/5 rounded-full blur-[80px] pointer-events-none z-0"></div>
+                    <img
+                      src="/images/Eric-Chuang-15.png"
+                      alt="Dr. Eric Chuang Portrait"
+                      className="h-full w-auto max-h-full object-contain object-bottom relative z-10 filter drop-shadow-[0_0_55px_rgba(230,200,76,0.18)] contrast-[1.1]"
                       referrerPolicy="no-referrer"
                     />
-                    
-                    {/* Bottom Fade - Seamless Matching Page Background (especially on mobile) */}
-                    <div className="absolute inset-x-0 bottom-0 h-16 sm:h-24 bg-gradient-to-t from-[#050505] via-[#050505]/80 to-transparent z-10 pointer-events-none lg:hidden"></div>
-
-                    {/* Signature Overlay */}
-                    <div className="absolute bottom-4 right-0 lg:-right-4 xl:right-4 z-20 pointer-events-none select-none">
-                      <img 
-                        src="/signature-eric001.png" 
-                        alt="Dr. Eric Chuang Signature" 
-                        className="w-24 sm:w-36 lg:w-48 xl:w-60 max-w-[80vw] h-auto drop-shadow-[0_2px_12px_rgba(0,0,0,0.95)] opacity-95"
+                    {/* 簽名 */}
+                    <div className="absolute bottom-6 right-4 z-20 pointer-events-none select-none">
+                      <img
+                        src="/images/signature-eric001.png"
+                        alt="Signature"
+                        className="w-36 lg:w-48 xl:w-56 h-auto opacity-95 drop-shadow-[0_2px_12px_rgba(0,0,0,0.95)]"
                         referrerPolicy="no-referrer"
                       />
                     </div>
