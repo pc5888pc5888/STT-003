@@ -1,0 +1,1 @@
+f=open('src/pages/About.tsx',encoding='utf-8');c=f.read();f.close();c=c.replace('flex flex-col lg:flex-row items-center justify-between w-full h-[calc(100vh-180px)] lg:h-[calc(100vh-140px)] gap-6 lg:gap-12 min-h-0 pt-2 lg:pt-4','flex flex-row w-full');f=open('src/pages/About.tsx','w',encoding='utf-8');f.write(c);f.close();print('OK') 

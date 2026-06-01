@@ -1,0 +1,738 @@
+﻿import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "motion/react";
+import { 
+  Shield, 
+  GraduationCap, 
+  Award, 
+  BookOpen, 
+  Fingerprint, 
+  ChevronRight, 
+  ChevronLeft,
+  Mail,
+  Crown,
+  Sparkles,
+  Zap,
+  Globe,
+  CornerDownRight,
+  Bookmark,
+  Scale
+} from "lucide-react";
+
+export default function About() {
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  const slides = [
+    {
+      id: "sovereignty",
+      title: "?銝餅? SOVEREIGNTY OF THOUGHT",
+      labelZh: "銝餅?脫?",
+      labelEn: "SOVEREIGNTY",
+      image: "/images/Eric-Chuang-15.png"
+    },
+    {
+      id: "positions",
+      title: "?曆遙?瑕? POSITIONS",
+      labelZh: "?曆遙?瑕?",
+      labelEn: "POSITIONS",
+      image: "/images/Eric-Chuang-17.png"
+    },
+    {
+      id: "scholarship",
+      title: "摮貉???祕??SCHOLARSHIP",
+      labelZh: "摮貉??祕??,
+      labelEn: "SCHOLARSHIP",
+      image: "/images/Eric-Chuang-14.png"
+    },
+    {
+      id: "credentials",
+      title: "2026 ??撠平隤? CREDENTIALS",
+      labelZh: "撠平隤?",
+      labelEn: "CREDENTIALS",
+      image: "/images/Eric-Chuang-18.png"
+    },
+    {
+      id: "services",
+      title: "?之?詨???? SERVICES",
+      labelZh: "???",
+      labelEn: "SERVICES",
+      image: "/images/Eric-Chuang-19.png"
+    },
+    {
+      id: "contact",
+      title: "?箏澈?????閮?CONTACT",
+      labelZh: "瘝餌?憪?",
+      labelEn: "CONTACT",
+      image: "/images/Eric-Chuang-20.png"
+    }
+  ];
+
+  // Instantly navigate to slide and center screen
+  const selectSlide = (index: number) => {
+    setCurrentSlide(index);
+    // Smooth scroll page back to top container to align the viewport perfectly
+    const element = document.getElementById("about-viewport-container");
+    if (element) {
+      if ((window as any).lenis) {
+        (window as any).lenis.scrollTo(element, { offset: -80 });
+      } else {
+        element.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }
+  };
+
+  return (
+    <div 
+      className="min-h-screen bg-[#050505] text-white selection:bg-gold-400/30 selection:text-white relative flex flex-col justify-between"
+      id="about-viewport-container"
+    >
+      {/* Floating coordinates indicator on the left for brand prestige */}
+      <div className="fixed left-8 top-1/3 -translate-y-1/2 z-40 hidden xl:flex flex-col items-start gap-4 select-none pointer-events-none origin-left">
+        <div className="w-px h-16 bg-[#e6c84c]/15"></div>
+        <span className="font-mono text-[9px] tracking-[0.4em] text-white/25 uppercase [writing-mode:vertical-lr]">
+          STT PRESS THINK TANK PLATFORM
+        </span>
+        <div className="w-1.5 h-1.5 rounded-full bg-[#e6c84c]/30"></div>
+      </div>
+
+      {/* Horizontal Premium Sub-navigation Tab Bar */}
+      <div className="w-full bg-[#050505] py-2.5 border-b border-white/[0.02] sticky top-[80px] z-30 select-none hidden md:block">
+        <div className="container mx-auto px-6 max-w-7xl flex justify-between items-center gap-1.5">
+          {slides.map((slide, index) => (
+            <button
+              key={slide.id}
+              type="button"
+              onClick={() => selectSlide(index)}
+              className={`flex flex-col items-center py-1.5 px-3 rounded-lg transition-all cursor-pointer border-0 bg-transparent outline-none flex-1 max-w-[180px] ${
+                currentSlide === index 
+                  ? "bg-white/[0.04] text-[#e6c84c]" 
+                  : "text-zinc-500 hover:text-zinc-300"
+              }`}
+            >
+              <span className={`text-[11px] font-sans font-bold tracking-wider ${currentSlide === index ? "text-[#e6c84c]" : "text-zinc-400"}`}>
+                {slide.labelZh}
+              </span>
+              <span className="text-[7.5px] font-mono tracking-widest mt-0.5 opacity-60">
+                {slide.labelEn}
+              </span>
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Mobile Horizontal Scrollable Tab Bar */}
+      <div className="w-full bg-[#050505] py-2 border-b border-white/[0.02] overflow-x-auto scrollbar-none flex md:hidden gap-2 px-4 z-30 select-none">
+        {slides.map((slide, index) => (
+          <button
+            key={slide.id}
+            type="button"
+            onClick={() => selectSlide(index)}
+            className={`whitespace-nowrap px-3 py-1.5 rounded-full text-xs font-sans font-bold cursor-pointer border-0 outline-none transition-all ${
+              currentSlide === index 
+                ? "bg-[#e6c84c] text-black" 
+                : "bg-white/[0.03] text-zinc-400 hover:text-white"
+            }`}
+          >
+            {slide.labelZh}
+          </button>
+        ))}
+      </div>
+
+      {/* ================= SCREEN ACTIVE WORKSPACE ================= */}
+      <div className="flex-grow flex items-center relative py-6 lg:py-0 w-full">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentSlide}
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -12 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+            className="w-full"
+          >
+            <div className="container mx-auto px-6 max-w-7xl relative z-10 w-full font-sans">
+              
+              {/* SLIDE 0: sovereignty (銝餅?脫?) */}
+              {currentSlide === 0 && (
+                <div className="flex flex-col lg:flex-row items-center justify-between w-full h-[calc(100vh-180px)] lg:h-[calc(100vh-140px)] gap-6 lg:gap-12 min-h-0 pt-2 lg:pt-4">
+                  {/* Left Content Column */}
+                  <div className="w-full lg:w-[55%] flex flex-col justify-center text-left self-center py-2 overflow-hidden h-full flex-1 lg:flex-none">
+                    
+                    {/* Title Area */}
+                    <div className="flex-shrink-0 w-full overflow-hidden">
+                      <div className="flex items-center gap-2 lg:gap-3 mb-2 lg:mb-4">
+                        <div className="w-8 lg:w-12 h-px bg-[#e6c84c]"></div>
+                        <span className="text-[#e6c84c] text-[10px] sm:text-[11px] lg:text-sm tracking-[0.25em] font-medium uppercase font-sans whitespace-nowrap">
+                          SOVEREIGNTY OF THOUGHT <span className="mx-1 sm:mx-2">|</span> ?銝餅?
+                        </span>
+                      </div>
+                      <h1 className="text-[20px] sm:text-2xl lg:text-3xl xl:text-[40px] 2xl:text-[46px] font-serif text-[#e6c84c] tracking-wider md:tracking-wide mb-2 lg:mb-3 xl:mb-4 leading-tight lg:leading-[1.15] whitespace-nowrap">
+                        蝑?方???憡????霅航?                      </h1>
+
+                      <div className="mb-2 lg:mb-4 xl:mb-5 space-y-1">
+                        <p className="text-white font-sans font-light text-xs sm:text-sm lg:text-base tracking-wider whitespace-nowrap">
+                          隡平蝑摰嗆瘜憿批? <span className="mx-1">|</span> 摮貉??箇?摰?                        </p>
+                        <p className="text-[#e6c84c] font-serif text-[14px] sm:text-lg lg:text-xl xl:text-[26px] 2xl:text-[30px] tracking-widest pt-1 whitespace-nowrap">
+                          ??蝧??ㄚ CHUANG CHUN HSIANG Ph.D.
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Body Content */}
+                    <div className="flex flex-col min-h-0 flex-1 justify-around py-1 lg:py-2">
+                      <p className="font-sans text-[#EBE7DF]/95 text-[11px] sm:text-[12px] md:text-[13px] lg:text-[15px] leading-relaxed sm:leading-[1.6] lg:leading-[1.8] tracking-wider antialiased p-3 lg:p-4 border-l-2 border-[#e6c84c]/75 italic bg-zinc-950/45">
+                        ??平瘙箇??祥??撘葉嚗????其遙雿芋蝟征???⊥??舀??飛銵??詻?蝝釭???萇移蟡?撠???甈?霅?蝝桀祕?弦嚗??舀?銵?閮犖?銝餅???撖血?喉???蝯???撠?撖衣?隤縑??嚗?摮貉????祕???楛撅斗??頛?芾釭隡平韏啣???芯????刻????                      </p>
+                      
+                      <ul className="text-stone-300 font-sans font-light text-[11px] sm:text-[11px] lg:text-[14px] xl:text-[15px] leading-relaxed sm:leading-[1.6] lg:leading-[1.8] list-disc pl-4 lg:pl-6 space-y-1.5 lg:space-y-3 my-2 lg:my-3">
+                        <li className="pl-1 text-justify">
+                          ??憯急楛??璆剔??亥???蝞∠????曆??僑嚗誑瘜飛??摮賊???璆剔?箇嚗?摮貉??箸?祕??撽??疵???游??潛?臭犖隡平??蝎暹?銝??抒?閫?捱?寞???                        </li>
+                        <li className="pl-1 text-justify">
+                          ??憯急?雓?銝??氬????雓?????澆之摮豢?隞餃隞餃?????游??典誨?砍瘝餌?瘜???                        </li>
+                      </ul>
+
+                      <div className="flex-shrink-0 mt-1 lg:mt-2">
+                        <p className="text-[#e6c84c] font-serif italic text-[9px] sm:text-[11px] lg:text-[13px] xl:text-[14px] tracking-wide inline-block">
+                          ??銝?閬?蝢?雿?閬?◤靽∟陷??
+                          <span className="ml-1 sm:ml-2 border-b border-[#e6c84c]/50 pb-0.5 inline-block text-[#e6c84c]">
+                            --- ?批瘜 Internal Compliance?雿??批?嚗???摨找??臭噩?舐??唾????                          </span>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Right Portrait Column */}
+                  <div className="w-full lg:w-[45%] flex-[1.2] lg:flex-[0_0_auto] flex items-end justify-center lg:justify-end relative min-h-0 h-[280px] sm:h-[400px] lg:h-full overflow-hidden lg:overflow-visible">
+                    {/* Spotlight gradient effect */}
+                    <div className="absolute -bottom-16 right-0 w-[350px] lg:w-[500px] h-[350px] lg:h-[500px] bg-[#e6c84c]/5 rounded-full blur-[100px] pointer-events-none z-0"></div>
+
+                    <img 
+                      src="/images/Eric-Chuang-15.png" 
+                      alt="Dr. Eric Chuang Portrait" 
+                      className="max-w-full max-h-full w-auto object-contain relative z-10 filter drop-shadow-[0_0_55px_rgba(230,200,76,0.18)] contrast-[1.1]"
+                      style={{ 
+                        objectPosition: 'bottom right',
+                        transformOrigin: 'bottom right'
+                      }}
+                      referrerPolicy="no-referrer"
+                    />
+                    
+                    {/* Bottom Fade - Seamless Matching Page Background (especially on mobile) */}
+                    <div className="absolute inset-x-0 bottom-0 h-16 sm:h-24 bg-gradient-to-t from-[#050505] via-[#050505]/80 to-transparent z-10 pointer-events-none lg:hidden"></div>
+
+                    {/* Signature Overlay */}
+                    <div className="absolute bottom-4 right-0 lg:-right-4 xl:right-4 z-20 pointer-events-none select-none">
+                      <img 
+                        src="/signature-eric001.png" 
+                        alt="Dr. Eric Chuang Signature" 
+                        className="w-24 sm:w-36 lg:w-48 xl:w-60 max-w-[80vw] h-auto drop-shadow-[0_2px_12px_rgba(0,0,0,0.95)] opacity-95"
+                        referrerPolicy="no-referrer"
+                      />
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* SLIDE 1: positions (?曆遙?瑕???蝜? */}
+              {currentSlide === 1 && (
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start pt-4 lg:pt-[4.5rem]">
+                  {/* Left Content Column */}
+                  <div className="lg:col-span-7 space-y-4 text-left py-2">
+                    <div className="space-y-1">
+                      <div className="flex items-center gap-2">
+                        <span className="h-[2px] w-6 bg-[#e6c84c]"></span>
+                        <span className="text-[#e6c84c] font-sans font-bold text-xs sm:text-sm tracking-[0.25em]">AFFILIATIONS & ROLES 嚚??曆遙?瑕?</span>
+                      </div>
+                      <h2 className="text-2xl sm:text-3xl md:text-[2.1rem] lg:text-[2.3rem] xl:text-[2.6rem] font-serif font-black text-[#e6c84c] leading-tight select-none">
+                        ?曆遙?瑕???蝜?                      </h2>
+                      <p className="text-stone-300 font-sans text-xs sm:text-sm tracking-wide">
+                        隡平蝑摰嗆瘜憿批? | 擃?蝯??菔齒鈭?                      </p>
+                    </div>
+
+                    {/* Grid of 4 modular cards without heavy borders to prevent lines */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 xl:gap-4">
+                      {/* NGO Card */}
+                      <div className="p-3 bg-zinc-950/80 border border-white/[0.03] hover:border-[#e6c84c]/20 transition-all rounded-lg relative overflow-hidden shadow-2xl">
+                        <div className="absolute top-0 left-0 w-1 h-full bg-[#e6c84c]/60"></div>
+                        <span className="text-[9px] text-[#e6c84c]/80 font-mono tracking-widest block uppercase font-bold">NGO CO-REGULATION</span>
+                        <h3 className="text-xs md:text-[13px] font-serif font-black text-[#e6c84c] mt-0.5">??銝剛隡平蝑瘞貊??澆?摮豢? GCSDA ?菜?????/h3>
+                        <p className="text-[11px] md:text-xs text-zinc-300 font-light leading-relaxed mt-1">
+                          ?扳?函閮?獢?NGO 蝯?嚗?艙嚗??亦?祥??研恣?蝯?靽?擃??潭摨思??抵?撖西釭?芸?????                        </p>
+                        <div className="text-[10px] md:text-[11px] text-zinc-400 mt-1.5 space-y-0.5 border-t border-white/[0.02] pt-1 leading-relaxed">
+                          <p>嚚?璊璆剖?澆蝷?撘??砍瘝餌????萇移蟡?/p>
+                          <p>嚚??脫摨怎??交??剁?撘?隡平撖西?蝷暹?鞎砌遙</p>
+                          <p>嚚??餅雁憸券?抒恣嚗釵鈭?璆剜偶蝥撅???/p>
+                        </div>
+                      </div>
+
+                      {/* Media Group Card */}
+                      <div className="p-3 bg-zinc-950/80 border border-white/[0.03] hover:border-[#e6c84c]/20 transition-all rounded-lg relative overflow-hidden shadow-2xl">
+                        <div className="absolute top-0 left-0 w-1 h-full bg-[#e6c84c]/60"></div>
+                        <span className="text-[9px] text-[#e6c84c]/80 font-mono tracking-widest block uppercase font-bold">DIGITAL PUBLICATION</span>
+                        <h3 className="text-xs md:text-[13px] font-serif font-black text-[#e6c84c] mt-0.5">??蝑?箏澈?訾??? STT Group ?瑁??瑟?菔齒鈭?/h3>
+                        <p className="text-[11px] md:text-xs text-zinc-300 font-light leading-relaxed mt-1">
+                          ??摮貉??箇???璆剜?慦?銝西??望?敺雁摨西?蝑撠?閫????                        </p>
+                        <div className="text-[10px] md:text-[11px] text-zinc-400 mt-1.5 space-y-0.5 border-t border-white/[0.02] pt-1 leading-relaxed">
+                          <p>嚚TT Press 蝑?箏澈?訾??箇?</p>
+                          <p>嚚TT News 蝑?箏澈?訾??啗?</p>
+                          <p>嚚TT Intelligence 蝑?箏澈?訾?閰?</p>
+                          <p>嚚TT Legal Insights 瘜?蝑撠?</p>
+                        </div>
+                      </div>
+
+                      {/* Columns Card */}
+                      <div className="p-3 bg-zinc-950/80 border border-white/[0.03] hover:border-[#e6c84c]/20 transition-all rounded-lg relative overflow-hidden shadow-2xl">
+                        <div className="absolute top-0 left-0 w-1 h-full bg-[#e6c84c]/60"></div>
+                        <span className="text-[9px] text-[#e6c84c]/80 font-mono tracking-widest block uppercase font-bold">MEDIA COLUMNIST</span>
+                        <h3 className="text-xs md:text-[13px] font-serif font-black text-[#e6c84c] mt-0.5">??M?喳? 瘜?蝑撠??寧??∟赤?典?摰嗉?隢?/h3>
+                        <p className="text-[11px] md:text-xs text-zinc-300 font-light leading-relaxed mt-1">
+                          銝餌?隡平?啁??摨血?冽?嗥里?賂??隡平撠???敺??株?霅舐擃祕?扼暑?批?瑚?瘙箇?摨???                        </p>
+                        <div className="text-[10px] md:text-[11px] text-zinc-400 mt-1.5 space-y-0.5 border-t border-white/[0.02] pt-1 leading-relaxed">
+                          <p>嚚蜓蝑?璆剜?敺??/p>
+                          <p>嚚?豢祥??璆剔???/p>
+                          <p>嚚璆剔奎?剖???</p>
+                          <p>嚚雿???閬???/p>
+                        </div>
+                      </div>
+
+                      {/* Academic Card */}
+                      <div className="p-3 bg-zinc-950/80 border border-white/[0.03] hover:border-[#e6c84c]/20 transition-all rounded-lg relative overflow-hidden shadow-2xl">
+                        <div className="absolute top-0 left-0 w-1 h-full bg-[#e6c84c]/60"></div>
+                        <span className="text-[9px] text-[#e6c84c]/80 font-mono tracking-widest block uppercase font-bold">ACADEMIC APPOINTMENT</span>
+                        <h3 className="text-xs md:text-[13px] font-serif font-black text-[#e6c84c] mt-0.5">???Ｙ憭批飛?飛???潔遙?拍???</h3>
+                        <p className="text-[11px] md:text-xs text-zinc-300 font-light leading-relaxed mt-1">
+                          銝餅?擃??銋雿祥??蝑蝬?璅∪?嚗疵????AI 瘝餌??銵??典?擃?皞?豢??菜??脯?                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Right Portrait Column */}
+                  <div className="lg:col-span-5 h-[340px] sm:h-[400px] lg:h-[78vh] xl:h-[84vh] self-end relative flex items-end justify-center lg:justify-end overflow-visible">
+                    <div className="relative h-full w-full max-w-[400px] lg:max-w-none flex items-end justify-center lg:justify-end">
+                      <div className="absolute -bottom-16 -right-16 w-[350px] sm:w-[500px] h-[350px] sm:h-[500px] bg-[#e6c84c]/4 rounded-full blur-[140px] pointer-events-none z-0"></div>
+                      <img 
+                        src="/images/Eric-Chuang-17.png" 
+                        alt="Dr. Eric Chuang Position Portrait" 
+                        className="w-full h-auto max-h-[100%] object-bottom object-contain filter drop-shadow-[0_0_55px_rgba(230,200,76,0.15)] contrast-[1.05]"
+                        referrerPolicy="no-referrer"
+                      />
+                      {/* Bottom Fade - Seamless Matching Page Background */}
+                      <div className="absolute inset-x-0 bottom-0 h-1/4 bg-gradient-to-t from-[#050505] via-[#050505]/95 to-transparent z-10 pointer-events-none"></div>
+                      
+                      {/* Signature & Title Overlay */}
+                      <div className="absolute bottom-6 right-6 z-20 pointer-events-none select-none text-right flex flex-col items-end gap-1 font-sans">
+                        <img 
+                          src="/signature-eric001.png" 
+                          alt="Dr. Eric Chuang Signature" 
+                          className="w-32 sm:w-36 lg:w-[136px] h-auto drop-shadow-[0_2px_12px_rgba(0,0,0,0.95)] opacity-95 transition-all"
+                          referrerPolicy="no-referrer"
+                        />
+                        <div className="text-right mt-1.5 drop-shadow-[0_2px_8px_rgba(0,0,0,1)]">
+                          <p className="text-[#e6c84c] text-sm sm:text-base font-serif font-bold tracking-widest leading-none">??蝧??ㄚ</p>
+                          <p className="text-stone-300 text-[10px] sm:text-[11px] font-mono tracking-widest uppercase mt-0.5 leading-none">ERIC CHUANG, Ph.D.</p>
+                          <p className="text-zinc-400 text-[8.5px] sm:text-[9.5px] tracking-widest mt-1 opacity-90 leading-relaxed font-light">
+                            隡平蝑鞈楛憿批? 嚚?瘝餌??嗅漲閮剛???嚚?蝑?箏澈?菔齒鈭?                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* SLIDE 2: scholarship (摮貉???祕??甇? */}
+              {currentSlide === 2 && (
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start pt-4 lg:pt-[4.5rem]">
+                  
+                  {/* Left Content Column */}
+                  <div className="lg:col-span-7 space-y-4 text-left py-2">
+                    <div className="space-y-1">
+                      <div className="flex items-center gap-2">
+                        <span className="h-[2px] w-6 bg-[#e6c84c]"></span>
+                        <span className="text-[#e6c84c] font-sans font-bold text-xs sm:text-sm tracking-[0.25em]">ACADEMIC FOUNDATION 嚚?摮貉??祕??/span>
+                      </div>
+                      <h2 className="text-2xl sm:text-3xl md:text-[2.1rem] lg:text-[2.3rem] xl:text-[2.6rem] font-serif font-black text-[#e6c84c] leading-tight select-none">
+                        摮貉???祕??甇?                      </h2>
+                      <p className="text-stone-300 font-sans text-xs sm:text-sm tracking-wide">
+                        摮貉??渲牲?扯?擃?瘝餌?撖西??敹霅?                      </p>
+                    </div>
+
+                    {/* Grid of 2 modular cards */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 xl:gap-4">
+                      {/* Academic Credentials Card */}
+                      <div className="p-3 bg-zinc-950/80 border border-white/[0.03] hover:border-[#e6c84c]/20 transition-all rounded-lg relative overflow-hidden shadow-2xl">
+                        <div className="absolute top-0 left-0 w-1 h-full bg-[#e6c84c]/60"></div>
+                        <span className="text-[9px] text-[#e6c84c]/80 font-mono tracking-widest block uppercase font-bold">ACADEMIC FOUNDATION</span>
+                        <h3 className="text-xs md:text-[13px] font-serif font-black text-[#e6c84c] mt-0.5">??摮貉??</h3>
+                        
+                        <div className="mt-1.5 space-y-2 text-zinc-300">
+                          <div className="space-y-0.5">
+                            <span className="font-semibold text-[11px] md:text-xs text-white">嚚??飛?ㄚ Ph.D. in Business Administration</span>
+                            <p className="text-[10px] md:text-[11px] leading-relaxed text-zinc-400 pl-2">
+                              ?雿喳?蝞⊥?????敺蜓 (2024)嚗楛??璆剔??亥?瘜祥????                            </p>
+                          </div>
+
+                          <div className="space-y-0.5">
+                            <span className="font-semibold text-[11px] md:text-xs text-white">嚚?擃?蝬?蝞∠?蝣拙ㄚ Executive Master of Business Administration</span>
+                            <p className="text-[10px] md:text-[11px] leading-relaxed text-zinc-400 pl-2">
+                              撱箇?擃雁摨衣?隡平憸券瘝餌???璆剜芋撘芋??摮?蝘?閬???                            </p>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Practical Experience Card */}
+                      <div className="p-3 bg-zinc-950/80 border border-white/[0.03] hover:border-[#e6c84c]/20 transition-all rounded-lg relative overflow-hidden shadow-2xl">
+                        <div className="absolute top-0 left-0 w-1 h-full bg-[#e6c84c]/60"></div>
+                        <span className="text-[9px] text-[#e6c84c]/80 font-mono tracking-widest block uppercase font-bold">EMPIRICAL RIGOR</span>
+                        <h3 className="text-xs md:text-[13px] font-serif font-black text-[#e6c84c] mt-0.5">??撖血?蝬風</h3>
+                        
+                        <div className="mt-2.5 space-y-1.5 text-zinc-300 text-[11px] md:text-xs pl-1 font-sans">
+                          <p className="text-white font-semibold">嚚???閰孵?憯怠???敺??? 瘞貊???/p>
+                          <p className="text-white font-semibold">嚚????脩?脩?????∩遢???砍 蝮賜???/p>
+                          <p className="text-white font-semibold">嚚?????隡平蝞∠?憿批??∩遢???砍 ??蝮賜</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Core value quote text */}
+                    <div className="p-3.5 bg-zinc-950/45 border-l-2 border-[#e6c84c]/75 text-[#dbd7cf] text-xs sm:text-[13px] md:text-sm leading-relaxed max-w-2xl font-sans font-light italic">
+                      瘛梯摰飛??嚗?瞍???摮豢?蝥?雿祥????璆剔??乓??詨??孵潘???⊥??舀?????蝛嗅?撅歹??舐?詨擃恣隢?撘祕?堆?蝑?箏澈?敹???舐?撠?靘?蝛箸????脫瘙箇???-- CHUANG CHUN HSIANG Ph.D.
+                    </div>
+                  </div>
+
+                  {/* Right Portrait Column */}
+                  <div className="lg:col-span-5 h-[340px] sm:h-[400px] lg:h-[78vh] xl:h-[84vh] self-end relative flex items-end justify-center lg:justify-end overflow-visible">
+                    <div className="relative h-full w-full max-w-[400px] lg:max-w-none flex items-end justify-center lg:justify-end">
+                      <div className="absolute -bottom-16 -right-16 w-[350px] sm:w-[500px] h-[350px] sm:h-[500px] bg-[#e6c84c]/4 rounded-full blur-[140px] pointer-events-none z-0"></div>
+                      <img 
+                        src="/images/Eric-Chuang-14.png" 
+                        alt="Dr. Eric Chuang Academic Portrait" 
+                        className="w-full h-auto max-h-[100%] object-bottom object-contain filter drop-shadow-[0_0_55px_rgba(230,200,76,0.15)] contrast-[1.05]"
+                        referrerPolicy="no-referrer"
+                      />
+                      {/* Bottom Fade - Seamless Matching Page Background */}
+                      <div className="absolute inset-x-0 bottom-0 h-1/4 bg-gradient-to-t from-[#050505] via-[#050505]/95 to-transparent z-10 pointer-events-none"></div>
+                      
+                      {/* Signature & Title Overlay */}
+                      <div className="absolute bottom-6 right-6 z-20 pointer-events-none select-none text-right flex flex-col items-end gap-1 font-sans">
+                        <img 
+                          src="/signature-eric001.png" 
+                          alt="Dr. Eric Chuang Signature" 
+                          className="w-32 sm:w-36 lg:w-[136px] h-auto drop-shadow-[0_2px_12px_rgba(0,0,0,0.95)] opacity-95 transition-all"
+                          referrerPolicy="no-referrer"
+                        />
+                        <div className="text-right mt-1.5 drop-shadow-[0_2px_8px_rgba(0,0,0,1)]">
+                          <p className="text-[#e6c84c] text-sm sm:text-base font-serif font-bold tracking-widest leading-none">??蝧??ㄚ</p>
+                          <p className="text-stone-300 text-[10px] sm:text-[11px] font-mono tracking-widest uppercase mt-0.5 leading-none">ERIC CHUANG, Ph.D.</p>
+                          <p className="text-zinc-400 text-[8.5px] sm:text-[9.5px] tracking-widest mt-1 opacity-90 leading-relaxed font-light">
+                            隡平蝑鞈楛憿批? 嚚?瘝餌??嗅漲閮剛???嚚?蝑?箏澈?菔齒鈭?                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* SLIDE 3: credentials (2026 ??撠平隤?) */}
+              {currentSlide === 3 && (
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start pt-4 lg:pt-[4.5rem]">
+                  
+                  {/* Left Content Column */}
+                  <div className="lg:col-span-7 space-y-4 text-left py-2">
+                    <div className="space-y-1">
+                      <div className="flex items-center gap-2">
+                        <span className="h-[2px] w-6 bg-[#e6c84c]"></span>
+                        <span className="text-[#e6c84c] font-sans font-bold text-xs sm:text-sm tracking-[0.25em]">REGULATORY ACCREDITATIONS 嚚?撠平隤?</span>
+                      </div>
+                      <h2 className="text-2xl sm:text-3xl md:text-[2.1rem] lg:text-[2.3rem] xl:text-[2.6rem] font-serif font-black text-[#e6c84c] leading-tight select-none">
+                        ???訾?隤??ESG 瘞貊?瘜隤?
+                      </h2>
+                      <p className="text-stone-300 font-sans text-xs sm:text-sm tracking-wide">
+                        擃??銵????瘜?脩?甈?隤? | 蝎曇???箏澈?
+                      </p>
+                    </div>
+
+                    {/* Main statement quote */}
+                    <div className="space-y-4">
+                      <p className="font-sans text-[#EBE7DF]/95 text-xs sm:text-[13px] md:text-sm leading-relaxed tracking-wider antialiased bg-zinc-950/45 p-4 border-l-2 border-[#e6c84c]/75 italic">
+                        ???典?璆剖之霈?銝???????璆剛?霅??芣鋆ˇ嚗?航??抵鈭?摰?芾??閮剖?閬?怎???蝡臬?具??楛???窒????AI 隤璅∪???ESG 蝣喃葉??伐?撠祕銵?皞?霅舐??祕?奎?剖???                      </p>
+                      
+                      <div className="space-y-2 text-[#dbd7cf] text-[11px] sm:text-xs md:text-[13px] font-sans leading-relaxed">
+                        <p>??<strong className="text-white font-semibold">Anthropic ? Google 摰 AI ???賢?隤?</strong>嚗???Anthropic ? HEA ? UCC ?臬?銋?AI Fluency ?函頂?瑽?霅laude 101/Code in Action?mazon Bedrock ???emini AI 隤??葦隞亙??脤? Agent ??質?霅?/p>
+                        <p>??<strong className="text-white font-semibold">銝剔??Ｘ?蝣喟恣?? T?V ??拙硫??瘜?隤?</strong>嚗??葉?舐?瞈?蝛園蝬銝剖???蝣喟恣?葦??霅EO ??瘞貊??澆?蝣喟恣?蝝恣?葦?SG 銝??Ｘ楊?嗚誑?噸????T?V ??瘜?蝞∠??脩???撠振鞈??/p>
+                      </div>
+
+                      <div className="pt-2 border-t border-white/[0.02]">
+                        <p className="text-[#e6c84c]/90 text-[11px] sm:text-xs font-serif leading-relaxed italic">
+                          ???萎??臭?璆剔????餌?嚗撘???瘙箇??振??輻??撘瑟郎?具?--- ?批瘜 Internal Compliance
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Right Portrait Column */}
+                  <div className="lg:col-span-5 h-[340px] sm:h-[400px] lg:h-[78vh] xl:h-[84vh] self-end relative flex items-end justify-center lg:justify-end overflow-visible">
+                    <div className="relative h-full w-full max-w-[400px] lg:max-w-none flex items-end justify-center lg:justify-end">
+                      <div className="absolute -bottom-16 -right-16 w-[350px] sm:w-[500px] h-[350px] sm:h-[500px] bg-[#e6c84c]/4 rounded-full blur-[140px] pointer-events-none z-0"></div>
+                      <img 
+                        src="/images/Eric-Chuang-18.png" 
+                        alt="Dr. Eric Chuang Credentials Portrait" 
+                        className="w-full h-auto max-h-[100%] object-bottom object-contain filter drop-shadow-[0_0_55px_rgba(230,200,76,0.15)] contrast-[1.05]"
+                        referrerPolicy="no-referrer"
+                      />
+                      {/* Bottom Fade - Seamless Matching Page Background Container */}
+                      <div className="absolute inset-x-0 bottom-0 h-1/4 bg-gradient-to-t from-[#050505] via-[#050505]/95 to-transparent z-10 pointer-events-none"></div>
+                      
+                      {/* Signature & Title Overlay */}
+                      <div className="absolute bottom-6 right-6 z-20 pointer-events-none select-none text-right flex flex-col items-end gap-1 font-sans">
+                        <img 
+                          src="/signature-eric001.png" 
+                          alt="Dr. Eric Chuang Signature" 
+                          className="w-32 sm:w-36 lg:w-[136px] h-auto drop-shadow-[0_2px_12px_rgba(0,0,0,0.95)] opacity-95 transition-all"
+                          referrerPolicy="no-referrer"
+                        />
+                        <div className="text-right mt-1.5 drop-shadow-[0_2px_8px_rgba(0,0,0,1)]">
+                          <p className="text-[#e6c84c] text-sm sm:text-base font-serif font-bold tracking-widest leading-none">??蝧??ㄚ</p>
+                          <p className="text-stone-300 text-[10px] sm:text-[11px] font-mono tracking-widest uppercase mt-0.5 leading-none">ERIC CHUANG, Ph.D.</p>
+                          <p className="text-zinc-400 text-[8.5px] sm:text-[9.5px] tracking-widest mt-1 opacity-90 leading-relaxed font-light">
+                            隡平蝑鞈楛憿批? 嚚?瘝餌??嗅漲閮剛???嚚?蝑?箏澈?菔齒鈭?                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* SLIDE 4: services (?之?詨????) */}
+              {currentSlide === 4 && (
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start pt-4 lg:pt-[4.5rem]">
+                  
+                  {/* Left Content Column */}
+                  <div className="lg:col-span-7 space-y-4 text-left py-2">
+                    <div className="space-y-1">
+                      <div className="flex items-center gap-4">
+                        <span className="h-[2px] w-12 bg-[#e6c84c]"></span>
+                        <span className="text-[#e6c84c] font-sans font-black text-xs uppercase tracking-[0.4em]">PROFESSIONAL DOMAIN AREAS</span>
+                      </div>
+                      <h2 className="text-3xl sm:text-4xl text-white font-serif tracking-wide leading-tight">
+                        ?之?詨????
+                      </h2>
+                      <p className="text-zinc-400 text-xs sm:text-sm font-mono tracking-widest uppercase font-semibold">
+                        THE FOUR PILLARS OF GOVERNANCE & COMPLIANCE SOLUTIONS
+                      </p>
+                    </div>
+
+                    {/* Grid of the 4 Pillars without heavy borders */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                      {[
+                        {
+                          title: "蝑雿? STRATEGIC PLAN",
+                          roman: "憯?嚚?瘣?????擐剛???,
+                          points: [
+                            "隡平?箸鞎∠??璆剔?撖?嫣??脰?蝑",
+                            "擃?蝬?鈭箔?撅?匱?踵???璆剜芋撘??,
+                            "隡平蝑?找蔥鞈澆?隤輯??啁?舐??游?"
+                          ]
+                        },
+                        {
+                          title: "蝛拙?? STEADY RUNNING",
+                          roman: "鞎?嚚??圾?剛降????,
+                          points: [
+                            "?⊥??嗆?閮剛??祥??憭?拙拿??鈭箄???,
+                            "銝?蝔望捱蝑????方??折?批瘚?蝔賣",
+                            "隡平憟???望?摰閰摯??璆剖?蝝?
+                          ]
+                        },
+                        {
+                          title: "瘞貊?瘝餌? CORE GOVERNANCE",
+                          roman: "??嚚??單?菜???萄??,
+                          points: [
+                            "鈭箏?鞈?啁?亙??隢批?????蝝?,
+                            "摰嗆?鞈颲血摰斤??交?????砍?單",
+                            "隡平瘜???脩戌??貉敺撖抵?蝭?
+                          ]
+                        },
+                        {
+                          title: "撠平擗? ACCOMODATION",
+                          roman: "??嚚???隤??玨蝔閮?,
+                          points: [
+                            "??擃?蝬?鈭箏?豢祥?祕???脰身閮?,
+                            "2026擃??銵?霅??西?隞???寡?隤脩雇",
+                            "隡平?箏澈???脫?撣貉身瘜祥???典?"
+                          ]
+                        }
+                      ].map((pillar, idx) => (
+                        <div 
+                          key={idx}
+                          className="p-4 sm:p-5 border border-white/[0.03] hover:border-[#e6c84c]/20 group transition-all duration-300 bg-zinc-950/80 rounded-lg flex flex-col justify-between shadow-2xl"
+                        >
+                          <div className="space-y-2">
+                            <span className="text-[7.5px] text-[#e6c84c]/60 font-mono tracking-wider block font-bold">PILLAR 0{idx + 1} &nbsp;??nbsp; {pillar.title}</span>
+                            <h3 className="text-sm font-bold font-serif text-white">{pillar.roman}</h3>
+                            <ul className="space-y-1.5 text-[11px] text-zinc-400 pl-0 border-t border-white/[0.02] pt-2 select-all">
+                              {pillar.points.map((p, pIdx) => (
+                                <li key={pIdx} className="flex items-start gap-1.5 leading-relaxed">
+                                  <span className="text-[#e6c84c] font-black shrink-0">嚚?/span>
+                                  <span>{p}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+
+                  </div>
+
+                  {/* Right Portrait Column */}
+                  <div className="lg:col-span-5 h-[340px] sm:h-[400px] lg:h-[78vh] xl:h-[84vh] self-end relative flex items-end justify-center lg:justify-end overflow-visible">
+                    <div className="relative h-full w-full max-w-[400px] lg:max-w-none flex items-end justify-center lg:justify-end">
+                      <div className="absolute -bottom-16 -right-16 w-[350px] sm:w-[500px] h-[350px] sm:h-[500px] bg-[#e6c84c]/4 rounded-full blur-[140px] pointer-events-none z-0"></div>
+                      <img 
+                        src="/images/Eric-Chuang-19.png" 
+                        alt="Dr. Eric Chuang Services Portrait" 
+                        className="w-full h-auto max-h-[100%] object-bottom object-contain filter drop-shadow-[0_0_55px_rgba(230,200,76,0.15)] contrast-[1.05]"
+                        referrerPolicy="no-referrer"
+                      />
+                      {/* Bottom Fade - Seamless Matching Page Background Container */}
+                      <div className="absolute inset-x-0 bottom-0 h-1/4 bg-gradient-to-t from-[#050505] via-[#050505]/95 to-transparent z-10 pointer-events-none"></div>
+                      
+                      {/* Signature & Title Overlay */}
+                      <div className="absolute bottom-6 right-6 z-20 pointer-events-none select-none text-right flex flex-col items-end gap-1 font-sans">
+                        <img 
+                          src="/signature-eric001.png" 
+                          alt="Dr. Eric Chuang Signature" 
+                          className="w-32 sm:w-36 lg:w-[136px] h-auto drop-shadow-[0_2px_12px_rgba(0,0,0,0.95)] opacity-95 transition-all"
+                          referrerPolicy="no-referrer"
+                        />
+                        <div className="text-right mt-1.5 drop-shadow-[0_2px_8px_rgba(0,0,0,1)]">
+                          <p className="text-[#e6c84c] text-sm sm:text-base font-serif font-bold tracking-widest leading-none">??蝧??ㄚ</p>
+                          <p className="text-stone-300 text-[10px] sm:text-[11px] font-mono tracking-widest uppercase mt-0.5 leading-none">ERIC CHUANG, Ph.D.</p>
+                          <p className="text-zinc-400 text-[8.5px] sm:text-[9.5px] tracking-widest mt-1 opacity-90 leading-relaxed font-light">
+                            隡平蝑鞈楛憿批? 嚚?瘝餌??嗅漲閮剛???嚚?蝑?箏澈?菔齒鈭?                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* SLIDE 5: contact (瘝餌?憪??摨恍??) */}
+              {currentSlide === 5 && (
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start pt-4 lg:pt-[4.5rem]">
+                  
+                  {/* Left Content Column */}
+                  <div className="lg:col-span-7 space-y-5 text-left py-2">
+                    <div className="space-y-1">
+                      <div className="flex items-center gap-4">
+                        <span className="h-[2px] w-12 bg-[#e6c84c]"></span>
+                        <span className="text-[#e6c84c] font-sans font-black text-xs uppercase tracking-[0.4em]">INITIATE COREGULATION</span>
+                      </div>
+                      <h2 className="text-3xl sm:text-4xl text-white font-serif tracking-wide leading-tight">
+                        撖西??函??銝餅?
+                      </h2>
+                      <p className="text-zinc-400 text-xs sm:text-sm font-mono tracking-widest uppercase font-semibold">
+                        GOVERNANCE DELEGATION & INTELLECTUAL ALLIANCE
+                      </p>
+                    </div>
+
+                    {/* Engagement description */}
+                    <div className="space-y-4 text-zinc-300">
+                      <p className="text-sm sm:text-base leading-relaxed bg-zinc-950/45 p-4 border-l-2 border-[#e6c84c]/75 italic">
+                        ????銝?瑚遙雿??寧?撱箄降嚗????箇?甇??閬璆剛?蝘拙???鋡?撱箇??⊥??舀?????怎???                      </p>
+                      <p className="text-xs sm:text-sm text-zinc-400 font-light leading-relaxed">
+                        憒??券?閬隡平????釣?亙祕鞈芰?瘙箇?蝘拙??戎??霅瑕犖?箸鞎∠??璆剔?撖???脰?蝟餌絞??摰嗆??亦鈭箄??Ｚ???隤?隢?????ㄚ撠惇?箏澈颲血摰文???閰晞?                      </p>
+                    </div>
+
+                    {/* Action layout cards without outline borders */}
+                    <div className="flex flex-col sm:flex-row gap-4 pt-4">
+                      <a 
+                        href="https://lin.ee/yJrCTeo"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex-1 bg-gradient-to-br from-[#e6c84c] via-gold-500 to-[#b89530] text-black px-6 py-5 rounded-xl flex flex-col items-start gap-1 hover:brightness-110 active:scale-[0.98] transition-all cursor-pointer shadow-lg no-underline"
+                      >
+                        <div className="flex items-center gap-2">
+                          <Crown className="w-5 h-5 text-black" strokeWidth={1.5} />
+                          <span className="text-base font-bold tracking-wider font-sans">瘝餌?憪? ENGAGEMENT</span>
+                        </div>
+                        <span className="text-[9px] font-mono font-black tracking-widest opacity-80 uppercase leading-none">
+                          ?? 暺?銝?菟???LINE 蝘犖憪?隢株岷
+                        </span>
+                      </a>
+
+                      <a 
+                        href="mailto:pc5888@gmail.com"
+                        className="flex-1 border border-[#e6c84c]/40 text-[#e6c84c] hover:bg-[#e6c84c]/5 px-6 py-5 rounded-xl flex flex-col items-start gap-1 active:scale-[0.98] transition-all cursor-pointer shadow-lg no-underline"
+                      >
+                        <div className="flex items-center gap-2">
+                          <Mail className="w-5 h-5 text-[#e6c84c]" strokeWidth={1.5} />
+                          <span className="text-base font-bold tracking-wider font-sans">?舐窗?箏澈 CONNECT</span>
+                        </div>
+                        <span className="text-[9px] font-mono font-black tracking-widest opacity-80 uppercase leading-none">
+                          ?? 撖思縑?喳?撅祈齒?砍恕蝘 pc5888@gmail.com
+                        </span>
+                      </a>
+                    </div>
+
+                    {/* Bottom return to top trigger */}
+                    <div className="pt-4">
+                      <button
+                        type="button"
+                        onClick={() => selectSlide(0)}
+                        className="bg-transparent border border-white/5 hover:border-[#e6c84c]/30 p-2.5 rounded-full flex items-center justify-center text-white/30 hover:text-[#e6c84c] transition-all cursor-pointer text-[10px] font-mono tracking-widest outline-none"
+                      >
+                        <span className="px-2">???蝚砌???START OVER</span>
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Right Portrait Column */}
+                  <div className="lg:col-span-5 h-[340px] sm:h-[400px] lg:h-[78vh] xl:h-[84vh] self-end relative flex items-end justify-center lg:justify-end overflow-visible">
+                    <div className="relative h-full w-full max-w-[400px] lg:max-w-none flex items-end justify-center lg:justify-end">
+                      <div className="absolute -bottom-16 -right-16 w-[350px] sm:w-[500px] h-[350px] sm:h-[500px] bg-[#e6c84c]/4 rounded-full blur-[140px] pointer-events-none z-0"></div>
+                      <img 
+                        src="/images/Eric-Chuang-20.png" 
+                        alt="Dr. Eric Chuang Connection Portrait" 
+                        className="w-full h-auto max-h-[100%] object-bottom object-contain filter drop-shadow-[0_0_55px_rgba(230,200,76,0.15)] contrast-[1.05]"
+                        referrerPolicy="no-referrer"
+                      />
+                      {/* Bottom Fade - Seamless Matching Page Background Container */}
+                      <div className="absolute inset-x-0 bottom-0 h-1/4 bg-gradient-to-t from-[#050505] via-[#050505]/95 to-transparent z-10 pointer-events-none"></div>
+                      
+                      {/* Signature & Title Overlay */}
+                      <div className="absolute bottom-6 right-6 z-20 pointer-events-none select-none text-right flex flex-col items-end gap-1 font-sans">
+                        <img 
+                          src="/signature-eric001.png" 
+                          alt="Dr. Eric Chuang Signature" 
+                          className="w-32 sm:w-36 lg:w-[136px] h-auto drop-shadow-[0_2px_12px_rgba(0,0,0,0.95)] opacity-95 transition-all"
+                          referrerPolicy="no-referrer"
+                        />
+                        <div className="text-right mt-1.5 drop-shadow-[0_2px_8px_rgba(0,0,0,1)]">
+                          <p className="text-[#e6c84c] text-sm sm:text-base font-serif font-bold tracking-widest leading-none">??蝧??ㄚ</p>
+                          <p className="text-stone-300 text-[10px] sm:text-[11px] font-mono tracking-widest uppercase mt-0.5 leading-none">ERIC CHUANG, Ph.D.</p>
+                          <p className="text-zinc-400 text-[8.5px] sm:text-[9.5px] tracking-widest mt-1 opacity-90 leading-relaxed font-light">
+                            隡平蝑鞈楛憿批? 嚚?瘝餌??嗅漲閮剛???嚚?蝑?箏澈?菔齒鈭?                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+            </div>
+          </motion.div>
+        </AnimatePresence>
+      </div>
+
+      {/* Honor footprint metadata at the bottom */}
+      <footer className="border-t border-white/[0.02] bg-[#000] py-4 relative z-20 select-none">
+        <div className="container mx-auto px-6 max-w-7xl flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left text-[10px] font-mono text-zinc-500">
+          <p>穢 {new Date().getFullYear()} STT Press 蝑?箏澈?訾??箇? 繚 ??蝧??ㄚ (Founder: Eric Chuang, Ph.D.) ??ALL RIGHTS RESERVED.</p>
+          <div className="flex gap-4">
+            <span className="hover:text-gold-200 cursor-default">TRUST FOUNDATION</span>
+            <span>繚</span>
+            <span className="hover:text-gold-200 cursor-default">INSTITUTIONAL LOGIC</span>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+}
+
