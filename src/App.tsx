@@ -299,7 +299,7 @@ export default function App() {
                 </div>
                 <span className="text-[7px] font-mono font-black tracking-[0.15em] opacity-80 uppercase leading-none whitespace-nowrap">GOVERNANCE ENGAGEMENT</span>
               </a>
-
+                href="/about.html#contact
               <a 
                 href=/about.html#contact"
                 className="border border-gold-400/40 text-gold-400 hover:bg-gold-400/5 px-5 py-3.5 rounded-lg flex flex-col items-center justify-center gap-0 group transition-all shadow-lg font-sans cursor-pointer no-underline"
