@@ -299,6 +299,18 @@ export default function App() {
                 </div>
                 <span className="text-[7px] font-mono font-black tracking-[0.15em] opacity-80 uppercase leading-none whitespace-nowrap">GOVERNANCE ENGAGEMENT</span>
               </a>
+              <button
+                type="button"
+                onClick={() => { window.location.href = '/about.html#contact'; }}
+                className="border border-[#e6c84c]/40 text-[#e6c84c] hover:bg-[#e6c84c]/5 px-5 py-3.5 rounded-lg flex flex-col items-center justify-center gap-0 group transition-all shadow-lg font-sans cursor-pointer bg-transparent outline-none"
+              >
+                <div className="flex items-center gap-1.5 mb-0.5 whitespace-nowrap">
+                  <Mail className="w-3.5 h-3.5 text-[#e6c84c]" strokeWidth={1.5} />
+                  <span className="text-[14px] font-bold tracking-[0.05em] leading-none">聯絡智庫</span>
+                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform text-[#e6c84c]" strokeWidth={1.5} />
+                </div>
+                <span className="text-[7px] font-mono font-black tracking-[0.15em] opacity-80 uppercase leading-none whitespace-nowrap">CONTACT STT</span>
+              </button>
             </div>
           </div>
 
