@@ -1,6 +1,4 @@
-﻿蝚砌?畾蛛?銴ˊ鞎澆閮??穿?
-
-```
+﻿```
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Mail, Crown, X, Send, Loader2 } from "lucide-react";
