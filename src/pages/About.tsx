@@ -129,7 +129,6 @@ function ContactModal({ onClose }: { onClose: () => void }) {
   );
 }
 
-蝚砌?畾蛛??亙蝚砌?畾萄??Ｚ票?伐?
 
 export default function About() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -210,7 +209,6 @@ export default function About() {
             <motion.div key={currentSlide} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.4, ease: 'easeOut' }} style={{ height: '100%' }}>
               <div className="container mx-auto px-6 max-w-7xl font-sans" style={{ height: '100%' }}>
 
-蝚砌?畾蛛?
 
                 {currentSlide === 0 && (
                   <div className="flex flex-row" style={{ height: '100%', overflow: 'hidden' }}>
@@ -385,4 +383,5 @@ export default function About() {
     </>
   );
 }
+
 
