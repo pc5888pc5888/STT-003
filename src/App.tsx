@@ -435,7 +435,7 @@ export default function App() {
                     <span className="text-[8px] font-mono font-black tracking-widest uppercase opacity-80 whitespace-nowrap">GOVERNANCE ENGAGEMENT</span>
                   </a>
                   <a 
-                    href=/about.html#contact"
+                    href="/about.html#contact
                     onClick={() => setIsMenuOpen(false)}
                     className="border border-gold-400/40 text-gold-400 px-6 py-4 rounded-lg flex items-center justify-between group no-underline"
                   >
