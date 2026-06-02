@@ -232,7 +232,7 @@ export default function App() {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               }
             }}
-            aria-label="????
+          aria-label="STT Press Home
           >
               <div className="relative w-40 lg:w-56 h-10 lg:h-12 flex items-center flex-shrink-0">
                <img src="/images/logo-header.png?v=20260522_v2" alt="STT Press Logo" className="w-full h-full object-contain transition-transform group-hover:scale-[1.02]" />
