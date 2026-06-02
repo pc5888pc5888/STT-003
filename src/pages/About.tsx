@@ -26,14 +26,19 @@ export default function About() {
         style={{ height: '100%', maxHeight: '100%', filter: 'contrast(1.05)' }}
         referrerPolicy="no-referrer"
       />
-      <div className="absolute bottom-5 right-5 z-20 pointer-events-none select-none">
+      <div className="absolute bottom-5 right-5 z-20 pointer-events-none select-none text-right flex flex-col items-end gap-1">
         <img
           src="/images/signature-eric001.png"
           alt="Signature"
           className="h-auto opacity-95"
-          style={{ width: 'clamp(120px, 11vw, 200px)', filter: 'drop-shadow(0 2px 10px rgba(0,0,0,0.95))' }}
+          style={{ width: 'clamp(100px, 9vw, 170px)', filter: 'drop-shadow(0 2px 10px rgba(0,0,0,0.95))' }}
           referrerPolicy="no-referrer"
         />
+        <div className="text-right mt-1 drop-shadow-[0_2px_8px_rgba(0,0,0,1)]">
+          <p className="text-[#e6c84c] font-serif font-bold tracking-widest leading-none" style={{ fontSize: 'clamp(11px, 1vw, 15px)' }}>莊鈞翔 博士</p>
+          <p className="text-stone-300 font-mono tracking-widest uppercase mt-0.5 leading-none" style={{ fontSize: 'clamp(8px, 0.7vw, 11px)' }}>ERIC CHUANG, Ph.D.</p>
+          <p className="text-zinc-400 mt-1 opacity-90 leading-relaxed font-light" style={{ fontSize: 'clamp(7px, 0.6vw, 9px)' }}>企業策略資深顧問 ｜ 治理制度設計者 ｜ 策略智庫創辦人</p>
+        </div>
       </div>
     </div>
   );
@@ -65,7 +70,7 @@ export default function About() {
     <div
       className="bg-[#050505] text-white selection:bg-gold-400/30 selection:text-white flex flex-col"
       id="about-viewport-container"
-      style={{ height: 'calc(100vh - 80px)', overflow: 'hidden' }}
+      style={{ height: '100vh', overflow: 'hidden' }}
     >
       {/* 左側垂直文字 */}
       <div className="fixed left-6 top-1/2 -translate-y-1/2 z-40 hidden xl:flex flex-col items-start gap-4 select-none pointer-events-none">
