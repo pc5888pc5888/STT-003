@@ -299,17 +299,6 @@ export default function App() {
                 </div>
                 <span className="text-[7px] font-mono font-black tracking-[0.15em] opacity-80 uppercase leading-none whitespace-nowrap">GOVERNANCE ENGAGEMENT</span>
               </a>
-                href="mailto:pc5888@gmail.com
- className=border border-gold-400/40 text-gold-400 hover:bg-gold-400/5 px-5 py-3.5 rounded-lg flex flex-col items-center justify-center gap-0 group transition-all shadow-lg font-sans cursor-pointer no-underline
- >
-              >
-                <div className="flex items-center gap-1.5 mb-0.5 whitespace-nowrap">
-                  <Mail className="w-3.5 h-3.5 text-gold-400" strokeWidth={1.5} />
-                  <span className="text-[14px] font-bold tracking-[0.05em] leading-none">????蝞?</span>
-                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform text-gold-400" strokeWidth={1.5} />
-                </div>
-                <span className="text-[7px] font-mono font-black tracking-[0.15em] opacity-80 uppercase leading-none whitespace-nowrap">CONTACT STT</span>
-              </a>
             </div>
           </div>
 
@@ -432,16 +421,6 @@ export default function App() {
                       <span className="text-base font-bold">????軋??</span>
                     </div>
                     <span className="text-[8px] font-mono font-black tracking-widest uppercase opacity-80 whitespace-nowrap">GOVERNANCE ENGAGEMENT</span>
-                  </a>
-                  <a 
- href=mailto:pc5888@gmail.com
-                    className="border border-gold-400/40 text-gold-400 px-6 py-4 rounded-lg flex items-center justify-between group no-underline"
-                  >
-                    <div className="flex items-center gap-2">
-                      <Mail className="w-5 h-5 text-gold-400" strokeWidth={1.5} />
-                      <span className="text-base font-bold">????蝞?</span>
-                    </div>
-                    <span className="text-[8px] font-mono font-black tracking-widest uppercase opacity-80">CONTACT STT</span>
                   </a>
                   {/* Discreet Core system login */}
                   <button 
