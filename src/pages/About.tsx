@@ -1,5 +1,4 @@
-﻿```
-import { useState } from "react";
+﻿import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Mail, Crown, X, Send, Loader2 } from "lucide-react";
 import emailjs from "@emailjs/browser";
@@ -129,11 +128,9 @@ function ContactModal({ onClose }: { onClose: () => void }) {
     </div>
   );
 }
-```
 
 蝚砌?畾蛛??亙蝚砌?畾萄??Ｚ票?伐?
 
-```
 export default function About() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [showContact, setShowContact] = useState(false);
@@ -212,11 +209,9 @@ export default function About() {
           <AnimatePresence mode="wait">
             <motion.div key={currentSlide} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.4, ease: 'easeOut' }} style={{ height: '100%' }}>
               <div className="container mx-auto px-6 max-w-7xl font-sans" style={{ height: '100%' }}>
-```
 
 蝚砌?畾蛛?
 
-```
                 {currentSlide === 0 && (
                   <div className="flex flex-row" style={{ height: '100%', overflow: 'hidden' }}>
                     <div className="w-full lg:w-[58%] flex flex-col overflow-hidden flex-shrink-0" style={{ padding: 'clamp(8px, 1.5vh, 24px) 0', paddingRight: 'clamp(16px, 2vw, 40px)' }}>
@@ -339,7 +334,6 @@ export default function About() {
                     <Portrait src="/images/Eric-Chuang-19.png" alt="??蝧?憯? />
                   </div>
                 )}
-```
 
 {currentSlide === 5 && (
                   <div className="flex flex-row" style={{ height: '100%', overflow: 'hidden' }}>
