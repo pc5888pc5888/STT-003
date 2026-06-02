@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+﻿import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import Lenis from "lenis";
 import Home from "./pages/Home";
@@ -205,12 +205,12 @@ export default function App() {
   };
 
   const navItems = [
-    { id: "governance", labelZh: "治理入口", labelEn: "GOVERNANCE", icon: Landmark },
-    { id: "columns", labelZh: "法律研究", labelEn: "LEGAL RESEARCH", icon: Scale },
-    { id: "books", labelZh: "治理出版", labelEn: "PUBLICATION", icon: BookText },
-    { id: "papers", labelZh: "學術策展", labelEn: "ACADEMIC CURATION", icon: GraduationCap },
-    { id: "gcsda", labelZh: "策略發展學會", labelEn: "STRATEGY FORUM", icon: Users },
-    { id: "about", labelZh: "思想主權", labelEn: "SOVEREIGNTY OF THOUGHT", icon: Shield },
+    { id: "governance", labelZh: "瘝餌??亙", labelEn: "GOVERNANCE", icon: Landmark },
+    { id: "columns", labelZh: "瘜??弦", labelEn: "LEGAL RESEARCH", icon: Scale },
+    { id: "books", labelZh: "瘝餌??箇?", labelEn: "PUBLICATION", icon: BookText },
+    { id: "papers", labelZh: "摮貉?蝑?", labelEn: "ACADEMIC CURATION", icon: GraduationCap },
+    { id: "gcsda", labelZh: "蝑?澆?摮豢?", labelEn: "STRATEGY FORUM", icon: Users },
+    { id: "about", labelZh: "?銝餅?", labelEn: "SOVEREIGNTY OF THOUGHT", icon: Shield },
   ];
 
   return (
@@ -232,7 +232,7 @@ export default function App() {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               }
             }}
-            aria-label="回首頁"
+            aria-label="????
           >
               <div className="relative w-40 lg:w-56 h-10 lg:h-12 flex items-center flex-shrink-0">
                <img src="/images/logo-header.png?v=20260522_v2" alt="STT Press Logo" className="w-full h-full object-contain transition-transform group-hover:scale-[1.02]" />
@@ -294,19 +294,19 @@ export default function App() {
               >
                 <div className="flex items-center gap-1.5 mb-0.5 whitespace-nowrap">
                   <Crown className="w-3.5 h-3.5 text-black" strokeWidth={1.5} />
-                  <span className="text-[14px] font-bold tracking-[0.05em] leading-none">治理委託</span>
+                  <span className="text-[14px] font-bold tracking-[0.05em] leading-none">瘝餌?憪?</span>
                   <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform text-black" strokeWidth={1.5} />
                 </div>
                 <span className="text-[7px] font-mono font-black tracking-[0.15em] opacity-80 uppercase leading-none whitespace-nowrap">GOVERNANCE ENGAGEMENT</span>
               </a>
 
               <a 
-                href="mailto:pc5888@gmail.com"
+                href=/about.html#contact"
                 className="border border-gold-400/40 text-gold-400 hover:bg-gold-400/5 px-5 py-3.5 rounded-lg flex flex-col items-center justify-center gap-0 group transition-all shadow-lg font-sans cursor-pointer no-underline"
               >
                 <div className="flex items-center gap-1.5 mb-0.5 whitespace-nowrap">
                   <Mail className="w-3.5 h-3.5 text-gold-400" strokeWidth={1.5} />
-                  <span className="text-[14px] font-bold tracking-[0.05em] leading-none">聯絡智庫</span>
+                  <span className="text-[14px] font-bold tracking-[0.05em] leading-none">?舐窗?箏澈</span>
                   <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform text-gold-400" strokeWidth={1.5} />
                 </div>
                 <span className="text-[7px] font-mono font-black tracking-[0.15em] opacity-80 uppercase leading-none whitespace-nowrap">CONTACT STT</span>
@@ -352,24 +352,24 @@ export default function App() {
                   <div className="w-16 h-16 bg-gold-400/10 rounded-full flex items-center justify-center mx-auto mb-4">
                     <Shield className="w-8 h-8 text-gold-400" />
                   </div>
-                  <h3 className="text-2xl font-display text-white mb-2">ESGAI 核心系統</h3>
+                  <h3 className="text-2xl font-display text-white mb-2">ESGAI ?詨?蝟餌絞</h3>
                   <p className="text-white/40 text-xs tracking-widest uppercase italic">Governance Protocol Login</p>
                 </div>
                 <div className="space-y-4">
                   <div className="space-y-1.5">
-                    <label className="text-[10px] text-gold-400 uppercase tracking-widest font-bold">治理帳號</label>
-                    <input type="text" className="w-full bg-black border border-white/10 rounded px-4 py-3 text-white focus:border-gold-400 outline-none transition-colors" placeholder="請輸入帳號" />
+                    <label className="text-[10px] text-gold-400 uppercase tracking-widest font-bold">瘝餌?撣唾?</label>
+                    <input type="text" className="w-full bg-black border border-white/10 rounded px-4 py-3 text-white focus:border-gold-400 outline-none transition-colors" placeholder="隢撓?亙董?? />
                   </div>
                   <div className="space-y-1.5">
-                    <label className="text-[10px] text-gold-400 uppercase tracking-widest font-bold">安全密鑰</label>
-                    <input type="password" className="w-full bg-black border border-white/10 rounded px-4 py-3 text-white focus:border-gold-400 outline-none transition-colors" placeholder="請輸入密碼" />
+                    <label className="text-[10px] text-gold-400 uppercase tracking-widest font-bold">摰撖</label>
+                    <input type="password" className="w-full bg-black border border-white/10 rounded px-4 py-3 text-white focus:border-gold-400 outline-none transition-colors" placeholder="隢撓?亙?蝣? />
                   </div>
                   <Button className="w-full bg-gold-400 hover:bg-gold-500 text-black font-bold h-12 mt-4">
-                    啟動治理協議
+                    ??瘝餌??降
                   </Button>
                 </div>
                 <p className="mt-8 text-center text-[10px] text-white/20">
-                  PRIVATE SYSTEM &nbsp;·&nbsp; AUTHORIZED PERSONNEL ONLY
+                  PRIVATE SYSTEM &nbsp;繚&nbsp; AUTHORIZED PERSONNEL ONLY
                 </p>
               </motion.div>
             </div>
@@ -430,18 +430,18 @@ export default function App() {
                   >
                     <div className="flex items-center gap-2">
                       <Crown className="w-5 h-5 text-black" strokeWidth={1.5} />
-                      <span className="text-base font-bold">治理委託</span>
+                      <span className="text-base font-bold">瘝餌?憪?</span>
                     </div>
                     <span className="text-[8px] font-mono font-black tracking-widest uppercase opacity-80 whitespace-nowrap">GOVERNANCE ENGAGEMENT</span>
                   </a>
                   <a 
-                    href="mailto:pc5888@gmail.com"
+                    href=/about.html#contact"
                     onClick={() => setIsMenuOpen(false)}
                     className="border border-gold-400/40 text-gold-400 px-6 py-4 rounded-lg flex items-center justify-between group no-underline"
                   >
                     <div className="flex items-center gap-2">
                       <Mail className="w-5 h-5 text-gold-400" strokeWidth={1.5} />
-                      <span className="text-base font-bold">聯絡智庫</span>
+                      <span className="text-base font-bold">?舐窗?箏澈</span>
                     </div>
                     <span className="text-[8px] font-mono font-black tracking-widest uppercase opacity-80">CONTACT STT</span>
                   </a>
@@ -508,12 +508,11 @@ export default function App() {
                     STT Governance
                   </h3>
                   <p className="text-white text-lg lg:text-xl font-display tracking-widest w-full">
-                    策略為先 &nbsp;|&nbsp; 治理為本 &nbsp;|&nbsp; 管理為終
+                    蝑?箏? &nbsp;|&nbsp; 瘝餌??箸 &nbsp;|&nbsp; 蝞∠??箇?
                   </p>
                   <div className="w-12 h-px bg-[#e6c84c]/40 mx-auto lg:mx-0"></div>
                   <p className="text-white/40 max-w-sm font-sans text-sm leading-loose font-light mx-auto lg:mx-0">
-                    協助領導者在變革中實現專業長青，我們將企業治理的嚴謹法遵精神，轉化為個人心智運作的底層邏輯。
-                  </p>
+                    ????霈銝剖祕?曉?璆剝????隡平瘝餌??雓寞??萇移蟡?頧??箏犖敹????撅日?頛胯?                  </p>
                 </div>
               </div>
             </div>
@@ -524,12 +523,12 @@ export default function App() {
               
               <div className="space-y-6">
                 {[
-                  { id: "governance", zh: "治理入口", en: "GOVERNANCE", icon: Landmark, href: "governance.html" },
-                  { id: "columns", zh: "法律研究", en: "LEGAL RESEARCH", icon: Scale, href: "insights.html" },
-                  { id: "books", zh: "治理出版", en: "PUBLICATION", icon: BookText, href: "books.html" },
-                  { id: "papers", zh: "學術策展", en: "ACADEMIC CURATION", icon: GraduationCap, href: "papers.html" },
-                  { id: "gcsda", zh: "策略發展學會", en: "STRATEGY FORUM", icon: Users, href: "gcsda.html" },
-                  { id: "about", zh: "思想主權", en: "SOVEREIGNTY OF THOUGHT", icon: Shield, href: "about.html" },
+                  { id: "governance", zh: "瘝餌??亙", en: "GOVERNANCE", icon: Landmark, href: "governance.html" },
+                  { id: "columns", zh: "瘜??弦", en: "LEGAL RESEARCH", icon: Scale, href: "insights.html" },
+                  { id: "books", zh: "瘝餌??箇?", en: "PUBLICATION", icon: BookText, href: "books.html" },
+                  { id: "papers", zh: "摮貉?蝑?", en: "ACADEMIC CURATION", icon: GraduationCap, href: "papers.html" },
+                  { id: "gcsda", zh: "蝑?澆?摮豢?", en: "STRATEGY FORUM", icon: Users, href: "gcsda.html" },
+                  { id: "about", zh: "?銝餅?", en: "SOVEREIGNTY OF THOUGHT", icon: Shield, href: "about.html" },
                 ].map((item, idx) => (
                   <a 
                     key={idx}
@@ -572,7 +571,7 @@ export default function App() {
                     <div>
                       <div className="text-white/30 text-[10px] tracking-[0.2em] uppercase font-bold mb-1">Digital Fulfillment</div>
                       <div className="text-white/80 group-hover:text-gold-400 transition-colors inline-flex items-center gap-2">
-                        STT 智庫治理 Line 🤙
+                        STT ?箏澈瘝餌? Line ??
                       </div>
                     </div>
                   </div>
@@ -593,7 +592,7 @@ export default function App() {
                     <div>
                       <div className="text-white/30 text-[10px] tracking-[0.2em] uppercase font-bold mb-1">Academic Society</div>
                       <div className="text-white/80 group-hover:text-gold-400 transition-colors inline-flex items-center gap-2">
-                        GCSDA 學會 Line 🤙
+                        GCSDA 摮豢? Line ??
                       </div>
                     </div>
                   </div>
@@ -623,9 +622,9 @@ export default function App() {
           <div className="mt-24 pt-12 border-t border-white/5 flex flex-col lg:flex-row justify-between items-center gap-8">
             <div className="flex gap-10">
               {[
-                { zh: "信任為本", en: "TRUST FOUNDATION" },
-                { zh: "制度為本", en: "INSTITUTIONAL LOGIC" },
-                { zh: "長期為本", en: "LONG-TERM VALUE" }
+                { zh: "靽∩遙?箸", en: "TRUST FOUNDATION" },
+                { zh: "?嗅漲?箸", en: "INSTITUTIONAL LOGIC" },
+                { zh: "?瑟??箸", en: "LONG-TERM VALUE" }
               ].map((item, idx) => (
                 <div key={idx} className="text-center">
                   <div className="text-gold-400/60 text-[11px] mb-1 tracking-widest font-medium uppercase">{item.zh}</div>
@@ -636,11 +635,11 @@ export default function App() {
 
             <div className="flex flex-col items-center lg:items-end gap-3">
               <div className="flex gap-8 text-[9px] font-sans font-medium tracking-[0.3em] text-white/20 uppercase">
-                <button onClick={() => setCurrentPage('service-portal')} className="hover:text-gold-400 transition-colors">合規與退換貨 Compliance</button>
-                <button onClick={() => setCurrentPage('service-portal')} className="hover:text-gold-400 transition-colors">隱私權保護 Privacy</button>
+                <button onClick={() => setCurrentPage('service-portal')} className="hover:text-gold-400 transition-colors">????疏 Compliance</button>
+                <button onClick={() => setCurrentPage('service-portal')} className="hover:text-gold-400 transition-colors">?梁?甈?霅?Privacy</button>
               </div>
               <span className="text-[9px] font-sans font-black tracking-[0.3em] text-white/10 uppercase">
-                © 2026 STT PRESS. ALL RIGHTS RESERVED.
+                穢 2026 STT PRESS. ALL RIGHTS RESERVED.
               </span>
             </div>
           </div>
@@ -649,3 +648,4 @@ export default function App() {
     </div>
   );
 }
+
