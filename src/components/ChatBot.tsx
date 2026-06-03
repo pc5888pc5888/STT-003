@@ -109,10 +109,10 @@ ${context ? `以下是與問題相關的專欄知識庫內容：\n\n${context}` 
         }
       );
       const data = await res.json();
-      const reply = data.candidates?.[0]?.content?.parts?.[0]?.text || "抱歉，暫時無法回應，請稍後再試。";
+      const reply = data.candidates?.[0]?.content?.parts?.[0]?.text || (data.error ? "API錯誤：" + data.error.message : "抱歉，暫時無法回應，請稍後再試。");
       setMessages(prev => [...prev, { role: "assistant", content: reply }]);
-    } catch {
-      setMessages(prev => [...prev, { role: "assistant", content: "連線異常，請稍後再試。" }]);
+    } catch (err: any) {
+      setMessages(prev => [...prev, { role: "assistant", content: "錯誤：" + (err?.message || String(err)) }]);
     }
     setLoading(false);
   }
