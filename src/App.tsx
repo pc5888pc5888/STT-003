@@ -432,7 +432,7 @@ export default function App() {
                   >
                     <div className="flex items-center gap-2">
                       <Crown className="w-5 h-5 text-black" strokeWidth={1.5} />
-                      <span className="text-base font-bold">????軋??</span>
+                      <span className="text-base font-bold">治理委託</span>
                     </div>
                     <span className="text-[8px] font-mono font-black tracking-widest uppercase opacity-80 whitespace-nowrap">GOVERNANCE ENGAGEMENT</span>
                   </a>
@@ -504,11 +504,11 @@ export default function App() {
                     STT Governance
                   </h3>
                   <p className="text-white text-lg lg:text-xl font-display tracking-widest w-full">
-                    ?▽??蝞? &nbsp;|&nbsp; ????蝞賃秧 &nbsp;|&nbsp; ????蝞?
+                    策略智庫 &nbsp;|&nbsp; 治理出版 &nbsp;|&nbsp; 法遵精神
                   </p>
                   <div className="w-12 h-px bg-[#e6c84c]/40 mx-auto lg:mx-0"></div>
                   <p className="text-white/40 max-w-sm font-sans text-sm leading-loose font-light mx-auto lg:mx-0">
-                    ????謢???荒祗??豰??????????????威???∵撮撟喟?擗???矽?????宏?∵筑??改??蝞???對謒???????????                  </p>
+                    我們以制度性思維守護企業核心價值，提供具備學術嚴謹性與實務可執行性的治理諮詢服務。
                 </div>
               </div>
             </div>
@@ -519,12 +519,12 @@ export default function App() {
               
               <div className="space-y-6">
                 {[
-                  { id: "governance", zh: "????鈭", en: "GOVERNANCE", icon: Landmark, href: "governance.html" },
-                  { id: "columns", zh: "?????憐", en: "LEGAL RESEARCH", icon: Scale, href: "insights.html" },
-                  { id: "books", zh: "????蝞?", en: "PUBLICATION", icon: BookText, href: "books.html" },
-                  { id: "papers", zh: "?株???□?", en: "ACADEMIC CURATION", icon: GraduationCap, href: "papers.html" },
-                  { id: "gcsda", zh: "?▽??瞉??株悻?", en: "STRATEGY FORUM", icon: Users, href: "gcsda.html" },
-                  { id: "about", zh: "?豲????", en: "SOVEREIGNTY OF THOUGHT", icon: Shield, href: "about.html" },
+                  { id: "governance", zh: "治理入口", en: "GOVERNANCE", icon: Landmark, href: "governance.html" },
+                  { id: "columns", zh: "法律研究", en: "LEGAL RESEARCH", icon: Scale, href: "insights.html" },
+                  { id: "books", zh: "治理出版", en: "PUBLICATION", icon: BookText, href: "books.html" },
+                  { id: "papers", zh: "學術策展", en: "ACADEMIC CURATION", icon: GraduationCap, href: "papers.html" },
+                  { id: "gcsda", zh: "策略發展學會", en: "STRATEGY FORUM", icon: Users, href: "gcsda.html" },
+                  { id: "about", zh: "思想主權", en: "SOVEREIGNTY OF THOUGHT", icon: Shield, href: "about.html" },
                 ].map((item, idx) => (
                   <a 
                     key={idx}
@@ -567,7 +567,7 @@ export default function App() {
                     <div>
                       <div className="text-white/30 text-[10px] tracking-[0.2em] uppercase font-bold mb-1">Digital Fulfillment</div>
                       <div className="text-white/80 group-hover:text-gold-400 transition-colors inline-flex items-center gap-2">
-                        STT ?蝞???? Line ??
+                        STT 智庫數位 Line 官方帳號
                       </div>
                     </div>
                   </div>
@@ -588,7 +588,7 @@ export default function App() {
                     <div>
                       <div className="text-white/30 text-[10px] tracking-[0.2em] uppercase font-bold mb-1">Academic Society</div>
                       <div className="text-white/80 group-hover:text-gold-400 transition-colors inline-flex items-center gap-2">
-                        GCSDA ?株悻? Line ??
+                        GCSDA 學會 Line 官方帳號
                       </div>
                     </div>
                   </div>
@@ -618,9 +618,9 @@ export default function App() {
           <div className="mt-24 pt-12 border-t border-white/5 flex flex-col lg:flex-row justify-between items-center gap-8">
             <div className="flex gap-10">
               {[
-                { zh: "?賤??蝞賃秧", en: "TRUST FOUNDATION" },
-                { zh: "??撞?蝞賃秧", en: "INSTITUTIONAL LOGIC" },
-                { zh: "????蝞賃秧", en: "LONG-TERM VALUE" }
+                { zh: "信任基礎", en: "TRUST FOUNDATION" },
+                { zh: "制度邏輯", en: "INSTITUTIONAL LOGIC" },
+                { zh: "長期價值", en: "LONG-TERM VALUE" }
               ].map((item, idx) => (
                 <div key={idx} className="text-center">
                   <div className="text-gold-400/60 text-[11px] mb-1 tracking-widest font-medium uppercase">{item.zh}</div>
@@ -631,8 +631,8 @@ export default function App() {
 
             <div className="flex flex-col items-center lg:items-end gap-3">
               <div className="flex gap-8 text-[9px] font-sans font-medium tracking-[0.3em] text-white/20 uppercase">
-                <button onClick={() => setCurrentPage('service-portal')} className="hover:text-gold-400 transition-colors">?????倦??謜? Compliance</button>
-                <button onClick={() => setCurrentPage('service-portal')} className="hover:text-gold-400 transition-colors">?璇?????Privacy</button>
+                <button onClick={() => setCurrentPage('service-portal')} className="hover:text-gold-400 transition-colors">服務條款 Compliance</button>
+                <button onClick={() => setCurrentPage('service-portal')} className="hover:text-gold-400 transition-colors">隱私政策 Privacy</button>
               </div>
               <span className="text-[9px] font-sans font-black tracking-[0.3em] text-white/10 uppercase">
                 蝛?2026 STT PRESS. ALL RIGHTS RESERVED.
