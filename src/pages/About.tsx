@@ -52,7 +52,7 @@ export function ContactModal({ onClose }: { onClose: () => void }) {
   const labelClass = "block text-zinc-400 font-mono tracking-widest uppercase mb-1" ;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4" style={{ background: "rgba(0,0,0,0.85)" }}>
+    <div className="fixed inset-0 z-[200] flex items-center justify-center p-4" style={{ background: "rgba(0,0,0,0.85)" }}>
       <motion.div
         initial={{ opacity: 0, scale: 0.95, y: 20 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
