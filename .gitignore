@@ -18,3 +18,4 @@ temp/
 build/
 # PDF files (temp removal to reduce package size)
 # 128專欄文章.pdf
+.env 
