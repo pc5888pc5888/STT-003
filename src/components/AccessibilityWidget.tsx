@@ -44,7 +44,7 @@ export function AccessibilityWidget({ onChatOpen, isChatOpen }: AccessibilityWid
       setIsSpeaking(false);
     } else {
       const textToRead = document.body.innerText;
-      const cleanText = textToRead.replace(/Google 蝧餉陌/g, '').replace(/?賢?蝬脤?/g, '').substring(0, 5000);
+      const cleanText = textToRead.substring(0, 5000);
       const utterance = new SpeechSynthesisUtterance(cleanText);
       utterance.lang = "zh-TW";
       utterance.onend = () => setIsSpeaking(false);
