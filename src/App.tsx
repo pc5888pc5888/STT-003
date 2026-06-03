@@ -1,3 +1,4 @@
+import ChatBot from "./components/ChatBot";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import Lenis from "lenis";
@@ -106,7 +107,6 @@ export default function App() {
     };
   }, []);
 
-  // Update hash when page changes
   useEffect(() => {
     if (currentPage === 'home') {
       window.location.hash = homeSection;
@@ -128,7 +128,6 @@ export default function App() {
       infinite: false,
     });
 
-    // Make lenis globally accessible for scrolling to top
     (window as any).lenis = lenis;
 
     function raf(time: number) {
@@ -144,7 +143,6 @@ export default function App() {
     };
   }, []);
 
-  // Scroll to top on page change, or to section for governance portal
   useEffect(() => {
     if (currentPage === "governance") {
       setTimeout(() => {
@@ -217,7 +215,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen flex flex-col selection:bg-gold-400/30 selection:text-white bg-[#050505]">
-      {/* Navigation - High Prestige Design */}
+      {/* Navigation */}
       <nav className="sticky top-0 z-50 bg-[#050505]/95 backdrop-blur-2xl border-b border-gold-400/10">
         <div className="container mx-auto px-6 h-20 flex items-center">
           <a 
@@ -366,12 +364,10 @@ export default function App() {
                     <label className="text-[10px] text-gold-400 uppercase tracking-widest font-bold">密碼</label>
                     <input type="password" className="w-full bg-black border border-white/10 rounded px-4 py-3 text-white focus:border-gold-400 outline-none transition-colors" placeholder="請輸入密碼" />
                   </div>
-                  <Button className="w-full bg-gold-400 hover:bg-gold-500 text-black font-bold h-12 mt-4">
-                    <Button className="w-full bg-gold-400 hover:bg-gold-500 text-black font-bold h-12 mt-4">登入系統</Button>
-                  </Button>
+                  <Button className="w-full bg-gold-400 hover:bg-gold-500 text-black font-bold h-12 mt-4">登入系統</Button>
                 </div>
                 <p className="mt-8 text-center text-[10px] text-white/20">
-                  PRIVATE SYSTEM &nbsp;蝜?nbsp; AUTHORIZED PERSONNEL ONLY
+                  PRIVATE SYSTEM · AUTHORIZED PERSONNEL ONLY
                 </p>
               </motion.div>
             </div>
@@ -421,7 +417,6 @@ export default function App() {
                   );
                 })}
 
-                {/* Mobile action links */}
                 <div className="border-t border-gold-400/10 pt-6 mt-2 flex flex-col gap-4">
                   <a 
                     href="https://lin.ee/yJrCTeo"
@@ -436,7 +431,6 @@ export default function App() {
                     </div>
                     <span className="text-[8px] font-mono font-black tracking-widest uppercase opacity-80 whitespace-nowrap">GOVERNANCE ENGAGEMENT</span>
                   </a>
-                  {/* Discreet Core system login */}
                   <button 
                     onClick={() => {
                       setIsMenuOpen(false);
@@ -454,7 +448,7 @@ export default function App() {
         </AnimatePresence>
       </nav>
 
-      {/* Contact Modal - outside nav */}
+      {/* Contact Modal */}
       <AnimatePresence>
         {showContactModal && <ContactModal onClose={() => setShowContactModal(false)} />}
       </AnimatePresence>
@@ -475,23 +469,20 @@ export default function App() {
       </main>
 
       <AccessibilityWidget />
+      <ChatBot />
 
-      {/* Footer - Redesigned per User Image */}
+      {/* Footer */}
       <footer className="relative bg-black text-white pt-24 pb-16 overflow-hidden border-t-[0.5px] border-gold-400/20">
-        {/* Subtle Background Glow/Map Effect */}
         <div className="absolute top-0 right-0 w-1/2 h-full opacity-20 pointer-events-none">
           <div className="absolute top-0 right-0 w-full h-full bg-[radial-gradient(circle_at_70%_30%,rgba(230,200,76,0.1)_0%,transparent_70%)]"></div>
-          {/* We can simulate the world map with a CSS pattern if needed, but a focused glow is cleaner for now */}
         </div>
 
         <div className="container mx-auto px-6 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-0">
             
-            {/* Left Section: Brand & Slogan */}
             <div className="lg:col-span-4 space-y-8 pr-8 flex flex-col items-center lg:items-start text-center lg:text-left">
               <div className="flex flex-col gap-6 items-center lg:items-start">
                 <div className="relative w-40 h-40 lg:w-48 lg:h-48 flex justify-center lg:justify-start">
-                  {/* Seal Logo */}
                   <img 
                     src="/images/logo-seal-footer.png?v=20260522_v2" 
                     alt="STT Press Seal" 
@@ -513,7 +504,6 @@ export default function App() {
               </div>
             </div>
 
-            {/* Middle Section: Explore */}
             <div className="lg:col-span-4 border-l border-white/10 lg:pl-12 lg:pr-8">
               <h4 className="text-gold-400 text-sm font-medium tracking-[0.4em] uppercase mb-12">EXPLORE</h4>
               
@@ -548,12 +538,10 @@ export default function App() {
               </div>
             </div>
 
-            {/* Right Section: Connect & Support */}
             <div className="lg:col-span-4 border-l border-white/10 lg:pl-12">
               <h4 className="text-gold-400 text-sm font-medium tracking-[0.4em] uppercase mb-12">CONNECT & SUPPORT</h4>
               
               <div className="space-y-10">
-                {/* Line Item 1 */}
                 <a 
                   href="https://line.me/R/ti/p/@stt-group" 
                   target="_blank" 
@@ -574,7 +562,6 @@ export default function App() {
                   <ArrowUpRight className="w-6 h-6 text-gold-400/40 group-hover:text-gold-400 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
                 </a>
 
-                {/* Line Item 2 */}
                 <a 
                   href="https://line.me/R/ti/p/@387nbnjs" 
                   target="_blank" 
@@ -597,7 +584,6 @@ export default function App() {
 
                 <div className="h-px bg-white/10 w-full"></div>
 
-                {/* Email Item */}
                 <div className="flex items-center justify-between group cursor-default">
                   <div className="flex items-center gap-6">
                     <div className="w-10 h-10 rounded-full border border-gold-400/30 flex items-center justify-center group-hover:border-gold-400 transition-colors">
@@ -614,7 +600,6 @@ export default function App() {
             </div>
           </div>
           
-          {/* Final Bottom Bar */}
           <div className="mt-24 pt-12 border-t border-white/5 flex flex-col lg:flex-row justify-between items-center gap-8">
             <div className="flex gap-10">
               {[
@@ -635,7 +620,7 @@ export default function App() {
                 <button onClick={() => setCurrentPage('service-portal')} className="hover:text-gold-400 transition-colors">隱私政策 Privacy</button>
               </div>
               <span className="text-[9px] font-sans font-black tracking-[0.3em] text-white/10 uppercase">
-                蝛?2026 STT PRESS. ALL RIGHTS RESERVED.
+                © 2026 STT PRESS. ALL RIGHTS RESERVED.
               </span>
             </div>
           </div>
@@ -645,7 +630,5 @@ export default function App() {
   );
 }
 
-
 // rebuild Tue Jun  2 08:22:41 UTC 2026
-
 // force-rebuild-20260602
