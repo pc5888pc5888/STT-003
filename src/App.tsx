@@ -327,11 +327,6 @@ export default function App() {
           </Button>
         </div>
 
-        {/* Contact Modal */}
-        <AnimatePresence>
-          {showContactModal && <ContactModal onClose={() => setShowContactModal(false)} />}
-        </AnimatePresence>
-
         {/* Login Modal */}
         <AnimatePresence>
           {isLoginModalOpen && (
@@ -458,6 +453,11 @@ export default function App() {
           )}
         </AnimatePresence>
       </nav>
+
+      {/* Contact Modal - outside nav */}
+      <AnimatePresence>
+        {showContactModal && <ContactModal onClose={() => setShowContactModal(false)} />}
+      </AnimatePresence>
 
       {/* Main Content */}
       <main className="flex-grow">
