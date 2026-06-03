@@ -207,12 +207,12 @@ export default function App() {
   };
 
   const navItems = [
-    { id: "governance", labelZh: "????鈭", labelEn: "GOVERNANCE", icon: Landmark },
-    { id: "columns", labelZh: "?????憐", labelEn: "LEGAL RESEARCH", icon: Scale },
-    { id: "books", labelZh: "????蝞?", labelEn: "PUBLICATION", icon: BookText },
-    { id: "papers", labelZh: "?株???□?", labelEn: "ACADEMIC CURATION", icon: GraduationCap },
-    { id: "gcsda", labelZh: "?▽??瞉??株悻?", labelEn: "STRATEGY FORUM", icon: Users },
-    { id: "about", labelZh: "?豲????", labelEn: "SOVEREIGNTY OF THOUGHT", icon: Shield },
+    { id: "governance", labelZh: "治理入口", labelEn: "GOVERNANCE", icon: Landmark },
+    { id: "columns", labelZh: "法律研究", labelEn: "LEGAL RESEARCH", icon: Scale },
+    { id: "books", labelZh: "治理出版", labelEn: "PUBLICATION", icon: BookText },
+    { id: "papers", labelZh: "學術策展", labelEn: "ACADEMIC CURATION", icon: GraduationCap },
+    { id: "gcsda", labelZh: "策略發展學會", labelEn: "STRATEGY FORUM", icon: Users },
+    { id: "about", labelZh: "依律主張", labelEn: "SOVEREIGNTY OF THOUGHT", icon: Shield },
   ];
 
   return (
