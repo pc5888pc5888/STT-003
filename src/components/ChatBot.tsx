@@ -17,7 +17,6 @@ interface ColumnsData {
   articles: Article[];
 }
 
-// 從知識庫中找相關文章
 function findRelevantArticles(query: string, articles: Article[], topN = 5): Article[] {
   const keywords = query.replace(/[，。？！、]/g, " ").split(/\s+/).filter(k => k.length > 1);
   const scored = articles
@@ -50,7 +49,6 @@ export default function ChatBot() {
   const [articles, setArticles] = useState<Article[]>([]);
   const bottomRef = useRef<HTMLDivElement>(null);
 
-  // 載入知識庫
   useEffect(() => {
     fetch("/data/columns.json")
       .then(r => r.json())
@@ -71,7 +69,6 @@ export default function ChatBot() {
     setMessages(newMessages);
     setLoading(true);
 
-    // 找相關文章段落作為上下文
     const relevant = findRelevantArticles(query, articles);
     const context = relevant.length > 0
       ? relevant.map(a => `【${a.title}】\n${a.excerpt.slice(0, 600)}`).join("\n\n---\n\n")
@@ -118,13 +115,13 @@ ${context ? `以下是與問題相關的專欄知識庫內容：\n\n${context}` 
 
   return (
     <>
-      {/* 浮動按鈕 */}
+      {/* 浮動按鈕 — 左下角 */}
       <button
         onClick={() => setOpen(o => !o)}
         style={{
           position: "fixed",
           bottom: "2rem",
-          right: "2rem",
+          left: "2rem",
           width: "60px",
           height: "60px",
           borderRadius: "50%",
@@ -143,13 +140,13 @@ ${context ? `以下是與問題相關的專欄知識庫內容：\n\n${context}` 
         {open ? "✕" : "💬"}
       </button>
 
-      {/* 聊天視窗 */}
+      {/* 聊天視窗 — 左下角 */}
       {open && (
         <div
           style={{
             position: "fixed",
             bottom: "5.5rem",
-            right: "2rem",
+            left: "2rem",
             width: "380px",
             height: "520px",
             background: "#0A0A0A",
