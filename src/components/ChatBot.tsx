@@ -36,8 +36,12 @@ function findRelevantArticles(query: string, articles: Article[], topN = 5): Art
   return scored;
 }
 
-export default function ChatBot() {
-  const [open, setOpen] = useState(false);
+interface ChatBotProps {
+  open: boolean;
+  onClose: () => void;
+}
+
+export default function ChatBot({ open, onClose }: ChatBotProps) {
   const [messages, setMessages] = useState<Message[]>([
     {
       role: "assistant",
@@ -113,154 +117,132 @@ ${context ? `以下是與問題相關的專欄知識庫內容：\n\n${context}` 
     setLoading(false);
   }
 
+  if (!open) return null;
+
   return (
-    <>
-      {/* 浮動按鈕 — 左下角 */}
-      <button
-        onClick={() => setOpen(o => !o)}
-        style={{
-          position: "fixed",
-          bottom: "8rem",
-          right: "2rem",
-          width: "60px",
-          height: "60px",
-          borderRadius: "50%",
-          background: "linear-gradient(135deg, #C9A84C, #8B6914)",
-          border: "none",
-          cursor: "pointer",
-          boxShadow: "0 4px 20px rgba(201,168,76,0.4)",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          zIndex: 9999,
-          fontSize: "24px",
-        }}
-        title="策略智庫數位領航員"
-      >
-        {open ? "✕" : "💬"}
-      </button>
-
-      {/* 聊天視窗 — 左下角 */}
-      {open && (
-        <div
-          style={{
-            position: "fixed",
-            bottom: "14rem",
-            right: "2rem",
-            width: "380px",
-            height: "520px",
-            background: "#0A0A0A",
-            border: "1px solid #C9A84C",
-            borderRadius: "12px",
-            display: "flex",
-            flexDirection: "column",
-            zIndex: 9998,
-            boxShadow: "0 8px 40px rgba(0,0,0,0.6)",
-            overflow: "hidden",
-          }}
-        >
-          {/* 標題列 */}
-          <div style={{
-            background: "linear-gradient(135deg, #0F2236, #1a3a5c)",
-            padding: "14px 18px",
-            borderBottom: "1px solid #C9A84C",
-          }}>
-            <div style={{ color: "#C9A84C", fontWeight: "bold", fontSize: "15px" }}>
-              策略智庫數位領航員
-            </div>
-            <div style={{ color: "#888", fontSize: "11px", marginTop: "2px" }}>
-              莊鈞翔博士 · STT Group
-            </div>
+    <div
+      style={{
+        position: "fixed",
+        bottom: "5.5rem",
+        right: "2rem",
+        width: "380px",
+        height: "520px",
+        background: "#0A0A0A",
+        border: "1px solid #C9A84C",
+        borderRadius: "12px",
+        display: "flex",
+        flexDirection: "column",
+        zIndex: 9998,
+        boxShadow: "0 8px 40px rgba(0,0,0,0.6)",
+        overflow: "hidden",
+      }}
+    >
+      {/* 標題列 */}
+      <div style={{
+        background: "linear-gradient(135deg, #0F2236, #1a3a5c)",
+        padding: "14px 18px",
+        borderBottom: "1px solid #C9A84C",
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+      }}>
+        <div>
+          <div style={{ color: "#C9A84C", fontWeight: "bold", fontSize: "15px" }}>
+            策略智庫數位領航員
           </div>
-
-          {/* 訊息區 */}
-          <div style={{
-            flex: 1,
-            overflowY: "auto",
-            padding: "16px",
-            display: "flex",
-            flexDirection: "column",
-            gap: "12px",
-          }}>
-            {messages.map((m, i) => (
-              <div key={i} style={{
-                display: "flex",
-                justifyContent: m.role === "user" ? "flex-end" : "flex-start",
-              }}>
-                <div style={{
-                  maxWidth: "85%",
-                  padding: "10px 14px",
-                  borderRadius: m.role === "user" ? "12px 12px 2px 12px" : "12px 12px 12px 2px",
-                  background: m.role === "user" ? "#C9A84C" : "#1a1a1a",
-                  color: m.role === "user" ? "#0A0A0A" : "#E0E0E0",
-                  fontSize: "13px",
-                  lineHeight: "1.6",
-                  border: m.role === "assistant" ? "1px solid #333" : "none",
-                  whiteSpace: "pre-wrap",
-                }}>
-                  {m.content}
-                </div>
-              </div>
-            ))}
-            {loading && (
-              <div style={{ display: "flex", justifyContent: "flex-start" }}>
-                <div style={{
-                  padding: "10px 14px",
-                  borderRadius: "12px 12px 12px 2px",
-                  background: "#1a1a1a",
-                  border: "1px solid #333",
-                  color: "#C9A84C",
-                  fontSize: "13px",
-                }}>
-                  分析中⋯
-                </div>
-              </div>
-            )}
-            <div ref={bottomRef} />
-          </div>
-
-          {/* 輸入區 */}
-          <div style={{
-            padding: "12px 16px",
-            borderTop: "1px solid #222",
-            display: "flex",
-            gap: "8px",
-          }}>
-            <input
-              value={input}
-              onChange={e => setInput(e.target.value)}
-              onKeyDown={e => e.key === "Enter" && !e.shiftKey && sendMessage()}
-              placeholder="請輸入您的問題⋯"
-              style={{
-                flex: 1,
-                background: "#1a1a1a",
-                border: "1px solid #333",
-                borderRadius: "8px",
-                padding: "8px 12px",
-                color: "#fff",
-                fontSize: "13px",
-                outline: "none",
-              }}
-            />
-            <button
-              onClick={sendMessage}
-              disabled={loading || !input.trim()}
-              style={{
-                background: loading || !input.trim() ? "#333" : "#C9A84C",
-                border: "none",
-                borderRadius: "8px",
-                padding: "8px 14px",
-                color: loading || !input.trim() ? "#666" : "#0A0A0A",
-                cursor: loading || !input.trim() ? "not-allowed" : "pointer",
-                fontWeight: "bold",
-                fontSize: "13px",
-              }}
-            >
-              送出
-            </button>
+          <div style={{ color: "#888", fontSize: "11px", marginTop: "2px" }}>
+            莊鈞翔博士 · STT Group
           </div>
         </div>
-      )}
-    </>
+        <button onClick={onClose} style={{ color: "#888", background: "none", border: "none", cursor: "pointer", fontSize: "18px" }}>✕</button>
+      </div>
+
+      {/* 訊息區 */}
+      <div style={{
+        flex: 1,
+        overflowY: "auto",
+        padding: "16px",
+        display: "flex",
+        flexDirection: "column",
+        gap: "12px",
+      }}>
+        {messages.map((m, i) => (
+          <div key={i} style={{
+            display: "flex",
+            justifyContent: m.role === "user" ? "flex-end" : "flex-start",
+          }}>
+            <div style={{
+              maxWidth: "85%",
+              padding: "10px 14px",
+              borderRadius: m.role === "user" ? "12px 12px 2px 12px" : "12px 12px 12px 2px",
+              background: m.role === "user" ? "#C9A84C" : "#1a1a1a",
+              color: m.role === "user" ? "#0A0A0A" : "#E0E0E0",
+              fontSize: "13px",
+              lineHeight: "1.6",
+              border: m.role === "assistant" ? "1px solid #333" : "none",
+              whiteSpace: "pre-wrap",
+            }}>
+              {m.content}
+            </div>
+          </div>
+        ))}
+        {loading && (
+          <div style={{ display: "flex", justifyContent: "flex-start" }}>
+            <div style={{
+              padding: "10px 14px",
+              borderRadius: "12px 12px 12px 2px",
+              background: "#1a1a1a",
+              border: "1px solid #333",
+              color: "#C9A84C",
+              fontSize: "13px",
+            }}>
+              分析中⋯
+            </div>
+          </div>
+        )}
+        <div ref={bottomRef} />
+      </div>
+
+      {/* 輸入區 */}
+      <div style={{
+        padding: "12px 16px",
+        borderTop: "1px solid #222",
+        display: "flex",
+        gap: "8px",
+      }}>
+        <input
+          value={input}
+          onChange={e => setInput(e.target.value)}
+          onKeyDown={e => e.key === "Enter" && !e.shiftKey && sendMessage()}
+          placeholder="請輸入您的問題⋯"
+          style={{
+            flex: 1,
+            background: "#1a1a1a",
+            border: "1px solid #333",
+            borderRadius: "8px",
+            padding: "8px 12px",
+            color: "#fff",
+            fontSize: "13px",
+            outline: "none",
+          }}
+        />
+        <button
+          onClick={sendMessage}
+          disabled={loading || !input.trim()}
+          style={{
+            background: loading || !input.trim() ? "#333" : "#C9A84C",
+            border: "none",
+            borderRadius: "8px",
+            padding: "8px 14px",
+            color: loading || !input.trim() ? "#666" : "#0A0A0A",
+            cursor: loading || !input.trim() ? "not-allowed" : "pointer",
+            fontWeight: "bold",
+            fontSize: "13px",
+          }}
+        >
+          送出
+        </button>
+      </div>
+    </div>
   );
 }

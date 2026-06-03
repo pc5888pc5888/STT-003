@@ -166,6 +166,7 @@ export default function App() {
 
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [showContactModal, setShowContactModal] = useState(false);
+  const [chatOpen, setChatOpen] = useState(false);
 
   const renderPage = () => {
     switch (currentPage) {
@@ -468,8 +469,8 @@ export default function App() {
         </AnimatePresence>
       </main>
 
-      <AccessibilityWidget />
-      <ChatBot />
+      <AccessibilityWidget onChatOpen={() => setChatOpen(o => !o)} isChatOpen={chatOpen} />
+      <ChatBot open={chatOpen} onClose={() => setChatOpen(false)} />
 
       {/* Footer */}
       <footer className="relative bg-black text-white pt-24 pb-16 overflow-hidden border-t-[0.5px] border-gold-400/20">
@@ -632,5 +633,3 @@ export default function App() {
 
 // rebuild Tue Jun  2 08:22:41 UTC 2026
 // force-rebuild-20260602
-
-.env
