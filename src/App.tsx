@@ -354,20 +354,20 @@ export default function App() {
                   <div className="w-16 h-16 bg-gold-400/10 rounded-full flex items-center justify-center mx-auto mb-4">
                     <Shield className="w-8 h-8 text-gold-400" />
                   </div>
-                  <h3 className="text-2xl font-display text-white mb-2">ESGAI ?閰???蝯?/h3>
+                  <h3 className="text-2xl font-display text-white mb-2">ESGAI 核心系統</h3>
                   <p className="text-white/40 text-xs tracking-widest uppercase italic">Governance Protocol Login</p>
                 </div>
                 <div className="space-y-4">
                   <div className="space-y-1.5">
-                    <label className="text-[10px] text-gold-400 uppercase tracking-widest font-bold">??????</label>
-                    <input type="text" className="w-full bg-black border border-white/10 rounded px-4 py-3 text-white focus:border-gold-400 outline-none transition-colors" placeholder="?ｇ???鈭?? />
+                    <label className="text-[10px] text-gold-400 uppercase tracking-widest font-bold">帳號</label>
+                    <input type="text" className="w-full bg-black border border-white/10 rounded px-4 py-3 text-white focus:border-gold-400 outline-none transition-colors" placeholder="請輸入帳號" />
                   </div>
                   <div className="space-y-1.5">
-                    <label className="text-[10px] text-gold-400 uppercase tracking-widest font-bold">?堆?脫??</label>
-                    <input type="password" className="w-full bg-black border border-white/10 rounded px-4 py-3 text-white focus:border-gold-400 outline-none transition-colors" placeholder="?ｇ???鈭??? />
+                    <label className="text-[10px] text-gold-400 uppercase tracking-widest font-bold">密碼</label>
+                    <input type="password" className="w-full bg-black border border-white/10 rounded px-4 py-3 text-white focus:border-gold-400 outline-none transition-colors" placeholder="請輸入密碼" />
                   </div>
                   <Button className="w-full bg-gold-400 hover:bg-gold-500 text-black font-bold h-12 mt-4">
-                    ?賹???????
+                    <Button className="w-full bg-gold-400 hover:bg-gold-500 text-black font-bold h-12 mt-4">登入系統</Button>
                   </Button>
                 </div>
                 <p className="mt-8 text-center text-[10px] text-white/20">
