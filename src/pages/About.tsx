@@ -5,7 +5,7 @@ import emailjs from "@emailjs/browser";
 const EMAILJS_SERVICE_ID = "service_oewfa1e";
 const EMAILJS_TEMPLATE_ID = "template_y0yk0gj";
 const EMAILJS_PUBLIC_KEY = "x7FRu_LgWbUiDozNh";
-const EMAILJS_PUBLIC_KEY = "x7FRu_LgWbUiDozNh";
+
 
 interface ContactFormData {
   company_name: string;
