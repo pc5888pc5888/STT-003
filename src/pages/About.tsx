@@ -17,7 +17,7 @@ interface ContactFormData {
   message: string;
 }
 
-function ContactModal({ onClose }: { onClose: () => void }) {
+export function ContactModal({ onClose }: { onClose: () => void }) {
   const [form, setForm] = useState<ContactFormData>({
     company_name: "",
     from_name: "",

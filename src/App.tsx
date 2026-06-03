@@ -1,4 +1,4 @@
-﻿import { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import Lenis from "lenis";
 import Home from "./pages/Home";
@@ -13,6 +13,7 @@ import FamilyGovernance from "./pages/FamilyGovernance";
 import InternalCompliancePortal from "./pages/InternalCompliancePortal";
 import ESGAI from "./pages/ESGAI";
 import ServicePortal from "./pages/ServicePortal";
+import { ContactModal } from "./pages/About";
 import Success from "./pages/Success";
 import ArticleIndex from "./pages/ArticleIndex";
 import { Button } from "@/components/ui/button";
@@ -166,6 +167,7 @@ export default function App() {
   }, [currentPage]);
 
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const [showContactModal, setShowContactModal] = useState(false);
 
   const renderPage = () => {
     switch (currentPage) {
@@ -301,7 +303,7 @@ export default function App() {
               </a>
               <button
                 type="button"
-                onClick={() => { window.location.href = '/about.html#contact'; }}
+                onClick={() => setShowContactModal(true)}
                 className="border border-[#e6c84c]/40 text-[#e6c84c] hover:bg-[#e6c84c]/5 px-5 py-3.5 rounded-lg flex flex-col items-center justify-center gap-0 group transition-all shadow-lg font-sans cursor-pointer bg-transparent outline-none"
               >
                 <div className="flex items-center gap-1.5 mb-0.5 whitespace-nowrap">
@@ -324,6 +326,11 @@ export default function App() {
             {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </Button>
         </div>
+
+        {/* Contact Modal */}
+        <AnimatePresence>
+          {showContactModal && <ContactModal onClose={() => setShowContactModal(false)} />}
+        </AnimatePresence>
 
         {/* Login Modal */}
         <AnimatePresence>
