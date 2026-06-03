@@ -212,7 +212,7 @@ export default function App() {
     { id: "books", labelZh: "治理出版", labelEn: "PUBLICATION", icon: BookText },
     { id: "papers", labelZh: "學術策展", labelEn: "ACADEMIC CURATION", icon: GraduationCap },
     { id: "gcsda", labelZh: "策略發展學會", labelEn: "STRATEGY FORUM", icon: Users },
-    { id: "about", labelZh: "依律主張", labelEn: "SOVEREIGNTY OF THOUGHT", icon: Shield },
+    { id: "about", labelZh: "思想主權", labelEn: "SOVEREIGNTY OF THOUGHT", icon: Shield },
   ];
 
   return (
@@ -296,7 +296,7 @@ export default function App() {
               >
                 <div className="flex items-center gap-1.5 mb-0.5 whitespace-nowrap">
                   <Crown className="w-3.5 h-3.5 text-black" strokeWidth={1.5} />
-                  <span className="text-[14px] font-bold tracking-[0.05em] leading-none">????軋??</span>
+                  <span className="text-[14px] font-bold tracking-[0.05em] leading-none">治理委託</span>
                   <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform text-black" strokeWidth={1.5} />
                 </div>
                 <span className="text-[7px] font-mono font-black tracking-[0.15em] opacity-80 uppercase leading-none whitespace-nowrap">GOVERNANCE ENGAGEMENT</span>
