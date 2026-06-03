@@ -508,7 +508,7 @@ export default function App() {
                   </p>
                   <div className="w-12 h-px bg-[#e6c84c]/40 mx-auto lg:mx-0"></div>
                   <p className="text-white/40 max-w-sm font-sans text-sm leading-loose font-light mx-auto lg:mx-0">
-                    我們以制度性思維守護企業核心價值，提供具備學術嚴謹性與實務可執行性的治理諮詢服務。
+                    我們以制度性思維守護企業核心價值，提供具備學術嚴謹性與實務可執行性的治理諮詢服務。</p>
                 </div>
               </div>
             </div>
