@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "motion/react";
 import { Mail, Crown, X, Send, Loader2 } from "lucide-react";
 import emailjs from "@emailjs/browser";
 
-const EMAILJS_SERVICE_ID = "service_oewfa1e";
+const EMAILJS_TEMPLATE_ID = "template_y0yk0gj";
 const EMAILJS_TEMPLATE_ID = "template_faf5tjh";
 const EMAILJS_PUBLIC_KEY = "x7FRu_LgWbUiDozNh";
 
