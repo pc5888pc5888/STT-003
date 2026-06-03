@@ -120,8 +120,8 @@ ${context ? `以下是與問題相關的專欄知識庫內容：\n\n${context}` 
         onClick={() => setOpen(o => !o)}
         style={{
           position: "fixed",
-          bottom: "2rem",
-          left: "2rem",
+          bottom: "8rem",
+          right: "2rem",
           width: "60px",
           height: "60px",
           borderRadius: "50%",
@@ -145,8 +145,8 @@ ${context ? `以下是與問題相關的專欄知識庫內容：\n\n${context}` 
         <div
           style={{
             position: "fixed",
-            bottom: "5.5rem",
-            left: "2rem",
+            bottom: "14rem",
+            right: "2rem",
             width: "380px",
             height: "520px",
             background: "#0A0A0A",
