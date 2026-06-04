@@ -356,32 +356,32 @@ export default function About() {
                       <div className="grid grid-cols-2 gap-2 flex-shrink-0" style={{ marginBottom: 'clamp(8px, 1.2vh, 16px)' }}>
                         <div className="p-3 bg-zinc-950/80 border-l-4 border-l-[#e6c84c]/70 border-t border-t-white/[0.03] border-r border-r-white/[0.03] border-b border-b-white/[0.03] rounded-lg overflow-hidden">
                           <span className="text-[#e6c84c]/80 font-mono tracking-widest block uppercase font-bold" style={{ fontSize: '9px' }}>ANTHROPIC</span>
-                          <h3 className="font-serif font-black text-[#e6c84c] mt-0.5" style={{ fontSize: 'clamp(10px, 0.85vw, 13px)' }}>AI 治�?認�?</h3>
+                          <h3 className="font-serif font-black text-[#e6c84c] mt-0.5" style={{ fontSize: 'clamp(10px, 0.85vw, 13px)' }}>AI 治理認證</h3>
                           <div className="mt-1.5 space-y-1" style={{ fontSize: 'clamp(9px, 0.75vw, 11px)' }}>
-                            <p className="text-zinc-300">??HEA 認�?</p>
-                            <p className="text-zinc-300">??UCC 認�?</p>
-                            <p className="text-zinc-300">??AI Fluency 系�?</p>
-                            <p className="text-zinc-300">??Claude 101 / Code in Action</p>
+                            <p className="text-zinc-300">▸ HEA 認證</p>
+                            <p className="text-zinc-300">▸ UCC 認證</p>
+                            <p className="text-zinc-300">▸ AI Fluency 系列</p>
+                            <p className="text-zinc-300">▸ Claude 101 / Code in Action</p>
                           </div>
                         </div>
                         <div className="p-3 bg-zinc-950/80 border-l-4 border-l-[#e6c84c]/70 border-t border-t-white/[0.03] border-r border-r-white/[0.03] border-b border-b-white/[0.03] rounded-lg overflow-hidden">
-                          <span className="text-[#e6c84c]/80 font-mono tracking-widest block uppercase font-bold" style={{ fontSize: '9px' }}>GOOGLE</span>
-                          <h3 className="font-serif font-black text-[#e6c84c] mt-0.5" style={{ fontSize: 'clamp(10px, 0.85vw, 13px)' }}>AI 專業認�?</h3>
+                          <span className="text-[#e6c84c]/80 font-mono tracking-widest block uppercase font-bold" style={{ fontSize: '9px' }}>GOOGLE / AWS</span>
+                          <h3 className="font-serif font-black text-[#e6c84c] mt-0.5" style={{ fontSize: 'clamp(10px, 0.85vw, 13px)' }}>AI 專業認證</h3>
                           <div className="mt-1.5 space-y-1" style={{ fontSize: 'clamp(9px, 0.75vw, 11px)' }}>
-                            <p className="text-zinc-300">??Amazon Bedrock 認�?</p>
-                            <p className="text-zinc-300">??Gemini AI 認�?</p>
-                            <p className="text-zinc-300">??Agent ?�發認�?</p>
+                            <p className="text-zinc-300">▸ Gemini AI 認證</p>
+                            <p className="text-zinc-300">▸ Amazon Bedrock 認證</p>
+                            <p className="text-zinc-300">▸ Agent 開發認證</p>
                           </div>
                         </div>
                         <div className="p-3 bg-zinc-950/80 border-l-4 border-l-[#e6c84c]/70 border-t border-t-white/[0.03] border-r border-r-white/[0.03] border-b border-b-white/[0.03] rounded-lg overflow-hidden col-span-2">
-                          <span className="text-[#e6c84c]/80 font-mono tracking-widest block uppercase font-bold" style={{ fontSize: '9px' }}>T?V RHEINLAND</span>
-                          <h3 className="font-serif font-black text-[#e6c84c] mt-0.5" style={{ fontSize: 'clamp(10px, 0.85vw, 13px)' }}>?��?標�?機�?永�??��?認�?</h3>
-                          <div className="mt-1.5 grid grid-cols-2 gap-1" style={{ fontSize: 'clamp(9px, 0.75vw, 11px)' }}>
-                            <p className="text-zinc-300">??碳足跡查�?/p>
-                            <p className="text-zinc-300">??永�??��??�查�?/p>
-                            <p className="text-zinc-300">??CEO 永�??��?�?/p>
-                            <p className="text-zinc-300">??ESG 永�?評估�?/p>
-                            <p className="text-zinc-300">??T?V 認可訓練師�???/p>
+                          <span className="text-[#e6c84c]/80 font-mono tracking-widest block uppercase font-bold" style={{ fontSize: '9px' }}>TÜV RHEINLAND</span>
+                          <h3 className="font-serif font-black text-[#e6c84c] mt-0.5" style={{ fontSize: 'clamp(10px, 0.85vw, 13px)' }}>國際標準機構永續發展認證</h3>
+                          <div className="mt-1.5 grid grid-cols-3 gap-1" style={{ fontSize: 'clamp(9px, 0.75vw, 11px)' }}>
+                            <p className="text-zinc-300">▸ 碳足跡查驗</p>
+                            <p className="text-zinc-300">▸ 永續報告書查驗</p>
+                            <p className="text-zinc-300">▸ CEO 永續長認證</p>
+                            <p className="text-zinc-300">▸ ESG 永續評估師</p>
+                            <p className="text-zinc-300">▸ TÜV 認可訓練師資格</p>
                           </div>
                         </div>
                       </div>
@@ -478,7 +478,6 @@ export default function About() {
     </>
   );
 }
-
 
 
 
