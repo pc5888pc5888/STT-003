@@ -186,7 +186,7 @@ export default function About() {
   const selectSlide = (index: number) => setCurrentSlide(index);
 
   const Portrait = ({ src, alt }: { src: string; alt: string }) => (
-    <div className=hidden md:flex md:w-[40%] lg:w-[42%] flex-col items-end justify-end relative overflow-hidden flex-shrink-0" style={{ height: '100%' }}>
+    <div className=flex md:w-[40%] lg:w-[42%] flex-col items-end justify-end relative overflow-hidden flex-shrink-0 h-48 md:h-full" style={{ height: '100%' }}>
       <img src={src} alt={alt} className="w-auto object-contain object-bottom" style={{ height: '100%', maxHeight: '100%', filter: 'contrast(1.05)' }} referrerPolicy="no-referrer" />
       <div className="absolute bottom-5 right-5 z-20 pointer-events-none select-none">
         <img src="/images/signature-eric001.png" alt="Signature" className="h-auto opacity-95" style={{ width: 'clamp(120px, 11vw, 200px)', filter: 'drop-shadow(0 2px 10px rgba(0,0,0,0.95))' }} referrerPolicy="no-referrer" />
@@ -454,4 +454,5 @@ export default function About() {
     </>
   );
 }
+
 
