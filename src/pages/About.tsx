@@ -202,9 +202,11 @@ export default function About() {
   );
 
   const Card = ({ label, title, children }: { label: string; title: string; children: React.ReactNode }) => (
-    <div className="p-3 bg-zinc-950/80 border-l-2 border-l-[#e6c84c]/70 border-t border-t-white/[0.03] border-r border-r-white/[0.03] border-b border-b-white/[0.03] transition-all rounded-lg overflow-hidden">
-      <span className="text-[#e6c84c]/80 font-mono tracking-widest block uppercase font-bold" style={{ fontSize: '9px' }}>{label}</span>
-      <h3 className="font-serif font-black text-[#e6c84c] mt-0.5" style={{ fontSize: 'clamp(10px, 0.85vw, 13px)' }}>{title}</h3>
+    <div className="p-3 bg-zinc-950/80 border-t border-t-white/[0.03] border-r border-r-white/[0.03] border-b border-b-white/[0.03] border-l border-l-white/[0.03] transition-all rounded-lg overflow-hidden">
+      <div className="border-l-2 border-l-[#e6c84c]/70 pl-2 mb-1.5">
+        <span className="text-[#e6c84c]/80 font-mono tracking-widest block uppercase font-bold" style={{ fontSize: '9px' }}>{label}</span>
+        <h3 className="font-serif font-black text-[#e6c84c] mt-0.5" style={{ fontSize: 'clamp(10px, 0.85vw, 13px)' }}>{title}</h3>
+      </div>
       <div style={{ fontSize: 'clamp(9px, 0.75vw, 11px)' }}>{children}</div>
     </div>
   );
@@ -354,9 +356,11 @@ export default function About() {
                       <h2 className="font-serif font-black text-[#e6c84c] leading-tight flex-shrink-0" style={{ fontSize: 'clamp(18px, 2.4vw, 36px)', margin: 'clamp(4px, 0.8vh, 10px) 0' }}>AI 治理認證與 ESG 永續評估師資格</h2>
                       <p className="text-stone-300 tracking-wide flex-shrink-0" style={{ fontSize: 'clamp(10px, 0.85vw, 13px)', marginBottom: 'clamp(8px, 1.2vh, 16px)' }}>跨國機構認可的專業資格 | 治理實務與法遵整合</p>
                       <div className="grid grid-cols-2 gap-2 flex-1 overflow-hidden">
-                        <div className="p-3 bg-zinc-950/80 border-l-2 border-l-[#e6c84c]/70 border-t border-t-white/[0.03] border-r border-r-white/[0.03] border-b border-b-white/[0.03] rounded-lg overflow-auto row-span-2">
-                          <span className="text-[#e6c84c]/80 font-mono tracking-widest block uppercase font-bold" style={{ fontSize: '9px' }}>ANTHROPIC</span>
-                          <h3 className="font-serif font-black text-[#e6c84c] mt-0.5 mb-1.5" style={{ fontSize: 'clamp(10px, 0.85vw, 13px)' }}>Anthropic 官方 AI 技術認證</h3>
+                        <div className="p-3 bg-zinc-950/80 border-t border-t-white/[0.03] border-r border-r-white/[0.03] border-b border-b-white/[0.03] border-l border-l-white/[0.03] rounded-lg overflow-auto row-span-2">
+                          <div className="border-l-2 border-l-[#e6c84c]/70 pl-2 mb-1.5">
+                            <span className="text-[#e6c84c]/80 font-mono tracking-widest block uppercase font-bold" style={{ fontSize: '9px' }}>ANTHROPIC</span>
+                            <h3 className="font-serif font-black text-[#e6c84c] mt-0.5" style={{ fontSize: 'clamp(10px, 0.85vw, 13px)' }}>Anthropic 官方 AI 技術認證</h3>
+                          </div>
                           <p className="text-[#e6c84c]/70 font-mono font-bold uppercase mb-1" style={{ fontSize: '8px' }}>AI FLUENCY 系列</p>
                           <p className="text-zinc-400 italic mb-1.5" style={{ fontSize: 'clamp(8px, 0.7vw, 10px)' }}>Anthropic × UCC × Ringling College × HEA × National Forum 國際五方聯合認證</p>
                           <div className="grid grid-cols-2 gap-1 mb-2" style={{ fontSize: 'clamp(8px, 0.7vw, 10px)' }}>
@@ -380,14 +384,18 @@ export default function About() {
                           </div>
                         </div>
                         <div className="flex flex-col gap-2">
-                          <div className="p-3 bg-zinc-950/80 border-l-2 border-l-[#e6c84c]/70 border-t border-t-white/[0.03] border-r border-r-white/[0.03] border-b border-b-white/[0.03] rounded-lg overflow-hidden">
-                            <span className="text-[#e6c84c]/80 font-mono tracking-widest block uppercase font-bold" style={{ fontSize: '9px' }}>GOOGLE</span>
-                            <h3 className="font-serif font-black text-[#e6c84c] mt-0.5" style={{ fontSize: 'clamp(10px, 0.85vw, 13px)' }}>Google 官方認證</h3>
+                          <div className="p-3 bg-zinc-950/80 border-t border-t-white/[0.03] border-r border-r-white/[0.03] border-b border-b-white/[0.03] border-l border-l-white/[0.03] rounded-lg overflow-hidden">
+                            <div className="border-l-2 border-l-[#e6c84c]/70 pl-2 mb-1">
+                              <span className="text-[#e6c84c]/80 font-mono tracking-widest block uppercase font-bold" style={{ fontSize: '9px' }}>GOOGLE</span>
+                              <h3 className="font-serif font-black text-[#e6c84c] mt-0.5" style={{ fontSize: 'clamp(10px, 0.85vw, 13px)' }}>Google 官方認證</h3>
+                            </div>
                             <p className="text-[#e6c84c] italic mt-1" style={{ fontSize: 'clamp(9px, 0.75vw, 11px)' }}>Gemini Certification for Educators (AI 認證教師)</p>
                           </div>
-                          <div className="p-3 bg-zinc-950/80 border-l-2 border-l-[#e6c84c]/70 border-t border-t-white/[0.03] border-r border-r-white/[0.03] border-b border-b-white/[0.03] rounded-lg overflow-hidden flex-1">
-                            <span className="text-[#e6c84c]/80 font-mono tracking-widest block uppercase font-bold" style={{ fontSize: '9px' }}>ESG & 法遵</span>
-                            <h3 className="font-serif font-black text-[#e6c84c] mt-0.5 mb-1" style={{ fontSize: 'clamp(10px, 0.85vw, 13px)' }}>法遵與永續認證</h3>
+                          <div className="p-3 bg-zinc-950/80 border-t border-t-white/[0.03] border-r border-r-white/[0.03] border-b border-b-white/[0.03] border-l border-l-white/[0.03] rounded-lg overflow-hidden flex-1">
+                            <div className="border-l-2 border-l-[#e6c84c]/70 pl-2 mb-1">
+                              <span className="text-[#e6c84c]/80 font-mono tracking-widest block uppercase font-bold" style={{ fontSize: '9px' }}>ESG & 法遵</span>
+                              <h3 className="font-serif font-black text-[#e6c84c] mt-0.5" style={{ fontSize: 'clamp(10px, 0.85vw, 13px)' }}>法遵與永續認證</h3>
+                            </div>
                             <div className="space-y-0.5" style={{ fontSize: 'clamp(8px, 0.7vw, 10px)' }}>
                               <p className="text-zinc-300">中華經浟研究院綠色經浟研究中心—減碳管理師</p>
                               <p className="text-zinc-300">CEO 國際認證中心—永續發展碳管理（甲級）</p>
@@ -417,9 +425,11 @@ export default function About() {
                           { title: '核心治理 CORE GOVERNANCE', roman: '制度傳承，基業長青', points: ['董事會治理結構優化與職責分工', '家族憲章設計與股權架構規劃', '企業永續治理策略與 ESG 整合'] },
                           { title: '資產傳承 ACCOMODATION', roman: '以制度守護家族財富', points: ['高資產家族跨境稅務規劃框架', '2026 碳費元年下法遵制度因應', '企業主個人資產保護與傳承設計'] },
                         ].map((pillar, idx) => (
-                          <div key={idx} className="p-3 bg-zinc-950/80 border-l-2 border-l-[#e6c84c]/70 border-t border-t-white/[0.03] border-r border-r-white/[0.03] border-b border-b-white/[0.03] transition-all rounded-lg overflow-hidden">
-                            <span className="text-[#e6c84c]/60 font-mono font-bold block" style={{ fontSize: '8px' }}>PILLAR 0{idx+1} ｜ {pillar.title}</span>
-                            <h3 className="font-serif font-bold text-white mt-0.5" style={{ fontSize: 'clamp(10px, 0.85vw, 13px)' }}>{pillar.roman}</h3>
+                          <div key={idx} className="p-3 bg-zinc-950/80 border-t border-t-white/[0.03] border-r border-r-white/[0.03] border-b border-b-white/[0.03] border-l border-l-white/[0.03] transition-all rounded-lg overflow-hidden">
+                            <div className="border-l-2 border-l-[#e6c84c]/70 pl-2 mb-1.5">
+                              <span className="text-[#e6c84c]/60 font-mono font-bold block" style={{ fontSize: '8px' }}>PILLAR 0{idx+1} ｜ {pillar.title}</span>
+                              <h3 className="font-serif font-bold text-white mt-0.5" style={{ fontSize: 'clamp(10px, 0.85vw, 13px)' }}>{pillar.roman}</h3>
+                            </div>
                             <ul className="mt-1.5 border-t border-white/[0.02] pt-1.5 space-y-1" style={{ fontSize: 'clamp(9px, 0.75vw, 11px)' }}>
                               {pillar.points.map((p, i) => (
                                 <li key={i} className="flex items-start gap-1.5 text-zinc-400 leading-relaxed">
