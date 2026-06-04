@@ -202,7 +202,7 @@ export default function About() {
   );
 
   const Card = ({ label, title, children }: { label: string; title: string; children: React.ReactNode }) => (
-    <div className="p-3 bg-zinc-950/80 border-l-4 border-l-[#e6c84c]/70 border-t border-t-white/[0.03] border-r border-r-white/[0.03] border-b border-b-white/[0.03] transition-all rounded-lg overflow-hidden">
+    <div className="p-3 bg-zinc-950/80 border-l-2 border-l-[#e6c84c]/70 border-t border-t-white/[0.03] border-r border-r-white/[0.03] border-b border-b-white/[0.03] transition-all rounded-lg overflow-hidden">
       <span className="text-[#e6c84c]/80 font-mono tracking-widest block uppercase font-bold" style={{ fontSize: '9px' }}>{label}</span>
       <h3 className="font-serif font-black text-[#e6c84c] mt-0.5" style={{ fontSize: 'clamp(10px, 0.85vw, 13px)' }}>{title}</h3>
       <div style={{ fontSize: 'clamp(9px, 0.75vw, 11px)' }}>{children}</div>
@@ -271,7 +271,7 @@ export default function About() {
                         <li className="text-stone-300 font-light" style={{ marginBottom: 'clamp(4px, 0.6vh, 8px)' }}>莊博士以法遵為核心戰略語言，協助企業建立制度性競爭優勢，讓法律不再是成本中心，而是品牌溢價的來源。</li>
                         <li className="text-stone-300 font-light">莊博士深信企業的長期價值，建立在誠信與制度的磐石之上，而非短期獲利的流沙。</li>
                       </ul>
-                      <p className="text-[#e6c84c] font-serif italic tracking-wide flex-shrink-0 mt-auto border border-[#e6c84c]/60 rounded-lg px-3 py-2" style={{ fontSize: 'clamp(10px, 0.9vw, 13px)' }}>
+                      <p className="text-[#e6c84c] font-serif italic tracking-wide flex-shrink-0 mt-4 border border-[#e6c84c]/60 rounded-lg px-3 py-2" style={{ fontSize: 'clamp(10px, 0.9vw, 13px)' }}>
                         為你的內心，打造一座不可侵犯的至聖所<span className="border-b border-[#e6c84c]/50 pb-0.5 ml-1">--- 摘自《Internal Compliance》莊鈞翔博士著</span>
                       </p>
                     </div>
@@ -338,8 +338,8 @@ export default function About() {
                           </div>
                         </Card>
                       </div>
-                      <div className="border-l-2 border-[#e6c84c]/75 bg-zinc-950/45 flex-shrink-0" style={{ padding: 'clamp(8px, 1vh, 14px)', fontSize: 'clamp(10px, 0.9vw, 13px)' }}>
-                        <p className="text-[#dbd7cf] font-light italic leading-relaxed">學術是我看透制度本質的透鏡，實務是我驗證理論的試煉場。兩者缺一，皆不完整。-- CHUANG CHUN HSIANG Ph.D.</p>
+                      <div className="border border-[#e6c84c]/60 rounded-lg flex-shrink-0" style={{ padding: 'clamp(8px, 1vh, 14px)', fontSize: 'clamp(10px, 0.9vw, 13px)' }}>
+                        <p className="text-[#e6c84c] font-serif italic leading-relaxed">學術是我看透制度本質的透鏡，實務是我驗證理論的試煉場。兩者缺一，皆不完整。-- CHUANG CHUN HSIANG Ph.D.</p>
                       </div>
                     </div>
                     <Portrait src="/images/Eric-Chuang-14.png" alt="莊鈞翔博士" />
@@ -353,35 +353,47 @@ export default function About() {
                       <SectionLabel en="REGULATORY ACCREDITATIONS" zh="專業認證" />
                       <h2 className="font-serif font-black text-[#e6c84c] leading-tight flex-shrink-0" style={{ fontSize: 'clamp(18px, 2.4vw, 36px)', margin: 'clamp(4px, 0.8vh, 10px) 0' }}>AI 治理認證與 ESG 永續評估師資格</h2>
                       <p className="text-stone-300 tracking-wide flex-shrink-0" style={{ fontSize: 'clamp(10px, 0.85vw, 13px)', marginBottom: 'clamp(8px, 1.2vh, 16px)' }}>跨國機構認可的專業資格 | 治理實務與法遵整合</p>
-                      <div className="grid grid-cols-2 gap-2 flex-shrink-0" style={{ marginBottom: 'clamp(8px, 1.2vh, 16px)' }}>
-                        <div className="p-3 bg-zinc-950/80 border-l-4 border-l-[#e6c84c]/70 border-t border-t-white/[0.03] border-r border-r-white/[0.03] border-b border-b-white/[0.03] rounded-lg overflow-hidden">
+                      <div className="grid grid-cols-2 gap-2 flex-1 overflow-hidden">
+                        <div className="p-3 bg-zinc-950/80 border-l-2 border-l-[#e6c84c]/70 border-t border-t-white/[0.03] border-r border-r-white/[0.03] border-b border-b-white/[0.03] rounded-lg overflow-auto row-span-2">
                           <span className="text-[#e6c84c]/80 font-mono tracking-widest block uppercase font-bold" style={{ fontSize: '9px' }}>ANTHROPIC</span>
-                          <h3 className="font-serif font-black text-[#e6c84c] mt-0.5" style={{ fontSize: 'clamp(10px, 0.85vw, 13px)' }}>AI 治理認證</h3>
-                          <div className="mt-1.5 space-y-1" style={{ fontSize: 'clamp(9px, 0.75vw, 11px)' }}>
-                            <p className="text-zinc-300">▸ HEA 認證</p>
-                            <p className="text-zinc-300">▸ UCC 認證</p>
-                            <p className="text-zinc-300">▸ AI Fluency 系列</p>
-                            <p className="text-zinc-300">▸ Claude 101 / Code in Action</p>
+                          <h3 className="font-serif font-black text-[#e6c84c] mt-0.5 mb-1.5" style={{ fontSize: 'clamp(10px, 0.85vw, 13px)' }}>Anthropic 官方 AI 技術認證</h3>
+                          <p className="text-[#e6c84c]/70 font-mono font-bold uppercase mb-1" style={{ fontSize: '8px' }}>AI FLUENCY 系列</p>
+                          <p className="text-zinc-400 italic mb-1.5" style={{ fontSize: 'clamp(8px, 0.7vw, 10px)' }}>Anthropic × UCC × Ringling College × HEA × National Forum 國際五方聯合認證</p>
+                          <div className="grid grid-cols-2 gap-1 mb-2" style={{ fontSize: 'clamp(8px, 0.7vw, 10px)' }}>
+                            <p className="text-zinc-300">▸ AI Fluency: Framework & Foundations</p>
+                            <p className="text-zinc-300">▸ Teaching the AI Fluency Framework</p>
+                            <p className="text-zinc-300">▸ AI Fluency for Educators</p>
+                            <p className="text-zinc-300">▸ AI Fluency for Students</p>
+                            <p className="text-zinc-300">▸ AI Fluency for Nonprofits</p>
+                          </div>
+                          <p className="text-[#e6c84c]/70 font-mono font-bold uppercase mb-1" style={{ fontSize: '8px' }}>CLAUDE 技術實務</p>
+                          <div className="flex flex-wrap gap-1 mb-2">
+                            {['Claude 101', 'Claude Code in Action', 'Anthropic API', 'Amazon Bedrock', 'Google Vertex AI'].map(tag => (
+                              <span key={tag} className="px-1.5 py-0.5 border border-white/10 text-zinc-300 rounded" style={{ fontSize: '8px' }}>{tag}</span>
+                            ))}
+                          </div>
+                          <p className="text-[#e6c84c]/70 font-mono font-bold uppercase mb-1" style={{ fontSize: '8px' }}>進階架構認證</p>
+                          <div className="space-y-0.5" style={{ fontSize: 'clamp(8px, 0.7vw, 10px)' }}>
+                            <p className="text-zinc-300">✓ Introduction to Model Context Protocol</p>
+                            <p className="text-zinc-300">✓ Model Context Protocol: Advanced Topics</p>
+                            <p className="text-zinc-300">✓ Introduction to Agent Skills 官方認證</p>
                           </div>
                         </div>
-                        <div className="p-3 bg-zinc-950/80 border-l-4 border-l-[#e6c84c]/70 border-t border-t-white/[0.03] border-r border-r-white/[0.03] border-b border-b-white/[0.03] rounded-lg overflow-hidden">
-                          <span className="text-[#e6c84c]/80 font-mono tracking-widest block uppercase font-bold" style={{ fontSize: '9px' }}>GOOGLE / AWS</span>
-                          <h3 className="font-serif font-black text-[#e6c84c] mt-0.5" style={{ fontSize: 'clamp(10px, 0.85vw, 13px)' }}>AI 專業認證</h3>
-                          <div className="mt-1.5 space-y-1" style={{ fontSize: 'clamp(9px, 0.75vw, 11px)' }}>
-                            <p className="text-zinc-300">▸ Gemini AI 認證</p>
-                            <p className="text-zinc-300">▸ Amazon Bedrock 認證</p>
-                            <p className="text-zinc-300">▸ Agent 開發認證</p>
+                        <div className="flex flex-col gap-2">
+                          <div className="p-3 bg-zinc-950/80 border-l-2 border-l-[#e6c84c]/70 border-t border-t-white/[0.03] border-r border-r-white/[0.03] border-b border-b-white/[0.03] rounded-lg overflow-hidden">
+                            <span className="text-[#e6c84c]/80 font-mono tracking-widest block uppercase font-bold" style={{ fontSize: '9px' }}>GOOGLE</span>
+                            <h3 className="font-serif font-black text-[#e6c84c] mt-0.5" style={{ fontSize: 'clamp(10px, 0.85vw, 13px)' }}>Google 官方認證</h3>
+                            <p className="text-[#e6c84c] italic mt-1" style={{ fontSize: 'clamp(9px, 0.75vw, 11px)' }}>Gemini Certification for Educators (AI 認證教師)</p>
                           </div>
-                        </div>
-                        <div className="p-3 bg-zinc-950/80 border-l-4 border-l-[#e6c84c]/70 border-t border-t-white/[0.03] border-r border-r-white/[0.03] border-b border-b-white/[0.03] rounded-lg overflow-hidden col-span-2">
-                          <span className="text-[#e6c84c]/80 font-mono tracking-widest block uppercase font-bold" style={{ fontSize: '9px' }}>TÜV RHEINLAND</span>
-                          <h3 className="font-serif font-black text-[#e6c84c] mt-0.5" style={{ fontSize: 'clamp(10px, 0.85vw, 13px)' }}>國際標準機構永續發展認證</h3>
-                          <div className="mt-1.5 grid grid-cols-3 gap-1" style={{ fontSize: 'clamp(9px, 0.75vw, 11px)' }}>
-                            <p className="text-zinc-300">▸ 碳足跡查驗</p>
-                            <p className="text-zinc-300">▸ 永續報告書查驗</p>
-                            <p className="text-zinc-300">▸ CEO 永續長認證</p>
-                            <p className="text-zinc-300">▸ ESG 永續評估師</p>
-                            <p className="text-zinc-300">▸ TÜV 認可訓練師資格</p>
+                          <div className="p-3 bg-zinc-950/80 border-l-2 border-l-[#e6c84c]/70 border-t border-t-white/[0.03] border-r border-r-white/[0.03] border-b border-b-white/[0.03] rounded-lg overflow-hidden flex-1">
+                            <span className="text-[#e6c84c]/80 font-mono tracking-widest block uppercase font-bold" style={{ fontSize: '9px' }}>ESG & 法遵</span>
+                            <h3 className="font-serif font-black text-[#e6c84c] mt-0.5 mb-1" style={{ fontSize: 'clamp(10px, 0.85vw, 13px)' }}>法遵與永續認證</h3>
+                            <div className="space-y-0.5" style={{ fontSize: 'clamp(8px, 0.7vw, 10px)' }}>
+                              <p className="text-zinc-300">中華經浟研究院綠色經浟研究中心—減碳管理師</p>
+                              <p className="text-zinc-300">CEO 國際認證中心—永續發展碳管理（甲級）</p>
+                              <p className="text-zinc-300">ESG 不動產淨零（甲級管理師）</p>
+                              <p className="text-zinc-300">德國萊茵 TÜV—兩岸勞資法務管理（甲級）</p>
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -405,7 +417,7 @@ export default function About() {
                           { title: '核心治理 CORE GOVERNANCE', roman: '制度傳承，基業長青', points: ['董事會治理結構優化與職責分工', '家族憲章設計與股權架構規劃', '企業永續治理策略與 ESG 整合'] },
                           { title: '資產傳承 ACCOMODATION', roman: '以制度守護家族財富', points: ['高資產家族跨境稅務規劃框架', '2026 碳費元年下法遵制度因應', '企業主個人資產保護與傳承設計'] },
                         ].map((pillar, idx) => (
-                          <div key={idx} className="p-3 bg-zinc-950/80 border-l-4 border-l-[#e6c84c]/70 border-t border-t-white/[0.03] border-r border-r-white/[0.03] border-b border-b-white/[0.03] transition-all rounded-lg overflow-hidden">
+                          <div key={idx} className="p-3 bg-zinc-950/80 border-l-2 border-l-[#e6c84c]/70 border-t border-t-white/[0.03] border-r border-r-white/[0.03] border-b border-b-white/[0.03] transition-all rounded-lg overflow-hidden">
                             <span className="text-[#e6c84c]/60 font-mono font-bold block" style={{ fontSize: '8px' }}>PILLAR 0{idx+1} ｜ {pillar.title}</span>
                             <h3 className="font-serif font-bold text-white mt-0.5" style={{ fontSize: 'clamp(10px, 0.85vw, 13px)' }}>{pillar.roman}</h3>
                             <ul className="mt-1.5 border-t border-white/[0.02] pt-1.5 space-y-1" style={{ fontSize: 'clamp(9px, 0.75vw, 11px)' }}>
