@@ -35,7 +35,7 @@ export function ContactModal({ onClose }: { onClose: () => void }) {
 
   const handleSubmit = async () => {
     if (!form.company_name || !form.from_name || !form.from_email || !form.phone) {
-      alert("請填寫企業名稱、姓名、Email 及電話");
+      alert("請填寫�?業�?稱、�??�、Email ?�電�?);
       return;
     }
     setStatus("sending");
@@ -65,10 +65,10 @@ export function ContactModal({ onClose }: { onClose: () => void }) {
         <div className="flex items-center justify-between px-6 py-4 border-b border-white/[0.06]">
           <div>
             <p className="text-[#e6c84c] font-mono tracking-widest uppercase font-bold" style={{ fontSize: "9px" }}>
-              CONTACT STT — INITIATE COREGULATION
+              CONTACT STT ??INITIATE COREGULATION
             </p>
             <h3 className="text-white font-serif font-bold mt-0.5" style={{ fontSize: "18px" }}>
-              聯絡智庫
+              ?�絡?�庫
             </h3>
           </div>
           <button
@@ -84,10 +84,10 @@ export function ContactModal({ onClose }: { onClose: () => void }) {
         <div className="px-6 py-5 space-y-4">
           {status === "success" ? (
             <div className="text-center py-10">
-              <div className="text-[#e6c84c] text-4xl mb-3">✓</div>
-              <p className="text-white font-serif text-lg">訊息已成功送出</p>
+              <div className="text-[#e6c84c] text-4xl mb-3">??/div>
+              <p className="text-white font-serif text-lg">訊息已�??�送出</p>
               <p className="text-zinc-400 mt-1" style={{ fontSize: "13px" }}>
-                莊鈞翔博士團隊將盡快與您聯繫。
+                ?��?翔�?士�??��??�快?�您?�繫??
               </p>
               <button
                 type="button"
@@ -95,19 +95,19 @@ export function ContactModal({ onClose }: { onClose: () => void }) {
                 className="mt-6 px-6 py-2 border border-[#e6c84c]/40 text-[#e6c84c] rounded-lg hover:bg-[#e6c84c]/10 transition-all cursor-pointer bg-transparent outline-none"
                 style={{ fontSize: "13px" }}
               >
-                關閉
+                ?��?
               </button>
             </div>
           ) : (
             <>
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className={labelClass} style={{ fontSize: "8px" }}>企業名稱 *</label>
-                  <input className={inputClass} style={{ fontSize: "13px" }} name="company_name" value={form.company_name} onChange={handleChange} placeholder="貴公司名稱" />
+                  <label className={labelClass} style={{ fontSize: "8px" }}>企業?�稱 *</label>
+                  <input className={inputClass} style={{ fontSize: "13px" }} name="company_name" value={form.company_name} onChange={handleChange} placeholder="貴公?��?�? />
                 </div>
                 <div>
-                  <label className={labelClass} style={{ fontSize: "8px" }}>姓名 *</label>
-                  <input className={inputClass} style={{ fontSize: "13px" }} name="from_name" value={form.from_name} onChange={handleChange} placeholder="您的姓名" />
+                  <label className={labelClass} style={{ fontSize: "8px" }}>姓�? *</label>
+                  <input className={inputClass} style={{ fontSize: "13px" }} name="from_name" value={form.from_name} onChange={handleChange} placeholder="?��?姓�?" />
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-3">
@@ -116,22 +116,22 @@ export function ContactModal({ onClose }: { onClose: () => void }) {
                   <input className={inputClass} style={{ fontSize: "13px" }} name="from_email" type="email" value={form.from_email} onChange={handleChange} placeholder="your@email.com" />
                 </div>
                 <div>
-                  <label className={labelClass} style={{ fontSize: "8px" }}>電話 *</label>
+                  <label className={labelClass} style={{ fontSize: "8px" }}>?�話 *</label>
                   <input className={inputClass} style={{ fontSize: "13px" }} name="phone" value={form.phone} onChange={handleChange} placeholder="0912-345-678" />
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-3">
                 <div>
                   <label className={labelClass} style={{ fontSize: "8px" }}>Line ID</label>
-                  <input className={inputClass} style={{ fontSize: "13px" }} name="line_id" value={form.line_id} onChange={handleChange} placeholder="您的 Line ID" />
+                  <input className={inputClass} style={{ fontSize: "13px" }} name="line_id" value={form.line_id} onChange={handleChange} placeholder="?��? Line ID" />
                 </div>
                 <div>
-                  <label className={labelClass} style={{ fontSize: "8px" }}>預約時間</label>
-                  <input className={inputClass} style={{ fontSize: "13px" }} name="appointment_time" value={form.appointment_time} onChange={handleChange} placeholder="例：2026/07/01 下午 2 點" />
+                  <label className={labelClass} style={{ fontSize: "8px" }}>?��??��?</label>
+                  <input className={inputClass} style={{ fontSize: "13px" }} name="appointment_time" value={form.appointment_time} onChange={handleChange} placeholder="例�?2026/07/01 下�? 2 �? />
                 </div>
               </div>
               <div>
-                <label className={labelClass} style={{ fontSize: "8px" }}>訊息內容</label>
+                <label className={labelClass} style={{ fontSize: "8px" }}>訊息?�容</label>
                 <textarea
                   className={inputClass}
                   style={{ fontSize: "13px", resize: "none" }}
@@ -139,13 +139,13 @@ export function ContactModal({ onClose }: { onClose: () => void }) {
                   value={form.message}
                   onChange={handleChange}
                   rows={4}
-                  placeholder="請簡述您的需求或問題..."
+                  placeholder="請簡述您?��?求�??��?..."
                 />
               </div>
 
               {status === "error" && (
                 <p className="text-red-400 text-center" style={{ fontSize: "12px" }}>
-                  送出失敗，請稍後再試或直接寄信至 pc5888@gmail.com
+                  ?�出失�?，�?稍�??�試?�直?��?信至 pc5888@gmail.com
                 </p>
               )}
 
@@ -157,9 +157,9 @@ export function ContactModal({ onClose }: { onClose: () => void }) {
                 style={{ fontSize: "14px" }}
               >
                 {status === "sending" ? (
-                  <><Loader2 className="w-4 h-4 animate-spin" />送出中...</>
+                  <><Loader2 className="w-4 h-4 animate-spin" />?�出�?..</>
                 ) : (
-                  <><Send className="w-4 h-4" />送出申請</>
+                  <><Send className="w-4 h-4" />?�出?��?</>
                 )}
               </button>
             </>
@@ -175,18 +175,18 @@ export default function About() {
   const [showContact, setShowContact] = useState(false);
 
   const slides = [
-    { id: "sovereignty", labelZh: "主旨聲明", labelEn: "SOVEREIGNTY" },
-    { id: "positions",   labelZh: "現任職務", labelEn: "POSITIONS"   },
-    { id: "scholarship", labelZh: "學術與實務", labelEn: "SCHOLARSHIP" },
-    { id: "credentials", labelZh: "專業認證",  labelEn: "CREDENTIALS" },
-    { id: "services",    labelZh: "服務項目",  labelEn: "SERVICES"    },
-    { id: "contact",     labelZh: "治理委託",  labelEn: "CONTACT"     },
+    { id: "sovereignty", labelZh: "主旨?��?", labelEn: "SOVEREIGNTY" },
+    { id: "positions",   labelZh: "?�任?��?", labelEn: "POSITIONS"   },
+    { id: "scholarship", labelZh: "學�??�實??, labelEn: "SCHOLARSHIP" },
+    { id: "credentials", labelZh: "專業認�?",  labelEn: "CREDENTIALS" },
+    { id: "services",    labelZh: "?��??�目",  labelEn: "SERVICES"    },
+    { id: "contact",     labelZh: "治�?委�?",  labelEn: "CONTACT"     },
   ];
 
   const selectSlide = (index: number) => setCurrentSlide(index);
 
   const Portrait = ({ src, alt }: { src: string; alt: string }) => (
-    <div className="hidden lg:flex lg:w-[42%] flex-col items-end justify-end relative overflow-hidden flex-shrink-0" style={{ height: '100%' }}>
+    <div className=hidden md:flex md:w-[40%] lg:w-[42%] flex-col items-end justify-end relative overflow-hidden flex-shrink-0" style={{ height: '100%' }}>
       <img src={src} alt={alt} className="w-auto object-contain object-bottom" style={{ height: '100%', maxHeight: '100%', filter: 'contrast(1.05)' }} referrerPolicy="no-referrer" />
       <div className="absolute bottom-5 right-5 z-20 pointer-events-none select-none">
         <img src="/images/signature-eric001.png" alt="Signature" className="h-auto opacity-95" style={{ width: 'clamp(120px, 11vw, 200px)', filter: 'drop-shadow(0 2px 10px rgba(0,0,0,0.95))' }} referrerPolicy="no-referrer" />
@@ -197,7 +197,7 @@ export default function About() {
   const SectionLabel = ({ en, zh }: { en: string; zh: string }) => (
     <div className="flex items-center gap-3 flex-shrink-0">
       <div className="w-8 h-px bg-[#e6c84c] flex-shrink-0"></div>
-      <span className="text-[#e6c84c] font-sans font-bold uppercase tracking-[0.25em] whitespace-nowrap" style={{ fontSize: 'clamp(9px, 0.7vw, 11px)' }}>{en} ｜ {zh}</span>
+      <span className="text-[#e6c84c] font-sans font-bold uppercase tracking-[0.25em] whitespace-nowrap" style={{ fontSize: 'clamp(9px, 0.7vw, 11px)' }}>{en} �?{zh}</span>
     </div>
   );
 
@@ -224,7 +224,7 @@ export default function About() {
           <div className="w-1.5 h-1.5 rounded-full bg-[#e6c84c]/25"></div>
         </div>
 
-        {/* 桌面次導覽 */}
+        {/* 桌面次�?�?*/}
         <div className="w-full bg-[#050505] border-b border-white/[0.02] flex-shrink-0 select-none hidden md:block" style={{ paddingTop: '10px', paddingBottom: '10px' }}>
           <div className="container mx-auto px-6 max-w-7xl flex justify-between items-center gap-1.5">
             {slides.map((slide, index) => (
@@ -237,7 +237,7 @@ export default function About() {
           </div>
         </div>
 
-        {/* 手機次導覽 */}
+        {/* ?��?次�?�?*/}
         <div className="w-full bg-[#050505] border-b border-white/[0.02] overflow-x-auto scrollbar-none flex md:hidden gap-2 px-4 py-2 flex-shrink-0">
           {slides.map((slide, index) => (
             <button key={slide.id} type="button" onClick={() => selectSlide(index)}
@@ -247,7 +247,7 @@ export default function About() {
           ))}
         </div>
 
-        {/* 主內容區 */}
+        {/* 主內容�? */}
         <div className="flex-1 overflow-hidden">
           <AnimatePresence mode="wait">
             <motion.div key={currentSlide} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.4, ease: 'easeOut' }} style={{ height: '100%' }}>
@@ -257,26 +257,26 @@ export default function About() {
                 {currentSlide === 0 && (
                   <div className="flex flex-row" style={{ height: '100%', overflow: 'hidden' }}>
                     <div className="w-full lg:w-[58%] flex flex-col overflow-hidden flex-shrink-0" style={{ padding: 'clamp(8px, 1.5vh, 24px) 0', paddingRight: 'clamp(16px, 2vw, 40px)' }}>
-                      <SectionLabel en="SOVEREIGNTY OF THOUGHT" zh="思想主權" />
-                      <h1 className="font-serif text-[#e6c84c] tracking-wider leading-tight whitespace-nowrap flex-shrink-0" style={{ fontSize: 'clamp(18px, 2.5vw, 38px)', margin: 'clamp(4px, 0.8vh, 12px) 0' }}>實踐您的思想主權</h1>
+                      <SectionLabel en="SOVEREIGNTY OF THOUGHT" zh="?�想主�?" />
+                      <h1 className="font-serif text-[#e6c84c] tracking-wider leading-tight whitespace-nowrap flex-shrink-0" style={{ fontSize: 'clamp(18px, 2.5vw, 38px)', margin: 'clamp(4px, 0.8vh, 12px) 0' }}>實�??��??�想主�?</h1>
                       <div className="flex-shrink-0" style={{ marginBottom: 'clamp(6px, 1.2vh, 16px)' }}>
-                        <p className="text-white font-light tracking-wider whitespace-nowrap" style={{ fontSize: 'clamp(10px, 0.9vw, 14px)' }}>企業策略與公司治理法遵顧問 | 學術研究與實務</p>
-                        <p className="text-[#e6c84c] font-serif tracking-widest whitespace-nowrap" style={{ fontSize: 'clamp(12px, 1.3vw, 22px)', marginTop: '4px' }}>莊鈞翔博士 CHUANG CHUN HSIANG Ph.D.</p>
+                        <p className="text-white font-light tracking-wider whitespace-nowrap" style={{ fontSize: 'clamp(10px, 0.9vw, 14px)' }}>企業策略?�公?�治?��??�顧??| 學�??�究?�實??/p>
+                        <p className="text-[#e6c84c] font-serif tracking-widest whitespace-nowrap" style={{ fontSize: 'clamp(12px, 1.3vw, 22px)', marginTop: '4px' }}>?��?翔�?�?CHUANG CHUN HSIANG Ph.D.</p>
                       </div>
                       <div className="border-l-2 border-[#e6c84c]/75 bg-zinc-950/45 flex-shrink-0" style={{ padding: 'clamp(8px, 1vh, 14px)', marginBottom: 'clamp(6px, 1.2vh, 14px)' }}>
                         <p className="font-sans text-[#EBE7DF]/90 tracking-wider italic" style={{ fontSize: 'clamp(10px, 0.95vw, 14px)', lineHeight: '1.7' }}>
-                          我們絕不推銷任何廉價的建議，我們僅為真正珍視基業與秩序的領袖，建立無懈可擊的法商防火牆。
+                          ?�們�?不推?�任何�??��?建議，�??��??��?�??視基業�?秩�??��?袖�?建�??��??��??��??�防?��???
                         </p>
                       </div>
                       <ul className="list-disc flex-shrink-0" style={{ paddingLeft: 'clamp(14px, 1.5vw, 22px)', marginBottom: 'clamp(6px, 1.5vh, 18px)', fontSize: 'clamp(10px, 0.9vw, 13px)', lineHeight: '1.65' }}>
-                        <li className="text-stone-300 font-light" style={{ marginBottom: 'clamp(4px, 0.6vh, 8px)' }}>莊博士以法遵為核心戰略語言，協助企業建立制度性競爭優勢，讓法律不再是成本中心，而是品牌溢價的來源。</li>
-                        <li className="text-stone-300 font-light">莊博士深信企業的長期價值，建立在誠信與制度的磐石之上，而非短期獲利的流沙。</li>
+                        <li className="text-stone-300 font-light" style={{ marginBottom: 'clamp(4px, 0.6vh, 8px)' }}>?��?士以法遵?�核心戰?��?言，�??��?業建立制度性競?�優?��?讓�?律�??�是?�本中�?，而是?��?溢價?��?源�?/li>
+                        <li className="text-stone-300 font-light">?��?士深信�?業�??��??�值�?建�??��?信�??�度?��??��?上�??��??��??�利?��?沙�?/li>
                       </ul>
                       <p className="text-[#e6c84c] font-serif italic tracking-wide flex-shrink-0 mt-auto" style={{ fontSize: 'clamp(10px, 0.9vw, 13px)' }}>
-                        為你的內心，打造一座不可侵犯的至聖所<span className="border-b border-[#e6c84c]/50 pb-0.5 ml-1">--- 摘自《Internal Compliance》莊鈞翔博士著</span>
+                        ?��??�內心�??�造�?座�??�侵?��??��??�<span className="border-b border-[#e6c84c]/50 pb-0.5 ml-1">--- ?�自?�Internal Compliance?��??��??�士??/span>
                       </p>
                     </div>
-                    <Portrait src="/images/Eric-Chuang-15.png" alt="莊鈞翔博士" />
+                    <Portrait src="/images/Eric-Chuang-15.png" alt="?��?翔�?�? />
                   </div>
                 )}
 
@@ -284,36 +284,36 @@ export default function About() {
                 {currentSlide === 1 && (
                   <div className="flex flex-row" style={{ height: '100%', overflow: 'hidden' }}>
                     <div className="w-full lg:w-[58%] flex flex-col overflow-hidden flex-shrink-0" style={{ padding: 'clamp(8px, 1.5vh, 24px) 0', paddingRight: 'clamp(16px, 2vw, 40px)' }}>
-                      <SectionLabel en="AFFILIATIONS & ROLES" zh="現任職務" />
-                      <h2 className="font-serif font-black text-[#e6c84c] leading-tight flex-shrink-0" style={{ fontSize: 'clamp(20px, 2.8vw, 42px)', margin: 'clamp(4px, 0.8vh, 10px) 0' }}>現任職務一覽</h2>
-                      <p className="text-stone-300 tracking-wide flex-shrink-0" style={{ fontSize: 'clamp(10px, 0.85vw, 13px)', marginBottom: 'clamp(8px, 1.2vh, 16px)' }}>企業策略與公司治理法遵顧問 | 跨域整合型領導人</p>
+                      <SectionLabel en="AFFILIATIONS & ROLES" zh="?�任?��?" />
+                      <h2 className="font-serif font-black text-[#e6c84c] leading-tight flex-shrink-0" style={{ fontSize: 'clamp(20px, 2.8vw, 42px)', margin: 'clamp(4px, 0.8vh, 10px) 0' }}>?�任?��?一�?/h2>
+                      <p className="text-stone-300 tracking-wide flex-shrink-0" style={{ fontSize: 'clamp(10px, 0.85vw, 13px)', marginBottom: 'clamp(8px, 1.2vh, 16px)' }}>企業策略?�公?�治?��??�顧??| 跨�??��??��?導人</p>
                       <div className="grid grid-cols-2 gap-2 flex-1 overflow-hidden">
-                        <Card label="NGO CO-REGULATION" title="中華企業策略永續發展學會 GCSDA 創會理事長">
-                          <p className="text-zinc-300 font-light leading-relaxed mt-1">依法設立 NGO 法人，以制度性框架推動企業永續治理、接班傳承與法遵文化。</p>
+                        <Card label="NGO CO-REGULATION" title="中華企業策略永�??��?學�? GCSDA ?��??��???>
+                          <p className="text-zinc-300 font-light leading-relaxed mt-1">依�?設�? NGO 法人，以?�度?��??�推?��?業永續治?�、接?�傳?��?法遵?��???/p>
                           <div className="text-zinc-400 mt-1.5 space-y-0.5 border-t border-white/[0.02] pt-1 leading-relaxed">
-                            <p>▸ 年度白皮書與治理論壇主辦機構</p>
-                            <p>▸ 季度閉門圓桌：企業主接班與法遵對話</p>
-                            <p>▸ 雙年公開論壇：家族治理與資本效率</p>
+                            <p>??年度?�皮?��?治�?論�?主辦機�?</p>
+                            <p>??�?��?��??��?：�?業主?�班?��??��?�?/p>
+                            <p>???�年?��?論�?：家?�治?��?資本?��?</p>
                           </div>
                         </Card>
-                        <Card label="DIGITAL PUBLICATION" title="策略智庫數位集團 STT Group 創辦人暨執行長">
-                          <p className="text-zinc-300 font-light leading-relaxed mt-1">整合學術研究、策略顧問與數位出版，建構企業治理知識生態。</p>
+                        <Card label="DIGITAL PUBLICATION" title="策略?�庫?��??��? STT Group ?�辦人暨?��???>
+                          <p className="text-zinc-300 font-light leading-relaxed mt-1">?��?學�??�究?��??�顧?��??��??��?，建構�?業治?�知識�??��?/p>
                           <div className="text-zinc-400 mt-1.5 space-y-0.5 border-t border-white/[0.02] pt-1 leading-relaxed">
-                            <p>▸ STT Press 策略智庫出版社</p>
-                            <p>▸ STT News 策略智庫新聞網</p>
-                            <p>▸ STT Intelligence 策略智庫情報</p>
-                            <p>▸ STT Legal Insights 法遵智庫</p>
+                            <p>??STT Press 策略?�庫?��?�?/p>
+                            <p>??STT News 策略?�庫?��?�?/p>
+                            <p>??STT Intelligence 策略?�庫?�報</p>
+                            <p>??STT Legal Insights 法遵?�庫</p>
                           </div>
                         </Card>
-                        <Card label="MEDIA COLUMNIST" title="M傳媒 法遵智庫專欄：法律與公司治理策略觀點">
-                          <p className="text-zinc-300 font-light leading-relaxed mt-1">定期發表法遵、治理、家族接班與企業策略的深度分析，深度信任優於廣泛曝光。</p>
+                        <Card label="MEDIA COLUMNIST" title="M?��? 法遵?�庫專�?：�?律�??�司治�?策略觀�?>
+                          <p className="text-zinc-300 font-light leading-relaxed mt-1">定�??�表法遵?�治?�、家?�接?��?企業策略?�深度�??��?深度信任?�於�???��???/p>
                         </Card>
-                        <Card label="ACADEMIC APPOINTMENT" title="逢甲大學商學院兼任助理教授">
-                          <p className="text-zinc-300 font-light leading-relaxed mt-1">逢甲大學商學院兼任助理教授，開設企業治理與法遵課程，結合 AI 治理與 ESG 實務。</p>
+                        <Card label="ACADEMIC APPOINTMENT" title="?�甲大學?�學?�兼任助?��???>
+                          <p className="text-zinc-300 font-light leading-relaxed mt-1">?�甲大學?�學?�兼任助?��??��??�設企業治�??��??�課程�?結�? AI 治�???ESG 實�???/p>
                         </Card>
                       </div>
                     </div>
-                    <Portrait src="/images/Eric-Chuang-17.png" alt="莊鈞翔博士" />
+                    <Portrait src="/images/Eric-Chuang-17.png" alt="?��?翔�?�? />
                   </div>
                 )}
 
@@ -321,29 +321,29 @@ export default function About() {
                 {currentSlide === 2 && (
                   <div className="flex flex-row" style={{ height: '100%', overflow: 'hidden' }}>
                     <div className="w-full lg:w-[58%] flex flex-col overflow-hidden flex-shrink-0" style={{ padding: 'clamp(8px, 1.5vh, 24px) 0', paddingRight: 'clamp(16px, 2vw, 40px)' }}>
-                      <SectionLabel en="ACADEMIC FOUNDATION" zh="學術與實務" />
-                      <h2 className="font-serif font-black text-[#e6c84c] leading-tight flex-shrink-0" style={{ fontSize: 'clamp(20px, 2.8vw, 42px)', margin: 'clamp(4px, 0.8vh, 10px) 0' }}>學術奠基、實務淬鍊</h2>
-                      <p className="text-stone-300 tracking-wide flex-shrink-0" style={{ fontSize: 'clamp(10px, 0.85vw, 13px)', marginBottom: 'clamp(8px, 1.2vh, 16px)' }}>學術嚴謹性與產業實踐並重，不接受純理論或純經驗主義</p>
+                      <SectionLabel en="ACADEMIC FOUNDATION" zh="學�??�實?? />
+                      <h2 className="font-serif font-black text-[#e6c84c] leading-tight flex-shrink-0" style={{ fontSize: 'clamp(20px, 2.8vw, 42px)', margin: 'clamp(4px, 0.8vh, 10px) 0' }}>學�?奠基?�實?�淬??/h2>
+                      <p className="text-stone-300 tracking-wide flex-shrink-0" style={{ fontSize: 'clamp(10px, 0.85vw, 13px)', marginBottom: 'clamp(8px, 1.2vh, 16px)' }}>學�??�謹?��??�業實�?並�?，�??��?純�?論�?純�?驗主�?/p>
                       <div className="grid grid-cols-2 gap-2 flex-shrink-0" style={{ marginBottom: 'clamp(8px, 1.2vh, 16px)' }}>
-                        <Card label="ACADEMIC FOUNDATION" title="學歷背景">
+                        <Card label="ACADEMIC FOUNDATION" title="學歷?�景">
                           <div className="mt-1.5 space-y-2 text-zinc-300">
-                            <div><span className="font-semibold text-white">▸ 管理學博士 Ph.D. in Business Administration</span><p className="text-zinc-400 pl-2 mt-0.5">逢甲大學管理學院 (2024)，研究領域：公司治理與法遵策略</p></div>
-                            <div><span className="font-semibold text-white">▸ 嶺東科技大學管理研究所 EMBA</span><p className="text-zinc-400 pl-2 mt-0.5">跨世代企業家人格特質、創新能力與企業經營績效研究</p></div>
+                            <div><span className="font-semibold text-white">??管�?學�?�?Ph.D. in Business Administration</span><p className="text-zinc-400 pl-2 mt-0.5">?�甲大學管�?學院 (2024)，�?究�??��??�司治�??��??��???/p></div>
+                            <div><span className="font-semibold text-white">??嶺東科�?大學管�??�究?� EMBA</span><p className="text-zinc-400 pl-2 mt-0.5">跨�?�??業家人格?�質?�創?�能?��?企業經�?績�??�究</p></div>
                           </div>
                         </Card>
-                        <Card label="EMPIRICAL RIGOR" title="代表著作">
+                        <Card label="EMPIRICAL RIGOR" title="�?��?��?">
                           <div className="mt-2 space-y-1.5 text-zinc-300">
-                            <p className="text-white font-semibold">▸《內在法遵 Internal Compliance》STT Press 出版</p>
-                            <p className="text-white font-semibold">▸《2025 永續家族治理實務實錄》年度報告</p>
-                            <p className="text-white font-semibold">▸《臺灣企業接班人的佈局規劃與傳承家族價值》期刊論文</p>
+                            <p className="text-white font-semibold">?�《內?��???Internal Compliance?�STT Press ?��?</p>
+                            <p className="text-white font-semibold">?��?025 永�?家�?治�?實�?實�??�年度報??/p>
+                            <p className="text-white font-semibold">?�《臺???業接?�人?��?局規�??�傳?�家?�價?�》�??��???/p>
                           </div>
                         </Card>
                       </div>
                       <div className="border-l-2 border-[#e6c84c]/75 bg-zinc-950/45 flex-shrink-0" style={{ padding: 'clamp(8px, 1vh, 14px)', fontSize: 'clamp(10px, 0.9vw, 13px)' }}>
-                        <p className="text-[#dbd7cf] font-light italic leading-relaxed">學術是我看透制度本質的透鏡，實務是我驗證理論的試煉場。兩者缺一，皆不完整。-- CHUANG CHUN HSIANG Ph.D.</p>
+                        <p className="text-[#dbd7cf] font-light italic leading-relaxed">學�??��??�透制度本質�??�鏡，實?�是?��?證�?論�?試�??�。兩?�缺一，�?不�??��?- CHUANG CHUN HSIANG Ph.D.</p>
                       </div>
                     </div>
-                    <Portrait src="/images/Eric-Chuang-14.png" alt="莊鈞翔博士" />
+                    <Portrait src="/images/Eric-Chuang-14.png" alt="?��?翔�?�? />
                   </div>
                 )}
 
@@ -351,19 +351,19 @@ export default function About() {
                 {currentSlide === 3 && (
                   <div className="flex flex-row" style={{ height: '100%', overflow: 'hidden' }}>
                     <div className="w-full lg:w-[58%] flex flex-col overflow-hidden flex-shrink-0" style={{ padding: 'clamp(8px, 1.5vh, 24px) 0', paddingRight: 'clamp(16px, 2vw, 40px)' }}>
-                      <SectionLabel en="REGULATORY ACCREDITATIONS" zh="專業認證" />
-                      <h2 className="font-serif font-black text-[#e6c84c] leading-tight flex-shrink-0" style={{ fontSize: 'clamp(18px, 2.4vw, 36px)', margin: 'clamp(4px, 0.8vh, 10px) 0' }}>AI 治理認證與 ESG 永續評估師資格</h2>
-                      <p className="text-stone-300 tracking-wide flex-shrink-0" style={{ fontSize: 'clamp(10px, 0.85vw, 13px)', marginBottom: 'clamp(8px, 1.2vh, 16px)' }}>跨國機構認可的專業資格 | 治理實務與法遵整合</p>
+                      <SectionLabel en="REGULATORY ACCREDITATIONS" zh="專業認�?" />
+                      <h2 className="font-serif font-black text-[#e6c84c] leading-tight flex-shrink-0" style={{ fontSize: 'clamp(18px, 2.4vw, 36px)', margin: 'clamp(4px, 0.8vh, 10px) 0' }}>AI 治�?認�???ESG 永�?評估師�???/h2>
+                      <p className="text-stone-300 tracking-wide flex-shrink-0" style={{ fontSize: 'clamp(10px, 0.85vw, 13px)', marginBottom: 'clamp(8px, 1.2vh, 16px)' }}>跨�?機�?認可?��?業�???| 治�?實�??��??�整??/p>
                       <div className="border-l-2 border-[#e6c84c]/75 bg-zinc-950/45 flex-shrink-0" style={{ padding: 'clamp(8px, 1vh, 14px)', marginBottom: 'clamp(8px, 1.2vh, 16px)', fontSize: 'clamp(10px, 0.9vw, 14px)' }}>
-                        <p className="text-[#EBE7DF]/95 tracking-wider italic leading-relaxed">認證不是裝飾，而是對制度嚴謹性的承諾。每一張證書背後，是對 AI 治理與 ESG 實踐的深度理解與責任承擔。</p>
+                        <p className="text-[#EBE7DF]/95 tracking-wider italic leading-relaxed">認�?不是裝飾，而是對制度嚴謹性�??�諾?��?一張�??��?後�??��? AI 治�???ESG 實�??�深度�?�??責任?��???/p>
                       </div>
                       <div className="space-y-2 flex-shrink-0" style={{ fontSize: 'clamp(10px, 0.9vw, 13px)', marginBottom: 'clamp(8px, 1.2vh, 16px)' }}>
-                        <p className="text-[#dbd7cf] leading-relaxed">▸ <strong className="text-white">Anthropic 與 Google 核發 AI 專業認證</strong>：涵蓋 Anthropic 的 HEA、UCC 認證，AI Fluency 系列（Claude 101/Code in Action）、Amazon Bedrock、Gemini AI 認證及 Agent 開發認證。</p>
-                        <p className="text-[#dbd7cf] leading-relaxed">▸ <strong className="text-white">國際標準機構 TÜV 萊茵集團永續發展認證</strong>：涵蓋碳足跡查驗、永續報告書查驗、CEO 永續長認證、ESG 永續評估師、TÜV 萊茵集團認可訓練師資格。</p>
+                        <p className="text-[#dbd7cf] leading-relaxed">??<strong className="text-white">Anthropic ??Google ?�發 AI 專業認�?</strong>：涵??Anthropic ??HEA?�UCC 認�?，AI Fluency 系�?（Claude 101/Code in Action）、Amazon Bedrock?�Gemini AI 認�???Agent ?�發認�???/p>
+                        <p className="text-[#dbd7cf] leading-relaxed">??<strong className="text-white">?��?標�?機�? T?V ?�茵?��?永�??��?認�?</strong>：涵?�碳足跡?��??�永續報?�書?��??�CEO 永�??��?證、ESG 永�?評估師、T?V ?�茵?��?認可訓練師�??��?/p>
                       </div>
-                      <p className="text-[#e6c84c]/90 font-serif italic flex-shrink-0 mt-auto" style={{ fontSize: 'clamp(10px, 0.9vw, 13px)' }}>制度的嚴謹度，從不允許自己反覆犯同樣的錯誤開始。--- 《Internal Compliance》</p>
+                      <p className="text-[#e6c84c]/90 font-serif italic flex-shrink-0 mt-auto" style={{ fontSize: 'clamp(10px, 0.9vw, 13px)' }}>?�度?�嚴謹度，�?不�?許自己�?覆犯?�樣?�錯誤�?始�?-- ?�Internal Compliance??/p>
                     </div>
-                    <Portrait src="/images/Eric-Chuang-18.png" alt="莊鈞翔博士" />
+                    <Portrait src="/images/Eric-Chuang-18.png" alt="?��?翔�?�? />
                   </div>
                 )}
 
@@ -371,23 +371,23 @@ export default function About() {
                 {currentSlide === 4 && (
                   <div className="flex flex-row" style={{ height: '100%', overflow: 'hidden' }}>
                     <div className="w-full lg:w-[58%] flex flex-col overflow-hidden flex-shrink-0" style={{ padding: 'clamp(8px, 1.5vh, 24px) 0', paddingRight: 'clamp(16px, 2vw, 40px)' }}>
-                      <SectionLabel en="PROFESSIONAL DOMAIN AREAS" zh="服務項目" />
-                      <h2 className="font-serif text-white leading-tight flex-shrink-0" style={{ fontSize: 'clamp(20px, 2.8vw, 42px)', margin: 'clamp(4px, 0.8vh, 10px) 0' }}>四大治理解方</h2>
+                      <SectionLabel en="PROFESSIONAL DOMAIN AREAS" zh="?��??�目" />
+                      <h2 className="font-serif text-white leading-tight flex-shrink-0" style={{ fontSize: 'clamp(20px, 2.8vw, 42px)', margin: 'clamp(4px, 0.8vh, 10px) 0' }}>?�大治�?�?��</h2>
                       <p className="text-zinc-400 font-mono tracking-widest uppercase font-semibold flex-shrink-0" style={{ fontSize: 'clamp(8px, 0.7vw, 11px)', marginBottom: 'clamp(8px, 1.2vh, 16px)' }}>THE FOUR PILLARS OF GOVERNANCE & COMPLIANCE SOLUTIONS</p>
                       <div className="grid grid-cols-2 gap-2 flex-1 overflow-hidden">
                         {[
-                          { title: '策略規劃 STRATEGIC PLAN', roman: '從戰略高度重構治理格局', points: ['企業策略法律風險預防與制度建立', '家族企業接班梯隊設計與傳承規劃', '企業策略導入治理法遵精神'] },
-                          { title: '穩健運營 STEADY RUNNING', roman: '法遵是最堅實的護城河', points: ['內部控制制度建立與法遵健診', '企業內部法遵文化培訓與落地', '企業合規架構設計與文件化'] },
-                          { title: '核心治理 CORE GOVERNANCE', roman: '制度傳承，基業長青', points: ['董事會治理結構優化與職責分工', '家族憲章設計與股權架構規劃', '企業永續治理策略與 ESG 整合'] },
-                          { title: '資產傳承 ACCOMODATION', roman: '以制度守護家族財富', points: ['高資產家族跨境稅務規劃框架', '2026 碳費元年下法遵制度因應', '企業主個人資產保護與傳承設計'] },
+                          { title: '策略規�? STRATEGIC PLAN', roman: '從戰?��?度�?構治?�格局', points: ['企業策略法�?風險?�防?�制度建�?, '家�?企業?�班梯�?設�??�傳?��???, '企業策略導入治�?法遵精�?'] },
+                          { title: '穩健?��? STEADY RUNNING', roman: '法遵?��??�實?�護?�河', points: ['?�部?�制?�度建�??��??�健�?, '企業?�部法遵?��??��??�落??, '企業?��??��?設�??��?件�?'] },
+                          { title: '?��?治�? CORE GOVERNANCE', roman: '?�度?�承，基業長??, points: ['????�治?��?構優?��??�責?�工', '家�??��?設�??�股權架構�???, '企業永�?治�?策略??ESG ?��?'] },
+                          { title: '資產?�承 ACCOMODATION', roman: '以制度�?護家?�財�?, points: ['高�??�家?�跨境�??��??��???, '2026 碳費?�年下�??�制度�???, '企業主個人資產保護?�傳?�設�?] },
                         ].map((pillar, idx) => (
                           <div key={idx} className="p-3 bg-zinc-950/80 border border-white/[0.03] hover:border-[#e6c84c]/20 transition-all rounded-lg overflow-hidden">
-                            <span className="text-[#e6c84c]/60 font-mono font-bold block" style={{ fontSize: '8px' }}>PILLAR 0{idx+1} ｜ {pillar.title}</span>
+                            <span className="text-[#e6c84c]/60 font-mono font-bold block" style={{ fontSize: '8px' }}>PILLAR 0{idx+1} �?{pillar.title}</span>
                             <h3 className="font-serif font-bold text-white mt-0.5" style={{ fontSize: 'clamp(10px, 0.85vw, 13px)' }}>{pillar.roman}</h3>
                             <ul className="mt-1.5 border-t border-white/[0.02] pt-1.5 space-y-1" style={{ fontSize: 'clamp(9px, 0.75vw, 11px)' }}>
                               {pillar.points.map((p, i) => (
                                 <li key={i} className="flex items-start gap-1.5 text-zinc-400 leading-relaxed">
-                                  <span className="text-[#e6c84c] font-black shrink-0">▸</span><span>{p}</span>
+                                  <span className="text-[#e6c84c] font-black shrink-0">??/span><span>{p}</span>
                                 </li>
                               ))}
                             </ul>
@@ -395,7 +395,7 @@ export default function About() {
                         ))}
                       </div>
                     </div>
-                    <Portrait src="/images/Eric-Chuang-19.png" alt="莊鈞翔博士" />
+                    <Portrait src="/images/Eric-Chuang-19.png" alt="?��?翔�?�? />
                   </div>
                 )}
 
@@ -403,38 +403,38 @@ export default function About() {
                 {currentSlide === 5 && (
                   <div className="flex flex-row" style={{ height: '100%', overflow: 'hidden' }}>
                     <div className="w-full lg:w-[58%] flex flex-col overflow-hidden flex-shrink-0" style={{ padding: 'clamp(8px, 1.5vh, 24px) 0', paddingRight: 'clamp(16px, 2vw, 40px)' }}>
-                      <SectionLabel en="INITIATE COREGULATION" zh="治理委託" />
-                      <h2 className="font-serif text-white leading-tight flex-shrink-0" style={{ fontSize: 'clamp(22px, 3vw, 46px)', margin: 'clamp(4px, 0.8vh, 10px) 0' }}>實踐您的思想主權</h2>
+                      <SectionLabel en="INITIATE COREGULATION" zh="治�?委�?" />
+                      <h2 className="font-serif text-white leading-tight flex-shrink-0" style={{ fontSize: 'clamp(22px, 3vw, 46px)', margin: 'clamp(4px, 0.8vh, 10px) 0' }}>實�??��??�想主�?</h2>
                       <p className="text-zinc-400 font-mono tracking-widest uppercase font-semibold flex-shrink-0" style={{ fontSize: 'clamp(8px, 0.7vw, 11px)', marginBottom: 'clamp(8px, 1.2vh, 16px)' }}>GOVERNANCE DELEGATION & INTELLECTUAL ALLIANCE</p>
                       <div className="border-l-2 border-[#e6c84c]/75 bg-zinc-950/45 flex-shrink-0" style={{ padding: 'clamp(8px, 1vh, 14px)', marginBottom: 'clamp(8px, 1.2vh, 16px)', fontSize: 'clamp(11px, 1vw, 15px)' }}>
-                        <p className="text-zinc-300 italic leading-relaxed">我們絕不推銷任何廉價的建議，僅為真正珍視基業與秩序的領袖，提供制度性守護。</p>
+                        <p className="text-zinc-300 italic leading-relaxed">?�們�?不推?�任何�??��?建議，�??��?�??視基業�?秩�??��?袖�??��??�度?��?護�?/p>
                       </div>
                       <p className="text-zinc-400 font-light leading-relaxed flex-shrink-0" style={{ fontSize: 'clamp(10px, 0.9vw, 13px)', marginBottom: 'clamp(12px, 2vh, 24px)' }}>
-                        如果您需要為企業董事會注入實質的決策框架、妥善保護個人智慧財產或營業秘密，或是進行系統化的家族接班人資產規劃，誠摯邀請您與莊鈞翔博士專屬智庫辦公室展開對話。
+                        如�??��?要為企業????�注?�實質�?決�?框架?�妥?��?護個人?�慧財產?��?業�?密�??�是?��?系統?��?家�??�班人�??��??��?誠摯?�請您?��??��??�士專屬?�庫辦公室�??��?話�?
                       </p>
                       <div className="flex flex-col sm:flex-row gap-3 flex-shrink-0" style={{ marginBottom: 'clamp(12px, 2vh, 24px)' }}>
                         <a href="https://lin.ee/yJrCTeo" target="_blank" rel="noopener noreferrer"
                           className="flex-1 bg-gradient-to-br from-[#e6c84c] via-yellow-500 to-[#b89530] text-black rounded-xl flex flex-col items-start gap-1 hover:brightness-110 transition-all no-underline"
                           style={{ padding: 'clamp(12px, 1.5vh, 20px) clamp(16px, 1.5vw, 24px)' }}>
-                          <div className="flex items-center gap-2"><Crown className="w-4 h-4 text-black" /><span className="font-bold tracking-wider" style={{ fontSize: 'clamp(11px, 1vw, 15px)' }}>治理委託 ENGAGEMENT</span></div>
-                          <span className="font-mono font-black tracking-widest opacity-80 uppercase" style={{ fontSize: '9px' }}>▸ 點擊一鍵開啟 LINE 私人委託諮詢</span>
+                          <div className="flex items-center gap-2"><Crown className="w-4 h-4 text-black" /><span className="font-bold tracking-wider" style={{ fontSize: 'clamp(11px, 1vw, 15px)' }}>治�?委�? ENGAGEMENT</span></div>
+                          <span className="font-mono font-black tracking-widest opacity-80 uppercase" style={{ fontSize: '9px' }}>??點�?一?��???LINE 私人委�?諮詢</span>
                         </a>
                         <button
                           type="button"
                           onClick={() => setShowContact(true)}
                           className="flex-1 border border-[#e6c84c]/40 text-[#e6c84c] hover:bg-[#e6c84c]/5 rounded-xl flex flex-col items-start gap-1 transition-all cursor-pointer bg-transparent outline-none"
                           style={{ padding: 'clamp(12px, 1.5vh, 20px) clamp(16px, 1.5vw, 24px)' }}>
-                          <div className="flex items-center gap-2"><Mail className="w-4 h-4 text-[#e6c84c]" /><span className="font-bold tracking-wider" style={{ fontSize: 'clamp(11px, 1vw, 15px)' }}>聯絡智庫 CONNECT</span></div>
-                          <span className="font-mono font-black tracking-widest opacity-80 uppercase" style={{ fontSize: '9px' }}>填寫聯絡表單，我們將盡快回覆。</span>
+                          <div className="flex items-center gap-2"><Mail className="w-4 h-4 text-[#e6c84c]" /><span className="font-bold tracking-wider" style={{ fontSize: 'clamp(11px, 1vw, 15px)' }}>?�絡?�庫 CONNECT</span></div>
+                          <span className="font-mono font-black tracking-widest opacity-80 uppercase" style={{ fontSize: '9px' }}>填寫?�絡表單，�??��??�快?��???/span>
                         </button>
                       </div>
                       <button type="button" onClick={() => selectSlide(0)}
                         className="bg-transparent border border-white/5 hover:border-[#e6c84c]/30 p-2 rounded-full flex items-center text-white/30 hover:text-[#e6c84c] transition-all cursor-pointer outline-none self-start"
                         style={{ fontSize: '10px' }}>
-                        <span className="px-2">▲ 回到第一頁 START OVER</span>
+                        <span className="px-2">???�到第�???START OVER</span>
                       </button>
                     </div>
-                    <Portrait src="/images/Eric-Chuang-20.png" alt="莊鈞翔博士" />
+                    <Portrait src="/images/Eric-Chuang-20.png" alt="?��?翔�?�? />
                   </div>
                 )}
 
@@ -446,11 +446,12 @@ export default function About() {
         {/* Footer */}
         <footer className="border-t border-white/[0.02] bg-[#000] flex-shrink-0" style={{ padding: '10px 0' }}>
           <div className="container mx-auto px-6 max-w-7xl flex flex-col md:flex-row justify-between items-center gap-2 text-center md:text-left font-mono text-zinc-500" style={{ fontSize: '10px' }}>
-            <p>© {new Date().getFullYear()} STT Press 策略智庫出版社 ‧ 莊鈞翔博士 (Founder: Eric Chuang, Ph.D.) ‧ ALL RIGHTS RESERVED.</p>
-            <div className="flex gap-4"><span>TRUST FOUNDATION</span><span>‧</span><span>INSTITUTIONAL LOGIC</span></div>
+            <p>© {new Date().getFullYear()} STT Press 策略?�庫?��?�????��?翔�?�?(Founder: Eric Chuang, Ph.D.) ??ALL RIGHTS RESERVED.</p>
+            <div className="flex gap-4"><span>TRUST FOUNDATION</span><span>??/span><span>INSTITUTIONAL LOGIC</span></div>
           </div>
         </footer>
       </div>
     </>
   );
 }
+
