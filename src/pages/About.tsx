@@ -186,12 +186,22 @@ export default function About() {
   const selectSlide = (index: number) => setCurrentSlide(index);
 
   const Portrait = ({ src, alt }: { src: string; alt: string }) => (
-    <div className="hidden lg:flex lg:w-[42%] flex-col items-end justify-end relative overflow-hidden flex-shrink-0" style={{ height: '100%' }}>
-      <img src={src} alt={alt} className="w-auto object-contain object-bottom" style={{ height: '100%', maxHeight: '100%', filter: 'contrast(1.05)' }} referrerPolicy="no-referrer" />
-      <div className="absolute bottom-5 right-5 z-20 pointer-events-none select-none">
-        <img src="/images/signature-eric001.png" alt="Signature" className="h-auto opacity-95" style={{ width: 'clamp(120px, 11vw, 200px)', filter: 'drop-shadow(0 2px 10px rgba(0,0,0,0.95))' }} referrerPolicy="no-referrer" />
+    <>
+      {/* 手機版：肖像顯示在內容上方 */}
+      <div className="lg:hidden w-full flex justify-center items-end overflow-hidden flex-shrink-0 relative" style={{ height: '200px' }}>
+        <img src={src} alt={alt} className="h-full w-auto object-contain object-bottom" style={{ filter: 'contrast(1.05)' }} referrerPolicy="no-referrer" />
+        <div className="absolute bottom-2 right-4 z-20 pointer-events-none select-none">
+          <img src="/images/signature-eric001.png" alt="Signature" className="h-auto opacity-90" style={{ width: '90px', filter: 'drop-shadow(0 2px 10px rgba(0,0,0,0.95))' }} referrerPolicy="no-referrer" />
+        </div>
       </div>
-    </div>
+      {/* 桌機版：肖像在右側欄 */}
+      <div className="hidden lg:flex lg:w-[42%] flex-col items-end justify-end relative overflow-hidden flex-shrink-0" style={{ height: '100%' }}>
+        <img src={src} alt={alt} className="w-auto object-contain object-bottom" style={{ height: '100%', maxHeight: '100%', filter: 'contrast(1.05)' }} referrerPolicy="no-referrer" />
+        <div className="absolute bottom-5 right-5 z-20 pointer-events-none select-none">
+          <img src="/images/signature-eric001.png" alt="Signature" className="h-auto opacity-95" style={{ width: 'clamp(120px, 11vw, 200px)', filter: 'drop-shadow(0 2px 10px rgba(0,0,0,0.95))' }} referrerPolicy="no-referrer" />
+        </div>
+      </div>
+    </>
   );
 
   const SectionLabel = ({ en, zh }: { en: string; zh: string }) => (
@@ -256,7 +266,7 @@ export default function About() {
 
                 {/* SLIDE 0 */}
                 {currentSlide === 0 && (
-                  <div className="flex flex-row" style={{ height: '100%', overflow: 'hidden' }}>
+                  <div className="flex flex-col-reverse lg:flex-row overflow-auto lg:overflow-hidden" style={{ height: '100%' }}>
                     <div className="w-full lg:w-[58%] flex flex-col overflow-hidden flex-shrink-0" style={{ padding: 'clamp(8px, 1.5vh, 24px) 0', paddingRight: 'clamp(16px, 2vw, 40px)' }}>
                       <SectionLabel en="SOVEREIGNTY OF THOUGHT" zh="思想主權" />
                       <h1 className="font-serif text-[#e6c84c] tracking-wider leading-tight whitespace-nowrap flex-shrink-0" style={{ fontSize: 'clamp(18px, 2.5vw, 38px)', margin: 'clamp(4px, 0.8vh, 12px) 0' }}>實踐您的思想主權</h1>
@@ -283,7 +293,7 @@ export default function About() {
 
                 {/* SLIDE 1 */}
                 {currentSlide === 1 && (
-                  <div className="flex flex-row" style={{ height: '100%', overflow: 'hidden' }}>
+                  <div className="flex flex-col-reverse lg:flex-row overflow-auto lg:overflow-hidden" style={{ height: '100%' }}>
                     <div className="w-full lg:w-[58%] flex flex-col overflow-hidden flex-shrink-0" style={{ padding: 'clamp(8px, 1.5vh, 24px) 0', paddingRight: 'clamp(16px, 2vw, 40px)' }}>
                       <SectionLabel en="AFFILIATIONS & ROLES" zh="現任職務" />
                       <h2 className="font-serif font-black text-[#e6c84c] leading-tight flex-shrink-0" style={{ fontSize: 'clamp(20px, 2.8vw, 42px)', margin: 'clamp(4px, 0.8vh, 10px) 0' }}>現任職務一覽</h2>
@@ -320,7 +330,7 @@ export default function About() {
 
                 {/* SLIDE 2 */}
                 {currentSlide === 2 && (
-                  <div className="flex flex-row" style={{ height: '100%', overflow: 'hidden' }}>
+                  <div className="flex flex-col-reverse lg:flex-row overflow-auto lg:overflow-hidden" style={{ height: '100%' }}>
                     <div className="w-full lg:w-[58%] flex flex-col overflow-hidden flex-shrink-0" style={{ padding: 'clamp(8px, 1.5vh, 24px) 0', paddingRight: 'clamp(16px, 2vw, 40px)' }}>
                       <SectionLabel en="ACADEMIC FOUNDATION" zh="學術與實務" />
                       <h2 className="font-serif font-black text-[#e6c84c] leading-tight flex-shrink-0" style={{ fontSize: 'clamp(20px, 2.8vw, 42px)', margin: 'clamp(4px, 0.8vh, 10px) 0' }}>學術奠基、實務淬鍊</h2>
@@ -350,7 +360,7 @@ export default function About() {
 
                 {/* SLIDE 3 */}
                 {currentSlide === 3 && (
-                  <div className="flex flex-row" style={{ height: '100%', overflow: 'hidden' }}>
+                  <div className="flex flex-col-reverse lg:flex-row overflow-auto lg:overflow-hidden" style={{ height: '100%' }}>
                     <div className="w-full lg:w-[58%] flex flex-col overflow-hidden flex-shrink-0" style={{ padding: 'clamp(8px, 1.5vh, 24px) 0', paddingRight: 'clamp(16px, 2vw, 40px)' }}>
                       <SectionLabel en="REGULATORY ACCREDITATIONS" zh="專業認證" />
                       <h2 className="font-serif font-black text-[#e6c84c] leading-tight flex-shrink-0" style={{ fontSize: 'clamp(18px, 2.4vw, 36px)', margin: 'clamp(4px, 0.8vh, 10px) 0' }}>AI 治理認證與 ESG 永續評估師資格</h2>
@@ -413,7 +423,7 @@ export default function About() {
 
                 {/* SLIDE 4 */}
                 {currentSlide === 4 && (
-                  <div className="flex flex-row" style={{ height: '100%', overflow: 'hidden' }}>
+                  <div className="flex flex-col-reverse lg:flex-row overflow-auto lg:overflow-hidden" style={{ height: '100%' }}>
                     <div className="w-full lg:w-[58%] flex flex-col overflow-hidden flex-shrink-0" style={{ padding: 'clamp(8px, 1.5vh, 24px) 0', paddingRight: 'clamp(16px, 2vw, 40px)' }}>
                       <SectionLabel en="PROFESSIONAL DOMAIN AREAS" zh="服務項目" />
                       <h2 className="font-serif text-white leading-tight flex-shrink-0" style={{ fontSize: 'clamp(20px, 2.8vw, 42px)', margin: 'clamp(4px, 0.8vh, 10px) 0' }}>四大治理解方</h2>
@@ -447,7 +457,7 @@ export default function About() {
 
                 {/* SLIDE 5 */}
                 {currentSlide === 5 && (
-                  <div className="flex flex-row" style={{ height: '100%', overflow: 'hidden' }}>
+                  <div className="flex flex-col-reverse lg:flex-row overflow-auto lg:overflow-hidden" style={{ height: '100%' }}>
                     <div className="w-full lg:w-[58%] flex flex-col overflow-hidden flex-shrink-0" style={{ padding: 'clamp(8px, 1.5vh, 24px) 0', paddingRight: 'clamp(16px, 2vw, 40px)' }}>
                       <SectionLabel en="INITIATE COREGULATION" zh="治理委託" />
                       <h2 className="font-serif text-white leading-tight flex-shrink-0" style={{ fontSize: 'clamp(22px, 3vw, 46px)', margin: 'clamp(4px, 0.8vh, 10px) 0' }}>實踐您的思想主權</h2>
