@@ -353,12 +353,37 @@ export default function About() {
                       <SectionLabel en="REGULATORY ACCREDITATIONS" zh="專業認�?" />
                       <h2 className="font-serif font-black text-[#e6c84c] leading-tight flex-shrink-0" style={{ fontSize: 'clamp(18px, 2.4vw, 36px)', margin: 'clamp(4px, 0.8vh, 10px) 0' }}>AI 治�?認�???ESG 永�?評估師�???/h2>
                       <p className="text-stone-300 tracking-wide flex-shrink-0" style={{ fontSize: 'clamp(10px, 0.85vw, 13px)', marginBottom: 'clamp(8px, 1.2vh, 16px)' }}>跨�?機�?認可?��?業�???| 治�?實�??��??�整??/p>
-                      <div className="border-l-2 border-[#e6c84c]/75 bg-zinc-950/45 flex-shrink-0" style={{ padding: 'clamp(8px, 1vh, 14px)', marginBottom: 'clamp(8px, 1.2vh, 16px)', fontSize: 'clamp(10px, 0.9vw, 14px)' }}>
-                        <p className="text-[#EBE7DF]/95 tracking-wider italic leading-relaxed">認�?不是裝飾，而是對制度嚴謹性�??�諾?��?一張�??��?後�??��? AI 治�???ESG 實�??�深度�?�??責任?��???/p>
-                      </div>
-                      <div className="space-y-2 flex-shrink-0" style={{ fontSize: 'clamp(10px, 0.9vw, 13px)', marginBottom: 'clamp(8px, 1.2vh, 16px)' }}>
-                        <p className="text-[#dbd7cf] leading-relaxed">??<strong className="text-white">Anthropic ??Google ?�發 AI 專業認�?</strong>：涵??Anthropic ??HEA?�UCC 認�?，AI Fluency 系�?（Claude 101/Code in Action）、Amazon Bedrock?�Gemini AI 認�???Agent ?�發認�???/p>
-                        <p className="text-[#dbd7cf] leading-relaxed">??<strong className="text-white">?��?標�?機�? T?V ?�茵?��?永�??��?認�?</strong>：涵?�碳足跡?��??�永續報?�書?��??�CEO 永�??��?證、ESG 永�?評估師、T?V ?�茵?��?認可訓練師�??��?/p>
+                      <div className="grid grid-cols-2 gap-2 flex-shrink-0" style={{ marginBottom: 'clamp(8px, 1.2vh, 16px)' }}>
+                        <div className="p-3 bg-zinc-950/80 border-l-4 border-l-[#e6c84c]/70 border-t border-t-white/[0.03] border-r border-r-white/[0.03] border-b border-b-white/[0.03] rounded-lg overflow-hidden">
+                          <span className="text-[#e6c84c]/80 font-mono tracking-widest block uppercase font-bold" style={{ fontSize: '9px' }}>ANTHROPIC</span>
+                          <h3 className="font-serif font-black text-[#e6c84c] mt-0.5" style={{ fontSize: 'clamp(10px, 0.85vw, 13px)' }}>AI 治理認證</h3>
+                          <div className="mt-1.5 space-y-1" style={{ fontSize: 'clamp(9px, 0.75vw, 11px)' }}>
+                            <p className="text-zinc-300">▸ HEA 認證</p>
+                            <p className="text-zinc-300">▸ UCC 認證</p>
+                            <p className="text-zinc-300">▸ AI Fluency 系列</p>
+                            <p className="text-zinc-300">▸ Claude 101 / Code in Action</p>
+                          </div>
+                        </div>
+                        <div className="p-3 bg-zinc-950/80 border-l-4 border-l-[#e6c84c]/70 border-t border-t-white/[0.03] border-r border-r-white/[0.03] border-b border-b-white/[0.03] rounded-lg overflow-hidden">
+                          <span className="text-[#e6c84c]/80 font-mono tracking-widest block uppercase font-bold" style={{ fontSize: '9px' }}>GOOGLE</span>
+                          <h3 className="font-serif font-black text-[#e6c84c] mt-0.5" style={{ fontSize: 'clamp(10px, 0.85vw, 13px)' }}>AI 專業認證</h3>
+                          <div className="mt-1.5 space-y-1" style={{ fontSize: 'clamp(9px, 0.75vw, 11px)' }}>
+                            <p className="text-zinc-300">▸ Amazon Bedrock 認證</p>
+                            <p className="text-zinc-300">▸ Gemini AI 認證</p>
+                            <p className="text-zinc-300">▸ Agent 開發認證</p>
+                          </div>
+                        </div>
+                        <div className="p-3 bg-zinc-950/80 border-l-4 border-l-[#e6c84c]/70 border-t border-t-white/[0.03] border-r border-r-white/[0.03] border-b border-b-white/[0.03] rounded-lg overflow-hidden col-span-2">
+                          <span className="text-[#e6c84c]/80 font-mono tracking-widest block uppercase font-bold" style={{ fontSize: '9px' }}>TÜV RHEINLAND</span>
+                          <h3 className="font-serif font-black text-[#e6c84c] mt-0.5" style={{ fontSize: 'clamp(10px, 0.85vw, 13px)' }}>國際標準機構永續發展認證</h3>
+                          <div className="mt-1.5 grid grid-cols-2 gap-1" style={{ fontSize: 'clamp(9px, 0.75vw, 11px)' }}>
+                            <p className="text-zinc-300">▸ 碳足跡查驗</p>
+                            <p className="text-zinc-300">▸ 永續報告書查驗</p>
+                            <p className="text-zinc-300">▸ CEO 永續長認證</p>
+                            <p className="text-zinc-300">▸ ESG 永續評估師</p>
+                            <p className="text-zinc-300">▸ TÜV 認可訓練師資格</p>
+                          </div>
+                        </div>
                       </div>
                       <p className="text-[#e6c84c] font-serif italic flex-shrink-0 mt-auto border border-[#e6c84c]/60 rounded-lg px-3 py-2" style={{ fontSize: 'clamp(10px, 0.9vw, 13px)' }}>?�度?�嚴謹度，�?不�?許自己�?覆犯?�樣?�錯誤�?始�?-- ?�Internal Compliance??/p>
                     </div>
