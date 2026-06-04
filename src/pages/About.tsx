@@ -202,8 +202,7 @@ export default function About() {
   );
 
   const Card = ({ label, title, children }: { label: string; title: string; children: React.ReactNode }) => (
-    <div className="p-3 bg-zinc-950/80 border border-white/[0.03] hover:border-[#e6c84c]/20 transition-all rounded-lg relative overflow-hidden">
-      <div className="absolute top-0 left-0 w-1 h-full bg-[#e6c84c]/60"></div>
+    <div className="p-3 bg-zinc-950/80 border-l-4 border-l-[#e6c84c]/70 border-t border-t-white/[0.03] border-r border-r-white/[0.03] border-b border-b-white/[0.03] transition-all rounded-lg overflow-hidden">
       <span className="text-[#e6c84c]/80 font-mono tracking-widest block uppercase font-bold" style={{ fontSize: '9px' }}>{label}</span>
       <h3 className="font-serif font-black text-[#e6c84c] mt-0.5" style={{ fontSize: 'clamp(10px, 0.85vw, 13px)' }}>{title}</h3>
       <div style={{ fontSize: 'clamp(9px, 0.75vw, 11px)' }}>{children}</div>
@@ -272,7 +271,7 @@ export default function About() {
                         <li className="text-stone-300 font-light" style={{ marginBottom: 'clamp(4px, 0.6vh, 8px)' }}>?äÂ?Â£´‰ª•Ê≥ïÈÅµ?∫Ê†∏ÂøÉÊà∞?•Ë?Ë®ÄÔºåÂ??©‰?Ê•≠Âª∫Á´ãÂà∂Â∫¶ÊÄßÁ´∂?≠ÂÑ™?¢Ô?ËÆìÊ?Âæã‰??çÊòØ?êÊú¨‰∏≠Â?ÔºåËÄåÊòØ?ÅÁ?Ê∫¢ÂÉπ?Ñ‰?Ê∫ê„Ä?/li>
                         <li className="text-stone-300 font-light">?äÂ?Â£´Ê∑±‰ø°‰?Ê•≠Á??∑Ê??πÂÄºÔ?Âª∫Á??®Ë?‰ø°Ë??∂Â∫¶?ÑÁ??≥‰?‰∏äÔ??åÈ??≠Ê??≤Âà©?ÑÊ?Ê≤ô„Ä?/li>
                       </ul>
-                      <p className="text-[#e6c84c] font-serif italic tracking-wide flex-shrink-0 mt-auto" style={{ fontSize: 'clamp(10px, 0.9vw, 13px)' }}>
+                      <p className="text-[#e6c84c] font-serif italic tracking-wide flex-shrink-0 mt-auto border border-[#e6c84c]/60 rounded-lg px-3 py-2" style={{ fontSize: 'clamp(10px, 0.9vw, 13px)' }}>
                         ?∫‰??ÑÂÖßÂøÉÔ??ìÈÄ†‰?Â∫ß‰??Ø‰æµ?ØÁ??≥Ë??Ä<span className="border-b border-[#e6c84c]/50 pb-0.5 ml-1">--- ?òËá™?äInternal Compliance?ãË??ûÁ??öÂ£´??/span>
                       </p>
                     </div>
@@ -361,7 +360,7 @@ export default function About() {
                         <p className="text-[#dbd7cf] leading-relaxed">??<strong className="text-white">Anthropic ??Google ?∏Áôº AI Â∞àÊ•≠Ë™çË?</strong>ÔºöÊ∂µ??Anthropic ??HEA?ÅUCC Ë™çË?ÔºåAI Fluency Á≥ªÂ?ÔºàClaude 101/Code in ActionÔºâ„ÄÅAmazon Bedrock?ÅGemini AI Ë™çË???Agent ?ãÁôºË™çË???/p>
                         <p className="text-[#dbd7cf] leading-relaxed">??<strong className="text-white">?ãÈ?Ê®ôÊ?Ê©üÊ? T?V ?äËåµ?ÜÂ?Ê∞∏Á??ºÂ?Ë™çË?</strong>ÔºöÊ∂µ?ãÁ¢≥Ë∂≥Ë∑°?•È??ÅÊ∞∏Á∫åÂ†±?äÊõ∏?•È??ÅCEO Ê∞∏Á??∑Ë?Ë≠â„ÄÅESG Ê∞∏Á?Ë©ï‰º∞Â∏´„ÄÅT?V ?äËåµ?ÜÂ?Ë™çÂèØË®ìÁ∑¥Â∏´Ë??º„Ä?/p>
                       </div>
-                      <p className="text-[#e6c84c]/90 font-serif italic flex-shrink-0 mt-auto" style={{ fontSize: 'clamp(10px, 0.9vw, 13px)' }}>?∂Â∫¶?ÑÂö¥Ë¨πÂ∫¶ÔºåÂ?‰∏çÂ?Ë®±Ëá™Â∑±Â?Ë¶ÜÁäØ?åÊ®£?ÑÈåØË™§È?Âßã„Ä?-- ?äInternal Compliance??/p>
+                      <p className="text-[#e6c84c] font-serif italic flex-shrink-0 mt-auto border border-[#e6c84c]/60 rounded-lg px-3 py-2" style={{ fontSize: 'clamp(10px, 0.9vw, 13px)' }}>?∂Â∫¶?ÑÂö¥Ë¨πÂ∫¶ÔºåÂ?‰∏çÂ?Ë®±Ëá™Â∑±Â?Ë¶ÜÁäØ?åÊ®£?ÑÈåØË™§È?Âßã„Ä?-- ?äInternal Compliance??/p>
                     </div>
                     <Portrait src="/images/Eric-Chuang-18.png" alt="?äÈ?ÁøîÂ?Â£? />
                   </div>
@@ -381,7 +380,7 @@ export default function About() {
                           { title: '?∏Â?Ê≤ªÁ? CORE GOVERNANCE', roman: '?∂Â∫¶?≥ÊâøÔºåÂü∫Ê•≠Èï∑??, points: ['????ÉÊ≤ª?ÜÁ?ÊßãÂÑ™?ñË??∑Ë≤¨?ÜÂ∑•', 'ÂÆ∂Ê??≤Á?Ë®≠Ë??áËÇ°Ê¨äÊû∂ÊßãË???, '‰ºÅÊ•≠Ê∞∏Á?Ê≤ªÁ?Á≠ñÁï•??ESG ?¥Â?'] },
                           { title: 'Ë≥áÁî¢?≥Êâø ACCOMODATION', roman: '‰ª•Âà∂Â∫¶Â?Ë≠∑ÂÆ∂?èË≤°ÂØ?, points: ['È´òË??¢ÂÆ∂?èË∑®Â¢ÉÁ??ôË??ÉÊ???, '2026 Á¢≥Ë≤ª?ÉÂπ¥‰∏ãÊ??µÂà∂Â∫¶Â???, '‰ºÅÊ•≠‰∏ªÂÄã‰∫∫Ë≥áÁî¢‰øùË≠∑?áÂÇ≥?øË®≠Ë®?] },
                         ].map((pillar, idx) => (
-                          <div key={idx} className="p-3 bg-zinc-950/80 border border-white/[0.03] hover:border-[#e6c84c]/20 transition-all rounded-lg overflow-hidden">
+                          <div key={idx} className="p-3 bg-zinc-950/80 border-l-4 border-l-[#e6c84c]/70 border-t border-t-white/[0.03] border-r border-r-white/[0.03] border-b border-b-white/[0.03] transition-all rounded-lg overflow-hidden">
                             <span className="text-[#e6c84c]/60 font-mono font-bold block" style={{ fontSize: '8px' }}>PILLAR 0{idx+1} ÔΩ?{pillar.title}</span>
                             <h3 className="font-serif font-bold text-white mt-0.5" style={{ fontSize: 'clamp(10px, 0.85vw, 13px)' }}>{pillar.roman}</h3>
                             <ul className="mt-1.5 border-t border-white/[0.02] pt-1.5 space-y-1" style={{ fontSize: 'clamp(9px, 0.75vw, 11px)' }}>
