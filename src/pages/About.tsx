@@ -338,8 +338,16 @@ export default function About() {
                       <div className="grid grid-cols-2 gap-2 flex-shrink-0" style={{ marginBottom: 'clamp(8px, 1.2vh, 16px)' }}>
                         <Card label="ACADEMIC FOUNDATION" title="學歷背景">
                           <div className="mt-1.5 space-y-2 text-zinc-300">
-                            <div><span className="font-semibold text-white">▸ 管理學博士 Ph.D. in Business Administration</span><p className="text-zinc-400 pl-2 mt-0.5">逢甲大學管理學院 (2024)，研究領域：公司治理與法遵策略</p></div>
-                            <div><span className="font-semibold text-white">▸ 嶺東科技大學管理研究所 EMBA</span><p className="text-zinc-400 pl-2 mt-0.5">跨世代企業家人格特質、創新能力與企業經營績效研究</p></div>
+                            <div className="space-y-0.5">
+                              <span className="font-semibold text-white">▸ 管理學博士 Ph.D. in Business Administration</span>
+                              <p className="text-zinc-400 pl-2 mt-0.5">Research Expertise / 研究領域：Corporate Governance & Compliance Strategy 公司治理與法遵策略</p>
+                              <p className="text-zinc-400 pl-2">Affiliation / 畢業系所：College of Business, Feng Chia University</p>
+                            </div>
+                            <div className="space-y-0.5">
+                              <span className="font-semibold text-white">▸ 高階經營管理碩士 Executive MBA</span>
+                              <p className="text-zinc-400 pl-2 mt-0.5">Thesis Topic / 研究主題：跨世代企業家人格特質、創新能力與企業經營績效之研究</p>
+                              <p className="text-zinc-400 pl-2">Affiliation / 畢業系所：Graduate Institute of Business Administration, Ling Tung University</p>
+                            </div>
                           </div>
                         </Card>
                         <Card label="EMPIRICAL RIGOR" title="代表著作">
