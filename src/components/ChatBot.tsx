@@ -92,12 +92,11 @@ export default function ChatBot({ open, onClose }: ChatBotProps) {
 ${context ? `以下是與問題相關的專欄知識庫內容：\n\n${context}` : ""}`;
 
     try {
-      const apiKey = import.meta.env.VITE_ANTHROPIC_API_KEY;
       const res = await fetch("https://api.anthropic.com/v1/messages", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "x-api-key": apiKey,
+          "x-api-key": "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",
           "anthropic-version": "2023-06-01",
           "anthropic-dangerous-direct-browser-access": "true",
         },
@@ -142,7 +141,6 @@ ${context ? `以下是與問題相關的專欄知識庫內容：\n\n${context}` 
         overflow: "hidden",
       }}
     >
-      {/* 標題列 */}
       <div style={{
         background: "linear-gradient(135deg, #0F2236, #1a3a5c)",
         padding: "14px 18px",
@@ -162,7 +160,6 @@ ${context ? `以下是與問題相關的專欄知識庫內容：\n\n${context}` 
         <button onClick={onClose} style={{ color: "#888", background: "none", border: "none", cursor: "pointer", fontSize: "18px" }}>✕</button>
       </div>
 
-      {/* 訊息區 */}
       <div style={{
         flex: 1,
         overflowY: "auto",
@@ -208,7 +205,6 @@ ${context ? `以下是與問題相關的專欄知識庫內容：\n\n${context}` 
         <div ref={bottomRef} />
       </div>
 
-      {/* 輸入區 */}
       <div style={{
         padding: "12px 16px",
         borderTop: "1px solid #222",
