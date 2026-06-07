@@ -36,20 +36,6 @@ function findRelevantArticles(query: string, articles: Article[], topN = 5): Art
   return scored;
 }
 
-function generateLocalReply(query: string, articles: Article[]): string {
-  const relevant = findRelevantArticles(query, articles, 3);
-  
-  if (relevant.length === 0) {
-    return `感謝您的提問。莊鈞翔博士在企業治理、法律合規（法遵）、家族企業接班、ESG與AI治理等領域擁有豐富的學術研究與實務經驗。如需進一步了解，歡迎參閱博士於M傳媒發表的專欄文章，或直接聯繫STT Group。`;
-  }
-
-  const articleLinks = relevant.map(a => 
-    `• 【${a.title}】\n  ${a.url}`
-  ).join("\n\n");
-
-  return `根據莊鈞翔博士的研究與著作，以下專欄文章與您的問題高度相關：\n\n${articleLinks}\n\n如需深入諮詢企業治理或法遵相關議題，歡迎透過「聯絡智庫」與莊博士團隊聯繫。`;
-}
-
 interface ChatBotProps {
   open: boolean;
   onClose: () => void;
@@ -87,9 +73,51 @@ export default function ChatBot({ open, onClose }: ChatBotProps) {
     setMessages(newMessages);
     setLoading(true);
 
-    await new Promise(r => setTimeout(r, 800));
-    const reply = generateLocalReply(query, articles);
-    setMessages(prev => [...prev, { role: "assistant", content: reply }]);
+    const relevant = findRelevantArticles(query, articles);
+    const context = relevant.length > 0
+      ? relevant.map(a => `【${a.title}】\n${a.excerpt.slice(0, 600)}`).join("\n\n---\n\n")
+      : "";
+
+    const systemPrompt = `你是「策略智庫數位領航員」，是莊鈞翔博士（Chuang Chun-Hsiang, Ph.D.）的數位助理。
+莊博士是策略智庫數位集團（STT Group）執行長、逢甲大學商學院兼任助理教授、M傳媒專欄作家，專長為企業治理、法律合規（法遵）、家族企業接班、ESG與AI治理。
+其核心著作《內在法遵 Internal Compliance》主張：法遵應是企業核心價值的內在延伸，而非外部規範的被動遵守。
+
+回答原則：
+1. 以繁體中文回答，語氣專業、精準、具學術厚度
+2. 優先引用下方知識庫內容，並說明出自哪篇專欄
+3. 涉及具體法律條文，引導至 laws.moj.gov.tw 或 lawsnote.com 查詢
+4. 不提供具體法律建議，建議諮詢專業律師
+5. 回答結尾可提示相關專欄文章連結
+
+${context ? `以下是與問題相關的專欄知識庫內容：\n\n${context}` : ""}`;
+
+    try {
+      const res = await fetch("https://api.anthropic.com/v1/messages", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-api-key": "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",
+          "anthropic-version": "2023-06-01",
+          "anthropic-dangerous-direct-browser-access": "true",
+        },
+        body: JSON.stringify({
+          model: "claude-sonnet-4-20250514",
+          max_tokens: 1024,
+          system: systemPrompt,
+          messages: newMessages.map(m => ({
+            role: m.role,
+            content: m.content,
+          })),
+        }),
+      });
+      const data = await res.json();
+      const reply =
+        data.content?.[0]?.text ||
+        (data.error ? "API錯誤：" + data.error?.message : "抱歉，暫時無法回應，請稍後再試。");
+      setMessages(prev => [...prev, { role: "assistant", content: reply }]);
+    } catch (err: any) {
+      setMessages(prev => [...prev, { role: "assistant", content: "錯誤：" + (err?.message || String(err)) }]);
+    }
     setLoading(false);
   }
 
