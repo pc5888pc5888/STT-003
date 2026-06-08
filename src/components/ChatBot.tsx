@@ -136,7 +136,7 @@ ${context ? `以下是與問題相關的專欄知識庫內容：\n\n${context}` 
       flexDirection: "column",
       zIndex: 9998,
       boxShadow: "0 8px 48px rgba(0,0,0,0.7), inset 0 1px 0 rgba(255,255,255,0.05)",
-      overflow: "hidden",
+      backdropFilter:"blur(16px)",WebkitBackdropFilter:"blur(16px)",overflow:"hidden",
     }}>
       <div style={{
         background: "linear-gradient(135deg, rgba(15,34,54,0.9), rgba(26,58,92,0.85))",
@@ -177,7 +177,7 @@ ${context ? `以下是與問題相關的專欄知識庫內容：\n\n${context}` 
               padding: "10px 14px",
               borderRadius: m.role === "user" ? "12px 12px 2px 12px" : "12px 12px 12px 2px",
               background: m.role === "user" ? "rgba(201,168,76,0.92)" : "rgba(255,255,255,0.07)",
-              color: m.role === "user" ? "rgba(8,15,30,0.75)" : "#E8E8E8",
+              color: m.role === "user" ? "rgba(8,15,30,0.45)" : "#E8E8E8",
               fontSize: "13px",
               lineHeight: "1.6",
               border: m.role === "assistant" ? "1px solid rgba(255,255,255,0.1)" : "none",
