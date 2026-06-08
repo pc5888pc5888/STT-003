@@ -127,7 +127,7 @@ ${context ? `以下是與問題相關的專欄知識庫內容：\n\n${context}` 
       right: "2rem",
       width: "380px",
       height: "520px",
-      background:"rgba(5,12,35,0.28)",backdropFilter:"blur(24px)",WebkitBackdropFilter:"blur(24px)", 15, 30, 0.82)",
+      background:"rgba(5,12,35,0.15)",backdropFilter:"blur(24px)",WebkitBackdropFilter:"blur(24px)", 15, 30, 0.82)",
       backdropFilter: "blur(24px)",
       WebkitBackdropFilter: "blur(24px)",
       border: "1px solid rgba(201, 168, 76, 0.5)",
@@ -136,7 +136,7 @@ ${context ? `以下是與問題相關的專欄知識庫內容：\n\n${context}` 
       flexDirection: "column",
       zIndex: 9998,
       boxShadow: "0 8px 48px rgba(0,0,0,0.7), inset 0 1px 0 rgba(255,255,255,0.05)",
-      backdropFilter:"blur(16px)",WebkitBackdropFilter:"blur(16px)",overflow:"hidden",
+      backdropFilter:"blur(28px)",WebkitBackdropFilter:"blur(28px)",overflow:"hidden",
     }}>
       <div style={{
         background: "linear-gradient(135deg, rgba(15,34,54,0.9), rgba(26,58,92,0.85))",
