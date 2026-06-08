@@ -92,28 +92,25 @@ export default function ChatBot({ open, onClose }: ChatBotProps) {
 ${context ? `以下是與問題相關的專欄知識庫內容：\n\n${context}` : ""}`;
 
     try {
-      const res = await fetch("https://api.anthropic.com/v1/messages", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "x-api-key": "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",
-          "anthropic-version": "2023-06-01",
-          "anthropic-dangerous-direct-browser-access": "true",
-        },
-        body: JSON.stringify({
-          model: "claude-sonnet-4-20250514",
-          max_tokens: 1024,
-          system: systemPrompt,
-          messages: newMessages.map(m => ({
-            role: m.role,
-            content: m.content,
-          })),
-        }),
-      });
+      const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+      const res = await fetch(
+        `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent?key=${apiKey}`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            system_instruction: { parts: [{ text: systemPrompt }] },
+            contents: newMessages.map(m => ({
+              role: m.role === "assistant" ? "model" : "user",
+              parts: [{ text: m.content }],
+            })),
+            generationConfig: { temperature: 0.7, maxOutputTokens: 1024 },
+          }),
+        }
+      );
       const data = await res.json();
-      const reply =
-        data.content?.[0]?.text ||
-        (data.error ? "API錯誤：" + data.error?.message : "抱歉，暫時無法回應，請稍後再試。");
+      const reply = data.candidates?.[0]?.content?.parts?.[0]?.text ||
+        (data.error ? "API錯誤：" + data.error.message : "抱歉，暫時無法回應，請稍後再試。");
       setMessages(prev => [...prev, { role: "assistant", content: reply }]);
     } catch (err: any) {
       setMessages(prev => [...prev, { role: "assistant", content: "錯誤：" + (err?.message || String(err)) }]);
