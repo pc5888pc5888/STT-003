@@ -92,8 +92,7 @@ const charter = [
   }
 ];
 
-interface GCSDAPProps { onContactOpen?: () => void; }
-export default function GCSDA({ onContactOpen }: GCSDAPProps) {
+export default function GCSDA() {
   return (
     <div className="min-h-screen bg-[#050505] text-[#F8F7F4] pt-24 pb-20 selection:bg-gold-500 selection:text-black font-sans leading-relaxed">
       <div className="container mx-auto px-6 max-w-7xl">
@@ -119,72 +118,14 @@ export default function GCSDA({ onContactOpen }: GCSDAPProps) {
             <div className="flex flex-col items-center gap-10 text-center max-w-4xl px-4">
               <div className="h-px w-32 bg-gold-600/30"></div>
               
-              <button
-                onClick={() => onContactOpen && onContactOpen()}
-                className="block transform hover:-translate-y-1 transition-all duration-700 active:scale-95 bg-transparent border-none p-0 cursor-pointer"
-                style={{display:"inline-block"}}
+              <a 
+                href="https://line.me/R/ti/p/@387nbnjs"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-24 py-11 text-2xl md:text-3xl h-auto flex items-center justify-center bg-white/5 backdrop-blur-sm text-white/50 border border-white/10 hover:bg-gold-500 hover:text-black transition-all duration-700 rounded-none font-display font-black tracking-[0.5em] shadow-[0_40px_100px_rgba(0,0,0,0.3)] transform hover:-translate-y-1 active:scale-95 no-underline"
               >
-                <div style={{
-                  position: "relative",
-                  padding: "0",
-                  display: "inline-block",
-                }}>
-                  {/* 歐式金色油畫框 */}
-                  <div style={{
-                    position: "relative",
-                    border: "none",
-                    background: "transparent",
-                    padding: "6px",
-                  }}>
-                    {/* 外框裝飾 SVG */}
-                    <svg viewBox="0 0 600 200" xmlns="http://www.w3.org/2000/svg" style={{position:"absolute",inset:0,width:"100%",height:"100%",zIndex:2,pointerEvents:"none"}}>
-                      {/* 主框線 */}
-                      <rect x="4" y="4" width="592" height="192" fill="none" stroke="#C9A84C" strokeWidth="3"/>
-                      <rect x="12" y="12" width="576" height="176" fill="none" stroke="#8B6914" strokeWidth="1.5"/>
-                      <rect x="16" y="16" width="568" height="168" fill="none" stroke="#E5C56A" strokeWidth="1"/>
-                      {/* 四角花飾 */}
-                      <path d="M4,4 Q30,4 30,30" fill="none" stroke="#C9A84C" strokeWidth="3"/>
-                      <path d="M596,4 Q570,4 570,30" fill="none" stroke="#C9A84C" strokeWidth="3"/>
-                      <path d="M4,196 Q30,196 30,170" fill="none" stroke="#C9A84C" strokeWidth="3"/>
-                      <path d="M596,196 Q570,196 570,170" fill="none" stroke="#C9A84C" strokeWidth="3"/>
-                      {/* 角落裝飾圓點 */}
-                      <circle cx="4" cy="4" r="4" fill="#C9A84C"/>
-                      <circle cx="596" cy="4" r="4" fill="#C9A84C"/>
-                      <circle cx="4" cy="196" r="4" fill="#C9A84C"/>
-                      <circle cx="596" cy="196" r="4" fill="#C9A84C"/>
-                      {/* 上下中央裝飾 */}
-                      <path d="M270,4 Q300,14 330,4" fill="none" stroke="#C9A84C" strokeWidth="2"/>
-                      <path d="M270,196 Q300,186 330,196" fill="none" stroke="#C9A84C" strokeWidth="2"/>
-                      <circle cx="300" cy="4" r="3" fill="#C9A84C"/>
-                      <circle cx="300" cy="196" r="3" fill="#C9A84C"/>
-                      {/* 左右中央裝飾 */}
-                      <path d="M4,80 Q14,100 4,120" fill="none" stroke="#C9A84C" strokeWidth="2"/>
-                      <path d="M596,80 Q586,100 596,120" fill="none" stroke="#C9A84C" strokeWidth="2"/>
-                    </svg>
-                    {/* 油畫布底色內容區 */}
-                    <div style={{
-                      background: "linear-gradient(135deg, #2a1f08 0%, #3d2d0a 25%, #4a3510 50%, #3a2808 75%, #2a1f08 100%)",
-                      padding: "40px 80px",
-                      position: "relative",
-                      zIndex: 1,
-                      minWidth: "400px",
-                      textAlign: "center",
-                    }}>
-                      <div style={{
-                        color: "#C9A84C",
-                        fontSize: "clamp(18px, 2.5vw, 28px)",
-                        fontWeight: "900",
-                        letterSpacing: "0.4em",
-                        fontFamily: "serif",
-                        textShadow: "0 2px 8px rgba(0,0,0,0.6), 0 0 20px rgba(201,168,76,0.3)",
-                        whiteSpace: "nowrap",
-                      }}>
-                        請 預 約 策 略 治 理 聯 席 會
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </button>
+                <span>聯 繫 學 會 秘 書 處</span>
+              </a>
             </div>
           </motion.div>
         </section>
@@ -326,166 +267,23 @@ export default function GCSDA({ onContactOpen }: GCSDAPProps) {
 
         {/* FINAL REGISTRATION CTA */}
         <section className="py-40 border-t border-white/5 text-center bg-black -mx-6 md:-mx-24 px-6 md:px-24">
-          <div className="max-w-5xl mx-auto flex flex-col items-center gap-16">
-
-            {/* 油畫框主體 - 加入治理生態圈 */}
-            <div style={{ position: "relative", display: "inline-block", width: "100%", maxWidth: "900px" }}>
-              {/* 外層金色陰影光暈 */}
-              <div style={{
-                position: "absolute", inset: "-12px",
-                background: "radial-gradient(ellipse at center, rgba(201,168,76,0.08) 0%, transparent 70%)",
-                pointerEvents: "none", zIndex: 0,
-              }}/>
-              {/* SVG 巴洛克畫框 */}
-              <svg viewBox="0 0 900 320" xmlns="http://www.w3.org/2000/svg"
-                style={{ position: "absolute", inset: 0, width: "100%", height: "100%", zIndex: 2, pointerEvents: "none" }}>
-                <defs>
-                  <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stopColor="#E8D48A"/>
-                    <stop offset="30%" stopColor="#C9A84C"/>
-                    <stop offset="60%" stopColor="#A07828"/>
-                    <stop offset="100%" stopColor="#D4AF50"/>
-                  </linearGradient>
-                </defs>
-                {/* 最外框 */}
-                <rect x="3" y="3" width="894" height="314" fill="none" stroke="url(#goldGrad)" strokeWidth="4"/>
-                {/* 內框線 */}
-                <rect x="14" y="14" width="872" height="292" fill="none" stroke="#8B6914" strokeWidth="1.5" strokeDasharray="4,2"/>
-                <rect x="20" y="20" width="860" height="280" fill="none" stroke="#C9A84C" strokeWidth="1" opacity="0.5"/>
-                {/* 四角巴洛克角飾 */}
-                <path d="M3,3 Q50,3 50,50 Q30,30 3,30 Z" fill="#C9A84C" opacity="0.6"/>
-                <path d="M897,3 Q850,3 850,50 Q870,30 897,30 Z" fill="#C9A84C" opacity="0.6"/>
-                <path d="M3,317 Q50,317 50,270 Q30,290 3,290 Z" fill="#C9A84C" opacity="0.6"/>
-                <path d="M897,317 Q850,317 850,270 Q870,290 897,290 Z" fill="#C9A84C" opacity="0.6"/>
-                {/* 角落圓點 */}
-                <circle cx="3" cy="3" r="5" fill="#E8D48A"/>
-                <circle cx="897" cy="3" r="5" fill="#E8D48A"/>
-                <circle cx="3" cy="317" r="5" fill="#E8D48A"/>
-                <circle cx="897" cy="317" r="5" fill="#E8D48A"/>
-                {/* 上方中央裝飾 */}
-                <path d="M400,3 Q430,0 450,10 Q470,0 500,3" fill="none" stroke="#C9A84C" strokeWidth="2"/>
-                <path d="M420,3 Q450,16 480,3" fill="none" stroke="#E8D48A" strokeWidth="1.5"/>
-                <circle cx="450" cy="3" r="5" fill="#C9A84C"/>
-                <circle cx="420" cy="3" r="3" fill="#C9A84C" opacity="0.6"/>
-                <circle cx="480" cy="3" r="3" fill="#C9A84C" opacity="0.6"/>
-                {/* 下方中央裝飾 */}
-                <path d="M400,317 Q430,320 450,310 Q470,320 500,317" fill="none" stroke="#C9A84C" strokeWidth="2"/>
-                <path d="M420,317 Q450,304 480,317" fill="none" stroke="#E8D48A" strokeWidth="1.5"/>
-                <circle cx="450" cy="317" r="5" fill="#C9A84C"/>
-                <circle cx="420" cy="317" r="3" fill="#C9A84C" opacity="0.6"/>
-                <circle cx="480" cy="317" r="3" fill="#C9A84C" opacity="0.6"/>
-                {/* 左側中央裝飾 */}
-                <path d="M3,130 Q0,155 10,160 Q0,165 3,190" fill="none" stroke="#C9A84C" strokeWidth="2"/>
-                <circle cx="3" cy="160" r="5" fill="#C9A84C"/>
-                {/* 右側中央裝飾 */}
-                <path d="M897,130 Q900,155 890,160 Q900,165 897,190" fill="none" stroke="#C9A84C" strokeWidth="2"/>
-                <circle cx="897" cy="160" r="5" fill="#C9A84C"/>
-                {/* 內層四角小裝飾 */}
-                <rect x="14" y="14" width="20" height="20" fill="none" stroke="#C9A84C" strokeWidth="1.5"/>
-                <rect x="866" y="14" width="20" height="20" fill="none" stroke="#C9A84C" strokeWidth="1.5"/>
-                <rect x="14" y="286" width="20" height="20" fill="none" stroke="#C9A84C" strokeWidth="1.5"/>
-                <rect x="866" y="286" width="20" height="20" fill="none" stroke="#C9A84C" strokeWidth="1.5"/>
-              </svg>
-              {/* 畫框內容 - 油畫布底色 */}
-              <div style={{
-                background: "linear-gradient(135deg, #1a1205 0%, #2e2008 30%, #3d2d0a 50%, #2a1c06 75%, #1a1205 100%)",
-                padding: "clamp(40px, 6vw, 70px) clamp(40px, 8vw, 100px)",
-                position: "relative", zIndex: 1,
-                boxShadow: "inset 0 0 60px rgba(0,0,0,0.5), inset 0 0 20px rgba(201,168,76,0.05)",
-              }}>
-                {/* 裝飾分隔線 */}
-                <div style={{ display: "flex", alignItems: "center", gap: "16px", marginBottom: "clamp(20px,3vw,36px)" }}>
-                  <div style={{ flex: 1, height: "1px", background: "linear-gradient(to right, transparent, #C9A84C60)" }}/>
-                  <div style={{ width: "6px", height: "6px", background: "#C9A84C", transform: "rotate(45deg)" }}/>
-                  <div style={{ flex: 1, height: "1px", background: "linear-gradient(to left, transparent, #C9A84C60)" }}/>
-                </div>
-                {/* 主標題 */}
-                <h2 style={{
-                  color: "#E8D48A",
-                  fontSize: "clamp(32px, 6vw, 72px)",
-                  fontWeight: "300",
-                  letterSpacing: "0.15em",
-                  fontFamily: "serif",
-                  textShadow: "0 2px 12px rgba(0,0,0,0.8), 0 0 40px rgba(201,168,76,0.2)",
-                  margin: "0 0 clamp(16px,2vw,24px) 0",
-                  lineHeight: 1.2,
-                }}>
-                  加入<span style={{ color: "#C9A84C" }}>治理生態圈</span>
-                </h2>
-                {/* 副標題 */}
-                <p style={{
-                  color: "#a08050",
-                  fontSize: "clamp(14px, 1.8vw, 22px)",
-                  fontFamily: "serif",
-                  fontStyle: "italic",
-                  letterSpacing: "0.08em",
-                  fontWeight: "300",
-                  margin: "0",
-                  lineHeight: 1.7,
-                  textShadow: "0 1px 4px rgba(0,0,0,0.6)",
-                }}>
-                  與產學精英共同協作，引導企業建立穩健的策略治理基盤。
-                </p>
-                {/* 裝飾分隔線 */}
-                <div style={{ display: "flex", alignItems: "center", gap: "16px", marginTop: "clamp(20px,3vw,36px)" }}>
-                  <div style={{ flex: 1, height: "1px", background: "linear-gradient(to right, transparent, #C9A84C60)" }}/>
-                  <div style={{ width: "6px", height: "6px", background: "#C9A84C", transform: "rotate(45deg)" }}/>
-                  <div style={{ flex: 1, height: "1px", background: "linear-gradient(to left, transparent, #C9A84C60)" }}/>
-                </div>
-              </div>
+          <div className="max-w-5xl mx-auto space-y-12">
+            <h2 className="text-6xl md:text-9xl font-display font-light text-white tracking-tighter leading-none">
+              加入<span className="text-gold-metallic">治理生態圈</span>
+            </h2>
+            <p className="text-stone-400 font-serif font-light text-xl md:text-3xl leading-relaxed max-w-5xl mx-auto">
+              與產學精英共同協作，引導企業建立穩健的策略治理基盤。
+            </p>
+            <div className="pt-8">
+              <a 
+                href="https://line.me/R/ti/p/@387nbnjs"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex px-24 py-10 text-2xl h-auto bg-gold-400 text-black hover:bg-white transition-all duration-700 rounded-none font-display font-bold tracking-[0.4em] shadow-[0_30px_90px_rgba(212,175,55,0.25)] no-underline"
+              >
+                <span>申請入會洽詢</span>
+              </a>
             </div>
-
-            {/* 申請入會諮詢按鈕 - 油畫框風格，連結 Line 官方 */}
-            <a
-              href="https://line.me/R/ti/p/@387nbnjs"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{ textDecoration: "none", display: "inline-block", position: "relative" }}
-            >
-              <div style={{ position: "relative", display: "inline-block" }}>
-                {/* 按鈕 SVG 框 */}
-                <svg viewBox="0 0 480 90" xmlns="http://www.w3.org/2000/svg"
-                  style={{ position: "absolute", inset: 0, width: "100%", height: "100%", zIndex: 2, pointerEvents: "none" }}>
-                  <rect x="2" y="2" width="476" height="86" fill="none" stroke="#C9A84C" strokeWidth="2.5"/>
-                  <rect x="8" y="8" width="464" height="74" fill="none" stroke="#8B6914" strokeWidth="1" strokeDasharray="3,3"/>
-                  {/* 四角 */}
-                  <circle cx="2" cy="2" r="3" fill="#C9A84C"/>
-                  <circle cx="478" cy="2" r="3" fill="#C9A84C"/>
-                  <circle cx="2" cy="88" r="3" fill="#C9A84C"/>
-                  <circle cx="478" cy="88" r="3" fill="#C9A84C"/>
-                  {/* 左右裝飾 */}
-                  <path d="M2,35 Q12,45 2,55" fill="none" stroke="#C9A84C" strokeWidth="1.5"/>
-                  <path d="M478,35 Q468,45 478,55" fill="none" stroke="#C9A84C" strokeWidth="1.5"/>
-                  {/* 上下中央小菱形 */}
-                  <path d="M235,2 L240,8 L245,2 L240,-4 Z" fill="#C9A84C" opacity="0.7"/>
-                  <path d="M235,88 L240,82 L245,88 L240,94 Z" fill="#C9A84C" opacity="0.7"/>
-                </svg>
-                {/* 按鈕內容 */}
-                <div style={{
-                  background: "linear-gradient(135deg, #2e2008 0%, #4a3510 50%, #2e2008 100%)",
-                  padding: "28px 80px",
-                  position: "relative", zIndex: 1,
-                  transition: "all 0.4s ease",
-                  minWidth: "400px",
-                  textAlign: "center",
-                }}
-                  onMouseEnter={e => { (e.currentTarget as HTMLDivElement).style.background = "linear-gradient(135deg, #4a3510 0%, #6b4f1a 50%, #4a3510 100%)"; }}
-                  onMouseLeave={e => { (e.currentTarget as HTMLDivElement).style.background = "linear-gradient(135deg, #2e2008 0%, #4a3510 50%, #2e2008 100%)"; }}
-                >
-                  <span style={{
-                    color: "#E8D48A",
-                    fontSize: "clamp(16px, 2vw, 22px)",
-                    fontFamily: "serif",
-                    fontWeight: "700",
-                    letterSpacing: "0.5em",
-                    textShadow: "0 2px 8px rgba(0,0,0,0.6), 0 0 20px rgba(201,168,76,0.3)",
-                  }}>
-                    ❖ 申 請 入 會 諮 詢 ❖
-                  </span>
-                </div>
-              </div>
-            </a>
-
           </div>
         </section>
       </div>
