@@ -199,7 +199,7 @@ export default function App() {
       case "service-portal": return <ServicePortal />;
       case "success": return <Success />;
       case "papers": return <Papers onNavigate={handleNavigate} />;
-      case "gcsda": return <GCSDA />;
+      case "gcsda": return <GCSDA onContactOpen={() => setShowContactModal(true)} />;
       case "article-index": return <ArticleIndex />;
       default: return <Home onNavigate={handleNavigate} currentPage={currentPage} activeSection={homeSection} setActiveSection={setHomeSection} />;
     }
