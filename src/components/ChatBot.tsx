@@ -127,19 +127,22 @@ ${context ? `以下是與問題相關的專欄知識庫內容：\n\n${context}` 
       right: "2rem",
       width: "380px",
       height: "520px",
-      background: "#0A0A0A",
-      border: "1px solid #C9A84C",
-      borderRadius: "12px",
+      background: "rgba(8, 15, 30, 0.82)",
+      backdropFilter: "blur(24px)",
+      WebkitBackdropFilter: "blur(24px)",
+      border: "1px solid rgba(201, 168, 76, 0.5)",
+      borderRadius: "16px",
       display: "flex",
       flexDirection: "column",
       zIndex: 9998,
-      boxShadow: "0 8px 40px rgba(0,0,0,0.6)",
+      boxShadow: "0 8px 48px rgba(0,0,0,0.7), inset 0 1px 0 rgba(255,255,255,0.05)",
       overflow: "hidden",
     }}>
       <div style={{
-        background: "linear-gradient(135deg, #0F2236, #1a3a5c)",
+        background: "linear-gradient(135deg, rgba(15,34,54,0.9), rgba(26,58,92,0.85))",
+        backdropFilter: "blur(12px)",
         padding: "14px 18px",
-        borderBottom: "1px solid #C9A84C",
+        borderBottom: "1px solid rgba(201,168,76,0.4)",
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
@@ -162,6 +165,7 @@ ${context ? `以下是與問題相關的專欄知識庫內容：\n\n${context}` 
         display: "flex",
         flexDirection: "column",
         gap: "12px",
+        background: "transparent",
       }}>
         {messages.map((m, i) => (
           <div key={i} style={{
@@ -172,11 +176,12 @@ ${context ? `以下是與問題相關的專欄知識庫內容：\n\n${context}` 
               maxWidth: "85%",
               padding: "10px 14px",
               borderRadius: m.role === "user" ? "12px 12px 2px 12px" : "12px 12px 12px 2px",
-              background: m.role === "user" ? "#C9A84C" : "#1a1a1a",
-              color: m.role === "user" ? "#0A0A0A" : "#E0E0E0",
+              background: m.role === "user" ? "rgba(201,168,76,0.92)" : "rgba(255,255,255,0.07)",
+              color: m.role === "user" ? "#0A0A0A" : "#E8E8E8",
               fontSize: "13px",
               lineHeight: "1.6",
-              border: m.role === "assistant" ? "1px solid #333" : "none",
+              border: m.role === "assistant" ? "1px solid rgba(255,255,255,0.1)" : "none",
+              backdropFilter: m.role === "assistant" ? "blur(8px)" : "none",
               whiteSpace: "pre-wrap",
             }}>
               {m.content}
@@ -202,7 +207,8 @@ ${context ? `以下是與問題相關的專欄知識庫內容：\n\n${context}` 
 
       <div style={{
         padding: "12px 16px",
-        borderTop: "1px solid #222",
+        borderTop: "1px solid rgba(255,255,255,0.08)",
+        background: "rgba(0,0,0,0.2)",
         display: "flex",
         gap: "8px",
       }}>
@@ -213,13 +219,14 @@ ${context ? `以下是與問題相關的專欄知識庫內容：\n\n${context}` 
           placeholder="請輸入您的問題⋯"
           style={{
             flex: 1,
-            background: "#1a1a1a",
-            border: "1px solid #333",
+            background: "rgba(255,255,255,0.08)",
+            border: "1px solid rgba(255,255,255,0.12)",
             borderRadius: "8px",
             padding: "8px 12px",
             color: "#fff",
             fontSize: "13px",
             outline: "none",
+            backdropFilter: "blur(4px)",
           }}
         />
         <button
