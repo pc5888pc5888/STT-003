@@ -18,7 +18,7 @@ interface ColumnsData {
 }
 
 function findRelevantArticles(query: string, articles: Article[], topN = 5): Article[] {
-  const keywords = query.replace(/[ï¼Œã€‚ï?ï¼ã€]/g, " ").split(/\s+/).filter(k => k.length > 1);
+  const keywords = query.replace(/[ï¼Œã€‚ï¿½?ï¼ã€]/g, " ").split(/\s+/).filter(k => k.length > 1);
   const scored = articles
     .filter(a => a.status === "ok" && a.title)
     .map(a => {
@@ -45,7 +45,7 @@ export default function ChatBot({ open, onClose }: ChatBotProps) {
   const [messages, setMessages] = useState<Message[]>([
     {
       role: "assistant",
-      content: "?¨å¥½ï¼Œæ??¯ç??¥æ™ºåº«æ•¸ä½é??ªå“¡ï¼Œç”±?Šé?ç¿”å?å£«ç?å­¸è??—ä??‡å?æ¬„æ?ç« è?ç·´è€Œæ??‚è??æ‚¨?³ä?è§??æ¥­æ²»?†ã€æ??µç??¥ã€å®¶?å‚³?¿æ??¥ç­ä½ˆå??ªæ–¹?¢ç?è­°é?ï¼?,
+      content: "?ï¿½å¥½ï¼Œï¿½??ï¿½ï¿½??ï¿½æ™ºåº«æ•¸ä½ï¿½??ï¿½å“¡ï¼Œç”±?ï¿½ï¿½?ç¿”ï¿½?å£«ï¿½?å­¸ï¿½??ï¿½ï¿½??ï¿½ï¿½?æ¬„ï¿½?ç« ï¿½?ç·´è€Œï¿½??ï¿½ï¿½??ï¿½æ‚¨?ï¿½ï¿½?ï¿??æ¥­æ²»?ï¿½ã€ï¿½??ï¿½ï¿½??ï¿½ã€å®¶?ï¿½å‚³?ï¿½ï¿½??ï¿½ç­ä½ˆï¿½??ï¿½æ–¹?ï¿½ï¿½?è­°ï¿½?ï¿?,
     },
   ]);
   const [input, setInput] = useState("");
@@ -75,16 +75,16 @@ export default function ChatBot({ open, onClose }: ChatBotProps) {
 
     const relevant = findRelevantArticles(query, articles);
     const context = relevant.length > 0
-      ? relevant.map(a => `??{a.title}?‘\n${a.excerpt.slice(0, 600)}`).join("\n\n---\n\n")
+      ? relevant.map(a => `??{a.title}?ï¿½\n${a.excerpt.slice(0, 600)}`).join("\n\n---\n\n")
       : "";
 
-    const systemPrompt = `ä½ æ˜¯?Œç??¥æ™ºåº«æ•¸ä½é??ªå“¡?ï??¯è??ç??šå£«ï¼ˆChuang Chun-Hsiang, Ph.D.ï¼‰ç??¸ä??©ç????Šå?å£«æ˜¯ç­–ç•¥?ºåº«?¸ä??†å?ï¼ˆSTT Groupï¼‰åŸ·è¡Œé•·?é€¢ç”²å¤§å­¸?†å­¸?¢å…¼ä»»åŠ©?†æ??ˆã€M?³å?å°ˆæ?ä½œå®¶ï¼Œå??·ç‚ºä¼æ¥­æ²»ç??æ?å¾‹å?è¦ï?æ³•éµï¼‰ã€å®¶?ä?æ¥­æ¥?­ã€ESG?‡AIæ²»ç????¶æ ¸å¿ƒè?ä½œã€Šå…§?¨æ???Internal Compliance?‹ä¸»å¼µï?æ³•éµ?‰æ˜¯ä¼æ¥­?¸å??¹å€¼ç??§åœ¨å»¶ä¼¸ï¼Œè€Œé?å¤–éƒ¨è¦ç??„è¢«?•éµå®ˆã€?
-?ç??Ÿå?ï¼?1. ä»¥ç?é«”ä¸­?‡å?ç­”ï?èªæ°£å°ˆæ¥­?ç²¾æº–ã€å…·å­¸è??šåº¦
-2. ?ªå?å¼•ç”¨ä¸‹æ–¹?¥è?åº«å…§å®¹ï?ä¸¦èªª?å‡º?ªå“ªç¯‡å?æ¬?3. æ¶‰å??·é?æ³•å?æ¢æ?ï¼Œå?å°è‡³ laws.moj.gov.tw ??lawsnote.com ?¥è©¢
-4. ä¸æ?ä¾›å…·é«”æ?å¾‹å»ºè­°ï?å»ºè­°è«®è©¢å°ˆæ¥­å¾‹å¸«
-5. ?ç?çµå°¾?¯æ?ç¤ºç›¸?œå?æ¬„æ?ç« é€??
+    const systemPrompt = `ä½ æ˜¯?ï¿½ï¿½??ï¿½æ™ºåº«æ•¸ä½ï¿½??ï¿½å“¡?ï¿½ï¿½??ï¿½ï¿½??ï¿½ï¿½??ï¿½å£«ï¼ˆChuang Chun-Hsiang, Ph.D.ï¼‰ï¿½??ï¿½ï¿½??ï¿½ï¿½????ï¿½ï¿½?å£«æ˜¯ç­–ç•¥?ï¿½åº«?ï¿½ï¿½??ï¿½ï¿½?ï¼ˆSTT Groupï¼‰åŸ·è¡Œé•·?ï¿½é€¢ç”²å¤§å­¸?ï¿½å­¸?ï¿½å…¼ä»»åŠ©?ï¿½ï¿½??ï¿½ã€M?ï¿½ï¿½?å°ˆï¿½?ä½œå®¶ï¼Œï¿½??ï¿½ç‚ºä¼æ¥­æ²»ï¿½??ï¿½ï¿½?å¾‹ï¿½?è¦ï¿½?æ³•éµï¼‰ã€å®¶?ï¿½ï¿½?æ¥­æ¥?ï¿½ã€ESG?ï¿½AIæ²»ï¿½????ï¿½æ ¸å¿ƒï¿½?ä½œã€Šå…§?ï¿½ï¿½???Internal Compliance?ï¿½ä¸»å¼µï¿½?æ³•éµ?ï¿½æ˜¯ä¼æ¥­?ï¿½ï¿½??ï¿½å€¼ï¿½??ï¿½åœ¨å»¶ä¼¸ï¼Œè€Œï¿½?å¤–éƒ¨è¦ï¿½??ï¿½è¢«?ï¿½éµå®ˆï¿½?
+?ï¿½ï¿½??ï¿½ï¿½?ï¿?1. ä»¥ï¿½?é«”ä¸­?ï¿½ï¿½?ç­”ï¿½?èªæ°£å°ˆæ¥­?ï¿½ç²¾æº–ã€å…·å­¸ï¿½??ï¿½åº¦
+2. ?ï¿½ï¿½?å¼•ç”¨ä¸‹æ–¹?ï¿½ï¿½?åº«å…§å®¹ï¿½?ä¸¦èªª?ï¿½å‡º?ï¿½å“ªç¯‡ï¿½?ï¿?3. æ¶‰ï¿½??ï¿½ï¿½?æ³•ï¿½?æ¢ï¿½?ï¼Œï¿½?å°è‡³ laws.moj.gov.tw ??lawsnote.com ?ï¿½è©¢
+4. ä¸ï¿½?ä¾›å…·é«”ï¿½?å¾‹å»ºè­°ï¿½?å»ºè­°è«®è©¢å°ˆæ¥­å¾‹å¸«
+5. ?ï¿½ï¿½?çµå°¾?ï¿½ï¿½?ç¤ºç›¸?ï¿½ï¿½?æ¬„ï¿½?ç« ï¿½??
 
-${context ? `ä»¥ä??¯è??é??¸é??„å?æ¬„çŸ¥è­˜åº«?§å®¹ï¼š\n\n${context}` : ""}`;
+${context ? `ä»¥ï¿½??ï¿½ï¿½??ï¿½ï¿½??ï¿½ï¿½??ï¿½ï¿½?æ¬„çŸ¥è­˜åº«?ï¿½å®¹ï¼š\n\n${context}` : ""}`;
 
     try {
       const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
@@ -99,17 +99,17 @@ ${context ? `ä»¥ä??¯è??é??¸é??„å?æ¬„çŸ¥è­˜åº«?§å®¹ï¼š\n\n${context}` : ""}`;
               role: m.role === "assistant" ? "model" : "user",
               parts: [{ text: m.content }],
             })),
-            tools: [{ googleSearch: {} }],
+
             generationConfig: { temperature: 0.7, maxOutputTokens: 1024 },
           }),
         }
       );
       const data = await res.json();
       const reply = data.candidates?.[0]?.content?.parts?.[0]?.text ||
-        (data.error ? "API?¯èª¤ï¼? + data.error.message : "?±æ?ï¼Œæš«?‚ç„¡æ³•å??‰ï?è«‹ç?å¾Œå?è©¦ã€?);
+        (data.error ? "API?ï¿½èª¤ï¿? + data.error.message : "?ï¿½ï¿½?ï¼Œæš«?ï¿½ç„¡æ³•ï¿½??ï¿½ï¿½?è«‹ï¿½?å¾Œï¿½?è©¦ï¿½?);
       setMessages(prev => [...prev, { role: "assistant", content: reply }]);
     } catch (err: any) {
-      setMessages(prev => [...prev, { role: "assistant", content: "?¯èª¤ï¼? + (err?.message || String(err)) }]);
+      setMessages(prev => [...prev, { role: "assistant", content: "?ï¿½èª¤ï¿? + (err?.message || String(err)) }]);
     }
     setLoading(false);
   }
@@ -142,9 +142,9 @@ ${context ? `ä»¥ä??¯è??é??¸é??„å?æ¬„çŸ¥è­˜åº«?§å®¹ï¼š\n\n${context}` : ""}`;
       }}>
         <div>
           <div style={{ color: "#C9A84C", fontWeight: "bold", fontSize: "15px" }}>
-            ç­–ç•¥?ºåº«?¸ä??˜èˆª??          </div>
+            ç­–ç•¥?ï¿½åº«?ï¿½ï¿½??ï¿½èˆª??          </div>
           <div style={{ color: "#888", fontSize: "11px", marginTop: "2px" }}>
-            ?Šé?ç¿”å?å£?Â· STT Group
+            ?ï¿½ï¿½?ç¿”ï¿½?ï¿?Â· STT Group
           </div>
         </div>
         <button onClick={onClose} style={{ color: "#888", background: "none", border: "none", cursor: "pointer", fontSize: "18px" }}>??/button>
@@ -188,7 +188,7 @@ ${context ? `ä»¥ä??¯è??é??¸é??„å?æ¬„çŸ¥è­˜åº«?§å®¹ï¼š\n\n${context}` : ""}`;
               color: "#C9A84C",
               fontSize: "13px",
             }}>
-              ?†æ?ä¸­â‹¯
+              ?ï¿½ï¿½?ä¸­â‹¯
             </div>
           </div>
         )}
@@ -205,7 +205,7 @@ ${context ? `ä»¥ä??¯è??é??¸é??„å?æ¬„çŸ¥è­˜åº«?§å®¹ï¼š\n\n${context}` : ""}`;
           value={input}
           onChange={e => setInput(e.target.value)}
           onKeyDown={e => e.key === "Enter" && !e.shiftKey && sendMessage()}
-          placeholder="è«‹è¼¸?¥æ‚¨?„å?é¡Œâ‹¯"
+          placeholder="è«‹è¼¸?ï¿½æ‚¨?ï¿½ï¿½?é¡Œâ‹¯"
           style={{
             flex: 1,
             background: "#1a1a1a",
@@ -231,7 +231,7 @@ ${context ? `ä»¥ä??¯è??é??¸é??„å?æ¬„çŸ¥è­˜åº«?§å®¹ï¼š\n\n${context}` : ""}`;
             fontSize: "13px",
           }}
         >
-          ?å‡º
+          ?ï¿½å‡º
         </button>
       </div>
     </div>
