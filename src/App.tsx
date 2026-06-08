@@ -384,7 +384,7 @@ export default function App() {
               exit={{ opacity: 0, y: -20 }}
               className="absolute inset-x-0 top-24 bg-black border-b border-gold-400/10 overflow-hidden z-40 shadow-2xl"
             >
-              <div className="flex flex-col p-8 gap-6">
+              <div className="flex flex-col p-8 gap-6 pb-32">
                 {navItems.map((item) => {
                   const hrefMap: Record<string, string> = {
                     'governance': 'governance.html',
