@@ -18,7 +18,7 @@ interface ColumnsData {
 }
 
 function findRelevantArticles(query: string, articles: Article[], topN = 5): Article[] {
-  const keywords = query.replace(/[，。�?！、]/g, " ").split(/\s+/).filter(k => k.length > 1);
+  const keywords = query.replace(/[，。？！、]/g, " ").split(/\s+/).filter(k => k.length > 1);
   const scored = articles
     .filter(a => a.status === "ok" && a.title)
     .map(a => {
@@ -45,7 +45,7 @@ export default function ChatBot({ open, onClose }: ChatBotProps) {
   const [messages, setMessages] = useState<Message[]>([
     {
       role: "assistant",
-      content: "?�好，�??��??�智庫數位�??�員，由?��?翔�?士�?學�??��??��?欄�?章�?練而�??��??�您?��?�??業治?�、�??��??�、家?�傳?��??�班佈�??�方?��?議�?�?,
+      content: "您好，我是策略智庫數位領航員，由莊鈞翔博士的學術著作與專欄文章訓練而成。請問您想了解企業治理、法遵策略、家族傳承或接班佈局哪方面的議題？",
     },
   ]);
   const [input, setInput] = useState("");
@@ -75,41 +75,45 @@ export default function ChatBot({ open, onClose }: ChatBotProps) {
 
     const relevant = findRelevantArticles(query, articles);
     const context = relevant.length > 0
-      ? relevant.map(a => `??{a.title}?�\n${a.excerpt.slice(0, 600)}`).join("\n\n---\n\n")
+      ? relevant.map(a => `【${a.title}】\n${a.excerpt.slice(0, 600)}`).join("\n\n---\n\n")
       : "";
 
-    const systemPrompt = `你是?��??�智庫數位�??�員?��??��??��??�士（Chuang Chun-Hsiang, Ph.D.）�??��??��????��?士是策略?�庫?��??��?（STT Group）執行長?�逢甲大學?�學?�兼任助?��??�、M?��?專�?作家，�??�為企業治�??��?律�?規�?法遵）、家?��?業接?�、ESG?�AI治�????�核心�?作《內?��???Internal Compliance?�主張�?法遵?�是企業?��??�值�??�在延伸，而�?外部規�??�被?�遵守�?
-?��??��?�?1. 以�?體中?��?答�?語氣專業?�精準、具學�??�度
-2. ?��?引用下方?��?庫內容�?並說?�出?�哪篇�?�?3. 涉�??��?法�?條�?，�?導至 laws.moj.gov.tw ??lawsnote.com ?�詢
-4. 不�?供具體�?律建議�?建議諮詢專業律師
-5. ?��?結尾?��?示相?��?欄�?章�??
+    const systemPrompt = `你是「策略智庫數位領航員」，是莊鈞翔博士（Chuang Chun-Hsiang, Ph.D.）的數位助理。
+莊博士是策略智庫數位集團（STT Group）執行長、逢甲大學商學院兼任助理教授、M傳媒專欄作家，專長為企業治理、法律合規（法遵）、家族企業接班、ESG與AI治理。
+其核心著作《內在法遵 Internal Compliance》主張：法遵應是企業核心價值的內在延伸，而非外部規範的被動遵守。
 
-${context ? `以�??��??��??��??��?欄知識庫?�容：\n\n${context}` : ""}`;
+回答原則：
+1. 以繁體中文回答，語氣專業、精準、具學術厚度
+2. 優先引用下方知識庫內容，並說明出自哪篇專欄
+3. 涉及具體法律條文，引導至 laws.moj.gov.tw 或 lawsnote.com 查詢
+4. 不提供具體法律建議，建議諮詢專業律師
+5. 回答結尾可提示相關專欄文章連結
+
+${context ? `以下是與問題相關的專欄知識庫內容：\n\n${context}` : ""}`;
 
     try {
       const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
       const res = await fetch(
-        `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`,
+        `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro:generateContent?key=${apiKey}`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            systemInstruction: { parts: [{ text: systemPrompt }] },
+            system_instruction: { parts: [{ text: systemPrompt }] },
             contents: newMessages.map(m => ({
               role: m.role === "assistant" ? "model" : "user",
               parts: [{ text: m.content }],
             })),
-
             generationConfig: { temperature: 0.7, maxOutputTokens: 1024 },
           }),
         }
       );
       const data = await res.json();
       const reply = data.candidates?.[0]?.content?.parts?.[0]?.text ||
-        (data.error ? "API?�誤�? + data.error.message : "?��?，暫?�無法�??��?請�?後�?試�?);
+        (data.error ? "API錯誤：" + data.error.message : "抱歉，暫時無法回應，請稍後再試。");
       setMessages(prev => [...prev, { role: "assistant", content: reply }]);
     } catch (err: any) {
-      setMessages(prev => [...prev, { role: "assistant", content: "?�誤�? + (err?.message || String(err)) }]);
+      setMessages(prev => [...prev, { role: "assistant", content: "錯誤：" + (err?.message || String(err)) }]);
     }
     setLoading(false);
   }
@@ -142,12 +146,13 @@ ${context ? `以�??��??��??��??��?欄知識庫?�容：\n\n${
       }}>
         <div>
           <div style={{ color: "#C9A84C", fontWeight: "bold", fontSize: "15px" }}>
-            策略?�庫?��??�航??          </div>
+            策略智庫數位領航員
+          </div>
           <div style={{ color: "#888", fontSize: "11px", marginTop: "2px" }}>
-            ?��?翔�?�?· STT Group
+            莊鈞翔博士 · STT Group
           </div>
         </div>
-        <button onClick={onClose} style={{ color: "#888", background: "none", border: "none", cursor: "pointer", fontSize: "18px" }}>??/button>
+        <button onClick={onClose} style={{ color: "#888", background: "none", border: "none", cursor: "pointer", fontSize: "18px" }}>✕</button>
       </div>
 
       <div style={{
@@ -188,7 +193,7 @@ ${context ? `以�??��??��??��??��?欄知識庫?�容：\n\n${
               color: "#C9A84C",
               fontSize: "13px",
             }}>
-              ?��?中⋯
+              分析中⋯
             </div>
           </div>
         )}
@@ -205,7 +210,7 @@ ${context ? `以�??��??��??��??��?欄知識庫?�容：\n\n${
           value={input}
           onChange={e => setInput(e.target.value)}
           onKeyDown={e => e.key === "Enter" && !e.shiftKey && sendMessage()}
-          placeholder="請輸?�您?��?題⋯"
+          placeholder="請輸入您的問題⋯"
           style={{
             flex: 1,
             background: "#1a1a1a",
@@ -231,7 +236,7 @@ ${context ? `以�??��??��??��??��?欄知識庫?�容：\n\n${
             fontSize: "13px",
           }}
         >
-          ?�出
+          送出
         </button>
       </div>
     </div>
