@@ -127,7 +127,7 @@ ${context ? `以下是與問題相關的專欄知識庫內容：\n\n${context}` 
       right: "2rem",
       width: "380px",
       height: "520px",
-      background: "rgba(8, 15, 30, 0.82)",
+      background:"rgba(5,12,35,0.28)",backdropFilter:"blur(24px)",WebkitBackdropFilter:"blur(24px)", 15, 30, 0.82)",
       backdropFilter: "blur(24px)",
       WebkitBackdropFilter: "blur(24px)",
       border: "1px solid rgba(201, 168, 76, 0.5)",
