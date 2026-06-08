@@ -267,23 +267,100 @@ export default function GCSDA() {
 
         {/* FINAL REGISTRATION CTA */}
         <section className="py-40 border-t border-white/5 text-center bg-black -mx-6 md:-mx-24 px-6 md:px-24">
-          <div className="max-w-5xl mx-auto space-y-12">
-            <h2 className="text-6xl md:text-9xl font-display font-light text-white tracking-tighter leading-none">
-              加入<span className="text-gold-metallic">治理生態圈</span>
-            </h2>
-            <p className="text-stone-400 font-serif font-light text-xl md:text-3xl leading-relaxed max-w-5xl mx-auto">
-              與產學精英共同協作，引導企業建立穩健的策略治理基盤。
-            </p>
-            <div className="pt-8">
-              <a 
-                href="https://line.me/R/ti/p/@387nbnjs"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex px-24 py-10 text-2xl h-auto bg-gold-400 text-black hover:bg-white transition-all duration-700 rounded-none font-display font-bold tracking-[0.4em] shadow-[0_30px_90px_rgba(212,175,55,0.25)] no-underline"
-              >
-                <span>申請入會洽詢</span>
-              </a>
+          <div className="max-w-5xl mx-auto flex flex-col items-center gap-16">
+
+            {/* 油畫框主體 */}
+            <div style={{ position: "relative", display: "inline-block", width: "100%", maxWidth: "900px" }}>
+              <svg viewBox="0 0 900 300" xmlns="http://www.w3.org/2000/svg"
+                style={{ position: "absolute", inset: 0, width: "100%", height: "100%", zIndex: 2, pointerEvents: "none" }}>
+                <defs>
+                  <linearGradient id="gGold" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="#E8D48A"/>
+                    <stop offset="40%" stopColor="#C9A84C"/>
+                    <stop offset="100%" stopColor="#A07828"/>
+                  </linearGradient>
+                </defs>
+                <rect x="3" y="3" width="894" height="294" fill="none" stroke="url(#gGold)" strokeWidth="4"/>
+                <rect x="14" y="14" width="872" height="272" fill="none" stroke="#8B6914" strokeWidth="1.5" strokeDasharray="4,2"/>
+                <path d="M3,3 Q45,3 45,45 Q28,28 3,28 Z" fill="#C9A84C" opacity="0.7"/>
+                <path d="M897,3 Q855,3 855,45 Q872,28 897,28 Z" fill="#C9A84C" opacity="0.7"/>
+                <path d="M3,297 Q45,297 45,255 Q28,272 3,272 Z" fill="#C9A84C" opacity="0.7"/>
+                <path d="M897,297 Q855,297 855,255 Q872,272 897,272 Z" fill="#C9A84C" opacity="0.7"/>
+                <circle cx="3" cy="3" r="5" fill="#E8D48A"/>
+                <circle cx="897" cy="3" r="5" fill="#E8D48A"/>
+                <circle cx="3" cy="297" r="5" fill="#E8D48A"/>
+                <circle cx="897" cy="297" r="5" fill="#E8D48A"/>
+                <circle cx="450" cy="3" r="5" fill="#C9A84C"/>
+                <circle cx="450" cy="297" r="5" fill="#C9A84C"/>
+                <circle cx="3" cy="150" r="5" fill="#C9A84C"/>
+                <circle cx="897" cy="150" r="5" fill="#C9A84C"/>
+              </svg>
+              <div style={{
+                background: "linear-gradient(135deg, #1a1205 0%, #2e2008 30%, #3d2d0a 50%, #2a1c06 75%, #1a1205 100%)",
+                padding: "clamp(40px,6vw,65px) clamp(40px,8vw,100px)",
+                position: "relative", zIndex: 1,
+                boxShadow: "inset 0 0 60px rgba(0,0,0,0.5)",
+              }}>
+                <div style={{ display: "flex", alignItems: "center", gap: "16px", marginBottom: "clamp(20px,3vw,32px)" }}>
+                  <div style={{ flex: 1, height: "1px", background: "linear-gradient(to right, transparent, #C9A84C60)" }}/>
+                  <div style={{ width: "6px", height: "6px", background: "#C9A84C", transform: "rotate(45deg)" }}/>
+                  <div style={{ flex: 1, height: "1px", background: "linear-gradient(to left, transparent, #C9A84C60)" }}/>
+                </div>
+                <h2 style={{
+                  color: "#E8D48A", fontSize: "clamp(32px,6vw,68px)", fontWeight: 300,
+                  letterSpacing: "0.15em", fontFamily: "serif",
+                  textShadow: "0 2px 12px rgba(0,0,0,0.8)",
+                  margin: "0 0 clamp(14px,2vw,22px) 0", lineHeight: 1.2,
+                }}>
+                  加入<span style={{ color: "#C9A84C" }}>治理生態圈</span>
+                </h2>
+                <p style={{
+                  color: "#a08050", fontSize: "clamp(14px,1.8vw,20px)",
+                  fontFamily: "serif", fontStyle: "italic",
+                  letterSpacing: "0.08em", fontWeight: 300, margin: 0, lineHeight: 1.7,
+                }}>
+                  與產學精英共同協作，引導企業建立穩健的策略治理基盤。
+                </p>
+                <div style={{ display: "flex", alignItems: "center", gap: "16px", marginTop: "clamp(20px,3vw,32px)" }}>
+                  <div style={{ flex: 1, height: "1px", background: "linear-gradient(to right, transparent, #C9A84C60)" }}/>
+                  <div style={{ width: "6px", height: "6px", background: "#C9A84C", transform: "rotate(45deg)" }}/>
+                  <div style={{ flex: 1, height: "1px", background: "linear-gradient(to left, transparent, #C9A84C60)" }}/>
+                </div>
+              </div>
             </div>
+
+            {/* 申請按鈕 */}
+            <a href="https://line.me/R/ti/p/@387nbnjs" target="_blank" rel="noopener noreferrer"
+              style={{ textDecoration: "none", display: "inline-block" }}>
+              <div style={{ position: "relative", display: "inline-block" }}>
+                <svg viewBox="0 0 460 84" xmlns="http://www.w3.org/2000/svg"
+                  style={{ position: "absolute", inset: 0, width: "100%", height: "100%", zIndex: 2, pointerEvents: "none" }}>
+                  <rect x="2" y="2" width="456" height="80" fill="none" stroke="#C9A84C" strokeWidth="2.5"/>
+                  <rect x="8" y="8" width="444" height="68" fill="none" stroke="#8B6914" strokeWidth="1" strokeDasharray="3,3"/>
+                  <circle cx="2" cy="2" r="3" fill="#C9A84C"/>
+                  <circle cx="458" cy="2" r="3" fill="#C9A84C"/>
+                  <circle cx="2" cy="82" r="3" fill="#C9A84C"/>
+                  <circle cx="458" cy="82" r="3" fill="#C9A84C"/>
+                </svg>
+                <div style={{
+                  background: "linear-gradient(135deg, #2e2008 0%, #4a3510 50%, #2e2008 100%)",
+                  padding: "26px 72px", position: "relative", zIndex: 1,
+                  minWidth: "380px", textAlign: "center", transition: "all 0.4s ease",
+                }}
+                  onMouseEnter={e => { (e.currentTarget as HTMLDivElement).style.background = "linear-gradient(135deg, #4a3510 0%, #6b4f1a 50%, #4a3510 100%)"; }}
+                  onMouseLeave={e => { (e.currentTarget as HTMLDivElement).style.background = "linear-gradient(135deg, #2e2008 0%, #4a3510 50%, #2e2008 100%)"; }}
+                >
+                  <span style={{
+                    color: "#E8D48A", fontSize: "clamp(16px,2vw,20px)",
+                    fontFamily: "serif", fontWeight: 700, letterSpacing: "0.5em",
+                    textShadow: "0 2px 8px rgba(0,0,0,0.6)",
+                  }}>
+                    ❖ 申 請 入 會 諮 詢 ❖
+                  </span>
+                </div>
+              </div>
+            </a>
+
           </div>
         </section>
       </div>
