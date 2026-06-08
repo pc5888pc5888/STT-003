@@ -382,7 +382,7 @@ export default function App() {
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
-              className="absolute inset-x-0 top-24 bg-black border-b border-gold-400/10 overflow-hidden z-40 shadow-2xl"
+              className="absolute inset-x-0 top-24 bg-black border-b border-gold-400/10 z-40 shadow-2xl overflow-y-auto max-h-screen pb-32"
             >
               <div className="flex flex-col p-8 gap-6 pb-32">
                 {navItems.map((item) => {
