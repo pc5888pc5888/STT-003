@@ -140,31 +140,41 @@ ${context ? `以下是與問題相關的專欄知識庫內容：\n\n${context}` 
       right: "2rem",
       width: "380px",
       height: "520px",
-      background: "rgba(5,12,35,0.15)",
-      backdropFilter: "blur(24px)",
-      WebkitBackdropFilter: "blur(24px)",
-      border: "1px solid rgba(100,180,255,0.35)",
+      background: "rgba(4,10,28,0.25)",
+      backdropFilter: "blur(32px)",
+      WebkitBackdropFilter: "blur(32px)",
+      border: "1px solid rgba(80,160,255,0.45)",
       borderRadius: "16px",
       display: "flex",
       flexDirection: "column",
       zIndex: 9998,
-      boxShadow: "0 0 60px rgba(50,130,255,0.2), 0 8px 32px rgba(0,0,0,0.7)",
+      boxShadow: "0 0 0 1px rgba(80,160,255,0.15), 0 0 80px rgba(30,100,255,0.25), 0 0 160px rgba(30,100,255,0.1), inset 0 1px 0 rgba(255,255,255,0.08)",
       overflow: "hidden",
     }}>
+    <div style={{
+      position: "absolute",
+      inset: 0,
+      backgroundImage: "linear-gradient(rgba(80,160,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(80,160,255,0.04) 1px, transparent 1px)",
+      backgroundSize: "32px 32px",
+      pointerEvents: "none",
+      zIndex: 0,
+    }} />
       <div style={{
-        background: "linear-gradient(135deg, rgba(15,34,54,0.9), rgba(26,58,92,0.85))",
+        background: "linear-gradient(135deg, rgba(8,20,50,0.95), rgba(15,40,80,0.9))",
         backdropFilter: "blur(12px)",
         padding: "14px 18px",
-        borderBottom: "1px solid rgba(201,168,76,0.4)",
+        borderBottom: "1px solid rgba(80,160,255,0.3)",
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
+        position: "relative",
+        zIndex: 1,
       }}>
         <div>
           <div style={{ color: "#C9A84C", fontWeight: "bold", fontSize: "15px" }}>
             策略智庫數位領航員
           </div>
-          <div style={{ color: "#888", fontSize: "11px", marginTop: "2px" }}>
+          <div style={{ color: "rgba(100,180,255,0.7)", fontSize: "11px", marginTop: "2px", letterSpacing: "0.05em" }}>
             莊鈞翔博士 · STT Group
           </div>
         </div>
@@ -179,6 +189,8 @@ ${context ? `以下是與問題相關的專欄知識庫內容：\n\n${context}` 
         flexDirection: "column",
         gap: "12px",
         background: "transparent",
+        position: "relative",
+        zIndex: 1,
       }}>
         {messages.map((m, i) => (
           <div key={i} style={{
@@ -190,7 +202,7 @@ ${context ? `以下是與問題相關的專欄知識庫內容：\n\n${context}` 
               padding: "10px 14px",
               borderRadius: m.role === "user" ? "12px 12px 2px 12px" : "12px 12px 12px 2px",
               background: m.role === "user" ? "rgba(201,168,76,0.92)" : "rgba(255,255,255,0.07)",
-              color: m.role === "user" ? "rgba(10,20,50,0.35)" : "#E8E8E8",
+              color: m.role === "user" ? "#0A1428" : "#E8E8E8",
               fontSize: "13px",
               lineHeight: "1.6",
               border: m.role === "assistant" ? "1px solid rgba(255,255,255,0.1)" : "none",
@@ -220,10 +232,12 @@ ${context ? `以下是與問題相關的專欄知識庫內容：\n\n${context}` 
 
       <div style={{
         padding: "12px 16px",
-        borderTop: "1px solid rgba(255,255,255,0.08)",
-        background: "rgba(0,0,0,0.2)",
+        borderTop: "1px solid rgba(80,160,255,0.2)",
+        background: "rgba(4,10,28,0.4)",
         display: "flex",
         gap: "8px",
+        position: "relative",
+        zIndex: 1,
       }}>
         <input
           value={input}
@@ -250,7 +264,7 @@ ${context ? `以下是與問題相關的專欄知識庫內容：\n\n${context}` 
             border: "none",
             borderRadius: "8px",
             padding: "8px 14px",
-            color: loading || !input.trim() ? "#666" : "rgba(8,15,30,0.75)",
+            color: loading || !input.trim() ? "#666" : "#0A1428",
             cursor: loading || !input.trim() ? "not-allowed" : "pointer",
             fontWeight: "bold",
             fontSize: "13px",
