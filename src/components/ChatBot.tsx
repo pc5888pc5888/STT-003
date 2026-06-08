@@ -104,6 +104,7 @@ ${context ? `以下是與問題相關的專欄知識庫內容：\n\n${context}` 
               role: m.role === "assistant" ? "model" : "user",
               parts: [{ text: m.content }],
             })),
+            tools: [{ google_search: {} }],
             generationConfig: { temperature: 0.7, maxOutputTokens: 1024 },
           }),
         }
