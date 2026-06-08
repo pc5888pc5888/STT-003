@@ -202,7 +202,7 @@ ${context ? `以下是與問題相關的專欄知識庫內容：\n\n${context}` 
               padding: "10px 14px",
               borderRadius: m.role === "user" ? "12px 12px 2px 12px" : "12px 12px 12px 2px",
               background: m.role === "user" ? "rgba(201,168,76,0.92)" : "rgba(255,255,255,0.07)",
-              color: m.role === "user" ? "#0A1428" : "#E8E8E8",
+              color: m.role === "user" ? "#1a2a4a" : "#E8E8E8",
               fontSize: "13px",
               lineHeight: "1.6",
               border: m.role === "assistant" ? "1px solid rgba(255,255,255,0.1)" : "none",
