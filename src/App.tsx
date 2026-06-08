@@ -432,6 +432,13 @@ export default function App() {
                     </div>
                     <span className="text-[8px] font-mono font-black tracking-widest uppercase opacity-80 whitespace-nowrap">GOVERNANCE ENGAGEMENT</span>
                   </a>
+                  <button
+                    onClick={() => { setIsMenuOpen(false); setShowContactModal(true); }}
+                    className="border border-gold-400/30 text-gold-400 px-6 py-4 rounded-lg flex items-center justify-between w-full"
+                  >
+                    <span className="text-base font-bold">聯絡智庫</span>
+                    <span className="text-[8px] font-mono font-black tracking-widest uppercase opacity-80">CONTACT STT</span>
+                  </button>
                   <button 
                     onClick={() => {
                       setIsMenuOpen(false);
