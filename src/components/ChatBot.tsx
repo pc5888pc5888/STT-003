@@ -39,9 +39,10 @@ function findRelevantArticles(query: string, articles: Article[], topN = 5): Art
 interface ChatBotProps {
   open: boolean;
   onClose: () => void;
+  onContactOpen?: () => void;
 }
 
-export default function ChatBot({ open, onClose }: ChatBotProps) {
+export default function ChatBot({ open, onClose, onContactOpen }: ChatBotProps) {
   const [messages, setMessages] = useState<Message[]>([
     {
       role: "assistant",
@@ -50,6 +51,7 @@ export default function ChatBot({ open, onClose }: ChatBotProps) {
   ]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
+  const [replyCount, setReplyCount] = useState(0);
   const [articles, setArticles] = useState<Article[]>([]);
   const bottomRef = useRef<HTMLDivElement>(null);
 
@@ -67,6 +69,15 @@ export default function ChatBot({ open, onClose }: ChatBotProps) {
   async function sendMessage() {
     const query = input.trim();
     if (!query || loading) return;
+
+    // 超過2次回覆，引導預約
+    if (replyCount >= 2) {
+      const newMessages: Message[] = [...messages, { role: "user", content: query }];
+      setMessages([...newMessages, { role: "assistant", content: "感謝您的提問。為提供您最精準的建議，我誠摯邀請您預約莊鈞翔博士進行一對一深度診斷，請填寫下方聯絡表單，我們將盡快與您聯繫。" }]);
+      setInput("");
+      if (onContactOpen) setTimeout(() => onContactOpen(), 800);
+      return;
+    }
     setInput("");
 
     const newMessages: Message[] = [...messages, { role: "user", content: query }];
@@ -110,10 +121,12 @@ ${context ? `以下是與問題相關的專欄知識庫內容：\n\n${context}` 
       );
       const data = await res.json();
       const reply = data.candidates?.[0]?.content?.parts?.[0]?.text ||
-        (data.error ? "API錯誤：" + data.error.message : "抱歉，暫時無法回應，請稍後再試。");
+        (data.error ? "感謝您的提問。為提供您最精準的建議，我誠摯邀請您預約莊鈞翔博士進行一對一深度診斷，請填寫下方聯絡表單，我們將盡快與您聯繫。" : "抱歉，暫時無法回應，請稍後再試。");
       setMessages(prev => [...prev, { role: "assistant", content: reply }]);
+      setReplyCount(prev => prev + 1);
     } catch (err: any) {
-      setMessages(prev => [...prev, { role: "assistant", content: "錯誤：" + (err?.message || String(err)) }]);
+      setMessages(prev => [...prev, { role: "assistant", content: "感謝您的提問。為提供您最精準的建議，我誠摯邀請您預約莊鈞翔博士進行一對一深度診斷，請填寫下方聯絡表單，我們將盡快與您聯繫。" }]);
+      if (onContactOpen) setTimeout(() => onContactOpen(), 800);
     }
     setLoading(false);
   }

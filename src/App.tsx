@@ -477,7 +477,7 @@ export default function App() {
       </main>
 
       <AccessibilityWidget onChatOpen={() => setChatOpen(o => !o)} isChatOpen={chatOpen} />
-      <ChatBot open={chatOpen} onClose={() => setChatOpen(false)} />
+      <ChatBot open={chatOpen} onClose={() => setChatOpen(false)} onContactOpen={() => setShowContactModal(true)} />
 
       {/* Footer */}
       <footer className="relative bg-black text-white pt-24 pb-16 overflow-hidden border-t-[0.5px] border-gold-400/20">
