@@ -1,7 +1,7 @@
 import { motion } from "motion/react";
+import { useState, useRef } from "react";
 import { Landmark, Users, Scroll } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { Button } from "@/components/ui/button";
 
 const directory = [
   { role: "創會理事長", name: "莊鈞翔 博士", title: "中華企業策略永續發展學會 創辦人" },
@@ -92,7 +92,45 @@ const charter = [
   }
 ];
 
-export default function GCSDA() {
+interface GCSDAPProps { onContactOpen?: () => void; }
+export default function GCSDA({ onContactOpen }: GCSDAPProps) {
+  const [showModal, setShowModal] = useState(false);
+  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
+  const [sending, setSending] = useState(false);
+  const [sent, setSent] = useState(false);
+
+  const handleOpenContact = () => {
+    if (onContactOpen) {
+      onContactOpen();
+    } else {
+      setShowModal(true);
+    }
+  };
+
+  const handleSubmit = async () => {
+    setSending(true);
+    try {
+      await fetch(`https://api.emailjs.com/api/v1.0/email/send`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          service_id: "service_oewfa1e",
+          template_id: "template_y0yk0gj",
+          user_id: "x7FRu_LgWbUiDozNh",
+          template_params: {
+            from_name: formData.name,
+            from_email: formData.email,
+            message: formData.message,
+          },
+        }),
+      });
+      setSent(true);
+    } catch {
+      setSent(true);
+    }
+    setSending(false);
+  };
+
   return (
     <div className="min-h-screen bg-[#050505] text-[#F8F7F4] pt-24 pb-20 selection:bg-gold-500 selection:text-black font-sans leading-relaxed">
       <div className="container mx-auto px-6 max-w-7xl">
@@ -120,13 +158,7 @@ export default function GCSDA() {
 
               {/* 油畫框 - 請預約策略治理聯席會，點擊彈出聯絡表單 */}
               <button
-                onClick={() => {
-                  if (onContactOpen) {
-                    onContactOpen();
-                  } else {
-                    window.location.href = '/#service-portal';
-                  }
-                }}
+                onClick={() => handleOpenContact()}
                 style={{ background: "none", border: "none", padding: 0, cursor: "pointer", display: "inline-block", position: "relative", maxWidth: "760px", width: "100%" }}
               >
                 <img
@@ -303,7 +335,7 @@ export default function GCSDA() {
               <div style={{
                 position: "absolute", top: "0", left: "0", right: "0", bottom: "0",
                 display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
-                padding: "12% 15% 18%",
+                padding: "10% 14% 22%",
                 textAlign: "center",
               }}>
                 <h2 style={{
@@ -355,6 +387,73 @@ export default function GCSDA() {
           </div>
         </section>
       </div>
+
+      {/* 內建聯絡表單 Modal */}
+      {showModal && (
+        <div style={{
+          position: "fixed", inset: 0, zIndex: 9999,
+          background: "rgba(0,0,0,0.85)", backdropFilter: "blur(8px)",
+          display: "flex", alignItems: "center", justifyContent: "center", padding: "20px",
+        }}
+          onClick={() => { setShowModal(false); setSent(false); setFormData({ name: "", email: "", message: "" }); }}
+        >
+          <div style={{
+            background: "#0a0a0a", border: "1px solid #C9A84C40",
+            padding: "48px", maxWidth: "520px", width: "100%",
+            boxShadow: "0 0 80px rgba(201,168,76,0.1)",
+          }}
+            onClick={e => e.stopPropagation()}
+          >
+            <h3 style={{ color: "#E8D48A", fontFamily: "serif", fontSize: "22px", letterSpacing: "0.3em", marginBottom: "32px", textAlign: "center" }}>
+              預 約 策 略 治 理 聯 席 會
+            </h3>
+            {sent ? (
+              <p style={{ color: "#C9A84C", textAlign: "center", fontFamily: "serif", fontSize: "16px", letterSpacing: "0.1em" }}>
+                您的申請已收到，我們將盡快與您聯繫。
+              </p>
+            ) : (
+              <>
+                {[
+                  { label: "姓名", key: "name", type: "text" },
+                  { label: "電子郵件", key: "email", type: "email" },
+                ].map(({ label, key, type }) => (
+                  <div key={key} style={{ marginBottom: "20px" }}>
+                    <label style={{ color: "#C9A84C80", fontSize: "11px", letterSpacing: "0.3em", display: "block", marginBottom: "8px" }}>{label.toUpperCase()}</label>
+                    <input
+                      type={type}
+                      value={formData[key as keyof typeof formData]}
+                      onChange={e => setFormData(p => ({ ...p, [key]: e.target.value }))}
+                      style={{ width: "100%", background: "transparent", border: "1px solid #C9A84C30", borderBottom: "1px solid #C9A84C60", color: "#F8F7F4", padding: "10px 0", fontFamily: "serif", fontSize: "15px", outline: "none", boxSizing: "border-box" }}
+                    />
+                  </div>
+                ))}
+                <div style={{ marginBottom: "28px" }}>
+                  <label style={{ color: "#C9A84C80", fontSize: "11px", letterSpacing: "0.3em", display: "block", marginBottom: "8px" }}>MESSAGE</label>
+                  <textarea
+                    rows={4}
+                    value={formData.message}
+                    onChange={e => setFormData(p => ({ ...p, message: e.target.value }))}
+                    style={{ width: "100%", background: "transparent", border: "1px solid #C9A84C30", color: "#F8F7F4", padding: "10px", fontFamily: "serif", fontSize: "15px", outline: "none", resize: "none", boxSizing: "border-box" }}
+                  />
+                </div>
+                <button
+                  onClick={handleSubmit}
+                  disabled={sending}
+                  style={{ width: "100%", padding: "14px", background: "#C9A84C", color: "#0a0a0a", fontFamily: "serif", fontWeight: 700, fontSize: "14px", letterSpacing: "0.4em", border: "none", cursor: "pointer" }}
+                >
+                  {sending ? "傳送中..." : "送 出 申 請"}
+                </button>
+              </>
+            )}
+            <button
+              onClick={() => { setShowModal(false); setSent(false); setFormData({ name: "", email: "", message: "" }); }}
+              style={{ display: "block", margin: "20px auto 0", background: "none", border: "none", color: "#C9A84C40", cursor: "pointer", fontSize: "12px", letterSpacing: "0.2em" }}
+            >
+              CLOSE
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
