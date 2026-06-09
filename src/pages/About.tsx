@@ -1,4 +1,4 @@
-import { useState } from "react";
+﻿import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Mail, Crown, X, Send, Loader2 } from "lucide-react";
 import emailjs from "@emailjs/browser";
@@ -298,7 +298,7 @@ export default function About() {
                       <SectionLabel en="AFFILIATIONS & ROLES" zh="現任職務" />
                       <h2 className="font-serif font-black text-[#e6c84c] leading-tight flex-shrink-0" style={{ fontSize: 'clamp(20px, 2.8vw, 42px)', margin: 'clamp(4px, 0.8vh, 10px) 0' }}>現任職務一覽</h2>
                       <p className="text-stone-300 tracking-wide flex-shrink-0" style={{ fontSize: 'clamp(10px, 0.85vw, 13px)', marginBottom: 'clamp(8px, 1.2vh, 16px)' }}>企業策略與公司治理法遵顧問 | 跨域整合型領導人</p>
-                      <div className="grid grid-cols-2 gap-2 flex-1 overflow-hidden">
+                      <div className="grid grid-cols-2 gap-2 flex-shrink-0">
                         <Card label="NGO CO-REGULATION" title="中華企業策略永續發展學會 GCSDA 創會理事長">
                           <p className="text-zinc-300 font-light leading-relaxed mt-1">依法設立 NGO 法人，以制度性框架推動企業永續治理、接班傳承與法遵文化。</p>
                           <div className="text-zinc-400 mt-1.5 space-y-0.5 border-t border-white/[0.02] pt-1 leading-relaxed">
@@ -376,7 +376,7 @@ export default function About() {
                       <SectionLabel en="REGULATORY ACCREDITATIONS" zh="專業認證" />
                       <h2 className="font-serif font-black text-[#e6c84c] leading-tight flex-shrink-0" style={{ fontSize: 'clamp(18px, 2.4vw, 36px)', margin: 'clamp(4px, 0.8vh, 10px) 0' }}>AI 治理認證與 ESG 永續評估師資格</h2>
                       <p className="text-stone-300 tracking-wide flex-shrink-0" style={{ fontSize: 'clamp(10px, 0.85vw, 13px)', marginBottom: 'clamp(8px, 1.2vh, 16px)' }}>跨國機構認可的專業資格 | 治理實務與法遵整合</p>
-                      <div className="grid grid-cols-2 gap-2 flex-1 overflow-hidden">
+                      <div className="grid grid-cols-2 gap-2 flex-shrink-0">
                         <div className="p-3 bg-zinc-950/80 border-t border-t-white/[0.03] border-r border-r-white/[0.03] border-b border-b-white/[0.03] border-l border-l-white/[0.03] rounded-lg overflow-auto row-span-2">
                           <div className="border-l-2 border-l-[#e6c84c]/70 pl-2 mb-1.5">
                             <span className="text-[#e6c84c]/80 font-mono tracking-widest block uppercase font-bold" style={{ fontSize: '9px' }}>ANTHROPIC</span>
@@ -441,7 +441,7 @@ export default function About() {
                       <SectionLabel en="PROFESSIONAL DOMAIN AREAS" zh="服務項目" />
                       <h2 className="font-serif text-white leading-tight flex-shrink-0" style={{ fontSize: 'clamp(20px, 2.8vw, 42px)', margin: 'clamp(4px, 0.8vh, 10px) 0' }}>四大治理解方</h2>
                       <p className="text-zinc-400 font-mono tracking-widest uppercase font-semibold flex-shrink-0" style={{ fontSize: 'clamp(8px, 0.7vw, 11px)', marginBottom: 'clamp(8px, 1.2vh, 16px)' }}>THE FOUR PILLARS OF GOVERNANCE & COMPLIANCE SOLUTIONS</p>
-                      <div className="grid grid-cols-2 gap-2 flex-1 overflow-hidden">
+                      <div className="grid grid-cols-2 gap-2 flex-shrink-0">
                         {[
                           { title: '策略規劃 STRATEGIC PLAN', roman: '從戰略高度重構治理格局', points: ['企業策略法律風險預防與制度建立', '家族企業接班梯隊設計與傳承規劃', '企業策略導入治理法遵精神'] },
                           { title: '穩健運營 STEADY RUNNING', roman: '法遵是最堅實的護城河', points: ['內部控制制度建立與法遵健診', '企業內部法遵文化培訓與落地', '企業合規架構設計與文件化'] },
