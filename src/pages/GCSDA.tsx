@@ -1,4 +1,4 @@
-import { motion } from "motion/react";
+﻿import { motion } from "motion/react";
 import { useState, useRef } from "react";
 import { Landmark, Users, Scroll } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
@@ -176,10 +176,10 @@ export default function GCSDA({ onContactOpen }: GCSDAPProps) {
                 }}>
                   <span style={{
                     color: "#2a1a05",
-                    fontSize: "clamp(16px, 2.5vw, 28px)",
+                    fontSize: "clamp(10px, 2.2vw, 28px)",
                     fontFamily: "serif",
                     fontWeight: 900,
-                    letterSpacing: "0.4em",
+                    letterSpacing: "0.25em",
                     whiteSpace: "nowrap",
                     textShadow: "0 1px 3px rgba(0,0,0,0.2)",
                   }}>
@@ -197,7 +197,7 @@ export default function GCSDA({ onContactOpen }: GCSDAPProps) {
             <div className="text-center space-y-6">
               <span className="text-gold-500 font-bold tracking-[0.5em] text-xs uppercase opacity-60">Governance Collective</span>
               <h2 className="text-4xl md:text-6xl font-display font-light text-gold-metallic tracking-widest">策略治理聯席會</h2>
-              <p className="text-stone-300 text-xl md:text-2xl font-serif font-light tracking-[0.2em] mt-8">學會策略智庫 · 創始榮譽團體成員</p>
+              <p className="text-stone-300 text-lg md:text-2xl font-serif font-light tracking-[0.15em] mt-8 whitespace-nowrap">學會策略智庫 · 創始榮譽團體成員</p>
               <div className="h-px w-16 bg-gold-900/40 mx-auto mt-10"></div>
             </div>
 
@@ -355,7 +355,7 @@ export default function GCSDA({ onContactOpen }: GCSDAPProps) {
               }}>
                 <span style={{
                   color: "#2a1a05", fontSize: "clamp(13px, 1.5vw, 20px)",
-                  fontFamily: "serif", fontWeight: 700, letterSpacing: "0.4em",
+                  fontFamily: "serif", fontWeight: 700, letterSpacing: "0.25em",
                   whiteSpace: "nowrap", textShadow: "0 1px 2px rgba(0,0,0,0.2)",
                 }}>
                   ❖ 申 請 入 會 諮 詢 ❖
@@ -418,7 +418,7 @@ export default function GCSDA({ onContactOpen }: GCSDAPProps) {
                 <button
                   onClick={handleSubmit}
                   disabled={sending}
-                  style={{ width: "100%", padding: "14px", background: "#C9A84C", color: "#0a0a0a", fontFamily: "serif", fontWeight: 700, fontSize: "14px", letterSpacing: "0.4em", border: "none", cursor: "pointer" }}
+                  style={{ width: "100%", padding: "14px", background: "#C9A84C", color: "#0a0a0a", fontFamily: "serif", fontWeight: 700, fontSize: "14px", letterSpacing: "0.25em", border: "none", cursor: "pointer" }}
                 >
                   {sending ? "傳送中..." : "送 出 申 請"}
                 </button>
