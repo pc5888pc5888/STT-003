@@ -1,4 +1,4 @@
-import { motion } from "motion/react";
+﻿import { motion } from "motion/react";
 import { useState, useRef } from "react";
 import { Landmark, Users, Scroll } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
@@ -191,7 +191,7 @@ export default function GCSDA({ onContactOpen }: GCSDAPProps) {
         </section>
 
         {/* GOVERNANCE AUTHORITY - THE CANONICAL INSTITUTIONAL ZONE */}
-        <section className="relative py-24 border-t border-white/5">
+        <section className="relative py-8 border-t border-white/5">
           <div className="max-w-7xl mx-auto space-y-16">
             <div className="text-center space-y-6">
               <span className="text-gold-500 font-bold tracking-[0.5em] text-xs uppercase opacity-60">Governance Collective</span>
