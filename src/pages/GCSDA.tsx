@@ -120,7 +120,13 @@ export default function GCSDA() {
 
               {/* 油畫框 - 請預約策略治理聯席會，點擊彈出聯絡表單 */}
               <button
-                onClick={() => onContactOpen && onContactOpen()}
+                onClick={() => {
+                  if (onContactOpen) {
+                    onContactOpen();
+                  } else {
+                    window.location.href = '/#service-portal';
+                  }
+                }}
                 style={{ background: "none", border: "none", padding: 0, cursor: "pointer", display: "inline-block", position: "relative", maxWidth: "760px", width: "100%" }}
               >
                 <img
@@ -302,7 +308,7 @@ export default function GCSDA() {
               <div style={{
                 position: "absolute",
                 top: "50%", left: "50%",
-                transform: "translate(-50%, -58%)",
+                transform: "translate(-50%, -65%)",
                 width: "68%",
                 textAlign: "center",
               }}>
