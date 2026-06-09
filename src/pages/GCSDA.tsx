@@ -294,50 +294,30 @@ export default function GCSDA() {
         </section>
 
         {/* FINAL REGISTRATION CTA */}
-        <section className="py-40 border-t border-white/5 text-center bg-black -mx-6 md:-mx-24 px-6 md:px-24">
-          <div className="max-w-5xl mx-auto flex flex-col items-center gap-12">
+        <section className="py-32 border-t border-white/5 text-center bg-black -mx-6 md:-mx-24 px-6 md:px-24">
+          <div className="max-w-4xl mx-auto flex flex-col items-center gap-10">
 
             {/* 大油畫框 - 加入治理生態圈 */}
-            <div style={{ position: "relative", display: "inline-block", width: "100%", maxWidth: "960px" }}>
-              <img
-                src="/images/gcsda_002.png"
-                alt=""
-                style={{ width: "100%", height: "auto", display: "block" }}
-              />
-              {/* 文字疊加在框內 */}
+            <div style={{ position: "relative", display: "inline-block", width: "100%", maxWidth: "780px" }}>
+              <img src="/images/gcsda_002.png" alt="" style={{ width: "100%", height: "auto", display: "block" }} />
               <div style={{
-                position: "absolute",
-                top: "50%", left: "50%",
-                transform: "translate(-50%, -65%)",
-                width: "68%",
+                position: "absolute", top: "0", left: "0", right: "0", bottom: "0",
+                display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
+                padding: "12% 15% 18%",
                 textAlign: "center",
               }}>
                 <h2 style={{
-                  color: "#2a1a05",
-                  fontSize: "clamp(28px, 5vw, 62px)",
-                  fontWeight: 700,
-                  letterSpacing: "0.2em",
-                  fontFamily: "serif",
-                  textShadow: "0 1px 3px rgba(0,0,0,0.3)",
-                  margin: "0 0 clamp(8px,1.5vw,16px) 0",
-                  lineHeight: 1.2,
-                  whiteSpace: "nowrap",
+                  color: "#2a1a05", fontSize: "clamp(22px, 4vw, 52px)", fontWeight: 700,
+                  letterSpacing: "0.2em", fontFamily: "serif",
+                  textShadow: "0 1px 3px rgba(0,0,0,0.2)",
+                  margin: "0 0 clamp(6px,1vw,12px) 0", lineHeight: 1.2, whiteSpace: "nowrap",
                 }}>
                   加 入 治 理 生 態 圈
                 </h2>
-                <div style={{
-                  width: "60%", height: "1px",
-                  background: "rgba(60,30,5,0.3)",
-                  margin: "0 auto clamp(8px,1.5vw,14px)",
-                }}/>
+                <div style={{ width: "50%", height: "1px", background: "rgba(60,30,5,0.3)", margin: "0 auto clamp(6px,1vw,12px)" }}/>
                 <p style={{
-                  color: "#3a2005",
-                  fontSize: "clamp(12px, 1.4vw, 18px)",
-                  fontFamily: "serif",
-                  letterSpacing: "0.05em",
-                  fontWeight: 400,
-                  margin: 0,
-                  lineHeight: 1.6,
+                  color: "#3a2005", fontSize: "clamp(11px, 1.2vw, 16px)",
+                  fontFamily: "serif", letterSpacing: "0.05em", fontWeight: 400, margin: 0, lineHeight: 1.6,
                 }}>
                   與產學精英共同協作，引導企業建立穩健的策略治理基盤。
                 </p>
@@ -349,29 +329,23 @@ export default function GCSDA() {
               href="https://line.me/R/ti/p/@387nbnjs"
               target="_blank"
               rel="noopener noreferrer"
-              style={{ textDecoration: "none", display: "inline-block", position: "relative", maxWidth: "560px", width: "58%" }}
+              style={{ textDecoration: "none", display: "inline-block", position: "relative", maxWidth: "460px", width: "52%" }}
             >
               <img
                 src="/images/gcsda_003.png"
                 alt="申請入會諮詢"
                 style={{ width: "100%", height: "auto", display: "block", transition: "opacity 0.3s" }}
-                onMouseEnter={e => { (e.currentTarget as HTMLImageElement).style.opacity = "0.85"; }}
+                onMouseEnter={e => { (e.currentTarget as HTMLImageElement).style.opacity = "0.82"; }}
                 onMouseLeave={e => { (e.currentTarget as HTMLImageElement).style.opacity = "1"; }}
               />
               <div style={{
-                position: "absolute",
-                top: "50%", left: "50%",
-                transform: "translate(-50%, -50%)",
-                pointerEvents: "none",
+                position: "absolute", top: "50%", left: "50%",
+                transform: "translate(-50%, -50%)", pointerEvents: "none",
               }}>
                 <span style={{
-                  color: "#2a1a05",
-                  fontSize: "clamp(14px, 1.8vw, 22px)",
-                  fontFamily: "serif",
-                  fontWeight: 700,
-                  letterSpacing: "0.4em",
-                  whiteSpace: "nowrap",
-                  textShadow: "0 1px 2px rgba(0,0,0,0.2)",
+                  color: "#2a1a05", fontSize: "clamp(13px, 1.5vw, 20px)",
+                  fontFamily: "serif", fontWeight: 700, letterSpacing: "0.4em",
+                  whiteSpace: "nowrap", textShadow: "0 1px 2px rgba(0,0,0,0.2)",
                 }}>
                   ❖ 申 請 入 會 諮 詢 ❖
                 </span>
