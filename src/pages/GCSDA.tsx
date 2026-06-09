@@ -1,4 +1,4 @@
-import { motion } from "motion/react";
+﻿import { motion } from "motion/react";
 import { useState, useRef } from "react";
 import { Landmark, Users, Scroll } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
@@ -340,7 +340,7 @@ export default function GCSDA({ onContactOpen }: GCSDAPProps) {
               href="https://line.me/R/ti/p/@387nbnjs"
               target="_blank"
               rel="noopener noreferrer"
-              style={{ textDecoration: "none", display: "inline-block", position: "relative", maxWidth: "460px", width: "52%" }}
+              style={{ textDecoration: "none", display: "inline-block", position: "relative", maxWidth: "460px", width: "min(52%, 320px)", minWidth: "260px" }}
             >
               <img
                 src="/images/gcsda_003.png"
