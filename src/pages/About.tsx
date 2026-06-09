@@ -1,4 +1,4 @@
-﻿import { useState } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Mail, Crown, X, Send, Loader2 } from "lucide-react";
 import emailjs from "@emailjs/browser";
@@ -403,9 +403,6 @@ export default function About() {
                             <p className="text-zinc-300">✓ Model Context Protocol: Advanced Topics</p>
                             <p className="text-zinc-300">✓ Introduction to Agent Skills 官方認證</p>
                           </div>
-                          <div className="border border-[#e6c84c]/60 rounded-lg w-full" style={{ padding: 'clamp(12px, 1.5vh, 20px)', fontSize: 'clamp(11px, 1vw, 15px)', marginTop: 'clamp(12px, 1.5vh, 20px)' }}>
-                            <p className="text-[#e6c84c] font-serif italic leading-relaxed">制度的嚴謹度，從不允許自己反覆犯同樣的錯誤開始。--- 《Internal Compliance》</p>
-                          </div>
                         </div>
                         <div className="flex flex-col gap-2">
                           <div className="p-3 bg-zinc-950/80 border-t border-t-white/[0.03] border-r border-r-white/[0.03] border-b border-b-white/[0.03] border-l border-l-white/[0.03] rounded-lg overflow-hidden">
@@ -428,6 +425,9 @@ export default function About() {
                             </div>
                           </div>
                         </div>
+                      </div>
+                      <div className="border border-[#e6c84c]/60 rounded-lg w-full" style={{ padding: 'clamp(12px, 1.5vh, 20px)', fontSize: 'clamp(11px, 1vw, 15px)', marginTop: 'clamp(12px, 1.5vh, 20px)' }}>
+                        <p className="text-[#e6c84c] font-serif italic leading-relaxed">制度的嚴謹度，從不允許自己反覆犯同樣的錯誤開始。--- 《Internal Compliance》</p>
                       </div>
                     </div>
                     <Portrait src="/images/Eric-Chuang-18.png" alt="莊鈞翔博士" />
