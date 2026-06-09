@@ -355,6 +355,9 @@ export default function About() {
                             <p className="text-white font-semibold">▸《內在法遵 Internal Compliance》STT Press 出版</p>
                             <p className="text-white font-semibold">▸《2025 永續家族治理實務實錄》年度報告</p>
                             <p className="text-white font-semibold">▸《臺灣企業接班人的佈局規劃與傳承家族價值》期刊論文</p>
+                            <p className="text-white font-semibold">▸《企業策略導入公司治理法遵精神：以外部法律顧問團隊協助為例》期刊論文</p>
+                            <p className="text-white font-semibold">▸《顧客關係管理對服務永續之探討：以 A 國際法律事務所為例》博士論文</p>
+                            <p className="text-white font-semibold">▸《不同世代企業家人格特質、創新能力對企業經營績效之影響：以領導風格為中介變數》碩士論文</p>
                           </div>
                         </Card>
                       </div>
@@ -416,7 +419,7 @@ export default function About() {
                               <h3 className="font-serif font-black text-[#e6c84c] mt-0.5" style={{ fontSize: 'clamp(10px, 0.85vw, 13px)' }}>法遵與永續認證</h3>
                             </div>
                             <div className="space-y-0.5" style={{ fontSize: 'clamp(8px, 0.7vw, 10px)' }}>
-                              <p className="text-zinc-300">中華經浟研究院綠色經浟研究中心—減碳管理師</p>
+                              <p className="text-zinc-300">中華經濟研究院綠色經濟研究中心—減碳管理師</p>
                               <p className="text-zinc-300">CEO 國際認證中心—永續發展碳管理（甲級）</p>
                               <p className="text-zinc-300">ESG 不動產淨零（甲級管理師）</p>
                               <p className="text-zinc-300">德國萊茵 TÜV—兩岸勞資法務管理（甲級）</p>
