@@ -403,7 +403,9 @@ export default function About() {
                             <p className="text-zinc-300">✓ Model Context Protocol: Advanced Topics</p>
                             <p className="text-zinc-300">✓ Introduction to Agent Skills 官方認證</p>
                           </div>
-                          <p className="text-[#e6c84c] font-serif italic border border-[#e6c84c]/60 rounded-lg px-3 py-2" style={{ fontSize: 'clamp(9px, 0.8vw, 12px)', marginTop: 'clamp(8px, 1.2vh, 16px)' }}>制度的嚴謹度，從不允許自己反覆犯同樣的錯誤開始。--- 《Internal Compliance》</p>
+                          <div className="border border-[#e6c84c]/60 rounded-lg flex-shrink-0" style={{ padding: 'clamp(8px, 1vh, 14px)', fontSize: 'clamp(10px, 0.9vw, 13px)', marginTop: 'clamp(8px, 1.2vh, 16px)' }}>
+                            <p className="text-[#e6c84c] font-serif italic leading-relaxed">制度的嚴謹度，從不允許自己反覆犯同樣的錯誤開始。--- 《Internal Compliance》</p>
+                          </div>
                         </div>
                         <div className="flex flex-col gap-2">
                           <div className="p-3 bg-zinc-950/80 border-t border-t-white/[0.03] border-r border-r-white/[0.03] border-b border-b-white/[0.03] border-l border-l-white/[0.03] rounded-lg overflow-hidden">
