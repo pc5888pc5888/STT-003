@@ -1,4 +1,4 @@
-﻿import { useState } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { books } from "../data/mockData";
 import { X, Eye, Landmark } from "lucide-react";
@@ -214,8 +214,8 @@ export default function Books({ onNavigate }: { onNavigate: (page: string) => vo
                   className="p-4 bg-transparent transition-all duration-700 cursor-pointer group"
                   onClick={() => handleBookClick(book.id)}
                 >
-                  <div className=\"relative overflow-visible bg-transparent transition-all duration-300\" style={{height:\"420px\"}}>
-                    <div className="w-full h-full flex items-center justify-center p-2 rounded-lg relative">
+                  <div className="relative aspect-[3/4] overflow-visible bg-transparent transition-all duration-300">
+                    <div className="w-full h-full flex items-start justify-center p-2 rounded-lg relative">
                       {/* Subtle golden ambient glow behind the transparent book */}
                       <div className="absolute inset-4 bg-gold-600/10 blur-[40px] rounded-full opacity-0 group-hover:opacity-100 transition-all duration-700 pointer-events-none"></div>
                       <img 
