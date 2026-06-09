@@ -1,4 +1,4 @@
-import { useState } from "react";
+﻿import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Mail, Crown, X, Send, Loader2 } from "lucide-react";
 import emailjs from "@emailjs/browser";
@@ -403,7 +403,7 @@ export default function About() {
                             <p className="text-zinc-300">✓ Model Context Protocol: Advanced Topics</p>
                             <p className="text-zinc-300">✓ Introduction to Agent Skills 官方認證</p>
                           </div>
-                          <div className="border border-[#e6c84c]/60 rounded-lg flex-shrink-0" style={{ padding: 'clamp(8px, 1vh, 14px)', fontSize: 'clamp(10px, 0.9vw, 13px)', marginTop: 'clamp(8px, 1.2vh, 16px)' }}>
+                          <div className="border border-[#e6c84c]/60 rounded-lg w-full" style={{ padding: 'clamp(12px, 1.5vh, 20px)', fontSize: 'clamp(11px, 1vw, 15px)', marginTop: 'clamp(12px, 1.5vh, 20px)' }}>
                             <p className="text-[#e6c84c] font-serif italic leading-relaxed">制度的嚴謹度，從不允許自己反覆犯同樣的錯誤開始。--- 《Internal Compliance》</p>
                           </div>
                         </div>
