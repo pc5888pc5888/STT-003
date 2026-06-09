@@ -426,7 +426,7 @@ export default function About() {
                           </div>
                         </div>
                       </div>
-                      <div className="border border-[#e6c84c]/60 rounded-lg w-full" style={{ padding: 'clamp(12px, 1.5vh, 20px)', fontSize: 'clamp(11px, 1vw, 15px)', marginTop: 'clamp(12px, 1.5vh, 20px)' }}>
+                      <div className="border border-[#e6c84c]/60 rounded-lg" style={{ padding: 'clamp(10px, 1.2vh, 16px) clamp(16px, 2vw, 24px)', fontSize: 'clamp(11px, 1vw, 15px)', marginTop: 'clamp(8px, 1vh, 14px)' }}>
                         <p className="text-[#e6c84c] font-serif italic leading-relaxed">制度的嚴謹度，從不允許自己反覆犯同樣的錯誤開始。--- 《Internal Compliance》</p>
                       </div>
                     </div>
