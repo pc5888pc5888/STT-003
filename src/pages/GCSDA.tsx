@@ -1,4 +1,4 @@
-﻿import { motion } from "motion/react";
+import { motion } from "motion/react";
 import { useState, useRef } from "react";
 import { Landmark, Users, Scroll } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
@@ -142,6 +142,7 @@ export default function GCSDA({ onContactOpen }: GCSDAPProps) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
             className="flex flex-col items-center w-full"
+            style={{ paddingTop: "60px" }}
           >
             {/* The primary logo already contains the slogan; do not repeat textual slogans in the UI layer. */}
             <div className="w-full max-w-[650px] flex justify-center mb-16 px-4">
@@ -329,30 +330,9 @@ export default function GCSDA({ onContactOpen }: GCSDAPProps) {
         <section className="py-32 border-t border-white/5 text-center bg-black -mx-6 md:-mx-24 px-6 md:px-24">
           <div className="max-w-4xl mx-auto flex flex-col items-center gap-10">
 
-            {/* 大油畫框 - 加入治理生態圈 */}
-            <div style={{ position: "relative", display: "inline-block", width: "100%", maxWidth: "780px" }}>
-              <img src="/images/gcsda_002.png" alt="" style={{ width: "100%", height: "auto", display: "block" }} />
-              <div style={{
-                position: "absolute", top: "0", left: "0", right: "0", bottom: "0",
-                display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
-                padding: "18% 14% 22%",
-                textAlign: "center",
-              }}>
-                <h2 style={{
-                  color: "#2a1a05", fontSize: "clamp(22px, 4vw, 52px)", fontWeight: 700,
-                  letterSpacing: "0.2em", fontFamily: "serif",
-                  textShadow: "0 1px 3px rgba(0,0,0,0.2)",
-                  margin: "0 0 clamp(40px,6vw,80px) 0", lineHeight: 1.2, whiteSpace: "nowrap",
-                }}>
-                  加 入 治 理 生 態 圈
-                </h2>
-                <p style={{
-                  color: "#3a2005", fontSize: "clamp(11px, 1.2vw, 16px)",
-                  fontFamily: "serif", letterSpacing: "0.05em", fontWeight: 400, margin: 0, lineHeight: 1.6,
-                }}>
-                  與產學精英共同協作，引導企業建立穩健的策略治理基盤。
-                </p>
-              </div>
+            {/* 大油畫框 - 加入治理生態圈（文字已合成進圖片） */}
+            <div style={{ display: "inline-block", width: "100%", maxWidth: "780px" }}>
+              <img src="/images/gcsda_002.png" alt="加入治理生態圈" style={{ width: "100%", height: "auto", display: "block" }} />
             </div>
 
             {/* 小金框按鈕 - 申請入會諮詢 */}
