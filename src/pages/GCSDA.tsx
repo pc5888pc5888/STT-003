@@ -136,7 +136,7 @@ export default function GCSDA({ onContactOpen }: GCSDAPProps) {
       <div className="container mx-auto px-6 max-w-7xl">
         
         {/* HERO SECTION - INSTITUTIONAL PURITY */}
-        <section className="relative flex flex-col items-center justify-center min-h-[95vh] py-8 overflow-hidden">
+        <section className="relative flex flex-col items-center justify-center min-h-[60vh] py-8 overflow-hidden">
           <motion.div 
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
