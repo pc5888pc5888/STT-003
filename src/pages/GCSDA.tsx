@@ -335,14 +335,14 @@ export default function GCSDA({ onContactOpen }: GCSDAPProps) {
               <div style={{
                 position: "absolute", top: "0", left: "0", right: "0", bottom: "0",
                 display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
-                padding: "15% 14% 20%",
+                padding: "18% 14% 22%",
                 textAlign: "center",
               }}>
                 <h2 style={{
                   color: "#2a1a05", fontSize: "clamp(22px, 4vw, 52px)", fontWeight: 700,
                   letterSpacing: "0.2em", fontFamily: "serif",
                   textShadow: "0 1px 3px rgba(0,0,0,0.2)",
-                  margin: "0 0 clamp(10px,1.5vw,18px) 0", lineHeight: 1.2, whiteSpace: "nowrap",
+                  margin: "0 0 clamp(8px,1vw,14px) 0", lineHeight: 1.2, whiteSpace: "nowrap",
                 }}>
                   加 入 治 理 生 態 圈
                 </h2>
