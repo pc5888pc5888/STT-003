@@ -1,4 +1,4 @@
-﻿import { motion } from "motion/react";
+import { motion } from "motion/react";
 import { useState, useRef } from "react";
 import { Landmark, Users, Scroll } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
@@ -172,7 +172,7 @@ export default function GCSDA({ onContactOpen }: GCSDAPProps) {
                 <div style={{
                   position: "absolute", top: "50%", left: "50%",
                   transform: "translate(-50%, -55%)",
-                  pointerEvents: "none", width: "70%",
+                  pointerEvents: "none", width: "65%",
                 }}>
                   <span style={{
                     color: "#2a1a05",
@@ -335,12 +335,12 @@ export default function GCSDA({ onContactOpen }: GCSDAPProps) {
               <img src="/images/gcsda_002.png" alt="加入治理生態圈" style={{ width: "100%", height: "auto", display: "block" }} />
             </div>
 
-            {/* 小金框按鈕 - 申請入會諮詢 */}
+            {/* 小金框按鈕 - 申請入會諮詢（文字已合成進圖片） */}
             <a
               href="https://line.me/R/ti/p/@387nbnjs"
               target="_blank"
               rel="noopener noreferrer"
-              style={{ textDecoration: "none", display: "inline-block", position: "relative", maxWidth: "460px", width: "52%" }}
+              style={{ textDecoration: "none", display: "inline-block", width: "min(80%, 460px)" }}
             >
               <img
                 src="/images/gcsda_003.png"
@@ -349,18 +349,6 @@ export default function GCSDA({ onContactOpen }: GCSDAPProps) {
                 onMouseEnter={e => { (e.currentTarget as HTMLImageElement).style.opacity = "0.82"; }}
                 onMouseLeave={e => { (e.currentTarget as HTMLImageElement).style.opacity = "1"; }}
               />
-              <div style={{
-                position: "absolute", top: "50%", left: "50%",
-                transform: "translate(-50%, -50%)", pointerEvents: "none",
-              }}>
-                <span style={{
-                  color: "#2a1a05", fontSize: "clamp(13px, 1.5vw, 20px)",
-                  fontFamily: "serif", fontWeight: 700, letterSpacing: "0.25em",
-                  whiteSpace: "nowrap", textShadow: "0 1px 2px rgba(0,0,0,0.2)",
-                }}>
-                  ❖ 申 請 入 會 諮 詢 ❖
-                </span>
-              </div>
             </a>
 
           </div>
@@ -418,7 +406,7 @@ export default function GCSDA({ onContactOpen }: GCSDAPProps) {
                 <button
                   onClick={handleSubmit}
                   disabled={sending}
-                  style={{ width: "100%", padding: "14px", background: "#C9A84C", color: "#0a0a0a", fontFamily: "serif", fontWeight: 700, fontSize: "14px", letterSpacing: "0.25em", border: "none", cursor: "pointer" }}
+                  style={{ width: "100%", padding: "14px", background: "#C9A84C", color: "#0a0a0a", fontFamily: "serif", fontWeight: 700, fontSize: "14px", letterSpacing: "0.4em", border: "none", cursor: "pointer" }}
                 >
                   {sending ? "傳送中..." : "送 出 申 請"}
                 </button>
