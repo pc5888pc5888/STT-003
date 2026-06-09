@@ -117,15 +117,37 @@ export default function GCSDA() {
 
             <div className="flex flex-col items-center gap-10 text-center max-w-4xl px-4">
               <div className="h-px w-32 bg-gold-600/30"></div>
-              
-              <a 
-                href="https://line.me/R/ti/p/@387nbnjs"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-24 py-11 text-2xl md:text-3xl h-auto flex items-center justify-center bg-white/5 backdrop-blur-sm text-white/50 border border-white/10 hover:bg-gold-500 hover:text-black transition-all duration-700 rounded-none font-display font-black tracking-[0.5em] shadow-[0_40px_100px_rgba(0,0,0,0.3)] transform hover:-translate-y-1 active:scale-95 no-underline"
+
+              {/* 油畫框 - 請預約策略治理聯席會，點擊彈出聯絡表單 */}
+              <button
+                onClick={() => onContactOpen && onContactOpen()}
+                style={{ background: "none", border: "none", padding: 0, cursor: "pointer", display: "inline-block", position: "relative", maxWidth: "760px", width: "100%" }}
               >
-                <span>聯 繫 學 會 秘 書 處</span>
-              </a>
+                <img
+                  src="/images/gcsda_001.png"
+                  alt="請預約策略治理聯席會"
+                  style={{ width: "100%", height: "auto", display: "block", transition: "opacity 0.3s", filter: "drop-shadow(0 0 30px rgba(201,168,76,0.25))" }}
+                  onMouseEnter={e => { (e.currentTarget as HTMLImageElement).style.opacity = "0.85"; }}
+                  onMouseLeave={e => { (e.currentTarget as HTMLImageElement).style.opacity = "1"; }}
+                />
+                <div style={{
+                  position: "absolute", top: "50%", left: "50%",
+                  transform: "translate(-50%, -55%)",
+                  pointerEvents: "none", width: "70%",
+                }}>
+                  <span style={{
+                    color: "#2a1a05",
+                    fontSize: "clamp(16px, 2.5vw, 28px)",
+                    fontFamily: "serif",
+                    fontWeight: 900,
+                    letterSpacing: "0.4em",
+                    whiteSpace: "nowrap",
+                    textShadow: "0 1px 3px rgba(0,0,0,0.2)",
+                  }}>
+                    請 預 約 策 略 治 理 聯 席 會
+                  </span>
+                </div>
+              </button>
             </div>
           </motion.div>
         </section>
@@ -280,7 +302,7 @@ export default function GCSDA() {
               <div style={{
                 position: "absolute",
                 top: "50%", left: "50%",
-                transform: "translate(-50%, -52%)",
+                transform: "translate(-50%, -58%)",
                 width: "68%",
                 textAlign: "center",
               }}>
