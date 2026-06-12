@@ -1,5 +1,5 @@
 import ChatBot from "./components/ChatBot";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import Lenis from "lenis";
 import Home from "./pages/Home";
@@ -25,6 +25,7 @@ export default function App() {
   const [currentPage, setCurrentPage] = useState("home");
   const [homeSection, setHomeSection] = useState<'hero' | 'governance' | 'positioning' | 'strategist' | 'insights'>('hero');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const isInitialized = useRef(false);
 
   const handleNavigate = (page: string) => {
     const validSections = ['hero', 'governance', 'positioning', 'strategist', 'insights'];
@@ -99,7 +100,8 @@ export default function App() {
 
     window.addEventListener('hashchange', handleHashAndPathChange);
     window.addEventListener('popstate', handleHashAndPathChange);
-    handleHashAndPathChange(); 
+    handleHashAndPathChange();
+    isInitialized.current = true;
 
     return () => {
       window.removeEventListener('hashchange', handleHashAndPathChange);
@@ -108,6 +110,7 @@ export default function App() {
   }, []);
 
   useEffect(() => {
+    if (!isInitialized.current) return;
     if (currentPage === 'home') {
       window.location.hash = homeSection;
     } else {
