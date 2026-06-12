@@ -101,7 +101,7 @@ export default function App() {
     window.addEventListener('hashchange', handleHashAndPathChange);
     window.addEventListener('popstate', handleHashAndPathChange);
     handleHashAndPathChange();
-    isInitialized.current = true;
+    setTimeout(() => { isInitialized.current = true; }, 100);
 
     return () => {
       window.removeEventListener('hashchange', handleHashAndPathChange);
