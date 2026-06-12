@@ -112,9 +112,9 @@ export default function App() {
   useEffect(() => {
     if (!isInitialized.current) return;
     if (currentPage === 'home') {
-      window.location.hash = homeSection;
+      history.replaceState(null, '', '#' + homeSection);
     } else {
-      window.location.hash = currentPage;
+      history.replaceState(null, '', '#' + currentPage);
     }
   }, [currentPage, homeSection]);
 
