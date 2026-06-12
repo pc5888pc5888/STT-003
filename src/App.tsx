@@ -22,7 +22,8 @@ import { Home as HomeIcon, Newspaper, BookText, BookOpen, GraduationCap, Globe, 
 import { AccessibilityWidget } from "./components/AccessibilityWidget";
 
 export default function App() {
-  const [currentPage, setCurrentPage] = useState("home");
+  const getInitialPage = () => { const h = window.location.hash.replace("#","").split("?")[0]; const valid = ["home","about","columns","books","internal-compliance","internal-compliance-pillars","internal-compliance-simulator","internal-compliance-academic","service-portal","success","papers","gcsda","article-index","governance","insights","contact","corporate-governance","corporate-governance-modules","corporate-governance-simulator","corporate-governance-academic","family-governance","family-governance-framework","family-governance-stages","family-governance-academic","internal-compliance-book","esgai","esgai-features","esgai-console","esgai-academic","esg-ai","esg-ai-features","esg-ai-console","esg-ai-academic","positioning","strategist","hero"]; const pageMap: Record<string,string> = {"insights":"columns","contact":"service-portal"}; if (h && valid.includes(h)) { const r = pageMap[h] || h; const homeSections = ["hero","governance","positioning","strategist"]; return homeSections.includes(r) ? "home" : r; } return "home"; };
+  const [currentPage, setCurrentPage] = useState(getInitialPage);
   const [homeSection, setHomeSection] = useState<'hero' | 'governance' | 'positioning' | 'strategist' | 'insights'>('hero');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const isInitialized = useRef(false);
