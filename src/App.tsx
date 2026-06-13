@@ -110,14 +110,7 @@ export default function App() {
     };
   }, []);
 
-  useEffect(() => {
-    if (!isInitialized.current) return;
-    if (currentPage === 'home') {
-      history.replaceState(null, '', '#' + homeSection);
-    } else {
-      history.replaceState(null, '', '#' + currentPage);
-    }
-  }, [currentPage, homeSection]);
+
 
   useEffect(() => {
     const lenis = new Lenis({
