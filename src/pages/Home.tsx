@@ -68,6 +68,12 @@ export default function Home({
                 {/* Left Content */}
                 <div className="w-full md:w-1/2 lg:w-[43%] flex flex-col justify-center space-y-5 lg:space-y-6 py-6 md:py-8 lg:self-center">
                   <div className="space-y-3 lg:space-y-4">
+                    <img
+                      src="/images/index_title_001.png"
+                      alt="策略智庫智慧治理　治理為本管理為終"
+                      draggable={false}
+                      className="block w-full max-w-[260px] sm:max-w-[320px] md:max-w-[380px] lg:max-w-[440px] h-auto mb-4 lg:mb-6 select-none pointer-events-none"
+                    />
                     <h1 className="text-[1.8rem] md:text-[2.2rem] lg:text-[36px] xl:text-[42px] font-serif font-light leading-[1.35] text-white tracking-widest max-w-none">
                       <span className="block md:inline lg:block whitespace-normal md:whitespace-nowrap">當制度開始失序；</span>
                       <span className="block md:inline lg:block mt-1 sm:mt-2 whitespace-normal md:whitespace-nowrap">
