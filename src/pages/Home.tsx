@@ -72,7 +72,7 @@ export default function Home({
                       src="/images/index_title_001.png"
                       alt="策略智庫智慧治理　治理為本管理為終"
                       draggable={false}
-                      className="block w-full max-w-[260px] sm:max-w-[320px] md:max-w-[380px] lg:max-w-[440px] h-auto mb-4 lg:mb-6 select-none pointer-events-none"
+                      className="block mx-auto w-full max-w-[260px] sm:max-w-[320px] md:max-w-[380px] lg:max-w-[440px] h-auto mb-4 lg:mb-6 select-none pointer-events-none"
                     />
                     <h1 className="text-[1.8rem] md:text-[2.2rem] lg:text-[36px] xl:text-[42px] font-serif font-light leading-[1.35] text-white tracking-widest max-w-none">
                       <span className="block md:inline lg:block whitespace-normal md:whitespace-nowrap">當制度開始失序；</span>
