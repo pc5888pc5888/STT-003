@@ -1,13 +1,274 @@
 {
   "meta": {
-    "generated_at": "2026-06-03T13:53:26.335Z",
-    "total": 116,
-    "ok": 116,
-    "fail": 0,
-    "source": "https://94m.com.tw/editors/ed55fc",
-    "author": "莊鈞翔博士 Chuang Chun-Hsiang, Ph.D."
+    "total": 154
   },
   "articles": [
+    {
+      "code": "4acf41",
+      "url": "https://94m.com.tw/articles/4acf41",
+      "title": "【 可被稽核的定錨 Legal AI 與量刑的數位治理 】從裁量噪音到演算法定錨，重構司法可預測性與人為偏誤之間的治理均衡",
+      "excerpt": "",
+      "status": "ok"
+    },
+    {
+      "code": "04fe62",
+      "url": "https://94m.com.tw/articles/04fe62",
+      "title": "【 國民參與審判的程序誠實 】從資訊不對稱與評議結構，診斷國民法官制度尚待補強的制度防火牆",
+      "excerpt": "",
+      "status": "ok"
+    },
+    {
+      "code": "266a1c",
+      "url": "https://94m.com.tw/articles/266a1c",
+      "title": "【 可靠性之後量刑鑑定、自由心證與國家防衛當責的信任重建 】從鑑定可靠性要件的引入，診斷軟性鑑定、證明力判斷與被害人程序地位尚待補強的制度防火牆",
+      "excerpt": "",
+      "status": "ok"
+    },
+    {
+      "code": "d3475b",
+      "url": "https://94m.com.tw/articles/d3475b",
+      "title": "【 國家最終權力的憲政邊界與防衛底線 】應報正義、程序紀律與被害者地位的制度重構",
+      "excerpt": "",
+      "status": "ok"
+    },
+    {
+      "code": "130b83",
+      "url": "https://94m.com.tw/articles/130b83",
+      "title": "【AI 生成責任的臨界點】從平台免責時代走向治理責任時代",
+      "excerpt": "",
+      "status": "ok"
+    },
+    {
+      "code": "fcc997",
+      "url": "https://94m.com.tw/articles/fcc997",
+      "title": "【 A I 泡沫論戰的偽命題市場猜頂底 】董事會定生死",
+      "excerpt": "",
+      "status": "ok"
+    },
+    {
+      "code": "fea8d8",
+      "url": "https://94m.com.tw/articles/fea8d8",
+      "title": "【央行連九凍的制度防禦】利率不動、信用轉向與比例原則下的治理重構",
+      "excerpt": "",
+      "status": "ok"
+    },
+    {
+      "code": "570cca",
+      "url": "https://94m.com.tw/articles/570cca",
+      "title": "【新青安2.0與收支比重估】從補貼政策走向現金流風控的門檻重設",
+      "excerpt": "",
+      "status": "ok"
+    },
+    {
+      "code": "78d9f5",
+      "url": "https://94m.com.tw/articles/78d9f5",
+      "title": "【 員工臨退休突告高薪低報 】前負責人的舊帳到底算誰的？",
+      "excerpt": "",
+      "status": "ok"
+    },
+    {
+      "code": "e8bd0a",
+      "url": "https://94m.com.tw/articles/e8bd0a",
+      "title": "【 跨境雙層架構之主權制衡與資本防禦 】論台灣實體管轄權對撞英美法系信託神盾之實務解析與合規代價",
+      "excerpt": "",
+      "status": "ok"
+    },
+    {
+      "code": "8a2a98",
+      "url": "https://94m.com.tw/articles/8a2a98",
+      "title": "【 台灣法院如何破防本土傳承架構 】探究「閉鎖性公司與信託制度規劃」法制基因缺陷",
+      "excerpt": "",
+      "status": "ok"
+    },
+    {
+      "code": "1abe26",
+      "url": "https://94m.com.tw/articles/1abe26",
+      "title": "【 全球查稅實施下資本透明化與治理重構 】審視財富穿透式課稅（CFC）實施後之合規檢視與家族辦公室真偽判讀",
+      "excerpt": "",
+      "status": "ok"
+    },
+    {
+      "code": "2733f8",
+      "url": "https://94m.com.tw/articles/2733f8",
+      "title": "【 主權資本重構與法制邊界 】綜觀亞資中心戰略下之實體經濟制度判讀",
+      "excerpt": "",
+      "status": "ok"
+    },
+    {
+      "code": "87a4b7",
+      "url": "https://94m.com.tw/articles/87a4b7",
+      "title": "【 保養品合規風暴，無批號與宣稱醫療的雙重治理地雷 】",
+      "excerpt": "",
+      "status": "ok"
+    },
+    {
+      "code": "483662",
+      "url": "https://94m.com.tw/articles/483662",
+      "title": "【照顧的代價，法律終於開始計算】特別貢獻定價、遺產酌給與合法收養",
+      "excerpt": "",
+      "status": "ok"
+    },
+    {
+      "code": "c3427a",
+      "url": "https://94m.com.tw/articles/c3427a",
+      "title": "【 遺囑有了，財產還是過不了戶 】遺囑執行人的四大絕對職權與企業主的稅務流動性危機全解析",
+      "excerpt": "",
+      "status": "ok"
+    },
+    {
+      "code": "8b499b",
+      "url": "https://94m.com.tw/articles/8b499b",
+      "title": "【 血緣不再是遺產的強制分配器 】民法繼承編修正草案的制度本質",
+      "excerpt": "",
+      "status": "ok"
+    },
+    {
+      "code": "873721",
+      "url": "https://94m.com.tw/articles/873721",
+      "title": "千億集團的傳承困局，保單贈與遺囑能解套嗎？",
+      "excerpt": "",
+      "status": "ok"
+    },
+    {
+      "code": "2bf8ea",
+      "url": "https://94m.com.tw/articles/2bf8ea",
+      "title": "同樣是華人高資產家族，為何他選擇把財富留在新加坡？",
+      "excerpt": "",
+      "status": "ok"
+    },
+    {
+      "code": "30c072",
+      "url": "https://94m.com.tw/articles/30c072",
+      "title": "【一筆千億遺產，台灣政府課得到嗎？】",
+      "excerpt": "",
+      "status": "ok"
+    },
+    {
+      "code": "68fcd5",
+      "url": "https://94m.com.tw/articles/68fcd5",
+      "title": "【專業光環下的司法背叛】法律專業人員涉入組織犯罪、洩密與洗錢之刑事責任與倫理重構",
+      "excerpt": "",
+      "status": "ok"
+    },
+    {
+      "code": "1ff3f5",
+      "url": "https://94m.com.tw/articles/1ff3f5",
+      "title": "【當 AI 走進 LINE 智慧客服】自動聊天機器人與新型數位詐騙時代",
+      "excerpt": "",
+      "status": "ok"
+    },
+    {
+      "code": "4ae15d",
+      "url": "https://94m.com.tw/articles/4ae15d",
+      "title": "金保薪傳 智庫啟航",
+      "excerpt": "",
+      "status": "ok"
+    },
+    {
+      "code": "3d93ec",
+      "url": "https://94m.com.tw/articles/3d93ec",
+      "title": "【 AI 工業化詐騙演算法軍備競賽下的企業治理主權與制度防禦 】",
+      "excerpt": "",
+      "status": "ok"
+    },
+    {
+      "code": "fdf1ea",
+      "url": "https://94m.com.tw/articles/fdf1ea",
+      "title": "【治理主權的陷落與重構】生成式 AI 蔓延與資本市場時代下的雙重治理革命",
+      "excerpt": "",
+      "status": "ok"
+    },
+    {
+      "code": "6fe7f6",
+      "url": "https://94m.com.tw/articles/6fe7f6",
+      "title": "【四萬點下的企業決策責任重構 • 從市場狂熱中奪回治理主權】",
+      "excerpt": "",
+      "status": "ok"
+    },
+    {
+      "code": "154714",
+      "url": "https://94m.com.tw/articles/154714",
+      "title": "資訊戰時代的決策主權與人心秩序",
+      "excerpt": "",
+      "status": "ok"
+    },
+    {
+      "code": "cc19a7",
+      "url": "https://94m.com.tw/articles/cc19a7",
+      "title": "危機篩選與支付門檻下的中小企業生存方程式",
+      "excerpt": "",
+      "status": "ok"
+    },
+    {
+      "code": "c65c90",
+      "url": "https://94m.com.tw/articles/c65c90",
+      "title": "風險入世與秩序重構",
+      "excerpt": "",
+      "status": "ok"
+    },
+    {
+      "code": "a28ba8",
+      "url": "https://94m.com.tw/articles/a28ba8",
+      "title": "AI 法制的價值選擇與信任重建：在全球治理分歧中尋找企業的法制優勢",
+      "excerpt": "",
+      "status": "ok"
+    },
+    {
+      "code": "bcb83f",
+      "url": "https://94m.com.tw/articles/bcb83f",
+      "title": "AI 基本法下企業治理再定義：從技術合規走向戰略主動的典範轉移",
+      "excerpt": "",
+      "status": "ok"
+    },
+    {
+      "code": "e822d3",
+      "url": "https://94m.com.tw/articles/e822d3",
+      "title": "台美人工智慧治理分歧與競爭路徑：制度信任與企業策略的未來",
+      "excerpt": "",
+      "status": "ok"
+    },
+    {
+      "code": "586c13",
+      "url": "https://94m.com.tw/articles/586c13",
+      "title": "語音的權力與情感的轉譯：論創富進階演講會「當愛開口時」之組織治理價值",
+      "excerpt": "",
+      "status": "ok"
+    },
+    {
+      "code": "529231",
+      "url": "https://94m.com.tw/articles/529231",
+      "title": "公司治理相關法令 -- 【 合規方舟與數位韌性 】",
+      "excerpt": "",
+      "status": "ok"
+    },
+    {
+      "code": "580c32",
+      "url": "https://94m.com.tw/articles/580c32",
+      "title": "公司治理相關法令 -- 【 AI 決策介入模式 】",
+      "excerpt": "",
+      "status": "ok"
+    },
+    {
+      "code": "0a4512",
+      "url": "https://94m.com.tw/articles/0a4512",
+      "title": "公司治理相關法令 --【策略羅盤演算法下的紅線：媒體如何跨越新聞自由與著作權的治理鴻溝】",
+      "excerpt": "",
+      "status": "ok"
+    },
+    {
+      "code": "b108dc",
+      "url": "https://94m.com.tw/articles/b108dc",
+      "title": "公司治理相關法令 --【 策略羅盤資產傳承的隱形殺手 】",
+      "excerpt": "",
+      "status": "ok"
+    },
+    {
+      "code": "aec647",
+      "url": "https://94m.com.tw/articles/aec647",
+      "title": "駿程科技以「25年品質保證」定義產業標準",
+      "excerpt": "",
+      "status": "ok"
+    },
     {
       "code": "bfda8d",
       "url": "https://94m.com.tw/articles/bfda8d",
