@@ -34,7 +34,7 @@ async function requestOpenAiTts(text: string) {
       model,
       voice,
       input: text,
-      format: "mp3",
+      response_format: "mp3",
     }),
   });
 
