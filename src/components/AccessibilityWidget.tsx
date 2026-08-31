@@ -1,130 +1,152 @@
-import { useState, useEffect } from "react";
-import { Volume2, VolumeX, Languages, X, MessageCircle } from "lucide-react";
-import { motion, AnimatePresence } from "motion/react";
-
-declare global {
-  interface Window {
-    googleTranslateElementInit: () => void;
-    google: any;
-  }
-}
+import { useEffect, useRef, useState } from "react";
+import { MessageCircle, Volume2, VolumeX } from "lucide-react";
+import { LanguageSwitcher } from "./LanguageSwitcher";
+import { useI18n } from "@/i18n/I18nProvider";
 
 interface AccessibilityWidgetProps {
   onChatOpen?: () => void;
   isChatOpen?: boolean;
 }
 
+function collectReadableText() {
+  const explicitNodes = Array.from(document.querySelectorAll<HTMLElement>("[data-stt-readable='true']"));
+  if (explicitNodes.length > 0) {
+    return explicitNodes
+      .map((node) => node.innerText.trim())
+      .filter(Boolean)
+      .join("\n\n")
+      .slice(0, 5000);
+  }
+
+  const main = document.querySelector<HTMLElement>("main");
+  return (main?.innerText || document.body.innerText).trim().slice(0, 5000);
+}
+
 export function AccessibilityWidget({ onChatOpen, isChatOpen }: AccessibilityWidgetProps) {
+  const { locale, t } = useI18n();
   const [isSpeaking, setIsSpeaking] = useState(false);
-  const [showTranslate, setShowTranslate] = useState(false);
+  const [voiceError, setVoiceError] = useState(false);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const objectUrlRef = useRef<string | null>(null);
 
-  useEffect(() => {
-    const addGoogleTranslateScript = () => {
-      if (document.getElementById("google-translate-script")) return;
-      const script = document.createElement("script");
-      script.id = "google-translate-script";
-      script.src = "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
-      script.async = true;
-      document.body.appendChild(script);
-      window.googleTranslateElementInit = () => {
-        if (window.google && window.google.translate) {
-          new window.google.translate.TranslateElement(
-            { pageLanguage: 'zh-TW', includedLanguages: 'en,ja,ko,zh-CN,zh-TW', layout: window.google.translate.TranslateElement.InlineLayout.SIMPLE },
-            'google_translate_element'
-          );
-        }
-      };
-    };
-    addGoogleTranslateScript();
-  }, []);
-
-  const toggleSpeech = () => {
-    if (isSpeaking) {
-      window.speechSynthesis.cancel();
-      setIsSpeaking(false);
-    } else {
-      const textToRead = document.body.innerText;
-      const cleanText = textToRead.substring(0, 5000);
-      const utterance = new SpeechSynthesisUtterance(cleanText);
-      utterance.lang = "zh-TW";
-      utterance.onend = () => setIsSpeaking(false);
-      window.speechSynthesis.speak(utterance);
-      setIsSpeaking(true);
+  const releaseAudio = () => {
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+      audioRef.current = null;
     }
+    if (objectUrlRef.current) {
+      URL.revokeObjectURL(objectUrlRef.current);
+      objectUrlRef.current = null;
+    }
+    setIsSpeaking(false);
   };
 
   useEffect(() => {
-    return () => { window.speechSynthesis.cancel(); };
+    return () => {
+      if (audioRef.current) {
+        audioRef.current.pause();
+      }
+      if (objectUrlRef.current) {
+        URL.revokeObjectURL(objectUrlRef.current);
+      }
+    };
   }, []);
 
+  const toggleSpeech = async () => {
+    setVoiceError(false);
+
+    if (isSpeaking) {
+      releaseAudio();
+      return;
+    }
+
+    const text = collectReadableText();
+    if (!text) {
+      setVoiceError(true);
+      return;
+    }
+
+    try {
+      const response = await fetch("/api/tts", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ text, locale }),
+      });
+
+      if (!response.ok) {
+        throw new Error("TTS request failed");
+      }
+
+      const blob = await response.blob();
+      const objectUrl = URL.createObjectURL(blob);
+      const audio = new Audio(objectUrl);
+
+      objectUrlRef.current = objectUrl;
+      audioRef.current = audio;
+      audio.onended = releaseAudio;
+      audio.onerror = () => {
+        releaseAudio();
+        setVoiceError(true);
+      };
+
+      setIsSpeaking(true);
+      await audio.play();
+    } catch {
+      releaseAudio();
+      setVoiceError(true);
+    }
+  };
+
+  const baseButtonStyle = {
+    borderColor: "var(--stt-gold-line)",
+    color: "var(--stt-gold-deep)",
+    boxShadow: "0 12px 36px rgba(36,34,31,0.08)",
+  } as const;
+
   return (
-    <div className="fixed bottom-6 right-6 z-[40] flex flex-col items-end gap-4 pointer-events-auto">
-      <motion.div
-        initial={{ opacity: 0, y: 10, scale: 0.95 }}
-        animate={{
-          opacity: showTranslate ? 1 : 0,
-          y: showTranslate ? 0 : 10,
-          scale: showTranslate ? 1 : 0.95,
-          pointerEvents: showTranslate ? "auto" : "none"
-        }}
-        className="bg-black/90 border border-gold-400/30 p-4 rounded-lg shadow-2xl backdrop-blur-md mb-2 flex flex-col gap-3"
-      >
-        <div className="flex justify-between items-center mb-1 gap-8">
-          <span className="text-gold-400 text-xs font-display tracking-widest uppercase">Select Language</span>
-          <button onClick={() => setShowTranslate(false)} className="text-white/50 hover:text-white">
-            <X className="w-4 h-4" />
-          </button>
+    <div className="fixed bottom-6 right-6 z-[80] flex flex-col items-end gap-2 pointer-events-auto">
+      {voiceError && (
+        <div
+          className="max-w-[240px] px-3 py-2 bg-white border text-xs leading-relaxed"
+          style={{ borderColor: "var(--stt-gold-line)", color: "var(--stt-ink-muted)" }}
+          role="status"
+        >
+          {t("accessibility.voiceUnavailable")}
         </div>
-        <div id="google_translate_element" className="min-h-[32px] text-black rounded overflow-hidden"></div>
-        <style>{`
-          html { top: 0 !important; }
-          body { top: 0 !important; position: static !important; }
-          .skiptranslate iframe { display: none !important; }
-          .skiptranslate.goog-te-banner-frame { display: none !important; }
-          #goog-gt-tt { display: none !important; }
-          .goog-te-gadget-simple {
-            background-color: #1a1a1a !important;
-            border: 1px solid rgba(212, 175, 55, 0.3) !important;
-            padding: 8px !important;
-            border-radius: 4px !important;
-            font-family: inherit !important;
-          }
-          .goog-te-gadget-simple span { color: #D4AF37 !important; }
-          .goog-te-menu-value { color: #D4AF37 !important; }
-          .goog-text-highlight { background-color: transparent !important; box-shadow: none !important; }
-        `}</style>
-      </motion.div>
+      )}
 
-      <div className="flex gap-3">
-        {/* AI 聊天按鈕 */}
+      <div className="flex items-center gap-2">
         <button
+          type="button"
           onClick={onChatOpen}
-          className={`${isChatOpen ? 'bg-gold-400 text-black' : 'bg-black/80 text-gold-400 border border-gold-400/30'} hover:bg-gold-400/20 hover:text-gold-400 p-4 rounded-full shadow-[0_0_15px_rgba(212,175,55,0.15)] transition-all flex items-center justify-center backdrop-blur-sm group`}
-          title="策略智庫數位領航員"
+          className="w-12 h-12 rounded-full flex items-center justify-center bg-white border cursor-pointer transition-transform hover:scale-[1.03]"
+          style={{
+            ...baseButtonStyle,
+            background: isChatOpen ? "var(--stt-ivory)" : "var(--stt-surface)",
+          }}
+          title={t("accessibility.aiAssistant")}
+          aria-label={t("accessibility.aiAssistant")}
+          aria-pressed={isChatOpen}
         >
-          <MessageCircle className="w-6 h-6 group-hover:scale-110 transition-transform" />
+          <MessageCircle className="w-5 h-5" strokeWidth={1.4} />
         </button>
 
-        {/* 翻譯按鈕 */}
-        <button
-          onClick={() => setShowTranslate(!showTranslate)}
-          className="bg-black/80 hover:bg-gold-400/20 text-gold-400 border border-gold-400/30 p-4 rounded-full shadow-[0_0_15px_rgba(212,175,55,0.15)] transition-all flex items-center justify-center backdrop-blur-sm group"
-          title="語言翻譯"
-        >
-          <Languages className="w-6 h-6 group-hover:scale-110 transition-transform" />
-        </button>
+        <LanguageSwitcher />
 
-        {/* 語音按鈕 */}
         <button
+          type="button"
           onClick={toggleSpeech}
-          className={`${isSpeaking ? 'bg-gold-400 text-black' : 'bg-black/80 text-gold-400 border border-gold-400/30'} hover:bg-gold-400/20 hover:text-gold-400 p-4 rounded-full shadow-[0_0_15px_rgba(212,175,55,0.15)] transition-all flex items-center justify-center backdrop-blur-sm group`}
-          title={isSpeaking ? "停止朗讀" : "朗讀頁面"}
+          className="w-12 h-12 rounded-full flex items-center justify-center bg-white border cursor-pointer transition-transform hover:scale-[1.03]"
+          style={{
+            ...baseButtonStyle,
+            background: isSpeaking ? "var(--stt-ivory)" : "var(--stt-surface)",
+          }}
+          title={isSpeaking ? t("accessibility.stopVoice") : t("accessibility.startVoice")}
+          aria-label={isSpeaking ? t("accessibility.stopVoice") : t("accessibility.startVoice")}
+          aria-pressed={isSpeaking}
         >
-          {isSpeaking ? (
-            <VolumeX className="w-6 h-6 group-hover:scale-110 transition-transform animate-pulse" />
-          ) : (
-            <Volume2 className="w-6 h-6 group-hover:scale-110 transition-transform" />
-          )}
+          {isSpeaking ? <VolumeX className="w-5 h-5" strokeWidth={1.4} /> : <Volume2 className="w-5 h-5" strokeWidth={1.4} />}
         </button>
       </div>
     </div>
