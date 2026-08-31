@@ -11,6 +11,10 @@ type HomeProps = {
   setActiveSection?: (section: HomeSection) => void;
 };
 
+type RuntimeLenis = {
+  scrollTo: (target: HTMLElement, options?: { offset?: number }) => void;
+};
+
 const sectionMap: Record<HomeSection, string> = {
   hero: "hero",
   governance: "governance",
@@ -27,10 +31,13 @@ export default function Home({ onNavigate, currentPage, activeSection = "hero" }
     if (!element) {
       return;
     }
-    if ((window as Window & { lenis?: { scrollTo: (target: HTMLElement, options?: Record<string, unknown>) => void } }).lenis) {
-      (window as Window & { lenis: { scrollTo: (target: HTMLElement, options?: Record<string, unknown>) => void } }).lenis.scrollTo(element, { offset: -76 });
+
+    const runtimeWindow = window as unknown as { lenis?: RuntimeLenis };
+    if (runtimeWindow.lenis) {
+      runtimeWindow.lenis.scrollTo(element, { offset: -76 });
       return;
     }
+
     element.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
@@ -148,7 +155,7 @@ export default function Home({ onNavigate, currentPage, activeSection = "hero" }
         </div>
 
         <div className="relative z-20 mx-auto grid max-w-[1280px] grid-cols-1 border-t md:grid-cols-2 lg:grid-cols-4" style={{ borderColor: "var(--stt-line)" }}>
-          {gateways.map((gateway, index) => {
+          {gateways.map((gateway) => {
             const Icon = gateway.icon;
             const key = `home.gateways.${gateway.key}`;
             return (
