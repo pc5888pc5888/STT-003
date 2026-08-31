@@ -61,9 +61,9 @@ export default function Home({ onNavigate, currentPage, activeSection = "hero" }
       eyebrow: "03 Digital Governance",
       title: "數位（AI）治理",
       capabilityTitle: "Agentic AI、MCP、API 與企業級模型整合治理",
-      capability: "以 Anthropic AI／Claude 專業技術訓練與 Google Gemini 認證知識為技術底層，將模型使用、工具調用、權限、資料流與人類最終決策權納入同一套治理架構。",
+      capability: "把模型使用、工具調用、權限、資料流與人類最終決策權納入同一套治理架構，使 AI 成為治理幕僚與作業系統輔助，而不是未授權的決策主體。",
       challengeTitle: "企業 AI 工作流的模型安全閘門與數位協議法遵",
-      challenge: "當企業部署生成式與代理式 AI 工作流時，若缺乏模型安全閘門政策、資料責任、MCP 協議治理與數位法遵程序，技術效率將直接轉化為新的治理暴露。",
+      challenge: "企業部署生成式與代理式 AI 工作流時，若缺乏模型安全閘門政策、資料責任、MCP 協議治理與數位法遵程序，技術效率將直接轉化為新的治理暴露。",
       actionLabel: "進入數位治理",
       action: () => onNavigate("esgai"),
     },
@@ -85,7 +85,6 @@ export default function Home({ onNavigate, currentPage, activeSection = "hero" }
       window.setTimeout(() => detailRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 120);
       return;
     }
-
     if (activeSection === "insights") {
       setActivePillar("insights");
       window.setTimeout(() => detailRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 120);
@@ -126,34 +125,14 @@ export default function Home({ onNavigate, currentPage, activeSection = "hero" }
   const releaseAudio = () => {
     if (audioRef.current) {
       audioRef.current.pause();
-      audioRef.current.currentTime = 0;
+      audioRef.current.src = "";
       audioRef.current = null;
     }
-
     if (audioUrlRef.current) {
       URL.revokeObjectURL(audioUrlRef.current);
       audioUrlRef.current = null;
     }
-
     setVoicePlaying(false);
-  };
-
-  const readableText = () => {
-    const baseText = [
-      "秩序，讓價值穿越時間。",
-      "Strategic Think Tank",
-      "Governance 策略治理",
-      "Internal Compliance 內在法遵",
-      "Digital Governance 數位 AI 治理",
-      "Press and Insights 出版與觀點",
-    ];
-
-    if (activePillar) {
-      const item = pillars[activePillar];
-      baseText.push(item.title, item.capabilityTitle, item.capability, item.challengeTitle, item.challenge);
-    }
-
-    return baseText.join("。 ").slice(0, 5200);
   };
 
   const toggleVoice = async () => {
@@ -164,35 +143,38 @@ export default function Home({ onNavigate, currentPage, activeSection = "hero" }
       return;
     }
 
-    setVoiceStatus("正在建立語音導讀");
+    const text = [
+      "秩序，讓價值穿越時間。Strategic Think Tank。",
+      "Governance 策略治理。",
+      "Internal Compliance 內在法遵。",
+      "Digital Governance 數位 AI 治理。",
+      "Press and Insights 出版與觀點。",
+      activePillar ? `${pillars[activePillar].title}。${pillars[activePillar].capability} ${pillars[activePillar].challenge}` : "",
+    ].filter(Boolean).join("\n\n");
 
+    setVoiceStatus("正在建立語音導讀");
     try {
       const response = await fetch("/api/tts", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ text: readableText(), locale }),
+        body: JSON.stringify({ text, locale }),
       });
-
       if (!response.ok) {
-        throw new Error("TTS request failed");
+        throw new Error("TTS unavailable");
       }
-
       const blob = await response.blob();
       const objectUrl = URL.createObjectURL(blob);
       const audio = new Audio(objectUrl);
-
       audioRef.current = audio;
       audioUrlRef.current = objectUrl;
       audio.onended = () => {
         releaseAudio();
-        setVoiceStatus("語音導讀已完成");
-        window.setTimeout(() => setVoiceStatus(""), 1800);
+        setVoiceStatus("");
       };
       audio.onerror = () => {
         releaseAudio();
         setVoiceStatus("語音服務目前暫時無法使用");
       };
-
       setVoicePlaying(true);
       setVoiceStatus("語音導讀中");
       await audio.play();
@@ -203,235 +185,102 @@ export default function Home({ onNavigate, currentPage, activeSection = "hero" }
   };
 
   return (
-    <div className="stt-approved-home" data-stt-theme="platinum">
+    <div className="stt-approved-home">
       <style>{`
-        .stt-approved-home {
-          min-height: 100svh;
-          background: #fbfbfa;
-          color: #1a1a1a;
+        .stt-approved-home { min-height:100vh; background:#fbfbfa; color:#1a1a1a; }
+        .stt-approved-stage { min-height:100svh; display:grid; place-items:center; overflow:hidden; background:#fbfbfa; }
+        .stt-approved-frame { position:relative; width:min(100vw,1600px); aspect-ratio:1.5/1; overflow:hidden; background:#fbfbfa; }
+        .stt-approved-image { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center; user-select:none; pointer-events:none; }
+        .stt-approved-digital-cover {
+          position:absolute;
+          z-index:3;
+          left:50.6%;
+          top:65.8%;
+          width:18.6%;
+          height:27.0%;
+          display:flex;
+          flex-direction:column;
+          align-items:center;
+          justify-content:flex-start;
+          padding-top:1.4%;
+          background:linear-gradient(180deg,rgba(248,245,240,.985),rgba(251,248,243,.99));
+          color:#1a1a1a;
         }
-        .stt-approved-stage {
-          min-height: 100svh;
-          display: grid;
-          place-items: center;
-          overflow: hidden;
-          background: #fbfbfa;
+        .stt-approved-digital-icon {
+          width:18.2%;
+          aspect-ratio:1;
+          min-width:54px;
+          border:1px solid #b58b54;
+          border-radius:50%;
+          display:grid;
+          place-items:center;
+          color:#b58b54;
         }
-        .stt-approved-frame {
-          position: relative;
-          width: min(100vw, 150svh);
-          aspect-ratio: 3 / 2;
-          max-width: 100vw;
-          max-height: 100svh;
-          overflow: hidden;
-          background: #fbfbfa;
-        }
-        .stt-approved-image {
-          position: absolute;
-          inset: 0;
-          width: 100%;
-          height: 100%;
-          object-fit: contain;
-          object-position: center;
-          user-select: none;
-          pointer-events: none;
-        }
-        .stt-approved-hotspot {
-          position: absolute;
-          z-index: 4;
-          border: 0;
-          background: transparent;
-          cursor: pointer;
-          outline: none;
-        }
-        .stt-approved-hotspot:focus-visible {
-          box-shadow: inset 0 0 0 1px rgba(181, 137, 75, 0.58);
-          background: rgba(197, 168, 128, 0.05);
-        }
-        .stt-approved-menu-hit { top: 0.7%; right: 1.7%; width: 5.2%; height: 6.2%; }
-        .stt-approved-pillar-01 { left: 10.4%; top: 67.2%; width: 12.2%; height: 25.4%; }
-        .stt-approved-pillar-02 { left: 31.1%; top: 67.2%; width: 12.4%; height: 25.4%; }
-        .stt-approved-pillar-03 { left: 52.0%; top: 67.2%; width: 12.5%; height: 25.4%; }
-        .stt-approved-pillar-04 { left: 73.0%; top: 67.2%; width: 12.6%; height: 25.4%; }
-        .stt-approved-tool-ai { left: 81.5%; top: 92.4%; width: 4.8%; height: 6.2%; border-radius: 999px; }
-        .stt-approved-tool-language { left: 86.5%; top: 92.4%; width: 4.8%; height: 6.2%; border-radius: 999px; }
-        .stt-approved-tool-voice { left: 91.5%; top: 92.4%; width: 4.8%; height: 6.2%; border-radius: 999px; }
-        .stt-approved-menu-overlay {
-          position: fixed;
-          inset: 0;
-          z-index: 120;
-          display: flex;
-          justify-content: flex-end;
-          background: rgba(31, 28, 24, 0.10);
-          backdrop-filter: blur(8px);
-        }
-        .stt-approved-menu-panel {
-          width: min(430px, 92vw);
-          min-height: 100svh;
-          padding: 92px 38px 44px;
-          background: rgba(251, 251, 250, 0.98);
-          border-left: 1px solid rgba(197, 168, 128, 0.22);
-          box-shadow: -24px 0 80px rgba(36, 34, 31, 0.08);
-        }
-        .stt-approved-menu-label {
-          margin: 0 0 28px;
-          color: #a9895e;
-          font-size: 10px;
-          letter-spacing: 0.24em;
-          text-transform: uppercase;
-        }
-        .stt-approved-menu-link {
-          width: 100%;
-          padding: 18px 0;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          border: 0;
-          border-bottom: 1px solid rgba(197, 168, 128, 0.18);
-          background: transparent;
-          color: #1a1a1a;
-          font-family: "Noto Serif TC", "Noto Serif JP", Georgia, serif;
-          font-size: 20px;
-          text-align: left;
-          cursor: pointer;
-        }
-        .stt-approved-private-link {
-          margin-top: 38px;
-          padding-top: 22px;
-          border-top: 1px solid rgba(197, 168, 128, 0.18);
-          color: #a9895e;
-          font-size: 12px;
-          line-height: 1.8;
-        }
-        .stt-approved-language-panel {
-          position: fixed;
-          z-index: 130;
-          right: 26px;
-          bottom: 86px;
-          min-width: 190px;
-          padding: 10px;
-          background: rgba(255, 255, 255, 0.97);
-          border: 1px solid rgba(197, 168, 128, 0.24);
-          box-shadow: 0 20px 60px rgba(36, 34, 31, 0.10);
-        }
-        .stt-approved-language-option {
-          width: 100%;
-          padding: 11px 12px;
-          border: 0;
-          background: transparent;
-          color: #4b463f;
-          font-size: 12px;
-          text-align: left;
-          cursor: pointer;
-        }
-        .stt-approved-language-option[data-active="true"] {
-          color: #a9895e;
-          background: rgba(197, 168, 128, 0.09);
-        }
-        .stt-approved-voice-status {
-          position: fixed;
-          right: 26px;
-          bottom: 86px;
-          z-index: 125;
-          max-width: 260px;
-          padding: 10px 12px;
-          border: 1px solid rgba(197, 168, 128, 0.20);
-          background: rgba(255, 255, 255, 0.96);
-          color: #6e675e;
-          font-size: 11px;
-          line-height: 1.7;
-          box-shadow: 0 18px 55px rgba(36, 34, 31, 0.08);
-        }
-        .stt-approved-detail {
-          scroll-margin-top: 22px;
-          border-top: 1px solid rgba(197, 168, 128, 0.18);
-          background: linear-gradient(180deg, #fbfbfa 0%, #f7f4ef 100%);
-        }
-        .stt-approved-detail-inner {
-          width: min(calc(100% - 48px), 1240px);
-          margin: 0 auto;
-          padding: 76px 0 88px;
-          display: grid;
-          grid-template-columns: minmax(250px, 0.76fr) minmax(0, 1.24fr);
-          gap: 72px;
-        }
-        .stt-approved-detail-eyebrow {
-          margin: 0 0 14px;
-          color: #a9895e;
-          font-size: 10px;
-          letter-spacing: 0.22em;
-          text-transform: uppercase;
-        }
-        .stt-approved-detail-title {
-          margin: 0;
-          font-family: "Noto Serif TC", "Noto Serif JP", Georgia, serif;
-          font-size: clamp(34px, 4vw, 54px);
-          font-weight: 400;
-          line-height: 1.35;
-          letter-spacing: 0.04em;
-        }
-        .stt-approved-detail-rule {
-          width: 52px;
-          height: 1px;
-          margin: 22px 0 24px;
-          background: #c5a880;
-        }
-        .stt-approved-detail-summary {
-          margin: 0;
-          color: #6e675e;
-          font-size: 14px;
-          line-height: 2;
-        }
-        .stt-approved-detail-body { display: grid; gap: 20px; }
-        .stt-approved-detail-card {
-          padding: 26px 28px;
-          border: 1px solid rgba(197, 168, 128, 0.18);
-          background: rgba(255, 255, 255, 0.76);
-        }
-        .stt-approved-detail-card h3 {
-          margin: 0 0 12px;
-          font-family: "Noto Serif TC", "Noto Serif JP", Georgia, serif;
-          font-size: 21px;
-          font-weight: 400;
-        }
-        .stt-approved-detail-card p {
-          margin: 0;
-          color: #4b463f;
-          font-size: 14px;
-          line-height: 2;
-        }
-        .stt-approved-detail-actions { display: flex; flex-wrap: wrap; gap: 12px; }
-        .stt-approved-detail-button {
-          min-height: 48px;
-          padding: 0 22px;
-          border: 1px solid #c5a880;
-          background: transparent;
-          color: #1a1a1a;
-          font-size: 12px;
-          cursor: pointer;
-        }
-        .stt-approved-detail-button:hover { background: #a9895e; border-color: #a9895e; color: #ffffff; }
-        @media (max-width: 900px) {
-          .stt-approved-detail-inner { grid-template-columns: 1fr; gap: 36px; }
-        }
-        @media (max-width: 640px) {
-          .stt-approved-stage { min-height: auto; padding: 0; }
-          .stt-approved-frame { width: 100vw; max-height: none; }
-          .stt-approved-detail-inner { width: calc(100% - 28px); padding: 54px 0 66px; }
+        .stt-approved-digital-icon svg { width:61%; height:61%; }
+        .stt-approved-digital-number { margin-top:4.6%; color:#a9793f; font-family:Georgia,"Times New Roman",serif; font-size:clamp(9px,1.05vw,17px); letter-spacing:.06em; }
+        .stt-approved-digital-en { margin-top:3.1%; font-family:Georgia,"Times New Roman",serif; font-size:clamp(10px,1.25vw,20px); letter-spacing:.015em; white-space:nowrap; }
+        .stt-approved-digital-zh { margin-top:4.0%; color:#ad7e42; font-family:"Noto Serif TC","Noto Serif JP",Georgia,serif; font-size:clamp(10px,1.18vw,19px); letter-spacing:.09em; white-space:nowrap; }
+        .stt-approved-digital-arrow { margin-top:4.0%; color:#ad7e42; font-family:Georgia,serif; font-size:clamp(15px,1.8vw,28px); }
+        .stt-approved-hotspot { position:absolute; z-index:5; border:0; background:transparent; cursor:pointer; outline:none; }
+        .stt-approved-hotspot:focus-visible { box-shadow:inset 0 0 0 1px rgba(181,137,75,.58); background:rgba(197,168,128,.05); }
+        .stt-approved-menu-hit { top:.7%; right:1.7%; width:5.2%; height:6.2%; }
+        .stt-approved-pillar-01 { left:10.4%; top:67.2%; width:12.2%; height:25.4%; }
+        .stt-approved-pillar-02 { left:31.1%; top:67.2%; width:12.4%; height:25.4%; }
+        .stt-approved-pillar-03 { left:50.6%; top:65.8%; width:18.6%; height:27.0%; }
+        .stt-approved-pillar-04 { left:73.0%; top:67.2%; width:12.6%; height:25.4%; }
+        .stt-approved-tool-ai { left:81.5%; top:92.4%; width:4.8%; height:6.2%; border-radius:999px; }
+        .stt-approved-tool-language { left:86.5%; top:92.4%; width:4.8%; height:6.2%; border-radius:999px; }
+        .stt-approved-tool-voice { left:91.5%; top:92.4%; width:4.8%; height:6.2%; border-radius:999px; }
+        .stt-approved-menu-overlay { position:fixed; inset:0; z-index:120; display:flex; justify-content:flex-end; background:rgba(31,28,24,.10); backdrop-filter:blur(8px); }
+        .stt-approved-menu-panel { width:min(430px,92vw); min-height:100svh; padding:92px 38px 44px; background:rgba(251,251,250,.98); border-left:1px solid rgba(197,168,128,.22); box-shadow:-24px 0 80px rgba(36,34,31,.08); }
+        .stt-approved-menu-label { margin:0 0 28px; color:#a9895e; font-size:10px; letter-spacing:.24em; text-transform:uppercase; }
+        .stt-approved-menu-link { width:100%; padding:18px 0; display:flex; align-items:center; justify-content:space-between; border:0; border-bottom:1px solid rgba(197,168,128,.18); background:transparent; color:#1a1a1a; font-family:"Noto Serif TC","Noto Serif JP",Georgia,serif; font-size:20px; text-align:left; cursor:pointer; }
+        .stt-approved-private-link { margin-top:38px; padding-top:22px; border-top:1px solid rgba(197,168,128,.18); color:#a9895e; font-size:12px; line-height:1.8; }
+        .stt-approved-language-panel { position:fixed; z-index:130; right:26px; bottom:86px; min-width:190px; padding:10px; background:rgba(255,255,255,.97); border:1px solid rgba(197,168,128,.24); box-shadow:0 20px 60px rgba(36,34,31,.10); }
+        .stt-approved-language-option { width:100%; padding:11px 12px; border:0; background:transparent; color:#4b463f; font-size:12px; text-align:left; cursor:pointer; }
+        .stt-approved-language-option[data-active="true"] { color:#a9895e; background:rgba(197,168,128,.09); }
+        .stt-approved-voice-status { position:fixed; right:26px; bottom:86px; z-index:125; max-width:260px; padding:10px 12px; border:1px solid rgba(197,168,128,.20); background:rgba(255,255,255,.96); color:#6e675e; font-size:11px; line-height:1.7; box-shadow:0 18px 55px rgba(36,34,31,.08); }
+        .stt-approved-detail { scroll-margin-top:22px; border-top:1px solid rgba(197,168,128,.18); background:linear-gradient(180deg,#fbfbfa 0%,#f7f4ef 100%); }
+        .stt-approved-detail-inner { width:min(calc(100% - 48px),1240px); margin:0 auto; padding:76px 0 88px; display:grid; grid-template-columns:minmax(250px,.76fr) minmax(0,1.24fr); gap:72px; }
+        .stt-approved-detail-eyebrow { margin:0 0 14px; color:#a9895e; font-size:10px; letter-spacing:.22em; text-transform:uppercase; }
+        .stt-approved-detail-title { margin:0; font-family:"Noto Serif TC","Noto Serif JP",Georgia,serif; font-size:clamp(34px,4vw,54px); font-weight:400; line-height:1.35; letter-spacing:.04em; }
+        .stt-approved-detail-rule { width:52px; height:1px; margin:22px 0 24px; background:#c5a880; }
+        .stt-approved-detail-summary { margin:0; color:#6e675e; font-size:14px; line-height:2; }
+        .stt-approved-detail-body { display:grid; gap:20px; }
+        .stt-approved-detail-card { padding:26px 28px; border:1px solid rgba(197,168,128,.18); background:rgba(255,255,255,.76); }
+        .stt-approved-detail-card h3 { margin:0 0 12px; font-family:"Noto Serif TC","Noto Serif JP",Georgia,serif; font-size:21px; font-weight:400; }
+        .stt-approved-detail-card p { margin:0; color:#4b463f; font-size:14px; line-height:2; }
+        .stt-approved-detail-actions { display:flex; flex-wrap:wrap; gap:12px; }
+        .stt-approved-detail-button { min-height:48px; padding:0 22px; border:1px solid #c5a880; background:transparent; color:#1a1a1a; font-size:12px; cursor:pointer; }
+        .stt-approved-detail-button:hover { background:#a9895e; border-color:#a9895e; color:#fff; }
+        @media (max-width:900px) { .stt-approved-detail-inner { grid-template-columns:1fr; gap:36px; } }
+        @media (max-width:640px) {
+          .stt-approved-stage { min-height:auto; }
+          .stt-approved-frame { width:100vw; }
+          .stt-approved-detail-inner { width:calc(100% - 28px); padding:54px 0 66px; }
+          .stt-approved-digital-en { font-size:12px; }
+          .stt-approved-digital-zh { font-size:11px; }
         }
       `}</style>
 
       <section className="stt-approved-stage" aria-label="STT Governance approved homepage visual">
         <div className="stt-approved-frame">
-          <img
-            className="stt-approved-image"
-            src={APPROVED_VISUAL}
-            alt="STT Governance 白金極簡古典幾何首頁，秩序，讓價值穿越時間。"
-            width={7680}
-            height={5120}
-            decoding="async"
-            fetchPriority="high"
-          />
+          <img className="stt-approved-image" src={APPROVED_VISUAL} alt="STT Governance 白金極簡古典幾何首頁，秩序，讓價值穿越時間。" width={7680} height={5120} decoding="async" fetchPriority="high" />
+
+          <div className="stt-approved-digital-cover" aria-hidden="true">
+            <div className="stt-approved-digital-icon">
+              <svg viewBox="0 0 64 64" fill="none">
+                <rect x="20" y="20" width="24" height="24" rx="3" stroke="currentColor" strokeWidth="2" />
+                <rect x="27" y="27" width="10" height="10" stroke="currentColor" strokeWidth="2" />
+                <path d="M20 25H13V18H8M20 39H13V46H8M44 25H51V18H56M44 39H51V46H56M25 20V13H18V8M39 20V13H46V8M25 44V51H18V56M39 44V51H46V56" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </div>
+            <div className="stt-approved-digital-number">03</div>
+            <div className="stt-approved-digital-en">Digital Governance</div>
+            <div className="stt-approved-digital-zh">數位（AI）治理</div>
+            <div className="stt-approved-digital-arrow">→</div>
+          </div>
+
           <button className="stt-approved-hotspot stt-approved-menu-hit" type="button" aria-label="開啟選單" onClick={() => setMenuOpen(true)} />
           <button className="stt-approved-hotspot stt-approved-pillar-01" type="button" aria-label="開啟策略治理" onClick={() => openPillar("governance")} />
           <button className="stt-approved-hotspot stt-approved-pillar-02" type="button" aria-label="開啟內在法遵" onClick={() => openPillar("compliance")} />
@@ -472,7 +321,7 @@ export default function Home({ onNavigate, currentPage, activeSection = "hero" }
       {voiceStatus && <div className="stt-approved-voice-status" role="status">{voiceStatus}</div>}
 
       {activePillar && (
-        <section ref={detailRef} className="stt-approved-detail" aria-label={pillars[activePillar].title}>
+        <section ref={detailRef} className="stt-approved-detail" aria-label={pillars[activePillar].title} data-stt-readable="true">
           <div className="stt-approved-detail-inner">
             <div>
               <p className="stt-approved-detail-eyebrow">{pillars[activePillar].eyebrow}</p>
