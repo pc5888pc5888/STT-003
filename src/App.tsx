@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState, type ReactNode } from "react";
 import { BrowserRouter, Navigate, Route, Routes, useLocation, useNavigate } from "react-router-dom";
-import { ArrowRight, BookOpen, GraduationCap, Landmark, Menu, Scale, Shield, Users, X } from "lucide-react";
+import { ArrowRight, BookOpen, GraduationCap, Menu, Shield, Users, X } from "lucide-react";
 import Lenis from "lenis";
 import Home from "./pages/Home";
 import About, { ContactModal } from "./pages/About";
@@ -318,7 +318,9 @@ function AppFrame() {
       lerp: 0.09,
     });
 
-    (window as Window & { lenis?: Lenis }).lenis = lenis;
+    const runtimeWindow = window as unknown as { lenis?: Lenis };
+    runtimeWindow.lenis = lenis;
+
     let frame = 0;
     const raf = (time: number) => {
       lenis.raf(time);
@@ -329,7 +331,7 @@ function AppFrame() {
     return () => {
       window.cancelAnimationFrame(frame);
       lenis.destroy();
-      delete (window as Window & { lenis?: Lenis }).lenis;
+      delete runtimeWindow.lenis;
     };
   }, []);
 
