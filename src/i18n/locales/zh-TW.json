@@ -1,1 +1,270 @@
-{"meta":{"locale":"zh-TW","languageName":"繁體中文","htmlLang":"zh-TW"},"common":{"brand":"STT Governance","platform":"策略智庫治理平台","founder":"莊鈞翔 博士","home":"首頁","learnMore":"深入了解","readMore":"閱讀更多","register":"立即報名","contact":"聯絡智庫","submit":"送出","cancel":"取消","close":"關閉","confirm":"確認","back":"返回","continue":"繼續","loading":"處理中","required":"必填","optional":"選填"},"navigation":{"governance":"策略治理","internalCompliance":"內在法遵","humanisticLandscape":"人文地景產","pressInsights":"出版與觀點","institution":"智庫與創辦人","events":"活動與論壇","engagement":"治理委託"},"home":{"hero":{"eyebrow":"Strategic Think Tank","titleLine1":"秩序，","titleLine2":"讓價值穿越時間。","subtitle":"高位階治理文明平台","description":"以制度設計、決策判讀與長期治理，協助企業、家族與組織在不確定中建立可被信任的秩序。","primaryAction":"進入治理架構","secondaryAction":"認識 STT Governance"},"gateways":{"governance":{"number":"01","title":"Governance","subtitle":"策略治理","description":"企業治理、家族治理、接班、決策架構與治理委託。"},"internalCompliance":{"number":"02","title":"Internal Compliance","subtitle":"內在法遵","description":"把法遵從外部要求轉化為制度、文化與決策邊界。"},"humanisticLandscape":{"number":"03","title":"Humanistic Landscape","subtitle":"人文地景產","description":"從人、地方、產業與時間理解文明如何形成與延續。"},"pressInsights":{"number":"04","title":"Press & Insights","subtitle":"出版與觀點","description":"匯整專欄、出版、研究與治理思想資產。"}},"architecture":{"eyebrow":"Governance Architecture","title":"治理不是單點建議，而是可持續運作的制度架構","description":"STT 以治理設計整合權責、風險、法遵、接班與 AI 輔助，使重大決策可被判讀、記錄、稽核與持續修正。","corporateGovernance":"企業治理與策略判讀","familyGovernance":"家族治理與企業接班","internalCompliance":"內在法遵與風險治理","esgai":"ESGAI 治理作業系統"},"authority":{"eyebrow":"Governance Authority","title":"由治理總控者負責最後判讀","role1":"治理總控者","role2":"制度設計者","role3":"決策判讀者","description":"AI 作為治理幕僚群與作業系統輔助，提供檢索、分析、流程與紀錄支援；重大判讀與治理主權仍由人類決策者掌握。","action":"認識莊鈞翔博士"},"intelligence":{"eyebrow":"Press & Intelligence","title":"治理知識必須形成可累積的制度資產","description":"透過法律專欄、治理評論、出版與研究，將判讀方法轉化為可持續使用的知識基礎。","latest":"最新觀點","editorial":"編輯精選","publications":"治理出版","research":"研究與學術"},"engagement":{"eyebrow":"Governance Engagement","title":"從問題描述進入治理委託","description":"適合企業治理、家族接班、法遵風險、治理型 AI 與重大決策需求。","primaryAction":"提出治理需求","secondaryAction":"查看服務範圍"}},"events":{"index":{"title":"活動與治理論壇","description":"匯整 STT Governance、合作機構與專業社群之治理講座、論壇、工作坊與閉門交流。","upcoming":"近期活動","past":"歷屆活動","details":"查看活動"},"registration":{"title":"活動報名","subtitle":"Governance Event Registration","eventInformation":"活動資訊","attendeeInformation":"參與者資訊","organizationInformation":"組織資訊","governanceNeeds":"治理關注議題","privacy":"個資與報名聲明","fields":{"eventName":"活動名稱","date":"日期","time":"時間","venue":"地點","attendanceMode":"參與方式","organization":"公司／機構名稱","department":"部門","jobTitle":"職稱","name":"姓名","email":"電子郵件","phone":"聯絡電話","lineId":"LINE ID","dietary":"餐食需求","governanceTopic":"主要關注議題","message":"補充說明","consent":"我已閱讀並同意報名與個人資料使用說明","invoiceTitle":"發票抬頭","taxId":"統一編號"},"options":{"onsite":"現場參與","online":"線上參與","hybrid":"混合參與","regularMeal":"一般餐","vegetarian":"素食","noMeal":"不需餐食","corporateGovernance":"企業治理","familyGovernance":"家族治理與接班","internalCompliance":"法遵與風險治理","aiGovernance":"AI 治理","strategy":"策略與重大決策","other":"其他"},"actions":{"submit":"送出報名","submitting":"正在送出","success":"報名已完成","successDescription":"我們已收到您的報名資料，後續通知將依活動流程寄送。","error":"報名未完成","errorDescription":"系統暫時無法完成送出，請稍後再試。"},"validation":{"required":"此欄位為必填","invalidEmail":"請輸入有效的電子郵件","invalidPhone":"請輸入有效的聯絡電話","consentRequired":"送出前請先同意報名與個人資料使用說明"}}},"governanceTerms":{"governance":"治理","corporateGovernance":"企業治理","boardGovernance":"董事會治理","strategicGovernance":"策略治理","decisionArchitecture":"決策架構","institutionalDesign":"制度設計","governanceArchitecture":"治理架構","decisionRights":"決策權限","authorizationMatrix":"授權矩陣","accountability":"當責","fiduciaryDuty":"受託義務","conflictOfInterest":"利益衝突","riskManagement":"風險管理","riskAppetite":"風險胃納","scenarioAnalysis":"情境分析","businessContinuity":"營運持續","organizationalResilience":"組織韌性","internalControl":"內部控制","auditability":"可稽核性","transparency":"治理透明","governanceBoundary":"治理邊界","governanceReview":"治理審查","governanceRecord":"治理紀錄","governanceEngagement":"治理委託","governanceAssessment":"治理評估","governanceCivilization":"治理文明","familyGovernance":"家族治理","successionPlanning":"接班規劃","familyCharter":"家族憲章","familyCouncil":"家族理事會","familyOffice":"家族辦公室","trustGovernance":"信託治理","wealthGovernance":"財富治理","longTermValue":"長期價值","stakeholderGovernance":"利害關係人治理","institutionalTrust":"制度信任","decisionGate":"決策門控","evidenceGate":"證據門控","escalationMechanism":"升級處理機制"},"complianceTerms":{"internalCompliance":"內在法遵","regulatoryCompliance":"法規遵循","legalCompliance":"法律遵循","complianceGovernance":"法遵治理","complianceCulture":"法遵文化","complianceByDesign":"法遵內建","complianceGate":"法遵門控","dueDiligence":"盡職調查","knowYourCustomer":"客戶身分審查","antiMoneyLaundering":"洗錢防制","whistleblowerProtection":"吹哨者保護","dataGovernance":"資料治理","privacyGovernance":"隱私治理","informationSecurity":"資訊安全","intellectualProperty":"智慧財產","tradeSecret":"營業秘密","thirdPartyRisk":"第三方風險","sanctionsScreening":"制裁篩查","antiCorruption":"反貪腐","contractGovernance":"契約治理","legalRisk":"法律風險","auditTrail":"稽核軌跡","evidencePreservation":"證據保全","incidentResponse":"事件應變","remedialAction":"矯正措施","controlTesting":"控制測試","complianceMonitoring":"法遵監控","regulatoryChange":"法規變動管理","crossBorderCompliance":"跨境法遵"},"ai":{"assistantTitle":"STT 治理領航員","assistantSubtitle":"Governance AI Assistant","welcome":"您好，我是 STT 治理領航員。我可以協助您查找治理、法遵、家族接班、出版與活動資訊。","placeholder":"請輸入您的治理問題","send":"送出","thinking":"正在分析","streaming":"正在回應","unavailable":"治理領航員目前暫時無法連線。","consultationSuggested":"此問題可能適合進一步進行治理診斷或委託。","consultationAction":"提出治理需求"},"accessibility":{"language":"語言","selectLanguage":"選擇語言","aiAssistant":"治理 AI","startVoice":"開始導讀","stopVoice":"停止導讀","voiceUnavailable":"語音服務目前暫時無法使用。"}}
+{
+  "meta": {
+    "locale": "zh-TW",
+    "languageName": "繁體中文",
+    "htmlLang": "zh-TW"
+  },
+  "common": {
+    "brand": "STT Governance",
+    "platform": "策略智庫治理平台",
+    "founder": "莊鈞翔 博士",
+    "home": "首頁",
+    "learnMore": "深入了解",
+    "readMore": "閱讀更多",
+    "register": "立即報名",
+    "contact": "聯絡智庫",
+    "submit": "送出",
+    "cancel": "取消",
+    "close": "關閉",
+    "confirm": "確認",
+    "back": "返回",
+    "continue": "繼續",
+    "loading": "處理中",
+    "required": "必填",
+    "optional": "選填"
+  },
+  "navigation": {
+    "governance": "策略治理",
+    "internalCompliance": "內在法遵",
+    "digitalGovernance": "數位（AI）治理",
+    "pressInsights": "出版與觀點",
+    "institution": "智庫與創辦人",
+    "events": "活動與論壇",
+    "engagement": "治理委託"
+  },
+  "home": {
+    "hero": {
+      "eyebrow": "Strategic Think Tank",
+      "titleLine1": "秩序，",
+      "titleLine2": "讓價值穿越時間。",
+      "subtitle": "高位階治理文明平台",
+      "description": "以制度設計、決策判讀、內在法遵與數位治理，協助企業與組織在不確定中建立可被信任的秩序。",
+      "primaryAction": "進入治理架構",
+      "secondaryAction": "認識 STT Governance"
+    },
+    "gateways": {
+      "governance": {
+        "number": "01",
+        "title": "Governance",
+        "subtitle": "策略治理",
+        "description": "企業治理、組織決策、高階管理與重大事項治理。"
+      },
+      "internalCompliance": {
+        "number": "02",
+        "title": "Internal Compliance",
+        "subtitle": "內在法遵",
+        "description": "把法遵從外部要求轉化為制度、契約、權限與決策邊界。"
+      },
+      "digitalGovernance": {
+        "number": "03",
+        "title": "Digital Governance",
+        "subtitle": "數位（AI）治理",
+        "description": "治理模型、資料、工具權限、MCP、API 與人類最終決策權。"
+      },
+      "pressInsights": {
+        "number": "04",
+        "title": "Press & Insights",
+        "subtitle": "出版與觀點",
+        "description": "匯整專欄、出版、研究與治理判讀資產。"
+      }
+    },
+    "architecture": {
+      "eyebrow": "Governance Architecture",
+      "title": "治理不是單點建議，而是可持續運作的制度架構",
+      "description": "STT 以治理設計整合權責、風險、法遵與 AI 輔助，使重大決策可被判讀、記錄、稽核與持續修正。",
+      "corporateGovernance": "企業治理與策略判讀",
+      "familyGovernance": "家族治理與企業接班",
+      "internalCompliance": "內在法遵與風險治理",
+      "digitalGovernance": "數位（AI）治理作業系統"
+    },
+    "authority": {
+      "eyebrow": "Governance Authority",
+      "title": "由治理總控者負責最後判讀",
+      "role1": "治理總控者",
+      "role2": "制度設計者",
+      "role3": "決策判讀者",
+      "description": "AI 作為治理幕僚群與作業系統輔助，提供檢索、分析、流程與紀錄支援；重大判讀與治理主權仍由人類決策者掌握。",
+      "action": "認識莊鈞翔博士"
+    },
+    "intelligence": {
+      "eyebrow": "Press & Intelligence",
+      "title": "治理知識必須形成可累積的制度資產",
+      "description": "透過法律專欄、治理評論、出版與研究，將判讀方法轉化為可持續使用的知識基礎。",
+      "latest": "最新觀點",
+      "editorial": "編輯精選",
+      "publications": "治理出版",
+      "research": "研究與學術"
+    },
+    "engagement": {
+      "eyebrow": "Governance Engagement",
+      "title": "從問題描述進入治理委託",
+      "description": "適合企業治理、家族接班、法遵風險、數位治理與重大決策需求。",
+      "primaryAction": "提出治理需求",
+      "secondaryAction": "查看服務範圍"
+    }
+  },
+  "events": {
+    "index": {
+      "title": "活動與治理論壇",
+      "description": "匯整 STT Governance、合作機構與專業社群之治理講座、論壇、工作坊與閉門交流。",
+      "upcoming": "近期活動",
+      "past": "歷屆活動",
+      "details": "查看活動"
+    },
+    "registration": {
+      "title": "活動報名",
+      "subtitle": "Governance Event Registration",
+      "eventInformation": "活動資訊",
+      "attendeeInformation": "參與者資訊",
+      "organizationInformation": "組織資訊",
+      "governanceNeeds": "治理關注議題",
+      "privacy": "個資與報名聲明",
+      "fields": {
+        "eventName": "活動名稱",
+        "date": "日期",
+        "time": "時間",
+        "venue": "地點",
+        "attendanceMode": "參與方式",
+        "organization": "公司／機構名稱",
+        "department": "部門",
+        "jobTitle": "職稱",
+        "name": "姓名",
+        "email": "電子郵件",
+        "phone": "聯絡電話",
+        "lineId": "LINE ID",
+        "dietary": "餐食需求",
+        "governanceTopic": "主要關注議題",
+        "message": "補充說明",
+        "consent": "我已閱讀並同意報名與個人資料使用說明",
+        "invoiceTitle": "發票抬頭",
+        "taxId": "統一編號"
+      },
+      "options": {
+        "onsite": "現場參與",
+        "online": "線上參與",
+        "hybrid": "混合參與",
+        "regularMeal": "一般餐",
+        "vegetarian": "素食",
+        "noMeal": "不需餐食",
+        "corporateGovernance": "企業治理",
+        "familyGovernance": "家族治理與接班",
+        "internalCompliance": "法遵與風險治理",
+        "aiGovernance": "數位（AI）治理",
+        "strategy": "策略與重大決策",
+        "other": "其他"
+      },
+      "actions": {
+        "submit": "送出報名",
+        "submitting": "正在送出",
+        "success": "報名已完成",
+        "successDescription": "我們已收到您的報名資料，後續通知將依活動流程寄送。",
+        "error": "報名未完成",
+        "errorDescription": "系統暫時無法完成送出，請稍後再試。"
+      },
+      "validation": {
+        "required": "此欄位為必填",
+        "invalidEmail": "請輸入有效的電子郵件",
+        "invalidPhone": "請輸入有效的聯絡電話",
+        "consentRequired": "送出前請先同意報名與個人資料使用說明"
+      }
+    }
+  },
+  "governanceTerms": {
+    "governance": "治理",
+    "corporateGovernance": "企業治理",
+    "boardGovernance": "董事會治理",
+    "strategicGovernance": "策略治理",
+    "digitalGovernance": "數位治理",
+    "aiGovernance": "AI 治理",
+    "decisionArchitecture": "決策架構",
+    "institutionalDesign": "制度設計",
+    "governanceArchitecture": "治理架構",
+    "decisionRights": "決策權限",
+    "authorizationMatrix": "授權矩陣",
+    "accountability": "當責",
+    "fiduciaryDuty": "受託義務",
+    "conflictOfInterest": "利益衝突",
+    "riskManagement": "風險管理",
+    "riskAppetite": "風險胃納",
+    "scenarioAnalysis": "情境分析",
+    "businessContinuity": "營運持續",
+    "organizationalResilience": "組織韌性",
+    "internalControl": "內部控制",
+    "auditability": "可稽核性",
+    "transparency": "治理透明",
+    "governanceBoundary": "治理邊界",
+    "governanceReview": "治理審查",
+    "governanceRecord": "治理紀錄",
+    "governanceEngagement": "治理委託",
+    "governanceAssessment": "治理評估",
+    "familyGovernance": "家族治理",
+    "successionPlanning": "接班規劃",
+    "familyCharter": "家族憲章",
+    "familyCouncil": "家族理事會",
+    "familyOffice": "家族辦公室",
+    "trustGovernance": "信託治理",
+    "wealthGovernance": "財富治理",
+    "longTermValue": "長期價值",
+    "institutionalTrust": "制度信任",
+    "decisionGate": "決策門控",
+    "evidenceGate": "證據門控",
+    "modelGate": "模型門控",
+    "dataGate": "資料門控",
+    "toolGate": "工具門控",
+    "humanGate": "人工決策門控",
+    "modelContextProtocol": "模型情境協議（MCP）",
+    "agenticWorkflow": "代理式 AI 工作流",
+    "escalationMechanism": "升級處理機制"
+  },
+  "complianceTerms": {
+    "internalCompliance": "內在法遵",
+    "regulatoryCompliance": "法規遵循",
+    "legalCompliance": "法律遵循",
+    "complianceGovernance": "法遵治理",
+    "complianceCulture": "法遵文化",
+    "complianceByDesign": "法遵內建",
+    "complianceGate": "法遵門控",
+    "dueDiligence": "盡職調查",
+    "knowYourCustomer": "客戶身分審查",
+    "antiMoneyLaundering": "洗錢防制",
+    "whistleblowerProtection": "吹哨者保護",
+    "dataGovernance": "資料治理",
+    "privacyGovernance": "隱私治理",
+    "informationSecurity": "資訊安全",
+    "intellectualProperty": "智慧財產",
+    "tradeSecret": "營業秘密",
+    "thirdPartyRisk": "第三方風險",
+    "sanctionsScreening": "制裁篩查",
+    "antiCorruption": "反貪腐",
+    "contractGovernance": "契約治理",
+    "legalRisk": "法律風險",
+    "auditTrail": "稽核軌跡",
+    "evidencePreservation": "證據保全",
+    "incidentResponse": "事件應變",
+    "remedialAction": "矯正措施",
+    "controlTesting": "控制測試",
+    "complianceMonitoring": "法遵監控",
+    "regulatoryChange": "法規變動管理",
+    "crossBorderCompliance": "跨境法遵"
+  },
+  "ai": {
+    "assistantTitle": "STT 治理領航員",
+    "assistantSubtitle": "Governance AI Assistant",
+    "welcome": "您好，我是 STT 治理領航員。我可以協助您查找策略治理、內在法遵、數位治理、出版與活動資訊。",
+    "placeholder": "請輸入您的治理問題",
+    "send": "送出",
+    "thinking": "正在分析",
+    "streaming": "正在回應",
+    "unavailable": "治理領航員目前暫時無法連線。",
+    "consultationSuggested": "此問題可能適合進一步進行治理診斷或委託。",
+    "consultationAction": "提出治理需求"
+  },
+  "accessibility": {
+    "language": "語言",
+    "selectLanguage": "選擇語言",
+    "aiAssistant": "治理 AI",
+    "startVoice": "開始導讀",
+    "stopVoice": "停止導讀",
+    "voiceUnavailable": "語音服務目前暫時無法使用。"
+  }
+}
