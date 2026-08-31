@@ -1,45 +1,18 @@
 import express from "express";
 import path from "path";
 import fs from "fs";
-import AdmZip from "adm-zip";
 
 async function startServer() {
   const app = express();
-  const PORT = 3000;
-
-  app.get("/api/health", (_, res) => res.status(200).json({ status: "ok" }));
-
-  app.get("/api/download-source-zip", (req, res) => {
-    try {
-      const zip = new AdmZip();
-      const workspaceDir = process.cwd();
-      
-      const files = fs.readdirSync(workspaceDir);
-      for (const file of files) {
-        // Skip node_modules, .git, and build artifacts to keep the download small and clean
-        if (file === "node_modules" || file === ".git" || file === "dist" || file === "package-lock.json") {
-          continue;
-        }
-        const fullPath = path.join(workspaceDir, file);
-        const stat = fs.statSync(fullPath);
-        if (stat.isDirectory()) {
-          zip.addLocalFolder(fullPath, file);
-        } else if (stat.isFile()) {
-          zip.addLocalFile(fullPath);
-        }
-      }
-      
-      const buffer = zip.toBuffer();
-      res.setHeader("Content-Type", "application/zip");
-      res.setHeader("Content-Disposition", 'attachment; filename="stt-governance-source.zip"');
-      res.send(buffer);
-    } catch (err: any) {
-      console.error("ZIP bundle error:", err);
-      res.status(500).send("Failed to bundle source: " + err.message);
-    }
-  });
-
+  const port = Number(process.env.PORT || 3000);
   const distPath = path.resolve(process.cwd(), "dist");
+
+  app.disable("x-powered-by");
+  app.use(express.json({ limit: "1mb" }));
+
+  app.get("/api/health", (_request, response) => {
+    response.status(200).json({ status: "ok", service: "stt-governance" });
+  });
 
   if (process.env.NODE_ENV !== "production") {
     try {
@@ -50,41 +23,49 @@ async function startServer() {
         appType: "spa",
       });
       app.use(vite.middlewares);
-    } catch (e) {
+    } catch {
       app.use(express.static(distPath));
     }
   } else {
-    // Production serving logic: serve all static files automatically
-    app.use(express.static(distPath));
+    app.use(
+      express.static(distPath, {
+        index: false,
+        fallthrough: true,
+      })
+    );
 
-    app.get("*", (req, res) => {
-      if (req.path.startsWith("/api/")) {
-        return res.status(404).json({ error: "Not Found" });
+    app.get("*", (request, response) => {
+      if (request.path.startsWith("/api/")) {
+        response.status(404).json({ error: "Not Found" });
+        return;
       }
 
-      // If requested path does not have an extension, check if matching .html file exists
-      const ext = path.extname(req.path);
-      if (!ext) {
-        const checkPath = req.path === "/" ? "/index" : req.path;
-        const htmlFile = `${checkPath.replace(/\/$/, "")}.html`;
-        const fullHtmlPath = path.join(distPath, htmlFile);
-        if (fs.existsSync(fullHtmlPath) && fs.statSync(fullHtmlPath).isFile()) {
-          return res.sendFile(fullHtmlPath);
+      const requestedExtension = path.extname(request.path);
+      if (!requestedExtension) {
+        const normalizedPath = request.path === "/" ? "/index" : request.path.replace(/\/$/, "");
+        const matchingHtml = path.join(distPath, `${normalizedPath}.html`);
+        if (fs.existsSync(matchingHtml) && fs.statSync(matchingHtml).isFile()) {
+          response.sendFile(matchingHtml);
+          return;
         }
       }
 
-      // Default fallback to index.html for SPA routing
       const indexPath = path.join(distPath, "index.html");
       if (fs.existsSync(indexPath)) {
-        return res.sendFile(indexPath);
+        response.sendFile(indexPath);
+        return;
       }
-      res.status(404).send("Initializing...");
+
+      response.status(404).send("Application build not found");
     });
   }
 
-  app.listen(PORT, "0.0.0.0", () => {
-    console.log(`STT Press Server Live: ${PORT}`);
+  app.listen(port, "0.0.0.0", () => {
+    console.log(`STT Governance server listening on port ${port}`);
   });
 }
 
-startServer().catch(() => process.exit(1));
+startServer().catch((error) => {
+  console.error("STT Governance server failed to start", error);
+  process.exit(1);
+});
