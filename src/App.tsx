@@ -52,7 +52,6 @@ const legacyPathMap: Record<string, string> = {
   "family-governance-framework": "/governance/family/framework",
   "family-governance-stages": "/governance/family/stages",
   "family-governance-academic": "/governance/family/academic",
-  "digital-governance": "/governance/esgai",
   esgai: "/governance/esgai",
   "esg-ai": "/governance/esgai",
   "esgai-features": "/governance/esgai/features",
@@ -66,9 +65,9 @@ const legacyPathMap: Record<string, string> = {
 const homeAnchorMap: Record<string, string> = {
   hero: "hero",
   governance: "governance",
-  positioning: "governance",
-  strategist: "hero",
-  insights: "insights",
+  positioning: "architecture",
+  strategist: "authority",
+  insights: "intelligence",
 };
 
 function useLegacyNavigate(): LegacyNavigate {
@@ -80,14 +79,7 @@ function useLegacyNavigate(): LegacyNavigate {
       navigate(`/#${anchor}`);
       return;
     }
-
-    const path = legacyPathMap[page];
-    if (path) {
-      navigate(path);
-      return;
-    }
-
-    navigate("/");
+    navigate(legacyPathMap[page] ?? "/");
   };
 }
 
@@ -96,7 +88,6 @@ function PublicShell({ children, onContactOpen, chatOpen, onChatToggle }: ShellP
   const location = useLocation();
   const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
-
   const exactHome = location.pathname === "/" || location.pathname === "/index.html";
 
   const primaryNavigation = useMemo(
@@ -135,10 +126,7 @@ function PublicShell({ children, onContactOpen, chatOpen, onChatToggle }: ShellP
 
   return (
     <div className="min-h-screen" style={{ background: "var(--stt-canvas)", color: "var(--stt-ink)" }}>
-      <header
-        className="sticky top-0 z-[70] border-b bg-white/95 backdrop-blur-xl"
-        style={{ borderColor: "var(--stt-line)", minHeight: "var(--stt-header-height)" }}
-      >
+      <header className="sticky top-0 z-[70] border-b bg-white/95 backdrop-blur-xl" style={{ borderColor: "var(--stt-line)", minHeight: "var(--stt-header-height)" }}>
         <div className="mx-auto flex h-[76px] max-w-[1320px] items-center px-5 lg:px-8">
           <button type="button" onClick={() => go("/")} className="mr-auto bg-transparent border-0 p-0 text-left cursor-pointer">
             <span className="block font-serif text-lg tracking-[0.06em]" style={{ color: "var(--stt-ink)" }}>STT Governance</span>
@@ -149,13 +137,7 @@ function PublicShell({ children, onContactOpen, chatOpen, onChatToggle }: ShellP
             {primaryNavigation.map((item) => {
               const active = item.path.startsWith("/#") ? location.pathname === "/" : location.pathname.startsWith(item.path);
               return (
-                <button
-                  key={item.path}
-                  type="button"
-                  onClick={() => go(item.path)}
-                  className="relative h-full bg-transparent border-0 px-5 text-[12px] tracking-[0.08em] cursor-pointer"
-                  style={{ color: active ? "var(--stt-gold-deep)" : "var(--stt-ink-soft)" }}
-                >
+                <button key={item.path} type="button" onClick={() => go(item.path)} className="relative h-full bg-transparent border-0 px-5 text-[12px] tracking-[0.08em] cursor-pointer" style={{ color: active ? "var(--stt-gold-deep)" : "var(--stt-ink-soft)" }}>
                   {item.label}
                   {active && <span className="absolute bottom-0 left-5 right-5 h-px" style={{ background: "var(--stt-gold)" }} />}
                 </button>
@@ -164,31 +146,16 @@ function PublicShell({ children, onContactOpen, chatOpen, onChatToggle }: ShellP
           </nav>
 
           <div className="ml-4 hidden xl:flex items-center gap-3">
-            <button
-              type="button"
-              onClick={onContactOpen}
-              className="inline-flex items-center gap-2 border bg-transparent px-4 py-2.5 text-xs font-semibold cursor-pointer"
-              style={{ borderColor: "var(--stt-gold-line)", color: "var(--stt-gold-deep)" }}
-            >
+            <button type="button" onClick={onContactOpen} className="inline-flex items-center gap-2 border bg-transparent px-4 py-2.5 text-xs font-semibold cursor-pointer" style={{ borderColor: "var(--stt-gold-line)", color: "var(--stt-gold-deep)" }}>
               {t("navigation.engagement")}
               <ArrowRight className="w-3.5 h-3.5" strokeWidth={1.3} />
             </button>
-            <button
-              type="button"
-              onClick={() => setMenuOpen((value) => !value)}
-              className="w-10 h-10 inline-flex items-center justify-center bg-transparent border-0 cursor-pointer"
-              aria-label={menuOpen ? t("common.close") : "Menu"}
-            >
+            <button type="button" onClick={() => setMenuOpen((value) => !value)} className="w-10 h-10 inline-flex items-center justify-center bg-transparent border-0 cursor-pointer" aria-label={menuOpen ? t("common.close") : "Menu"}>
               {menuOpen ? <X className="w-5 h-5" strokeWidth={1.2} /> : <Menu className="w-5 h-5" strokeWidth={1.2} />}
             </button>
           </div>
 
-          <button
-            type="button"
-            onClick={() => setMenuOpen((value) => !value)}
-            className="ml-3 w-10 h-10 inline-flex items-center justify-center bg-transparent border-0 cursor-pointer xl:hidden"
-            aria-label={menuOpen ? t("common.close") : "Menu"}
-          >
+          <button type="button" onClick={() => setMenuOpen((value) => !value)} className="ml-3 w-10 h-10 inline-flex items-center justify-center bg-transparent border-0 cursor-pointer xl:hidden" aria-label={menuOpen ? t("common.close") : "Menu"}>
             {menuOpen ? <X className="w-5 h-5" strokeWidth={1.2} /> : <Menu className="w-5 h-5" strokeWidth={1.2} />}
           </button>
         </div>
@@ -235,9 +202,7 @@ function PublicShell({ children, onContactOpen, chatOpen, onChatToggle }: ShellP
         <div className="mx-auto grid max-w-[1180px] gap-8 md:grid-cols-[1fr_auto] md:items-end">
           <div>
             <p className="font-serif text-xl tracking-[0.04em]">STT Governance</p>
-            <p className="mt-3 max-w-[620px] text-sm leading-7" style={{ color: "var(--stt-ink-muted)" }}>
-              {t("home.hero.description")}
-            </p>
+            <p className="mt-3 max-w-[620px] text-sm leading-7" style={{ color: "var(--stt-ink-muted)" }}>{t("home.hero.description")}</p>
           </div>
           <div className="flex flex-wrap gap-x-5 gap-y-2 text-xs" style={{ color: "var(--stt-ink-muted)" }}>
             <button type="button" onClick={() => go("/insights")} className="bg-transparent border-0 p-0 cursor-pointer">{t("navigation.pressInsights")}</button>
@@ -255,12 +220,7 @@ function PublicShell({ children, onContactOpen, chatOpen, onChatToggle }: ShellP
 function HomeRoute({ onNavigate }: { onNavigate: LegacyNavigate }) {
   const location = useLocation();
   const hash = location.hash.replace("#", "");
-  const activeSection = hash === "governance"
-    ? "governance"
-    : hash === "insights"
-      ? "insights"
-      : "hero";
-
+  const activeSection = hash === "governance" ? "governance" : hash === "architecture" ? "positioning" : hash === "authority" ? "strategist" : hash === "intelligence" ? "insights" : "hero";
   return <Home onNavigate={onNavigate} currentPage={hash === "governance" ? "governance" : "home"} activeSection={activeSection} />;
 }
 
@@ -301,8 +261,6 @@ function AppRoutes({ onContactOpen }: { onContactOpen: () => void }) {
       <Route path="/governance/family/academic" element={<FamilyGovernance onNavigate={onNavigate} activeSection="academic" />} />
 
       <Route path="/governance/esgai" element={<ESGAI onNavigate={onNavigate} activeSection="intro" />} />
-      <Route path="/governance/digital" element={<ESGAI onNavigate={onNavigate} activeSection="intro" />} />
-      <Route path="/digital-governance" element={<ESGAI onNavigate={onNavigate} activeSection="intro" />} />
       <Route path="/governance/esgai/features" element={<ESGAI onNavigate={onNavigate} activeSection="features" />} />
       <Route path="/governance/esgai/console" element={<ESGAI onNavigate={onNavigate} activeSection="console" />} />
       <Route path="/governance/esgai/academic" element={<ESGAI onNavigate={onNavigate} activeSection="academic" />} />
@@ -320,24 +278,15 @@ function AppFrame() {
   const [chatOpen, setChatOpen] = useState(false);
 
   useEffect(() => {
-    const lenis = new Lenis({
-      duration: 1.1,
-      smoothWheel: true,
-      wheelMultiplier: 1,
-      touchMultiplier: 1.2,
-      lerp: 0.09,
-    });
-
+    const lenis = new Lenis({ duration: 1.1, smoothWheel: true, wheelMultiplier: 1, touchMultiplier: 1.2, lerp: 0.09 });
     const runtimeWindow = window as unknown as { lenis?: Lenis };
     runtimeWindow.lenis = lenis;
-
     let frame = 0;
     const raf = (time: number) => {
       lenis.raf(time);
       frame = window.requestAnimationFrame(raf);
     };
     frame = window.requestAnimationFrame(raf);
-
     return () => {
       window.cancelAnimationFrame(frame);
       lenis.destroy();
@@ -348,10 +297,8 @@ function AppFrame() {
   useEffect(() => {
     const openAi = () => setChatOpen(true);
     const openContact = () => setShowContactModal(true);
-
     window.addEventListener("stt:open-ai", openAi);
     window.addEventListener("stt:open-contact", openContact);
-
     return () => {
       window.removeEventListener("stt:open-ai", openAi);
       window.removeEventListener("stt:open-contact", openContact);
@@ -360,14 +307,9 @@ function AppFrame() {
 
   return (
     <>
-      <PublicShell
-        onContactOpen={() => setShowContactModal(true)}
-        chatOpen={chatOpen}
-        onChatToggle={() => setChatOpen((value) => !value)}
-      >
+      <PublicShell onContactOpen={() => setShowContactModal(true)} chatOpen={chatOpen} onChatToggle={() => setChatOpen((value) => !value)}>
         <AppRoutes onContactOpen={() => setShowContactModal(true)} />
       </PublicShell>
-
       {showContactModal && <ContactModal onClose={() => setShowContactModal(false)} />}
       <ChatBot open={chatOpen} onClose={() => setChatOpen(false)} onContactOpen={() => setShowContactModal(true)} />
     </>
