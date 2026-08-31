@@ -1,6 +1,5 @@
-import { useEffect } from "react";
-import { ArrowRight, BookOpen, Brain, Building2, Landmark, Map, Scale, ShieldCheck, Users } from "lucide-react";
-import { useI18n } from "@/i18n/I18nProvider";
+import { useEffect, useRef, useState } from "react";
+import { useI18n, type SupportedLocale } from "@/i18n/I18nProvider";
 
 type HomeSection = "hero" | "governance" | "positioning" | "strategist" | "insights";
 
@@ -11,294 +10,493 @@ type HomeProps = {
   setActiveSection?: (section: HomeSection) => void;
 };
 
-type RuntimeLenis = {
-  scrollTo: (target: HTMLElement, options?: { offset?: number }) => void;
+type PillarKey = "governance" | "compliance" | "digital" | "insights";
+
+type PillarContent = {
+  eyebrow: string;
+  title: string;
+  capabilityTitle: string;
+  capability: string;
+  challengeTitle: string;
+  challenge: string;
+  actionLabel: string;
+  action: () => void;
 };
 
-const sectionMap: Record<HomeSection, string> = {
-  hero: "hero",
-  governance: "governance",
-  positioning: "architecture",
-  strategist: "authority",
-  insights: "intelligence",
-};
+const APPROVED_VISUAL = "/images/stt-home-approved-8k.webp";
 
 export default function Home({ onNavigate, currentPage, activeSection = "hero" }: HomeProps) {
-  const { t } = useI18n();
+  const { locale, setLocale } = useI18n();
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [languageOpen, setLanguageOpen] = useState(false);
+  const [activePillar, setActivePillar] = useState<PillarKey | null>(null);
+  const [voicePlaying, setVoicePlaying] = useState(false);
+  const [voiceStatus, setVoiceStatus] = useState("");
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const audioUrlRef = useRef<string | null>(null);
+  const detailRef = useRef<HTMLElement | null>(null);
 
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (!element) {
-      return;
-    }
-
-    const runtimeWindow = window as unknown as { lenis?: RuntimeLenis };
-    if (runtimeWindow.lenis) {
-      runtimeWindow.lenis.scrollTo(element, { offset: -76 });
-      return;
-    }
-
-    element.scrollIntoView({ behavior: "smooth", block: "start" });
+  const pillars: Record<PillarKey, PillarContent> = {
+    governance: {
+      eyebrow: "01 Governance",
+      title: "策略治理",
+      capabilityTitle: "公司治理策略、組織決策與高階管理",
+      capability: "建立企業重大決策的權責邊界、制度接口與核心決策圈秩序，使重大轉型不再依賴個人權威，而能由組織穩定承接。",
+      challengeTitle: "全球市場與地緣政治重組下的決策秩序",
+      challenge: "企業主在面對重大轉型、跨域投資與市場秩序重組時，真正危險的往往不是資訊不足，而是核心決策圈失序、權責重疊，以及重大選擇缺乏可承擔後果的治理程序。",
+      actionLabel: "進入策略治理",
+      action: () => onNavigate("corporate-governance"),
+    },
+    compliance: {
+      eyebrow: "02 Internal Compliance",
+      title: "內在法遵",
+      capabilityTitle: "企業內部合規架構、契約治理、資本籌措與跨國防禦",
+      capability: "將法遵前置進入交易、投資、資金、契約與跨境營運流程，使合規不只是事件發生後的檢查，而成為重大決策本身的制度門控。",
+      challengeTitle: "跨國佈局與 Clean Supply Chain 法遵防護",
+      challenge: "台資企業走向跨國與海外佈局時，同時承受地緣風險、跨國供應鏈審查、契約責任、勞資制度與交易相對人治理要求，需要一套可跨市場延伸的內在法遵架構。",
+      actionLabel: "進入內在法遵",
+      action: () => onNavigate("internal-compliance"),
+    },
+    digital: {
+      eyebrow: "03 Digital Governance",
+      title: "數位（AI）治理",
+      capabilityTitle: "Agentic AI、MCP、API 與企業級模型整合治理",
+      capability: "以 Anthropic AI／Claude 專業技術訓練與 Google Gemini 認證知識為技術底層，將模型使用、工具調用、權限、資料流與人類最終決策權納入同一套治理架構。",
+      challengeTitle: "企業 AI 工作流的模型安全閘門與數位協議法遵",
+      challenge: "當企業部署生成式與代理式 AI 工作流時，若缺乏模型安全閘門政策、資料責任、MCP 協議治理與數位法遵程序，技術效率將直接轉化為新的治理暴露。",
+      actionLabel: "進入數位治理",
+      action: () => onNavigate("esgai"),
+    },
+    insights: {
+      eyebrow: "04 Press & Insights",
+      title: "出版與觀點",
+      capabilityTitle: "法務、營運風險、出版與高信任知識資產",
+      capability: "整合法務管理、營運風險防控、《內在法遵》系列著作與商學研究視角，把複雜治理問題轉化為企業主可以直接判讀的高信任知識入口。",
+      challengeTitle: "在資訊過量時代建立可信賴的判讀入口",
+      challenge: "企業真正需要的不是更多零碎資訊，而是一個能快速辨識問題層級、判斷風險、理解制度邊界並建立下一步行動秩序的高信任入口。",
+      actionLabel: "進入出版與觀點",
+      action: () => onNavigate("columns"),
+    },
   };
 
   useEffect(() => {
-    const target = currentPage === "governance" ? "governance" : sectionMap[activeSection];
-    const timer = window.setTimeout(() => scrollToSection(target), 120);
-    return () => window.clearTimeout(timer);
+    if (currentPage === "governance" || activeSection === "governance") {
+      setActivePillar("governance");
+      window.setTimeout(() => detailRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 120);
+      return;
+    }
+
+    if (activeSection === "insights") {
+      setActivePillar("insights");
+      window.setTimeout(() => detailRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 120);
+    }
   }, [activeSection, currentPage]);
 
-  const gateways = [
-    {
-      key: "governance",
-      icon: Landmark,
-      action: () => scrollToSection("governance"),
-    },
-    {
-      key: "internalCompliance",
-      icon: ShieldCheck,
-      action: () => onNavigate("internal-compliance"),
-    },
-    {
-      key: "humanisticLandscape",
-      icon: Map,
-      action: () => scrollToSection("humanistic"),
-    },
-    {
-      key: "pressInsights",
-      icon: BookOpen,
-      action: () => onNavigate("columns"),
-    },
-  ];
+  useEffect(() => {
+    return () => {
+      if (audioRef.current) {
+        audioRef.current.pause();
+      }
+      if (audioUrlRef.current) {
+        URL.revokeObjectURL(audioUrlRef.current);
+      }
+    };
+  }, []);
 
-  const architectureItems = [
-    {
-      label: t("home.architecture.corporateGovernance"),
-      icon: Building2,
-      action: () => onNavigate("corporate-governance"),
-    },
-    {
-      label: t("home.architecture.familyGovernance"),
-      icon: Users,
-      action: () => onNavigate("family-governance"),
-    },
-    {
-      label: t("home.architecture.internalCompliance"),
-      icon: Scale,
-      action: () => onNavigate("internal-compliance"),
-    },
-    {
-      label: t("home.architecture.esgai"),
-      icon: Brain,
-      action: () => onNavigate("esgai"),
-    },
-  ];
+  const openPillar = (pillar: PillarKey) => {
+    setActivePillar(pillar);
+    setMenuOpen(false);
+    window.setTimeout(() => detailRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 80);
+  };
+
+  const closeDetail = () => {
+    setActivePillar(null);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const openAi = () => {
+    window.dispatchEvent(new CustomEvent("stt:open-ai"));
+  };
+
+  const changeLanguage = (nextLocale: SupportedLocale) => {
+    setLocale(nextLocale);
+    setLanguageOpen(false);
+  };
+
+  const releaseAudio = () => {
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+      audioRef.current = null;
+    }
+
+    if (audioUrlRef.current) {
+      URL.revokeObjectURL(audioUrlRef.current);
+      audioUrlRef.current = null;
+    }
+
+    setVoicePlaying(false);
+  };
+
+  const readableText = () => {
+    const baseText = [
+      "秩序，讓價值穿越時間。",
+      "Strategic Think Tank",
+      "Governance 策略治理",
+      "Internal Compliance 內在法遵",
+      "Digital Governance 數位 AI 治理",
+      "Press and Insights 出版與觀點",
+    ];
+
+    if (activePillar) {
+      const item = pillars[activePillar];
+      baseText.push(item.title, item.capabilityTitle, item.capability, item.challengeTitle, item.challenge);
+    }
+
+    return baseText.join("。 ").slice(0, 5200);
+  };
+
+  const toggleVoice = async () => {
+    if (voicePlaying) {
+      releaseAudio();
+      setVoiceStatus("語音導讀已停止");
+      window.setTimeout(() => setVoiceStatus(""), 1800);
+      return;
+    }
+
+    setVoiceStatus("正在建立語音導讀");
+
+    try {
+      const response = await fetch("/api/tts", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ text: readableText(), locale }),
+      });
+
+      if (!response.ok) {
+        throw new Error("TTS request failed");
+      }
+
+      const blob = await response.blob();
+      const objectUrl = URL.createObjectURL(blob);
+      const audio = new Audio(objectUrl);
+
+      audioRef.current = audio;
+      audioUrlRef.current = objectUrl;
+      audio.onended = () => {
+        releaseAudio();
+        setVoiceStatus("語音導讀已完成");
+        window.setTimeout(() => setVoiceStatus(""), 1800);
+      };
+      audio.onerror = () => {
+        releaseAudio();
+        setVoiceStatus("語音服務目前暫時無法使用");
+      };
+
+      setVoicePlaying(true);
+      setVoiceStatus("語音導讀中");
+      await audio.play();
+    } catch {
+      releaseAudio();
+      setVoiceStatus("語音服務目前暫時無法使用");
+    }
+  };
 
   return (
-    <div data-stt-theme="platinum" className="min-h-screen" style={{ background: "var(--stt-canvas)", color: "var(--stt-ink)" }}>
-      <section id="hero" data-stt-readable="true" className="relative min-h-[calc(100vh-80px)] overflow-hidden border-b" style={{ borderColor: "var(--stt-line)" }}>
-        <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
-          <div className="absolute right-[-7vw] top-[-16vh] w-[68vw] h-[68vw] rounded-full border" style={{ borderColor: "rgba(183,138,69,0.22)" }} />
-          <div className="absolute right-[4vw] top-[7vh] w-[46vw] h-[46vw] rounded-full border" style={{ borderColor: "rgba(183,138,69,0.20)" }} />
-          <div className="absolute right-[14vw] top-[20vh] w-[28vw] h-[28vw] rounded-full border" style={{ borderColor: "rgba(183,138,69,0.18)" }} />
-          <div className="absolute right-[34vw] top-0 h-full w-px" style={{ background: "rgba(183,138,69,0.18)" }} />
-          <div className="absolute right-0 top-[33%] h-px w-[64%]" style={{ background: "rgba(183,138,69,0.16)" }} />
-          <div className="absolute right-[8vw] bottom-0 w-[27vw] h-[62vh] border-l border-t bg-white/50" style={{ borderColor: "rgba(183,138,69,0.20)" }}>
-            <div className="absolute left-0 right-0 top-0 h-10 border-b" style={{ borderColor: "rgba(36,34,31,0.08)" }} />
-            <div className="absolute left-[12%] top-10 bottom-0 w-[13%] border-x" style={{ borderColor: "rgba(36,34,31,0.08)" }} />
-            <div className="absolute left-[36%] top-10 bottom-0 w-[13%] border-x" style={{ borderColor: "rgba(36,34,31,0.08)" }} />
-            <div className="absolute left-[60%] top-10 bottom-0 w-[13%] border-x" style={{ borderColor: "rgba(36,34,31,0.08)" }} />
-            <div className="absolute left-[84%] top-10 bottom-0 w-[13%] border-x" style={{ borderColor: "rgba(36,34,31,0.08)" }} />
-          </div>
-          <div
-            className="absolute right-[29vw] bottom-[23vh] w-14 h-14 rounded-full"
-            style={{ background: "radial-gradient(circle at 32% 28%, #fff8df 0%, #d9b777 28%, #b0823a 58%, #76511f 100%)", boxShadow: "0 16px 34px rgba(118,81,31,0.18)" }}
+    <div className="stt-approved-home" data-stt-theme="platinum">
+      <style>{`
+        .stt-approved-home {
+          min-height: 100svh;
+          background: #fbfbfa;
+          color: #1a1a1a;
+        }
+        .stt-approved-stage {
+          min-height: 100svh;
+          display: grid;
+          place-items: center;
+          overflow: hidden;
+          background: #fbfbfa;
+        }
+        .stt-approved-frame {
+          position: relative;
+          width: min(100vw, 150svh);
+          aspect-ratio: 3 / 2;
+          max-width: 100vw;
+          max-height: 100svh;
+          overflow: hidden;
+          background: #fbfbfa;
+        }
+        .stt-approved-image {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+          object-position: center;
+          user-select: none;
+          pointer-events: none;
+        }
+        .stt-approved-hotspot {
+          position: absolute;
+          z-index: 4;
+          border: 0;
+          background: transparent;
+          cursor: pointer;
+          outline: none;
+        }
+        .stt-approved-hotspot:focus-visible {
+          box-shadow: inset 0 0 0 1px rgba(181, 137, 75, 0.58);
+          background: rgba(197, 168, 128, 0.05);
+        }
+        .stt-approved-menu-hit { top: 0.7%; right: 1.7%; width: 5.2%; height: 6.2%; }
+        .stt-approved-pillar-01 { left: 10.4%; top: 67.2%; width: 12.2%; height: 25.4%; }
+        .stt-approved-pillar-02 { left: 31.1%; top: 67.2%; width: 12.4%; height: 25.4%; }
+        .stt-approved-pillar-03 { left: 52.0%; top: 67.2%; width: 12.5%; height: 25.4%; }
+        .stt-approved-pillar-04 { left: 73.0%; top: 67.2%; width: 12.6%; height: 25.4%; }
+        .stt-approved-tool-ai { left: 81.5%; top: 92.4%; width: 4.8%; height: 6.2%; border-radius: 999px; }
+        .stt-approved-tool-language { left: 86.5%; top: 92.4%; width: 4.8%; height: 6.2%; border-radius: 999px; }
+        .stt-approved-tool-voice { left: 91.5%; top: 92.4%; width: 4.8%; height: 6.2%; border-radius: 999px; }
+        .stt-approved-menu-overlay {
+          position: fixed;
+          inset: 0;
+          z-index: 120;
+          display: flex;
+          justify-content: flex-end;
+          background: rgba(31, 28, 24, 0.10);
+          backdrop-filter: blur(8px);
+        }
+        .stt-approved-menu-panel {
+          width: min(430px, 92vw);
+          min-height: 100svh;
+          padding: 92px 38px 44px;
+          background: rgba(251, 251, 250, 0.98);
+          border-left: 1px solid rgba(197, 168, 128, 0.22);
+          box-shadow: -24px 0 80px rgba(36, 34, 31, 0.08);
+        }
+        .stt-approved-menu-label {
+          margin: 0 0 28px;
+          color: #a9895e;
+          font-size: 10px;
+          letter-spacing: 0.24em;
+          text-transform: uppercase;
+        }
+        .stt-approved-menu-link {
+          width: 100%;
+          padding: 18px 0;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          border: 0;
+          border-bottom: 1px solid rgba(197, 168, 128, 0.18);
+          background: transparent;
+          color: #1a1a1a;
+          font-family: "Noto Serif TC", "Noto Serif JP", Georgia, serif;
+          font-size: 20px;
+          text-align: left;
+          cursor: pointer;
+        }
+        .stt-approved-private-link {
+          margin-top: 38px;
+          padding-top: 22px;
+          border-top: 1px solid rgba(197, 168, 128, 0.18);
+          color: #a9895e;
+          font-size: 12px;
+          line-height: 1.8;
+        }
+        .stt-approved-language-panel {
+          position: fixed;
+          z-index: 130;
+          right: 26px;
+          bottom: 86px;
+          min-width: 190px;
+          padding: 10px;
+          background: rgba(255, 255, 255, 0.97);
+          border: 1px solid rgba(197, 168, 128, 0.24);
+          box-shadow: 0 20px 60px rgba(36, 34, 31, 0.10);
+        }
+        .stt-approved-language-option {
+          width: 100%;
+          padding: 11px 12px;
+          border: 0;
+          background: transparent;
+          color: #4b463f;
+          font-size: 12px;
+          text-align: left;
+          cursor: pointer;
+        }
+        .stt-approved-language-option[data-active="true"] {
+          color: #a9895e;
+          background: rgba(197, 168, 128, 0.09);
+        }
+        .stt-approved-voice-status {
+          position: fixed;
+          right: 26px;
+          bottom: 86px;
+          z-index: 125;
+          max-width: 260px;
+          padding: 10px 12px;
+          border: 1px solid rgba(197, 168, 128, 0.20);
+          background: rgba(255, 255, 255, 0.96);
+          color: #6e675e;
+          font-size: 11px;
+          line-height: 1.7;
+          box-shadow: 0 18px 55px rgba(36, 34, 31, 0.08);
+        }
+        .stt-approved-detail {
+          scroll-margin-top: 22px;
+          border-top: 1px solid rgba(197, 168, 128, 0.18);
+          background: linear-gradient(180deg, #fbfbfa 0%, #f7f4ef 100%);
+        }
+        .stt-approved-detail-inner {
+          width: min(calc(100% - 48px), 1240px);
+          margin: 0 auto;
+          padding: 76px 0 88px;
+          display: grid;
+          grid-template-columns: minmax(250px, 0.76fr) minmax(0, 1.24fr);
+          gap: 72px;
+        }
+        .stt-approved-detail-eyebrow {
+          margin: 0 0 14px;
+          color: #a9895e;
+          font-size: 10px;
+          letter-spacing: 0.22em;
+          text-transform: uppercase;
+        }
+        .stt-approved-detail-title {
+          margin: 0;
+          font-family: "Noto Serif TC", "Noto Serif JP", Georgia, serif;
+          font-size: clamp(34px, 4vw, 54px);
+          font-weight: 400;
+          line-height: 1.35;
+          letter-spacing: 0.04em;
+        }
+        .stt-approved-detail-rule {
+          width: 52px;
+          height: 1px;
+          margin: 22px 0 24px;
+          background: #c5a880;
+        }
+        .stt-approved-detail-summary {
+          margin: 0;
+          color: #6e675e;
+          font-size: 14px;
+          line-height: 2;
+        }
+        .stt-approved-detail-body { display: grid; gap: 20px; }
+        .stt-approved-detail-card {
+          padding: 26px 28px;
+          border: 1px solid rgba(197, 168, 128, 0.18);
+          background: rgba(255, 255, 255, 0.76);
+        }
+        .stt-approved-detail-card h3 {
+          margin: 0 0 12px;
+          font-family: "Noto Serif TC", "Noto Serif JP", Georgia, serif;
+          font-size: 21px;
+          font-weight: 400;
+        }
+        .stt-approved-detail-card p {
+          margin: 0;
+          color: #4b463f;
+          font-size: 14px;
+          line-height: 2;
+        }
+        .stt-approved-detail-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+        .stt-approved-detail-button {
+          min-height: 48px;
+          padding: 0 22px;
+          border: 1px solid #c5a880;
+          background: transparent;
+          color: #1a1a1a;
+          font-size: 12px;
+          cursor: pointer;
+        }
+        .stt-approved-detail-button:hover { background: #a9895e; border-color: #a9895e; color: #ffffff; }
+        @media (max-width: 900px) {
+          .stt-approved-detail-inner { grid-template-columns: 1fr; gap: 36px; }
+        }
+        @media (max-width: 640px) {
+          .stt-approved-stage { min-height: auto; padding: 0; }
+          .stt-approved-frame { width: 100vw; max-height: none; }
+          .stt-approved-detail-inner { width: calc(100% - 28px); padding: 54px 0 66px; }
+        }
+      `}</style>
+
+      <section className="stt-approved-stage" aria-label="STT Governance approved homepage visual">
+        <div className="stt-approved-frame">
+          <img
+            className="stt-approved-image"
+            src={APPROVED_VISUAL}
+            alt="STT Governance 白金極簡古典幾何首頁，秩序，讓價值穿越時間。"
+            width={7680}
+            height={5120}
+            decoding="async"
+            fetchPriority="high"
           />
+          <button className="stt-approved-hotspot stt-approved-menu-hit" type="button" aria-label="開啟選單" onClick={() => setMenuOpen(true)} />
+          <button className="stt-approved-hotspot stt-approved-pillar-01" type="button" aria-label="開啟策略治理" onClick={() => openPillar("governance")} />
+          <button className="stt-approved-hotspot stt-approved-pillar-02" type="button" aria-label="開啟內在法遵" onClick={() => openPillar("compliance")} />
+          <button className="stt-approved-hotspot stt-approved-pillar-03" type="button" aria-label="開啟數位 AI 治理" onClick={() => openPillar("digital")} />
+          <button className="stt-approved-hotspot stt-approved-pillar-04" type="button" aria-label="開啟出版與觀點" onClick={() => openPillar("insights")} />
+          <button className="stt-approved-hotspot stt-approved-tool-ai" type="button" aria-label="開啟 AI 小幫手" onClick={openAi} />
+          <button className="stt-approved-hotspot stt-approved-tool-language" type="button" aria-label="切換語言" onClick={() => setLanguageOpen((value) => !value)} />
+          <button className="stt-approved-hotspot stt-approved-tool-voice" type="button" aria-label={voicePlaying ? "停止語音導讀" : "開始語音導讀"} onClick={toggleVoice} />
         </div>
+      </section>
 
-        <div className="relative z-10 mx-auto flex min-h-[calc(100vh-80px)] max-w-[1280px] items-center px-6 py-16 lg:px-10">
-          <div className="max-w-[680px] lg:pb-20">
-            <p className="mb-7 text-xs tracking-[0.24em]" style={{ color: "var(--stt-gold-deep)" }}>
-              {t("home.hero.eyebrow")}
-            </p>
-            <h1 className="font-serif text-[clamp(2.9rem,6vw,5.8rem)] font-light leading-[1.22] tracking-[0.04em]">
-              <span className="block">{t("home.hero.titleLine1")}</span>
-              <span className="block">{t("home.hero.titleLine2")}</span>
-            </h1>
-            <div className="my-8 h-px w-16" style={{ background: "var(--stt-gold)" }} />
-            <p className="text-sm tracking-[0.16em] uppercase" style={{ color: "var(--stt-gold-deep)" }}>
-              {t("home.hero.subtitle")}
-            </p>
-            <p className="mt-5 max-w-[600px] text-base leading-8" style={{ color: "var(--stt-ink-muted)" }}>
-              {t("home.hero.description")}
-            </p>
-
-            <div className="mt-9 flex flex-wrap gap-3">
-              <button
-                type="button"
-                onClick={() => scrollToSection("governance")}
-                className="inline-flex items-center gap-3 border bg-transparent px-5 py-3 text-sm cursor-pointer transition-all hover:translate-x-0.5"
-                style={{ borderColor: "var(--stt-gold-line)", color: "var(--stt-gold-deep)" }}
-              >
-                {t("home.hero.primaryAction")}
-                <ArrowRight className="w-4 h-4" strokeWidth={1.3} />
-              </button>
-              <button
-                type="button"
-                onClick={() => onNavigate("about")}
-                className="inline-flex items-center gap-3 border bg-white/60 px-5 py-3 text-sm cursor-pointer"
-                style={{ borderColor: "var(--stt-line)", color: "var(--stt-ink-soft)" }}
-              >
-                {t("home.hero.secondaryAction")}
+      {menuOpen && (
+        <div className="stt-approved-menu-overlay" role="presentation" onMouseDown={(event) => { if (event.currentTarget === event.target) setMenuOpen(false); }}>
+          <nav className="stt-approved-menu-panel" aria-label="STT Governance 導覽">
+            <p className="stt-approved-menu-label">Strategic Think Tank</p>
+            <button className="stt-approved-menu-link" type="button" onClick={() => openPillar("governance")}><span>Governance 策略治理</span><span>→</span></button>
+            <button className="stt-approved-menu-link" type="button" onClick={() => openPillar("compliance")}><span>Internal Compliance 內在法遵</span><span>→</span></button>
+            <button className="stt-approved-menu-link" type="button" onClick={() => openPillar("digital")}><span>Digital Governance 數位（AI）治理</span><span>→</span></button>
+            <button className="stt-approved-menu-link" type="button" onClick={() => openPillar("insights")}><span>Press & Insights 出版與觀點</span><span>→</span></button>
+            <button className="stt-approved-menu-link" type="button" onClick={() => onNavigate("about")}><span>STT Governance</span><span>→</span></button>
+            <div className="stt-approved-private-link">
+              <button type="button" onClick={() => onNavigate("gcsda")} className="border-0 bg-transparent p-0 text-left cursor-pointer" style={{ color: "inherit" }}>
+                中華企業策略永續發展學會（GCSDA）活動專區 →
               </button>
             </div>
-          </div>
+          </nav>
         </div>
+      )}
 
-        <div className="relative z-20 mx-auto grid max-w-[1280px] grid-cols-1 border-t md:grid-cols-2 lg:grid-cols-4" style={{ borderColor: "var(--stt-line)" }}>
-          {gateways.map((gateway) => {
-            const Icon = gateway.icon;
-            const key = `home.gateways.${gateway.key}`;
-            return (
-              <button
-                key={gateway.key}
-                type="button"
-                onClick={gateway.action}
-                className="group min-h-[190px] border-b bg-white/45 px-7 py-6 text-left cursor-pointer transition-colors hover:bg-white md:border-r lg:border-b-0"
-                style={{ borderColor: "var(--stt-line)" }}
-              >
-                <div className="flex items-center justify-between">
-                  <Icon className="w-6 h-6" strokeWidth={1.15} style={{ color: "var(--stt-gold-deep)" }} />
-                  <span className="text-xs tracking-[0.18em]" style={{ color: "var(--stt-gold-deep)" }}>
-                    {t(`${key}.number`)}
-                  </span>
-                </div>
-                <p className="mt-6 font-serif text-lg tracking-[0.04em]">{t(`${key}.title`)}</p>
-                <p className="mt-2 text-sm" style={{ color: "var(--stt-gold-deep)" }}>{t(`${key}.subtitle`)}</p>
-                <p className="mt-3 text-xs leading-6 opacity-0 transition-opacity group-hover:opacity-100" style={{ color: "var(--stt-ink-muted)" }}>
-                  {t(`${key}.description`)}
-                </p>
-                <ArrowRight className="mt-4 w-4 h-4 transition-transform group-hover:translate-x-1" strokeWidth={1.2} style={{ color: "var(--stt-gold-deep)" }} />
-              </button>
-            );
-          })}
+      {languageOpen && (
+        <div className="stt-approved-language-panel" role="dialog" aria-label="語言切換">
+          <button className="stt-approved-language-option" data-active={locale === "zh-TW"} type="button" onClick={() => changeLanguage("zh-TW")}>繁體中文</button>
+          <button className="stt-approved-language-option" data-active={locale === "en"} type="button" onClick={() => changeLanguage("en")}>English</button>
+          <button className="stt-approved-language-option" data-active={locale === "ja"} type="button" onClick={() => changeLanguage("ja")}>日本語</button>
         </div>
-      </section>
+      )}
 
-      <section id="governance" data-stt-readable="true" className="border-b px-6 py-24 lg:px-10 lg:py-32" style={{ borderColor: "var(--stt-line)" }}>
-        <div className="mx-auto max-w-[1180px]">
-          <div className="max-w-[820px]">
-            <p className="text-xs tracking-[0.22em] uppercase" style={{ color: "var(--stt-gold-deep)" }}>{t("home.architecture.eyebrow")}</p>
-            <h2 className="mt-5 font-serif text-3xl font-light leading-[1.5] md:text-5xl">{t("home.architecture.title")}</h2>
-            <p className="mt-6 max-w-[760px] text-base leading-8" style={{ color: "var(--stt-ink-muted)" }}>{t("home.architecture.description")}</p>
-          </div>
+      {voiceStatus && <div className="stt-approved-voice-status" role="status">{voiceStatus}</div>}
 
-          <div id="architecture" className="mt-14 grid gap-px border bg-[var(--stt-line)] md:grid-cols-2" style={{ borderColor: "var(--stt-line)" }}>
-            {architectureItems.map((item, index) => {
-              const Icon = item.icon;
-              return (
-                <button key={item.label} type="button" onClick={item.action} className="group flex min-h-[180px] items-center justify-between bg-[var(--stt-canvas)] p-7 text-left cursor-pointer transition-colors hover:bg-white">
-                  <div>
-                    <span className="text-xs tracking-[0.18em]" style={{ color: "var(--stt-gold-deep)" }}>0{index + 1}</span>
-                    <h3 className="mt-5 font-serif text-xl font-normal leading-8 md:text-2xl">{item.label}</h3>
-                  </div>
-                  <div className="flex flex-col items-end gap-8">
-                    <Icon className="w-7 h-7" strokeWidth={1.1} style={{ color: "var(--stt-gold-deep)" }} />
-                    <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" strokeWidth={1.2} style={{ color: "var(--stt-gold-deep)" }} />
-                  </div>
-                </button>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      <section id="authority" data-stt-readable="true" className="border-b bg-white px-6 py-24 lg:px-10 lg:py-32" style={{ borderColor: "var(--stt-line)" }}>
-        <div className="mx-auto grid max-w-[1180px] gap-14 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
-          <div className="relative min-h-[360px] overflow-hidden border" style={{ borderColor: "var(--stt-line)" }}>
-            <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, rgba(243,239,231,0.96), rgba(255,255,255,0.8))" }} />
-            <div className="absolute left-[14%] top-[12%] w-[72%] aspect-square rounded-full border" style={{ borderColor: "var(--stt-gold-line)" }} />
-            <div className="absolute left-[29%] top-[27%] w-[42%] aspect-square rounded-full border" style={{ borderColor: "var(--stt-gold-line)" }} />
-            <div className="absolute left-1/2 top-0 h-full w-px" style={{ background: "var(--stt-gold-line)" }} />
-            <div className="absolute top-1/2 left-0 h-px w-full" style={{ background: "var(--stt-gold-line)" }} />
-            <div className="absolute left-1/2 top-1/2 w-4 h-4 -translate-x-1/2 -translate-y-1/2 rounded-full" style={{ background: "var(--stt-gold)" }} />
-          </div>
-
-          <div>
-            <p className="text-xs tracking-[0.22em] uppercase" style={{ color: "var(--stt-gold-deep)" }}>{t("home.authority.eyebrow")}</p>
-            <h2 className="mt-5 font-serif text-3xl font-light leading-[1.5] md:text-5xl">{t("home.authority.title")}</h2>
-            <div className="mt-8 flex flex-wrap gap-2">
-              {["role1", "role2", "role3"].map((role) => (
-                <span key={role} className="border px-3 py-2 text-xs" style={{ borderColor: "var(--stt-gold-line)", color: "var(--stt-gold-deep)" }}>
-                  {t(`home.authority.${role}`)}
-                </span>
-              ))}
-            </div>
-            <p className="mt-7 text-base leading-8" style={{ color: "var(--stt-ink-muted)" }}>{t("home.authority.description")}</p>
-            <button type="button" onClick={() => onNavigate("about")} className="mt-8 inline-flex items-center gap-3 bg-transparent border-0 p-0 text-sm cursor-pointer" style={{ color: "var(--stt-gold-deep)" }}>
-              {t("home.authority.action")}
-              <ArrowRight className="w-4 h-4" strokeWidth={1.2} />
-            </button>
-          </div>
-        </div>
-      </section>
-
-      <section id="humanistic" data-stt-readable="true" className="border-b px-6 py-24 lg:px-10 lg:py-32" style={{ borderColor: "var(--stt-line)" }}>
-        <div className="mx-auto grid max-w-[1180px] gap-12 lg:grid-cols-2 lg:items-end">
-          <div>
-            <p className="text-xs tracking-[0.22em] uppercase" style={{ color: "var(--stt-gold-deep)" }}>{t("home.gateways.humanisticLandscape.title")}</p>
-            <h2 className="mt-5 font-serif text-3xl font-light md:text-5xl">{t("home.gateways.humanisticLandscape.subtitle")}</h2>
-            <p className="mt-6 max-w-[620px] text-base leading-8" style={{ color: "var(--stt-ink-muted)" }}>{t("home.gateways.humanisticLandscape.description")}</p>
-          </div>
-          <div className="grid grid-cols-3 gap-px border bg-[var(--stt-line)]" style={{ borderColor: "var(--stt-line)" }}>
-            {["People", "Place", "Industry"].map((label, index) => (
-              <div key={label} className="min-h-[160px] bg-white p-5">
-                <span className="text-xs" style={{ color: "var(--stt-gold-deep)" }}>0{index + 1}</span>
-                <p className="mt-16 font-serif text-lg">{label}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section id="intelligence" data-stt-readable="true" className="border-b bg-white px-6 py-24 lg:px-10 lg:py-32" style={{ borderColor: "var(--stt-line)" }}>
-        <div className="mx-auto max-w-[1180px]">
-          <p className="text-xs tracking-[0.22em] uppercase" style={{ color: "var(--stt-gold-deep)" }}>{t("home.intelligence.eyebrow")}</p>
-          <div className="mt-5 grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
-            <h2 className="font-serif text-3xl font-light leading-[1.5] md:text-5xl">{t("home.intelligence.title")}</h2>
-            <p className="text-base leading-8" style={{ color: "var(--stt-ink-muted)" }}>{t("home.intelligence.description")}</p>
-          </div>
-
-          <div className="mt-14 grid gap-px border bg-[var(--stt-line)] md:grid-cols-2 lg:grid-cols-4" style={{ borderColor: "var(--stt-line)" }}>
-            {[
-              ["latest", "columns"],
-              ["editorial", "article-index"],
-              ["publications", "books"],
-              ["research", "papers"],
-            ].map(([key, route]) => (
-              <button key={key} type="button" onClick={() => onNavigate(route)} className="group min-h-[150px] bg-white p-6 text-left cursor-pointer">
-                <p className="font-serif text-lg">{t(`home.intelligence.${key}`)}</p>
-                <ArrowRight className="mt-12 w-4 h-4 transition-transform group-hover:translate-x-1" strokeWidth={1.2} style={{ color: "var(--stt-gold-deep)" }} />
-              </button>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section data-stt-readable="true" className="px-6 py-24 lg:px-10 lg:py-28">
-        <div className="mx-auto max-w-[1180px] border px-7 py-12 md:px-12" style={{ borderColor: "var(--stt-gold-line)", background: "var(--stt-ivory)" }}>
-          <p className="text-xs tracking-[0.22em] uppercase" style={{ color: "var(--stt-gold-deep)" }}>{t("home.engagement.eyebrow")}</p>
-          <div className="mt-5 grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
+      {activePillar && (
+        <section ref={detailRef} className="stt-approved-detail" aria-label={pillars[activePillar].title}>
+          <div className="stt-approved-detail-inner">
             <div>
-              <h2 className="font-serif text-3xl font-light md:text-4xl">{t("home.engagement.title")}</h2>
-              <p className="mt-5 max-w-[720px] text-base leading-8" style={{ color: "var(--stt-ink-muted)" }}>{t("home.engagement.description")}</p>
+              <p className="stt-approved-detail-eyebrow">{pillars[activePillar].eyebrow}</p>
+              <h2 className="stt-approved-detail-title">{pillars[activePillar].title}</h2>
+              <div className="stt-approved-detail-rule" />
+              <p className="stt-approved-detail-summary">{pillars[activePillar].challengeTitle}</p>
             </div>
-            <button type="button" onClick={() => onNavigate("about")} className="inline-flex items-center justify-center gap-3 border bg-white px-5 py-3 text-sm cursor-pointer" style={{ borderColor: "var(--stt-gold-line)", color: "var(--stt-gold-deep)" }}>
-              {t("home.engagement.primaryAction")}
-              <ArrowRight className="w-4 h-4" strokeWidth={1.2} />
-            </button>
+            <div className="stt-approved-detail-body">
+              <article className="stt-approved-detail-card">
+                <h3>{pillars[activePillar].capabilityTitle}</h3>
+                <p>{pillars[activePillar].capability}</p>
+              </article>
+              <article className="stt-approved-detail-card">
+                <h3>{pillars[activePillar].challengeTitle}</h3>
+                <p>{pillars[activePillar].challenge}</p>
+              </article>
+              <div className="stt-approved-detail-actions">
+                <button className="stt-approved-detail-button" type="button" onClick={pillars[activePillar].action}>{pillars[activePillar].actionLabel} →</button>
+                <button className="stt-approved-detail-button" type="button" onClick={closeDetail}>返回首頁視覺</button>
+              </div>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
     </div>
   );
 }
