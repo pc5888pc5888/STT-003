@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState, type ReactNode } from "react";
 import { BrowserRouter, Navigate, Route, Routes, useLocation, useNavigate } from "react-router-dom";
-import { ArrowRight, BookOpen, GraduationCap, Menu, Shield, Users, X } from "lucide-react";
+import { ArrowRight, BookOpen, Brain, GraduationCap, Menu, Shield, Users, X } from "lucide-react";
 import Lenis from "lenis";
 import Home from "./pages/Home";
 import About, { ContactModal } from "./pages/About";
@@ -52,6 +52,7 @@ const legacyPathMap: Record<string, string> = {
   "family-governance-framework": "/governance/family/framework",
   "family-governance-stages": "/governance/family/stages",
   "family-governance-academic": "/governance/family/academic",
+  "digital-governance": "/governance/esgai",
   esgai: "/governance/esgai",
   "esg-ai": "/governance/esgai",
   "esgai-features": "/governance/esgai/features",
@@ -65,9 +66,9 @@ const legacyPathMap: Record<string, string> = {
 const homeAnchorMap: Record<string, string> = {
   hero: "hero",
   governance: "governance",
-  positioning: "architecture",
-  strategist: "authority",
-  insights: "intelligence",
+  positioning: "governance",
+  strategist: "hero",
+  insights: "insights",
 };
 
 function useLegacyNavigate(): LegacyNavigate {
@@ -96,11 +97,13 @@ function PublicShell({ children, onContactOpen, chatOpen, onChatToggle }: ShellP
   const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
 
+  const exactHome = location.pathname === "/" || location.pathname === "/index.html";
+
   const primaryNavigation = useMemo(
     () => [
       { label: t("navigation.governance"), path: "/#governance" },
       { label: t("navigation.internalCompliance"), path: "/internal-compliance" },
-      { label: t("navigation.humanisticLandscape"), path: "/#humanistic" },
+      { label: t("navigation.digitalGovernance", "數位（AI）治理"), path: "/governance/esgai" },
       { label: t("navigation.pressInsights"), path: "/insights" },
     ],
     [t]
@@ -111,6 +114,7 @@ function PublicShell({ children, onContactOpen, chatOpen, onChatToggle }: ShellP
       { label: t("navigation.institution"), path: "/institution/eric-chuang", icon: Shield },
       { label: t("home.intelligence.publications"), path: "/books", icon: BookOpen },
       { label: t("home.intelligence.research"), path: "/papers", icon: GraduationCap },
+      { label: t("navigation.digitalGovernance", "數位（AI）治理"), path: "/governance/esgai", icon: Brain },
       { label: "GCSDA", path: "/institution/gcsda", icon: Users },
     ],
     [t]
@@ -120,6 +124,14 @@ function PublicShell({ children, onContactOpen, chatOpen, onChatToggle }: ShellP
     setMenuOpen(false);
     navigate(path);
   };
+
+  if (exactHome) {
+    return (
+      <div className="min-h-screen" style={{ background: "#fbfbfa", color: "var(--stt-ink)" }}>
+        <main>{children}</main>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen" style={{ background: "var(--stt-canvas)", color: "var(--stt-ink)" }}>
@@ -245,13 +257,9 @@ function HomeRoute({ onNavigate }: { onNavigate: LegacyNavigate }) {
   const hash = location.hash.replace("#", "");
   const activeSection = hash === "governance"
     ? "governance"
-    : hash === "architecture"
-      ? "positioning"
-      : hash === "authority"
-        ? "strategist"
-        : hash === "intelligence"
-          ? "insights"
-          : "hero";
+    : hash === "insights"
+      ? "insights"
+      : "hero";
 
   return <Home onNavigate={onNavigate} currentPage={hash === "governance" ? "governance" : "home"} activeSection={activeSection} />;
 }
@@ -293,6 +301,8 @@ function AppRoutes({ onContactOpen }: { onContactOpen: () => void }) {
       <Route path="/governance/family/academic" element={<FamilyGovernance onNavigate={onNavigate} activeSection="academic" />} />
 
       <Route path="/governance/esgai" element={<ESGAI onNavigate={onNavigate} activeSection="intro" />} />
+      <Route path="/governance/digital" element={<ESGAI onNavigate={onNavigate} activeSection="intro" />} />
+      <Route path="/digital-governance" element={<ESGAI onNavigate={onNavigate} activeSection="intro" />} />
       <Route path="/governance/esgai/features" element={<ESGAI onNavigate={onNavigate} activeSection="features" />} />
       <Route path="/governance/esgai/console" element={<ESGAI onNavigate={onNavigate} activeSection="console" />} />
       <Route path="/governance/esgai/academic" element={<ESGAI onNavigate={onNavigate} activeSection="academic" />} />
@@ -332,6 +342,19 @@ function AppFrame() {
       window.cancelAnimationFrame(frame);
       lenis.destroy();
       delete runtimeWindow.lenis;
+    };
+  }, []);
+
+  useEffect(() => {
+    const openAi = () => setChatOpen(true);
+    const openContact = () => setShowContactModal(true);
+
+    window.addEventListener("stt:open-ai", openAi);
+    window.addEventListener("stt:open-contact", openContact);
+
+    return () => {
+      window.removeEventListener("stt:open-ai", openAi);
+      window.removeEventListener("stt:open-contact", openContact);
     };
   }, []);
 
