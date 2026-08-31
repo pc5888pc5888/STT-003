@@ -1,9 +1,9 @@
-import ChatBot from "./components/ChatBot";
-import { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence } from "motion/react";
+import { useEffect, useMemo, useState, type ReactNode } from "react";
+import { BrowserRouter, Navigate, Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import { ArrowRight, BookOpen, GraduationCap, Landmark, Menu, Scale, Shield, Users, X } from "lucide-react";
 import Lenis from "lenis";
 import Home from "./pages/Home";
-import About from "./pages/About";
+import About, { ContactModal } from "./pages/About";
 import Columns from "./pages/Columns";
 import Books from "./pages/Books";
 import Papers from "./pages/Papers";
@@ -14,626 +14,345 @@ import FamilyGovernance from "./pages/FamilyGovernance";
 import InternalCompliancePortal from "./pages/InternalCompliancePortal";
 import ESGAI from "./pages/ESGAI";
 import ServicePortal from "./pages/ServicePortal";
-import { ContactModal } from "./pages/About";
 import Success from "./pages/Success";
 import ArticleIndex from "./pages/ArticleIndex";
-import { Button } from "@/components/ui/button";
-import { Home as HomeIcon, Newspaper, BookText, BookOpen, GraduationCap, Globe, User, Menu, X, ShieldAlert, Scale, Users, Library, ArrowUpRight, Mail, Award, Landmark, Shield, Crown, ArrowRight } from "lucide-react";
+import ChatBot from "./components/ChatBot";
 import { AccessibilityWidget } from "./components/AccessibilityWidget";
+import { useI18n } from "./i18n/I18nProvider";
 
-export default function App() {
-  const getInitialPage = () => { const h = window.location.hash.replace("#","").split("?")[0]; const valid = ["home","about","columns","books","internal-compliance","internal-compliance-pillars","internal-compliance-simulator","internal-compliance-academic","service-portal","success","papers","gcsda","article-index","governance","insights","contact","corporate-governance","corporate-governance-modules","corporate-governance-simulator","corporate-governance-academic","family-governance","family-governance-framework","family-governance-stages","family-governance-academic","internal-compliance-book","esgai","esgai-features","esgai-console","esgai-academic","esg-ai","esg-ai-features","esg-ai-console","esg-ai-academic","positioning","strategist","hero"]; if (h && valid.includes(h) && !["hero","governance","positioning","strategist"].includes(h)) { return h === "insights" ? "columns" : h === "contact" ? "service-portal" : h; } return "home"; };
-  const [currentPage, setCurrentPage] = useState(getInitialPage);
-  const [homeSection, setHomeSection] = useState<'hero' | 'governance' | 'positioning' | 'strategist' | 'insights'>('hero');
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const isInitialized = useRef(false);
+type LegacyNavigate = (page: string) => void;
 
-  const handleNavigate = (page: string) => {
-    const validSections = ['hero', 'governance', 'positioning', 'strategist', 'insights'];
-    if (validSections.includes(page)) {
-      setHomeSection(page as any);
-      setCurrentPage('home');
-    } else {
-      setCurrentPage(page);
+type ShellProps = {
+  children: ReactNode;
+  onContactOpen: () => void;
+  chatOpen: boolean;
+  onChatToggle: () => void;
+};
+
+const legacyPathMap: Record<string, string> = {
+  home: "/",
+  about: "/institution/eric-chuang",
+  columns: "/insights",
+  books: "/books",
+  papers: "/papers",
+  gcsda: "/institution/gcsda",
+  "article-index": "/insights/index",
+  "service-portal": "/digital-product-policy",
+  success: "/success",
+  "internal-compliance": "/internal-compliance",
+  "internal-compliance-pillars": "/internal-compliance/pillars",
+  "internal-compliance-simulator": "/internal-compliance/simulator",
+  "internal-compliance-academic": "/internal-compliance/academic",
+  "internal-compliance-book": "/internal-compliance/publication",
+  "corporate-governance": "/governance/corporate",
+  "corporate-governance-modules": "/governance/corporate/modules",
+  "corporate-governance-simulator": "/governance/corporate/simulator",
+  "corporate-governance-academic": "/governance/corporate/academic",
+  "family-governance": "/governance/family",
+  "family-governance-framework": "/governance/family/framework",
+  "family-governance-stages": "/governance/family/stages",
+  "family-governance-academic": "/governance/family/academic",
+  esgai: "/governance/esgai",
+  "esg-ai": "/governance/esgai",
+  "esgai-features": "/governance/esgai/features",
+  "esg-ai-features": "/governance/esgai/features",
+  "esgai-console": "/governance/esgai/console",
+  "esg-ai-console": "/governance/esgai/console",
+  "esgai-academic": "/governance/esgai/academic",
+  "esg-ai-academic": "/governance/esgai/academic",
+};
+
+const homeAnchorMap: Record<string, string> = {
+  hero: "hero",
+  governance: "governance",
+  positioning: "architecture",
+  strategist: "authority",
+  insights: "intelligence",
+};
+
+function useLegacyNavigate(): LegacyNavigate {
+  const navigate = useNavigate();
+
+  return (page: string) => {
+    const anchor = homeAnchorMap[page];
+    if (anchor) {
+      navigate(`/#${anchor}`);
+      return;
     }
+
+    const path = legacyPathMap[page];
+    if (path) {
+      navigate(path);
+      return;
+    }
+
+    navigate("/");
   };
+}
 
-  useEffect(() => {
-    const handleHashAndPathChange = () => {
-      const urlParams = new URLSearchParams(window.location.search);
-      const appParams = urlParams.get('appParams') || urlParams.get('page');
-      
-      const hash = window.location.hash.replace('#', '').split('?')[0];
-      const path = window.location.pathname.replace('/', '').replace('.html', '').split('?')[0];
-      
-      const validPages = [
-        'home', 'about', 'columns', 'books', 
-        'internal-compliance', 'internal-compliance-pillars', 'internal-compliance-simulator', 'internal-compliance-academic', 
-        'service-portal', 'success', 'papers', 'gcsda', 'article-index', 'governance', 'insights', 'contact', 
-        'corporate-governance', 'corporate-governance-modules', 'corporate-governance-simulator', 'corporate-governance-academic',
-        'family-governance', 'family-governance-framework', 'family-governance-stages', 'family-governance-academic',
-        'internal-compliance-book', 
-        'esgai', 'esgai-features', 'esgai-console', 'esgai-academic',
-        'esg-ai', 'esg-ai-features', 'esg-ai-console', 'esg-ai-academic',
-        'positioning', 'strategist', 'hero'
-      ];
-      
-      let targetPage = "home";
-      if (hash && validPages.includes(hash)) {
-        targetPage = hash;
-      } else if (appParams && validPages.includes(appParams)) {
-        targetPage = appParams;
-      } else if (path && validPages.includes(path)) {
-        targetPage = path;
-      } else {
-        return;
-      }
-      
-      if (validPages.includes(targetPage)) {
-        const pageMap: Record<string, string> = {
-          'insights': 'columns',
-          'contact': 'service-portal'
-        };
-        const resolvedPage = pageMap[targetPage] || targetPage;
-        
-        const homeSections = ['hero', 'governance', 'positioning', 'strategist'];
-        if (homeSections.includes(resolvedPage)) {
-          setHomeSection(resolvedPage as any);
-          setCurrentPage('home');
-        } else {
-          setCurrentPage(resolvedPage);
-        }
-        
-        if (resolvedPage === 'governance') {
-          setTimeout(() => {
-            const element = document.getElementById('governance');
-            if (element) {
-              if ((window as any).lenis) {
-                (window as any).lenis.scrollTo(element, { offset: -80 });
-              } else {
-                element.scrollIntoView({ behavior: 'smooth' });
-              }
-            }
-          }, 300);
-        }
-      }
-    };
+function PublicShell({ children, onContactOpen, chatOpen, onChatToggle }: ShellProps) {
+  const { t } = useI18n();
+  const location = useLocation();
+  const navigate = useNavigate();
+  const [menuOpen, setMenuOpen] = useState(false);
 
-    window.addEventListener('hashchange', handleHashAndPathChange);
-    window.addEventListener('popstate', handleHashAndPathChange);
-    handleHashAndPathChange();
-    setTimeout(() => { isInitialized.current = true; }, 100);
+  const primaryNavigation = useMemo(
+    () => [
+      { label: t("navigation.governance"), path: "/#governance" },
+      { label: t("navigation.internalCompliance"), path: "/internal-compliance" },
+      { label: t("navigation.humanisticLandscape"), path: "/#humanistic" },
+      { label: t("navigation.pressInsights"), path: "/insights" },
+    ],
+    [t]
+  );
 
-    return () => {
-      window.removeEventListener('hashchange', handleHashAndPathChange);
-      window.removeEventListener('popstate', handleHashAndPathChange);
-    };
-  }, []);
+  const secondaryNavigation = useMemo(
+    () => [
+      { label: t("navigation.institution"), path: "/institution/eric-chuang", icon: Shield },
+      { label: t("home.intelligence.publications"), path: "/books", icon: BookOpen },
+      { label: t("home.intelligence.research"), path: "/papers", icon: GraduationCap },
+      { label: "GCSDA", path: "/institution/gcsda", icon: Users },
+    ],
+    [t]
+  );
 
-
-
-  useEffect(() => {
-    const lenis = new Lenis({
-      duration: 1.5,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      orientation: 'vertical',
-      gestureOrientation: 'vertical',
-      smoothWheel: true,
-      wheelMultiplier: 1.1,
-      touchMultiplier: 1.5,
-      lerp: 0.08,
-      infinite: false,
-    });
-
-    (window as any).lenis = lenis;
-
-    function raf(time: number) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
-
-    requestAnimationFrame(raf);
-
-    return () => {
-      lenis.destroy();
-      delete (window as any).lenis;
-    };
-  }, []);
-
-  useEffect(() => {
-    if (currentPage === "governance") {
-      setTimeout(() => {
-        const element = document.getElementById("governance");
-        if (element) {
-          if ((window as any).lenis) {
-            (window as any).lenis.scrollTo(element, { offset: -80 });
-          } else {
-            element.scrollIntoView({ behavior: "smooth" });
-          }
-        }
-      }, 150);
-    } else {
-      if ((window as any).lenis) {
-        (window as any).lenis.scrollTo(0, { immediate: true });
-      } else {
-        window.scrollTo(0, 0);
-      }
-    }
-  }, [currentPage]);
-
-  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
-  const [showContactModal, setShowContactModal] = useState(false);
-  const [chatOpen, setChatOpen] = useState(false);
-
-  const renderPage = () => {
-    switch (currentPage) {
-      case "home": return <Home onNavigate={handleNavigate} currentPage={currentPage} activeSection={homeSection} setActiveSection={setHomeSection} />;
-      case "about": return <About />;
-      case "columns": return <Columns />;
-      case "books": return <Books onNavigate={handleNavigate} />;
-      case "governance": return <Home onNavigate={handleNavigate} currentPage={currentPage} activeSection={homeSection} setActiveSection={setHomeSection} />;
-      case "internal-compliance": return <InternalCompliancePortal onNavigate={handleNavigate} activeSection="intro" />;
-      case "internal-compliance-pillars": return <InternalCompliancePortal onNavigate={handleNavigate} activeSection="pillars" />;
-      case "internal-compliance-simulator": return <InternalCompliancePortal onNavigate={handleNavigate} activeSection="simulator" />;
-      case "internal-compliance-academic": return <InternalCompliancePortal onNavigate={handleNavigate} activeSection="academic" />;
-      case "internal-compliance-book": return <InternalComplianceBook onNavigate={handleNavigate} />;
-      case "corporate-governance": return <CorporateGovernance onNavigate={handleNavigate} activeSection="intro" />;
-      case "corporate-governance-modules": return <CorporateGovernance onNavigate={handleNavigate} activeSection="modules" />;
-      case "corporate-governance-simulator": return <CorporateGovernance onNavigate={handleNavigate} activeSection="simulator" />;
-      case "corporate-governance-academic": return <CorporateGovernance onNavigate={handleNavigate} activeSection="academic" />;
-      case "family-governance": return <FamilyGovernance onNavigate={handleNavigate} activeSection="intro" />;
-      case "family-governance-framework": return <FamilyGovernance onNavigate={handleNavigate} activeSection="framework" />;
-      case "family-governance-stages": return <FamilyGovernance onNavigate={handleNavigate} activeSection="stages" />;
-      case "family-governance-academic": return <FamilyGovernance onNavigate={handleNavigate} activeSection="academic" />;
-      case "esgai":
-      case "esg-ai": return <ESGAI onNavigate={handleNavigate} activeSection="intro" />;
-      case "esgai-features":
-      case "esg-ai-features": return <ESGAI onNavigate={handleNavigate} activeSection="features" />;
-      case "esgai-console":
-      case "esg-ai-console": return <ESGAI onNavigate={handleNavigate} activeSection="console" />;
-      case "esgai-academic":
-      case "esg-ai-academic": return <ESGAI onNavigate={handleNavigate} activeSection="academic" />;
-      case "service-portal": return <ServicePortal />;
-      case "success": return <Success />;
-      case "papers": return <Papers onNavigate={handleNavigate} />;
-      case "gcsda": return <GCSDA onContactOpen={() => setShowContactModal(true)} />;
-      case "article-index": return <ArticleIndex />;
-      default: return <Home onNavigate={handleNavigate} currentPage={currentPage} activeSection={homeSection} setActiveSection={setHomeSection} />;
-    }
+  const go = (path: string) => {
+    setMenuOpen(false);
+    navigate(path);
   };
-
-  const navItems = [
-    { id: "governance", labelZh: "治理入口", labelEn: "GOVERNANCE", icon: Landmark },
-    { id: "columns", labelZh: "法律研究", labelEn: "LEGAL RESEARCH", icon: Scale },
-    { id: "books", labelZh: "治理出版", labelEn: "PUBLICATION", icon: BookText },
-    { id: "papers", labelZh: "學術策展", labelEn: "ACADEMIC CURATION", icon: GraduationCap },
-    { id: "gcsda", labelZh: "策略發展學會", labelEn: "STRATEGY FORUM", icon: Users },
-    { id: "about", labelZh: "思想主權", labelEn: "SOVEREIGNTY OF THOUGHT", icon: Shield },
-  ];
 
   return (
-    <div className="min-h-screen flex flex-col selection:bg-gold-400/30 selection:text-white bg-[#050505]">
-      {/* Navigation */}
-      <nav className="sticky top-0 z-50 bg-[#050505]/95 backdrop-blur-2xl border-b border-gold-400/10">
-        <div className="container mx-auto px-6 h-20 flex items-center">
-          <a 
-            className="flex items-center cursor-pointer group outline-none mr-auto no-underline"
-            href="index.html"
-            onClick={(e) => {
-              e.preventDefault();
-              setHomeSection('hero');
-              setCurrentPage('home');
-              window.history.pushState({}, '', 'index.html');
-              if ((window as any).lenis) {
-                (window as any).lenis.scrollTo(0, { immediate: false });
-              } else {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-              }
-            }}
-          aria-label="STT Press Home"
-          >
-              <div className="relative w-40 lg:w-56 h-10 lg:h-12 flex items-center flex-shrink-0">
-               <img src="/images/logo-header.png?v=20260522_v2" alt="STT Press Logo" className="w-full h-full object-contain transition-transform group-hover:scale-[1.02]" />
-            </div>
-          </a>
+    <div className="min-h-screen" style={{ background: "var(--stt-canvas)", color: "var(--stt-ink)" }}>
+      <header
+        className="sticky top-0 z-[70] border-b bg-white/95 backdrop-blur-xl"
+        style={{ borderColor: "var(--stt-line)", minHeight: "var(--stt-header-height)" }}
+      >
+        <div className="mx-auto flex h-[76px] max-w-[1320px] items-center px-5 lg:px-8">
+          <button type="button" onClick={() => go("/")} className="mr-auto bg-transparent border-0 p-0 text-left cursor-pointer">
+            <span className="block font-serif text-lg tracking-[0.06em]" style={{ color: "var(--stt-ink)" }}>STT Governance</span>
+            <span className="mt-1 block text-[8px] tracking-[0.28em] uppercase" style={{ color: "var(--stt-gold-deep)" }}>Strategic Think Tank</span>
+          </button>
 
-          {/* Desktop Nav */}
-          <div className="hidden xl:flex items-center h-full">
-            {navItems.map((item, idx) => {
-              const hrefMap: Record<string, string> = {
-                'governance': 'governance.html',
-                'columns': 'insights.html',
-                'books': 'books.html',
-                'papers': 'papers.html',
-                'gcsda': 'gcsda.html',
-                'about': 'about.html',
-              };
-              const href = hrefMap[item.id] || `${item.id.toLowerCase()}.html`;
+          <nav className="hidden xl:flex items-center h-full" aria-label="Primary">
+            {primaryNavigation.map((item) => {
+              const active = item.path.startsWith("/#") ? location.pathname === "/" : location.pathname.startsWith(item.path);
               return (
-                <div key={item.id} className="flex h-full items-center">
-                  {idx === 0 && <div className="h-10 w-px bg-white/10"></div>}
-                  <a
-                    href={href}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      setCurrentPage(item.id);
-                      window.history.pushState({}, '', href);
-                    }}
-                    className={`relative flex flex-col items-center justify-center px-4 h-full transition-all group min-w-[100px] no-underline ${
-                      currentPage === item.id ? "bg-white/[0.03]" : "hover:bg-white/[0.01]"
-                    }`}
-                  >
-                    <item.icon className={`w-5 h-5 mb-1.5 transition-all duration-300 group-hover:scale-110 ${
-                      currentPage === item.id ? "text-gold-400 drop-shadow-[0_0_10px_rgba(230,200,76,0.2)]" : "text-gold-400/50 group-hover:text-gold-400/80"
-                    }`} strokeWidth={1.2} />
-                    <span className={`text-[12px] font-sans font-medium tracking-[0.05em] mb-0.5 transition-colors whitespace-nowrap ${
-                      currentPage === item.id ? "text-gold-400" : "text-white/60 group-hover:text-white"
-                    }`}>{item.labelZh}</span>
-                    <span className={`text-[7px] font-mono tracking-[0.15em] font-light transition-opacity whitespace-nowrap ${
-                      currentPage === item.id ? "text-gold-400/60" : "text-white/30 group-hover:text-white/50"
-                    }`}>{item.labelEn}</span>
-
-                    {currentPage === item.id && (
-                      <motion.div layoutId="nav-line" className="absolute bottom-0 left-0 right-0 h-0.5 bg-gold-400/80" />
-                    )}
-                  </a>
-                  <div className="h-10 w-px bg-white/10"></div>
-                </div>
+                <button
+                  key={item.path}
+                  type="button"
+                  onClick={() => go(item.path)}
+                  className="relative h-full bg-transparent border-0 px-5 text-[12px] tracking-[0.08em] cursor-pointer"
+                  style={{ color: active ? "var(--stt-gold-deep)" : "var(--stt-ink-soft)" }}
+                >
+                  {item.label}
+                  {active && <span className="absolute bottom-0 left-5 right-5 h-px" style={{ background: "var(--stt-gold)" }} />}
+                </button>
               );
             })}
+          </nav>
 
-            {/* Action Buttons */}
-            <div className="flex items-center gap-4 ml-8">
-              <a 
-                href="https://lin.ee/yJrCTeo"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-gradient-to-br from-[#e6c84c] via-gold-500 to-[#b89530] hover:brightness-110 text-black px-5 py-3.5 rounded-lg flex flex-col items-center justify-center gap-0 group transition-all shadow-lg font-sans border-0 cursor-pointer no-underline"
-              >
-                <div className="flex items-center gap-1.5 mb-0.5 whitespace-nowrap">
-                  <Crown className="w-3.5 h-3.5 text-black" strokeWidth={1.5} />
-                  <span className="text-[14px] font-bold tracking-[0.05em] leading-none">治理委託</span>
-                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform text-black" strokeWidth={1.5} />
-                </div>
-                <span className="text-[7px] font-mono font-black tracking-[0.15em] opacity-80 uppercase leading-none whitespace-nowrap">GOVERNANCE ENGAGEMENT</span>
-              </a>
-              <button
-                type="button"
-                onClick={() => setShowContactModal(true)}
-                className="border border-[#e6c84c]/40 text-[#e6c84c] hover:bg-[#e6c84c]/5 px-5 py-3.5 rounded-lg flex flex-col items-center justify-center gap-0 group transition-all shadow-lg font-sans cursor-pointer bg-transparent outline-none"
-              >
-                <div className="flex items-center gap-1.5 mb-0.5 whitespace-nowrap">
-                  <Mail className="w-3.5 h-3.5 text-[#e6c84c]" strokeWidth={1.5} />
-                  <span className="text-[14px] font-bold tracking-[0.05em] leading-none">聯絡智庫</span>
-                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform text-[#e6c84c]" strokeWidth={1.5} />
-                </div>
-                <span className="text-[7px] font-mono font-black tracking-[0.15em] opacity-80 uppercase leading-none whitespace-nowrap">CONTACT STT</span>
-              </button>
-            </div>
+          <div className="ml-4 hidden xl:flex items-center gap-3">
+            <button
+              type="button"
+              onClick={onContactOpen}
+              className="inline-flex items-center gap-2 border bg-transparent px-4 py-2.5 text-xs font-semibold cursor-pointer"
+              style={{ borderColor: "var(--stt-gold-line)", color: "var(--stt-gold-deep)" }}
+            >
+              {t("navigation.engagement")}
+              <ArrowRight className="w-3.5 h-3.5" strokeWidth={1.3} />
+            </button>
+            <button
+              type="button"
+              onClick={() => setMenuOpen((value) => !value)}
+              className="w-10 h-10 inline-flex items-center justify-center bg-transparent border-0 cursor-pointer"
+              aria-label={menuOpen ? t("common.close") : "Menu"}
+            >
+              {menuOpen ? <X className="w-5 h-5" strokeWidth={1.2} /> : <Menu className="w-5 h-5" strokeWidth={1.2} />}
+            </button>
           </div>
 
-          {/* Mobile Menu Toggle */}
-          <Button 
-            variant="ghost" 
-            size="icon" 
-            className="xl:hidden hover:bg-transparent text-gold-400"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          <button
+            type="button"
+            onClick={() => setMenuOpen((value) => !value)}
+            className="ml-3 w-10 h-10 inline-flex items-center justify-center bg-transparent border-0 cursor-pointer xl:hidden"
+            aria-label={menuOpen ? t("common.close") : "Menu"}
           >
-            {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-          </Button>
+            {menuOpen ? <X className="w-5 h-5" strokeWidth={1.2} /> : <Menu className="w-5 h-5" strokeWidth={1.2} />}
+          </button>
         </div>
 
-        {/* Login Modal */}
-        <AnimatePresence>
-          {isLoginModalOpen && (
-            <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
-              <motion.div 
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                onClick={() => setIsLoginModalOpen(false)}
-                className="absolute inset-0 bg-black/80 backdrop-blur-md"
-              ></motion.div>
-              <motion.div
-                initial={{ opacity: 0, scale: 0.95, y: 20 }}
-                animate={{ opacity: 1, scale: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.95, y: 20 }}
-                className="relative w-full max-w-md bg-zinc-900 border border-gold-400/20 p-8 rounded-xl shadow-[0_0_50px_rgba(230,200,76,0.1)]"
-              >
-                <button 
-                  onClick={() => setIsLoginModalOpen(false)}
-                  className="absolute top-4 right-4 text-white/40 hover:text-white"
-                >
-                  <X className="w-5 h-5" />
-                </button>
-                <div className="text-center mb-8">
-                  <div className="w-16 h-16 bg-gold-400/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <Shield className="w-8 h-8 text-gold-400" />
-                  </div>
-                  <h3 className="text-2xl font-display text-white mb-2">ESGAI 核心系統</h3>
-                  <p className="text-white/40 text-xs tracking-widest uppercase italic">Governance Protocol Login</p>
-                </div>
-                <div className="space-y-4">
-                  <div className="space-y-1.5">
-                    <label className="text-[10px] text-gold-400 uppercase tracking-widest font-bold">帳號</label>
-                    <input type="text" className="w-full bg-black border border-white/10 rounded px-4 py-3 text-white focus:border-gold-400 outline-none transition-colors" placeholder="請輸入帳號" />
-                  </div>
-                  <div className="space-y-1.5">
-                    <label className="text-[10px] text-gold-400 uppercase tracking-widest font-bold">密碼</label>
-                    <input type="password" className="w-full bg-black border border-white/10 rounded px-4 py-3 text-white focus:border-gold-400 outline-none transition-colors" placeholder="請輸入密碼" />
-                  </div>
-                  <Button className="w-full bg-gold-400 hover:bg-gold-500 text-black font-bold h-12 mt-4">登入系統</Button>
-                </div>
-                <p className="mt-8 text-center text-[10px] text-white/20">
-                  PRIVATE SYSTEM · AUTHORIZED PERSONNEL ONLY
-                </p>
-              </motion.div>
-            </div>
-          )}
-        </AnimatePresence>
+        {menuOpen && (
+          <div className="absolute left-0 right-0 top-[76px] border-b bg-white shadow-[0_22px_50px_rgba(36,34,31,0.08)]" style={{ borderColor: "var(--stt-line)" }}>
+            <div className="mx-auto grid max-w-[1320px] gap-10 px-6 py-8 lg:grid-cols-[1.2fr_0.8fr] lg:px-8">
+              <div className="grid gap-px border bg-[var(--stt-line)] sm:grid-cols-2" style={{ borderColor: "var(--stt-line)" }}>
+                {primaryNavigation.map((item, index) => (
+                  <button key={item.path} type="button" onClick={() => go(item.path)} className="min-h-[110px] bg-white p-5 text-left cursor-pointer">
+                    <span className="text-[10px] tracking-[0.16em]" style={{ color: "var(--stt-gold-deep)" }}>0{index + 1}</span>
+                    <span className="mt-5 block font-serif text-lg">{item.label}</span>
+                  </button>
+                ))}
+              </div>
 
-        {/* Mobile Nav */}
-        <AnimatePresence>
-          {isMenuOpen && (
-            <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              className="absolute inset-x-0 top-24 bg-black border-b border-gold-400/10 z-50 shadow-2xl overflow-y-auto pb-24"
-            >
-              <div className="flex flex-col p-4 gap-2 pb-4">
-                {navItems.map((item) => {
-                  const hrefMap: Record<string, string> = {
-                    'governance': 'governance.html',
-                    'columns': 'insights.html',
-                    'books': 'books.html',
-                    'papers': 'papers.html',
-                    'gcsda': 'gcsda.html',
-                    'about': 'about.html',
-                  };
-                  const href = hrefMap[item.id] || `${item.id.toLowerCase()}.html`;
+              <div className="space-y-2">
+                {secondaryNavigation.map((item) => {
+                  const Icon = item.icon;
                   return (
-                    <a
-                      key={item.id}
-                      href={href}
-                      onClick={(e) => {
-                        e.preventDefault();
-                        setCurrentPage(item.id);
-                        setIsMenuOpen(false);
-                        window.history.pushState({}, '', href);
-                      }}
-                      className={`flex items-center gap-6 group transition-colors text-left py-2 no-underline ${
-                        currentPage === item.id ? "text-gold-400" : "text-gold-50/60"
-                      }`}
-                    >
-                      <item.icon className="w-6 h-6 text-gold-400/50" />
-                      <div className="flex flex-col">
-                        <span className="text-xl font-display font-light">{item.labelZh}</span>
-                        <span className="text-[10px] font-mono tracking-widest opacity-40 uppercase">{item.labelEn}</span>
-                      </div>
-                    </a>
+                    <button key={item.path} type="button" onClick={() => go(item.path)} className="flex w-full items-center justify-between border-b bg-transparent px-2 py-3 text-left cursor-pointer" style={{ borderColor: "var(--stt-line)" }}>
+                      <span className="flex items-center gap-3 text-sm" style={{ color: "var(--stt-ink-soft)" }}>
+                        <Icon className="w-4 h-4" strokeWidth={1.2} style={{ color: "var(--stt-gold-deep)" }} />
+                        {item.label}
+                      </span>
+                      <ArrowRight className="w-3.5 h-3.5" strokeWidth={1.2} style={{ color: "var(--stt-gold-deep)" }} />
+                    </button>
                   );
                 })}
 
-                <div className="border-t border-gold-400/10 pt-6 mt-2 flex flex-col gap-4">
-                  <a 
-                    href="https://lin.ee/yJrCTeo"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={() => setIsMenuOpen(false)}
-                    className="bg-gradient-to-br from-[#e6c84c] via-gold-500 to-[#b89530] text-black px-6 py-4 rounded-lg flex items-center justify-between group no-underline"
-                  >
-                    <div className="flex items-center gap-2">
-                      <Crown className="w-5 h-5 text-black" strokeWidth={1.5} />
-                      <span className="text-base font-bold">治理委託</span>
-                    </div>
-                    <span className="text-[8px] font-mono font-black tracking-widest uppercase opacity-80 whitespace-nowrap">GOVERNANCE ENGAGEMENT</span>
-                  </a>
-                  <button
-                    onClick={() => { setIsMenuOpen(false); setShowContactModal(true); }}
-                    className="border border-gold-400/30 text-gold-400 px-6 py-4 rounded-lg flex items-center justify-between w-full"
-                  >
-                    <span className="text-base font-bold">聯絡智庫</span>
-                    <span className="text-[8px] font-mono font-black tracking-widest uppercase opacity-80">CONTACT STT</span>
-                  </button>
-                  <button 
-                    onClick={() => {
-                      setIsMenuOpen(false);
-                      setIsLoginModalOpen(true);
-                    }}
-                    className="text-white/20 hover:text-white/40 text-[10px] uppercase tracking-widest text-center mt-4 flex items-center justify-center gap-1.5 cursor-pointer bg-transparent border-0"
-                  >
-                    <Crown className="w-3 h-3" />
-                    <span>System Login</span>
-                  </button>
-                </div>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </nav>
-
-      {/* Contact Modal */}
-      <AnimatePresence>
-        {showContactModal && <ContactModal onClose={() => setShowContactModal(false)} />}
-      </AnimatePresence>
-
-      {/* Main Content */}
-      <main className="flex-grow">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={currentPage}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          >
-            {renderPage()}
-          </motion.div>
-        </AnimatePresence>
-      </main>
-
-      <AccessibilityWidget onChatOpen={() => setChatOpen(o => !o)} isChatOpen={chatOpen} />
-      <ChatBot open={chatOpen} onClose={() => setChatOpen(false)} onContactOpen={() => setShowContactModal(true)} />
-
-      {/* Footer */}
-      <footer className="relative bg-black text-white pt-24 pb-16 overflow-hidden border-t-[0.5px] border-gold-400/20">
-        <div className="absolute top-0 right-0 w-1/2 h-full opacity-20 pointer-events-none">
-          <div className="absolute top-0 right-0 w-full h-full bg-[radial-gradient(circle_at_70%_30%,rgba(230,200,76,0.1)_0%,transparent_70%)]"></div>
-        </div>
-
-        <div className="container mx-auto px-6 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-0">
-            
-            <div className="lg:col-span-4 space-y-8 pr-8 flex flex-col items-center lg:items-start text-center lg:text-left">
-              <div className="flex flex-col gap-6 items-center lg:items-start">
-                <div className="relative w-40 h-40 lg:w-48 lg:h-48 flex justify-center lg:justify-start">
-                  <img 
-                    src="/images/logo-seal-footer.png?v=20260522_v2" 
-                    alt="STT Press Seal" 
-                    className="w-full h-full object-contain filter drop-shadow-[0_0_15px_rgba(230,200,76,0.2)]" 
-                  />
-                </div>
-                
-                <div className="space-y-4 flex flex-col items-center lg:items-start w-full">
-                  <h3 className="text-3xl lg:text-4xl font-serif text-[#e6c84c] tracking-tight w-full">
-                    STT Governance
-                  </h3>
-                  <p className="text-white text-lg lg:text-xl font-display tracking-widest w-full">
-                    策略智庫 &nbsp;|&nbsp; 治理出版 &nbsp;|&nbsp; 法遵精神
-                  </p>
-                  <div className="w-12 h-px bg-[#e6c84c]/40 mx-auto lg:mx-0"></div>
-                  <p className="text-white/40 max-w-sm font-sans text-sm leading-loose font-light mx-auto lg:mx-0">
-                    我們以制度性思維守護企業核心價值，提供具備學術嚴謹性與實務可執行性的治理諮詢服務。</p>
-                </div>
-              </div>
-            </div>
-
-            <div className="lg:col-span-4 border-l border-white/10 lg:pl-12 lg:pr-8">
-              <h4 className="text-gold-400 text-sm font-medium tracking-[0.4em] uppercase mb-12">EXPLORE</h4>
-              
-              <div className="space-y-6">
-                {[
-                  { id: "governance", zh: "治理入口", en: "GOVERNANCE", icon: Landmark, href: "governance.html" },
-                  { id: "columns", zh: "法律研究", en: "LEGAL RESEARCH", icon: Scale, href: "insights.html" },
-                  { id: "books", zh: "治理出版", en: "PUBLICATION", icon: BookText, href: "books.html" },
-                  { id: "papers", zh: "學術策展", en: "ACADEMIC CURATION", icon: GraduationCap, href: "papers.html" },
-                  { id: "gcsda", zh: "策略發展學會", en: "STRATEGY FORUM", icon: Users, href: "gcsda.html" },
-                  { id: "about", zh: "思想主權", en: "SOVEREIGNTY OF THOUGHT", icon: Shield, href: "about.html" },
-                ].map((item, idx) => (
-                  <a 
-                    key={idx}
-                    href={item.href}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      setCurrentPage(item.id);
-                      window.history.pushState({}, '', item.href);
-                    }}
-                    className="flex items-center gap-6 group text-left w-full transition-colors hover:text-gold-400 no-underline"
-                  >
-                    <div className="w-10 h-10 flex items-center justify-center">
-                      <item.icon className="w-6 h-6 text-gold-400/60 group-hover:text-gold-400 transition-colors" />
-                    </div>
-                    <div>
-                      <div className="text-white/80 font-sans text-sm font-medium tracking-wider group-hover:text-white">{item.zh}</div>
-                      <div className="text-white/30 font-sans text-[10px] tracking-wide uppercase">{item.en}</div>
-                    </div>
-                  </a>
-                ))}
-              </div>
-            </div>
-
-            <div className="lg:col-span-4 border-l border-white/10 lg:pl-12">
-              <h4 className="text-gold-400 text-sm font-medium tracking-[0.4em] uppercase mb-12">CONNECT & SUPPORT</h4>
-              
-              <div className="space-y-10">
-                <a 
-                  href="https://line.me/R/ti/p/@stt-group" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-between group no-underline"
-                >
-                  <div className="flex items-center gap-6">
-                    <div className="w-10 h-10 rounded-full border border-gold-400 flex items-center justify-center bg-gold-400/5 group-hover:bg-gold-400/20 transition-all">
-                      <span className="text-[8px] font-black text-gold-400 leading-none">LINE</span>
-                    </div>
-                    <div>
-                      <div className="text-white/30 text-[10px] tracking-[0.2em] uppercase font-bold mb-1">Digital Fulfillment</div>
-                      <div className="text-white/80 group-hover:text-gold-400 transition-colors inline-flex items-center gap-2">
-                        STT 智庫數位 Line 官方帳號
-                      </div>
-                    </div>
-                  </div>
-                  <ArrowUpRight className="w-6 h-6 text-gold-400/40 group-hover:text-gold-400 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
-                </a>
-
-                <a 
-                  href="https://line.me/R/ti/p/@387nbnjs" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-between group no-underline"
-                >
-                  <div className="flex items-center gap-6">
-                    <div className="w-10 h-10 rounded-full border border-gold-400 flex items-center justify-center bg-gold-400/5 group-hover:bg-gold-400/20 transition-all">
-                      <span className="text-[8px] font-black text-gold-400 leading-none">LINE</span>
-                    </div>
-                    <div>
-                      <div className="text-white/30 text-[10px] tracking-[0.2em] uppercase font-bold mb-1">Academic Society</div>
-                      <div className="text-white/80 group-hover:text-gold-400 transition-colors inline-flex items-center gap-2">
-                        GCSDA 學會 Line 官方帳號
-                      </div>
-                    </div>
-                  </div>
-                  <ArrowUpRight className="w-6 h-6 text-gold-400/40 group-hover:text-gold-400 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
-                </a>
-
-                <div className="h-px bg-white/10 w-full"></div>
-
-                <div className="flex items-center justify-between group cursor-default">
-                  <div className="flex items-center gap-6">
-                    <div className="w-10 h-10 rounded-full border border-gold-400/30 flex items-center justify-center group-hover:border-gold-400 transition-colors">
-                      <Mail className="w-5 h-5 text-gold-400/60" />
-                    </div>
-                    <div>
-                      <div className="text-white/30 text-[10px] tracking-[0.2em] uppercase font-bold mb-1">Email</div>
-                      <div className="text-white/60 font-sans text-sm tracking-wide">pc5888@gmail.com</div>
-                    </div>
-                  </div>
-                  <ArrowUpRight className="w-6 h-6 text-gold-400/20" />
-                </div>
+                <button type="button" onClick={() => { setMenuOpen(false); onContactOpen(); }} className="mt-5 inline-flex items-center gap-2 border bg-[var(--stt-ivory)] px-4 py-3 text-sm cursor-pointer" style={{ borderColor: "var(--stt-gold-line)", color: "var(--stt-gold-deep)" }}>
+                  {t("navigation.engagement")}
+                  <ArrowRight className="w-4 h-4" strokeWidth={1.2} />
+                </button>
               </div>
             </div>
           </div>
-          
-          <div className="mt-24 pt-12 border-t border-white/5 flex flex-col lg:flex-row justify-between items-center gap-8">
-            <div className="flex gap-10">
-              {[
-                { zh: "信任基礎", en: "TRUST FOUNDATION" },
-                { zh: "制度邏輯", en: "INSTITUTIONAL LOGIC" },
-                { zh: "長期價值", en: "LONG-TERM VALUE" }
-              ].map((item, idx) => (
-                <div key={idx} className="text-center">
-                  <div className="text-gold-400/60 text-[11px] mb-1 tracking-widest font-medium uppercase">{item.zh}</div>
-                  <div className="text-[8px] text-white/20 uppercase tracking-[0.2em] font-medium">{item.en}</div>
-                </div>
-              ))}
-            </div>
+        )}
+      </header>
 
-            <div className="flex flex-col items-center lg:items-end gap-3">
-              <div className="flex gap-8 text-[9px] font-sans font-medium tracking-[0.3em] text-white/20 uppercase">
-                <button onClick={() => setCurrentPage('service-portal')} className="hover:text-gold-400 transition-colors">服務條款 Compliance</button>
-                <button onClick={() => setCurrentPage('service-portal')} className="hover:text-gold-400 transition-colors">隱私政策 Privacy</button>
-              </div>
-              <span className="text-[9px] font-sans font-black tracking-[0.3em] text-white/10 uppercase">
-                © 2026 STT PRESS. ALL RIGHTS RESERVED.
-              </span>
-            </div>
+      <main className="min-h-[60vh]">{children}</main>
+
+      <footer className="border-t bg-white px-6 py-12 lg:px-8" style={{ borderColor: "var(--stt-line)" }}>
+        <div className="mx-auto grid max-w-[1180px] gap-8 md:grid-cols-[1fr_auto] md:items-end">
+          <div>
+            <p className="font-serif text-xl tracking-[0.04em]">STT Governance</p>
+            <p className="mt-3 max-w-[620px] text-sm leading-7" style={{ color: "var(--stt-ink-muted)" }}>
+              {t("home.hero.description")}
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-x-5 gap-y-2 text-xs" style={{ color: "var(--stt-ink-muted)" }}>
+            <button type="button" onClick={() => go("/insights")} className="bg-transparent border-0 p-0 cursor-pointer">{t("navigation.pressInsights")}</button>
+            <button type="button" onClick={() => go("/institution/eric-chuang")} className="bg-transparent border-0 p-0 cursor-pointer">{t("navigation.institution")}</button>
+            <button type="button" onClick={onContactOpen} className="bg-transparent border-0 p-0 cursor-pointer">{t("navigation.engagement")}</button>
           </div>
         </div>
       </footer>
+
+      <AccessibilityWidget onChatOpen={onChatToggle} isChatOpen={chatOpen} />
     </div>
   );
 }
 
-// rebuild Tue Jun  2 08:22:41 UTC 2026
-// force-rebuild-20260602
+function HomeRoute({ onNavigate }: { onNavigate: LegacyNavigate }) {
+  const location = useLocation();
+  const hash = location.hash.replace("#", "");
+  const activeSection = hash === "governance"
+    ? "governance"
+    : hash === "architecture"
+      ? "positioning"
+      : hash === "authority"
+        ? "strategist"
+        : hash === "intelligence"
+          ? "insights"
+          : "hero";
+
+  return <Home onNavigate={onNavigate} currentPage={hash === "governance" ? "governance" : "home"} activeSection={activeSection} />;
+}
+
+function AppRoutes({ onContactOpen }: { onContactOpen: () => void }) {
+  const onNavigate = useLegacyNavigate();
+
+  return (
+    <Routes>
+      <Route path="/" element={<HomeRoute onNavigate={onNavigate} />} />
+      <Route path="/index.html" element={<HomeRoute onNavigate={onNavigate} />} />
+      <Route path="/governance.html" element={<Navigate to="/#governance" replace />} />
+
+      <Route path="/insights" element={<Columns />} />
+      <Route path="/insights.html" element={<Columns />} />
+      <Route path="/insights/index" element={<ArticleIndex />} />
+      <Route path="/books" element={<Books onNavigate={onNavigate} />} />
+      <Route path="/papers" element={<Papers onNavigate={onNavigate} />} />
+
+      <Route path="/institution/eric-chuang" element={<About />} />
+      <Route path="/about.html" element={<About />} />
+      <Route path="/institution/gcsda" element={<GCSDA onContactOpen={onContactOpen} />} />
+      <Route path="/gcsda.html" element={<GCSDA onContactOpen={onContactOpen} />} />
+
+      <Route path="/internal-compliance" element={<InternalCompliancePortal onNavigate={onNavigate} activeSection="intro" />} />
+      <Route path="/internal-compliance/pillars" element={<InternalCompliancePortal onNavigate={onNavigate} activeSection="pillars" />} />
+      <Route path="/internal-compliance/simulator" element={<InternalCompliancePortal onNavigate={onNavigate} activeSection="simulator" />} />
+      <Route path="/internal-compliance/academic" element={<InternalCompliancePortal onNavigate={onNavigate} activeSection="academic" />} />
+      <Route path="/internal-compliance/publication" element={<InternalComplianceBook onNavigate={onNavigate} />} />
+
+      <Route path="/governance/corporate" element={<CorporateGovernance onNavigate={onNavigate} activeSection="intro" />} />
+      <Route path="/governance/corporate/modules" element={<CorporateGovernance onNavigate={onNavigate} activeSection="modules" />} />
+      <Route path="/governance/corporate/simulator" element={<CorporateGovernance onNavigate={onNavigate} activeSection="simulator" />} />
+      <Route path="/governance/corporate/academic" element={<CorporateGovernance onNavigate={onNavigate} activeSection="academic" />} />
+
+      <Route path="/governance/family" element={<FamilyGovernance onNavigate={onNavigate} activeSection="intro" />} />
+      <Route path="/governance/family/framework" element={<FamilyGovernance onNavigate={onNavigate} activeSection="framework" />} />
+      <Route path="/governance/family/stages" element={<FamilyGovernance onNavigate={onNavigate} activeSection="stages" />} />
+      <Route path="/governance/family/academic" element={<FamilyGovernance onNavigate={onNavigate} activeSection="academic" />} />
+
+      <Route path="/governance/esgai" element={<ESGAI onNavigate={onNavigate} activeSection="intro" />} />
+      <Route path="/governance/esgai/features" element={<ESGAI onNavigate={onNavigate} activeSection="features" />} />
+      <Route path="/governance/esgai/console" element={<ESGAI onNavigate={onNavigate} activeSection="console" />} />
+      <Route path="/governance/esgai/academic" element={<ESGAI onNavigate={onNavigate} activeSection="academic" />} />
+
+      <Route path="/digital-product-policy" element={<ServicePortal />} />
+      <Route path="/contact.html" element={<ServicePortal />} />
+      <Route path="/success" element={<Success />} />
+      <Route path="*" element={<Navigate to="/" replace />} />
+    </Routes>
+  );
+}
+
+function AppFrame() {
+  const [showContactModal, setShowContactModal] = useState(false);
+  const [chatOpen, setChatOpen] = useState(false);
+
+  useEffect(() => {
+    const lenis = new Lenis({
+      duration: 1.1,
+      smoothWheel: true,
+      wheelMultiplier: 1,
+      touchMultiplier: 1.2,
+      lerp: 0.09,
+    });
+
+    (window as Window & { lenis?: Lenis }).lenis = lenis;
+    let frame = 0;
+    const raf = (time: number) => {
+      lenis.raf(time);
+      frame = window.requestAnimationFrame(raf);
+    };
+    frame = window.requestAnimationFrame(raf);
+
+    return () => {
+      window.cancelAnimationFrame(frame);
+      lenis.destroy();
+      delete (window as Window & { lenis?: Lenis }).lenis;
+    };
+  }, []);
+
+  return (
+    <>
+      <PublicShell
+        onContactOpen={() => setShowContactModal(true)}
+        chatOpen={chatOpen}
+        onChatToggle={() => setChatOpen((value) => !value)}
+      >
+        <AppRoutes onContactOpen={() => setShowContactModal(true)} />
+      </PublicShell>
+
+      {showContactModal && <ContactModal onClose={() => setShowContactModal(false)} />}
+      <ChatBot open={chatOpen} onClose={() => setChatOpen(false)} onContactOpen={() => setShowContactModal(true)} />
+    </>
+  );
+}
+
+export default function App() {
+  return (
+    <BrowserRouter>
+      <AppFrame />
+    </BrowserRouter>
+  );
+}
