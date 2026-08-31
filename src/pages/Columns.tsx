@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { ArrowRight, BookOpen, Search } from "lucide-react";
+import { BookOpen, Search } from "lucide-react";
 import { articles, type Article } from "../data/mockData";
 
 const EXCLUDED_TOPICS = ["減碳", "碳排", "碳權"];
@@ -74,42 +74,24 @@ export default function Columns() {
       <style>{`
         .stt-editorial-page { min-height:100vh; background:#fbfbfa; color:#1a1a1a; }
         .stt-editorial-hero {
-          position:relative;
-          min-height:560px;
+          min-height:520px;
           display:grid;
           align-items:center;
-          overflow:hidden;
-          border-bottom:1px solid rgba(197,168,128,.22);
-          background:linear-gradient(180deg,#fbfbfa 0%,#f7f4ee 100%);
-        }
-        .stt-editorial-hero::before {
-          content:"";
-          position:absolute;
-          width:620px;
-          height:620px;
-          right:-40px;
-          top:-120px;
-          border:1px solid rgba(197,168,128,.28);
-          border-radius:50%;
-          box-shadow:0 0 0 86px rgba(197,168,128,.06),0 0 0 172px rgba(197,168,128,.04);
-        }
-        .stt-editorial-hero::after {
-          content:"";
-          position:absolute;
-          right:0;
-          bottom:0;
-          width:47%;
-          height:1px;
-          background:linear-gradient(90deg,transparent,#c5a880);
+          border-bottom:1px solid rgba(197,168,128,.20);
+          background:linear-gradient(180deg,#fbfbfa 0%,#f9f7f3 100%);
         }
         .stt-editorial-hero-inner {
-          position:relative;
-          z-index:2;
           width:min(calc(100% - 72px),1280px);
           margin:0 auto;
           padding:88px 0 74px;
         }
-        .stt-editorial-eyebrow { margin:0 0 22px; color:#a9895e; font-size:10px; letter-spacing:.24em; text-transform:uppercase; }
+        .stt-editorial-eyebrow {
+          margin:0 0 22px;
+          color:#a9895e;
+          font-size:10px;
+          letter-spacing:.24em;
+          text-transform:uppercase;
+        }
         .stt-editorial-title {
           margin:0;
           max-width:780px;
@@ -119,8 +101,19 @@ export default function Columns() {
           line-height:1.15;
           letter-spacing:.035em;
         }
-        .stt-editorial-lead { max-width:680px; margin:30px 0 0; color:#625c54; font-size:15px; line-height:2; }
-        .stt-editorial-rule { width:66px; height:1px; margin-top:28px; background:#c5a880; }
+        .stt-editorial-lead {
+          max-width:680px;
+          margin:30px 0 0;
+          color:#625c54;
+          font-size:15px;
+          line-height:2;
+        }
+        .stt-editorial-rule {
+          width:66px;
+          height:1px;
+          margin-top:28px;
+          background:#c5a880;
+        }
         .stt-editorial-tools {
           position:sticky;
           top:76px;
@@ -148,8 +141,21 @@ export default function Columns() {
           border:1px solid rgba(197,168,128,.24);
           background:#fff;
         }
-        .stt-editorial-search input { width:100%; border:0; outline:0; background:transparent; color:#1a1a1a; font-size:13px; }
-        .stt-editorial-categories { display:flex; align-items:center; gap:8px; overflow-x:auto; padding:8px 0; }
+        .stt-editorial-search input {
+          width:100%;
+          border:0;
+          outline:0;
+          background:transparent;
+          color:#1a1a1a;
+          font-size:13px;
+        }
+        .stt-editorial-categories {
+          display:flex;
+          align-items:center;
+          gap:8px;
+          overflow-x:auto;
+          padding:8px 0;
+        }
         .stt-editorial-filter {
           flex:0 0 auto;
           min-height:38px;
@@ -160,11 +166,35 @@ export default function Columns() {
           font-size:11px;
           cursor:pointer;
         }
-        .stt-editorial-filter[data-active="true"] { background:#efe7da; border-color:#c5a880; color:#1a1a1a; }
-        .stt-editorial-library { width:min(calc(100% - 72px),1280px); margin:0 auto; padding:70px 0 104px; }
-        .stt-editorial-library-head { display:flex; align-items:flex-end; justify-content:space-between; gap:24px; margin-bottom:32px; }
-        .stt-editorial-library-head h2 { margin:0; font-family:"Noto Serif TC","Noto Serif JP",Georgia,serif; font-size:30px; font-weight:400; }
-        .stt-editorial-count { color:#a9895e; font-size:10px; letter-spacing:.16em; text-transform:uppercase; }
+        .stt-editorial-filter[data-active="true"] {
+          background:#efe7da;
+          border-color:#c5a880;
+          color:#1a1a1a;
+        }
+        .stt-editorial-library {
+          width:min(calc(100% - 72px),1280px);
+          margin:0 auto;
+          padding:70px 0 104px;
+        }
+        .stt-editorial-library-head {
+          display:flex;
+          align-items:flex-end;
+          justify-content:space-between;
+          gap:24px;
+          margin-bottom:32px;
+        }
+        .stt-editorial-library-head h2 {
+          margin:0;
+          font-family:"Noto Serif TC","Noto Serif JP",Georgia,serif;
+          font-size:30px;
+          font-weight:400;
+        }
+        .stt-editorial-count {
+          color:#a9895e;
+          font-size:10px;
+          letter-spacing:.16em;
+          text-transform:uppercase;
+        }
         .stt-editorial-list { border-top:1px solid rgba(197,168,128,.22); }
         .stt-editorial-row {
           display:grid;
@@ -176,12 +206,50 @@ export default function Columns() {
           cursor:pointer;
           transition:background .18s ease,padding .24s ease;
         }
-        .stt-editorial-row:hover { background:rgba(197,168,128,.045); padding-left:14px; padding-right:14px; }
-        .stt-editorial-index { color:#a9895e; font-family:"Noto Serif TC","Noto Serif JP",Georgia,serif; font-size:14px; }
-        .stt-editorial-meta { display:flex; flex-wrap:wrap; gap:14px; color:#a9895e; font-size:9px; letter-spacing:.12em; text-transform:uppercase; }
-        .stt-editorial-main h2 { margin:13px 0 0; max-width:900px; font-family:"Noto Serif TC","Noto Serif JP",Georgia,serif; font-size:clamp(22px,2.5vw,32px); font-weight:400; line-height:1.55; }
-        .stt-editorial-main p { margin:14px 0 0; max-width:830px; color:#6e675e; font-size:13px; line-height:1.9; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
-        .stt-editorial-arrow { padding-top:30px; color:#a9895e; font-size:22px; transition:transform .2s ease; }
+        .stt-editorial-row:hover {
+          background:rgba(197,168,128,.045);
+          padding-left:14px;
+          padding-right:14px;
+        }
+        .stt-editorial-index {
+          color:#a9895e;
+          font-family:"Noto Serif TC","Noto Serif JP",Georgia,serif;
+          font-size:14px;
+        }
+        .stt-editorial-meta {
+          display:flex;
+          flex-wrap:wrap;
+          gap:14px;
+          color:#a9895e;
+          font-size:9px;
+          letter-spacing:.12em;
+          text-transform:uppercase;
+        }
+        .stt-editorial-main h2 {
+          margin:13px 0 0;
+          max-width:900px;
+          font-family:"Noto Serif TC","Noto Serif JP",Georgia,serif;
+          font-size:clamp(22px,2.5vw,32px);
+          font-weight:400;
+          line-height:1.55;
+        }
+        .stt-editorial-main p {
+          margin:14px 0 0;
+          max-width:830px;
+          color:#6e675e;
+          font-size:13px;
+          line-height:1.9;
+          display:-webkit-box;
+          -webkit-line-clamp:2;
+          -webkit-box-orient:vertical;
+          overflow:hidden;
+        }
+        .stt-editorial-arrow {
+          padding-top:30px;
+          color:#a9895e;
+          font-size:22px;
+          transition:transform .2s ease;
+        }
         .stt-editorial-row:hover .stt-editorial-arrow { transform:translateX(6px); }
         .stt-editorial-empty { padding:70px 0; text-align:center; color:#6e675e; }
         @media (max-width:900px) {
@@ -192,7 +260,7 @@ export default function Columns() {
         }
         @media (max-width:620px) {
           .stt-editorial-hero-inner,.stt-editorial-tools-inner,.stt-editorial-library { width:calc(100% - 30px); }
-          .stt-editorial-hero { min-height:470px; }
+          .stt-editorial-hero { min-height:440px; }
           .stt-editorial-row { grid-template-columns:42px minmax(0,1fr) 24px; gap:12px; padding:28px 0; }
           .stt-editorial-main h2 { font-size:22px; }
         }
