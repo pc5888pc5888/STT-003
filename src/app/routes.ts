@@ -4,7 +4,7 @@ export const routes = {
   corporateGovernance: "/governance/corporate",
   familyGovernance: "/governance/family",
   decisionArchitecture: "/governance/decision-architecture",
-  digitalGovernance: "/governance/esgai",
+  digitalGovernance: "/governance/digital",
   internalCompliance: "/internal-compliance",
   pressInsights: "/insights",
   institution: "/institution/stt",
