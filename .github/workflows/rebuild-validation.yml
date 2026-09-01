@@ -38,7 +38,7 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p preview-artifacts
-          npm run preview -- --host 127.0.0.1 --port 4173 > /tmp/stt-vite-preview.log 2>&1 &
+          npx vite preview --host 127.0.0.1 --port 4173 > /tmp/stt-vite-preview.log 2>&1 &
           PREVIEW_PID=$!
           trap 'kill "$PREVIEW_PID" 2>/dev/null || true' EXIT
 
