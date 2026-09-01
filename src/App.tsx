@@ -52,14 +52,14 @@ const legacyPathMap: Record<string, string> = {
   "family-governance-framework": "/governance/family/framework",
   "family-governance-stages": "/governance/family/stages",
   "family-governance-academic": "/governance/family/academic",
-  esgai: "/governance/esgai",
-  "esg-ai": "/governance/esgai",
-  "esgai-features": "/governance/esgai/features",
-  "esg-ai-features": "/governance/esgai/features",
-  "esgai-console": "/governance/esgai/console",
-  "esg-ai-console": "/governance/esgai/console",
-  "esgai-academic": "/governance/esgai/academic",
-  "esg-ai-academic": "/governance/esgai/academic",
+  esgai: "/governance/digital",
+  "esg-ai": "/governance/digital",
+  "esgai-features": "/governance/digital/features",
+  "esg-ai-features": "/governance/digital/features",
+  "esgai-console": "/governance/digital/console",
+  "esg-ai-console": "/governance/digital/console",
+  "esgai-academic": "/governance/digital/academic",
+  "esg-ai-academic": "/governance/digital/academic",
 };
 
 const homeAnchorMap: Record<string, string> = {
@@ -94,7 +94,7 @@ function PublicShell({ children, onContactOpen, chatOpen, onChatToggle }: ShellP
     () => [
       { label: t("navigation.governance"), path: "/#governance" },
       { label: t("navigation.internalCompliance"), path: "/internal-compliance" },
-      { label: t("navigation.digitalGovernance", "數位（AI）治理"), path: "/governance/esgai" },
+      { label: t("navigation.digitalGovernance", "數位（AI）治理"), path: "/governance/digital" },
       { label: t("navigation.pressInsights"), path: "/insights" },
     ],
     [t]
@@ -105,7 +105,7 @@ function PublicShell({ children, onContactOpen, chatOpen, onChatToggle }: ShellP
       { label: t("navigation.institution"), path: "/institution/eric-chuang", icon: Shield },
       { label: t("home.intelligence.publications"), path: "/books", icon: BookOpen },
       { label: t("home.intelligence.research"), path: "/papers", icon: GraduationCap },
-      { label: t("navigation.digitalGovernance", "數位（AI）治理"), path: "/governance/esgai", icon: Brain },
+      { label: t("navigation.digitalGovernance", "數位（AI）治理"), path: "/governance/digital", icon: Brain },
       { label: "GCSDA", path: "/institution/gcsda", icon: Users },
     ],
     [t]
@@ -260,10 +260,15 @@ function AppRoutes({ onContactOpen }: { onContactOpen: () => void }) {
       <Route path="/governance/family/stages" element={<FamilyGovernance onNavigate={onNavigate} activeSection="stages" />} />
       <Route path="/governance/family/academic" element={<FamilyGovernance onNavigate={onNavigate} activeSection="academic" />} />
 
-      <Route path="/governance/esgai" element={<ESGAI onNavigate={onNavigate} activeSection="intro" />} />
-      <Route path="/governance/esgai/features" element={<ESGAI onNavigate={onNavigate} activeSection="features" />} />
-      <Route path="/governance/esgai/console" element={<ESGAI onNavigate={onNavigate} activeSection="console" />} />
-      <Route path="/governance/esgai/academic" element={<ESGAI onNavigate={onNavigate} activeSection="academic" />} />
+      <Route path="/governance/digital" element={<ESGAI onNavigate={onNavigate} activeSection="intro" />} />
+      <Route path="/governance/digital/features" element={<ESGAI onNavigate={onNavigate} activeSection="features" />} />
+      <Route path="/governance/digital/console" element={<ESGAI onNavigate={onNavigate} activeSection="console" />} />
+      <Route path="/governance/digital/academic" element={<ESGAI onNavigate={onNavigate} activeSection="academic" />} />
+
+      <Route path="/governance/esgai" element={<Navigate to="/governance/digital" replace />} />
+      <Route path="/governance/esgai/features" element={<Navigate to="/governance/digital/features" replace />} />
+      <Route path="/governance/esgai/console" element={<Navigate to="/governance/digital/console" replace />} />
+      <Route path="/governance/esgai/academic" element={<Navigate to="/governance/digital/academic" replace />} />
 
       <Route path="/digital-product-policy" element={<ServicePortal />} />
       <Route path="/contact.html" element={<ServicePortal />} />
