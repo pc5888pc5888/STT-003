@@ -1,0 +1,37 @@
+name: Recover Homepage Visual
+
+on:
+  push:
+    branches:
+      - rebuild/white-gold-governance-os-v1
+    paths:
+      - '.github/workflows/recover-home-visual.yml'
+      - 'assets/home-visual/**'
+
+permissions:
+  contents: read
+
+jobs:
+  recover:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Reconstruct archived homepage visual
+        run: |
+          set -euo pipefail
+          mkdir -p recovered
+          cat assets/home-visual/part*.b64 | tr -d '\r\n' | base64 --decode > recovered/stt-home-recovered.avif
+          test -s recovered/stt-home-recovered.avif
+          file recovered/stt-home-recovered.avif
+          sha256sum recovered/stt-home-recovered.avif
+
+      - name: Upload recovered visual for inspection
+        uses: actions/upload-artifact@v4
+        with:
+          name: stt-home-recovered-visual
+          path: recovered/stt-home-recovered.avif
+          if-no-files-found: error
+          retention-days: 1
