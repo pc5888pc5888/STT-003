@@ -19,20 +19,23 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Inspect archived homepage visual candidate
+      - name: Inspect archived homepage visual candidates
         run: |
           set -euo pipefail
           mkdir -p recovered-home
-          cat assets/home-visual/part*.b64 | tr -d '\r\n' | base64 --decode > recovered-home/stt-home-candidate.avif
-          test -s recovered-home/stt-home-candidate.avif
-          file recovered-home/stt-home-candidate.avif
-          sha256sum recovered-home/stt-home-candidate.avif
+          cat assets/home-visual/part*.b64 | tr -d '\r\n' | base64 --decode > recovered-home/01-home-archive.avif
+          cat assets/home-visual-final/chunk*.txt | tr -d '\r\n' | base64 --decode > recovered-home/02-home-final-archive.avif
+          for candidate in recovered-home/*.avif; do
+            test -s "$candidate"
+            file "$candidate"
+            sha256sum "$candidate"
+          done
 
-      - name: Upload archived homepage candidate
+      - name: Upload archived homepage candidates
         uses: actions/upload-artifact@v4
         with:
-          name: stt-step01-archived-home-candidate
-          path: recovered-home/stt-home-candidate.avif
+          name: stt-step01-archived-home-candidates
+          path: recovered-home/*.avif
           if-no-files-found: error
           retention-days: 1
 
