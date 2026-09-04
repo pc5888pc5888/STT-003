@@ -1,5 +1,5 @@
-import GCSDAStandalone from "./GCSDAStandalone";
+import GCSDAStandaloneV2 from "./GCSDAStandaloneV2";
 
 export default function App() {
-  return <GCSDAStandalone />;
+  return <GCSDAStandaloneV2 />;
 }
