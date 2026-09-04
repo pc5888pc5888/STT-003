@@ -16,6 +16,8 @@ import ESGAI from "./pages/ESGAI";
 import ServicePortal from "./pages/ServicePortal";
 import Success from "./pages/Success";
 import ArticleIndex from "./pages/ArticleIndex";
+import Problems from "./pages/Problems";
+import Start from "./pages/Start";
 import ChatBot from "./components/ChatBot";
 import { AccessibilityWidget } from "./components/AccessibilityWidget";
 import { useI18n } from "./i18n/I18nProvider";
@@ -31,6 +33,8 @@ type ShellProps = {
 
 const legacyPathMap: Record<string, string> = {
   home: "/",
+  problems: "/problems",
+  start: "/start",
   about: "/institution/eric-chuang",
   columns: "/insights",
   books: "/books",
@@ -64,15 +68,14 @@ const legacyPathMap: Record<string, string> = {
 
 const homeAnchorMap: Record<string, string> = {
   hero: "hero",
-  governance: "governance",
-  positioning: "architecture",
+  governance: "problems",
+  positioning: "how-stt-works",
   strategist: "authority",
   insights: "intelligence",
 };
 
 function useLegacyNavigate(): LegacyNavigate {
   const navigate = useNavigate();
-
   return (page: string) => {
     const anchor = homeAnchorMap[page];
     if (anchor) {
@@ -92,20 +95,20 @@ function PublicShell({ children, onContactOpen, chatOpen, onChatToggle }: ShellP
 
   const primaryNavigation = useMemo(
     () => [
-      { label: t("navigation.governance"), path: "/#governance" },
-      { label: t("navigation.internalCompliance"), path: "/internal-compliance" },
-      { label: t("navigation.digitalGovernance", "數位（AI）治理"), path: "/governance/digital" },
-      { label: t("navigation.pressInsights"), path: "/insights" },
+      { label: t("navigation.problems", "你正在面對什麼"), path: "/problems" },
+      { label: t("navigation.howSttWorks", "莊博士怎麼處理"), path: "/#how-stt-works" },
+      { label: t("navigation.pressInsights", "專欄判讀"), path: "/insights" },
+      { label: t("navigation.publications", "出版研究"), path: "/books" },
     ],
     [t]
   );
 
   const secondaryNavigation = useMemo(
     () => [
-      { label: t("navigation.institution"), path: "/institution/eric-chuang", icon: Shield },
-      { label: t("home.intelligence.publications"), path: "/books", icon: BookOpen },
-      { label: t("home.intelligence.research"), path: "/papers", icon: GraduationCap },
-      { label: t("navigation.digitalGovernance", "數位（AI）治理"), path: "/governance/digital", icon: Brain },
+      { label: t("navigation.institution", "莊鈞翔博士"), path: "/institution/eric-chuang", icon: Shield },
+      { label: t("home.intelligence.research", "研究論文"), path: "/papers", icon: GraduationCap },
+      { label: t("navigation.digitalGovernance", "AI Governance"), path: "/governance/digital", icon: Brain },
+      { label: t("navigation.internalCompliance", "內在法遵"), path: "/internal-compliance", icon: BookOpen },
       { label: "GCSDA", path: "/institution/gcsda", icon: Users },
     ],
     [t]
@@ -118,8 +121,9 @@ function PublicShell({ children, onContactOpen, chatOpen, onChatToggle }: ShellP
 
   if (exactHome) {
     return (
-      <div className="min-h-screen" style={{ background: "#fbfbfa", color: "var(--stt-ink)" }}>
+      <div className="min-h-screen" style={{ background: "#fbfaf7", color: "var(--stt-ink)" }}>
         <main>{children}</main>
+        <AccessibilityWidget onChatOpen={onChatToggle} isChatOpen={chatOpen} />
       </div>
     );
   }
@@ -128,35 +132,35 @@ function PublicShell({ children, onContactOpen, chatOpen, onChatToggle }: ShellP
     <div className="min-h-screen" style={{ background: "var(--stt-canvas)", color: "var(--stt-ink)" }}>
       <header className="sticky top-0 z-[70] border-b bg-white/95 backdrop-blur-xl" style={{ borderColor: "var(--stt-line)", minHeight: "var(--stt-header-height)" }}>
         <div className="mx-auto flex h-[76px] max-w-[1320px] items-center px-5 lg:px-8">
-          <button type="button" onClick={() => go("/")} className="mr-auto bg-transparent border-0 p-0 text-left cursor-pointer">
+          <button type="button" onClick={() => go("/")} className="mr-auto cursor-pointer border-0 bg-transparent p-0 text-left">
             <span className="block font-serif text-lg tracking-[0.06em]" style={{ color: "var(--stt-ink)" }}>STT Governance</span>
-            <span className="mt-1 block text-[8px] tracking-[0.28em] uppercase" style={{ color: "var(--stt-gold-deep)" }}>Strategic Think Tank</span>
+            <span className="mt-1 block text-[8px] uppercase tracking-[0.28em]" style={{ color: "var(--stt-gold-deep)" }}>Strategic Think Tank</span>
           </button>
 
-          <nav className="hidden xl:flex items-center h-full" aria-label="Primary">
+          <nav className="hidden h-full items-center xl:flex" aria-label="Primary">
             {primaryNavigation.map((item) => {
               const active = item.path.startsWith("/#") ? location.pathname === "/" : location.pathname.startsWith(item.path);
               return (
-                <button key={item.path} type="button" onClick={() => go(item.path)} className="relative h-full bg-transparent border-0 px-5 text-[12px] tracking-[0.08em] cursor-pointer" style={{ color: active ? "var(--stt-gold-deep)" : "var(--stt-ink-soft)" }}>
+                <button key={item.path} type="button" onClick={() => go(item.path)} className="relative h-full cursor-pointer border-0 bg-transparent px-4 text-[12px] tracking-[0.05em]" style={{ color: active ? "var(--stt-gold-deep)" : "var(--stt-ink-soft)" }}>
                   {item.label}
-                  {active && <span className="absolute bottom-0 left-5 right-5 h-px" style={{ background: "var(--stt-gold)" }} />}
+                  {active && <span className="absolute bottom-0 left-4 right-4 h-px" style={{ background: "var(--stt-gold)" }} />}
                 </button>
               );
             })}
           </nav>
 
-          <div className="ml-4 hidden xl:flex items-center gap-3">
-            <button type="button" onClick={onContactOpen} className="inline-flex items-center gap-2 border bg-transparent px-4 py-2.5 text-xs font-semibold cursor-pointer" style={{ borderColor: "var(--stt-gold-line)", color: "var(--stt-gold-deep)" }}>
-              {t("navigation.engagement")}
-              <ArrowRight className="w-3.5 h-3.5" strokeWidth={1.3} />
+          <div className="ml-4 hidden items-center gap-3 xl:flex">
+            <button type="button" onClick={() => go("/start")} className="inline-flex cursor-pointer items-center gap-2 border bg-transparent px-4 py-2.5 text-xs font-semibold" style={{ borderColor: "var(--stt-gold-line)", color: "var(--stt-gold-deep)" }}>
+              {t("navigation.engagement", "開始")}
+              <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.3} />
             </button>
-            <button type="button" onClick={() => setMenuOpen((value) => !value)} className="w-10 h-10 inline-flex items-center justify-center bg-transparent border-0 cursor-pointer" aria-label={menuOpen ? t("common.close") : "Menu"}>
-              {menuOpen ? <X className="w-5 h-5" strokeWidth={1.2} /> : <Menu className="w-5 h-5" strokeWidth={1.2} />}
+            <button type="button" onClick={() => setMenuOpen((value) => !value)} className="inline-flex h-10 w-10 cursor-pointer items-center justify-center border-0 bg-transparent" aria-label={menuOpen ? t("common.close") : "Menu"}>
+              {menuOpen ? <X className="h-5 w-5" strokeWidth={1.2} /> : <Menu className="h-5 w-5" strokeWidth={1.2} />}
             </button>
           </div>
 
-          <button type="button" onClick={() => setMenuOpen((value) => !value)} className="ml-3 w-10 h-10 inline-flex items-center justify-center bg-transparent border-0 cursor-pointer xl:hidden" aria-label={menuOpen ? t("common.close") : "Menu"}>
-            {menuOpen ? <X className="w-5 h-5" strokeWidth={1.2} /> : <Menu className="w-5 h-5" strokeWidth={1.2} />}
+          <button type="button" onClick={() => setMenuOpen((value) => !value)} className="ml-3 inline-flex h-10 w-10 cursor-pointer items-center justify-center border-0 bg-transparent xl:hidden" aria-label={menuOpen ? t("common.close") : "Menu"}>
+            {menuOpen ? <X className="h-5 w-5" strokeWidth={1.2} /> : <Menu className="h-5 w-5" strokeWidth={1.2} />}
           </button>
         </div>
 
@@ -165,7 +169,7 @@ function PublicShell({ children, onContactOpen, chatOpen, onChatToggle }: ShellP
             <div className="mx-auto grid max-w-[1320px] gap-10 px-6 py-8 lg:grid-cols-[1.2fr_0.8fr] lg:px-8">
               <div className="grid gap-px border bg-[var(--stt-line)] sm:grid-cols-2" style={{ borderColor: "var(--stt-line)" }}>
                 {primaryNavigation.map((item, index) => (
-                  <button key={item.path} type="button" onClick={() => go(item.path)} className="min-h-[110px] bg-white p-5 text-left cursor-pointer">
+                  <button key={item.path} type="button" onClick={() => go(item.path)} className="min-h-[110px] cursor-pointer bg-white p-5 text-left">
                     <span className="text-[10px] tracking-[0.16em]" style={{ color: "var(--stt-gold-deep)" }}>0{index + 1}</span>
                     <span className="mt-5 block font-serif text-lg">{item.label}</span>
                   </button>
@@ -176,19 +180,19 @@ function PublicShell({ children, onContactOpen, chatOpen, onChatToggle }: ShellP
                 {secondaryNavigation.map((item) => {
                   const Icon = item.icon;
                   return (
-                    <button key={item.path} type="button" onClick={() => go(item.path)} className="flex w-full items-center justify-between border-b bg-transparent px-2 py-3 text-left cursor-pointer" style={{ borderColor: "var(--stt-line)" }}>
+                    <button key={item.path} type="button" onClick={() => go(item.path)} className="flex w-full cursor-pointer items-center justify-between border-b bg-transparent px-2 py-3 text-left" style={{ borderColor: "var(--stt-line)" }}>
                       <span className="flex items-center gap-3 text-sm" style={{ color: "var(--stt-ink-soft)" }}>
-                        <Icon className="w-4 h-4" strokeWidth={1.2} style={{ color: "var(--stt-gold-deep)" }} />
+                        <Icon className="h-4 w-4" strokeWidth={1.2} style={{ color: "var(--stt-gold-deep)" }} />
                         {item.label}
                       </span>
-                      <ArrowRight className="w-3.5 h-3.5" strokeWidth={1.2} style={{ color: "var(--stt-gold-deep)" }} />
+                      <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.2} style={{ color: "var(--stt-gold-deep)" }} />
                     </button>
                   );
                 })}
 
-                <button type="button" onClick={() => { setMenuOpen(false); onContactOpen(); }} className="mt-5 inline-flex items-center gap-2 border bg-[var(--stt-ivory)] px-4 py-3 text-sm cursor-pointer" style={{ borderColor: "var(--stt-gold-line)", color: "var(--stt-gold-deep)" }}>
-                  {t("navigation.engagement")}
-                  <ArrowRight className="w-4 h-4" strokeWidth={1.2} />
+                <button type="button" onClick={() => go("/start")} className="mt-5 inline-flex cursor-pointer items-center gap-2 border bg-[var(--stt-ivory)] px-4 py-3 text-sm" style={{ borderColor: "var(--stt-gold-line)", color: "var(--stt-gold-deep)" }}>
+                  {t("navigation.engagement", "開始")}
+                  <ArrowRight className="h-4 w-4" strokeWidth={1.2} />
                 </button>
               </div>
             </div>
@@ -202,12 +206,13 @@ function PublicShell({ children, onContactOpen, chatOpen, onChatToggle }: ShellP
         <div className="mx-auto grid max-w-[1180px] gap-8 md:grid-cols-[1fr_auto] md:items-end">
           <div>
             <p className="font-serif text-xl tracking-[0.04em]">STT Governance</p>
-            <p className="mt-3 max-w-[620px] text-sm leading-7" style={{ color: "var(--stt-ink-muted)" }}>{t("home.hero.description")}</p>
+            <p className="mt-3 max-w-[620px] text-sm leading-7" style={{ color: "var(--stt-ink-muted)" }}>把未來可能後悔的事情，提前帶到今天理解、判斷、安排與執行。</p>
           </div>
           <div className="flex flex-wrap gap-x-5 gap-y-2 text-xs" style={{ color: "var(--stt-ink-muted)" }}>
-            <button type="button" onClick={() => go("/insights")} className="bg-transparent border-0 p-0 cursor-pointer">{t("navigation.pressInsights")}</button>
-            <button type="button" onClick={() => go("/institution/eric-chuang")} className="bg-transparent border-0 p-0 cursor-pointer">{t("navigation.institution")}</button>
-            <button type="button" onClick={onContactOpen} className="bg-transparent border-0 p-0 cursor-pointer">{t("navigation.engagement")}</button>
+            <button type="button" onClick={() => go("/problems")} className="cursor-pointer border-0 bg-transparent p-0">你正在面對什麼</button>
+            <button type="button" onClick={() => go("/insights")} className="cursor-pointer border-0 bg-transparent p-0">專欄判讀</button>
+            <button type="button" onClick={() => go("/institution/eric-chuang")} className="cursor-pointer border-0 bg-transparent p-0">莊鈞翔博士</button>
+            <button type="button" onClick={() => go("/start")} className="cursor-pointer border-0 bg-transparent p-0">開始</button>
           </div>
         </div>
       </footer>
@@ -220,8 +225,8 @@ function PublicShell({ children, onContactOpen, chatOpen, onChatToggle }: ShellP
 function HomeRoute({ onNavigate }: { onNavigate: LegacyNavigate }) {
   const location = useLocation();
   const hash = location.hash.replace("#", "");
-  const activeSection = hash === "governance" ? "governance" : hash === "architecture" ? "positioning" : hash === "authority" ? "strategist" : hash === "intelligence" ? "insights" : "hero";
-  return <Home onNavigate={onNavigate} currentPage={hash === "governance" ? "governance" : "home"} activeSection={activeSection} />;
+  const activeSection = hash === "problems" ? "governance" : hash === "how-stt-works" ? "positioning" : hash === "authority" ? "strategist" : hash === "intelligence" ? "insights" : "hero";
+  return <Home onNavigate={onNavigate} currentPage="home" activeSection={activeSection} />;
 }
 
 function AppRoutes({ onContactOpen }: { onContactOpen: () => void }) {
@@ -231,7 +236,10 @@ function AppRoutes({ onContactOpen }: { onContactOpen: () => void }) {
     <Routes>
       <Route path="/" element={<HomeRoute onNavigate={onNavigate} />} />
       <Route path="/index.html" element={<HomeRoute onNavigate={onNavigate} />} />
-      <Route path="/governance.html" element={<Navigate to="/#governance" replace />} />
+      <Route path="/governance.html" element={<Navigate to="/#problems" replace />} />
+      <Route path="/how-stt-works" element={<Navigate to="/#how-stt-works" replace />} />
+      <Route path="/problems" element={<Problems />} />
+      <Route path="/start" element={<Start />} />
 
       <Route path="/insights" element={<Columns />} />
       <Route path="/insights.html" element={<Columns />} />
@@ -264,7 +272,6 @@ function AppRoutes({ onContactOpen }: { onContactOpen: () => void }) {
       <Route path="/governance/digital/features" element={<ESGAI onNavigate={onNavigate} activeSection="features" />} />
       <Route path="/governance/digital/console" element={<ESGAI onNavigate={onNavigate} activeSection="console" />} />
       <Route path="/governance/digital/academic" element={<ESGAI onNavigate={onNavigate} activeSection="academic" />} />
-
       <Route path="/governance/esgai" element={<Navigate to="/governance/digital" replace />} />
       <Route path="/governance/esgai/features" element={<Navigate to="/governance/digital/features" replace />} />
       <Route path="/governance/esgai/console" element={<Navigate to="/governance/digital/console" replace />} />
