@@ -21,8 +21,14 @@
 }
 
 @layer base {
+  html {
+    background: #fbfaf7;
+  }
+
   body {
-    @apply bg-black text-white antialiased overflow-x-hidden;
+    @apply antialiased overflow-x-hidden;
+    background: #fbfaf7;
+    color: #2a251f;
   }
   
   img:not(.hero-portrait):not(.strategist-portrait) {
@@ -108,7 +114,9 @@
 }
 
 .glass-header {
-  @apply bg-black/80 backdrop-blur-md border-b border-white/10;
+  background: rgba(255,253,249,0.94) !important;
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid #ddcfb9 !important;
 }
 
 .portrait-render {
@@ -125,15 +133,52 @@
 }
 
 .strategic-bg-overlay {
-  @apply absolute inset-0 bg-black/75 z-5;
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  background: rgba(251,250,247,0.72) !important;
+}
+
+/* NO-BLACK PUBLIC THEME GUARDRAIL — source-level, not a late JS patch. */
+.hv-dark,
+.hv-final,
+.pd-method {
+  background: #eee4d6 !important;
+  color: #2a251f !important;
+  border-color: #d8c6ac !important;
+}
+.hv-dark .hv-heading,
+.hv-final h2,
+.pd-method h2 {
+  color: #2a251f !important;
+}
+.hv-dark .hv-desc,
+.hv-final p {
+  color: #70675d !important;
+}
+.hv-dark .hv-eyebrow,
+.hv-mis b {
+  color: #9b6e36 !important;
+}
+.hv-mis {
+  background: #d9c8ae !important;
+  border-color: #d9c8ae !important;
+}
+.hv-mis div,
+.pd-method .pd-item {
+  background: #f8f2e9 !important;
+  color: #50473e !important;
+  border-color: #d8c6ac !important;
+}
+.pd-method .pd-items {
+  border-color: #d8c6ac !important;
 }
 
 .scrollbar-none {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 .scrollbar-none::-webkit-scrollbar {
-  display: none; /* Chrome, Safari and Opera */
+  display: none;
 }
-
