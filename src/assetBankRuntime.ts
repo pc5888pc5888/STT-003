@@ -36,9 +36,9 @@ function enforceWhitePublicSurfaces(){
     const rect=el.getBoundingClientRect();
     if(rect.width*rect.height<12000)return;
     const cs=getComputedStyle(el);
-    const dark=luminance(cs.backgroundColor)<.22;
-    const gradient=cs.backgroundImage.includes('gradient')&&!cs.backgroundImage.includes('url(');
-    if(dark||gradient){
+    const transparent=cs.backgroundColor==='rgba(0, 0, 0, 0)'||cs.backgroundColor==='transparent';
+    const dark=!transparent&&luminance(cs.backgroundColor)<.22;
+    if(dark){
       el.classList.add('asset-bank-whitened');
     }
   });
