@@ -15,7 +15,7 @@ body{margin:0!important}
 .g3{background:var(--g-approved-paper)!important;color:var(--g-approved-ink)!important}
 .g3-head{background:rgba(255,253,249,.96)!important;border-bottom-color:rgba(179,138,81,.24)!important}
 .g3-home{background:var(--g-approved-paper)!important;border-color:var(--g-approved-line)!important}
-.g3-home-media{background-image:url('/visual-bank/gcsda/home.webp')!important;background-position:center right!important;background-size:cover!important}
+.g3-home-media{background-image:url('/visual-bank/gcsda/home-approved.webp')!important;background-position:center right!important;background-size:cover!important}
 .g3-home-media:after{background:linear-gradient(90deg,var(--g-approved-paper) 0%,rgba(251,250,247,.96) 14%,rgba(251,250,247,.74) 38%,rgba(251,250,247,.18) 70%,rgba(251,250,247,.03) 100%)!important}
 .g3-values,.g3-card,.g3-person,.g3-drawerpanel{background:var(--g-approved-white)!important}
 .g3-section{background:var(--g-approved-paper)!important}
