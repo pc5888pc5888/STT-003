@@ -1,0 +1,51 @@
+name: Fix GCSDA STT approved link
+
+on:
+  push:
+    branches:
+      - gcsda/approved-white-gold-v1
+    paths:
+      - .github/workflows/gcsda-fix-stt-approved-link.yml
+      - src/GCSDAStandaloneV2.tsx
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  fix-link:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout approved GCSDA branch
+        uses: actions/checkout@v4
+        with:
+          ref: gcsda/approved-white-gold-v1
+          fetch-depth: 0
+
+      - name: Replace legacy STT link with approved STT branch alias
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('src/GCSDAStandaloneV2.tsx')
+          s = p.read_text(encoding='utf-8')
+          old = 'https://stt-003-git-rebuild-white-gold-go-4eafa7-pc5888pc5888s-projects.vercel.app'
+          new = 'https://stt-003-git-rebuild-stt-approved-8c858b-pc5888pc5888s-projects.vercel.app'
+          count = s.count(old)
+          if count == 0:
+              print('No legacy STT URL remains; nothing to change.')
+          else:
+              p.write_text(s.replace(old, new), encoding='utf-8')
+              print(f'Replaced {count} legacy STT URL occurrence(s).')
+          PY
+
+      - name: Commit corrected link
+        run: |
+          git config user.name "GCSDA Approved Site Bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add src/GCSDAStandaloneV2.tsx
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+            exit 0
+          fi
+          git commit -m "fix: point GCSDA back to approved STT site"
+          git push origin HEAD:gcsda/approved-white-gold-v1
