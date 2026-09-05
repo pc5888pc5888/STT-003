@@ -21,8 +21,16 @@
 }
 
 @layer base {
+  html,
+  body,
+  #root {
+    background: #ffffff !important;
+    color: #2a251f !important;
+    min-height: 100%;
+  }
+
   body {
-    @apply bg-black text-white antialiased overflow-x-hidden;
+    @apply antialiased overflow-x-hidden;
   }
   
   img:not(.hero-portrait):not(.strategist-portrait) {
@@ -108,7 +116,9 @@
 }
 
 .glass-header {
-  @apply bg-black/80 backdrop-blur-md border-b border-white/10;
+  background: rgba(255,255,255,0.96) !important;
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid #e2d5bf !important;
 }
 
 .portrait-render {
@@ -125,15 +135,43 @@
 }
 
 .strategic-bg-overlay {
-  @apply absolute inset-0 bg-black/75 z-5;
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 5 !important;
+  background: rgba(255,255,255,0.82) !important;
+}
+
+/* HARD WHITE-SURFACE LOCK: no black/dark public page backgrounds. */
+#root [class*="bg-black"],
+#root [class*="bg-[#0"],
+#root [class*="bg-neutral-9"],
+#root [class*="bg-zinc-9"],
+#root [class*="bg-gray-9"],
+#root [class*="bg-slate-9"] {
+  background-color: #ffffff !important;
+  background-image: none !important;
+}
+
+#root [class*="text-white"] {
+  color: #2a251f !important;
+}
+
+#root [class*="border-white"] {
+  border-color: #e2d5bf !important;
+}
+
+#root nav,
+#root header,
+#root footer {
+  background-color: #ffffff !important;
+  color: #2a251f !important;
 }
 
 .scrollbar-none {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 .scrollbar-none::-webkit-scrollbar {
-  display: none; /* Chrome, Safari and Opera */
+  display: none;
 }
-
