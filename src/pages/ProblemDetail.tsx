@@ -91,14 +91,14 @@ const data:Record<string,ProblemConfig>={
 };
 
 const visualImages:Record<VisualKind,string>={
-  decision:"/images/paper_corporate_governance.png",
-  owner:"/images/Corporate Governance Strategy Interpretation02.png",
-  succession:"/images/paper_succession_family.png",
-  family:"/images/Family Office02.png",
-  strategicLegal:"/images/STT-Press-Law-Header.png",
-  ai:"/images/ESGAI02.png",
-  system:"/images/internal compliance02.png",
-  legacy:"/images/bg-strategist-spotlight.png",
+  decision:"/visual-bank/stt/major-decision.webp",
+  owner:"/visual-bank/stt/owner-dependence.webp",
+  succession:"/visual-bank/stt/succession.webp",
+  family:"/visual-bank/stt/family-ownership.webp",
+  strategicLegal:"/visual-bank/stt/strategic-legal.webp",
+  ai:"/visual-bank/stt/ai-governance.webp",
+  system:"/visual-bank/stt/system-failure.webp",
+  legacy:"/visual-bank/stt/founder-legacy.webp",
 };
 
 const visualPosition:Partial<Record<VisualKind,string>>={
