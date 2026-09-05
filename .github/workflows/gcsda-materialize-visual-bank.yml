@@ -1,0 +1,45 @@
+name: Materialize GCSDA Visual Asset Bank
+
+on:
+  push:
+    branches:
+      - gcsda/independent-site-v1
+    paths:
+      - .github/workflows/gcsda-materialize-visual-bank.yml
+
+permissions:
+  contents: write
+
+jobs:
+  materialize:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Materialize approved visual-bank blobs
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          fetch_blob() {
+            local sha="$1" dest="$2"
+            mkdir -p "$(dirname "$dest")"
+            gh api "/repos/${GITHUB_REPOSITORY}/git/blobs/${sha}" --jq '.content' | tr -d '\n' | base64 -d > "$dest"
+          }
+          fetch_blob 1ed66482e8abb11fa25366405a35f4d56297a80f public/visual-bank/gcsda/home.webp
+          fetch_blob 4f763283364a6dc0cd08fbae8a8afbbb87417078 public/visual-bank/gcsda/about.webp
+          fetch_blob fe9a901ccf99505fb796a311907516bba0e6c746 public/visual-bank/gcsda/governance.webp
+          fetch_blob a833a881609c2938dcb557574ecf40100ecfcc85 public/visual-bank/gcsda/council.webp
+          fetch_blob 34629db4bd4c22dd26f742e402bacf92e5b3068a public/visual-bank/gcsda/membership.webp
+          fetch_blob 1c55e3115d23e5d39d03f679930cdbaf4aef80ae public/visual-bank/gcsda/events.webp
+          fetch_blob 72bbe16df863a5bb66a0f6fb4f45498745e82378 public/visual-bank/gcsda/knowledge.webp
+          fetch_blob 5d1509a8915281970acebaf4d62b214533f84f7d public/visual-bank/gcsda/charter.webp
+      - name: Commit visual-bank masters
+        run: |
+          git config user.name "GCSDA Visual Bank Bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add public/visual-bank/gcsda
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "feat: install GCSDA visual asset bank masters"
+          git push origin HEAD:gcsda/independent-site-v1
