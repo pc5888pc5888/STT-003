@@ -1,0 +1,36 @@
+name: Fix GCSDA Asset Bank Runtime
+
+on:
+  push:
+    branches:
+      - gcsda/independent-site-v1
+    paths:
+      - .github/workflows/gcsda-fix-asset-runtime.yml
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Patch runtime guard
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('src/assetBankRuntime.ts')
+          s=p.read_text()
+          s=s.replace("const cs=getComputedStyle(el); const dark=luminance(cs.backgroundColor)<.22;\n    const gradient=cs.backgroundImage.includes('gradient')&&!cs.backgroundImage.includes('url(');\n    if(dark||gradient)el.classList.add('asset-bank-whitened');", "const cs=getComputedStyle(el);\n    const transparent=cs.backgroundColor==='rgba(0, 0, 0, 0)'||cs.backgroundColor==='transparent';\n    const dark=!transparent&&luminance(cs.backgroundColor)<.22;\n    if(dark)el.classList.add('asset-bank-whitened');")
+          p.write_text(s)
+          PY
+      - name: Commit patch
+        run: |
+          git config user.name "GCSDA Visual Bank Bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add src/assetBankRuntime.ts
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "fix: protect white-gold institutional surfaces"
+          git push origin HEAD:gcsda/independent-site-v1
