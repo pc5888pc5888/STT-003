@@ -21,14 +21,16 @@
 }
 
 @layer base {
-  html {
-    background: #fbfaf7;
+  html,
+  body,
+  #root {
+    background: #ffffff !important;
+    color: #2a251f !important;
+    min-height: 100%;
   }
 
   body {
     @apply antialiased overflow-x-hidden;
-    background: #fbfaf7;
-    color: #2a251f;
   }
   
   img:not(.hero-portrait):not(.strategist-portrait) {
@@ -114,9 +116,9 @@
 }
 
 .glass-header {
-  background: rgba(255,253,249,0.94) !important;
+  background: rgba(255,255,255,0.96) !important;
   backdrop-filter: blur(12px);
-  border-bottom: 1px solid #ddcfb9 !important;
+  border-bottom: 1px solid #e2d5bf !important;
 }
 
 .portrait-render {
@@ -136,38 +138,47 @@
   position: absolute;
   inset: 0;
   z-index: 5;
-  background: rgba(251,250,247,0.72) !important;
+  background: rgba(255,255,255,0.82) !important;
 }
 
-/* GCSDA NO-BLACK INSTITUTIONAL THEME GUARDRAIL. */
 .g2,
-.gcsda {
-  background: #faf8f3 !important;
-  color: #29241f !important;
-}
+.gcsda,
 .g2-dark,
 .g-dark,
 .g2-footer,
-.g-footer {
-  background: #eee4d6 !important;
+.g-footer,
+.g2-dark .g2-card,
+.g-dark .g-card {
+  background: #ffffff !important;
   color: #29241f !important;
-  border-color: #d8c6ac !important;
+  border-color: #e2d5bf !important;
 }
 .g2-dark .g2-lead,
 .g-dark .g-lead,
 .g2-footer p,
 .g-footer p {
-  color: #70675d !important;
-}
-.g2-dark .g2-card,
-.g-dark .g-card {
-  background: #f8f2e9 !important;
-  color: #50473e !important;
+  color: #5f574e !important;
 }
 .g2-footer a,
 .g-footer a {
   color: #8b622f !important;
 }
+
+/* HARD WHITE-SURFACE LOCK: no dark page surfaces anywhere. */
+#root [class*="bg-black"],
+#root [class*="bg-[#0"],
+#root [class*="bg-neutral-9"],
+#root [class*="bg-zinc-9"],
+#root [class*="bg-gray-9"],
+#root [class*="bg-slate-9"] {
+  background-color: #ffffff !important;
+  background-image: none !important;
+}
+#root [class*="text-white"] { color: #2a251f !important; }
+#root [class*="border-white"] { border-color: #e2d5bf !important; }
+#root nav,
+#root header,
+#root footer { background-color:#ffffff !important; color:#2a251f !important; }
 
 .scrollbar-none {
   -ms-overflow-style: none;
