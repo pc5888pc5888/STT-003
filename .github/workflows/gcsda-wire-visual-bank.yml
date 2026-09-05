@@ -1,0 +1,48 @@
+name: Wire GCSDA Visual Asset Bank
+
+on:
+  push:
+    branches:
+      - gcsda/independent-site-v1
+    paths:
+      - .github/workflows/gcsda-wire-visual-bank.yml
+
+permissions:
+  contents: write
+
+jobs:
+  wire:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Wire canonical institutional page masters
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('src/GCSDAStandaloneV2.tsx')
+          s=p.read_text()
+          repl={
+            "/images/bg-portal-columns.png":"/visual-bank/gcsda/about.webp",
+            "/images/gcsda_team_new.png":"/visual-bank/gcsda/governance.webp",
+            "/images/group-001.png":"/visual-bank/gcsda/council.webp",
+            "/images/gcsda_003.png":"/visual-bank/gcsda/membership.webp",
+            "/images/gcsda_team_2026.png":"/visual-bank/gcsda/events.webp",
+            "/images/bg-insights-globe.png":"/visual-bank/gcsda/knowledge.webp",
+            "/images/paper_corporate_governance.png":"/visual-bank/gcsda/charter.webp",
+          }
+          for a,b in repl.items(): s=s.replace(a,b)
+          # Home is a separate approved source-20 master, not the About source.
+          s=s.replace("background:#fbfaf7 url('/visual-bank/gcsda/about.webp')", "background:#fbfaf7 url('/visual-bank/gcsda/home.webp')")
+          s=s.replace("https://stt-003-git-rebuild-white-gold-go-67654f-pc5888s-projects.vercel.app", "https://stt-003-git-rebuild-white-gold-go-4eafa7-pc5888pc5888s-projects.vercel.app")
+          p.write_text(s)
+          PY
+      - name: Commit wiring
+        run: |
+          git config user.name "GCSDA Visual Bank Bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add src/GCSDAStandaloneV2.tsx
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "feat: place GCSDA Visual Asset Bank masters on institutional pages"
+          git push origin HEAD:gcsda/independent-site-v1
