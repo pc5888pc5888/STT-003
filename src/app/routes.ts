@@ -1,0 +1,18 @@
+export const routes = {
+  home: "/",
+  governance: "/governance",
+  corporateGovernance: "/governance/corporate",
+  familyGovernance: "/governance/family",
+  decisionArchitecture: "/governance/decision-architecture",
+  digitalGovernance: "/governance/digital",
+  internalCompliance: "/internal-compliance",
+  pressInsights: "/insights",
+  institution: "/institution/stt",
+  founder: "/institution/eric-chuang",
+  events: "/events",
+  engagement: "/engage",
+  admin: "/admin",
+  eventDetail: (eventId: string) => `/events/${encodeURIComponent(eventId)}`,
+  eventRegistration: (eventId: string) => `/events/${encodeURIComponent(eventId)}/register`,
+  adminEventCheckin: (eventId: string) => `/admin/checkin/${encodeURIComponent(eventId)}`,
+} as const;

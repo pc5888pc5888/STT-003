@@ -1,0 +1,102 @@
+name: Rebuild Validation
+
+on:
+  push:
+    branches:
+      - rebuild/white-gold-governance-os-v1
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 14
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Type check
+        run: npm run lint
+
+      - name: Production build
+        run: npm run build
+
+      - name: Install CJK preview fonts
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y fonts-noto-cjk
+          fc-cache -f
+
+      - name: Render core page previews
+        run: |
+          set -euo pipefail
+          mkdir -p preview-artifacts
+          npx vite preview --host 127.0.0.1 --port 4173 > /tmp/stt-vite-preview.log 2>&1 &
+          PREVIEW_PID=$!
+          trap 'kill "$PREVIEW_PID" 2>/dev/null || true' EXIT
+
+          READY=0
+          for attempt in $(seq 1 30); do
+            if curl --fail --silent --show-error http://127.0.0.1:4173/ > /dev/null; then
+              READY=1
+              break
+            fi
+            sleep 1
+          done
+
+          if [ "$READY" -ne 1 ]; then
+            cat /tmp/stt-vite-preview.log
+            exit 1
+          fi
+
+          BROWSER="$(command -v google-chrome || command -v chromium || command -v chromium-browser || true)"
+          if [ -z "$BROWSER" ]; then
+            echo "No Chromium-compatible browser found on runner."
+            exit 1
+          fi
+
+          render_page() {
+            local path="$1"
+            local output="$2"
+            "$BROWSER" \
+              --headless=new \
+              --no-sandbox \
+              --disable-gpu \
+              --hide-scrollbars \
+              --window-size=1536,1024 \
+              --force-device-scale-factor=1 \
+              --virtual-time-budget=2500 \
+              --screenshot="$output" \
+              "http://127.0.0.1:4173$path"
+          }
+
+          render_page "/governance/corporate" "preview-artifacts/01-governance.png"
+          render_page "/internal-compliance" "preview-artifacts/02-internal-compliance.png"
+          render_page "/governance/digital" "preview-artifacts/03-digital-governance.png"
+          render_page "/insights" "preview-artifacts/04-press-insights.png"
+
+          test -s preview-artifacts/01-governance.png
+          test -s preview-artifacts/02-internal-compliance.png
+          test -s preview-artifacts/03-digital-governance.png
+          test -s preview-artifacts/04-press-insights.png
+
+      - name: Upload visual previews
+        uses: actions/upload-artifact@v4
+        with:
+          name: stt-core-page-previews
+          path: preview-artifacts/*.png
+          if-no-files-found: error
+          retention-days: 7

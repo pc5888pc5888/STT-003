@@ -1,338 +1,561 @@
-import { useState, useEffect, useMemo, useRef, FC } from "react";
-import { motion, AnimatePresence, useScroll, useTransform } from "motion/react";
-import { articles, categories, Article } from "../data/mockData";
-import { ArrowRight, Search, RefreshCcw, Filter, List, Sparkles, Tag } from "lucide-react";
+import { useMemo, useState } from "react";
+import { ArrowRight, BookOpen, Search } from "lucide-react";
+import { articles, type Article } from "../data/mockData";
 
+const EXCLUDED_TOPICS = ["減碳", "碳排", "碳權"];
 
-const ArticleCard: FC<{ article: Article, index: number }> = ({ article, index }) => {
-  const ref = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"]
+function isLegacyExcluded(article: Article) {
+  if (article.category === "ESG") {
+    return true;
+  }
+  const text = `${article.title} ${article.excerpt}`;
+  return EXCLUDED_TOPICS.some((term) => text.includes(term));
+}
+
+function sortArticles(items: Article[]) {
+  return [...items].sort((a, b) => {
+    const aTime = Date.parse(a.date || "") || 0;
+    const bTime = Date.parse(b.date || "") || 0;
+    if (aTime !== bTime) {
+      return bTime - aTime;
+    }
+    return String(b.id).localeCompare(String(a.id));
   });
+}
 
-  const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
-  const y = useTransform(scrollYProgress, [0, 0.2], [50, 0]);
+function openArticle(article: Article) {
+  if (!article.url) {
+    return;
+  }
+  window.open(article.url, "_blank", "noopener,noreferrer");
+}
 
-  const categoryStyles: Record<string, string> = {
-    "治理": "border-blue-500/30 text-blue-400 bg-blue-500/5",
-    "策略": "border-gold-500/30 text-gold-400 bg-gold-500/5",
-    "ESG": "border-emerald-500/30 text-emerald-400 bg-emerald-500/5",
-    "風險": "border-red-500/30 text-red-400 bg-red-500/5",
-  };
-
+function ArticleRow({ article, index }: { article: Article; index: number }) {
   return (
-    <motion.div
-      ref={ref}
-      style={{ opacity, y }}
-      className="group cursor-pointer border-b border-gold-900/10 pb-12 last:border-0 hover:bg-gold-400/[0.01] -mx-4 px-4 transition-all rounded-lg"
-      onClick={() => article.url && window.open(article.url, '_blank')}
+    <article
+      className="stt-editorial-row"
+      onClick={() => openArticle(article)}
+      role={article.url ? "link" : undefined}
+      tabIndex={article.url ? 0 : -1}
+      onKeyDown={(event) => {
+        if (article.url && (event.key === "Enter" || event.key === " ")) {
+          event.preventDefault();
+          openArticle(article);
+        }
+      }}
     >
-      <div className="space-y-4 py-4 max-w-4xl">
-        <div className="flex items-center gap-4 text-[10px] font-black tracking-widest uppercase">
-          <span className={`px-3 py-1 border rounded-full transition-colors ${categoryStyles[article.category] || "border-gold-600/30 text-gold-600"}`}>
-            {article.category}
-          </span>
-          <span className="opacity-40 text-stone-500">{article.date}</span>
-          <div className="flex-grow"></div>
-          <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity text-gold-500">
-             <Sparkles size={10} />
-             <span className="text-[8px]">DIGITAL CANON</span>
-          </div>
+      <div className="stt-editorial-index">{String(index + 1).padStart(2, "0")}</div>
+      <div className="stt-editorial-main">
+        <div className="stt-editorial-meta">
+          <span>{article.category}</span>
+          <span>{article.date}</span>
         </div>
-        <h3 className="text-2xl lg:text-3xl font-display font-light text-stone-200 group-hover:text-gold-400 transition-colors leading-tight">
-          {article.title}
-        </h3>
-        <p className="text-stone-400 font-sans font-light leading-relaxed line-clamp-2 text-sm">
-          {article.excerpt}
-        </p>
-        <div className="flex items-center gap-4 text-gold-600 font-sans text-[10px] font-black uppercase tracking-[0.4em] group-hover:text-gold-200 transition-colors pt-2">
-           深入解析 <ArrowRight className="w-3 h-3 translate-x-0 group-hover:translate-x-2 transition-transform" />
-        </div>
+        <h2>{article.title}</h2>
+        {article.excerpt && <p>{article.excerpt}</p>}
       </div>
-    </motion.div>
+      <div className="stt-editorial-arrow" aria-hidden="true">→</div>
+    </article>
   );
-};
+}
 
 export default function Columns() {
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-  const [searchQuery, setSearchQuery] = useState("");
-  const [displayArticles, setDisplayArticles] = useState<Article[]>([]);
-  const [isRefreshing, setIsRefreshing] = useState(false);
+  const cleanArticles = useMemo(
+    () => sortArticles(articles.filter((article) => !isLegacyExcluded(article))),
+    []
+  );
 
-  // Initial and manual shuffle logic
-  const shuffleAndFilter = () => {
-    setIsRefreshing(true);
-    
-    // 1. Filter by category and search
-    let filtered = articles.filter(art => {
-      const matchesCategory = !selectedCategory || art.category === selectedCategory;
-      const matchesSearch = art.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                            art.excerpt.toLowerCase().includes(searchQuery.toLowerCase());
-      return matchesCategory && matchesSearch;
+  const categories = useMemo(() => {
+    const values = Array.from(new Set(cleanArticles.map((article) => article.category).filter(Boolean)));
+    return values.slice(0, 8);
+  }, [cleanArticles]);
+
+  const categoryCounts = useMemo(() => {
+    const counts = new Map<string, number>();
+    cleanArticles.forEach((article) => {
+      counts.set(article.category, (counts.get(article.category) || 0) + 1);
     });
+    return counts;
+  }, [cleanArticles]);
 
-    // 2. Shuffle the filtered pool
-    const shuffled = [...filtered].sort(() => 0.5 - Math.random());
-    
-    // 3. Take 12 (or whatever is available)
-    setTimeout(() => {
-      setDisplayArticles(shuffled.slice(0, 12));
-      setIsRefreshing(false);
-    }, 600); // Cinematic delay
-  };
+  const [category, setCategory] = useState<string | null>(null);
+  const [query, setQuery] = useState("");
 
-  // Trigger shuffle on category/search change or mount
-  useEffect(() => {
-    shuffleAndFilter();
-  }, [selectedCategory, searchQuery]);
+  const filtered = useMemo(() => {
+    const normalized = query.trim().toLowerCase();
+    return cleanArticles.filter((article) => {
+      const categoryMatch = !category || article.category === category;
+      const textMatch = !normalized || `${article.title} ${article.excerpt}`.toLowerCase().includes(normalized);
+      return categoryMatch && textMatch;
+    });
+  }, [category, cleanArticles, query]);
+
+  const featured = cleanArticles[0] ?? null;
+  const showFeatured = Boolean(featured && !category && query.trim() === "");
+  const libraryEntries = showFeatured && featured
+    ? filtered.filter((article) => article.id !== featured.id)
+    : filtered;
 
   return (
-    <div className="bg-[#050505] min-h-screen selection:bg-gold-400/30 selection:text-white">
-      {/* Dark Prestige Hero Section */}
-      <section className="relative overflow-hidden bg-black py-20 lg:py-0 lg:h-[80vh] flex items-center border-b border-gold-900/30">
-        {/* Background Visual Tension */}
-        <div className="absolute inset-0 opacity-20 pointer-events-none">
-          <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-gold-900/10 blur-[150px] rounded-full -translate-y-1/2 translate-x-1/3"></div>
-          <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-gold-600/5 blur-[120px] rounded-full translate-y-1/2 -translate-x-1/4"></div>
-          <div className="absolute inset-0" style={{ backgroundImage: `linear-gradient(to right, #111 1px, transparent 1px), linear-gradient(to bottom, #111 1px, transparent 1px)`, backgroundSize: '80px 80px' }}></div>
-        </div>
-        
-        <div className="container mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-0 items-center relative z-10 h-full">
-          {/* Left: Elite Column Identity - Image Replacement */}
-          <div className="lg:col-span-7 space-y-12 text-center lg:text-left py-12 lg:py-0">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-              className="space-y-6"
-            >
-              <div className="flex items-center justify-center lg:justify-start gap-4">
-                <span className="h-[2px] w-16 bg-gold-600"></span>
-                <span className="text-gold-500 font-sans font-black text-xs uppercase tracking-[0.6em]">最新法律專欄：莊博士策略判讀</span>
-              </div>
-              
-              <div className="relative pt-4 max-w-[600px] mx-auto lg:mx-0">
-                <img 
-                  src="/images/stt-word-001.png?v=20260522" 
-                  alt="STT Press Law Strategic Review" 
-                  className="w-full h-auto object-contain drop-shadow-[0_0_50px_rgba(212,175,55,0.2)]"
-                  referrerPolicy="no-referrer"
-                />
-              </div>
-            </motion.div>
-            
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4, duration: 1 }}
-              className="space-y-10 max-w-2xl"
-            >
-              <p className="text-stone-500 text-lg font-sans leading-relaxed">
-                將卓越的策略思維數位正典化，為您的商業決策提供具有廣度與深度的專業判讀。這不是故事，這是權力的邏輯。
-              </p>
-              
-              <div className="flex flex-wrap gap-8 justify-center lg:justify-start pt-4">
-                <div className="flex flex-col border-l border-gold-900/50 pl-6">
-                  <span className="text-[10px] font-bold text-gold-600 uppercase tracking-widest mb-1">Frequency</span>
-                  <span className="text-sm font-medium text-stone-300 tracking-wider">Weekly Intelligence</span>
-                </div>
-                <div className="flex flex-col border-l border-gold-900/50 pl-6">
-                  <span className="text-[10px] font-bold text-gold-600 uppercase tracking-widest mb-1">Focus</span>
-                  <span className="text-sm font-medium text-stone-300 tracking-wider">Governance & Strategy</span>
-                </div>
-              </div>
-            </motion.div>
+    <div className="stt-editorial-page">
+      <style>{`
+        .stt-editorial-page {
+          min-height: 100vh;
+          background: #fbfbfa;
+          color: #1a1a1a;
+        }
+        .stt-editorial-page * { box-sizing: border-box; }
+        .stt-editorial-hero {
+          border-bottom: 1px solid rgba(197,168,128,.20);
+          background: #fbfbfa;
+        }
+        .stt-editorial-hero-inner {
+          width: min(calc(100% - 72px), 1320px);
+          margin: 0 auto;
+          display: grid;
+          grid-template-columns: minmax(0, 1.32fr) minmax(320px, .68fr);
+          gap: 88px;
+          align-items: stretch;
+          padding: 94px 0 84px;
+        }
+        .stt-editorial-hero-copy {
+          align-self: center;
+          max-width: 820px;
+        }
+        .stt-editorial-eyebrow {
+          margin: 0 0 24px;
+          color: #a9895e;
+          font-size: 10px;
+          font-weight: 500;
+          letter-spacing: .24em;
+          text-transform: uppercase;
+        }
+        .stt-editorial-title {
+          margin: 0;
+          max-width: 800px;
+          font-family: "Noto Serif TC", "Noto Serif JP", "Songti TC", "PMingLiU", Georgia, serif;
+          font-size: clamp(50px, 5.8vw, 84px);
+          font-weight: 400;
+          line-height: 1.16;
+          letter-spacing: .03em;
+        }
+        .stt-editorial-title-en {
+          margin: 20px 0 0;
+          color: #a9895e;
+          font-family: Georgia, "Times New Roman", serif;
+          font-size: 12px;
+          letter-spacing: .16em;
+          text-transform: uppercase;
+        }
+        .stt-editorial-lead {
+          max-width: 720px;
+          margin: 36px 0 0;
+          color: #625c54;
+          font-size: 15px;
+          line-height: 2.05;
+          letter-spacing: .015em;
+        }
+        .stt-editorial-index-panel {
+          min-height: 460px;
+          padding: 32px 32px 28px;
+          display: flex;
+          flex-direction: column;
+          border: 1px solid rgba(197,168,128,.22);
+          background: #f7f3ec;
+        }
+        .stt-editorial-index-kicker {
+          display: flex;
+          justify-content: space-between;
+          gap: 18px;
+          padding-bottom: 18px;
+          border-bottom: 1px solid rgba(197,168,128,.24);
+          color: #81776c;
+          font-size: 8px;
+          letter-spacing: .18em;
+          text-transform: uppercase;
+        }
+        .stt-editorial-index-number {
+          margin-top: 30px;
+          color: #b18a58;
+          font-family: Georgia, "Times New Roman", serif;
+          font-size: 82px;
+          line-height: .95;
+          letter-spacing: -.04em;
+        }
+        .stt-editorial-index-name {
+          margin-top: 16px;
+          color: #28241f;
+          font-family: Georgia, "Times New Roman", serif;
+          font-size: 15px;
+          letter-spacing: .18em;
+          text-transform: uppercase;
+        }
+        .stt-editorial-index-list {
+          margin-top: 30px;
+          border-top: 1px solid rgba(197,168,128,.22);
+        }
+        .stt-editorial-index-item {
+          display: flex;
+          justify-content: space-between;
+          gap: 20px;
+          padding: 13px 0;
+          border-bottom: 1px solid rgba(197,168,128,.16);
+          color: #5f584f;
+          font-size: 11px;
+        }
+        .stt-editorial-index-item span:last-child {
+          color: #a9895e;
+          font-family: Georgia, "Times New Roman", serif;
+        }
+        .stt-featured {
+          border-bottom: 1px solid rgba(197,168,128,.20);
+          background: #f9f7f3;
+        }
+        .stt-featured-inner {
+          width: min(calc(100% - 72px), 1320px);
+          margin: 0 auto;
+          display: grid;
+          grid-template-columns: minmax(220px, .42fr) minmax(0, 1.58fr);
+          gap: 72px;
+          padding: 68px 0 74px;
+        }
+        .stt-featured-label {
+          color: #a9895e;
+          font-size: 9px;
+          letter-spacing: .2em;
+          text-transform: uppercase;
+        }
+        .stt-featured-number {
+          margin-top: 18px;
+          color: #c5a880;
+          font-family: Georgia, "Times New Roman", serif;
+          font-size: 54px;
+          line-height: 1;
+        }
+        .stt-featured-copy {
+          cursor: pointer;
+        }
+        .stt-featured-meta {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 14px;
+          color: #a9895e;
+          font-size: 9px;
+          letter-spacing: .12em;
+          text-transform: uppercase;
+        }
+        .stt-featured-copy h2 {
+          margin: 18px 0 0;
+          max-width: 940px;
+          font-family: "Noto Serif TC", "Noto Serif JP", "Songti TC", "PMingLiU", Georgia, serif;
+          font-size: clamp(30px, 3.7vw, 52px);
+          font-weight: 400;
+          line-height: 1.48;
+          letter-spacing: .02em;
+        }
+        .stt-featured-copy p {
+          margin: 22px 0 0;
+          max-width: 840px;
+          color: #625c54;
+          font-size: 14px;
+          line-height: 2;
+        }
+        .stt-featured-action {
+          margin-top: 26px;
+          display: inline-flex;
+          align-items: center;
+          gap: 10px;
+          color: #a9895e;
+          font-size: 11px;
+          letter-spacing: .08em;
+        }
+        .stt-editorial-tools {
+          position: sticky;
+          top: 76px;
+          z-index: 30;
+          border-bottom: 1px solid rgba(197,168,128,.18);
+          background: rgba(251,251,250,.96);
+          backdrop-filter: blur(18px);
+        }
+        .stt-editorial-tools-inner {
+          width: min(calc(100% - 72px), 1320px);
+          min-height: 84px;
+          margin: 0 auto;
+          display: flex;
+          align-items: center;
+          gap: 24px;
+        }
+        .stt-editorial-search {
+          flex: 0 1 350px;
+          height: 44px;
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          padding: 0 2px;
+          border-bottom: 1px solid rgba(197,168,128,.34);
+          background: transparent;
+        }
+        .stt-editorial-search input {
+          width: 100%;
+          border: 0;
+          outline: 0;
+          background: transparent;
+          color: #1a1a1a;
+          font-size: 13px;
+        }
+        .stt-editorial-categories {
+          display: flex;
+          align-items: center;
+          gap: 18px;
+          overflow-x: auto;
+          padding: 8px 0;
+        }
+        .stt-editorial-filter {
+          position: relative;
+          flex: 0 0 auto;
+          min-height: 36px;
+          padding: 0 0 3px;
+          border: 0;
+          background: transparent;
+          color: #756d64;
+          font-size: 11px;
+          cursor: pointer;
+        }
+        .stt-editorial-filter::after {
+          content: "";
+          position: absolute;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          height: 1px;
+          background: transparent;
+        }
+        .stt-editorial-filter[data-active="true"] {
+          color: #1a1a1a;
+        }
+        .stt-editorial-filter[data-active="true"]::after {
+          background: #b18a58;
+        }
+        .stt-editorial-library {
+          width: min(calc(100% - 72px), 1320px);
+          margin: 0 auto;
+          padding: 72px 0 108px;
+        }
+        .stt-editorial-library-head {
+          display: flex;
+          align-items: flex-end;
+          justify-content: space-between;
+          gap: 24px;
+          margin-bottom: 34px;
+        }
+        .stt-editorial-library-head h2 {
+          margin: 0;
+          font-family: "Noto Serif TC", "Noto Serif JP", Georgia, serif;
+          font-size: 31px;
+          font-weight: 400;
+        }
+        .stt-editorial-count {
+          color: #a9895e;
+          font-size: 9px;
+          letter-spacing: .16em;
+          text-transform: uppercase;
+        }
+        .stt-editorial-list {
+          border-top: 1px solid rgba(197,168,128,.24);
+        }
+        .stt-editorial-row {
+          display: grid;
+          grid-template-columns: 64px minmax(0,1fr) 40px;
+          gap: 24px;
+          align-items: start;
+          padding: 34px 4px;
+          border-bottom: 1px solid rgba(197,168,128,.18);
+          cursor: pointer;
+          transition: background .18s ease, padding .24s ease;
+        }
+        .stt-editorial-row:hover {
+          background: rgba(197,168,128,.04);
+          padding-left: 14px;
+          padding-right: 14px;
+        }
+        .stt-editorial-index {
+          color: #a9895e;
+          font-family: Georgia, "Times New Roman", serif;
+          font-size: 13px;
+        }
+        .stt-editorial-meta {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 14px;
+          color: #a9895e;
+          font-size: 9px;
+          letter-spacing: .12em;
+          text-transform: uppercase;
+        }
+        .stt-editorial-main h2 {
+          margin: 13px 0 0;
+          max-width: 930px;
+          font-family: "Noto Serif TC", "Noto Serif JP", "Songti TC", "PMingLiU", Georgia, serif;
+          font-size: clamp(22px, 2.45vw, 32px);
+          font-weight: 400;
+          line-height: 1.58;
+        }
+        .stt-editorial-main p {
+          margin: 14px 0 0;
+          max-width: 850px;
+          color: #6e675e;
+          font-size: 13px;
+          line-height: 1.95;
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+        }
+        .stt-editorial-arrow {
+          padding-top: 30px;
+          color: #a9895e;
+          font-size: 22px;
+          transition: transform .2s ease;
+        }
+        .stt-editorial-row:hover .stt-editorial-arrow { transform: translateX(6px); }
+        .stt-editorial-empty {
+          padding: 72px 0;
+          text-align: center;
+          color: #6e675e;
+        }
+        @media (max-width: 940px) {
+          .stt-editorial-hero-inner {
+            grid-template-columns: 1fr;
+            gap: 48px;
+          }
+          .stt-editorial-index-panel { min-height: 0; }
+          .stt-featured-inner { grid-template-columns: 1fr; gap: 26px; }
+          .stt-editorial-tools { top: 0; }
+          .stt-editorial-tools-inner {
+            align-items: stretch;
+            flex-direction: column;
+            padding: 14px 0;
+          }
+          .stt-editorial-search { flex-basis: auto; width: 100%; }
+          .stt-editorial-categories { width: 100%; }
+        }
+        @media (max-width: 620px) {
+          .stt-editorial-hero-inner,
+          .stt-featured-inner,
+          .stt-editorial-tools-inner,
+          .stt-editorial-library { width: calc(100% - 30px); }
+          .stt-editorial-hero-inner { padding: 58px 0 54px; }
+          .stt-editorial-title { font-size: clamp(43px, 13vw, 62px); }
+          .stt-editorial-index-panel { padding: 26px 22px 24px; }
+          .stt-editorial-row {
+            grid-template-columns: 42px minmax(0,1fr) 24px;
+            gap: 12px;
+            padding: 28px 0;
+          }
+          .stt-editorial-main h2 { font-size: 22px; }
+        }
+      `}</style>
+
+      <section className="stt-editorial-hero" data-stt-readable="true">
+        <div className="stt-editorial-hero-inner">
+          <div className="stt-editorial-hero-copy">
+            <p className="stt-editorial-eyebrow">04 Press &amp; Insights · Governance Intelligence</p>
+            <h1 className="stt-editorial-title">出版與觀點</h1>
+            <p className="stt-editorial-title-en">Press, Legal Commentary &amp; Institutional Insight</p>
+            <p className="stt-editorial-lead">
+              STT 將法律、企業治理、重大決策與數位治理的判讀，持續沉澱為可以搜尋、閱讀、引用與回溯的知識資產。這裡不是內容流量牆，而是具有編輯秩序的智庫資料庫。
+            </p>
           </div>
 
-          {/* Right: The Portrait - Integrated Cinematic Style */}
-          <div className="lg:col-span-5 h-full relative flex items-end justify-center lg:justify-end overflow-visible">
-            <motion.div 
-              initial={{ opacity: 0, x: 60 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
-              className="relative h-full w-full flex items-end justify-center lg:justify-end"
-            >
-              {/* Cinematic Light Beam */}
-              <div className="absolute right-0 bottom-0 w-[120%] h-[120%] bg-gradient-to-tr from-gold-600/10 via-transparent to-transparent -rotate-12 pointer-events-none"></div>
-
-              <div className="relative h-full w-full max-w-[500px] lg:max-w-none flex items-end justify-end">
-                <img 
-                  src="/images/Eric-Chuang-05.png" 
-                  alt="Dr. Eric Chuang" 
-                  className="w-full h-auto max-h-[75vh] lg:max-h-[90vh] object-contain object-bottom filter drop-shadow-[0_0_50px_rgba(212,175,55,0.1)] contrast-[1.1]"
-                  referrerPolicy="no-referrer"
-                />
-                
-                {/* Integration Scrim - Strengthened */}
-                <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black via-black/90 to-transparent pointer-events-none z-10"></div>
-                
-                {/* Clean Signature Overlay */}
-                <div className="absolute bottom-6 md:bottom-12 right-6 md:right-8 z-20 pointer-events-none select-none">
-                  <img 
-                    src="/signature-eric001.png" 
-                    alt="Dr. Eric Chuang Signature" 
-                    className="w-32 sm:w-44 lg:w-52 h-auto drop-shadow-[0_2px_15px_rgba(0,0,0,0.9)] opacity-95 transition-all"
-                    referrerPolicy="no-referrer"
-                  />
+          <aside className="stt-editorial-index-panel" aria-label="Editorial index">
+            <div className="stt-editorial-index-kicker">
+              <span>STT Governance</span>
+              <span>Editorial Index</span>
+            </div>
+            <div className="stt-editorial-index-number">04</div>
+            <div className="stt-editorial-index-name">Press &amp; Insights</div>
+            <div className="stt-editorial-index-list">
+              {categories.slice(0, 5).map((item) => (
+                <div key={item} className="stt-editorial-index-item">
+                  <span>{item}</span>
+                  <span>{String(categoryCounts.get(item) || 0).padStart(2, "0")}</span>
                 </div>
-              </div>
-            </motion.div>
-          </div>
+              ))}
+            </div>
+          </aside>
         </div>
       </section>
-      
-      {/* Category Selection Hub / Table of Contents */}
-      <section className="bg-zinc-950/50 border-b border-gold-900/10 backdrop-blur-sm sticky top-24 z-30">
-        <div className="container mx-auto px-6">
-          <div className="flex items-center gap-8 h-20 overflow-x-auto no-scrollbar">
-            <button 
-              onClick={() => window.location.hash = 'article-index'}
-              className="flex-shrink-0 flex items-center gap-3 px-6 h-10 rounded-full bg-white/10 text-white border border-white/20 hover:bg-gold-500 hover:text-black hover:border-gold-500 transition-all text-xs font-black tracking-widest uppercase shadow-lg group"
+
+      {showFeatured && featured && (
+        <section className="stt-featured" data-stt-readable="true">
+          <div className="stt-featured-inner">
+            <div>
+              <div className="stt-featured-label">Featured Briefing</div>
+              <div className="stt-featured-number">01</div>
+            </div>
+            <article
+              className="stt-featured-copy"
+              onClick={() => openArticle(featured)}
+              role={featured.url ? "link" : undefined}
+              tabIndex={featured.url ? 0 : -1}
+              onKeyDown={(event) => {
+                if (featured.url && (event.key === "Enter" || event.key === " ")) {
+                  event.preventDefault();
+                  openArticle(featured);
+                }
+              }}
             >
-              <List className="w-3 h-3 group-hover:scale-110 transition-transform" /> 專欄精選索引目錄
-            </button>
-            <div className="h-4 w-px bg-gold-900/30 flex-shrink-0"></div>
-            <button 
-              onClick={() => setSelectedCategory(null)}
-              className={`flex-shrink-0 flex items-center gap-3 px-6 h-10 rounded-full transition-all text-xs font-black tracking-widest uppercase border ${
-                selectedCategory === null 
-                ? "bg-gold-500 text-black border-gold-500 shadow-[0_0_15px_rgba(230,200,76,0.2)]" 
-                : "text-stone-500 border-white/5 hover:border-gold-500/20 hover:text-gold-200"
-              }`}
-            >
-              <List className="w-3 h-3" /> 全部判讀
-            </button>
-            <div className="h-4 w-px bg-gold-900/30 flex-shrink-0"></div>
-            {categories.map(cat => (
-              <button 
-                key={cat}
-                onClick={() => setSelectedCategory(cat)}
-                className={`flex-shrink-0 px-6 h-10 rounded-full transition-all text-xs font-black tracking-widest uppercase border whitespace-nowrap ${
-                  selectedCategory === cat 
-                  ? "bg-gold-500 text-black border-gold-500 shadow-[0_0_15px_rgba(230,200,76,0.2)]" 
-                  : "text-stone-500 border-white/5 hover:border-gold-500/20 hover:text-gold-200"
-                }`}
-              >
-                {cat}
-              </button>
+              <div className="stt-featured-meta">
+                <span>{featured.category}</span>
+                <span>{featured.date}</span>
+              </div>
+              <h2>{featured.title}</h2>
+              {featured.excerpt && <p>{featured.excerpt}</p>}
+              {featured.url && (
+                <div className="stt-featured-action">
+                  <span>閱讀完整判讀</span>
+                  <ArrowRight size={15} strokeWidth={1.2} />
+                </div>
+              )}
+            </article>
+          </div>
+        </section>
+      )}
+
+      <section className="stt-editorial-tools" aria-label="Press and insights filters">
+        <div className="stt-editorial-tools-inner">
+          <label className="stt-editorial-search">
+            <Search className="w-4 h-4" strokeWidth={1.25} style={{ color: "#a9895e" }} />
+            <input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="搜尋治理、法律、決策議題" />
+          </label>
+          <div className="stt-editorial-categories">
+            <button type="button" className="stt-editorial-filter" data-active={category === null} onClick={() => setCategory(null)}>全部</button>
+            {categories.map((item) => (
+              <button key={item} type="button" className="stt-editorial-filter" data-active={category === item} onClick={() => setCategory(item)}>{item}</button>
             ))}
           </div>
         </div>
       </section>
 
-      <div className="container mx-auto px-6 py-24">
-        <div className="flex flex-col lg:flex-row gap-24">
-          {/* Main Content: Intelligence Feed */}
-          <div className="flex-grow space-y-24">
-            <div className="flex items-center justify-between gap-6 mb-16">
-              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6">
-                <h2 className="text-xl sm:text-2xl font-display font-light text-white uppercase tracking-widest whitespace-nowrap">
-                  {selectedCategory || "即時判讀"}
-                </h2>
-                <div className="flex items-center gap-3 text-gold-600/40 text-[9px] sm:text-[10px] font-black tracking-[0.1em] sm:tracking-[0.2em] uppercase whitespace-nowrap">
-                  <span className="w-1.5 h-1.5 rounded-full bg-gold-600 animate-pulse"></span>
-                  Live Feed
-                </div>
-              </div>
-              
-              <button 
-                onClick={shuffleAndFilter}
-                disabled={isRefreshing}
-                className="flex items-center gap-3 px-6 py-3 bg-white/5 border border-white/10 text-gold-400 hover:bg-gold-400/10 transition-all font-display text-[10px] tracking-widest uppercase group disabled:opacity-50"
-              >
-                <RefreshCcw className={`w-3 h-3 group-hover:rotate-180 transition-transform duration-700 ${isRefreshing ? 'animate-spin' : ''}`} />
-                換一批隨機判讀
-              </button>
-            </div>
-
-            <AnimatePresence mode="wait">
-              <motion.div 
-                key={displayArticles.map(a => a.id).join('')}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.5 }}
-                className="space-y-16"
-              >
-                {displayArticles.length > 0 ? (
-                  displayArticles.map((article, index) => (
-                    <ArticleCard key={article.id} article={article} index={index} />
-                  ))
-                ) : (
-                  <div className="py-20 text-center space-y-6">
-                    <p className="text-stone-500 font-display text-xl">目前該分類下無符合條件的判讀內容</p>
-                    <button 
-                      onClick={() => { setSelectedCategory(null); setSearchQuery(""); }}
-                      className="text-gold-500 underline text-sm tracking-widest uppercase hover:text-gold-200"
-                    >
-                      重置搜索
-                    </button>
-                  </div>
-                )}
-              </motion.div>
-            </AnimatePresence>
+      <section className="stt-editorial-library" data-stt-readable="true">
+        <div className="stt-editorial-library-head">
+          <div>
+            <p className="stt-editorial-eyebrow" style={{ marginBottom: 10 }}>Editorial Library</p>
+            <h2>{category || "最新治理判讀"}</h2>
           </div>
-
-          {/* Sidebar: Control Center */}
-          <aside className="lg:w-80 space-y-24">
-            <div className="space-y-8">
-              <span className="text-[10px] font-black text-gold-600 uppercase tracking-widest block border-b border-gold-900/30 pb-4">精準檢索 Query</span>
-              <div className="relative group">
-                <Search className="absolute left-0 top-1/2 -translate-y-1/2 h-4 w-4 text-gold-600/40 group-focus-within:text-gold-400 transition-colors" />
-                <input 
-                  type="text" 
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="搜尋關鍵判讀內容..." 
-                  className="w-full pl-8 pr-4 py-3 rounded-none bg-transparent border-b border-gold-900/20 focus:border-gold-600 focus:outline-none transition-all placeholder:text-stone-700 text-stone-300 font-sans text-sm"
-                />
-              </div>
-            </div>
-
-            <div className="space-y-8">
-              <span className="text-[10px] font-black text-gold-600 uppercase tracking-widest block border-b border-gold-900/30 pb-4">權力範疇 Domains</span>
-              <div className="flex flex-col gap-2">
-                {categories.map(cat => (
-                  <button 
-                    key={cat} 
-                    onClick={() => setSelectedCategory(cat === selectedCategory ? null : cat)}
-                    className={`group flex justify-between items-center py-3 px-4 rounded transition-all text-left ${
-                      selectedCategory === cat ? 'bg-gold-500/10 border-l-2 border-gold-500' : 'hover:bg-white/[0.03]'
-                    }`}
-                  >
-                    <span className={`text-sm font-display font-light transition-colors ${
-                      selectedCategory === cat ? 'text-gold-400' : 'text-stone-500 group-hover:text-gold-200'
-                    }`}>
-                      {cat}
-                    </span>
-                    <ArrowRight className={`w-3 h-3 text-gold-600 transition-all ${
-                      selectedCategory === cat ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0'
-                    }`} />
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            <div className="bg-gradient-to-b from-stone-900 to-black p-8 border border-gold-900/20 space-y-8">
-              <div className="space-y-4">
-                <h3 className="text-xl font-display font-light text-gold-400">訂閱判讀報告</h3>
-                <p className="text-sm text-stone-500 font-sans leading-relaxed">我們將不定期發送深度策略分析報告，這是一份專為高階經理人準備的法律洞察。</p>
-              </div>
-              <div className="space-y-6">
-                <input 
-                  type="email" 
-                  placeholder="Official Email Address" 
-                  className="w-full bg-stone-900/50 border border-gold-900/20 px-4 py-3 text-white placeholder:text-stone-700 focus:border-gold-600 focus:outline-none transition-all text-sm rounded"
-                />
-                <button className="w-full bg-gold-600 hover:bg-gold-500 text-black font-sans font-bold text-xs uppercase tracking-widest py-4 transition-all hover:shadow-[0_0_20px_rgba(212,175,55,0.2)]">
-                  確 認 訂 閱
-                </button>
-              </div>
-            </div>
-          </aside>
+          <div className="stt-editorial-count">{libraryEntries.length} entries</div>
         </div>
-      </div>
+
+        {libraryEntries.length > 0 ? (
+          <div className="stt-editorial-list">
+            {libraryEntries.map((article, index) => <ArticleRow key={article.id} article={article} index={index} />)}
+          </div>
+        ) : (
+          <div className="stt-editorial-empty">
+            <BookOpen className="mx-auto mb-4 h-6 w-6" strokeWidth={1.2} style={{ color: "#a9895e" }} />
+            目前沒有符合條件的內容。
+          </div>
+        )}
+      </section>
     </div>
   );
 }
