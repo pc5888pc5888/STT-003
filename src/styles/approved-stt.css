@@ -1,0 +1,68 @@
+/* STT Governance — approved white / ivory / champagne-gold institutional surface */
+:root{
+  --approved-paper:#fbfaf7;
+  --approved-white:#fffdf9;
+  --approved-ivory:#f6f1e7;
+  --approved-stone:#eee5d8;
+  --approved-ink:#2b261f;
+  --approved-muted:#756b5f;
+  --approved-gold:#b1874c;
+  --approved-gold-deep:#865f31;
+  --approved-line:#dccdb6;
+}
+html,body,#root{background:var(--approved-paper)!important;color:var(--approved-ink)!important;min-height:100%}
+body{margin:0!important}
+
+/* Canonical homepage visual: preserve approved composition, bind to approved visual bank. */
+.stth,.pc-root,.pd-root{background:var(--approved-paper)!important;color:var(--approved-ink)!important}
+.stth-hero-media{background-image:url('/visual-bank/stt/home.webp')!important;background-position:center right!important;background-size:cover!important}
+.stth-belief-media{background-image:url('/visual-bank/stt/stt-platform.webp')!important;background-position:center!important;background-size:cover!important}
+.stth-head{background:rgba(255,253,249,.96)!important;border-bottom:1px solid rgba(177,135,76,.24)!important}
+.stth-pillars,.stth-focus button,.stth-drawerpanel{background:var(--approved-white)!important}
+.stth-section{background:var(--approved-paper)!important}
+.stth-section.soft,.stth-final{background:linear-gradient(135deg,#f6f1e7 0%,#fbfaf7 72%,#efe5d6 100%)!important;color:var(--approved-ink)!important}
+.stth-final p{color:var(--approved-muted)!important}
+
+/* Public core pages: replace synthetic CSS objects with real approved institutional visuals. */
+.pc-artifact{border:1px solid var(--approved-line)!important;background-color:var(--approved-ivory)!important;background-repeat:no-repeat!important;background-position:center!important;background-size:cover!important;box-shadow:0 26px 58px rgba(92,70,44,.10)!important}
+.pc-artifact-method{background-image:url('/visual-bank/stt/how-we-judge.webp')!important}
+.pc-artifact-publications{background-image:url('/visual-bank/stt/publications.webp')!important}
+.pc-artifact-projects{background-image:url('/visual-bank/stt/founder-legacy.webp')!important}
+.pc-artifact-stt{background-image:url('/visual-bank/stt/stt-platform.webp')!important}
+.pc-artifact>div,.pc-artifact>span{display:none!important}
+.pc-root .pc-body,.pc-root .pc-section{background:var(--approved-paper)!important}
+.pc-root .pc-card,.pc-root .pc-item{background:var(--approved-white)!important;color:var(--approved-ink)!important;border-color:var(--approved-line)!important}
+.pc-root .pc-cta{background:linear-gradient(135deg,#f6f1e7,#fffdf9)!important;color:var(--approved-ink)!important;border-color:var(--approved-line)!important}
+
+/* Problem detail: every section stays light. No dark method panel. */
+.pd-root{--paper:var(--approved-paper)!important;--ink:var(--approved-ink)!important;--muted:var(--approved-muted)!important;--gold:var(--approved-gold-deep)!important;--line:var(--approved-line)!important}
+.pd-hero{background:var(--approved-paper)!important}
+.pd-visual{background:var(--approved-ivory)!important;border-color:var(--approved-line)!important;box-shadow:0 28px 68px rgba(82,62,38,.10)!important}
+.pd-visual-img{filter:saturate(.94) contrast(.98) brightness(1.05)!important}
+.pd-visual-glaze{background:linear-gradient(135deg,rgba(255,253,249,.05),transparent 48%,rgba(177,135,76,.04))!important;box-shadow:inset 0 0 0 10px rgba(255,253,249,.18)!important}
+.pd-body{background:var(--approved-paper)!important;border-color:var(--approved-line)!important}
+.pd-block{background:transparent!important;color:var(--approved-ink)!important;border-color:var(--approved-line)!important}
+.pd-method{background:linear-gradient(135deg,#f3ecdf,#fffdf9)!important;color:var(--approved-ink)!important;border:1px solid var(--approved-line)!important;padding:45px!important}
+.pd-method .pd-items{border-color:var(--approved-line)!important}
+.pd-method .pd-item{background:rgba(255,253,249,.88)!important;color:#554d43!important;border-color:var(--approved-line)!important}
+.pd-item{background:var(--approved-white)!important;color:#655d53!important;border-color:var(--approved-line)!important}
+.pd-cta{background:linear-gradient(135deg,#fffdf9,#f4ede2)!important;color:var(--approved-ink)!important;border-color:var(--approved-line)!important;box-shadow:0 18px 45px rgba(82,62,38,.06)!important}
+
+/* Problem finder and intake remain editorial, not card-app UI. */
+.bg-\[\#fbfaf7\]{background:var(--approved-paper)!important}
+#root .border-\[\#d8c8ad\],#root .border-\[\#ded4c4\]{border-color:var(--approved-line)!important}
+
+/* White-surface safety rail: no legacy black/dark utility may become a page or section background. */
+#root .bg-black,#root [class*='bg-neutral-9'],#root [class*='bg-zinc-9'],#root [class*='bg-gray-9'],#root [class*='bg-slate-9']{
+  background:var(--approved-paper)!important;color:var(--approved-ink)!important
+}
+#root .text-white{color:inherit}
+#root button.text-white,#root a.text-white{color:#fff!important}
+
+/* Refined motion and responsive rhythm. */
+.stth-focus button,.pd-item,.pc-root button,.pc-root a{transition:background-color .22s ease,border-color .22s ease,transform .22s ease,box-shadow .22s ease}
+.stth-focus button:hover{background:#f7f1e7!important;box-shadow:0 12px 28px rgba(91,68,42,.06)!important}
+@media(max-width:900px){
+  .pc-artifact{min-height:340px!important}
+  .pd-method{padding:28px!important}
+}
