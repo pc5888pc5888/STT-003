@@ -13,9 +13,9 @@
 html,body,#root{background:var(--approved-paper)!important;color:var(--approved-ink)!important;min-height:100%}
 body{margin:0!important}
 
-/* Canonical homepage visual: preserve approved composition, bind to approved visual bank. */
+/* Canonical homepage visual: preserve approved composition, bind to the user-approved STT master. */
 .stth,.pc-root,.pd-root{background:var(--approved-paper)!important;color:var(--approved-ink)!important}
-.stth-hero-media{background-image:url('/visual-bank/stt/home.webp')!important;background-position:center right!important;background-size:cover!important}
+.stth-hero-media{background-image:url('/visual-bank/stt/home-approved.webp')!important;background-position:center right!important;background-size:cover!important}
 .stth-belief-media{background-image:url('/visual-bank/stt/stt-platform.webp')!important;background-position:center!important;background-size:cover!important}
 .stth-head{background:rgba(255,253,249,.96)!important;border-bottom:1px solid rgba(177,135,76,.24)!important}
 .stth-pillars,.stth-focus button,.stth-drawerpanel{background:var(--approved-white)!important}
