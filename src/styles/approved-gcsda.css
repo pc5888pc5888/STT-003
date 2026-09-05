@@ -1,0 +1,57 @@
+/* GCSDA — approved white / stone-white / champagne-gold institutional association system */
+:root{
+  --g-approved-paper:#fbfaf7;
+  --g-approved-white:#fffdf9;
+  --g-approved-soft:#f6f1e8;
+  --g-approved-stone:#eee5d8;
+  --g-approved-ink:#2d2821;
+  --g-approved-muted:#766d61;
+  --g-approved-gold:#b38a51;
+  --g-approved-gold-deep:#855f31;
+  --g-approved-line:#ddceb8;
+}
+html,body,#root{background:var(--g-approved-paper)!important;color:var(--g-approved-ink)!important;min-height:100%}
+body{margin:0!important}
+.g3{background:var(--g-approved-paper)!important;color:var(--g-approved-ink)!important}
+.g3-head{background:rgba(255,253,249,.96)!important;border-bottom-color:rgba(179,138,81,.24)!important}
+.g3-home{background:var(--g-approved-paper)!important;border-color:var(--g-approved-line)!important}
+.g3-home-media{background-image:url('/visual-bank/gcsda/home.webp')!important;background-position:center right!important;background-size:cover!important}
+.g3-home-media:after{background:linear-gradient(90deg,var(--g-approved-paper) 0%,rgba(251,250,247,.96) 14%,rgba(251,250,247,.74) 38%,rgba(251,250,247,.18) 70%,rgba(251,250,247,.03) 100%)!important}
+.g3-values,.g3-card,.g3-person,.g3-drawerpanel{background:var(--g-approved-white)!important}
+.g3-section{background:var(--g-approved-paper)!important}
+.g3-section.soft,.g3-final{background:linear-gradient(135deg,#f6f1e8 0%,#fbfaf7 72%,#eee4d5 100%)!important;color:var(--g-approved-ink)!important}
+.g3-footer{background:#f6f1e8!important;color:var(--g-approved-ink)!important;border-top:1px solid var(--g-approved-line)!important}
+.g3-footer p{color:var(--g-approved-muted)!important}
+.g3-footer a{color:var(--g-approved-gold-deep)!important}
+
+/* Bind every institution page to the approved visual bank without changing route/content logic. */
+.g3-aboutmedia{background-image:url('/visual-bank/gcsda/about.webp')!important;background-size:cover!important;background-position:center!important}
+.g3-visual img[src$='bg-portal-columns.png']{content:url('/visual-bank/gcsda/about.webp')!important}
+.g3-visual img[src$='gcsda_team_new.png']{content:url('/visual-bank/gcsda/governance.webp')!important}
+.g3-visual img[src$='group-001.png']{content:url('/visual-bank/gcsda/council.webp')!important}
+.g3-visual img[src$='gcsda_003.png']{content:url('/visual-bank/gcsda/membership.webp')!important}
+.g3-visual img[src$='gcsda_team_2026.png']{content:url('/visual-bank/gcsda/events.webp')!important}
+.g3-visual img[src$='bg-insights-globe.png']{content:url('/visual-bank/gcsda/knowledge.webp')!important}
+.g3-visual img[src$='paper_corporate_governance.png']{content:url('/visual-bank/gcsda/charter.webp')!important}
+.g3-visual{background:var(--g-approved-soft)!important;border-color:var(--g-approved-line)!important;box-shadow:0 24px 56px rgba(88,67,41,.09)!important}
+.g3-visual img{filter:saturate(.94) contrast(.98) brightness(1.05)!important}
+.g3-pagehead{border-color:var(--g-approved-line)!important}
+.g3-grid3,.g3-directory,.g3-list,.g3-row,.g3-card,.g3-person,.g3-event,.g3-value{border-color:var(--g-approved-line)!important}
+.g3-card,.g3-person{box-shadow:none!important}
+
+/* Institutional, not commercial: quiet gold and generous white space. */
+.g3-actions .primary{background:var(--g-approved-gold-deep)!important;border-color:var(--g-approved-gold-deep)!important;color:#fff!important}
+.g3-stt{border-color:#c9a36f!important;color:var(--g-approved-gold-deep)!important;background:transparent!important}
+.g3-kicker,.g3-card span,.g3-person small,.g3-event time,.g3-row b{color:var(--g-approved-gold-deep)!important}
+
+/* No black/dark public surfaces. */
+#root .bg-black,#root [class*='bg-neutral-9'],#root [class*='bg-zinc-9'],#root [class*='bg-gray-9'],#root [class*='bg-slate-9']{
+  background:var(--g-approved-paper)!important;color:var(--g-approved-ink)!important
+}
+#root .text-white{color:inherit}
+#root button.text-white,#root a.text-white{color:#fff!important}
+
+@media(max-width:1050px){
+  .g3-home-media{inset:0!important;opacity:.54!important}
+  .g3-home-media:after{background:rgba(251,250,247,.84)!important}
+}
