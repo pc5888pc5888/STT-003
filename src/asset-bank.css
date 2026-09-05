@@ -1,0 +1,21 @@
+/* GCSDA Visual Asset Bank — formal institutional white-gold surface layer */
+:root{--asset-ivory:#fbfaf7;--asset-warm:#f5f1e8;--asset-stone:#eee8de;--asset-ink:#29241f;--asset-muted:#70675d;--asset-gold:#a9793e;--asset-line:#ddcfb9}
+html,body,#root{background:var(--asset-ivory)!important;color:var(--asset-ink)!important}
+body{color-scheme:light!important}
+.bg-black,.bg-neutral-950,.bg-neutral-900,.bg-zinc-950,.bg-zinc-900,.bg-gray-950,.bg-gray-900,.bg-slate-950,.bg-slate-900{background-color:var(--asset-ivory)!important}
+.from-black{--tw-gradient-from:var(--asset-ivory)!important;--tw-gradient-to:rgb(251 250 247 / 0)!important}.via-black{--tw-gradient-via:var(--asset-warm)!important}.to-black{--tw-gradient-to:var(--asset-ivory)!important}
+[class*="bg-[#0"],[class*="bg-[#1"],[class*="bg-[#2"]{background-color:var(--asset-ivory)!important}
+.glass-header{background:rgba(251,250,247,.96)!important;border-color:var(--asset-line)!important}
+.strategic-bg-overlay{background:rgba(251,250,247,.74)!important}
+
+.g2,.gcsda{background:var(--asset-ivory)!important;color:var(--asset-ink)!important}
+.g2-home{background-color:var(--asset-ivory)!important;background-image:url('/visual-bank/gcsda/home.webp')!important;background-size:cover!important;background-position:center!important}
+.g2-home::before,.g2-home::after{background:linear-gradient(90deg,rgba(251,250,247,.95),rgba(251,250,247,.38),rgba(251,250,247,.06))!important}
+.g2-dark,.g-dark,.g2-footer,.g-footer{background:var(--asset-warm)!important;color:var(--asset-ink)!important;border-color:var(--asset-line)!important}
+.g2-dark .g2-lead,.g-dark .g-lead,.g2-footer p,.g-footer p{color:var(--asset-muted)!important}
+.g2-dark .g2-card,.g-dark .g-card{background:#fffdf9!important;color:#50473e!important;border-color:var(--asset-line)!important}
+.g2-footer a,.g-footer a{color:#8b622f!important}
+.g2-visual{background:var(--asset-warm)!important;border-color:var(--asset-line)!important}
+.g2-visual img{filter:none!important;object-fit:cover!important}
+.asset-bank-whitened{background-color:var(--asset-ivory)!important;background-image:none!important;color:var(--asset-ink)!important;border-color:var(--asset-line)!important}
+.asset-bank-whitened *{color:var(--asset-ink)!important;border-color:var(--asset-line)!important}
