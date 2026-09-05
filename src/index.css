@@ -21,14 +21,16 @@
 }
 
 @layer base {
-  html {
-    background: #fbfaf7;
+  html,
+  body,
+  #root {
+    background: #ffffff !important;
+    color: #2a251f !important;
+    min-height: 100%;
   }
 
   body {
     @apply antialiased overflow-x-hidden;
-    background: #fbfaf7;
-    color: #2a251f;
   }
   
   img:not(.hero-portrait):not(.strategist-portrait) {
@@ -114,9 +116,9 @@
 }
 
 .glass-header {
-  background: rgba(255,253,249,0.94) !important;
+  background: rgba(255,255,255,0.96) !important;
   backdrop-filter: blur(12px);
-  border-bottom: 1px solid #ddcfb9 !important;
+  border-bottom: 1px solid #e2d5bf !important;
 }
 
 .portrait-render {
@@ -136,43 +138,51 @@
   position: absolute;
   inset: 0;
   z-index: 5;
-  background: rgba(251,250,247,0.72) !important;
+  background: rgba(255,255,255,0.82) !important;
 }
 
-/* NO-BLACK PUBLIC THEME GUARDRAIL — source-level, not a late JS patch. */
 .hv-dark,
 .hv-final,
 .pd-method {
-  background: #eee4d6 !important;
+  background: #ffffff !important;
   color: #2a251f !important;
-  border-color: #d8c6ac !important;
+  border-color: #e2d5bf !important;
 }
 .hv-dark .hv-heading,
 .hv-final h2,
-.pd-method h2 {
-  color: #2a251f !important;
-}
+.pd-method h2,
 .hv-dark .hv-desc,
-.hv-final p {
-  color: #70675d !important;
+.hv-final p,
+.pd-method .pd-item {
+  color: #2a251f !important;
 }
 .hv-dark .hv-eyebrow,
 .hv-mis b {
   color: #9b6e36 !important;
 }
-.hv-mis {
-  background: #d9c8ae !important;
-  border-color: #d9c8ae !important;
-}
+.hv-mis,
 .hv-mis div,
-.pd-method .pd-item {
-  background: #f8f2e9 !important;
-  color: #50473e !important;
-  border-color: #d8c6ac !important;
-}
+.pd-method .pd-item,
 .pd-method .pd-items {
-  border-color: #d8c6ac !important;
+  background: #ffffff !important;
+  border-color: #e2d5bf !important;
 }
+
+/* HARD WHITE-SURFACE LOCK: no dark page surfaces anywhere. */
+#root [class*="bg-black"],
+#root [class*="bg-[#0"],
+#root [class*="bg-neutral-9"],
+#root [class*="bg-zinc-9"],
+#root [class*="bg-gray-9"],
+#root [class*="bg-slate-9"] {
+  background-color: #ffffff !important;
+  background-image: none !important;
+}
+#root [class*="text-white"] { color: #2a251f !important; }
+#root [class*="border-white"] { border-color: #e2d5bf !important; }
+#root nav,
+#root header,
+#root footer { background-color:#ffffff !important; color:#2a251f !important; }
 
 .scrollbar-none {
   -ms-overflow-style: none;
