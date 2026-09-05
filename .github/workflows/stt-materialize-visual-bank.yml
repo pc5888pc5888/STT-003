@@ -1,0 +1,52 @@
+name: Materialize STT Visual Asset Bank
+
+on:
+  push:
+    branches:
+      - rebuild/white-gold-governance-os-v2-gold
+    paths:
+      - .github/workflows/stt-materialize-visual-bank.yml
+
+permissions:
+  contents: write
+
+jobs:
+  materialize:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Materialize approved visual-bank blobs
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          fetch_blob() {
+            local sha="$1" dest="$2"
+            mkdir -p "$(dirname "$dest")"
+            gh api "/repos/${GITHUB_REPOSITORY}/git/blobs/${sha}" --jq '.content' | tr -d '\n' | base64 -d > "$dest"
+          }
+          fetch_blob a17b74824a55b91016559215a7ed585e57a3de93 public/visual-bank/stt/home.webp
+          fetch_blob b9abb1d08d974f29b195fe755a71a53ac94d072e public/visual-bank/stt/major-decision.webp
+          fetch_blob cac05c621d1ea4ad907cffc3b1f2880d8288b475 public/visual-bank/stt/owner-dependence.webp
+          fetch_blob 9a2e98c086496fd97ddfde3acb8e735d2348dcd0 public/visual-bank/stt/succession.webp
+          fetch_blob f589e19f7c1de10a798b783de912ff1f3f750665 public/visual-bank/stt/family-ownership.webp
+          fetch_blob 1cb6dc4b7534dfb2827dda44c707abf3bb48cfac public/visual-bank/stt/strategic-legal.webp
+          fetch_blob b7a1d98170ca4a9c79e0d65a32f0e4a718e4c847 public/visual-bank/stt/ai-governance.webp
+          fetch_blob 1b099dfc80e89fa4f6dae925603dfdb3f3665b86 public/visual-bank/stt/system-failure.webp
+          fetch_blob 8edce53423b908d52f8861b6fb7ccafa61c79df0 public/visual-bank/stt/founder-legacy.webp
+          fetch_blob 33c635cce2937a30dd156683aed8132e5ec32c52 public/visual-bank/stt/how-we-judge.webp
+          fetch_blob f0b8ab5f1eb2ebba6534e99636afbe6b9f79f0f1 public/visual-bank/stt/insights.webp
+          fetch_blob d40a91d711c6f86a2f6899d023b887cdc33b323e public/visual-bank/stt/publications.webp
+          fetch_blob 80ba291aefd8ea8e062569ac70ae808fea13713b public/visual-bank/stt/stt-platform.webp
+          cp public/visual-bank/stt/owner-dependence.webp public/visual-bank/stt/corporate-governance.webp
+          cp public/visual-bank/stt/system-failure.webp public/visual-bank/stt/internal-compliance.webp
+      - name: Commit visual-bank masters
+        run: |
+          git config user.name "STT Visual Bank Bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add public/visual-bank/stt
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "feat: install STT visual asset bank masters"
+          git push origin HEAD:rebuild/white-gold-governance-os-v2-gold
