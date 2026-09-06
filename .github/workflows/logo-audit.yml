@@ -18,32 +18,36 @@ jobs:
           python - <<'PY'
           from PIL import Image
           from pathlib import Path
-          import numpy as np
 
           TARGET = int('000000404c006ce062e170006cbb66a322a9b000a673a2736233600002004000', 16)
 
           def dhash256(path):
               im = Image.open(path).convert('L').resize((17,16), Image.Resampling.LANCZOS)
-              a = np.array(im)
-              bits = (a[:,1:] > a[:,:-1]).flatten()
+              px = list(im.getdata())
               v = 0
-              for b in bits:
-                  v = (v << 1) | int(b)
+              for y in range(16):
+                  row = px[y*17:(y+1)*17]
+                  for x in range(16):
+                      v = (v << 1) | int(row[x+1] > row[x])
               return v
 
           rows=[]
+          seen=set()
           for base in [Path('public'), Path('public/images')]:
               if not base.exists():
                   continue
               for p in base.iterdir():
                   if not p.is_file() or p.suffix.lower() not in {'.png','.jpg','.jpeg','.webp'}:
                       continue
+                  if str(p) in seen:
+                      continue
+                  seen.add(str(p))
                   try:
                       with Image.open(p) as im:
-                          size=im.size
+                          w,h=im.size
                       d=(dhash256(p)^TARGET).bit_count()
-                      rows.append((d,size[0],size[1],str(p)))
-                  except Exception as e:
+                      rows.append((d,w,h,str(p)))
+                  except Exception:
                       pass
           for d,w,h,p in sorted(rows)[:30]:
               print(f'{d:3d}  {w:4d}x{h:<4d}  {p}')
