@@ -60,7 +60,7 @@ function PublicShell({ children, chatOpen, onChatToggle }: ShellProps) {
       <header className="sticky top-0 z-[70] border-b bg-white/95 backdrop-blur-xl" style={{ borderColor: "var(--stt-line)", minHeight: "var(--stt-header-height)" }}>
         <div className="mx-auto flex h-[76px] max-w-[1320px] items-center px-5 lg:px-8">
           <button type="button" onClick={() => go("/")} className="stt-official-brand mr-auto cursor-pointer border-0 bg-transparent p-0 text-left" aria-label="STT Governance 首頁">
-            <img src="/首頁表頭logo.png" alt="STT Governance Strategic Think Tank Governance｜策略智庫｜治理出版｜法遵精神" className="stt-official-logo block h-auto w-auto object-contain" />
+            <img src="/stt-governance-official-logo.jpg" alt="STT Governance Strategic Think Tank Governance｜策略智庫｜治理出版｜法遵精神" className="stt-official-logo block h-auto w-auto object-contain" />
           </button>
           <nav className="hidden h-full items-center 2xl:flex" aria-label="Primary">
             {primaryNavigation.map((item) => {
