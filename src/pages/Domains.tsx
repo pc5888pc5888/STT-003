@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 type Domain = {
@@ -77,7 +78,7 @@ const domains: Domain[] = [
   },
 ];
 
-function DomainShell({ children }: { children: React.ReactNode }) {
+function DomainShell({ children }: { children: ReactNode }) {
   return <div className="domain-root"><style>{`
     .domain-root{min-height:100vh;background:#fbfaf7;color:#2b261f}.domain-root *{box-sizing:border-box}.domain-wrap{max-width:1180px;margin:0 auto;padding:0 28px}.domain-hero{padding:88px 0 72px;border-bottom:1px solid #ddcfba}.domain-kicker{font-size:10px;letter-spacing:.26em;color:#8b642f}.domain-hero h1{max-width:940px;margin:20px 0 0;font:400 clamp(42px,5vw,68px)/1.32 'Noto Serif TC',Georgia,serif}.domain-hero p{max-width:820px;margin:26px 0 0;color:#746b60;line-height:2}.domain-body{padding:68px 0 110px}.domain-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));border-top:1px solid #ddcfba;border-left:1px solid #ddcfba}.domain-card{min-height:230px;padding:30px;border-right:1px solid #ddcfba;border-bottom:1px solid #ddcfba;background:#fffdf9}.domain-card small{color:#9a6f3b;letter-spacing:.14em}.domain-card h2,.domain-card h3{margin:16px 0 0;font:400 24px/1.5 'Noto Serif TC',Georgia,serif}.domain-card p{margin:12px 0 0;color:#6f675e;line-height:1.9}.domain-card button,.domain-link{margin-top:22px;border:0;border-bottom:1px solid #a9793e;background:transparent;color:#805a30;padding:0 0 5px;cursor:pointer;text-decoration:none}.domain-detail{display:grid;grid-template-columns:260px 1fr;gap:48px;padding:34px 0;border-bottom:1px solid #ddcfba}.domain-detail h2{margin:0;font:400 23px/1.5 'Noto Serif TC',Georgia,serif}.domain-detail p{margin:0;color:#6f675e;line-height:1.95}.domain-related{display:flex;gap:18px;flex-wrap:wrap;margin-top:40px}.domain-related button{border:1px solid #c7a16b;background:#fffdf9;color:#805a30;padding:11px 15px;cursor:pointer}@media(max-width:780px){.domain-grid{grid-template-columns:1fr}.domain-detail{grid-template-columns:1fr}.domain-hero{padding:66px 0 54px}}
   `}</style>{children}</div>;
