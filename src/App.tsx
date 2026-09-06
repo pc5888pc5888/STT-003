@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState, type ReactNode } from "react";
 import { BrowserRouter, Navigate, Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import { ArrowRight, BookOpen, GraduationCap, Landmark, Menu, Shield, Users, X } from "lucide-react";
 import Lenis from "lenis";
-import Home from "./pages/HomeV2";
+import Home from "./pages/HomeCanonical";
 import About, { ContactModal } from "./pages/About";
 import Columns from "./pages/Columns";
 import Problems from "./pages/Problems";
