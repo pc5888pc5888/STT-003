@@ -3,7 +3,8 @@ import { BrowserRouter, Navigate, Route, Routes, useLocation, useNavigate } from
 import { ArrowRight, BookOpen, GraduationCap, Landmark, Menu, Shield, Users, X } from "lucide-react";
 import Lenis from "lenis";
 import Home from "./pages/HomeCanonical";
-import About, { ContactModal } from "./pages/About";
+import { ContactModal } from "./pages/About";
+import GovernanceResponsibility from "./pages/GovernanceResponsibility";
 import Columns from "./pages/Columns";
 import Problems from "./pages/Problems";
 import ProblemDetail from "./pages/ProblemDetail";
@@ -108,7 +109,7 @@ function AppRoutes() {
 
       <Route path="/projects" element={<ProjectsHub />} />
       <Route path="/stt" element={<STTPlatform />} />
-      <Route path="/institution/eric-chuang" element={<About />} />
+      <Route path="/institution/eric-chuang" element={<GovernanceResponsibility />} />
       <Route path="/about.html" element={<Navigate to="/institution/eric-chuang" replace />} />
       <Route path="/start" element={<Start />} />
 
