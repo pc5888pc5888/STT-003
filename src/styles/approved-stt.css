@@ -46,7 +46,7 @@ button,input,textarea,select{font-family:var(--stt-font-zh-sans)}
 
 /* --------------------------------------------------------------------------
    CANONICAL IDENTITY SYSTEM
-   One brand lockup + one inner-page title hierarchy across the entire STT site.
+   One official logo + one inner-page title hierarchy across the entire STT site.
    -------------------------------------------------------------------------- */
 
 /* Inner-page header must visually match the homepage header. */
@@ -62,24 +62,18 @@ header.sticky>div:first-child{
   padding-left:40px!important;
   padding-right:40px!important;
 }
-header.sticky>div:first-child>button:first-child span:first-child{
-  font-family:var(--stt-font-en)!important;
-  font-size:24px!important;
-  font-weight:500!important;
-  line-height:1!important;
-  letter-spacing:.065em!important;
-  text-transform:uppercase!important;
-  color:var(--approved-ink)!important;
+.stt-official-brand{
+  display:flex!important;
+  align-items:center!important;
+  flex:0 0 auto!important;
+  min-width:0!important;
 }
-header.sticky>div:first-child>button:first-child span:nth-child(2){
-  margin-top:7px!important;
-  font-family:var(--stt-font-zh-sans)!important;
-  font-size:9px!important;
-  font-weight:600!important;
-  line-height:1!important;
-  letter-spacing:.28em!important;
-  text-transform:uppercase!important;
-  color:var(--approved-gold-deep)!important;
+.stt-official-logo{
+  display:block!important;
+  height:62px!important;
+  width:auto!important;
+  max-width:330px!important;
+  object-fit:contain!important;
 }
 header.sticky nav button{
   font-family:var(--stt-font-zh-sans)!important;
@@ -184,6 +178,7 @@ header.sticky>div+div{top:94px!important}
   header.sticky nav{display:none!important}
   header.sticky>div:first-child>div{display:none!important}
   header.sticky>div:first-child>button:last-child{display:inline-flex!important}
+  .stt-official-logo{height:56px!important;max-width:300px!important}
 }
 
 /* White-surface safety rail: no legacy black/dark utility or overlay may become a visible public surface. */
@@ -211,7 +206,7 @@ header.sticky>div+div{top:94px!important}
   .pc-artifact{min-height:340px!important}
   header.sticky{min-height:82px!important}
   header.sticky>div:first-child{height:82px!important;padding-left:20px!important;padding-right:20px!important}
-  header.sticky>div:first-child>button:first-child span:first-child{font-size:21px!important}
+  .stt-official-logo{height:48px!important;max-width:250px!important}
   header.sticky>div+div{top:82px!important}
   .stt-canon h1,
   .domain-hero h1,
