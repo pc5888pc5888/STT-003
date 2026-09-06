@@ -9,9 +9,14 @@
   --approved-gold:#b1874c;
   --approved-gold-deep:#865f31;
   --approved-line:#dccdb6;
+  --stt-font-en:"Cormorant Garamond",Georgia,"Times New Roman",serif;
+  --stt-font-zh-serif:"Noto Serif TC","Source Han Serif TC","Songti TC","PMingLiU",serif;
+  --stt-font-zh-sans:"Noto Sans TC","Source Han Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
 }
 html,body,#root{background:var(--approved-paper)!important;color:var(--approved-ink)!important;min-height:100%}
-body{margin:0!important}
+body{margin:0!important;font-family:var(--stt-font-zh-sans);font-weight:400;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased}
+button,input,textarea,select{font-family:var(--stt-font-zh-sans)}
+.font-serif{font-family:var(--stt-font-en),var(--stt-font-zh-serif)!important}
 
 /* Canonical homepage visual: preserve approved composition, bind to the user-approved STT master. */
 .stth,.pc-root,.pd-root{background:var(--approved-paper)!important;color:var(--approved-ink)!important}
