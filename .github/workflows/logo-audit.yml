@@ -1,0 +1,50 @@
+name: logo-audit
+on:
+  push:
+    branches:
+      - rebuild/stt-approved-white-gold-v1
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install pillow
+      - name: Compare logo candidates
+        shell: bash
+        run: |
+          python - <<'PY'
+          from PIL import Image
+          from pathlib import Path
+          import numpy as np
+
+          TARGET = int('000000404c006ce062e170006cbb66a322a9b000a673a2736233600002004000', 16)
+
+          def dhash256(path):
+              im = Image.open(path).convert('L').resize((17,16), Image.Resampling.LANCZOS)
+              a = np.array(im)
+              bits = (a[:,1:] > a[:,:-1]).flatten()
+              v = 0
+              for b in bits:
+                  v = (v << 1) | int(b)
+              return v
+
+          rows=[]
+          for base in [Path('public'), Path('public/images')]:
+              if not base.exists():
+                  continue
+              for p in base.iterdir():
+                  if not p.is_file() or p.suffix.lower() not in {'.png','.jpg','.jpeg','.webp'}:
+                      continue
+                  try:
+                      with Image.open(p) as im:
+                          size=im.size
+                      d=(dhash256(p)^TARGET).bit_count()
+                      rows.append((d,size[0],size[1],str(p)))
+                  except Exception as e:
+                      pass
+          for d,w,h,p in sorted(rows)[:30]:
+              print(f'{d:3d}  {w:4d}x{h:<4d}  {p}')
+          PY
