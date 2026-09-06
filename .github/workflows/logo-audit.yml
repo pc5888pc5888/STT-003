@@ -12,43 +12,39 @@ jobs:
         with:
           python-version: '3.12'
       - run: pip install pillow
-      - name: Compare logo candidates
+      - name: Verify exact approved STT logo payload
         shell: bash
         run: |
           python - <<'PY'
-          from PIL import Image
           from pathlib import Path
+          import base64, hashlib, io
+          from PIL import Image
 
-          TARGET = int('000000404c006ce062e170006cbb66a322a9b000a673a2736233600002004000', 16)
-
-          def dhash256(path):
-              im = Image.open(path).convert('L').resize((17,16), Image.Resampling.LANCZOS)
-              px = list(im.getdata())
-              v = 0
-              for y in range(16):
-                  row = px[y*17:(y+1)*17]
-                  for x in range(16):
-                      v = (v << 1) | int(row[x+1] > row[x])
-              return v
-
-          rows=[]
-          seen=set()
-          for base in [Path('public'), Path('public/images')]:
-              if not base.exists():
-                  continue
-              for p in base.iterdir():
-                  if not p.is_file() or p.suffix.lower() not in {'.png','.jpg','.jpeg','.webp'}:
-                      continue
-                  if str(p) in seen:
-                      continue
-                  seen.add(str(p))
-                  try:
-                      with Image.open(p) as im:
-                          w,h=im.size
-                      d=(dhash256(p)^TARGET).bit_count()
-                      rows.append((d,w,h,str(p)))
-                  except Exception:
-                      pass
-          for d,w,h,p in sorted(rows)[:30]:
-              print(f'{d:3d}  {w:4d}x{h:<4d}  {p}')
+          files = [
+              'src/assets/stt-logo-exact/chunk00.txt',
+              'src/assets/stt-logo-exact/chunk01.txt',
+              'src/assets/stt-logo-exact/chunk02.txt',
+              'src/assets/stt-logo-exact/chunk03.txt',
+              'src/assets/stt-logo-exact/chunk04_05.txt',
+              'src/assets/stt-logo-exact/chunk06_07.txt',
+              'src/assets/stt-logo-exact/chunk08_09.txt',
+              'src/assets/stt-logo-exact/chunk10_11.txt',
+              'src/assets/stt-logo-exact/chunk12.txt',
+              'src/assets/stt-logo-exact/chunk13.txt',
+              'src/assets/stt-logo-exact/chunk14.txt',
+              'src/assets/stt-logo-exact/chunk15.txt',
+              'src/assets/stt-logo-exact/chunk16.txt',
+              'src/assets/stt-logo-exact/chunk17.txt',
+          ]
+          payload = ''.join(Path(p).read_text().strip() for p in files)
+          assert len(payload) == 105220, f'base64 length mismatch: {len(payload)}'
+          raw = base64.b64decode(payload, validate=True)
+          assert len(raw) == 78914, f'binary length mismatch: {len(raw)}'
+          digest = hashlib.sha256(raw).hexdigest()
+          expected = '76e8a86218610db60952f1427a90019182225847d7d597a178ad25263b60eefa'
+          assert digest == expected, f'sha256 mismatch: {digest}'
+          image = Image.open(io.BytesIO(raw))
+          assert image.size == (884, 250), f'dimension mismatch: {image.size}'
+          image.verify()
+          print('STT logo payload PASS', digest, '884x250')
           PY
