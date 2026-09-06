@@ -27,7 +27,10 @@ jobs:
             'chunk03.txt':'a831e0260f501b44edcd1829d33586ed9feac707656eb4a43057883c7fe77a8e',
             'chunk04_05.txt':'764f9405565715180211488a7307de2ebd33d40bd73e5efb3f8ef5c07aa59625',
             'chunk06_07.txt':'c89965781e347160298c0e7fb607ee35e01dddf789b85a4c09525618129e1959',
-            'chunk08_09.txt':'0cf9d26975e10fe00b788509ab39e6822c0c1b07b433492ce12c9df98e69b660',
+            'chunk08_0.txt':'159a500bf0f725c9ec2e5cd14c5fafb555eba516f0c0e7d0ee537838eebd48bc',
+            'chunk08_1.txt':'181866018d2790bd03e428c0e82f95d652c9bbc2e9304705fdc6b82f4d72bc58',
+            'chunk09_0.txt':'848d602562bfec550c6c38741868f64d178018d2ce47498aa647b4ce59299143',
+            'chunk09_1.txt':'51cfd34bb54e2f2a743fd10de957df27a04d52ff1aa34b816653d5cb039799b0',
             'chunk10_11.txt':'8c515a7905c7b6c653606a3243dc2740bb53948a12b5beef64752f829951bf3c',
             'chunk12.txt':'e29b4e005dfcb8d7a59bc9d5d5823cec4933a82b550469e138240fb4e08c1b64',
             'chunk13.txt':'7ce5e03d2ceffcba80f57862888d2de7378ccdeed4de30951b62c05f8d9ff19d',
@@ -48,14 +51,16 @@ jobs:
 
           files = [
               'chunk00.txt','chunk01.txt','chunk02.txt','chunk03.txt',
-              'chunk04_05.txt','chunk06_07.txt','chunk08_09.txt','chunk10_11.txt',
-              'chunk12.txt','chunk13.txt','chunk14.txt','chunk15.txt','chunk16.txt','chunk17.txt',
+              'chunk04_05.txt','chunk06_07.txt',
+              'chunk08_0.txt','chunk08_1.txt','chunk09_0.txt','chunk09_1.txt',
+              'chunk10_11.txt','chunk12.txt','chunk13.txt','chunk14.txt','chunk15.txt','chunk16.txt','chunk17.txt',
           ]
           payload=''.join((base/n).read_text().strip() for n in files)
           assert len(payload)==105220, len(payload)
           raw=base64.b64decode(payload, validate=True)
+          assert len(raw)==78914, len(raw)
           digest=hashlib.sha256(raw).hexdigest()
           assert digest=='76e8a86218610db60952f1427a90019182225847d7d597a178ad25263b60eefa', digest
           image=Image.open(io.BytesIO(raw)); assert image.size==(884,250); image.verify()
-          print('STT logo payload PASS', digest, image.size)
+          print('STT logo payload PASS', digest, '884x250')
           PY
