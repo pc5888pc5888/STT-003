@@ -1,173 +1,345 @@
-/* STT Governance — approved white / ivory / champagne-gold institutional surface */
+/* STT Governance — canonical white-gold institutional design system */
 :root{
-  --approved-paper:#fbfaf7;
-  --approved-white:#fffdf9;
-  --approved-ivory:#f6f1e7;
-  --approved-stone:#eee5d8;
-  --approved-ink:#2b261f;
-  --approved-muted:#756b5f;
-  --approved-gold:#b1874c;
-  --approved-gold-deep:#865f31;
-  --approved-line:#dccdb6;
+  --approved-paper:#ffffff;
+  --approved-warm:#fbf9f6;
+  --approved-white:#ffffff;
+  --approved-ivory:#f7f2ea;
+  --approved-ink:#252525;
+  --approved-muted:#6b665f;
+  --approved-gold:#c4a67a;
+  --approved-gold-deep:#8f6f47;
+  --approved-line:#eae3d5;
   --stt-font-en:"Cormorant Garamond",Georgia,"Times New Roman",serif;
   --stt-font-zh-serif:"Noto Serif TC","Source Han Serif TC","Songti TC","PMingLiU",serif;
   --stt-font-zh-sans:"Noto Sans TC","Source Han Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
 }
+
 html,body,#root{background:var(--approved-paper)!important;color:var(--approved-ink)!important;min-height:100%}
 body{margin:0!important;font-family:var(--stt-font-zh-sans);font-weight:400;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased}
 button,input,textarea,select{font-family:var(--stt-font-zh-sans)}
 .font-serif{font-family:var(--stt-font-en),var(--stt-font-zh-serif)!important}
 
-/* Canonical homepage visual: preserve approved composition, bind to the user-approved STT master. */
-.stth,.pc-root,.pd-root{background:var(--approved-paper)!important;color:var(--approved-ink)!important}
-.stth-hero-media{background-image:url('/visual-bank/stt/home-approved.webp')!important;background-position:center right!important;background-size:cover!important}
-.stth-belief-media{background-image:url('/visual-bank/stt/stt-platform.webp')!important;background-position:center!important;background-size:cover!important}
-.stth-head{background:rgba(255,253,249,.96)!important;border-bottom:1px solid rgba(177,135,76,.24)!important}
-.stth-pillars,.stth-focus button,.stth-drawerpanel{background:var(--approved-white)!important}
-.stth-section{background:var(--approved-paper)!important}
-.stth-section.soft,.stth-final{background:linear-gradient(135deg,#f6f1e7 0%,#fbfaf7 72%,#efe5d6 100%)!important;color:var(--approved-ink)!important}
-.stth-final p{color:var(--approved-muted)!important}
-
-/* Public core pages: preserve light institutional surfaces. */
-.pc-artifact{border:1px solid var(--approved-line)!important;background-color:var(--approved-ivory)!important;background-repeat:no-repeat!important;background-position:center!important;background-size:cover!important;box-shadow:0 26px 58px rgba(92,70,44,.10)!important}
-.pc-root .pc-body,.pc-root .pc-section{background:var(--approved-paper)!important}
-.pc-root .pc-card,.pc-root .pc-item{background:var(--approved-white)!important;color:var(--approved-ink)!important;border-color:var(--approved-line)!important}
-.pc-root .pc-cta{background:linear-gradient(135deg,#f6f1e7,#fffdf9)!important;color:var(--approved-ink)!important;border-color:var(--approved-line)!important}
-
-/* Problem detail: every section stays light. */
-.pd-root{--paper:var(--approved-paper)!important;--ink:var(--approved-ink)!important;--muted:var(--approved-muted)!important;--gold:var(--approved-gold-deep)!important;--line:var(--approved-line)!important}
-.pd-hero,.pd-body{background:var(--approved-paper)!important;border-color:var(--approved-line)!important}
-.pd-item{background:var(--approved-white)!important;color:#655d53!important;border-color:var(--approved-line)!important}
-.pd-cta{background:linear-gradient(135deg,#fffdf9,#f4ede2)!important;color:var(--approved-ink)!important;border-color:var(--approved-line)!important;box-shadow:0 18px 45px rgba(82,62,38,.06)!important}
-
-/* Problem finder and intake remain editorial, not card-app UI. */
-.bg-\[\#fbfaf7\]{background:var(--approved-paper)!important}
-#root .border-\[\#d8c8ad\],#root .border-\[\#ded4c4\]{border-color:var(--approved-line)!important}
-
 /* --------------------------------------------------------------------------
-   CANONICAL IDENTITY SYSTEM
-   One official logo + one inner-page title hierarchy across the entire STT site.
+   OFFICIAL IDENTITY — the uploaded complete logo is the only header lockup.
    -------------------------------------------------------------------------- */
-
-/* Inner-page header must visually match the homepage header. */
+.stth-head,
 header.sticky{
-  min-height:94px!important;
-  background:rgba(255,253,249,.96)!important;
-  border-bottom:1px solid rgba(177,135,76,.20)!important;
+  height:116px!important;
+  min-height:116px!important;
+  background:rgba(255,255,255,.97)!important;
+  border-bottom:1px solid var(--approved-line)!important;
   color:var(--approved-ink)!important;
+  backdrop-filter:blur(12px)!important;
 }
+.stth-headin,
 header.sticky>div:first-child{
-  height:94px!important;
-  max-width:1280px!important;
+  height:116px!important;
+  max-width:1320px!important;
   padding-left:40px!important;
   padding-right:40px!important;
 }
-.stt-official-brand{
-  display:flex!important;
-  align-items:center!important;
-  flex:0 0 auto!important;
-  min-width:0!important;
-}
-.stt-official-logo{
+.stth-brand,.stt-official-brand{display:flex!important;align-items:center!important;flex:0 0 auto!important;min-width:0!important}
+.stth-brand img,.stt-official-logo{
   display:block!important;
-  height:62px!important;
-  width:auto!important;
-  max-width:330px!important;
+  width:360px!important;
+  max-width:360px!important;
+  height:auto!important;
+  max-height:none!important;
   object-fit:contain!important;
 }
-header.sticky nav button{
+header.sticky nav button,.stth-nav button{
   font-family:var(--stt-font-zh-sans)!important;
   font-size:14px!important;
   font-weight:500!important;
   line-height:1!important;
   letter-spacing:0!important;
   white-space:nowrap!important;
-  color:#5f584f;
+  color:#5d5852!important;
 }
-header.sticky>div:first-child>div>button:first-child{
+header.sticky>div:first-child>div>button:first-child,.stth-start{
   border-radius:999px!important;
   padding:12px 20px!important;
   font-family:var(--stt-font-zh-sans)!important;
   font-size:14px!important;
   font-weight:500!important;
 }
-header.sticky>div+div{top:94px!important}
+header.sticky>div+div{top:116px!important}
 
-/* Canonical eyebrow / English section marker. */
-.stt-canon-eyebrow,
-.domain-kicker,
-.lib-kicker,
-.pd4-eyebrow,
-.gr-kicker,
-.legal-kicker,
-.stt-editorial-eyebrow,
-#root main p.uppercase{
+/* --------------------------------------------------------------------------
+   HOMEPAGE — restrained hierarchy. Large does not mean authoritative.
+   -------------------------------------------------------------------------- */
+.stth{background:var(--approved-paper)!important;color:var(--approved-ink)!important}
+.stth-wrap{max-width:1320px!important;padding-left:40px!important;padding-right:40px!important}
+.stth-hero{
+  min-height:690px!important;
+  padding-top:116px!important;
+  background:var(--approved-paper)!important;
+}
+.stth-hero-media{
+  inset:116px 0 0!important;
+  background-image:url('/visual-bank/stt/home-approved.webp')!important;
+  background-position:center right!important;
+  background-size:cover!important;
+}
+.stth-hero-copy{width:52%!important;max-width:680px!important;padding:74px 0 70px!important}
+.stth-hero .stth-kicker{display:none!important}
+.stth-hero h1{
+  margin-top:0!important;
+  font-family:var(--stt-font-zh-serif)!important;
+  font-size:clamp(48px,3.7vw,56px)!important;
+  font-weight:500!important;
+  line-height:1.22!important;
+  letter-spacing:.006em!important;
+  color:var(--approved-ink)!important;
+}
+.stth-lead{
+  max-width:700px!important;
+  margin-top:28px!important;
+  font-family:var(--stt-font-zh-sans)!important;
+  font-size:17px!important;
+  line-height:1.92!important;
+  color:var(--approved-muted)!important;
+}
+.stth-actions{margin-top:27px!important}
+.stth-actions button{font-size:14px!important;padding:12px 18px!important}
+.stth-hero-note{
+  max-width:620px!important;
+  margin-top:32px!important;
+  padding-top:18px!important;
+  border-top:1px solid var(--approved-line)!important;
+  font-family:var(--stt-font-zh-serif)!important;
+  font-size:15px!important;
+  line-height:1.9!important;
+  color:var(--approved-gold-deep)!important;
+}
+
+.stth-pillars{background:var(--approved-paper)!important;border-color:var(--approved-line)!important}
+.stth-pillargrid{gap:0 28px!important}
+.stth-pillar{
+  min-height:148px!important;
+  padding:26px 0 28px!important;
+  border:0!important;
+  border-top:1px solid var(--approved-line)!important;
+  background:transparent!important;
+}
+.stth-pillar span{font-size:18px!important;color:var(--approved-gold)!important}
+.stth-pillar h3{margin-top:12px!important;font-size:20px!important}
+.stth-pillar p{margin-top:9px!important;font-size:13px!important;line-height:1.75!important}
+
+.stth-section{padding:82px 0!important;background:var(--approved-paper)!important;border-color:var(--approved-line)!important}
+.stth-section.soft{background:var(--approved-warm)!important;color:var(--approved-ink)!important}
+.stth-kicker{
   font-family:var(--stt-font-en)!important;
-  font-size:11px!important;
+  font-size:10px!important;
+  font-weight:600!important;
+  letter-spacing:.18em!important;
+  color:var(--approved-gold-deep)!important;
+}
+.stth-title{
+  max-width:900px!important;
+  margin-top:14px!important;
+  font-family:var(--stt-font-zh-serif)!important;
+  font-size:clamp(30px,2.7vw,38px)!important;
+  font-weight:500!important;
+  line-height:1.48!important;
+  letter-spacing:.004em!important;
+  color:var(--approved-ink)!important;
+}
+.stth-desc{max-width:800px!important;margin-top:16px!important;font-size:15px!important;line-height:1.95!important;color:var(--approved-muted)!important}
+
+/* Eight real-problem entries: editorial modules, not an Excel grid. */
+.stth-focus{
+  margin-top:34px!important;
+  display:grid!important;
+  grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  gap:0 28px!important;
+  border:0!important;
+}
+.stth-focus button{
+  min-height:176px!important;
+  padding:25px 0 28px!important;
+  border:0!important;
+  border-top:1px solid var(--approved-line)!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+.stth-focus button:hover{background:var(--approved-warm)!important;transform:none!important;box-shadow:none!important;padding-left:12px!important;padding-right:12px!important}
+.stth-focus b{font-family:var(--stt-font-en)!important;font-size:24px!important;font-weight:500!important;color:var(--approved-gold)!important;letter-spacing:.03em!important}
+.stth-focus h3{margin-top:14px!important;font-size:20px!important;line-height:1.5!important}
+.stth-focus p{margin-top:9px!important;font-size:13px!important;line-height:1.8!important}
+.stth-focus em{margin-top:15px!important;font-size:13px!important;color:var(--approved-gold-deep)!important}
+
+/* Seven-step method: one continuous golden line, not seven table cells. */
+.stth-steps{
+  position:relative!important;
+  margin-top:38px!important;
+  padding-top:6px!important;
+  display:grid!important;
+  grid-template-columns:repeat(7,minmax(0,1fr))!important;
+  border:0!important;
+  background:transparent!important;
+}
+.stth-steps::before{
+  content:"";
+  position:absolute;
+  left:7%;right:7%;top:24px;
+  height:1px;
+  background:var(--approved-gold)!important;
+}
+.stth-step{
+  position:relative!important;
+  z-index:1!important;
+  min-height:104px!important;
+  padding:0 8px 12px!important;
+  border:0!important;
+  background:transparent!important;
+  text-align:center!important;
+}
+.stth-step b{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  width:38px!important;height:38px!important;
+  margin:0 auto!important;
+  border:1px solid var(--approved-gold)!important;
+  border-radius:999px!important;
+  background:var(--approved-paper)!important;
+  font-family:var(--stt-font-en)!important;
+  font-size:12px!important;
+  color:var(--approved-gold-deep)!important;
+}
+.stth-step span{margin-top:14px!important;font-size:17px!important;line-height:1.5!important}
+
+.stth-split{gap:28px!important;margin-top:36px!important}
+.stth-panel{
+  padding:30px 0!important;
+  border:0!important;
+  border-top:1px solid var(--approved-line)!important;
+  background:transparent!important;
+}
+.stth-panel h3{font-size:25px!important;line-height:1.55!important}
+.stth-panel p{font-size:14px!important;line-height:1.9!important}
+
+.stth-links{gap:0 28px!important;margin-top:34px!important;border:0!important}
+.stth-link{
+  padding:26px 0 28px!important;
+  border:0!important;
+  border-top:1px solid var(--approved-line)!important;
+  background:transparent!important;
+}
+.stth-link h3{margin-top:12px!important;font-size:22px!important}
+.stth-link p{font-size:13px!important;line-height:1.8!important}
+
+.stth-final{
+  padding:82px 28px!important;
+  background:var(--approved-warm)!important;
+  color:var(--approved-ink)!important;
+  border-color:var(--approved-line)!important;
+}
+.stth-final h2{max-width:820px!important;margin-top:14px!important;font-family:var(--stt-font-zh-serif)!important;font-size:clamp(30px,2.9vw,40px)!important;line-height:1.5!important}
+.stth-final p{max-width:720px!important;margin-top:16px!important;font-size:15px!important;line-height:1.95!important;color:var(--approved-muted)!important}
+
+/* --------------------------------------------------------------------------
+   INNER PAGES — one restrained scale across Problems, Domains, Library, etc.
+   -------------------------------------------------------------------------- */
+.stt-canon,.domain-root,.lib-root,.pd4-root,.gr-root,.legal-root,.stt-editorial-page,.pc-root,.pd-root{background:var(--approved-paper)!important;color:var(--approved-ink)!important}
+.stt-canon-hero,.domain-hero,.lib-hero,.pd4-hero,.gr-hero,.stt-editorial-hero{background:var(--approved-paper)!important;border-color:var(--approved-line)!important}
+.stt-canon-hero,.domain-hero,.lib-hero,.pd4-hero,.gr-hero{padding-top:68px!important;padding-bottom:58px!important}
+.stt-editorial-hero-inner{padding-top:68px!important;padding-bottom:58px!important}
+
+.stt-canon-eyebrow,.domain-kicker,.lib-kicker,.pd4-eyebrow,.gr-kicker,.legal-kicker,.stt-editorial-eyebrow,#root main p.uppercase{
+  font-family:var(--stt-font-en)!important;
+  font-size:10px!important;
   font-weight:600!important;
   line-height:1.3!important;
-  letter-spacing:.20em!important;
+  letter-spacing:.18em!important;
   text-transform:uppercase!important;
   color:var(--approved-gold-deep)!important;
 }
 
-/* Canonical inner-page H1. Homepage H1 intentionally remains one tier larger. */
-.stt-canon h1,
-.domain-hero h1,
-.lib-hero h1,
-.pd4-hero h1,
-.gr-hero h1,
-.legal-root h1,
-.stt-editorial-title,
-#root main h1.font-serif{
-  max-width:980px!important;
+.stt-canon h1,.domain-hero h1,.lib-hero h1,.pd4-hero h1,.gr-hero h1,.legal-root h1,.stt-editorial-title,#root main h1.font-serif{
+  max-width:960px!important;
+  margin-top:16px!important;
   font-family:var(--stt-font-zh-serif)!important;
-  font-size:clamp(44px,4.4vw,64px)!important;
+  font-size:clamp(38px,3.4vw,50px)!important;
   font-weight:500!important;
-  line-height:1.30!important;
-  letter-spacing:.005em!important;
+  line-height:1.34!important;
+  letter-spacing:.003em!important;
   text-wrap:balance;
   color:var(--approved-ink)!important;
 }
 
-/* Canonical introductory paragraph below an inner-page H1. */
-.stt-canon-sub,
-.domain-hero p,
-.lib-hero p,
-.pd4-hero p,
-.gr-lead,
-.stt-editorial-lead,
-#root main h1.font-serif+p{
-  max-width:840px!important;
+.stt-canon-sub,.domain-hero p,.lib-hero p,.pd4-hero p,.gr-lead,.stt-editorial-lead,#root main h1.font-serif+p{
+  max-width:820px!important;
+  margin-top:20px!important;
   font-family:var(--stt-font-zh-sans)!important;
-  font-size:17px!important;
+  font-size:16px!important;
   font-weight:400!important;
-  line-height:2!important;
-  letter-spacing:.01em!important;
-  color:#6e675f!important;
+  line-height:1.95!important;
+  letter-spacing:.006em!important;
+  color:var(--approved-muted)!important;
 }
 
-/* Keep secondary titles clearly below the H1 tier. */
-.stt-canon-row h2,
-.domain-card h2,.domain-card h3,.domain-detail h2,
-.lib-row h2,.lib-note h2,.lib-panel h2,
-.pd4-block h2,
-.gr-card h3,
-#root main h2.font-serif{
+.stt-canon-statement{font-size:16px!important;line-height:1.9!important;border-color:var(--approved-line)!important}
+.stt-canon-row,.domain-detail,.lib-row,.pd4-block{border-color:var(--approved-line)!important}
+.stt-canon-row h2,.domain-card h2,.domain-card h3,.domain-detail h2,.lib-row h2,.lib-note h2,.lib-panel h2,.pd4-block h2,.gr-card h3,#root main h2.font-serif{
   font-family:var(--stt-font-zh-serif)!important;
+  font-size:23px!important;
   font-weight:500!important;
-  letter-spacing:.003em!important;
+  line-height:1.55!important;
+  letter-spacing:.002em!important;
+  color:var(--approved-ink)!important;
 }
 
-/* Editorial page has a custom grid but must share the same heading voice. */
-.stt-editorial-title-en,
-.stt-editorial-index-name,
-.stt-editorial-index-number,
-.stt-featured-number{
-  font-family:var(--stt-font-en)!important;
+/* Domain index: open editorial modules rather than boxed service cards. */
+.domain-grid{border:0!important;gap:18px 28px!important}
+.domain-card{
+  min-height:190px!important;
+  padding:26px 0 30px!important;
+  border:0!important;
+  border-top:1px solid var(--approved-line)!important;
+  background:transparent!important;
 }
+.domain-card small,.lib-index,.stt-canon-number{color:var(--approved-gold)!important}
 
-/* Desktop navigation behavior must match the homepage: nav + CTA, no stray desktop hamburger. */
+/* Libraries and detail lists remain light and quiet. */
+.lib-list,.lib-row,.lib-note,.lib-panel,.pd4-block,.pd4-item,.pd4-cta{border-color:var(--approved-line)!important}
+.lib-note,.lib-panel,.pd4-item,.pd4-cta{background:var(--approved-warm)!important;color:var(--approved-ink)!important}
+.pd4-item{padding:16px 18px!important;line-height:1.85!important}
+.pd4-cta{box-shadow:none!important}
+
+/* Problem Finder Tailwind surfaces: smaller first-level titles, no oversized hero. */
+#root main .lg\:text-6xl{font-size:50px!important}
+#root main .text-4xl{font-size:38px!important}
+#root main .lg\:text-5xl{font-size:46px!important}
+#root main .lg\:text-3xl{font-size:26px!important}
+
+/* Editorial page stays consistent with the same type voice. */
+.stt-editorial-title-en,.stt-editorial-index-name,.stt-editorial-index-number,.stt-featured-number{font-family:var(--stt-font-en)!important}
+.stt-editorial-library-head h2{font-size:28px!important}
+.stt-editorial-main h2{font-size:clamp(21px,2vw,29px)!important}
+
+/* White-surface safety rail: never allow legacy dark/black sections back into public UI. */
+#root .bg-black,
+#root [class*='bg-black'],
+#root [class*='bg-neutral-9'],
+#root [class*='bg-zinc-9'],
+#root [class*='bg-gray-9'],
+#root [class*='bg-slate-9']{
+  background:var(--approved-warm)!important;
+  color:var(--approved-ink)!important;
+}
+#root [class*='from-black'],#root [class*='via-black'],#root [class*='to-black']{
+  --tw-gradient-from:rgba(255,255,255,.98)!important;
+  --tw-gradient-via:rgba(251,249,246,.90)!important;
+  --tw-gradient-to:rgba(255,255,255,.20)!important;
+}
+#root .text-white{color:inherit}
+#root button.text-white,#root a.text-white{color:#fff!important}
+.bg-\[\#fbfaf7\]{background:var(--approved-paper)!important}
+#root .border-\[\#d8c8ad\],#root .border-\[\#ded4c4\]{border-color:var(--approved-line)!important}
+
+/* Desktop navigation: nav + CTA, hamburger only below breakpoint. */
 @media(min-width:1180px){
   header.sticky nav{display:flex!important}
   header.sticky>div:first-child>div{display:flex!important}
@@ -178,42 +350,47 @@ header.sticky>div+div{top:94px!important}
   header.sticky nav{display:none!important}
   header.sticky>div:first-child>div{display:none!important}
   header.sticky>div:first-child>button:last-child{display:inline-flex!important}
-  .stt-official-logo{height:56px!important;max-width:300px!important}
+  .stth-brand img,.stt-official-logo{width:320px!important;max-width:320px!important}
+  .stth-wrap{padding-left:30px!important;padding-right:30px!important}
+  .stth-focus{grid-template-columns:repeat(2,minmax(0,1fr))!important}
 }
 
-/* White-surface safety rail: no legacy black/dark utility or overlay may become a visible public surface. */
-#root .bg-black,
-#root [class*='bg-black'],
-#root [class*='bg-neutral-9'],
-#root [class*='bg-zinc-9'],
-#root [class*='bg-gray-9'],
-#root [class*='bg-slate-9']{
-  background:rgba(245,239,229,.86)!important;
-  color:var(--approved-ink)!important;
-}
-#root [class*='from-black'],#root [class*='via-black'],#root [class*='to-black']{
-  --tw-gradient-from:rgba(251,250,247,.96)!important;
-  --tw-gradient-via:rgba(246,241,231,.84)!important;
-  --tw-gradient-to:rgba(251,250,247,.12)!important;
-}
-#root .text-white{color:inherit}
-#root button.text-white,#root a.text-white{color:#fff!important}
-
-/* Refined motion and responsive rhythm. */
-.stth-focus button,.pd-item,.pc-root button,.pc-root a{transition:background-color .22s ease,border-color .22s ease,transform .22s ease,box-shadow .22s ease}
-.stth-focus button:hover{background:#f7f1e7!important;box-shadow:0 12px 28px rgba(91,68,42,.06)!important}
 @media(max-width:900px){
-  .pc-artifact{min-height:340px!important}
-  header.sticky{min-height:82px!important}
-  header.sticky>div:first-child{height:82px!important;padding-left:20px!important;padding-right:20px!important}
-  .stt-official-logo{height:48px!important;max-width:250px!important}
-  header.sticky>div+div{top:82px!important}
-  .stt-canon h1,
-  .domain-hero h1,
-  .lib-hero h1,
-  .pd4-hero h1,
-  .gr-hero h1,
-  .legal-root h1,
-  .stt-editorial-title,
-  #root main h1.font-serif{font-size:clamp(40px,10vw,52px)!important;line-height:1.32!important}
+  .stth-head,header.sticky{height:92px!important;min-height:92px!important}
+  .stth-headin,header.sticky>div:first-child{height:92px!important;padding-left:22px!important;padding-right:22px!important}
+  header.sticky>div+div{top:92px!important}
+  .stth-brand img,.stt-official-logo{width:270px!important;max-width:270px!important}
+  .stth-hero{min-height:620px!important;padding-top:92px!important}
+  .stth-hero-media{inset:92px 0 0!important;opacity:.45!important}
+  .stth-hero-copy{width:100%!important;max-width:650px!important;padding:62px 0 58px!important}
+  .stth-hero h1{font-size:clamp(42px,7.2vw,50px)!important}
+  .stth-lead{font-size:16px!important}
+  .stth-section{padding:68px 0!important}
+  .stth-title{font-size:clamp(28px,4.5vw,34px)!important}
+  .stth-steps{grid-template-columns:repeat(4,minmax(0,1fr))!important;row-gap:28px!important}
+  .stth-steps::before{display:none!important}
+  .stth-canon h1,.domain-hero h1,.lib-hero h1,.pd4-hero h1,.gr-hero h1,.legal-root h1,.stt-editorial-title,#root main h1.font-serif{font-size:clamp(36px,6vw,44px)!important}
+  .pc-artifact{min-height:320px!important}
+}
+
+@media(max-width:620px){
+  .stth-head,header.sticky{height:84px!important;min-height:84px!important}
+  .stth-headin,header.sticky>div:first-child{height:84px!important;padding-left:16px!important;padding-right:16px!important}
+  header.sticky>div+div{top:84px!important}
+  .stth-brand img,.stt-official-logo{width:225px!important;max-width:225px!important}
+  .stth-wrap{padding-left:20px!important;padding-right:20px!important}
+  .stth-hero{min-height:570px!important;padding-top:84px!important}
+  .stth-hero-media{inset:84px 0 0!important}
+  .stth-hero-copy{padding:52px 0 48px!important}
+  .stth-hero h1{font-size:38px!important;line-height:1.28!important}
+  .stth-lead{font-size:15.5px!important;line-height:1.9!important}
+  .stth-focus{grid-template-columns:1fr!important;gap:0!important}
+  .stth-pillargrid{grid-template-columns:1fr!important;gap:0!important}
+  .stth-steps{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  .stth-split,.stth-links{grid-template-columns:1fr!important}
+  .stth-final{padding:68px 20px!important}
+  .stth-final h2{font-size:30px!important}
+  .stt-canon h1,.domain-hero h1,.lib-hero h1,.pd4-hero h1,.gr-hero h1,.legal-root h1,.stt-editorial-title,#root main h1.font-serif{font-size:34px!important;line-height:1.38!important}
+  .stt-canon-row h2,.domain-card h2,.domain-card h3,.domain-detail h2,.lib-row h2,.lib-note h2,.lib-panel h2,.pd4-block h2,.gr-card h3,#root main h2.font-serif{font-size:21px!important}
+  #root main .lg\:text-6xl,#root main .text-4xl,#root main .lg\:text-5xl{font-size:34px!important}
 }
