@@ -44,6 +44,148 @@ button,input,textarea,select{font-family:var(--stt-font-zh-sans)}
 .bg-\[\#fbfaf7\]{background:var(--approved-paper)!important}
 #root .border-\[\#d8c8ad\],#root .border-\[\#ded4c4\]{border-color:var(--approved-line)!important}
 
+/* --------------------------------------------------------------------------
+   CANONICAL IDENTITY SYSTEM
+   One brand lockup + one inner-page title hierarchy across the entire STT site.
+   -------------------------------------------------------------------------- */
+
+/* Inner-page header must visually match the homepage header. */
+header.sticky{
+  min-height:94px!important;
+  background:rgba(255,253,249,.96)!important;
+  border-bottom:1px solid rgba(177,135,76,.20)!important;
+  color:var(--approved-ink)!important;
+}
+header.sticky>div:first-child{
+  height:94px!important;
+  max-width:1280px!important;
+  padding-left:40px!important;
+  padding-right:40px!important;
+}
+header.sticky>div:first-child>button:first-child span:first-child{
+  font-family:var(--stt-font-en)!important;
+  font-size:24px!important;
+  font-weight:500!important;
+  line-height:1!important;
+  letter-spacing:.065em!important;
+  text-transform:uppercase!important;
+  color:var(--approved-ink)!important;
+}
+header.sticky>div:first-child>button:first-child span:nth-child(2){
+  margin-top:7px!important;
+  font-family:var(--stt-font-zh-sans)!important;
+  font-size:9px!important;
+  font-weight:600!important;
+  line-height:1!important;
+  letter-spacing:.28em!important;
+  text-transform:uppercase!important;
+  color:var(--approved-gold-deep)!important;
+}
+header.sticky nav button{
+  font-family:var(--stt-font-zh-sans)!important;
+  font-size:14px!important;
+  font-weight:500!important;
+  line-height:1!important;
+  letter-spacing:0!important;
+  white-space:nowrap!important;
+  color:#5f584f;
+}
+header.sticky>div:first-child>div>button:first-child{
+  border-radius:999px!important;
+  padding:12px 20px!important;
+  font-family:var(--stt-font-zh-sans)!important;
+  font-size:14px!important;
+  font-weight:500!important;
+}
+header.sticky>div+div{top:94px!important}
+
+/* Canonical eyebrow / English section marker. */
+.stt-canon-eyebrow,
+.domain-kicker,
+.lib-kicker,
+.pd4-eyebrow,
+.gr-kicker,
+.legal-kicker,
+.stt-editorial-eyebrow,
+#root main p.uppercase{
+  font-family:var(--stt-font-en)!important;
+  font-size:11px!important;
+  font-weight:600!important;
+  line-height:1.3!important;
+  letter-spacing:.20em!important;
+  text-transform:uppercase!important;
+  color:var(--approved-gold-deep)!important;
+}
+
+/* Canonical inner-page H1. Homepage H1 intentionally remains one tier larger. */
+.stt-canon h1,
+.domain-hero h1,
+.lib-hero h1,
+.pd4-hero h1,
+.gr-hero h1,
+.legal-root h1,
+.stt-editorial-title,
+#root main h1.font-serif{
+  max-width:980px!important;
+  font-family:var(--stt-font-zh-serif)!important;
+  font-size:clamp(44px,4.4vw,64px)!important;
+  font-weight:500!important;
+  line-height:1.30!important;
+  letter-spacing:.005em!important;
+  text-wrap:balance;
+  color:var(--approved-ink)!important;
+}
+
+/* Canonical introductory paragraph below an inner-page H1. */
+.stt-canon-sub,
+.domain-hero p,
+.lib-hero p,
+.pd4-hero p,
+.gr-lead,
+.stt-editorial-lead,
+#root main h1.font-serif+p{
+  max-width:840px!important;
+  font-family:var(--stt-font-zh-sans)!important;
+  font-size:17px!important;
+  font-weight:400!important;
+  line-height:2!important;
+  letter-spacing:.01em!important;
+  color:#6e675f!important;
+}
+
+/* Keep secondary titles clearly below the H1 tier. */
+.stt-canon-row h2,
+.domain-card h2,.domain-card h3,.domain-detail h2,
+.lib-row h2,.lib-note h2,.lib-panel h2,
+.pd4-block h2,
+.gr-card h3,
+#root main h2.font-serif{
+  font-family:var(--stt-font-zh-serif)!important;
+  font-weight:500!important;
+  letter-spacing:.003em!important;
+}
+
+/* Editorial page has a custom grid but must share the same heading voice. */
+.stt-editorial-title-en,
+.stt-editorial-index-name,
+.stt-editorial-index-number,
+.stt-featured-number{
+  font-family:var(--stt-font-en)!important;
+}
+
+/* Desktop navigation behavior must match the homepage: nav + CTA, no stray desktop hamburger. */
+@media(min-width:1180px){
+  header.sticky nav{display:flex!important}
+  header.sticky>div:first-child>div{display:flex!important}
+  header.sticky>div:first-child>div>button:last-child{display:none!important}
+  header.sticky>div:first-child>button:last-child{display:none!important}
+}
+@media(max-width:1179px){
+  header.sticky nav{display:none!important}
+  header.sticky>div:first-child>div{display:none!important}
+  header.sticky>div:first-child>button:last-child{display:inline-flex!important}
+}
+
 /* White-surface safety rail: no legacy black/dark utility or overlay may become a visible public surface. */
 #root .bg-black,
 #root [class*='bg-black'],
@@ -67,4 +209,16 @@ button,input,textarea,select{font-family:var(--stt-font-zh-sans)}
 .stth-focus button:hover{background:#f7f1e7!important;box-shadow:0 12px 28px rgba(91,68,42,.06)!important}
 @media(max-width:900px){
   .pc-artifact{min-height:340px!important}
+  header.sticky{min-height:82px!important}
+  header.sticky>div:first-child{height:82px!important;padding-left:20px!important;padding-right:20px!important}
+  header.sticky>div:first-child>button:first-child span:first-child{font-size:21px!important}
+  header.sticky>div+div{top:82px!important}
+  .stt-canon h1,
+  .domain-hero h1,
+  .lib-hero h1,
+  .pd4-hero h1,
+  .gr-hero h1,
+  .legal-root h1,
+  .stt-editorial-title,
+  #root main h1.font-serif{font-size:clamp(40px,10vw,52px)!important;line-height:1.32!important}
 }
