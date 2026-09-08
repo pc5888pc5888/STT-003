@@ -1,560 +1,248 @@
-import { useMemo, useState } from "react";
-import { ArrowRight, BookOpen, Search } from "lucide-react";
+import { useEffect, useMemo, useState } from "react";
+import { Search } from "lucide-react";
 import { articles, type Article } from "../data/mockData";
+
+type Series = "legal" | "humanistic";
+
+type ColumnArticle = {
+  id: string;
+  title: string;
+  excerpt: string;
+  date: string;
+  category: string;
+  author: string;
+  url?: string;
+  series: Series;
+  source: "M傳媒";
+};
+
+type SyncPayload = {
+  ok: boolean;
+  syncedAt?: string;
+  articles?: Array<Partial<ColumnArticle> & { id: string; title: string; url: string; series: Series }>;
+};
+
+const MMEDIA_AUTHOR_URL = "https://94m.com.tw/editors/ed55fc";
+
+const HUMANISTIC_FALLBACK: ColumnArticle[] = [
+  {
+    id: "mmedia-fea32f",
+    title: "在人還健康的時候，先替未來留下一次選擇｜人文地景產專欄",
+    excerpt: "從健康、選擇與生命安排切入，留下人在仍能決定時的判斷與生活尺度。",
+    date: "2026/08/27 21:20",
+    category: "人文地景產",
+    author: "莊鈞翔博士",
+    url: "https://94m.com.tw/articles/fea32f",
+    series: "humanistic",
+    source: "M傳媒",
+  },
+  {
+    id: "mmedia-36f160",
+    title: "〖茗香與墨痕交織的儒者交響〗｜人文地景產專欄",
+    excerpt: "以人物專訪、教育志業與美學視界，保存一段可被理解與傳承的人文記憶。",
+    date: "2026/08/25 04:20",
+    category: "人文地景產",
+    author: "莊鈞翔博士",
+    url: "https://94m.com.tw/articles/36f160",
+    series: "humanistic",
+    source: "M傳媒",
+  },
+];
 
 const EXCLUDED_TOPICS = ["減碳", "碳排", "碳權"];
 
-function isLegacyExcluded(article: Article) {
-  if (article.category === "ESG") {
-    return true;
-  }
+function legacySeries(article: Article): Series {
   const text = `${article.title} ${article.excerpt}`;
-  return EXCLUDED_TOPICS.some((term) => text.includes(term));
+  // Legacy fallback only. New M Media items receive an explicit series from /api/mmedia.
+  return /人文地景產/.test(text) ? "humanistic" : "legal";
 }
 
-function sortArticles(items: Article[]) {
-  return [...items].sort((a, b) => {
-    const aTime = Date.parse(a.date || "") || 0;
-    const bTime = Date.parse(b.date || "") || 0;
-    if (aTime !== bTime) {
-      return bTime - aTime;
-    }
-    return String(b.id).localeCompare(String(a.id));
-  });
+function legacyArticle(article: Article): ColumnArticle {
+  return {
+    id: article.id,
+    title: article.title,
+    excerpt: article.excerpt,
+    date: article.date,
+    category: article.category,
+    author: article.author,
+    url: article.url,
+    series: legacySeries(article),
+    source: "M傳媒",
+  };
 }
 
-function openArticle(article: Article) {
-  if (!article.url) {
-    return;
+function isLegacyExcluded(article: ColumnArticle) {
+  const text = `${article.title} ${article.excerpt}`;
+  return article.category === "ESG" || EXCLUDED_TOPICS.some((term) => text.includes(term));
+}
+
+function timeValue(value: string) {
+  if (!value) return 0;
+  const normalized = value.replace(/\//g, "-").replace(" ", "T");
+  return Date.parse(normalized) || 0;
+}
+
+function sortArticles(items: ColumnArticle[]) {
+  return [...items].sort((a, b) => timeValue(b.date) - timeValue(a.date));
+}
+
+function dedupe(items: ColumnArticle[]) {
+  const map = new Map<string, ColumnArticle>();
+  for (const item of items) {
+    const key = item.url || item.id;
+    const previous = map.get(key);
+    map.set(key, previous ? { ...previous, ...item, excerpt: item.excerpt || previous.excerpt } : item);
   }
+  return Array.from(map.values());
+}
+
+function openArticle(article: ColumnArticle) {
+  if (!article.url) return;
   window.open(article.url, "_blank", "noopener,noreferrer");
 }
 
-function ArticleRow({ article, index }: { article: Article; index: number }) {
-  return (
-    <article
-      className="stt-editorial-row"
-      onClick={() => openArticle(article)}
-      role={article.url ? "link" : undefined}
-      tabIndex={article.url ? 0 : -1}
-      onKeyDown={(event) => {
-        if (article.url && (event.key === "Enter" || event.key === " ")) {
-          event.preventDefault();
-          openArticle(article);
-        }
-      }}
-    >
-      <div className="stt-editorial-index">{String(index + 1).padStart(2, "0")}</div>
-      <div className="stt-editorial-main">
-        <div className="stt-editorial-meta">
-          <span>{article.category}</span>
-          <span>{article.date}</span>
-        </div>
-        <h2>{article.title}</h2>
-        {article.excerpt && <p>{article.excerpt}</p>}
-      </div>
-      <div className="stt-editorial-arrow" aria-hidden="true">→</div>
-    </article>
-  );
+function seriesLabel(series: Series) {
+  return series === "humanistic" ? "人文地景產" : "法律策略專欄";
 }
 
 export default function Columns() {
-  const cleanArticles = useMemo(
-    () => sortArticles(articles.filter((article) => !isLegacyExcluded(article))),
-    []
-  );
-
-  const categories = useMemo(() => {
-    const values = Array.from(new Set(cleanArticles.map((article) => article.category).filter(Boolean)));
-    return values.slice(0, 8);
-  }, [cleanArticles]);
-
-  const categoryCounts = useMemo(() => {
-    const counts = new Map<string, number>();
-    cleanArticles.forEach((article) => {
-      counts.set(article.category, (counts.get(article.category) || 0) + 1);
-    });
-    return counts;
-  }, [cleanArticles]);
-
-  const [category, setCategory] = useState<string | null>(null);
+  const [remote, setRemote] = useState<ColumnArticle[]>([]);
+  const [syncState, setSyncState] = useState<"loading" | "live" | "fallback">("loading");
+  const [series, setSeries] = useState<Series | "all">("all");
   const [query, setQuery] = useState("");
+
+  useEffect(() => {
+    let active = true;
+    fetch("/api/mmedia", { headers: { accept: "application/json" } })
+      .then((response) => response.json() as Promise<SyncPayload>)
+      .then((payload) => {
+        if (!active) return;
+        const synced = (payload.articles || []).map((item): ColumnArticle => ({
+          id: item.id,
+          title: item.title,
+          excerpt: item.excerpt || "",
+          date: item.date || "",
+          category: item.category || seriesLabel(item.series),
+          author: item.author || "莊鈞翔博士",
+          url: item.url,
+          series: item.series,
+          source: "M傳媒",
+        }));
+        setRemote(synced);
+        setSyncState(payload.ok && synced.length > 0 ? "live" : "fallback");
+      })
+      .catch(() => {
+        if (active) setSyncState("fallback");
+      });
+    return () => { active = false; };
+  }, []);
+
+  const catalog = useMemo(() => {
+    const legacy = articles.map(legacyArticle).filter((item) => !isLegacyExcluded(item));
+    return sortArticles(dedupe([...remote, ...HUMANISTIC_FALLBACK, ...legacy]));
+  }, [remote]);
+
+  const counts = useMemo(() => ({
+    legal: catalog.filter((item) => item.series === "legal").length,
+    humanistic: catalog.filter((item) => item.series === "humanistic").length,
+  }), [catalog]);
 
   const filtered = useMemo(() => {
     const normalized = query.trim().toLowerCase();
-    return cleanArticles.filter((article) => {
-      const categoryMatch = !category || article.category === category;
-      const textMatch = !normalized || `${article.title} ${article.excerpt}`.toLowerCase().includes(normalized);
-      return categoryMatch && textMatch;
+    return catalog.filter((article) => {
+      const seriesMatch = series === "all" || article.series === series;
+      const textMatch = !normalized || `${article.title} ${article.excerpt} ${article.category}`.toLowerCase().includes(normalized);
+      return seriesMatch && textMatch;
     });
-  }, [category, cleanArticles, query]);
-
-  const featured = cleanArticles[0] ?? null;
-  const showFeatured = Boolean(featured && !category && query.trim() === "");
-  const libraryEntries = showFeatured && featured
-    ? filtered.filter((article) => article.id !== featured.id)
-    : filtered;
+  }, [catalog, query, series]);
 
   return (
-    <div className="stt-editorial-page">
-      <style>{`
-        .stt-editorial-page {
-          min-height: 100vh;
-          background: #fbfbfa;
-          color: #1a1a1a;
-        }
-        .stt-editorial-page * { box-sizing: border-box; }
-        .stt-editorial-hero {
-          border-bottom: 1px solid rgba(197,168,128,.20);
-          background: #fbfbfa;
-        }
-        .stt-editorial-hero-inner {
-          width: min(calc(100% - 72px), 1320px);
-          margin: 0 auto;
-          display: grid;
-          grid-template-columns: minmax(0, 1.32fr) minmax(320px, .68fr);
-          gap: 88px;
-          align-items: stretch;
-          padding: 94px 0 84px;
-        }
-        .stt-editorial-hero-copy {
-          align-self: center;
-          max-width: 820px;
-        }
-        .stt-editorial-eyebrow {
-          margin: 0 0 24px;
-          color: #a9895e;
-          font-size: 10px;
-          font-weight: 500;
-          letter-spacing: .24em;
-          text-transform: uppercase;
-        }
-        .stt-editorial-title {
-          margin: 0;
-          max-width: 800px;
-          font-family: "Noto Serif TC", "Noto Serif JP", "Songti TC", "PMingLiU", Georgia, serif;
-          font-size: clamp(50px, 5.8vw, 84px);
-          font-weight: 400;
-          line-height: 1.16;
-          letter-spacing: .03em;
-        }
-        .stt-editorial-title-en {
-          margin: 20px 0 0;
-          color: #a9895e;
-          font-family: Georgia, "Times New Roman", serif;
-          font-size: 12px;
-          letter-spacing: .16em;
-          text-transform: uppercase;
-        }
-        .stt-editorial-lead {
-          max-width: 720px;
-          margin: 36px 0 0;
-          color: #625c54;
-          font-size: 15px;
-          line-height: 2.05;
-          letter-spacing: .015em;
-        }
-        .stt-editorial-index-panel {
-          min-height: 460px;
-          padding: 32px 32px 28px;
-          display: flex;
-          flex-direction: column;
-          border: 1px solid rgba(197,168,128,.22);
-          background: #f7f3ec;
-        }
-        .stt-editorial-index-kicker {
-          display: flex;
-          justify-content: space-between;
-          gap: 18px;
-          padding-bottom: 18px;
-          border-bottom: 1px solid rgba(197,168,128,.24);
-          color: #81776c;
-          font-size: 8px;
-          letter-spacing: .18em;
-          text-transform: uppercase;
-        }
-        .stt-editorial-index-number {
-          margin-top: 30px;
-          color: #b18a58;
-          font-family: Georgia, "Times New Roman", serif;
-          font-size: 82px;
-          line-height: .95;
-          letter-spacing: -.04em;
-        }
-        .stt-editorial-index-name {
-          margin-top: 16px;
-          color: #28241f;
-          font-family: Georgia, "Times New Roman", serif;
-          font-size: 15px;
-          letter-spacing: .18em;
-          text-transform: uppercase;
-        }
-        .stt-editorial-index-list {
-          margin-top: 30px;
-          border-top: 1px solid rgba(197,168,128,.22);
-        }
-        .stt-editorial-index-item {
-          display: flex;
-          justify-content: space-between;
-          gap: 20px;
-          padding: 13px 0;
-          border-bottom: 1px solid rgba(197,168,128,.16);
-          color: #5f584f;
-          font-size: 11px;
-        }
-        .stt-editorial-index-item span:last-child {
-          color: #a9895e;
-          font-family: Georgia, "Times New Roman", serif;
-        }
-        .stt-featured {
-          border-bottom: 1px solid rgba(197,168,128,.20);
-          background: #f9f7f3;
-        }
-        .stt-featured-inner {
-          width: min(calc(100% - 72px), 1320px);
-          margin: 0 auto;
-          display: grid;
-          grid-template-columns: minmax(220px, .42fr) minmax(0, 1.58fr);
-          gap: 72px;
-          padding: 68px 0 74px;
-        }
-        .stt-featured-label {
-          color: #a9895e;
-          font-size: 9px;
-          letter-spacing: .2em;
-          text-transform: uppercase;
-        }
-        .stt-featured-number {
-          margin-top: 18px;
-          color: #c5a880;
-          font-family: Georgia, "Times New Roman", serif;
-          font-size: 54px;
-          line-height: 1;
-        }
-        .stt-featured-copy {
-          cursor: pointer;
-        }
-        .stt-featured-meta {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 14px;
-          color: #a9895e;
-          font-size: 9px;
-          letter-spacing: .12em;
-          text-transform: uppercase;
-        }
-        .stt-featured-copy h2 {
-          margin: 18px 0 0;
-          max-width: 940px;
-          font-family: "Noto Serif TC", "Noto Serif JP", "Songti TC", "PMingLiU", Georgia, serif;
-          font-size: clamp(30px, 3.7vw, 52px);
-          font-weight: 400;
-          line-height: 1.48;
-          letter-spacing: .02em;
-        }
-        .stt-featured-copy p {
-          margin: 22px 0 0;
-          max-width: 840px;
-          color: #625c54;
-          font-size: 14px;
-          line-height: 2;
-        }
-        .stt-featured-action {
-          margin-top: 26px;
-          display: inline-flex;
-          align-items: center;
-          gap: 10px;
-          color: #a9895e;
-          font-size: 11px;
-          letter-spacing: .08em;
-        }
-        .stt-editorial-tools {
-          position: sticky;
-          top: 76px;
-          z-index: 30;
-          border-bottom: 1px solid rgba(197,168,128,.18);
-          background: rgba(251,251,250,.96);
-          backdrop-filter: blur(18px);
-        }
-        .stt-editorial-tools-inner {
-          width: min(calc(100% - 72px), 1320px);
-          min-height: 84px;
-          margin: 0 auto;
-          display: flex;
-          align-items: center;
-          gap: 24px;
-        }
-        .stt-editorial-search {
-          flex: 0 1 350px;
-          height: 44px;
-          display: flex;
-          align-items: center;
-          gap: 10px;
-          padding: 0 2px;
-          border-bottom: 1px solid rgba(197,168,128,.34);
-          background: transparent;
-        }
-        .stt-editorial-search input {
-          width: 100%;
-          border: 0;
-          outline: 0;
-          background: transparent;
-          color: #1a1a1a;
-          font-size: 13px;
-        }
-        .stt-editorial-categories {
-          display: flex;
-          align-items: center;
-          gap: 18px;
-          overflow-x: auto;
-          padding: 8px 0;
-        }
-        .stt-editorial-filter {
-          position: relative;
-          flex: 0 0 auto;
-          min-height: 36px;
-          padding: 0 0 3px;
-          border: 0;
-          background: transparent;
-          color: #756d64;
-          font-size: 11px;
-          cursor: pointer;
-        }
-        .stt-editorial-filter::after {
-          content: "";
-          position: absolute;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          height: 1px;
-          background: transparent;
-        }
-        .stt-editorial-filter[data-active="true"] {
-          color: #1a1a1a;
-        }
-        .stt-editorial-filter[data-active="true"]::after {
-          background: #b18a58;
-        }
-        .stt-editorial-library {
-          width: min(calc(100% - 72px), 1320px);
-          margin: 0 auto;
-          padding: 72px 0 108px;
-        }
-        .stt-editorial-library-head {
-          display: flex;
-          align-items: flex-end;
-          justify-content: space-between;
-          gap: 24px;
-          margin-bottom: 34px;
-        }
-        .stt-editorial-library-head h2 {
-          margin: 0;
-          font-family: "Noto Serif TC", "Noto Serif JP", Georgia, serif;
-          font-size: 31px;
-          font-weight: 400;
-        }
-        .stt-editorial-count {
-          color: #a9895e;
-          font-size: 9px;
-          letter-spacing: .16em;
-          text-transform: uppercase;
-        }
-        .stt-editorial-list {
-          border-top: 1px solid rgba(197,168,128,.24);
-        }
-        .stt-editorial-row {
-          display: grid;
-          grid-template-columns: 64px minmax(0,1fr) 40px;
-          gap: 24px;
-          align-items: start;
-          padding: 34px 4px;
-          border-bottom: 1px solid rgba(197,168,128,.18);
-          cursor: pointer;
-          transition: background .18s ease, padding .24s ease;
-        }
-        .stt-editorial-row:hover {
-          background: rgba(197,168,128,.04);
-          padding-left: 14px;
-          padding-right: 14px;
-        }
-        .stt-editorial-index {
-          color: #a9895e;
-          font-family: Georgia, "Times New Roman", serif;
-          font-size: 13px;
-        }
-        .stt-editorial-meta {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 14px;
-          color: #a9895e;
-          font-size: 9px;
-          letter-spacing: .12em;
-          text-transform: uppercase;
-        }
-        .stt-editorial-main h2 {
-          margin: 13px 0 0;
-          max-width: 930px;
-          font-family: "Noto Serif TC", "Noto Serif JP", "Songti TC", "PMingLiU", Georgia, serif;
-          font-size: clamp(22px, 2.45vw, 32px);
-          font-weight: 400;
-          line-height: 1.58;
-        }
-        .stt-editorial-main p {
-          margin: 14px 0 0;
-          max-width: 850px;
-          color: #6e675e;
-          font-size: 13px;
-          line-height: 1.95;
-          display: -webkit-box;
-          -webkit-line-clamp: 2;
-          -webkit-box-orient: vertical;
-          overflow: hidden;
-        }
-        .stt-editorial-arrow {
-          padding-top: 30px;
-          color: #a9895e;
-          font-size: 22px;
-          transition: transform .2s ease;
-        }
-        .stt-editorial-row:hover .stt-editorial-arrow { transform: translateX(6px); }
-        .stt-editorial-empty {
-          padding: 72px 0;
-          text-align: center;
-          color: #6e675e;
-        }
-        @media (max-width: 940px) {
-          .stt-editorial-hero-inner {
-            grid-template-columns: 1fr;
-            gap: 48px;
-          }
-          .stt-editorial-index-panel { min-height: 0; }
-          .stt-featured-inner { grid-template-columns: 1fr; gap: 26px; }
-          .stt-editorial-tools { top: 0; }
-          .stt-editorial-tools-inner {
-            align-items: stretch;
-            flex-direction: column;
-            padding: 14px 0;
-          }
-          .stt-editorial-search { flex-basis: auto; width: 100%; }
-          .stt-editorial-categories { width: 100%; }
-        }
-        @media (max-width: 620px) {
-          .stt-editorial-hero-inner,
-          .stt-featured-inner,
-          .stt-editorial-tools-inner,
-          .stt-editorial-library { width: calc(100% - 30px); }
-          .stt-editorial-hero-inner { padding: 58px 0 54px; }
-          .stt-editorial-title { font-size: clamp(43px, 13vw, 62px); }
-          .stt-editorial-index-panel { padding: 26px 22px 24px; }
-          .stt-editorial-row {
-            grid-template-columns: 42px minmax(0,1fr) 24px;
-            gap: 12px;
-            padding: 28px 0;
-          }
-          .stt-editorial-main h2 { font-size: 22px; }
-        }
-      `}</style>
-
-      <section className="stt-editorial-hero" data-stt-readable="true">
-        <div className="stt-editorial-hero-inner">
-          <div className="stt-editorial-hero-copy">
-            <p className="stt-editorial-eyebrow">04 Press &amp; Insights · Governance Intelligence</p>
-            <h1 className="stt-editorial-title">出版與觀點</h1>
-            <p className="stt-editorial-title-en">Press, Legal Commentary &amp; Institutional Insight</p>
-            <p className="stt-editorial-lead">
-              STT 將法律、企業治理、重大決策與數位治理的判讀，持續沉澱為可以搜尋、閱讀、引用與回溯的知識資產。這裡不是內容流量牆，而是具有編輯秩序的智庫資料庫。
+    <div className="stt-columns-v2">
+      <section className="stt-columns-hero">
+        <div className="stt-columns-wrap stt-columns-hero-grid">
+          <div>
+            <p className="stt-columns-eyebrow">DR. CHUANG · COLUMN JUDGMENT</p>
+            <h1 className="stt-columns-title">莊鈞翔博士｜專欄判讀</h1>
+            <p className="stt-columns-lead" data-stt-title-sentence>
+              這裡只收錄莊鈞翔博士對外發表的專欄。法律策略專欄與人文地景產分流整理，出版與研究另行歸入「出版研究」。
             </p>
+            <div className="stt-columns-source">
+              <span>{syncState === "live" ? "M傳媒同步索引已連線" : syncState === "loading" ? "正在讀取 M傳媒索引" : "目前使用 STT 本地索引"}</span>
+              <button type="button" onClick={() => window.open(MMEDIA_AUTHOR_URL, "_blank", "noopener,noreferrer")}>M傳媒｜莊鈞翔博士作者頁 ↗</button>
+            </div>
           </div>
-
-          <aside className="stt-editorial-index-panel" aria-label="Editorial index">
-            <div className="stt-editorial-index-kicker">
-              <span>STT Governance</span>
-              <span>Editorial Index</span>
-            </div>
-            <div className="stt-editorial-index-number">04</div>
-            <div className="stt-editorial-index-name">Press &amp; Insights</div>
-            <div className="stt-editorial-index-list">
-              {categories.slice(0, 5).map((item) => (
-                <div key={item} className="stt-editorial-index-item">
-                  <span>{item}</span>
-                  <span>{String(categoryCounts.get(item) || 0).padStart(2, "0")}</span>
-                </div>
-              ))}
-            </div>
-          </aside>
+          <div className="stt-columns-visual" aria-hidden="true" />
         </div>
       </section>
 
-      {showFeatured && featured && (
-        <section className="stt-featured" data-stt-readable="true">
-          <div className="stt-featured-inner">
+      <section className="stt-series">
+        <div className="stt-columns-wrap stt-series-grid">
+          <article className="stt-series-card">
+            <small>LEGAL INSIGHTS · {String(counts.legal).padStart(2, "0")}</small>
+            <h2>法律策略專欄｜STT Legal Insights</h2>
+            <p>從法律制度、企業治理、資產傳承、契約、AI 治理與重大決策切入，辨識風險、責任與制度邊界。</p>
+          </article>
+          <article className="stt-series-card">
+            <small>HUMANISTIC LANDSCAPE · {String(counts.humanistic).padStart(2, "0")}</small>
+            <h2>人文地景產｜Humanistic Landscape</h2>
+            <p>從人物、地方、產業、文化、美學與生命經驗切入，保存事件背後的人、價值、記憶與時代質地。</p>
+          </article>
+        </div>
+      </section>
+
+      <section className="stt-columns-tools" aria-label="專欄篩選">
+        <div className="stt-columns-wrap stt-columns-tools-inner">
+          <label className="stt-columns-search">
+            <Search size={16} strokeWidth={1.25} style={{ color: "#8f6f47", marginRight: 10 }} />
+            <input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="搜尋專欄主題" />
+          </label>
+          <div className="stt-series-tabs">
+            <button className="stt-series-tab" data-active={series === "all"} onClick={() => setSeries("all")}>全部專欄</button>
+            <button className="stt-series-tab" data-active={series === "legal"} onClick={() => setSeries("legal")}>法律策略專欄</button>
+            <button className="stt-series-tab" data-active={series === "humanistic"} onClick={() => setSeries("humanistic")}>人文地景產</button>
+          </div>
+        </div>
+      </section>
+
+      <section className="stt-columns-list">
+        <div className="stt-columns-wrap">
+          <div className="stt-columns-list-head">
             <div>
-              <div className="stt-featured-label">Featured Briefing</div>
-              <div className="stt-featured-number">01</div>
+              <p className="stt-columns-eyebrow">EDITORIAL INDEX</p>
+              <h2>{series === "all" ? "最新專欄" : seriesLabel(series)}</h2>
             </div>
+            <div className="stt-columns-count">{filtered.length} ARTICLES</div>
+          </div>
+
+          {filtered.length > 0 ? filtered.map((article, index) => (
             <article
-              className="stt-featured-copy"
-              onClick={() => openArticle(featured)}
-              role={featured.url ? "link" : undefined}
-              tabIndex={featured.url ? 0 : -1}
+              key={`${article.id}-${article.url || index}`}
+              className="stt-column-row"
+              role={article.url ? "link" : undefined}
+              tabIndex={article.url ? 0 : -1}
+              onClick={() => openArticle(article)}
               onKeyDown={(event) => {
-                if (featured.url && (event.key === "Enter" || event.key === " ")) {
+                if (article.url && (event.key === "Enter" || event.key === " ")) {
                   event.preventDefault();
-                  openArticle(featured);
+                  openArticle(article);
                 }
               }}
             >
-              <div className="stt-featured-meta">
-                <span>{featured.category}</span>
-                <span>{featured.date}</span>
-              </div>
-              <h2>{featured.title}</h2>
-              {featured.excerpt && <p>{featured.excerpt}</p>}
-              {featured.url && (
-                <div className="stt-featured-action">
-                  <span>閱讀完整判讀</span>
-                  <ArrowRight size={15} strokeWidth={1.2} />
+              <div className="stt-column-index">{String(index + 1).padStart(2, "0")}</div>
+              <div>
+                <div className="stt-column-meta">
+                  <span>{seriesLabel(article.series)}</span>
+                  <span>{article.category}</span>
+                  <span>{article.date}</span>
+                  <span>{article.source}</span>
                 </div>
-              )}
+                <h3 data-stt-title-sentence>{article.title}</h3>
+                {article.excerpt && <p>{article.excerpt}</p>}
+              </div>
+              <div className="stt-column-arrow">→</div>
             </article>
-          </div>
-        </section>
-      )}
-
-      <section className="stt-editorial-tools" aria-label="Press and insights filters">
-        <div className="stt-editorial-tools-inner">
-          <label className="stt-editorial-search">
-            <Search className="w-4 h-4" strokeWidth={1.25} style={{ color: "#a9895e" }} />
-            <input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="搜尋治理、法律、決策議題" />
-          </label>
-          <div className="stt-editorial-categories">
-            <button type="button" className="stt-editorial-filter" data-active={category === null} onClick={() => setCategory(null)}>全部</button>
-            {categories.map((item) => (
-              <button key={item} type="button" className="stt-editorial-filter" data-active={category === item} onClick={() => setCategory(item)}>{item}</button>
-            ))}
-          </div>
+          )) : <div className="stt-columns-empty">目前沒有符合條件的專欄。</div>}
         </div>
-      </section>
-
-      <section className="stt-editorial-library" data-stt-readable="true">
-        <div className="stt-editorial-library-head">
-          <div>
-            <p className="stt-editorial-eyebrow" style={{ marginBottom: 10 }}>Editorial Library</p>
-            <h2>{category || "最新治理判讀"}</h2>
-          </div>
-          <div className="stt-editorial-count">{libraryEntries.length} entries</div>
-        </div>
-
-        {libraryEntries.length > 0 ? (
-          <div className="stt-editorial-list">
-            {libraryEntries.map((article, index) => <ArticleRow key={article.id} article={article} index={index} />)}
-          </div>
-        ) : (
-          <div className="stt-editorial-empty">
-            <BookOpen className="mx-auto mb-4 h-6 w-6" strokeWidth={1.2} style={{ color: "#a9895e" }} />
-            目前沒有符合條件的內容。
-          </div>
-        )}
       </section>
     </div>
   );
