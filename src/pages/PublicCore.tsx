@@ -15,6 +15,7 @@ type PageConfig = {
   title: string;
   subtitle: string;
   statement: string;
+  visual: string;
   sections: Section[];
   finalTitle: string;
   finalBody: string;
@@ -28,6 +29,7 @@ const pages: Record<PageKind, PageConfig> = {
     title: "先把問題判斷對，再談怎麼做。",
     subtitle: "STT 不從服務分類開始，而是把事件、真正問題、證據、反方、不可承擔結果、專業責任與執行條件放回同一個判讀程序。",
     statement: "看見 → 反推 → 舉證 → 理解 → 架構 → 執行 → 留下",
+    visual: "/visual-bank/stt/how-we-judge.webp",
     sections: [
       { number: "01", title: "看見｜先分開事件與問題", body: "事件本身，不等於問題。先辨識正在發生的事、當事人真正擔心的結果，以及目前仍然不知道的部分。" },
       { number: "02", title: "反推｜從最不希望發生的未來往回看", body: "不是等結果發生才補救，而是先確認不可接受的終局，再往回辨識今天已經存在的斷點、依賴與不可逆條件。" },
@@ -47,6 +49,7 @@ const pages: Record<PageKind, PageConfig> = {
     title: "出版與研究，是治理思想被檢驗、被傳承的地方。",
     subtitle: "專欄用來辨識問題；著作用來建立完整思想；研究則必須回到原始論文、方法與可驗證資料。三者不混為同一種內容。",
     statement: "思想被留下，才可能被理解；被檢驗，才可能成為長期制度資產。",
+    visual: "/visual-bank/stt/publications.webp",
     sections: [
       { number: "01", title: "著作正典", body: "集中呈現已正式出版或完成之著作，不以商城式促銷取代思想架構。每本書分開說明其問題意識、核心命題、章節結構與正式版本。", action: "進入著作", path: "/books" },
       { number: "02", title: "研究與論文", body: "研究頁只陳述原始論文真正支持的研究問題、方法、資料與發現；不得把後來的策略推論包裝成既有實證成果。", action: "進入研究", path: "/research" },
@@ -60,6 +63,7 @@ const pages: Record<PageKind, PageConfig> = {
     title: "有些治理資產，只能在人還能說、還能修正時留下。",
     subtitle: "企業史、Founder Legacy、家族記憶與人文採訪，不只是內容製作，而是把散落在個人記憶中的判斷、價值與重大轉折，轉成下一代仍能理解的知識資產。",
     statement: "事件人人看得見；事件對一個人的意義，往往只有當事人知道。",
+    visual: "/visual-bank/stt/founder-legacy.webp",
     sections: [
       { number: "01", title: "Founder Legacy", body: "保存創辦人如何形成判斷、如何面對危機、哪些底線不能被交換，以及企業文化真正從何而來。", action: "從 Founder Legacy 開始", path: "/problems/founder-legacy" },
       { number: "02", title: "Enterprise History", body: "企業史不只記錄年份與事件，而是建立可追溯時間軸、訪談、文件與影像來源，區分事實、記憶與後來詮釋。" },
@@ -75,6 +79,7 @@ const pages: Record<PageKind, PageConfig> = {
     title: "STT 是治理判讀與制度設計平台，不是把更多意見堆在一起的顧問目錄。",
     subtitle: "前台從人的真實問題開始；後台才進入證據、反方、策略資格、專業路由、人機權力邊界與最終治理判讀。",
     statement: "外界看的是入口；系統承接的是複雜度；最終責任仍然必須回到人。",
+    visual: "/visual-bank/stt/stt-platform.webp",
     sections: [
       { number: "01", title: "Problem Framing｜問題形成", body: "先確認真正需要被回答的問題，而不是讓部門、既有分類、工具或 AI 自動替決策者預設問題。", action: "從問題入口開始", path: "/problems" },
       { number: "02", title: "Evidence & Counter-Case｜證據與反方", body: "重要判斷必須能追溯資料來源、假設與未知，也必須保留可能推翻結論的證據與替代情境。" },
@@ -91,13 +96,49 @@ const pages: Record<PageKind, PageConfig> = {
 function CanonicalPage({ kind }: { kind: PageKind }) {
   const navigate = useNavigate();
   const page = pages[kind];
+
   return (
     <div className="stt-canon">
       <style>{`
-        .stt-canon{min-height:100vh;background:#fbfaf7;color:#2b261f}.stt-canon *{box-sizing:border-box}.stt-canon-wrap{max-width:1180px;margin:0 auto;padding:0 28px}.stt-canon-hero{padding:92px 0 78px;border-bottom:1px solid #ddcfba}.stt-canon-eyebrow{font-size:10px;letter-spacing:.27em;color:#8b642f}.stt-canon h1{max-width:980px;margin:20px 0 0;font:400 clamp(42px,5vw,70px)/1.32 'Noto Serif TC',Georgia,serif;letter-spacing:-.02em}.stt-canon-sub{max-width:820px;margin:28px 0 0;color:#746b60;font-size:16px;line-height:2}.stt-canon-statement{max-width:900px;margin-top:34px;padding-top:22px;border-top:1px solid #ddcfba;color:#805a2e;font:400 18px/1.9 'Noto Serif TC',Georgia,serif}.stt-canon-body{padding:34px 0 90px}.stt-canon-row{display:grid;grid-template-columns:90px minmax(0,1fr) auto;gap:34px;padding:36px 0;border-bottom:1px solid #ddd0bc}.stt-canon-number{font:400 22px Georgia,serif;color:#b1874c}.stt-canon-row h2{margin:0;font:400 25px/1.55 'Noto Serif TC',Georgia,serif}.stt-canon-row p{max-width:760px;margin:13px 0 0;color:#6f675e;line-height:1.95}.stt-canon-action{align-self:center;border:0;border-bottom:1px solid #aa7c42;background:transparent;color:#825b2d;padding:0 0 5px;white-space:nowrap;cursor:pointer}.stt-canon-final{margin-top:58px;padding:42px;border:1px solid #d8c8ad;background:linear-gradient(135deg,#fffdf9,#f4ede2)}.stt-canon-final h2{margin:0;font:400 31px/1.5 'Noto Serif TC',Georgia,serif}.stt-canon-final p{max-width:820px;margin:16px 0 0;color:#6f675e;line-height:1.9}.stt-canon-final button{margin-top:24px;border:1px solid #a9793e;background:#a9793e;color:white;padding:12px 18px;cursor:pointer}@media(max-width:800px){.stt-canon-row{grid-template-columns:54px 1fr}.stt-canon-action{grid-column:2;justify-self:start}.stt-canon-hero{padding:70px 0 58px}.stt-canon-final{padding:28px}}
+        .stt-canon{min-height:100vh;background:#fff;color:#252525}.stt-canon *{box-sizing:border-box}.stt-canon-wrap{max-width:1180px;margin:0 auto;padding:0 28px}.stt-canon-hero{padding:68px 0 58px;border-bottom:1px solid #eae3d5;background:#fff}.stt-canon-eyebrow{font-size:10px;letter-spacing:.20em;color:#8f6f47}.stt-canon h1{max-width:850px;margin:16px 0 0;font:500 clamp(38px,3.4vw,50px)/1.34 'Noto Serif TC','Source Han Serif TC',serif}.stt-canon-sub{max-width:800px;margin:20px 0 0;color:#6b665f;font-size:16px;line-height:1.95}.stt-canon-statement{max-width:900px;margin-top:28px;padding-top:18px;border-top:1px solid #eae3d5;color:#8f6f47;font:500 17px/1.9 'Noto Serif TC','Source Han Serif TC',serif}.stt-canon-body{padding:28px 0 90px}.stt-canon-row{display:grid;grid-template-columns:82px minmax(0,1fr) auto;gap:30px;padding:34px 0;border-bottom:1px solid #eae3d5}.stt-canon-number{font:500 22px Georgia,serif;color:#c4a67a}.stt-canon-row h2{margin:0;font:500 25px/1.55 'Noto Serif TC','Source Han Serif TC',serif}.stt-canon-row p{max-width:760px;margin:13px 0 0;color:#6b665f;line-height:1.95}.stt-canon-action{align-self:center;border:0;border-bottom:1px solid #c4a67a;background:transparent;color:#8f6f47;padding:0 0 5px;white-space:nowrap;cursor:pointer}.stt-canon-final{margin-top:54px;padding:38px;border:1px solid #eae3d5;background:#fbf9f6}.stt-canon-final h2{margin:0;font:500 29px/1.5 'Noto Serif TC','Source Han Serif TC',serif}.stt-canon-final p{max-width:820px;margin:15px 0 0;color:#6b665f;line-height:1.9}.stt-canon-final button{margin-top:22px;border:1px solid #c4a67a;background:#fff;color:#8f6f47;padding:11px 17px;cursor:pointer}@media(max-width:800px){.stt-canon-row{grid-template-columns:52px 1fr}.stt-canon-action{grid-column:2;justify-self:start}.stt-canon-final{padding:26px}}
       `}</style>
-      <section className="stt-canon-hero"><div className="stt-canon-wrap"><div className="stt-canon-eyebrow">{page.eyebrow}</div><h1>{page.title}</h1><p className="stt-canon-sub">{page.subtitle}</p><div className="stt-canon-statement">{page.statement}</div></div></section>
-      <section className="stt-canon-body"><div className="stt-canon-wrap">{page.sections.map((section)=><article className="stt-canon-row" key={section.number}><div className="stt-canon-number">{section.number}</div><div><h2>{section.title}</h2><p>{section.body}</p></div>{section.action&&section.path&&<button className="stt-canon-action" onClick={()=>navigate(section.path!)}>{section.action} →</button>}</article>)}<div className="stt-canon-final"><h2>{page.finalTitle}</h2><p>{page.finalBody}</p>{page.finalAction&&page.finalPath&&<button onClick={()=>navigate(page.finalPath!)}>{page.finalAction} →</button>}</div></div></section>
+
+      <section className="stt-canon-hero">
+        <div className="stt-canon-wrap stt-canon-hero-grid">
+          <div className="stt-canon-copy">
+            <div className="stt-canon-eyebrow">{page.eyebrow}</div>
+            <h1 data-stt-title-sentence>{page.title}</h1>
+            <p className="stt-canon-sub" data-stt-title-sentence>{page.subtitle}</p>
+            <div className={`stt-canon-statement ${kind === "method" ? "stt-canon-method-sequence" : ""}`}>{page.statement}</div>
+          </div>
+          <div className="stt-canon-visual" aria-hidden="true" style={{ backgroundImage: `url(${page.visual})` }} />
+        </div>
+      </section>
+
+      <section className="stt-canon-body">
+        <div className="stt-canon-wrap">
+          {page.sections.map((section) => (
+            <article className="stt-canon-row" key={section.number}>
+              <div className="stt-canon-number">{section.number}</div>
+              <div>
+                <h2 data-stt-title-sentence>{section.title}</h2>
+                <p>{section.body}</p>
+              </div>
+              {section.action && section.path && (
+                <button className="stt-canon-action" onClick={() => navigate(section.path!)}>{section.action} →</button>
+              )}
+            </article>
+          ))}
+
+          <div className="stt-canon-final">
+            <h2 data-stt-title-sentence>{page.finalTitle}</h2>
+            <p>{page.finalBody}</p>
+            {page.finalAction && page.finalPath && (
+              <button onClick={() => navigate(page.finalPath!)}>{page.finalAction} →</button>
+            )}
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
