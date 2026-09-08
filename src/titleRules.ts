@@ -2,6 +2,11 @@ const TITLE_SELECTORS = [
   "h1",
   "h2",
   ".stt-canon-sub",
+  ".domain-hero p",
+  ".lib-hero p",
+  ".gr-lead",
+  ".pd4-hero p",
+  ".legal-root h1 + p",
   "[data-stt-title-sentence]",
 ].join(",");
 
@@ -36,6 +41,7 @@ function applySentenceBreak(el: HTMLElement) {
 }
 
 function applyTitleRules() {
+  document.documentElement.dataset.sttRoute = window.location.pathname || "/";
   document.querySelectorAll<HTMLElement>(TITLE_SELECTORS).forEach(applySentenceBreak);
 }
 
@@ -51,6 +57,7 @@ function scheduleTitleRules() {
 
 if (typeof window !== "undefined") {
   document.addEventListener("DOMContentLoaded", scheduleTitleRules, { once: true });
+  window.addEventListener("popstate", scheduleTitleRules);
   new MutationObserver(scheduleTitleRules).observe(document.documentElement, {
     subtree: true,
     childList: true,
