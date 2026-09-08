@@ -7,6 +7,7 @@ import "./index.css";
 import "./styles/no-dark-theme.css";
 import "./styles/approved-stt.css";
 import "./styles/stt-refinement-v4.css";
+import "./styles/stt-route-visuals-v1.css";
 import "./titleRules";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
