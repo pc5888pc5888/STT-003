@@ -16,9 +16,20 @@ type ColumnArticle = {
   source: "M傳媒";
 };
 
+type SyncStats = {
+  pagesFetched: number;
+  pageNumbers: number[];
+  paginationDetected: boolean;
+  totalClassified: number;
+  legal: number;
+  humanistic: number;
+  pending: number;
+};
+
 type SyncPayload = {
   ok: boolean;
   syncedAt?: string;
+  stats?: SyncStats;
   articles?: Array<Partial<ColumnArticle> & { id: string; title: string; url: string; series: Series }>;
 };
 
@@ -30,7 +41,7 @@ const HUMANISTIC_FALLBACK: ColumnArticle[] = [
     title: "在人還健康的時候，先替未來留下一次選擇｜人文地景產專欄",
     excerpt: "從健康、選擇與生命安排切入，留下人在仍能決定時的判斷與生活尺度。",
     date: "2026/08/27 21:20",
-    category: "人文地景產",
+    category: "社會",
     author: "莊鈞翔博士",
     url: "https://94m.com.tw/articles/fea32f",
     series: "humanistic",
@@ -41,7 +52,7 @@ const HUMANISTIC_FALLBACK: ColumnArticle[] = [
     title: "〖茗香與墨痕交織的儒者交響〗｜人文地景產專欄",
     excerpt: "以人物專訪、教育志業與美學視界，保存一段可被理解與傳承的人文記憶。",
     date: "2026/08/25 04:20",
-    category: "人文地景產",
+    category: "社會",
     author: "莊鈞翔博士",
     url: "https://94m.com.tw/articles/36f160",
     series: "humanistic",
@@ -53,7 +64,6 @@ const EXCLUDED_TOPICS = ["減碳", "碳排", "碳權"];
 
 function legacySeries(article: Article): Series {
   const text = `${article.title} ${article.excerpt}`;
-  // Legacy fallback only. New M Media items receive an explicit series from /api/mmedia.
   return /人文地景產/.test(text) ? "humanistic" : "legal";
 }
 
@@ -108,6 +118,7 @@ function seriesLabel(series: Series) {
 export default function Columns() {
   const [remote, setRemote] = useState<ColumnArticle[]>([]);
   const [syncState, setSyncState] = useState<"loading" | "live" | "fallback">("loading");
+  const [syncStats, setSyncStats] = useState<SyncStats | null>(null);
   const [series, setSeries] = useState<Series | "all">("all");
   const [query, setQuery] = useState("");
 
@@ -122,13 +133,14 @@ export default function Columns() {
           title: item.title,
           excerpt: item.excerpt || "",
           date: item.date || "",
-          category: item.category || seriesLabel(item.series),
+          category: item.category || (item.series === "humanistic" ? "社會" : "法律"),
           author: item.author || "莊鈞翔博士",
           url: item.url,
           series: item.series,
           source: "M傳媒",
         }));
-        setRemote(synced);
+        setRemote(sortArticles(dedupe(synced)));
+        setSyncStats(payload.stats || null);
         setSyncState(payload.ok && synced.length > 0 ? "live" : "fallback");
       })
       .catch(() => {
@@ -137,10 +149,14 @@ export default function Columns() {
     return () => { active = false; };
   }, []);
 
-  const catalog = useMemo(() => {
+  const fallbackCatalog = useMemo(() => {
     const legacy = articles.map(legacyArticle).filter((item) => !isLegacyExcluded(item));
-    return sortArticles(dedupe([...remote, ...HUMANISTIC_FALLBACK, ...legacy]));
-  }, [remote]);
+    return sortArticles(dedupe([...HUMANISTIC_FALLBACK, ...legacy]));
+  }, []);
+
+  // Live mode is authoritative: only items discovered from Dr. Chuang's M Media author zone
+  // are shown. Local data is used only when the upstream index cannot be read.
+  const catalog = remote.length > 0 ? remote : fallbackCatalog;
 
   const counts = useMemo(() => ({
     legal: catalog.filter((item) => item.series === "legal").length,
@@ -156,6 +172,12 @@ export default function Columns() {
     });
   }, [catalog, query, series]);
 
+  const syncLabel = syncState === "live"
+    ? `M傳媒｜莊鈞翔博士專區已連線${syncStats ? ` · 法律 ${syncStats.legal} · 社會／人文 ${syncStats.humanistic}${syncStats.pending ? ` · 待確認 ${syncStats.pending}` : ""}` : ""}`
+    : syncState === "loading"
+      ? "正在讀取 M傳媒｜莊鈞翔博士專區"
+      : "M傳媒暫時無法讀取，目前使用 STT 本地備援索引";
+
   return (
     <div className="stt-columns-v2">
       <section className="stt-columns-hero">
@@ -164,11 +186,11 @@ export default function Columns() {
             <p className="stt-columns-eyebrow">DR. CHUANG · COLUMN JUDGMENT</p>
             <h1 className="stt-columns-title">莊鈞翔博士｜專欄判讀</h1>
             <p className="stt-columns-lead" data-stt-title-sentence>
-              這裡只收錄莊鈞翔博士對外發表的專欄。法律策略專欄與人文地景產分流整理，出版與研究另行歸入「出版研究」。
+              這裡只收錄莊鈞翔博士對外發表的專欄。M傳媒「法律」對應法律策略專欄；M傳媒「社會」對應人文地景產，出版與研究另行歸入「出版研究」。
             </p>
             <div className="stt-columns-source">
-              <span>{syncState === "live" ? "M傳媒同步索引已連線" : syncState === "loading" ? "正在讀取 M傳媒索引" : "目前使用 STT 本地索引"}</span>
-              <button type="button" onClick={() => window.open(MMEDIA_AUTHOR_URL, "_blank", "noopener,noreferrer")}>M傳媒｜莊鈞翔博士作者頁 ↗</button>
+              <span>{syncLabel}</span>
+              <button type="button" onClick={() => window.open(MMEDIA_AUTHOR_URL, "_blank", "noopener,noreferrer")}>M傳媒｜莊鈞翔博士專區 ↗</button>
             </div>
           </div>
           <div className="stt-columns-visual" aria-hidden="true" />
@@ -180,12 +202,12 @@ export default function Columns() {
           <article className="stt-series-card">
             <small>LEGAL INSIGHTS · {String(counts.legal).padStart(2, "0")}</small>
             <h2>法律策略專欄｜STT Legal Insights</h2>
-            <p>從法律制度、企業治理、資產傳承、契約、AI 治理與重大決策切入，辨識風險、責任與制度邊界。</p>
+            <p>唯一上游為莊鈞翔博士 M傳媒專區；文章類別「法律」自動進入此系列。</p>
           </article>
           <article className="stt-series-card">
             <small>HUMANISTIC LANDSCAPE · {String(counts.humanistic).padStart(2, "0")}</small>
             <h2>人文地景產｜Humanistic Landscape</h2>
-            <p>從人物、地方、產業、文化、美學與生命經驗切入，保存事件背後的人、價值、記憶與時代質地。</p>
+            <p>唯一上游同為莊鈞翔博士 M傳媒專區；文章類別「社會」自動進入此系列。</p>
           </article>
         </div>
       </section>
@@ -232,7 +254,7 @@ export default function Columns() {
               <div>
                 <div className="stt-column-meta">
                   <span>{seriesLabel(article.series)}</span>
-                  <span>{article.category}</span>
+                  <span>M傳媒／{article.category}</span>
                   <span>{article.date}</span>
                   <span>{article.source}</span>
                 </div>
