@@ -1,3 +1,4 @@
+import FullBleedHero, { JudgmentFoundations, STTRoles } from "../components/FullBleedHero";
 import { useNavigate } from "react-router-dom";
 
 type PageKind = "method" | "publications" | "projects" | "stt";
@@ -103,23 +104,27 @@ function CanonicalPage({ kind }: { kind: PageKind }) {
         .stt-canon{min-height:100vh;background:#fff;color:#252525}.stt-canon *{box-sizing:border-box}.stt-canon-wrap{max-width:1180px;margin:0 auto;padding:0 28px}.stt-canon-hero{padding:68px 0 58px;border-bottom:1px solid #eae3d5;background:#fff}.stt-canon-eyebrow{font-size:10px;letter-spacing:.20em;color:#8f6f47}.stt-canon h1{max-width:850px;margin:16px 0 0;font:500 clamp(38px,3.4vw,50px)/1.34 'Noto Serif TC','Source Han Serif TC',serif}.stt-canon-sub{max-width:800px;margin:20px 0 0;color:#6b665f;font-size:16px;line-height:1.95}.stt-canon-statement{max-width:900px;margin-top:28px;padding-top:18px;border-top:1px solid #eae3d5;color:#8f6f47;font:500 17px/1.9 'Noto Serif TC','Source Han Serif TC',serif}.stt-canon-body{padding:28px 0 90px}.stt-canon-row{display:grid;grid-template-columns:82px minmax(0,1fr) auto;gap:30px;padding:34px 0;border-bottom:1px solid #eae3d5}.stt-canon-number{font:500 22px Georgia,serif;color:#c4a67a}.stt-canon-row h2{margin:0;font:500 25px/1.55 'Noto Serif TC','Source Han Serif TC',serif}.stt-canon-row p{max-width:760px;margin:13px 0 0;color:#6b665f;line-height:1.95}.stt-canon-action{align-self:center;border:0;border-bottom:1px solid #c4a67a;background:transparent;color:#8f6f47;padding:0 0 5px;white-space:nowrap;cursor:pointer}.stt-canon-final{margin-top:54px;padding:38px;border:1px solid #eae3d5;background:#fbf9f6}.stt-canon-final h2{margin:0;font:500 29px/1.5 'Noto Serif TC','Source Han Serif TC',serif}.stt-canon-final p{max-width:820px;margin:15px 0 0;color:#6b665f;line-height:1.9}.stt-canon-final button{margin-top:22px;border:1px solid #c4a67a;background:#fff;color:#8f6f47;padding:11px 17px;cursor:pointer}@media(max-width:800px){.stt-canon-row{grid-template-columns:52px 1fr}.stt-canon-action{grid-column:2;justify-self:start}.stt-canon-final{padding:26px}}
       `}</style>
 
+      {kind === "projects" ? (
       <section className="stt-canon-hero">
         <div className="stt-canon-wrap stt-canon-hero-grid">
           <div className="stt-canon-copy">
             <div className="stt-canon-eyebrow">{page.eyebrow}</div>
             <h1 data-stt-title-sentence>{page.title}</h1>
             <p className="stt-canon-sub" data-stt-title-sentence>{page.subtitle}</p>
-            {kind !== "method" && <div className="stt-canon-statement">{page.statement}</div>}
+            <div className="stt-canon-statement">{page.statement}</div>
           </div>
           <div className="stt-canon-visual" aria-hidden="true" style={{ backgroundImage: `url(${page.visual})` }} />
-          {kind === "method" && <div className="stt-canon-method-sequence stt-canon-method-rail" aria-label={page.statement}>{["看見", "反推", "舉證", "理解", "架構", "執行", "留下"].map((step, index) => <span className="stt-method-node" key={step}>{index > 0 && <span className="stt-method-arrow" aria-hidden="true">→</span>}{step}</span>)}</div>}
         </div>
       </section>
+      ) : <FullBleedHero theme={kind} />}
+      {kind === "method" && <JudgmentFoundations />}
+      {kind === "stt" && <STTRoles />}
 
       <section className="stt-canon-body">
         <div className="stt-canon-wrap">
+          {kind !== "method" && kind !== "projects" && <div className="stt-about-intro"><p>{page.title}</p><p>{page.statement}</p></div>}
           {page.sections.map((section) => (
-            <article className="stt-canon-row" key={section.number}>
+            <article className="stt-canon-row" key={section.number} id={kind === "method" ? `judgment-step-${Number(section.number)}` : undefined}>
               <div className="stt-canon-number">{section.number}</div>
               <div>
                 <h2 data-stt-title-sentence>{section.title}</h2>
