@@ -22,7 +22,7 @@ jobs:
           npm run build
       - name: Start local production build
         run: |
-          nohup npm run preview -- --host 127.0.0.1 --port 4173 >/tmp/stt-preview.log 2>&1 &
+          nohup npx vite preview --host 127.0.0.1 --port 4173 >/tmp/stt-preview.log 2>&1 &
           for i in {1..30}; do curl -fsS http://127.0.0.1:4173/ >/dev/null && exit 0; sleep 1; done
           cat /tmp/stt-preview.log
           exit 1
@@ -47,7 +47,7 @@ jobs:
               '/publications':['publications',6250,4419,'publications.png'],
               '/stt':['stt',4096,5120,'stt-portrait.png']
             };
-            const seen=new Map(); const report={routes:[],home:null,actions:[],errors};
+            const seen=new Map(); const report={routes:[],home:null,errors};
             const hash=b=>crypto.createHash('sha256').update(b).digest('hex');
             async function go(path){await page.goto('http://127.0.0.1:4173'+path,{waitUntil:'networkidle'});await page.waitForTimeout(150);}
             for(const [path,[theme,w,h,file]] of Object.entries(expected)){
