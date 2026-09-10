@@ -58,6 +58,7 @@ jobs:
           agent-browser screenshot stage2-evidence/agent-browser-preview.png
           agent-browser close
           node scripts/test_stage2_browser.mjs
+          node scripts/test_stage2_surface.mjs
       - name: Commit only verified layout corrections
         run: |
           git config user.name "STT Verified Layout"

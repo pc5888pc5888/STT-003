@@ -9,6 +9,7 @@ import "./styles/approved-stt.css";
 import "./styles/stt-refinement-v4.css";
 import "./styles/stt-route-visuals-v1.css";
 import "./styles/stt-stage2.css";
+import "./styles/stt-stage2-polish.css";
 import "./titleRules";
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode><AppProviders><App /></AppProviders></React.StrictMode>
