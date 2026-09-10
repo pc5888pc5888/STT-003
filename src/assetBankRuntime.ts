@@ -1,18 +1,18 @@
 const problemAssets:Record<string,string>={
-  '/problems/major-decision':'/visual-bank/stt/major-decision.webp',
-  '/problems/owner-dependence':'/visual-bank/stt/owner-dependence.webp',
-  '/problems/succession':'/visual-bank/stt/succession.webp',
-  '/problems/family-ownership':'/visual-bank/stt/family-ownership.webp',
-  '/problems/strategic-legal':'/visual-bank/stt/strategic-legal.webp',
-  '/problems/ai-governance':'/visual-bank/stt/ai-governance.webp',
-  '/problems/system-failure':'/visual-bank/stt/system-failure.webp',
-  '/problems/founder-legacy':'/visual-bank/stt/founder-legacy.webp'
+  '/problems/major-decision':'/visual-bank/stt/originals-20260910/major-decision.webp',
+  '/problems/owner-dependence':'/visual-bank/stt/originals-20260910/owner-dependence.webp',
+  '/problems/succession':'/visual-bank/stt/originals-20260910/succession.webp',
+  '/problems/family-ownership':'/visual-bank/stt/originals-20260910/family-ownership.webp',
+  '/problems/strategic-legal':'/visual-bank/stt/originals-20260910/strategic-legal.webp',
+  '/problems/ai-governance':'/visual-bank/stt/originals-20260910/ai-governance.webp',
+  '/problems/system-failure':'/visual-bank/stt/originals-20260910/system-failure.webp',
+  '/problems/founder-legacy':'/visual-bank/stt/originals-20260910/founder-legacy.webp'
 };
 
 const artifactAssets:Record<string,string>={
-  '/how-stt-works':'/visual-bank/stt/how-we-judge.webp',
-  '/publications':'/visual-bank/stt/publications.webp',
-  '/stt':'/visual-bank/stt/stt-platform.webp'
+  '/how-stt-works':'/visual-bank/stt/originals-20260910/how-we-judge.webp',
+  '/publications':'/visual-bank/stt/originals-20260910/publications.webp',
+  '/stt':'/visual-bank/stt/originals-20260910/stt-platform.webp'
 };
 
 function setImage(el:HTMLImageElement|null,src:string){
@@ -49,9 +49,9 @@ function applyAssetBank(){
   if(p)setImage(document.querySelector<HTMLImageElement>('.pd-visual-img'),p);
   const a=artifactAssets[path];
   if(a)setArtifact(document.querySelector<HTMLElement>('.pc-artifact'),a);
-  if(path==='/insights'||path==='/insights/index')setArtifact(document.querySelector<HTMLElement>('.stt-editorial-index-panel'),'/visual-bank/stt/insights.webp');
-  if(path.startsWith('/governance/corporate'))setArtifact(document.querySelector<HTMLElement>('[class*="portal"], [class*="visual"], [class*="hero"]'),'/visual-bank/stt/corporate-governance.webp');
-  if(path.startsWith('/internal-compliance'))setArtifact(document.querySelector<HTMLElement>('[class*="portal"], [class*="visual"], [class*="hero"]'),'/visual-bank/stt/internal-compliance.webp');
+  if(path==='/insights'||path==='/insights/index')setArtifact(document.querySelector<HTMLElement>('.stt-editorial-index-panel'),'/visual-bank/stt/originals-20260910/insights.webp');
+  if(path.startsWith('/governance/corporate'))setArtifact(document.querySelector<HTMLElement>('[class*="portal"], [class*="visual"], [class*="hero"]'),'/visual-bank/stt/originals-20260910/corporate-governance.webp');
+  if(path.startsWith('/internal-compliance'))setArtifact(document.querySelector<HTMLElement>('[class*="portal"], [class*="visual"], [class*="hero"]'),'/visual-bank/stt/originals-20260910/internal-compliance.webp');
   enforceWhitePublicSurfaces();
 }
 

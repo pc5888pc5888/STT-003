@@ -1,0 +1,278 @@
+{
+  "version": "stt-originals-20260910",
+  "archiveName": "網頁參考底圖(3).zip",
+  "sourceArchiveSha256": "50c6610880d0103ea9b9065062db371a52731ad4a13404628e55b34061624077",
+  "assets": {
+    "004.png": {
+      "file": "004.webp",
+      "sourceSha256": "10888a0e693ba48835347692642d11b6b5a4322bd094a546a9b331eec25d02d3",
+      "width": 1672,
+      "height": 941,
+      "pixelSha256": "1d084229b0814929c454b36af32225f2ef52e53bd95c4fa95cbd9f577a46f03b",
+      "encodedSha256": "18d5aec21a1bd31a30bc9be059ffc49733566e5251e27219d2644e6958f37d85",
+      "bytes": 1400196
+    },
+    "006.png": {
+      "file": "006.webp",
+      "sourceSha256": "3b7d574e304b741d893981c0dcf6129e4097dd88136ecef4f1d23e2a12238422",
+      "width": 1672,
+      "height": 941,
+      "pixelSha256": "1ad96772c6ca474a6128e9fefc45c2b2cd9b241acbe96239ee20ffd96f4606ea",
+      "encodedSha256": "147e3bf344c5567b00c1d96e43359414b635d8f32082235973f0c8cd1e6b6483",
+      "bytes": 1572568
+    },
+    "007.png": {
+      "file": "007.webp",
+      "sourceSha256": "e03aed0c66ae1ebcefab01d1cb05f771900616fa564678608f95baf4f0005067",
+      "width": 1672,
+      "height": 941,
+      "pixelSha256": "3865885a76272ccd74b23322c11e824f3b009b61156c0ec1a83a3421a52d8ad6",
+      "encodedSha256": "e10ee9abce5697ce5c0d18d8c0f1c08ceaf9c0ca8c7d2bc41f30641873592f65",
+      "bytes": 1514830
+    },
+    "011.png": {
+      "file": "011.webp",
+      "sourceSha256": "551bc1f623b1384de0d2f21bd5c2b57bbb9719963fa3bed1500c2c2fed0b0afe",
+      "width": 1672,
+      "height": 941,
+      "pixelSha256": "e17dfa9e9193acbbd1be44a1ab7e2c1895525e4878427ccba4c90b19e516c04d",
+      "encodedSha256": "104e8829d593c621553ee047737c7bef35733596e2d00e60c38f52480b57fa9d",
+      "bytes": 1575318
+    },
+    "012.png": {
+      "file": "012.webp",
+      "sourceSha256": "1695a46bb9447b0047d376867408a0e4c38d4fe528f11841fefa6925b4bd1357",
+      "width": 1672,
+      "height": 941,
+      "pixelSha256": "0c19e629af2e7073749fa3b45b9a9f7c6604b50618088f0a4af8ec1cc36883ff",
+      "encodedSha256": "6e0d09691ec4898d27b80e2292e1051e621225edd67aaf5a68d68c0b4a02b524",
+      "bytes": 1555894
+    },
+    "013.png": {
+      "file": "013.webp",
+      "sourceSha256": "81f3d412ba45fab755e19932c2c9431fe9efeb147ee6ea163cc612c00ef2356c",
+      "width": 1672,
+      "height": 941,
+      "pixelSha256": "ad12cac921d0f866a82a140c7bf81476046179a250b42d9056ea88794f96315d",
+      "encodedSha256": "98022d38ff78917a7b0b17d3524628fe69e317ecc907b177969d2d335712b9d9",
+      "bytes": 1564172
+    },
+    "29.png": {
+      "file": "29.webp",
+      "sourceSha256": "e7db9a4286878a35dbdbb09088c5b9ba41357dab057f75e07f58289074d687cf",
+      "width": 3200,
+      "height": 2263,
+      "pixelSha256": "ae66d0684ec13b0c257602b33f8675b8a431754c2b14c9686483ddf1face0919",
+      "encodedSha256": "845e6596047edc16eb1fb6eb4f483e61de8c572516d471392f36c8b90349ac81",
+      "bytes": 4688772,
+      "sourceWidth": 6250,
+      "sourceHeight": 4419,
+      "transform": "Lanczos downsample from supplied 6250x4419 PNG to 3200x2263, then pixel-lossless WebP. No crop, no AI generation."
+    },
+    "30.png": {
+      "file": "30.webp",
+      "sourceSha256": "56bb0ab93bad9be5c9cd760a87c26699eb98d6f6888ef7397ceba8797fdefd28",
+      "width": 3509,
+      "height": 1975,
+      "pixelSha256": "78eacb98de1d519cbb6ec0d4920664c2469f19d61fd08a416eae2d395130360b",
+      "encodedSha256": "db3f23155df3559e2de414b2c53e54e210adee66cee815d37c99037047e5149d",
+      "bytes": 3558918
+    },
+    "31.png": {
+      "file": "31.webp",
+      "sourceSha256": "457b12089660fc2be7a790f492bc513a3f936af76d41cb1303f0d56ef22cedbf",
+      "width": 1672,
+      "height": 941,
+      "pixelSha256": "69b28edf5d0d2eb3c17bfb040c81e7d2311123ef73ffaa068eb453f9e8578773",
+      "encodedSha256": "a1dbc5832c2046d6f639647fa3a37db62760d4e7004ed108bac5fb2956062eb7",
+      "bytes": 1818282
+    },
+    "32.png": {
+      "file": "32.webp",
+      "sourceSha256": "27549183d5de0a2feed22001847f9c5e1a5e362f65b37cd2ffa8ff67c72c6a3a",
+      "width": 1672,
+      "height": 941,
+      "pixelSha256": "7b315e6ee624c21ec3c6bccd12338f38288d40c450a81962997a2c3f6173f000",
+      "encodedSha256": "ff7603e2dbcc9e8ac4374fc3795122ef8489d54970b4d5bac5f739385dad666b",
+      "bytes": 1845020
+    },
+    "33.png": {
+      "file": "33.webp",
+      "sourceSha256": "a6369863fcab3963d7be1730d9277714c5c487bd66b03249bc64ed2aebab8630",
+      "width": 1672,
+      "height": 941,
+      "pixelSha256": "5a1ba3522096520e62cec35e31d4200fbe078162f375e8dfed0891c041a3ddcd",
+      "encodedSha256": "438d9f26c08c07c1c89d1d4ddc7104c9fdf8b60522d3fbeef743b27d16d9b20d",
+      "bytes": 1940294
+    },
+    "34.png": {
+      "file": "34.webp",
+      "sourceSha256": "bae6aee4524894890358a1cafec7298e7905c98a70813efd14338cb7f4783fae",
+      "width": 1672,
+      "height": 941,
+      "pixelSha256": "4c7f3eeaf3cab56aa5b7bf2ce6d42579f1a48006965729c4ba7246d6e44303fd",
+      "encodedSha256": "80cfbe78f27ee54967620b455f2cf9d0d7029c2ea843dcff74bf67d0abf0f563",
+      "bytes": 1756474
+    }
+  },
+  "mapping": {
+    "home-approved.webp": "30.png",
+    "major-decision.webp": "004.png",
+    "owner-dependence.webp": "32.png",
+    "corporate-governance.webp": "32.png",
+    "succession.webp": "006.png",
+    "family-ownership.webp": "006.png",
+    "strategic-legal.webp": "33.png",
+    "system-failure.webp": "007.png",
+    "internal-compliance.webp": "007.png",
+    "founder-legacy.webp": "013.png",
+    "how-we-judge.webp": "31.png",
+    "insights.webp": "011.png",
+    "publications.webp": "012.png",
+    "stt-platform.webp": "34.png",
+    "ai-governance.webp": "29.png"
+  },
+  "operation": "Eleven supplied PNGs retain original dimensions and exact RGB pixels in lossless WebP. The AI visual is a 3200px-wide derivative of the supplied 6250px original, encoded losslessly. No image generation, no upscaling.",
+  "urlPrefix": "/visual-bank/stt/originals-20260910/",
+  "packageSha256": "fb9ddc782737573167c307ee160c29036a00bd2d68d1e14366ba85ca8695da5b",
+  "installedAssets": {
+    "home-approved.webp": {
+      "file": "30.webp",
+      "sourceSha256": "56bb0ab93bad9be5c9cd760a87c26699eb98d6f6888ef7397ceba8797fdefd28",
+      "width": 3509,
+      "height": 1975,
+      "pixelSha256": "78eacb98de1d519cbb6ec0d4920664c2469f19d61fd08a416eae2d395130360b",
+      "encodedSha256": "db3f23155df3559e2de414b2c53e54e210adee66cee815d37c99037047e5149d",
+      "bytes": 3558918
+    },
+    "major-decision.webp": {
+      "file": "004.webp",
+      "sourceSha256": "10888a0e693ba48835347692642d11b6b5a4322bd094a546a9b331eec25d02d3",
+      "width": 1672,
+      "height": 941,
+      "pixelSha256": "1d084229b0814929c454b36af32225f2ef52e53bd95c4fa95cbd9f577a46f03b",
+      "encodedSha256": "18d5aec21a1bd31a30bc9be059ffc49733566e5251e27219d2644e6958f37d85",
+      "bytes": 1400196
+    },
+    "owner-dependence.webp": {
+      "file": "32.webp",
+      "sourceSha256": "27549183d5de0a2feed22001847f9c5e1a5e362f65b37cd2ffa8ff67c72c6a3a",
+      "width": 1672,
+      "height": 941,
+      "pixelSha256": "7b315e6ee624c21ec3c6bccd12338f38288d40c450a81962997a2c3f6173f000",
+      "encodedSha256": "ff7603e2dbcc9e8ac4374fc3795122ef8489d54970b4d5bac5f739385dad666b",
+      "bytes": 1845020
+    },
+    "corporate-governance.webp": {
+      "file": "32.webp",
+      "sourceSha256": "27549183d5de0a2feed22001847f9c5e1a5e362f65b37cd2ffa8ff67c72c6a3a",
+      "width": 1672,
+      "height": 941,
+      "pixelSha256": "7b315e6ee624c21ec3c6bccd12338f38288d40c450a81962997a2c3f6173f000",
+      "encodedSha256": "ff7603e2dbcc9e8ac4374fc3795122ef8489d54970b4d5bac5f739385dad666b",
+      "bytes": 1845020
+    },
+    "succession.webp": {
+      "file": "006.webp",
+      "sourceSha256": "3b7d574e304b741d893981c0dcf6129e4097dd88136ecef4f1d23e2a12238422",
+      "width": 1672,
+      "height": 941,
+      "pixelSha256": "1ad96772c6ca474a6128e9fefc45c2b2cd9b241acbe96239ee20ffd96f4606ea",
+      "encodedSha256": "147e3bf344c5567b00c1d96e43359414b635d8f32082235973f0c8cd1e6b6483",
+      "bytes": 1572568
+    },
+    "family-ownership.webp": {
+      "file": "006.webp",
+      "sourceSha256": "3b7d574e304b741d893981c0dcf6129e4097dd88136ecef4f1d23e2a12238422",
+      "width": 1672,
+      "height": 941,
+      "pixelSha256": "1ad96772c6ca474a6128e9fefc45c2b2cd9b241acbe96239ee20ffd96f4606ea",
+      "encodedSha256": "147e3bf344c5567b00c1d96e43359414b635d8f32082235973f0c8cd1e6b6483",
+      "bytes": 1572568
+    },
+    "strategic-legal.webp": {
+      "file": "33.webp",
+      "sourceSha256": "a6369863fcab3963d7be1730d9277714c5c487bd66b03249bc64ed2aebab8630",
+      "width": 1672,
+      "height": 941,
+      "pixelSha256": "5a1ba3522096520e62cec35e31d4200fbe078162f375e8dfed0891c041a3ddcd",
+      "encodedSha256": "438d9f26c08c07c1c89d1d4ddc7104c9fdf8b60522d3fbeef743b27d16d9b20d",
+      "bytes": 1940294
+    },
+    "system-failure.webp": {
+      "file": "007.webp",
+      "sourceSha256": "e03aed0c66ae1ebcefab01d1cb05f771900616fa564678608f95baf4f0005067",
+      "width": 1672,
+      "height": 941,
+      "pixelSha256": "3865885a76272ccd74b23322c11e824f3b009b61156c0ec1a83a3421a52d8ad6",
+      "encodedSha256": "e10ee9abce5697ce5c0d18d8c0f1c08ceaf9c0ca8c7d2bc41f30641873592f65",
+      "bytes": 1514830
+    },
+    "internal-compliance.webp": {
+      "file": "007.webp",
+      "sourceSha256": "e03aed0c66ae1ebcefab01d1cb05f771900616fa564678608f95baf4f0005067",
+      "width": 1672,
+      "height": 941,
+      "pixelSha256": "3865885a76272ccd74b23322c11e824f3b009b61156c0ec1a83a3421a52d8ad6",
+      "encodedSha256": "e10ee9abce5697ce5c0d18d8c0f1c08ceaf9c0ca8c7d2bc41f30641873592f65",
+      "bytes": 1514830
+    },
+    "founder-legacy.webp": {
+      "file": "013.webp",
+      "sourceSha256": "81f3d412ba45fab755e19932c2c9431fe9efeb147ee6ea163cc612c00ef2356c",
+      "width": 1672,
+      "height": 941,
+      "pixelSha256": "ad12cac921d0f866a82a140c7bf81476046179a250b42d9056ea88794f96315d",
+      "encodedSha256": "98022d38ff78917a7b0b17d3524628fe69e317ecc907b177969d2d335712b9d9",
+      "bytes": 1564172
+    },
+    "how-we-judge.webp": {
+      "file": "31.webp",
+      "sourceSha256": "457b12089660fc2be7a790f492bc513a3f936af76d41cb1303f0d56ef22cedbf",
+      "width": 1672,
+      "height": 941,
+      "pixelSha256": "69b28edf5d0d2eb3c17bfb040c81e7d2311123ef73ffaa068eb453f9e8578773",
+      "encodedSha256": "a1dbc5832c2046d6f639647fa3a37db62760d4e7004ed108bac5fb2956062eb7",
+      "bytes": 1818282
+    },
+    "insights.webp": {
+      "file": "011.webp",
+      "sourceSha256": "551bc1f623b1384de0d2f21bd5c2b57bbb9719963fa3bed1500c2c2fed0b0afe",
+      "width": 1672,
+      "height": 941,
+      "pixelSha256": "e17dfa9e9193acbbd1be44a1ab7e2c1895525e4878427ccba4c90b19e516c04d",
+      "encodedSha256": "104e8829d593c621553ee047737c7bef35733596e2d00e60c38f52480b57fa9d",
+      "bytes": 1575318
+    },
+    "publications.webp": {
+      "file": "012.webp",
+      "sourceSha256": "1695a46bb9447b0047d376867408a0e4c38d4fe528f11841fefa6925b4bd1357",
+      "width": 1672,
+      "height": 941,
+      "pixelSha256": "0c19e629af2e7073749fa3b45b9a9f7c6604b50618088f0a4af8ec1cc36883ff",
+      "encodedSha256": "6e0d09691ec4898d27b80e2292e1051e621225edd67aaf5a68d68c0b4a02b524",
+      "bytes": 1555894
+    },
+    "stt-platform.webp": {
+      "file": "34.webp",
+      "sourceSha256": "bae6aee4524894890358a1cafec7298e7905c98a70813efd14338cb7f4783fae",
+      "width": 1672,
+      "height": 941,
+      "pixelSha256": "4c7f3eeaf3cab56aa5b7bf2ce6d42579f1a48006965729c4ba7246d6e44303fd",
+      "encodedSha256": "80cfbe78f27ee54967620b455f2cf9d0d7029c2ea843dcff74bf67d0abf0f563",
+      "bytes": 1756474
+    },
+    "ai-governance.webp": {
+      "file": "29.webp",
+      "sourceSha256": "e7db9a4286878a35dbdbb09088c5b9ba41357dab057f75e07f58289074d687cf",
+      "width": 3200,
+      "height": 2263,
+      "pixelSha256": "ae66d0684ec13b0c257602b33f8675b8a431754c2b14c9686483ddf1face0919",
+      "encodedSha256": "845e6596047edc16eb1fb6eb4f483e61de8c572516d471392f36c8b90349ac81",
+      "bytes": 4688772,
+      "sourceWidth": 6250,
+      "sourceHeight": 4419,
+      "transform": "Lanczos downsample from supplied 6250x4419 PNG to 3200x2263, then pixel-lossless WebP. No crop, no AI generation."
+    }
+  }
+}

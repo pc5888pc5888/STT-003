@@ -29,7 +29,7 @@ const pages: Record<PageKind, PageConfig> = {
     title: "先把問題判斷對，再談怎麼做。",
     subtitle: "STT 不從服務分類開始，而是把事件、真正問題、證據、反方、不可承擔結果、專業責任與執行條件放回同一個判讀程序。",
     statement: "看見 → 反推 → 舉證 → 理解 → 架構 → 執行 → 留下",
-    visual: "/visual-bank/stt/how-we-judge.webp",
+    visual: "/visual-bank/stt/originals-20260910/how-we-judge.webp",
     sections: [
       { number: "01", title: "看見｜先分開事件與問題", body: "事件本身，不等於問題。先辨識正在發生的事、當事人真正擔心的結果，以及目前仍然不知道的部分。" },
       { number: "02", title: "反推｜從最不希望發生的未來往回看", body: "不是等結果發生才補救，而是先確認不可接受的終局，再往回辨識今天已經存在的斷點、依賴與不可逆條件。" },
@@ -49,7 +49,7 @@ const pages: Record<PageKind, PageConfig> = {
     title: "出版與研究，是治理思想被檢驗、被傳承的地方。",
     subtitle: "專欄用來辨識問題；著作用來建立完整思想；研究則必須回到原始論文、方法與可驗證資料。三者不混為同一種內容。",
     statement: "思想被留下，才可能被理解；被檢驗，才可能成為長期制度資產。",
-    visual: "/visual-bank/stt/publications.webp",
+    visual: "/visual-bank/stt/originals-20260910/publications.webp",
     sections: [
       { number: "01", title: "著作正典", body: "集中呈現已正式出版或完成之著作，不以商城式促銷取代思想架構。每本書分開說明其問題意識、核心命題、章節結構與正式版本。", action: "進入著作", path: "/books" },
       { number: "02", title: "研究與論文", body: "研究頁只陳述原始論文真正支持的研究問題、方法、資料與發現；不得把後來的策略推論包裝成既有實證成果。", action: "進入研究", path: "/research" },
@@ -63,7 +63,7 @@ const pages: Record<PageKind, PageConfig> = {
     title: "有些治理資產，只能在人還能說、還能修正時留下。",
     subtitle: "企業史、Founder Legacy、家族記憶與人文採訪，不只是內容製作，而是把散落在個人記憶中的判斷、價值與重大轉折，轉成下一代仍能理解的知識資產。",
     statement: "事件人人看得見；事件對一個人的意義，往往只有當事人知道。",
-    visual: "/visual-bank/stt/founder-legacy.webp",
+    visual: "/visual-bank/stt/originals-20260910/founder-legacy.webp",
     sections: [
       { number: "01", title: "Founder Legacy", body: "保存創辦人如何形成判斷、如何面對危機、哪些底線不能被交換，以及企業文化真正從何而來。", action: "從 Founder Legacy 開始", path: "/problems/founder-legacy" },
       { number: "02", title: "Enterprise History", body: "企業史不只記錄年份與事件，而是建立可追溯時間軸、訪談、文件與影像來源，區分事實、記憶與後來詮釋。" },
@@ -79,7 +79,7 @@ const pages: Record<PageKind, PageConfig> = {
     title: "STT 是治理判讀與制度設計平台，不是把更多意見堆在一起的顧問目錄。",
     subtitle: "前台從人的真實問題開始；後台才進入證據、反方、策略資格、專業路由、人機權力邊界與最終治理判讀。",
     statement: "外界看的是入口；系統承接的是複雜度；最終責任仍然必須回到人。",
-    visual: "/visual-bank/stt/stt-platform.webp",
+    visual: "/visual-bank/stt/originals-20260910/stt-platform.webp",
     sections: [
       { number: "01", title: "Problem Framing｜問題形成", body: "先確認真正需要被回答的問題，而不是讓部門、既有分類、工具或 AI 自動替決策者預設問題。", action: "從問題入口開始", path: "/problems" },
       { number: "02", title: "Evidence & Counter-Case｜證據與反方", body: "重要判斷必須能追溯資料來源、假設與未知，也必須保留可能推翻結論的證據與替代情境。" },

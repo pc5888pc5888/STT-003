@@ -25,6 +25,6 @@ export default function RouteArtwork() {
   const filename = ROUTE_ARTWORK[pathname];
   if (!filename) return null;
   return <div className="stt-route-artwork" aria-hidden="true">
-    <img src={`/visual-bank/stt/${filename}`} alt="" width={600} height={338} decoding="async" />
+    <img src={`/visual-bank/stt/originals-20260910/${filename}`} alt="" width={filename === "ai-governance.webp" ? 3200 : 1672} height={filename === "ai-governance.webp" ? 2263 : 941} decoding="async" />
   </div>;
 }
