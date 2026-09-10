@@ -4,9 +4,7 @@ on:
     branches: [main]
     paths:
       - .github/workflows/stt-install-true-hires-heroes.yml
-      - '28.png'
       - '29.png'
-      - '30.png'
       - '35.png'
       - '4.png'
       - '3.png'
@@ -18,47 +16,109 @@ concurrency:
 jobs:
   install:
     runs-on: ubuntu-latest
-    timeout-minutes: 8
+    timeout-minutes: 12
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Verify dimensions and copy exact supplied bytes
+      - name: Verify all six full-screen sources and install exact bytes
+        id: source
         run: |
           set -euo pipefail
           pip -q install Pillow
           python - <<'PY'
           from pathlib import Path
           from PIL import Image
-          import hashlib, json, shutil
-          mapping={
-            'home.png':('30.png',(3509,1975)),
-            'problems.png':('29.png',(6250,4419)),
-            'method.png':('28.png',(4400,2475)),
-            'columns.png':('35.png',(3509,1975)),
-            'publications.png':('4.png',(6250,4419)),
-            'stt.png':('3.png',(6250,4419)),
+          missing=[x for x in ['3.png','4.png'] if not Path(x).exists()]
+          if missing:
+            Path('/tmp/not-ready').write_text(','.join(missing))
+            print('WAITING_FOR='+','.join(missing))
+            raise SystemExit(0)
+          checks={
+            '29.png':(6250,4419),'35.png':(3509,1975),'4.png':(6250,4419),'3.png':(6250,4419),
+            'public/visual-bank/stt/originals-20260910/home-approved.webp':(3509,1975),
+            'public/visual-bank/stt/originals-20260910/ai-governance.webp':(3200,2263),
           }
-          out=Path('public/visual-bank/stt/hero-hires');out.mkdir(parents=True,exist_ok=True)
-          report={}
-          for target,(source,expected) in mapping.items():
-            p=Path(source)
-            if not p.exists(): raise SystemExit(f'Missing supplied original: {source}')
-            with Image.open(p) as im:
+          for name,size in checks.items():
+            with Image.open(name) as im:
               im.load()
-              if im.size!=expected: raise SystemExit(f'{source} dimensions {im.size}, expected {expected}')
-            shutil.copyfile(p,out/target)
-            report[target]={'source':source,'dimensions':expected,'bytes':p.stat().st_size,'sha256':hashlib.sha256(p.read_bytes()).hexdigest(),'exactByteCopy':True}
+              if im.size!=size: raise SystemExit(f'{name}: {im.size} != {size}')
+          PY
+          if test -f /tmp/not-ready; then
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+            echo "Waiting for exact supplied masters: $(cat /tmp/not-ready)" >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+          echo "ready=true" >> "$GITHUB_OUTPUT"
+          mkdir -p public/visual-bank/stt/hero-hires
+          cp public/visual-bank/stt/originals-20260910/home-approved.webp public/visual-bank/stt/hero-hires/home.webp
+          cp 29.png public/visual-bank/stt/hero-hires/problems.png
+          cp public/visual-bank/stt/originals-20260910/ai-governance.webp public/visual-bank/stt/hero-hires/method.webp
+          cp 35.png public/visual-bank/stt/hero-hires/columns.png
+          cp 4.png public/visual-bank/stt/hero-hires/publications.png
+          cp 3.png public/visual-bank/stt/hero-hires/stt.png
+          python - <<'PY'
+          from pathlib import Path
+          from PIL import Image
+          import hashlib,json
+          report={}
+          for p in sorted(Path('public/visual-bank/stt/hero-hires').iterdir()):
+            with Image.open(p) as im:
+              im.load();dims=im.size
+            report[p.name]={'dimensions':dims,'bytes':p.stat().st_size,'sha256':hashlib.sha256(p.read_bytes()).hexdigest(),'sourceMagnificationForbidden':True}
           Path('public/data/stt-hires-hero-manifest.json').write_text(json.dumps(report,ensure_ascii=False,indent=2))
           print(json.dumps(report,ensure_ascii=False,indent=2))
           PY
-      - name: Commit only verified high-resolution masters
+      - name: Wire only verified high-resolution sources into full-screen pages
+        if: steps.source.outputs.ready == 'true'
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('src/components/FullBleedHero.tsx');s=p.read_text()
+          s=s.replace('const ROOT = "/visual-bank/stt/originals-20260910/";','const ROOT = "/visual-bank/stt/hero-hires/";')
+          replacements={
+            'label: "你正在面對什麼", image: "major-decision.webp",':'label: "你正在面對什麼", image: "problems.png",',
+            'label: "如何判讀", image: "how-we-judge.webp",':'label: "如何判讀", image: "method.webp",',
+            'label: "專欄判讀", image: "insights.webp",':'label: "專欄判讀", image: "columns.png",',
+            'label: "出版研究", image: "publications.webp",':'label: "出版研究", image: "publications.png",',
+            'label: "關於 STT", image: "stt-platform.webp",':'label: "關於 STT", image: "stt.png",',
+          }
+          for a,b in replacements.items():
+            if a in s:s=s.replace(a,b)
+          marker='const TITLE_LINES: Record<PrimaryTheme, string[]> = '
+          if 'const HERO_DIMENSIONS' not in s:
+            idx=s.index(marker)
+            line_end=s.index('\n',idx)
+            s=s[:line_end+1]+'const HERO_DIMENSIONS: Record<PrimaryTheme, [number, number]> = { problems:[6250,4419], method:[3200,2263], columns:[3509,1975], publications:[6250,4419], stt:[6250,4419] };\n'+s[line_end+1:]
+          s=s.replace('  const item = PRIMARY_THEMES[theme];\n  return <section','  const item = PRIMARY_THEMES[theme];\n  const [imageWidth, imageHeight] = HERO_DIMENSIONS[theme];\n  return <section')
+          s=s.replace('width={1672} height={941}', 'width={imageWidth} height={imageHeight}')
+          p.write_text(s)
+          p=Path('src/pages/HomeCanonical.tsx');s=p.read_text()
+          s=s.replace("/visual-bank/stt/originals-20260910/home-approved.webp","/visual-bank/stt/hero-hires/home.webp")
+          p.write_text(s)
+          PY
+      - name: Build before committing
+        if: steps.source.outputs.ready == 'true'
+        run: |
+          set -euo pipefail
+          npm ci
+          npm run lint
+          npm run build
+          grep -q '/visual-bank/stt/hero-hires/' src/components/FullBleedHero.tsx
+          grep -q '/visual-bank/stt/hero-hires/home.webp' src/pages/HomeCanonical.tsx
+      - name: Commit verified high-resolution website sources
+        if: steps.source.outputs.ready == 'true'
         run: |
           set -euo pipefail
           git config user.name "STT Hi-Res Artwork"
           git config user.email "actions@users.noreply.github.com"
-          git add public/visual-bank/stt/hero-hires public/data/stt-hires-hero-manifest.json
+          git add public/visual-bank/stt/hero-hires public/data/stt-hires-hero-manifest.json src/components/FullBleedHero.tsx src/pages/HomeCanonical.tsx
           if git diff --cached --quiet; then exit 0; fi
-          git commit -m "fix: install exact 3509-6250px hero masters from supplied originals"
+          git commit -m "fix: serve true 3200-6250px masters on every full-screen STT hero"
           git push origin HEAD:main
