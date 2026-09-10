@@ -5,6 +5,7 @@ import { AppProviders } from "./app/AppProviders";
 import "./styles/tokens.css";
 import "./index.css";
 import "./styles/no-dark-theme.css";
+import "./styles/gcsda-typography-v1.css";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
