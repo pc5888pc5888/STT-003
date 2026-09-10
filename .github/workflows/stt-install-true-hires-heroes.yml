@@ -6,8 +6,8 @@ on:
       - .github/workflows/stt-install-true-hires-heroes.yml
       - '29.png'
       - '35.png'
-      - '4.png'
-      - '3.png'
+      - '4(2).png'
+      - '3(3).png'
 permissions:
   contents: write
 concurrency:
@@ -34,34 +34,29 @@ jobs:
           python - <<'PY'
           from pathlib import Path
           from PIL import Image
-          missing=[x for x in ['3.png','4.png'] if not Path(x).exists()]
-          if missing:
-            Path('/tmp/not-ready').write_text(','.join(missing))
-            print('WAITING_FOR='+','.join(missing))
-            raise SystemExit(0)
           checks={
-            '29.png':(6250,4419),'35.png':(3509,1975),'4.png':(6250,4419),'3.png':(6250,4419),
+            '29.png':(6250,4419),
+            '35.png':(3509,1975),
+            '4(2).png':(6250,4419),
+            '3(3).png':(6250,4419),
             'public/visual-bank/stt/originals-20260910/home-approved.webp':(3509,1975),
             'public/visual-bank/stt/originals-20260910/ai-governance.webp':(3200,2263),
           }
           for name,size in checks.items():
-            with Image.open(name) as im:
+            p=Path(name)
+            if not p.exists(): raise SystemExit(f'Missing supplied original: {name}')
+            with Image.open(p) as im:
               im.load()
               if im.size!=size: raise SystemExit(f'{name}: {im.size} != {size}')
           PY
-          if test -f /tmp/not-ready; then
-            echo "ready=false" >> "$GITHUB_OUTPUT"
-            echo "Waiting for exact supplied masters: $(cat /tmp/not-ready)" >> "$GITHUB_STEP_SUMMARY"
-            exit 0
-          fi
           echo "ready=true" >> "$GITHUB_OUTPUT"
           mkdir -p public/visual-bank/stt/hero-hires
           cp public/visual-bank/stt/originals-20260910/home-approved.webp public/visual-bank/stt/hero-hires/home.webp
           cp 29.png public/visual-bank/stt/hero-hires/problems.png
           cp public/visual-bank/stt/originals-20260910/ai-governance.webp public/visual-bank/stt/hero-hires/method.webp
           cp 35.png public/visual-bank/stt/hero-hires/columns.png
-          cp 4.png public/visual-bank/stt/hero-hires/publications.png
-          cp 3.png public/visual-bank/stt/hero-hires/stt.png
+          cp '4(2).png' public/visual-bank/stt/hero-hires/publications.png
+          cp '3(3).png' public/visual-bank/stt/hero-hires/stt.png
           python - <<'PY'
           from pathlib import Path
           from PIL import Image
@@ -93,14 +88,13 @@ jobs:
             if a in s:s=s.replace(a,b)
           marker='const TITLE_LINES: Record<PrimaryTheme, string[]> = '
           if 'const HERO_DIMENSIONS' not in s:
-            idx=s.index(marker)
-            line_end=s.index('\n',idx)
+            idx=s.index(marker);line_end=s.index('\n',idx)
             s=s[:line_end+1]+'const HERO_DIMENSIONS: Record<PrimaryTheme, [number, number]> = { problems:[6250,4419], method:[3200,2263], columns:[3509,1975], publications:[6250,4419], stt:[6250,4419] };\n'+s[line_end+1:]
           s=s.replace('  const item = PRIMARY_THEMES[theme];\n  return <section','  const item = PRIMARY_THEMES[theme];\n  const [imageWidth, imageHeight] = HERO_DIMENSIONS[theme];\n  return <section')
           s=s.replace('width={1672} height={941}', 'width={imageWidth} height={imageHeight}')
           p.write_text(s)
           p=Path('src/pages/HomeCanonical.tsx');s=p.read_text()
-          s=s.replace("/visual-bank/stt/originals-20260910/home-approved.webp","/visual-bank/stt/hero-hires/home.webp")
+          s=s.replace('/visual-bank/stt/originals-20260910/home-approved.webp','/visual-bank/stt/hero-hires/home.webp')
           p.write_text(s)
           PY
       - name: Build before committing
