@@ -6,6 +6,9 @@ on:
   workflow_dispatch:
 permissions:
   contents: write
+defaults:
+  run:
+    shell: bash
 concurrency:
   group: stt-stage2-validation
   cancel-in-progress: false
@@ -26,6 +29,7 @@ jobs:
         run: python scripts/apply_stage2_layout.py
       - name: Install and validate
         run: |
+          set -euo pipefail
           mkdir -p stage2-evidence
           pip -q install beautifulsoup4==4.13.4
           python -m unittest discover -s tests -p 'test_mmedia_sync.py' -v 2>&1 | tee stage2-evidence/sync-tests.txt
@@ -48,6 +52,7 @@ jobs:
           PID=$!
           trap 'kill "$PID" 2>/dev/null || true' EXIT
           for i in $(seq 1 30); do curl -sf http://127.0.0.1:4173/ > /dev/null && break || sleep 1; done
+          curl -fsS http://127.0.0.1:4173/ > /dev/null
           agent-browser open http://127.0.0.1:4173/insights
           agent-browser snapshot -i > stage2-evidence/agent-browser-snapshot.txt
           agent-browser screenshot stage2-evidence/agent-browser-preview.png
