@@ -8,52 +8,40 @@ permissions:
 jobs:
   audit:
     runs-on: ubuntu-latest
-    timeout-minutes: 8
+    timeout-minutes: 6
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
       - run: pip -q install Pillow
-      - name: Audit all existing image candidates
+      - name: Inspect existing GCSDA topic bank
         run: |
           python - <<'PY'
           from pathlib import Path
-          from PIL import Image,ImageOps,ImageDraw,ImageFont
+          from PIL import Image,ImageDraw,ImageFont
           import hashlib,json,math
-          exts={'.png','.jpg','.jpeg','.webp'}
+          root=Path('public/visual-bank/gcsda')
           rows=[]
-          for p in Path('.').rglob('*'):
-            if not p.is_file() or p.suffix.lower() not in exts or '.git' in p.parts or 'node_modules' in p.parts: continue
+          for p in sorted(root.glob('*')):
+            if not p.is_file(): continue
             try:
-              with Image.open(p) as im:
-                im.load(); w,h=im.size
+              with Image.open(p) as im: im.load(); size=im.size
             except Exception: continue
-            if max(w,h)<1600: continue
-            rows.append({'path':p.as_posix(),'width':w,'height':h,'bytes':p.stat().st_size,'sha256':hashlib.sha256(p.read_bytes()).hexdigest()})
-          rows=sorted(rows,key=lambda x:(-x['width']*x['height'],x['path']))
+            rows.append({'path':p.as_posix(),'width':size[0],'height':size[1],'bytes':p.stat().st_size,'sha256':hashlib.sha256(p.read_bytes()).hexdigest()})
           Path('gcsda-audit').mkdir(exist_ok=True)
-          Path('gcsda-audit/images.json').write_text(json.dumps(rows,ensure_ascii=False,indent=2))
+          Path('gcsda-audit/topic-bank.json').write_text(json.dumps(rows,ensure_ascii=False,indent=2))
           print(json.dumps(rows,ensure_ascii=False,indent=2))
-          # Build contact sheets only for inspection; no source files are changed.
-          thumb_w,thumb_h=320,230; cols=3; batch=18
-          font=ImageFont.load_default()
-          for bi in range(0,len(rows),batch):
-            part=rows[bi:bi+batch]; rr=math.ceil(len(part)/cols)
-            sheet=Image.new('RGB',(cols*thumb_w,rr*(thumb_h+42)),'white')
-            d=ImageDraw.Draw(sheet)
-            for i,item in enumerate(part):
-              p=Path(item['path']); x=(i%cols)*thumb_w; y=(i//cols)*(thumb_h+42)
-              with Image.open(p) as im:
-                im=im.convert('RGB'); im.thumbnail((thumb_w-8,thumb_h-8))
-                xx=x+(thumb_w-im.width)//2; yy=y+(thumb_h-im.height)//2
-                sheet.paste(im,(xx,yy))
-              label=f"{item['path'][:48]}\n{item['width']}x{item['height']}"
-              d.text((x+4,y+thumb_h+2),label,fill='black',font=font)
-            sheet.save(f'gcsda-audit/contact-{bi//batch+1}.jpg',quality=88)
+          tw,th=360,230;cols=2;rh=th+48;sheet=Image.new('RGB',(cols*tw,math.ceil(len(rows)/cols)*rh),'white');d=ImageDraw.Draw(sheet);font=ImageFont.load_default()
+          for i,item in enumerate(rows):
+            p=Path(item['path']);x=i%cols*tw;y=i//cols*rh
+            with Image.open(p) as im:
+              im=im.convert('RGB');im.thumbnail((tw-10,th-10));sheet.paste(im,(x+(tw-im.width)//2,y+(th-im.height)//2))
+            d.text((x+5,y+th+2),f"{p.name}  {item['width']}x{item['height']}  {item['bytes']} B",fill='black',font=font)
+          sheet.save('gcsda-audit/topic-bank.jpg',quality=90)
           PY
       - uses: actions/upload-artifact@v4
         with:
-          name: gcsda-image-audit
+          name: gcsda-topic-bank-audit
           path: gcsda-audit/
           retention-days: 3
