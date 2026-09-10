@@ -1,0 +1,21 @@
+/* Stage 3: explicit route imagery; no replacement of approved copy or identity. */
+html[data-stt-route] .stt-route-hero{background:#fff!important;background-image:none!important}
+.stt-route-hero .stt-route-hero-grid{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(280px,.9fr);gap:48px;align-items:center}
+.stt-route-hero-copy{min-width:0}
+.stt-route-hero .stt-route-hero-copy h1{max-width:none!important;font-size:clamp(36px,3.3vw,48px)!important;font-weight:500!important;line-height:1.52!important;letter-spacing:0!important;overflow-wrap:anywhere}
+.stt-route-hero .stt-route-hero-copy p{margin-top:22px;color:#67615a!important;font-size:17px!important;line-height:1.95!important;max-width:none!important}
+.stt-route-artwork{min-width:0;margin:0;border-top:1px solid #eae3d5;border-bottom:1px solid #eae3d5;background:#fbf9f6;overflow:hidden}
+.stt-route-artwork img{display:block;width:100%;height:auto;aspect-ratio:600/338;object-fit:cover}
+.stt-route-hero :is(.pd4-eyebrow,.domain-kicker,.lib-kicker){color:#8b642f;font:500 11px/1.7 Inter,"Helvetica Neue",Arial,sans-serif;letter-spacing:.13em;overflow-wrap:anywhere}
+.stt-route-hero :is(button,a):focus-visible{outline:2px solid #8b642f;outline-offset:5px}
+@media(max-width:900px){
+  .stt-route-hero .stt-route-hero-grid{grid-template-columns:minmax(0,1fr);gap:30px}
+  .stt-route-hero .stt-route-hero-copy h1{font-size:clamp(32px,4.4vw,40px)!important}
+  .stt-route-artwork{width:100%;max-width:600px;justify-self:end}
+}
+@media(max-width:620px){
+  .stt-route-hero{padding-top:42px!important;padding-bottom:36px!important}
+  .stt-route-hero .stt-route-hero-grid{padding-left:22px;padding-right:22px;gap:26px}
+  .stt-route-hero .stt-route-hero-copy h1{font-size:32px!important;line-height:1.55!important}
+  .stt-route-hero .stt-route-hero-copy p{font-size:16px!important}
+}

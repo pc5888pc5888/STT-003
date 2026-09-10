@@ -1,0 +1,83 @@
+name: STT Stage 3 Verified Route Completion
+on:
+  push:
+    branches: [rebuild/stt-approved-white-gold-v1]
+    paths: ['.github/workflows/stt-stage3-verify.yml', 'scripts/apply_stage3_layout.py', 'scripts/test_stage3_browser.mjs', 'src/components/RouteArtwork.tsx', 'src/styles/stt-stage3.css']
+permissions:
+  contents: write
+defaults:
+  run:
+    shell: bash
+concurrency:
+  group: stt-stage3-route-verification
+  cancel-in-progress: false
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Apply source-locked route corrections
+        run: |
+          set -euo pipefail
+          pip -q install Pillow beautifulsoup4==4.13.4
+          python scripts/apply_stage3_layout.py
+      - name: Verify the existing archive and build
+        run: |
+          set -euo pipefail
+          mkdir -p stage2-evidence stage3-evidence
+          python -m unittest discover -s tests -p 'test_mmedia_sync.py' -v 2>&1 | tee stage3-evidence/sync-tests.txt
+          npm ci
+          npm run lint 2>&1 | tee stage3-evidence/typescript.txt
+          npm run build 2>&1 | tee stage3-evidence/build.txt
+          npx tsx scripts/test_mmedia_api.ts 2>&1 | tee stage3-evidence/api-handler-tests.txt
+      - name: Prepare real browser verification
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y fonts-noto-cjk
+          npm install -g agent-browser
+          npm install --prefix /tmp/stt-browser --no-save playwright
+      - name: Check rendered routes and prior-stage regressions
+        run: |
+          set -euo pipefail
+          export CHROME_PATH="$(command -v google-chrome || command -v chromium)"
+          export AGENT_BROWSER_EXECUTABLE_PATH="$CHROME_PATH"
+          npx vite preview --host 127.0.0.1 --port 4173 > stage3-evidence/server.log 2>&1 &
+          PID=$!
+          trap 'kill "$PID" 2>/dev/null || true' EXIT
+          for i in $(seq 1 30); do curl -sf http://127.0.0.1:4173/ > /dev/null && break || sleep 1; done
+          curl -fsS http://127.0.0.1:4173/ > /dev/null
+          agent-browser open http://127.0.0.1:4173/domains/family-succession
+          agent-browser snapshot -i > stage3-evidence/agent-browser-snapshot.txt
+          agent-browser screenshot stage3-evidence/agent-browser-family.png
+          agent-browser close
+          node scripts/test_stage3_browser.mjs
+          node scripts/test_stage2_browser.mjs
+          node scripts/test_stage2_surface.mjs
+          cp stage2-evidence/browser-report.json stage3-evidence/stage2-regression-report.json
+          cp stage2-evidence/surface-report.json stage3-evidence/home-logo-footer-regression.json
+      - name: Persist only verified bounded changes
+        run: |
+          set -euo pipefail
+          git config user.name "STT Verified Routes"
+          git config user.email "actions@users.noreply.github.com"
+          git add src/pages/ProblemDetail.tsx src/pages/Domains.tsx src/pages/CanonicalLibrary.tsx src/main.tsx src/titleRules.ts public/visual-bank/stt/family-ownership.webp
+          if git diff --cached --quiet; then exit 0; fi
+          git diff --cached --stat > stage3-evidence/committed-change-summary.txt
+          git commit -m "fix: complete source-verified route artwork and consistent navigation"
+          git push origin HEAD:rebuild/stt-approved-white-gold-v1
+          git rev-parse HEAD > stage3-evidence/verified-commit.txt
+      - name: Preserve evidence without fonts or authentication tokens
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: stt-stage3-verified-routes
+          path: stage3-evidence/
+          retention-days: 14
