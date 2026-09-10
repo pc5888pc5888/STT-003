@@ -15,15 +15,17 @@ jobs:
         with:
           python-version: '3.12'
       - run: pip -q install Pillow
-      - name: Scan existing root PNGs
+      - name: Scan approved existing image candidates
         run: |
           python - <<'PY'
           from pathlib import Path
           from PIL import Image
           import hashlib
-          for p in sorted(Path('.').glob('*.png')):
+          targets=list(Path('.').glob('*.png'))+[Path('public/Eric-Chuang-04.png'),Path('public/portrait-read.png'),Path('public/portrait-open.png')]
+          for p in targets:
+              if not p.exists(): continue
               try:
                   with Image.open(p) as im: size=im.size
               except Exception: continue
-              print(f'{p.name}\t{size[0]}x{size[1]}\t{p.stat().st_size}\t{hashlib.sha256(p.read_bytes()).hexdigest()}')
+              print(f'{p.as_posix()}\t{size[0]}x{size[1]}\t{p.stat().st_size}\t{hashlib.sha256(p.read_bytes()).hexdigest()}')
           PY
