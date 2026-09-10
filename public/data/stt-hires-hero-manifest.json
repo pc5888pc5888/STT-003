@@ -1,0 +1,56 @@
+{
+  "columns.png": {
+    "dimensions": [
+      3509,
+      1975
+    ],
+    "bytes": 6497336,
+    "sha256": "19e212c92f1caca504caf0ee4872cdd1076ea286dc547cb03bda56d5158d1eed",
+    "sourceMagnificationForbidden": true
+  },
+  "home.webp": {
+    "dimensions": [
+      3509,
+      1975
+    ],
+    "bytes": 3558918,
+    "sha256": "db3f23155df3559e2de414b2c53e54e210adee66cee815d37c99037047e5149d",
+    "sourceMagnificationForbidden": true
+  },
+  "method.webp": {
+    "dimensions": [
+      3200,
+      2263
+    ],
+    "bytes": 4688772,
+    "sha256": "845e6596047edc16eb1fb6eb4f483e61de8c572516d471392f36c8b90349ac81",
+    "sourceMagnificationForbidden": true
+  },
+  "problems.png": {
+    "dimensions": [
+      6250,
+      4419
+    ],
+    "bytes": 12745940,
+    "sha256": "e7db9a4286878a35dbdbb09088c5b9ba41357dab057f75e07f58289074d687cf",
+    "sourceMagnificationForbidden": true
+  },
+  "publications.png": {
+    "dimensions": [
+      6250,
+      4419
+    ],
+    "bytes": 11692832,
+    "sha256": "c8eb3d355c217b99c02bea3b330060a641c1e5fa4208ea95b2d4eddb42545cdb",
+    "sourceMagnificationForbidden": true
+  },
+  "stt.png": {
+    "dimensions": [
+      6250,
+      4419
+    ],
+    "bytes": 11998129,
+    "sha256": "c246f883d1160b5671a78c60b2228ecf00c210986b3f50e85f418ed009686a0b",
+    "sourceMagnificationForbidden": true
+  }
+}

@@ -4,34 +4,34 @@ import "../styles/stt-fullbleed.css";
 
 export type PrimaryTheme = "problems" | "method" | "columns" | "publications" | "stt";
 type Action = { text: string; to: string };
-const ROOT = "/visual-bank/stt/originals-20260910/";
+const ROOT = "/visual-bank/stt/hero-hires/";
 export const PRIMARY_THEMES: Record<PrimaryTheme, { label: string; image: string; title: string; lead: string; actions: Action[] }> = {
   problems: {
-    label: "你正在面對什麼", image: "major-decision.webp",
+    label: "你正在面對什麼", image: "problems.png",
     title: "不是先選服務；先從你正在面對的真實問題開始。",
     lead: "不用先知道自己需要哪一種顧問。先從正在發生的事情開始，再把症狀、真正問題、證據與可執行結果分開。",
     actions: [{ text: "找到我正在面對的問題", to: "#problem-index" }, { text: "理解 STT 如何判讀", to: "/how-stt-works" }],
   },
   method: {
-    label: "如何判讀", image: "how-we-judge.webp",
+    label: "如何判讀", image: "method.webp",
     title: "先把問題判斷對，再談怎麼做。",
     lead: "STT 不從服務分類開始，而是把事件、真正問題、證據、反方、不可承擔結果、專業責任與執行條件放回同一個判讀程序。",
     actions: [{ text: "理解判讀的起點", to: "#judgment-foundations" }, { text: "從我的問題開始", to: "/start" }],
   },
   columns: {
-    label: "專欄判讀", image: "insights.webp",
+    label: "專欄判讀", image: "columns.png",
     title: "莊鈞翔博士｜專欄判讀",
     lead: "從法律新聞、人文地景產與新聞採訪出發，看見事件背後的制度、人的選擇與長期影響。",
     actions: [{ text: "選擇專欄系列", to: "#column-series" }, { text: "瀏覽全部專欄", to: "#column-list" }],
   },
   publications: {
-    label: "出版研究", image: "publications.webp",
+    label: "出版研究", image: "publications.png",
     title: "思想被留下，才可能被理解、被檢驗、被承接。",
     lead: "專欄用來辨識問題；著作用來建立完整思想；研究則必須回到原始論文、方法與可驗證資料。三者不混為同一種內容。",
     actions: [{ text: "閱讀著作", to: "/books" }, { text: "查看研究論文", to: "/research" }],
   },
   stt: {
-    label: "關於 STT", image: "stt-platform.webp",
+    label: "關於 STT", image: "stt.png",
     title: "策略為先，治理為本，管理為終。",
     lead: "STT Governance 是以治理判讀與制度設計為核心的高位階治理文明平台，從人的真實問題出發，統合證據、專業與決策，讓權力與責任有清楚的歸屬。",
     actions: [{ text: "認識莊鈞翔博士", to: "/institution/eric-chuang" }, { text: "合作洽詢", to: "/start" }],
@@ -39,12 +39,14 @@ export const PRIMARY_THEMES: Record<PrimaryTheme, { label: string; image: string
 };
 
 const TITLE_LINES: Record<PrimaryTheme, string[]> = {"problems": ["不是先選服務；", "先從你正在面對的", "真實問題開始。"], "method": ["先把問題判斷對，", "再談怎麼做。"], "columns": ["莊鈞翔博士｜專欄判讀"], "publications": ["思想被留下，", "才可能被理解、", "被檢驗、被承接。"], "stt": ["策略為先，", "治理為本，", "管理為終。"]};
+const HERO_DIMENSIONS: Record<PrimaryTheme, [number, number]> = { problems:[6250,4419], method:[3200,2263], columns:[3509,1975], publications:[6250,4419], stt:[6250,4419] };
 
 export default function FullBleedHero({ theme, children }: { theme: PrimaryTheme; children?: ReactNode }) {
   const item = PRIMARY_THEMES[theme];
+  const [imageWidth, imageHeight] = HERO_DIMENSIONS[theme];
   return <section key={theme} className="stt-full-hero" data-stt-primary-hero={theme} aria-labelledby={`hero-title-${theme}`}>
     <div className="stt-full-hero__media" aria-hidden="true">
-      <img src={ROOT + item.image} alt="" width={1672} height={941} decoding="async" fetchPriority="high" />
+      <img src={ROOT + item.image} alt="" width={imageWidth} height={imageHeight} decoding="async" fetchPriority="high" />
     </div>
     <div className="stt-full-hero__veil" aria-hidden="true" />
     <div className="stt-full-hero__inner">
