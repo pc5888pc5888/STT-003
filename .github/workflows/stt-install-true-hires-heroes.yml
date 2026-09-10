@@ -1,0 +1,64 @@
+name: STT Install True Hi-Res Heroes
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/stt-install-true-hires-heroes.yml
+      - '28.png'
+      - '29.png'
+      - '30.png'
+      - '35.png'
+      - '4.png'
+      - '3.png'
+permissions:
+  contents: write
+concurrency:
+  group: stt-hires-hero-install
+  cancel-in-progress: false
+jobs:
+  install:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify dimensions and copy exact supplied bytes
+        run: |
+          set -euo pipefail
+          pip -q install Pillow
+          python - <<'PY'
+          from pathlib import Path
+          from PIL import Image
+          import hashlib, json, shutil
+          mapping={
+            'home.png':('30.png',(3509,1975)),
+            'problems.png':('29.png',(6250,4419)),
+            'method.png':('28.png',(4400,2475)),
+            'columns.png':('35.png',(3509,1975)),
+            'publications.png':('4.png',(6250,4419)),
+            'stt.png':('3.png',(6250,4419)),
+          }
+          out=Path('public/visual-bank/stt/hero-hires');out.mkdir(parents=True,exist_ok=True)
+          report={}
+          for target,(source,expected) in mapping.items():
+            p=Path(source)
+            if not p.exists(): raise SystemExit(f'Missing supplied original: {source}')
+            with Image.open(p) as im:
+              im.load()
+              if im.size!=expected: raise SystemExit(f'{source} dimensions {im.size}, expected {expected}')
+            shutil.copyfile(p,out/target)
+            report[target]={'source':source,'dimensions':expected,'bytes':p.stat().st_size,'sha256':hashlib.sha256(p.read_bytes()).hexdigest(),'exactByteCopy':True}
+          Path('public/data/stt-hires-hero-manifest.json').write_text(json.dumps(report,ensure_ascii=False,indent=2))
+          print(json.dumps(report,ensure_ascii=False,indent=2))
+          PY
+      - name: Commit only verified high-resolution masters
+        run: |
+          set -euo pipefail
+          git config user.name "STT Hi-Res Artwork"
+          git config user.email "actions@users.noreply.github.com"
+          git add public/visual-bank/stt/hero-hires public/data/stt-hires-hero-manifest.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "fix: install exact 3509-6250px hero masters from supplied originals"
+          git push origin HEAD:main
