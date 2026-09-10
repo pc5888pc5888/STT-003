@@ -1,4 +1,5 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
+import RouteArtwork from "../components/RouteArtwork";
 
 type ProblemConfig = {
   title: string;
@@ -135,9 +136,10 @@ const sectionNames = [
 export default function ProblemDetail(){
   const {id="major-decision"}=useParams();
   const navigate=useNavigate();
-  const cfg=data[id]??data["major-decision"];
+  const cfg=data[id];
+  if(!cfg) return <Navigate to="/problems" replace />;
   const groups=[cfg.event,cfg.framing,cfg.evidence,cfg.counter,cfg.downside,cfg.judgment,cfg.outputs,cfg.professional];
   return <div className="pd4-root"><style>{`
     .pd4-root{min-height:100vh;background:#fbfaf7;color:#2b261f}.pd4-root *{box-sizing:border-box}.pd4-wrap{max-width:1180px;margin:0 auto;padding:0 28px}.pd4-hero{padding:90px 0 74px;border-bottom:1px solid #ddcfba}.pd4-eyebrow{font-size:10px;letter-spacing:.27em;color:#8b642f}.pd4-hero h1{max-width:980px;margin:20px 0 0;font:400 clamp(42px,5vw,68px)/1.32 'Noto Serif TC',Georgia,serif}.pd4-hero p{max-width:850px;margin:26px 0 0;color:#746b60;line-height:2}.pd4-back{margin-top:28px;border:0;border-bottom:1px solid #a9793e;background:transparent;color:#805a30;padding:0 0 5px;cursor:pointer}.pd4-body{padding:28px 0 110px}.pd4-block{display:grid;grid-template-columns:300px 1fr;gap:48px;padding:38px 0;border-bottom:1px solid #ddcfba}.pd4-block h2{margin:0;font:400 24px/1.55 'Noto Serif TC',Georgia,serif}.pd4-items{display:grid;gap:12px}.pd4-item{padding:18px 20px;border:1px solid #e0d4c3;background:#fffdf9;color:#625b52;line-height:1.85}.pd4-cta{margin-top:54px;padding:38px;border:1px solid #d8c8ad;background:linear-gradient(135deg,#fffdf9,#f4ede2);display:flex;justify-content:space-between;align-items:center;gap:30px}.pd4-cta h3{max-width:760px;margin:0;font:400 29px/1.5 'Noto Serif TC',Georgia,serif}.pd4-cta button{border:1px solid #9f7138;background:#9f7138;color:#fff;padding:12px 18px;cursor:pointer;white-space:nowrap}@media(max-width:820px){.pd4-block{grid-template-columns:1fr}.pd4-cta{display:block}.pd4-cta button{margin-top:24px}.pd4-hero{padding:66px 0 54px}}
-  `}</style><section className="pd4-hero"><div className="pd4-wrap"><div className="pd4-eyebrow">{cfg.en}</div><h1>{cfg.title}</h1><p>{cfg.lead}</p><button className="pd4-back" onClick={()=>navigate('/problems')}>← 回到問題入口</button></div></section><section className="pd4-body"><div className="pd4-wrap">{groups.map((items,index)=><article className="pd4-block" key={sectionNames[index]}><h2>{sectionNames[index]}</h2><div className="pd4-items">{items.map((item)=><div className="pd4-item" key={item}>{item}</div>)}</div></article>)}<div className="pd4-cta"><h3>如果這正是你正在面對的問題，下一步不用先選服務；先把事件與最不希望出現的結果說清楚。</h3><button onClick={()=>navigate(`/start?route=${id}`)}>從這個問題開始 →</button></div></div></section></div>;
+  `}</style><section className="pd4-hero stt-route-hero"><div className="pd4-wrap stt-route-hero-grid"><div className="stt-route-hero-copy"><div className="pd4-eyebrow">{cfg.en}</div><h1>{cfg.title}</h1><p>{cfg.lead}</p><button className="pd4-back" onClick={()=>navigate('/problems')}>← 回到問題入口</button></div><RouteArtwork /></div></section><section className="pd4-body"><div className="pd4-wrap">{groups.map((items,index)=><article className="pd4-block" key={sectionNames[index]}><h2>{sectionNames[index]}</h2><div className="pd4-items">{items.map((item)=><div className="pd4-item" key={item}>{item}</div>)}</div></article>)}<div className="pd4-cta"><h3>如果這正是你正在面對的問題，下一步不用先選服務；先把事件與最不希望出現的結果說清楚。</h3><button onClick={()=>navigate(`/start?route=${id}`)}>從這個問題開始 →</button></div></div></section></div>;
 }

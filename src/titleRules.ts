@@ -43,6 +43,9 @@ function applySentenceBreak(el: HTMLElement) {
 function applyTitleRules() {
   document.documentElement.dataset.sttRoute = window.location.pathname || "/";
   document.querySelectorAll<HTMLElement>(TITLE_SELECTORS).forEach(applySentenceBreak);
+  const heading = document.querySelector("main h1")?.textContent?.trim();
+  const title = window.location.pathname === "/" ? "STT Governance｜策略智庫" : heading ? `${heading} · STT Governance` : "STT Governance｜策略智庫";
+  if (document.title !== title) document.title = title;
 }
 
 let queued = false;

@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
+import RouteArtwork from "../components/RouteArtwork";
 
 type Domain = {
   slug: string;
@@ -92,6 +93,7 @@ export function DomainsIndex(){
 export function DomainDetail(){
   const {slug="corporate-governance"}=useParams();
   const navigate=useNavigate();
-  const domain=domains.find((d)=>d.slug===slug)??domains[0];
-  return <DomainShell><section className="domain-hero"><div className="domain-wrap"><div className="domain-kicker">{domain.eyebrow}</div><h1>{domain.title}</h1><p>{domain.subtitle}</p></div></section><section className="domain-body"><div className="domain-wrap">{domain.principles.map((p)=><article className="domain-detail" key={p.title}><h2>{p.title}</h2><p>{p.body}</p></article>)}<div className="domain-related"><button onClick={()=>navigate('/domains')}>← 回到治理知識領域</button>{domain.related.map((r)=><button key={r.path} onClick={()=>navigate(r.path)}>{r.label} →</button>)}</div></div></section></DomainShell>;
+  const domain=domains.find((d)=>d.slug===slug);
+  if(!domain) return <Navigate to="/domains" replace />;
+  return <DomainShell><section className="domain-hero stt-route-hero"><div className="domain-wrap stt-route-hero-grid"><div className="stt-route-hero-copy"><div className="domain-kicker">{domain.eyebrow}</div><h1>{domain.title}</h1><p>{domain.subtitle}</p></div><RouteArtwork /></div></section><section className="domain-body"><div className="domain-wrap">{domain.principles.map((p)=><article className="domain-detail" key={p.title}><h2>{p.title}</h2><p>{p.body}</p></article>)}<div className="domain-related"><button onClick={()=>navigate('/domains')}>← 回到治理知識領域</button>{domain.related.map((r)=><button key={r.path} onClick={()=>navigate(r.path)}>{r.label} →</button>)}</div></div></section></DomainShell>;
 }
