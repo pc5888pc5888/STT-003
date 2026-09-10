@@ -1,3 +1,4 @@
+import FullBleedHero from "../components/FullBleedHero";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { ArrowUpRight, Search } from "lucide-react";
@@ -75,18 +76,8 @@ export default function Columns() {
   const pageNumbers = Array.from({ length: pageCount }, (_, i) => i + 1).filter(n => n === 1 || n === pageCount || Math.abs(n - page) <= 1);
   return (
     <div className="stt-columns-v2 stt-columns-v3">
-      <section className="stt-columns-hero">
-        <div className="stt-columns-wrap stt-columns-hero-grid">
-          <div>
-            <p className="stt-columns-eyebrow">DR. CHUANG · COLUMN INSIGHTS</p>
-            <h1 className="stt-columns-title">莊鈞翔博士｜專欄判讀</h1>
-            <p className="stt-columns-lead">從法律新聞、人文地景產與新聞採訪出發，看見事件背後的制度、人的選擇與長期影響。</p>
-            <div className="stt-columns-source"><span>收錄 {catalog.articles.length} 則專欄</span><a href={AUTHOR} target="_blank" rel="noopener noreferrer">M傳媒作者專區 ↗</a></div>
-          </div>
-          <div className="stt-columns-visual" aria-hidden="true" />
-        </div>
-      </section>
-      <section className="stt-series" aria-label="三大專欄系列">
+      <FullBleedHero theme="columns"><div className="stt-columns-source"><span>收錄 {catalog.articles.length} 則專欄</span><a href={AUTHOR} target="_blank" rel="noopener noreferrer">M傳媒作者專區 ↗</a></div></FullBleedHero>
+      <section className="stt-series" id="column-series" aria-label="三大專欄系列">
         <div className="stt-columns-wrap stt-series-grid">
           {SERIES.map((s, i) => <article className="stt-series-card" key={s.key}>
             <div className="stt-series-index"><small>0{i + 1} · {s.en}</small><span>{counts[s.key]}<small> 則</small></span></div>

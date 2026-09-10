@@ -15,15 +15,6 @@ const focusAreas=[
   ["Founder Legacy","把創辦人的判斷與治理記憶轉成可被傳承的知識資產。","/problems/founder-legacy"],
 ] as const;
 
-const pillars=[
-  ["01","Problem","事件本身，不等於問題。"],
-  ["02","Evidence","答案、口頭說法與市場共識，都要重新取得證據資格。"],
-  ["03","Judgment","先否決不可承擔的錯誤，再談策略最佳化。"],
-  ["04","Governance","權力、責任、停止、回復與再驗證，都要有制度位置。"],
-] as const;
-
-const steps=["看見","反推","舉證","理解","架構","執行","留下"] as const;
-
 export default function HomeCanonical(_:HomeProps){
   const nav=useNavigate();
   const [menu,setMenu]=useState(false);
@@ -42,13 +33,11 @@ export default function HomeCanonical(_:HomeProps){
 
   <header className="stth-head"><div className="stth-wrap stth-headin"><button className="stth-brand" onClick={()=>go('/')} aria-label="STT Governance 首頁"><img src={STT_OFFICIAL_LOGO_SRC} alt="STT Governance Strategic Think Tank Governance｜策略智庫｜治理出版｜法遵精神" /></button><nav className="stth-nav"><button onClick={()=>go('/problems')}>你正在面對什麼</button><button onClick={()=>go('/how-stt-works')}>如何判讀</button><button onClick={()=>go('/insights')}>專欄判讀</button><button onClick={()=>go('/publications')}>出版研究</button><button onClick={()=>go('/stt')}>關於 STT</button><button className="stth-start" onClick={()=>go('/start')}>開始 →</button></nav><button className="stth-menubtn" onClick={()=>setMenu(true)} aria-label="Menu">☰</button></div></header>
 
-  <section className="stth-hero"><div className="stth-hero-media"/><div className="stth-wrap"><div className="stth-hero-copy"><div className="stth-kicker">STT GOVERNANCE · STRATEGY · GOVERNANCE · JUDGMENT</div><h1>讓重要的事，走得更遠。</h1><p className="stth-lead"><span className="stth-lead-line">STT Governance 協助企業、家族與重大決策者，在事件變成不可逆結果之前，</span><span className="stth-lead-line">先把真正的問題、證據、權力、責任與選項看清楚，再進入執行。</span></p><div className="stth-actions"><button className="primary" onClick={()=>go('/problems')}>看看我正在面對的問題</button><button onClick={()=>go('/how-stt-works')}>理解 STT 如何判讀</button></div><div className="stth-hero-note">真正的治理，不是給更多答案；而是先避免以錯誤問題、錯誤證據與不可承擔的代價，推動一個看似合理的決策。</div></div></div></section>
+  <section className="stth-hero" id="hero"><div className="stth-hero-media"/><div className="stth-wrap"><div className="stth-hero-copy"><div className="stth-kicker">STT GOVERNANCE · STRATEGY · GOVERNANCE · JUDGMENT</div><h1>讓重要的事，走得更遠。</h1><p className="stth-lead"><span className="stth-lead-line">STT Governance 協助企業、家族與重大決策者，在事件變成不可逆結果之前，</span><span className="stth-lead-line">先把真正的問題、證據、權力、責任與選項看清楚，再進入執行。</span></p><div className="stth-actions"><button className="primary" onClick={()=>go('/problems')}>看看我正在面對的問題</button><button onClick={()=>go('/how-stt-works')}>理解 STT 如何判讀</button></div><div className="stth-hero-note">真正的治理，不是給更多答案；而是先避免以錯誤問題、錯誤證據與不可承擔的代價，推動一個看似合理的決策。</div></div></div></section>
 
-  <section className="stth-pillars"><div className="stth-wrap stth-pillargrid">{pillars.map(([n,t,d])=><div className="stth-pillar" key={n}><span>{n}</span><h3>{t}</h3><p>{d}</p></div>)}</div></section>
 
   <section className="stth-section"><div className="stth-wrap"><div className="stth-kicker">START FROM THE REAL PROBLEM</div><h2 className="stth-title">不是先選服務；先從你正在面對的真實問題開始。</h2><p className="stth-desc">同一個症狀可能來自完全不同的治理根因。真正需要被處理的，不是事件名稱，而是事件背後的權力、證據、責任與不可逆風險。</p><div className="stth-focus">{focusAreas.map((x,i)=><button key={x[0]} onClick={()=>go(x[2])}><b>{String(i+1).padStart(2,'0')}</b><h3>{x[0]}</h3><p>{x[1]}</p><em>進入判讀 →</em></button>)}</div></div></section>
 
-  <section className="stth-section soft"><div className="stth-wrap"><div className="stth-kicker">HOW STT JUDGES</div><h2 className="stth-title">先把問題判斷對，再談怎麼做。</h2><p className="stth-desc">判讀不是堆疊更多意見，而是把事件、證據、反方、最大損失、權力與執行條件放回同一個治理程序。</p><div className="stth-steps">{steps.map((s,i)=><div className="stth-step" key={s}><b>{String(i+1).padStart(2,'0')}</b><span>{s}</span></div>)}</div></div></section>
 
   <section className="stth-section"><div className="stth-wrap"><div className="stth-kicker">PROFESSIONAL BOUNDARIES · HUMAN AUTHORITY</div><h2 className="stth-title">真正的治理，不是把所有專業混在一起。</h2><div className="stth-split"><article className="stth-panel"><h3>知道什麼時候，必須讓誰進場。</h3><p>法律、會計、稅務、信託、產業與技術專業各自保有責任邊界。STT 的工作，是把問題形成、證據門檻、策略價值、專業路由與最終治理判讀放回同一張決策地圖。</p><button onClick={()=>go('/domains')}>進入治理知識領域 →</button></article><article className="stth-panel"><h3>AI 可以增加能力，但不能自動增加權力。</h3><p>資料是否可進模型、模型可以形成什麼主張、代理工具能執行到哪裡、誰能覆核、誰能停止，以及最後誰負責，都必須在能力被使用之前先被決定。</p><button onClick={()=>go('/domains/human-ai-governance')}>理解 AI Governance →</button></article></div></div></section>
 

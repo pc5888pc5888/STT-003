@@ -38,6 +38,8 @@ export const PRIMARY_THEMES: Record<PrimaryTheme, { label: string; image: string
   },
 };
 
+const TITLE_LINES: Record<PrimaryTheme, string[]> = {"problems": ["不是先選服務；", "先從你正在面對的", "真實問題開始。"], "method": ["先把問題判斷對，", "再談怎麼做。"], "columns": ["莊鈞翔博士｜專欄判讀"], "publications": ["思想被留下，", "才可能被理解、", "被檢驗、被承接。"], "stt": ["策略為先，", "治理為本，", "管理為終。"]};
+
 export default function FullBleedHero({ theme, children }: { theme: PrimaryTheme; children?: ReactNode }) {
   const item = PRIMARY_THEMES[theme];
   return <section key={theme} className="stt-full-hero" data-stt-primary-hero={theme} aria-labelledby={`hero-title-${theme}`}>
@@ -48,7 +50,7 @@ export default function FullBleedHero({ theme, children }: { theme: PrimaryTheme
     <div className="stt-full-hero__inner">
       <div className="stt-full-hero__copy">
         <p className="stt-full-hero__label">{item.label}</p>
-        <h1 id={`hero-title-${theme}`}>{item.title}</h1>
+        <h1 id={`hero-title-${theme}`} aria-label={item.title}>{TITLE_LINES[theme].map((line, index) => <span key={index} style={{ display: "block" }}>{line}</span>)}</h1>
         <p className="stt-full-hero__lead" data-stt-title-sentence>{item.lead}</p>
         <div className="stt-full-hero__actions">
           {item.actions.map((action, index) => action.to.startsWith("#")
