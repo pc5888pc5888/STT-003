@@ -1,0 +1,44 @@
+name: STT Original Pixel Check
+on:
+  push:
+    branches: [rebuild/stt-approved-white-gold-v1]
+    paths: [.github/workflows/stt-original-pixel-check.yml]
+permissions:
+  contents: read
+jobs:
+  verify-original:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Check native source without accepting a thumbnail
+        run: |
+          set -euo pipefail
+          pip -q install Pillow
+          mkdir -p original-pixel-evidence
+          python - <<'PY'
+          import urllib.request,hashlib,json,io
+          from PIL import Image
+          from pathlib import Path
+          url='https://media.canva.com/v2/image-resize/format:PNG/height:941/quality:100/uri:ifs%3A%2F%2FM%2F3c6a7a1c-a354-45dc-ae2e-ddf66d95e369/watermark:F/width:1672?csig=AAAAAAAAAAAAAAAAAAAAAFjAob-RetW6GOrxHUlXVz2Yp7aaA7N0wnY5kXZwOmyU&exp=1789027298&osig=AAAAAAAAAAAAAAAAAAAAAJ8uASkRP38CphRsMBM4wMYHOfgr1oynTAzf2rPcnZZZ&signer=media-rpc&x-canva-quality=thumbnail'
+          report={'passed':False,'expectedDimensions':[1672,941],'expectedPixelSha256':'1ad96772c6ca474a6128e9fefc45c2b2cd9b241acbe96239ee20ffd96f4606ea'}
+          try:
+              with urllib.request.urlopen(urllib.request.Request(url,headers={'User-Agent':'Mozilla/5.0'}),timeout=25) as r:
+                  data=r.read();report['status']=r.status
+              im=Image.open(io.BytesIO(data));im.load();report['size']=im.size;report['bytes']=len(data)
+              report['pixelSha256']=hashlib.sha256(im.convert('RGB').tobytes()).hexdigest()
+              report['passed']=im.size==(1672,941) and report['pixelSha256']==report['expectedPixelSha256']
+              if report['passed']:Path('original-pixel-evidence/006.png').write_bytes(data)
+          except Exception as e:report['error']=str(e)
+          Path('original-pixel-evidence/result.json').write_text(json.dumps(report,indent=2))
+          print(json.dumps(report,indent=2))
+          if not report['passed']:raise SystemExit(1)
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: stt-original-pixel-evidence
+          path: original-pixel-evidence/
+          retention-days: 2
