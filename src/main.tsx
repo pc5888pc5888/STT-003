@@ -12,6 +12,7 @@ import "./styles/stt-stage2.css";
 import "./styles/stt-stage2-polish.css";
 import "./styles/stt-stage3.css";
 import "./styles/stt-native-artwork.css";
+import "./styles/stt-typography-v1.css";
 import "./titleRules";
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode><AppProviders><App /></AppProviders></React.StrictMode>
