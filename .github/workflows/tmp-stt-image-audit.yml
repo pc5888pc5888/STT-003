@@ -1,0 +1,29 @@
+name: Temporary STT Image Audit
+on:
+  push:
+    branches: [fix/stt-food-only-20260911]
+    paths: ['.github/workflows/tmp-stt-image-audit.yml']
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip -q install Pillow
+      - name: Scan existing root PNGs
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from PIL import Image
+          import hashlib
+          for p in sorted(Path('.').glob('*.png')):
+              try:
+                  with Image.open(p) as im: size=im.size
+              except Exception: continue
+              print(f'{p.name}\t{size[0]}x{size[1]}\t{p.stat().st_size}\t{hashlib.sha256(p.read_bytes()).hexdigest()}')
+          PY
