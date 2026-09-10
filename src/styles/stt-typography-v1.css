@@ -11,41 +11,42 @@
   --stt-type-h3:clamp(20px,1.65vw,24px);
   --stt-type-lead:clamp(16px,1.18vw,18px);
   --stt-type-body-size:16px;
-  --stt-type-small:13px;
 }
-
 html{font-synthesis-weight:none;text-rendering:optimizeLegibility}
 body{font-family:var(--stt-type-sans)!important;color:var(--stt-type-body);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
-button,input,select,textarea{font-family:var(--stt-type-sans)}
+button,input,select,textarea{font-family:var(--stt-type-sans)!important}
 
-main h1,main h2,main h3,.stth h1,.stth h2,.stth h3{font-family:var(--stt-type-serif)!important;color:var(--stt-type-ink)!important;font-synthesis:none}
-main h1,.stth h1{font-size:var(--stt-type-h1)!important;font-weight:550!important;line-height:1.34!important;letter-spacing:-.012em!important}
-main h2,.stth h2{font-size:var(--stt-type-h2)!important;font-weight:540!important;line-height:1.46!important;letter-spacing:-.006em!important}
-main h3,.stth h3{font-size:var(--stt-type-h3)!important;font-weight:540!important;line-height:1.55!important;letter-spacing:0!important}
+/* One effective heading scale across all existing STT pages. The :not() adds enough
+   specificity to supersede legacy route-level type declarations without changing layout. */
+#root main h1:not([data-stt-type-exempt]),.stth h1:not([data-stt-type-exempt]){font-family:var(--stt-type-serif)!important;color:var(--stt-type-ink)!important;font-size:var(--stt-type-h1)!important;font-weight:550!important;line-height:1.34!important;letter-spacing:-.012em!important;font-synthesis:none}
+#root main h2:not([data-stt-type-exempt]),.stth h2:not([data-stt-type-exempt]){font-family:var(--stt-type-serif)!important;color:var(--stt-type-ink)!important;font-size:var(--stt-type-h2)!important;font-weight:540!important;line-height:1.46!important;letter-spacing:-.006em!important;font-synthesis:none}
+#root main h3:not([data-stt-type-exempt]),.stth h3:not([data-stt-type-exempt]){font-family:var(--stt-type-serif)!important;color:var(--stt-type-ink)!important;font-size:var(--stt-type-h3)!important;font-weight:540!important;line-height:1.55!important;letter-spacing:0!important;font-synthesis:none}
+#root main p,#root main li,.stth p,.stth li{font-family:var(--stt-type-sans)!important;color:var(--stt-type-muted)!important;font-size:var(--stt-type-body-size)!important;font-weight:400!important;line-height:1.92!important}
 
-.stth-hero h1,.stt-full-hero h1{font-size:var(--stt-type-hero)!important;font-weight:550!important;line-height:1.30!important;letter-spacing:-.014em!important;color:var(--stt-type-ink)!important}
-.stt-route-hero .stt-route-hero-copy h1,.stt-canon h1,.stt-columns-hero h1{font-size:var(--stt-type-h1)!important}
-.stth-title,.stt-editorial-wrap>h2,.stt-foundations h2,.stt-method-intro h2,.stt-roles h2{font-size:var(--stt-type-h2)!important}
-.stth-panel h3,.stth-link h3,.stth-focus h3,.stt-foundations h3,.stt-roles h3{font-size:var(--stt-type-h3)!important}
+/* Homepage and the five specified topic pages share the same hero tier. */
+#root .stth-hero h1:not([data-stt-type-exempt]),#root .stt-full-hero h1:not([data-stt-type-exempt]){font-size:var(--stt-type-hero)!important;font-weight:550!important;line-height:1.30!important;letter-spacing:-.014em!important;color:var(--stt-type-ink)!important}
 
-.stth-lead,.stt-full-hero__lead,.stt-canon-sub,.stt-editorial-lead{font-family:var(--stt-type-sans)!important;color:#5d5751!important;font-size:var(--stt-type-lead)!important;font-weight:400!important;line-height:1.92!important;letter-spacing:0!important}
-.stth-desc,.stth-panel p,.stth-link p,.stth-focus p,.stt-foundations article>p:last-child,.stt-roles article p,.stt-about-intro,.stt-canon-section p{font-family:var(--stt-type-sans)!important;color:var(--stt-type-muted)!important;font-size:var(--stt-type-body-size)!important;font-weight:400!important;line-height:1.92!important}
+/* Leads remain quieter than titles, but are still part of the same system. */
+#root .stth-lead,#root .stt-full-hero__lead,#root .stt-canon-sub,#root .stt-editorial-lead,#root .domain-hero p,#root .lib-hero p,#root .pd4-hero p,#root .gr-lead{font-family:var(--stt-type-sans)!important;color:#5d5751!important;font-size:var(--stt-type-lead)!important;font-weight:400!important;line-height:1.92!important;letter-spacing:0!important}
 
-.stth-kicker,.stt-full-hero__label,.stt-editorial-label,.stt-foundations__eyebrow,.pd4-eyebrow,.domain-kicker,.lib-kicker,.stt-canon-eyebrow{font-family:var(--stt-type-sans)!important;color:var(--stt-type-gold)!important;font-size:11px!important;font-weight:600!important;line-height:1.6!important;letter-spacing:.16em!important;text-transform:uppercase}
-.stt-golden-path a{font-family:var(--stt-type-serif)!important;font-size:clamp(20px,1.75vw,25px)!important;font-weight:540!important;line-height:1.5!important}
-.stt-golden-path a span{font-family:var(--stt-type-sans)!important;font-size:11px!important;font-weight:600!important;letter-spacing:.08em!important}
+/* Existing institutional labels/eyebrows use one restrained gold treatment. */
+#root .stth-kicker,#root .stt-full-hero__label,#root .stt-editorial-label,#root .stt-foundations__eyebrow,#root .pd4-eyebrow,#root .domain-kicker,#root .lib-kicker,#root .stt-canon-eyebrow,#root .gr-kicker,#root .legal-kicker,#root .stt-editorial-eyebrow,#root main p.uppercase{font-family:var(--stt-type-sans)!important;color:var(--stt-type-gold)!important;font-size:11px!important;font-weight:600!important;line-height:1.6!important;letter-spacing:.16em!important;text-transform:uppercase!important}
 
-header nav button,.stth-nav button,.stth-drawerpanel button,.stt-full-hero__actions a{font-family:var(--stt-type-sans)!important;font-weight:500!important;letter-spacing:.01em!important}
-header nav button,.stth-nav button{font-size:13px!important;color:#514b45!important}
-.stth-nav button:hover,header nav button:hover{color:#805d32!important}
-.stt-full-hero__actions a{font-size:14px!important;line-height:1.5!important}
+#root .stt-golden-path a{font-family:var(--stt-type-serif)!important;font-size:clamp(20px,1.75vw,25px)!important;font-weight:540!important;line-height:1.5!important}
+#root .stt-golden-path a span{font-family:var(--stt-type-sans)!important;font-size:11px!important;font-weight:600!important;letter-spacing:.08em!important}
+
+/* Typography only: preserve all existing navigation labels, targets and structure. */
+#root header.sticky nav button,#root .stth-nav button,#root .stth-drawerpanel button,#root .stt-full-hero__actions a{font-family:var(--stt-type-sans)!important;font-weight:500!important;letter-spacing:.01em!important}
+#root header.sticky nav button,#root .stth-nav button{font-size:13px!important;color:#514b45!important}
+#root .stth-nav button:hover,#root header.sticky nav button:hover{color:#805d32!important}
+#root .stt-full-hero__actions a{font-size:14px!important;line-height:1.5!important}
 
 img{image-rendering:auto;-ms-interpolation-mode:bicubic}
-.stt-full-hero__media img,.stt-route-artwork img{filter:none!important;opacity:1!important}
+#root .stt-full-hero__media img,#root .stt-route-artwork img{filter:none!important;opacity:1!important}
 
 @media(max-width:700px){
   :root{--stt-type-hero:36px;--stt-type-h1:32px;--stt-type-h2:27px;--stt-type-h3:21px;--stt-type-lead:16px;--stt-type-body-size:15.5px}
-  .stth-hero h1,.stt-full-hero h1{line-height:1.36!important;letter-spacing:-.008em!important}
-  main h1,.stth h1{line-height:1.42!important}
-  main h2,.stth h2{line-height:1.50!important}
+  #root .stth-hero h1:not([data-stt-type-exempt]),#root .stt-full-hero h1:not([data-stt-type-exempt]){line-height:1.36!important;letter-spacing:-.008em!important}
+  #root main h1:not([data-stt-type-exempt]),.stth h1:not([data-stt-type-exempt]){line-height:1.42!important}
+  #root main h2:not([data-stt-type-exempt]),.stth h2:not([data-stt-type-exempt]){line-height:1.50!important}
 }
