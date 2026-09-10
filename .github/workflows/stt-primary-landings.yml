@@ -2,7 +2,7 @@ name: STT Primary Full-Bleed Landings
 on:
   push:
     branches: [rebuild/stt-approved-white-gold-v1]
-    paths: ['src/components/FullBleedHero.tsx','src/styles/stt-fullbleed.css','scripts/apply_fullbleed.py','scripts/test_fullbleed.mjs','.github/workflows/stt-primary-landings.yml']
+    paths: ['src/components/FullBleedHero.tsx','src/styles/stt-fullbleed.css','scripts/apply_fullbleed.py','scripts/refine_primary.py','scripts/test_fullbleed.mjs','.github/workflows/stt-primary-landings.yml']
 permissions:
   contents: write
 concurrency:
@@ -28,6 +28,7 @@ jobs:
         run: |
           set -euo pipefail
           python scripts/apply_fullbleed.py
+          python scripts/refine_primary.py
           python - <<'PY'
           from pathlib import Path
           import json,os
@@ -70,7 +71,7 @@ jobs:
           lock=json.loads(Path('fullbleed-evidence/change-lock.json').read_text())
           assert all(hashlib.sha256(Path(p).read_bytes()).hexdigest()==v for p,v in lock['protectedHashes'].items())
           report=json.loads(Path('fullbleed-evidence/fullbleed-report.json').read_text());assert report['passed'] and len(report['routes'])==15
-          allowed={'src/pages/HomeCanonical.tsx','src/pages/Problems.tsx','src/pages/Columns.tsx','src/pages/PublicCore.tsx','src/App.tsx'}
+          allowed={'src/pages/HomeCanonical.tsx','src/pages/Problems.tsx','src/pages/Columns.tsx','src/pages/PublicCore.tsx','src/App.tsx','src/components/FullBleedHero.tsx'}
           changed=set(subprocess.check_output(['git','diff','--name-only'],text=True).splitlines());assert changed<=allowed,changed-allowed
           subprocess.check_call(['git','add',*sorted(allowed),'public/data/stt-primary-release.json'])
           PY
