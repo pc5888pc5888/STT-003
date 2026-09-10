@@ -1,0 +1,47 @@
+name: STT Native Source Transfer Check
+on:
+  push:
+    branches: [rebuild/stt-approved-white-gold-v1]
+    paths: [.github/workflows/stt-native-source-transfer-check.yml]
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Preserve the exact existing application and inspect provided source link
+        run: |
+          set -euo pipefail
+          mkdir -p native-source-evidence
+          python - <<'PY'
+          import urllib.request, json, zipfile
+          from pathlib import Path
+          out=Path('native-source-evidence')
+          with zipfile.ZipFile(out/'application.zip','w',zipfile.ZIP_DEFLATED) as z:
+              for folder in ['src','public','scripts','tests','api','data','docs']:
+                  for p in Path(folder).rglob('*'):
+                      if p.is_file():z.write(p,str(p))
+              for n in ['AGENTS.md','package.json','package-lock.json','tsconfig.json','vite.config.ts','vercel.json','server.ts','index.html']:
+                  if Path(n).exists():z.write(n,n)
+          result={}
+          try:
+              req=urllib.request.Request('https://www.canva.com/d/YBIwmQCIGaKa0zn',headers={'User-Agent':'Mozilla/5.0'})
+              with urllib.request.urlopen(req,timeout=25) as r:
+                  result.update(status=r.status,finalUrl=r.url,contentType=r.headers.get('content-type'))
+                  text=r.read(6000000).decode('utf-8',errors='replace')
+              (out/'provided-source-view.html').write_text(text)
+              result['htmlBytes']=len(text)
+          except Exception as e:result['error']=str(e)
+          (out/'source-access.json').write_text(json.dumps(result,indent=2))
+          print(json.dumps(result,indent=2))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: stt-current-native-source-check
+          path: native-source-evidence/
+          retention-days: 2

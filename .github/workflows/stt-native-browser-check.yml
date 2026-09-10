@@ -1,0 +1,73 @@
+name: STT Native Browser Source Check
+on:
+  push:
+    branches: [rebuild/stt-approved-white-gold-v1]
+    paths: [.github/workflows/stt-native-browser-check.yml]
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Read only the supplied source view in a normal browser
+        run: |
+          set -euo pipefail
+          pip -q install Pillow
+          npm install --prefix /tmp/stt-browser --no-save playwright
+          mkdir -p /tmp/native-candidates native-browser-evidence
+          export CHROME_PATH="$(command -v google-chrome || command -v chromium)"
+          node --input-type=module <<'JS'
+          import fs from 'node:fs';
+          import crypto from 'node:crypto';
+          const {chromium}=await import('/tmp/stt-browser/node_modules/playwright/index.mjs');
+          const browser=await chromium.launch({executablePath:process.env.CHROME_PATH,args:['--no-sandbox']});
+          const page=await browser.newPage({viewport:{width:1672,height:1100}});
+          const pending=[];let candidates=0;
+          function save(bytes){if(bytes.length<100000||bytes.length>10000000)return;const id=crypto.createHash('sha256').update(bytes).digest('hex');fs.writeFileSync('/tmp/native-candidates/'+id,bytes);candidates++;}
+          page.on('response',r=>{if((r.headers()['content-type']||'').startsWith('image/'))pending.push(r.body().then(save).catch(()=>{}));});
+          let report={};
+          try{
+            const r=await page.goto('https://www.canva.com/d/PKA0pTOTr_dgUF4',{waitUntil:'domcontentloaded',timeout:45000});
+            await page.waitForTimeout(10000);
+            report={status:r?.status(),title:await page.title(),text:(await page.locator('body').innerText()).slice(0,1500),frames:page.frames().map(f=>{try{return new URL(f.url()).origin}catch{return 'inline'}})};
+            for(const frame of page.frames()){
+              try{
+                const sources=await frame.locator('img').evaluateAll(imgs=>imgs.map(i=>i.src));
+                for(const src of sources)if(src.startsWith('data:image/'))save(Buffer.from(src.split(',')[1],'base64'));
+                const html=await frame.content();
+                for(const m of html.matchAll(/data:image\/(?:png|webp);base64,([A-Za-z0-9+/=]+)/g))save(Buffer.from(m[1],'base64'));
+              }catch{}
+            }
+            await Promise.all(pending);
+          }catch(e){report.error=String(e)}
+          report.candidates=candidates;
+          fs.writeFileSync('native-browser-evidence/browser-access.json',JSON.stringify(report,null,2));
+          console.log(JSON.stringify(report));
+          await browser.close();
+          JS
+          python - <<'PY'
+          from pathlib import Path
+          from PIL import Image
+          import hashlib,json
+          result={'recovered':False,'expectedPixels':'1ad96772c6ca474a6128e9fefc45c2b2cd9b241acbe96239ee20ffd96f4606ea','images':[]}
+          for p in Path('/tmp/native-candidates').glob('*'):
+              try:
+                  im=Image.open(p).convert('RGB');ph=hashlib.sha256(im.tobytes()).hexdigest();result['images'].append({'size':im.size,'pixels':ph})
+                  if im.size==(1672,941) and ph==result['expectedPixels']:
+                      im.save('native-browser-evidence/006-original.png');result['recovered']=True
+              except Exception:pass
+          Path('native-browser-evidence/native-pixel-check.json').write_text(json.dumps(result,indent=2));print(json.dumps(result))
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: stt-native-browser-source
+          path: native-browser-evidence/
+          retention-days: 2

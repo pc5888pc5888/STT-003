@@ -1,0 +1,37 @@
+/* STT Visual Asset Bank — white-gold canonical surface layer */
+:root{--asset-ivory:#fbfaf7;--asset-warm:#f5f1e8;--asset-stone:#eee8de;--asset-ink:#2a251f;--asset-muted:#6f675d;--asset-gold:#a9793e;--asset-line:#ddcfb9}
+html,body,#root{background:var(--asset-ivory)!important;color:var(--asset-ink)!important}
+body{color-scheme:light!important}
+
+/* Public site may not fall back to black/charcoal surfaces. */
+.bg-black,.bg-neutral-950,.bg-neutral-900,.bg-zinc-950,.bg-zinc-900,.bg-gray-950,.bg-gray-900,.bg-slate-950,.bg-slate-900{background-color:var(--asset-ivory)!important}
+.from-black{--tw-gradient-from:var(--asset-ivory)!important;--tw-gradient-to:rgb(251 250 247 / 0)!important}
+.via-black{--tw-gradient-via:var(--asset-warm)!important}
+.to-black{--tw-gradient-to:var(--asset-ivory)!important}
+[class*="bg-[#0"],[class*="bg-[#1"],[class*="bg-[#2"]{background-color:var(--asset-ivory)!important}
+[class*="from-[#0"],[class*="via-[#0"],[class*="to-[#0"]{--tw-gradient-from:var(--asset-ivory)!important;--tw-gradient-via:var(--asset-warm)!important;--tw-gradient-to:var(--asset-ivory)!important}
+.glass-header{background:rgba(251,250,247,.96)!important;border-color:var(--asset-line)!important}
+.strategic-bg-overlay{background:rgba(251,250,247,.74)!important}
+
+/* Home: approved white-gold civilization master from the Visual Asset Bank. */
+.hv-hero{background-color:var(--asset-ivory)!important;background-image:url('/visual-bank/stt/home.webp')!important;background-position:right center!important;background-size:cover!important}
+.hv-overlay{background:linear-gradient(90deg,rgba(251,250,247,.98) 0%,rgba(251,250,247,.90) 34%,rgba(251,250,247,.35) 58%,rgba(251,250,247,.06) 78%,rgba(251,250,247,0) 100%)!important}
+.hv-dark,.hv-final,.pd-method{background:var(--asset-warm)!important;color:var(--asset-ink)!important;border-color:var(--asset-line)!important}
+.hv-dark .hv-heading,.hv-final h2,.pd-method h2{color:var(--asset-ink)!important}
+.hv-dark .hv-desc,.hv-final p{color:var(--asset-muted)!important}
+.hv-mis{background:var(--asset-line)!important;border-color:var(--asset-line)!important}
+.hv-mis>div,.pd-method .pd-item{background:#fffdf9!important;color:#50473e!important;border-color:var(--asset-line)!important}
+.pd-method .pd-items{border-color:var(--asset-line)!important}
+
+/* Asset Bank images replace provisional/CSS-built artifacts. */
+.pd-visual{background:var(--asset-warm)!important;border-color:var(--asset-line)!important}
+.pd-visual-img{filter:none!important;object-fit:cover!important}
+.pc-artifact[data-asset-bank],.stt-editorial-index-panel[data-asset-bank]{background-color:var(--asset-warm)!important;background-image:var(--asset-bank-image)!important;background-size:cover!important;background-position:center!important;background-repeat:no-repeat!important;border-color:var(--asset-line)!important}
+.pc-artifact[data-asset-bank]::before,.pc-artifact[data-asset-bank]::after,.stt-editorial-index-panel[data-asset-bank]::before,.stt-editorial-index-panel[data-asset-bank]::after{opacity:0!important}
+.pc-artifact[data-asset-bank]>*{opacity:0!important;pointer-events:none!important}
+
+/* Runtime safety class for any legacy dark public block detected after route render. */
+.asset-bank-whitened{background-color:var(--asset-ivory)!important;background-image:none!important;color:var(--asset-ink)!important;border-color:var(--asset-line)!important}
+.asset-bank-whitened *{color:var(--asset-ink)!important;border-color:var(--asset-line)!important}
+
+@media(max-width:900px){.hv-hero{background-position:68% center!important}.hv-overlay{background:rgba(251,250,247,.87)!important}}

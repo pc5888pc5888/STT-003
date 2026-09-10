@@ -1,0 +1,51 @@
+name: Wire STT Visual Asset Bank
+
+on:
+  push:
+    branches:
+      - rebuild/white-gold-governance-os-v2-gold
+    paths:
+      - .github/workflows/stt-wire-visual-bank.yml
+
+permissions:
+  contents: write
+
+jobs:
+  wire:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Wire canonical page masters
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('src/pages/HomeV2.tsx')
+          s=p.read_text()
+          s=s.replace("/images/bg-portal-columns.png","/visual-bank/stt/home.webp")
+          p.write_text(s)
+
+          p=Path('src/pages/ProblemDetail.tsx')
+          s=p.read_text()
+          repl={
+            "/images/paper_corporate_governance.png":"/visual-bank/stt/major-decision.webp",
+            "/images/Corporate Governance Strategy Interpretation02.png":"/visual-bank/stt/owner-dependence.webp",
+            "/images/paper_succession_family.png":"/visual-bank/stt/succession.webp",
+            "/images/Family Office02.png":"/visual-bank/stt/family-ownership.webp",
+            "/images/STT-Press-Law-Header.png":"/visual-bank/stt/strategic-legal.webp",
+            "/images/ESGAI02.png":"/visual-bank/stt/ai-governance.webp",
+            "/images/internal compliance02.png":"/visual-bank/stt/system-failure.webp",
+            "/images/bg-strategist-spotlight.png":"/visual-bank/stt/founder-legacy.webp",
+          }
+          for a,b in repl.items(): s=s.replace(a,b)
+          p.write_text(s)
+          PY
+      - name: Commit wiring
+        run: |
+          git config user.name "STT Visual Bank Bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add src/pages/HomeV2.tsx src/pages/ProblemDetail.tsx
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "feat: place STT Visual Asset Bank masters on core pages"
+          git push origin HEAD:rebuild/white-gold-governance-os-v2-gold

@@ -1,0 +1,6 @@
+/* Supplied original artwork. Display sizing never replaces source pixels. */
+.stt-route-artwork img{height:auto!important;aspect-ratio:auto!important;object-fit:contain!important;image-rendering:auto!important;filter:none!important;opacity:1!important}
+.stt-canon-visual,.stt-columns-visual,.stth-hero-media{filter:none!important;image-rendering:auto!important}
+.stt-canon-visual::after{background:none!important}
+.stt-canon-visual,.stt-columns-visual{width:100%;max-width:800px;min-height:0!important;aspect-ratio:1672/941;background-size:contain!important;background-repeat:no-repeat!important;justify-self:end}
+@media(max-width:700px){.stth-hero-media{background-size:100% auto!important;background-position:center bottom!important}}

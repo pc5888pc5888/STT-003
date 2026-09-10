@@ -135,13 +135,40 @@
 }
 
 .strategic-bg-overlay {
-  position: absolute !important;
-  inset: 0 !important;
-  z-index: 5 !important;
+  position: absolute;
+  inset: 0;
+  z-index: 5;
   background: rgba(255,255,255,0.82) !important;
 }
 
-/* HARD WHITE-SURFACE LOCK: no black/dark public page backgrounds. */
+.hv-dark,
+.hv-final,
+.pd-method {
+  background: #ffffff !important;
+  color: #2a251f !important;
+  border-color: #e2d5bf !important;
+}
+.hv-dark .hv-heading,
+.hv-final h2,
+.pd-method h2,
+.hv-dark .hv-desc,
+.hv-final p,
+.pd-method .pd-item {
+  color: #2a251f !important;
+}
+.hv-dark .hv-eyebrow,
+.hv-mis b {
+  color: #9b6e36 !important;
+}
+.hv-mis,
+.hv-mis div,
+.pd-method .pd-item,
+.pd-method .pd-items {
+  background: #ffffff !important;
+  border-color: #e2d5bf !important;
+}
+
+/* HARD WHITE-SURFACE LOCK: no dark page surfaces anywhere. */
 #root [class*="bg-black"],
 #root [class*="bg-[#0"],
 #root [class*="bg-neutral-9"],
@@ -151,21 +178,11 @@
   background-color: #ffffff !important;
   background-image: none !important;
 }
-
-#root [class*="text-white"] {
-  color: #2a251f !important;
-}
-
-#root [class*="border-white"] {
-  border-color: #e2d5bf !important;
-}
-
+#root [class*="text-white"] { color: #2a251f !important; }
+#root [class*="border-white"] { border-color: #e2d5bf !important; }
 #root nav,
 #root header,
-#root footer {
-  background-color: #ffffff !important;
-  color: #2a251f !important;
-}
+#root footer { background-color:#ffffff !important; color:#2a251f !important; }
 
 .scrollbar-none {
   -ms-overflow-style: none;

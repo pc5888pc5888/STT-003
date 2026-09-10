@@ -1,626 +1,218 @@
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "motion/react";
-import { ArrowRight, ShieldCheck, Users, Scale, Landmark, Brain, BookOpen, Globe, Award } from "lucide-react";
-import { articles } from "../data/mockData";
+import { useNavigate } from "react-router-dom";
 
-export default function Home({ 
-  onNavigate, 
-  currentPage,
-  activeSection: propActiveSection,
-  setActiveSection: propSetActiveSection
-}: { 
-  onNavigate: (page: string) => void; 
+type HomeSection = "hero" | "governance" | "positioning" | "strategist" | "insights";
+
+type HomeProps = {
+  onNavigate: (page: string) => void;
   currentPage?: string;
-  activeSection?: 'hero' | 'governance' | 'positioning' | 'strategist' | 'insights';
-  setActiveSection?: (section: 'hero' | 'governance' | 'positioning' | 'strategist' | 'insights') => void;
-}) {
-  const [internalActiveSection, setInternalActiveSection] = useState<'hero' | 'governance' | 'positioning' | 'strategist' | 'insights'>('hero');
-  const activeSection = propActiveSection !== undefined ? propActiveSection : internalActiveSection;
-  const setActiveSection = propSetActiveSection !== undefined ? propSetActiveSection : setInternalActiveSection;
-  const [activeImage, setActiveImage] = useState<string | null>(null);
-  const [imageError, setImageError] = useState(false);
+  activeSection?: HomeSection;
+  setActiveSection?: (section: HomeSection) => void;
+};
 
-  useEffect(() => {
-    setImageError(false);
-  }, [activeImage]);
+const problemEntries = [
+  ["重大決策", "一個重大決定，大家都說可以做，我卻不知道真正的風險在哪裡。", "major-decision"],
+  ["企業承接", "公司愈來愈大，但所有重要事情還是在等老闆決定。", "owner-dependence"],
+  ["接班", "二代已經進公司，職位交了，權力卻一直交不出去。", "succession"],
+  ["家族與所有權", "家族有資產，但沒有人真正知道誰有最後決定權。", "family-ownership"],
+  ["策略＋法務", "律師說法律上可以做，但我不知道商業上值不值得。", "strategic-legal"],
+  ["AI Governance", "公司已經在使用 AI，但沒有人說得清楚它可以決定到哪裡。", "ai-governance"],
+  ["制度失效", "制度、SOP 都有，真正出事時卻沒有人照制度走。", "system-failure"],
+  ["Founder Legacy", "我希望把創辦人的思想、企業故事與價值留下來。", "founder-legacy"],
+];
 
-  useEffect(() => {
-    if (currentPage === "governance") {
-      setActiveSection("governance");
-    } else if (currentPage === "home") {
-      // Only default to hero if we are not explicitly navigating to one of the custom sub-sections
-      if (propActiveSection !== "positioning" && propActiveSection !== "strategist" && propActiveSection !== "insights" && propActiveSection !== "governance") {
-        setActiveSection("hero");
-      }
-    }
-  }, [currentPage, propActiveSection]);
+const misjudgments = [
+  "問題一開始就定錯，把症狀當成真正要解決的事情。",
+  "把主張當成事實，把『大家都知道』當成證據。",
+  "法律上可以主張，就誤認為策略上值得執行。",
+  "只看成功機率，沒有先看最大損失與不可逆性。",
+  "提出方案的人同時壟斷審查權，缺少真正反方。",
+  "危機結束就以為問題解決，沒有把一次經驗留下成制度。",
+];
 
-  // Handle section transition and sync header nav state
-  const goToSection = (section: 'hero' | 'governance' | 'positioning' | 'strategist' | 'insights') => {
-    setActiveSection(section);
-    onNavigate(section);
-  };
+const methods = [
+  ["01", "看見", "先讓真正正在發生的事情被看見。"],
+  ["02", "反推", "先看最不希望發生的結果，再往回找今天的斷點。"],
+  ["03", "舉證", "區分事實、主張、證據、假設與未知。"],
+  ["04", "理解", "讓當事人自己看懂為什麼會誤判，而不是只被告知不能做。"],
+  ["05", "架構", "把正確判斷轉成權責、程序、門檻、契約與紀錄。"],
+  ["06", "執行", "形成 SOP、Workflow、責任人、時間表與驗收。"],
+  ["07", "留下", "把結果與教訓沉澱成下一次可以直接使用的治理記憶。"],
+];
 
-  const renderActiveSection = () => {
-    switch (activeSection) {
-      case 'hero':
-        return (
-          <motion.section 
-            key="hero"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.6 }}
-            className="relative flex flex-col pt-4 lg:pt-0 bg-[#050505] lg:overflow-hidden justify-end border-b border-white/5 pb-0 h-auto lg:h-[calc(100vh-80px)] min-h-[calc(100vh-80px)]"
-          >
-            {/* Background Image */}
-            <div 
-              className="absolute inset-0 bg-cover bg-center z-0" 
-              style={{ backgroundImage: "url('/images/bg-hero-boardroom.png')" }}
-            >
-              <div className="absolute inset-0 bg-black/60 backdrop-blur-[2px]"></div>
-              <div className="absolute inset-0 bg-gradient-to-r from-black via-black/40 to-transparent"></div>
-            </div>
-            
-            <div className="container mx-auto px-4 md:px-6 relative z-10 flex-grow flex flex-col justify-end h-full">
-              <div className="flex flex-col-reverse md:flex-row items-end md:justify-between gap-12 md:gap-4 lg:gap-4 pt-4 lg:pt-0 w-full h-full">
-                
-                {/* Left Content */}
-                <div className="w-full md:w-1/2 lg:w-[43%] flex flex-col justify-center space-y-5 lg:space-y-6 py-6 md:py-8 lg:self-center">
-                  <div className="space-y-3 lg:space-y-4">
-                    <img
-                      src="/images/index_title_001.png"
-                      alt="策略智庫智慧治理　治理為本管理為終"
-                      draggable={false}
-                      className="block mx-auto w-full max-w-[260px] sm:max-w-[320px] md:max-w-[380px] lg:max-w-[440px] h-auto mb-4 lg:mb-6 select-none pointer-events-none"
-                    />
-                    <h1 className="text-[1.8rem] md:text-[2.2rem] lg:text-[36px] xl:text-[42px] font-serif font-light leading-[1.35] text-white tracking-widest max-w-none">
-                      <span className="block md:inline lg:block whitespace-normal md:whitespace-nowrap">當制度開始失序；</span>
-                      <span className="block md:inline lg:block mt-1 sm:mt-2 whitespace-normal md:whitespace-nowrap">
-                        <span className="text-[#e6c84c] font-normal">治理</span>便成為企業最後的秩序。
-                      </span>
-                    </h1>
-                    <div className="w-16 h-[1px] bg-[#e6c84c]/40 my-3 lg:my-4"></div>
-                    <div className="space-y-1.5">
-                      <p className="text-sm sm:text-base md:text-[18px] font-sans font-light text-white/70 leading-tight">
-                        以治理設計決策的邊界，
-                      </p>
-                      <p className="text-sm sm:text-base md:text-[18px] font-sans font-light text-white/70 leading-tight">
-                        讓企業在不確定中保持穩定與信任。
-                      </p>
-                    </div>
-                  </div>
+const outcomes = [
+  "重大決策判讀與 Decision Brief",
+  "GO／CONDITIONAL GO／HOLD／NO-GO",
+  "權責矩陣與 Reserved Matters",
+  "策略＋法務雙視角 Decision Review",
+  "接班與家族治理路線圖",
+  "AI 權限、覆核、停止與回滾 SOP",
+  "90 日治理啟動計畫與驗收",
+  "Founder Legacy／治理記憶與知識資產",
+];
 
-                  <div className="space-y-6 lg:space-y-8">
-                    <div className="flex flex-col sm:flex-row flex-wrap gap-4 w-full">
-                      <button 
-                        onClick={() => goToSection('positioning')}
-                        className="w-full sm:w-auto bg-gradient-to-br from-[#e6c84c] via-gold-500 to-gold-600 hover:brightness-110 text-black px-8 py-3.5 rounded flex items-center justify-center gap-3 group transition-all font-bold shadow-2xl no-underline text-sm md:text-base cursor-pointer border-0"
-                      >
-                        進入治理架構 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                      </button>
-                      <button 
-                        onClick={() => onNavigate('about')}
-                        className="w-full sm:w-auto px-8 py-3.5 rounded border border-[#e6c84c]/40 text-[#e6c84c] hover:bg-[#e6c84c]/5 transition-all font-bold flex items-center justify-center gap-3 no-underline text-sm md:text-base cursor-pointer bg-transparent border-0"
-                      >
-                        探索 STT 智庫 <ArrowRight className="w-4 h-4" />
-                      </button>
-                    </div>
+export default function Home({ onNavigate }: HomeProps) {
+  const navigate = useNavigate();
 
-                    {/* Core Focus Areas */}
-                    <div className="flex items-center gap-1.5 sm:gap-3 pt-5 border-t border-white/5 max-w-3xl overflow-x-auto scrollbar-none">
-                      {[
-                        { en: "Governance Systems", zh: "治理系統" },
-                        { en: "Decision Architecture", zh: "決策架構" },
-                        { en: "Family & Enterprise Governance", zh: "家族與企業治理" }
-                      ].map((item, i) => (
-                        <div 
-                          key={i} 
-                          className={`flex-1 flex flex-col items-center md:items-start justify-center text-center md:text-left group px-1 sm:px-2 ${
-                            i !== 2 ? 'border-r border-white/10' : ''
-                          }`}
-                        >
-                          <span className="font-serif text-[10px] sm:text-[11px] md:text-[12px] lg:text-[13px] font-light text-gold-200/90 tracking-wide transition-colors group-hover:text-gold-300 leading-normal mb-0.5 whitespace-nowrap">
-                            {item.en}
-                          </span>
-                          <span className="font-serif text-[11px] sm:text-[12px] md:text-[13px] lg:text-[14px] font-light text-white/70 tracking-[0.2em] transition-colors group-hover:text-white leading-normal pl-[0.2em] whitespace-nowrap">
-                            {item.zh}
-                          </span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-
-                {/* Right Portrait */}
-                <div className="w-full md:w-1/2 lg:w-[55%] flex justify-center md:justify-end items-end relative h-[280px] xs:h-[340px] sm:h-[440px] md:h-auto lg:h-[70vh] xl:h-[75vh] max-h-[640px] overflow-visible">
-                  <div className="relative w-full h-[280px] xs:h-[340px] sm:h-[440px] md:h-full flex items-end justify-center md:justify-end overflow-visible">
-                    <img
-                      src="/images/portrait-001.png"
-                      alt="Dr. Eric Chuang"
-                      style={{ 
-                        display: 'block', 
-                        width: 'auto', 
-                        objectFit: 'contain', 
-                        objectPosition: 'bottom center',
-                        transformOrigin: 'bottom center',
-                        pointerEvents: 'none'
-                      }}
-                      className="hero-portrait h-[280px] xs:h-[340px] sm:h-[440px] md:h-full max-w-full md:max-w-none relative z-10 md:mr-12 lg:mr-32 xl:mr-36 transition-all pb-4 md:pb-0"
-                    />
-                    
-                    <div className="absolute bottom-4 xs:bottom-6 sm:bottom-10 md:bottom-16 lg:bottom-24 right-0 sm:right-4 lg:right-4 xl:right-8 z-20 flex flex-col items-start bg-transparent pointer-events-none select-none">
-                      <img 
-                        src="/signature-eric001.png" 
-                        alt="Eric Chuang, Ph.D. Signature" 
-                        className="w-40 sm:w-52 lg:w-60 xl:w-72 h-auto drop-shadow-[0_2px_15px_rgba(0,0,0,0.9)] opacity-95 transition-all"
-                        referrerPolicy="no-referrer"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </motion.section>
-        );
-
-      case 'governance':
-        return (
-          <motion.section 
-            key="governance"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.6 }}
-            className="strategic-bg-container border-y border-white/5 w-full h-auto lg:h-[calc(100vh-80px)] min-h-[calc(100vh-80px)] lg:overflow-hidden flex flex-col justify-center py-12 lg:py-6"
-          >
-            <div 
-              className="strategic-bg-image" 
-              style={{ backgroundImage: "url('/images/bg-portal-columns.png')" }}
-            ></div>
-            <div className="strategic-bg-overlay"></div>
-
-            <div className="container mx-auto px-4 md:px-6 relative z-10 h-full flex flex-col justify-between py-2 max-w-7xl">
-              <div className="text-center space-y-1 pb-2">
-                <p className="text-gold-600 text-[10px] tracking-[0.5em] uppercase font-bold">PORTALS OF INTERPRETATION</p>
-                <h2 className="text-3xl sm:text-4xl font-display text-white">治理入口</h2>
-                <p className="text-stone-500 max-w-2xl mx-auto italic text-xs leading-normal">
-                  不是提供建議，而是協助建立不可動搖的治理秩序與文明架構。
-                </p>
-                <p className="text-stone-400 max-w-2xl mx-auto leading-relaxed text-[11px] mt-1">
-                  選擇您目前關注的治理領域，進入相應的專業場域，我們將協助您釐清問題本質，建立可長期運作的治理系統。
-                </p>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 w-full">
-                {[
-                  { 
-                    id: "01", 
-                    title: "企業治理與策略判讀", 
-                    icon: <Landmark className="w-8 h-8 md:w-9 md:h-9" />,
-                    desc: "整合策略、風險、制度與架構，協助企業建立長期競爭優勢與治理秩序。", 
-                    items: ["策略治理", "董事會治理", "制度架構", "風險管理"],
-                    route: "corporate-governance",
-                    btnText: "進入 企業治理策略判讀 系統",
-                    image: "/images/Corporate Governance Strategy Interpretation02.png"
-                  },
-                  { 
-                    id: "02", 
-                    title: "家族治理與企業接班", 
-                    icon: <Users className="w-8 h-8 md:w-9 md:h-9" />,
-                    desc: "建立家族信任與治理制度，確保財富、價值與使命的永續傳承。", 
-                    items: ["家族信任系統", "接班計畫", "財富治理", "家族憲章"],
-                    route: "family-governance",
-                    btnText: "進入 家族治理與企業接班 系統",
-                    image: "/images/Family Office02.png"
-                  },
-                  { 
-                    id: "03", 
-                    title: "內在法遵 Internal Compliance", 
-                    icon: <Scale className="w-8 h-8 md:w-9 md:h-9" />,
-                    desc: "從制度內化合規意識，打造企業不可動搖的合規文化。", 
-                    items: ["內部控制", "法遵機制", "稽核機制", "合規文化"],
-                    route: "internal-compliance",
-                    btnText: "進入 內在法遵 INTERNAL COMPLIANCE 專欄",
-                    image: "/images/internal compliance02.png"
-                  },
-                  { 
-                    id: "04", 
-                    title: "ESGAI Governance System", 
-                    icon: <Brain className="w-8 h-8 md:w-9 md:h-9" />,
-                    desc: "AI 治理輔助系統，提供決策門控、風險辨識與治理支援。", 
-                    items: ["決策門控", "風險辨識", "治理框架", "制度支援"],
-                    route: "esgai",
-                    btnText: "進入 ESGAI GOVERNANCE SYSTEM 系統",
-                    image: "/images/ESGAI02.png"
-                  }
-                ].map((card, i) => (
-                  <div 
-                    key={i} 
-                    className="group bg-zinc-950/80 border border-white/5 hover:border-gold-600/30 transition-all duration-500 backdrop-blur-sm flex flex-col items-center text-center justify-between p-4 flex-1 w-full"
-                  >
-                    <div className="w-full flex-col flex items-center mb-2">
-                      <span className="text-[10px] text-gold-600/40 font-mono tracking-widest block mb-1">{card.id}</span>
-                      <div className="text-gold-600 opacity-60 group-hover:opacity-100 transition-opacity">{card.icon}</div>
-                    </div>
-                    <h3 className="font-display text-white leading-tight text-lg sm:text-xl font-medium mt-1 mb-1">{card.title}</h3>
-                    <p className="text-stone-500 text-xs font-light leading-relaxed max-w-[280px] mb-2">
-                      {card.desc}
-                    </p>
-                    <div className="flex flex-col items-center mb-3">
-                      {card.items.map((item, idx) => (
-                        <div 
-                          key={idx} 
-                          className="flex items-center gap-1.5 text-stone-400 text-xs my-0.5"
-                        >
-                          <ShieldCheck className="w-3 h-3 text-gold-600/50" />
-                          {item}
-                        </div>
-                      ))}
-                    </div>
-
-                    <button 
-                      onClick={() => onNavigate(card.route)}
-                      className="w-full mt-auto bg-gold-600/10 border border-gold-600/20 text-gold-500 font-bold tracking-widest uppercase hover:bg-gold-600 hover:text-black transition-all text-center flex items-center justify-center py-2 text-[11px] cursor-pointer"
-                    >
-                      {card.btnText} <ArrowRight className="inline ml-1.5 w-3 h-3" />
-                    </button>
-                  </div>
-                ))}
-              </div>
-
-              <div className="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-12 text-[10px] uppercase font-bold tracking-[0.3em] text-gold-600/50 mt-4">
-                <p className="flex items-center gap-2 opacity-80 hover:opacity-100 cursor-default transition-all">
-                   <ShieldCheck className="w-3 h-3" /> Governance First
-                </p>
-                <p className="flex items-center gap-2 opacity-80 hover:opacity-100 cursor-default transition-all">
-                   <ShieldCheck className="w-3 h-3" /> Decision with Order
-                </p>
-                <p className="flex items-center gap-2 opacity-80 hover:opacity-100 cursor-default transition-all">
-                   <ShieldCheck className="w-3 h-3" /> Trust across Generations
-                </p>
-              </div>
-            </div>
-          </motion.section>
-        );
-
-      case 'positioning':
-        return (
-          <motion.section 
-            key="positioning"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.6 }}
-            className="strategic-bg-container w-full h-auto lg:h-[calc(100vh-80px)] min-h-[calc(100vh-80px)] lg:overflow-hidden flex flex-col justify-center py-12 lg:py-8"
-          >
-            <div 
-              className="strategic-bg-image" 
-              style={{ backgroundImage: "url('/images/bg-platform-chess.png')" }}
-            ></div>
-            <div className="strategic-bg-overlay"></div>
-            <div className="container mx-auto px-4 md:px-6 relative z-10 max-w-7xl">
-              <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 xl:gap-24 items-center">
-                
-                {/* Left Column */}
-                <div className="w-full lg:w-1/2 space-y-6">
-                  <div className="flex items-center gap-4">
-                    <div className="w-12 h-px bg-gold-600/40"></div>
-                    <span className="text-gold-600 text-[10px] tracking-[0.5em] uppercase font-bold">POSITIONING</span>
-                  </div>
-                  <h2 className="text-4xl sm:text-5xl lg:text-6xl font-display text-white leading-tight">
-                    <span className="block">不是顧問公司；</span>
-                    <span className="block mt-2">
-                      而是<span className="metallic-gold-text">治理文明平台</span>。
-                    </span>
-                  </h2>
-                  <p className="text-stone-300 text-sm sm:text-base leading-relaxed max-w-xl">
-                    在不確定的時代，企業需要的不是更多建議，而是一套能守住秩序、創造價值的治理系統。
-                  </p>
-                  
-                  <div className="space-y-1 pt-2">
-                    <div className="metallic-gold-text text-3xl font-display font-medium">Eric Chuang</div>
-                    <p className="text-[9px] tracking-[0.4em] text-stone-500 uppercase font-black">Founder, STT Strategic Think Tank</p>
-                  </div>
-                </div>
-
-                {/* Right Column */}
-                <div className="w-full lg:w-1/2 flex flex-col justify-between space-y-6">
-                   <div className="grid grid-cols-2 gap-4 sm:gap-6 relative z-10 w-full">
-                      {[
-                        { label: "治理秩序", sub: "Governance Order" },
-                        { label: "決策系統", sub: "Decision Systems" },
-                        { label: "長期信任", sub: "Institutional Trust" },
-                        { label: "法遵治理", sub: "Compliance Governance" },
-                        { label: "家族傳承", sub: "Family Succession" },
-                        { label: "高階策略整合", sub: "Executive Alliance" }
-                      ].map((p, i) => (
-                        <div key={i} className="flex flex-col gap-0.5 border-b border-white/5 pb-2">
-                          <p className="text-base sm:text-lg text-white font-display">{p.label}</p>
-                          <p className="text-[9px] text-gold-600/60 uppercase tracking-widest">{p.sub}</p>
-                        </div>
-                      ))}
-                   </div>
-                   
-                   {/* Clickable Quote Box as requested */}
-                   <div 
-                     onClick={() => goToSection('strategist')}
-                     className="border border-white/10 p-5 sm:p-6 bg-zinc-950/70 hover:bg-zinc-900/80 hover:border-gold-400/40 cursor-pointer transition-all duration-300 backdrop-blur-sm shadow-[0_4px_20px_rgba(0,0,0,0.5)] group relative overflow-hidden"
-                   >
-                      <div className="absolute top-0 left-0 w-1 h-full bg-gold-400/0 group-hover:bg-[#e6c84c] transition-colors duration-300"></div>
-                      <p className="text-stone-200 text-sm sm:text-base leading-relaxed tracking-wide group-hover:text-[#e6c84c] transition-colors">
-                        「STT 不只是提供建議，而是協助企業建立不可動搖的治理秩序與文明架構。」
-                      </p>
-                      <p className="text-[9px] text-gold-500/60 tracking-wider text-right mt-2.5 font-mono uppercase group-hover:text-gold-400 transition-colors">
-                        CLICK TO VIEW STRATEGIST ➔
-                      </p>
-                   </div>
-                </div>
-
-              </div>
-            </div>
-          </motion.section>
-        );
-
-      case 'strategist':
-        return (
-          <motion.section 
-            key="strategist"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.6 }}
-            className="strategic-bg-container relative border-y border-white/5 w-full h-auto lg:h-[calc(100vh-80px)] min-h-[calc(100vh-80px)] lg:overflow-hidden flex flex-col justify-end py-12 lg:py-0"
-          >
-            <div 
-              className="strategic-bg-image" 
-              style={{ backgroundImage: "url('/images/bg-strategist-spotlight.png')" }}
-            ></div>
-            <div className="strategic-bg-overlay"></div>
-
-            <div className="container mx-auto px-4 md:px-6 relative z-10 h-full flex flex-col justify-end max-w-7xl">
-              <div className="flex flex-col-reverse lg:flex-row gap-12 lg:gap-16 xl:gap-24 items-center lg:items-stretch h-full w-full justify-between">
-                 
-                 {/* Left Column (Portrait) */}
-                 <div className="w-full lg:w-[42%] flex items-end justify-center lg:justify-start relative z-10 h-auto lg:h-full">
-                    <div className="relative group w-[440px] max-w-full flex justify-center items-end h-[280px] xs:h-[340px] sm:h-[440px] md:h-auto lg:h-[70vh] xl:h-[75vh] max-h-[640px]">
-                      <div className="absolute -inset-4 bg-gold-600/5 blur-3xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-1000 z-0"></div>
-                      
-                      {/* Perfectly centered vertical gold thin frame design directly behind the portrait */}
-                      <div className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 flex flex-col items-center gap-4 z-0 pointer-events-none select-none">
-                        <div className="w-px h-32 bg-[#e6c84c]/25"></div>
-                        <span className="font-mono text-[9px] tracking-[0.4em] text-white/35 uppercase whitespace-nowrap [writing-mode:vertical-lr]">
-                          STRATEGIC THINK TANK PLATFORM
-                        </span>
-                        <div className="w-1.5 h-1.5 rounded-full bg-[#e6c84c]/50"></div>
-                        <div className="w-px h-24 bg-[#e6c84c]/25"></div>
-                      </div>
-
-                      <img
-                        src="/images/portrait-002.png"
-                        alt="莊鈞翔博士"
-                        style={{ 
-                          display: 'block', 
-                          width: 'auto', 
-                          objectFit: 'contain', 
-                          objectPosition: 'bottom center',
-                          transformOrigin: 'bottom center'
-                        }}
-                        onClick={() => goToSection('insights')}
-                        className="strategist-portrait h-[280px] xs:h-[340px] sm:h-[440px] md:h-full max-w-full md:max-w-none relative z-10 cursor-pointer hover:brightness-110 transition-all duration-300"
-                      />
-
-                      {/* Floating overlay click indicator */}
-                      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 bg-black/60 backdrop-blur-md border border-[#e6c84c]/30 px-3 py-1.5 rounded-full text-[9px] tracking-widest text-[#e6c84c] z-20 pointer-events-none uppercase">
-                        點擊肖像 進入智庫觀點 ➔
-                      </div>
-                    </div>
-                  </div>
-
-                 {/* Right Column (Text / Info) */}
-                 <div className="w-full lg:w-[54%] flex flex-col justify-center space-y-4 lg:space-y-6 py-6 lg:py-10 font-sans text-left z-10 lg:pl-4">
-                   <div className="space-y-1.5">
-                     <p className="text-[#e6c84c] text-[10px] tracking-[0.5em] uppercase font-bold">THE STRATEGIST</p>
-                     <h2 className="text-3xl lg:text-4xl font-serif text-white tracking-wide font-normal">治理判讀者</h2>
-                     <p className="text-stone-400 text-xs sm:text-sm leading-relaxed max-w-xl font-light">
-                       莊鈞翔博士長期致力於建立高信任、可長期存續的治理文明架構；透過對「決策秩序」的深度校準，為企業預判策略風險與利潤風險。
-                     </p>
-                   </div>
-
-                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 lg:gap-4 pt-2 max-w-xl">
-                      {[
-                        { label: "企業治理與法治合規", icon: <ShieldCheck className="w-4 h-4 text-[#e6c84c]" /> },
-                        { label: "家族傳承與長期治理", icon: <Users className="w-4 h-4 text-[#e6c84c]" /> },
-                        { label: "決策結構與內在秩序", icon: <Scale className="w-4 h-4 text-[#e6c84c]" /> },
-                        { label: "數位法治與 AI 治理", icon: <Brain className="w-4 h-4 text-[#e6c84c]" /> },
-                        { label: "組織秩序之對策判讀", icon: <Globe className="w-4 h-4 text-[#e6c84c]" /> },
-                        { label: "高信任治理文明架構", icon: <Award className="w-4 h-4 text-[#e6c84c]" /> }
-                      ].map((item, i) => (
-                        <div key={i} className="flex items-center gap-3 group">
-                          <div className="p-1 border border-white/5 bg-zinc-950/80 group-hover:border-[#e6c84c]/30 group-hover:bg-zinc-900 transition-all">
-                            {item.icon}
-                          </div>
-                          <span className="text-xs sm:text-sm font-sans font-light text-stone-300 group-hover:text-white transition-colors tracking-wide">{item.label}</span>
-                        </div>
-                      ))}
-                   </div>
-
-                   <div className="border-l border-[#e6c84c] bg-zinc-950/40 max-w-xl p-4">
-                      <p className="text-stone-300 italic text-xs sm:text-sm leading-relaxed">
-                         「治理的本質，不是控制，而是確保秩序與信任長期存在。」
-                      </p>
-                      <div className="mt-2 flex items-center gap-4">
-                         <div className="text-stone-500 font-serif text-xs font-medium">— 莊鈞翔博士</div>
-                      </div>
-                   </div>
-                 </div>
-
-              </div>
-            </div>
-          </motion.section>
-        );
-
-      case 'insights':
-        return (
-          <motion.section 
-            key="insights"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.6 }}
-            className="strategic-bg-container w-full h-auto lg:h-[calc(100vh-80px)] min-h-[calc(100vh-80px)] lg:overflow-hidden flex flex-col justify-center py-12 lg:py-10 bg-[#050505] border-t border-white/5"
-          >
-            <div 
-              className="strategic-bg-image opacity-30" 
-              style={{ 
-                backgroundImage: "url('/images/bg-insights-globe.png')",
-                backgroundPosition: "right top",
-                backgroundRepeat: "no-repeat",
-                backgroundSize: "600px"
-              }}
-            ></div>
-            <div className="strategic-bg-overlay bg-[#050505]/30"></div>
-            <div className="container mx-auto px-4 md:px-6 relative z-10 h-full flex flex-col justify-center max-w-7xl">
-              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-6 sm:gap-4 mb-10">
-                 <div className="space-y-2">
-                    <p className="text-gold-600 text-[10px] tracking-[0.5em] uppercase font-bold">GOVERNANCE INSIGHTS</p>
-                    <h2 className="text-4xl font-display text-white">智庫觀點</h2>
-                    <p className="text-stone-500 text-xs sm:text-sm">深入探討治理、策略與法律的關鍵議題，提供專業洞見與實務指引。</p>
-                 </div>
-                 <button 
-                   onClick={() => onNavigate('columns')}
-                   className="text-stone-400 hover:text-gold-600 transition-colors text-xs font-bold tracking-widest uppercase flex items-center gap-3 no-underline bg-transparent border-0 cursor-pointer"
-                 >
-                    ARCHIVE VIEW <ArrowRight className="w-4 h-4" />
-                 </button>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {articles.slice(0, 3).map((article, i) => (
-                  <div 
-                    key={i} 
-                    className="group cursor-pointer bg-zinc-950 p-6 border border-white/5 hover:border-gold-600/30 transition-all duration-500 flex flex-col justify-between min-h-[280px]"
-                    onClick={() => window.open(article.url, '_blank')}
-                  >
-                    <div>
-                      <div className="flex justify-between items-center mb-6">
-                         <div className="flex items-center gap-3">
-                            <GradmarkIcon className="w-4 h-4 text-gold-600/60" />
-                            <span className="text-[9px] text-stone-500 uppercase tracking-widest">{article.category}</span>
-                         </div>
-                         <span className="text-[9px] text-stone-700 font-mono italic">{article.date}</span>
-                      </div>
-                      <h3 className="text-lg font-display text-white group-hover:text-gold-400 transition-colors mb-4 leading-snug">
-                        {article.title}
-                      </h3>
-                      <p className="text-stone-500 text-xs line-clamp-3 leading-relaxed italic mb-6">
-                        {article.excerpt}
-                      </p>
-                    </div>
-                    <div className="flex justify-between items-center pt-4 border-t border-white/5">
-                       <button className="text-[9px] font-bold text-[#e6c84c] tracking-widest uppercase flex items-center gap-2 bg-transparent border-0 cursor-pointer">
-                          READ JOURNAL <ArrowRight className="w-3 h-3" />
-                       </button>
-                       <BookOpen className="w-3.5 h-3.5 text-stone-700" />
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </motion.section>
-        );
-
-      default:
-        return null;
-    }
-  };
+  const goToProblem = (id: string) => navigate(`/problems#${id}`);
 
   return (
-    <div className="bg-[#050505] min-h-screen text-stone-200">
-      <AnimatePresence mode="wait">
-        {renderActiveSection()}
-      </AnimatePresence>
+    <div className="stt-rs-home">
+      <style>{`
+        .stt-rs-home{--ink:#27231f;--muted:#726b61;--gold:#a87a40;--line:#d9cab1;--paper:#fbfaf7;--paper2:#f2eee7;min-height:100vh;background:var(--paper);color:var(--ink);font-family:Inter,system-ui,sans-serif}
+        .stt-rs-home *{box-sizing:border-box}
+        .stt-rs-shell{max-width:1260px;margin:0 auto;padding:0 28px}
+        .stt-rs-header{position:absolute;z-index:10;top:0;left:0;right:0;border-bottom:1px solid rgba(164,128,81,.22);background:rgba(251,250,247,.76);backdrop-filter:blur(16px)}
+        .stt-rs-header-inner{height:80px;display:flex;align-items:center;gap:30px}
+        .stt-rs-brand{margin-right:auto;border:0;background:transparent;text-align:left;cursor:pointer;color:var(--ink)}
+        .stt-rs-brand strong{display:block;font-family:'Noto Serif TC',Georgia,serif;font-size:18px;letter-spacing:.05em;font-weight:500}
+        .stt-rs-brand span{display:block;margin-top:5px;color:var(--gold);font-size:8px;letter-spacing:.26em;text-transform:uppercase}
+        .stt-rs-nav{display:flex;align-items:center;gap:24px}
+        .stt-rs-nav button{border:0;background:transparent;color:#625b52;font-size:12px;cursor:pointer}
+        .stt-rs-start{border:1px solid #b68b54!important;padding:10px 16px!important;color:#885f31!important}
+        .stt-rs-hero{position:relative;min-height:100svh;display:flex;align-items:center;overflow:hidden;background:linear-gradient(118deg,#fbfaf7 0%,#fbfaf7 48%,#f3efe8 48%,#ece6dc 100%)}
+        .stt-rs-hero:before{content:'';position:absolute;right:-7vw;top:8vh;width:54vw;height:80vh;border-left:1px solid rgba(170,132,82,.30);border-radius:50% 0 0 50%;transform:rotate(-5deg)}
+        .stt-rs-hero:after{content:'';position:absolute;right:11vw;top:17vh;width:29vw;height:62vh;border:1px solid rgba(170,132,82,.18);border-bottom:0;box-shadow:inset 18px 0 40px rgba(255,255,255,.72)}
+        .stt-rs-hero-grid{position:relative;z-index:2;display:grid;grid-template-columns:minmax(0,1.04fr) minmax(340px,.96fr);gap:8vw;align-items:center;padding-top:120px;padding-bottom:80px}
+        .stt-rs-eyebrow{color:var(--gold);font-size:10px;letter-spacing:.28em;text-transform:uppercase}
+        .stt-rs-hero h1{max-width:760px;margin:24px 0 0;font-family:'Noto Serif TC',Georgia,serif;font-size:clamp(42px,5.5vw,76px);font-weight:400;line-height:1.25;letter-spacing:-.02em}
+        .stt-rs-hero-copy{max-width:700px;margin:28px 0 0;color:var(--muted);font-size:17px;line-height:2}
+        .stt-rs-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:34px}
+        .stt-rs-actions button{padding:13px 20px;border:1px solid #b68b54;background:transparent;color:#80572b;font-size:13px;cursor:pointer}
+        .stt-rs-actions button:first-child{background:#b68b54;color:white}
+        .stt-rs-object{position:relative;min-height:560px}
+        .stt-rs-plinth{position:absolute;right:7%;bottom:8%;width:70%;height:18%;background:linear-gradient(180deg,#eee8de,#d9d0c3);box-shadow:0 25px 55px rgba(76,62,44,.13);border-top:1px solid rgba(255,255,255,.8)}
+        .stt-rs-column{position:absolute;right:17%;bottom:24%;width:23%;height:58%;background:linear-gradient(90deg,#ddd5c8,#f8f5ef 30%,#d9d0c2 72%,#c9bdae);box-shadow:12px 20px 45px rgba(65,52,37,.13)}
+        .stt-rs-column:before,.stt-rs-column:after{content:'';position:absolute;left:-18%;width:136%;height:8%;background:linear-gradient(180deg,#eee8de,#cfc4b5)}
+        .stt-rs-column:before{top:-8%}.stt-rs-column:after{bottom:-8%}
+        .stt-rs-orb{position:absolute;right:48%;bottom:31%;width:82px;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 32% 28%,#f6dfb8 0%,#c69757 28%,#9a6a31 62%,#6e4824 100%);box-shadow:0 18px 40px rgba(118,83,41,.25)}
+        .stt-rs-axis{position:absolute;right:42%;bottom:44%;width:43%;height:1px;background:linear-gradient(90deg,transparent,rgba(166,125,72,.48),transparent);transform:rotate(-17deg);transform-origin:right center}
+        .stt-rs-section{padding:110px 0;border-top:1px solid var(--line)}
+        .stt-rs-heading{max-width:860px;font-family:'Noto Serif TC',Georgia,serif;font-size:clamp(34px,4vw,54px);font-weight:400;line-height:1.35;margin:16px 0 0}
+        .stt-rs-lead{max-width:760px;margin-top:18px;color:var(--muted);font-size:15px;line-height:2}
+        .stt-rs-problem-list{margin-top:50px;border-top:1px solid var(--line)}
+        .stt-rs-problem{display:grid;grid-template-columns:82px 1fr auto;gap:22px;align-items:center;padding:27px 0;border-bottom:1px solid var(--line);cursor:pointer}
+        .stt-rs-problem .n{font-family:Georgia,serif;color:#b18a55;font-size:19px}.stt-rs-problem .t{font-family:'Noto Serif TC',Georgia,serif;font-size:20px;line-height:1.7}.stt-rs-problem .tag{color:#8a6b43;font-size:11px;white-space:nowrap}
+        .stt-rs-dark{background:#27231f;color:#f6f1e8}.stt-rs-dark .stt-rs-eyebrow{color:#d1ad78}.stt-rs-dark .stt-rs-heading{color:#fffaf1}.stt-rs-dark .stt-rs-lead{color:#c8c0b6}
+        .stt-rs-misgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;margin-top:48px;background:#4b443c;border:1px solid #4b443c}
+        .stt-rs-mis{min-height:160px;padding:28px;background:#2f2a25;font-family:'Noto Serif TC',Georgia,serif;font-size:20px;line-height:1.7}.stt-rs-mis span{display:block;margin-bottom:16px;color:#d1ad78;font:10px Inter,sans-serif;letter-spacing:.22em}
+        .stt-rs-methods{margin-top:48px;border-top:1px solid var(--line)}
+        .stt-rs-method{display:grid;grid-template-columns:74px 130px 1fr;gap:20px;padding:25px 0;border-bottom:1px solid var(--line);align-items:start}.stt-rs-method .n{color:#b18a55;font-family:Georgia,serif}.stt-rs-method .name{font-family:'Noto Serif TC',Georgia,serif;font-size:21px}.stt-rs-method .desc{color:var(--muted);line-height:1.8}
+        .stt-rs-outcomes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0;margin-top:48px;border:1px solid var(--line)}
+        .stt-rs-outcome{min-height:120px;padding:26px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);background:white;font-family:'Noto Serif TC',Georgia,serif;font-size:19px;line-height:1.6}.stt-rs-outcome:nth-child(2n){border-right:0}
+        .stt-rs-proof-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:24px;margin-top:48px}.stt-rs-proof{min-height:320px;padding:38px;border:1px solid var(--line);background:white}.stt-rs-proof h3{font-family:'Noto Serif TC',Georgia,serif;font-size:29px;font-weight:400;line-height:1.45}.stt-rs-proof p{margin-top:18px;color:var(--muted);line-height:1.9}.stt-rs-proof button{margin-top:28px;border:0;border-bottom:1px solid #a87a40;background:transparent;padding:0 0 5px;color:#81592d;cursor:pointer}
+        .stt-rs-legacy{background:linear-gradient(135deg,#eee8df,#fbfaf7)}.stt-rs-legacy-wrap{display:grid;grid-template-columns:.9fr 1.1fr;gap:9vw;align-items:center}.stt-rs-archive{position:relative;min-height:470px}.stt-rs-folder{position:absolute;left:8%;top:11%;width:72%;height:69%;border:1px solid #bfa984;background:linear-gradient(145deg,#e8dfd0,#f8f3ea);box-shadow:0 24px 52px rgba(80,66,49,.10);transform:rotate(-4deg)}.stt-rs-folder:before{content:'';position:absolute;left:8%;top:9%;width:82%;height:78%;border:1px solid rgba(152,116,70,.35);background:#fbfaf7}.stt-rs-folder:after{content:'';position:absolute;right:10%;bottom:10%;width:44px;height:44px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#d8b779,#a5743d 60%,#79502c)}
+        .stt-rs-authority{display:grid;grid-template-columns:1fr 1fr;gap:8vw;align-items:end}.stt-rs-authority-roles{border-top:1px solid var(--line)}.stt-rs-role{display:grid;grid-template-columns:160px 1fr;gap:20px;padding:20px 0;border-bottom:1px solid var(--line)}.stt-rs-role strong{font-family:Georgia,serif;font-weight:400;color:#8f6738}.stt-rs-role span{color:var(--muted);line-height:1.7}
+        .stt-rs-final{padding:120px 0;background:#f0ebe3;border-top:1px solid var(--line)}.stt-rs-final-card{max-width:1100px;margin:0 auto;padding:56px;border:1px solid #bea77e;background:#fbfaf7}.stt-rs-final-card h2{font-family:'Noto Serif TC',Georgia,serif;font-size:clamp(34px,4vw,52px);font-weight:400;line-height:1.35}.stt-rs-final-card p{max-width:760px;margin-top:20px;color:var(--muted);line-height:2}.stt-rs-final-card button{margin-top:28px;border:1px solid #b68b54;background:#b68b54;color:white;padding:14px 22px;cursor:pointer}
+        @media(max-width:900px){.stt-rs-nav{display:none}.stt-rs-shell{padding:0 20px}.stt-rs-hero-grid,.stt-rs-legacy-wrap,.stt-rs-authority,.stt-rs-proof-grid{grid-template-columns:1fr}.stt-rs-object{min-height:390px}.stt-rs-hero{padding-top:40px}.stt-rs-problem{grid-template-columns:54px 1fr}.stt-rs-problem .tag{display:none}.stt-rs-misgrid,.stt-rs-outcomes{grid-template-columns:1fr}.stt-rs-outcome{border-right:0}.stt-rs-method{grid-template-columns:46px 90px 1fr}.stt-rs-section{padding:82px 0}.stt-rs-authority{gap:45px}.stt-rs-final-card{padding:34px 26px}}
+        @media(max-width:620px){.stt-rs-hero-grid{padding-top:120px}.stt-rs-hero h1{font-size:42px}.stt-rs-object{min-height:310px}.stt-rs-orb{width:62px}.stt-rs-method{grid-template-columns:40px 1fr}.stt-rs-method .desc{grid-column:2}.stt-rs-problem .t{font-size:18px}.stt-rs-header-inner{height:70px}.stt-rs-section{padding:70px 0}}
+      `}</style>
 
-      {/* Elegant Full-screen Image Portal Modal */}
-      <AnimatePresence>
-        {activeImage && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setActiveImage(null)}
-            className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-black/95 backdrop-blur-xl p-4 md:p-8 cursor-pointer"
-          >
-            {/* Close Button */}
-            <button
-              onClick={() => setActiveImage(null)}
-              className="absolute top-6 right-6 text-stone-400 hover:text-gold-400 transition-colors bg-white/5 hover:bg-white/10 p-3 rounded-full border border-white/10 z-50 cursor-pointer"
-              aria-label="關閉"
-            >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
+      <header className="stt-rs-header">
+        <div className="stt-rs-shell stt-rs-header-inner">
+          <button className="stt-rs-brand" type="button" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
+            <strong>STT Governance</strong><span>Strategic Think Tank</span>
+          </button>
+          <nav className="stt-rs-nav" aria-label="Primary">
+            <button type="button" onClick={() => navigate("/problems")}>你正在面對什麼</button>
+            <button type="button" onClick={() => document.getElementById("how-stt-works")?.scrollIntoView({ behavior: "smooth" })}>莊博士怎麼處理</button>
+            <button type="button" onClick={() => onNavigate("columns")}>專欄判讀</button>
+            <button type="button" onClick={() => onNavigate("books")}>出版研究</button>
+            <button type="button" onClick={() => onNavigate("about")}>莊鈞翔博士</button>
+            <button type="button" className="stt-rs-start" onClick={() => navigate("/start")}>開始</button>
+          </nav>
+        </div>
+      </header>
 
-            {/* Image Container with entrance motion */}
-            <motion.div
-              initial={{ scale: 0.95, y: 15 }}
-              animate={{ scale: 1, y: 0 }}
-              exit={{ scale: 0.95, y: 15 }}
-              transition={{ type: "spring", damping: 25, stiffness: 180 }}
-              className="relative max-h-[85vh] max-w-[95vw] lg:max-w-4xl flex flex-col items-center shadow-[0_25px_60px_-15px_rgba(230,200,76,0.15)] rounded-lg overflow-hidden border border-gold-600/20 bg-zinc-950 p-6 md:p-10 text-center"
-              onClick={(e) => e.stopPropagation()} // Prevent closing when clicking the image box
-            >
-              {!imageError ? (
-                <img
-                  src={activeImage}
-                  alt="治理系統解說"
-                  className="max-h-[65vh] w-auto object-contain rounded"
-                  referrerPolicy="no-referrer"
-                  onError={() => setImageError(true)}
-                />
-              ) : (
-                <div className="flex flex-col items-center justify-center py-12 px-6 max-w-lg">
-                  <div className="w-16 h-16 rounded-full bg-gold-400/10 border border-gold-400/20 flex items-center justify-center mb-6">
-                    <svg className="w-8 h-8 text-gold-400 animate-pulse" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
-                    </svg>
-                  </div>
-                  <h3 className="text-lg font-medium text-stone-100 tracking-wider mb-3">
-                    【系統提示：請上傳專欄圖片】
-                  </h3>
-                  <p className="text-stone-400 text-sm leading-relaxed mb-6">
-                    我們已為您將此按鈕正確配置好連結。請將正確的圖片重新命為：
-                  </p>
-                  <div className="bg-white/5 border border-white/10 px-4 py-2.5 rounded font-mono text-xs text-gold-400 select-all mb-6 break-all">
-                    {activeImage.substring(activeImage.lastIndexOf('/') + 1)}
-                  </div>
-                  <p className="text-stone-500 text-xs leading-relaxed">
-                    並點擊左側檔案樹，將圖片上傳或拖曳至 <span className="font-mono text-stone-300">/public/images/</span> 資料夾。
-                    上傳完成後，系統將會在此立即完美呈現！
-                  </p>
-                </div>
-              )}
-              
-              <div className="w-full text-center py-2.5 mt-4 border-t border-white/5">
-                <p className="text-[11px] text-stone-400 tracking-[0.2em] uppercase font-mono mb-1">STT Press · SYSTEM DEPLOYMENT PREVIEW</p>
-                <p className="text-[10px] text-gold-500/60 tracking-[0.1em]">
-                  {imageError ? "請於左側目錄補上圖片後重新整理，或點擊任意處、右上角關閉" : "點擊任意黑底處或右上角關閉"}
-                </p>
+      <section className="stt-rs-hero" id="hero">
+        <div className="stt-rs-shell stt-rs-hero-grid">
+          <div>
+            <p className="stt-rs-eyebrow">STT Governance</p>
+            <h1>很多事情，不是無法處理；而是往往等到太晚才開始處理。</h1>
+            <p className="stt-rs-hero-copy">協助企業、家族與重大決策者，把未來可能後悔的事情，提前帶到今天理解、判斷、安排與執行。</p>
+            <div className="stt-rs-actions">
+              <button type="button" onClick={() => navigate("/problems")}>看看我正在面對的問題</button>
+              <button type="button" onClick={() => document.getElementById("how-stt-works")?.scrollIntoView({ behavior: "smooth" })}>莊博士怎麼處理</button>
+            </div>
+          </div>
+          <div className="stt-rs-object" aria-hidden="true">
+            <div className="stt-rs-axis" /><div className="stt-rs-plinth" /><div className="stt-rs-column" /><div className="stt-rs-orb" />
+          </div>
+        </div>
+      </section>
+
+      <section className="stt-rs-section" id="problems">
+        <div className="stt-rs-shell">
+          <p className="stt-rs-eyebrow">Where Governance Begins</p>
+          <h2 className="stt-rs-heading">現在發生了什麼，而你最不希望接下來發生什麼？</h2>
+          <p className="stt-rs-lead">使用者不需要先理解 Governance、Compliance 或 Decision Intelligence。先從自己真正正在發生的事情開始。</p>
+          <div className="stt-rs-problem-list">
+            {problemEntries.map(([tag, title, id], index) => (
+              <div className="stt-rs-problem" key={id} role="button" tabIndex={0} onClick={() => goToProblem(id)} onKeyDown={(event) => event.key === "Enter" && goToProblem(id)}>
+                <span className="n">{String(index + 1).padStart(2, "0")}</span><span className="t">{title}</span><span className="tag">{tag} →</span>
               </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="stt-rs-section stt-rs-dark" id="misjudgment">
+        <div className="stt-rs-shell">
+          <p className="stt-rs-eyebrow">Why We Misjudge</p>
+          <h2 className="stt-rs-heading">企業真正危險的，通常不是沒有答案，而是在錯誤的問題上得到一個非常完整的答案。</h2>
+          <p className="stt-rs-lead">STT 不把「更多分析」直接等同「更好的決策」。先找出誤判如何形成，才有資格談後面的最佳方案。</p>
+          <div className="stt-rs-misgrid">
+            {misjudgments.map((item, index) => <div className="stt-rs-mis" key={item}><span>MISJUDGMENT {String(index + 1).padStart(2, "0")}</span>{item}</div>)}
+          </div>
+        </div>
+      </section>
+
+      <section className="stt-rs-section" id="how-stt-works">
+        <div className="stt-rs-shell">
+          <p className="stt-rs-eyebrow">How STT Works</p>
+          <h2 className="stt-rs-heading">不是把抽象治理交給客戶，而是把問題變成可以判斷、可以執行、可以驗收的結果。</h2>
+          <div className="stt-rs-methods">
+            {methods.map(([n, name, desc]) => <div className="stt-rs-method" key={n}><span className="n">{n}</span><span className="name">{name}</span><span className="desc">{desc}</span></div>)}
+          </div>
+        </div>
+      </section>
+
+      <section className="stt-rs-section" id="outcomes">
+        <div className="stt-rs-shell">
+          <p className="stt-rs-eyebrow">What You Can Get</p>
+          <h2 className="stt-rs-heading">最後拿到的，不應只是「一份建議」。</h2>
+          <p className="stt-rs-lead">每一個治理議題都必須能落成具體交付，才有資格進入企業日常與真正的決策現場。</p>
+          <div className="stt-rs-outcomes">{outcomes.map((item) => <div className="stt-rs-outcome" key={item}>{item}</div>)}</div>
+        </div>
+      </section>
+
+      <section className="stt-rs-section" id="intelligence">
+        <div className="stt-rs-shell">
+          <p className="stt-rs-eyebrow">Judgment Library</p>
+          <h2 className="stt-rs-heading">專欄不是內容倉庫，而是讓人先認出「原來我可能一直把問題想錯了」。</h2>
+          <div className="stt-rs-proof-grid">
+            <article className="stt-rs-proof"><p className="stt-rs-eyebrow">STT Intelligence</p><h3>從錯誤直覺切入，再把法律、策略、證據與治理重新接回現實。</h3><p>文章未來會以 Problem Node 管理：它正在處理什麼問題、常見誤判是什麼、需要哪些證據、可能形成什麼結果，以及讀者下一步應走哪一條治理路徑。</p><button type="button" onClick={() => onNavigate("columns")}>進入專欄判讀 →</button></article>
+            <article className="stt-rs-proof"><p className="stt-rs-eyebrow">Canon & Research</p><h3>文章先讓人看見問題；書籍與研究讓人把問題真正想深。</h3><p>《內在法遵》系列、家族治理、決策治理、企業治理與 AI Governance，不作為商城分類，而作為更深的判斷入口。</p><button type="button" onClick={() => onNavigate("books")}>進入出版研究 →</button></article>
+          </div>
+        </div>
+      </section>
+
+      <section className="stt-rs-section stt-rs-legacy" id="legacy">
+        <div className="stt-rs-shell stt-rs-legacy-wrap">
+          <div className="stt-rs-archive" aria-hidden="true"><div className="stt-rs-folder" /></div>
+          <div><p className="stt-rs-eyebrow">Humanistic Landscape · Founder Legacy</p><h2 className="stt-rs-heading">趁一個人還能說、還能修正的時候，把只有他知道的東西留下來。</h2><p className="stt-rs-lead">人物採訪、企業史、創辦人判斷、家族記憶與企業文化，不只是內容。它們可以成為下一代仍有機會理解的治理記憶與知識資產。</p><div className="stt-rs-actions"><button type="button" onClick={() => navigate("/start?route=founder-legacy")}>了解人文／傳承專案</button></div></div>
+        </div>
+      </section>
+
+      <section className="stt-rs-section" id="authority">
+        <div className="stt-rs-shell stt-rs-authority">
+          <div><p className="stt-rs-eyebrow">Governance Authority</p><h2 className="stt-rs-heading">莊鈞翔博士，不是網站裡的一張 Founder 履歷卡，而是最終治理判讀者。</h2><p className="stt-rs-lead">AI 可以整理、比較、搜尋、模擬與提出反方；律師、會計師及其他專業者在必要時承擔各自專業責任。STT 的差異，是有人負責把問題定義、證據門檻、專業衝突、風險承擔與最終決定放在同一張桌上。</p><div className="stt-rs-actions"><button type="button" onClick={() => onNavigate("about")}>認識莊鈞翔博士</button></div></div>
+          <div className="stt-rs-authority-roles"><div className="stt-rs-role"><strong>Problem Framing</strong><span>決定真正需要被回答的問題是什麼。</span></div><div className="stt-rs-role"><strong>Authority Allocation</strong><span>決定 AI、律師、會計師、當事人各自處理哪一段。</span></div><div className="stt-rs-role"><strong>Conflict Arbitration</strong><span>不同事實或專業意見衝突時，要求重新驗證。</span></div><div className="stt-rs-role"><strong>Risk Acceptance</strong><span>判斷哪些風險可以承擔、哪些不可逆風險不應被交換。</span></div><div className="stt-rs-role"><strong>Final Judgment</strong><span>形成最後可以執行、可以說明、可以承擔的治理判讀。</span></div></div>
+        </div>
+      </section>
+
+      <section className="stt-rs-final" id="start">
+        <div className="stt-rs-shell"><div className="stt-rs-final-card"><p className="stt-rs-eyebrow">Governance Engagement</p><h2>不用先知道自己需要哪一種顧問。先把真正發生的事情說清楚。</h2><p>告訴 STT：現在發生了什麼、最不希望發生什麼，以及希望事情最後變成什麼。先形成問題與結果，再決定是否需要策略、法務、家族、AI 或其他專業進場。</p><button type="button" onClick={() => navigate("/start")}>開始治理判斷</button></div></div>
+      </section>
     </div>
-  );
-}
-
-function GradmarkIcon({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
-      <path d="M22 10v6M2 10l10-5 10 5-10 5L2 10z" />
-      <path d="M6 12v5c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2v-5" />
-    </svg>
   );
 }

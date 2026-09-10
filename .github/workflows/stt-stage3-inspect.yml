@@ -1,0 +1,48 @@
+name: STT Stage 3 Source Inspection
+on:
+  push:
+    branches: [rebuild/stt-approved-white-gold-v1]
+    paths: [.github/workflows/stt-stage3-inspect.yml]
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Inspect actual image bytes and export editable sources
+        run: |
+          set -euo pipefail
+          pip -q install Pillow
+          mkdir -p stage3-inspection
+          python - <<'PY'
+          import io,json,hashlib,zipfile,subprocess
+          from pathlib import Path
+          from PIL import Image
+          out=Path('stage3-inspection')
+          report={'commit':subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip(),'images':[]}
+          for p in Path('public').rglob('*'):
+              if p.suffix.lower() not in {'.png','.jpg','.jpeg','.webp'}:continue
+              b=p.read_bytes(); item={'path':str(p),'bytes':len(b),'sha256':hashlib.sha256(b).hexdigest()}
+              try:
+                  im=Image.open(io.BytesIO(b));im.load();item.update(valid=True,size=im.size)
+              except Exception as e:item.update(valid=False,error=str(e),prefix=b[:80].hex())
+              report['images'].append(item)
+          (out/'image-audit.json').write_text(json.dumps(report,ensure_ascii=False,indent=2))
+          with zipfile.ZipFile(out/'stage3-sources.zip','w',zipfile.ZIP_DEFLATED) as z:
+              for folder in ['src','scripts','tests','docs','api','data','.github/workflows','public/visual-bank','public/data']:
+                  for p in Path(folder).rglob('*'):
+                      if p.is_file() and p.stat().st_size<8000000:z.write(p,str(p))
+              for n in ['AGENTS.md','package.json','package-lock.json','tsconfig.json','vite.config.ts','vercel.json','server.ts','index.html']:
+                  if Path(n).is_file():z.write(n,n)
+          print(json.dumps({'invalid':[x for x in report['images'] if not x['valid']]},ensure_ascii=False,indent=2))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: stt-stage3-source-inspection
+          path: stage3-inspection/
+          retention-days: 7

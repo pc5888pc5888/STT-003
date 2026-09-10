@@ -1,0 +1,66 @@
+name: logo-audit
+on:
+  push:
+    branches:
+      - rebuild/stt-approved-white-gold-v1
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install pillow
+      - name: Verify exact approved STT logo payload
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import base64, hashlib, io
+          from PIL import Image
+
+          expected = {
+            'chunk00.txt':'ccf0600a016fc5d4842fd6dc99a9bc73afc7699fefc7805452eaf0b15d8ef404',
+            'chunk01.txt':'b2d33ee0a07f76313922a732aff4d35f237a4891f15d8131e6dbc3662efb55b7',
+            'chunk02.txt':'af6fde9e6d71dc0ae6b02f720e67944ccc23b1c127b31806ebb14efb6703b064',
+            'chunk03.txt':'a831e0260f501b44edcd1829d33586ed9feac707656eb4a43057883c7fe77a8e',
+            'chunk04_05.txt':'764f9405565715180211488a7307de2ebd33d40bd73e5efb3f8ef5c07aa59625',
+            'chunk06_07.txt':'c89965781e347160298c0e7fb607ee35e01dddf789b85a4c09525618129e1959',
+            'chunk08_0.txt':'159a500bf0f725c9ec2e5cd14c5fafb555eba516f0c0e7d0ee537838eebd48bc',
+            'chunk08_1.txt':'181866018d2790bd03e428c0e82f95d652c9bbc2e9304705fdc6b82f4d72bc58',
+            'chunk09_0.txt':'848d602562bfec550c6c38741868f64d178018d2ce47498aa647b4ce59299143',
+            'chunk09_1.txt':'51cfd34bb54e2f2a743fd10de957df27a04d52ff1aa34b816653d5cb039799b0',
+            'chunk10_11.txt':'8c515a7905c7b6c653606a3243dc2740bb53948a12b5beef64752f829951bf3c',
+            'chunk12.txt':'e29b4e005dfcb8d7a59bc9d5d5823cec4933a82b550469e138240fb4e08c1b64',
+            'chunk13.txt':'7ce5e03d2ceffcba80f57862888d2de7378ccdeed4de30951b62c05f8d9ff19d',
+            'chunk14.txt':'ae34d8f7d9b5577710cdd65b702f83c27d999e664bd89cdf33531238b10eca0b',
+            'chunk15.txt':'2a6fd202d352130469a49db205217203905c10026c87051dba99bfd74d8c85b3',
+            'chunk16.txt':'915df62ee6ff7140b8a4f276a96414224d3302329942679c15914630eedbb397',
+            'chunk17.txt':'e9fded7940793d5cb5dc33485a69d39d0c6b97a5ba0032dbad51dfd3ef331c33',
+          }
+          base = Path('src/assets/stt-logo-exact')
+          bad=[]
+          for name,want in expected.items():
+              data=(base/name).read_bytes()
+              got=hashlib.sha256(data).hexdigest()
+              ok=got==want
+              print(name, len(data), got, 'PASS' if ok else 'FAIL expected='+want)
+              if not ok: bad.append(name)
+          assert not bad, 'chunk mismatch: '+', '.join(bad)
+
+          files = [
+              'chunk00.txt','chunk01.txt','chunk02.txt','chunk03.txt',
+              'chunk04_05.txt','chunk06_07.txt',
+              'chunk08_0.txt','chunk08_1.txt','chunk09_0.txt','chunk09_1.txt',
+              'chunk10_11.txt','chunk12.txt','chunk13.txt','chunk14.txt','chunk15.txt','chunk16.txt','chunk17.txt',
+          ]
+          payload=''.join((base/n).read_text().strip() for n in files)
+          assert len(payload)==105220, len(payload)
+          raw=base64.b64decode(payload, validate=True)
+          assert len(raw)==78914, len(raw)
+          digest=hashlib.sha256(raw).hexdigest()
+          assert digest=='76e8a86218610db60952f1427a90019182225847d7d597a178ad25263b60eefa', digest
+          image=Image.open(io.BytesIO(raw)); assert image.size==(884,250); image.verify()
+          print('STT logo payload PASS', digest, '884x250')
+          PY

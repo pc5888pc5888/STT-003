@@ -1,0 +1,85 @@
+name: STT Stage 2 Source Check
+on:
+  push:
+    branches: [rebuild/stt-approved-white-gold-v1]
+    paths: [.github/workflows/stt-stage2-source-check.yml]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Collect source and verify public author pagination
+        run: |
+          pip -q install beautifulsoup4==4.13.4
+          mkdir -p stage2-evidence
+          python - <<'PY'
+          import json, re, hashlib, zipfile, subprocess, pathlib, urllib.request, urllib.parse, http.cookiejar, time
+          from bs4 import BeautifulSoup
+          out=pathlib.Path('stage2-evidence')
+          with zipfile.ZipFile(out/'source.zip','w',zipfile.ZIP_DEFLATED) as z:
+              for name in subprocess.check_output(['git','ls-files'],text=True).splitlines():
+                  p=pathlib.Path(name)
+                  if p.is_file() and p.suffix.lower() in {'.ts','.tsx','.js','.mjs','.css','.json','.html','.md','.yml','.yaml','.svg','.txt'}:
+                      z.write(p,name)
+          base='https://94m.com.tw'; author=base+'/editors/ed55fc'
+          jar=http.cookiejar.CookieJar(); op=urllib.request.build_opener(urllib.request.HTTPCookieProcessor(jar))
+          headers={'User-Agent':'Mozilla/5.0 (compatible; STT-Author-Index/3.0)','Accept':'text/html'}
+          report={'source':author,'baselineCanonicalSha256':'6bc22afe721807e841c05643003d935b33f5d11c6e170572f148943c57993b20'}
+          rows={}
+          def text(v): return re.sub(r'\s+',' ',str(v or '')).strip()
+          def url(v):
+              u=urllib.parse.urlparse(urllib.parse.urljoin(base,str(v or '')))
+              return urllib.parse.urlunparse((u.scheme,u.netloc,u.path,'','',''))
+          def add(r):
+              if r['authorUrl']!=author or re.sub(r'\s+','',r['author'])!='莊鈞翔博士': return
+              if not re.fullmatch(r'https://94m\.com\.tw/articles/[A-Za-z0-9_-]+',r['url']): return
+              rows[r['url']]=r
+          try:
+              raw=op.open(urllib.request.Request(author,headers=headers),timeout=30).read().decode('utf-8')
+              s=BeautifulSoup(raw,'html.parser')
+              for c in s.select('div.box'):
+                  a=c.select_one('dl.text_dl > dt > a'); w=c.select_one('dd.writer a'); cat=c.select_one('dfn.func'); dt=c.select_one('dd.writer'); ex=c.select_one('dd.summary')
+                  if not all([a,w,cat,dt]): continue
+                  dates=re.search(r'20\d{2}/\d{2}/\d{2}\s+\d{2}:\d{2}',dt.get_text(' ',strip=True))
+                  add(dict(url=url(a.get('href')),title=text(a.get_text()),date=text(dates.group(0)) if dates else '',category=text(cat.get_text()),author=text(w.get_text()),authorUrl=url(w.get('href')),excerpt=text(ex.get_text()) if ex else ''))
+              report['initialCount']=len(rows)
+              more=s.find('more-block'); report['paginationProps']=dict(more.attrs) if more else None
+              csrf=s.find('meta',attrs={'name':'csrf-token'})
+              if more and csrf:
+                  attrs=more.attrs
+                  def prop(k): return attrs.get(k,attrs.get(':'+k,''))
+                  limit=int(prop('default_limit') or 12)
+                  for page in range(2,42):
+                      payload={'model':prop('model'),'id':prop('id'),'page':page,'limit':limit,'special':prop('special')}
+                      req=urllib.request.Request(base+'/articles/more',data=json.dumps(payload).encode(),headers={**headers,'Accept':'application/json','Content-Type':'application/json','X-CSRF-Token':csrf.get('content',''),'Origin':base,'Referer':author},method='POST')
+                      d=json.loads(op.open(req,timeout=30).read())
+                      articles=d.get('articles',[])
+                      if page==2: report['sample']=articles[:1]; report['responseStatus']=d.get('status')
+                      for a in articles:
+                          add(dict(url=url(a.get('article_path')),title=text(a.get('title')),date=text(a.get('start_at_time')),category=text(a.get('sub_category_title')),author=text(a.get('editor_name')),authorUrl=url(a.get('editor_url')),excerpt=text(a.get('intro'))))
+                      report['lastPage']=page
+                      if not articles or len(articles)<limit: break
+                      time.sleep(.25)
+              records=sorted(rows.values(),key=lambda a:a['url'])
+              canonical=json.dumps(records,ensure_ascii=False,sort_keys=True,separators=(',',':'))
+              report['canonicalSha256']=hashlib.sha256(canonical.encode()).hexdigest()
+              report['matchesUploadedBaseline']=report['canonicalSha256']==report['baselineCanonicalSha256']
+              report['total']=len(records); report['categories']={c:sum(a['category']==c for a in records) for c in sorted({a['category'] for a in records})}
+              (out/'live-author-records.json').write_text(canonical,encoding='utf-8')
+          except Exception as e:
+              report['error']=str(e)
+          (out/'source-report.json').write_text(json.dumps(report,ensure_ascii=False,indent=2),encoding='utf-8')
+          print(json.dumps({k:v for k,v in report.items() if k!='sample'},ensure_ascii=False,indent=2))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: stt-stage2-source-evidence
+          path: stage2-evidence/
+          retention-days: 7

@@ -1,0 +1,43 @@
+/* Route-specific Visual Asset Bank rails.
+   White remains the page field; imagery enters only from the right. */
+
+html[data-stt-route="/books"] .lib-hero{
+  background-image:linear-gradient(90deg,#fff 0%,#fff 56%,rgba(255,255,255,.86) 68%,rgba(255,255,255,.18) 88%),url('/visual-bank/stt/originals-20260910/publications.webp')!important;
+  background-position:center,right center!important;background-size:100% 100%,44% auto!important;background-repeat:no-repeat!important;
+}
+html[data-stt-route="/research"] .lib-hero{
+  background-image:linear-gradient(90deg,#fff 0%,#fff 56%,rgba(255,255,255,.86) 68%,rgba(255,255,255,.18) 88%),url('/visual-bank/stt/originals-20260910/publications.webp')!important;
+  background-position:center,right center!important;background-size:100% 100%,44% auto!important;background-repeat:no-repeat!important;
+}
+html[data-stt-route="/books/internal-compliance"] .lib-hero{
+  background-image:linear-gradient(90deg,#fff 0%,#fff 56%,rgba(255,255,255,.86) 68%,rgba(255,255,255,.18) 88%),url('/visual-bank/stt/originals-20260910/internal-compliance.webp')!important;
+  background-position:center,right center!important;background-size:100% 100%,44% auto!important;background-repeat:no-repeat!important;
+}
+
+html[data-stt-route="/domains/corporate-governance"] .domain-hero{
+  background-image:linear-gradient(90deg,#fff 0%,#fff 56%,rgba(255,255,255,.86) 68%,rgba(255,255,255,.18) 88%),url('/visual-bank/stt/originals-20260910/corporate-governance.webp')!important;
+  background-position:center,right center!important;background-size:100% 100%,42% auto!important;background-repeat:no-repeat!important;
+}
+html[data-stt-route="/domains/family-succession"] .domain-hero{
+  background-image:linear-gradient(90deg,#fff 0%,#fff 56%,rgba(255,255,255,.86) 68%,rgba(255,255,255,.18) 88%),url('/visual-bank/stt/originals-20260910/family-ownership.webp')!important;
+  background-position:center,right center!important;background-size:100% 100%,42% auto!important;background-repeat:no-repeat!important;
+}
+html[data-stt-route="/domains/strategic-legal"] .domain-hero{
+  background-image:linear-gradient(90deg,#fff 0%,#fff 56%,rgba(255,255,255,.86) 68%,rgba(255,255,255,.18) 88%),url('/visual-bank/stt/originals-20260910/strategic-legal.webp')!important;
+  background-position:center,right center!important;background-size:100% 100%,42% auto!important;background-repeat:no-repeat!important;
+}
+html[data-stt-route="/domains/compliance-contract"] .domain-hero{
+  background-image:linear-gradient(90deg,#fff 0%,#fff 56%,rgba(255,255,255,.86) 68%,rgba(255,255,255,.18) 88%),url('/visual-bank/stt/originals-20260910/internal-compliance.webp')!important;
+  background-position:center,right center!important;background-size:100% 100%,42% auto!important;background-repeat:no-repeat!important;
+}
+html[data-stt-route="/domains/human-ai-governance"] .domain-hero{
+  background-image:linear-gradient(90deg,#fff 0%,#fff 56%,rgba(255,255,255,.86) 68%,rgba(255,255,255,.18) 88%),url('/visual-bank/stt/originals-20260910/ai-governance.webp')!important;
+  background-position:center,right center!important;background-size:100% 100%,42% auto!important;background-repeat:no-repeat!important;
+}
+
+@media(max-width:900px){
+  html[data-stt-route] .lib-hero,
+  html[data-stt-route^="/domains/"] .domain-hero{
+    background-image:none!important;
+  }
+}

@@ -1,0 +1,121 @@
+name: STT Install Supplied Original Artwork
+on:
+  push:
+    branches: [rebuild/stt-approved-white-gold-v1]
+    paths:
+      - STT_Original_Artwork.zip
+      - scripts/install_original_artwork.py
+      - scripts/test_native_artwork.mjs
+      - .github/workflows/stt-install-original-artwork.yml
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: stt-install-supplied-originals
+  cancel-in-progress: false
+defaults:
+  run:
+    shell: bash
+jobs:
+  install-and-verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate source payload before changing application
+        id: source
+        run: |
+          set -euo pipefail
+          mkdir -p native-artwork-evidence
+          pip -q install Pillow beautifulsoup4==4.13.4
+          if test -f STT_Original_Artwork.zip; then
+            python scripts/install_original_artwork.py --package STT_Original_Artwork.zip
+            echo 'installed=true' >> "$GITHUB_OUTPUT"
+          else
+            python scripts/install_original_artwork.py --code-only
+            echo 'installed=false' >> "$GITHUB_OUTPUT"
+            echo 'Original artwork payload is not present. Compile-only preflight; no application changes will be committed.' >> "$GITHUB_STEP_SUMMARY"
+          fi
+      - name: Compile existing website and recheck article archive
+        run: |
+          set -euo pipefail
+          npm ci
+          npm run lint 2>&1 | tee native-artwork-evidence/typescript.txt
+          npm run build 2>&1 | tee native-artwork-evidence/build.txt
+          python -m unittest discover -s tests -p 'test_mmedia_sync.py' -v 2>&1 | tee native-artwork-evidence/archive-tests.txt
+          npx tsx scripts/test_mmedia_api.ts 2>&1 | tee native-artwork-evidence/api-tests.txt
+      - name: Export compiled code only for local rendering with supplied originals
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import zipfile
+          with zipfile.ZipFile('native-artwork-evidence/compiled-code.zip','w',zipfile.ZIP_DEFLATED) as z:
+              for p in Path('dist').rglob('*'):
+                  if p.is_file() and p.suffix in {'.js','.css','.html'}:
+                      z.write(p,str(p.relative_to('dist')))
+          PY
+      - name: Prepare browser quality test
+        if: steps.source.outputs.installed == 'true'
+        run: |
+          set -euo pipefail
+          sudo apt-get update -qq
+          sudo apt-get install -y fonts-noto-cjk
+          npm install -g agent-browser
+          npm install --prefix /tmp/stt-browser --no-save playwright
+      - name: Verify actual native pixels in desktop and mobile browser views
+        if: steps.source.outputs.installed == 'true'
+        run: |
+          set -euo pipefail
+          export CHROME_PATH="$(command -v google-chrome || command -v chromium)"
+          export AGENT_BROWSER_EXECUTABLE_PATH="$CHROME_PATH"
+          npx vite preview --host 127.0.0.1 --port 4173 > native-artwork-evidence/server.log 2>&1 &
+          PID=$!
+          trap 'kill "$PID" 2>/dev/null || true' EXIT
+          for i in $(seq 1 30); do curl -sf http://127.0.0.1:4173/ > /dev/null && break || sleep 1; done
+          curl -fsS http://127.0.0.1:4173/ > /dev/null
+          agent-browser open http://127.0.0.1:4173/domains/family-succession
+          agent-browser snapshot -i > native-artwork-evidence/interaction-snapshot.txt
+          agent-browser close
+          node scripts/test_native_artwork.mjs
+          mkdir -p stage2-evidence
+          node scripts/test_stage2_browser.mjs
+          cp stage2-evidence/browser-report.json native-artwork-evidence/column-regression.json
+      - name: Commit verified original images and matching application references
+        if: steps.source.outputs.installed == 'true'
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          import json, subprocess
+          report=json.loads(Path('native-artwork-evidence/native-browser-report.json').read_text())
+          assert report['passed'] and len(report['assets'])==15 and len(report['routes'])==44
+          allowed={'src/assetBankRuntime.ts','src/styles/stt-route-visuals-v1.css','src/styles/approved-stt.css','src/styles/stt-refinement-v4.css','src/components/RouteArtwork.tsx','src/pages/PublicCore.tsx','src/pages/HomeCanonical.tsx','src/main.tsx'}
+          changed=set(subprocess.check_output(['git','diff','--name-only'],text=True).splitlines())
+          assert changed <= allowed, 'Unexpected application file changed: '+str(changed-allowed)
+          assert subprocess.check_output(['git','diff','--','public/data/mmedia-catalog.json','src/sttLogo.ts','src/assets/stt-logo-exact'],text=True)==''
+          subprocess.check_call(['git','add',*sorted(allowed),'src/styles/stt-native-artwork.css','public/data/stt-original-artwork.json','public/visual-bank/stt/originals-20260910'])
+          PY
+          git config user.name "STT Verified Original Artwork"
+          git config user.email "actions@users.noreply.github.com"
+          if git diff --cached --quiet; then
+            echo 'Verified original artwork is already installed.' >> "$GITHUB_STEP_SUMMARY"
+          else
+            git commit -m "fix: replace website thumbnails with supplied original artwork after native-pixel and Retina checks"
+            git push origin HEAD:rebuild/stt-approved-white-gold-v1
+            git rev-parse HEAD > native-artwork-evidence/installed-commit.txt
+            echo 'Original artwork installed and verified. The connected Vercel Git integration will build this commit.' >> "$GITHUB_STEP_SUMMARY"
+          fi
+      - name: Save honest verification state
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: stt-original-artwork-installation
+          path: native-artwork-evidence/
+          retention-days: 7

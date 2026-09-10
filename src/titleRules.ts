@@ -1,0 +1,69 @@
+const TITLE_SELECTORS = [
+  "h1",
+  "h2",
+  ".stt-canon-sub",
+  ".domain-hero p",
+  ".lib-hero p",
+  ".gr-lead",
+  ".pd4-hero p",
+  ".legal-root h1 + p",
+  "[data-stt-title-sentence]",
+].join(",");
+
+function sentenceCount(text: string) {
+  return (text.match(/。/g) || []).length;
+}
+
+function applySentenceBreak(el: HTMLElement) {
+  if (el.dataset.sttSentenceBreak === "1") return;
+  if (el.children.length > 0 && !el.hasAttribute("data-stt-title-sentence")) return;
+
+  const text = (el.textContent || "").trim();
+  if (!text || sentenceCount(text) < 2) return;
+
+  const firstStop = text.indexOf("。");
+  if (firstStop < 0 || firstStop >= text.length - 1) return;
+
+  const first = text.slice(0, firstStop + 1).trim();
+  const second = text.slice(firstStop + 1).trim();
+  if (!second) return;
+
+  const firstLine = document.createElement("span");
+  firstLine.className = "stt-title-line";
+  firstLine.textContent = first;
+
+  const secondLine = document.createElement("span");
+  secondLine.className = "stt-title-line";
+  secondLine.textContent = second;
+
+  el.dataset.sttSentenceBreak = "1";
+  el.replaceChildren(firstLine, secondLine);
+}
+
+function applyTitleRules() {
+  document.documentElement.dataset.sttRoute = window.location.pathname || "/";
+  document.querySelectorAll<HTMLElement>(TITLE_SELECTORS).forEach(applySentenceBreak);
+  const heading = document.querySelector("main h1")?.textContent?.trim();
+  const title = window.location.pathname === "/" ? "STT Governance｜策略智庫" : heading ? `${heading} · STT Governance` : "STT Governance｜策略智庫";
+  if (document.title !== title) document.title = title;
+}
+
+let queued = false;
+function scheduleTitleRules() {
+  if (queued) return;
+  queued = true;
+  requestAnimationFrame(() => {
+    queued = false;
+    applyTitleRules();
+  });
+}
+
+if (typeof window !== "undefined") {
+  document.addEventListener("DOMContentLoaded", scheduleTitleRules, { once: true });
+  window.addEventListener("popstate", scheduleTitleRules);
+  new MutationObserver(scheduleTitleRules).observe(document.documentElement, {
+    subtree: true,
+    childList: true,
+  });
+  scheduleTitleRules();
+}

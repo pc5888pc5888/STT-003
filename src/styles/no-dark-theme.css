@@ -1,0 +1,96 @@
+/* STT / GCSDA light-governance override
+   Locked rule: no black / charcoal full-width sections. White-gold civilization remains the visual base. */
+
+:root{
+  --stt-ivory:#fbfaf7;
+  --stt-warm-white:#fffdf9;
+  --stt-champagne-mist:#f3e8d7;
+  --stt-stone:#ede4d7;
+  --stt-gold:#a9793e;
+  --stt-gold-line:#d8c3a3;
+  --stt-ink:#2a251f;
+  --stt-muted:#6f675d;
+}
+
+/* STT homepage: formerly dark risk / threshold sections */
+.hv-dark{
+  background:linear-gradient(135deg,#f1e4d2 0%,#f8f3eb 48%,#fffdf9 100%) !important;
+  color:var(--stt-ink) !important;
+  border-top:1px solid var(--stt-gold-line) !important;
+  border-bottom:1px solid var(--stt-gold-line) !important;
+}
+.hv-dark .hv-heading{color:var(--stt-ink) !important;}
+.hv-dark .hv-desc{color:var(--stt-muted) !important;}
+.hv-dark .hv-eyebrow{color:var(--stt-gold) !important;}
+.hv-mis{
+  background:var(--stt-gold-line) !important;
+  border-color:var(--stt-gold-line) !important;
+}
+.hv-mis div{
+  background:rgba(255,253,249,.96) !important;
+  color:var(--stt-ink) !important;
+}
+.hv-mis b{color:#9a6c34 !important;}
+
+.hv-final{
+  background:linear-gradient(120deg,#ead9bf 0%,#f5ecdf 52%,#fffdf9 100%) !important;
+  color:var(--stt-ink) !important;
+  border-top:1px solid var(--stt-gold-line) !important;
+}
+.hv-final h2{color:var(--stt-ink) !important;}
+.hv-final p{color:var(--stt-muted) !important;}
+.hv-final .hv-eyebrow{color:var(--stt-gold) !important;}
+.hv-final button{
+  background:#b7864b !important;
+  border-color:#b7864b !important;
+  color:#fffdf8 !important;
+}
+
+/* Problem detail: judgment method must not switch to charcoal */
+.pd-method{
+  background:linear-gradient(135deg,#f0e3d1 0%,#faf6ef 100%) !important;
+  color:var(--stt-ink) !important;
+  border:1px solid var(--stt-gold-line) !important;
+}
+.pd-method .pd-items{border-color:var(--stt-gold-line) !important;}
+.pd-method .pd-item{
+  background:#fffdf9 !important;
+  color:#625b52 !important;
+  border-color:var(--stt-gold-line) !important;
+}
+
+/* GCSDA current and legacy section class names */
+.g2-dark,.g-dark{
+  background:linear-gradient(135deg,#eee1ce 0%,#f8f2e8 56%,#fffdf9 100%) !important;
+  color:var(--stt-ink) !important;
+  border-top:1px solid var(--stt-gold-line) !important;
+  border-bottom:1px solid var(--stt-gold-line) !important;
+}
+.g2-dark .g2-title,.g-dark .g-title{color:var(--stt-ink) !important;}
+.g2-dark .g2-lead,.g-dark .g-lead{color:var(--stt-muted) !important;}
+.g2-dark .g2-kicker,.g-dark .g-kicker{color:var(--stt-gold) !important;}
+.g2-dark .g2-card,.g-dark .g-card{
+  background:#fffdf9 !important;
+  color:var(--stt-ink) !important;
+}
+.g2-dark .g2-card p,.g-dark .g-card p{color:var(--stt-muted) !important;}
+.g2-dark .g2-card h3,.g-dark .g-card h3{color:var(--stt-ink) !important;}
+
+/* Footers remain institutional, but not black. */
+footer,.g2-footer,.g-footer{
+  background:linear-gradient(100deg,#e9ddcc 0%,#f3ebdf 58%,#faf7f1 100%) !important;
+  color:var(--stt-ink) !important;
+  border-top:1px solid var(--stt-gold-line) !important;
+}
+footer p,.g2-footer p,.g-footer p{color:var(--stt-muted) !important;}
+footer a,.g2-footer a,.g-footer a{color:#8b622f !important;}
+
+/* Guardrail against accidental near-black full-width sections in these two public shells. */
+.hv-root section[style*="#2c2823"],
+.hv-root section[style*="#302"],
+.pd-root section[style*="#2c2823"],
+.g2 section[style*="#302"],
+.gcsda section[style*="#302"]{
+  background:#f3e8d7 !important;
+  color:var(--stt-ink) !important;
+}
