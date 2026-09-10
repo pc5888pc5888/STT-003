@@ -54,26 +54,17 @@ jobs:
               await go(path);
               assert.equal(await page.locator('[data-stt-primary-hero]').count(),1,path+' hero count');
               const m=await page.locator('[data-stt-primary-hero]').evaluate(async e=>{const r=e.getBoundingClientRect();const img=e.querySelector('img');await img.decode();const ir=img.getBoundingClientRect();const cs=getComputedStyle(img);return {heroWidth:r.width,heroHeight:r.height,src:img.currentSrc,nw:img.naturalWidth,nh:img.naturalHeight,displayWidth:ir.width,displayHeight:ir.height,fit:cs.objectFit,filter:cs.filter,h1:getComputedStyle(e.querySelector('h1')).fontFamily};});
-              assert.ok(Math.abs(m.heroWidth-1440)<1,path+' not full width');
-              assert.equal(m.nw,w,path+' natural width'); assert.equal(m.nh,h,path+' natural height');
-              assert.ok(m.src.endsWith('/visual-bank/stt/hero-hires/'+file),path+' wrong source');
-              assert.equal(m.fit,'cover'); assert.equal(m.filter,'none'); assert.ok(m.heroHeight>=680);
+              assert.ok(Math.abs(m.heroWidth-1440)<1,path+' not full width'); assert.equal(m.nw,w); assert.equal(m.nh,h); assert.ok(m.src.endsWith('/visual-bank/stt/hero-hires/'+file)); assert.equal(m.fit,'cover'); assert.equal(m.filter,'none'); assert.ok(m.heroHeight>=680); assert.ok(/Noto Serif TC|Noto Serif/.test(m.h1));
               const res=await ctx.request.get(m.src); assert.equal(res.status(),200); const digest=hash(await res.body()); assert.ok(!seen.has(digest),path+' duplicates '+seen.get(digest)); seen.set(digest,path);
-              assert.ok(/Noto Serif TC|Noto Serif/.test(m.h1),path+' wrong title family');
-              const hrefs=await page.locator('.stt-full-hero__actions a').evaluateAll(xs=>xs.map(x=>x.getAttribute('href'))); assert.equal(hrefs.length,2,path+' action count');
-              for(const href of hrefs){if(href.startsWith('#')){assert.equal(await page.locator(href).count(),1,path+' missing '+href)}else{const target=await ctx.request.get('http://127.0.0.1:4173'+href);assert.equal(target.status(),200,path+' action '+href)}}
-              report.routes.push({path,theme,...m,sha256:digest,actions:hrefs});
-              await page.screenshot({path:'food-only-evidence/'+theme+'.png',fullPage:false});
+              const hrefs=await page.locator('.stt-full-hero__actions a').evaluateAll(xs=>xs.map(x=>x.getAttribute('href'))); assert.equal(hrefs.length,2);
+              for(const href of hrefs){if(href.startsWith('#')) assert.equal(await page.locator(href).count(),1,path+' missing '+href); else assert.equal((await ctx.request.get('http://127.0.0.1:4173'+href)).status(),200,path+' action '+href);}
+              report.routes.push({path,theme,...m,sha256:digest,actions:hrefs}); await page.screenshot({path:'food-only-evidence/'+theme+'.png'});
             }
             await go('/');
-            const home=await page.locator('.stth-hero').evaluate(e=>{const r=e.getBoundingClientRect();const media=e.querySelector('.stth-hero-media');const bg=getComputedStyle(media).backgroundImage;return {width:r.width,height:r.height,bg,h1:e.querySelector('h1').textContent,h1Family:getComputedStyle(e.querySelector('h1')).fontFamily};});
-            assert.ok(Math.abs(home.width-1440)<1); assert.equal(home.h1,'讓重要的事，走得更遠。'); assert.ok(home.bg.includes('/visual-bank/stt/hero-hires/home.webp')); assert.ok(/Noto Serif TC|Noto Serif/.test(home.h1Family));
-            const homeRes=await ctx.request.get('http://127.0.0.1:4173/visual-bank/stt/hero-hires/home.webp'); assert.equal(homeRes.status(),200); const homeHash=hash(await homeRes.body()); assert.ok(!seen.has(homeHash),'home duplicates another hero'); seen.set(homeHash,'/');
-            report.home={...home,sha256:homeHash}; assert.equal(seen.size,6,'six hero sources are not unique');
-            await page.screenshot({path:'food-only-evidence/home.png',fullPage:false});
-            assert.deepEqual(errors,[]);
-            fs.writeFileSync('food-only-evidence/report.json',JSON.stringify(report,null,2));
-            await browser.close();
+            const home=await page.locator('.stth-hero').evaluate(async e=>{const r=e.getBoundingClientRect();const media=e.querySelector('.stth-hero-media');const bg=getComputedStyle(media).backgroundImage;const match=bg.match(/url\(["']?(.*?)["']?\)/);const src=match?match[1]:'';const img=new Image();img.src=src;await img.decode();return {width:r.width,height:r.height,bg,src,nw:img.naturalWidth,nh:img.naturalHeight,h1:e.querySelector('h1').textContent,h1Family:getComputedStyle(e.querySelector('h1')).fontFamily};});
+            assert.ok(Math.abs(home.width-1440)<1); assert.equal(home.h1,'讓重要的事，走得更遠。'); assert.equal(home.nw,3509); assert.equal(home.nh,1975); assert.ok(/Noto Serif TC|Noto Serif/.test(home.h1Family));
+            const homeRes=await ctx.request.get(home.src); assert.equal(homeRes.status(),200); const homeHash=hash(await homeRes.body()); assert.ok(!seen.has(homeHash),'home duplicates another hero'); seen.set(homeHash,'/'); report.home={...home,sha256:homeHash}; assert.equal(seen.size,6);
+            await page.screenshot({path:'food-only-evidence/home.png'}); assert.deepEqual(errors,[]); fs.writeFileSync('food-only-evidence/report.json',JSON.stringify(report,null,2)); await browser.close();
           })().catch(e=>{console.error(e);process.exit(1)});
           JS
       - uses: actions/upload-artifact@v4
