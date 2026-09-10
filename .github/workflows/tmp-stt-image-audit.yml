@@ -8,7 +8,7 @@ permissions:
 jobs:
   verify:
     runs-on: ubuntu-latest
-    timeout-minutes: 12
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -26,50 +26,16 @@ jobs:
           for i in {1..30}; do curl -fsS http://127.0.0.1:4173/ >/dev/null && exit 0; sleep 1; done
           cat /tmp/stt-preview.log
           exit 1
-      - name: Verify six unique high-resolution heroes and existing actions
+      - name: Verify requested STT work and all existing links
         run: |
           sudo apt-get update -qq
           sudo apt-get install -y fonts-noto-cjk
           npm install --prefix /tmp/stt-browser --no-save playwright
           export CHROME_PATH="$(command -v google-chrome || command -v chromium)"
-          node - <<'JS'
-          const fs=require('fs'),crypto=require('crypto'),assert=require('assert/strict');
-          (async()=>{
-            const {chromium}=await import('/tmp/stt-browser/node_modules/playwright/index.mjs');
-            const browser=await chromium.launch({executablePath:process.env.CHROME_PATH,args:['--no-sandbox']});
-            const ctx=await browser.newContext({viewport:{width:1440,height:960},deviceScaleFactor:2,reducedMotion:'reduce'});
-            const page=await ctx.newPage(); const errors=[]; page.on('pageerror',e=>errors.push(e.message));
-            fs.mkdirSync('food-only-evidence',{recursive:true});
-            const expected={
-              '/problems':['problems',6250,4419,'problems.png'],
-              '/how-stt-works':['method',6250,4419,'stt.png'],
-              '/insights':['columns',3509,1975,'columns.png'],
-              '/publications':['publications',6250,4419,'publications.png'],
-              '/stt':['stt',4096,5120,'stt-portrait.png']
-            };
-            const seen=new Map(); const report={routes:[],home:null,errors};
-            const hash=b=>crypto.createHash('sha256').update(b).digest('hex');
-            async function go(path){await page.goto('http://127.0.0.1:4173'+path,{waitUntil:'networkidle'});await page.waitForTimeout(150);}
-            for(const [path,[theme,w,h,file]] of Object.entries(expected)){
-              await go(path);
-              assert.equal(await page.locator('[data-stt-primary-hero]').count(),1,path+' hero count');
-              const m=await page.locator('[data-stt-primary-hero]').evaluate(async e=>{const r=e.getBoundingClientRect();const img=e.querySelector('img');await img.decode();const ir=img.getBoundingClientRect();const cs=getComputedStyle(img);return {heroWidth:r.width,heroHeight:r.height,src:img.currentSrc,nw:img.naturalWidth,nh:img.naturalHeight,displayWidth:ir.width,displayHeight:ir.height,fit:cs.objectFit,filter:cs.filter,h1:getComputedStyle(e.querySelector('h1')).fontFamily};});
-              assert.ok(Math.abs(m.heroWidth-1440)<1,path+' not full width'); assert.equal(m.nw,w); assert.equal(m.nh,h); assert.ok(m.src.endsWith('/visual-bank/stt/hero-hires/'+file)); assert.equal(m.fit,'cover'); assert.equal(m.filter,'none'); assert.ok(m.heroHeight>=680); assert.ok(/Noto Serif TC|Noto Serif/.test(m.h1));
-              const res=await ctx.request.get(m.src); assert.equal(res.status(),200); const digest=hash(await res.body()); assert.ok(!seen.has(digest),path+' duplicates '+seen.get(digest)); seen.set(digest,path);
-              const hrefs=await page.locator('.stt-full-hero__actions a').evaluateAll(xs=>xs.map(x=>x.getAttribute('href'))); assert.equal(hrefs.length,2);
-              for(const href of hrefs){if(href.startsWith('#')) assert.equal(await page.locator(href).count(),1,path+' missing '+href); else assert.equal((await ctx.request.get('http://127.0.0.1:4173'+href)).status(),200,path+' action '+href);}
-              report.routes.push({path,theme,...m,sha256:digest,actions:hrefs}); await page.screenshot({path:'food-only-evidence/'+theme+'.png'});
-            }
-            await go('/');
-            const home=await page.locator('.stth-hero').evaluate(async e=>{const r=e.getBoundingClientRect();const media=e.querySelector('.stth-hero-media');const bg=getComputedStyle(media).backgroundImage;const match=bg.match(/url\(["']?(.*?)["']?\)/);const src=match?match[1]:'';const img=new Image();img.src=src;await img.decode();return {width:r.width,height:r.height,bg,src,nw:img.naturalWidth,nh:img.naturalHeight,h1:e.querySelector('h1').textContent,h1Family:getComputedStyle(e.querySelector('h1')).fontFamily};});
-            assert.ok(Math.abs(home.width-1440)<1); assert.equal(home.h1,'讓重要的事，走得更遠。'); assert.equal(home.nw,3509); assert.equal(home.nh,1975); assert.ok(/Noto Serif TC|Noto Serif/.test(home.h1Family));
-            const homeRes=await ctx.request.get(home.src); assert.equal(homeRes.status(),200); const homeHash=hash(await homeRes.body()); assert.ok(!seen.has(homeHash),'home duplicates another hero'); seen.set(homeHash,'/'); report.home={...home,sha256:homeHash}; assert.equal(seen.size,6);
-            await page.screenshot({path:'food-only-evidence/home.png'}); assert.deepEqual(errors,[]); fs.writeFileSync('food-only-evidence/report.json',JSON.stringify(report,null,2)); await browser.close();
-          })().catch(e=>{console.error(e);process.exit(1)});
-          JS
+          node scripts/test_fullbleed.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: stt-food-only-evidence
-          path: food-only-evidence/
+          path: fullbleed-evidence/
           retention-days: 3
