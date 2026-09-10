@@ -1,0 +1,66 @@
+name: STT Recover Exact Original Artwork
+on:
+  push:
+    branches: [rebuild/stt-approved-white-gold-v1]
+    paths: [.github/workflows/stt-recover-native-originals.yml]
+permissions:
+  contents: write
+jobs:
+  recover:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Match original RGB pixels, not appearance or filenames
+        run: |
+          set -euo pipefail
+          pip -q install Pillow
+          mkdir -p native-recovery-evidence
+          python - <<'PY'
+          import io,json,hashlib,subprocess,zipfile
+          from pathlib import Path
+          from PIL import Image
+          expected={'004':'1d084229b0814929c454b36af32225f2ef52e53bd95c4fa95cbd9f577a46f03b','006':'1ad96772c6ca474a6128e9fefc45c2b2cd9b241acbe96239ee20ffd96f4606ea','007':'3865885a76272ccd74b23322c11e824f3b009b61156c0ec1a83a3421a52d8ad6','011':'e17dfa9e9193acbbd1be44a1ab7e2c1895525e4878427ccba4c90b19e516c04d','012':'0c19e629af2e7073749fa3b45b9a9f7c6604b50618088f0a4af8ec1cc36883ff','013':'ad12cac921d0f866a82a140c7bf81476046179a250b42d9056ea88794f96315d','29':'ffc5ead50a7e75020a2092300bab0c8ca6d13356acd01bb925575bf3d9f99398','30':'78eacb98de1d519cbb6ec0d4920664c2469f19d61fd08a416eae2d395130360b','31':'69b28edf5d0d2eb3c17bfb040c81e7d2311123ef73ffaa068eb453f9e8578773','32':'7b315e6ee624c21ec3c6bccd12338f38288d40c450a81962997a2c3f6173f000','33':'5a1ba3522096520e62cec35e31d4200fbe078162f375e8dfed0891c041a3ddcd','34':'4c7f3eeaf3cab56aa5b7bf2ce6d42579f1a48006965729c4ba7246d6e44303fd'}
+          reverse={v:k for k,v in expected.items()};found={};examined=[]
+          objects=subprocess.check_output(['git','rev-list','--objects','--all'],text=True).splitlines()
+          sizes={(1672,941),(3509,1975),(6250,4419)}
+          for line in objects:
+              sha,_,name=line.partition(' ')
+              if not name.lower().endswith(('.png','.jpg','.jpeg','.webp','.zip')):continue
+              raw=subprocess.check_output(['git','cat-file','-p',sha])
+              candidates=[(name,raw)]
+              if name.lower().endswith('.zip'):
+                  try:
+                      z=zipfile.ZipFile(io.BytesIO(raw));candidates=[(name+'!'+n,z.read(n)) for n in z.namelist() if n.lower().endswith(('.png','.jpg','.webp')) and not n.startswith('__MACOSX/')]
+                  except Exception:continue
+              for label,data in candidates:
+                  try:
+                      im=Image.open(io.BytesIO(data))
+                      if im.size not in sizes:continue
+                      im=im.convert('RGB');ph=hashlib.sha256(im.tobytes()).hexdigest()
+                      examined.append({'gitBlob':sha,'path':label,'size':im.size,'pixelSha256':ph})
+                      if ph in reverse:
+                          code=reverse[ph];p=Path('native-recovery-evidence')/(code+'.png');im.save(p)
+                          found[code]={'gitBlob':sha,'path':label,'pixelSha256':ph,'file':str(p)}
+                  except Exception:continue
+          report={'allOriginalsRecovered':len(found)==len(expected),'found':found,'missing':sorted(set(expected)-set(found)),'examined':examined,'gitObjects':len(objects)}
+          Path('native-recovery-evidence/recovery.json').write_text(json.dumps(report,ensure_ascii=False,indent=2))
+          print(json.dumps({'found':list(found),'missing':report['missing'],'matchingDimensions':len(examined),'gitObjects':len(objects)},ensure_ascii=False))
+          # Export a compact current source copy, not hundreds of megabytes of unrelated portraits.
+          with zipfile.ZipFile('native-recovery-evidence/current-sources.zip','w',zipfile.ZIP_DEFLATED) as z:
+              for folder in ['src','api','data','scripts','tests','public/data','public/visual-bank']:
+                  for p in Path(folder).rglob('*'):
+                      if p.is_file() and p.suffix.lower() not in {'.woff','.woff2','.ttf','.otf','.ttc'}:z.write(p,str(p))
+              for n in ['package.json','package-lock.json','tsconfig.json','vite.config.ts','vercel.json','server.ts','index.html','governance.html','about.html','insights.html','contact.html']:
+                  if Path(n).exists():z.write(n,n)
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: stt-exact-original-recovery
+          path: native-recovery-evidence/
+          retention-days: 2
