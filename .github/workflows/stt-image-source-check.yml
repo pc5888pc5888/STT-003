@@ -1,0 +1,51 @@
+name: STT Approved Image Source Check
+on:
+  push:
+    branches: [rebuild/stt-approved-white-gold-v1]
+    paths: [.github/workflows/stt-image-source-check.yml]
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: |
+          pip -q install Pillow
+          python - <<'PY'
+          from pathlib import Path
+          from PIL import Image, ImageOps, ImageDraw
+          import json, hashlib, struct, shutil
+          out=Path('image-source-evidence');out.mkdir()
+          broken=Path('public/visual-bank/stt/home-approved.webp').read_bytes()
+          report={'brokenBytes':len(broken),'declaredBytes':8+struct.unpack('<I',broken[4:8])[0],'images':[],'prefixMatches':[]}
+          candidates=[]
+          for p in Path('public').rglob('*'):
+              if p.suffix.lower() not in {'.webp','.png','.jpg','.jpeg'}:continue
+              data=p.read_bytes()
+              entry={'path':str(p),'bytes':len(data),'sha256':hashlib.sha256(data).hexdigest()}
+              if data.startswith(broken[:100]) and len(data)>len(broken):report['prefixMatches'].append(str(p));shutil.copy(p,out/p.name)
+              try:
+                  im=Image.open(p);im.load();entry['valid']=True;entry['size']=im.size
+                  if any(x in p.name.lower() for x in ['home','portal','white','column','hero','civil','classic','approved','bg-']):
+                      candidates.append((str(p),im.copy().convert('RGB')))
+                      if 'home' in p.name.lower():shutil.copy(p,out/p.name)
+              except Exception as e:entry['valid']=False;entry['error']=str(e)
+              report['images'].append(entry)
+          for start in range(0,len(candidates),12):
+              batch=candidates[start:start+12];sheet=Image.new('RGB',(1200,240*((len(batch)+2)//3)),'white');draw=ImageDraw.Draw(sheet)
+              for k,(name,im) in enumerate(batch):
+                  x=(k%3)*400;y=(k//3)*240;im.thumbnail((390,205));sheet.paste(im,(x+(390-im.width)//2,y));draw.text((x+5,y+207),name[-62:],fill='black')
+              sheet.save(out/f'candidates-{start//12}.jpg',quality=90)
+          (out/'image-report.json').write_text(json.dumps(report,ensure_ascii=False,indent=2))
+          print(json.dumps({'totalImages':len(report['images']),'invalid':[x['path'] for x in report['images'] if not x['valid']],'matches':report['prefixMatches']},ensure_ascii=False))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: stt-approved-image-source
+          path: image-source-evidence/
+          retention-days: 7
