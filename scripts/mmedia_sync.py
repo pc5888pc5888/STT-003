@@ -116,6 +116,9 @@ def merge(previous: dict, rows: list[dict], checked_at: str, pages: int) -> dict
         item = {**row, 'id': 'mmedia-' + source_id, 'sourceArticleId': source_id, 'series': series, 'seriesTitle': TITLES[series], 'source': 'M傳媒'}
         old = archive.get(row['url'])
         if old:
+            for field in ('title', 'excerpt'):
+                if re.sub(r'\s+', ' ', old.get(field, '')).strip() == re.sub(r'\s+', ' ', item[field]).strip():
+                    item[field] = old.get(field, '')
             item['excerpt'] = preserve_excerpt(old.get('excerpt', ''), item['excerpt'])
             if old.get('series') != series: changes['reclassified'] += 1
             if any(old.get(k) != item.get(k) for k in (*FIELDS, 'series')): changes['updated'] += 1

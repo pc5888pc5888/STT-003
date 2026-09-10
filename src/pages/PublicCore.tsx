@@ -109,9 +109,10 @@ function CanonicalPage({ kind }: { kind: PageKind }) {
             <div className="stt-canon-eyebrow">{page.eyebrow}</div>
             <h1 data-stt-title-sentence>{page.title}</h1>
             <p className="stt-canon-sub" data-stt-title-sentence>{page.subtitle}</p>
-            <div className={`stt-canon-statement ${kind === "method" ? "stt-canon-method-sequence" : ""}`}>{page.statement}</div>
+            {kind !== "method" && <div className="stt-canon-statement">{page.statement}</div>}
           </div>
           <div className="stt-canon-visual" aria-hidden="true" style={{ backgroundImage: `url(${page.visual})` }} />
+          {kind === "method" && <div className="stt-canon-method-sequence stt-canon-method-rail" aria-label={page.statement}>{["看見", "反推", "舉證", "理解", "架構", "執行", "留下"].map((step, index) => <span className="stt-method-node" key={step}>{index > 0 && <span className="stt-method-arrow" aria-hidden="true">→</span>}{step}</span>)}</div>}
         </div>
       </section>
 
