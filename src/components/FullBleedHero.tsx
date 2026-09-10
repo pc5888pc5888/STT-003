@@ -13,7 +13,7 @@ export const PRIMARY_THEMES: Record<PrimaryTheme, { label: string; image: string
     actions: [{ text: "找到我正在面對的問題", to: "#problem-index" }, { text: "理解 STT 如何判讀", to: "/how-stt-works" }],
   },
   method: {
-    label: "如何判讀", image: "method.webp",
+    label: "如何判讀", image: "stt.png",
     title: "先把問題判斷對，再談怎麼做。",
     lead: "STT 不從服務分類開始，而是把事件、真正問題、證據、反方、不可承擔結果、專業責任與執行條件放回同一個判讀程序。",
     actions: [{ text: "理解判讀的起點", to: "#judgment-foundations" }, { text: "從我的問題開始", to: "/start" }],
@@ -31,7 +31,7 @@ export const PRIMARY_THEMES: Record<PrimaryTheme, { label: string; image: string
     actions: [{ text: "閱讀著作", to: "/books" }, { text: "查看研究論文", to: "/research" }],
   },
   stt: {
-    label: "關於 STT", image: "stt.png",
+    label: "關於 STT", image: "stt-portrait.png",
     title: "策略為先，治理為本，管理為終。",
     lead: "STT Governance 是以治理判讀與制度設計為核心的高位階治理文明平台，從人的真實問題出發，統合證據、專業與決策，讓權力與責任有清楚的歸屬。",
     actions: [{ text: "認識莊鈞翔博士", to: "/institution/eric-chuang" }, { text: "合作洽詢", to: "/start" }],
@@ -39,7 +39,7 @@ export const PRIMARY_THEMES: Record<PrimaryTheme, { label: string; image: string
 };
 
 const TITLE_LINES: Record<PrimaryTheme, string[]> = {"problems": ["不是先選服務；", "先從你正在面對的", "真實問題開始。"], "method": ["先把問題判斷對，", "再談怎麼做。"], "columns": ["莊鈞翔博士｜專欄判讀"], "publications": ["思想被留下，", "才可能被理解、", "被檢驗、被承接。"], "stt": ["策略為先，", "治理為本，", "管理為終。"]};
-const HERO_DIMENSIONS: Record<PrimaryTheme, [number, number]> = { problems:[6250,4419], method:[3200,2263], columns:[3509,1975], publications:[6250,4419], stt:[6250,4419] };
+const HERO_DIMENSIONS: Record<PrimaryTheme, [number, number]> = { problems:[6250,4419], method:[6250,4419], columns:[3509,1975], publications:[6250,4419], stt:[4096,5120] };
 
 export default function FullBleedHero({ theme, children }: { theme: PrimaryTheme; children?: ReactNode }) {
   const item = PRIMARY_THEMES[theme];
