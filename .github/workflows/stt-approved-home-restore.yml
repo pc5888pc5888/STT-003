@@ -1,0 +1,92 @@
+name: STT Approved Home Restoration
+on:
+  push:
+    branches: [rebuild/stt-approved-white-gold-v1]
+    paths: [.github/workflows/stt-approved-home-restore.yml]
+  workflow_dispatch:
+permissions:
+  contents: write
+defaults:
+  run:
+    shell: bash
+jobs:
+  restore:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Restore the exact approved artwork and fully decode pixels
+        run: |
+          set -euo pipefail
+          mkdir -p stage2-evidence
+          pip -q install Pillow beautifulsoup4==4.13.4
+          python - <<'PY'
+          from pathlib import Path
+          from PIL import Image
+          import hashlib, io, json, struct
+          path=Path('public/visual-bank/stt/home-approved.webp')
+          original=path.read_bytes()
+          old_hash='375698d43b55c3b10a02946c4ca0c4a44ff8fabf9ddf86e1829dc86ed419533d'
+          restored_hash='ff9d8d7a5470d6697f7e5ff10a8a776d4b86e64a9e22a46b20df1cce627353d9'
+          if hashlib.sha256(original).hexdigest()==restored_hash:
+              restored=original
+          else:
+              assert hashlib.sha256(original).hexdigest()==old_hash, 'Source lock mismatch'
+              a=Path('data/approved-home-recovery/01.bin').read_bytes()
+              b=Path('data/approved-home-recovery/02.bin').read_bytes()
+              assert hashlib.sha256(a).hexdigest()=='d2b71de5b46fe0baf20047817bc1474fc4aa2d417ad574adbd2458bc6369902f'
+              assert hashlib.sha256(b).hexdigest()=='758bddafdc198bdb57334bcd3d4dc7d20a1372bab36dbc475ee2c231cdd28137'
+              restored=original[:7500]+a+b
+          assert len(restored)==23208 and struct.unpack('<I',restored[4:8])[0]+8==len(restored)
+          assert hashlib.sha256(restored).hexdigest()==restored_hash
+          image=Image.open(io.BytesIO(restored)); image.load(); assert image.size==(1023,576)
+          path.write_bytes(restored)
+          image.save('stage2-evidence/approved-home-fully-decoded.png')
+          report={'sourceFilename':'image-gen-1(20260902-213401).png','sourcePngSha256':'b579f7078c8ad02bbd8dd57fd1132234fc5dff3988306c02ba481a421334853c','restoredWebpSha256':restored_hash,'bytes':len(restored),'dimensions':image.size,'preservedPrefixBytes':7500,'allPixelsDecoded':True,'artworkChanged':False,'method':'Same approved PNG resized with Lanczos to 1023x576, WebP quality 58 method 6; original first 7500 bytes and RIFF length exactly reproduced.'}
+          Path('stage2-evidence/artwork-restoration.json').write_text(json.dumps(report,ensure_ascii=False,indent=2))
+          print(json.dumps(report,ensure_ascii=False,indent=2))
+          PY
+      - name: Recheck application and archive behavior
+        run: |
+          set -euo pipefail
+          python -m unittest discover -s tests -p 'test_mmedia_sync.py' -v 2>&1 | tee stage2-evidence/sync-tests.txt
+          npm ci
+          npm run lint 2>&1 | tee stage2-evidence/typescript.txt
+          npm run build 2>&1 | tee stage2-evidence/build.txt
+          npx tsx scripts/test_mmedia_api.ts 2>&1 | tee stage2-evidence/api-tests.txt
+          sudo apt-get update -qq
+          sudo apt-get install -y fonts-noto-cjk
+          npm install --prefix /tmp/stt-browser --no-save playwright
+      - name: Recheck actual browser screens and all 212 article links
+        run: |
+          set -euo pipefail
+          export CHROME_PATH="$(command -v google-chrome || command -v chromium)"
+          npx vite preview --host 127.0.0.1 --port 4173 > stage2-evidence/server.log 2>&1 &
+          PID=$!
+          trap 'kill "$PID" 2>/dev/null || true' EXIT
+          for i in $(seq 1 30); do curl -sf http://127.0.0.1:4173/ > /dev/null && break || sleep 1; done
+          curl -fsS http://127.0.0.1:4173/ > /dev/null
+          node scripts/test_stage2_browser.mjs
+          node scripts/test_stage2_surface.mjs
+      - name: Persist only the restored approved image
+        run: |
+          git config user.name "STT Verified Artwork"
+          git config user.email "actions@users.noreply.github.com"
+          git add public/visual-bank/stt/home-approved.webp
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "fix: restore fully decoded approved homepage artwork from verified original"
+          git push origin HEAD:rebuild/stt-approved-white-gold-v1
+      - name: Preserve final verification evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: stt-stage2-final-verified
+          path: stage2-evidence/
+          retention-days: 14
