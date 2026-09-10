@@ -1,0 +1,76 @@
+name: STT Fixed Domain Live Verification
+on:
+  push:
+    branches: [rebuild/stt-approved-white-gold-v1]
+    paths: [.github/workflows/stt-fixed-domain-verify.yml]
+permissions:
+  contents: read
+jobs:
+  verify-public-site:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: e008ccceffa22ac3525497425e2aa76c253a6fa0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Prepare browser for public production only
+        run: |
+          set -euo pipefail
+          sudo apt-get update -qq
+          sudo apt-get install -y fonts-noto-cjk
+          npm install -g agent-browser
+          npm install --prefix /tmp/stt-browser --no-save playwright
+      - name: Verify the fixed URL and actual API without authentication or mocks
+        run: |
+          set -euo pipefail
+          mkdir -p native-artwork-evidence
+          export CHROME_PATH="$(command -v google-chrome || command -v chromium)"
+          export AGENT_BROWSER_EXECUTABLE_PATH="$CHROME_PATH"
+          export STT_TEST_ORIGIN=https://stt-003.vercel.app
+          agent-browser open https://stt-003.vercel.app/#hero
+          agent-browser snapshot -i > native-artwork-evidence/live-home-snapshot.txt
+          agent-browser close
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('scripts/test_native_artwork.mjs');s=p.read_text()
+          lines=s.splitlines(True)
+          mocks=[x for x in lines if "await page.route('**/api/mmedia'" in x]
+          assert len(mocks)==1
+          s=s.replace(mocks[0],'')
+          assert '.route(' not in s
+          s=s.replace('Actual production build in Chromium with supplied image bytes','Live https://stt-003.vercel.app in unauthenticated Chromium; no API mocks; production release e008ccceffa22ac3525497425e2aa76c253a6fa0')
+          p.write_text(s)
+          PY
+          node scripts/test_native_artwork.mjs
+          node --input-type=module <<'JS'
+          import fs from 'node:fs';
+          import assert from 'node:assert/strict';
+          const {chromium}=await import('/tmp/stt-browser/node_modules/playwright/index.mjs');
+          const base='https://stt-003.vercel.app';
+          const response=await fetch(base+'/api/mmedia');
+          assert.equal(response.status,200);assert.ok(response.headers.get('content-type')?.includes('application/json'));
+          const c=await response.json();assert.equal(c.ok,true);assert.equal(c.mode,'archive');assert.equal(c.articles.length,212);assert.equal(new Set(c.articles.map(a=>a.url)).size,212);
+          assert.deepEqual([c.stats.legal,c.stats.humanistic,c.stats.news],[199,2,11]);
+          const browser=await chromium.launch({executablePath:process.env.CHROME_PATH,args:['--no-sandbox']});
+          const page=await browser.newPage({viewport:{width:1440,height:1000}});
+          await page.goto(base+'/insights',{waitUntil:'networkidle'});
+          for(const [name,series,total] of [['瀏覽莊博士人文地景產專欄','humanistic',2],['瀏覽莊博士新聞採訪專欄','news',11],['瀏覽莊博士法律新聞專欄','legal',12]]){
+            await page.getByRole('button',{name,exact:true}).click();
+            assert.equal(await page.locator('article.stt-column-row').count(),total);
+            assert.equal(await page.locator(`article.stt-column-row[data-series="${series}"]`).count(),total);
+          }
+          const raw=await page.evaluate(async()=>{const r=await fetch('/api/mmedia');const c=await r.json();return {status:r.status,ok:c.ok,mode:c.mode,stats:c.stats};});
+          assert.equal(raw.status,200);assert.equal(raw.mode,'archive');
+          await browser.close();
+          fs.writeFileSync('native-artwork-evidence/live-api-and-filters.json',JSON.stringify({passed:true,origin:base,authenticated:false,mocked:false,httpStatus:response.status,mode:c.mode,stats:c.stats,syncedAt:c.syncedAt,liveBrowserApi:raw,threeSeriesFiltersPassed:true},null,2));
+          console.log(JSON.stringify({passed:true,httpStatus:response.status,mode:c.mode,stats:c.stats,threeSeriesFiltersPassed:true}));
+          JS
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: stt-fixed-domain-live-verification
+          path: native-artwork-evidence/
+          retention-days: 7
