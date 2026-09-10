@@ -1,0 +1,64 @@
+name: STT MMedia Scheduled Sync
+on:
+  schedule:
+    # UTC; Asia/Taipei 02:17, 08:17, 14:17 and 20:17.
+    - cron: '17 */6 * * *'
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: [.github/workflows/stt-mmedia-sync.yml]
+permissions:
+  contents: write
+concurrency:
+  group: stt-mmedia-catalog
+  cancel-in-progress: false
+defaults:
+  run:
+    shell: bash
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: rebuild/stt-approved-white-gold-v1
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate and synchronize the public author index
+        run: |
+          set -euo pipefail
+          mkdir -p sync-evidence
+          pip -q install beautifulsoup4==4.13.4
+          python -m unittest discover -s tests -p 'test_mmedia_sync.py' -v 2>&1 | tee sync-evidence/tests.txt
+          python scripts/mmedia_sync.py | tee sync-evidence/sync-result.json
+      - name: Persist only the verified article catalog
+        run: |
+          set -euo pipefail
+          git config user.name "STT Column Index"
+          git config user.email "actions@users.noreply.github.com"
+          git add public/data/mmedia-catalog.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "data: synchronize verified Dr Chuang column archive"
+          git push origin HEAD:rebuild/stt-approved-white-gold-v1
+      - name: Summarize the result
+        run: |
+          python - <<'PY'
+          import json, os
+          d=json.load(open('public/data/mmedia-catalog.json',encoding='utf-8'))
+          with open(os.environ['GITHUB_STEP_SUMMARY'],'a') as f:
+              f.write('### STT MMedia index\n')
+              f.write('Last verified: '+d['syncedAt']+'\n\n')
+              f.write('Counts: '+json.dumps(d['stats'],ensure_ascii=False)+'\n\n')
+              f.write('Changes: '+json.dumps(d['sync']['changes'],ensure_ascii=False)+'\n')
+          if d['stats']['pending']:
+              print('::warning::Unmapped source categories require human review; no series has been guessed.')
+          PY
+      - name: Preserve synchronization evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: stt-mmedia-sync-evidence
+          path: sync-evidence/
+          retention-days: 14
