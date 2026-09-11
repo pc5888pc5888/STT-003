@@ -20,25 +20,48 @@ jobs:
       - name: Inspect GCSDA hero candidates
         run: |
           set -euo pipefail
-          pip -q install Pillow
           python - <<'PY'
           from pathlib import Path
-          from PIL import Image
-          import hashlib, json
-          root=Path('public/visual-bank/gcsda')
-          report=[]
+          import hashlib, json, struct
+
+          def webp_size(data: bytes):
+              if len(data) < 30 or data[:4] != b'RIFF' or data[8:12] != b'WEBP':
+                  return None
+              pos = 12
+              while pos + 8 <= len(data):
+                  typ = data[pos:pos+4]
+                  n = struct.unpack_from('<I', data, pos+4)[0]
+                  payload = pos + 8
+                  if typ == b'VP8X' and payload + 10 <= len(data):
+                      w = 1 + int.from_bytes(data[payload+4:payload+7], 'little')
+                      h = 1 + int.from_bytes(data[payload+7:payload+10], 'little')
+                      return [w, h]
+                  if typ == b'VP8 ' and payload + 10 <= len(data):
+                      start = data.find(b'\x9d\x01\x2a', payload, min(payload+n, len(data)))
+                      if start >= 0 and start + 7 <= len(data):
+                          w = int.from_bytes(data[start+3:start+5], 'little') & 0x3fff
+                          h = int.from_bytes(data[start+5:start+7], 'little') & 0x3fff
+                          return [w, h]
+                  if typ == b'VP8L' and payload + 5 <= len(data) and data[payload] == 0x2f:
+                      bits = int.from_bytes(data[payload+1:payload+5], 'little')
+                      w = (bits & 0x3fff) + 1
+                      h = ((bits >> 14) & 0x3fff) + 1
+                      return [w, h]
+                  pos = payload + n + (n & 1)
+              return None
+
+          root = Path('public/visual-bank/gcsda')
+          report = []
           for p in sorted(root.glob('*.webp')):
-              with Image.open(p) as im:
-                  im.load()
-                  dims=list(im.size)
+              data = p.read_bytes()
               report.append({
-                  'file':p.name,
-                  'dimensions':dims,
-                  'bytes':p.stat().st_size,
-                  'sha256':hashlib.sha256(p.read_bytes()).hexdigest(),
+                  'file': p.name,
+                  'dimensions': webp_size(data),
+                  'bytes': len(data),
+                  'sha256': hashlib.sha256(data).hexdigest(),
               })
-          print(json.dumps(report,ensure_ascii=False,indent=2))
-          Path('gcsda-visual-bank-audit.json').write_text(json.dumps(report,ensure_ascii=False,indent=2))
+          print(json.dumps(report, ensure_ascii=False, indent=2))
+          Path('gcsda-visual-bank-audit.json').write_text(json.dumps(report, ensure_ascii=False, indent=2))
           PY
       - uses: actions/upload-artifact@v4
         with:
