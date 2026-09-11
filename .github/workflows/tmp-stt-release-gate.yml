@@ -21,11 +21,14 @@ jobs:
           set -euo pipefail
           npm ci
           npm run build
-      - name: Install browser verifier
+      - name: Prepare browser verifier
         run: |
           set -euo pipefail
-          npm install --prefix /tmp/stt-browser --no-save playwright
-          npx --prefix /tmp/stt-browser playwright install --with-deps chromium
+          npm install --prefix /tmp/stt-browser --no-save playwright-core
+          CHROME_PATH="$(command -v google-chrome || command -v google-chrome-stable || command -v chromium || command -v chromium-browser || true)"
+          test -n "$CHROME_PATH"
+          echo "CHROME_PATH=$CHROME_PATH" >> "$GITHUB_ENV"
+          "$CHROME_PATH" --version
       - name: Run browser release gate
         run: |
           set -euo pipefail
@@ -35,7 +38,7 @@ jobs:
           for i in $(seq 1 40); do curl -sf http://127.0.0.1:4173/ >/dev/null && break || sleep 1; done
           node <<'NODE'
           const fs = require('fs');
-          const { chromium } = require('/tmp/stt-browser/node_modules/playwright');
+          const { chromium } = require('/tmp/stt-browser/node_modules/playwright-core');
           const base = 'http://127.0.0.1:4173';
           const routes = [
             '/', '/problems', '/problems/major-decision', '/how-stt-works', '/domains',
@@ -61,7 +64,7 @@ jobs:
             if (res.status !== 200 || !type.startsWith('image/')) failures.push(`asset ${path} -> ${res.status} ${type}`);
           }
 
-          const browser = await chromium.launch({ headless: true });
+          const browser = await chromium.launch({ headless: true, executablePath: process.env.CHROME_PATH, args: ['--no-sandbox'] });
           for (const vp of viewports) {
             const context = await browser.newContext({ viewport: { width: vp.width, height: vp.height } });
             const page = await context.newPage();
