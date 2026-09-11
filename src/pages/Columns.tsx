@@ -37,8 +37,8 @@ function checkedTime(value: string) {
 function normalized(value: string) { return value.normalize("NFKC").toLowerCase().replace(/\s+/g, ""); }
 
 export default function Columns() {
-  const [catalog, setCatalog] = useState<Catalog>(INITIAL);
-  const [archiveState, setArchiveState] = useState<"loading" | "archive" | "bundled">("loading");
+  const catalog = INITIAL;
+  const archiveState: "bundled" = "bundled";
   const [params, setParams] = useSearchParams();
   const listRef = useRef<HTMLElement>(null);
   const selected = SERIES.find(s => s.key === params.get("series"));
@@ -46,15 +46,9 @@ export default function Columns() {
   const query = params.get("q") || "";
   const order = params.get("order") === "oldest" ? "oldest" : "newest";
   useEffect(() => {
-    const originalTitle = document.title; document.title = "莊鈞翔博士｜專欄判讀 · STT Governance";
-    const controller = new AbortController(); let active = true;
-    const timer = window.setTimeout(() => controller.abort(), 9000);
-    fetch("/api/mmedia", { headers: { accept: "application/json" }, signal: controller.signal })
-      .then(r => { if (!r.ok) throw new Error("Archive unavailable"); return r.json(); })
-      .then((data: Catalog) => { if (active) { setCatalog(mergeArchive(data)); setArchiveState(data.mode === "archive" ? "archive" : "bundled"); } })
-      .catch(() => { if (active) setArchiveState("bundled"); })
-      .finally(() => window.clearTimeout(timer));
-    return () => { active = false; controller.abort(); window.clearTimeout(timer); document.title = originalTitle; };
+    const originalTitle = document.title;
+    document.title = "莊鈞翔博士｜專欄判讀 · STT Governance";
+    return () => { document.title = originalTitle; };
   }, []);
   const counts = useMemo(() => Object.fromEntries(SERIES.map(s => [s.key, catalog.articles.filter(a => a.series === s.key).length])) as Record<Series, number>, [catalog]);
   const filtered = useMemo(() => {
