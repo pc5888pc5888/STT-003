@@ -23,7 +23,6 @@ jobs:
           set -euo pipefail
           python - <<'PY'
           from pathlib import Path
-
           app = Path('src/App.tsx')
           text = app.read_text()
           old = 'className="stt-official-brand mr-auto cursor-pointer border-0 bg-transparent p-0 text-left"'
@@ -37,25 +36,17 @@ jobs:
               raise SystemExit('App logo class target not found')
           text = text.replace(old, new, 1)
           app.write_text(text)
-
           columns = Path('src/pages/Columns.tsx')
           text = columns.read_text()
-          old = '''  const [catalog, setCatalog] = useState<Catalog>(INITIAL);
-  const [archiveState, setArchiveState] = useState<"loading" | "archive" | "bundled">("loading");'''
-          new = '''  const catalog = INITIAL;
-  const archiveState: "bundled" = "bundled";'''
+          old = '  const [catalog, setCatalog] = useState<Catalog>(INITIAL);\n  const [archiveState, setArchiveState] = useState<"loading" | "archive" | "bundled">("loading");'
+          new = '  const catalog = INITIAL;\n  const archiveState: "bundled" = "bundled";'
           if old not in text:
               raise SystemExit('Columns catalog state target not found')
           text = text.replace(old, new, 1)
           start = text.index('  useEffect(() => {\n    const originalTitle = document.title;')
           end_marker = '  }, []);\n'
           end = text.index(end_marker, start) + len(end_marker)
-          replacement = '''  useEffect(() => {
-    const originalTitle = document.title;
-    document.title = "莊鈞翔博士｜專欄判讀 · STT Governance";
-    return () => { document.title = originalTitle; };
-  }, []);
-'''
+          replacement = '  useEffect(() => {\n    const originalTitle = document.title;\n    document.title = "莊鈞翔博士｜專欄判讀 · STT Governance";\n    return () => { document.title = originalTitle; };\n  }, []);\n'
           text = text[:start] + replacement + text[end:]
           columns.write_text(text)
           PY
