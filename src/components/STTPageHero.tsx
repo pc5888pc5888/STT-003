@@ -18,7 +18,18 @@ type Props = {
 export default function STTPageHero({ visual, eyebrow, title, lead, actions = [], primary = false, children, id }: Props) {
   return (
     <section id={id} className={`stt-master-hero${primary ? " is-primary" : " is-secondary"}`} data-stt-visual={visual} aria-labelledby={`stt-hero-${visual}`}>
-      <img className="stt-master-hero__image" src={sttVisual(visual)} alt="" aria-hidden="true" width="1491" height="1055" decoding="async" fetchPriority={primary ? "high" : "auto"} />
+      <img
+        className="stt-master-hero__image"
+        src={sttVisual(visual)}
+        alt=""
+        aria-hidden="true"
+        width="1491"
+        height="1055"
+        decoding="async"
+        loading={primary ? "eager" : "lazy"}
+        fetchPriority={primary ? "high" : "auto"}
+        draggable={false}
+      />
       <div className="stt-master-hero__veil" aria-hidden="true" />
       <div className="stt-master-shell stt-master-hero__inner">
         <div className="stt-master-hero__copy">
