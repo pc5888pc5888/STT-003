@@ -1,0 +1,29 @@
+name: Temporary STT Six Source Export
+on:
+  push:
+    branches: [asset/stt-six-hero-selection-20260911]
+    paths:
+      - .github/workflows/tmp-stt-six-source-export.yml
+permissions:
+  contents: read
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Export source candidates only
+        run: |
+          set -euo pipefail
+          mkdir -p six-source
+          cp public/visual-bank/stt/hero-hires/home.webp six-source/home-fixed.webp
+          cp 004.png six-source/problems-governance-charter.png
+          cp 31.png six-source/method-judgment-governance.png
+          cp 011.png six-source/columns-insight-article.png
+          cp 012.png six-source/publications-stt-press-library.png
+          cp 34.png six-source/about-stt-governance-dossiers.png
+      - uses: actions/upload-artifact@v4
+        with:
+          name: stt-six-source-candidates
+          path: six-source/
+          retention-days: 2
