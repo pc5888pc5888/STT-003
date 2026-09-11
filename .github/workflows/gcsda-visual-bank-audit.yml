@@ -1,0 +1,48 @@
+name: GCSDA Visual Bank Audit
+
+on:
+  push:
+    branches:
+      - audit/gcsda-visual-bank-20260912
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Inspect GCSDA hero candidates
+        run: |
+          set -euo pipefail
+          pip -q install Pillow
+          python - <<'PY'
+          from pathlib import Path
+          from PIL import Image
+          import hashlib, json
+          root=Path('public/visual-bank/gcsda')
+          report=[]
+          for p in sorted(root.glob('*.webp')):
+              with Image.open(p) as im:
+                  im.load()
+                  dims=list(im.size)
+              report.append({
+                  'file':p.name,
+                  'dimensions':dims,
+                  'bytes':p.stat().st_size,
+                  'sha256':hashlib.sha256(p.read_bytes()).hexdigest(),
+              })
+          print(json.dumps(report,ensure_ascii=False,indent=2))
+          Path('gcsda-visual-bank-audit.json').write_text(json.dumps(report,ensure_ascii=False,indent=2))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: gcsda-visual-bank-audit
+          path: gcsda-visual-bank-audit.json
+          if-no-files-found: error
+          retention-days: 7
