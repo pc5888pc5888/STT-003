@@ -27,8 +27,7 @@ jobs:
           cp 34.png public/visual-bank/stt/primary-semantic/stt-governance-dossiers.png
           python - <<'PY'
           from pathlib import Path
-          from PIL import Image
-          import hashlib, json
+          import hashlib, json, struct
           expected={
             'problems-governance-charter.png':'004.png',
             'method-governance-mission.png':'31.png',
@@ -39,18 +38,20 @@ jobs:
           report={}
           for target,source in expected.items():
             p=Path('public/visual-bank/stt/primary-semantic')/target
-            with Image.open(p) as im:
-              im.load()
-              if im.size!=(1672,941): raise SystemExit(f'{source} unexpected dimensions: {im.size}')
+            data=p.read_bytes()
+            if data[:8] != b'\x89PNG\r\n\x1a\n': raise SystemExit(f'{source} is not PNG')
+            size=struct.unpack('>II',data[16:24])
+            if size!=(1672,941): raise SystemExit(f'{source} unexpected dimensions: {size}')
             src=Path(source)
-            if hashlib.sha256(p.read_bytes()).digest()!=hashlib.sha256(src.read_bytes()).digest(): raise SystemExit(f'{source} byte mismatch')
-            report[target]={'source':source,'dimensions':[1672,941],'sha256':hashlib.sha256(p.read_bytes()).hexdigest(),'exactOriginalBytes':True}
+            if hashlib.sha256(data).digest()!=hashlib.sha256(src.read_bytes()).digest(): raise SystemExit(f'{source} byte mismatch')
+            report[target]={'source':source,'dimensions':[1672,941],'sha256':hashlib.sha256(data).hexdigest(),'exactOriginalBytes':True}
           Path('public/data/stt-primary-semantic-manifest.json').write_text(json.dumps(report,ensure_ascii=False,indent=2))
           PY
       - name: Wire five topics to five different approved visuals
         run: |
           python - <<'PY'
           from pathlib import Path
+          import re
           p=Path('src/components/FullBleedHero.tsx'); s=p.read_text()
           s=s.replace('const ROOT = "/visual-bank/stt/hero-hires/";','const ROOT = "/visual-bank/stt/primary-semantic/";')
           replacements={
@@ -63,9 +64,7 @@ jobs:
           for a,b in replacements.items():
             if a not in s: raise SystemExit('expected component mapping not found: '+a)
             s=s.replace(a,b)
-          import re
-          s=re.sub(r'const HERO_DIMENSIONS: Record<PrimaryTheme, \[number, number\]> = \{.*?\};',
-                   'const HERO_DIMENSIONS: Record<PrimaryTheme, [number, number]> = { problems:[1672,941], method:[1672,941], columns:[1672,941], publications:[1672,941], stt:[1672,941] };',s,count=1)
+          s=re.sub(r'const HERO_DIMENSIONS: Record<PrimaryTheme, \[number, number\]> = \{.*?\};','const HERO_DIMENSIONS: Record<PrimaryTheme, [number, number]> = { problems:[1672,941], method:[1672,941], columns:[1672,941], publications:[1672,941], stt:[1672,941] };',s,count=1)
           p.write_text(s)
 
           p=Path('src/styles/stt-fullbleed.css'); s=p.read_text()
