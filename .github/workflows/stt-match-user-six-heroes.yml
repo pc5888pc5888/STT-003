@@ -1,0 +1,67 @@
+name: STT Match User-Approved Six Heroes
+
+on:
+  push:
+    branches: [fix/stt-user-six-heroes-20260912]
+    paths:
+      - .github/workflows/stt-match-user-six-heroes.yml
+
+permissions:
+  contents: write
+
+jobs:
+  match-existing-artwork:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/stt-user-six-heroes-20260912
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Compute robust visual signatures for existing candidate artwork
+        run: |
+          python -m pip install -q Pillow numpy
+          python - <<'PY'
+          from pathlib import Path
+          from PIL import Image
+          import numpy as np, json
+
+          def ahash(path, size=16):
+              im=Image.open(path).convert('L').resize((size,size), Image.Resampling.LANCZOS)
+              a=np.array(im,dtype=np.uint8)
+              bits=(a>=a.mean()).flatten()
+              return hex(int(''.join('1' if x else '0' for x in bits),2))[2:].zfill(size*size//4)
+          def dhash(path, size=16):
+              im=Image.open(path).convert('L').resize((size+1,size), Image.Resampling.LANCZOS)
+              a=np.array(im,dtype=np.int16)
+              bits=(a[:,1:]>a[:,:-1]).flatten()
+              return hex(int(''.join('1' if x else '0' for x in bits),2))[2:].zfill(size*size//4)
+
+          roots=[Path('public/visual-bank/stt'), Path('.')]
+          seen=set(); rows=[]
+          allowed={'.png','.jpg','.jpeg','.webp'}
+          for root in roots:
+              if not root.exists(): continue
+              it=root.rglob('*') if root != Path('.') else root.glob('*')
+              for p in it:
+                  if not p.is_file() or p.suffix.lower() not in allowed: continue
+                  key=str(p)
+                  if key in seen: continue
+                  seen.add(key)
+                  try:
+                      im=Image.open(p).convert('RGB')
+                      w,h=im.size
+                      mean=np.array(im.resize((64,64))).mean((0,1)).round(1).tolist()
+                      rows.append({'path':key,'width':w,'height':h,'bytes':p.stat().st_size,'ahash':ahash(p),'dhash':dhash(p),'rgb':mean})
+                  except Exception as e:
+                      rows.append({'path':key,'error':str(e)})
+          Path('stt-user-six-existing-artwork-signatures.json').write_text(json.dumps(rows,ensure_ascii=False,indent=2),encoding='utf-8')
+          PY
+      - name: Commit evidence report only
+        run: |
+          git config user.name "STT Visual Evidence"
+          git config user.email "actions@users.noreply.github.com"
+          git add stt-user-six-existing-artwork-signatures.json
+          git commit -m "chore: record existing STT artwork visual signatures" || exit 0
+          git push origin HEAD:fix/stt-user-six-heroes-20260912
