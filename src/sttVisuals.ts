@@ -1,8 +1,8 @@
 export const STT_VISUALS = {
   home: "/visual-bank/stt/hero-hires/home.webp",
-  problems: "/visual-bank/stt/primary-semantic/problems-governance-charter.png",
-  method: "/visual-bank/stt/primary-semantic/method-governance-mission.png",
-  columns: "/visual-bank/stt/primary-semantic/columns-insight-article.png",
+  problems: "/visual-bank/stt/hero-hires/problems.png",
+  method: "/visual-bank/stt/hero-hires/method.webp",
+  columns: "/visual-bank/stt/hero-hires/columns.png",
   publications: "/visual-bank/stt/hero-hires/publications.png",
   aboutStt: "/visual-bank/stt/hero-hires/stt.png",
   problemMajorDecision: "/visual-bank/stt/originals-20260910/major-decision.webp",
