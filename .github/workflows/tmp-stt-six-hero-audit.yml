@@ -1,0 +1,80 @@
+name: Temporary STT Six Hero Audit
+on:
+  push:
+    branches: [asset/stt-six-hero-selection-20260911]
+    paths:
+      - .github/workflows/tmp-stt-six-hero-audit.yml
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Build true-resolution contact sheet
+        run: |
+          pip -q install Pillow
+          python - <<'PY'
+          from PIL import Image,ImageOps,ImageDraw
+          from pathlib import Path
+          import json,math,hashlib
+          target=(6250,4419)
+          candidates=[]
+          for p in Path('.').glob('*.png'):
+              try:
+                  with Image.open(p) as im:
+                      im.load(); size=im.size
+                      if size==target:
+                          candidates.append((p,size))
+              except Exception:
+                  pass
+          # also scan approved visual-bank sources, de-duplicated by hash
+          for p in Path('public/visual-bank/stt').rglob('*'):
+              if p.suffix.lower() not in {'.png','.webp','.jpg','.jpeg'}: continue
+              try:
+                  with Image.open(p) as im:
+                      im.load(); size=im.size
+                      if size==target:
+                          candidates.append((p,size))
+              except Exception:
+                  pass
+          seen={}; unique=[]
+          for p,size in candidates:
+              h=hashlib.sha256(p.read_bytes()).hexdigest()
+              if h in seen: continue
+              seen[h]=str(p); unique.append((p,size,h))
+          out=Path('six-hero-audit'); out.mkdir(exist_ok=True)
+          report=[]; cells=[]
+          for i,(p,size,h) in enumerate(unique,1):
+              with Image.open(p) as im:
+                  im.load(); rgb=im.convert('RGB')
+                  thumb=ImageOps.contain(rgb,(700,495),method=Image.Resampling.LANCZOS)
+              cell=Image.new('RGB',(730,555),'white')
+              cell.paste(thumb,((730-thumb.width)//2,8))
+              d=ImageDraw.Draw(cell)
+              d.rectangle((8,8,722,503),outline=(210,210,210),width=1)
+              d.text((14,512),f'{i:02d} | {p.name}',fill='black')
+              d.text((14,532),f'{size[0]}x{size[1]} | {h[:16]}',fill='black')
+              cells.append(cell)
+              report.append({'index':i,'path':str(p),'name':p.name,'width':size[0],'height':size[1],'sha256':h,'bytes':p.stat().st_size})
+          cols=2; rows=math.ceil(len(cells)/cols) if cells else 1
+          sheet=Image.new('RGB',(cols*730,rows*555),'white')
+          for j,c in enumerate(cells): sheet.paste(c,((j%cols)*730,(j//cols)*555))
+          sheet.save(out/'all-6250x4419-candidates.jpg',quality=94)
+          (out/'report.json').write_text(json.dumps(report,ensure_ascii=False,indent=2))
+          # reference current locked homepage for visual matching
+          ref=Path('public/visual-bank/stt/hero-hires/home.webp')
+          if ref.exists():
+              with Image.open(ref) as im:
+                  im.convert('RGB').save(out/'locked-home-reference.jpg',quality=95)
+          print(json.dumps(report,ensure_ascii=False,indent=2))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: stt-six-hero-audit
+          path: six-hero-audit/
+          retention-days: 2
