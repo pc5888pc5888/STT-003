@@ -1,0 +1,72 @@
+name: Temporary STT Mobile and Archive Fix
+on:
+  push:
+    branches: [rebuild/stt-25-visuals-final-20260911]
+    paths:
+      - .github/workflows/tmp-stt-mobile-api-fix.yml
+permissions:
+  contents: write
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: rebuild/stt-25-visuals-final-20260911
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - name: Apply minimal source fixes
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+
+          app = Path('src/App.tsx')
+          text = app.read_text()
+          old = 'className="stt-official-brand mr-auto cursor-pointer border-0 bg-transparent p-0 text-left"'
+          new = 'className="stt-official-brand mr-auto min-w-0 flex-1 cursor-pointer border-0 bg-transparent p-0 text-left"'
+          if old not in text:
+              raise SystemExit('App brand class target not found')
+          text = text.replace(old, new, 1)
+          old = 'className="stt-official-logo block h-auto w-auto object-contain"'
+          new = 'className="stt-official-logo block h-auto w-full object-contain object-left"'
+          if old not in text:
+              raise SystemExit('App logo class target not found')
+          text = text.replace(old, new, 1)
+          app.write_text(text)
+
+          columns = Path('src/pages/Columns.tsx')
+          text = columns.read_text()
+          old = '''  const [catalog, setCatalog] = useState<Catalog>(INITIAL);
+  const [archiveState, setArchiveState] = useState<"loading" | "archive" | "bundled">("loading");'''
+          new = '''  const catalog = INITIAL;
+  const archiveState: "bundled" = "bundled";'''
+          if old not in text:
+              raise SystemExit('Columns catalog state target not found')
+          text = text.replace(old, new, 1)
+          start = text.index('  useEffect(() => {\n    const originalTitle = document.title;')
+          end_marker = '  }, []);\n'
+          end = text.index(end_marker, start) + len(end_marker)
+          replacement = '''  useEffect(() => {
+    const originalTitle = document.title;
+    document.title = "莊鈞翔博士｜專欄判讀 · STT Governance";
+    return () => { document.title = originalTitle; };
+  }, []);
+'''
+          text = text[:start] + replacement + text[end:]
+          columns.write_text(text)
+          PY
+          npm ci
+          npm run build
+      - name: Commit source fixes
+        run: |
+          set -euo pipefail
+          git config user.name "STT Governance Build"
+          git config user.email "actions@users.noreply.github.com"
+          git add src/App.tsx src/pages/Columns.tsx
+          git diff --cached --quiet && exit 0
+          git commit -m "fix: constrain mobile brand and use verified bundled column archive"
+          git push origin HEAD:rebuild/stt-25-visuals-final-20260911
