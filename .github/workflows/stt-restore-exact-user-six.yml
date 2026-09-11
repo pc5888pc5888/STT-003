@@ -1,0 +1,138 @@
+name: STT Restore Exact User-Approved Six Heroes
+
+on:
+  push:
+    branches: [fix/stt-user-six-heroes-20260912]
+    paths:
+      - .github/workflows/stt-restore-exact-user-six.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  exact-six-only:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout full repository history
+        uses: actions/checkout@v4
+        with:
+          ref: fix/stt-user-six-heroes-20260912
+          fetch-depth: 0
+
+      - name: Fetch every branch and tag
+        run: |
+          git fetch origin '+refs/heads/*:refs/remotes/origin/*' --tags --force
+
+      - name: Verify the six exact uploaded PNG blobs exist in repository history
+        shell: bash
+        run: |
+          set -euo pipefail
+          declare -A BLOBS=(
+            [home]='69af46e6e02496a2fb77416a0b74e2eb9a49bac4'
+            [problems]='787612ccab1d53a890ab19d1f0b58c7b1811be37'
+            [method]='51f9b62bddf50ae740b79780d76a566d405e4bdf'
+            [columns]='5360af0f83bcf951f12929edcb5ced2c413c532c'
+            [publications]='5a3e5305a64fc7d3945e0b64a270773cbde59739'
+            [about-stt]='a7a24af21d5a34132d48512bf77f7a16f77041d3'
+          )
+          missing=0
+          for key in home problems method columns publications about-stt; do
+            sha="${BLOBS[$key]}"
+            if git cat-file -e "${sha}^{blob}" 2>/dev/null; then
+              echo "FOUND exact ${key}: ${sha}"
+            else
+              echo "MISSING exact ${key}: ${sha}"
+              missing=1
+            fi
+          done
+          if [ "$missing" -ne 0 ]; then
+            echo 'Exact six-image evidence chain is incomplete. No substitution, crop, regeneration, or deployment is permitted.'
+            exit 44
+          fi
+
+      - name: Materialize the exact six images and wire only the six primary-page hero paths
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p public/visual-bank/stt/user-approved-six
+          git cat-file blob 69af46e6e02496a2fb77416a0b74e2eb9a49bac4 > public/visual-bank/stt/user-approved-six/home.png
+          git cat-file blob 787612ccab1d53a890ab19d1f0b58c7b1811be37 > public/visual-bank/stt/user-approved-six/problems.png
+          git cat-file blob 51f9b62bddf50ae740b79780d76a566d405e4bdf > public/visual-bank/stt/user-approved-six/method.png
+          git cat-file blob 5360af0f83bcf951f12929edcb5ced2c413c532c > public/visual-bank/stt/user-approved-six/columns.png
+          git cat-file blob 5a3e5305a64fc7d3945e0b64a270773cbde59739 > public/visual-bank/stt/user-approved-six/publications.png
+          git cat-file blob a7a24af21d5a34132d48512bf77f7a16f77041d3 > public/visual-bank/stt/user-approved-six/about-stt.png
+
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('src/sttVisuals.ts')
+          s=p.read_text(encoding='utf-8')
+          replacements={
+            'home: "/visual-bank/stt/hero-hires/home.webp"':'home: "/visual-bank/stt/user-approved-six/home.png"',
+            'problems: "/visual-bank/stt/hero-hires/problems.png"':'problems: "/visual-bank/stt/user-approved-six/problems.png"',
+            'method: "/visual-bank/stt/hero-hires/method.webp"':'method: "/visual-bank/stt/user-approved-six/method.png"',
+            'columns: "/visual-bank/stt/hero-hires/columns.png"':'columns: "/visual-bank/stt/user-approved-six/columns.png"',
+            'publications: "/visual-bank/stt/hero-hires/publications.png"':'publications: "/visual-bank/stt/user-approved-six/publications.png"',
+            'aboutStt: "/visual-bank/stt/hero-hires/stt.png"':'aboutStt: "/visual-bank/stt/user-approved-six/about-stt.png"',
+          }
+          for old,new in replacements.items():
+              if old not in s:
+                  raise SystemExit(f'Expected current mapping not found; refusing drifted edit: {old}')
+              s=s.replace(old,new,1)
+          p.write_text(s,encoding='utf-8')
+          PY
+
+      - name: Verify exact source identity, dimensions, uniqueness and six-route mapping
+        run: |
+          python -m pip install -q Pillow
+          python - <<'PY'
+          from pathlib import Path
+          from PIL import Image
+          import hashlib, re
+
+          expected={
+            'home.png':'d87b1039a686ad6a92be4eb2aadbc6d32111278ffd59869137e77e939708ff39',
+            'problems.png':'f8fa16efabc931975e46973aafba97a2e75b733c8836ea06bece490b5d676754',
+            'method.png':'6ae927ed6e822b3699005a734b169f7b098cd353fe6c688f381730c41da1d33d',
+            'columns.png':'e64be189148c76ce2dd5b13efba5a9512e2cb003692f87991c95d35322602753',
+            'publications.png':'03cc644c1f32e05252ebc4defae7149dd6ddc0a8a36f7965436f0c2dff284417',
+            'about-stt.png':'964923d0ba8ddc9589fcd8a254d6daca2f71643d2e6702236bff2902d38850c9',
+          }
+          root=Path('public/visual-bank/stt/user-approved-six')
+          digests=[]
+          for name,want in expected.items():
+              p=root/name
+              got=hashlib.sha256(p.read_bytes()).hexdigest()
+              if got != want: raise SystemExit(f'Hash mismatch {name}: {got}')
+              size=Image.open(p).size
+              if size != (1491,1055): raise SystemExit(f'Dimension mismatch {name}: {size}')
+              digests.append(got)
+              print(name, size, got)
+          if len(set(digests)) != 6: raise SystemExit('Hero images are not six unique files')
+
+          s=Path('src/sttVisuals.ts').read_text(encoding='utf-8')
+          exact=[
+            'home: "/visual-bank/stt/user-approved-six/home.png"',
+            'problems: "/visual-bank/stt/user-approved-six/problems.png"',
+            'method: "/visual-bank/stt/user-approved-six/method.png"',
+            'columns: "/visual-bank/stt/user-approved-six/columns.png"',
+            'publications: "/visual-bank/stt/user-approved-six/publications.png"',
+            'aboutStt: "/visual-bank/stt/user-approved-six/about-stt.png"',
+          ]
+          for x in exact:
+              if x not in s: raise SystemExit(f'Missing mapping: {x}')
+          print('PASS: six primary STT pages point to six exact, unique, user-approved source images.')
+          PY
+
+      - name: Build gate
+        run: |
+          npm ci
+          npm run build
+
+      - name: Commit exact six-image correction to fix branch
+        run: |
+          git config user.name "STT Governance Build"
+          git config user.email "actions@users.noreply.github.com"
+          git add public/visual-bank/stt/user-approved-six src/sttVisuals.ts
+          git commit -m "fix: install the six exact user-approved STT hero images"
+          git push origin HEAD:fix/stt-user-six-heroes-20260912
