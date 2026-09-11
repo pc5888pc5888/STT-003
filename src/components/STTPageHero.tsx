@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import { Link } from "react-router-dom";
-import { sttVisual, type STTVisualKey } from "../sttVisuals";
+import { sttVisual, sttVisualDimensions, type STTVisualKey } from "../sttVisuals";
 
 type Action = { text: string; to: string; primary?: boolean };
 
@@ -16,6 +16,8 @@ type Props = {
 };
 
 export default function STTPageHero({ visual, eyebrow, title, lead, actions = [], primary = false, children, id }: Props) {
+  const dimensions = sttVisualDimensions(visual);
+
   return (
     <section id={id} className={`stt-master-hero${primary ? " is-primary" : " is-secondary"}`} data-stt-visual={visual} aria-labelledby={`stt-hero-${visual}`}>
       <img
@@ -23,8 +25,8 @@ export default function STTPageHero({ visual, eyebrow, title, lead, actions = []
         src={sttVisual(visual)}
         alt=""
         aria-hidden="true"
-        width="1491"
-        height="1055"
+        width={dimensions?.[0]}
+        height={dimensions?.[1]}
         decoding="async"
         loading={primary ? "eager" : "lazy"}
         fetchPriority={primary ? "high" : "auto"}
