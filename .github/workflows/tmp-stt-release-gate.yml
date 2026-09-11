@@ -1,3 +1,4 @@
+# Re-run against audited dependency state
 name: Temporary STT Release Browser Gate
 on:
   push:
