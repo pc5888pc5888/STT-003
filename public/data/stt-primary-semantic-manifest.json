@@ -1,0 +1,47 @@
+{
+  "problems-governance-charter.png": {
+    "source": "004.png",
+    "dimensions": [
+      1672,
+      941
+    ],
+    "sha256": "10888a0e693ba48835347692642d11b6b5a4322bd094a546a9b331eec25d02d3",
+    "exactOriginalBytes": true
+  },
+  "method-governance-mission.png": {
+    "source": "31.png",
+    "dimensions": [
+      1672,
+      941
+    ],
+    "sha256": "457b12089660fc2be7a790f492bc513a3f936af76d41cb1303f0d56ef22cedbf",
+    "exactOriginalBytes": true
+  },
+  "columns-insight-article.png": {
+    "source": "011.png",
+    "dimensions": [
+      1672,
+      941
+    ],
+    "sha256": "551bc1f623b1384de0d2f21bd5c2b57bbb9719963fa3bed1500c2c2fed0b0afe",
+    "exactOriginalBytes": true
+  },
+  "publications-stt-press-library.png": {
+    "source": "012.png",
+    "dimensions": [
+      1672,
+      941
+    ],
+    "sha256": "1695a46bb9447b0047d376867408a0e4c38d4fe528f11841fefa6925b4bd1357",
+    "exactOriginalBytes": true
+  },
+  "stt-governance-dossiers.png": {
+    "source": "34.png",
+    "dimensions": [
+      1672,
+      941
+    ],
+    "sha256": "bae6aee4524894890358a1cafec7298e7905c98a70813efd14338cb7f4783fae",
+    "exactOriginalBytes": true
+  }
+}
