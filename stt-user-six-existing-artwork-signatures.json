@@ -1,0 +1,1250 @@
+[
+  {
+    "path": "public/visual-bank/stt/home.webp",
+    "width": 600,
+    "height": 338,
+    "bytes": 5778,
+    "ahash": "fff0fff0ffc0ffc0ffd0fff0fff0fff0ff30ff38fe00ff00ff00c902d9b3ffff",
+    "dhash": "2c0692021b120b121a120a03580348034963096320624843b227b326b3264c98",
+    "rgb": [
+      235.8,
+      228.3,
+      220.2
+    ]
+  },
+  {
+    "path": "public/visual-bank/stt/major-decision.webp",
+    "width": 600,
+    "height": 338,
+    "bytes": 8424,
+    "ahash": "cfc0dfc0ffc0ffe0fff8ff9eff1fff3eff1eff9eff387f008f2e803480340030",
+    "dhash": "1c8e3093e4899325a331a3382236626e6c36653cc673e26f3e4c1f6502e570e5",
+    "rgb": [
+      213.4,
+      197.7,
+      177.6
+    ]
+  },
+  {
+    "path": "public/visual-bank/stt/succession.webp",
+    "width": 600,
+    "height": 338,
+    "bytes": 6778,
+    "ahash": "fff8fffcff84ff84ff84ff84ff86ff87ff87ff80fc8079037002307cb47c9038",
+    "dhash": "8cc00468262c442c502d880d880c3c0c740ec42ca28c860fc58e4ddc6cc864c0",
+    "rgb": [
+      234.7,
+      224.4,
+      210.1
+    ]
+  },
+  {
+    "path": "public/visual-bank/stt/internal-compliance.webp",
+    "width": 600,
+    "height": 338,
+    "bytes": 7816,
+    "ahash": "ffe6fff0fff8fefcff5efe4fffcfff4effcaf24bf80ffe0bfd0fe005e803cc19",
+    "dhash": "4ccc1824122214b8109430963096309c1a5a26da425b4adb0a594a1d59769b3b",
+    "rgb": [
+      225.0,
+      214.1,
+      201.5
+    ]
+  },
+  {
+    "path": "public/visual-bank/stt/owner-dependence.webp",
+    "width": 600,
+    "height": 338,
+    "bytes": 10838,
+    "ahash": "f800fe00ffc03ff81f9519bc39387f38ffb8fffc9fff83ff83ff93f733e777c6",
+    "dhash": "406d482d538560a172256328e361d261ac6866887c981e3326326626e42ce40e",
+    "rgb": [
+      191.9,
+      174.1,
+      153.6
+    ]
+  },
+  {
+    "path": "public/visual-bank/stt/founder-legacy.webp",
+    "width": 600,
+    "height": 338,
+    "bytes": 10348,
+    "ahash": "1c00240020000000207c21dc01c60ffe0fffdfc1dfe33ff23ff30fff0fdf771f",
+    "dhash": "f9aec9acc92fc8ebc1c9d31cc21cd8c45af93e1bba067b666b27b9a5dc35cc30",
+    "rgb": [
+      167.9,
+      149.0,
+      129.0
+    ]
+  },
+  {
+    "path": "public/visual-bank/stt/stt-platform.webp",
+    "width": 600,
+    "height": 338,
+    "bytes": 10352,
+    "ahash": "3ffc3ffe2ff8ac00afffb800bdc195f50575455f31001f809f97ff87ffa0e720",
+    "dhash": "68005800580051555955516761556d555d558955c752b4863924212e19278e61",
+    "rgb": [
+      200.6,
+      182.6,
+      162.2
+    ]
+  },
+  {
+    "path": "public/visual-bank/stt/system-failure.webp",
+    "width": 600,
+    "height": 338,
+    "bytes": 7816,
+    "ahash": "ffe6fff0fff8fefcff5efe4fffcfff4effcaf24bf80ffe0bfd0fe005e803cc19",
+    "dhash": "4ccc1824122214b8109430963096309c1a5a26da425b4adb0a594a1d59769b3b",
+    "rgb": [
+      225.0,
+      214.1,
+      201.5
+    ]
+  },
+  {
+    "path": "public/visual-bank/stt/home-approved.webp",
+    "width": 1023,
+    "height": 576,
+    "bytes": 23208,
+    "ahash": "fffffff8fff8fff8fff0fff0fff0fff8ffc9ff81e9c1f921ed09e909c0000000",
+    "dhash": "e044e0120011404000c2008400a1005104191309120992491a491a491a492527",
+    "rgb": [
+      232.6,
+      224.1,
+      213.6
+    ]
+  },
+  {
+    "path": "public/visual-bank/stt/how-we-judge.webp",
+    "width": 600,
+    "height": 338,
+    "bytes": 7704,
+    "ahash": "fff0ffc8ffc0ff80ff80ffc0ffc0ffc0ff40ff70ff74ff70f3f4e3e487e4c7a4",
+    "dhash": "0002001b009900090099001a0012040282c25ae00a440ac526c40ece2ecd1c6d",
+    "rgb": [
+      216.7,
+      205.3,
+      191.6
+    ]
+  },
+  {
+    "path": "public/visual-bank/stt/ai-governance.webp",
+    "width": 600,
+    "height": 338,
+    "bytes": 6382,
+    "ahash": "fff8ffecffe8ffd0fa40fa00ff00fb00f800fd00f000fe00fe40ffc0ffffffff",
+    "dhash": "810049086f482a5042902260276026402470236402680c810ac0200684014000",
+    "rgb": [
+      223.3,
+      217.2,
+      205.4
+    ]
+  },
+  {
+    "path": "public/visual-bank/stt/insights.webp",
+    "width": 600,
+    "height": 338,
+    "bytes": 7708,
+    "ahash": "bf83bf831fc31fff27f727f7bff7b7f7a3f327f333f333f337f01ff000f3e013",
+    "dhash": "780f640fad07edc6cde76de56de56de74de64de645e645c245e379210fe782f6",
+    "rgb": [
+      213.2,
+      202.3,
+      188.0
+    ]
+  },
+  {
+    "path": "public/visual-bank/stt/publications.webp",
+    "width": 600,
+    "height": 338,
+    "bytes": 6736,
+    "ahash": "fff0fff0bff08fc88fc88ec08ec08dc08dc08dc88ddc84dc8f1c3fc8ffd8ff9c",
+    "dhash": "000400025912595a594a594a594a594a594a5958591459113c11e498cc920cb0",
+    "rgb": [
+      208.1,
+      194.3,
+      177.7
+    ]
+  },
+  {
+    "path": "public/visual-bank/stt/family-ownership.webp",
+    "width": 600,
+    "height": 338,
+    "bytes": 6778,
+    "ahash": "fff8fffcff84ff84ff84ff84ff86ff87ff87ff80fc8079037002307cb47c9038",
+    "dhash": "8cc00468262c442c502d880d880c3c0c740ec42ca28c860fc58e4ddc6cc864c0",
+    "rgb": [
+      234.7,
+      224.4,
+      210.1
+    ]
+  },
+  {
+    "path": "public/visual-bank/stt/corporate-governance.webp",
+    "width": 600,
+    "height": 338,
+    "bytes": 10838,
+    "ahash": "f800fe00ffc03ff81f9519bc39387f38ffb8fffc9fff83ff83ff93f733e777c6",
+    "dhash": "406d482d538560a172256328e361d261ac6866887c981e3326326626e42ce40e",
+    "rgb": [
+      191.9,
+      174.1,
+      153.6
+    ]
+  },
+  {
+    "path": "public/visual-bank/stt/strategic-legal.webp",
+    "width": 600,
+    "height": 338,
+    "bytes": 9014,
+    "ahash": "0fff0fff0fff1fff1fff5fdfcfff0eff0eff4fff4fef0fdf0790078024012003",
+    "dhash": "7bcd7b9a7a9af4b9f183b39b349534dd94dc9cad9a4d5bb65b335a2fc862c9e6",
+    "rgb": [
+      215.6,
+      201.2,
+      183.4
+    ]
+  },
+  {
+    "path": "public/visual-bank/stt/primary-semantic/columns-insight-article.png",
+    "width": 1672,
+    "height": 941,
+    "bytes": 2273687,
+    "ahash": "bf83bf831fc31fff27f707f7bff7b7f7a7f323f333f333f337f01ff000f3e013",
+    "dhash": "700f640fad07ed86cde66de56de56de74de64de645e645e245a379210fe782f6",
+    "rgb": [
+      213.3,
+      201.7,
+      188.3
+    ]
+  },
+  {
+    "path": "public/visual-bank/stt/primary-semantic/stt-governance-dossiers.png",
+    "width": 1672,
+    "height": 941,
+    "bytes": 2191952,
+    "ahash": "3ffc3ffe2ff0ac00afffb800bd5195f50555455f31001f809f97ff87ffa0e720",
+    "dhash": "68005800580051555955516761556d555d558955c752b4863924212e1927ce61",
+    "rgb": [
+      200.6,
+      182.0,
+      162.4
+    ]
+  },
+  {
+    "path": "public/visual-bank/stt/primary-semantic/publications-stt-press-library.png",
+    "width": 1672,
+    "height": 941,
+    "bytes": 2123056,
+    "ahash": "fff0fff0bff08fc88fc88ec08ec08dc08dc08dc88ddc845c8f1c3fc8ffd8ff9c",
+    "dhash": "000400025912595a594a594a594a594a594a5958591459113c11e498cc920c30",
+    "rgb": [
+      208.1,
+      193.6,
+      177.9
+    ]
+  },
+  {
+    "path": "public/visual-bank/stt/primary-semantic/method-governance-mission.png",
+    "width": 1672,
+    "height": 941,
+    "bytes": 2289712,
+    "ahash": "fff0ffc8ffc0ff80ffc0ffc0ffc0ffc0ff40ff70ff74ff70f3f4e3e687e4c7a4",
+    "dhash": "0002001b009b00090019001a0012000282c25ae00ac40ac527c40ece2ecd1c69",
+    "rgb": [
+      216.5,
+      204.4,
+      191.4
+    ]
+  },
+  {
+    "path": "public/visual-bank/stt/primary-semantic/problems-governance-charter.png",
+    "width": 1672,
+    "height": 941,
+    "bytes": 1953656,
+    "ahash": "cfc0dfc0ffc0ffe0fff8ff9eff1fff3eff1eff9eff387f008f2c803480340030",
+    "dhash": "1e8e3093e4899b25a331a338223662666436653cc673e06f3e4c1f6502e530e5",
+    "rgb": [
+      213.6,
+      197.2,
+      177.8
+    ]
+  },
+  {
+    "path": "public/visual-bank/stt/hero-hires/stt.png",
+    "width": 6250,
+    "height": 4419,
+    "bytes": 11998129,
+    "ahash": "3fff3ffcfffcfffcfff8fff8fff8ffecffe4fbc2d9c2f932d922992200000000",
+    "dhash": "585958580048804020c000c001d000c8088c2296324632663264326632664993",
+    "rgb": [
+      233.1,
+      225.8,
+      217.9
+    ]
+  },
+  {
+    "path": "public/visual-bank/stt/hero-hires/home.webp",
+    "width": 3509,
+    "height": 1975,
+    "bytes": 3558918,
+    "ahash": "fffffff8fff8fff8fff0fff0fff0fff8ffc9ff81e9c1f921ed09e909c0000000",
+    "dhash": "006450126011c0c010c6008401a100d104191309120912491a491a491a492527",
+    "rgb": [
+      231.6,
+      224.8,
+      217.5
+    ]
+  },
+  {
+    "path": "public/visual-bank/stt/hero-hires/publications.png",
+    "width": 6250,
+    "height": 4419,
+    "bytes": 11692832,
+    "ahash": "fffffffcfffcfffcfff8fff8fff8ffecffe4fbc2d9c2f932d922992200000000",
+    "dhash": "785958588048804020c000c001d000c8088c2296324632663264326632664993",
+    "rgb": [
+      233.4,
+      226.2,
+      218.5
+    ]
+  },
+  {
+    "path": "public/visual-bank/stt/hero-hires/stt-portrait.png",
+    "width": 4096,
+    "height": 5120,
+    "bytes": 7341879,
+    "ahash": "008001c003c003c007c00fe00fd01bd00fc00780078007000600040004000000",
+    "dhash": "01800b101f1003001b205b20172037903b100f200d201c601cc0098009800980",
+    "rgb": [
+      16.2,
+      15.7,
+      22.7
+    ]
+  },
+  {
+    "path": "public/visual-bank/stt/hero-hires/method.webp",
+    "width": 3200,
+    "height": 2263,
+    "bytes": 4688772,
+    "ahash": "fffcfff8ffe0f720ff00f800f900f800f000f000f000f600ffc0ffffffffffff",
+    "dhash": "23014101c9006b48a25002d0266026402410036000480cc02000000000840000",
+    "rgb": [
+      228.4,
+      223.0,
+      214.0
+    ]
+  },
+  {
+    "path": "public/visual-bank/stt/hero-hires/problems.png",
+    "width": 6250,
+    "height": 4419,
+    "bytes": 12745940,
+    "ahash": "fffcfff8ffe0f720ff00f800f900f800f000f000f000f600ffc0ffffffffffff",
+    "dhash": "23014101c9006b48a25002d0266026402410036000480cc02000000000840000",
+    "rgb": [
+      228.4,
+      223.0,
+      214.0
+    ]
+  },
+  {
+    "path": "public/visual-bank/stt/hero-hires/columns.png",
+    "width": 3509,
+    "height": 1975,
+    "bytes": 6497336,
+    "ahash": "fffffff8fff8fff8fff0fff0fff0fff8ffc9ff81e9c1f921ed09e909c0000000",
+    "dhash": "c06410126011c0c010c6008401a100d104191309120912491a491a491a492527",
+    "rgb": [
+      231.5,
+      224.7,
+      217.4
+    ]
+  },
+  {
+    "path": "public/visual-bank/stt/originals-20260910/major-decision.webp",
+    "width": 1672,
+    "height": 941,
+    "bytes": 1400196,
+    "ahash": "cfc0dfc0ffc0ffe0fff8ff9eff1fff3eff1eff9eff387f008f2c803480340030",
+    "dhash": "1e8e3093e4899b25a331a338223662666436653cc673e06f3e4c1f6502e530e5",
+    "rgb": [
+      213.6,
+      197.2,
+      177.8
+    ]
+  },
+  {
+    "path": "public/visual-bank/stt/originals-20260910/succession.webp",
+    "width": 1672,
+    "height": 941,
+    "bytes": 1572568,
+    "ahash": "fff8fffcff84ff84ff84ff84ff84ff87ff87ff80fc0079037002307eb47e9038",
+    "dhash": "8cc00468262c442c502d880da80c740c740e842ca20e860fc58e4dde6ccc64c0",
+    "rgb": [
+      235.1,
+      223.7,
+      210.3
+    ]
+  },
+  {
+    "path": "public/visual-bank/stt/originals-20260910/internal-compliance.webp",
+    "width": 1672,
+    "height": 941,
+    "bytes": 1514830,
+    "ahash": "ffe6fff0fff8fefcff56fe4fffcfffceffcaf24bf80ffe0bfd0de005e803cc19",
+    "dhash": "4c8c1824122214b8109430963092309c1a5a26da825b48da0a594a1d59769b79",
+    "rgb": [
+      225.2,
+      213.5,
+      201.6
+    ]
+  },
+  {
+    "path": "public/visual-bank/stt/originals-20260910/owner-dependence.webp",
+    "width": 1672,
+    "height": 941,
+    "bytes": 1845020,
+    "ahash": "f800fe00ffc03ff81f9519bc39387f38ffb8fffc9fff83ff83ff93f733e777c6",
+    "dhash": "406d482d538560a172256328e361d261ac6866887c881e3326326626e42ce48e",
+    "rgb": [
+      192.1,
+      173.6,
+      153.8
+    ]
+  },
+  {
+    "path": "public/visual-bank/stt/originals-20260910/founder-legacy.webp",
+    "width": 1672,
+    "height": 941,
+    "bytes": 1564172,
+    "ahash": "1c00240020000000207c21dc01c60ffe0fffdfc1dfe33ff23ff30fff0fdf761f",
+    "dhash": "f9aec9acc92dc8ebc1c9d31cc21cd8c45af93e1bbb067b666b27b9a5dc35cc38",
+    "rgb": [
+      168.1,
+      148.5,
+      129.2
+    ]
+  },
+  {
+    "path": "public/visual-bank/stt/originals-20260910/stt-platform.webp",
+    "width": 1672,
+    "height": 941,
+    "bytes": 1756474,
+    "ahash": "3ffc3ffe2ff0ac00afffb800bd5195f50555455f31001f809f97ff87ffa0e720",
+    "dhash": "68005800580051555955516761556d555d558955c752b4863924212e1927ce61",
+    "rgb": [
+      200.6,
+      182.0,
+      162.4
+    ]
+  },
+  {
+    "path": "public/visual-bank/stt/originals-20260910/system-failure.webp",
+    "width": 1672,
+    "height": 941,
+    "bytes": 1514830,
+    "ahash": "ffe6fff0fff8fefcff56fe4fffcfffceffcaf24bf80ffe0bfd0de005e803cc19",
+    "dhash": "4c8c1824122214b8109430963092309c1a5a26da825b48da0a594a1d59769b79",
+    "rgb": [
+      225.2,
+      213.5,
+      201.6
+    ]
+  },
+  {
+    "path": "public/visual-bank/stt/originals-20260910/home-approved.webp",
+    "width": 3509,
+    "height": 1975,
+    "bytes": 3558918,
+    "ahash": "fffffff8fff8fff8fff0fff0fff0fff8ffc9ff81e9c1f921ed09e909c0000000",
+    "dhash": "006450126011c0c010c6008401a100d104191309120912491a491a491a492527",
+    "rgb": [
+      231.6,
+      224.8,
+      217.5
+    ]
+  },
+  {
+    "path": "public/visual-bank/stt/originals-20260910/how-we-judge.webp",
+    "width": 1672,
+    "height": 941,
+    "bytes": 1818282,
+    "ahash": "fff0ffc8ffc0ff80ffc0ffc0ffc0ffc0ff40ff70ff74ff70f3f4e3e687e4c7a4",
+    "dhash": "0002001b009b00090019001a0012000282c25ae00ac40ac527c40ece2ecd1c69",
+    "rgb": [
+      216.5,
+      204.4,
+      191.4
+    ]
+  },
+  {
+    "path": "public/visual-bank/stt/originals-20260910/ai-governance.webp",
+    "width": 3200,
+    "height": 2263,
+    "bytes": 4688772,
+    "ahash": "fffcfff8ffe0f720ff00f800f900f800f000f000f000f600ffc0ffffffffffff",
+    "dhash": "23014101c9006b48a25002d0266026402410036000480cc02000000000840000",
+    "rgb": [
+      228.4,
+      223.0,
+      214.0
+    ]
+  },
+  {
+    "path": "public/visual-bank/stt/originals-20260910/insights.webp",
+    "width": 1672,
+    "height": 941,
+    "bytes": 1575318,
+    "ahash": "bf83bf831fc31fff27f707f7bff7b7f7a7f323f333f333f337f01ff000f3e013",
+    "dhash": "700f640fad07ed86cde66de56de56de74de64de645e645e245a379210fe782f6",
+    "rgb": [
+      213.3,
+      201.7,
+      188.3
+    ]
+  },
+  {
+    "path": "public/visual-bank/stt/originals-20260910/publications.webp",
+    "width": 1672,
+    "height": 941,
+    "bytes": 1555894,
+    "ahash": "fff0fff0bff08fc88fc88ec08ec08dc08dc08dc88ddc845c8f1c3fc8ffd8ff9c",
+    "dhash": "000400025912595a594a594a594a594a594a5958591459113c11e498cc920c30",
+    "rgb": [
+      208.1,
+      193.6,
+      177.9
+    ]
+  },
+  {
+    "path": "public/visual-bank/stt/originals-20260910/family-ownership.webp",
+    "width": 1672,
+    "height": 941,
+    "bytes": 1572568,
+    "ahash": "fff8fffcff84ff84ff84ff84ff84ff87ff87ff80fc0079037002307eb47e9038",
+    "dhash": "8cc00468262c442c502d880da80c740c740e842ca20e860fc58e4dde6ccc64c0",
+    "rgb": [
+      235.1,
+      223.7,
+      210.3
+    ]
+  },
+  {
+    "path": "public/visual-bank/stt/originals-20260910/corporate-governance.webp",
+    "width": 1672,
+    "height": 941,
+    "bytes": 1845020,
+    "ahash": "f800fe00ffc03ff81f9519bc39387f38ffb8fffc9fff83ff83ff93f733e777c6",
+    "dhash": "406d482d538560a172256328e361d261ac6866887c881e3326326626e42ce48e",
+    "rgb": [
+      192.1,
+      173.6,
+      153.8
+    ]
+  },
+  {
+    "path": "public/visual-bank/stt/originals-20260910/strategic-legal.webp",
+    "width": 1672,
+    "height": 941,
+    "bytes": 1940294,
+    "ahash": "0fff0fff0fff1fff1fff5fdfcfff0eff0eff4fff4fef0fdf0790078024012003",
+    "dhash": "79cd7b9e7e9af4b9f183b39b349534dc94dc9cad9a4d59b65b375a2dc862c9a6",
+    "rgb": [
+      215.5,
+      200.4,
+      183.1
+    ]
+  },
+  {
+    "path": "22.png",
+    "width": 1672,
+    "height": 941,
+    "bytes": 1732568,
+    "ahash": "fffefffefff0fff8ffe8ffe0ffe0ff80ff80ff80ff80ffe0ffa0ff60fc60fc00",
+    "dhash": "4000a0009020c001c009c009e00cf02ef02ef826f826f80fbc4db265b9c2b1c4",
+    "rgb": [
+      220.3,
+      211.1,
+      201.2
+    ]
+  },
+  {
+    "path": "portrait-open.png",
+    "width": 1080,
+    "height": 1456,
+    "bytes": 1879534,
+    "ahash": "000000000380038003800fe00ff00ff07ffe77fe07e007e007e007e006e006e0",
+    "dhash": "f480f940f300d720e710de80d8a41c87b490cc1c2cc9dcc8fcc8ecc8ec88ecc8",
+    "rgb": [
+      58.1,
+      54.8,
+      58.0
+    ]
+  },
+  {
+    "path": "34.png",
+    "width": 1672,
+    "height": 941,
+    "bytes": 2191952,
+    "ahash": "3ffc3ffe2ff0ac00afffb800bd5195f50555455f31001f809f97ff87ffa0e720",
+    "dhash": "68005800580051555955516761556d555d558955c752b4863924212e1927ce61",
+    "rgb": [
+      200.6,
+      182.0,
+      162.4
+    ]
+  },
+  {
+    "path": "ChatGPT Image 2026年9月3日 上午02_00_07 (3).png",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 2227917,
+    "ahash": "ffffffdffc37f00be403ac05a00584018701a0858181d18be817f3cffc1fffff",
+    "dhash": "10742698496494d629ab59bd55b52c3b5c5d55352b1ba31b98664e8d30720cc4",
+    "rgb": [
+      200.4,
+      184.8,
+      168.7
+    ]
+  },
+  {
+    "path": "013.png",
+    "width": 1672,
+    "height": 941,
+    "bytes": 2230520,
+    "ahash": "1c00240020000000207c21dc01c60ffe0fffdfc1dfe33ff23ff30fff0fdf761f",
+    "dhash": "f9aec9acc92dc8ebc1c9d31cc21cd8c45af93e1bbb067b666b27b9a5dc35cc38",
+    "rgb": [
+      168.1,
+      148.5,
+      129.2
+    ]
+  },
+  {
+    "path": "aa98d786-033c-4821-81e8-2a97581f5da2.png",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 1581985,
+    "ahash": "fffffffffffffffffe7ffc1ff81ff00ff00ff80ff807fc0fff3fffffffffffff",
+    "dhash": "8000200880488310ac68507412d0a658a6fa325e529f287f807c810020008000",
+    "rgb": [
+      238.0,
+      227.3,
+      215.3
+    ]
+  },
+  {
+    "path": "ChatGPT Image 2026年9月3日 上午02_00_05 (2).png",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 2417324,
+    "ahash": "fc3ff7cfec17d00ba405a9c5800584018701a085a185d18bc813e7e7f81fffff",
+    "dhash": "30f2468d9966a4da296b5b55559538394c555535430d231b92764ccd203a10e6",
+    "rgb": [
+      198.0,
+      182.3,
+      165.5
+    ]
+  },
+  {
+    "path": "31.png",
+    "width": 1672,
+    "height": 941,
+    "bytes": 2289712,
+    "ahash": "fff0ffc8ffc0ff80ffc0ffc0ffc0ffc0ff40ff70ff74ff70f3f4e3e687e4c7a4",
+    "dhash": "0002001b009b00090019001a0012000282c25ae00ac40ac527c40ece2ecd1c69",
+    "rgb": [
+      216.5,
+      204.4,
+      191.4
+    ]
+  },
+  {
+    "path": "portrait-read-2.png",
+    "width": 3804,
+    "height": 5120,
+    "bytes": 7666422,
+    "ahash": "0000010003c003c003800fe01fe01ff81ffc3f8004100ff00fe00fe00fe00fe0",
+    "dhash": "64c0bb00b7107600c630be08b286b44064716928e9f0d844d848da64584058c0",
+    "rgb": [
+      49.2,
+      46.9,
+      49.4
+    ]
+  },
+  {
+    "path": "008.png",
+    "width": 1672,
+    "height": 941,
+    "bytes": 2237519,
+    "ahash": "3fff1ffc1ff91bf93bff0bff33ff33ff61ff79ff79ff01ff01ff018f000f303f",
+    "dhash": "7fe47ee136e376b3d2b9d6b3d6f3c69386d2d29292d2075a5fccd31bd17be1f0",
+    "rgb": [
+      216.1,
+      206.2,
+      194.8
+    ]
+  },
+  {
+    "path": "4(2).png",
+    "width": 6250,
+    "height": 4419,
+    "bytes": 11692832,
+    "ahash": "fffffffcfffcfffcfff8fff8fff8ffecffe4fbc2d9c2f932d922992200000000",
+    "dhash": "785958588048804020c000c001d000c8088c2296324632663264326632664993",
+    "rgb": [
+      233.4,
+      226.2,
+      218.5
+    ]
+  },
+  {
+    "path": "007.png",
+    "width": 1672,
+    "height": 941,
+    "bytes": 2154081,
+    "ahash": "ffe6fff0fff8fefcff56fe4fffcfffceffcaf24bf80ffe0bfd0de005e803cc19",
+    "dhash": "4c8c1824122214b8109430963092309c1a5a26da825b48da0a594a1d59769b79",
+    "rgb": [
+      225.2,
+      213.5,
+      201.6
+    ]
+  },
+  {
+    "path": "ChatGPT Image 2026年9月3日 上午02_00_09 (4).png",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 2250353,
+    "ahash": "fe7ff3cfe817d00be407a885800184018701a485a1c5d18bc813f7eff81fffff",
+    "dhash": "30f2451d9976a4da292b5b35553529394c5d5515431d231b93764ccd203a10c4",
+    "rgb": [
+      203.9,
+      187.4,
+      169.7
+    ]
+  },
+  {
+    "path": "logo001拷貝.png",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 2251083,
+    "ahash": "000008103bdc37ec6ff6ffffdffbdfdbfbdfedf777fe7ffe3c3c1e3804200000",
+    "dhash": "4444b3326718cd4c9b269696b6d23492963699268d4ed794696cb0f2b9620280",
+    "rgb": [
+      103.8,
+      84.0,
+      59.3
+    ]
+  },
+  {
+    "path": "weblogo001.png",
+    "width": 2171,
+    "height": 724,
+    "bytes": 1101138,
+    "ahash": "0000000000006600fff8fff8f000fffebfffd000de66fff76264200000000000",
+    "dhash": "40002800c080c80089d0cb22c350c9044caaa60028cea8ceccecc00008848000",
+    "rgb": [
+      25.9,
+      21.2,
+      12.2
+    ]
+  },
+  {
+    "path": "29.png",
+    "width": 6250,
+    "height": 4419,
+    "bytes": 12745940,
+    "ahash": "fffcfff8ffe0f720ff00f800f900f800f000f000f000f600ffc0ffffffffffff",
+    "dhash": "23014101c9006b48a25002d0266026402410036000480cc02000000000840000",
+    "rgb": [
+      228.4,
+      223.0,
+      214.0
+    ]
+  },
+  {
+    "path": "23.png",
+    "width": 1672,
+    "height": 941,
+    "bytes": 1928408,
+    "ahash": "fffeffffffefffc7ffc7ffc9fe48fe00fe00fc00fc00fcc4ffc0fec0fe00ff00",
+    "dhash": "00200010000a000d820f041908db005f004c48c0098c098c0d0d148d48430a07",
+    "rgb": [
+      222.8,
+      212.2,
+      201.5
+    ]
+  },
+  {
+    "path": "ChatGPT Image 2026年9月3日 上午02_00_05 (1).png",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 2261259,
+    "ahash": "fffff3cfec17d00be407ac05c00184018701a085a1c5d18bc813f7eff81fffff",
+    "dhash": "107266189964a4da292f5995551529194c5d5515431d231b93764ccd203a18e4",
+    "rgb": [
+      202.6,
+      186.3,
+      168.6
+    ]
+  },
+  {
+    "path": "weblogo002.png",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 2624362,
+    "ahash": "00000ff01ff83dfc3ffc7ffe7ffe7ff66fee77ce37ec39fc1fb80ff003e00000",
+    "dhash": "4f04bf227160f3b0ef08cd8cccacc9ccd8cccc0ced98d3106b69b9b25f442708",
+    "rgb": [
+      102.3,
+      82.0,
+      59.1
+    ]
+  },
+  {
+    "path": "portrait-read-3.png",
+    "width": 3804,
+    "height": 5120,
+    "bytes": 7666422,
+    "ahash": "0000010003c003c003800fe01fe01ff81ffc3f8004100ff00fe00fe00fe00fe0",
+    "dhash": "64c0bb00b7107600c630be08b286b44064716928e9f0d844d848da64584058c0",
+    "rgb": [
+      49.2,
+      46.9,
+      49.4
+    ]
+  },
+  {
+    "path": "33.png",
+    "width": 1672,
+    "height": 941,
+    "bytes": 2415654,
+    "ahash": "0fff0fff0fff1fff1fff5fdfcfff0eff0eff4fff4fef0fdf0790078024012003",
+    "dhash": "79cd7b9e7e9af4b9f183b39b349534dc94dc9cad9a4d59b65b375a2dc862c9a6",
+    "rgb": [
+      215.5,
+      200.4,
+      183.1
+    ]
+  },
+  {
+    "path": "19.png",
+    "width": 1672,
+    "height": 941,
+    "bytes": 1893456,
+    "ahash": "fff8fff8fff8fff8fff8fffafff8fff8fff0fff0fff07ff07f303b003d003c00",
+    "dhash": "e412d013c003c083c091c0f2c0c2e0c0d180c180c380c784c6656639624dd123",
+    "rgb": [
+      227.9,
+      218.4,
+      208.8
+    ]
+  },
+  {
+    "path": "c71e80bc-8547-400a-93b5-7a60a089e647.png",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 1477326,
+    "ahash": "fffffffffffffffffe7ffc3ffa1ffa0ff007f807f807fc07ffffffffffffffff",
+    "dhash": "00000000004407000cc000f012b004da20dc125e939e007e04c4018941004200",
+    "rgb": [
+      239.3,
+      229.8,
+      220.3
+    ]
+  },
+  {
+    "path": "32.png",
+    "width": 1672,
+    "height": 941,
+    "bytes": 2341463,
+    "ahash": "f800fe00ffc03ff81f9519bc39387f38ffb8fffc9fff83ff83ff93f733e777c6",
+    "dhash": "406d482d538560a172256328e361d261ac6866887c881e3326326626e42ce48e",
+    "rgb": [
+      192.1,
+      173.6,
+      153.8
+    ]
+  },
+  {
+    "path": "ddcfbba2-30fa-4cc7-a90c-77b839ae34d0.png",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 1182050,
+    "ahash": "fffffffffffffffffe3ff81ff80ff00ff00ff80ffc1ffe3fffffffffffffffff",
+    "dhash": "000400000048071208ea107612b822fa0278105808f004600300002000094904",
+    "rgb": [
+      239.5,
+      232.1,
+      225.4
+    ]
+  },
+  {
+    "path": "24.png",
+    "width": 1672,
+    "height": 941,
+    "bytes": 1924003,
+    "ahash": "fe00ff80ffe0fff0fff8fff87ff83fe03fe01ff007f007c0878afc40006801f8",
+    "dhash": "802004008400a400c200c000e013ea03f441ec25edc42d043b3a519059c923e1",
+    "rgb": [
+      216.3,
+      202.5,
+      187.6
+    ]
+  },
+  {
+    "path": "portrait-open-2.png",
+    "width": 1080,
+    "height": 1456,
+    "bytes": 1879534,
+    "ahash": "000000000380038003800fe00ff00ff07ffe77fe07e007e007e007e006e006e0",
+    "dhash": "f480f940f300d720e710de80d8a41c87b490cc1c2cc9dcc8fcc8ecc8ec88ecc8",
+    "rgb": [
+      58.1,
+      54.8,
+      58.0
+    ]
+  },
+  {
+    "path": "35.png",
+    "width": 3509,
+    "height": 1975,
+    "bytes": 6497336,
+    "ahash": "fffffff8fff8fff8fff0fff0fff0fff8ffc9ff81e9c1f921ed09e909c0000000",
+    "dhash": "c06410126011c0c010c6008401a100d104191309120912491a491a491a492527",
+    "rgb": [
+      231.5,
+      224.7,
+      217.4
+    ]
+  },
+  {
+    "path": "16.png",
+    "width": 1672,
+    "height": 941,
+    "bytes": 2528314,
+    "ahash": "f7ffffbffe3ff03ff01ff01ff007f806f806fc0efc0ffc07fc07fc0fee3feeff",
+    "dhash": "0f98ae68a4688178423c423c41bc6116319e299a291a491f08ff2cff5cf359cb",
+    "rgb": [
+      182.7,
+      167.2,
+      148.4
+    ]
+  },
+  {
+    "path": "Eric-Chuang-18-1.png",
+    "width": 4096,
+    "height": 5120,
+    "bytes": 7341879,
+    "ahash": "008001c003c003c007c00fe00fd01bd00fc00780078007000600040004000000",
+    "dhash": "01800b101f1003001b205b20172037903b100f200d201c601cc0098009800980",
+    "rgb": [
+      16.2,
+      15.7,
+      22.7
+    ]
+  },
+  {
+    "path": "14.png",
+    "width": 1672,
+    "height": 941,
+    "bytes": 2458817,
+    "ahash": "7fff7ff17ff17ffc7dfc3cf17cf07c947cfe7cff7cff7c731c0306072c046c03",
+    "dhash": "dc27cf07cc63d9e1c934e973c9a1e1b4e1b8f1e9f19ff0e6a48728bdd87dd1d2",
+    "rgb": [
+      209.3,
+      195.3,
+      178.0
+    ]
+  },
+  {
+    "path": "920243ba-0712-43d5-9ce2-5a27ccfec24e.png",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 1766412,
+    "ahash": "fffffffffffffffffe7ffc1ff81ff80ff00ff80ff80ffc1fffffffffffffffff",
+    "dhash": "000000000040031004e0097012701278227a125a113e087c064a101000000000",
+    "rgb": [
+      240.5,
+      229.6,
+      217.0
+    ]
+  },
+  {
+    "path": "21.png",
+    "width": 1672,
+    "height": 941,
+    "bytes": 2100790,
+    "ahash": "fffffff8fff8fff8fff8fff8ffd8efbe6687be1cbc679060c020c086e0000040",
+    "dhash": "c042c210c288c801d0c9cc198c319d28c91c447871ce23c48f499b0c8315acd1",
+    "rgb": [
+      229.5,
+      220.5,
+      209.6
+    ]
+  },
+  {
+    "path": "17.png",
+    "width": 1672,
+    "height": 941,
+    "bytes": 1657672,
+    "ahash": "ffe0ffe0ffe0ffe0fff8fff0fff0ffe0ffe0fff0fff0fff0ffdcff0cff04ff88",
+    "dhash": "83c483c483c00bc00d8015a616873e441e803e803e013fa11eb13e39bf393f39",
+    "rgb": [
+      230.9,
+      221.5,
+      210.7
+    ]
+  },
+  {
+    "path": "005.png",
+    "width": 1672,
+    "height": 941,
+    "bytes": 2453279,
+    "ahash": "2ff1c7f107e00fe01fd00fdcefffcfefc7efc7ffc7efc7f7e7f3e7f9c7cde40c",
+    "dhash": "d85118331c213885fd91991898db1bd91a4b1b8b1a091a4e0b220aeb0e09083c",
+    "rgb": [
+      205.9,
+      192.3,
+      173.8
+    ]
+  },
+  {
+    "path": "9f821aea-54c5-4e3f-b59e-ddec5fce22d2.png",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 1585886,
+    "ahash": "fffffffffffffffffe7ffc1ff80ff80ff80ff80ffc0ffe1fffffffffffffffff",
+    "dhash": "000000000000030024c008f4123416da169a131f097f047f021e000c00080208",
+    "rgb": [
+      241.1,
+      229.1,
+      216.8
+    ]
+  },
+  {
+    "path": "portrait-read.png",
+    "width": 3804,
+    "height": 5120,
+    "bytes": 7666422,
+    "ahash": "0000010003c003c003800fe01fe01ff81ffc3f8004100ff00fe00fe00fe00fe0",
+    "dhash": "64c0bb00b7107600c630be08b286b44064716928e9f0d844d848da64584058c0",
+    "rgb": [
+      49.2,
+      46.9,
+      49.4
+    ]
+  },
+  {
+    "path": "portrait-open-1.png",
+    "width": 1080,
+    "height": 1456,
+    "bytes": 1879534,
+    "ahash": "000000000380038003800fe00ff00ff07ffe77fe07e007e007e007e006e006e0",
+    "dhash": "f480f940f300d720e710de80d8a41c87b490cc1c2cc9dcc8fcc8ecc8ec88ecc8",
+    "rgb": [
+      58.1,
+      54.8,
+      58.0
+    ]
+  },
+  {
+    "path": "weblogo.png",
+    "width": 3181,
+    "height": 891,
+    "bytes": 183439,
+    "ahash": "0000000000004f80efc0e000eff0fffeee36a000aeeeeeefeeee400000000000",
+    "dhash": "1000040090009200950080009200995cdd564000588c598c9dcc800014028000",
+    "rgb": [
+      24.4,
+      20.6,
+      15.3
+    ]
+  },
+  {
+    "path": "3(3).png",
+    "width": 6250,
+    "height": 4419,
+    "bytes": 11998129,
+    "ahash": "3fff3ffcfffcfffcfff8fff8fff8ffecffe4fbc2d9c2f932d922992200000000",
+    "dhash": "585958580048804020c000c001d000c8088c2296324632663264326632664993",
+    "rgb": [
+      233.1,
+      225.8,
+      217.9
+    ]
+  },
+  {
+    "path": "26.png",
+    "width": 1672,
+    "height": 941,
+    "bytes": 1816323,
+    "ahash": "ffe0ffc0ffc0ffe2ffe2ffe0ffc0ffc0ff00ff00ff00ffc0f890f800ffe0ffe3",
+    "dhash": "9c09cc04260622062206330123080080024106610644061a131201330c43030e",
+    "rgb": [
+      222.8,
+      212.5,
+      200.5
+    ]
+  },
+  {
+    "path": "20.png",
+    "width": 1672,
+    "height": 941,
+    "bytes": 1923720,
+    "ahash": "fffffffffffffffffffefff2fff9fff0ff80ff80fcc0fdc0ffc0fe00ff00ff00",
+    "dhash": "03000200520004402908080622433266e706cc0689819901f9cbcc8bee31e23b",
+    "rgb": [
+      225.0,
+      214.4,
+      201.2
+    ]
+  },
+  {
+    "path": "012.png",
+    "width": 1672,
+    "height": 941,
+    "bytes": 2123056,
+    "ahash": "fff0fff0bff08fc88fc88ec08ec08dc08dc08dc88ddc845c8f1c3fc8ffd8ff9c",
+    "dhash": "000400025912595a594a594a594a594a594a5958591459113c11e498cc920c30",
+    "rgb": [
+      208.1,
+      193.6,
+      177.9
+    ]
+  },
+  {
+    "path": "77b0731c-582d-475b-b5cf-846085368fb7.png",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 1413404,
+    "ahash": "fffffffffffffffffe7ff81ff81ff00ff00ff00ff80ffc1fffffffffffffffff",
+    "dhash": "80001020404083208cc090f011342458255b133f10ff08fe0600010000100000",
+    "rgb": [
+      244.0,
+      234.0,
+      221.8
+    ]
+  },
+  {
+    "path": "weblogo003.png",
+    "width": 1815,
+    "height": 508,
+    "bytes": 244267,
+    "ahash": "f800effecffeeffeccb6000000008d40fffe702400000000fbdefbdef3de0000",
+    "dhash": "c00015509b729b64192400000a001a54cd24e54c2000d698a69c8698a6b84130",
+    "rgb": [
+      39.8,
+      30.3,
+      16.1
+    ]
+  },
+  {
+    "path": "f34f14b9-69fd-4301-a04b-aea017577015.png",
+    "width": 1254,
+    "height": 1254,
+    "bytes": 1538499,
+    "ahash": "fffffffffffffffffc3ff81ff19ff00ff00ff19ff817fc00ffffffffffffffff",
+    "dhash": "010000000000469208e8113107342692249416341337087f0210000000008008",
+    "rgb": [
+      236.7,
+      227.5,
+      218.0
+    ]
+  },
+  {
+    "path": "18.png",
+    "width": 1672,
+    "height": 941,
+    "bytes": 2331355,
+    "ahash": "ffe0ffe0fff8fff0fff8fff8ffe8ffe0fff0fff9ff71ff11fe017e003f802c00",
+    "dhash": "802240208010805000c000c000c901cb010303138253ca73c49bc027c92eca8e",
+    "rgb": [
+      208.1,
+      193.3,
+      176.1
+    ]
+  },
+  {
+    "path": "004.png",
+    "width": 1672,
+    "height": 941,
+    "bytes": 1953656,
+    "ahash": "cfc0dfc0ffc0ffe0fff8ff9eff1fff3eff1eff9eff387f008f2c803480340030",
+    "dhash": "1e8e3093e4899b25a331a338223662666436653cc673e06f3e4c1f6502e530e5",
+    "rgb": [
+      213.6,
+      197.2,
+      177.8
+    ]
+  },
+  {
+    "path": "006.png",
+    "width": 1672,
+    "height": 941,
+    "bytes": 2197204,
+    "ahash": "fff8fffcff84ff84ff84ff84ff84ff87ff87ff80fc0079037002307eb47e9038",
+    "dhash": "8cc00468262c442c502d880da80c740c740e842ca20e860fc58e4dde6ccc64c0",
+    "rgb": [
+      235.1,
+      223.7,
+      210.3
+    ]
+  },
+  {
+    "path": "portrait-read-1.png",
+    "width": 3804,
+    "height": 5120,
+    "bytes": 7666422,
+    "ahash": "0000010003c003c003800fe01fe01ff81ffc3f8004100ff00fe00fe00fe00fe0",
+    "dhash": "64c0bb00b7107600c630be08b286b44064716928e9f0d844d848da64584058c0",
+    "rgb": [
+      49.2,
+      46.9,
+      49.4
+    ]
+  },
+  {
+    "path": "15.png",
+    "width": 1672,
+    "height": 941,
+    "bytes": 2194213,
+    "ahash": "fffcfff0fffcffb0fff0ffa0ff80fcc0fcc0ffe4ffe0ffc0fe80ff8073017779",
+    "dhash": "002000440040102480248024012409a421850a482a846c994c99a50ce643cc79",
+    "rgb": [
+      229.9,
+      216.7,
+      201.5
+    ]
+  },
+  {
+    "path": "011.png",
+    "width": 1672,
+    "height": 941,
+    "bytes": 2273687,
+    "ahash": "bf83bf831fc31fff27f707f7bff7b7f7a7f323f333f333f337f01ff000f3e013",
+    "dhash": "700f640fad07ed86cde66de56de56de74de64de645e645e245a379210fe782f6",
+    "rgb": [
+      213.3,
+      201.7,
+      188.3
+    ]
+  },
+  {
+    "path": "010.png",
+    "width": 1672,
+    "height": 941,
+    "bytes": 2020067,
+    "ahash": "7fff3ffe1ffe1ffe0fffdff7c3e743e712670246024ae60eef8e8f251f8106c1",
+    "dhash": "f2c0eba07bc459e071e6b2ef946f950fa4ce64cee4cac89a5e4c326d3a2d1c95",
+    "rgb": [
+      221.1,
+      208.3,
+      193.9
+    ]
+  }
+]
