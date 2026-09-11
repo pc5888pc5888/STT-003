@@ -77,6 +77,7 @@ export default function Columns() {
             <div className="stt-series-index"><small>0{i + 1} · {s.en}</small><span>{counts[s.key]}<small> 則</small></span></div>
             <h2>{s.name}</h2><p>{s.description}</p>
             <button type="button" className="stt-series-enter" onClick={() => update("series", s.key, true)} aria-label={`瀏覽${s.name}`}>瀏覽這個系列 <ArrowUpRight size={16} aria-hidden="true" /></button>
+            {s.key === "humanistic" && <a className="stt-series-enter" style={{ marginLeft: 16, textDecoration: "none" }} href="/projects" aria-label="進入人文地景產專案頁">人文地景產專案頁 <ArrowUpRight size={16} aria-hidden="true" /></a>}
           </article>)}
         </div>
       </section>
