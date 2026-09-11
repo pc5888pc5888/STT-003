@@ -21,6 +21,10 @@ jobs:
           set -euo pipefail
           npm ci
           npm run build
+      - name: Audit production dependencies
+        run: |
+          set -euo pipefail
+          npm audit --omit=dev --audit-level=high
       - name: Prepare browser verifier
         run: |
           set -euo pipefail
@@ -39,75 +43,77 @@ jobs:
           node <<'NODE'
           const fs = require('fs');
           const { chromium } = require('/tmp/stt-browser/node_modules/playwright-core');
-          const base = 'http://127.0.0.1:4173';
-          const routes = [
-            '/', '/problems', '/problems/major-decision', '/how-stt-works', '/domains',
-            '/domains/human-ai-governance', '/insights', '/publications', '/books',
-            '/books/internal-compliance', '/research', '/projects', '/stt', '/institution/eric-chuang'
-          ];
-          const viewports = [
-            { name: 'desktop', width: 1440, height: 1000 },
-            { name: 'mobile', width: 390, height: 844 },
-          ];
-          const forbidden = ['正式上線前', '這一階段先保留', '出版資料仍需逐本校對'];
-          const failures = [];
-          const report = [];
+          (async () => {
+            const base = 'http://127.0.0.1:4173';
+            const routes = [
+              '/', '/problems', '/problems/major-decision', '/how-stt-works', '/domains',
+              '/domains/human-ai-governance', '/insights', '/publications', '/books',
+              '/books/internal-compliance', '/research', '/projects', '/stt', '/institution/eric-chuang'
+            ];
+            const viewports = [
+              { name: 'desktop', width: 1440, height: 1000 },
+              { name: 'mobile', width: 390, height: 844 },
+            ];
+            const forbidden = ['正式上線前', '這一階段先保留', '出版資料仍需逐本校對'];
+            const failures = [];
+            const report = [];
 
-          const visualSource = fs.readFileSync('src/sttVisuals.ts', 'utf8');
-          const assetPaths = [...visualSource.matchAll(/:\s*"(\/visual-bank\/stt\/[^"\n]+)"/g)].map(m => m[1]);
-          const uniqueAssets = [...new Set(assetPaths)];
-          if (assetPaths.length !== 25) failures.push(`visual-key-count expected 25, got ${assetPaths.length}`);
-          if (uniqueAssets.length < 20) failures.push(`visual-diversity expected >=20 concrete asset paths, got ${uniqueAssets.length}`);
-          for (const path of uniqueAssets) {
-            const res = await fetch(base + path, { redirect: 'manual' });
-            const type = res.headers.get('content-type') || '';
-            if (res.status !== 200 || !type.startsWith('image/')) failures.push(`asset ${path} -> ${res.status} ${type}`);
-          }
-
-          const browser = await chromium.launch({ headless: true, executablePath: process.env.CHROME_PATH, args: ['--no-sandbox'] });
-          for (const vp of viewports) {
-            const context = await browser.newContext({ viewport: { width: vp.width, height: vp.height } });
-            const page = await context.newPage();
-            const runtimeErrors = [];
-            page.on('pageerror', e => runtimeErrors.push(`pageerror:${e.message}`));
-            page.on('console', msg => { if (msg.type() === 'error') runtimeErrors.push(`console:${msg.text()}`); });
-            page.on('requestfailed', req => { if (req.url().startsWith(base)) runtimeErrors.push(`request:${req.url()} ${req.failure()?.errorText || ''}`); });
-            for (const route of routes) {
-              runtimeErrors.length = 0;
-              await page.goto(base + route, { waitUntil: 'networkidle', timeout: 30000 });
-              await page.evaluate(() => document.fonts?.ready).catch(() => {});
-              const data = await page.evaluate((badWords) => {
-                const h1 = document.querySelector('h1')?.textContent?.trim() || '';
-                const hero = document.querySelector('.stt-master-hero__image');
-                const logo = document.querySelector('.stt-official-logo');
-                const body = document.body;
-                const heroInfo = hero instanceof HTMLImageElement ? {
-                  complete: hero.complete,
-                  naturalWidth: hero.naturalWidth,
-                  naturalHeight: hero.naturalHeight,
-                  src: hero.currentSrc || hero.src,
-                  rect: hero.getBoundingClientRect().toJSON(),
-                } : null;
-                const logoInfo = logo instanceof HTMLImageElement ? { complete: logo.complete, naturalWidth: logo.naturalWidth } : null;
-                return {
-                  h1,
-                  overflow: Math.max(document.documentElement.scrollWidth, body.scrollWidth) - window.innerWidth,
-                  heroInfo,
-                  logoInfo,
-                  forbidden: badWords.filter(w => body.innerText.includes(w)),
-                };
-              }, forbidden);
-              if (!data.h1) failures.push(`${vp.name} ${route}: missing h1`);
-              if (data.overflow > 2) failures.push(`${vp.name} ${route}: horizontal overflow ${data.overflow}px`);
-              if (!data.heroInfo || !data.heroInfo.complete || data.heroInfo.naturalWidth < 1000) failures.push(`${vp.name} ${route}: hero image invalid ${JSON.stringify(data.heroInfo)}`);
-              if (!data.logoInfo || !data.logoInfo.complete || data.logoInfo.naturalWidth < 100) failures.push(`${vp.name} ${route}: logo invalid ${JSON.stringify(data.logoInfo)}`);
-              if (data.forbidden.length) failures.push(`${vp.name} ${route}: public build-note text ${data.forbidden.join(',')}`);
-              if (runtimeErrors.length) failures.push(`${vp.name} ${route}: ${runtimeErrors.join(' | ')}`);
-              report.push({ viewport: vp.name, route, h1: data.h1, overflow: data.overflow, hero: data.heroInfo?.src || '', heroWidth: data.heroInfo?.naturalWidth || 0 });
+            const visualSource = fs.readFileSync('src/sttVisuals.ts', 'utf8');
+            const assetPaths = [...visualSource.matchAll(/:\s*"(\/visual-bank\/stt\/[^"\n]+)"/g)].map(m => m[1]);
+            const uniqueAssets = [...new Set(assetPaths)];
+            if (assetPaths.length !== 25) failures.push(`visual-key-count expected 25, got ${assetPaths.length}`);
+            if (uniqueAssets.length < 20) failures.push(`visual-diversity expected >=20 concrete asset paths, got ${uniqueAssets.length}`);
+            for (const path of uniqueAssets) {
+              const res = await fetch(base + path, { redirect: 'manual' });
+              const type = res.headers.get('content-type') || '';
+              if (res.status !== 200 || !type.startsWith('image/')) failures.push(`asset ${path} -> ${res.status} ${type}`);
             }
-            await context.close();
-          }
-          await browser.close();
-          console.log(JSON.stringify({ assetKeys: assetPaths.length, uniqueAssets: uniqueAssets.length, pagesChecked: report.length, report, failures }, null, 2));
-          if (failures.length) process.exit(1);
+
+            const browser = await chromium.launch({ headless: true, executablePath: process.env.CHROME_PATH, args: ['--no-sandbox'] });
+            for (const vp of viewports) {
+              const context = await browser.newContext({ viewport: { width: vp.width, height: vp.height } });
+              const page = await context.newPage();
+              const runtimeErrors = [];
+              page.on('pageerror', e => runtimeErrors.push(`pageerror:${e.message}`));
+              page.on('console', msg => { if (msg.type() === 'error') runtimeErrors.push(`console:${msg.text()}`); });
+              page.on('requestfailed', req => { if (req.url().startsWith(base)) runtimeErrors.push(`request:${req.url()} ${req.failure()?.errorText || ''}`); });
+              for (const route of routes) {
+                runtimeErrors.length = 0;
+                await page.goto(base + route, { waitUntil: 'networkidle', timeout: 30000 });
+                await page.evaluate(() => document.fonts?.ready).catch(() => {});
+                const data = await page.evaluate((badWords) => {
+                  const h1 = document.querySelector('h1')?.textContent?.trim() || '';
+                  const hero = document.querySelector('.stt-master-hero__image');
+                  const logo = document.querySelector('.stt-official-logo');
+                  const body = document.body;
+                  const heroInfo = hero instanceof HTMLImageElement ? {
+                    complete: hero.complete,
+                    naturalWidth: hero.naturalWidth,
+                    naturalHeight: hero.naturalHeight,
+                    src: hero.currentSrc || hero.src,
+                    rect: hero.getBoundingClientRect().toJSON(),
+                  } : null;
+                  const logoInfo = logo instanceof HTMLImageElement ? { complete: logo.complete, naturalWidth: logo.naturalWidth } : null;
+                  return {
+                    h1,
+                    overflow: Math.max(document.documentElement.scrollWidth, body.scrollWidth) - window.innerWidth,
+                    heroInfo,
+                    logoInfo,
+                    forbidden: badWords.filter(w => body.innerText.includes(w)),
+                  };
+                }, forbidden);
+                if (!data.h1) failures.push(`${vp.name} ${route}: missing h1`);
+                if (data.overflow > 2) failures.push(`${vp.name} ${route}: horizontal overflow ${data.overflow}px`);
+                if (!data.heroInfo || !data.heroInfo.complete || data.heroInfo.naturalWidth < 1000) failures.push(`${vp.name} ${route}: hero image invalid ${JSON.stringify(data.heroInfo)}`);
+                if (!data.logoInfo || !data.logoInfo.complete || data.logoInfo.naturalWidth < 100) failures.push(`${vp.name} ${route}: logo invalid ${JSON.stringify(data.logoInfo)}`);
+                if (data.forbidden.length) failures.push(`${vp.name} ${route}: public build-note text ${data.forbidden.join(',')}`);
+                if (runtimeErrors.length) failures.push(`${vp.name} ${route}: ${runtimeErrors.join(' | ')}`);
+                report.push({ viewport: vp.name, route, h1: data.h1, overflow: data.overflow, hero: data.heroInfo?.src || '', heroWidth: data.heroInfo?.naturalWidth || 0 });
+              }
+              await context.close();
+            }
+            await browser.close();
+            console.log(JSON.stringify({ assetKeys: assetPaths.length, uniqueAssets: uniqueAssets.length, pagesChecked: report.length, report, failures }, null, 2));
+            if (failures.length) process.exit(1);
+          })().catch((error) => { console.error(error); process.exit(1); });
           NODE
