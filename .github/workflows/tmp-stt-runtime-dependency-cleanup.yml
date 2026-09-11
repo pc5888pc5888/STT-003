@@ -1,0 +1,40 @@
+name: Temporary STT Runtime Dependency Cleanup
+on:
+  push:
+    branches: [rebuild/stt-25-visuals-final-20260911]
+    paths:
+      - .github/workflows/tmp-stt-runtime-dependency-cleanup.yml
+permissions:
+  contents: write
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: rebuild/stt-25-visuals-final-20260911
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - name: Remove unused zip dependency and refresh safe patches
+        run: |
+          set -euo pipefail
+          npm ci
+          npm uninstall adm-zip @types/adm-zip
+          npm audit fix || true
+          npm run build
+          npm audit --omit=dev --audit-level=high
+      - name: Commit dependency cleanup
+        run: |
+          set -euo pipefail
+          git config user.name "STT Governance Build"
+          git config user.email "actions@users.noreply.github.com"
+          if git diff --quiet -- package.json package-lock.json; then
+            echo "No dependency changes required"
+            exit 0
+          fi
+          git add package.json package-lock.json
+          git commit -m "chore: remove unused zip dependency and refresh audited lockfile"
+          git push origin HEAD:rebuild/stt-25-visuals-final-20260911
