@@ -1,0 +1,69 @@
+name: Temporary STT Visual Candidate Audit
+on:
+  push:
+    branches: [fix/stt-distinct-hero-visuals-20260911]
+    paths:
+      - .github/workflows/tmp-stt-visual-candidate-audit.yml
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Build candidate contact sheet and dimension report
+        run: |
+          pip -q install Pillow
+          python - <<'PY'
+          from PIL import Image,ImageOps,ImageDraw,ImageFont
+          from pathlib import Path
+          import json, math
+          candidates=[
+            'public/visual-bank/stt/hero-hires/home.webp',
+            'public/visual-bank/stt/hero-hires/problems.png',
+            'public/visual-bank/stt/hero-hires/stt-portrait.png',
+            'public/images/bg-hero-boardroom.png',
+            'public/images/bg-insights-globe.png',
+            'public/images/bg-platform-chess.png',
+            'public/images/bg-portal-columns.png',
+            'public/images/bg-strategist-spotlight.png',
+            'public/images/Column-Image-1.png',
+            'public/images/STT-Press-Digital-Header.png',
+            'public/images/STT-Press-Law-Header.png',
+            'public/images/STT-Press-Seal.png',
+            'public/images/5555.png',
+            'public/images/homepage-design.png',
+            'public/images/paper_corporate_governance.png',
+            'public/images/paper_customer_relationship.png',
+            'public/images/paper_personality_innovation.png',
+            'public/images/paper_succession_family.png',
+            'public/images/內在法遵 Internal Compliance《 為你的內心，打造一座不可侵犯的至聖所 》 數位閱讀完整版.png',
+          ]
+          out=Path('candidate-audit');out.mkdir(exist_ok=True)
+          report=[]; cells=[]
+          for pstr in candidates:
+            p=Path(pstr)
+            if not p.exists(): continue
+            with Image.open(p) as im:
+              im.load(); w,h=im.size
+              report.append({'path':pstr,'width':w,'height':h,'bytes':p.stat().st_size})
+              thumb=ImageOps.fit(im.convert('RGB'),(480,270),method=Image.Resampling.LANCZOS)
+            cell=Image.new('RGB',(500,315),'white');cell.paste(thumb,(10,10))
+            d=ImageDraw.Draw(cell);d.text((10,286),f'{p.name} | {w}x{h}',fill='black')
+            cells.append(cell)
+          cols=2;rows=math.ceil(len(cells)/cols)
+          sheet=Image.new('RGB',(cols*500,rows*315),'white')
+          for i,cell in enumerate(cells):sheet.paste(cell,((i%cols)*500,(i//cols)*315))
+          sheet.save(out/'candidate-sheet.jpg',quality=92)
+          (out/'candidate-report.json').write_text(json.dumps(report,ensure_ascii=False,indent=2))
+          print(json.dumps(report,ensure_ascii=False,indent=2))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: stt-visual-candidate-audit
+          path: candidate-audit/
+          retention-days: 2
