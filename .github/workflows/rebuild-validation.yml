@@ -40,7 +40,7 @@ jobs:
           sudo apt-get install -y fonts-noto-cjk
           fc-cache -f
 
-      - name: Render core page previews
+      - name: Render six STT primary page previews
         run: |
           set -euo pipefail
           mkdir -p preview-artifacts
@@ -78,25 +78,32 @@ jobs:
               --hide-scrollbars \
               --window-size=1536,1024 \
               --force-device-scale-factor=1 \
-              --virtual-time-budget=2500 \
+              --virtual-time-budget=3000 \
               --screenshot="$output" \
               "http://127.0.0.1:4173$path"
           }
 
-          render_page "/governance/corporate" "preview-artifacts/01-governance.png"
-          render_page "/internal-compliance" "preview-artifacts/02-internal-compliance.png"
-          render_page "/governance/digital" "preview-artifacts/03-digital-governance.png"
-          render_page "/insights" "preview-artifacts/04-press-insights.png"
+          render_page "/" "preview-artifacts/01-home.png"
+          render_page "/problems" "preview-artifacts/02-problems.png"
+          render_page "/how-stt-works" "preview-artifacts/03-how-stt-works.png"
+          render_page "/insights" "preview-artifacts/04-insights.png"
+          render_page "/publications" "preview-artifacts/05-publications.png"
+          render_page "/stt" "preview-artifacts/06-about-stt.png"
 
-          test -s preview-artifacts/01-governance.png
-          test -s preview-artifacts/02-internal-compliance.png
-          test -s preview-artifacts/03-digital-governance.png
-          test -s preview-artifacts/04-press-insights.png
+          for file in \
+            preview-artifacts/01-home.png \
+            preview-artifacts/02-problems.png \
+            preview-artifacts/03-how-stt-works.png \
+            preview-artifacts/04-insights.png \
+            preview-artifacts/05-publications.png \
+            preview-artifacts/06-about-stt.png; do
+            test -s "$file"
+          done
 
-      - name: Upload visual previews
+      - name: Upload six primary-page visual previews
         uses: actions/upload-artifact@v4
         with:
-          name: stt-core-page-previews
+          name: stt-six-primary-page-previews
           path: preview-artifacts/*.png
           if-no-files-found: error
           retention-days: 7
