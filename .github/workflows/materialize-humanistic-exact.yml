@@ -27,13 +27,36 @@ jobs:
           cat .staging/humanistic-exact/part-*.b64 | base64 -d > public/humanistic-interview/index.html
           echo "001b9876eca5c16bdff1b724b931aa81d8b86d7c9e31e1e07edb3cbed62a6fc9  public/humanistic-interview/index.html" | sha256sum -c -
           grep -q "人文地景產｜20 Questions Journey" public/humanistic-interview/index.html
+      - name: Wire exact interview to STT navigation
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+
+          app = Path('src/App.tsx')
+          text = app.read_text()
+          old = 'const HUMANISTIC_INTERVIEW_URL = "https://fluffy-crumble-cd749c.netlify.app/";'
+          new = 'const HUMANISTIC_INTERVIEW_URL = "/humanistic-interview/index.html";'
+          if old not in text:
+              raise SystemExit('Expected Humanistic interview URL not found in App.tsx')
+          app.write_text(text.replace(old, new, 1))
+
+          columns = Path('src/pages/Columns.tsx')
+          text = columns.read_text()
+          old = 'const HUMANISTIC_INTERVIEW = "/humanistic-20q";'
+          new = 'const HUMANISTIC_INTERVIEW = "/humanistic-interview/index.html";'
+          if old not in text:
+              raise SystemExit('Expected Humanistic interview URL not found in Columns.tsx')
+          columns.write_text(text.replace(old, new, 1))
+          PY
       - name: Commit materialized page
         shell: bash
         run: |
           set -euo pipefail
           git config user.name "STT Humanistic Installer"
           git config user.email "actions@users.noreply.github.com"
-          git add public/humanistic-interview/index.html
+          git add public/humanistic-interview/index.html src/App.tsx src/pages/Columns.tsx vercel.json
           git rm -r .staging/humanistic-exact
           git commit -m "feat: materialize exact Humanistic interview [skip ci]" || exit 0
           git push origin HEAD:fix/humanistic-exact-static-20260912
