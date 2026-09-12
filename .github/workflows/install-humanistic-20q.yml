@@ -24,7 +24,7 @@ jobs:
         run: |
           set -euo pipefail
           cat .staging/humanistic20q/part-*.txt | base64 -d > /tmp/humanistic20q-live.tar.gz
-          echo "3d40a29e067c9e982fa5f4033e7e02e757de59389155cd8b7db3c414b687aef8  /tmp/humanistic20q-live.tar.gz" | sha256sum -c -
+          echo "a38918522cc6fc1b28c445142e80255b94e27330a644aed3b09353694cba2ec7  /tmp/humanistic20q-live.tar.gz" | sha256sum -c -
           rm -rf public/humanistic-interview
           mkdir -p public/humanistic-interview
           tar -xzf /tmp/humanistic20q-live.tar.gz -C public/humanistic-interview
