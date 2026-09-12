@@ -1,0 +1,111 @@
+name: STT Match User Six Visuals
+on:
+  push:
+    branches: [fix/stt-exact-six-user-visuals-20260912]
+    paths: ['.github/workflows/stt-match-user-six-visuals.yml']
+permissions:
+  contents: write
+jobs:
+  match:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/stt-exact-six-user-visuals-20260912
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip -q install Pillow
+      - name: Find nearest existing artwork to the six user-approved uploads
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from PIL import Image
+          import json
+
+          targets = [
+            {
+              'source':'ChatGPT Image 2026年9月11日 上午10_46_52 (1).png',
+              'ah':'fffcfffcfff8fff8fff0fff07ff03fe8ff88788838290949000100000000fd08',
+              'dh':'5f161f970b8d076c837f63db09de83ac72e42cd405b42da425a4d2dc6db565b5'
+            },
+            {
+              'source':'ChatGPT Image 2026年9月11日 上午10_46_53 (2).png',
+              'ah':'7f927ff82fc80fc80fc01fc81bf80fe00f707f7cfffff3ff07ff47fc7f837fe0',
+              'dh':'1a491b3d2365a36443764b6449edc37d073f353b713a3813713361922af10e3c'
+            },
+            {
+              'source':'ChatGPT Image 2026年9月11日 上午10_46_54 (3).png',
+              'ah':'89f1c1e343c34fc31fff1ffb1ff71ff35bf3dbfbd9fb3bf847f80018240807f8',
+              'dh':'cc58647060f061f80971890d094801485949585d5c1c5d1c421d380d2687041e'
+            },
+            {
+              'source':'ChatGPT Image 2026年9月11日 上午10_46_55 (4).png',
+              'ah':'bd8cfb80ffc0ffdce7c8dfc8cec0dfc0cfcca6fc069d1fcc7fde204e000313fe',
+              'dh':'9d7799ed9de78267f2a7c237623752b5e2a6b2ae22ce0de219ed3a6392311919'
+            },
+            {
+              'source':'ChatGPT Image 2026年9月11日 上午10_48_06 (2).png',
+              'ah':'c9b4cd84cc84cc84c7e40ff40fec0fee3fc6bfc27fc3e7c7e043f80d1c1e033a',
+              'dh':'eedb68d366d3664b61fb49fb49332333036393690f793060b8682e460f09218d'
+            },
+            {
+              'source':'ChatGPT Image 2026年9月11日 上午10_48_06 (3).png',
+              'ah':'fde0f1a2f5e2f5e211c234c030f083d283f783b00f9883e0cff8fffefffe7fff',
+              'dh':'ccfcd89974b95cfb1cf91af9ba5fb069d0f2c19c81cdf075e25f2ddb107b1b77'
+            }
+          ]
+
+          def bits(h): return bin(int(h,16))[2:].zfill(256)
+          def ham(a,b): return sum(x!=y for x,y in zip(a,b))
+          def ahash(im):
+              g=im.convert('L').resize((16,16),Image.Resampling.LANCZOS)
+              vals=list(g.getdata()); mean=sum(vals)/len(vals)
+              return ''.join('1' if x>=mean else '0' for x in vals)
+          def dhash(im):
+              g=im.convert('L').resize((17,16),Image.Resampling.LANCZOS)
+              px=list(g.getdata()); out=[]
+              for y in range(16):
+                  row=px[y*17:(y+1)*17]
+                  out.extend('1' if row[x]>row[x+1] else '0' for x in range(16))
+              return ''.join(out)
+
+          candidates=[]
+          roots=[Path('.'),Path('public')]
+          seen=set()
+          for root in roots:
+              for p in root.rglob('*'):
+                  if p.suffix.lower() not in {'.png','.jpg','.jpeg','.webp'}: continue
+                  key=str(p)
+                  if key in seen: continue
+                  seen.add(key)
+                  try:
+                      with Image.open(p) as im:
+                          im.load(); size=im.size
+                          a=ahash(im); d=dhash(im)
+                      candidates.append((key,size,a,d,p.stat().st_size))
+                  except Exception:
+                      pass
+
+          result=[]
+          for t in targets:
+              ta=bits(t['ah']); td=bits(t['dh'])
+              rows=[]
+              for path,size,a,d,nbytes in candidates:
+                  da=ham(ta,a); dd=ham(td,d); score=da+dd
+                  rows.append({'path':path,'size':size,'bytes':nbytes,'ahamming':da,'dhamming':dd,'score':score})
+              rows.sort(key=lambda x:(x['score'],x['ahamming'],x['dhamming'],x['path']))
+              result.append({'source':t['source'],'top':rows[:12]})
+          out={'method':'16x16 aHash + 16x16 dHash; score = Hamming(a)+Hamming(d), lower is closer','results':result}
+          Path('data').mkdir(exist_ok=True)
+          Path('data/stt-user-six-match-report.json').write_text(json.dumps(out,ensure_ascii=False,indent=2),encoding='utf-8')
+          print(json.dumps(out,ensure_ascii=False,indent=2))
+          PY
+      - name: Persist evidence report only
+        run: |
+          git config user.name "STT Visual Evidence"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/stt-user-six-match-report.json
+          git commit -m "audit: match six user-approved visuals against repository assets" || exit 0
+          git push origin HEAD:fix/stt-exact-six-user-visuals-20260912
