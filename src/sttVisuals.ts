@@ -1,10 +1,12 @@
 export const STT_VISUALS = {
-  home: "/visual-bank/stt/approved-six-20260912/01-home.webp",
-  problems: "/visual-bank/stt/approved-six-20260912/02-problems.webp",
-  method: "/visual-bank/stt/approved-six-20260912/03-how-stt-works.webp",
-  columns: "/visual-bank/stt/approved-six-20260912/04-insights.webp",
-  publications: "/visual-bank/stt/approved-six-20260912/05-publications.webp",
-  aboutStt: "/visual-bank/stt/approved-six-20260912/06-about-stt.webp",
+  // Six first-level pages use six different user-approved source artworks.
+  // Do not substitute generated variants, thumbnail assets, or same-image crops.
+  home: "/visual-bank/stt/hero-hires/home.webp",
+  problems: "/visual-bank/stt/primary-semantic/problems-governance-charter.png",
+  method: "/visual-bank/stt/primary-semantic/columns-insight-article.png",
+  columns: "/visual-bank/stt/primary-semantic/publications-stt-press-library.png",
+  publications: "/visual-bank/stt/primary-semantic/stt-governance-dossiers.png",
+  aboutStt: "/visual-bank/stt/hero-hires/stt.png",
   problemMajorDecision: "/visual-bank/stt/originals-20260910/major-decision.webp",
   problemOwnerDependence: "/visual-bank/stt/originals-20260910/owner-dependence.webp",
   problemSuccession: "/visual-bank/stt/originals-20260910/succession.webp",
@@ -29,15 +31,9 @@ export const STT_VISUALS = {
 export type STTVisualKey = keyof typeof STT_VISUALS;
 export const sttVisual = (key: STTVisualKey) => STT_VISUALS[key];
 
-export const STT_VISUAL_DIMENSIONS: Partial<Record<STTVisualKey, readonly [number, number]>> = {
-  home: [1491, 1055],
-  problems: [1491, 1055],
-  method: [1491, 1055],
-  columns: [1491, 1055],
-  publications: [1491, 1055],
-  aboutStt: [1491, 1055],
-};
-
+// Let the browser use each original asset's intrinsic ratio.
+// Do not impose the former 1491×1055 contract on higher-resolution source images.
+export const STT_VISUAL_DIMENSIONS: Partial<Record<STTVisualKey, readonly [number, number]>> = {};
 export const sttVisualDimensions = (key: STTVisualKey) => STT_VISUAL_DIMENSIONS[key];
 
 export const PROBLEM_VISUALS: Record<string, STTVisualKey> = {
