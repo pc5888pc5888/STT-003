@@ -1,0 +1,48 @@
+Humanistic visual repository match audit
+threshold: dHash Hamming <= 50
+scanned images: 203
+
+## inline-01
+NO MATCH <= 50
+
+## inline-02
+NO MATCH <= 50
+
+## inline-03
+NO MATCH <= 50
+
+## inline-04
+NO MATCH <= 50
+
+## inline-05
+NO MATCH <= 50
+
+## inline-06
+NO MATCH <= 50
+
+## inline-07
+NO MATCH <= 50
+
+## inline-08
+NO MATCH <= 50
+
+## inline-09
+NO MATCH <= 50
+
+## inline-10
+NO MATCH <= 50
+
+## station-01
+NO MATCH <= 50
+
+## station-02
+NO MATCH <= 50
+
+## station-03
+NO MATCH <= 50
+
+## station-04
+NO MATCH <= 50
+
+## station-05
+NO MATCH <= 50
