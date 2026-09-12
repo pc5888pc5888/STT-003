@@ -1,0 +1,26 @@
+name: STT Probe Canva Media Resize
+on:
+  push:
+    branches: [fix/stt-user-six-heroes-20260912]
+    paths: [.github/workflows/stt-probe-canva-media-resize.yml]
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Probe signed media resize URL at source dimensions
+        shell: bash
+        run: |
+          set -euo pipefail
+          base='https://media.canva.com/v2/image-resize/format:PNG/height:1055/quality:100/uri:ifs%3A%2F%2FM%2F877b38a6-5ac2-4c90-8398-c367daea85f8/watermark:F/width:1491?csig=AAAAAAAAAAAAAAAAAAAAAIY_P4Tsthyd9duf7xeZEz4ohd0wBps_O2tEDs_5MajO&exp=1789186987&osig=AAAAAAAAAAAAAAAAAAAAAGPws77F-r53fXs34NG1p_gKZcSFqi6Z0TrUaLXcGwic&signer=media-rpc&x-canva-quality=thumbnail'
+          code=$(curl -L -sS -o /tmp/source.png -w '%{http_code}' "$base" || true)
+          echo "status=$code bytes=$(wc -c </tmp/source.png 2>/dev/null || echo 0)"
+          file /tmp/source.png || true
+          sha256sum /tmp/source.png || true
+          python - <<'PY'
+          from PIL import Image
+          try:
+              im=Image.open('/tmp/source.png'); print('dimensions', im.size, im.format)
+          except Exception as e: print('not_image',e)
+          PY
