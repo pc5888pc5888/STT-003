@@ -1,0 +1,42 @@
+name: Install Humanistic 20Q interview
+
+on:
+  push:
+    branches:
+      - feature/humanistic-20q-9feb5e
+    paths:
+      - .staging/humanistic20q/READY
+
+permissions:
+  contents: write
+
+jobs:
+  install:
+    if: ${{ !contains(github.event.head_commit.message, 'materialize humanistic 20Q') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: feature/humanistic-20q-9feb5e
+          fetch-depth: 0
+      - name: Reconstruct verified interview bundle
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat .staging/humanistic20q/part-*.txt | base64 -d > /tmp/humanistic20q-live.tar.gz
+          echo "3d40a29e067c9e982fa5f4033e7e02e757de59389155cd8b7db3c414b687aef8  /tmp/humanistic20q-live.tar.gz" | sha256sum -c -
+          rm -rf public/humanistic-interview
+          mkdir -p public/humanistic-interview
+          tar -xzf /tmp/humanistic20q-live.tar.gz -C public/humanistic-interview
+          test -f public/humanistic-interview/index.html
+          grep -q "人文地景產｜20 Questions Journey" public/humanistic-interview/index.html
+      - name: Commit materialized website
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "STT Humanistic Installer"
+          git config user.email "actions@users.noreply.github.com"
+          git add public/humanistic-interview
+          git rm -r .staging/humanistic20q
+          git commit -m "feat: materialize humanistic 20Q interview [skip ci]"
+          git push origin HEAD:feature/humanistic-20q-9feb5e
