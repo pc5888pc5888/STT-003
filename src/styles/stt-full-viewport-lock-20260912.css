@@ -1,0 +1,116 @@
+/*
+ * STT full-viewport layout lock — 2026-09-12
+ *
+ * Governing rule: the page visual plane is full-bleed. Artwork is never
+ * confined to a right-side panel or an inner max-width frame. Text may use
+ * an internal reading grid, but the hero/background must span the viewport.
+ */
+
+html,
+body,
+#root {
+  width: 100%;
+  max-width: none;
+  overflow-x: clip;
+}
+
+.stt-master-scope,
+.stt-home-gateway {
+  width: 100%;
+  max-width: none;
+}
+
+/* Full-bleed hero canvas. This deliberately escapes any accidental parent
+   width constraint while keeping the existing semantic markup intact. */
+.stt-master-hero {
+  width: 100vw !important;
+  max-width: none !important;
+  margin-left: calc(50% - 50vw) !important;
+  margin-right: calc(50% - 50vw) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+.stt-master-hero.is-primary {
+  min-height: calc(100svh - var(--stt-header-height, 76px)) !important;
+}
+
+.stt-master-hero__image {
+  position: absolute !important;
+  inset: 0 !important;
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none !important;
+  object-fit: cover !important;
+  object-position: center center !important;
+}
+
+/* The source artwork already contains a bright left-side negative-space zone.
+   Keep only a restrained readability veil; do not turn the layout into a
+   separate white left panel. */
+.stt-master-hero__veil {
+  background: linear-gradient(
+    90deg,
+    rgba(251, 250, 247, 0.94) 0%,
+    rgba(251, 250, 247, 0.88) 18%,
+    rgba(251, 250, 247, 0.64) 31%,
+    rgba(251, 250, 247, 0.22) 46%,
+    rgba(251, 250, 247, 0) 62%
+  ) !important;
+}
+
+/* Full-width canvas, internal alignment only. */
+.stt-master-hero__inner {
+  width: 100% !important;
+  max-width: none !important;
+  margin-inline: 0 !important;
+  padding-left: clamp(36px, 7.4vw, 124px) !important;
+  padding-right: clamp(36px, 7.4vw, 124px) !important;
+}
+
+.stt-master-hero__copy {
+  width: min(48vw, 720px) !important;
+  max-width: 720px !important;
+}
+
+.stt-master-hero h1 {
+  max-width: 720px !important;
+}
+
+/* Header uses the same wide alignment axis as the full-bleed hero instead of
+   a narrow centered card-like frame. Navigation labels/order are untouched. */
+header.sticky > div:first-child {
+  width: 100% !important;
+  max-width: none !important;
+  padding-left: clamp(36px, 7.4vw, 124px) !important;
+  padding-right: clamp(36px, 7.4vw, 124px) !important;
+}
+
+@media (max-width: 900px) {
+  .stt-master-hero__inner {
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+  }
+
+  .stt-master-hero__copy {
+    width: 100% !important;
+    max-width: 680px !important;
+  }
+
+  .stt-master-hero__veil {
+    background: linear-gradient(
+      180deg,
+      rgba(251, 250, 247, 0.98) 0%,
+      rgba(251, 250, 247, 0.94) 42%,
+      rgba(251, 250, 247, 0.68) 64%,
+      rgba(251, 250, 247, 0.12) 88%,
+      rgba(251, 250, 247, 0) 100%
+    ) !important;
+  }
+
+  header.sticky > div:first-child {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+}
