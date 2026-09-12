@@ -29,6 +29,17 @@ export const STT_VISUALS = {
 export type STTVisualKey = keyof typeof STT_VISUALS;
 export const sttVisual = (key: STTVisualKey) => STT_VISUALS[key];
 
+export const STT_VISUAL_DIMENSIONS: Partial<Record<STTVisualKey, readonly [number, number]>> = {
+  home: [1491, 1055],
+  problems: [1491, 1055],
+  method: [1491, 1055],
+  columns: [1491, 1055],
+  publications: [1491, 1055],
+  aboutStt: [1491, 1055],
+};
+
+export const sttVisualDimensions = (key: STTVisualKey) => STT_VISUAL_DIMENSIONS[key];
+
 export const PROBLEM_VISUALS: Record<string, STTVisualKey> = {
   "major-decision": "problemMajorDecision",
   "owner-dependence": "problemOwnerDependence",
