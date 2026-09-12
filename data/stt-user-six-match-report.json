@@ -1,0 +1,827 @@
+{
+  "method": "16x16 aHash + 16x16 dHash; score = Hamming(a)+Hamming(d), lower is closer",
+  "results": [
+    {
+      "source": "ChatGPT Image 2026年9月11日 上午10_46_52 (1).png",
+      "top": [
+        {
+          "path": "public/visual-bank/stt/home-approved.webp",
+          "size": [
+            1023,
+            576
+          ],
+          "bytes": 23208,
+          "ahamming": 54,
+          "dhamming": 95,
+          "score": 149
+        },
+        {
+          "path": "public/visual-bank/stt/hero-hires/home.webp",
+          "size": [
+            3509,
+            1975
+          ],
+          "bytes": 3558918,
+          "ahamming": 54,
+          "dhamming": 96,
+          "score": 150
+        },
+        {
+          "path": "public/visual-bank/stt/originals-20260910/home-approved.webp",
+          "size": [
+            3509,
+            1975
+          ],
+          "bytes": 3558918,
+          "ahamming": 54,
+          "dhamming": 96,
+          "score": 150
+        },
+        {
+          "path": "35.png",
+          "size": [
+            3509,
+            1975
+          ],
+          "bytes": 6497336,
+          "ahamming": 54,
+          "dhamming": 97,
+          "score": 151
+        },
+        {
+          "path": "public/visual-bank/stt/hero-hires/columns.png",
+          "size": [
+            3509,
+            1975
+          ],
+          "bytes": 6497336,
+          "ahamming": 54,
+          "dhamming": 97,
+          "score": 151
+        },
+        {
+          "path": "18.png",
+          "size": [
+            1672,
+            941
+          ],
+          "bytes": 2331355,
+          "ahamming": 69,
+          "dhamming": 101,
+          "score": 170
+        },
+        {
+          "path": "20.png",
+          "size": [
+            1672,
+            941
+          ],
+          "bytes": 1923720,
+          "ahamming": 71,
+          "dhamming": 112,
+          "score": 183
+        },
+        {
+          "path": "22.png",
+          "size": [
+            1672,
+            941
+          ],
+          "bytes": 1732568,
+          "ahamming": 69,
+          "dhamming": 115,
+          "score": 184
+        },
+        {
+          "path": "public/images/paper_corporate_governance.png",
+          "size": [
+            2128,
+            2433
+          ],
+          "bytes": 7514427,
+          "ahamming": 84,
+          "dhamming": 100,
+          "score": 184
+        },
+        {
+          "path": "public/visual-bank/stt/home.webp",
+          "size": [
+            600,
+            338
+          ],
+          "bytes": 5778,
+          "ahamming": 75,
+          "dhamming": 114,
+          "score": 189
+        },
+        {
+          "path": "public/images/group-001.png",
+          "size": [
+            3074,
+            1728
+          ],
+          "bytes": 6477324,
+          "ahamming": 81,
+          "dhamming": 108,
+          "score": 189
+        },
+        {
+          "path": "21.png",
+          "size": [
+            1672,
+            941
+          ],
+          "bytes": 2100790,
+          "ahamming": 64,
+          "dhamming": 127,
+          "score": 191
+        }
+      ]
+    },
+    {
+      "source": "ChatGPT Image 2026年9月11日 上午10_46_53 (2).png",
+      "top": [
+        {
+          "path": "31.png",
+          "size": [
+            1672,
+            941
+          ],
+          "bytes": 2289712,
+          "ahamming": 87,
+          "dhamming": 103,
+          "score": 190
+        },
+        {
+          "path": "public/visual-bank/stt/originals-20260910/how-we-judge.webp",
+          "size": [
+            1672,
+            941
+          ],
+          "bytes": 1818282,
+          "ahamming": 87,
+          "dhamming": 103,
+          "score": 190
+        },
+        {
+          "path": "public/visual-bank/stt/primary-semantic/method-governance-mission.png",
+          "size": [
+            1672,
+            941
+          ],
+          "bytes": 2289712,
+          "ahamming": 87,
+          "dhamming": 103,
+          "score": 190
+        },
+        {
+          "path": "public/images/portrait-009.png",
+          "size": [
+            2102,
+            3004
+          ],
+          "bytes": 3274325,
+          "ahamming": 80,
+          "dhamming": 111,
+          "score": 191
+        },
+        {
+          "path": "public/visual-bank/stt/how-we-judge.webp",
+          "size": [
+            600,
+            338
+          ],
+          "bytes": 7704,
+          "ahamming": 87,
+          "dhamming": 106,
+          "score": 193
+        },
+        {
+          "path": "19.png",
+          "size": [
+            1672,
+            941
+          ],
+          "bytes": 1893456,
+          "ahamming": 92,
+          "dhamming": 103,
+          "score": 195
+        },
+        {
+          "path": "public/images/gcsda_003.png",
+          "size": [
+            3256,
+            930
+          ],
+          "bytes": 2524001,
+          "ahamming": 90,
+          "dhamming": 112,
+          "score": 202
+        },
+        {
+          "path": "public/images/Eric-Chuang-06.png",
+          "size": [
+            4000,
+            5188
+          ],
+          "bytes": 5178864,
+          "ahamming": 96,
+          "dhamming": 106,
+          "score": 202
+        },
+        {
+          "path": "public/images/paper_customer_relationship.png",
+          "size": [
+            2129,
+            2433
+          ],
+          "bytes": 7094574,
+          "ahamming": 80,
+          "dhamming": 124,
+          "score": 204
+        },
+        {
+          "path": "public/images/paper_succession_family.png",
+          "size": [
+            2129,
+            2433
+          ],
+          "bytes": 5353523,
+          "ahamming": 80,
+          "dhamming": 124,
+          "score": 204
+        },
+        {
+          "path": "public/images/paper_corporate_governance.png",
+          "size": [
+            2128,
+            2433
+          ],
+          "bytes": 7514427,
+          "ahamming": 82,
+          "dhamming": 122,
+          "score": 204
+        },
+        {
+          "path": "public/images/portrait-004.png",
+          "size": [
+            1102,
+            1427
+          ],
+          "bytes": 1090327,
+          "ahamming": 99,
+          "dhamming": 105,
+          "score": 204
+        }
+      ]
+    },
+    {
+      "source": "ChatGPT Image 2026年9月11日 上午10_46_54 (3).png",
+      "top": [
+        {
+          "path": "public/images/portrait-009.png",
+          "size": [
+            2102,
+            3004
+          ],
+          "bytes": 3274325,
+          "ahamming": 85,
+          "dhamming": 93,
+          "score": 178
+        },
+        {
+          "path": "public/images/Eric-Chuang-03.png",
+          "size": [
+            3977,
+            5343
+          ],
+          "bytes": 9072206,
+          "ahamming": 81,
+          "dhamming": 102,
+          "score": 183
+        },
+        {
+          "path": "public/images/portrait-008.png",
+          "size": [
+            3977,
+            5343
+          ],
+          "bytes": 9072206,
+          "ahamming": 81,
+          "dhamming": 102,
+          "score": 183
+        },
+        {
+          "path": "public/images/Eric-Chuang-03-1.png",
+          "size": [
+            3870,
+            6144
+          ],
+          "bytes": 20675603,
+          "ahamming": 82,
+          "dhamming": 111,
+          "score": 193
+        },
+        {
+          "path": "public/images/Eric-Chuang-03-2.png",
+          "size": [
+            3870,
+            6144
+          ],
+          "bytes": 20675603,
+          "ahamming": 82,
+          "dhamming": 111,
+          "score": 193
+        },
+        {
+          "path": "public/images/Eric-Chuang-03-3.png",
+          "size": [
+            3870,
+            6144
+          ],
+          "bytes": 20675603,
+          "ahamming": 82,
+          "dhamming": 111,
+          "score": 193
+        },
+        {
+          "path": "public/images/portrait-suit.png",
+          "size": [
+            3870,
+            6144
+          ],
+          "bytes": 20675603,
+          "ahamming": 82,
+          "dhamming": 111,
+          "score": 193
+        },
+        {
+          "path": "public/images/Eric-Chuang-09.png",
+          "size": [
+            3840,
+            3639
+          ],
+          "bytes": 12087961,
+          "ahamming": 91,
+          "dhamming": 104,
+          "score": 195
+        },
+        {
+          "path": "public/images/About-Portrait.png",
+          "size": [
+            3367,
+            5343
+          ],
+          "bytes": 8042217,
+          "ahamming": 85,
+          "dhamming": 111,
+          "score": 196
+        },
+        {
+          "path": "public/images/Eric-Chuang-05.png",
+          "size": [
+            3367,
+            5343
+          ],
+          "bytes": 8042217,
+          "ahamming": 85,
+          "dhamming": 111,
+          "score": 196
+        },
+        {
+          "path": "public/images/portrait-003.png",
+          "size": [
+            3367,
+            5343
+          ],
+          "bytes": 8042217,
+          "ahamming": 85,
+          "dhamming": 111,
+          "score": 196
+        },
+        {
+          "path": "public/images/Column-Image-1.png",
+          "size": [
+            4366,
+            5343
+          ],
+          "bytes": 8636932,
+          "ahamming": 89,
+          "dhamming": 109,
+          "score": 198
+        }
+      ]
+    },
+    {
+      "source": "ChatGPT Image 2026年9月11日 上午10_46_55 (4).png",
+      "top": [
+        {
+          "path": "public/visual-bank/stt/publications.webp",
+          "size": [
+            600,
+            338
+          ],
+          "bytes": 6736,
+          "ahamming": 90,
+          "dhamming": 90,
+          "score": 180
+        },
+        {
+          "path": "012.png",
+          "size": [
+            1672,
+            941
+          ],
+          "bytes": 2123056,
+          "ahamming": 91,
+          "dhamming": 91,
+          "score": 182
+        },
+        {
+          "path": "public/visual-bank/stt/originals-20260910/publications.webp",
+          "size": [
+            1672,
+            941
+          ],
+          "bytes": 1555894,
+          "ahamming": 91,
+          "dhamming": 91,
+          "score": 182
+        },
+        {
+          "path": "public/visual-bank/stt/primary-semantic/publications-stt-press-library.png",
+          "size": [
+            1672,
+            941
+          ],
+          "bytes": 2123056,
+          "ahamming": 91,
+          "dhamming": 91,
+          "score": 182
+        },
+        {
+          "path": "24.png",
+          "size": [
+            1672,
+            941
+          ],
+          "bytes": 1924003,
+          "ahamming": 78,
+          "dhamming": 120,
+          "score": 198
+        },
+        {
+          "path": "public/images/paper_corporate_governance.png",
+          "size": [
+            2128,
+            2433
+          ],
+          "bytes": 7514427,
+          "ahamming": 98,
+          "dhamming": 107,
+          "score": 205
+        },
+        {
+          "path": "public/images/gcsda_003.png",
+          "size": [
+            3256,
+            930
+          ],
+          "bytes": 2524001,
+          "ahamming": 94,
+          "dhamming": 113,
+          "score": 207
+        },
+        {
+          "path": "31.png",
+          "size": [
+            1672,
+            941
+          ],
+          "bytes": 2289712,
+          "ahamming": 85,
+          "dhamming": 126,
+          "score": 211
+        },
+        {
+          "path": "public/visual-bank/stt/originals-20260910/how-we-judge.webp",
+          "size": [
+            1672,
+            941
+          ],
+          "bytes": 1818282,
+          "ahamming": 85,
+          "dhamming": 126,
+          "score": 211
+        },
+        {
+          "path": "public/visual-bank/stt/primary-semantic/method-governance-mission.png",
+          "size": [
+            1672,
+            941
+          ],
+          "bytes": 2289712,
+          "ahamming": 85,
+          "dhamming": 126,
+          "score": 211
+        },
+        {
+          "path": "18.png",
+          "size": [
+            1672,
+            941
+          ],
+          "bytes": 2331355,
+          "ahamming": 101,
+          "dhamming": 110,
+          "score": 211
+        },
+        {
+          "path": "public/images/paper_customer_relationship.png",
+          "size": [
+            2129,
+            2433
+          ],
+          "bytes": 7094574,
+          "ahamming": 102,
+          "dhamming": 111,
+          "score": 213
+        }
+      ]
+    },
+    {
+      "source": "ChatGPT Image 2026年9月11日 上午10_48_06 (2).png",
+      "top": [
+        {
+          "path": "public/images/bg-portal-columns.png",
+          "size": [
+            1685,
+            934
+          ],
+          "bytes": 1577748,
+          "ahamming": 102,
+          "dhamming": 98,
+          "score": 200
+        },
+        {
+          "path": "006.png",
+          "size": [
+            1672,
+            941
+          ],
+          "bytes": 2197204,
+          "ahamming": 93,
+          "dhamming": 109,
+          "score": 202
+        },
+        {
+          "path": "public/visual-bank/stt/originals-20260910/family-ownership.webp",
+          "size": [
+            1672,
+            941
+          ],
+          "bytes": 1572568,
+          "ahamming": 93,
+          "dhamming": 109,
+          "score": 202
+        },
+        {
+          "path": "public/visual-bank/stt/originals-20260910/succession.webp",
+          "size": [
+            1672,
+            941
+          ],
+          "bytes": 1572568,
+          "ahamming": 93,
+          "dhamming": 109,
+          "score": 202
+        },
+        {
+          "path": "public/visual-bank/stt/family-ownership.webp",
+          "size": [
+            600,
+            338
+          ],
+          "bytes": 6778,
+          "ahamming": 93,
+          "dhamming": 110,
+          "score": 203
+        },
+        {
+          "path": "public/visual-bank/stt/succession.webp",
+          "size": [
+            600,
+            338
+          ],
+          "bytes": 6778,
+          "ahamming": 93,
+          "dhamming": 110,
+          "score": 203
+        },
+        {
+          "path": "public/visual-bank/stt/founder-legacy.webp",
+          "size": [
+            600,
+            338
+          ],
+          "bytes": 10348,
+          "ahamming": 107,
+          "dhamming": 104,
+          "score": 211
+        },
+        {
+          "path": "013.png",
+          "size": [
+            1672,
+            941
+          ],
+          "bytes": 2230520,
+          "ahamming": 108,
+          "dhamming": 106,
+          "score": 214
+        },
+        {
+          "path": "public/visual-bank/stt/originals-20260910/founder-legacy.webp",
+          "size": [
+            1672,
+            941
+          ],
+          "bytes": 1564172,
+          "ahamming": 108,
+          "dhamming": 106,
+          "score": 214
+        },
+        {
+          "path": "24.png",
+          "size": [
+            1672,
+            941
+          ],
+          "bytes": 1924003,
+          "ahamming": 98,
+          "dhamming": 117,
+          "score": 215
+        },
+        {
+          "path": "public/images/paper_family_governance_white_paper.png",
+          "size": [
+            1528,
+            1937
+          ],
+          "bytes": 257437,
+          "ahamming": 107,
+          "dhamming": 108,
+          "score": 215
+        },
+        {
+          "path": "15.png",
+          "size": [
+            1672,
+            941
+          ],
+          "bytes": 2194213,
+          "ahamming": 110,
+          "dhamming": 106,
+          "score": 216
+        }
+      ]
+    },
+    {
+      "source": "ChatGPT Image 2026年9月11日 上午10_48_06 (3).png",
+      "top": [
+        {
+          "path": "public/visual-bank/stt/home.webp",
+          "size": [
+            600,
+            338
+          ],
+          "bytes": 5778,
+          "ahamming": 102,
+          "dhamming": 102,
+          "score": 204
+        },
+        {
+          "path": "17.png",
+          "size": [
+            1672,
+            941
+          ],
+          "bytes": 1657672,
+          "ahamming": 93,
+          "dhamming": 112,
+          "score": 205
+        },
+        {
+          "path": "26.png",
+          "size": [
+            1672,
+            941
+          ],
+          "bytes": 1816323,
+          "ahamming": 100,
+          "dhamming": 111,
+          "score": 211
+        },
+        {
+          "path": "29.png",
+          "size": [
+            6250,
+            4419
+          ],
+          "bytes": 12745940,
+          "ahamming": 98,
+          "dhamming": 118,
+          "score": 216
+        },
+        {
+          "path": "public/visual-bank/stt/hero-hires/problems.png",
+          "size": [
+            6250,
+            4419
+          ],
+          "bytes": 12745940,
+          "ahamming": 98,
+          "dhamming": 118,
+          "score": 216
+        },
+        {
+          "path": "public/visual-bank/stt/hero-hires/method.webp",
+          "size": [
+            3200,
+            2263
+          ],
+          "bytes": 4688772,
+          "ahamming": 98,
+          "dhamming": 119,
+          "score": 217
+        },
+        {
+          "path": "public/visual-bank/stt/originals-20260910/ai-governance.webp",
+          "size": [
+            3200,
+            2263
+          ],
+          "bytes": 4688772,
+          "ahamming": 98,
+          "dhamming": 119,
+          "score": 217
+        },
+        {
+          "path": "public/visual-bank/stt/publications.webp",
+          "size": [
+            600,
+            338
+          ],
+          "bytes": 6736,
+          "ahamming": 91,
+          "dhamming": 129,
+          "score": 220
+        },
+        {
+          "path": "012.png",
+          "size": [
+            1672,
+            941
+          ],
+          "bytes": 2123056,
+          "ahamming": 92,
+          "dhamming": 128,
+          "score": 220
+        },
+        {
+          "path": "public/visual-bank/stt/originals-20260910/publications.webp",
+          "size": [
+            1672,
+            941
+          ],
+          "bytes": 1555894,
+          "ahamming": 92,
+          "dhamming": 128,
+          "score": 220
+        },
+        {
+          "path": "public/visual-bank/stt/primary-semantic/publications-stt-press-library.png",
+          "size": [
+            1672,
+            941
+          ],
+          "bytes": 2123056,
+          "ahamming": 92,
+          "dhamming": 128,
+          "score": 220
+        },
+        {
+          "path": "public/images/Eric-Chuang-03.png",
+          "size": [
+            3977,
+            5343
+          ],
+          "bytes": 9072206,
+          "ahamming": 99,
+          "dhamming": 122,
+          "score": 221
+        }
+      ]
+    }
+  ]
+}
