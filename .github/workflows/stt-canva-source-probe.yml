@@ -1,0 +1,25 @@
+name: STT Canva Source Probe
+on:
+  push:
+    branches: [fix/stt-exact-six-user-visuals-20260912]
+    paths: ['.github/workflows/stt-canva-source-probe.yml']
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Probe Canva signed asset resize URL
+        shell: bash
+        run: |
+          set -euxo pipefail
+          THUMB='https://media.canva.com/v2/image-resize/format:PNG/height:141/quality:100/uri:ifs%3A%2F%2FM%2F7db3f49b-e20e-4dec-847b-4a48990e44e7/watermark:F/width:200?csig=AAAAAAAAAAAAAAAAAAAAAL-glZE5zipwc8MgHP8BfiP1fwoh5KDFL_dSKmHumdnG&exp=1789192590&osig=AAAAAAAAAAAAAAAAAAAAADTqx4ymnO9IO4ia_5AguP7PpNfW26j3FjQq9wcaYtyf&signer=media-rpc&x-canva-quality=thumbnail'
+          FULL='https://media.canva.com/v2/image-resize/format:PNG/height:1055/quality:100/uri:ifs%3A%2F%2FM%2F7db3f49b-e20e-4dec-847b-4a48990e44e7/watermark:F/width:1491?csig=AAAAAAAAAAAAAAAAAAAAAL-glZE5zipwc8MgHP8BfiP1fwoh5KDFL_dSKmHumdnG&exp=1789192590&osig=AAAAAAAAAAAAAAAAAAAAADTqx4ymnO9IO4ia_5AguP7PpNfW26j3FjQq9wcaYtyf&signer=media-rpc&x-canva-quality=thumbnail'
+          curl -fL "$THUMB" -o /tmp/thumb.png
+          file /tmp/thumb.png
+          identify /tmp/thumb.png || true
+          curl -fL "$FULL" -o /tmp/full.png
+          file /tmp/full.png
+          identify /tmp/full.png || true
+          ls -lh /tmp/thumb.png /tmp/full.png
