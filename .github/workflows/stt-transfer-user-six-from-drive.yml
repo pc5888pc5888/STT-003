@@ -1,0 +1,96 @@
+name: STT Transfer User-Approved Six From Drive
+
+on:
+  push:
+    branches: [fix/stt-user-six-heroes-20260912]
+    paths:
+      - .github/workflows/stt-transfer-user-six-from-drive.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  transfer-exact-six:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/stt-user-six-heroes-20260912
+      - name: Download only the six uploaded user-approved source images
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p public/visual-bank/stt/user-approved-six
+          download() {
+            local id="$1" out="$2"
+            curl -fL --retry 2 --connect-timeout 20 --max-time 120 \
+              "https://drive.usercontent.google.com/download?id=${id}&export=download&confirm=t" \
+              -o "$out"
+          }
+          download '10KSOi6hXWHgVp_aVPBQjv44KqvIYqXwo' public/visual-bank/stt/user-approved-six/home.png
+          download '12hq7Db0438KXN6SHLZ_TG0ge-VNgySck' public/visual-bank/stt/user-approved-six/problems.png
+          download '13Jd4EhgnxRBszfJ-lGUMRDsid2pUWI-m' public/visual-bank/stt/user-approved-six/method.png
+          download '129ROAJ7jJLfk9tJPlv4tsEVOrgStqxxz' public/visual-bank/stt/user-approved-six/columns.png
+          download '1q0s89NySyrt1Mkcrj9vjAolTwLn1M-H1' public/visual-bank/stt/user-approved-six/publications.png
+          download '1Zp9Fo-IA69d7wEXqqv12Rl1sUYas2_LG' public/visual-bank/stt/user-approved-six/about-stt.png
+
+      - name: Evidence gate — exact SHA-256, PNG dimensions, six unique images
+        run: |
+          python -m pip install -q Pillow
+          python - <<'PY'
+          from pathlib import Path
+          from PIL import Image
+          import hashlib
+          expected={
+            'home.png':'d87b1039a686ad6a92be4eb2aadbc6d32111278ffd59869137e77e939708ff39',
+            'problems.png':'f8fa16efabc931975e46973aafba97a2e75b733c8836ea06bece490b5d676754',
+            'method.png':'6ae927ed6e822b3699005a734b169f7b098cd353fe6c688f381730c41da1d33d',
+            'columns.png':'e64be189148c76ce2dd5b13efba5a9512e2cb003692f87991c95d35322602753',
+            'publications.png':'03cc644c1f32e05252ebc4defae7149dd6ddc0a8a36f7965436f0c2dff284417',
+            'about-stt.png':'964923d0ba8ddc9589fcd8a254d6daca2f71643d2e6702236bff2902d38850c9',
+          }
+          root=Path('public/visual-bank/stt/user-approved-six')
+          got=[]
+          for name,want in expected.items():
+              p=root/name
+              digest=hashlib.sha256(p.read_bytes()).hexdigest()
+              if digest != want: raise SystemExit(f'FAIL exact hash {name}: {digest}')
+              if Image.open(p).size != (1491,1055): raise SystemExit(f'FAIL dimensions {name}: {Image.open(p).size}')
+              got.append(digest)
+              print('PASS',name,digest)
+          if len(set(got)) != 6: raise SystemExit('FAIL uniqueness')
+          PY
+
+      - name: Wire exactly these six sources to the six primary pages
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('src/sttVisuals.ts')
+          s=p.read_text(encoding='utf-8')
+          pairs=[
+            ('home: "/visual-bank/stt/hero-hires/home.webp"','home: "/visual-bank/stt/user-approved-six/home.png"'),
+            ('problems: "/visual-bank/stt/hero-hires/problems.png"','problems: "/visual-bank/stt/user-approved-six/problems.png"'),
+            ('method: "/visual-bank/stt/hero-hires/method.webp"','method: "/visual-bank/stt/user-approved-six/method.png"'),
+            ('columns: "/visual-bank/stt/hero-hires/columns.png"','columns: "/visual-bank/stt/user-approved-six/columns.png"'),
+            ('publications: "/visual-bank/stt/hero-hires/publications.png"','publications: "/visual-bank/stt/user-approved-six/publications.png"'),
+            ('aboutStt: "/visual-bank/stt/hero-hires/stt.png"','aboutStt: "/visual-bank/stt/user-approved-six/about-stt.png"'),
+          ]
+          for old,new in pairs:
+              if old not in s: raise SystemExit(f'Refuse drifted edit, missing: {old}')
+              s=s.replace(old,new,1)
+          p.write_text(s,encoding='utf-8')
+          PY
+
+      - name: Build gate
+        run: |
+          npm ci
+          npm run build
+
+      - name: Commit correction to fix branch
+        run: |
+          git config user.name "STT Governance Build"
+          git config user.email "actions@users.noreply.github.com"
+          git add public/visual-bank/stt/user-approved-six src/sttVisuals.ts
+          git commit -m "fix: use the six exact user-uploaded STT primary hero images"
+          git push origin HEAD:fix/stt-user-six-heroes-20260912
