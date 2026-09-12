@@ -1,5 +1,5 @@
 import FullBleedHero from "../components/FullBleedHero";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import { useSearchParams } from "react-router-dom";
 import { ArrowUpRight, Search } from "lucide-react";
 import bundled from "../../public/data/mmedia-catalog.json";
@@ -8,6 +8,8 @@ type Series = "legal" | "humanistic" | "news";
 type Column = { id: string; title: string; excerpt: string; date: string; category: string; author: string; authorUrl: string; url: string; series: Series };
 type Catalog = { articles: Column[]; syncedAt: string; mode?: "archive" | "bundled" };
 const AUTHOR = "https://94m.com.tw/editors/ed55fc";
+const HUMANISTIC_INTERVIEW = "/humanistic-20q";
+const HUMANISTIC_LATEST = "https://94m.com.tw/articles/9feb5e?from_admin=true";
 const PAGE_SIZE = 12;
 const MAPPING: Record<string, Series> = { "法律": "legal", "社會": "humanistic", "熱門社會": "humanistic", "M-news": "news", "M-NEWS": "news", "Ｍ-NEWS": "news" };
 const SERIES: Array<{ key: Series; name: string; short: string; en: string; description: string }> = [
@@ -73,11 +75,14 @@ export default function Columns() {
       <FullBleedHero theme="columns"><div className="stt-columns-source"><span>收錄 {catalog.articles.length} 則專欄</span><a href={AUTHOR} target="_blank" rel="noopener noreferrer">M傳媒作者專區 ↗</a></div></FullBleedHero>
       <section className="stt-series" id="column-series" aria-label="三大專欄系列">
         <div className="stt-columns-wrap stt-series-grid">
-          {SERIES.map((s, i) => <article className="stt-series-card" key={s.key}>
-            <div className="stt-series-index"><small>0{i + 1} · {s.en}</small><span>{counts[s.key]}<small> 則</small></span></div>
+          {SERIES.map((s) => <article className="stt-series-card" key={s.key}>
+            <div className="stt-series-index"><small>{s.en}</small><span>{counts[s.key]}<small> 則</small></span></div>
             <h2>{s.name}</h2><p>{s.description}</p>
             <button type="button" className="stt-series-enter" onClick={() => update("series", s.key, true)} aria-label={`瀏覽${s.name}`}>瀏覽這個系列 <ArrowUpRight size={16} aria-hidden="true" /></button>
-            {s.key === "humanistic" && <a className="stt-series-enter" style={{ marginLeft: 16, textDecoration: "none" }} href="/projects" aria-label="進入人文地景產專案頁">人文地景產專案頁 <ArrowUpRight size={16} aria-hidden="true" /></a>}
+            {s.key === "humanistic" && <div className="stt-humanistic-links">
+              <a className="stt-series-enter" href={HUMANISTIC_INTERVIEW} aria-label="進入人文地景產採訪 20 Questions">人文地景產採訪｜20 Questions <ArrowUpRight size={16} aria-hidden="true" /></a>
+              <a className="stt-series-enter" href={HUMANISTIC_LATEST} target="_blank" rel="noopener noreferrer" aria-label="閱讀最新人文地景產專欄">最新人文地景產專欄｜M傳媒 <ArrowUpRight size={16} aria-hidden="true" /></a>
+            </div>}
           </article>)}
         </div>
       </section>
