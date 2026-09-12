@@ -31,10 +31,6 @@ body,
   box-shadow: none !important;
 }
 
-.stt-master-hero.is-primary {
-  min-height: calc(100svh - var(--stt-header-height, 76px)) !important;
-}
-
 .stt-master-hero__image {
   position: absolute !important;
   inset: 0 !important;
@@ -60,13 +56,14 @@ body,
   ) !important;
 }
 
-/* Full-width canvas, internal alignment only. */
+/* Full-width canvas, internal alignment only. The 5.25vw axis follows the
+   approved full-screen reference rather than a centered 1320px card. */
 .stt-master-hero__inner {
   width: 100% !important;
   max-width: none !important;
   margin-inline: 0 !important;
-  padding-left: clamp(36px, 7.4vw, 124px) !important;
-  padding-right: clamp(36px, 7.4vw, 124px) !important;
+  padding-left: clamp(36px, 5.25vw, 104px) !important;
+  padding-right: clamp(36px, 5.25vw, 104px) !important;
 }
 
 .stt-master-hero__copy {
@@ -83,8 +80,8 @@ body,
 header.sticky > div:first-child {
   width: 100% !important;
   max-width: none !important;
-  padding-left: clamp(36px, 7.4vw, 124px) !important;
-  padding-right: clamp(36px, 7.4vw, 124px) !important;
+  padding-left: clamp(36px, 5.25vw, 104px) !important;
+  padding-right: clamp(36px, 5.25vw, 104px) !important;
 }
 
 @media (max-width: 900px) {
