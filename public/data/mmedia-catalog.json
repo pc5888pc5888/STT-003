@@ -14,28 +14,42 @@
     "verification": "All seven source fields exactly match the uploaded 212-record snapshot after restoring its original whitespace."
   },
   "schemaVersion": "2.0",
-  "syncedAt": "2026-09-12T04:42:51.673390+00:00",
+  "syncedAt": "2026-09-12T10:55:19.253571+00:00",
   "sync": {
     "method": "public-author-index-and-more",
     "complete": true,
     "pagesFetched": 35,
-    "observed": 212,
+    "observed": 213,
     "retainedNotSeen": 0,
     "changes": {
-      "added": 0,
+      "added": 1,
       "updated": 0,
       "reclassified": 0
     }
   },
   "stats": {
-    "total": 212,
-    "uniqueUrls": 212,
+    "total": 213,
+    "uniqueUrls": 213,
     "legal": 199,
-    "humanistic": 2,
+    "humanistic": 3,
     "news": 11,
     "pending": 0
   },
   "articles": [
+    {
+      "url": "https://94m.com.tw/articles/9feb5e",
+      "title": "【 味有來處，業有根本 】陳朝榮在尋常滋味裡守住的分寸與信義｜人文地景產專欄",
+      "date": "2026/09/12 11:44",
+      "category": "社會",
+      "author": "莊鈞翔博士",
+      "authorUrl": "https://94m.com.tw/editors/ed55fc",
+      "excerpt": "本席多年來接觸不同產業的企業經營者，愈來愈相信，一家公司真正能夠走多遠，到了最後，考驗的往往不是經營者懂得多少管理術語，也不只是他掌握了多少市場資訊，而是在現實的利益、壓力與選擇同時來到眼前時，這個人究竟如何判斷，又願意為什麼事情守住底線。策略可以寫進企劃書，制度可以畫進流程圖，但一位經營者如何看待承諾、如何處理關係、如何面對失誤，以及在利益與信義之間如何取捨，這些最難被量化的東西，反而最容易在時間裡沉澱成一家企業真正的性格。",
+      "id": "mmedia-9feb5e",
+      "sourceArticleId": "9feb5e",
+      "series": "humanistic",
+      "seriesTitle": "莊博士人文地景產專欄",
+      "source": "M傳媒"
+    },
     {
       "url": "https://94m.com.tw/articles/ed1d40",
       "title": "從收藏走向文明治理 為家族建立一套藝術資產治理憲章",
