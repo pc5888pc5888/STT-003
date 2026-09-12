@@ -1,10 +1,10 @@
 export const STT_VISUALS = {
-  home: "/visual-bank/stt/hero-hires/home.webp",
-  problems: "/visual-bank/stt/hero-hires/problems.png",
-  method: "/visual-bank/stt/hero-hires/method.webp",
-  columns: "/visual-bank/stt/hero-hires/columns.png",
-  publications: "/visual-bank/stt/hero-hires/publications.png",
-  aboutStt: "/visual-bank/stt/hero-hires/stt.png",
+  home: "/visual-bank/stt/approved-six-20260912/01-home.webp",
+  problems: "/visual-bank/stt/approved-six-20260912/02-problems.webp",
+  method: "/visual-bank/stt/approved-six-20260912/03-how-stt-works.webp",
+  columns: "/visual-bank/stt/approved-six-20260912/04-insights.webp",
+  publications: "/visual-bank/stt/approved-six-20260912/05-publications.webp",
+  aboutStt: "/visual-bank/stt/approved-six-20260912/06-about-stt.webp",
   problemMajorDecision: "/visual-bank/stt/originals-20260910/major-decision.webp",
   problemOwnerDependence: "/visual-bank/stt/originals-20260910/owner-dependence.webp",
   problemSuccession: "/visual-bank/stt/originals-20260910/succession.webp",
@@ -28,17 +28,6 @@ export const STT_VISUALS = {
 
 export type STTVisualKey = keyof typeof STT_VISUALS;
 export const sttVisual = (key: STTVisualKey) => STT_VISUALS[key];
-
-export const STT_VISUAL_DIMENSIONS: Partial<Record<STTVisualKey, readonly [number, number]>> = {
-  home: [3509, 1975],
-  problems: [6250, 4419],
-  method: [3200, 2263],
-  columns: [3509, 1975],
-  publications: [6250, 4419],
-  aboutStt: [6250, 4419],
-};
-
-export const sttVisualDimensions = (key: STTVisualKey) => STT_VISUAL_DIMENSIONS[key];
 
 export const PROBLEM_VISUALS: Record<string, STTVisualKey> = {
   "major-decision": "problemMajorDecision",
