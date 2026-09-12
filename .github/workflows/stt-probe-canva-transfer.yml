@@ -1,0 +1,24 @@
+name: STT Probe Canva Source Transfer
+on:
+  push:
+    branches: [fix/stt-user-six-heroes-20260912]
+    paths: [.github/workflows/stt-probe-canva-transfer.yml]
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Probe user-owned Canva view URL without modifying website
+        run: |
+          set -euo pipefail
+          curl -L -A 'Mozilla/5.0' -sS -D /tmp/headers.txt 'https://www.canva.com/d/fZFHWCC-4HbgOSu' -o /tmp/canva.html
+          echo '--- headers ---'
+          tail -40 /tmp/headers.txt
+          echo '--- bytes/type ---'
+          wc -c /tmp/canva.html
+          file /tmp/canva.html
+          echo '--- candidate media URLs ---'
+          grep -Eo 'https:[^"<> ]+' /tmp/canva.html | grep -E 'media\.canva|image-resize|ifs%3A|ifs://' | head -30 || true
+          echo '--- og image/meta ---'
+          grep -Eo '<meta[^>]+(og:image|twitter:image)[^>]*>' /tmp/canva.html | head -20 || true
