@@ -21,7 +21,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - run: python -m pip install --quiet pillow
+      - run: python -m pip install --quiet pillow numpy
       - name: Match existing repository images to approved Humanistic visual fingerprints
         shell: bash
         run: |
@@ -59,11 +59,13 @@ jobs:
           files=[p for p in Path('.').rglob('*') if p.is_file() and p.suffix.lower() in exts and '.git' not in p.parts and '.audit' not in p.parts]
           matches={k:[] for k in targets}
           for p in files:
-              try: h=dhash(p)
-              except Exception: continue
+              try:
+                  h=dhash(p); dim=Image.open(p).size
+              except Exception:
+                  continue
               for name,t in targets.items():
                   d=ham(h,t)
-                  if d <= 50: matches[name].append((d,str(p),p.stat().st_size,Image.open(p).size))
+                  if d <= 50: matches[name].append((d,str(p),p.stat().st_size,dim))
           lines=['Humanistic visual repository match audit','threshold: dHash Hamming <= 50','scanned images: '+str(len(files)),'']
           for name in targets:
               vals=sorted(matches[name])[:12]
