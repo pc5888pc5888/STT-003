@@ -1,0 +1,30 @@
+/* Primary-page content modules — 2026-09-12
+   Shared system stops at Header / Hero / typography / palette / spacing.
+   Below the Hero, each first-level page uses its own content structure. */
+
+.stt-humanistic-links{display:flex;flex-direction:column;align-items:flex-start;gap:2px;margin-top:8px}
+.stt-humanistic-links .stt-series-enter{margin-top:10px;text-decoration:none}
+
+.stt-publication-entrances{padding:92px 0 112px;background:#fff;border-top:1px solid var(--stt-line);border-bottom:1px solid var(--stt-line)}
+.stt-publication-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--stt-line);border-bottom:1px solid var(--stt-line)}
+.stt-publication-entry{min-height:330px;padding:38px 34px 42px;border-right:1px solid var(--stt-line);display:flex;flex-direction:column;align-items:flex-start;background:#fff}
+.stt-publication-entry:last-child{border-right:0}
+.stt-publication-entry h2{margin:14px 0 0!important;font-size:clamp(26px,2.3vw,34px)!important;line-height:1.45!important}
+.stt-publication-entry>p:not(.stt-editorial-label){margin:18px 0 0;color:var(--stt-ink-soft);font-size:15px;line-height:1.95}
+.stt-publication-entry button{margin-top:auto;padding:10px 0 5px;border:0;border-bottom:1px solid var(--stt-gold);background:transparent;color:var(--stt-gold-deep);font-size:13px;font-weight:600;cursor:pointer}
+.stt-publication-entry button:hover{color:#60431f;border-color:#60431f}
+
+.stt-about-modules{padding:82px 0 108px;background:#fff;border-top:1px solid var(--stt-line);border-bottom:1px solid var(--stt-line)}
+.stt-about-row{display:grid;grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr);gap:clamp(42px,7vw,96px);padding:44px 0;border-top:1px solid var(--stt-line);align-items:start}
+.stt-about-row:last-child{border-bottom:1px solid var(--stt-line)}
+.stt-about-row h2{margin:14px 0 0!important;font-size:clamp(27px,2.5vw,36px)!important;line-height:1.48!important}
+.stt-about-row>div:last-child>p{margin:2px 0 0;color:var(--stt-ink-soft);font-size:15px;line-height:2}
+.stt-about-row button{margin-top:22px;padding:9px 0 5px;border:0;border-bottom:1px solid var(--stt-gold);background:transparent;color:var(--stt-gold-deep);font-size:13px;font-weight:600;cursor:pointer}
+.stt-about-row button:hover{color:#60431f;border-color:#60431f}
+
+@media(max-width:900px){
+  .stt-publication-grid{grid-template-columns:1fr}
+  .stt-publication-entry{min-height:0;border-right:0;border-bottom:1px solid var(--stt-line);padding:31px 4px 34px}
+  .stt-publication-entry:last-child{border-bottom:0}
+  .stt-about-row{grid-template-columns:1fr;gap:18px;padding:35px 0}
+}
