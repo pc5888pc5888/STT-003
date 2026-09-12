@@ -1,0 +1,85 @@
+name: Audit Humanistic visual matches
+
+on:
+  push:
+    branches:
+      - fix/humanistic-publish-exact-v2-20260912
+    paths:
+      - .audit/TRIGGER_HUMANISTIC_MATCH
+
+permissions:
+  contents: write
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/humanistic-publish-exact-v2-20260912
+          fetch-depth: 1
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --quiet pillow
+      - name: Match existing repository images to approved Humanistic visual fingerprints
+        shell: bash
+        run: |
+          python - <<'PY'
+          from PIL import Image
+          from pathlib import Path
+          import numpy as np
+
+          targets = {
+          'inline-01':'7fc9f913d32caccd2e302a17356a37506b183198b31aec1a7cf0f8e0f610f2c0',
+          'inline-02':'3841d860ad363a706860a424e4c2e2a2a3a240c3a5c3c286a4d0e640e270f202',
+          'inline-03':'7f387919cc9b2c833119364124c9a3e5a9b3a372a332a3b6e572e13472f0f242',
+          'inline-04':'7e49f113c626396c29582cd106f682310b5105c184d0c49847087800b298b6b0',
+          'inline-05':'7f62f906eabc22b12e882e85146130201122083a8e509903e1a968ec64d0f261',
+          'inline-06':'fe21fdc3ace6263412d0216c076429262f23c66222c4c2e4ae32ed5072f0fee2',
+          'inline-07':'7f49f113ef26bce43454a3078526c6238ee102c6cf67c3c469c369e0f6c0f2f0',
+          'inline-08':'7f49f913d126ad6d3e54267638de2dbc431a36122512c0306863f84bf40df2a4',
+          'inline-09':'7e41f902d1582ad32a98ca952b3f29ec90c42b392939e5226a2a7a70f4f0b3a0',
+          'inline-10':'7fc17901d326ade42dd436db347c2d3202c402cc89308670ea587c38f270f290',
+          'station-01':'3c01db608a660ce746dc6a646862647266b36f936f93670960c9ddcbdf70fc83',
+          'station-02':'7881d8b0a43024311a302d04ab07d039ac794d64cd06cd61ffa319d8fde0cb07',
+          'station-03':'3802d861a400244036b1b761a4c0360616c29a462e463e6293c375836680fa10',
+          'station-04':'7a03f960ab202b48298d3a9ca101f143f8fffc25f207f356e1f2e6f3e6c2fc40',
+          'station-05':'3a01d868ac6a276a24391c59201b093b083b2c5e2007918da271e0c9f1a0f202',
+          }
+          def bits(h): return int(h,16)
+          def ham(a,b): return (bits(a)^bits(b)).bit_count()
+          def dhash(p):
+              im=Image.open(p).convert('L').resize((17,16),Image.Resampling.LANCZOS)
+              a=np.array(im); v=(a[:,1:]>a[:,:-1]).reshape(-1)
+              packed=np.packbits(v)
+              return ''.join(f'{x:02x}' for x in packed)
+
+          exts={'.png','.jpg','.jpeg','.webp','.avif'}
+          files=[p for p in Path('.').rglob('*') if p.is_file() and p.suffix.lower() in exts and '.git' not in p.parts and '.audit' not in p.parts]
+          matches={k:[] for k in targets}
+          for p in files:
+              try: h=dhash(p)
+              except Exception: continue
+              for name,t in targets.items():
+                  d=ham(h,t)
+                  if d <= 50: matches[name].append((d,str(p),p.stat().st_size,Image.open(p).size))
+          lines=['Humanistic visual repository match audit','threshold: dHash Hamming <= 50','scanned images: '+str(len(files)),'']
+          for name in targets:
+              vals=sorted(matches[name])[:12]
+              lines.append('## '+name)
+              if not vals: lines.append('NO MATCH <= 50')
+              else:
+                  for d,p,size,dim in vals: lines.append(f'{d:3d}  {size:9d}  {dim[0]}x{dim[1]}  {p}')
+              lines.append('')
+          Path('.audit').mkdir(exist_ok=True)
+          Path('.audit/humanistic-image-match.txt').write_text('\n'.join(lines),encoding='utf-8')
+          PY
+      - name: Commit audit report
+        shell: bash
+        run: |
+          git config user.name "STT Visual Audit"
+          git config user.email "actions@users.noreply.github.com"
+          git add .audit/humanistic-image-match.txt
+          git commit -m "audit: record Humanistic visual matches [skip ci]" || exit 0
+          git push origin HEAD:fix/humanistic-publish-exact-v2-20260912
