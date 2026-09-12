@@ -22,6 +22,7 @@ import { STT_OFFICIAL_LOGO_SRC } from "./sttLogo";
 type ShellProps = { children: ReactNode; chatOpen: boolean; onChatToggle: () => void };
 
 const GCSDA_URL = "https://stt-003-git-gcsda-approved-white-gold-v1-pc5888pc5888s-projects.vercel.app";
+const HUMANISTIC_INTERVIEW_URL = "https://fluffy-crumble-cd749c.netlify.app/";
 
 function ExternalRedirect({ url }: { url: string }) {
   useEffect(() => { window.location.replace(url); }, [url]);
@@ -105,7 +106,7 @@ function AppRoutes() {
       <Route path="/research" element={<ResearchCanonical />} />
       <Route path="/papers" element={<Navigate to="/research" replace />} />
 
-      <Route path="/humanistic-20q" element={<ProjectsHub />} />
+      <Route path="/humanistic-20q" element={<ExternalRedirect url={HUMANISTIC_INTERVIEW_URL} />} />
       <Route path="/projects" element={<ProjectsHub />} />
       <Route path="/stt" element={<STTPlatform />} />
       <Route path="/institution/eric-chuang" element={<GovernanceResponsibility />} />
