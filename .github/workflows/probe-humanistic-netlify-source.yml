@@ -1,0 +1,74 @@
+name: Probe Humanistic Netlify source
+
+on:
+  push:
+    branches:
+      - fix/humanistic-publish-exact-v2-20260912
+    paths:
+      - .audit/TRIGGER_HUMANISTIC_NETLIFY
+
+permissions:
+  contents: write
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/humanistic-publish-exact-v2-20260912
+          fetch-depth: 1
+      - name: Probe candidate project hostname and verify exact files
+        shell: bash
+        run: |
+          set -u
+          base='https://fluffy-crumble-cd749c.netlify.app'
+          mkdir -p /tmp/humanistic-probe .audit
+          cat > /tmp/expected.tsv <<'EOF'
+index.html	b22cc3d27b3f70cd3a6279326bec0794b790f602d29e39fbddb3f2ad1d78dd5e
+assets/inline/inline-01.webp	e2e3632e89b613663c9a5e3685ee9460a483adf94d9fc7523b80992d249a3d09
+assets/inline/inline-02.webp	caa02349c3387c24d9ed0e8707c24b14ce95da4ecaa33cb43f22133179a349c7
+assets/inline/inline-03.webp	f33fa4d5c9209a58fe65a7f04ef29f69ec7a0c8ab39b485c2ad6bb8aa42d0974
+assets/inline/inline-04.webp	40aebfe6bf07a55318e877f0e044f0c4c4bbcb6ee08e4b1f5c89cfa628a9973d
+assets/inline/inline-05.webp	3ca6f3c2d84e9209cd8f76e9636229fe911bbdae9886fca41fcb3969ed85e0fd
+assets/inline/inline-06.webp	f6b541d46216aa3500f05e62aec03e0c89f593135427ea6990b881b3c2de6f96
+assets/inline/inline-07.webp	f423c861417f4078dda8fc0ac8b70b7d8ddfbf9fbb1545c55db8a56432c9e4eb
+assets/inline/inline-08.webp	4b2c9fd44895f059b65225442418d4d722c3e15c9926d6a7340cd66b7f41915f
+assets/inline/inline-09.webp	c66cc4bfaf74c17537183fa1fbb04c684a72ef53b93158cbd58f8765d8c2d33c
+assets/inline/inline-10.webp	a052cc5a6a5a84460fcf73980f7c1656af892cfa038a45562e1bd3ff5f7af2d0
+assets/stations/station-01.webp	ce22798a5676fcf39ca9386910ef7145a84748ab7459cd2e9dd9964cd76ffbe4
+assets/stations/station-02.webp	28cf37165f146ba8c0fd2b38c7033fda9671cd64a53a616ea12e4663a4e03a5e
+assets/stations/station-03.webp	4094703aa75672d11bfde48bbd9ae09e0710e3813b3743970c3c0725d0ec1237
+assets/stations/station-04.webp	cf73191bb314d6d7f95c88ad8dc8f0961b4d0e1177dacb00b73f467a1bf0c5ea
+assets/stations/station-05.webp	ac7e929bf413757be3ab0d8a89bde94144ccb8f8e5f970fc4d695bf52ab61cf9
+assets/meta/image-generation-log-v1.0.json	0392d1b4b8b3fe1d9e24d552fba547a2a9aafb3e5ba9721d7da691aa4b80874a
+assets/meta/image-generation-log-v1.0.md	141e1bcec3085c352b897b0673363f8ee3fcf0517cb700c09e8692ec7a85d119
+EOF
+          total=0; exact=0; httpok=0
+          {
+            echo "Humanistic candidate source verification"
+            echo "base=$base"
+            echo
+            while IFS=$'\t' read -r rel expected; do
+              total=$((total+1))
+              out="/tmp/humanistic-probe/$(echo "$rel" | tr '/' '_')"
+              code=$(curl -L --connect-timeout 10 --max-time 30 -sS -o "$out" -w '%{http_code}' "$base/$rel" || true)
+              actual='MISSING'
+              if [ -f "$out" ]; then actual=$(sha256sum "$out" | awk '{print $1}'); fi
+              if [ "$code" = "200" ]; then httpok=$((httpok+1)); fi
+              status='DIFF'
+              if [ "$actual" = "$expected" ]; then status='EXACT'; exact=$((exact+1)); fi
+              printf '%s  http=%s  expected=%s  actual=%s  %s\n' "$status" "$code" "$expected" "$actual" "$rel"
+            done < /tmp/expected.tsv
+            echo
+            echo "SUMMARY exact=$exact/$total http200=$httpok/$total"
+          } > .audit/humanistic-netlify-probe.txt
+          cat .audit/humanistic-netlify-probe.txt
+      - name: Commit probe report
+        shell: bash
+        run: |
+          git config user.name "STT Source Audit"
+          git config user.email "actions@users.noreply.github.com"
+          git add .audit/humanistic-netlify-probe.txt
+          git commit -m "audit: record Humanistic Netlify source verification [skip ci]" || exit 0
+          git push origin HEAD:fix/humanistic-publish-exact-v2-20260912
