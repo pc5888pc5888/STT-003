@@ -1,5 +1,6 @@
 name: Audit current user-approved STT visual sources
 
+# 2026-09-13: retriggered after the user reconfirmed the six approved visuals and official logo.
 on:
   push:
     branches: [main]
