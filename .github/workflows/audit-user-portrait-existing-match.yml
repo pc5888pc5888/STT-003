@@ -1,0 +1,47 @@
+name: Audit user-approved portrait match already in repo
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/audit-user-portrait-existing-match.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Find closest existing portrait by visible artwork
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install -q Pillow numpy
+          python - <<'PY'
+          from pathlib import Path
+          from PIL import Image
+          import numpy as np
+          target=int('13c001a9032303cb23f50b701138131f3dcb19231997019b0d970a62586b2068',16)
+          def normalize(im):
+            im=im.convert('RGBA')
+            box=im.getchannel('A').getbbox()
+            if box: im=im.crop(box)
+            base=Image.new('RGBA',im.size,(255,255,255,255))
+            base.alpha_composite(im)
+            return base.convert('L')
+          def dhash(p,hs=16):
+            im=normalize(Image.open(p)).resize((hs+1,hs),Image.Resampling.LANCZOS)
+            a=np.asarray(im); d=a[:,1:]>a[:,:-1]
+            return int(''.join('1' if x else '0' for x in d.flatten()),2)
+          rows=[]
+          for p in Path('.').rglob('*'):
+            if not p.is_file() or p.suffix.lower() not in {'.png','.jpg','.jpeg','.webp'}: continue
+            try:
+              h=dhash(p); orig=Image.open(p).size
+              rows.append(((target^h).bit_count(),str(p),p.stat().st_size,orig))
+            except Exception: pass
+          for row in sorted(rows)[:40]: print(*row)
+          PY
