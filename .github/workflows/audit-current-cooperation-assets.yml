@@ -1,4 +1,4 @@
-name: Audit current cooperation background and portrait candidates
+name: Audit current approved assets against final visual branch
 
 on:
   push:
@@ -12,27 +12,34 @@ permissions:
 
 jobs:
   audit:
-    if: ${{ !contains(github.event.head_commit.message, 'record cooperation asset ranking') }}
+    if: ${{ !contains(github.event.head_commit.message, 'record eight-asset branch ranking') }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
           ref: main
           fetch-depth: 0
-      - name: Rank repository images against the two user-approved cooperation assets
+      - name: Rank final approved branch against all eight current user assets
         shell: bash
         run: |
           set -euo pipefail
           python -m pip install -q Pillow numpy
           mkdir -p .audit
-          python - <<'PY' > .audit/current-cooperation-rank.txt
+          git worktree add --detach /tmp/stt-final origin/fix/stt-final-user-approved-20260913
+          python - <<'PY' > .audit/current-eight-branch-rank.txt
           from pathlib import Path
           from PIL import Image
           import numpy as np, hashlib
 
           targets={
-            'background':'8801a54485648524a6c485b585259526955a9cd998cc844c844d87cdb0098c03',
-            'portrait':'13c001a9032303cb23f50b701138131f3dcb19231997019b0d970a62586b2068',
+            '01-home':'002900080012001340009024c00178538d1bd30bfa4bd25bda5b2523924a9a4a',
+            '02-problems':'e5b6e4c2dc9a5c9bbc89b49bb6123c82f8c0cac48cc5c7cc8ecc9e6dd50ef1c3',
+            '03-method':'33a79b0f9f0f9e07f68c76f2f6b7f6b7a6b6a7a2a3e3a2e3bda2c7f2d938fbe1',
+            '04-columns':'6288661262187c980d581dc89dc8ad4a1d594d51dd31f21ce612c59c4dcee6e6',
+            '05-publications':'1124172c992c99b49e04b604b6ccdcccf49c6c96f006cf1f4797d0b9f0f65e72',
+            '06-about':'330327268b06a304e306e50645a00f962f0d3e637e320f8a1da0d224e504e488',
+            '07-cooperation-bg':'8801a54485648524a6c485b585259526955a9cd998cc844c844d87cdb0098c03',
+            '08-cooperation-portrait':'13c001a9032303cb23f50b701138131f3dcb19231997019b0d970a62586b2068',
           }
 
           def normalize(im):
@@ -48,9 +55,10 @@ jobs:
               a=np.asarray(im); d=a[:,1:]>a[:,:-1]
               return int(''.join('1' if x else '0' for x in d.flatten()),2)
 
+          root=Path('/tmp/stt-final')
           candidates=[]
-          for p in Path('public').rglob('*'):
-              if not p.is_file() or p.suffix.lower() not in {'.png','.jpg','.jpeg','.webp'}: continue
+          for p in root.rglob('*'):
+              if '.git' in p.parts or not p.is_file() or p.suffix.lower() not in {'.png','.jpg','.jpeg','.webp'}: continue
               try:
                   candidates.append((p,dhash(p),Image.open(p).size,p.stat().st_size,hashlib.sha256(p.read_bytes()).hexdigest()))
               except Exception:
@@ -59,16 +67,16 @@ jobs:
           for label,target_hex in targets.items():
               target=int(target_hex,16)
               print(f'### {label}')
-              rows=sorted(((target^h).bit_count(),str(p),size,bytes_,sha) for p,h,size,bytes_,sha in candidates)[:25]
+              rows=sorted(((target^h).bit_count(),str(p.relative_to(root)),size,bytes_,sha) for p,h,size,bytes_,sha in candidates)[:10]
               for row in rows: print(*row)
               print()
           PY
-      - name: Commit audit evidence only
+      - name: Commit branch audit evidence only
         shell: bash
         run: |
           set -euo pipefail
           git config user.name 'STT Visual Audit'
           git config user.email 'actions@users.noreply.github.com'
-          git add .audit/current-cooperation-rank.txt
-          git commit -m 'audit: record cooperation asset ranking [skip ci]'
+          git add .audit/current-eight-branch-rank.txt
+          git commit -m 'audit: record eight-asset branch ranking [skip ci]'
           git push origin HEAD:main
