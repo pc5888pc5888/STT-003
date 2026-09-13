@@ -1,0 +1,40 @@
+name: Audit user-approved logo match already in repo
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/audit-user-logo-existing-match.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Find closest existing logo image
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install -q Pillow numpy
+          python - <<'PY'
+          from pathlib import Path
+          from PIL import Image
+          import numpy as np
+          target=int('000000404c006ce062e170006cbb66a322a9b000a673a2736233600002004000',16)
+          def dhash(p,hs=16):
+            im=Image.open(p).convert('L').resize((hs+1,hs),Image.Resampling.LANCZOS)
+            a=np.asarray(im); d=a[:,1:]>a[:,:-1]
+            return int(''.join('1' if x else '0' for x in d.flatten()),2),im.size
+          rows=[]
+          for p in Path('.').rglob('*'):
+            if not p.is_file() or p.suffix.lower() not in {'.png','.jpg','.jpeg','.webp'}: continue
+            try:
+              h,_=dhash(p); orig=Image.open(p).size
+              rows.append(((target^h).bit_count(),str(p),p.stat().st_size,orig))
+            except Exception: pass
+          for row in sorted(rows)[:20]: print(*row)
+          PY
