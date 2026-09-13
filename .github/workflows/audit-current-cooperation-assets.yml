@@ -12,7 +12,7 @@ permissions:
 
 jobs:
   audit:
-    if: ${{ !contains(github.event.head_commit.message, 'audit: record cooperation asset ranking') }}
+    if: ${{ !contains(github.event.head_commit.message, 'record cooperation asset ranking') }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
