@@ -15,24 +15,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Download and verify existing Humanistic deployment
+      - name: Inspect existing Humanistic deployment without assuming asset paths
         shell: bash
         run: |
           set -euo pipefail
           root='https://fluffy-crumble-cd749c.netlify.app'
-          mkdir -p /tmp/humanistic/assets/stations
-          curl -fL --retry 2 --connect-timeout 20 --max-time 120 "$root/" -o /tmp/humanistic/index.html
-          for n in 01 02 03 04 05; do
-            curl -fL --retry 2 --connect-timeout 20 --max-time 120 "$root/assets/stations/station-$n.png" -o "/tmp/humanistic/assets/stations/station-$n.png"
-          done
-          echo 'EXPECTED HASH CHECK:'
-          echo '672ce2789a433177d40e230b4b80a2faae1d0878f82535f88a3e663e54955d0f  /tmp/humanistic/index.html' | sha256sum -c - || true
-          echo 'aa283614dab98aa6a18a67a87fa1140dcc9b077faabfb17a41ec56c50910e88b  /tmp/humanistic/assets/stations/station-01.png' | sha256sum -c - || true
-          echo 'a371375fcaadcdf61ac260308ce88330598d5556e51b91f8c80f6d56080c964e  /tmp/humanistic/assets/stations/station-02.png' | sha256sum -c - || true
-          echo '4f5d618dda11a98d9a9c5a1af02468b56e7ff8ec02757860d547108192ee5208  /tmp/humanistic/assets/stations/station-03.png' | sha256sum -c - || true
-          echo 'c06a062b27bcaf277ea31c86cfd38db2f986590fdcf50f6bdb211b2e88caf012  /tmp/humanistic/assets/stations/station-04.png' | sha256sum -c - || true
-          echo '1d3507d4b41467af402cbcbceb709e0befae09bd38eb219b01a5b7bd53ca256e  /tmp/humanistic/assets/stations/station-05.png' | sha256sum -c - || true
-          echo 'ACTUAL:'
-          sha256sum /tmp/humanistic/index.html /tmp/humanistic/assets/stations/*.png
-          echo 'INDEX TITLE:'
-          grep -o '<title>[^<]*' /tmp/humanistic/index.html | head -1 || true
+          curl -fL --retry 2 --connect-timeout 20 --max-time 120 "$root/" -o /tmp/humanistic-index.html
+          echo 'ROOT SHA256:'
+          sha256sum /tmp/humanistic-index.html
+          echo 'EXPECTED ORIGINAL INDEX SHA256: 672ce2789a433177d40e230b4b80a2faae1d0878f82535f88a3e663e54955d0f'
+          echo 'TITLE:'
+          grep -o '<title>[^<]*' /tmp/humanistic-index.html | head -1 || true
+          echo 'REFERENCED ASSETS:'
+          grep -Eo '(src|href)=["'"'][^"'"']+["'"']' /tmp/humanistic-index.html | sed -E 's/^(src|href)=["'"']|["'"']$//g' | sort -u || true
+          echo 'STATION REFERENCES:'
+          grep -Eo '[^"'"']*station-[0-9][0-9][^"'"']*' /tmp/humanistic-index.html | sort -u || true
