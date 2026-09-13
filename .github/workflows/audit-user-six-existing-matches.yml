@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   audit:
@@ -20,7 +20,8 @@ jobs:
         run: |
           set -euo pipefail
           python -m pip install -q Pillow numpy
-          python - <<'PY'
+          mkdir -p .audit
+          python - <<'PY' > .audit/current-visual-rank.txt
           from pathlib import Path
           from PIL import Image
           import numpy as np, hashlib
@@ -53,16 +54,27 @@ jobs:
             if not p.is_file() or p.suffix.lower() not in {'.png','.jpg','.jpeg','.webp'}: continue
             try:
               with Image.open(p) as im: dims=im.size
-              candidates.append((p,dhash(p),dims,p.stat().st_size,hashlib.sha256(p.read_bytes()).hexdigest()))
+              data=p.read_bytes()
+              candidates.append((p,dhash(p),dims,len(data),hashlib.sha256(data).hexdigest()))
             except Exception: pass
           for name,hx in targets.items():
-            print('\n###',name)
+            print(f'### {name}')
             exact=[c for c in candidates if c[4]==exact_sha[name]]
             if exact:
               for p,h,dims,size,sha in exact: print('EXACT',dims,size,p,sha)
             else:
               print('NO EXACT SHA MATCH')
             t=int(hx,16)
-            ranked=sorted((((t^h).bit_count(),dims,size,str(p),sha) for p,h,dims,size,sha in candidates))[:12]
+            ranked=sorted((((t^h).bit_count(),dims,size,str(p),sha) for p,h,dims,size,sha in candidates))[:10]
             for d,dims,size,p,sha in ranked: print('DHASH',d,'DIMS',dims,'BYTES',size,'PATH',p,'SHA256',sha)
+            print()
           PY
+      - name: Commit audit report
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'STT Visual Audit'
+          git config user.email 'actions@users.noreply.github.com'
+          git add .audit/current-visual-rank.txt
+          git commit -m 'audit: record current visual ranking [skip ci]' || exit 0
+          git push origin HEAD:main
