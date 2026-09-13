@@ -1,13 +1,15 @@
 export const STT_VISUALS = {
-  // Six first-level pages use six different user-approved source artworks.
-  // Do not substitute generated variants, thumbnail assets, or same-image crops.
-  // Always serve the verified native high-resolution masters for primary heroes.
-  home: "/visual-bank/stt/hero-hires/home.webp",
-  problems: "/visual-bank/stt/hero-hires/problems.png",
-  method: "/visual-bank/stt/hero-hires/method.webp",
-  columns: "/visual-bank/stt/hero-hires/columns.png",
-  publications: "/visual-bank/stt/hero-hires/publications.png",
-  aboutStt: "/visual-bank/stt/hero-hires/stt.png",
+  // Seven first-level public routes use distinct user-approved visual sources.
+  // Primary hero assets below are the current 2026-09-14 approved artworks.
+  // Never substitute thumbnails, alternate generations, or a crop reused by another first-level page.
+  home: "/visual-bank/stt/current-approved/home.avif",
+  problems: "/visual-bank/stt/current-approved/problems.avif",
+  method: "/visual-bank/stt/current-approved/method.avif",
+  columns: "/visual-bank/stt/current-approved/columns.avif",
+  publications: "/visual-bank/stt/current-approved/publications.avif",
+  aboutStt: "/visual-bank/stt/current-approved/about-stt.avif",
+  cooperation: "/visual-bank/stt/current-approved/cooperation-background.avif",
+  cooperationPortrait: "/visual-bank/stt/current-approved/chuang-portrait-signature.avif",
   problemMajorDecision: "/visual-bank/stt/originals-20260910/major-decision.webp",
   problemOwnerDependence: "/visual-bank/stt/originals-20260910/owner-dependence.webp",
   problemSuccession: "/visual-bank/stt/originals-20260910/succession.webp",
@@ -32,8 +34,7 @@ export const STT_VISUALS = {
 export type STTVisualKey = keyof typeof STT_VISUALS;
 export const sttVisual = (key: STTVisualKey) => STT_VISUALS[key];
 
-// Let the browser use each original asset's intrinsic ratio.
-// Do not impose the former 1491×1055 contract on higher-resolution source images.
+// Let the browser use each source asset's intrinsic ratio. Primary visuals remain native-pixel web masters.
 export const STT_VISUAL_DIMENSIONS: Partial<Record<STTVisualKey, readonly [number, number]>> = {};
 export const sttVisualDimensions = (key: STTVisualKey) => STT_VISUAL_DIMENSIONS[key];
 
