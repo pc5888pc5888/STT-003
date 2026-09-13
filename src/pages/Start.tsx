@@ -19,6 +19,8 @@ const routeLabels: Record<string, string> = {
   "ai-governance": "AI Governance",
   "system-failure": "制度失效",
   "founder-legacy": "Founder Legacy",
+  "enterprise-evaluation": "企業經營診斷與策略評估",
+  "speaking-invitation": "主題演講與論壇邀約",
 };
 
 const emptyData: IntakeData = {
