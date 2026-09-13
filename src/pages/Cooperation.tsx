@@ -1,7 +1,9 @@
 import { useNavigate } from "react-router-dom";
+import { sttVisual } from "../sttVisuals";
 
 const HUMANISTIC_INTERVIEW_URL = "https://shimmering-longma-509244.netlify.app/";
-const PORTRAIT_SRC = "/images/portrait-001.png";
+const COOPERATION_BACKGROUND = sttVisual("cooperation");
+const PORTRAIT_SRC = sttVisual("cooperationPortrait");
 
 const channels = [
   {
@@ -44,21 +46,40 @@ export default function Cooperation() {
   return (
     <div className="stt-coop-page">
       <section className="stt-coop-hero" aria-labelledby="stt-coop-title">
+        <img
+          className="stt-coop-hero-bg"
+          src={COOPERATION_BACKGROUND}
+          alt=""
+          aria-hidden="true"
+          draggable={false}
+        />
         <div className="stt-coop-copy">
-          <p className="stt-master-kicker">STRATEGIC COOPERATION &amp; GROWTH</p>
-          <h1 id="stt-coop-title">預約與合作</h1>
-          <p className="stt-coop-thesis">企業在市場的<strong>終局賽道</strong>能走多遠，取決於經營者在資本、利潤與變局交織時的<strong>決策序列</strong>。</p>
-          <p className="stt-coop-intro"><strong>STT Governance 策略智庫</strong>由莊鈞翔博士主導，我們不談懸空的理論，只專注於<strong>「拆解商業本質」</strong>與<strong>「建構治理護城河」</strong>，透過嚴謹的商學實戰邏輯，協助企業在龐大生存壓力下精準破局；歡迎依據您的發展策略，選擇相對應的合作通道。</p>
+          <h1 id="stt-coop-title" className="sr-only">預約與合作</h1>
+          <p className="stt-coop-thesis">
+            企業在市場的<strong>終局賽道</strong>能走多遠，取決於經營者在資本、利潤與變局交織時的<strong>決策序列</strong>。
+          </p>
+          <p className="stt-coop-intro">
+            <strong>STT Governance 策略智庫</strong>由莊鈞翔博士主導，我們不談懸空的理論，只專注於<strong>「拆解商業本質」</strong>與<strong>「建構治理護城河」</strong>，透過嚴謹的商學實戰邏輯，協助企業在龐大生存壓力下精準破局；歡迎依據您的發展策略，選擇相對應的合作通道。
+          </p>
         </div>
-        <div className="stt-coop-portrait" aria-label="莊鈞翔博士">
-          <img src={PORTRAIT_SRC} alt="莊鈞翔博士" draggable={false} />
+        <p className="stt-coop-hero-label">STRATEGIC COOPERATION &amp; GROWTH <span aria-hidden="true">|</span> 預約與合作</p>
+      </section>
+
+      <section className="stt-coop-identity" aria-label="莊鈞翔博士">
+        <div className="stt-coop-identity-copy">
+          <p className="stt-master-kicker">GOVERNANCE PRINCIPAL</p>
+          <h2>由治理總控者親自判讀，<br />而不是把企業交給一套制式答案。</h2>
+          <p>莊鈞翔博士以策略、治理與法遵視角進入企業問題。AI 作為治理幕僚與作業系統輔助，但決策責任、判斷主權與制度設計仍由人類掌握。</p>
         </div>
+        <figure className="stt-coop-identity-portrait">
+          <img src={PORTRAIT_SRC} alt="莊鈞翔博士完整人物與簽名" draggable={false} />
+        </figure>
       </section>
 
       <section className="stt-coop-channels" aria-labelledby="stt-coop-channels-title">
         <div className="stt-coop-section-head">
           <p className="stt-master-kicker">THREE COOPERATION CHANNELS</p>
-          <h2 id="stt-coop-channels-title">三大合作通道</h2>
+          <h2 id="stt-coop-channels-title">依您的發展策略，選擇合作通道</h2>
         </div>
         <div className="stt-coop-grid">
           {channels.map((channel) => (
