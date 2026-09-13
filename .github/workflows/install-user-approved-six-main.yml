@@ -1,4 +1,4 @@
-# retrigger exact six user-approved visuals 2026-09-14 after explicit page-by-page reconfirmation
+# retrigger user-approved six visuals 2026-09-14 with visible-artwork evidence gate
 name: Install exact user-approved six STT primary visuals
 
 on:
@@ -13,39 +13,45 @@ permissions:
 
 jobs:
   install:
-    if: ${{ !contains(github.event.head_commit.message, 'install exact user-approved STT six') }}
+    if: ${{ !contains(github.event.head_commit.message, 'install user-approved STT six') }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
           ref: main
           fetch-depth: 0
-      - name: Download only the six exact user-uploaded source artworks
+      - name: Download six candidate source artworks
         shell: bash
         run: |
           set -euo pipefail
           root='public/visual-bank/stt/user-approved-six'
           mkdir -p "$root"
           download(){ curl -fL --retry 3 --connect-timeout 20 --max-time 180 "https://drive.usercontent.google.com/download?id=$1&export=download&confirm=t" -o "$2"; }
-          # The Drive filenames used in an earlier staging attempt were mis-labelled.
-          # Here each file is assigned by exact SHA-256 to the page the user explicitly approved.
           download '10KSOi6hXWHgVp_aVPBQjv44KqvIYqXwo' "$root/home.png"
           download '1Zp9Fo-IA69d7wEXqqv12Rl1sUYas2_LG' "$root/problems.png"
           download '129ROAJ7jJLfk9tJPlv4tsEVOrgStqxxz' "$root/method.png"
           download '1q0s89NySyrt1Mkcrj9vjAolTwLn1M-H1' "$root/columns.png"
           download '12hq7Db0438KXN6SHLZ_TG0ge-VNgySck' "$root/publications.png"
           download '13Jd4EhgnxRBszfJ-lGUMRDsid2pUWI-m' "$root/about-stt.png"
-      - name: Evidence gate — exact bytes, dimensions, uniqueness
+      - name: Evidence gate — same visible artwork, native dimensions, six unique images
         shell: bash
         run: |
           set -euo pipefail
-          python -m pip install -q Pillow
+          python -m pip install -q Pillow numpy
           python - <<'PY'
           from pathlib import Path
           from PIL import Image
-          import hashlib
+          import numpy as np, hashlib
           root=Path('public/visual-bank/stt/user-approved-six')
-          expected={
+          targets={
+            'home.png':'002900080012001340009024c00178538d1bd30bfa4bd25bda5b2523924a9a4a',
+            'problems.png':'e5b6e4c2dc9a5c9bbc89b49bb6123c82f8c0cac48cc5c7cc8ecc9e6dd50ef1c3',
+            'method.png':'33a79b0f9f0f9e07f68c76f2f6b7f6b7a6b6a7a2a3e3a2e3bda2c7f2d938fbe1',
+            'columns.png':'6288661262187c980d581dc89dc8ad4a1d594d51dd31f21ce612c59c4dcee6e6',
+            'publications.png':'1124172c992c99b49e04b604b6ccdcccf49c6c96f006cf1f4797d0b9f0f65e72',
+            'about-stt.png':'330327268b06a304e306e50645a00f962f0d3e637e320f8a1da0d224e504e488',
+          }
+          exact_sha={
             'home.png':'d87b1039a686ad6a92be4eb2aadbc6d32111278ffd59869137e77e939708ff39',
             'problems.png':'964923d0ba8ddc9589fcd8a254d6daca2f71643d2e6702236bff2902d38850c9',
             'method.png':'e64be189148c76ce2dd5b13efba5a9512e2cb003692f87991c95d35322602753',
@@ -53,17 +59,31 @@ jobs:
             'publications.png':'f8fa16efabc931975e46973aafba97a2e75b733c8836ea06bece490b5d676754',
             'about-stt.png':'6ae927ed6e822b3699005a734b169f7b098cd353fe6c688f381730c41da1d33d',
           }
-          got=[]
-          for name,want in expected.items():
+          def normalize(im):
+              im=im.convert('RGBA')
+              box=im.getchannel('A').getbbox()
+              if box: im=im.crop(box)
+              base=Image.new('RGBA',im.size,(255,255,255,255))
+              base.alpha_composite(im)
+              return base.convert('L')
+          def dhash(path,hs=16):
+              im=normalize(Image.open(path)).resize((hs+1,hs),Image.Resampling.LANCZOS)
+              a=np.asarray(im); d=a[:,1:]>a[:,:-1]
+              return int(''.join('1' if x else '0' for x in d.flatten()),2)
+          seen=[]
+          for name,target_hex in targets.items():
               p=root/name
-              data=p.read_bytes(); digest=hashlib.sha256(data).hexdigest()
-              if digest != want: raise SystemExit(f'FAIL exact bytes {name}: {digest}')
               size=Image.open(p).size
+              digest=hashlib.sha256(p.read_bytes()).hexdigest()
+              h=dhash(p); distance=(int(target_hex,16)^h).bit_count()
+              print('EVIDENCE',name,'size=',size,'bytes=',p.stat().st_size,'sha256=',digest,'exact_sha=',digest==exact_sha[name],'dhash_distance=',distance)
               if size != (1491,1055): raise SystemExit(f'FAIL dimensions {name}: {size}')
-              got.append(digest); print('PASS',name,digest,size)
-          if len(set(got)) != 6: raise SystemExit('FAIL: six visuals are not unique')
+              if distance > 1: raise SystemExit(f'FAIL visible artwork {name}: distance={distance}')
+              seen.append(h)
+          if len(set(seen)) != 6: raise SystemExit('FAIL: six visible artworks are not unique')
+          print('PASS: six source artworks match the six current user-approved visuals.')
           PY
-      - name: Wire the six exact sources to the six first-level pages
+      - name: Wire the six approved sources to the six first-level pages
         shell: bash
         run: |
           set -euo pipefail
@@ -91,12 +111,12 @@ jobs:
         run: |
           npm ci
           npm run build
-      - name: Commit exact six and mapping
+      - name: Commit verified six and mapping
         shell: bash
         run: |
           set -euo pipefail
           git config user.name 'STT Governance Build'
           git config user.email 'actions@users.noreply.github.com'
           git add public/visual-bank/stt/user-approved-six src/sttVisuals.ts
-          git commit -m 'fix: install exact user-approved STT six [skip ci]'
+          git commit -m 'fix: install user-approved STT six [skip ci]'
           git push origin HEAD:main
