@@ -1,4 +1,4 @@
-name: Audit exact user-six visual matches already in repo
+name: Audit current user-approved STT visual sources
 
 on:
   push:
@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Find perceptually closest existing repository images
+      - name: Rank repository images against current approved sources
         shell: bash
         run: |
           set -euo pipefail
@@ -23,14 +23,26 @@ jobs:
           python - <<'PY'
           from pathlib import Path
           from PIL import Image
-          import numpy as np
+          import numpy as np, hashlib
           targets={
-          'home':'002900080012001340009024c00178538d1bd30bfa4bd25bda5b2523924a9a4a',
-          'problems':'e5b6e4c2dc9a5c9bbc89b49bb6123c82f8c0cac48cc5c7cc8ecc9e6dd50ef1c3',
-          'method':'33a79b0f9f0f9e07f68c76f2f6b7f6b7a6b6a7a2a3e3a2e3bda2c7f2d938fbe1',
-          'columns':'6288661262187c980d581dc89dc8ad4a1d594d51dd31f21ce612c59c4dcee6e6',
-          'publications':'1124172c992c99b49e04b604b6ccdcccf49c6c96f006cf1f4797d0b9f0f65e72',
-          'about':'330327268b06a304e306e50645a00f962f0d3e637e320f8a1da0d224e504e488',
+            'home':'002900080012001340009024c00178538d1bd30bfa4bd25bda5b2523924a9a4a',
+            'problems':'e5b6e4c2dc9a5c9bbc89b49bb6123c82f8c0cac48cc5c7cc8ecc9e6dd50ef1c3',
+            'method':'33a79b0f9f0f9e07f68c76f2f6b7f6b7a6b6a7a2a3e3a2e3bda2c7f2d938fbe1',
+            'columns':'6288661262187c980d581dc89dc8ad4a1d594d51dd31f21ce612c59c4dcee6e6',
+            'publications':'1124172c992c99b49e04b604b6ccdcccf49c6c96f006cf1f4797d0b9f0f65e72',
+            'about':'4b704b704b504b708b70db70db504d30df328bcac34e6ec26ccb9c4b104b13fe',
+            'portrait':'04a07c4298d478a4e312cb4899209310bdcc99209994c192c198e18da3144b90',
+            'logo':'0000480000005880cb80cd30acccc8cc00004888000000000000000000000000',
+          }
+          exact_sha={
+            'home':'d87b1039a686ad6a92be4eb2aadbc6d32111278ffd59869137e77e939708ff39',
+            'problems':'964923d0ba8ddc9589fcd8a254d6daca2f71643d2e6702236bff2902d38850c9',
+            'method':'e64be189148c76ce2dd5b13efba5a9512e2cb003692f87991c95d35322602753',
+            'columns':'03cc644c1f32e05252ebc4defae7149dd6ddc0a8a36f7965436f0c2dff284417',
+            'publications':'f8fa16efabc931975e46973aafba97a2e75b733c8836ea06bece490b5d676754',
+            'about':'3ed7e83d8e50626082280e984e0741155afcd5166ba41c8d04e3ea24126df737',
+            'portrait':'8d844e7528c9911a403e5987882293fe002864dade9956671e7235106c4c70d2',
+            'logo':'5b02e93e72a5435adb184d1d1cd19fab166dd3fbff169871c54ba0c38bf9faa5',
           }
           def dhash(p,hs=16):
             im=Image.open(p).convert('L').resize((hs+1,hs),Image.Resampling.LANCZOS)
@@ -39,11 +51,18 @@ jobs:
           candidates=[]
           for p in Path('.').rglob('*'):
             if not p.is_file() or p.suffix.lower() not in {'.png','.jpg','.jpeg','.webp'}: continue
-            try: candidates.append((p,dhash(p)))
+            try:
+              with Image.open(p) as im: dims=im.size
+              candidates.append((p,dhash(p),dims,p.stat().st_size,hashlib.sha256(p.read_bytes()).hexdigest()))
             except Exception: pass
           for name,hx in targets.items():
-            t=int(hx,16)
-            ranked=sorted((( (t^h).bit_count(), str(p), p.stat().st_size) for p,h in candidates))[:12]
             print('\n###',name)
-            for d,p,size in ranked: print(d,size,p)
+            exact=[c for c in candidates if c[4]==exact_sha[name]]
+            if exact:
+              for p,h,dims,size,sha in exact: print('EXACT',dims,size,p,sha)
+            else:
+              print('NO EXACT SHA MATCH')
+            t=int(hx,16)
+            ranked=sorted((((t^h).bit_count(),dims,size,str(p),sha) for p,h,dims,size,sha in candidates))[:12]
+            for d,dims,size,p,sha in ranked: print('DHASH',d,'DIMS',dims,'BYTES',size,'PATH',p,'SHA256',sha)
           PY
