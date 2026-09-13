@@ -1,0 +1,24 @@
+name: Test approved visual rendition transfer
+on:
+  push:
+    branches: [fix/stt-current-uploaded-visuals-20260914]
+    paths: [.github/workflows/test-canva-current-asset-transfer.yml]
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Probe signed Canva rendition
+        shell: bash
+        run: |
+          set -u
+          base='https://media.canva.com/v2/image-resize/format:PNG/height:141/quality:100/uri:ifs%3A%2F%2FM%2F31bd44c1-2bdd-41b4-aedc-f10bd36f20ae/watermark:F/width:200?csig=AAAAAAAAAAAAAAAAAAAAAPvqY3rAVwZmfzlztVTV-hSxNRJJxhPb5DrTeFNpBPEN&exp=1789358631&osig=AAAAAAAAAAAAAAAAAAAAADVdQ7N1-ym7nBxQt2Ks7sGV4BJhhbHWgdsA_uZ5x7cq&signer=media-rpc&x-canva-quality=thumbnail'
+          full='https://media.canva.com/v2/image-resize/format:PNG/height:1055/quality:100/uri:ifs%3A%2F%2FM%2F31bd44c1-2bdd-41b4-aedc-f10bd36f20ae/watermark:F/width:1491?csig=AAAAAAAAAAAAAAAAAAAAAPvqY3rAVwZmfzlztVTV-hSxNRJJxhPb5DrTeFNpBPEN&exp=1789358631&osig=AAAAAAAAAAAAAAAAAAAAADVdQ7N1-ym7nBxQt2Ks7sGV4BJhhbHWgdsA_uZ5x7cq&signer=media-rpc&x-canva-quality=thumbnail'
+          for kind in thumb full; do
+            url="$base"; [ "$kind" = full ] && url="$full"
+            code=$(curl -L -sS -o "/tmp/$kind.png" -w '%{http_code}' "$url" || true)
+            echo "$kind HTTP=$code bytes=$(wc -c < /tmp/$kind.png 2>/dev/null || echo 0)"
+            file "/tmp/$kind.png" || true
+          done
