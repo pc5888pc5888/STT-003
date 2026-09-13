@@ -1,0 +1,40 @@
+name: Probe Canva full asset transfer
+on:
+  push:
+    branches: [fix/stt-final-user-approved-20260913]
+    paths: [.github/workflows/probe-canva-full-asset.yml]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Probe original and full-size transformations
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install -q Pillow requests
+          python - <<'PY'
+          import requests,io
+          from PIL import Image
+          urls={
+          'home':'https://media.canva.com/v2/image-resize/format:PNG/height:141/quality:100/uri:ifs%3A%2F%2FM%2Ff582af5e-089e-4af8-8c60-5f9d2251c233/watermark:F/width:200?csig=AAAAAAAAAAAAAAAAAAAAACgT3eKJrWPmRT2CayNpxJAPlW0IwhGOLCrp-FnYiqfN&exp=1789280169&osig=AAAAAAAAAAAAAAAAAAAAAHslm8N4-GDeMoN8O4IONhjWQjd6MypxHsq8ud8mvabh&signer=media-rpc&x-canva-quality=thumbnail',
+          'logo':'https://media.canva.com/v2/image-resize/format:JPG/height:56/quality:75/uri:ifs%3A%2F%2FM%2F89d73305-7a72-400e-85e7-df75ccba3a5c/watermark:F/width:200?csig=AAAAAAAAAAAAAAAAAAAAABTF5OFrDOOGtN3dIlrnpLNKrqnKMRMOPMjP-lGO_7-H&exp=1789280539&osig=AAAAAAAAAAAAAAAAAAAAAEIvgtU0-n3-H-3ugxHrBpUXNozVK1GKS8MUKHOdGtvp&signer=media-rpc&x-canva-quality=thumbnail'}
+          dims={'home':(1491,1055),'logo':(884,250)}
+          for name,u in urls.items():
+              w,h=dims[name]
+              candidates={
+                'thumb':u,
+                'modify_dims':u.replace('/height:141/','/height:1055/').replace('/width:200?','/width:1491?') if name=='home' else u.replace('/height:56/','/height:250/').replace('/width:200?','/width:884?').replace('/quality:75/','/quality:100/'),
+                'drop_csig':None,
+              }
+              candidates['drop_csig']=candidates['modify_dims'].replace('csig=','unused=')
+              for kind,url in candidates.items():
+                  r=requests.get(url,timeout=30)
+                  print(name,kind,'status',r.status_code,'bytes',len(r.content),'ct',r.headers.get('content-type'))
+                  if r.ok and r.headers.get('content-type','').startswith('image/'):
+                      try: print('dims',Image.open(io.BytesIO(r.content)).size)
+                      except Exception as e: print('image-open-error',e)
+          PY
