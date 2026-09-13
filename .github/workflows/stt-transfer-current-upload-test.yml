@@ -1,0 +1,31 @@
+name: STT current upload transfer test
+
+on:
+  push:
+    paths:
+      - '.github/workflows/stt-transfer-current-upload-test.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Probe Canva signed source at native dimensions
+        shell: bash
+        run: |
+          set -u
+          BASE_Q='csig=AAAAAAAAAAAAAAAAAAAAAKNfI8O2rWnQVYnHe5zMf4goQOOns2f9PjxFNIr74f_0&exp=1789313577&osig=AAAAAAAAAAAAAAAAAAAAAJnulvuFKQw4F5VXulfyLBAjhfMAVhMK9POrMRAaQFQd&signer=media-rpc&x-canva-quality=thumbnail'
+          URI='ifs%3A%2F%2FM%2F816804d6-db72-4693-9287-3695bb13b4ee'
+          U1="https://media.canva.com/v2/image-resize/format:PNG/height:1055/quality:100/uri:${URI}/watermark:F/width:1491?${BASE_Q}"
+          U2="https://media.canva.com/v2/image-resize/format:PNG/quality:100/uri:${URI}/watermark:F/width:1491?${BASE_Q}"
+          U3="https://media.canva.com/v2/image-resize/format:PNG/height:1055/quality:100/uri:${URI}/watermark:F/width:1491?${BASE_Q/x-canva-quality=thumbnail/x-canva-quality=screen}"
+          for n in 1 2 3; do
+            var="U${n}"; url="${!var}"
+            code=$(curl -L -sS -o "probe${n}.bin" -w '%{http_code}' "$url" || true)
+            size=$(wc -c < "probe${n}.bin" 2>/dev/null || echo 0)
+            echo "probe${n}: HTTP ${code}, bytes=${size}"
+            file "probe${n}.bin" || true
+          done
