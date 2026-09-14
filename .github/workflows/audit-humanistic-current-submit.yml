@@ -17,32 +17,53 @@ jobs:
       - name: Inspect current Netlify page and submission wiring
         shell: bash
         run: |
-          set -u
-          root='https://shimmering-longma-509244.netlify.app'
-          echo '=== ROOT ==='
-          curl -sS -L --connect-timeout 20 --max-time 120 -D /tmp/root.headers "$root/" -o /tmp/index.html || true
-          head -40 /tmp/root.headers || true
-          echo '--- title / forms / scripts / actions ---'
-          grep -Eio '<title>[^<]*|<form[^>]*>|name=["'"'][^"'"']+["'"']|action=["'"'][^"'"']+["'"']|data-netlify[^ >]*|src=["'"'][^"'"']+["'"']' /tmp/index.html | head -200 || true
-          echo '--- relevant inline references ---'
-          grep -Ein 'humanistic|20q|netlify|send-backup|submit|fetch\(|form-name|success|function' /tmp/index.html | head -200 || true
+          set -euo pipefail
+          python - <<'PY'
+          from urllib.request import Request, urlopen
+          from urllib.error import HTTPError, URLError
+          from urllib.parse import urljoin
+          import re
 
-          echo '=== SAME-ORIGIN SCRIPT REFERENCES ==='
-          grep -Eo 'src=["'"'][^"'"']+["'"']' /tmp/index.html | sed -E 's/^src=["'"']|["'"']$//g' | while read -r src; do
-            case "$src" in
-              http*) url="$src" ;;
-              /*) url="$root$src" ;;
-              *) url="$root/$src" ;;
-            esac
-            echo "--- $url ---"
-            curl -sS -L --connect-timeout 20 --max-time 120 "$url" -o /tmp/script.js || true
-            grep -Eio '.{0,140}(humanistic|20q|netlify|send-backup|submit|fetch\(|form-name|success|function).{0,220}' /tmp/script.js | head -120 || true
-          done
+          root='https://shimmering-longma-509244.netlify.app/'
+          headers={'User-Agent':'Mozilla/5.0 STT-Governance-Audit/1.0'}
 
-          for path in '/api/send-backup' '/.netlify/functions/send-backup' '/success' '/success.html'; do
-            echo "=== GET $path ==="
-            curl -sS -L --connect-timeout 20 --max-time 60 -o /tmp/body -D /tmp/headers -w 'FINAL_STATUS=%{http_code} FINAL_URL=%{url_effective}\n' "$root$path" || true
-            head -20 /tmp/headers || true
-            head -c 1200 /tmp/body || true
-            echo
-          done
+          def get(url):
+              req=Request(url,headers=headers)
+              try:
+                  with urlopen(req,timeout=40) as r:
+                      body=r.read()
+                      print(f'GET {url} -> {r.status} {r.geturl()} content-type={r.headers.get("content-type")} bytes={len(body)}')
+                      return r.status, r.geturl(), body, dict(r.headers)
+              except HTTPError as e:
+                  body=e.read()
+                  print(f'GET {url} -> HTTP {e.code} bytes={len(body)}')
+                  return e.code, url, body, dict(e.headers)
+              except URLError as e:
+                  print(f'GET {url} -> ERROR {e}')
+                  return 0, url, b'', {}
+
+          status, final, body, h=get(root)
+          text=body.decode('utf-8','replace')
+          print('\n=== RELEVANT ROOT MARKUP ===')
+          pats=[r'<title>.*?</title>',r'<form\b[^>]*>',r'<input\b[^>]*(?:form-name|name=)[^>]*>',r'<script\b[^>]*src=[^>]*>',r'action=["\'][^"\']+["\']',r'data-netlify(?:-[a-z-]+)?(?:=["\'][^"\']*["\'])?']
+          for pat in pats:
+              for m in re.finditer(pat,text,re.I|re.S):
+                  print(re.sub(r'\s+',' ',m.group(0))[:1000])
+          print('\n=== RELEVANT REFERENCES ===')
+          for line in text.splitlines():
+              if re.search(r'humanistic|20q|netlify|send-backup|submit|form-name|success|fetch\(',line,re.I):
+                  print(line[:2000])
+
+          print('\n=== SAME-ORIGIN SCRIPTS ===')
+          for src in re.findall(r'<script\b[^>]*src=["\']([^"\']+)["\']',text,re.I):
+              url=urljoin(final,src)
+              st,fu,b,_=get(url)
+              js=b.decode('utf-8','replace')
+              for m in re.finditer(r'.{0,220}(?:humanistic|20q|netlify|send-backup|submit|form-name|success|fetch\().{0,360}',js,re.I|re.S):
+                  print(re.sub(r'\s+',' ',m.group(0))[:1500])
+
+          print('\n=== ENDPOINT PROBES ===')
+          for path in ('api/send-backup','.netlify/functions/send-backup','success','success.html'):
+              st,fu,b,_=get(urljoin(root,path))
+              print(b[:800].decode('utf-8','replace'))
+          PY
