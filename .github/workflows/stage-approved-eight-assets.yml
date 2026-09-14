@@ -1,0 +1,70 @@
+name: Stage approved eight STT assets
+
+on:
+  push:
+    branches: [fix/stt-current-uploaded-visuals-20260914]
+    paths:
+      - .github/workflows/stage-approved-eight-assets.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  stage:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/stt-current-uploaded-visuals-20260914
+          fetch-depth: 0
+
+      - name: Download approved Canva-native renditions
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p public/visual-bank/stt/current-approved public/images
+
+          curl -fL --retry 3 'https://media.canva.com/v2/image-resize/format:PNG/height:1055/quality:100/uri:ifs%3A%2F%2FM%2F826ec8a0-2c74-4acb-8c64-398b6bfb2a95/watermark:F/width:1491?csig=AAAAAAAAAAAAAAAAAAAAABCT2CSRqshAhCkTgqU0zHsvnjMQYkhAQGPMMZU-CtUP&exp=1789445786&osig=AAAAAAAAAAAAAAAAAAAAAFva0ieRh7iJx6tXr-E5OYZz8nbnQdS-rrNWo5Tgf9PR&signer=media-rpc&x-canva-quality=thumbnail' -o public/visual-bank/stt/current-approved/home.png
+          curl -fL --retry 3 'https://media.canva.com/v2/image-resize/format:PNG/height:1055/quality:100/uri:ifs%3A%2F%2FM%2F0d5ec762-94bc-45a8-891b-641ccf8274a9/watermark:F/width:1491?csig=AAAAAAAAAAAAAAAAAAAAAD-QzC0oCSbY3-u5Eb2UBKhRXPdjYgoeoYpsDU5mXPR5&exp=1789444292&osig=AAAAAAAAAAAAAAAAAAAAAMsTb2GbUg1N7p-0KHN5W7DfIpKXYhERY_DAQ4F3X-mp&signer=media-rpc&x-canva-quality=thumbnail' -o public/visual-bank/stt/current-approved/problems.png
+          curl -fL --retry 3 'https://media.canva.com/v2/image-resize/format:PNG/height:1055/quality:100/uri:ifs%3A%2F%2FM%2Ffd6752d4-4da9-4ae0-a20b-e7cc25a0dfec/watermark:F/width:1491?csig=AAAAAAAAAAAAAAAAAAAAAG_cChXCtUN8NeYU_hwUc662HuHanIfKK286q1t_no--&exp=1789446936&osig=AAAAAAAAAAAAAAAAAAAAAEks0C2AzpcaisLb-SP5kTkyE4BWrVDMu0S-ftrmpV9S&signer=media-rpc&x-canva-quality=thumbnail' -o public/visual-bank/stt/current-approved/method.png
+          curl -fL --retry 3 'https://media.canva.com/v2/image-resize/format:PNG/height:1055/quality:100/uri:ifs%3A%2F%2FM%2F5160fa29-e43b-42d4-97c7-95a301d0ddb2/watermark:F/width:1491?csig=AAAAAAAAAAAAAAAAAAAAAAlprPgJZ5rboj9xPnV5ocE3B9cW0MPb6IfE-IxUxA3c&exp=1789444359&osig=AAAAAAAAAAAAAAAAAAAAAH-pRkCRQGkysYde10TUl_-gSIRlJjYycAp0wbBZ9GEV&signer=media-rpc&x-canva-quality=thumbnail' -o public/visual-bank/stt/current-approved/columns.png
+          curl -fL --retry 3 'https://media.canva.com/v2/image-resize/format:PNG/height:1055/quality:100/uri:ifs%3A%2F%2FM%2F0a199f6b-4645-4cb2-aeeb-f3b0f1864063/watermark:F/width:1491?csig=AAAAAAAAAAAAAAAAAAAAADujOrhb52aLHZq7MQZo5b7qU4BxAubIlrENZneUD1Ck&exp=1789443700&osig=AAAAAAAAAAAAAAAAAAAAAA0IaGp6DWvuCYPaifSHr8rUkc76CV630L-fLgL5F5IN&signer=media-rpc&x-canva-quality=thumbnail' -o public/visual-bank/stt/current-approved/publications.png
+          curl -fL --retry 3 'https://media.canva.com/v2/image-resize/format:PNG/height:1055/quality:100/uri:ifs%3A%2F%2FM%2F515b78df-1f39-4efb-8aad-972e2b22660f/watermark:F/width:1491?csig=AAAAAAAAAAAAAAAAAAAAAMwr7_LzpN731WyfQZtawXGZaEx2scYe7589R361Lcp0&exp=1789444037&osig=AAAAAAAAAAAAAAAAAAAAAJTplpAjqbzWXlbFAHfNZYmNGq79xncKxplcHz_ZSwoK&signer=media-rpc&x-canva-quality=thumbnail' -o public/visual-bank/stt/current-approved/about-stt.png
+          curl -fL --retry 3 'https://media.canva.com/v2/image-resize/format:PNG/height:941/quality:100/uri:ifs%3A%2F%2FM%2Fb252b468-1cbe-48f5-acbd-826f55425764/watermark:F/width:1672?csig=AAAAAAAAAAAAAAAAAAAAALTchjCi5ca3EP_4WUyZhtCYW2jeU_QipZmAbu65vcYe&exp=1789444394&osig=AAAAAAAAAAAAAAAAAAAAAOvf5f-xX63ioAJysBMBb2ldKbThnPmMqJEEAt4dJD2L&signer=media-rpc&x-canva-quality=thumbnail' -o public/visual-bank/stt/current-approved/cooperation-background.png
+          curl -fL --retry 3 'https://media.canva.com/v2/image-resize/format:PNG/height:2048/quality:100/uri:ifs%3A%2F%2FM%2F6aca3660-aa8e-404b-a828-d81ccafee58e/watermark:F/width:1365?csig=AAAAAAAAAAAAAAAAAAAAAIV1JvSIIcBdZyEBzGDkO7OdzwRnQI3t2iFXwNWGyd1Z&exp=1789447016&osig=AAAAAAAAAAAAAAAAAAAAAHSYoJYAsw31DlvimR_yvJxcXoT4KlecWVcDuJfvzKfF&signer=media-rpc&x-canva-quality=thumbnail' -o public/images/STT_Author_Portrait_APPROVED_600DPI_PRODUCTION.png
+
+      - name: Verify native dimensions and exact decoded pixels
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from PIL import Image
+          import hashlib
+          expected={
+            'public/visual-bank/stt/current-approved/home.png':((1491,1055),'1e6d23687f5853cab4a9bb22980ba008a8de7d3fb8370a8849fd80c625ed36c4'),
+            'public/visual-bank/stt/current-approved/problems.png':((1491,1055),'c226552f42f22364f2ec422a760dec43be9b8a5bf434c10a13e3e47e326dae2a'),
+            'public/visual-bank/stt/current-approved/method.png':((1491,1055),'e025ecc1f0ff5230bda1f0bd2aa76b91e4a6342efdd673d2669d0a01b29c0614'),
+            'public/visual-bank/stt/current-approved/columns.png':((1491,1055),'e5828e3d991941ea5efb1fa3a3136b98f302faf2904f7c7b62a60c5ace390444'),
+            'public/visual-bank/stt/current-approved/publications.png':((1491,1055),'7ef86bfc60d425a9429e5bc823d575d2a8d5df020dd9b3d36bf6732617e02210'),
+            'public/visual-bank/stt/current-approved/about-stt.png':((1491,1055),'f09a83c5eafd1eca6753b0b576f1496c8e363e702016b22869be85e63093cfd7'),
+            'public/visual-bank/stt/current-approved/cooperation-background.png':((1672,941),'036717825f2c2af04589159b52c5c7c02541e5050ee21eb8d2b4c426b4c9878f'),
+            'public/images/STT_Author_Portrait_APPROVED_600DPI_PRODUCTION.png':((1365,2048),'8e7dfad1ce366db0e4a75b7dc6c22a88329f0c90a01b8747a6fa4d58d7e197f4'),
+          }
+          for p,(dims,pxhash) in expected.items():
+            im=Image.open(p).convert('RGBA')
+            got=hashlib.sha256(im.tobytes()).hexdigest()
+            assert im.size==dims,(p,im.size,dims)
+            assert got==pxhash,(p,got,pxhash)
+            print('PASS',p,im.size,got)
+          PY
+
+      - name: Commit verified approved assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'STT Governance Asset Gate'
+          git config user.email 'actions@users.noreply.github.com'
+          git add public/visual-bank/stt/current-approved/*.png public/images/STT_Author_Portrait_APPROVED_600DPI_PRODUCTION.png
+          git commit -m 'asset: install exact approved seven heroes and cooperation portrait [skip ci]' || exit 0
+          git push origin HEAD:fix/stt-current-uploaded-visuals-20260914
