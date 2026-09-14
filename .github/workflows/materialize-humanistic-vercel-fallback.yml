@@ -13,6 +13,7 @@ permissions:
 
 jobs:
   materialize:
+    if: ${{ !contains(github.event.head_commit.message, 'materialize canonical Humanistic interview') }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -24,8 +25,29 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p public/humanistic-interview
-          cat .staging/humanistic-exact/part-*.b64 | base64 -d > public/humanistic-interview/index.html
-          printf '%s  %s\n' '001b9876eca5c16bdff1b724b931aa81d8b86d7c9e31e1e07edb3cbed62a6fc9' 'public/humanistic-interview/index.html' | sha256sum -c -
+          python3 - <<'PY'
+          from pathlib import Path
+          import base64, hashlib, re
+
+          parts=sorted(Path('.staging/humanistic-exact').glob('part-*.b64'))
+          raw=''.join(p.read_text(encoding='utf-8-sig') for p in parts)
+          cleaned=re.sub(r'\s+','',raw)
+          invalid=sorted(set(re.sub(r'[A-Za-z0-9+/=]','',cleaned)))
+          print('parts',[(p.name,p.stat().st_size) for p in parts])
+          print('base64 chars',len(cleaned),'invalid',invalid,'padding_positions',[i for i,c in enumerate(cleaned) if c=='='][-10:])
+          if invalid:
+              raise SystemExit('Invalid non-base64 characters remain')
+          try:
+              html=base64.b64decode(cleaned,validate=True)
+          except Exception as exc:
+              raise SystemExit(f'Base64 decode failed: {exc}')
+          digest=hashlib.sha256(html).hexdigest()
+          print('decoded bytes',len(html),'sha256',digest)
+          expected='001b9876eca5c16bdff1b724b931aa81d8b86d7c9e31e1e07edb3cbed62a6fc9'
+          if digest != expected:
+              raise SystemExit(f'Canonical SHA mismatch: {digest}')
+          Path('public/humanistic-interview/index.html').write_bytes(html)
+          PY
           grep -Fq '人文地景產' public/humanistic-interview/index.html
           grep -Fq 'humanistic-20q' public/humanistic-interview/index.html
       - name: Commit canonical HTML
@@ -34,6 +56,7 @@ jobs:
           set -euo pipefail
           git config user.name 'STT Humanistic Materializer'
           git config user.email 'actions@users.noreply.github.com'
+          git pull --rebase origin fix/humanistic-vercel-fallback-20260915
           git add public/humanistic-interview/index.html
           git commit -m 'build: materialize canonical Humanistic interview [skip ci]' || exit 0
           git push origin HEAD:fix/humanistic-vercel-fallback-20260915
