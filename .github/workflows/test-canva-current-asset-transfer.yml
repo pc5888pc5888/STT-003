@@ -1,24 +1,38 @@
-name: Test approved portrait rendition transfer
+name: Stage exact approved cooperation portrait
 on:
   push:
     branches: [fix/stt-current-uploaded-visuals-20260914]
     paths: [.github/workflows/test-canva-current-asset-transfer.yml]
 permissions:
-  contents: read
+  contents: write
 jobs:
-  test:
+  stage:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Probe signed Canva portrait rendition
+        with:
+          ref: fix/stt-current-uploaded-visuals-20260914
+          fetch-depth: 0
+      - name: Download exact uploaded portrait and verify evidence
         shell: bash
         run: |
-          set -u
-          thumb='https://media.canva.com/v2/image-resize/format:PNG/height:200/quality:100/uri:ifs%3A%2F%2FM%2Ff2c85f4b-3435-482f-a5e2-4d9f34bb605c/watermark:F/width:133?csig=AAAAAAAAAAAAAAAAAAAAAHb8qQIDKun_MSIZFpENSBlVcXWYW_yLBqt5fSHMviaM&exp=1789363014&osig=AAAAAAAAAAAAAAAAAAAAANJEcvMyXGtMEWOUJSS7IL95lBaDKZTa-Q4jZ1CslOxi&signer=media-rpc&x-canva-quality=thumbnail'
-          native='https://media.canva.com/v2/image-resize/format:PNG/height:2048/quality:100/uri:ifs%3A%2F%2FM%2Ff2c85f4b-3435-482f-a5e2-4d9f34bb605c/watermark:F/width:1365?csig=AAAAAAAAAAAAAAAAAAAAAHb8qQIDKun_MSIZFpENSBlVcXWYW_yLBqt5fSHMviaM&exp=1789363014&osig=AAAAAAAAAAAAAAAAAAAAANJEcvMyXGtMEWOUJSS7IL95lBaDKZTa-Q4jZ1CslOxi&signer=media-rpc&x-canva-quality=thumbnail'
-          for kind in thumb native; do
-            url="$thumb"; [ "$kind" = native ] && url="$native"
-            code=$(curl -L -sS -o "/tmp/$kind.png" -w '%{http_code}' "$url" || true)
-            echo "$kind HTTP=$code bytes=$(wc -c < /tmp/$kind.png 2>/dev/null || echo 0)"
-            file "/tmp/$kind.png" || true
-          done
+          set -euo pipefail
+          url='https://oaisdmntprcentralus.blob.core.windows.net/files/00000000-968c-81f5-aca4-80b9182ae6f5/raw?se=2026-09-14T01:06:02Z&sp=r&sv=2026-02-06&sr=b&scid=01a09d50-0695-78f0-a05b-d3671ad11a5f&skoid=f5e14fda-2af7-44a3-9d18-d372ffcad871&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-13T23:41:51Z&ske=2026-09-14T23:41:51Z&sks=b&skv=2026-02-06&sig=fZ94r6o6xqBdI%2Blg8phSHuy3G7b%2BsZQu9eDlKL/YADI%3D'
+          mkdir -p public/images
+          curl -fL --retry 3 "$url" -o public/images/STT_Author_Portrait_APPROVED_600DPI_PRODUCTION.png
+          echo '8d844e7528c9911a403e5987882293fe002864dade9956671e7235106c4c70d2  public/images/STT_Author_Portrait_APPROVED_600DPI_PRODUCTION.png' | sha256sum -c -
+          python - <<'PY'
+          from PIL import Image
+          p='public/images/STT_Author_Portrait_APPROVED_600DPI_PRODUCTION.png'
+          im=Image.open(p)
+          assert im.size == (1365,2048), im.size
+          print('PASS dimensions', im.size, im.mode)
+          PY
+      - name: Commit exact portrait to staging branch
+        shell: bash
+        run: |
+          git config user.name 'STT Governance Asset Transfer'
+          git config user.email 'actions@users.noreply.github.com'
+          git add public/images/STT_Author_Portrait_APPROVED_600DPI_PRODUCTION.png
+          git commit -m 'asset: stage exact approved cooperation portrait [skip ci]' || exit 0
+          git push origin HEAD:fix/stt-current-uploaded-visuals-20260914
