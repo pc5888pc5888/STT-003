@@ -1,0 +1,46 @@
+name: Audit Humanistic POST endpoints safely
+
+on:
+  push:
+    branches: [fix/stt-current-uploaded-visuals-20260914]
+    paths:
+      - .github/workflows/audit-humanistic-post-safe.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Probe Netlify form POST with honeypot and backup function validation
+        shell: bash
+        run: |
+          set -euo pipefail
+          root='https://shimmering-longma-509244.netlify.app'
+          echo '=== FORM POST (honeypot populated; should not create a legitimate submission) ==='
+          curl -sS -L --connect-timeout 20 --max-time 90 \
+            -D /tmp/form.headers -o /tmp/form.body \
+            -w 'STATUS=%{http_code} FINAL=%{url_effective}\n' \
+            -X POST "$root/" \
+            -H 'Content-Type: application/x-www-form-urlencoded' \
+            --data-urlencode 'form-name=humanistic-20q' \
+            --data-urlencode 'bot-field=stt-governance-audit' \
+            --data-urlencode 'participant_name=SYSTEM_AUDIT_DO_NOT_PROCESS' \
+            --data-urlencode 'participant_email=' \
+            --data-urlencode 'q01=SYSTEM_AUDIT' || true
+          head -30 /tmp/form.headers || true
+          head -c 1200 /tmp/form.body || true
+          echo
+
+          echo '=== BACKUP FUNCTION POST (empty email; validation only, no email should be sent) ==='
+          curl -sS -L --connect-timeout 20 --max-time 90 \
+            -D /tmp/fn.headers -o /tmp/fn.body \
+            -w 'STATUS=%{http_code} FINAL=%{url_effective}\n' \
+            -X POST "$root/api/send-backup" \
+            -H 'Content-Type: application/json' \
+            --data '{"email":"","name":"SYSTEM_AUDIT_DO_NOT_PROCESS","backup":"SYSTEM_AUDIT"}' || true
+          head -30 /tmp/fn.headers || true
+          head -c 2000 /tmp/fn.body || true
+          echo
