@@ -1,0 +1,60 @@
+name: Verify Humanistic production once
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/verify-humanistic-production-once.yml
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Wait for fixed production page
+        run: |
+          set -euo pipefail
+          for i in $(seq 1 60); do
+            page=$(curl -fsSL https://stt-003.vercel.app/humanistic-interview/ || true)
+            if printf '%s' "$page" | grep -Fq "fetch('/api/humanistic-submit',{method:'POST'" \
+              && printf '%s' "$page" | grep -Fq "mailResult={ok:true,delivery:'server-receipt'}" \
+              && ! printf '%s' "$page" | grep -Fq "fetch('/',{method:'POST'"; then
+              echo 'production page transport verified'
+              exit 0
+            fi
+            sleep 5
+          done
+          echo 'production page did not reach fixed version in time'
+          exit 1
+
+      - name: Submit full no-email case
+        run: |
+          set -euo pipefail
+          args=(
+            --data-urlencode 'form-name=humanistic-20q'
+            --data-urlencode 'name=STT無Email驗證'
+            --data-urlencode 'company=STT Governance'
+            --data-urlencode 'message=[SYSTEM TEST NO EMAIL]'
+          )
+          for i in $(seq -w 1 20); do args+=(--data-urlencode "q${i}=驗證回答${i}"); done
+          r=$(curl -fsS -X POST https://stt-003.vercel.app/api/humanistic-submit \
+            -H 'Content-Type: application/x-www-form-urlencoded' "${args[@]}")
+          echo "$r"
+          echo "$r" | grep -Fq '"ok":true'
+          echo "$r" | grep -Fq '"receiptId":"HUM-'
+
+      - name: Submit full with-email case
+        run: |
+          set -euo pipefail
+          args=(
+            --data-urlencode 'form-name=humanistic-20q'
+            --data-urlencode 'name=STT有Email驗證'
+            --data-urlencode 'company=STT Governance'
+            --data-urlencode 'email=pc5888@gmail.com'
+            --data-urlencode 'message=[SYSTEM TEST WITH EMAIL]'
+          )
+          for i in $(seq -w 1 20); do args+=(--data-urlencode "q${i}=驗證回答${i}"); done
+          r=$(curl -fsS -X POST https://stt-003.vercel.app/api/humanistic-submit \
+            -H 'Content-Type: application/x-www-form-urlencoded' "${args[@]}")
+          echo "$r"
+          echo "$r" | grep -Fq '"ok":true'
+          echo "$r" | grep -Fq '"receiptId":"HUM-'
