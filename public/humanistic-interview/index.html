@@ -654,7 +654,7 @@ textarea:focus{border-color:#5e877e;box-shadow:0 0 0 4px rgba(94,135,126,.12)}
     </div>
     <label class="consent"><input type="checkbox" id="consent"><span>我了解這些回答將作為人物專訪之整理與撰稿素材；正式公開前，我仍可就涉及本人的內容與直接引言進行確認或修正。</span></label>
 
-    <form id="netlify-form" name="humanistic-20q" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+    <form id="netlify-form" name="humanistic-20q" method="POST" action="/api/humanistic-submit" data-netlify="true" netlify-honeypot="bot-field">
       <input type="hidden" name="form-name" value="humanistic-20q">
       <p class="hidden"><label>Don’t fill this out: <input name="bot-field"></label></p>
       <input type="hidden" name="participant_name" id="form-participant-name">
@@ -881,7 +881,7 @@ form.addEventListener('submit',async e=>{
     const payload=new URLSearchParams();
     for(const [k,v] of fd.entries())payload.append(k,v);
     try{
-      const r=await fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:payload.toString()});
+      const r=await fetch('/api/humanistic-submit',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:payload.toString()});
       if(!r.ok)throw new Error('HTTP '+r.status);
       stored=true;localStorage.setItem('stt20q.v02.submitted','1');
     }catch(err){
@@ -901,7 +901,7 @@ form.addEventListener('submit',async e=>{
       msg.textContent='目前是本機預覽：回答已保存在這台裝置，但尚未送到網路收件端。';
       er.textContent='你可以先下載回答備份；部署到 Netlify 後才會啟用正式送件。';
     }else if(email && mailResult.ok){
-      msg.textContent='你的回答已送出，備份郵件也已寄出。';
+      msg.textContent='你的回答已送出，聯絡 Email 已一併收件。';
       er.textContent=`備份已寄到 ${email}；你也可以在此再下載一份文字備份。`;
     }else if(email){
       msg.textContent='你的回答已送出。';
