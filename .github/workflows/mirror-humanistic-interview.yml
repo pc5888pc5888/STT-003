@@ -68,6 +68,10 @@ jobs:
               "msg.textContent='你的回答已送出，備份郵件也已寄出。';",
               "msg.textContent='你的回答已送出，聯絡 Email 已一併收件。';"
           )
+          s=s.replace(
+              "er.textContent=`備份已寄到 ${email}；你也可以在此再下載一份文字備份。`;",
+              "er.textContent=`系統已記錄 ${email} 作為聯絡信箱；你也可以在此下載一份文字備份。`;"
+          )
 
           root_post_variants = [
               "fetch('/',{method:'POST'",
