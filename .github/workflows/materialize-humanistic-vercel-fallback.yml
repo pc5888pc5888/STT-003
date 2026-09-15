@@ -32,13 +32,15 @@ jobs:
           parts=sorted(Path('.staging/humanistic-exact').glob('part-*.b64'))
           raw=''.join(p.read_text(encoding='utf-8-sig') for p in parts)
           cleaned=re.sub(r'\s+','',raw)
-          invalid=sorted(set(re.sub(r'[A-Za-z0-9+/=]','',cleaned)))
+          # Staged payload may use RFC 4648 URL-safe Base64 (- and _).
+          invalid=sorted(set(re.sub(r'[A-Za-z0-9+/_=-]','',cleaned)))
           print('parts',[(p.name,p.stat().st_size) for p in parts])
-          print('base64 chars',len(cleaned),'invalid',invalid,'padding_positions',[i for i,c in enumerate(cleaned) if c=='='][-10:])
+          print('base64 chars',len(cleaned),'invalid',invalid)
           if invalid:
               raise SystemExit('Invalid non-base64 characters remain')
           try:
-              html=base64.b64decode(cleaned,validate=True)
+              padded=cleaned + ('=' * ((4 - len(cleaned) % 4) % 4))
+              html=base64.urlsafe_b64decode(padded)
           except Exception as exc:
               raise SystemExit(f'Base64 decode failed: {exc}')
           digest=hashlib.sha256(html).hexdigest()
