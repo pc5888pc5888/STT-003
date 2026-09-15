@@ -1,0 +1,41 @@
+name: Verify Humanistic privacy once
+
+on:
+  push:
+    paths:
+      - '.github/workflows/verify-humanistic-privacy-once.yml'
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verify production privacy controls and send one marker
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fsS https://stt-003.vercel.app/humanistic-interview/ -o /tmp/page.html
+          grep -Fq '文字送出後，本網站不保留您輸入的文字。' /tmp/page.html
+          grep -Fq 'function purgeSubmittedData()' /tmp/page.html
+          grep -Fq "result.delivery!=='resend-email'" /tmp/page.html
+          grep -Fq 'sessionStorage.setItem(storageKey' /tmp/page.html
+          if grep -Fq 'localStorage' /tmp/page.html; then
+            echo 'localStorage found in production page'
+            exit 1
+          fi
+
+          api=$(curl -fsS https://stt-003.vercel.app/api/humanistic-submit)
+          echo "$api"
+          echo "$api" | grep -Fq '"resendConfigured":true'
+          echo "$api" | grep -Fq '"contentRetention":"none"'
+          echo "$api" | grep -Fq '"serverContentLogging":false'
+
+          r=$(curl -fsS -X POST https://stt-003.vercel.app/api/humanistic-submit \
+            -H 'Content-Type: application/x-www-form-urlencoded' \
+            --data-urlencode 'form-name=humanistic-20q' \
+            --data-urlencode 'participant_name=PRIVACY_VERIFY' \
+            --data-urlencode 'participant_email=pc5888@gmail.com' \
+            --data-urlencode 'q01=PRIVACY-NOLOG-20260915')
+          echo "$r"
+          echo "$r" | grep -Fq '"ok":true'
+          echo "$r" | grep -Fq '"delivery":"resend-email"'
+          echo "$r" | grep -Fq '"receiptId":"HUM-'
