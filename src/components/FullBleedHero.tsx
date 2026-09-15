@@ -9,33 +9,33 @@ type PrimaryItem = { label: string; visual: STTVisualKey; title: string; lead: s
 export const PRIMARY_THEMES: Record<PrimaryTheme, PrimaryItem> = {
   problems: {
     label: "你正在面對什麼", visual: "problems",
-    title: "不是先選服務；先從你正在面對的真實問題開始。",
-    lead: "不用先知道自己需要哪一種顧問。先從正在發生的事情開始，再把症狀、真正問題、證據與可執行結果分開。",
-    actions: [{ text: "找到我正在面對的問題", to: "#problem-index", primary: true }, { text: "理解 STT 如何判讀", to: "/how-stt-works" }],
+    title: "先釐清你正在面對的是什麼，再決定怎麼處理。",
+    lead: "企業重大決策、家族治理、接班安排、信任摩擦、法遵壓力、數位轉型與 AI 使用，表面看似不同，底層往往都指向問題定義、權責配置、證據判讀與風險承擔。",
+    actions: [{ text: "展開問題盤點", to: "#problem-index", primary: true }, { text: "進入治理入口", to: "/start" }],
   },
   method: {
     label: "如何判讀", visual: "method",
-    title: "先把問題判斷對，再談怎麼做。",
-    lead: "STT 不從服務分類開始，而是把事件、真正問題、證據、反方、不可承擔結果、專業責任與執行條件放回同一個判讀程序。",
-    actions: [{ text: "理解判讀的起點", to: "#judgment-foundations", primary: true }, { text: "從我的問題開始", to: "/start" }],
+    title: "在採取行動之前，先完成判讀。",
+    lead: "STT 的判讀，不是快速給答案，而是先回到事件結構：問題是否被正確定義、證據是否足夠、權力是否越界、責任如何承擔、風險是否可逆，然後才決定是否進入下一步。",
+    actions: [{ text: "理解判讀方法", to: "#judgment-foundations", primary: true }, { text: "檢視治理流程", to: "#judgment-path" }],
   },
   columns: {
     label: "專欄判讀", visual: "columns",
-    title: "莊鈞翔博士｜專欄判讀",
-    lead: "從法律新聞、人文地景產與新聞採訪出發，看見事件背後的制度、人的選擇與長期影響。",
-    actions: [{ text: "選擇專欄系列", to: "#column-series", primary: true }, { text: "瀏覽全部專欄", to: "#column-list" }],
+    title: "把事件的表面，還原成可判讀的結構。",
+    lead: "透過莊博士的人文地景產專欄與治理評論，STT 將複雜事件拆解為制度、風險、信任、法遵與策略之間的結構關係，讓閱讀不只是吸收資訊，而是學會判讀。",
+    actions: [{ text: "閱讀專欄", to: "#column-list", primary: true }, { text: "進入判讀", to: "/how-stt-works" }],
   },
   publications: {
     label: "出版研究", visual: "publications",
-    title: "思想被留下，才可能被理解、被檢驗、被承接。",
-    lead: "專欄用來辨識問題；著作用來建立完整思想；研究則必須回到原始論文、方法與可驗證資料。三者不混為同一種內容。",
-    actions: [{ text: "閱讀著作", to: "/books", primary: true }, { text: "查看研究論文", to: "/research" }],
+    title: "出版，不只是內容；而是治理知識的長期載體。",
+    lead: "STT Press 將治理、法遵、接班、家族、數位治理與制度文明轉化為可閱讀、可累積、可流通的研究文本，讓知識不只被發表，更能被持續使用。",
+    actions: [{ text: "查看出版研究", to: "/books", primary: true }, { text: "進入 STT Press", to: "/books" }],
   },
   stt: {
     label: "關於 STT", visual: "aboutStt",
-    title: "策略為先，治理為本，管理為終。",
-    lead: "STT Governance 是以治理判讀與制度設計為核心的高位階治理文明平台，從人的真實問題出發，統合證據、專業與決策，讓權力與責任有清楚的歸屬。",
-    actions: [{ text: "認識莊鈞翔博士", to: "/institution/eric-chuang", primary: true }, { text: "合作洽詢", to: "/start" }],
+    title: "STT 不是一般顧問公司，而是高位階治理文明平台。",
+    lead: "在 STT，治理不是口號，而是一套面對現實、判讀局勢、設計制度、協助決策與建立長期信任的工作方法。莊鈞翔博士主導判讀與制度設計，AI 作為治理幕僚與作業系統輔助。",
+    actions: [{ text: "認識 STT", to: "/institution/eric-chuang", primary: true }, { text: "理解治理定位", to: "/problems" }],
   },
 };
 
