@@ -1,0 +1,25 @@
+name: Verify Resend mail once
+
+on:
+  push:
+    paths:
+      - '.github/workflows/verify-resend-mail-once.yml'
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Submit controlled mail verification
+        shell: bash
+        run: |
+          set -euo pipefail
+          r=$(curl -fsS -X POST https://stt-003.vercel.app/api/humanistic-submit \
+            -H 'Content-Type: application/x-www-form-urlencoded' \
+            --data-urlencode 'form-name=humanistic-20q' \
+            --data-urlencode 'participant_name=STT郵件鏈路驗收' \
+            --data-urlencode 'participant_email=pc5888@gmail.com' \
+            --data-urlencode 'q01=MAIL-VERIFY-20260915')
+          echo "$r"
+          echo "$r" | grep -Fq '"ok":true'
+          echo "$r" | grep -Fq '"delivery":"resend-email"'
+          echo "$r" | grep -Fq '"receiptId":"HUM-'
