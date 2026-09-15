@@ -1,0 +1,72 @@
+name: Mirror Humanistic interview into STT Vercel
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/mirror-humanistic-interview.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  mirror:
+    if: ${{ !contains(github.event.head_commit.message, 'mirror Humanistic interview') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Download live approved Humanistic page
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p public/humanistic-interview
+          curl --fail --location --retry 4 --retry-delay 2 \
+            -A 'Mozilla/5.0 STT-Governance-Mirror/1.0' \
+            'https://shimmering-longma-509244.netlify.app/' \
+            -o /tmp/humanistic.html
+          test -s /tmp/humanistic.html
+          grep -Fq '人文地景產' /tmp/humanistic.html
+          grep -Fq 'humanistic-20q' /tmp/humanistic.html
+
+      - name: Patch only the submission transport
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('/tmp/humanistic.html')
+          s=p.read_text(encoding='utf-8')
+          before=s
+          # Preserve the approved page/fields/UI. Only move the POST transport from
+          # broken Netlify form handling to STT's server-side Vercel endpoint.
+          s=s.replace("fetch('/', {method:'POST'", "fetch('/api/humanistic-submit', {method:'POST'")
+          s=s.replace('fetch("/", {method:"POST"', 'fetch("/api/humanistic-submit", {method:"POST"')
+          s=s.replace("fetch('/api/send-backup'", "fetch('/api/humanistic-submit'")
+          s=s.replace('fetch("/api/send-backup"', 'fetch("/api/humanistic-submit"')
+          # Make native form fallback target the same working endpoint as well.
+          s=s.replace('<form name="humanistic-20q" method="POST"', '<form name="humanistic-20q" method="POST" action="/api/humanistic-submit"')
+          if s == before:
+              raise SystemExit('No submit transport was patched; fail closed')
+          if '/api/humanistic-submit' not in s:
+              raise SystemExit('Vercel submit endpoint absent after patch')
+          Path('public/humanistic-interview/index.html').write_text(s,encoding='utf-8')
+          print('mirrored bytes', len(s.encode('utf-8')))
+          PY
+          grep -Fq '/api/humanistic-submit' public/humanistic-interview/index.html
+          grep -Fq '人文地景產' public/humanistic-interview/index.html
+
+      - name: Commit mirrored page
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'STT Humanistic Mirror'
+          git config user.email 'actions@users.noreply.github.com'
+          git pull --rebase origin main
+          git add public/humanistic-interview/index.html
+          git commit -m 'fix: mirror Humanistic interview with Vercel submit transport [skip ci]' || exit 0
+          git push origin HEAD:main
