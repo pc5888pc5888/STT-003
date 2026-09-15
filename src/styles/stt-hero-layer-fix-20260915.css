@@ -1,0 +1,36 @@
+/* Final hero layer correction — 2026-09-15
+   The prior canonical sheet assigned negative z-index values to hero artwork.
+   With an isolated section and opaque section background, that placed the approved
+   image below the section canvas. Keep the source artwork visible, then veil/copy above it. */
+
+.stt-master-hero.is-primary{
+  position:relative!important;
+  isolation:isolate!important;
+  overflow:hidden!important;
+}
+.stt-master-hero.is-primary .stt-master-hero__image{
+  position:absolute!important;
+  inset:0!important;
+  z-index:0!important;
+  opacity:1!important;
+  visibility:visible!important;
+  display:block!important;
+}
+.stt-master-hero.is-primary .stt-master-hero__veil{
+  position:absolute!important;
+  inset:0!important;
+  z-index:1!important;
+  pointer-events:none!important;
+}
+.stt-master-hero.is-primary .stt-master-hero__inner{
+  position:relative!important;
+  z-index:2!important;
+}
+
+/* Cooperation uses the same layer order: backdrop → veil → copy/portrait. */
+.stt-coop-hero{position:relative!important;isolation:isolate!important;overflow:hidden!important}
+.stt-coop-hero-bg{z-index:0!important;opacity:1!important;visibility:visible!important}
+.stt-coop-hero::after{z-index:1!important}
+.stt-coop-copy{z-index:3!important}
+.stt-coop-portrait{z-index:2!important}
+.stt-coop-signature{z-index:4!important}
