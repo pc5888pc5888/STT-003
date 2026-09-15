@@ -62,7 +62,6 @@ jobs:
               '<form name="humanistic-20q" method="POST" action="/api/humanistic-submit"'
           )
 
-          # The full form is already delivered once. Do not create a second receipt merely because Email was supplied.
           s=s.replace(
               "if(stored && email && location.protocol!=='file:') mailResult=await sendEmailBackup();",
               "if(stored && email && location.protocol!=='file:') mailResult={ok:true,delivery:'server-receipt'};"
@@ -95,10 +94,17 @@ jobs:
           Path('public/humanistic-interview/index.html').write_text(s,encoding='utf-8')
           print('mirrored bytes', len(s.encode('utf-8')))
           PY
+
+      - name: Reapply mandatory privacy controls
+        shell: bash
+        run: |
+          set -euo pipefail
+          python scripts/patch_humanistic_privacy.py
+          grep -Fq '文字送出後，本網站不保留您輸入的文字。' public/humanistic-interview/index.html
+          grep -Fq 'function purgeSubmittedData()' public/humanistic-interview/index.html
+          grep -Fq "result.delivery!=='resend-email'" public/humanistic-interview/index.html
+          ! grep -Fq 'localStorage' public/humanistic-interview/index.html
           grep -Fq '/api/humanistic-submit' public/humanistic-interview/index.html
-          grep -Fq '人文地景產' public/humanistic-interview/index.html
-          ! grep -Fq "fetch('/',{method:'POST'" public/humanistic-interview/index.html
-          ! grep -Fq 'mailResult=await sendEmailBackup()' public/humanistic-interview/index.html
 
       - name: Commit mirrored page
         shell: bash
@@ -107,6 +113,6 @@ jobs:
           git config user.name 'STT Humanistic Mirror'
           git config user.email 'actions@users.noreply.github.com'
           git add public/humanistic-interview/index.html
-          git commit -m 'fix: Humanistic interview transport recovery [mirror-skip]' || exit 0
+          git commit -m 'fix: Humanistic interview transport + privacy recovery [mirror-skip]' || exit 0
           git pull --rebase origin main
           git push origin HEAD:main
