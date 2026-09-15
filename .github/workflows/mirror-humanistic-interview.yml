@@ -64,7 +64,6 @@ jobs:
               '<form name="humanistic-20q" method="POST" action="/api/humanistic-submit"'
           )
 
-          # Do not claim an email was sent when the STT server only confirmed receipt.
           s=s.replace(
               "msg.textContent='你的回答已送出，備份郵件也已寄出。';",
               "msg.textContent='你的回答已送出，聯絡 Email 已一併收件。';"
@@ -96,7 +95,7 @@ jobs:
           set -euo pipefail
           git config user.name 'STT Humanistic Mirror'
           git config user.email 'actions@users.noreply.github.com'
-          git pull --rebase origin main
           git add public/humanistic-interview/index.html
           git commit -m 'fix: Humanistic interview transport recovery [mirror-skip]' || exit 0
+          git pull --rebase origin main
           git push origin HEAD:main
