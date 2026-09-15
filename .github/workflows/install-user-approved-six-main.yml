@@ -163,3 +163,5 @@ jobs:
           git add public/visual-bank/stt/user-approved-six src/sttVisuals.ts
           git commit -m 'fix: install user-approved STT six [skip ci]'
           git push origin HEAD:main
+
+# retrigger exact approved six 2026-09-15
