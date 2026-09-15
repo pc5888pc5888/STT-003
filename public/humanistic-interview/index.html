@@ -902,7 +902,7 @@ form.addEventListener('submit',async e=>{
       er.textContent='你可以先下載回答備份；部署到 Netlify 後才會啟用正式送件。';
     }else if(email && mailResult.ok){
       msg.textContent='你的回答已送出，聯絡 Email 已一併收件。';
-      er.textContent=`備份已寄到 ${email}；你也可以在此再下載一份文字備份。`;
+      er.textContent=`系統已記錄 ${email} 作為聯絡信箱；你也可以在此下載一份文字備份。`;
     }else if(email){
       msg.textContent='你的回答已送出。';
       er.textContent='郵件備份目前未完成，但你可以立即下載完整回答備份；網站管理者可再啟用郵件服務。';
