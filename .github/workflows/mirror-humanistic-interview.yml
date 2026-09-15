@@ -49,8 +49,6 @@ jobs:
               ("fetch('/', {method:'POST'", "fetch('/api/humanistic-submit', {method:'POST'"),
               ('fetch("/",{method:"POST"', 'fetch("/api/humanistic-submit",{method:"POST"'),
               ('fetch("/", {method:"POST"', 'fetch("/api/humanistic-submit", {method:"POST"'),
-              ("fetch('/api/send-backup'", "fetch('/api/humanistic-submit'"),
-              ('fetch("/api/send-backup"', 'fetch("/api/humanistic-submit"'),
           ]
           for old,new in replacements:
               s=s.replace(old,new)
@@ -62,6 +60,12 @@ jobs:
           s=s.replace(
               '<form name="humanistic-20q" method="POST"',
               '<form name="humanistic-20q" method="POST" action="/api/humanistic-submit"'
+          )
+
+          # The full form is already delivered once. Do not create a second receipt merely because Email was supplied.
+          s=s.replace(
+              "if(stored && email && location.protocol!=='file:') mailResult=await sendEmailBackup();",
+              "if(stored && email && location.protocol!=='file:') mailResult={ok:true,delivery:'server-receipt'};"
           )
 
           s=s.replace(
@@ -81,6 +85,8 @@ jobs:
           ]
           if any(v in s for v in root_post_variants):
               raise SystemExit('Root POST transport still present; fail closed')
+          if "mailResult=await sendEmailBackup()" in s:
+              raise SystemExit('Duplicate backup submit path still active; fail closed')
           if '/api/humanistic-submit' not in s:
               raise SystemExit('Vercel submit endpoint absent after patch')
           if s == before:
@@ -92,6 +98,7 @@ jobs:
           grep -Fq '/api/humanistic-submit' public/humanistic-interview/index.html
           grep -Fq '人文地景產' public/humanistic-interview/index.html
           ! grep -Fq "fetch('/',{method:'POST'" public/humanistic-interview/index.html
+          ! grep -Fq 'mailResult=await sendEmailBackup()' public/humanistic-interview/index.html
 
       - name: Commit mirrored page
         shell: bash
