@@ -1,7 +1,8 @@
 import { useNavigate } from "react-router-dom";
 
-const HUMANISTIC_INTERVIEW_URL = "/humanistic-interview/";
-const PORTRAIT_SRC = "/images/portrait-001.png";
+const HUMANISTIC_INTERVIEW_URL = "/humanistic-20q/";
+const PORTRAIT_SRC = "/visual-bank/stt/hero-hires/stt-portrait.png";
+const SIGNATURE_SRC = "/images/signature-eric001.png";
 
 const channels = [
   {
@@ -44,14 +45,27 @@ export default function Cooperation() {
   return (
     <div className="stt-coop-page">
       <section className="stt-coop-hero" aria-labelledby="stt-coop-title">
+        <div className="stt-coop-hero-bg" aria-hidden="true" />
         <div className="stt-coop-copy">
-          <p className="stt-master-kicker">STRATEGIC COOPERATION &amp; GROWTH</p>
-          <h1 id="stt-coop-title">預約與合作</h1>
-          <p className="stt-coop-thesis">企業在市場的<strong>終局賽道</strong>能走多遠，取決於經營者在資本、利潤與變局交織時的<strong>決策序列</strong>。</p>
+          <h1 id="stt-coop-title">企業在市場的終局賽道能走多遠，<br />取決於經營者在資本，<br />利潤與變局交織時的決策序列。</h1>
           <p className="stt-coop-intro"><strong>STT Governance 策略智庫</strong>由莊鈞翔博士主導，我們不談懸空的理論，只專注於<strong>「拆解商業本質」</strong>與<strong>「建構治理護城河」</strong>，透過嚴謹的商學實戰邏輯，協助企業在龐大生存壓力下精準破局；歡迎依據您的發展策略，選擇相對應的合作通道。</p>
+          <div className="stt-coop-actions">
+            <button type="button" className="is-primary" onClick={() => navigate("/start")}>立即預約諮詢 <span>→</span></button>
+            <button type="button" onClick={() => document.getElementById("stt-coop-channels-title")?.scrollIntoView({ behavior: "smooth" })}>了解合作通道</button>
+          </div>
+          <div className="stt-coop-caption">
+            <strong>STRATEGIC COOPERATION &amp; GROWTH｜預約與合作</strong>
+            <span>一起思考更好的決策，讓重要的事，走得更遠。</span>
+          </div>
         </div>
         <div className="stt-coop-portrait" aria-label="莊鈞翔博士">
-          <img src={PORTRAIT_SRC} alt="莊鈞翔博士" draggable={false} />
+          <img className="stt-coop-person" src={PORTRAIT_SRC} alt="莊鈞翔博士" draggable={false} />
+          <div className="stt-coop-signature">
+            <img src={SIGNATURE_SRC} alt="莊鈞翔博士簽名" draggable={false} />
+            <strong>莊鈞翔 博士</strong>
+            <span>CHUANG CHUN-HSIANG, Ph.D.</span>
+            <small>人文戰略推文者｜企業治理策略顧問｜內在法遵推動者</small>
+          </div>
         </div>
       </section>
 
