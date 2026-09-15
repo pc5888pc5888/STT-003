@@ -12,7 +12,7 @@ permissions:
 
 jobs:
   mirror:
-    if: ${{ !contains(github.event.head_commit.message, 'mirror Humanistic interview') }}
+    if: ${{ !contains(github.event.head_commit.message, '[mirror-skip]') }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -42,13 +42,10 @@ jobs:
           p=Path('/tmp/humanistic.html')
           s=p.read_text(encoding='utf-8')
           before=s
-          # Preserve the approved page/fields/UI. Only move the POST transport from
-          # broken Netlify form handling to STT's server-side Vercel endpoint.
           s=s.replace("fetch('/', {method:'POST'", "fetch('/api/humanistic-submit', {method:'POST'")
           s=s.replace('fetch("/", {method:"POST"', 'fetch("/api/humanistic-submit", {method:"POST"')
           s=s.replace("fetch('/api/send-backup'", "fetch('/api/humanistic-submit'")
           s=s.replace('fetch("/api/send-backup"', 'fetch("/api/humanistic-submit"')
-          # Make native form fallback target the same working endpoint as well.
           s=s.replace('<form name="humanistic-20q" method="POST"', '<form name="humanistic-20q" method="POST" action="/api/humanistic-submit"')
           if s == before:
               raise SystemExit('No submit transport was patched; fail closed')
@@ -68,5 +65,5 @@ jobs:
           git config user.email 'actions@users.noreply.github.com'
           git pull --rebase origin main
           git add public/humanistic-interview/index.html
-          git commit -m 'fix: mirror Humanistic interview with Vercel submit transport [skip ci]' || exit 0
+          git commit -m 'fix: Humanistic interview transport recovery [mirror-skip]' || exit 0
           git push origin HEAD:main
