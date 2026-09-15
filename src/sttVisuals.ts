@@ -1,12 +1,12 @@
 export const STT_VISUALS = {
   // Six first-level pages use the six user-approved source artworks uploaded on 2026-09-15.
   // Do not substitute generated variants, thumbnail assets, or same-image crops.
-  home: "/visual-bank/stt/user-approved-20260915/home.webp",
-  problems: "/visual-bank/stt/user-approved-20260915/problems.webp",
-  method: "/visual-bank/stt/user-approved-20260915/how-stt-works.webp",
-  columns: "/visual-bank/stt/user-approved-20260915/insights.webp",
-  publications: "/visual-bank/stt/user-approved-20260915/publications.webp",
-  aboutStt: "/visual-bank/stt/user-approved-20260915/stt.webp",
+  home: "/visual-bank/stt/user-approved-six/home.png",
+  problems: "/visual-bank/stt/user-approved-six/problems.png",
+  method: "/visual-bank/stt/user-approved-six/method.png",
+  columns: "/visual-bank/stt/user-approved-six/columns.png",
+  publications: "/visual-bank/stt/user-approved-six/publications.png",
+  aboutStt: "/visual-bank/stt/user-approved-six/about-stt.png",
   problemMajorDecision: "/visual-bank/stt/originals-20260910/major-decision.webp",
   problemOwnerDependence: "/visual-bank/stt/originals-20260910/owner-dependence.webp",
   problemSuccession: "/visual-bank/stt/originals-20260910/succession.webp",
