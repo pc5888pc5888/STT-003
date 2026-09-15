@@ -104,6 +104,19 @@ async function deliverViaFormSubmit(body: AnyRecord, fullMessage: string) {
   return { ok: accepted, status: upstream.status, detail: detail.slice(0, 500) };
 }
 
+function recordServerReceipt(body: AnyRecord, fullMessage: string) {
+  const receiptId = `HUM-${Date.now()}-${Math.random().toString(36).slice(2, 8).toUpperCase()}`;
+  // Emergency operational receipt: keep the entire submission recoverable from the
+  // project's server logs when external mail delivery is temporarily unavailable.
+  console.log("HUMANISTIC_SUBMISSION_RECEIVED", JSON.stringify({
+    receiptId,
+    receivedAt: new Date().toISOString(),
+    body,
+    fullMessage,
+  }));
+  return receiptId;
+}
+
 export default async function handler(req: any, res: any) {
   const emailJsConfigured = Boolean(
     process.env.EMAILJS_API_URL?.trim() &&
@@ -112,7 +125,7 @@ export default async function handler(req: any, res: any) {
     process.env.EMAILJS_PUBLIC_KEY?.trim()
   );
 
-  if (req.method === "GET") return json(res, 200, { ok: true, emailJsConfigured, fallbackConfigured: true });
+  if (req.method === "GET") return json(res, 200, { ok: true, emailJsConfigured, fallbackConfigured: true, serverReceiptConfigured: true });
   if (req.method !== "POST") return json(res, 405, { ok: false, error: "Method not allowed" });
 
   const body = parseBody(req);
@@ -120,19 +133,26 @@ export default async function handler(req: any, res: any) {
   const fullMessage = stringifySubmission(body);
   if (!fullMessage.trim()) return json(res, 400, { ok: false, error: "Empty submission" });
 
+  const receiptId = recordServerReceipt(body, fullMessage);
+
   try {
     const primary = await deliverViaEmailJs(body, fullMessage);
-    if (primary.attempted && primary.ok) return json(res, 200, { ok: true, delivery: "primary" });
+    if (primary.attempted && primary.ok) return json(res, 200, { ok: true, delivery: "email", receiptId });
     if (primary.attempted && !primary.ok) console.error("humanistic EmailJS delivery failed", primary.status, primary.detail);
 
-    const fallback = await deliverViaFormSubmit(body, fullMessage);
-    if (!fallback.ok) {
+    try {
+      const fallback = await deliverViaFormSubmit(body, fullMessage);
+      if (fallback.ok) return json(res, 200, { ok: true, delivery: "email-fallback", receiptId });
       console.error("humanistic fallback delivery failed", fallback.status, fallback.detail);
-      return json(res, 502, { ok: false, error: "Submission delivery failed" });
+    } catch (fallbackError) {
+      console.error("humanistic fallback connection failed", fallbackError);
     }
-    return json(res, 200, { ok: true, delivery: "fallback" });
+
+    // Never discard a completed 20Q interview merely because a third-party mail
+    // provider is down. The STT server receipt is the operational fallback.
+    return json(res, 200, { ok: true, delivery: "server-receipt", receiptId });
   } catch (error) {
-    console.error("humanistic submit failed", error);
-    return json(res, 502, { ok: false, error: "Submission service connection failed" });
+    console.error("humanistic primary delivery failed after server receipt", error);
+    return json(res, 200, { ok: true, delivery: "server-receipt", receiptId });
   }
 }
