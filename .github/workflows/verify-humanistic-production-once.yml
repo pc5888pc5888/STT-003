@@ -58,3 +58,6 @@ jobs:
           echo "$r"
           echo "$r" | grep -Fq '"ok":true'
           echo "$r" | grep -Fq '"receiptId":"HUM-'
+
+      - name: Verification marker
+        run: echo 'Humanistic production verification completed'
