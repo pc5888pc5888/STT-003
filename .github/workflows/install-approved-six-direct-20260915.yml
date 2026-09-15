@@ -1,0 +1,98 @@
+name: Install exact approved STT six from secured transfer
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/install-approved-six-direct-20260915.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  install:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Download exact six approved PNG sources
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p public/visual-bank/stt/user-approved-six
+          curl -L --fail --retry 3 'https://sdmntpraustraliaeast.oaiusercontent.com/files/00000000-b384-81fa-b89a-b097e7a52852/raw?se=2026-09-15T11%3A34%3A25Z&sp=r&sv=2026-02-06&sr=b&scid=a22eebdb-f54f-53e0-b4d1-7f707542ad11&skoid=f5e14fda-2af7-44a3-9d18-d372ffcad871&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-14T22%3A13%3A15Z&ske=2026-09-15T22%3A13%3A15Z&sks=b&skv=2026-02-06&sig=6XwbwkyR%2Bm/HjcnEEJtD7XFz3iGZ1FWurYytFpMl0yY%3D' -o public/visual-bank/stt/user-approved-six/home.png
+          curl -L --fail --retry 3 'https://sdmntpraustraliaeast.oaiusercontent.com/files/00000000-e774-81fa-a145-9cead634f8b3/raw?se=2026-09-15T11%3A34%3A38Z&sp=r&sv=2026-02-06&sr=b&scid=f2a1add8-1a08-5cb9-b895-d9f515909310&skoid=f5e14fda-2af7-44a3-9d18-d372ffcad871&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-15T01%3A35%3A12Z&ske=2026-09-16T01%3A35%3A12Z&sks=b&skv=2026-02-06&sig=%2BR3F%2Be8kL6%2BXjByNP12T52mEZ324/a3co1eAIiTj9Ew%3D' -o public/visual-bank/stt/user-approved-six/problems.png
+          curl -L --fail --retry 3 'https://sdmntprnznorth.oaiusercontent.com/files/00000000-df6c-820b-b96d-bc53904dbb6b/raw?se=2026-09-15T11%3A34%3A48Z&sp=r&sv=2026-02-06&sr=b&scid=0374a979-668d-5cbf-b14f-36aa9d25cc6c&skoid=f5e14fda-2af7-44a3-9d18-d372ffcad871&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-15T01%3A50%3A50Z&ske=2026-09-16T01%3A50%3A50Z&sks=b&skv=2026-02-06&sig=M6XND3F6YvQ1KrmZZ76isD%2BVAwxeZugQ1xQSrYxADQI%3D' -o public/visual-bank/stt/user-approved-six/method.png
+          curl -L --fail --retry 3 'https://sdmntpraustraliaeast.oaiusercontent.com/files/00000000-33cc-81fa-b8cc-ea5e44c9026f/raw?se=2026-09-15T11%3A34%3A57Z&sp=r&sv=2026-02-06&sr=b&scid=487f9865-fdc4-5547-9119-3f53a258e7df&skoid=f5e14fda-2af7-44a3-9d18-d372ffcad871&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-14T22%3A51%3A38Z&ske=2026-09-15T22%3A51%3A38Z&sks=b&skv=2026-02-06&sig=UTg5XRe%2B7jw4W2A7TKNgkjJlNBExH4%2B6ZWVZlu0fCao%3D' -o public/visual-bank/stt/user-approved-six/columns.png
+          curl -L --fail --retry 3 'https://sdmntprcentralus.oaiusercontent.com/files/00000000-9fcc-81f5-989e-9183101309ab/raw?se=2026-09-15T11%3A35%3A06Z&sp=r&sv=2026-02-06&sr=b&scid=e81312e9-4344-5ccc-997d-d7216094bfff&skoid=f5e14fda-2af7-44a3-9d18-d372ffcad871&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-15T01%3A51%3A00Z&ske=2026-09-16T01%3A51%3A00Z&sks=b&skv=2026-02-06&sig=K3xPGxs9nHXBxm69LBidnvkHVjgAMTKmB%2BkzCdJ5q8U%3D' -o public/visual-bank/stt/user-approved-six/publications.png
+          curl -L --fail --retry 3 'https://sdmntprcentralus.oaiusercontent.com/files/00000000-6c7c-81f5-8995-2a329d0bf75d/raw?se=2026-09-15T11%3A35%3A20Z&sp=r&sv=2026-02-06&sr=b&scid=d079f3c1-0853-5e08-a0ba-06be4e58e687&skoid=f5e14fda-2af7-44a3-9d18-d372ffcad871&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-15T01%3A35%3A10Z&ske=2026-09-16T01%3A35%3A10Z&sks=b&skv=2026-02-06&sig=pTjR4iv8Hs0txqJEtElsodRlLblsSJKiuM9JWaDCM90%3D' -o public/visual-bank/stt/user-approved-six/about-stt.png
+
+      - name: Evidence gate exact hashes and dimensions
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install -q Pillow
+          python - <<'PY'
+          from PIL import Image
+          from pathlib import Path
+          import hashlib
+          expected={
+            'home.png':'d87b1039a686ad6a92be4eb2aadbc6d32111278ffd59869137e77e939708ff39',
+            'problems.png':'964923d0ba8ddc9589fcd8a254d6daca2f71643d2e6702236bff2902d38850c9',
+            'method.png':'e64be189148c76ce2dd5b13efba5a9512e2cb003692f87991c95d35322602753',
+            'columns.png':'03cc644c1f32e05252ebc4defae7149dd6ddc0a8a36f7965436f0c2dff284417',
+            'publications.png':'f8fa16efabc931975e46973aafba97a2e75b733c8836ea06bece490b5d676754',
+            'about-stt.png':'6ae927ed6e822b3699005a734b169f7b098cd353fe6c688f381730c41da1d33d',
+          }
+          root=Path('public/visual-bank/stt/user-approved-six')
+          for name,sha in expected.items():
+              p=root/name
+              got=hashlib.sha256(p.read_bytes()).hexdigest()
+              if got != sha: raise SystemExit(f'FAIL SHA {name}: {got}')
+              size=Image.open(p).size
+              if size != (1491,1055): raise SystemExit(f'FAIL SIZE {name}: {size}')
+              print('PASS',name,size,got)
+          PY
+
+      - name: Wire exact approved sources
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          p=Path('src/sttVisuals.ts')
+          s=p.read_text(encoding='utf-8')
+          replacements={
+            'home':'/visual-bank/stt/user-approved-six/home.png',
+            'problems':'/visual-bank/stt/user-approved-six/problems.png',
+            'method':'/visual-bank/stt/user-approved-six/method.png',
+            'columns':'/visual-bank/stt/user-approved-six/columns.png',
+            'publications':'/visual-bank/stt/user-approved-six/publications.png',
+            'aboutStt':'/visual-bank/stt/user-approved-six/about-stt.png',
+          }
+          for key,val in replacements.items():
+              pat=rf'(^\s*{key}:\s*)"[^"]+"(,\s*$)'
+              s,n=re.subn(pat,rf'\1"{val}"\2',s,count=1,flags=re.M)
+              if n != 1: raise SystemExit(f'FAIL mapping {key}')
+          p.write_text(s,encoding='utf-8')
+          PY
+
+      - name: Build gate
+        run: |
+          npm ci
+          npm run build
+
+      - name: Commit exact approved sources
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'STT Governance Build'
+          git config user.email 'actions@users.noreply.github.com'
+          git add public/visual-bank/stt/user-approved-six src/sttVisuals.ts
+          git commit -m 'fix: install exact approved STT six visual sources'
+          git push origin HEAD:main
