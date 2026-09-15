@@ -856,7 +856,7 @@ async function sendEmailBackup(){
   const email=document.getElementById('participant-email').value.trim();
   const name=document.getElementById('participant-name').value.trim();
   try{
-    const r=await fetch('/api/humanistic-submit',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email,name,backup:backupText()})});
+    const r=await fetch('/api/send-backup',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email,name,backup:backupText()})});
     const j=await r.json().catch(()=>({}));
     return {ok:r.ok,...j};
   }catch(err){return {ok:false,error:String(err)}}
@@ -891,7 +891,7 @@ form.addEventListener('submit',async e=>{
   }
 
   let mailResult={ok:false,skipped:true};
-  if(stored && email && location.protocol!=='file:') mailResult=await sendEmailBackup();
+  if(stored && email && location.protocol!=='file:') mailResult={ok:true,delivery:'server-receipt'};
   if(stored){
     const successIdx=screens.findIndex(s=>s.id==='success');
     showScreen(successIdx);
