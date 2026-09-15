@@ -1,13 +1,13 @@
 import { useNavigate } from "react-router-dom";
 
-const HUMANISTIC_INTERVIEW_URL = "https://shimmering-longma-509244.netlify.app/";
+const HUMANISTIC_INTERVIEW_URL = "/humanistic-interview/";
 const PORTRAIT_SRC = "/images/portrait-001.png";
 
 const channels = [
   {
     number: "01",
     title: "專欄寫作與媒體專訪",
-    subtitle: "接受莊博士採訪（Netlify 獨立人文地景產專區）",
+    subtitle: "接受莊博士採訪（獨立人文地景產專區）",
     body: <>透視尋常產業的商業性格，透過深度訪談與文字沉澱，為企業提煉出在市場浪潮中守住分寸、走向長青的<strong>品牌核心資產</strong>。</>,
     action: "進入專區 ➔ 提煉企業故事",
     external: HUMANISTIC_INTERVIEW_URL,
