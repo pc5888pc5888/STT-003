@@ -1,4 +1,4 @@
-name: Apply Humanistic submission governance and approved Cooperation hero
+name: Apply Humanistic and Cooperation production repair
 
 on:
   push:
@@ -19,7 +19,7 @@ jobs:
           ref: main
           fetch-depth: 0
 
-      - name: Install exact user-uploaded Cooperation hero
+      - name: Download exact uploaded Cooperation hero from secured Canva transfer
         shell: bash
         run: |
           set -euo pipefail
@@ -27,386 +27,12 @@ jobs:
           URL='https://media.canva.com/v2/image-resize/format:PNG/height:941/quality:100/uri:ifs%3A%2F%2FM%2F8b32cc2d-4e37-44d2-85b9-7ee3245248df/watermark:F/width:1672?csig=AAAAAAAAAAAAAAAAAAAAAFvZvRP5L1kpXR3PtQ9r-ak2zSPrdMouhlphHQjMo986&exp=1789539112&osig=AAAAAAAAAAAAAAAAAAAAAKYuHjksTtgJF54MJ2ZUaJoGnRjt25SqyFvZeuoeNgfX&signer=media-rpc&x-canva-quality=thumbnail'
           curl -L --fail --retry 3 --connect-timeout 20 --max-time 120 "$URL" -o public/visual-bank/stt/user-approved-cooperation/cooperation-hero-20260916.png
           python -m pip install -q Pillow
-          python - <<'PY'
-          from PIL import Image
-          from pathlib import Path
-          import hashlib
-          p=Path('public/visual-bank/stt/user-approved-cooperation/cooperation-hero-20260916.png')
-          im=Image.open(p)
-          if im.size != (1672,941):
-              raise SystemExit(f'FAIL cooperation hero dimensions: {im.size}')
-          if p.stat().st_size < 300_000:
-              raise SystemExit(f'FAIL cooperation hero unexpectedly small: {p.stat().st_size}')
-          print('PASS cooperation hero', im.size, p.stat().st_size, hashlib.sha256(p.read_bytes()).hexdigest())
-          PY
+          python -c "from PIL import Image; from pathlib import Path; p=Path('public/visual-bank/stt/user-approved-cooperation/cooperation-hero-20260916.png'); im=Image.open(p); assert im.size==(1672,941), im.size; assert p.stat().st_size>300000, p.stat().st_size; print('PASS hero', im.size, p.stat().st_size)"
 
-      - name: Patch Cooperation page to use the uploaded portrait only once
-        shell: bash
-        run: |
-          set -euo pipefail
-          python - <<'PY'
-          from pathlib import Path
+      - name: Apply deterministic source patches
+        run: python scripts/apply_humanistic_cooperation_20260916.py
 
-          page=Path('src/pages/Cooperation.tsx')
-          s=page.read_text(encoding='utf-8')
-          s=s.replace('const PORTRAIT_SRC = "/visual-bank/stt/hero-hires/stt-portrait.png";\n','')
-          portrait='          <img className="stt-coop-person" src={PORTRAIT_SRC} alt="莊鈞翔博士" draggable={false} />\n'
-          if portrait not in s:
-              raise SystemExit('FAIL: Cooperation portrait line not found')
-          s=s.replace(portrait,'',1)
-          page.write_text(s,encoding='utf-8')
-
-          css=Path('src/styles/stt-approved-heroes-20260915.css')
-          c=css.read_text(encoding='utf-8')
-          old="""  background-image:url('/visual-bank/stt/hero-hires/stt.png');
-  background-size:cover;
-  background-position:center center;
-  filter:saturate(.92) brightness(1.06);
-"""
-          new="""  background-image:url('/visual-bank/stt/user-approved-cooperation/cooperation-hero-20260916.png');
-  background-size:cover;
-  background-position:center center;
-  filter:none;
-"""
-          if old not in c:
-              raise SystemExit('FAIL: Cooperation background block not found')
-          c=c.replace(old,new,1)
-          c=c.replace('.stt-coop-portrait{\n', '.stt-coop-portrait{\n  pointer-events:none!important;\n', 1)
-          css.write_text(c,encoding='utf-8')
-          print('PASS Cooperation exact-source wiring; separate portrait overlay removed')
-          PY
-
-      - name: Harden Humanistic browser submission path
-        shell: bash
-        run: |
-          set -euo pipefail
-          python - <<'PY'
-          from pathlib import Path
-          import re
-
-          p=Path('public/humanistic-interview/index.html')
-          s=p.read_text(encoding='utf-8')
-
-          def once(old,new,label):
-              global s
-              n=s.count(old)
-              if n != 1:
-                  raise SystemExit(f'FAIL {label}: expected 1, found {n}')
-              s=s.replace(old,new,1)
-
-          once(
-              '<label class="consent"><input type="checkbox" id="consent"><span>',
-              '<label class="consent"><input type="checkbox" id="consent" name="consent" value="accepted" form="netlify-form"><span>',
-              'consent form binding',
-          )
-
-          old_save="""function saveAll(){
-  document.querySelectorAll('textarea[data-q]').forEach(t=>answers[t.dataset.q]=t.value);
-  sessionStorage.setItem(storageKey,JSON.stringify(answers));
-  const meta={
-    midNote:document.getElementById('mid-note')?.value||'',
-    name:document.getElementById('participant-name')?.value||'',
-    email:document.getElementById('participant-email')?.value||''
-  };
-  sessionStorage.setItem(metaKey,JSON.stringify(meta));
-}
-function hydrate(){
-  try{Object.assign(answers,JSON.parse(sessionStorage.getItem(storageKey)||'{}'))}catch{}
-"""
-          new_save="""function safeSessionGet(key){
-  try{return sessionStorage.getItem(key)}catch{return null}
-}
-function safeSessionSet(key,value){
-  try{sessionStorage.setItem(key,value);return true}catch{return false}
-}
-function safeSessionRemove(key){
-  try{sessionStorage.removeItem(key);return true}catch{return false}
-}
-function saveAll(){
-  document.querySelectorAll('textarea[data-q]').forEach(t=>answers[t.dataset.q]=t.value);
-  safeSessionSet(storageKey,JSON.stringify(answers));
-  const meta={
-    midNote:document.getElementById('mid-note')?.value||'',
-    name:document.getElementById('participant-name')?.value||'',
-    email:document.getElementById('participant-email')?.value||''
-  };
-  safeSessionSet(metaKey,JSON.stringify(meta));
-}
-function hydrate(){
-  try{Object.assign(answers,JSON.parse(safeSessionGet(storageKey)||'{}'))}catch{}
-"""
-          once(old_save,new_save,'safe session storage')
-          once("const m=JSON.parse(sessionStorage.getItem(metaKey)||'{}');","const m=JSON.parse(safeSessionGet(metaKey)||'{}');",'safe meta hydrate')
-
-          submit_pat=re.compile(r"const form=document\.getElementById\('netlify-form'\);\nform\.addEventListener\('submit',async e=>\{.*?\n\}\);",re.S)
-          submit_new="""const form=document.getElementById('netlify-form');
-form.addEventListener('submit',async e=>{
-  e.preventDefault();
-  const status=document.getElementById('submit-status');
-  const btn=document.getElementById('submit-btn');
-
-  saveAll();
-  syncFormFields();
-
-  if(!document.getElementById('consent').checked){
-    status.textContent='請先勾選使用說明與隱私提醒，再進行送出。';
-    return;
-  }
-  const email=document.getElementById('participant-email').value.trim();
-  if(email && !document.getElementById('participant-email').checkValidity()){
-    status.textContent='Email 格式似乎不完整，請修正或留白。';
-    return;
-  }
-  if(location.protocol==='file:'){
-    status.textContent='目前是本機預覽，尚未送出。';
-    return;
-  }
-
-  btn.disabled=true;
-  status.textContent='正在送出……';
-  const fd=new FormData(form);
-  const payload=new URLSearchParams();
-  for(const [k,v] of fd.entries())payload.append(k,v);
-
-  const controller=new AbortController();
-  const timeoutId=setTimeout(()=>controller.abort(),20000);
-  let r;
-  let result={};
-  try{
-    r=await fetch('/api/humanistic-submit',{
-      method:'POST',
-      headers:{'Content-Type':'application/x-www-form-urlencoded'},
-      body:payload.toString(),
-      signal:controller.signal,
-      credentials:'same-origin',
-      cache:'no-store'
-    });
-    result=await r.json().catch(()=>({}));
-  }catch(err){
-    clearTimeout(timeoutId);
-    status.textContent=err?.name==='AbortError'
-      ?'送件連線逾時。你的回答仍保留在目前頁面，請稍後再試。'
-      :'目前網路連線中斷，尚未送出。你的回答仍保留在目前頁面，請恢復連線後再試。';
-    btn.disabled=false;
-    return;
-  }
-  clearTimeout(timeoutId);
-
-  if(r.status===503){
-    status.textContent='送件服務暫時無法完成郵件傳送。你的回答尚未清除，請稍後再試；如需先離開，請先下載回答備份。';
-    btn.disabled=false;
-    return;
-  }
-  if(!r.ok || !result.ok){
-    status.textContent='送件回應異常，尚未完成送出。你的回答仍保留在目前頁面，請稍後再試。';
-    btn.disabled=false;
-    return;
-  }
-  if(result.delivery!=='resend-email'){
-    status.textContent='郵件交付尚未獲得確認，因此本頁不會宣告送件完成。你的回答仍保留，請稍後再試。';
-    btn.disabled=false;
-    return;
-  }
-
-  safeSessionSet(purgeMarker,'1');
-  purgeSubmittedData();
-  const successIdx=screens.findIndex(s=>s.id==='success');
-  showScreen(successIdx);
-  const msg=document.getElementById('success-message');
-  const er=document.getElementById('email-result');
-  msg.textContent=result.receiptId?`你的回答已完成送出。收件編號：${result.receiptId}`:'你的回答已完成送出。';
-  er.textContent='為保護個人資料，成功送出後，本網站已清除本頁與目前瀏覽器分頁暫存中的姓名、Email 與 20 題回答；本網站不保留您輸入的文字。';
-});"""
-          s,n=submit_pat.subn(submit_new,s,count=1)
-          if n != 1:
-              raise SystemExit(f'FAIL submit handler replacement: {n}')
-
-          once("if(sessionStorage.getItem(purgeMarker)==='1')purgeSubmittedData();else hydrate();","if(safeSessionGet(purgeMarker)==='1')purgeSubmittedData();else hydrate();",'safe purge marker read')
-          once("window.addEventListener('pageshow',()=>{if(sessionStorage.getItem(purgeMarker)==='1')purgeSubmittedData()});","window.addEventListener('pageshow',()=>{if(safeSessionGet(purgeMarker)==='1')purgeSubmittedData()});",'safe pageshow marker')
-          once("  sessionStorage.removeItem(purgeMarker);\n  location.reload();","  safeSessionRemove(purgeMarker);\n  location.reload();",'safe restart removal')
-
-          required=[
-            'function safeSessionSet(key,value)',
-            'form="netlify-form"',
-            "const timeoutId=setTimeout(()=>controller.abort(),20000);",
-            '送件服務暫時無法完成郵件傳送',
-            "result.delivery!=='resend-email'",
-          ]
-          for needle in required:
-              if needle not in s: raise SystemExit(f'FAIL missing {needle}')
-          p.write_text(s,encoding='utf-8')
-          print('PASS Humanistic browser submission hardening')
-          PY
-
-      - name: Harden Humanistic server response without retaining content
-        shell: bash
-        run: |
-          set -euo pipefail
-          python - <<'PY'
-          from pathlib import Path
-
-          p=Path('api/humanistic-submit.ts')
-          s=p.read_text(encoding='utf-8')
-
-          old="""    const delivery = await deliverViaResend(body, fullMessage, receiptId);
-    if (delivery.attempted && delivery.ok) {
-      // Privacy rule: never log submitted names, emails, answers, or the full message.
-      console.log("HUMANISTIC_EMAIL_SENT", JSON.stringify({
-        receiptId,
-        provider: "resend",
-        sentAt: new Date().toISOString(),
-      }));
-      return json(res, 200, { ok: true, delivery: "resend-email", receiptId });
-    }
-
-    console.error("HUMANISTIC_EMAIL_FAILED", JSON.stringify({
-      receiptId,
-      provider: "resend",
-      status: delivery.status,
-      failedAt: new Date().toISOString(),
-    }));
-    return json(res, 503, { ok: false, error: "Delivery unavailable. Please retry.", receiptId });
-"""
-          new="""    const delivery = await deliverViaResend(body, fullMessage, receiptId);
-    if (delivery.attempted && delivery.ok) {
-      // Privacy rule: never log submitted names, emails, answers, or the full message.
-      console.log("HUMANISTIC_EMAIL_SENT", JSON.stringify({
-        receiptId,
-        provider: "resend",
-        sentAt: new Date().toISOString(),
-      }));
-      return json(res, 200, { ok: true, delivery: "resend-email", receiptId });
-    }
-
-    const code = delivery.attempted ? "DELIVERY_REJECTED" : "DELIVERY_NOT_CONFIGURED";
-    console.error("HUMANISTIC_EMAIL_FAILED", JSON.stringify({
-      receiptId,
-      provider: "resend",
-      code,
-      status: delivery.status,
-      failedAt: new Date().toISOString(),
-    }));
-    return json(res, 503, {
-      ok: false,
-      code,
-      retryable: delivery.attempted,
-      error: "Delivery unavailable. Please retry.",
-      receiptId,
-    });
-"""
-          if old not in s:
-              raise SystemExit('FAIL: server delivery block not found')
-          s=s.replace(old,new,1)
-
-          old_catch="""    return json(res, 503, { ok: false, error: "Delivery unavailable. Please retry.", receiptId });
-  }
-}
-"""
-          new_catch="""    return json(res, 503, {
-      ok: false,
-      code: "DELIVERY_EXCEPTION",
-      retryable: true,
-      error: "Delivery unavailable. Please retry.",
-      receiptId,
-    });
-  }
-}
-"""
-          if old_catch not in s:
-              raise SystemExit('FAIL: server catch response not found')
-          s=s.replace(old_catch,new_catch,1)
-          if 'fullMessage' not in s or 'serverContentLogging: false' not in s:
-              raise SystemExit('FAIL: server privacy contract drift')
-          p.write_text(s,encoding='utf-8')
-          print('PASS Humanistic server structured failure handling')
-          PY
-
-      - name: Replace stale production verification gate
-        shell: bash
-        run: |
-          set -euo pipefail
-          cat > .github/workflows/verify-humanistic-production-once.yml <<'YAML'
-          name: Verify Humanistic production delivery
-
-          on:
-            push:
-              branches: [main]
-              paths:
-                - public/humanistic-interview/index.html
-                - api/humanistic-submit.ts
-                - .github/workflows/verify-humanistic-production-once.yml
-            workflow_dispatch:
-
-          permissions:
-            contents: read
-
-          concurrency:
-            group: humanistic-production-verification
-            cancel-in-progress: true
-
-          jobs:
-            verify:
-              runs-on: ubuntu-latest
-              steps:
-                - name: Wait for production browser transport
-                  shell: bash
-                  run: |
-                    set -euo pipefail
-                    for i in $(seq 1 60); do
-                      page=$(curl -fsSL https://stt-003.vercel.app/humanistic-interview/ || true)
-                      api=$(curl -fsSL https://stt-003.vercel.app/api/humanistic-submit || true)
-                      if printf '%s' "$page" | grep -Fq "送件服務暫時無法完成郵件傳送" \
-                        && printf '%s' "$page" | grep -Fq "result.delivery!=='resend-email'" \
-                        && printf '%s' "$api" | grep -Fq '"resendConfigured":true'; then
-                        echo 'production transport and provider configuration visible'
-                        exit 0
-                      fi
-                      sleep 5
-                    done
-                    echo 'production did not reach governed Humanistic version in time'
-                    exit 1
-
-                - name: Submit one complete synthetic journey
-                  shell: bash
-                  run: |
-                    set -euo pipefail
-                    args=(
-                      --data-urlencode 'form-name=humanistic-20q'
-                      --data-urlencode 'participant_name=STT Production E2E'
-                      --data-urlencode 'consent=accepted'
-                    )
-                    for i in $(seq -w 1 20); do args+=(--data-urlencode "q${i}=[STT E2E TEST ${i}]"); done
-                    r=$(curl -fsS -X POST https://stt-003.vercel.app/api/humanistic-submit \
-                      -H 'Content-Type: application/x-www-form-urlencoded' "${args[@]}")
-                    echo "$r"
-                    echo "$r" | grep -Fq '"ok":true'
-                    echo "$r" | grep -Fq '"delivery":"resend-email"'
-                    echo "$r" | grep -Fq '"receiptId":"HUM-'
-          YAML
-
-      - name: Add production release marker and runtime documentation
-        shell: bash
-        run: |
-          set -euo pipefail
-          printf '%s\n' 'STT-COOP-HUMANISTIC-20260916-V1' > public/stt-release-humanistic-cooperation-20260916.txt
-          cat > docs/HUMANISTIC_PRODUCTION_DELIVERY.md <<'MD'
-          # Humanistic 20 Questions — production delivery contract
-
-          The public form submits to `/api/humanistic-submit` on the same origin.
-
-          Production success is declared only when the server confirms `delivery: "resend-email"` and returns a `receiptId`.
-          Failed or timed-out delivery never clears the participant's current-page answers.
-          Successful delivery clears the page and tab-session draft immediately.
-          Browser session storage is an optional draft convenience and must never be a prerequisite for POST delivery.
-
-          Required Vercel production environment variables:
-          - `RESEND_API_KEY`
-          - `RESEND_FROM_EMAIL` — use an address on a domain verified in the STT Resend account for unrestricted production delivery.
-
-          Privacy rule: submitted names, email addresses, and answers must not be written to server logs or a server-side content store by this endpoint.
-          MD
-
-      - name: Static evidence gate
+      - name: Static governance gate
         shell: bash
         run: |
           set -euo pipefail
@@ -416,61 +42,47 @@ form.addEventListener('submit',async e=>{
           grep -Fq 'form="netlify-form"' public/humanistic-interview/index.html
           grep -Fq 'DELIVERY_REJECTED' api/humanistic-submit.ts
           grep -Fq 'serverContentLogging: false' api/humanistic-submit.ts
-          grep -Fq 'delivery":"resend-email' .github/workflows/verify-humanistic-production-once.yml
-          echo 'PASS static governance evidence gate'
+          echo 'PASS static governance gate'
 
       - name: Build gate
         run: |
           npm ci
           npm run build
 
-      - name: Commit governed changes
+      - name: Commit repaired production sources
         shell: bash
         run: |
           set -euo pipefail
           git config user.name 'STT Governance Build'
           git config user.email 'actions@users.noreply.github.com'
-          git add \
-            public/visual-bank/stt/user-approved-cooperation/cooperation-hero-20260916.png \
-            public/stt-release-humanistic-cooperation-20260916.txt \
-            src/pages/Cooperation.tsx \
-            src/styles/stt-approved-heroes-20260915.css \
-            public/humanistic-interview/index.html \
-            api/humanistic-submit.ts \
-            .github/workflows/verify-humanistic-production-once.yml \
-            docs/HUMANISTIC_PRODUCTION_DELIVERY.md
+          git add public/visual-bank/stt/user-approved-cooperation/cooperation-hero-20260916.png public/stt-release-humanistic-cooperation-20260916.txt src/pages/Cooperation.tsx src/styles/stt-approved-heroes-20260915.css public/humanistic-interview/index.html api/humanistic-submit.ts docs/HUMANISTIC_PRODUCTION_DELIVERY.md
           git commit -m 'fix: close Humanistic delivery loop and install approved Cooperation hero'
           git push origin HEAD:main
 
-      - name: Wait for Vercel production and verify delivery end-to-end
+      - name: Wait for Vercel production release
         shell: bash
         run: |
           set -euo pipefail
-          ready=0
           for i in $(seq 1 72); do
             marker=$(curl -fsSL https://stt-003.vercel.app/stt-release-humanistic-cooperation-20260916.txt || true)
-            if printf '%s' "$marker" | grep -Fq 'STT-COOP-HUMANISTIC-20260916-V1'; then
-              ready=1
-              break
+            if printf '%s' "$marker" | grep -Fq 'STT-COOP-HUMANISTIC-20260916-V2'; then
+              echo 'production marker is live'
+              exit 0
             fi
             sleep 5
           done
-          if [ "$ready" -ne 1 ]; then
-            echo 'FAIL Vercel production marker not visible'
-            exit 1
-          fi
+          echo 'Vercel production marker did not become live in time'
+          exit 1
 
+      - name: Verify production Humanistic delivery end to end
+        shell: bash
+        run: |
+          set -euo pipefail
           api=$(curl -fsSL https://stt-003.vercel.app/api/humanistic-submit)
           echo "$api" | grep -Fq '"resendConfigured":true'
-
-          args=(
-            --data-urlencode 'form-name=humanistic-20q'
-            --data-urlencode 'participant_name=STT Production E2E'
-            --data-urlencode 'consent=accepted'
-          )
+          args=(--data-urlencode 'form-name=humanistic-20q' --data-urlencode 'participant_name=STT Production E2E' --data-urlencode 'consent=accepted')
           for i in $(seq -w 1 20); do args+=(--data-urlencode "q${i}=[STT E2E TEST ${i}]"); done
-          response=$(curl -fsS -X POST https://stt-003.vercel.app/api/humanistic-submit \
-            -H 'Content-Type: application/x-www-form-urlencoded' "${args[@]}")
+          response=$(curl -fsS -X POST https://stt-003.vercel.app/api/humanistic-submit -H 'Content-Type: application/x-www-form-urlencoded' "${args[@]}")
           echo "$response"
           echo "$response" | grep -Fq '"ok":true'
           echo "$response" | grep -Fq '"delivery":"resend-email"'
