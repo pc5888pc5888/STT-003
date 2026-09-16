@@ -1,0 +1,1 @@
+Temporary generated hero transfer chunks are deprecated. Final production pages use the binary WebP files under public/visual-bank/stt/final-20260916/ directly. Do not use external image URLs or build-time fetches.
