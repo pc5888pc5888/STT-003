@@ -1,0 +1,107 @@
+name: Finalize approved Cooperation and Eric heroes
+
+on:
+  push:
+    paths:
+      - '.github/workflows/finalize-approved-two-heroes-20260916.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  install-approved-heroes:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Download exact approved hero images
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p public/images
+
+          COOP='https://media.canva.com/v2/image-resize/format:WEBP/height:941/quality:94/uri:ifs%3A%2F%2FM%2Faee2f1f5-aed9-428a-ad7e-48547f947aa6/watermark:F/width:1672?csig=AAAAAAAAAAAAAAAAAAAAACLjb3WljhRZp5WAncAOhyd2veQln5wDYPyj_Lx3j6g5&exp=1789553759&osig=AAAAAAAAAAAAAAAAAAAAABfucQXCF8OPjlMk0WtZdlPCK22qPx5DJhZvTSRSNrbl&signer=media-rpc&x-canva-quality=thumbnail'
+          ERIC='https://media.canva.com/v2/image-resize/format:WEBP/height:941/quality:94/uri:ifs%3A%2F%2FM%2F6cbb47ee-d964-4b9f-9a79-6d243ff55674/watermark:F/width:1672?csig=AAAAAAAAAAAAAAAAAAAAADWSoqbcc-fYnqpXymL7sGAoxtjPPhG5aHbXZ-uvtnnB&exp=1789552867&osig=AAAAAAAAAAAAAAAAAAAAAKKj7VKRP02R1IvDn3Bka_mGXLQB-RfjZzoSXr9t4pnE&signer=media-rpc&x-canva-quality=thumbnail'
+
+          curl -fL --retry 3 --retry-delay 2 "$COOP" -o public/images/stt-cooperation-hero-20260916.webp
+          curl -fL --retry 3 --retry-delay 2 "$ERIC" -o public/images/stt-eric-chuang-hero-20260916.webp
+
+          test "$(wc -c < public/images/stt-cooperation-hero-20260916.webp)" -gt 100000
+          test "$(wc -c < public/images/stt-eric-chuang-hero-20260916.webp)" -gt 100000
+          file public/images/stt-cooperation-hero-20260916.webp
+          file public/images/stt-eric-chuang-hero-20260916.webp
+
+      - name: Wire Cooperation hero and remove duplicate signature layer
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('src/pages/Cooperation.tsx')
+          s = p.read_text()
+
+          s = s.replace('import { COOPERATION_HERO_SRC } from "../assets/generated/cooperationHero";\n', '')
+          s = s.replace('const SIGNATURE_SRC = "/images/signature-eric001.png";\n', '')
+          s = s.replace('background-size: auto 100% !important;', 'background-size: cover !important;')
+          s = s.replace('background-position: right center !important;', 'background-position: center center !important;')
+          s = s.replace('filter: none !important;\n        }', 'filter: none !important;\n          opacity: 1 !important;\n        }')
+          s = s.replace('background-position: 72% top !important;', 'background-position: 70% top !important;')
+          s = s.replace('style={{ backgroundImage: `url("${COOPERATION_HERO_SRC}")` }}', 'style={{ backgroundImage: \'url("/images/stt-cooperation-hero-20260916.webp")\' }}')
+
+          start = s.find('        <div className="stt-coop-portrait" aria-label="莊鈞翔博士">')
+          if start != -1:
+              end_marker = '        </div>\n      </section>'
+              end = s.find(end_marker, start)
+              if end == -1:
+                  raise SystemExit('Could not locate end of cooperation portrait block')
+              s = s[:start] + '      </section>' + s[end + len(end_marker):]
+
+          if 'COOPERATION_HERO_SRC' in s or 'SIGNATURE_SRC' in s or 'stt-coop-signature' in s:
+              raise SystemExit('Old cooperation hero/signature references remain')
+          if '/images/stt-cooperation-hero-20260916.webp' not in s:
+              raise SystemExit('New cooperation hero path missing')
+
+          p.write_text(s)
+          PY
+
+      - name: Wire Eric Chuang hero
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('src/sttVisuals.ts')
+          s = p.read_text()
+          old = 'governanceResponsibility: "/visual-bank/stt/hero-hires/stt-portrait.png",'
+          new = 'governanceResponsibility: "/images/stt-eric-chuang-hero-20260916.webp",'
+          if old not in s:
+              raise SystemExit('Expected old governanceResponsibility visual mapping not found')
+          s = s.replace(old, new)
+          p.write_text(s)
+          PY
+
+      - name: Build verification
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm ci
+          npm run build
+
+      - name: Commit and push
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'STT Governance Automation'
+          git config user.email 'actions@users.noreply.github.com'
+          git add public/images/stt-cooperation-hero-20260916.webp \
+                  public/images/stt-eric-chuang-hero-20260916.webp \
+                  src/pages/Cooperation.tsx \
+                  src/sttVisuals.ts
+          if git diff --cached --quiet; then
+            echo 'No changes to commit.'
+            exit 0
+          fi
+          git commit -m 'fix: install approved cooperation and Eric hero images'
+          git push origin HEAD:main
