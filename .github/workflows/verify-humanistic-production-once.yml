@@ -1,63 +1,56 @@
-name: Verify Humanistic production once
+name: Verify Humanistic production delivery
 
 on:
   push:
     branches: [main]
     paths:
+      - public/humanistic-interview/index.html
+      - api/humanistic-submit.ts
       - .github/workflows/verify-humanistic-production-once.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: humanistic-production-verification
+  cancel-in-progress: true
 
 jobs:
   verify:
     runs-on: ubuntu-latest
     steps:
-      - name: Wait for fixed production page
+      - name: Wait for governed production transport
+        shell: bash
         run: |
           set -euo pipefail
           for i in $(seq 1 60); do
             page=$(curl -fsSL https://stt-003.vercel.app/humanistic-interview/ || true)
-            if printf '%s' "$page" | grep -Fq "fetch('/api/humanistic-submit',{method:'POST'" \
-              && printf '%s' "$page" | grep -Fq "mailResult={ok:true,delivery:'server-receipt'}" \
-              && ! printf '%s' "$page" | grep -Fq "fetch('/',{method:'POST'"; then
-              echo 'production page transport verified'
+            api=$(curl -fsSL https://stt-003.vercel.app/api/humanistic-submit || true)
+            if printf '%s' "$page" | grep -Fq "送件服務暫時無法完成郵件傳送" \
+              && printf '%s' "$page" | grep -Fq "result.delivery!=='resend-email'" \
+              && printf '%s' "$api" | grep -Fq '"resendConfigured":true'; then
+              echo 'production transport and provider configuration visible'
               exit 0
             fi
             sleep 5
           done
-          echo 'production page did not reach fixed version in time'
+          echo 'production did not reach governed Humanistic version in time'
           exit 1
 
-      - name: Submit full no-email case
+      - name: Submit one complete synthetic journey
+        shell: bash
         run: |
           set -euo pipefail
           args=(
             --data-urlencode 'form-name=humanistic-20q'
-            --data-urlencode 'name=STT無Email驗證'
-            --data-urlencode 'company=STT Governance'
-            --data-urlencode 'message=[SYSTEM TEST NO EMAIL]'
+            --data-urlencode 'participant_name=STT Production E2E'
+            --data-urlencode 'consent=accepted'
           )
-          for i in $(seq -w 1 20); do args+=(--data-urlencode "q${i}=驗證回答${i}"); done
+          for i in $(seq -w 1 20); do args+=(--data-urlencode "q${i}=[STT E2E TEST ${i}]"); done
           r=$(curl -fsS -X POST https://stt-003.vercel.app/api/humanistic-submit \
             -H 'Content-Type: application/x-www-form-urlencoded' "${args[@]}")
           echo "$r"
           echo "$r" | grep -Fq '"ok":true'
+          echo "$r" | grep -Fq '"delivery":"resend-email"'
           echo "$r" | grep -Fq '"receiptId":"HUM-'
-
-      - name: Submit full with-email case
-        run: |
-          set -euo pipefail
-          args=(
-            --data-urlencode 'form-name=humanistic-20q'
-            --data-urlencode 'name=STT有Email驗證'
-            --data-urlencode 'company=STT Governance'
-            --data-urlencode 'email=pc5888@gmail.com'
-            --data-urlencode 'message=[SYSTEM TEST WITH EMAIL]'
-          )
-          for i in $(seq -w 1 20); do args+=(--data-urlencode "q${i}=驗證回答${i}"); done
-          r=$(curl -fsS -X POST https://stt-003.vercel.app/api/humanistic-submit \
-            -H 'Content-Type: application/x-www-form-urlencoded' "${args[@]}")
-          echo "$r"
-          echo "$r" | grep -Fq '"ok":true'
-          echo "$r" | grep -Fq '"receiptId":"HUM-'
-
-      - name: Verification marker
-        run: echo 'Humanistic production verification completed'
