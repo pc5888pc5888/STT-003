@@ -25,7 +25,7 @@ export const STT_VISUALS = {
   internalCompliance: "/visual-bank/stt/originals-20260910/internal-compliance.webp",
   research: "/visual-bank/stt/originals-20260910/insights.webp",
   projects: "/visual-bank/stt/originals-20260910/stt-platform.webp",
-  governanceResponsibility: "/visual-bank/stt/final-20260916/eric-chuang-hero.webp",
+  governanceResponsibility: "/images/stt-eric-chuang-hero-20260916.webp",
 } as const;
 
 export type STTVisualKey = keyof typeof STT_VISUALS;
