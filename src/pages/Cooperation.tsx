@@ -1,8 +1,7 @@
 import { useNavigate } from "react-router-dom";
-import { COOPERATION_HERO_SRC } from "../assets/generated/cooperationHero";
 
 const HUMANISTIC_INTERVIEW_URL = "/humanistic-20q/";
-const SIGNATURE_SRC = "/images/signature-eric001.png";
+const COOPERATION_HERO_SRC = "/visual-bank/stt/final-20260916/cooperation-hero.webp";
 
 const channels = [
   {
@@ -45,17 +44,68 @@ export default function Cooperation() {
   return (
     <div className="stt-coop-page">
       <style>{`
+        .stt-coop-hero {
+          position: relative;
+          isolation: isolate;
+          overflow: hidden;
+          min-height: clamp(700px, calc(100svh - 76px), 880px);
+          background: #fbfaf7;
+        }
+
         .stt-coop-hero-bg {
-          background-size: auto 100% !important;
-          background-position: right center !important;
+          position: absolute;
+          inset: 0;
+          z-index: -2;
+          background-size: cover !important;
+          background-position: center center !important;
           background-repeat: no-repeat !important;
           filter: none !important;
         }
 
+        .stt-coop-hero::after {
+          content: "";
+          position: absolute;
+          inset: 0;
+          z-index: -1;
+          pointer-events: none;
+          background: linear-gradient(
+            90deg,
+            rgba(251,250,247,.985) 0%,
+            rgba(251,250,247,.94) 24%,
+            rgba(251,250,247,.74) 39%,
+            rgba(251,250,247,.24) 55%,
+            rgba(251,250,247,0) 69%
+          );
+        }
+
+        .stt-coop-copy {
+          position: relative;
+          z-index: 1;
+          width: min(50%, 720px);
+        }
+
         @media (max-width: 900px) {
+          .stt-coop-hero {
+            min-height: 760px;
+            padding-top: 320px;
+          }
+
           .stt-coop-hero-bg {
-            background-size: cover !important;
-            background-position: 72% top !important;
+            background-position: 70% top !important;
+          }
+
+          .stt-coop-hero::after {
+            background: linear-gradient(
+              180deg,
+              rgba(251,250,247,.05) 0%,
+              rgba(251,250,247,.18) 34%,
+              rgba(251,250,247,.93) 58%,
+              rgba(251,250,247,1) 100%
+            );
+          }
+
+          .stt-coop-copy {
+            width: 100%;
           }
         }
       `}</style>
@@ -76,14 +126,6 @@ export default function Cooperation() {
           <div className="stt-coop-caption">
             <strong>STRATEGIC COOPERATION &amp; GROWTH｜預約與合作</strong>
             <span>一起思考更好的決策，讓重要的事，走得更遠。</span>
-          </div>
-        </div>
-        <div className="stt-coop-portrait" aria-label="莊鈞翔博士">
-          <div className="stt-coop-signature">
-            <img src={SIGNATURE_SRC} alt="莊鈞翔博士簽名" draggable={false} />
-            <strong>莊鈞翔 博士</strong>
-            <span>CHUANG CHUN-HSIANG, Ph.D.</span>
-            <small>人文戰略推文者｜企業治理策略顧問｜內在法遵推動者</small>
           </div>
         </div>
       </section>
