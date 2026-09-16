@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
+import { COOPERATION_HERO_SRC } from "../assets/generated/cooperationHero";
 
 const HUMANISTIC_INTERVIEW_URL = "/humanistic-20q/";
-const PORTRAIT_SRC = "/visual-bank/stt/hero-hires/stt-portrait.png";
 const SIGNATURE_SRC = "/images/signature-eric001.png";
 
 const channels = [
@@ -44,8 +44,28 @@ export default function Cooperation() {
 
   return (
     <div className="stt-coop-page">
+      <style>{`
+        .stt-coop-hero-bg {
+          background-size: auto 100% !important;
+          background-position: right center !important;
+          background-repeat: no-repeat !important;
+          filter: none !important;
+        }
+
+        @media (max-width: 900px) {
+          .stt-coop-hero-bg {
+            background-size: cover !important;
+            background-position: 72% top !important;
+          }
+        }
+      `}</style>
+
       <section className="stt-coop-hero" aria-labelledby="stt-coop-title">
-        <div className="stt-coop-hero-bg" aria-hidden="true" />
+        <div
+          className="stt-coop-hero-bg"
+          aria-hidden="true"
+          style={{ backgroundImage: `url("${COOPERATION_HERO_SRC}")` }}
+        />
         <div className="stt-coop-copy">
           <h1 id="stt-coop-title">企業在市場的終局賽道能走多遠，<br />取決於經營者在資本，<br />利潤與變局交織時的決策序列。</h1>
           <p className="stt-coop-intro"><strong>STT Governance 策略智庫</strong>由莊鈞翔博士主導，我們不談懸空的理論，只專注於<strong>「拆解商業本質」</strong>與<strong>「建構治理護城河」</strong>，透過嚴謹的商學實戰邏輯，協助企業在龐大生存壓力下精準破局；歡迎依據您的發展策略，選擇相對應的合作通道。</p>
@@ -59,7 +79,6 @@ export default function Cooperation() {
           </div>
         </div>
         <div className="stt-coop-portrait" aria-label="莊鈞翔博士">
-          <img className="stt-coop-person" src={PORTRAIT_SRC} alt="莊鈞翔博士" draggable={false} />
           <div className="stt-coop-signature">
             <img src={SIGNATURE_SRC} alt="莊鈞翔博士簽名" draggable={false} />
             <strong>莊鈞翔 博士</strong>
