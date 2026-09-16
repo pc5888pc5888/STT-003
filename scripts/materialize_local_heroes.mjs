@@ -4,22 +4,26 @@ import path from 'node:path';
 const ROOT = process.cwd();
 const jobs = [
   {
-    dir: 'src/assets/localHeroBase64/cooperation',
+    payload: 'src/assets/localHeroPayload/cooperation.txt',
     out: 'public/images/stt-cooperation-hero-20260916.webp',
+    minBytes: 50000,
   },
   {
-    dir: 'src/assets/localHeroBase64/eric',
+    payload: 'src/assets/localHeroPayload/eric.txt',
     out: 'public/images/stt-eric-chuang-hero-20260916.webp',
+    minBytes: 40000,
   },
 ];
 
 for (const job of jobs) {
-  const dir = path.join(ROOT, job.dir);
-  const files = fs.readdirSync(dir).filter((f) => /^c\d+\.txt$/.test(f)).sort();
-  if (!files.length) throw new Error(`No hero chunks in ${job.dir}`);
-  const b64 = files.map((f) => fs.readFileSync(path.join(dir, f), 'utf8').trim()).join('');
+  const payloadPath = path.join(ROOT, job.payload);
+  if (!fs.existsSync(payloadPath)) throw new Error(`Missing local hero payload: ${job.payload}`);
+  const b64 = fs.readFileSync(payloadPath, 'utf8').replace(/\s+/g, '');
   const bytes = Buffer.from(b64, 'base64');
-  if (bytes.length < 50000) throw new Error(`Hero asset too small: ${job.out} (${bytes.length} bytes)`);
+  if (bytes.length < job.minBytes) throw new Error(`Hero asset too small: ${job.out} (${bytes.length} bytes)`);
+  if (bytes.subarray(0, 4).toString('ascii') !== 'RIFF' || bytes.subarray(8, 12).toString('ascii') !== 'WEBP') {
+    throw new Error(`Hero payload is not WebP: ${job.payload}`);
+  }
   const out = path.join(ROOT, job.out);
   fs.mkdirSync(path.dirname(out), { recursive: true });
   fs.writeFileSync(out, bytes);
