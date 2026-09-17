@@ -6,12 +6,12 @@ const jobs = [
   {
     payload: 'src/assets/localHeroPayload/cooperation.txt',
     out: 'public/images/stt-cooperation-hero-20260916.webp',
-    minBytes: 50000,
+    minBytes: 10000,
   },
   {
     payload: 'src/assets/localHeroPayload/eric.txt',
     out: 'public/images/stt-eric-chuang-hero-20260916.webp',
-    minBytes: 40000,
+    minBytes: 10000,
   },
 ];
 
