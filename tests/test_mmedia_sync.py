@@ -21,6 +21,11 @@ class ArchiveTests(unittest.TestCase):
     def test_unknown_category_is_pending_not_guessed(self):
         row={**self.rows[0],'url':'https://94m.com.tw/articles/testonly-pending','category':'焦點'}
         result=sync.merge(self.data,[row],self.now,1); self.assertEqual(result['stats']['total'],self.n); self.assertEqual(result['stats']['pending'],1)
+    def test_explicit_humanistic_column_label_overrides_broad_source_category(self):
+        row={**self.rows[0],'url':'https://94m.com.tw/articles/testonly-humanistic','category':'專家','title':'測試文章｜人文地景產專欄'}
+        result=sync.merge(self.data,[row],self.now,1)
+        item=next(r for r in result['articles'] if r['url']==row['url'])
+        self.assertEqual(item['series'],'humanistic'); self.assertNotIn(row['url'],{r['url'] for r in result.get('pending',[])})
     def test_other_author_and_external_url_rejected(self):
         for row in ({**self.rows[0],'author':'其他作者'},{**self.rows[0],'url':'https://example.com/articles/test'}):
             with self.assertRaises(ValueError): sync.merge(self.data,[row],self.now,1)
