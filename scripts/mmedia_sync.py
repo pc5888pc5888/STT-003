@@ -1,6 +1,7 @@
 """Read the public author index; never delete an archived article on absence.
 The /articles/more POST is the site's public read-only '查看更多' operation.
-No login, CMS credentials, article-body scraping or title-based classification.
+No login, CMS credentials or article-body scraping. The explicit published column label
+「人文地景產專欄」 is authoritative for that series even when M傳媒 uses a broader source category.
 """
 from __future__ import annotations
 import argparse, datetime as dt, hashlib, http.cookiejar, json, pathlib, re, sys, time
@@ -15,10 +16,18 @@ ORIGIN = 'https://94m.com.tw'
 FIELDS = ('url', 'title', 'date', 'category', 'author', 'authorUrl', 'excerpt')
 SERIES = {'法律': 'legal', '社會': 'humanistic', '熱門社會': 'humanistic', 'M-news': 'news', 'M-NEWS': 'news', 'Ｍ-NEWS': 'news'}
 TITLES = {'legal': '莊博士法律新聞專欄', 'humanistic': '莊博士人文地景產專欄', 'news': '莊博士新聞採訪專欄'}
+HUMANISTIC_LABEL = '人文地景產專欄'
 
 def absolute(value: str) -> str:
     u = urllib.parse.urlparse(urllib.parse.urljoin(ORIGIN, str(value or '')))
     return urllib.parse.urlunparse((u.scheme, u.netloc, u.path, '', '', ''))
+
+def series_for(row: dict) -> str | None:
+    # M傳媒 may publish this named column under a broader category such as「專家」.
+    # The explicit column label is narrower and therefore authoritative only for this series.
+    if HUMANISTIC_LABEL in str(row.get('title', '')):
+        return 'humanistic'
+    return SERIES.get(str(row.get('category', '')))
 
 def verified(row: dict) -> bool:
     return (row.get('authorUrl') == AUTHOR and re.sub(r'\s+', '', str(row.get('author', ''))) == '莊鈞翔博士'
@@ -107,9 +116,9 @@ def merge(previous: dict, rows: list[dict], checked_at: str, pages: int) -> dict
     seen = set(); changes = {'added': 0, 'updated': 0, 'reclassified': 0}
     for row in rows:
         if not verified(row): raise ValueError('Merge input failed author validation')
-        seen.add(row['url']); series = SERIES.get(row['category'])
+        seen.add(row['url']); series = series_for(row)
         if not series:
-            pending[row['url']] = {**row, 'reason': '來源分類尚未授權對應，不以標題猜測。'}
+            pending[row['url']] = {**row, 'reason': '來源分類尚未授權對應，且未帶有已核定的明確專欄標籤。'}
             continue
         pending.pop(row['url'], None)
         source_id = row['url'].rsplit('/', 1)[-1]
@@ -147,7 +156,7 @@ def main() -> None:
     temp = CATALOG.with_suffix('.tmp'); temp.write_text(json.dumps(result, ensure_ascii=False, indent=2) + '\n', encoding='utf-8'); temp.replace(CATALOG)
     print(json.dumps({'checkedAt': checked, 'stats': result['stats'], 'sync': result['sync'], 'baseline': result['baseline']}, ensure_ascii=False, indent=2))
 
-if __name__ == '__main__':
+if __name__=='__main__':
     try: main()
     except Exception as error:
         print('SYNC BLOCKED: ' + str(error), file=sys.stderr); sys.exit(1)
