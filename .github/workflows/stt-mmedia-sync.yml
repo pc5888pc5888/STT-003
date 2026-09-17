@@ -45,7 +45,15 @@ jobs:
           git add public/data/mmedia-catalog.json
           if git diff --cached --quiet; then exit 0; fi
           git commit -m "data: synchronize verified Dr Chuang column archive"
-          git push origin HEAD:main
+          for attempt in 1 2 3; do
+            if git push origin HEAD:main; then exit 0; fi
+            echo "main advanced during synchronization; rebasing catalog commit (attempt ${attempt})"
+            git fetch origin main
+            git rebase origin/main
+            sleep 2
+          done
+          echo 'unable to persist verified catalog after three attempts'
+          exit 1
       - name: Summarize the result
         run: |
           python - <<'PY'
