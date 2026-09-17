@@ -6,7 +6,10 @@ on:
   workflow_dispatch:
   push:
     branches: [main]
-    paths: [.github/workflows/stt-mmedia-sync.yml]
+    paths:
+      - '.github/workflows/stt-mmedia-sync.yml'
+      - 'scripts/mmedia_sync.py'
+      - 'tests/test_mmedia_sync.py'
 permissions:
   contents: write
 concurrency:
