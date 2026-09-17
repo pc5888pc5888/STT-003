@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 
 const HUMANISTIC_INTERVIEW_URL = "/humanistic-20q/";
-const COOPERATION_HERO_SRC = "/visual-bank/stt/final-20260916/cooperation-hero.webp";
+const COOPERATION_HERO_SRC = "/images/stt-cooperation-hero-20260916.webp";
 
 const channels = [
   {
