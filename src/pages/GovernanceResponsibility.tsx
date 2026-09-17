@@ -21,7 +21,7 @@ const domains = [
 export default function GovernanceResponsibility(){
   const navigate=useNavigate();
   return <div className="gr-root">
-    <STTPageHero visual="governanceResponsibility" eyebrow="GOVERNANCE RESPONSIBILITY" title="莊鈞翔 博士" lead="STT 的最終價值不是由一個人取代所有專業，而是確保重大問題有人負責形成、證據有人要求、專業在必要時進場、AI 權力有邊界，而最後的治理判讀仍然有一個可以被追問的人。">
+    <STTPageHero primary visual="governanceResponsibility" eyebrow="GOVERNANCE RESPONSIBILITY" title="莊鈞翔 博士" lead="STT 的最終價值不是由一個人取代所有專業，而是確保重大問題有人負責形成、證據有人要求、專業在必要時進場、AI 權力有邊界，而最後的治理判讀仍然有一個可以被追問的人。">
       <p className="gr-hero-note">ERIC CHUANG, PH.D. · GOVERNANCE STRATEGIST</p>
     </STTPageHero>
     <section className="gr-section"><div className="gr-wrap"><p className="stt-master-kicker">ROLE OF FINAL JUDGMENT</p><h2>治理責任不是「永遠知道答案」，而是對判斷程序與最後決定負責。</h2><p className="gr-desc">能力可以外包，資訊可以由工具協助，專業可以分工；但最後的授權、否決、停止與責任，不能因此消失。</p><div className="gr-grid">{[["01","問題形成","在比較方案之前，先確認真正需要被回答的是什麼。"],["02","證據門檻","要求重要主張能回到來源、假設、未知與可能推翻結論的證據。"],["03","專業路由","辨識法律、會計、稅務、信託、產業或技術專業何時必須正式進場。"],["04","人機權力邊界","AI 可以檢索、分析與支援流程，但不能自然取得無邊界的決策權。"],["05","不可逆風險","重大行動先確認最大損失、退出能力、停止條件與再驗證機制。"],["06","最終說明責任","重要判讀必須能說明依據、限制與不確定性，不以模型或團隊名義稀釋責任。"]].map(([n,t,b])=><article className="gr-card" key={n}><small>{n}</small><h3>{t}</h3><p>{b}</p></article>)}</div></div></section>
