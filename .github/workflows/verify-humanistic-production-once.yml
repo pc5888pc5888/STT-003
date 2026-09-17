@@ -27,16 +27,17 @@ jobs:
           for i in $(seq 1 60); do
             page=$(curl -fsSL https://stt-003.vercel.app/humanistic-interview/ || true)
             api=$(curl -fsSL https://stt-003.vercel.app/api/humanistic-submit || true)
-            if printf '%s' "$page" | grep -Fq "/api/humanistic-submit" \
-              && printf '%s' "$page" | grep -Fq "resend-email" \
-              && printf '%s' "$api" | grep -Fq '"resendConfigured":true'; then
+            if [[ "$page" == *"/api/humanistic-submit"* ]] \
+              && [[ "$api" == *'"resendConfigured":true'* ]]; then
               echo 'production form wiring and provider configuration visible'
-              exit 0
+              break
+            fi
+            if [[ "$i" == "60" ]]; then
+              echo 'production did not expose the Humanistic submission transport in time'
+              exit 1
             fi
             sleep 5
           done
-          echo 'production did not expose the Humanistic submission transport in time'
-          exit 1
 
       - name: Submit one synthetic interview journey
         shell: bash
@@ -53,6 +54,6 @@ jobs:
           r=$(curl -fsS -X POST https://stt-003.vercel.app/api/humanistic-submit \
             -H 'Content-Type: application/x-www-form-urlencoded' "${args[@]}")
           echo "$r"
-          echo "$r" | grep -Fq '"ok":true'
-          echo "$r" | grep -Fq '"delivery":"resend-email"'
-          echo "$r" | grep -Fq '"receiptId":"HUM-'
+          [[ "$r" == *'"ok":true'* ]]
+          [[ "$r" == *'"delivery":"resend-email"'* ]]
+          [[ "$r" == *'"receiptId":"HUM-'* ]]
