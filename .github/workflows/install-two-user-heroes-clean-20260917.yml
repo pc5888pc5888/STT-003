@@ -1,0 +1,62 @@
+name: Install two user hero backgrounds clean 2026-09-17
+
+on:
+  push:
+    branches:
+      - stt-two-heroes-clean-20260917
+    paths:
+      - '.staging/trigger-two-heroes.txt'
+
+permissions:
+  contents: write
+
+jobs:
+  install:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Reconstruct user-provided hero images
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p public/visual-bank/stt/final-20260917
+          cat .staging/cooperation/*.b64 | base64 --decode > public/visual-bank/stt/final-20260917/cooperation-hero.webp
+          cat .staging/eric/*.b64 | base64 --decode > public/visual-bank/stt/final-20260917/eric-chuang-hero.webp
+          echo '87986774b6a3b382009dabae7466bab0e2ca9d93f6efd659a2a8c8b25e51013e  public/visual-bank/stt/final-20260917/cooperation-hero.webp' | sha256sum -c -
+          echo '574300cca4fce9c9706dbee2517ab96f52b68f836eb33b6bcf41d00696c3ff11  public/visual-bank/stt/final-20260917/eric-chuang-hero.webp' | sha256sum -c -
+      - name: Point only the requested pages to the new images
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+
+          p = Path('src/pages/Cooperation.tsx')
+          s = p.read_text()
+          old = '/visual-bank/stt/final-20260916/cooperation-hero.webp'
+          new = '/visual-bank/stt/final-20260917/cooperation-hero.webp'
+          if old not in s:
+              raise SystemExit('Expected cooperation hero path not found')
+          p.write_text(s.replace(old, new, 1))
+
+          p = Path('src/sttVisuals.ts')
+          s = p.read_text()
+          old = '/visual-bank/stt/final-20260916/eric-chuang-hero.webp'
+          new = '/visual-bank/stt/final-20260917/eric-chuang-hero.webp'
+          if old not in s:
+              raise SystemExit('Expected Eric hero path not found')
+          p.write_text(s.replace(old, new, 1))
+          PY
+      - name: Commit final assets and page wiring
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf .staging
+          rm -f .github/workflows/install-two-user-heroes-clean-20260917.yml
+          git config user.name 'STT Site Maintenance'
+          git config user.email 'actions@users.noreply.github.com'
+          git add -A
+          git commit -m 'fix: install user-provided cooperation and Eric hero backgrounds'
+          git push origin HEAD:stt-two-heroes-clean-20260917
