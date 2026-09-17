@@ -19,7 +19,7 @@ class ArchiveTests(unittest.TestCase):
         row={**self.rows[0],'url':'https://94m.com.tw/articles/testonly-new','title':'Test fixture, never published'}
         result=sync.merge(self.data,[row,row],self.now,1); self.assertEqual(result['stats']['total'],self.n+1)
     def test_unknown_category_is_pending_not_guessed(self):
-        row={**self.rows[0],'url':'https://94m.com.tw/articles/testonly-pending','category':'焦點'}
+        row={**self.rows[0],'url':'https://94m.com.tw/articles/testonly-pending','category':'焦點','title':'未知分類測試文章'}
         result=sync.merge(self.data,[row],self.now,1); self.assertEqual(result['stats']['total'],self.n); self.assertEqual(result['stats']['pending'],1)
     def test_explicit_humanistic_column_label_overrides_broad_source_category(self):
         row={**self.rows[0],'url':'https://94m.com.tw/articles/testonly-humanistic','category':'專家','title':'測試文章｜人文地景產專欄'}
