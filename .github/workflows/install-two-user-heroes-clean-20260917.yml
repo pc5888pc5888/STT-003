@@ -24,8 +24,8 @@ jobs:
           mkdir -p public/visual-bank/stt/final-20260917
           cat .staging/cooperation/*.b64 | base64 --decode > public/visual-bank/stt/final-20260917/cooperation-hero.webp
           cat .staging/eric/*.b64 | base64 --decode > public/visual-bank/stt/final-20260917/eric-chuang-hero.webp
-          echo 'a0019ba37e28dda75cd98fcac6fd4fc01a33514f0a6091153d6ac1c816aea041  public/visual-bank/stt/final-20260917/cooperation-hero.webp' | sha256sum -c -
-          echo 'ad3effb2e3773fd3e58a47dc01f4dc39c947947dd116aadbcf8f4cd71abb7a9f  public/visual-bank/stt/final-20260917/eric-chuang-hero.webp' | sha256sum -c -
+          echo 'e70b2498444407d4d6017204134e16b68960eb556acf618f5a34d004d84b17bf  public/visual-bank/stt/final-20260917/cooperation-hero.webp' | sha256sum -c -
+          echo '77abde01ff9fc2929103a03f045aef5c29819b84118d3d3afdcf7c826ce44f5f  public/visual-bank/stt/final-20260917/eric-chuang-hero.webp' | sha256sum -c -
       - name: Point only the requested pages to the new images
         shell: bash
         run: |
