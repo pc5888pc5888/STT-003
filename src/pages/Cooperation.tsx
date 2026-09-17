@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
+import { COOPERATION_HERO_SRC } from "../assets/generated/cooperationHero";
 
 const HUMANISTIC_INTERVIEW_URL = "/humanistic-20q/";
-const COOPERATION_HERO_SRC = "/visual-bank/stt/final-20260916/cooperation-hero.webp";
 
 const channels = [
   {
@@ -55,18 +55,20 @@ export default function Cooperation() {
         .stt-coop-hero-bg {
           position: absolute;
           inset: 0;
-          z-index: -2;
+          z-index: 0 !important;
           background-size: cover !important;
           background-position: center center !important;
           background-repeat: no-repeat !important;
           filter: none !important;
+          opacity: 1 !important;
+          visibility: visible !important;
         }
 
         .stt-coop-hero::after {
           content: "";
           position: absolute;
           inset: 0;
-          z-index: -1;
+          z-index: 1 !important;
           pointer-events: none;
           background: linear-gradient(
             90deg,
@@ -80,7 +82,7 @@ export default function Cooperation() {
 
         .stt-coop-copy {
           position: relative;
-          z-index: 1;
+          z-index: 2 !important;
           width: min(50%, 720px);
         }
 
