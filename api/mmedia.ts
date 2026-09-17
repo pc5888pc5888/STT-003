@@ -3,8 +3,12 @@ const AUTHOR = "https://94m.com.tw/editors/ed55fc";
 const ARCHIVE = "https://raw.githubusercontent.com/pc5888pc5888/STT-003/refs/heads/main/public/data/mmedia-catalog.json";
 const EXPECTED_BASELINE = "6bc22afe721807e841c05643003d935b33f5d11c6e170572f148943c57993b20";
 const SERIES: Record<string, string> = { "法律": "legal", "社會": "humanistic", "熱門社會": "humanistic", "M-news": "news", "M-NEWS": "news", "Ｍ-NEWS": "news" };
+const HUMANISTIC_LABEL = "人文地景產專欄";
 type Article = { id: string; url: string; title: string; excerpt: string; date: string; author: string; authorUrl: string; category: string; series: string; [key: string]: unknown };
 type Catalog = { source: { authorUrl: string }; baseline: { canonicalSha256: string }; syncedAt: string; articles: Article[]; pending?: unknown[]; [key: string]: unknown };
+function seriesFor(a: Article): string | undefined {
+  return a.title.includes(HUMANISTIC_LABEL) ? "humanistic" : SERIES[a.category];
+}
 function valid(value: unknown): value is Catalog {
   if (!value || typeof value !== "object") return false;
   const c = value as Catalog;
@@ -13,7 +17,7 @@ function valid(value: unknown): value is Catalog {
     && c.articles.every(a => a && typeof a === "object" && a.authorUrl === AUTHOR && typeof a.author === "string" && a.author.replace(/\s/g, "") === "莊鈞翔博士"
       && typeof a.title === "string" && !!a.title.trim() && typeof a.excerpt === "string" && typeof a.id === "string"
       && /^https:\/\/94m\.com\.tw\/articles\/[A-Za-z0-9_-]+$/.test(a.url) && /^20\d{2}\/\d{2}\/\d{2} \d{2}:\d{2}$/.test(a.date)
-      && ["legal", "humanistic", "news"].includes(a.series) && SERIES[a.category] === a.series)
+      && ["legal", "humanistic", "news"].includes(a.series) && seriesFor(a) === a.series)
     && new Set(c.articles.map(a => a.url)).size === c.articles.length;
 }
 export default async function handler(req: { method?: string }, res: any) {
@@ -36,7 +40,7 @@ export default async function handler(req: { method?: string }, res: any) {
   res.setHeader("Cache-Control", "public, s-maxage=300, stale-while-revalidate=3600");
   res.setHeader("Content-Type", "application/json; charset=utf-8");
   res.setHeader("X-STT-Catalog-Mode", mode);
-  return res.status(200).json({ ...catalog, ok: true, mode, sourcePolicy: "verified-author-and-exact-category", stats: {
+  return res.status(200).json({ ...catalog, ok: true, mode, sourcePolicy: "verified-author-category-and-explicit-series-label", stats: {
     total: articles.length, uniqueUrls: new Set(articles.map(a => a.url)).size,
     legal: articles.filter(a => a.series === "legal").length, humanistic: articles.filter(a => a.series === "humanistic").length,
     news: articles.filter(a => a.series === "news").length, pending: catalog.pending?.length || 0,
