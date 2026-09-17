@@ -1,6 +1,6 @@
 import bundled from "../public/data/mmedia-catalog.json" with { type: "json" };
 const AUTHOR = "https://94m.com.tw/editors/ed55fc";
-const ARCHIVE = "https://raw.githubusercontent.com/pc5888pc5888/STT-003/refs/heads/rebuild/stt-approved-white-gold-v1/public/data/mmedia-catalog.json";
+const ARCHIVE = "https://raw.githubusercontent.com/pc5888pc5888/STT-003/refs/heads/main/public/data/mmedia-catalog.json";
 const EXPECTED_BASELINE = "6bc22afe721807e841c05643003d935b33f5d11c6e170572f148943c57993b20";
 const SERIES: Record<string, string> = { "法律": "legal", "社會": "humanistic", "熱門社會": "humanistic", "M-news": "news", "M-NEWS": "news", "Ｍ-NEWS": "news" };
 type Article = { id: string; url: string; title: string; excerpt: string; date: string; author: string; authorUrl: string; category: string; series: string; [key: string]: unknown };
