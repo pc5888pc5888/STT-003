@@ -22,7 +22,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: rebuild/stt-approved-white-gold-v1
+          ref: main
+          fetch-depth: 0
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
@@ -41,7 +42,7 @@ jobs:
           git add public/data/mmedia-catalog.json
           if git diff --cached --quiet; then exit 0; fi
           git commit -m "data: synchronize verified Dr Chuang column archive"
-          git push origin HEAD:rebuild/stt-approved-white-gold-v1
+          git push origin HEAD:main
       - name: Summarize the result
         run: |
           python - <<'PY'
