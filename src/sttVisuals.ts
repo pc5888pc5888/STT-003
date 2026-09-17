@@ -1,3 +1,5 @@
+import { ERIC_APPROVED_HERO_SRC } from "./assets/approvedHeroData/eric";
+
 export const STT_VISUALS = {
   // Six first-level pages use the six user-approved source artworks uploaded on 2026-09-15.
   // Do not substitute generated variants, thumbnail assets, or same-image crops.
@@ -25,7 +27,7 @@ export const STT_VISUALS = {
   internalCompliance: "/visual-bank/stt/originals-20260910/internal-compliance.webp",
   research: "/visual-bank/stt/originals-20260910/insights.webp",
   projects: "/visual-bank/stt/originals-20260910/stt-platform.webp",
-  governanceResponsibility: "/visual-bank/stt/final-20260916/eric-chuang-hero.webp",
+  governanceResponsibility: ERIC_APPROVED_HERO_SRC,
 } as const;
 
 export type STTVisualKey = keyof typeof STT_VISUALS;
