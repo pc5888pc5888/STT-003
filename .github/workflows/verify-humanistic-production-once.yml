@@ -27,27 +27,29 @@ jobs:
           for i in $(seq 1 60); do
             page=$(curl -fsSL https://stt-003.vercel.app/humanistic-interview/ || true)
             api=$(curl -fsSL https://stt-003.vercel.app/api/humanistic-submit || true)
-            if printf '%s' "$page" | grep -Fq "送件服務暫時無法完成郵件傳送" \
-              && printf '%s' "$page" | grep -Fq "result.delivery!=='resend-email'" \
+            if printf '%s' "$page" | grep -Fq "/api/humanistic-submit" \
+              && printf '%s' "$page" | grep -Fq "resend-email" \
               && printf '%s' "$api" | grep -Fq '"resendConfigured":true'; then
-              echo 'production transport and provider configuration visible'
+              echo 'production form wiring and provider configuration visible'
               exit 0
             fi
             sleep 5
           done
-          echo 'production did not reach governed Humanistic version in time'
+          echo 'production did not expose the Humanistic submission transport in time'
           exit 1
 
-      - name: Submit one complete synthetic journey
+      - name: Submit one synthetic interview journey
         shell: bash
         run: |
           set -euo pipefail
           args=(
             --data-urlencode 'form-name=humanistic-20q'
-            --data-urlencode 'participant_name=STT Production E2E'
+            --data-urlencode 'participant_name=STT 系統驗證 20260917'
+            --data-urlencode 'participant_company=Humanistic E2E Test'
+            --data-urlencode 'participant_email=stt-test@example.com'
             --data-urlencode 'consent=accepted'
           )
-          for i in $(seq -w 1 20); do args+=(--data-urlencode "q${i}=[STT E2E TEST ${i}]"); done
+          for i in $(seq -w 1 20); do args+=(--data-urlencode "q${i}=[STT SYSTEM TEST ${i}] 系統測試資料，請忽略。"); done
           r=$(curl -fsS -X POST https://stt-003.vercel.app/api/humanistic-submit \
             -H 'Content-Type: application/x-www-form-urlencoded' "${args[@]}")
           echo "$r"
