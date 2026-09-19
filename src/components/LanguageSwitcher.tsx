@@ -12,7 +12,7 @@ export function LanguageSwitcher() {
   };
 
   return (
-    <div className="relative">
+    <div className="stt-language-switcher relative">
       {open && (
         <div
           className="absolute bottom-[calc(100%+12px)] right-0 min-w-[190px] border bg-white p-2 shadow-[0_18px_60px_rgba(36,34,31,0.12)]"
@@ -57,7 +57,7 @@ export function LanguageSwitcher() {
       <button
         type="button"
         onClick={() => setOpen((value) => !value)}
-        className="w-12 h-12 rounded-full flex items-center justify-center bg-white border cursor-pointer transition-transform hover:scale-[1.03]"
+        className="stt-language-button w-12 h-12 rounded-full flex items-center justify-center bg-white border cursor-pointer transition-transform hover:scale-[1.03]"
         style={{ borderColor: "var(--stt-gold-line)", color: "var(--stt-gold-deep)" }}
         title={t("accessibility.language")}
         aria-label={t("accessibility.language")}
