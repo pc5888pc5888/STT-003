@@ -46,10 +46,16 @@ html,body{background:var(--stt-paper)!important;color:var(--stt-ink)!important}
     color:var(--stt-soft)!important;
     font-size:12px!important;
   }
+  .screen{
+    width:100%!important;
+    max-width:none!important;
+    padding:24px 24px 96px!important;
+    box-sizing:border-box!important;
+  }
   .screen.landing.active{
     width:100%!important;
     max-width:none!important;
-    padding:24px 20px 96px!important;
+    padding:24px 24px 96px!important;
     box-sizing:border-box!important;
   }
   .screen.landing.active .visual-card{
@@ -88,6 +94,8 @@ html,body{background:var(--stt-paper)!important;color:var(--stt-ink)!important}
     font-weight:500!important;
     letter-spacing:.008em!important;
     text-wrap:pretty!important;
+    line-break:strict!important;
+    word-break:normal!important;
   }
   .screen.landing.active .lead{
     margin:20px 0 0!important;
@@ -114,6 +122,62 @@ html,body{background:var(--stt-paper)!important;color:var(--stt-ink)!important}
     font-size:14px!important;
     font-weight:600!important;
     box-shadow:none!important;
+  }
+  .question-page-header{
+    margin-bottom:22px!important;
+    font-size:10.5px!important;
+    line-height:1.6!important;
+    letter-spacing:.1em!important;
+  }
+  .question-stack{gap:20px!important}
+  .question-card{
+    min-height:0!important;
+    padding:24px!important;
+    border-radius:18px!important;
+    box-shadow:none!important;
+  }
+  .qnum{
+    font-size:28px!important;
+    line-height:1.15!important;
+  }
+  .qbody h3{
+    margin:0 0 12px!important;
+    font-size:clamp(22px,6vw,25px)!important;
+    line-height:1.6!important;
+    font-weight:500!important;
+    line-break:strict!important;
+    text-wrap:pretty!important;
+  }
+  .tip{
+    margin:0 0 18px!important;
+    font-size:15px!important;
+    line-height:1.85!important;
+  }
+  textarea{
+    min-height:220px!important;
+    padding:16px!important;
+    border-radius:14px!important;
+    font-size:16px!important;
+    line-height:1.85!important;
+  }
+  .nav-row{
+    margin-top:24px!important;
+    padding:8px!important;
+  }
+  .nav-row .primary,
+  .nav-row .ghost{
+    min-height:48px!important;
+    padding:11px 16px!important;
+    font-size:14px!important;
+  }
+  .review-item,
+  .optional-note,
+  .backup-note,
+  .consent,
+  .submit-status,
+  .post-submit-note{
+    font-size:14.5px!important;
+    line-height:1.8!important;
   }
   .bottom-tools{
     right:12px!important;
