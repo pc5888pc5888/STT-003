@@ -81,6 +81,9 @@ try{
     const overflow=await page.evaluate(()=>({w:innerWidth,sw:document.documentElement.scrollWidth}));
     assert.ok(overflow.sw<=overflow.w+1,path+' horizontal overflow');
 
+    const visibleText=await page.locator('body').innerText();
+    assert.ok(!visibleText.includes('*')&&!visibleText.includes('＊'),path+' contains visible asterisk marker');
+
     const h1=page.locator('main h1').first();
     assert.ok(await h1.count(),path+' missing H1');
     const hs=await h1.evaluate(el=>{const cs=getComputedStyle(el);return{font:parseFloat(cs.fontSize),line:parseFloat(cs.lineHeight)};});
@@ -169,6 +172,8 @@ try{
 
   await page.goto(base+'/humanistic-interview/',{waitUntil:'networkidle'});
   await page.evaluate(()=>document.fonts.ready);
+  const humanisticText=await page.locator('body').innerText();
+  assert.ok(!humanisticText.includes('*')&&!humanisticText.includes('＊'),'Humanistic contains visible asterisk marker');
   const stationSources=await page.locator('.station-visual img').evaluateAll(imgs=>imgs.map(img=>img.getAttribute('src')));
   assert.equal(stationSources.length,5,'Humanistic must expose five station artworks');
   for(const src of stationSources){
