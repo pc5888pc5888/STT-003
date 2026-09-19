@@ -316,3 +316,37 @@
     display:block!important;
   }
 }
+
+
+/* Mobile header: brand must yield to the viewport. */
+@media(max-width:700px){
+  header.sticky>div:first-child{
+    width:100%!important;
+    height:76px!important;
+    min-height:76px!important;
+    padding-left:18px!important;
+    padding-right:12px!important;
+    box-sizing:border-box!important;
+  }
+  .stt-official-brand{
+    flex:1 1 auto!important;
+    width:auto!important;
+    max-width:calc(100% - 56px)!important;
+    min-width:0!important;
+  }
+  .stt-official-logo{
+    display:block!important;
+    width:min(100%,260px)!important;
+    max-width:260px!important;
+    height:auto!important;
+    max-height:48px!important;
+    object-fit:contain!important;
+    object-position:left center!important;
+  }
+  header.sticky button[aria-label="Menu"]{
+    flex:0 0 40px!important;
+    width:40px!important;
+    height:40px!important;
+    margin-left:8px!important;
+  }
+}
