@@ -122,12 +122,14 @@ try{
 
     if(path.includes('enterprise-evaluation')){
       assert.equal(await page.locator('.stt-intake-field').count(),7,'enterprise evaluation must have seven dedicated fields');
+      assert.equal(await page.locator('.stt-intake-textarea[required]').count(),4,'enterprise evaluation must keep four required fields without visible asterisks');
       enterpriseTitles=await page.locator('.stt-intake-question').allInnerTexts();
       assert.ok(enterpriseTitles.some(t=>t.includes('企業／組織目前處於什麼階段')),'enterprise organization field missing');
       assert.ok(enterpriseTitles.some(t=>t.includes('最不能承擔的結果')),'enterprise downside field missing');
     }
     if(path.includes('speaking-invitation')){
       assert.equal(await page.locator('.stt-intake-field').count(),8,'speaking invitation must have eight dedicated fields');
+      assert.equal(await page.locator('.stt-intake-textarea[required]').count(),4,'speaking invitation must keep four required fields without visible asterisks');
       speakingTitles=await page.locator('.stt-intake-question').allInnerTexts();
       assert.ok(speakingTitles.some(t=>t.includes('主辦單位與活動名稱')),'speaking organizer field missing');
       assert.ok(speakingTitles.some(t=>t.includes('錄影、直播或公開刊載')),'speaking recording/public-use field missing');
