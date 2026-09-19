@@ -160,3 +160,57 @@ At 360 / 390 / 430px:
 At desktop:
 - no regression to approved artwork, navigation, copy, or route behavior
 - mobile semantic line segments may collapse into fewer lines
+
+## 10. Page editorial personalities
+
+Consistency does not mean every page is the same template. All pages share the same mobile canvas, type hierarchy, line-breaking discipline, emphasis rules and spacing scale, while content types use different editorial personalities.
+
+### A. Home — Manifesto / editorial index
+- Hero is a concise institutional proposition.
+- The first content section behaves like an editorial index, not a dashboard.
+- Situation entries use number → title → short explanation → restrained next link.
+- Avoid heavy card chrome on mobile.
+
+### B. Problems / Method — Diagnostic / judgment dossier
+- Problem titles may be longer than ordinary headings; keep them at section-heading scale, not hero scale.
+- Labels such as 常見誤判 / 可形成結果 are subordinate metadata and should be visually separated from the paragraph.
+- Method steps should read as a sequence of judgment, not a product grid.
+- Numbers and English labels are navigation aids, not decorative headlines.
+
+### C. Publications / About STT / Eric — Institutional editorial
+- Use quieter folio-like rhythm, restrained borders and generous white space.
+- Reduce boxed-card appearance.
+- Titles and body copy should read like an institutional publication, not a marketing landing page.
+- Eric page must emphasize role, responsibility and research structure rather than create a credential wall.
+
+### D. Cooperation / Humanistic — Action / narrative
+- Cooperation choices are formal routes of engagement, not pricing/product cards.
+- Humanistic keeps its own narrative identity but shares STT type scale, spacing, safe-area and action hierarchy.
+- Action pages may use stronger CTA affordance, but content remains primary.
+
+## 11. Body-copy art direction
+
+Mobile body text is composed deliberately:
+- ordinary reading measure: approximately 20–24 CJK characters per line where possible
+- explanatory paragraphs use max-width rather than filling every available desktop pixel
+- metadata labels are separated from body copy by size, weight and spacing
+- bordered boxes are used only when a boundary or interaction genuinely needs one
+- repeated content groups should prefer editorial separators over repeated card shadows
+- section endings should leave visible breathing space before the next topic
+
+Section-title wrapping:
+- H2 preferably 1–3 lines on 390px
+- H3 preferably 1–3 lines
+- use balanced/pretty wrapping, not forced breaks, unless the title is an approved proposition with intentional semantic lines
+
+## 12. QA extension
+
+Production QA must check both hero and body composition.
+
+At 360 / 390 / 430px, representative content below the fold must verify:
+- no horizontal overflow
+- section headings remain within the defined type scale
+- body text is at least 14.5px and uses readable line-height
+- semantic metadata labels are visually subordinate
+- repeated cards/lists do not reintroduce full-width SaaS/dashboard styling
+- primary actions remain reachable without covering reading content
