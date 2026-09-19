@@ -72,7 +72,7 @@ function CanonicalPage({ kind }: { kind: PageKind }) {
     else navigate(path);
   };
   return <div className={`stt-canon stt-editorial-page stt-editorial-${kind}`}>
-    {primary ? <FullBleedHero theme={kind as "method" | "publications" | "stt"} /> : <STTPageHero visual="projects" eyebrow={page.eyebrow} title={page.title} lead={page.subtitle} />}
+    {primary ? <FullBleedHero theme={kind as "method" | "publications" | "stt"} /> : <STTPageHero visual="projects" eyebrow={page.eyebrow} title={page.title} titleLines={["人文地景產採訪｜", "把仍能被說清楚的", "記憶留下。"]} lead={page.subtitle} />}
     {kind === "method" && <JudgmentFoundations />}
     <section className="stt-canon-body"><div className="stt-canon-wrap">
       <p className="stt-canon-statement">{page.statement}</p>
