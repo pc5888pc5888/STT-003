@@ -195,3 +195,23 @@ html,body{background:var(--stt-paper)!important;color:var(--stt-ink)!important}
     box-shadow:0 8px 24px rgba(36,34,31,.07)!important;
   }
 }
+
+
+/* Humanistic editorial pacing: landing is narrative-first; tools enter with the interview. */
+@media(max-width:700px){
+  .screen.landing.active .lead,
+  .screen.landing.active .soft-note{
+    max-width:24em!important;
+  }
+  .app:has(#welcome.active) .bottom-tools{
+    display:none!important;
+  }
+  .question-card .qbody{
+    max-width:100%!important;
+  }
+  .qbody h3,
+  .tip,
+  .qbody textarea{
+    max-width:100%!important;
+  }
+}
