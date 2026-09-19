@@ -728,3 +728,307 @@
     max-width:900px;
   }
 }
+
+
+/* --------------------------------------------------------------------------
+   Site-wide Chinese editorial discipline
+   Extends the mobile-first system beyond first-level pages.
+   -------------------------------------------------------------------------- */
+
+.stt-master-scope :where(h1,h2,h3,p,li,button,a,label,span),
+.legal-root :where(h1,h2,h3,p),
+.stt-intake-page :where(h1,h2,h3,p,span,label){
+  line-break:strict;
+  word-break:auto-phrase;
+  overflow-wrap:normal;
+}
+
+.stt-master-scope :where(h1,h2,h3),
+.legal-root :where(h1,h2,h3),
+.stt-intake-page :where(h1,h2,h3){
+  text-wrap:balance;
+  hanging-punctuation:none;
+}
+
+.stt-master-scope :where(p,li),
+.legal-root p,
+.stt-intake-page :where(p,.stt-intake-hint){
+  text-wrap:pretty;
+}
+
+/* A full stop belongs to the sentence, never as a decorative orphan. */
+.stt-editorial-title-line{
+  text-wrap:balance;
+}
+
+@media(max-width:900px){
+  /* Secondary institutional heroes: calmer than first-level manifesto heroes. */
+  .stt-master-hero.is-secondary{
+    min-height:auto!important;
+    height:auto!important;
+  }
+  .stt-master-hero.is-secondary .stt-master-hero__inner{
+    min-height:clamp(600px,calc(100svh - 76px),820px)!important;
+    padding:52px var(--stt-m-pad) 72px!important;
+    align-items:flex-start!important;
+  }
+  .stt-master-hero.is-secondary .stt-master-hero__copy{
+    width:100%!important;
+    max-width:25em!important;
+  }
+  .stt-master-hero.is-secondary h1{
+    max-width:12em!important;
+    margin-top:16px!important;
+    font-size:clamp(34px,9.2vw,42px)!important;
+    line-height:1.38!important;
+    font-weight:500!important;
+    letter-spacing:.005em!important;
+  }
+  .stt-master-hero.is-secondary .stt-master-lead{
+    max-width:24em!important;
+    margin-top:20px!important;
+    font-size:15.5px!important;
+    line-height:1.92!important;
+  }
+
+  /* Knowledge domains: institutional folio, not giant English cards. */
+  .domain-body{
+    padding:58px 0 76px!important;
+  }
+  .domain-grid{
+    display:block!important;
+    border-left:0!important;
+    border-top:1px solid var(--stt-gold-line)!important;
+  }
+  .domain-card{
+    min-height:0!important;
+    padding:28px 0 30px!important;
+    border-right:0!important;
+    background:transparent!important;
+  }
+  .domain-card h2,
+  .domain-detail h2{
+    max-width:15em!important;
+    margin:10px 0 0!important;
+    font-size:clamp(24px,6.6vw,28px)!important;
+    line-height:1.52!important;
+    font-weight:500!important;
+  }
+  .domain-card p,
+  .domain-detail p{
+    max-width:24em!important;
+    margin-top:12px!important;
+    font-size:15px!important;
+    line-height:1.92!important;
+    color:var(--stt-ink-soft)!important;
+  }
+  .domain-detail{
+    display:block!important;
+    padding:28px 0 30px!important;
+  }
+  .domain-detail h2{
+    font-family:var(--stt-serif)!important;
+    font-size:clamp(25px,6.8vw,29px)!important;
+  }
+  .domain-related{
+    margin-top:30px!important;
+    gap:14px!important;
+  }
+
+  /* Problem detail: evidence dossier hierarchy. */
+  .pd4-body{
+    padding:46px 0 76px!important;
+  }
+  .pd4-block{
+    display:block!important;
+    padding:30px 0 32px!important;
+  }
+  .pd4-block h2{
+    max-width:14em!important;
+    font-size:clamp(24px,6.6vw,28px)!important;
+    line-height:1.55!important;
+  }
+  .pd4-items{
+    margin-top:18px!important;
+    gap:0!important;
+  }
+  .pd4-item{
+    padding:15px 0!important;
+    border:0!important;
+    border-top:1px solid var(--stt-line)!important;
+    background:transparent!important;
+    font-size:15px!important;
+    line-height:1.9!important;
+  }
+  .pd4-cta{
+    margin-top:36px!important;
+    padding:28px 0!important;
+    border-left:0!important;
+    border-right:0!important;
+    background:transparent!important;
+  }
+
+  /* Legal: one reading column, no billboard heading. */
+  .legal-wrap{
+    max-width:none!important;
+    padding:58px var(--stt-m-pad) 82px!important;
+  }
+  .legal-kicker{
+    font-size:10.5px!important;
+    line-height:1.6!important;
+    letter-spacing:.2em!important;
+  }
+  .legal-root h1{
+    max-width:11em!important;
+    margin-top:18px!important;
+    font-size:clamp(34px,9vw,40px)!important;
+    line-height:1.42!important;
+    font-weight:500!important;
+  }
+  .legal-rule{
+    margin:28px 0 22px!important;
+  }
+  .legal-root p{
+    max-width:24em!important;
+    padding:22px 0!important;
+    font-size:15.5px!important;
+    line-height:1.95!important;
+  }
+
+  /* Canonical library / Internal Compliance: editorial pages, not cards with giant type. */
+  .lib-body{
+    padding:56px 0 78px!important;
+  }
+  .lib-row{
+    grid-template-columns:38px minmax(0,1fr)!important;
+    gap:12px!important;
+    padding:26px 0!important;
+  }
+  .lib-row h2,
+  .lib-note h2,
+  .lib-panel h2{
+    max-width:14em!important;
+    font-size:clamp(24px,6.6vw,28px)!important;
+    line-height:1.55!important;
+    font-weight:500!important;
+  }
+  .lib-row p,
+  .lib-note p,
+  .lib-panel :where(p,li){
+    font-size:15px!important;
+    line-height:1.92!important;
+  }
+  .lib-note,
+  .lib-panel{
+    padding:26px 0!important;
+    border-left:0!important;
+    border-right:0!important;
+    background:transparent!important;
+  }
+
+  /* Columns: series cards read as archive entries. */
+  .stt-series-card{
+    padding:28px 0!important;
+    border-left:0!important;
+    border-right:0!important;
+    background:transparent!important;
+  }
+  .stt-series-card h2,
+  .stt-series-card h3{
+    max-width:14em!important;
+    font-size:clamp(25px,6.8vw,29px)!important;
+    line-height:1.52!important;
+  }
+  .stt-series-card p{
+    max-width:24em!important;
+    font-size:15px!important;
+    line-height:1.9!important;
+  }
+
+  /* Intake: route-specific forms with the same editorial calm. */
+  .stt-intake-hero{
+    padding:54px var(--stt-m-pad) 62px!important;
+  }
+  .stt-intake-title{
+    max-width:12em!important;
+    margin-top:16px!important;
+    font-size:clamp(34px,9vw,40px)!important;
+    line-height:1.4!important;
+    font-weight:500!important;
+  }
+  .stt-intake-lead{
+    max-width:24em!important;
+    margin-top:20px!important;
+    font-size:15.5px!important;
+    line-height:1.92!important;
+  }
+  .stt-intake-route{
+    margin-top:24px!important;
+    font-size:12px!important;
+    line-height:1.6!important;
+  }
+  .stt-intake-body{
+    padding:38px var(--stt-m-pad) 76px!important;
+  }
+  .stt-intake-form{
+    max-width:none!important;
+  }
+  .stt-intake-field{
+    padding:28px 0 30px!important;
+    background:transparent!important;
+    gap:12px!important;
+  }
+  .stt-intake-number{
+    font-size:12px!important;
+    line-height:1.4!important;
+    letter-spacing:.14em!important;
+  }
+  .stt-intake-question{
+    max-width:17em!important;
+    font-size:clamp(22px,6vw,26px)!important;
+    line-height:1.55!important;
+    font-weight:500!important;
+  }
+  .stt-intake-hint{
+    max-width:25em!important;
+    margin-top:10px!important;
+    font-size:13px!important;
+    line-height:1.8!important;
+  }
+  .stt-intake-textarea{
+    min-height:148px!important;
+    margin-top:18px!important;
+    padding:14px 15px!important;
+    font-size:16px!important;
+    line-height:1.8!important;
+    background:#fff!important;
+  }
+  .stt-intake-submit{
+    padding-top:30px!important;
+  }
+  .stt-intake-summary{
+    font-size:14px!important;
+    line-height:1.85!important;
+  }
+
+  /* Paragraph measure is a hard editorial boundary on mobile. */
+  .domain-root :where(p),
+  .pd4-root :where(p,.pd4-item),
+  .lib-root :where(p,li),
+  .gr-root :where(p),
+  .stt-canon :where(p),
+  .stt-problems-page :where(p),
+  .stt-coop-page :where(p),
+  .legal-root p,
+  .stt-intake-page :where(p,.stt-intake-hint){
+    max-width:25em;
+  }
+}
+
+@media(max-width:370px){
+  .stt-master-hero.is-secondary h1,
+  .legal-root h1,
+  .stt-intake-title{
+    font-size:33px!important;
+  }
+}
