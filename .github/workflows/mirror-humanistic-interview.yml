@@ -76,6 +76,14 @@ jobs:
           # Netlify HUD belongs to the source host, not the governed STT mirror.
           s=re.sub(r'<script[^>]+src=["\']/.netlify/scripts/hud[^>]*></script>\s*', '', s, flags=re.I)
 
+          # Station artwork is mirrored locally; load it only when the user reaches the station.
+          s=re.sub(
+              r'<img src="assets/stations/(station-\d{2}\.png)"',
+              r'<img loading="lazy" decoding="async" src="assets/stations/\1"',
+              s,
+          )
+          s=s.replace(' decoding="async" decoding="async">', ' decoding="async">')
+
           s=s.replace(
               '<form id="netlify-form" name="humanistic-20q" method="POST"',
               '<form id="netlify-form" name="humanistic-20q" method="POST" action="/api/humanistic-submit"'
