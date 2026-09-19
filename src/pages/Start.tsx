@@ -249,7 +249,7 @@ function Field({ number, title, hint, value, onChange, required = false, rows = 
     <label className="stt-intake-field grid gap-4 border-b border-[#ded4c4] bg-white p-6 lg:grid-cols-[70px_1fr] lg:p-8">
       <span className="stt-intake-number font-serif text-xl text-[#b18a54]">{number}</span>
       <span>
-        <span className="stt-intake-question block font-serif text-xl lg:text-2xl">{title}{required ? " *" : ""}</span>
+        <span className="stt-intake-question block font-serif text-xl lg:text-2xl">{title}</span>
         <span className="stt-intake-hint mt-2 block text-xs leading-6 text-[#8a8278]">{hint}</span>
         <textarea required={required} value={value} onChange={(event) => onChange(event.target.value)} rows={rows} className="stt-intake-textarea mt-5 w-full resize-y border border-[#d8c8ad] bg-[#fbfaf7] px-4 py-3 text-sm leading-7 text-[#3b3732] outline-none focus:border-[#a37a43]" />
       </span>
