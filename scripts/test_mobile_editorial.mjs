@@ -125,6 +125,44 @@ async function measureHumanistic(page){
   });
 }
 
+
+async function measureEditorialBody(page, route){
+  const selectors = route.path==='/' ? {
+      heading:'.stt-home-problems h2', body:'.stt-home-problems__head>p'
+    } : route.path==='/problems' ? {
+      heading:'#problem-index h2', body:'.stt-problem-misjudgment'
+    } : route.path==='/cooperation' ? {
+      heading:'.stt-coop-card h3', body:'.stt-coop-body'
+    } : route.path==='/institution/eric-chuang' ? {
+      heading:'.gr-section h2', body:'.gr-desc'
+    } : {
+      heading:'.stt-canon-card h2', body:'.stt-canon-card p'
+    };
+  const heading = page.locator(selectors.heading).first();
+  const body = page.locator(selectors.body).first();
+  await heading.scrollIntoViewIfNeeded();
+  return {
+    ...await heading.evaluate(el=>{
+      const cs=getComputedStyle(el),r=el.getBoundingClientRect();
+      return {
+        headingFont:parseFloat(cs.fontSize),
+        headingLine:parseFloat(cs.lineHeight),
+        headingWidth:r.width,
+        headingText:el.textContent?.trim()||'',
+      };
+    }),
+    ...await body.evaluate(el=>{
+      const cs=getComputedStyle(el),r=el.getBoundingClientRect();
+      return {
+        bodyFont:parseFloat(cs.fontSize),
+        bodyLine:parseFloat(cs.lineHeight),
+        bodyWidth:r.width,
+      };
+    }),
+    headingLines:await visualLines(page,selectors.heading),
+  };
+}
+
 const browser=await chromium.launch({executablePath:process.env.CHROME_PATH,args:['--no-sandbox']});
 const report={passed:false,origin:base,mobile:[],desktop:[],errors:[]};
 
@@ -189,9 +227,43 @@ try{
         assert.ok(!metrics.hasNetlifyHud,'Humanistic source-host HUD must not exist on STT mirror');
       }
 
+      let bodyMetrics=null;
+      if(route.kind!=='humanistic'){
+        bodyMetrics=await measureEditorialBody(page,route);
+        assert.ok(bodyMetrics.headingFont>=20&&bodyMetrics.headingFont<=32,`${route.path} body heading font ${bodyMetrics.headingFont}`);
+        assert.ok(bodyMetrics.headingLine/bodyMetrics.headingFont>=1.4&&bodyMetrics.headingLine/bodyMetrics.headingFont<=1.72,`${route.path} body heading line-height ratio`);
+        assert.ok(bodyMetrics.headingLines.length>=1&&bodyMetrics.headingLines.length<=4,`${route.path} body heading has ${bodyMetrics.headingLines.length} visual lines: ${JSON.stringify(bodyMetrics.headingLines)}`);
+        assert.ok(bodyMetrics.headingLines.every(line=>Array.from(line.replace(/\s/g,'')).length!==1),`${route.path} body heading orphan line: ${JSON.stringify(bodyMetrics.headingLines)}`);
+        assert.ok(bodyMetrics.bodyFont>=14.5&&bodyMetrics.bodyFont<=17,`${route.path} body font ${bodyMetrics.bodyFont}`);
+        assert.ok(bodyMetrics.bodyLine/bodyMetrics.bodyFont>=1.7&&bodyMetrics.bodyLine/bodyMetrics.bodyFont<=2.08,`${route.path} body line-height ratio`);
+        assert.ok(bodyMetrics.bodyWidth<=viewport.width-36,`${route.path} body measure exceeds mobile safe area`);
+        if(route.path==='/problems'){
+          const label=page.locator('.stt-problem-label').first();
+          const labelStyle=await label.evaluate(el=>({display:getComputedStyle(el).display,font:parseFloat(getComputedStyle(el).fontSize)}));
+          assert.equal(labelStyle.display,'block','Problems metadata label must be separated from paragraph');
+          assert.ok(labelStyle.font<=11.5,'Problems metadata label must remain subordinate');
+        }
+      }else{
+        assert.ok(!(await page.locator('.bottom-tools').isVisible()),'Humanistic landing tools should not interrupt narrative first screen');
+        const leadStyle=await page.locator('#welcome .lead').evaluate(el=>({font:parseFloat(getComputedStyle(el).fontSize),line:parseFloat(getComputedStyle(el).lineHeight),width:el.getBoundingClientRect().width}));
+        assert.ok(leadStyle.font>=14.5&&leadStyle.font<=17,'Humanistic landing lead scale');
+        assert.ok(leadStyle.line/leadStyle.font>=1.7&&leadStyle.line/leadStyle.font<=2.08,'Humanistic landing lead line-height');
+        const start=page.locator('#welcome .primary').first();
+        if(await start.count()){
+          await start.click();
+          await page.waitForTimeout(80);
+          const q=page.locator('.question-card .qbody h3').first();
+          if(await q.count()){
+            const qs=await q.evaluate(el=>({font:parseFloat(getComputedStyle(el).fontSize),line:parseFloat(getComputedStyle(el).lineHeight)}));
+            assert.ok(qs.font>=21&&qs.font<=26,'Humanistic question heading scale');
+            assert.ok(qs.line/qs.font>=1.45&&qs.line/qs.font<=1.75,'Humanistic question heading line-height');
+          }
+        }
+      }
+
       const screenshot=`${route.name}-${viewport.width}.png`;
       await page.screenshot({path:out+'/'+screenshot,fullPage:false});
-      report.mobile.push({route:route.path,viewport:viewport.width,metrics,lines,screenshot});
+      report.mobile.push({route:route.path,viewport:viewport.width,metrics,lines,bodyMetrics,screenshot});
     }
     await ctx.close();
   }
