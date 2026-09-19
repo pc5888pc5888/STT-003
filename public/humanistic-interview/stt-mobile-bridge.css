@@ -1,0 +1,118 @@
+/* STT Humanistic 20Q — mobile visual bridge
+   Presentation only. Preserve approved artwork, questions and submission behavior. */
+:root{
+  --stt-paper:#fffdfa;
+  --stt-ink:#252525;
+  --stt-soft:#5f5a54;
+  --stt-gold:#c4a67a;
+  --stt-gold-deep:#8b642f;
+  --stt-line:#e7dfd2;
+}
+html,body{background:var(--stt-paper)!important;color:var(--stt-ink)!important}
+#nl-badge-frame{display:none!important}
+@media(max-width:700px){
+  .app{background:var(--stt-paper)!important;color:var(--stt-ink)!important}
+  .topbar{
+    min-height:64px!important;
+    padding:0 20px!important;
+    background:rgba(255,255,255,.97)!important;
+    border-bottom:1px solid var(--stt-line)!important;
+    box-shadow:none!important;
+    backdrop-filter:blur(10px);
+  }
+  .topbar .brand{
+    color:var(--stt-gold-deep)!important;
+    font-size:12px!important;
+    line-height:1.4!important;
+    font-weight:600!important;
+    letter-spacing:.08em!important;
+  }
+  .topbar .step-label{
+    color:var(--stt-soft)!important;
+    font-size:12px!important;
+  }
+  .screen.landing.active{
+    width:100%!important;
+    max-width:none!important;
+    padding:24px 20px 96px!important;
+    box-sizing:border-box!important;
+  }
+  .screen.landing.active .visual-card{
+    width:100%!important;
+    max-width:none!important;
+    aspect-ratio:4/5!important;
+    min-height:0!important;
+    height:auto!important;
+    margin:0 0 30px!important;
+    border-radius:18px!important;
+    background-position:center center!important;
+    background-size:cover!important;
+    box-shadow:none!important;
+  }
+  .screen.landing.active .copy-panel{
+    width:100%!important;
+    max-width:none!important;
+    padding:0!important;
+    margin:0!important;
+  }
+  .screen.landing.active .eyebrow{
+    margin:0 0 18px!important;
+    color:var(--stt-gold-deep)!important;
+    font-size:10.5px!important;
+    line-height:1.6!important;
+    font-weight:600!important;
+    letter-spacing:.18em!important;
+  }
+  .screen.landing.active heading{
+    display:block!important;
+    margin:0!important;
+    color:var(--stt-ink)!important;
+    font-family:"Noto Serif TC","Songti TC","PMingLiU",Georgia,serif!important;
+    font-size:clamp(32px,8.4vw,38px)!important;
+    line-height:1.42!important;
+    font-weight:500!important;
+    letter-spacing:.008em!important;
+    text-wrap:pretty!important;
+  }
+  .screen.landing.active .lead{
+    margin:20px 0 0!important;
+    color:var(--stt-soft)!important;
+    font-size:15.5px!important;
+    line-height:1.9!important;
+  }
+  .screen.landing.active .soft-note{
+    margin-top:16px!important;
+    color:#746d64!important;
+    font-size:12.5px!important;
+    line-height:1.75!important;
+  }
+  .screen.landing.active .nav-row.end{
+    margin-top:28px!important;
+  }
+  .screen.landing.active .primary{
+    min-height:48px!important;
+    padding:11px 20px!important;
+    border-radius:999px!important;
+    border:1px solid var(--stt-gold-deep)!important;
+    background:var(--stt-gold-deep)!important;
+    color:#fff!important;
+    font-size:14px!important;
+    font-weight:600!important;
+    box-shadow:none!important;
+  }
+  .bottom-tools{
+    right:12px!important;
+    bottom:max(12px,env(safe-area-inset-bottom))!important;
+    gap:6px!important;
+  }
+  .bottom-tools .tool-btn{
+    width:40px!important;
+    height:40px!important;
+    min-width:40px!important;
+    min-height:40px!important;
+    border:1px solid var(--stt-gold)!important;
+    background:rgba(255,255,255,.94)!important;
+    color:var(--stt-gold-deep)!important;
+    box-shadow:0 8px 24px rgba(36,34,31,.07)!important;
+  }
+}
