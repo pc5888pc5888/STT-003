@@ -214,3 +214,33 @@ At 360 / 390 / 430px, representative content below the fold must verify:
 - semantic metadata labels are visually subordinate
 - repeated cards/lists do not reintroduce full-width SaaS/dashboard styling
 - primary actions remain reachable without covering reading content
+
+## 13. Chinese punctuation governance
+
+Punctuation is part of editorial art direction and must carry meaning.
+
+- `、` is for parallel nouns or short peer phrases. It must not replace a comma between complete clauses.
+- `，` separates complete clauses or natural sentence rhythm.
+- `；` separates two complete clauses that are logically related but independently readable. Do not use it merely to make a sentence look formal.
+- `：` introduces a definition, explanation, list or consequence.
+- `。` closes a complete proposition. Do not leave it as a visual orphan line.
+- `？` is reserved for genuine questions. Declarative headings should not use it for drama.
+- `｜` is metadata punctuation: series name, category, role or compact navigation label. It should not appear as ordinary prose punctuation.
+- `／` is for compact alternatives or paired terms such as GO／HOLD; it should not replace prose conjunctions.
+- `「」` is used for quoted concepts or exact expressions; `《》` is reserved for titles of works.
+
+Visual punctuation rules:
+- a visual line must not begin with `，。；：、？！）》】」』`
+- a visual line must not end with an opening mark such as `（《【「『`
+- punctuation remains attached to its semantic phrase when an intentional title line break is defined
+- do not insert manual line breaks solely to place punctuation at the edge of a line
+
+## 14. Cooperation intake separation
+
+The three cooperation routes are not interchangeable forms.
+
+1. Humanistic interview: the 20 Questions Journey, focused on person, place, memory and narrative.
+2. Enterprise evaluation: organization context, current management problem, decisions in formation, evidence/signals, unacceptable downside, timing and contact.
+3. Speaking/forum invitation: organizer/event, purpose, audience, topic, schedule/venue/format, duration/run-of-show, recording/public-use requirements and contact.
+
+Each route must retain its own field schema and submission label. A generic governance intake must not silently replace route-specific cooperation forms.
