@@ -5,35 +5,40 @@ import type { STTVisualKey } from "../sttVisuals";
 export type PrimaryTheme = "problems" | "method" | "columns" | "publications" | "stt";
 type Action = { text: string; to: string; primary?: boolean };
 
-type PrimaryItem = { label: string; visual: STTVisualKey; title: string; lead: string; actions: Action[] };
+type PrimaryItem = { label: string; visual: STTVisualKey; title: string; titleLines: readonly string[]; lead: string; actions: Action[] };
 export const PRIMARY_THEMES: Record<PrimaryTheme, PrimaryItem> = {
   problems: {
     label: "你正在面對什麼", visual: "problems",
     title: "先釐清你正在面對的是什麼，再決定怎麼處理。",
+    titleLines: ["先釐清你正在面對的是什麼，", "再決定怎麼處理。"],
     lead: "企業重大決策、家族治理、接班安排、信任摩擦、法遵壓力、數位轉型與 AI 使用，表面看似不同，底層往往都指向問題定義、權責配置、證據判讀與風險承擔。",
     actions: [{ text: "展開問題盤點", to: "#problem-index", primary: true }, { text: "進入治理入口", to: "/start" }],
   },
   method: {
     label: "如何判讀", visual: "method",
     title: "在採取行動之前，先完成判讀。",
+    titleLines: ["在採取行動之前，", "先完成判讀。"],
     lead: "STT 的判讀，不是快速給答案，而是先回到事件結構：問題是否被正確定義、證據是否足夠、權力是否越界、責任如何承擔、風險是否可逆，然後才決定是否進入下一步。",
     actions: [{ text: "理解判讀方法", to: "#judgment-foundations", primary: true }, { text: "檢視治理流程", to: "#judgment-path" }],
   },
   columns: {
     label: "專欄判讀", visual: "columns",
     title: "把事件的表面，還原成可判讀的結構。",
+    titleLines: ["把事件的表面，", "還原成可判讀的結構。"],
     lead: "透過莊博士的人文地景產專欄與治理評論，STT 將複雜事件拆解為制度、風險、信任、法遵與策略之間的結構關係，讓閱讀不只是吸收資訊，而是學會判讀。",
     actions: [{ text: "閱讀專欄", to: "#column-list", primary: true }, { text: "進入判讀", to: "/how-stt-works" }],
   },
   publications: {
     label: "出版研究", visual: "publications",
     title: "出版，不只是內容；而是治理知識的長期載體。",
+    titleLines: ["出版，不只是內容；", "而是治理知識的長期載體。"],
     lead: "STT Press 將治理、法遵、接班、家族、數位治理與制度文明轉化為可閱讀、可累積、可流通的研究文本，讓知識不只被發表，更能被持續使用。",
     actions: [{ text: "查看出版研究", to: "/books", primary: true }, { text: "進入 STT Press", to: "/books" }],
   },
   stt: {
     label: "關於 STT", visual: "aboutStt",
     title: "STT 不是一般顧問公司，而是高位階治理文明平台。",
+    titleLines: ["STT 不是一般顧問公司，", "而是高位階治理文明平台。"],
     lead: "在 STT，治理不是口號，而是一套面對現實、判讀局勢、設計制度、協助決策與建立長期信任的工作方法。莊鈞翔博士主導判讀與制度設計，AI 作為治理幕僚與作業系統輔助。",
     actions: [{ text: "認識 STT", to: "/institution/eric-chuang", primary: true }, { text: "理解治理定位", to: "/problems" }],
   },
@@ -41,7 +46,7 @@ export const PRIMARY_THEMES: Record<PrimaryTheme, PrimaryItem> = {
 
 export default function FullBleedHero({ theme, children }: { theme: PrimaryTheme; children?: ReactNode }) {
   const item = PRIMARY_THEMES[theme];
-  return <STTPageHero primary visual={item.visual} eyebrow={item.label} title={item.title} lead={item.lead} actions={item.actions}>{children}</STTPageHero>;
+  return <STTPageHero primary visual={item.visual} eyebrow={item.label} title={item.title} titleLines={item.titleLines} lead={item.lead} actions={item.actions}>{children}</STTPageHero>;
 }
 
 export function JudgmentFoundations() {
