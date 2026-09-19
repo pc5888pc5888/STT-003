@@ -23,6 +23,7 @@ on:
       - 'api/cooperation-submit.ts'
       - 'api/release.ts'
       - 'scripts/test_mobile_editorial.mjs'
+      - 'scripts/test_editorial_extended.mjs'
       - 'public/data/stt-primary-release.json'
       - '.github/workflows/stt-primary-production.yml'
 permissions:
@@ -68,9 +69,12 @@ jobs:
           export CHROME_PATH="$(command -v google-chrome || command -v chromium)"
           export STT_TEST_ORIGIN=https://stt-003.vercel.app
           node scripts/test_mobile_editorial.mjs
+          node scripts/test_editorial_extended.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: stt-mobile-editorial-production-evidence
-          path: mobile-editorial-evidence/
+          path: |
+            mobile-editorial-evidence/
+            editorial-extended-evidence/
           retention-days: 14
