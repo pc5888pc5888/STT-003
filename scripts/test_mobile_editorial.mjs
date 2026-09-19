@@ -128,7 +128,7 @@ async function measureHumanistic(page){
 
 async function measureEditorialBody(page, route){
   const selectors = route.path==='/' ? {
-      heading:'.stt-home-problems h2', body:'.stt-home-problems__head>p'
+      heading:'.stt-home-problems h2', body:'.stt-home-problems__head>p:not(.stt-master-kicker)'
     } : route.path==='/problems' ? {
       heading:'#problem-index h2', body:'.stt-problem-misjudgment'
     } : route.path==='/cooperation' ? {
