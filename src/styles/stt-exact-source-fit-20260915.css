@@ -200,3 +200,28 @@
     aspect-ratio:4/3!important;
   }
 }
+
+
+/* Mobile utility controls — compact and safe-area aware. */
+@media (max-width:700px){
+  .stt-accessibility-widget{
+    right:12px!important;
+    bottom:max(12px,env(safe-area-inset-bottom))!important;
+    gap:6px!important;
+  }
+  .stt-accessibility-tools{gap:6px!important}
+  .stt-accessibility-button,
+  .stt-language-button{
+    width:40px!important;
+    height:40px!important;
+    min-width:40px!important;
+    min-height:40px!important;
+    box-shadow:0 8px 24px rgba(36,34,31,.07)!important;
+    background:rgba(255,255,255,.94)!important;
+  }
+  .stt-accessibility-button svg,
+  .stt-language-button svg{
+    width:17px!important;
+    height:17px!important;
+  }
+}
