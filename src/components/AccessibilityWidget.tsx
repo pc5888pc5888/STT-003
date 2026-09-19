@@ -105,7 +105,7 @@ export function AccessibilityWidget({ onChatOpen, isChatOpen }: AccessibilityWid
   } as const;
 
   return (
-    <div className="fixed bottom-6 right-6 z-[80] flex flex-col items-end gap-2 pointer-events-auto">
+    <div className="stt-accessibility-widget fixed bottom-6 right-6 z-[80] flex flex-col items-end gap-2 pointer-events-auto">
       {voiceError && (
         <div
           className="max-w-[240px] px-3 py-2 bg-white border text-xs leading-relaxed"
@@ -116,11 +116,11 @@ export function AccessibilityWidget({ onChatOpen, isChatOpen }: AccessibilityWid
         </div>
       )}
 
-      <div className="flex items-center gap-2">
+      <div className="stt-accessibility-tools flex items-center gap-2">
         <button
           type="button"
           onClick={onChatOpen}
-          className="w-12 h-12 rounded-full flex items-center justify-center bg-white border cursor-pointer transition-transform hover:scale-[1.03]"
+          className="stt-accessibility-button w-12 h-12 rounded-full flex items-center justify-center bg-white border cursor-pointer transition-transform hover:scale-[1.03]"
           style={{
             ...baseButtonStyle,
             background: isChatOpen ? "var(--stt-ivory)" : "var(--stt-surface)",
@@ -137,7 +137,7 @@ export function AccessibilityWidget({ onChatOpen, isChatOpen }: AccessibilityWid
         <button
           type="button"
           onClick={toggleSpeech}
-          className="w-12 h-12 rounded-full flex items-center justify-center bg-white border cursor-pointer transition-transform hover:scale-[1.03]"
+          className="stt-accessibility-button w-12 h-12 rounded-full flex items-center justify-center bg-white border cursor-pointer transition-transform hover:scale-[1.03]"
           style={{
             ...baseButtonStyle,
             background: isSpeaking ? "var(--stt-ivory)" : "var(--stt-surface)",
