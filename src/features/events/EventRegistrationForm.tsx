@@ -137,7 +137,7 @@ export function EventRegistrationForm({ eventName, onSubmit }: EventRegistration
 
         <div className="grid gap-4 md:grid-cols-2">
           <label className="text-sm" style={{ color: "var(--stt-ink-soft)" }}>
-            {t("events.registration.fields.organization")} *
+            {t("events.registration.fields.organization")}
             <input
               className={`${fieldClassName} mt-1.5`}
               style={fieldStyle}
@@ -168,7 +168,7 @@ export function EventRegistrationForm({ eventName, onSubmit }: EventRegistration
           </label>
 
           <label className="text-sm" style={{ color: "var(--stt-ink-soft)" }}>
-            {t("events.registration.fields.name")} *
+            {t("events.registration.fields.name")}
             <input
               className={`${fieldClassName} mt-1.5`}
               style={fieldStyle}
@@ -179,7 +179,7 @@ export function EventRegistrationForm({ eventName, onSubmit }: EventRegistration
           </label>
 
           <label className="text-sm" style={{ color: "var(--stt-ink-soft)" }}>
-            {t("events.registration.fields.email")} *
+            {t("events.registration.fields.email")}
             <input
               type="email"
               className={`${fieldClassName} mt-1.5`}
@@ -191,7 +191,7 @@ export function EventRegistrationForm({ eventName, onSubmit }: EventRegistration
           </label>
 
           <label className="text-sm" style={{ color: "var(--stt-ink-soft)" }}>
-            {t("events.registration.fields.phone")} *
+            {t("events.registration.fields.phone")}
             <input
               className={`${fieldClassName} mt-1.5`}
               style={fieldStyle}
