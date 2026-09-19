@@ -8,6 +8,7 @@ type Props = {
   visual: STTVisualKey;
   eyebrow: string;
   title: string;
+  titleLines?: readonly string[];
   lead?: string;
   actions?: Action[];
   primary?: boolean;
@@ -15,8 +16,9 @@ type Props = {
   id?: string;
 };
 
-export default function STTPageHero({ visual, eyebrow, title, lead, actions = [], primary = false, children, id }: Props) {
+export default function STTPageHero({ visual, eyebrow, title, titleLines, lead, actions = [], primary = false, children, id }: Props) {
   const dimensions = sttVisualDimensions(visual);
+  const editorialTitleLines = titleLines?.length ? titleLines : [title];
 
   return (
     <section id={id} className={`stt-master-hero${primary ? " is-primary" : " is-secondary"}`} data-stt-visual={visual} aria-labelledby={`stt-hero-${visual}`}>
@@ -36,7 +38,11 @@ export default function STTPageHero({ visual, eyebrow, title, lead, actions = []
       <div className="stt-master-shell stt-master-hero__inner">
         <div className="stt-master-hero__copy">
           <p className="stt-master-kicker">{eyebrow}</p>
-          <h1 id={`stt-hero-${visual}`}>{title}</h1>
+          <h1 id={`stt-hero-${visual}`} aria-label={title}>
+            {editorialTitleLines.map((line, index) => (
+              <span className="stt-editorial-title-line" key={`${visual}-title-${index}`}>{line}</span>
+            ))}
+          </h1>
           {lead && <p className="stt-master-lead">{lead}</p>}
           {actions.length > 0 && <div className="stt-master-actions">{actions.map((a) => a.to.startsWith("#")
             ? <a key={a.to} className={a.primary ? "is-primary" : undefined} href={a.to}>{a.text}<span aria-hidden="true">↓</span></a>
