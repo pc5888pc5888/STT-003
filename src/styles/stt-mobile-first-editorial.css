@@ -1032,3 +1032,33 @@
     font-size:33px!important;
   }
 }
+
+
+/* Explicit semantic H1 lines: browser may not split inside an editorial line. */
+@media(max-width:900px){
+  .stt-intake-title-line,
+  .stt-master-hero.is-secondary .stt-editorial-title-line{
+    display:block!important;
+    white-space:nowrap!important;
+  }
+
+  .stt-intake-title{
+    max-width:none!important;
+    font-size:clamp(30px,8.1vw,34px)!important;
+    line-height:1.5!important;
+    letter-spacing:.002em!important;
+  }
+
+  .stt-intake-title-line + .stt-intake-title-line{
+    margin-top:.04em;
+  }
+
+  .stt-intake-hero{
+    padding-top:48px!important;
+    padding-bottom:56px!important;
+  }
+
+  .stt-intake-lead{
+    margin-top:22px!important;
+  }
+}
