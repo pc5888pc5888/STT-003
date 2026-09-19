@@ -139,8 +139,15 @@ try{
       await page.evaluate(()=>document.fonts.ready);
       await page.waitForTimeout(100);
 
-      const overflow=await page.evaluate(()=>({inner:innerWidth,scroll:document.documentElement.scrollWidth}));
-      assert.ok(overflow.scroll<=overflow.inner+1,`${route.path} ${viewport.width}px horizontal overflow`);
+      const overflow=await page.evaluate(()=>{
+        const inner=innerWidth,scroll=document.documentElement.scrollWidth;
+        const offenders=[...document.querySelectorAll('body *')].map(el=>{
+          const r=el.getBoundingClientRect();
+          return {tag:el.tagName,cls:el.className||'',id:el.id||'',left:Math.round(r.left),right:Math.round(r.right),width:Math.round(r.width)};
+        }).filter(x=>x.right>inner+1||x.left<-1).sort((a,b)=>b.width-a.width).slice(0,8);
+        return {inner,scroll,offenders};
+      });
+      assert.ok(overflow.scroll<=overflow.inner+1,`${route.path} ${viewport.width}px horizontal overflow ${JSON.stringify(overflow)}`);
 
       let metrics, lines;
       if(route.kind==='master'){
