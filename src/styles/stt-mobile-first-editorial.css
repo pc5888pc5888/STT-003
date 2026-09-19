@@ -350,3 +350,381 @@
     margin-left:8px!important;
   }
 }
+
+
+/* --------------------------------------------------------------------------
+   Page-level Editorial Art Direction
+   Same institution, different reading personalities.
+   -------------------------------------------------------------------------- */
+
+@media(max-width:900px){
+  .stt-master-scope p,
+  .stt-coop-page p{
+    text-wrap:pretty;
+  }
+
+  /* HOME — manifesto / editorial index */
+  .stt-home-problems__head{
+    max-width:none!important;
+  }
+  .stt-home-problems__head h2{
+    max-width:12em!important;
+    margin-top:14px!important;
+  }
+  .stt-home-problems__head>p{
+    max-width:23em!important;
+    margin-top:16px!important;
+  }
+  .stt-home-problem-grid{
+    display:block!important;
+    margin-top:34px!important;
+    border-left:0!important;
+    border-top:1px solid var(--stt-gold-line)!important;
+  }
+  .stt-home-problem-grid button{
+    display:block!important;
+    width:100%!important;
+    min-height:0!important;
+    padding:28px 0 30px!important;
+    border-right:0!important;
+    border-bottom:1px solid var(--stt-line)!important;
+    background:transparent!important;
+    transform:none!important;
+  }
+  .stt-home-problem-grid small{
+    display:block!important;
+    font-size:11px!important;
+    line-height:1.4!important;
+    letter-spacing:.12em!important;
+    color:var(--stt-gold-deep)!important;
+  }
+  .stt-home-problem-grid h3{
+    max-width:15em!important;
+    margin:10px 0 0!important;
+  }
+  .stt-home-problem-grid p{
+    max-width:23em!important;
+    margin:10px 0 0!important;
+    color:var(--stt-ink-soft)!important;
+  }
+  .stt-home-problem-grid span{
+    margin-top:14px!important;
+    font-size:12.5px!important;
+    font-weight:600!important;
+  }
+  .stt-home-final{
+    text-align:left!important;
+  }
+  .stt-home-final h2,
+  .stt-home-final p{
+    margin-left:0!important;
+    margin-right:0!important;
+  }
+  .stt-home-final h2{max-width:15em!important}
+  .stt-home-final p{max-width:23em!important}
+
+  /* PROBLEMS — diagnostic dossier rows */
+  .stt-problems-page #problem-index>div{
+    border-top:1px solid var(--stt-gold-line)!important;
+    border-bottom:0!important;
+  }
+  .stt-problems-page #problem-index article{
+    gap:0!important;
+    padding:32px 0 34px!important;
+  }
+  .stt-problems-page #problem-index article>div:first-child{
+    margin-bottom:14px!important;
+    font-size:12px!important;
+    line-height:1.2!important;
+    letter-spacing:.14em!important;
+    color:var(--stt-gold-deep)!important;
+  }
+  .stt-problems-page #problem-index h2{
+    max-width:15em!important;
+    text-wrap:balance!important;
+  }
+  .stt-problem-misjudgment,
+  .stt-problem-result{
+    max-width:24em!important;
+    margin-top:18px!important;
+  }
+  .stt-problem-label{
+    display:block!important;
+    margin-bottom:6px!important;
+    color:var(--stt-gold-deep)!important;
+    font-size:10.5px!important;
+    line-height:1.45!important;
+    font-weight:700!important;
+    letter-spacing:.12em!important;
+  }
+  .stt-problems-page #problem-index article>div:last-child{
+    margin-top:20px!important;
+    padding-top:20px!important;
+    border-top:1px solid rgba(215,194,159,.7)!important;
+  }
+  .stt-problems-page #problem-index article button{
+    font-size:12.5px!important;
+    line-height:1.4!important;
+  }
+  .stt-problems-page section:last-child>div{
+    padding:30px 0!important;
+    border-left:0!important;
+    border-right:0!important;
+    background:transparent!important;
+  }
+  .stt-problems-page section:last-child h2{
+    max-width:14em!important;
+    margin-top:12px!important;
+  }
+
+  /* METHOD / PUBLICATIONS / ABOUT — institutional editorial folios */
+  .stt-editorial-page .stt-canon-statement{
+    max-width:23em!important;
+    margin:0!important;
+    padding:22px 0!important;
+    border-top:1px solid var(--stt-gold-line)!important;
+    border-bottom:1px solid var(--stt-line)!important;
+    font-family:var(--stt-serif)!important;
+    font-size:17.5px!important;
+    line-height:1.82!important;
+    color:var(--stt-gold-deep)!important;
+    text-wrap:pretty!important;
+  }
+  .stt-editorial-page .stt-canon-grid{
+    display:block!important;
+    margin-top:34px!important;
+    border-left:0!important;
+    border-top:1px solid var(--stt-gold-line)!important;
+  }
+  .stt-editorial-page .stt-canon-card{
+    min-height:0!important;
+    padding:30px 0 32px!important;
+    border-right:0!important;
+    border-bottom:1px solid var(--stt-line)!important;
+    background:transparent!important;
+  }
+  .stt-editorial-page .stt-canon-card small{
+    display:block!important;
+    margin-bottom:10px!important;
+    color:var(--stt-gold-deep)!important;
+    font-size:10.5px!important;
+    line-height:1.3!important;
+    letter-spacing:.14em!important;
+  }
+  .stt-editorial-page .stt-canon-card h2{
+    max-width:14em!important;
+    margin:0!important;
+    font-size:clamp(24px,6.6vw,28px)!important;
+    line-height:1.55!important;
+    text-wrap:balance!important;
+  }
+  .stt-editorial-page .stt-canon-card p{
+    max-width:24em!important;
+    margin-top:14px!important;
+    font-size:15px!important;
+    line-height:1.92!important;
+  }
+  .stt-editorial-page .stt-canon-card button{
+    width:auto!important;
+    margin-top:18px!important;
+    padding:0 0 5px!important;
+    border:0!important;
+    border-bottom:1px solid var(--stt-gold)!important;
+    border-radius:0!important;
+    background:transparent!important;
+    color:var(--stt-gold-deep)!important;
+    font-size:12.5px!important;
+    font-weight:650!important;
+  }
+  .stt-editorial-page .stt-canon-final{
+    text-align:left!important;
+  }
+  .stt-editorial-page .stt-canon-final h2,
+  .stt-editorial-page .stt-canon-final p{
+    margin-left:0!important;
+    margin-right:0!important;
+  }
+  .stt-editorial-page .stt-canon-final h2{max-width:14em!important}
+  .stt-editorial-page .stt-canon-final p{
+    max-width:24em!important;
+    margin-top:16px!important;
+  }
+
+  /* METHOD — steps should read as a sequence, not a product grid. */
+  .stt-editorial-method .stt-canon-card small{
+    font-family:Georgia,"Times New Roman",serif!important;
+  }
+  .stt-editorial-method .stt-canon-card h2{
+    max-width:13em!important;
+  }
+  .stt-foundations__grid{
+    margin-top:30px!important;
+  }
+  .stt-foundations__grid article{
+    padding:26px 0 28px!important;
+  }
+  .stt-foundations__grid h3{
+    max-width:14em!important;
+    margin-top:10px!important;
+  }
+  .stt-editorial-lead{
+    max-width:24em!important;
+    margin-top:16px!important;
+    font-size:15px!important;
+    line-height:1.92!important;
+  }
+
+  /* PUBLICATIONS — quiet archive hierarchy. */
+  .stt-editorial-publications .stt-canon-card h2{
+    max-width:12em!important;
+  }
+  .stt-editorial-publications .stt-canon-statement{
+    max-width:21em!important;
+  }
+
+  /* ABOUT STT — institutional clarity, fewer decorative boxes. */
+  .stt-editorial-stt .stt-canon-card h2{
+    max-width:14em!important;
+  }
+  .stt-editorial-stt .stt-canon-card p{
+    max-width:23em!important;
+  }
+
+  /* ERIC — authority / research profile, not a credential wall. */
+  .stt-editorial-eric .gr-section{
+    padding-top:64px!important;
+    padding-bottom:64px!important;
+  }
+  .stt-editorial-eric .gr-section h2{
+    max-width:14em!important;
+    margin-top:14px!important;
+    text-wrap:balance!important;
+  }
+  .stt-editorial-eric .gr-desc{
+    max-width:24em!important;
+    margin-top:16px!important;
+    font-size:15px!important;
+    line-height:1.92!important;
+  }
+  .stt-editorial-eric .gr-grid{
+    display:block!important;
+    margin-top:30px!important;
+    border-left:0!important;
+    border-top:1px solid var(--stt-gold-line)!important;
+  }
+  .stt-editorial-eric .gr-card{
+    padding:26px 0 28px!important;
+    border-right:0!important;
+    background:transparent!important;
+  }
+  .stt-editorial-eric .gr-card small{
+    display:block!important;
+    color:var(--stt-gold-deep)!important;
+    font-size:10.5px!important;
+    letter-spacing:.14em!important;
+  }
+  .stt-editorial-eric .gr-card h3{
+    max-width:14em!important;
+    margin-top:10px!important;
+  }
+  .stt-editorial-eric .gr-card p{
+    max-width:24em!important;
+    margin-top:10px!important;
+    font-size:15px!important;
+    line-height:1.9!important;
+  }
+  .stt-editorial-eric .gr-list{
+    margin-top:28px!important;
+  }
+  .stt-editorial-eric .gr-row{
+    grid-template-columns:34px minmax(0,1fr)!important;
+    gap:12px!important;
+    padding:17px 0!important;
+  }
+  .stt-editorial-eric .gr-row p{
+    font-size:14.8px!important;
+    line-height:1.82!important;
+  }
+  .stt-editorial-eric .gr-cta{
+    margin-top:26px!important;
+    gap:8px!important;
+  }
+  .stt-editorial-eric .gr-cta button{
+    min-height:44px!important;
+    padding:9px 13px!important;
+    font-size:12.5px!important;
+  }
+
+  /* COOPERATION — formal routes, not pricing cards. */
+  .stt-coop-section-head{
+    max-width:none!important;
+  }
+  .stt-coop-section-head h2{
+    max-width:12em!important;
+    margin-top:14px!important;
+  }
+  .stt-coop-grid{
+    display:block!important;
+    margin-top:32px!important;
+    border-left:0!important;
+    border-top:1px solid var(--stt-gold-line)!important;
+  }
+  .stt-coop-card{
+    min-height:0!important;
+    padding:30px 0 32px!important;
+    border-right:0!important;
+    border-bottom:1px solid var(--stt-line)!important;
+    background:transparent!important;
+  }
+  .stt-coop-number{
+    font-size:11px!important;
+    line-height:1.3!important;
+    letter-spacing:.14em!important;
+    color:var(--stt-gold-deep)!important;
+  }
+  .stt-coop-card h3{
+    max-width:14em!important;
+    margin-top:12px!important;
+  }
+  .stt-coop-subtitle{
+    max-width:23em!important;
+    margin-top:10px!important;
+    color:var(--stt-gold-deep)!important;
+    font-size:12.5px!important;
+    line-height:1.75!important;
+    font-weight:650!important;
+  }
+  .stt-coop-body{
+    max-width:24em!important;
+    margin-top:16px!important;
+    font-size:15px!important;
+    line-height:1.92!important;
+  }
+  .stt-coop-card button{
+    width:auto!important;
+    min-height:0!important;
+    margin-top:20px!important;
+    padding:0 0 5px!important;
+    border:0!important;
+    border-bottom:1px solid var(--stt-gold)!important;
+    border-radius:0!important;
+    background:transparent!important;
+    color:var(--stt-gold-deep)!important;
+    font-size:12.5px!important;
+    font-weight:650!important;
+  }
+}
+
+/* Desktop editorial measures: wider canvas, same reading discipline. */
+@media(min-width:901px){
+  .stt-home-problems__head>p,
+  .stt-editorial-page .stt-canon-card p,
+  .stt-editorial-eric .gr-desc,
+  .stt-editorial-eric .gr-card p,
+  .stt-coop-body{
+    max-width:720px;
+  }
+  .stt-editorial-page .stt-canon-statement{
+    max-width:900px;
+  }
+}
