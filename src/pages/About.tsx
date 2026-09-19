@@ -78,19 +78,19 @@ export function ContactModal({ onClose }: { onClose: () => void }) {
         ) : (
           <div className="mt-8 grid gap-4 md:grid-cols-2">
             <label className="text-xs" style={{ color: "var(--stt-ink-soft)" }}>
-              公司／機構名稱 *
+              公司／機構名稱
               <input name="companyName" value={form.companyName} onChange={updateField} className={`${inputClassName} mt-1.5`} style={inputStyle} />
             </label>
             <label className="text-xs" style={{ color: "var(--stt-ink-soft)" }}>
-              姓名 *
+              姓名
               <input name="name" value={form.name} onChange={updateField} className={`${inputClassName} mt-1.5`} style={inputStyle} />
             </label>
             <label className="text-xs" style={{ color: "var(--stt-ink-soft)" }}>
-              Email *
+              Email
               <input type="email" name="email" value={form.email} onChange={updateField} className={`${inputClassName} mt-1.5`} style={inputStyle} />
             </label>
             <label className="text-xs" style={{ color: "var(--stt-ink-soft)" }}>
-              聯絡電話 *
+              聯絡電話
               <input name="phone" value={form.phone} onChange={updateField} className={`${inputClassName} mt-1.5`} style={inputStyle} />
             </label>
             <label className="text-xs" style={{ color: "var(--stt-ink-soft)" }}>
