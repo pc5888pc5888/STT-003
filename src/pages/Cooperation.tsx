@@ -101,9 +101,10 @@ export default function Cooperation() {
             z-index: 0 !important;
             display: block !important;
             width: 100% !important;
-            height: clamp(300px, 44svh, 420px) !important;
-            min-height: 300px !important;
-            max-height: 420px !important;
+            height: auto !important;
+            min-height: 0 !important;
+            max-height: none !important;
+            aspect-ratio: 4 / 3 !important;
             background-size: cover !important;
             background-position: right center !important;
             background-repeat: no-repeat !important;
@@ -123,19 +124,19 @@ export default function Cooperation() {
             width: 100% !important;
             max-width: none !important;
             transform: none !important;
-            padding: 34px 22px 52px !important;
+            padding: 30px 24px 52px !important;
             box-sizing: border-box !important;
             background: #fffdfa !important;
           }
 
           .stt-coop-copy h1 {
-            font-size: clamp(31px, 8.2vw, 44px) !important;
+            font-size: clamp(32px, 8.4vw, 38px) !important;
             line-height: 1.42 !important;
           }
 
           .stt-coop-intro {
-            font-size: 14.5px !important;
-            line-height: 1.85 !important;
+            font-size: 15.5px !important;
+            line-height: 1.9 !important;
           }
 
           .stt-coop-caption {
@@ -145,8 +146,9 @@ export default function Cooperation() {
 
         @media (max-width: 430px) {
           .stt-coop-hero-bg {
-            height: clamp(300px, 42svh, 360px) !important;
-            max-height: 360px !important;
+            height: auto !important;
+            max-height: none !important;
+            aspect-ratio: 4 / 3 !important;
             background-position: 100% center !important;
           }
         }
