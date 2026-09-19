@@ -22,7 +22,7 @@ function DomainShell({ children }: { children: ReactNode }) { return <div classN
 
 export function DomainsIndex(){
   const navigate=useNavigate();
-  return <DomainShell><STTPageHero visual="domainsIndex" eyebrow="GOVERNANCE KNOWLEDGE DOMAINS" title="這些不是服務套餐，而是 STT 用來理解複雜問題的治理知識領域。" titleLines={["這些不是服務套餐，", "而是 STT 用來理解", "複雜問題的治理知識領域。"]} lead="同一個事件可能同時涉及公司治理、接班、法務、契約或 AI。知識領域的作用，是幫助判讀與專業路由，而不是要求使用者先替自己選對顧問種類。" />
+  return <DomainShell><STTPageHero visual="domainsIndex" eyebrow="GOVERNANCE KNOWLEDGE DOMAINS" title="這些不是服務套餐，而是 STT 用來理解複雜問題的治理知識領域。" titleLines={["這些不是服務套餐，", "而是 STT 用來理解", "複雜問題的", "治理知識領域。"]} lead="同一個事件可能同時涉及公司治理、接班、法務、契約或 AI。知識領域的作用，是幫助判讀與專業路由，而不是要求使用者先替自己選對顧問種類。" />
     <section className="domain-body"><div className="domain-wrap"><div className="domain-grid">{domains.map((d,i)=><article className="domain-card" key={d.slug}><small>{String(i+1).padStart(2,"0")}</small><h2>{d.title}</h2><p>{d.subtitle}</p><button onClick={()=>navigate(`/domains/${d.slug}`)}>進入領域 →</button></article>)}</div></div></section></DomainShell>;
 }
 
