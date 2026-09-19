@@ -2,7 +2,18 @@ name: STT Primary Production Verification
 on:
   push:
     branches: [main]
-    paths: ['src/components/FullBleedHero.tsx','src/styles/stt-fullbleed.css','public/data/stt-primary-release.json','.github/workflows/stt-primary-production.yml']
+    paths:
+      - 'src/components/STTPageHero.tsx'
+      - 'src/components/FullBleedHero.tsx'
+      - 'src/components/AccessibilityWidget.tsx'
+      - 'src/pages/HomeCanonical.tsx'
+      - 'src/pages/Cooperation.tsx'
+      - 'src/styles/stt-mobile-first-editorial.css'
+      - 'public/humanistic-interview/stt-mobile-bridge.css'
+      - 'public/humanistic-interview/index.html'
+      - 'scripts/test_mobile_editorial.mjs'
+      - 'public/data/stt-primary-release.json'
+      - '.github/workflows/stt-primary-production.yml'
 permissions:
   contents: read
 jobs:
@@ -37,10 +48,10 @@ jobs:
           npm install --prefix /tmp/stt-browser --no-save playwright
           export CHROME_PATH="$(command -v google-chrome || command -v chromium)"
           export STT_TEST_ORIGIN=https://stt-003.vercel.app
-          node scripts/test_fullbleed.mjs
+          node scripts/test_mobile_editorial.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: stt-primary-production-evidence
-          path: fullbleed-evidence/
+          name: stt-mobile-editorial-production-evidence
+          path: mobile-editorial-evidence/
           retention-days: 14
