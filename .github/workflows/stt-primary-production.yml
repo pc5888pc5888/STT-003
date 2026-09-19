@@ -7,10 +7,21 @@ on:
       - 'src/components/FullBleedHero.tsx'
       - 'src/components/AccessibilityWidget.tsx'
       - 'src/pages/HomeCanonical.tsx'
+      - 'src/pages/Problems.tsx'
+      - 'src/pages/ProblemDetail.tsx'
+      - 'src/pages/PublicCore.tsx'
+      - 'src/pages/Domains.tsx'
+      - 'src/pages/CanonicalLibrary.tsx'
+      - 'src/pages/Columns.tsx'
+      - 'src/pages/Legal.tsx'
       - 'src/pages/Cooperation.tsx'
+      - 'src/pages/Start.tsx'
       - 'src/styles/stt-mobile-first-editorial.css'
       - 'public/humanistic-interview/stt-mobile-bridge.css'
       - 'public/humanistic-interview/index.html'
+      - 'public/humanistic-interview/assets/stations/**'
+      - 'api/cooperation-submit.ts'
+      - 'api/release.ts'
       - 'scripts/test_mobile_editorial.mjs'
       - 'public/data/stt-primary-release.json'
       - '.github/workflows/stt-primary-production.yml'
@@ -25,20 +36,28 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 24
-      - name: Wait for this release on the fixed public URL
+      - name: Wait for this exact commit on the fixed public URL
+        env:
+          EXPECTED_SHA: ${{ github.sha }}
         run: |
           python - <<'PY'
-          import urllib.request,json,time
-          from pathlib import Path
-          expected=json.loads(Path('public/data/stt-primary-release.json').read_text())
-          for i in range(60):
+          import json, os, time, urllib.request
+          expected=os.environ['EXPECTED_SHA']
+          for i in range(90):
               try:
-                  request=urllib.request.Request('https://stt-003.vercel.app/data/stt-primary-release.json?check='+str(time.time_ns()),headers={'Cache-Control':'no-cache'})
+                  request=urllib.request.Request(
+                      'https://stt-003.vercel.app/api/release?check='+str(time.time_ns()),
+                      headers={'Cache-Control':'no-cache'}
+                  )
                   result=json.loads(urllib.request.urlopen(request,timeout=15).read())
-                  if result==expected:print('Expected release is publicly served.');break
-              except Exception:pass
+                  if result.get('sha')==expected:
+                      print('Exact production commit is publicly served:', expected)
+                      break
+              except Exception:
+                  pass
               time.sleep(5)
-          else:raise SystemExit('Fixed domain has not served the expected release; production not verified.')
+          else:
+              raise SystemExit(f'Fixed domain has not served expected commit {expected}; production not verified.')
           PY
       - name: Verify the live website without mocked data
         run: |
