@@ -22,6 +22,7 @@ export default function HomeCanonical(_: HomeProps) {
       visual="home"
       eyebrow="STT GOVERNANCE · STRATEGY · GOVERNANCE · JUDGMENT"
       title="讓重要的事，走得更遠。"
+      titleLines={["讓重要的事，", "走得更遠。"]}
       lead="STT Governance 協助企業、家族與重大決策者，在事件變成不可逆結果之前，先把真正的問題、證據、權力、責任與選項看清楚，再進入執行。"
       actions={[
         { text: "看看我正在面對的問題", to: "/problems", primary: true },
