@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { MessageCircle, Volume2, VolumeX } from "lucide-react";
+import { MessageCircle, SlidersHorizontal, Volume2, VolumeX } from "lucide-react";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { useI18n } from "@/i18n/I18nProvider";
 
@@ -26,6 +26,7 @@ export function AccessibilityWidget({ onChatOpen, isChatOpen }: AccessibilityWid
   const { locale, t } = useI18n();
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [voiceError, setVoiceError] = useState(false);
+  const [toolsOpen, setToolsOpen] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const objectUrlRef = useRef<string | null>(null);
 
@@ -116,7 +117,17 @@ export function AccessibilityWidget({ onChatOpen, isChatOpen }: AccessibilityWid
         </div>
       )}
 
-      <div className="stt-accessibility-tools flex items-center gap-2">
+      <button
+        type="button"
+        onClick={() => setToolsOpen((value) => !value)}
+        className="stt-accessibility-toggle"
+        aria-label="開啟輔助工具"
+        aria-expanded={toolsOpen}
+      >
+        <SlidersHorizontal className="w-4 h-4" strokeWidth={1.4} />
+      </button>
+
+      <div className={`stt-accessibility-tools flex items-center gap-2${toolsOpen ? " is-open" : ""}`}>
         <button
           type="button"
           onClick={onChatOpen}
