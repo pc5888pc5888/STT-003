@@ -21,11 +21,11 @@ jobs:
           ref: main
           fetch-depth: 0
 
-      - name: Download live approved Humanistic page
+      - name: Download live approved Humanistic page and station artwork
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p public/humanistic-interview
+          mkdir -p public/humanistic-interview/assets/stations
           curl --fail --location --retry 4 --retry-delay 2 \
             -A 'Mozilla/5.0 STT-Governance-Mirror/1.0' \
             'https://shimmering-longma-509244.netlify.app/' \
@@ -33,6 +33,14 @@ jobs:
           test -s /tmp/humanistic.html
           grep -Fq '人文地景產' /tmp/humanistic.html
           grep -Fq 'humanistic-20q' /tmp/humanistic.html
+
+          for n in 01 02 03 04 05; do
+            curl --fail --location --retry 4 --retry-delay 2 \
+              -A 'Mozilla/5.0 STT-Governance-Mirror/1.0' \
+              "https://shimmering-longma-509244.netlify.app/assets/stations/station-${n}.png" \
+              -o "public/humanistic-interview/assets/stations/station-${n}.png"
+            test -s "public/humanistic-interview/assets/stations/station-${n}.png"
+          done
 
       - name: Patch only the submission transport
         shell: bash
@@ -127,7 +135,7 @@ jobs:
           set -euo pipefail
           git config user.name 'STT Humanistic Mirror'
           git config user.email 'actions@users.noreply.github.com'
-          git add public/humanistic-interview/index.html
+          git add public/humanistic-interview/index.html public/humanistic-interview/assets/stations
           git commit -m 'fix: Humanistic interview transport + privacy recovery [mirror-skip]' || exit 0
           git pull --rebase origin main
           git push origin HEAD:main
