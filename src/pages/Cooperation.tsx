@@ -167,7 +167,7 @@ export default function Cooperation() {
             <span className="stt-editorial-title-line">取決於經營者在資本，</span>
             <span className="stt-editorial-title-line">利潤與變局交織時的決策序列。</span>
           </h1>
-          <p className="stt-coop-intro"><strong>STT Governance 策略智庫</strong>由莊鈞翔博士主導，我們不談懸空的理論，只專注於<strong>「拆解商業本質」</strong>與<strong>「建構治理護城河」</strong>，透過嚴謹的商學實戰邏輯，協助企業在龐大生存壓力下精準破局；歡迎依據您的發展策略，選擇相對應的合作通道。</p>
+          <p className="stt-coop-intro"><strong>STT Governance 策略智庫</strong>由莊鈞翔博士主導，我們不談懸空的理論，只專注於<strong>「拆解商業本質」與「建構治理護城河」</strong>，透過嚴謹的商學實戰邏輯，協助企業在龐大生存壓力下精準破局；歡迎依據您的發展策略，選擇相對應的合作通道。</p>
           <div className="stt-coop-actions">
             <button type="button" className="is-primary" onClick={() => navigate("/start")}>立即預約諮詢 <span>→</span></button>
             <button type="button" onClick={() => document.getElementById("stt-coop-channels-title")?.scrollIntoView({ behavior: "smooth" })}>了解合作通道</button>
