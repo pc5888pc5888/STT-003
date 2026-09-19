@@ -26,7 +26,7 @@ const mobileViewports = [
 function pctDiff(a,b){ return Math.abs(a-b)/b; }
 
 async function visualLines(page, selector){
-  return page.locator(selector).evaluate(el => {
+  return page.locator(selector).first().evaluate(el => {
     const items = [];
     const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
     let node;
