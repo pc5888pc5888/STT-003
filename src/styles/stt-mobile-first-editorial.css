@@ -276,3 +276,38 @@
   .stt-master-hero.is-primary h1,
   .stt-coop-hero h1{line-break:auto;text-wrap:balance}
 }
+
+
+/* Mobile accessibility tools: one unobtrusive entry point; expand on demand. */
+.stt-accessibility-toggle{
+  display:none;
+}
+@media(max-width:700px){
+  .stt-accessibility-widget{
+    align-items:flex-end!important;
+  }
+  .stt-accessibility-toggle{
+    display:flex!important;
+    width:40px!important;
+    height:40px!important;
+    align-items:center!important;
+    justify-content:center!important;
+    border:1px solid var(--stt-gold-line)!important;
+    border-radius:999px!important;
+    background:rgba(255,255,255,.96)!important;
+    color:var(--stt-gold-deep)!important;
+    box-shadow:0 8px 24px rgba(36,34,31,.07)!important;
+  }
+  .stt-accessibility-tools{
+    display:none!important;
+    flex-direction:column!important;
+    align-items:flex-end!important;
+    gap:6px!important;
+  }
+  .stt-accessibility-tools.is-open{
+    display:flex!important;
+  }
+  .stt-language-switcher{
+    display:block!important;
+  }
+}
