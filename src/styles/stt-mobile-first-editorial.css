@@ -1056,11 +1056,19 @@
   }
 
   .stt-intake-hero{
-    padding-top:48px!important;
-    padding-bottom:56px!important;
+    padding-top:46px!important;
+    padding-bottom:40px!important;
   }
 
   .stt-intake-lead{
-    margin-top:22px!important;
+    margin-top:20px!important;
+  }
+
+  .stt-intake-body{
+    padding-top:24px!important;
+  }
+
+  .stt-intake-form>.stt-intake-field:first-child{
+    padding-top:22px!important;
   }
 }
