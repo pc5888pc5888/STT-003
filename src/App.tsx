@@ -23,7 +23,7 @@ import { STT_OFFICIAL_LOGO_SRC } from "./sttLogo";
 type ShellProps = { children: ReactNode; chatOpen: boolean; onChatToggle: () => void };
 
 const GCSDA_URL = "https://stt-003-git-gcsda-approved-white-gold-v1-pc5888pc5888s-projects.vercel.app";
-const HUMANISTIC_INTERVIEW_URL = "https://shimmering-longma-509244.netlify.app/";
+const HUMANISTIC_INTERVIEW_URL = "/humanistic-interview/";
 
 function ExternalRedirect({ url }: { url: string }) {
   useEffect(() => { window.location.replace(url); }, [url]);
