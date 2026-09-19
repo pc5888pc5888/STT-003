@@ -39,3 +39,85 @@
     object-position:right center!important;
   }
 }
+
+
+/* Mobile art direction — 2026-09-19
+   Mobile does not shrink the desktop canvas. It gives the artwork its own
+   subject window, then lets the copy continue below it. Each approved hero
+   keeps an explicit focal point so the visual subject survives narrow screens. */
+@media (max-width:900px){
+  .stt-master-hero.is-primary{
+    height:auto!important;
+    min-height:0!important;
+    max-height:none!important;
+    display:block!important;
+    align-items:initial!important;
+    overflow:hidden!important;
+    background:#fffdfa!important;
+  }
+  .stt-master-hero.is-primary .stt-master-hero__image{
+    position:relative!important;
+    inset:auto!important;
+    top:auto!important;
+    right:auto!important;
+    bottom:auto!important;
+    left:auto!important;
+    z-index:0!important;
+    display:block!important;
+    width:100%!important;
+    height:clamp(300px,44svh,420px)!important;
+    min-width:0!important;
+    max-width:none!important;
+    min-height:300px!important;
+    max-height:420px!important;
+    object-fit:cover!important;
+    object-position:var(--stt-mobile-focus,60% 50%)!important;
+  }
+  .stt-master-hero.is-primary .stt-master-hero__veil{
+    position:absolute!important;
+    z-index:1!important;
+    inset:0 0 auto 0!important;
+    height:clamp(300px,44svh,420px)!important;
+    background:linear-gradient(
+      180deg,
+      rgba(255,253,250,0) 0%,
+      rgba(255,253,250,0) 70%,
+      rgba(255,253,250,.28) 86%,
+      #fffdfa 100%
+    )!important;
+    pointer-events:none!important;
+  }
+  .stt-master-hero.is-primary .stt-master-hero__inner{
+    position:relative!important;
+    z-index:2!important;
+    min-height:0!important;
+    padding:34px 22px 54px!important;
+    align-items:flex-start!important;
+  }
+  .stt-master-hero.is-primary .stt-master-hero__copy{
+    width:100%!important;
+    max-width:none!important;
+    transform:none!important;
+  }
+
+  .stt-master-hero.is-primary[data-stt-visual="home"]{--stt-mobile-focus:56% 50%}
+  .stt-master-hero.is-primary[data-stt-visual="problems"]{--stt-mobile-focus:63% 50%}
+  .stt-master-hero.is-primary[data-stt-visual="method"]{--stt-mobile-focus:61% 50%}
+  .stt-master-hero.is-primary[data-stt-visual="columns"]{--stt-mobile-focus:58% 50%}
+  .stt-master-hero.is-primary[data-stt-visual="publications"]{--stt-mobile-focus:62% 50%}
+  .stt-master-hero.is-primary[data-stt-visual="aboutStt"]{--stt-mobile-focus:64% 50%}
+  .stt-master-hero.is-primary[data-stt-visual="governanceResponsibility"]{--stt-mobile-focus:76% 50%}
+}
+
+@media (max-width:430px){
+  .stt-master-hero.is-primary .stt-master-hero__image,
+  .stt-master-hero.is-primary .stt-master-hero__veil{
+    height:clamp(300px,42svh,360px)!important;
+  }
+  .stt-master-hero.is-primary .stt-master-hero__image{
+    max-height:360px!important;
+  }
+  .stt-master-hero.is-primary[data-stt-visual="governanceResponsibility"]{
+    --stt-mobile-focus:78% 50%;
+  }
+}
