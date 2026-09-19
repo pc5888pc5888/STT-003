@@ -4,6 +4,7 @@ import { PROBLEM_VISUALS } from "../sttVisuals";
 
 type ProblemConfig = {
   title: string;
+  titleLines: readonly string[];
   en: string;
   lead: string;
   event: string[];
@@ -19,6 +20,7 @@ type ProblemConfig = {
 const data: Record<string, ProblemConfig> = {
   "major-decision": {
     title: "重大決策，不是先選 A、B、C；而是先確認這是不是正確的問題。",
+    titleLines: ["重大決策，", "不是先選 A、B、C；", "而是先確認這是不是", "正確的問題。"],
     en: "MAJOR DECISION JUDGMENT",
     lead: "投資、併購、轉型、合作、退出或跨境行動，真正昂貴的錯誤可能不是資訊不足，而是錯誤問題、錯誤證據或不可逆風險被提前資源化。",
     event: ["市場、顧問或內部團隊都在比較方案，但真正目標仍模糊。", "資料很多，來源卻可能互相轉述或建立在同一個假設上。", "機會看似有時效，組織因而被迫快速承諾資本、時間或聲譽。"],
@@ -32,6 +34,7 @@ const data: Record<string, ProblemConfig> = {
   },
   "owner-dependence": {
     title: "公司愈大，卻還是只有老闆能決定，真正的風險是組織沒有承接能力。",
+    titleLines: ["公司愈大，", "卻還是只有老闆能決定，", "真正的風險是組織", "沒有承接能力。"],
     en: "OWNER DEPENDENCE & DECISION RIGHTS",
     lead: "治理重點不是削弱創辦人，而是把決策權、保留事項、代理、例外與責任轉成公司在關鍵人物不在場時仍能運作的制度。",
     event: ["主管有職稱，但重大例外仍回頭等老闆指示。", "責任已交給經理人，實際權限與資訊卻沒有一起移交。", "關鍵人物不在場時，付款、客戶、採購、重大合約或人事決策就停住。"],
@@ -45,6 +48,7 @@ const data: Record<string, ProblemConfig> = {
   },
   succession: {
     title: "職位交出去，不代表接班已經發生。",
+    titleLines: ["職位交出去，", "不代表接班已經發生。"],
     en: "SUCCESSION & AUTHORITY TRANSFER",
     lead: "接班必須同時處理所有權、經營權、資訊權、關係權與上一代權力的退出機制；否則二代可能只有責任，沒有真正決定權。",
     event: ["二代已任總經理或董事，重要客戶、幹部與付款仍只認創辦人。", "股權已移轉，資訊、印鑑、資金與重大事項保留權卻沒有同步。", "上一代想退，又擔心下一代做出不可逆錯誤。"],
@@ -58,6 +62,7 @@ const data: Record<string, ProblemConfig> = {
   },
   "family-ownership": {
     title: "家族有資產，不代表家族已經知道怎麼共同決定。",
+    titleLines: ["家族有資產，", "不代表家族已經知道", "怎麼共同決定。"],
     en: "FAMILY & OWNERSHIP GOVERNANCE",
     lead: "真正容易引爆衝突的，往往不是財產本身，而是每個人把自己心裡的理解當成家族共同事實。",
     event: ["大家都說長輩以前講過，但每個人記得的版本不同。", "持股或資產已分配，重大事項卻沒有共同決定與僵局機制。", "照護責任、居住安排、公司控制權與財產期待混在同一場爭議裡。"],
@@ -71,6 +76,7 @@ const data: Record<string, ProblemConfig> = {
   },
   "strategic-legal": {
     title: "法律上可以做，和策略上值得做，是兩個不同問題。",
+    titleLines: ["法律上可以做，", "和策略上值得做，", "是兩個不同問題。"],
     en: "STRATEGIC + LEGAL JUDGMENT",
     lead: "法律分析回答權利義務與程序位置；企業真正要做的決定，還必須知道值得不值得、何時做、做到哪裡，以及最壞會失去什麼。",
     event: ["法律上有主張空間，但訴訟、談判或執行可能耗時很久。", "契約可以解除，卻可能失去重要通路、合作方或現金流。", "法律責任可控，但品牌、關係或管理注意力的代價可能不可逆。"],
@@ -84,6 +90,7 @@ const data: Record<string, ProblemConfig> = {
   },
   "ai-governance": {
     title: "AI 能做到，不代表公司已經授權它做到。",
+    titleLines: ["AI 能做到，", "不代表公司已經授權它做到。"],
     en: "AI GOVERNANCE · HUMAN–AI CONSTITUTION",
     lead: "企業導入 AI 真正改變的，不只是效率，而是誰能看資料、誰能形成建議、誰能執行、誰能停止，以及最後誰負責。",
     event: ["員工已把內部資料送進不同模型，卻沒有統一資料邊界。", "Agent 能呼叫工具、發信、改資料或付款，權限卻只靠帳號決定。", "AI 建議開始進入人資、法務、財務或其他高影響領域，但覆核方式不清楚。"],
@@ -97,6 +104,7 @@ const data: Record<string, ProblemConfig> = {
   },
   "system-failure": {
     title: "有 SOP，不等於制度真的會在壓力下運作。",
+    titleLines: ["有 SOP，", "不等於制度真的會", "在壓力下運作。"],
     en: "SYSTEM FAILURE & GOVERNANCE RECOVERY",
     lead: "真正需要治理的不是制度有沒有寫，而是例外發生時，資訊是否到位、誰有權決定、誰能停止、誰負責，以及最後能不能重建。",
     event: ["制度文件完整，真正出事時大家仍回到口頭指示與私人訊息。", "同一個例外每次由不同人處理，沒有一致升級與紀錄。", "事故結束後只有補文件，沒有回頭檢查制度為何沒有被使用。"],
@@ -110,6 +118,7 @@ const data: Record<string, ProblemConfig> = {
   },
   "founder-legacy": {
     title: "人離開以後，很多最重要的事情就再也問不到了。",
+    titleLines: ["人離開以後，", "很多最重要的事情", "就再也問不到了。"],
     en: "FOUNDER LEGACY & GOVERNANCE MEMORY",
     lead: "企業史、家族記憶與 Founder Legacy 的價值，不只是保存事件，而是在當事人仍能說明、修正與確認時，把判斷如何形成留下來。",
     event: ["企業有完整年表，卻沒有創辦人為何做關鍵決定的記錄。", "下一代知道公司文化口號，不知道哪些底線從何而來。", "重大危機的經驗只存在幾位資深主管或家族成員腦中。"],
@@ -142,5 +151,5 @@ export default function ProblemDetail(){
   const groups=[cfg.event,cfg.framing,cfg.evidence,cfg.counter,cfg.downside,cfg.judgment,cfg.outputs,cfg.professional];
   return <div className="pd4-root"><style>{`
     .pd4-root{min-height:100vh;background:#fbfaf7;color:#2b261f}.pd4-root *{box-sizing:border-box}.pd4-wrap{max-width:1180px;margin:0 auto;padding:0 28px}.pd4-hero{padding:90px 0 74px;border-bottom:1px solid #ddcfba}.pd4-eyebrow{font-size:10px;letter-spacing:.27em;color:#8b642f}.pd4-hero h1{max-width:980px;margin:20px 0 0;font:400 clamp(42px,5vw,68px)/1.32 'Noto Serif TC',Georgia,serif}.pd4-hero p{max-width:850px;margin:26px 0 0;color:#746b60;line-height:2}.pd4-back{margin-top:28px;border:0;border-bottom:1px solid #a9793e;background:transparent;color:#805a30;padding:0 0 5px;cursor:pointer}.pd4-body{padding:28px 0 110px}.pd4-block{display:grid;grid-template-columns:300px 1fr;gap:48px;padding:38px 0;border-bottom:1px solid #ddcfba}.pd4-block h2{margin:0;font:400 24px/1.55 'Noto Serif TC',Georgia,serif}.pd4-items{display:grid;gap:12px}.pd4-item{padding:18px 20px;border:1px solid #e0d4c3;background:#fffdf9;color:#625b52;line-height:1.85}.pd4-cta{margin-top:54px;padding:38px;border:1px solid #d8c8ad;background:linear-gradient(135deg,#fffdf9,#f4ede2);display:flex;justify-content:space-between;align-items:center;gap:30px}.pd4-cta h3{max-width:760px;margin:0;font:400 29px/1.5 'Noto Serif TC',Georgia,serif}.pd4-cta button{border:1px solid #9f7138;background:#9f7138;color:#fff;padding:12px 18px;cursor:pointer;white-space:nowrap}@media(max-width:820px){.pd4-block{grid-template-columns:1fr}.pd4-cta{display:block}.pd4-cta button{margin-top:24px}.pd4-hero{padding:66px 0 54px}}
-  `}</style><STTPageHero visual={PROBLEM_VISUALS[id]} eyebrow={cfg.en} title={cfg.title} lead={cfg.lead}><button className="pd4-back" onClick={()=>navigate('/problems')}>← 回到問題入口</button></STTPageHero><section className="pd4-body"><div className="pd4-wrap">{groups.map((items,index)=><article className="pd4-block" key={sectionNames[index]}><h2>{sectionNames[index]}</h2><div className="pd4-items">{items.map((item)=><div className="pd4-item" key={item}>{item}</div>)}</div></article>)}<div className="pd4-cta"><h3>如果這正是你正在面對的問題，下一步不用先選服務；先把事件與最不希望出現的結果說清楚。</h3><button onClick={()=>navigate(`/start?route=${id}`)}>從這個問題開始 →</button></div></div></section></div>;
+  `}</style><STTPageHero visual={PROBLEM_VISUALS[id]} eyebrow={cfg.en} title={cfg.title} titleLines={cfg.titleLines} lead={cfg.lead}><button className="pd4-back" onClick={()=>navigate('/problems')}>← 回到問題入口</button></STTPageHero><section className="pd4-body"><div className="pd4-wrap">{groups.map((items,index)=><article className="pd4-block" key={sectionNames[index]}><h2>{sectionNames[index]}</h2><div className="pd4-items">{items.map((item)=><div className="pd4-item" key={item}>{item}</div>)}</div></article>)}<div className="pd4-cta"><h3>如果這正是你正在面對的問題，下一步不用先選服務；先把事件與最不希望出現的結果說清楚。</h3><button onClick={()=>navigate(`/start?route=${id}`)}>從這個問題開始 →</button></div></div></section></div>;
 }
