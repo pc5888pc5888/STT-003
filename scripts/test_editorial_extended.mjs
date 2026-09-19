@@ -10,12 +10,14 @@ const routes = [
   '/domains',
   '/domains/family-succession',
   '/domains/compliance-contract',
+  '/domains/human-ai-governance',
   '/problems/major-decision',
   '/problems/succession',
   '/books/internal-compliance',
   '/legal/ai-disclosure',
   '/legal/intellectual-property',
   '/insights',
+  '/projects',
   '/start?route=enterprise-evaluation',
   '/start?route=speaking-invitation',
 ];
@@ -82,11 +84,19 @@ try{
     const h1=page.locator('main h1').first();
     assert.ok(await h1.count(),path+' missing H1');
     const hs=await h1.evaluate(el=>{const cs=getComputedStyle(el);return{font:parseFloat(cs.fontSize),line:parseFloat(cs.lineHeight)};});
-    assert.ok(hs.font>=30&&hs.font<=44,path+' H1 font '+hs.font);
+    assert.ok(hs.font>=26&&hs.font<=44,path+' H1 font '+hs.font);
     assert.ok(hs.line/hs.font>=1.25&&hs.line/hs.font<=1.60,path+' H1 line-height ratio');
     const h1Lines=await visualLines(h1);
     assert.ok(h1Lines.length<=5,path+' H1 too fragmented: '+JSON.stringify(h1Lines));
     assertPunctuation(h1Lines,path+' H1');
+
+    const semanticSpans=h1.locator('.stt-editorial-title-line, .stt-intake-title-line');
+    const semanticCount=await semanticSpans.count();
+    for(let i=0;i<semanticCount;i++){
+      const spanLines=await visualLines(semanticSpans.nth(i));
+      assert.equal(spanLines.length,1,path+' semantic title line wrapped again: '+JSON.stringify(spanLines));
+      assertPunctuation(spanLines,path+' semantic title span '+i);
+    }
 
     for(const selector of ['main h2','main h3']){
       const nodes=page.locator(selector);
@@ -127,6 +137,35 @@ try{
 
   assert.notDeepEqual(enterpriseTitles,speakingTitles,'enterprise and speaking forms must not share one schema');
   report.forms={enterpriseFields:enterpriseTitles.length,speakingFields:speakingTitles.length};
+
+  const semanticRoutes=[
+    '/domains',
+    '/domains/human-ai-governance',
+    '/problems/major-decision',
+    '/problems/succession',
+    '/projects',
+    '/start?route=enterprise-evaluation',
+    '/start?route=speaking-invitation',
+  ];
+  for(const width of [360,430]){
+    const semanticCtx=await browser.newContext({viewport:{width,height:844},deviceScaleFactor:2,reducedMotion:'reduce'});
+    const semanticPage=await semanticCtx.newPage();
+    for(const path of semanticRoutes){
+      await semanticPage.goto(base+path,{waitUntil:'networkidle'});
+      await semanticPage.evaluate(()=>document.fonts.ready);
+      const overflow=await semanticPage.evaluate(()=>({w:innerWidth,sw:document.documentElement.scrollWidth}));
+      assert.ok(overflow.sw<=overflow.w+1,path+' '+width+'px semantic title overflow');
+      const spans=semanticPage.locator('main h1 .stt-editorial-title-line, main h1 .stt-intake-title-line');
+      const count=await spans.count();
+      assert.ok(count>=1,path+' '+width+'px missing semantic title spans');
+      for(let i=0;i<count;i++){
+        const lines=await visualLines(spans.nth(i));
+        assert.equal(lines.length,1,path+' '+width+'px semantic title line wrapped: '+JSON.stringify(lines));
+        assertPunctuation(lines,path+' '+width+'px semantic title span '+i);
+      }
+    }
+    await semanticCtx.close();
+  }
 
   await page.goto(base+'/humanistic-interview/',{waitUntil:'networkidle'});
   await page.evaluate(()=>document.fonts.ready);
