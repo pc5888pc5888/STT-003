@@ -86,26 +86,68 @@ export default function Cooperation() {
 
         @media (max-width: 900px) {
           .stt-coop-hero {
-            min-height: 760px;
-            padding-top: 320px;
+            height: auto !important;
+            min-height: 0 !important;
+            max-height: none !important;
+            padding: 0 !important;
+            display: block !important;
+            overflow: hidden !important;
+            background: #fffdfa !important;
           }
 
           .stt-coop-hero-bg {
-            background-position: 70% top !important;
+            position: relative !important;
+            inset: auto !important;
+            z-index: 0 !important;
+            display: block !important;
+            width: 100% !important;
+            height: clamp(300px, 44svh, 420px) !important;
+            min-height: 300px !important;
+            max-height: 420px !important;
+            background-size: cover !important;
+            background-position: right center !important;
+            background-repeat: no-repeat !important;
           }
 
           .stt-coop-hero::after {
-            background: linear-gradient(
-              180deg,
-              rgba(251,250,247,.05) 0%,
-              rgba(251,250,247,.18) 34%,
-              rgba(251,250,247,.93) 58%,
-              rgba(251,250,247,1) 100%
-            );
+            display: none !important;
           }
 
           .stt-coop-copy {
-            width: 100%;
+            position: relative !important;
+            z-index: 3 !important;
+            left: auto !important;
+            right: auto !important;
+            top: auto !important;
+            bottom: auto !important;
+            width: 100% !important;
+            max-width: none !important;
+            transform: none !important;
+            padding: 34px 22px 52px !important;
+            box-sizing: border-box !important;
+            background: #fffdfa !important;
+          }
+
+          .stt-coop-copy h1 {
+            font-size: clamp(31px, 8.2vw, 44px) !important;
+            line-height: 1.42 !important;
+          }
+
+          .stt-coop-intro {
+            font-size: 14.5px !important;
+            line-height: 1.85 !important;
+          }
+
+          .stt-coop-caption {
+            margin-top: 30px !important;
+          }
+        }
+
+        @media (max-width: 430px) {
+          .stt-coop-hero-bg {
+            height: clamp(300px, 42svh, 360px) !important;
+            max-height: 360px !important;
+            background-position: 100% center !important;
           }
         }
       `}</style>
