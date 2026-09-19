@@ -71,7 +71,7 @@ function CanonicalPage({ kind }: { kind: PageKind }) {
     if (/^https?:\/\//.test(path)) window.open(path, "_blank", "noopener,noreferrer");
     else navigate(path);
   };
-  return <div className="stt-canon">
+  return <div className={`stt-canon stt-editorial-page stt-editorial-${kind}`}>
     {primary ? <FullBleedHero theme={kind as "method" | "publications" | "stt"} /> : <STTPageHero visual="projects" eyebrow={page.eyebrow} title={page.title} lead={page.subtitle} />}
     {kind === "method" && <JudgmentFoundations />}
     <section className="stt-canon-body"><div className="stt-canon-wrap">
