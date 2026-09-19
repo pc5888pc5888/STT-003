@@ -121,3 +121,82 @@
     --stt-mobile-focus:78% 50%;
   }
 }
+
+
+/* Mobile visual rhythm normalization — 2026-09-19
+   One mobile composition across STT primary heroes:
+   4:3 subject window → editorial copy → actions. */
+@media (max-width:900px){
+  .stt-master-hero.is-primary .stt-master-hero__image{
+    width:100%!important;
+    height:auto!important;
+    min-height:0!important;
+    max-height:none!important;
+    aspect-ratio:4/3!important;
+    object-fit:cover!important;
+  }
+  .stt-master-hero.is-primary .stt-master-hero__veil{
+    width:100%!important;
+    height:auto!important;
+    aspect-ratio:4/3!important;
+    background:linear-gradient(
+      180deg,
+      rgba(255,253,250,0) 0%,
+      rgba(255,253,250,0) 72%,
+      rgba(255,253,250,.18) 86%,
+      #fffdfa 100%
+    )!important;
+  }
+  .stt-master-hero.is-primary .stt-master-hero__inner{
+    padding:30px 24px 52px!important;
+  }
+  .stt-master-hero.is-primary .stt-master-kicker{
+    margin:0 0 18px!important;
+    font-size:10.5px!important;
+    line-height:1.6!important;
+    letter-spacing:.22em!important;
+  }
+  .stt-master-hero.is-primary h1{
+    margin:0!important;
+    max-width:none!important;
+    font-size:clamp(32px,8.4vw,38px)!important;
+    line-height:1.42!important;
+    letter-spacing:.008em!important;
+    text-wrap:pretty!important;
+  }
+  .stt-master-hero.is-primary[data-stt-visual="home"] h1{
+    font-size:clamp(38px,9.6vw,44px)!important;
+    line-height:1.34!important;
+  }
+  .stt-master-hero.is-primary[data-stt-visual="governanceResponsibility"] h1{
+    font-size:clamp(36px,9vw,42px)!important;
+    line-height:1.38!important;
+  }
+  .stt-master-hero.is-primary .stt-master-lead{
+    margin-top:20px!important;
+    max-width:none!important;
+    font-size:15.5px!important;
+    line-height:1.9!important;
+  }
+  .stt-master-hero.is-primary .stt-master-actions{
+    gap:10px!important;
+    margin-top:26px!important;
+  }
+  .stt-master-hero.is-primary .stt-master-actions a{
+    min-height:48px!important;
+    padding:11px 18px!important;
+    font-size:14px!important;
+  }
+  .stt-master-hero.is-primary .stt-master-hero__meta{
+    margin-top:20px!important;
+  }
+}
+
+@media (max-width:430px){
+  .stt-master-hero.is-primary .stt-master-hero__image,
+  .stt-master-hero.is-primary .stt-master-hero__veil{
+    height:auto!important;
+    max-height:none!important;
+    aspect-ratio:4/3!important;
+  }
+}
