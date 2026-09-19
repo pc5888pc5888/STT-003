@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - .github/workflows/mirror-humanistic-interview.yml
+      - public/humanistic-interview/stt-mobile-bridge.css
   workflow_dispatch:
 
 permissions:
@@ -52,6 +53,12 @@ jobs:
           ]
           for old,new in replacements:
               s=s.replace(old,new)
+
+          bridge='<link rel="stylesheet" href="/humanistic-interview/stt-mobile-bridge.css">'
+          if bridge not in s:
+              if '</head>' not in s:
+                  raise SystemExit('Humanistic page is missing </head>; cannot attach STT presentation bridge')
+              s=s.replace('</head>', bridge+'</head>', 1)
 
           s=s.replace(
               '<form id="netlify-form" name="humanistic-20q" method="POST"',
