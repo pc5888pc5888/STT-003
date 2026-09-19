@@ -20,7 +20,7 @@ const domains = [
 
 export default function GovernanceResponsibility(){
   const navigate=useNavigate();
-  return <div className="gr-root">
+  return <div className="gr-root stt-editorial-eric">
     <STTPageHero primary visual="governanceResponsibility" eyebrow="GOVERNANCE RESPONSIBILITY" title="莊鈞翔 博士" lead="STT 的最終價值不是由一個人取代所有專業，而是確保重大問題有人負責形成、證據有人要求、專業在必要時進場、AI 權力有邊界，而最後的治理判讀仍然有一個可以被追問的人。">
       <p className="gr-hero-note">ERIC CHUANG, PH.D. · GOVERNANCE STRATEGIST</p>
     </STTPageHero>
