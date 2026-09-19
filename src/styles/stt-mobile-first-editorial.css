@@ -81,7 +81,8 @@
     align-items:flex-start!important;
   }
 
-  .stt-master-hero.is-primary .stt-master-hero__copy{
+  .stt-master-hero.is-primary .stt-master-hero__copy,
+  .stt-master-hero.is-primary[data-stt-visual] .stt-master-hero__copy{
     width:100%!important;
     max-width:none!important;
     transform:none!important;
