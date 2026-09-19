@@ -14,11 +14,22 @@ html,body{background:var(--stt-paper)!important;color:var(--stt-ink)!important}
   .app{background:var(--stt-paper)!important;color:var(--stt-ink)!important}
   .topbar{
     min-height:64px!important;
-    padding:0 20px!important;
+    padding:0 12px!important;
+    gap:8px!important;
     background:rgba(255,255,255,.97)!important;
     border-bottom:1px solid var(--stt-line)!important;
     box-shadow:none!important;
     backdrop-filter:blur(10px);
+  }
+  .stt-return-home{
+    flex:0 0 auto!important;
+    color:var(--stt-gold-deep)!important;
+    text-decoration:none!important;
+    font-size:11px!important;
+    line-height:1!important;
+    font-weight:700!important;
+    letter-spacing:.04em!important;
+    white-space:nowrap!important;
   }
   .topbar .brand{
     color:var(--stt-gold-deep)!important;
@@ -26,6 +37,10 @@ html,body{background:var(--stt-paper)!important;color:var(--stt-ink)!important}
     line-height:1.4!important;
     font-weight:600!important;
     letter-spacing:.08em!important;
+    max-width:27vw!important;
+    overflow:hidden!important;
+    text-overflow:ellipsis!important;
+    white-space:nowrap!important;
   }
   .topbar .step-label{
     color:var(--stt-soft)!important;
@@ -63,7 +78,7 @@ html,body{background:var(--stt-paper)!important;color:var(--stt-ink)!important}
     font-weight:600!important;
     letter-spacing:.18em!important;
   }
-  .screen.landing.active heading{
+  .screen.landing.active h1{
     display:block!important;
     margin:0!important;
     color:var(--stt-ink)!important;
