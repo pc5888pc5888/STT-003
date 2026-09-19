@@ -1,4 +1,4 @@
-import { FormEvent, useMemo, useState } from "react";
+import { FormEvent, useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 
 type IntakeField = {
@@ -100,6 +100,14 @@ export default function Start() {
   const [sendError, setSendError] = useState("");
   const [sending, setSending] = useState(false);
   const [copied, setCopied] = useState(false);
+
+  useEffect(() => {
+    setData(initial);
+    setSubmitted(false);
+    setReceiptId("");
+    setSendError("");
+    setCopied(false);
+  }, [route, initial]);
 
   const summary = useMemo(() => {
     const rows = [
