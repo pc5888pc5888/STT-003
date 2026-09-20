@@ -15,3 +15,4 @@ import "./styles/stt-mobile-first-editorial.css";
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode><AppProviders><App /></AppProviders></React.StrictMode>
 );
+import "./styles/stt-g0-shell.css";
