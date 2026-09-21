@@ -500,7 +500,7 @@ export const books: Book[] = [
   },
   {
     id: "b2",
-    title: "《2025 永續家族治理實務實錄》",
+    title: "《2026 永續家族治理實務實錄》",
     description: "法律架構、資本效率與策略演進之整合判讀。莊博士以系統化方法將法律精要融入管理實務之作。",
     price: 0,
     cover: "/images/paper_family_governance_white_paper.png",
