@@ -238,10 +238,15 @@
   gap: 13px 22px;
 }
 
-.stt-g0-footer__links a {
+.stt-g0-footer__links a,
+.stt-g0-footer__pending {
   color: var(--stt-g0-muted);
   font-size: 12px;
   text-decoration: none;
+}
+
+.stt-g0-footer__pending {
+  cursor: default;
 }
 
 .stt-g0-footer__links a:hover {
