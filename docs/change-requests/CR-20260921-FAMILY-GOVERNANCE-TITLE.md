@@ -5,7 +5,7 @@
 - Requested by: Project owner via project chat
 - Change type: Publication title correction
 - Old public title: 《2025 永續家族治理實務實錄》
-- New public title: 《2026 永續家族治理實務實錄》
+- New public title: 2026 永續家族治理實務實錄
 - Owner instruction: 一律修正為「2026 永續家族治理實務實錄」
 - Affected implementation:
   - src/data/mockData.ts
