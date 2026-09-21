@@ -18,7 +18,6 @@ type ShellProps = { children: ReactNode };
 
 const GCSDA_URL = "https://stt-003-git-gcsda-approved-white-gold-v1-pc5888pc5888s-projects.vercel.app";
 const HUMANISTIC_INTERVIEW_URL = "/humanistic-interview/";
-const STT_PRESS_URL = "https://sttpress.my.canva.site/dahakyytby8";
 
 const PRIMARY_NAVIGATION = [
   { label: "你正在面對什麼", path: "/problems" },
@@ -145,7 +144,7 @@ function PublicShell({ children }: ShellProps) {
             <Link to="/eric-chuang">莊鈞翔博士</Link>
             <Link to="/institutions">機構合作</Link>
             <Link to="/research">研究與論文</Link>
-            <a href={STT_PRESS_URL} target="_blank" rel="noreferrer">STT Press ↗</a>
+            <span className="stt-g0-footer__pending">STT Press</span>
             <a href={GCSDA_URL} target="_blank" rel="noreferrer">GCSDA｜中華企業策略永續發展學會 ↗</a>
             <Link to="/privacy">隱私</Link>
             <Link to="/professional-boundary">專業服務邊界</Link>
