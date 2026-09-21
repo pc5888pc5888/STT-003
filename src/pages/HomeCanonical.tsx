@@ -102,6 +102,7 @@ export default function HomeCanonical() {
   return (
     <div className="stt-g1-home">
       <section
+        id="hero"
         className="stt-g1-hero"
         style={{ backgroundImage: 'url("/visual-bank/stt/user-approved-six/home.png")' }}
         aria-labelledby="home-hero-title"
