@@ -13,6 +13,7 @@ import "./styles/stt-exact-source-fit-20260915.css";
 import "./styles/stt-mobile-first-editorial.css";
 import "./styles/stt-g0-shell.css";
 import "./styles/stt-g1-home.css";
+import "./styles/stt-g2-problems.css";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode><AppProviders><App /></AppProviders></React.StrictMode>
