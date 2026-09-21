@@ -146,6 +146,7 @@ function PublicShell({ children }: ShellProps) {
             <Link to="/institutions">機構合作</Link>
             <Link to="/research">研究與論文</Link>
             <a href={STT_PRESS_URL} target="_blank" rel="noreferrer">STT Press ↗</a>
+            <a href={GCSDA_URL} target="_blank" rel="noreferrer">GCSDA｜中華企業策略永續發展學會 ↗</a>
             <Link to="/privacy">隱私</Link>
             <Link to="/professional-boundary">專業服務邊界</Link>
           </nav>
