@@ -1,4 +1,4 @@
-import { splitTitleAtFirstPunctuation } from "./utils/titleBreak";
+import { splitTitleAtBalancedPunctuation } from "./utils/titleBreak";
 
 const TITLE_SELECTORS = ["main h1", "main h2", "[data-stt-title-auto]"].join(",");
 
@@ -43,7 +43,7 @@ function applyTitleBreak(el: HTMLElement) {
 
   const shouldSplit =
     el.hasAttribute("data-stt-force-title-break") || naturalLineCount(el) > 1;
-  const governedLines = splitTitleAtFirstPunctuation(original);
+  const governedLines = splitTitleAtBalancedPunctuation(original);
 
   if (shouldSplit && governedLines.length === 2) {
     const firstLine = document.createElement("span");
