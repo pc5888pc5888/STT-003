@@ -24,9 +24,11 @@ function applyTitleBreak(el: HTMLElement) {
   if (!currentText) return;
 
   let original = el.dataset.sttOriginalTitle || currentText;
-  if (currentText !== original && el.dataset.sttTitleState !== "split") {
+  if (currentText !== original) {
     original = currentText;
     el.dataset.sttOriginalTitle = original;
+    el.dataset.sttTitleState = "single";
+    delete el.dataset.sttTitleSignature;
   } else if (!el.dataset.sttOriginalTitle) {
     el.dataset.sttOriginalTitle = original;
   }
