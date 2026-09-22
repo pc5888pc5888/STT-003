@@ -209,7 +209,7 @@ export default function Start() {
         <div className="mx-auto max-w-[980px]">
           <p className="stt-intake-kicker text-[11px] uppercase tracking-[0.26em] text-[#a37a43]">{schema.eyebrow}</p>
           <h1 className="stt-intake-title mt-5 font-serif text-4xl leading-tight lg:text-6xl" aria-label={schema.title}>
-            {splitTitleAtFirstPunctuation(schema.title).map((line, index) => <span className="stt-intake-title-line" key={index}>{line}</span>)}
+            {splitTitleAtBalancedPunctuation(schema.title).map((line, index) => <span className="stt-intake-title-line" key={index}>{line}</span>)}
           </h1>
           <p className="stt-intake-lead mt-6 max-w-[760px] text-base leading-8 text-[#6d675f] lg:text-lg">{schema.intro}</p>
           <div className="stt-intake-route mt-7 inline-flex border border-[#d8c8ad] bg-white px-4 py-2 text-xs text-[#7b6d59]">目前入口｜{schema.label}</div>
