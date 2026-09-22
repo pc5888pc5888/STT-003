@@ -31,7 +31,7 @@ export const PRIMARY_THEMES: Record<PrimaryTheme, PrimaryItem> = {
   publications: {
     label: "出版研究", visual: "publications",
     title: "出版，不只是內容；而是治理知識的長期載體。",
-    titleLines: ["出版，", "不只是內容；而是治理知識的長期載體。"],
+    titleLines: ["出版，不只是內容；", "而是治理知識的長期載體。"],
     lead: "STT Press 將治理、法遵、接班、家族、數位治理與制度文明轉化為可閱讀、可累積、可流通的研究文本，讓知識不只被發表，更能被持續使用。",
     actions: [{ text: "查看出版研究", to: "/books", primary: true }, { text: "進入 STT Press", to: "/books" }],
   },
