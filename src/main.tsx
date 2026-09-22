@@ -15,6 +15,7 @@ import "./styles/stt-g0-shell.css";
 import "./styles/stt-g1-home.css";
 import "./styles/stt-g2-problems.css";
 import "./styles/stt-g3-method.css";
+import "./titleRules";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode><AppProviders><App /></AppProviders></React.StrictMode>
