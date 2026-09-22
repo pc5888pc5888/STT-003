@@ -31,14 +31,14 @@ export const PRIMARY_THEMES: Record<PrimaryTheme, PrimaryItem> = {
   publications: {
     label: "出版研究", visual: "publications",
     title: "出版，不只是內容；而是治理知識的長期載體。",
-    titleLines: ["出版，不只是內容；", "而是治理知識的長期載體。"],
+    titleLines: ["出版，", "不只是內容；而是治理知識的長期載體。"],
     lead: "STT Press 將治理、法遵、接班、家族、數位治理與制度文明轉化為可閱讀、可累積、可流通的研究文本，讓知識不只被發表，更能被持續使用。",
     actions: [{ text: "查看出版研究", to: "/books", primary: true }, { text: "進入 STT Press", to: "/books" }],
   },
   stt: {
     label: "關於 STT", visual: "aboutStt",
-    title: "STT 不是一般顧問公司，而是高位階治理文明平台。",
-    titleLines: ["STT 不是一般顧問公司，", "而是高位階治理文明平台。"],
+    title: "STT Governance 不是一般顧問公司，而是高位階治理文明平台。",
+    titleLines: ["STT Governance 不是一般顧問公司，", "而是高位階治理文明平台。"],
     lead: "在 STT，治理不是口號，而是一套面對現實、判讀局勢、設計制度、協助決策與建立長期信任的工作方法。莊鈞翔博士主導判讀與制度設計，AI 作為治理幕僚與作業系統輔助。",
     actions: [{ text: "認識 STT", to: "/institution/eric-chuang", primary: true }, { text: "理解治理定位", to: "/problems" }],
   },
