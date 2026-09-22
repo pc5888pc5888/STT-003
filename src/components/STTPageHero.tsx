@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import { Link } from "react-router-dom";
 import { sttVisual, sttVisualDimensions, type STTVisualKey } from "../sttVisuals";
-import { splitTitleAtFirstPunctuation } from "../utils/titleBreak";
+import { splitTitleAtBalancedPunctuation } from "../utils/titleBreak";
 
 type Action = { text: string; to: string; primary?: boolean };
 
@@ -19,7 +19,7 @@ type Props = {
 
 export default function STTPageHero({ visual, eyebrow, title, titleLines, lead, actions = [], primary = false, children, id }: Props) {
   const dimensions = sttVisualDimensions(visual);
-  const governedLines = splitTitleAtFirstPunctuation(title);
+  const governedLines = splitTitleAtBalancedPunctuation(title);
   const editorialTitleLines = governedLines.length > 1 ? governedLines : (titleLines?.length ? titleLines : [title]);
 
   return (
