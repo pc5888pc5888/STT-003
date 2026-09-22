@@ -7,29 +7,35 @@
 
 ## Owner instruction
 
-When a visible page title needs to change from one line to multiple lines, the first intentional line break must occur immediately after the first structural punctuation mark in the original title.
+When a visible page title needs to change from one line to multiple lines, do not break automatically at the first punctuation mark. Choose the punctuation break that preserves semantic completeness and produces the most balanced two-line title.
 
-Example:
+Primary examples:
 
-Original:
 STT Governance 不是一般顧問公司，而是高位階治理文明平台。
 
-Governed two-line form:
+Governed form:
 STT Governance 不是一般顧問公司，
 而是高位階治理文明平台。
+
+重大決策，不是先選 A、B、C；而是先確認這是不是正確的問題。
+
+Governed form:
+重大決策，不是先選 A、B、C；
+而是先確認這是不是正確的問題。
 
 ## Rules
 
 1. Do not rewrite LOCKED copy to improve wrapping.
 2. Do not add, delete, or move punctuation merely for layout.
 3. Preserve the original title text exactly.
-4. Use the first structural punctuation mark as the first intentional break point.
-5. Structural punctuation recognized by the implementation:
-   ， 。 ； ： ！ ？ ｜ , ; : ! ? |
-6. If there is no structural punctuation before the end of the title, do not invent a break point; allow normal responsive wrapping.
-7. Hero titles governed by STTPageHero use this rule at render time.
-8. Plain H1/H2 titles use the same rule only when the rendered heading actually requires multiple lines.
-9. Responsive layouts may still produce additional natural wrapping on very narrow screens; the first intentional break remains governed by this rule.
+4. Prefer an existing structural punctuation mark that keeps both lines semantically complete.
+5. Among viable punctuation marks, prefer the break closest to a balanced two-line composition rather than blindly selecting the first punctuation mark.
+6. Avoid a fragmentary first line or an excessively short second line.
+7. Structural punctuation recognized by the implementation:
+   ， ； ： ！ ？ ｜ , ; : ! ? |
+8. A sentence-ending full stop is not used as an internal break point.
+9. If no suitable punctuation exists, do not invent one; allow natural responsive wrapping.
+10. Responsive layouts may still create additional natural wrapping on very narrow screens, but the intentional editorial break follows this rule.
 
 ## Brand precision correction
 
@@ -57,10 +63,12 @@ STT Governance is the mother brand and formal governance intake entity; STT may 
 
 ## QA
 
-- Explicit hero titleLines audited to max two governed lines.
-- Problem-detail hero titles corrected to break after first punctuation.
-- Start/intake hero titles corrected.
-- Domain and Humanistic hero title arrays corrected.
-- About identity corrected to STT Governance.
-- Plain active-route H1/H2 headings are covered by the global responsive rule.
+- Problem-detail example now renders:
+  重大決策，不是先選 A、B、C；
+  而是先確認這是不是正確的問題。
+- About identity renders:
+  STT Governance 不是一般顧問公司，
+  而是高位階治理文明平台。
+- Explicit hero titleLines are aligned to the balanced punctuation rule.
+- Plain active-route H1/H2 headings use the same balanced punctuation logic when they actually require multiple lines.
 - No production merge at this stage.
