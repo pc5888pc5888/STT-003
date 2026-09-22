@@ -66,7 +66,7 @@ const schemas: Record<string, IntakeSchema> = {
     label: "企業經營診斷與策略評估",
     eyebrow: "ENTERPRISE GOVERNANCE INTAKE",
     title: "企業經營診斷，先把決策情境說清楚。",
-    titleLines: ["企業經營診斷，", "先把決策情境", "說清楚。"],
+    titleLines: ["企業經營診斷，", "先把決策情境說清楚。"],
     intro: "這份受理表不要求先選服務名稱，而是先釐清企業目前的位置、正在形成的決策、可用資料與不可承擔結果。",
     fields: enterpriseFields,
     cooperation: true,
@@ -75,7 +75,7 @@ const schemas: Record<string, IntakeSchema> = {
     label: "主題演講與論壇邀約",
     eyebrow: "SPEAKING & FORUM INVITATION",
     title: "演講與論壇邀約，先確認場域、對象與目的。",
-    titleLines: ["演講與論壇邀約，", "先確認場域、", "對象與目的。"],
+    titleLines: ["演講與論壇邀約，", "先確認場域、對象與目的。"],
     intro: "不同場合需要不同深度、語言與責任邊界。先確認受眾、主題、時間、形式與內容使用方式，再進入正式安排。",
     fields: speakingFields,
     cooperation: true,
@@ -87,7 +87,7 @@ function genericSchema(route: string): IntakeSchema {
     label: routeLabels[route] ?? "一般治理議題",
     eyebrow: "GOVERNANCE ENGAGEMENT",
     title: "不用先知道自己需要哪一種顧問。",
-    titleLines: ["不用先知道自己", "需要哪一種顧問。"],
+    titleLines: ["不用先知道自己需要哪一種顧問。"],
     intro: "先告訴 STT：現在發生了什麼、你最不希望接下來發生什麼，以及希望事情最後變成什麼。",
     fields: genericFields,
   };
@@ -209,7 +209,7 @@ export default function Start() {
         <div className="mx-auto max-w-[980px]">
           <p className="stt-intake-kicker text-[11px] uppercase tracking-[0.26em] text-[#a37a43]">{schema.eyebrow}</p>
           <h1 className="stt-intake-title mt-5 font-serif text-4xl leading-tight lg:text-6xl" aria-label={schema.title}>
-            {schema.titleLines.map((line, index) => <span className="stt-intake-title-line" key={index}>{line}</span>)}
+            {splitTitleAtBalancedPunctuation(schema.title).map((line, index) => <span className="stt-intake-title-line" key={index}>{line}</span>)}
           </h1>
           <p className="stt-intake-lead mt-6 max-w-[760px] text-base leading-8 text-[#6d675f] lg:text-lg">{schema.intro}</p>
           <div className="stt-intake-route mt-7 inline-flex border border-[#d8c8ad] bg-white px-4 py-2 text-xs text-[#7b6d59]">目前入口｜{schema.label}</div>

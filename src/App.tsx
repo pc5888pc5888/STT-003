@@ -8,7 +8,8 @@ import Problems from "./pages/Problems";
 import ProblemDetail from "./pages/ProblemDetail";
 import Start from "./pages/Start";
 import Success from "./pages/Success";
-import { HowWeJudge, ProjectsHub } from "./pages/PublicCore";
+import { ProjectsHub } from "./pages/PublicCore";
+import Method from "./pages/Method";
 import { DomainDetail, DomainsIndex } from "./pages/Domains";
 import { BooksCanonical, InternalComplianceCanonical, ResearchCanonical } from "./pages/CanonicalLibrary";
 import Legal from "./pages/Legal";
@@ -165,7 +166,7 @@ function AppRoutes() {
 
       <Route path="/problems" element={<Problems />} />
       <Route path="/problems/:id" element={<ProblemDetail />} />
-      <Route path="/how-stt-works" element={<HowWeJudge />} />
+      <Route path="/how-stt-works" element={<Method />} />
 
       <Route path="/engagement" element={<GatePending gate="G4" title="治理委任" />} />
       <Route path="/insights" element={<Columns />} />

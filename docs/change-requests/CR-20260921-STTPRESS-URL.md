@@ -1,0 +1,26 @@
+# CHANGE REQUEST — STT Press Destination Correction
+
+- CR ID: CR-20260921-STTPRESS-URL
+- Date: 2026-09-21
+- Requested by: Project owner via project chat
+- Business reason: Correct the STT Press destination supplied by the owner; the prior Canva destination is obsolete/incorrect.
+- Affected rule/page/copy/asset IDs:
+  - EXT-STTPRESS
+  - Global Footer
+  - /insights outbound STT Press link
+  - /eric-chuang outbound STT Press link
+  - STT_Website_Master_Build_Spec_v1.0 external platform routing
+  - link_routing_matrix.csv (if present in formal package)
+- Old value: https://sttpress.my.canva.site/dahakyytby8
+- Proposed value: https://stt-003.vercel.app/#hero
+- SEO/link/brand impact:
+  - STT Press no longer points to the obsolete Canva destination.
+  - Destination is on the STT Governance canonical domain.
+  - #hero anchor is added to the rebuilt Home page so the supplied fragment resolves after deployment.
+  - Relationship metadata should be revised from "external publishing site" to the owner-approved same-domain destination when formal SSOT files are updated.
+- Approved by Founder: PENDING FORMAL SSOT UPDATE
+- Implementation commit/deployment:
+  - Preview branches G0–G3 updated.
+- QA result:
+  - Source-level link value verified in preview code.
+  - Production main remains unchanged.

@@ -1,0 +1,22 @@
+# CHANGE REQUEST — Family Governance Publication Title Correction
+
+- CR ID: CR-20260921-FAMILY-GOVERNANCE-TITLE
+- Date: 2026-09-21
+- Requested by: Project owner via project chat
+- Change type: Publication title correction
+- Old public title: 《2025 永續家族治理實務實錄》
+- New public title: 2026 永續家族治理實務實錄
+- Owner instruction: 一律修正為「2026 永續家族治理實務實錄」
+- Affected implementation:
+  - src/data/mockData.ts
+  - /books
+  - any future /insights publication reference
+  - any future /eric-chuang publication reference
+  - any future metadata / schema / Open Graph / sitemap copy that contains the publication title
+- Governance note:
+  - Historical source filenames or archived working files are not rewritten unless separately instructed; public-facing canonical title is now the 2026 title.
+- Implementation:
+  - G0–G3 preview branches updated.
+  - Production main remains unchanged until normal Build-Lock merge.
+- QA:
+  - Current preview data source no longer contains the old public title.
