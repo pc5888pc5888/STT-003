@@ -1,0 +1,23 @@
+name: Capture Heyzine covers
+on:
+  push:
+    branches: [stt-convergence-20260923]
+    paths: [.github/workflows/capture-heyzine-covers.yml]
+permissions:
+  contents: read
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: Download public cover thumbnails
+        run: |
+          mkdir -p /tmp/heyzine
+          curl -fL --max-time 30 'https://cdnm.heyzine.com/files/uploaded/e424001f8ce96b6d3bb9c6c754aef26d241d1d7d.pdf-thumb.jpg' -o /tmp/heyzine/e424001f8c.jpg
+          curl -fL --max-time 30 'https://cdnm.heyzine.com/files/uploaded/v3/c700d8beb2dae65bbe06c2e40b7d71680d06a381.pdf-thumb.jpg' -o /tmp/heyzine/c700d8beb2.jpg
+          file /tmp/heyzine/*.jpg
+      - uses: actions/upload-artifact@v4
+        with:
+          name: heyzine-covers
+          path: /tmp/heyzine/
+          retention-days: 3
