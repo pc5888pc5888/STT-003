@@ -1,0 +1,58 @@
+name: Verify source-matched live column
+on:
+  push:
+    branches: [preview/legal-mortgage-20260923-r2]
+    paths: [.github/workflows/legal-editorial-live-verification.yml]
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python -m pip -q install playwright beautifulsoup4==4.14.3
+      - run: python -m playwright install --with-deps chromium
+      - name: Read live preview and exercise copy
+        run: |
+          mkdir -p /tmp/editorial-live-proof
+          python - <<'PY'
+          from playwright.sync_api import sync_playwright
+          from bs4 import BeautifulSoup
+          import pathlib,json,hashlib
+          out=pathlib.Path('/tmp/editorial-live-proof')
+          url='https://stt-003-ao2ug5s2h-pc5888pc5888s-projects.vercel.app/legal-mortgage-preview?_vercel_share=n74I1NkZIBXO3BCWZcWG8FYNO0el2xO0'
+          local=pathlib.Path('public/legal-mortgage-preview/index.html').read_text()
+          expected=json.loads(BeautifulSoup(local,'html.parser').select_one('#article-data').string)['fragment']
+          report={'url':url,'errors':[]}
+          with sync_playwright() as p:
+            browser=p.chromium.launch()
+            context=browser.new_context(permissions=['clipboard-read','clipboard-write'],viewport={'width':1440,'height':1000})
+            page=context.new_page();page.on('pageerror',lambda e:report['errors'].append(str(e)))
+            response=page.goto(url,wait_until='load',timeout=90000)
+            page.locator('#copy').wait_for(timeout=30000)
+            frame=page.frame_locator('#article');frame.locator('.author-shell').wait_for()
+            report['http_status']=response.status;report['title']=page.title()
+            report['author_cards']=frame.locator('.publication-card').count()
+            report['inline_anchors']=frame.locator('.article-body a, .article-body sup').count()
+            report['governance_reference']=frame.get_by_text('▍治理思想依據 GOVERNANCE REFERENCE',exact=True).count()
+            assert report['author_cards']==8 and report['inline_anchors']==0 and report['governance_reference']==1
+            page.locator('#copy').click();clip=page.evaluate('navigator.clipboard.readText()')
+            report['clipboard_exact']=clip==expected;report['clipboard_sha256']=hashlib.sha256(clip.encode()).hexdigest()
+            assert report['clipboard_exact'] and report['clipboard_sha256']=='f06594066154b1eaf6cf80973b06688125faa387390306be1f9ad461762b3167'
+            page.locator('#tab-source').click();assert page.locator('#source').input_value()==expected
+            page.locator('#tab-audit').click();assert '正文8,183' in page.locator('#audit').inner_text()
+            page.locator('#tab-preview').click();page.screenshot(path=str(out/'live-desktop.png'))
+            page.set_viewport_size({'width':390,'height':844});page.screenshot(path=str(out/'live-mobile.png'))
+            report['mobile_horizontal_overflow']=page.evaluate('document.documentElement.scrollWidth>innerWidth')
+            assert not report['mobile_horizontal_overflow']
+            assert not report['errors']
+            browser.close()
+          (out/'report.json').write_text(json.dumps(report,ensure_ascii=False,indent=2))
+          print(json.dumps(report,ensure_ascii=False))
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: source-matched-live-column-proof
+          path: /tmp/editorial-live-proof
+          retention-days: 7
