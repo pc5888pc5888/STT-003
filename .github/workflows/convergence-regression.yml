@@ -1,0 +1,65 @@
+name: Dual-site convergence regression
+on:
+  push:
+    branches: [stt-convergence-20260923]
+    paths: [src/styles/convergence-accessibility.css, .github/workflows/convergence-regression.yml, docs/qa/REGRESSION_REQUEST.md]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - site: stt
+            ref: stt-convergence-20260923
+            routes: '/,/problems,/how-stt-works,/engagement,/insights,/about,/eric-chuang,/institutions,/start,/privacy,/professional-boundary,/research,/books'
+          - site: gcsda
+            ref: gcsda-convergence-20260923
+            routes: '/,/about,/governance,/council,/membership,/events,/knowledge,/charter,/privacy'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          path: control
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ matrix.ref }}
+          path: site
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Snapshot and test
+        working-directory: site
+        run: |
+          mkdir -p /tmp/convergence-evidence
+          git rev-parse HEAD > /tmp/convergence-evidence/source-sha.txt
+          git ls-tree -r -l HEAD > /tmp/convergence-evidence/source-tree.txt
+          npm ci > /tmp/convergence-evidence/install.log 2>&1
+          npm run lint > /tmp/convergence-evidence/typecheck.log 2>&1
+          node --experimental-strip-types --test tests/*.test.mjs > /tmp/convergence-evidence/unit-tests.log 2>&1
+          npm run build > /tmp/convergence-evidence/build.log 2>&1
+          cp public/images/eric-home-authority-20260921.jpg /tmp/convergence-evidence/ 2>/dev/null || true
+          cp dist/robots.txt dist/sitemap.xml /tmp/convergence-evidence/ 2>/dev/null || true
+      - name: Browser verification
+        working-directory: site
+        env:
+          QA_SITE: ${{ matrix.site }}
+          QA_ROUTES: ${{ matrix.routes }}
+        run: |
+          npm install --no-save --package-lock=false playwright @axe-core/playwright > /tmp/convergence-evidence/browser-install.log 2>&1
+          npx playwright install --with-deps chromium > /tmp/convergence-evidence/browser-setup.log 2>&1
+          cp ../control/scripts/convergence_browser.mjs .convergence-browser.mjs
+          npx vite preview --host 127.0.0.1 --port 4173 > /tmp/convergence-evidence/preview.log 2>&1 &
+          node .convergence-browser.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: convergence-regression-${{ matrix.site }}-${{ github.run_number }}
+          path: /tmp/convergence-evidence/
+          retention-days: 7
