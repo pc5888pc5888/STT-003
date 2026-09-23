@@ -66,18 +66,18 @@ const directory = [
   ["創會理事長", "莊鈞翔 博士", "中華企業策略永續發展學會 創辦人"],
   ["副理事長", "范英峰", "鎂宥新工程有限公司 總經理"],
   ["秘書長", "黃朝福 會計師", "朝陽會計師事務所 所長"],
-  ["常務理事", "陳錚程", "玉山銀行 襄理"],
+  ["常務理事", "陳錚程", ""],
   ["理事", "謝秉錡 律師", "謝秉錡律師事務所 主持律師"],
   ["理事", "高毓謙 律師", "博理法律事務所"],
   ["理事", "林柏劭 律師", "欣成法律事務所 主持律師"],
   ["理事", "賴祺元 律師", "賴祺元律師事務所 所長"],
   ["理事", "劉煒達 律師", "亞森銧國際法律事務所 所長"],
   ["理事", "林政男 律師", "上海申浩律師事務所 合夥律師"],
-  ["候補理事", "游筑雅", "鈺田工業有限公司 業務經理"],
-  ["常務監事", "廖經舜", "旭研電機有限公司 總經理"],
-  ["監事", "李克成 建築師", "李克成建築師事務所 所長"],
-  ["監事", "林家豪", "樂業國際事業有限公司 執行長"],
-  ["候補監事", "陳冠宏", "裕富數位資融股份有限公司 副理"],
+  ["候補理事", "游筑雅", ""],
+  ["常務監事", "廖經舜", ""],
+  ["監事", "李克成 建築師", ""],
+  ["監事", "林家豪", ""],
+  ["候補監事", "陳冠宏", ""],
 ] as const;
 
 const charterHighlights = [
@@ -148,7 +148,7 @@ function Home(){return <><GovernedHero kicker="GCSDA · NATIONAL PROFESSIONAL AS
 
 function About(){return <div className="g4-page"><PageHead eyebrow="INSTITUTIONAL IDENTITY" title="讓企業、專業與學術在治理議題上，形成可以持續對話的正式共同體。" lead="GCSDA 以公司治理法遵、企業策略、風險控管、跨界交流與永續發展為核心，透過正式社團制度，把一次性交流轉化為可以逐年累積的組織與知識。"/><section className="g4-section"><div className="g4-wrap"><div className="g4-list">{charterHighlights.slice(0,3).map(([a,b])=><div className="g4-row" key={a}><b>{a}</b><div>{b}</div></div>)}<div className="g4-row"><b>法定立案</b><div>內政部 114/8 台內團字第 1140030747 號。</div></div></div><div className="g4-note"><h2>GCSDA 與 STT Governance 是不同機構主體。</h2><p>兩者可以在治理知識、活動或內容上形成合作與互相連結，但學會的會員大會、理事會、監事會、章程與法定責任不由 STT 取代；STT 亦不因連結學會而成為學會之法定機關。</p></div></div></section></div>}
 
-function Governance(){return <div className="g4-page"><PageHead eyebrow="INSTITUTIONAL GOVERNANCE" title="學會本身先接受治理：權力來源、任期、職權與責任都應可被理解。" lead="網站公開學會正式治理架構與第一屆理監事名錄；具體人數、職權、任期與程序以章程及正式會務文件為準。"/><section className="g4-section"><div className="g4-wrap"><div className="g4-grid">{[["01","會員大會","作為學會正式治理體系的一部分，其法定職權依章程與人民團體相關規範。"],["02","理事會","理事 9 人、常務理事 3 人；理事長、副理事長與候補理事之配置依正式章程。"],["03","監事會","監事 3 人、常務監事 1 人、候補監事 1 人；負責監察相關職權。"]].map(x=><div className="g4-card" key={x[0]}><span>{x[0]}</span><h2>{x[1]}</h2><p>{x[2]}</p></div>)}</div><div className="g4-kicker" style={{marginTop:58}}>FIRST BOARD & SUPERVISORS</div><h2 className="g4-title">第一屆理監事會</h2><div className="g4-directory">{directory.map(([role,name,title])=><div className="g4-person" key={`${role}-${name}`}><small>{role}</small><h3>{name}</h3><p>{title}</p></div>)}</div><div className="g4-note"><h3>職務資訊</h3><p>名錄中的外部公司／機構職銜屬會務公開資訊的一部分；公開資訊以會員本人或正式會務資料之最新版本為準。</p></div></div></section></div>}
+function Governance(){return <div className="g4-page"><PageHead eyebrow="INSTITUTIONAL GOVERNANCE" title="學會本身先接受治理：權力來源、任期、職權與責任都應可被理解。" lead="網站公開學會正式治理架構與第一屆理監事名錄；具體人數、職權、任期與程序以章程及正式會務文件為準。"/><section className="g4-section"><div className="g4-wrap"><div className="g4-grid">{[["01","會員大會","作為學會正式治理體系的一部分，其法定職權依章程與人民團體相關規範。"],["02","理事會","理事 9 人、常務理事 3 人；理事長、副理事長與候補理事之配置依正式章程。"],["03","監事會","監事 3 人、常務監事 1 人、候補監事 1 人；負責監察相關職權。"]].map(x=><div className="g4-card" key={x[0]}><span>{x[0]}</span><h2>{x[1]}</h2><p>{x[2]}</p></div>)}</div><div className="g4-kicker" style={{marginTop:58}}>FIRST BOARD & SUPERVISORS</div><h2 className="g4-title">第一屆理監事會</h2><div className="g4-directory">{directory.map(([role,name,title])=><div className="g4-person" key={`${role}-${name}`}><small>{role}</small><h3>{name}</h3>{title&&<p>{title}</p>}</div>)}</div><div className="g4-note"><h3>職務資訊</h3><p>名錄中的外部公司／機構職銜屬會務公開資訊的一部分；公開資訊以會員本人或正式會務資料之最新版本為準。</p></div></div></section></div>}
 
 function Council(){return <div className="g4-page"><PageHead eyebrow="STRATEGIC GOVERNANCE COUNCIL" title="跨域專業，不等於權責混同。" lead="策略治理聯席會以議題為中心，連結法律、會計、策略、產業與學術專業，在各自責任邊界內形成交流、研究與治理實務的共同語言。"/><section className="g4-section"><div className="g4-wrap"><div className="g4-grid">{[["01","議題導向","從企業治理、策略、法遵、永續與其他正式議題出發，不以固定專家名單製造全能顧問印象。"],["02","專業邊界","不同專業者只在其資格、經驗與責任範圍內提供意見；必要時由具正式資格者承接專業工作。"],["03","紀錄與成果","正式講座、交流紀錄或研究成果完成後再公開，不以尚未發生的合作或研究裝飾網站。"]].map(x=><div className="g4-card" key={x[0]}><span>{x[0]}</span><h2>{x[1]}</h2><p>{x[2]}</p></div>)}</div><div className="g4-note"><h2>制度界線</h2><p>策略治理聯席會屬學會之專業協作／交流機制；除非正式章程或會員大會／理事會決議另有明文，不取代會員大會、理事會或監事會之法定職權。</p></div></div></section></div>}
 
