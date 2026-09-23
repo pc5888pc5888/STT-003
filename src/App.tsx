@@ -71,8 +71,22 @@ function PublicShell({ children }: ShellProps) {
     applyGovernedMetadata(location.pathname);
   }, [location.pathname]);
 
+  useEffect(() => {
+    if (!menuOpen) return;
+    document.querySelector<HTMLAnchorElement>("#stt-g0-mobile-menu a")?.focus();
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key !== "Escape") return;
+      event.preventDefault();
+      setMenuOpen(false);
+      document.querySelector<HTMLButtonElement>(".stt-g0-menu-button")?.focus();
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [menuOpen]);
+
   return (
     <div className="stt-g0-shell">
+      <a className="site-skip-link" href="#main-content">跳至主要內容</a>
       <header className="stt-g0-header">
         <div className="stt-g0-header__inner">
           <Link to="/" className="stt-g0-brand" aria-label="STT Governance 首頁">
@@ -128,7 +142,7 @@ function PublicShell({ children }: ShellProps) {
         )}
       </header>
 
-      <main className="stt-g0-main">{children}</main>
+      <main id="main-content" tabIndex={-1} className="stt-g0-main">{children}</main>
 
       <footer className="stt-g0-footer">
         <div className="stt-g0-footer__inner">
@@ -155,7 +169,7 @@ function PublicShell({ children }: ShellProps) {
 function AppRoutes() {
   return (
     <Routes>
-      <Route path="/" element={<Home onNavigate={() => undefined} />} />
+      <Route path="/" element={<Home />} />
       <Route path="/index.html" element={<Navigate to="/" replace />} />
       <Route path="/governance.html" element={<Navigate to="/problems" replace />} />
 

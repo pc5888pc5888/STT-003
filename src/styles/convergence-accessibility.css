@@ -1,0 +1,6 @@
+/* Internal QA correction: text contrast only; images, crop and layout untouched. */
+.site-skip-link{position:fixed;left:16px;top:-100px;z-index:10000;background:#fff;color:#65461f;padding:12px 18px;border:2px solid #805b32}.site-skip-link:focus{top:12px}
+.stt-g0-primary-cta,.stt-g1-button.is-primary,.stt-g2-cta,.stt-intake-page button[type="submit"]{background:#805b32!important;border-color:#805b32!important;color:#fff!important}
+.stt-g1-kicker,.stt-g1-button:not(.is-primary),.stt-g1-evidence-strip span,.stt-g2-scenario__number,.stt-g2-scenario__main>span,.stt-g2-scenario dt,.stt-g2-scenarios dt,.stt-g2-coverage>span,.stt-g3-kicker,.stt-g3-page a,.stt-g4-engagement-row__head>p,.stt-g4-engagement-row dt,.stt-g4-engagement-row dd>a,.stt-inst-kicker,.stt-inst-body a,.stt-insights-kicker,.stt-insights-page button[data-active="true"]{color:#805b32!important}
+.stt-insights-index,.lib-index,.stt-intake-page span.text-xl{color:#805b32!important}
+.stt-insights-catalog-note{color:#70665a!important}.stt-intake-page a{text-decoration:underline;text-underline-offset:4px}

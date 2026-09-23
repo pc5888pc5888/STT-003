@@ -21,6 +21,7 @@ import "./styles/stt-institutional-pages.css";
 import "./styles/stt-g6-insights.css";
 import "./styles/stt-g9-accessibility.css";
 import "./titleRules";
+import "./styles/convergence-accessibility.css";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode><AppProviders><App /></AppProviders></React.StrictMode>
