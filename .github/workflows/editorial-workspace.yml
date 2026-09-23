@@ -10,6 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 12
     strategy:
+      fail-fast: false
       matrix:
         include:
           - site: stt
@@ -25,34 +26,21 @@ jobs:
         with:
           node-version: '22'
       - run: npm ci && npm run build
-      - name: Bundle exact working files and asset inventory
-        env:
-          SITE: ${{ matrix.site }}
+      - name: Bundle exact source and build dependencies
         run: |
           mkdir -p /tmp/editorial
           python3 - <<'PY'
           from pathlib import Path
-          from PIL import Image
-          import zipfile,json,os,hashlib
+          import zipfile
           files=[]
-          for folder in ['src','api','tests','public','dist']:
+          for folder in ['src','api','tests','public']:
               files.extend(p for p in Path(folder).rglob('*') if p.is_file())
-          files.extend(p for p in Path('.').glob('*') if p.suffix in ['.json','.ts','.html','.js'])
-          with zipfile.ZipFile('/tmp/editorial/site.zip','w',zipfile.ZIP_DEFLATED) as z:
+          files.extend(p for p in Path('.').glob('*') if p.suffix in ['.json','.ts','.html','.js','.png','.jpg','.webp'])
+          with zipfile.ZipFile('/tmp/editorial/site.zip','w',zipfile.ZIP_DEFLATED,compresslevel=1) as z:
               for p in files:z.write(p)
-          if os.environ['SITE']=='stt':
-              with zipfile.ZipFile('/tmp/editorial/dependencies.zip','w',zipfile.ZIP_DEFLATED) as z:
-                  for p in Path('node_modules').rglob('*'):
-                      if p.is_file():z.write(p)
-          assets=[]
-          for p in Path('public').rglob('*'):
-              if p.suffix.lower() not in ['.png','.webp','.jpg','.jpeg']:continue
-              try:
-                  with Image.open(p) as im:
-                      im.load();size=im.size
-                  assets.append({'path':str(p),'size':size,'sha256':hashlib.sha256(p.read_bytes()).hexdigest()})
-              except Exception as e:assets.append({'path':str(p),'decodeError':str(e)})
-          Path('/tmp/editorial/assets.json').write_text(json.dumps(assets,indent=2))
+          with zipfile.ZipFile('/tmp/editorial/dependencies.zip','w',zipfile.ZIP_DEFLATED,compresslevel=1) as z:
+              for p in Path('node_modules').rglob('*'):
+                  if p.is_file():z.write(p)
           PY
       - uses: actions/upload-artifact@v4
         if: always()
@@ -60,3 +48,4 @@ jobs:
           name: editorial-workspace-${{ matrix.site }}
           path: /tmp/editorial/
           retention-days: 3
+          compression-level: 0
