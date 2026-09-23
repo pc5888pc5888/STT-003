@@ -106,3 +106,30 @@
 #root .stt-g0-header__inner{padding:0 16px}#root .stt-g0-brand{width:214px}#root .stt-g0-menu-button{padding:9px}
 #root .cis-title-1 .cis-title{font-size:20.5px!important}#root .cis-title-2 .cis-title{font-size:19px!important}#root .cis-title-3 .cis-title{font-size:19px!important}
 }
+
+/* 2026-09-24: image is the full-width canvas, not a second grid column.
+   Natural image ratio is retained. No crop, filters, masks or image regeneration. */
+#root .cis-with-image .cis-hero-inner{width:100%;max-width:none;min-height:0;padding:0;margin:0;display:grid;grid-template-columns:minmax(0,1fr);gap:0;align-items:start}
+#root .cis-with-image .cis-hero-art{grid-area:1/1;margin:0;align-self:start;width:100%;max-width:none;min-width:0;z-index:0}
+#root .cis-with-image .cis-hero-art img,#root .cis-with-image.cis-portrait .cis-hero-art img{display:block;width:100%;max-width:none;height:auto!important;max-height:none!important;object-fit:contain!important;object-position:center;transform:none!important;filter:none;border:0;border-radius:0;box-shadow:none}
+#root .cis-with-image .cis-hero-copy{grid-area:1/1;align-self:start;position:relative;z-index:1;min-width:0;width:calc(100% - 96px);max-width:580px;margin:clamp(30px,4.5vw,76px) 0 40px max(48px,calc((100% - 1280px)/2));padding:24px 28px;background:rgba(251,250,247,.94);border:0;box-shadow:none}
+#root .cis-with-image.cis-portrait .cis-hero-copy,#root .cis-with-image.cis-clear-left .cis-hero-copy{align-self:center;max-width:550px;width:41%;padding:0;margin-top:36px;margin-bottom:36px;background:transparent}
+#root .cis-with-image .cis-title-1{font-size:42px}
+#root .cis-with-image .cis-hero-copy .cis-title-line{white-space:normal!important;text-wrap:balance}
+#root .cis-with-image .cis-lead{max-width:31em}
+#root .stt-g1-authority{grid-template-columns:minmax(0,1fr)!important}
+#root .stt-g1-authority__copy{max-width:880px}
+@media(min-width:901px) and (max-width:1200px){
+ #root .cis-with-image .cis-hero-copy{max-width:500px;padding:22px 24px;margin-left:36px}
+ #root .cis-with-image.cis-portrait .cis-hero-copy,#root .cis-with-image.cis-clear-left .cis-hero-copy{width:43%;padding:0;max-width:none}
+ #root .cis-with-image.cis-title-1 .cis-title{font-size:36px!important}
+ #root .cis-with-image.cis-title-2 .cis-title{font-size:31px!important}
+ #root .cis-with-image.cis-title-3 .cis-title{font-size:28px!important}
+}
+@media(max-width:900px){
+ #root .cis-with-image .cis-hero-inner{display:flex;flex-direction:column;gap:0;padding:0;min-height:0;width:100%}
+ #root .cis-with-image .cis-hero-art{order:0;flex:none;width:100%;margin:0}
+ #root .cis-with-image .cis-hero-copy,#root .cis-with-image.cis-portrait .cis-hero-copy,#root .cis-with-image.cis-clear-left .cis-hero-copy{order:1;flex:none;align-self:stretch;width:auto;max-width:none;margin:0;padding:30px 28px 36px;background:var(--cis-paper)}
+ #root .cis-with-image .cis-hero-copy .cis-title-line{white-space:normal!important}
+ #root .cis-with-image .cis-hero-copy .cis-lead{max-width:42em}
+}

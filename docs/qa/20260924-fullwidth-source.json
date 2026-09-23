@@ -1,0 +1,14 @@
+[
+  {
+    "site": "gcsda",
+    "path": "src/components/GovernedHero.tsx",
+    "before_sha256": "6ddc7e9bd423b5b87c3b2a831e0df5749558ba6c8fadde07e7f31b0a32734543",
+    "after_sha256": "943a9b0f525d37a02fe7a44ddd0bd63c95291c939422db9452cec84fd73e5250"
+  },
+  {
+    "site": "gcsda",
+    "path": "src/styles/cis-page-system.css",
+    "before_sha256": "9616f0d174194d5702ffd9e86334dc7bcd1bfebe3bfd76487857bd3c23c7ec16",
+    "after_sha256": "4da6d05f176c8635b3fb881c2da5eecb8a07338d0fbbc4730a25a342047a39fd"
+  }
+]

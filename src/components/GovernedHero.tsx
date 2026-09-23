@@ -9,8 +9,9 @@ export default function GovernedHero({kicker,title,subtitle,lead,image,id,childr
   const lines=page?.lines||[title];
   const picture=page ? page.image : image;
   const titleId=id||"page-title";
+  const clearLeft=picture?.includes("/user-approved-six/");
   return <>
-    <section className={`cis-hero cis-title-${lines.length}${picture?" cis-with-image":" cis-text-only"}${page?.portrait?" cis-portrait":""}`} aria-labelledby={titleId}>
+    <section className={`cis-hero cis-title-${lines.length}${picture?" cis-with-image":" cis-text-only"}${page?.portrait?" cis-portrait":""}${clearLeft?" cis-clear-left":""}`} aria-labelledby={titleId}>
       <div className="cis-hero-inner">
         <div className="cis-hero-copy">
           <p className="cis-kicker">{kicker}</p>
