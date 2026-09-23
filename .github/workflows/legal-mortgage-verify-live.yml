@@ -1,0 +1,45 @@
+name: Verify live legal preview
+on:
+  push:
+    branches: [preview/legal-mortgage-20260923-r2]
+    paths: [.github/workflows/legal-mortgage-verify-live.yml]
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verify actual HTTPS response and embedded CMS source
+        run: |
+          python -m pip -q install requests beautifulsoup4
+          python - <<'PY'
+          import requests,time,json,hashlib,pathlib
+          from bs4 import BeautifulSoup
+          u='https://stt-003-kap5kjnqh-pc5888pc5888s-projects.vercel.app/legal-mortgage-preview?_vercel_share=KxXgDKOfBUHjXIOxYhfB7vvSLdi6XALv'
+          session=requests.Session();result={}
+          for attempt in range(30):
+              try:
+                  r=session.get(u,timeout=25)
+                  s=BeautifulSoup(r.text,'html.parser');node=s.select_one('#article-data')
+                  if r.status_code==200 and node:
+                      data=json.loads(node.string);h=hashlib.sha256(data['fragment'].encode()).hexdigest()
+                      assert h=='cca0460eeead582abe5124577a2e7bc5cc9425e3be74c070215d7eebe9760c06'
+                      assert s.select_one('#copy') and s.select_one('#article') and s.select_one('#source')
+                      article=BeautifulSoup(data['fragment'],'html.parser')
+                      assert len(article.select('main.article-body>p'))==38
+                      assert len(article.select('.legal-zone .section-label'))==13
+                      assert article.select_one('h1').get_text()=='第1篇　當房貸不再跟著財富走'
+                      result={'status':'VERIFIED','http_status':200,'preview_url':u,'page_sha256':hashlib.sha256(r.content).hexdigest(),'cms_sha256':h,'cms_bytes':len(data['fragment'].encode()),'paragraphs':38,'copy_control_present':True,'source_tab_present':True,'audit_tab_present':bool(s.select_one('#tab-audit')),'production_modified':False}
+                      break
+                  result={'status':'PENDING','http_status':r.status_code,'title':s.title.get_text() if s.title else ''}
+              except Exception as e:result={'status':'ERROR','error':str(e)}
+              time.sleep(5)
+          pathlib.Path('live-verification.json').write_text(json.dumps(result,ensure_ascii=False,indent=2))
+          print(json.dumps(result,ensure_ascii=False,indent=2))
+          assert result.get('status')=='VERIFIED',result
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: legal-mortgage-live-verification
+          path: live-verification.json
