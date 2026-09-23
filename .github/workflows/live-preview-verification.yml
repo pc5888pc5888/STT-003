@@ -1,0 +1,70 @@
+name: Verify actual online previews
+on:
+  push:
+    branches: [stt-convergence-20260923]
+    paths: [.github/workflows/live-preview-verification.yml]
+permissions:
+  contents: read
+jobs:
+  live-browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Read-only online browser verification
+        env:
+          STT_URL: 'https://stt-003-buq45dkxs-pc5888pc5888s-projects.vercel.app/?_vercel_share=NK9UnT7qadxsjdkzjn1gA8GUXqRZHqoL'
+          GCSDA_URL: 'https://stt-003-ahi0c6q3x-pc5888pc5888s-projects.vercel.app/?_vercel_share=5GLJWrYALc9ML6Y36e417etJHSbCaWuU'
+        run: |
+          mkdir -p /tmp/live-preview
+          cd /tmp/live-preview
+          npm install --no-save playwright > install.log 2>&1
+          npx playwright install --with-deps chromium > setup.log 2>&1
+          cat > check.mjs <<'JS'
+          import fs from 'node:fs';
+          import {chromium} from 'playwright';
+          const browser=await chromium.launch({headless:true}),report=[];
+          for(const [site,share,sha] of [['stt',process.env.STT_URL,'0a76a76b691889e472dd76d5c466a5aa615b8928'],['gcsda',process.env.GCSDA_URL,'64b6fbb32592ac088af2838a54b339e08d102151']]){
+            const context=await browser.newContext({viewport:{width:1440,height:1000},reducedMotion:'reduce'}),page=await context.newPage();
+            const source=await (await fetch('https://raw.githubusercontent.com/pc5888pc5888/STT-003/'+sha+'/src/data/pagePresentation.ts')).text();
+            const routes=JSON.parse(source.match(/export const PAGE_PRESENTATION[^=]*=\s*(\{[\s\S]*\});/)[1]);
+            try{
+              await page.goto(share,{waitUntil:'networkidle',timeout:45000});
+              await page.waitForSelector('.cis-hero',{timeout:15000});
+              for(const [route,record] of Object.entries(routes)){
+                const errors=[];const handler=e=>errors.push(e.message);page.on('pageerror',handler);
+                try{
+                  const response=await page.goto(new URL(route,share).href,{waitUntil:'networkidle',timeout:30000});
+                  await page.evaluate(()=>document.fonts.ready);
+                  await page.evaluate(async()=>{for(let y=0;y<document.documentElement.scrollHeight;y+=800){scrollTo(0,y);await new Promise(r=>setTimeout(r,30));}scrollTo(0,0)});
+                  await page.waitForTimeout(120);
+                  const state=await page.evaluate(()=>({title:document.querySelector('h1')?.textContent,h1Count:document.querySelectorAll('h1').length,overflow:document.documentElement.scrollWidth>innerWidth+1,hero:document.querySelector('.cis-hero-art img')?.getAttribute('src'),broken:[...document.images].filter(i=>!i.complete||i.naturalWidth===0).map(i=>i.getAttribute('src')),headlineSize:document.querySelector('h1')?getComputedStyle(document.querySelector('h1')).fontSize:null}));
+                  const passed=state.h1Count===1&&!state.overflow&&!state.broken.length&&!errors.length&&(!record.image||state.hero===record.image);
+                  report.push({site,route,source:sha,width:1440,status:response.status(),...state,errors,passed});
+                  if(['/', '/engagement','/institutions','/governance','/membership'].includes(route))await page.screenshot({path:site+'-'+(route.slice(1)||'home')+'.png',fullPage:true});
+                }catch(e){report.push({site,route,source:sha,passed:false,error:String(e)});}
+                page.off('pageerror',handler);
+                fs.writeFileSync('results.json',JSON.stringify(report,null,2));
+              }
+            }catch(e){report.push({site,stage:'shared URL access',source:sha,passed:false,error:String(e),title:await page.title(),host:new URL(page.url()).hostname});await page.screenshot({path:site+'-access.png',fullPage:true});}
+            await context.close();
+          }
+          await browser.close();
+          fs.writeFileSync('results.json',JSON.stringify(report,null,2));
+          const summary={actualDeployedPagesChecked:report.length,passed:report.filter(x=>x.passed).length,failed:report.filter(x=>!x.passed),freshBrowserContexts:true,formsSubmitted:false,productionModified:false};
+          fs.writeFileSync('summary.json',JSON.stringify(summary,null,2));
+          console.log(JSON.stringify(summary,null,2));
+          if(summary.failed.length)process.exitCode=1;
+          JS
+          node check.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: online-preview-browser-evidence
+          path: |
+            /tmp/live-preview/*.json
+            /tmp/live-preview/*.png
+            /tmp/live-preview/*.log
+          retention-days: 3
