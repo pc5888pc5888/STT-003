@@ -133,3 +133,14 @@
  #root .cis-with-image .cis-hero-copy .cis-title-line{white-space:normal!important}
  #root .cis-with-image .cis-hero-copy .cis-lead{max-width:42em}
 }
+
+
+/* STT: approved image is the page canvas; copy integrates with the canvas instead of sitting in a white card. */
+#root .stt-g0-shell .cis-with-image{position:relative}
+#root .stt-g0-shell .cis-with-image::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(90deg,rgba(251,250,247,.76) 0%,rgba(251,250,247,.5) 23%,rgba(251,250,247,.2) 42%,rgba(251,250,247,.05) 60%,rgba(251,250,247,0) 78%)}
+#root .stt-g0-shell .cis-with-image .cis-hero-copy{z-index:2;background:transparent!important;padding:0!important;border:0!important;box-shadow:none!important}
+#root .stt-g0-shell .cis-with-image .cis-hero-art{z-index:0}
+@media(max-width:900px){
+  #root .stt-g0-shell .cis-with-image::before{display:none}
+  #root .stt-g0-shell .cis-with-image .cis-hero-copy{background:var(--cis-paper)!important;padding:30px 28px 36px!important}
+}
