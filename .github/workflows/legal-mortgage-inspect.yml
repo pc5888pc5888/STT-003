@@ -1,0 +1,21 @@
+name: Inspect legal column preview
+on:
+  push:
+    branches: [preview/legal-mortgage-20260923-r2]
+    paths: [.github/workflows/legal-mortgage-inspect.yml]
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Package actual preview for source comparison
+        run: |
+          mkdir -p inspect-output
+          cp legal-mortgage-preview/site/index.html inspect-output/index.html
+          sha256sum inspect-output/index.html > inspect-output/SHA256.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: actual-legal-column-preview
+          path: inspect-output
