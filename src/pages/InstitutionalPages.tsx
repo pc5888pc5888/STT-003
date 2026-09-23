@@ -30,6 +30,8 @@ export function AboutPage(){
       title="STT Governance 不是一般顧問公司，而是高位階治理文明平台。"
       subtitle="STT 不以提供更多意見為目的，而是建立可以承擔後果的治理秩序。"
       lead="STT Governance 是以重大決策、企業與家族治理為核心的治理判讀與制度設計平台。當一個問題同時牽涉策略、權力、證據、責任、法遵或家族關係時，單一專業工具往往不足以回答「應不應該做」以及「誰應該承擔」。STT 的工作，是先建立治理結構，再讓適當的專業工具進入。"
+      image="/visual-bank/stt/user-approved-six/about-stt.png"
+      imagePosition="center right"
       id="about-title"
     />
 
