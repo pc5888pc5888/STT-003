@@ -37,6 +37,7 @@ jobs:
           npx vite preview --host 127.0.0.1 --port 4173 > /tmp/convergence-evidence/preview.log 2>&1 &
           node scripts/convergence_browser.mjs
           node scripts/trust_paths_verify.mjs > /tmp/convergence-evidence/trust-path-tests.log 2>&1
+          node scripts/verify_problem_readability.mjs > /tmp/convergence-evidence/problem-readability.log 2>&1
           python3 - <<'PY'
           import json
           r=json.load(open('/tmp/convergence-evidence/browser-summary.json'))
