@@ -65,7 +65,7 @@ export function EricPage(){
       title="莊鈞翔博士 Eric Chuang, Ph.D."
       titleLines={["莊鈞翔博士", "Eric Chuang, Ph.D."]}
       subtitle="STT Governance 創辦人｜治理總控者｜制度設計與重大決策判讀。"
-      image="/images/eric-governance-principal-approved.jpg"
+      image="/visual-approved/eric-page-owner-original.png"
       imageFit="contain"
       imagePosition="right bottom"
       id="eric-title"
