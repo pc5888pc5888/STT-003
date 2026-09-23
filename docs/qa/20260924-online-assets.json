@@ -1,0 +1,58 @@
+[
+  {
+    "site": "gcsda",
+    "path": "public/visual-approved/secondary-08.png",
+    "before_sha256": null,
+    "after_sha256": "57a2d9597fd2f8241c5efa67ca75648a1d6e13a5965c7bf6b05877ba35db15f9",
+    "bytes": 2249242
+  },
+  {
+    "site": "gcsda",
+    "path": "public/visual-approved/bank-26.png",
+    "before_sha256": null,
+    "after_sha256": "14be1fb309fe047c83c242bcdf01eda428d6f292ffe02c4b439cc0c268c67522",
+    "bytes": 1924003
+  },
+  {
+    "site": "gcsda",
+    "path": "public/visual-approved/bank-27.png",
+    "before_sha256": null,
+    "after_sha256": "63f21faa8492b32dd256e24088bb67dbec633ba9ddc6fca5b28593db90cac605",
+    "bytes": 1893456
+  },
+  {
+    "site": "gcsda",
+    "path": "public/visual-approved/bank-25.png",
+    "before_sha256": null,
+    "after_sha256": "ed557da54c5845bca034741d37bcbc08814cd9dae269019f5be1a5d641325b40",
+    "bytes": 2331355
+  },
+  {
+    "site": "gcsda",
+    "path": "public/visual-approved/bank-22.png",
+    "before_sha256": null,
+    "after_sha256": "3eeb5a932e9582c5e602ff56a712e1fdd504ef4c14d9c1ebb417e9f9bfa90f42",
+    "bytes": 1923720
+  },
+  {
+    "site": "gcsda",
+    "path": "public/visual-approved/bank-23.png",
+    "before_sha256": null,
+    "after_sha256": "5cc905e9ef93ef9d2ed5cd7f571022f41d6dddcce5ede607db383b9932e5b3de",
+    "bytes": 1732568
+  },
+  {
+    "site": "gcsda",
+    "path": "public/visual-approved/bank-21.png",
+    "before_sha256": null,
+    "after_sha256": "95ceabad1952a7a6d60cb4e24b26a69fe68470237107ac12fbfb8977f3bf9d73",
+    "bytes": 2100790
+  },
+  {
+    "site": "gcsda",
+    "path": "public/visual-approved/bank-24.png",
+    "before_sha256": null,
+    "after_sha256": "acdf45286cb73768ac59353de3c1935250fe9d20501ce00cb1c5428a545b8a09",
+    "bytes": 1816323
+  }
+]
