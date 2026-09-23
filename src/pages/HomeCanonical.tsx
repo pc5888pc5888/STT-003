@@ -217,10 +217,7 @@ export default function HomeCanonical() {
               <Link className="stt-g1-button" to="/eric-chuang">認識治理判讀者 →</Link>
             </div>
           </div>
-          <figure className="stt-g1-authority__portrait">
-            <img src="/visual-approved/portrait-seated.png" alt="莊鈞翔博士正式坐姿肖像" />
-            <figcaption>FOUNDER · GOVERNANCE PRINCIPAL · FINAL JUDGMENT</figcaption>
-          </figure>
+
         </div>
       </section>
 

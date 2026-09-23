@@ -7,36 +7,36 @@ export const PAGE_PRESENTATION: Record<string, PagePresentation> = {
       "走得更遠。"
     ],
     "type": 2,
-    "image": "/visual-approved/bank-16.png",
+    "image": "/visual-bank/stt/user-approved-six/home.png",
     "originalTitle": "讓重要的事，走得更遠。",
     "context": null,
     "portrait": false,
-    "imageWidth": 1672,
-    "imageHeight": 941
+    "imageWidth": 1491,
+    "imageHeight": 1055
   },
   "/problems": {
     "lines": [
       "你正在面對什麼"
     ],
     "type": 1,
-    "image": "/visual-approved/bank-03.png",
+    "image": "/visual-bank/stt/user-approved-six/problems.png",
     "originalTitle": "你正在面對什麼",
     "context": null,
     "portrait": false,
-    "imageWidth": 1672,
-    "imageHeight": 941
+    "imageWidth": 1491,
+    "imageHeight": 1055
   },
   "/how-stt-works": {
     "lines": [
       "如何判讀"
     ],
     "type": 1,
-    "image": "/visual-approved/bank-19.png",
+    "image": "/visual-bank/stt/user-approved-six/method.png",
     "originalTitle": "如何判讀",
     "context": null,
     "portrait": false,
-    "imageWidth": 1672,
-    "imageHeight": 941
+    "imageWidth": 1491,
+    "imageHeight": 1055
   },
   "/engagement": {
     "lines": [
@@ -82,13 +82,13 @@ export const PAGE_PRESENTATION: Record<string, PagePresentation> = {
       "莊鈞翔博士"
     ],
     "type": 1,
-    "image": "/visual-approved/portrait-front.png",
+    "image": "/visual-approved/eric-page-owner-original.png",
     "originalTitle": "莊鈞翔博士 Eric Chuang, Ph.D.",
     "context": null,
     "portrait": true,
     "byline": "Eric Chuang, Ph.D.",
-    "imageWidth": 1447,
-    "imageHeight": 2048
+    "imageWidth": 2048,
+    "imageHeight": 1152
   },
   "/institutions": {
     "lines": [
