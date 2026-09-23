@@ -1,0 +1,55 @@
+name: Browser-check legal preview
+on:
+  push:
+    branches: [preview/legal-mortgage-20260923-r2]
+    paths: [.github/workflows/legal-mortgage-browser-check.yml]
+permissions:
+  contents: read
+jobs:
+  browser:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Prepare browser
+        run: |
+          python -m pip -q install playwright requests
+          python - <<'PY'
+          import shutil,subprocess,sys
+          if not shutil.which('google-chrome') and not shutil.which('chromium'):
+              subprocess.check_call([sys.executable,'-m','playwright','install','--with-deps','chromium'])
+          PY
+      - name: Read deployed workbench and verify clipboard
+        run: |
+          python - <<'PY'
+          from playwright.sync_api import sync_playwright
+          import pathlib,json,hashlib,shutil
+          url='https://stt-003-kap5kjnqh-pc5888pc5888s-projects.vercel.app/legal-mortgage-preview?_vercel_share=KxXgDKOfBUHjXIOxYhfB7vvSLdi6XALv'
+          result={}
+          with sync_playwright() as p:
+              exe=shutil.which('google-chrome') or shutil.which('chromium')
+              browser=p.chromium.launch(executable_path=exe,args=['--no-sandbox']) if exe else p.chromium.launch(args=['--no-sandbox'])
+              ctx=browser.new_context(permissions=['clipboard-read','clipboard-write'],viewport={'width':1440,'height':1100})
+              page=ctx.new_page()
+              try:
+                  response=page.goto(url,wait_until='domcontentloaded',timeout=90000)
+                  page.wait_for_selector('#copy',timeout=30000)
+                  page.locator('#copy').click()
+                  page.wait_for_function("document.getElementById('status').textContent.startsWith('已複製')")
+                  copied=page.evaluate('navigator.clipboard.readText()')
+                  h=hashlib.sha256(copied.encode()).hexdigest()
+                  assert h=='cca0460eeead582abe5124577a2e7bc5cc9425e3be74c070215d7eebe9760c06'
+                  page.locator('#tab-source').click();assert page.locator('#source').input_value()==copied
+                  page.locator('#tab-audit').click();assert page.locator('#audit details').count()==50
+                  page.locator('#tab-preview').click();frame=page.frames[1];assert frame.locator('main.article-body>p').count()==38
+                  result={'status':'VERIFIED','resolved_url':page.url,'title':page.title(),'clipboard_sha256':h,'copy_exact':True,'source_tab':True,'audit_tab':True,'paragraphs':38}
+              except Exception as e:
+                  result={'status':'UNVERIFIED','error':str(e),'resolved_url':page.url,'title':page.title(),'body_excerpt':page.locator('body').inner_text()[:1800]}
+              page.screenshot(path='live-browser.png')
+              browser.close()
+          pathlib.Path('live-browser.json').write_text(json.dumps(result,ensure_ascii=False,indent=2));print(json.dumps(result,ensure_ascii=False,indent=2))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: legal-mortgage-live-browser
+          path: |
+            live-browser.json
+            live-browser.png
