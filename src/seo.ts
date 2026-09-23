@@ -32,7 +32,7 @@ export const FORMAL_META: Record<string, MetaRecord> = {
   "/engagement": {
     title: "治理委任｜STT Governance",
     description: "了解 STT Governance 如何以治理初步判讀、治理架構設計與年度治理委任三種深度介入重大決策、企業與家族治理。",
-    image: "/visual-bank/stt/cooperation-hero-20260917.png",
+    image: "/visual-approved/bank-14.png",
     label: "治理委任",
   },
   "/insights": {
@@ -50,13 +50,13 @@ export const FORMAL_META: Record<string, MetaRecord> = {
   "/eric-chuang": {
     title: "莊鈞翔博士｜治理判讀與制度設計｜STT Governance",
     description: "莊鈞翔博士為 STT Governance 創辦人與治理總控者，研究與實務聚焦企業策略、公司治理與法遵、家族企業接班及 AI 治理。",
-    image: "/images/eric-governance-principal-approved.jpg",
+    image: "/visual-approved/eric-page-owner-original.png",
     label: "莊鈞翔博士",
   },
   "/institutions": {
     title: "機構合作｜STT Governance",
     description: "STT Governance 與律師、會計師、信託、家族辦公室、金融及其他專業機構，以治理架構整合跨專業重大案件。",
-    image: "/visual-bank/stt/cooperation-hero-20260917.png",
+    image: "/visual-approved/secondary-05.png",
     label: "機構合作",
   },
   "/start": {
@@ -173,7 +173,7 @@ export function applyGovernedMetadata(pathname: string) {
       "@type": "Person",
       name: "莊鈞翔博士 Eric Chuang, Ph.D.",
       url: canonical,
-      image: `${STT_CANONICAL_ORIGIN}/images/eric-governance-principal-approved.jpg`,
+      image: `${STT_CANONICAL_ORIGIN}/visual-approved/eric-page-owner-original.png`,
       jobTitle: "STT Governance 創辦人｜治理總控者｜制度設計與重大決策判讀",
       affiliation: {
         "@type": "Organization",
