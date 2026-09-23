@@ -1,0 +1,32 @@
+name: Materialize legal preview public asset
+on:
+  push:
+    branches: [preview/legal-mortgage-20260923-r2]
+    paths: [.github/workflows/legal-mortgage-public-preview.yml]
+permissions:
+  contents: write
+jobs:
+  materialize:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Copy verified preview into Vite public output
+        run: |
+          mkdir -p public/legal-mortgage-preview
+          cp legal-mortgage-preview/site/index.html public/legal-mortgage-preview/index.html
+          echo '643883ea23eba6293e731dd9e973824a556cbe833f416194b521a9609673bb89  public/legal-mortgage-preview/index.html' | sha256sum -c -
+          python - <<'PY'
+          import json,pathlib
+          p=pathlib.Path('vercel.json');d=json.loads(p.read_text())
+          for r in d.get('rewrites',[]):
+              if r.get('source') in ['/legal-mortgage-preview','/legal-mortgage-preview/']:
+                  r['destination']='/legal-mortgage-preview/index.html'
+          p.write_text(json.dumps(d,indent=2)+'\n')
+          PY
+      - name: Save isolated preview asset
+        run: |
+          git config user.name 'STT preview assembly'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add public/legal-mortgage-preview/index.html vercel.json
+          git commit -m 'Serve verified legal workbench in Vite preview output [skip ci]'
+          git push origin HEAD:preview/legal-mortgage-20260923-r2
