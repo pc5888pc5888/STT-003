@@ -1,0 +1,70 @@
+name: Apply source-matched legal column
+on:
+  push:
+    branches: [preview/legal-mortgage-20260923-r2]
+    paths: [.github/workflows/legal-editorial-layout-repair.yml]
+permissions:
+  contents: write
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python -m pip -q install beautifulsoup4==4.14.3 playwright
+      - name: Assemble exact tested fragment
+        run: python legal-mortgage-preview/build-editorial.py .
+      - run: python -m playwright install --with-deps chromium
+      - name: Verify rendered source and actual clipboard
+        run: |
+          python - <<'PY'
+          import pathlib,json,hashlib,threading,http.server,socketserver
+          from playwright.sync_api import sync_playwright
+          root=pathlib.Path('.');out=root/'legal-mortgage-preview/editorial-proof'
+          class Handler(http.server.SimpleHTTPRequestHandler):
+            def log_message(self,*args):pass
+          server=socketserver.TCPServer(('127.0.0.1',8781),Handler)
+          threading.Thread(target=server.serve_forever,daemon=True).start()
+          report={'errors':[],'viewports':[]}
+          expected=(out/'article.html').read_text()
+          with sync_playwright() as p:
+            browser=p.chromium.launch()
+            ctx=browser.new_context(permissions=['clipboard-read','clipboard-write'],viewport={'width':1440,'height':1000})
+            page=ctx.new_page();page.on('pageerror',lambda e:report['errors'].append(str(e)))
+            page.goto('http://127.0.0.1:8781/public/legal-mortgage-preview/index.html',wait_until='load')
+            page.frame_locator('#article').locator('.author-shell').wait_for()
+            page.locator('#copy').click();clip=page.evaluate('navigator.clipboard.readText()')
+            assert clip==expected
+            report['clipboard_exact']=True;report['fragment_sha256']=hashlib.sha256(clip.encode()).hexdigest()
+            page.locator('#tab-source').click();assert page.locator('#source').input_value()==expected
+            page.locator('#tab-audit').click();assert '正文8,183' in page.locator('#audit').inner_text()
+            page.locator('#tab-preview').click();page.screenshot(path=str(out/'workbench.png'))
+            page.goto('http://127.0.0.1:8781/legal-mortgage-preview/editorial-proof/article.html',wait_until='load')
+            page.evaluate('document.body.style.margin="0"')
+            for width in [320,360,375,390,430,600,768,820,1024,1440]:
+              page.set_viewport_size({'width':width,'height':1000})
+              result=page.evaluate('''()=>({width:innerWidth,doc:document.documentElement.scrollWidth,body:document.body.scrollWidth,overflow:[...document.querySelectorAll('#stt-legal-v2 *')].filter(e=>{let r=e.getBoundingClientRect();return r.width&&((r.right>innerWidth+.5)||(r.left<-.5))}).map(e=>({tag:e.tagName,class:e.className})),images:[...document.images].map(i=>i.complete&&i.naturalWidth>0)})''')
+              report['viewports'].append(result)
+              assert result['doc']<=width and result['body']<=width and not result['overflow'],result
+              assert all(result['images'])
+              if width==390:page.screenshot(path=str(out/'mobile.png'))
+              if width==1440:page.locator('.author-shell').screenshot(path=str(out/'author.png'))
+            assert not report['errors']
+            browser.close()
+          server.shutdown()
+          (out/'browser-proof.json').write_text(json.dumps(report,ensure_ascii=False,indent=2))
+          print(json.dumps(report,ensure_ascii=False))
+          PY
+      - name: Save only isolated preview and audit
+        run: |
+          git config user.name 'STT preview assembly'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add public/legal-mortgage-preview/index.html legal-mortgage-preview/site/index.html legal-mortgage-preview/site-verification.json
+          git diff --cached --quiet || git commit -m 'Restore requested fixed layout and continuous legal-column prose [skip ci]'
+          git push origin HEAD:preview/legal-mortgage-20260923-r2
+          git rev-parse HEAD > legal-mortgage-preview/editorial-proof/commit.txt
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: repaired-editorial-layout-proof
+          path: legal-mortgage-preview/editorial-proof
+          retention-days: 7
