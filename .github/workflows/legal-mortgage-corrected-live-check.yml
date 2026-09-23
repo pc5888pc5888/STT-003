@@ -1,0 +1,55 @@
+name: Verify corrected live legal column
+on:
+  push:
+    branches: [preview/legal-mortgage-20260923-r2]
+    paths: [.github/workflows/legal-mortgage-corrected-live-check.yml]
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - run: python -m pip -q install playwright
+      - run: python -m playwright install --with-deps chromium
+      - name: Verify shared deployment, article and clipboard
+        run: |
+          python - <<'PY'
+          from playwright.sync_api import sync_playwright
+          from pathlib import Path
+          import hashlib,json,time
+          out=Path('live-corrected-proof');out.mkdir(exist_ok=True)
+          url='https://stt-003-r3uugk1gv-pc5888pc5888s-projects.vercel.app/legal-mortgage-preview?_vercel_share=ZDa52lklT3ZZHgR5IOXljJuJrG3kTM1j'
+          expected='17cbd4aef5404e606687e683a8e7f40d3f77fe318691a2f05ec488c16cd08b53'
+          with sync_playwright() as p:
+            b=p.chromium.launch();c=b.new_context(permissions=['clipboard-read','clipboard-write'],viewport={'width':1440,'height':1100});page=c.new_page();errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
+            for attempt in range(12):
+              try:
+                response=page.goto(url,wait_until='networkidle',timeout=60000)
+                page.wait_for_function("window.sttPreview?.sha256==='"+expected+"'",timeout=12000)
+                break
+              except Exception:
+                if attempt==11:raise
+                time.sleep(5)
+            page.wait_for_function("document.getElementById('article').contentDocument?.querySelectorAll('.article-body > p').length===38")
+            page.click('#copy');page.wait_for_timeout(250);clipboard=page.evaluate('navigator.clipboard.readText()')
+            data=page.evaluate("JSON.parse(document.getElementById('article-data').textContent)")
+            assert hashlib.sha256(clipboard.encode()).hexdigest()==expected and clipboard==data['fragment']
+            page.click('[data-tab=source]');assert page.input_value('#source')==clipboard
+            page.click('[data-tab=audit]');assert page.locator('#audit details').count()==102
+            page.click('[data-tab=preview]');page.screenshot(path=str(out/'desktop.png'))
+            result={'deployment':'stt-003-r3uugk1gv-pc5888pc5888s-projects.vercel.app','browser':b.version,'response_status':response.status if response else None,'fragment_sha256':expected,'clipboard_exact_match':True,'body_paragraphs':38,'audit_details':102,'viewports':[],'cms':'PENDING','real_devices':'PENDING','author_confirmation':'PENDING'}
+            for w in [320,360,375,390,430,600,768,820,1024,1440]:
+              page.set_viewport_size({'width':w,'height':1000});page.wait_for_timeout(100)
+              d=page.evaluate("()=>{const f=document.getElementById('article').contentWindow,d=f.document;const a=Array.from(d.querySelectorAll('#stt-legal-v2 *')).filter(e=>{const r=e.getBoundingClientRect();return r.right>f.innerWidth+.5||r.left<-.5});return {outer:document.documentElement.scrollWidth,viewport:f.innerWidth,doc:d.documentElement.scrollWidth,body:d.body.scrollWidth,overflow:a.length}}")
+              assert d['outer']<=w and d['doc']<=d['viewport'] and d['body']<=d['viewport'] and d['overflow']==0,(w,d)
+              result['viewports'].append({'width':w,**d})
+            page.set_viewport_size({'width':390,'height':1000});page.screenshot(path=str(out/'mobile.png'))
+            result['images']=page.evaluate("()=>Array.from(document.getElementById('article').contentDocument.images).map(i=>({alt:i.alt,width:i.naturalWidth,height:i.naturalHeight}))")
+            assert len(result['images'])==3 and all(i['width']>0 for i in result['images']);assert not errors
+            result['page_errors']=errors;(out/'result.json').write_text(json.dumps(result,ensure_ascii=False,indent=2));print(json.dumps(result,ensure_ascii=False));b.close()
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: live-corrected-legal-column-proof
+          path: live-corrected-proof
