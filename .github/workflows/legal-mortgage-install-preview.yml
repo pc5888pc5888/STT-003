@@ -1,0 +1,32 @@
+name: Install legal workbench preview
+on:
+  push:
+    branches: [preview/legal-mortgage-20260923-r2]
+    paths: [.github/workflows/legal-mortgage-install-preview.yml]
+permissions:
+  contents: write
+jobs:
+  install:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Receive exact verified HTML
+        run: |
+          mkdir -p legal-mortgage-preview/site
+          curl --fail --location --max-time 90 'https://sdmntprbrazilsouth.oaiusercontent.com/files/00000000-2fa0-820e-abf0-91da158ed99e/raw?se=2026-09-23T09%3A51%3A20Z&sp=r&sv=2026-02-06&sr=b&scid=76e9112a-bd68-52ab-ab16-84c09376c009&skoid=f5e14fda-2af7-44a3-9d18-d372ffcad871&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-23T09%3A22%3A21Z&ske=2026-09-24T09%3A22%3A21Z&sks=b&skv=2026-02-06&sig=S6tsHQ0rcdSFYOd9DZF9v7nHutuP7fZzKzhvW51dCy4%3D' -o legal-mortgage-preview/site/index.html
+          echo '643883ea23eba6293e731dd9e973824a556cbe833f416194b521a9609673bb89  legal-mortgage-preview/site/index.html' | sha256sum -c -
+          python - <<'PY'
+          import json,pathlib,hashlib
+          p=pathlib.Path('vercel.json');d=json.loads(p.read_text())
+          d['rewrites']=[{'source':'/legal-mortgage-preview','destination':'/legal-mortgage-preview/site/index.html'},{'source':'/legal-mortgage-preview/','destination':'/legal-mortgage-preview/site/index.html'}]+[x for x in d.get('rewrites',[]) if x.get('source') not in ['/legal-mortgage-preview','/legal-mortgage-preview/']]
+          p.write_text(json.dumps(d,indent=2)+'\n')
+          b=pathlib.Path('legal-mortgage-preview/site/index.html').read_bytes()
+          pathlib.Path('legal-mortgage-preview/site-verification.json').write_text(json.dumps({'site_sha256':hashlib.sha256(b).hexdigest(),'bytes':len(b),'path':'/legal-mortgage-preview','branch':'preview/legal-mortgage-20260923-r2','production_modified':False},indent=2))
+          PY
+      - name: Save preview only
+        run: |
+          git config user.name 'STT preview assembly'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add legal-mortgage-preview/site legal-mortgage-preview/site-verification.json vercel.json
+          git commit -m 'Install exact legal article preview and copy workbench [skip ci]'
+          git push origin HEAD:preview/legal-mortgage-20260923-r2
