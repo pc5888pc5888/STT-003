@@ -23,8 +23,9 @@ export default function UnifiedTitleHero({
   children,
 }: Props) {
   const lines = splitTitleAtBalancedPunctuation(title);
+  const density = title.length >= 34 ? " is-long" : title.length >= 20 ? " is-medium" : " is-short";
   return (
-    <section className="stt-title-hero" aria-labelledby={id}>
+    <section className={"stt-title-hero" + density} aria-labelledby={id}>
       {image ? (
         <img
           className="stt-title-hero__image"
