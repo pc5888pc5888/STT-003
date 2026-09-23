@@ -1,0 +1,57 @@
+name: Legal mortgage preview
+on:
+  push:
+    branches: [preview/legal-mortgage-20260923-r2]
+    paths: [.github/workflows/legal-mortgage-preview.yml, legal-mortgage-preview/**]
+permissions:
+  contents: write
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Retrieve user-design reference and official legal texts
+        run: |
+          python -m pip -q install beautifulsoup4 requests
+          mkdir -p legal-mortgage-preview/evidence
+          python - <<'PY'
+          import requests,json,hashlib,base64,pathlib
+          from bs4 import BeautifulSoup
+          out=pathlib.Path('legal-mortgage-preview/evidence')
+          urls={'example':'https://94m.com.tw/articles/ed1d40','cbc_rules':'https://www.cbc.gov.tw/tw/cp-4217-192880-d9bde-1.html','cbc_qa':'https://www.cbc.gov.tw/tw/cp-4223-124873-79d4c-1.html','presale':'https://glrs.moi.gov.tw/LawContent.aspx?id=FL003296','central_bank':'https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=G0410001','procedure':'https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=A0030055','obu':'https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=G0380037','obu_rules':'https://law.fsc.gov.tw/LawContent.aspx?id=FL006484'}
+          report={}
+          for key,url in urls.items():
+            try:
+              r=requests.get(url,timeout=45);r.raise_for_status();r.encoding='utf-8';s=BeautifulSoup(r.text,'html.parser')
+              report[key]={'url':r.url,'status':r.status_code,'sha256':hashlib.sha256(r.content).hexdigest()}
+              if key=='example':
+                root=s.select_one('#stt-legal-v2');assert root is not None
+                report[key]['images']=[]
+                for img in root.select('img'):
+                  src=img.get('src','');b=base64.b64decode(src.split(',',1)[1]) if src.startswith('data:') else requests.get(src,timeout=45).content
+                  report[key]['images'].append({'alt':img.get('alt'),'sha256':hashlib.sha256(b).hexdigest(),'size':len(b)})
+                styles=[str(x) for x in s.select('style') if '#stt-legal-v2' in str(x)]
+                report[key]['style_sha256']=[hashlib.sha256(x.encode()).hexdigest() for x in styles]
+                (out/'example.html').write_text('<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/>'+''.join(styles)+str(root),encoding='utf-8')
+              else:
+                for e in s(['script','style']):e.decompose()
+                (out/(key+'.txt')).write_text(s.get_text('\n',strip=True),encoding='utf-8')
+                report[key]['pdf_links']=[{'text':a.get_text(' ',strip=True),'href':a.get('href')} for a in s.select('a[href]') if '.pdf' in a.get('href','').lower() or 'PDF' in a.get_text() or '/dl-' in a.get('href','')]
+            except Exception as e:report[key]={'url':url,'error':str(e)}
+          (out/'report.json').write_text(json.dumps(report,ensure_ascii=False,indent=2),encoding='utf-8')
+          print(json.dumps(report,ensure_ascii=False,indent=2))
+          PY
+      - name: Build requested preview when payload exists
+        run: |
+          if [ -f legal-mortgage-preview/build.py ]; then python legal-mortgage-preview/build.py; fi
+      - name: Preserve verification evidence on isolated branch
+        run: |
+          git config user.name "STT preview assembly"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add legal-mortgage-preview
+          git diff --cached --quiet || git commit -m "Record legal preview evidence [skip ci]"
+          git push origin HEAD:preview/legal-mortgage-20260923-r2
+      - uses: actions/upload-artifact@v4
+        with:
+          name: legal-mortgage-preview-evidence
+          path: legal-mortgage-preview
