@@ -113,7 +113,10 @@ export function InstitutionsPage(){
     <UnifiedTitleHero
       kicker="INSTITUTIONAL GOVERNANCE"
       title="當單一專業工具不足以處理整體治理問題，需要的是一個更上位的判讀架構。"
+      titleLines={["當單一專業工具不足以處理整體治理問題，", "需要的是一個更上位的判讀架構。"]}
       lead="重大治理事件可能同時牽涉法律、財務、家族、策略、權力與執行。STT 負責治理整合與問題架構；各專業仍在自身責任範圍內執行。"
+      image="/visual-bank/stt/cooperation-hero-20260917.png"
+      imagePosition="center right"
       id="institutions-title"
     >
       <Link to="/start?type=institution">提出機構合作情境 →</Link>
