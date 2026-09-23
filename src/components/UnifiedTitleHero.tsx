@@ -45,7 +45,7 @@ export default function UnifiedTitleHero({
           <p className="stt-title-hero__kicker">{kicker}</p>
           <h1 id={id} aria-label={title}>
             {lines.map((line, index) => (
-              <span key={index}>{line}</span>
+              <span className="stt-editorial-title-line" key={index}>{line}</span>
             ))}
           </h1>
           {subtitle && <h2>{subtitle}</h2>}
