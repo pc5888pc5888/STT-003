@@ -50,21 +50,19 @@ jobs:
           test -z "$(git diff --name-only -- public src/assets)"
           git diff --stat > /tmp/convergence-evidence/diff-stat.txt
           git diff > /tmp/convergence-evidence/implementation.patch
-      - name: Type check, build, and mocked backend tests
+      - name: Type check, build, and isolated unit tests
         working-directory: site
-        env:
-          SITE: ${{ matrix.site }}
         run: |
           npm ci > /tmp/convergence-evidence/install.log 2>&1
           npm run lint > /tmp/convergence-evidence/typecheck.log 2>&1
-          if [ "$SITE" = "stt" ]; then node --experimental-strip-types --test tests/governance-intake.test.mjs > /tmp/convergence-evidence/api-tests.log 2>&1; fi
+          node --experimental-strip-types --test tests/*.test.mjs > /tmp/convergence-evidence/unit-tests.log 2>&1
           npm run build > /tmp/convergence-evidence/build.log 2>&1
       - name: Browser verifier installation
         working-directory: site
         run: |
           npm install --no-save --package-lock=false playwright @axe-core/playwright > /tmp/convergence-evidence/browser-install.log 2>&1
           npx playwright install --with-deps chromium > /tmp/convergence-evidence/browser-setup.log 2>&1
-      - name: Route, responsive, accessibility and mocked form verification
+      - name: Responsive, accessibility and mocked form verification
         working-directory: site
         env:
           QA_SITE: ${{ matrix.site }}
@@ -83,7 +81,9 @@ jobs:
           mkdir -p docs/qa
           cp /tmp/convergence-evidence/changes.json docs/qa/CONVERGENCE_CHANGES.json
           cp /tmp/convergence-evidence/browser-summary.json docs/qa/CONVERGENCE_BROWSER_SUMMARY.json
-          git add src api tests vite.config.ts vercel.json docs/qa/CONVERGENCE_CHANGES.json docs/qa/CONVERGENCE_BROWSER_SUMMARY.json
+          git add src vite.config.ts vercel.json docs/qa/CONVERGENCE_CHANGES.json docs/qa/CONVERGENCE_BROWSER_SUMMARY.json
+          if [ -d api ]; then git add api; fi
+          if [ -d tests ]; then git add tests; fi
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git commit -m "$SITE: apply verified convergence fixes; production unchanged"
