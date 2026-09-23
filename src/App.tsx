@@ -3,6 +3,7 @@ import { BrowserRouter, Link, Navigate, NavLink, Route, Routes, useLocation } fr
 import { Menu, X } from "lucide-react";
 import Lenis from "lenis";
 import Home from "./pages/HomeCanonical";
+import NotFound from "./components/NotFound";
 import Columns from "./pages/Columns";
 import Problems from "./pages/Problems";
 import ProblemDetail from "./pages/ProblemDetail";
@@ -42,21 +43,6 @@ function ExternalRedirect({ url }: { url: string }) {
   return <div className="stt-g0-redirect">正在前往外部頁面…</div>;
 }
 
-function NotFound() {
-  return (
-    <section className="stt-g0-gate" aria-labelledby="not-found-title">
-      <div className="stt-g0-gate__inner">
-        <p className="stt-g0-kicker">404</p>
-        <h1 id="not-found-title">找不到這個頁面。</h1>
-        <p>這個網址不在目前的 STT Governance 正式路由中。</p>
-        <div className="stt-g0-gate__actions">
-          <Link to="/">回到首頁</Link>
-          <Link to="/start">開始治理判讀</Link>
-        </div>
-      </div>
-    </section>
-  );
-}
 
 function PublicShell({ children }: ShellProps) {
   const location = useLocation();
@@ -64,8 +50,17 @@ function PublicShell({ children }: ShellProps) {
 
   useEffect(() => {
     setMenuOpen(false);
-    window.scrollTo({ top: 0, behavior: "auto" });
-  }, [location.pathname]);
+    const frame = requestAnimationFrame(() => {
+      if (location.hash) {
+        let id = location.hash.slice(1);
+        try { id = decodeURIComponent(id); } catch { /* Keep the literal fragment. */ }
+        const target = document.getElementById(id);
+        if (target) { target.scrollIntoView({ block: "start", behavior: "instant" }); return; }
+      }
+      window.scrollTo({ top: 0, behavior: "instant" });
+    });
+    return () => cancelAnimationFrame(frame);
+  }, [location.pathname, location.hash]);
 
   useEffect(() => {
     applyGovernedMetadata(location.pathname);

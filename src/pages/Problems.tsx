@@ -133,13 +133,7 @@ export default function Problems() {
     meta.content = description;
   }, []);
 
-  useEffect(() => {
-    if (!location.hash) return;
-    const target = document.getElementById(location.hash.slice(1));
-    if (target) {
-      requestAnimationFrame(() => target.scrollIntoView({ block: "start" }));
-    }
-  }, [location.hash]);
+
 
   return (
     <div className="stt-g2-problems">

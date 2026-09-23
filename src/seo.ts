@@ -1,3 +1,4 @@
+import { RETAINED_META } from "./data/retainedRouteMetadata";
 export const STT_CANONICAL_ORIGIN = "https://stt-003.vercel.app";
 
 export type MetaRecord = {
@@ -9,6 +10,7 @@ export type MetaRecord = {
 };
 
 export const FORMAL_META: Record<string, MetaRecord> = {
+  ...RETAINED_META,
   "/": {
     title: "STT Governance｜重大決策・企業治理・家族治理",
     description: "STT Governance 協助企業、家族與重大決策者，在結果尚未不可逆之前，釐清問題、證據、權力、責任與選項，建立可承擔、可追溯的治理結構。",
@@ -131,7 +133,7 @@ export function applyGovernedMetadata(pathname: string) {
     upsertCanonical(canonical);
   } else {
     upsertMeta('meta[name="robots"]', { name: "robots", content: "noindex,follow" });
-    upsertCanonical(canonical);
+    document.head.querySelectorAll('link[rel="canonical"],meta[property^="og:"],meta[name^="twitter:"]').forEach(node=>node.remove());
   }
 
   removeSchemas();

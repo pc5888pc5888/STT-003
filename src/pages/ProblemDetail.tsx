@@ -1,7 +1,8 @@
 import { useEffect } from "react";
-import { Link, Navigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import STTPageHero from "../components/STTPageHero";
 import { PROBLEM_VISUALS } from "../sttVisuals";
+import NotFound from "../components/NotFound";
 
 type ProblemConfig = {
   title: string;
@@ -159,7 +160,7 @@ export default function ProblemDetail(){
     meta.content = cfg.lead;
   }, [cfg]);
 
-  if(!cfg) return <Navigate to="/problems" replace />;
+  if(!cfg) return <NotFound />;
   const groups=[cfg.event,cfg.framing,cfg.evidence,cfg.counter,cfg.downside,cfg.judgment,cfg.outputs,cfg.professional];
   return <div className="pd4-root"><style>{`
     .pd4-root{min-height:100vh;background:#fbfaf7;color:#2b261f}.pd4-root *{box-sizing:border-box}.pd4-wrap{max-width:1180px;margin:0 auto;padding:0 28px}.pd4-hero{padding:90px 0 74px;border-bottom:1px solid #ddcfba}.pd4-eyebrow{font-size:10px;letter-spacing:.27em;color:#8b642f}.pd4-hero h1{max-width:980px;margin:20px 0 0;font:400 clamp(42px,5vw,68px)/1.32 'Noto Serif TC',Georgia,serif}.pd4-hero p{max-width:850px;margin:26px 0 0;color:#746b60;line-height:2}.pd4-back{display:inline-flex;margin-top:28px;border-bottom:1px solid #a9793e;color:#805a30;padding:0 0 5px;text-decoration:none}.pd4-body{padding:28px 0 110px}.pd4-block{display:grid;grid-template-columns:300px 1fr;gap:48px;padding:38px 0;border-bottom:1px solid #ddcfba}.pd4-block h2{margin:0;font:400 24px/1.55 'Noto Serif TC',Georgia,serif}.pd4-items{display:grid;gap:12px}.pd4-item{padding:18px 20px;border:1px solid #e0d4c3;background:#fffdf9;color:#625b52;line-height:1.85}.pd4-cta{margin-top:54px;padding:38px;border:1px solid #d8c8ad;background:linear-gradient(135deg,#fffdf9,#f4ede2);display:flex;justify-content:space-between;align-items:center;gap:30px}.pd4-cta h3{max-width:760px;margin:0;font:400 29px/1.5 'Noto Serif TC',Georgia,serif}.pd4-cta a{display:inline-flex;border:1px solid #9f7138;background:#9f7138;color:#fff;padding:12px 18px;text-decoration:none;white-space:nowrap}@media(max-width:820px){.pd4-block{grid-template-columns:1fr}.pd4-cta{display:block}.pd4-cta a{margin-top:24px}.pd4-hero{padding:66px 0 54px}}
