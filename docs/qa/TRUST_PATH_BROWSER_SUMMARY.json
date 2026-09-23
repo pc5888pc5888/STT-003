@@ -1,0 +1,53 @@
+{
+  "site": "gcsda",
+  "environment": "local production build; Vercel routing and real mail delivery not certified",
+  "routes": [
+    "/",
+    "/about",
+    "/governance",
+    "/council",
+    "/membership",
+    "/events",
+    "/knowledge",
+    "/charter",
+    "/privacy"
+  ],
+  "renderCount": 27,
+  "viewportChecks": {
+    "desktop": [
+      1440,
+      1000
+    ],
+    "tablet": [
+      820,
+      1180
+    ],
+    "mobile": [
+      390,
+      844
+    ]
+  },
+  "overflow": [],
+  "invalidH1": [],
+  "brokenImages": [],
+  "pageErrors": [],
+  "internalLabels": [],
+  "accessibility": [],
+  "interactions": [
+    {
+      "name": "mobile menu Escape closes and restores trigger focus",
+      "passed": true
+    },
+    {
+      "name": "skip link reaches the main landmark",
+      "passed": true
+    },
+    {
+      "name": "mobile dialog keyboard wraps within navigation",
+      "passed": true
+    }
+  ],
+  "productionModified": false,
+  "realInboxDeliveryVerified": false,
+  "wholeSiteAccepted": false
+}

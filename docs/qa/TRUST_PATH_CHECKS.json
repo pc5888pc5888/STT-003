@@ -1,0 +1,19 @@
+{
+  "site": "gcsda",
+  "checks": [
+    {
+      "name": "assembly date and source are explicit, without publishing internal records",
+      "passed": true
+    },
+    {
+      "name": "association privacy reflects the actual LINE route, not STT intake",
+      "passed": true
+    },
+    {
+      "name": "association stays unindexed without an approved independent origin",
+      "passed": true
+    }
+  ],
+  "realMailVerified": false,
+  "productionHttpVerified": false
+}

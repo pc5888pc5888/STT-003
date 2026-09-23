@@ -42,6 +42,7 @@ export function verifiedGcsdaOrigin(value?:string){
  try{const url=new URL(value);if(url.protocol!=="https:"||url.pathname!=="/"||url.search||url.hash||url.username||url.password||url.hostname==="stt-003.vercel.app"||url.hostname.includes("-git-"))return "";return url.origin;}catch{return "";}
 }
 export function applyGcsdaMetadata(path:string){
+ path=path!=="/"?path.replace(/\/$/,""):"/";
  const meta=GCSDA_META[path],origin=verifiedGcsdaOrigin((import.meta as any).env.VITE_GCSDA_SITE_ORIGIN);
  function set(key:string,value:string,property=false){const attr=property?"property":"name";let el=document.head.querySelector<HTMLMetaElement>(`meta[${attr}="${key}"]`);if(!el){el=document.createElement("meta");el.setAttribute(attr,key);document.head.appendChild(el);}el.content=value;}
  const title=meta?.title||"找不到頁面｜GCSDA",description=meta?.description||"中華企業策略永續發展學會網站導覽。";
