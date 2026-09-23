@@ -1,92 +1,43 @@
 {
-  "revision": "2026-09-23-source-corrected",
-  "fragment_sha256": "17cbd4aef5404e606687e683a8e7f40d3f77fe318691a2f05ec488c16cd08b53",
-  "site_sha256": "cb8b0c0e7687d1e0e774d580e2fff83f09035e66395bb9f6ce4c38b678e7848c",
-  "bytes": 8075013,
+  "revision": "2026-09-23-editorial-and-fixed-layout-repair",
+  "fragment_sha256": "f06594066154b1eaf6cf80973b06688125faa387390306be1f9ad461762b3167",
   "counts": {
-    "paragraphs": 38,
+    "body_paragraphs": 38,
+    "body_han": 8183,
+    "body_nonspace": 8846,
+    "intro_nonspace": 543,
+    "conclusion_nonspace": 450,
+    "body_min_paragraph": 203,
+    "body_max_paragraph": 282,
+    "legal_notes_nonspace": 8555,
+    "pull_quotes": 2,
     "original_han": 6092,
-    "corrected_han": 6441,
-    "corrected_effective": 7035
+    "previous_han": 6441
   },
-  "changed_body_paragraphs": [
-    16,
-    21,
-    32
-  ],
-  "changes": [
+  "css_sha256": "d2badc1811f6dc2a0956aefed7261e11d767508bf8db0c27a6a8bea8df7dcc0d",
+  "original_author_dom_match_except_tags": true,
+  "fixed_image_bytes": [
     {
-      "position": "正文第16段",
-      "before": "截至本篇查核時，央行不動產貸款規定的官方版本為二〇二六年九月十七日修正、同月十八日生效。現行分類對公司法人、高價住宅與自然人不同房貸戶數設有不同條件，其中非高價住宅的自然人第二戶購屋貸款成數上限為七成，第三戶以上及高價住宅有三成等限制；數字只在各自要件成立時適用，不能把七成寫成所有第二棟房子的請求權，也不能把三成套在尚未辨識價格、借款主體與貸款筆數的案件上。",
-      "after": "以二〇二六年九月二十三日取得的央行官方規定為準，本篇採用同年九月十七日發布、十八日生效的版本。公司法人、高價住宅與自然人不同房貸戶數，各有適用條件；自然人名下已有一戶房貸，再辦理非高價住宅購屋貸款者，貸款額度最高為住宅含基地鑑價或買賣金額較低者的七成。公司法人購置住宅、自然人購置高價住宅，以及自然人名下已有二戶以上房貸再辦理購屋貸款，原則上適用三成上限，並不得有寬限期；第二戶購屋貸款也不得有寬限期。這些數字須與各項適用及排除條件一併閱讀，不能把七成當成購買第二棟房屋即有的請求權，也不能在尚未核對價格、借款主體及依法認定的房貸戶數前，就逕以三成估算。",
-      "reason": "補明既有房貸戶數、計算基礎及無寬限期條件；日期固定於實際查核日，不以三月舊網頁取代九月官方版本。",
-      "source": "央行規定第2至4點；官方問答Q14"
+      "alt": "莊鈞翔博士法律專欄｜以法律專業為基礎，以治理思維為高度",
+      "sha256": "f2effb52fc848ee1b9abf2fd507e8af0c5f13bd4b7150fe3eb2f677d057795cb"
     },
     {
-      "position": "正文第21段",
-      "before": "僅有購屋日期早於某次修正，尚不足以推論銀行必須按照當時市場常見成數撥款，更不能逕將成交時的口頭估算視為已成立的貸款契約。",
-      "after": "就本次修正而言，第十一點明定：修正生效前，金融機構已錄案辦理而尚未撥款的案件，適用錄案時的規定；修正後規定有利於借款人者，則適用修正後規定。因此，僅有購屋日期早於某次修正，尚不足以推論銀行必須按照當時市場常見成數撥款，更不能逕將成交時的口頭估算視為已成立的貸款契約。",
-      "reason": "銜接已列在註解的實際過渡條款，區分購屋簽約、銀行錄案及撥款。",
-      "source": "央行規定第11點"
+      "alt": "莊鈞翔博士",
+      "sha256": "2f283f4ffe59ba9e3055911b8ad9ba906ac9ae2e57d88a60c4447962e95972cc"
     },
     {
-      "position": "正文第32段",
-      "before": "若承貸規則以交易價格與鑑價較低者為基礎，即使貸款比例不變，鑑價下降也會減少可貸金額。",
-      "after": "承貸規則若以交易價格與鑑價較低者為基礎，須先看鑑價下降是否使這個「較低者」隨之減少。鑑價雖然下修，卻仍高於交易價格時，法規成數計算的基礎未必改變；只有較低的計算基礎下降，在同一成數下，法規容許的最高額度才會相應減少。銀行實際核貸金額，仍須另看授信審查結果。",
-      "reason": "更正鑑價下降必然減少貸款的過度結論；最低值基礎不變時，成數上限的計算結果不變。另區分法規上限與實際核貸。",
-      "source": "央行規定第3、4、10點；最低值計算推論"
-    },
-    {
-      "position": "AI使用揭露區第二段",
-      "before": "<p>本文不構成對特定個案之法律意見、投資建議或稅務諮詢，讀者如有個案需求，應諮詢具備相關專業資格之法律、財務或稅務顧問。</p>",
-      "after": "",
-      "reason": "移除前版自行加入且不屬Doc2的額外聲明；完整AI揭露母本文字不變，個案限制仍見文章註2。",
-      "source": "Doc2 v3.3 AI-DISCLOSURE-FULL"
-    },
-    {
-      "position": "法律依據第5組來源連結",
-      "before": "<a href=\"https://www.cbc.gov.tw/tw/cp-4223-124873-79d4c-1.html\" rel=\"noopener noreferrer\" target=\"_blank\">官方原文／法規版本</a>",
-      "after": "<a href=\"https://www.cbc.gov.tw/dl-227702-d82559a407814bb8b6797e6d81215f4e.html\" rel=\"noopener noreferrer\" target=\"_blank\">官方問答全文（2026年9月18日生效版本）</a>",
-      "reason": "直接連到本次取得的官方PDF，將問答版本固定，不以動態索引頁冒充固定版本。",
-      "source": "央行問答2026年9月18日生效版本"
-    },
-    {
-      "position": "法律依據區導言",
-      "before": "查核基準日：2026年9月23日。下列臺灣法條及規定按所引條號列示全文；官方問答、外國法中譯與制度說明另標示其性質。法律效果仍須依個案事實、適用時點與契約判斷。",
-      "after": "法源核對日：2026年9月23日。下列臺灣法條與規定按所引條號列示，僅調整網頁及PDF的排版換行與空白，不節略條文；官方問答、外國法中譯與制度說明分別標示其性質。本文說明的法律效果，仍須核對個案事實、契約及應適用的歷史或過渡規定，不表示任何個別授信、解除契約或責任爭議已有確定結果。",
-      "reason": "揭露法源核對的範圍、排版處理與個案適用界線，不將引文相符升格為確定個案結論。",
-      "source": "本次官方法源與原稿既有個案限制"
+      "alt": "莊鈞翔博士簽名",
+      "sha256": "43c7d8bb7f8e31c7cae3b82619e7720494b0c968ee976561232883d5fe85fa13"
     }
   ],
-  "statutory_quotes": 36,
-  "quote_matches": 36,
-  "fixed_modules": {
-    "AUTHOR-INFO": {
-      "expected_sha256": "b239431f7151f607b443e6f39a2a03f7539259a85123910ca1aa210b3c03236c",
-      "actual_sha256": "b239431f7151f607b443e6f39a2a03f7539259a85123910ca1aa210b3c03236c"
-    },
-    "COVER-META": {
-      "expected_sha256": "7cade1cc2e846d84487d723ee6423695f9f52bf1c5139b34a325ccee8fe71fb6",
-      "actual_sha256": "7cade1cc2e846d84487d723ee6423695f9f52bf1c5139b34a325ccee8fe71fb6"
-    },
-    "AI-DISCLOSURE-FULL": {
-      "expected_sha256": "4fc570e6718d2ef1b67c0aba621b7159d7350916db433aa437305cd4b9d6360f",
-      "actual_sha256": "4fc570e6718d2ef1b67c0aba621b7159d7350916db433aa437305cd4b9d6360f"
-    },
-    "IP-DECLARATION": {
-      "expected_sha256": "9f4051f797f42b38d916eece42f3c70aa0e9fee1c76c0b88fca34febd8ebb505",
-      "actual_sha256": "9f4051f797f42b38d916eece42f3c70aa0e9fee1c76c0b88fca34febd8ebb505"
-    },
-    "PLATFORM-LINKS": {
-      "expected_sha256": "0a2beac9cd3a3121146f050d44d097937d447245994ae533f25fa2ff3c7ea1fc",
-      "actual_sha256": "0a2beac9cd3a3121146f050d44d097937d447245994ae533f25fa2ff3c7ea1fc"
-    }
-  },
-  "css_and_assets_unchanged": true,
+  "inline_reference_links": 0,
+  "qa_blocks": 0,
+  "governance_reference": "莊鈞翔（2026）《內在法遵 Internal Compliance：為你的內心，打造一座不可侵犯的至聖所》；STT Press｜ISBN 978-626-447-054-4 EPUB；ISBN 978-626-447-055-1 PDF。",
+  "statutory_paragraphs_unchanged": 30,
+  "full_ai_disclosure_unchanged": true,
+  "original_source": "本次上傳《已貼上文字 (1).txt》；固定區外觀另對照使用者指定007816刊登頁",
+  "doc2_author_exception": "依本次最新指示恢復指定原始碼8項著作及版位；不以舊Doc2的2項著作覆蓋，也不宣稱本次AUTHOR-INFO與舊母本完全一致",
   "cms": "PENDING",
   "devices": "PENDING",
-  "author_approval": "PENDING",
-  "production_modified": false,
-  "path": "/legal-mortgage-preview",
-  "branch": "preview/legal-mortgage-20260923-r2"
+  "author_approval": "PENDING"
 }
