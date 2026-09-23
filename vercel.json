@@ -1,19 +1,47 @@
 {
   "rewrites": [
     {
-      "source": "/problems/:path*",
-      "destination": "/index.html"
+      "source": "/problems",
+      "destination": "/seo-problems.html"
     },
     {
       "source": "/how-stt-works",
-      "destination": "/index.html"
+      "destination": "/seo-how-stt-works.html"
     },
     {
       "source": "/engagement",
-      "destination": "/index.html"
+      "destination": "/seo-engagement.html"
     },
     {
       "source": "/insights",
+      "destination": "/seo-insights.html"
+    },
+    {
+      "source": "/about",
+      "destination": "/seo-about.html"
+    },
+    {
+      "source": "/eric-chuang",
+      "destination": "/seo-eric-chuang.html"
+    },
+    {
+      "source": "/institutions",
+      "destination": "/seo-institutions.html"
+    },
+    {
+      "source": "/start",
+      "destination": "/seo-start.html"
+    },
+    {
+      "source": "/privacy",
+      "destination": "/seo-privacy.html"
+    },
+    {
+      "source": "/professional-boundary",
+      "destination": "/seo-professional-boundary.html"
+    },
+    {
+      "source": "/problems/:path*",
       "destination": "/index.html"
     },
     {
@@ -25,31 +53,7 @@
       "destination": "/index.html"
     },
     {
-      "source": "/about",
-      "destination": "/index.html"
-    },
-    {
       "source": "/about.html",
-      "destination": "/index.html"
-    },
-    {
-      "source": "/eric-chuang",
-      "destination": "/index.html"
-    },
-    {
-      "source": "/institutions",
-      "destination": "/index.html"
-    },
-    {
-      "source": "/start",
-      "destination": "/index.html"
-    },
-    {
-      "source": "/privacy",
-      "destination": "/index.html"
-    },
-    {
-      "source": "/professional-boundary",
       "destination": "/index.html"
     },
     {
