@@ -39,6 +39,7 @@ function createReceiptId() {
 }
 
 const routeNames: Record<string, string> = {
+  "governance-intake": "治理判讀受理",
   "enterprise-evaluation": "企業經營診斷與策略評估",
   "speaking-invitation": "主題演講與論壇邀約",
 };
