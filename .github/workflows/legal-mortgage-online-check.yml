@@ -10,17 +10,41 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Inspect live response
+      - name: Verify corrected live page and copy button
         run: |
-          python -m pip -q install requests beautifulsoup4
-          mkdir -p online-check
+          python -m pip -q install playwright
           python - <<'PY'
-          import requests,json,pathlib,hashlib
-          from bs4 import BeautifulSoup
-          url='https://stt-003-1vz95b7ap-pc5888pc5888s-projects.vercel.app/legal-mortgage-preview?_vercel_share=myUQDaHvA7DlEqMJFz8CTaCh0qTjUfDf'
-          s=requests.Session();r=s.get(url,timeout=40);d=BeautifulSoup(r.text,'html.parser')
-          result={'status':r.status_code,'title':d.title.get_text() if d.title else '', 'url':r.url,'bytes':len(r.content),'has_data':d.select_one('#article-data') is not None,'sha256':hashlib.sha256(r.content).hexdigest(),'body_text':d.get_text(' ',strip=True)[:2500],'history':[{'status':x.status_code,'url':x.url} for x in r.history]}
-          pathlib.Path('online-check/result.json').write_text(json.dumps(result,ensure_ascii=False,indent=2));print(json.dumps(result,ensure_ascii=False,indent=2))
+          import pathlib,json,hashlib,shutil,subprocess,sys
+          from playwright.sync_api import sync_playwright
+          out=pathlib.Path('online-check');out.mkdir(exist_ok=True)
+          url='https://stt-003-7a1gq4ksw-pc5888pc5888s-projects.vercel.app/legal-mortgage-preview?_vercel_share=W5nOb22sAcFVHMjnvkRXihgapAdeFskj'
+          result={}
+          try:
+            chrome=shutil.which('google-chrome') or shutil.which('chromium')
+            if not chrome: subprocess.check_call([sys.executable,'-m','playwright','install','chromium'])
+            with sync_playwright() as p:
+              b=p.chromium.launch(headless=True,executable_path=chrome,args=['--no-sandbox'])
+              c=b.new_context(permissions=['clipboard-read','clipboard-write'],viewport={'width':1440,'height':1000})
+              page=c.new_page();errs=[];page.on('pageerror',lambda e:errs.append(str(e)))
+              r=page.goto(url,wait_until='load',timeout=90000)
+              result['http_status']=r.status;result['title']=page.title();result['final_url']=page.url;result['initial_body_excerpt']=page.locator('body').inner_text()[:500]
+              page.wait_for_function('window.sttPreview && document.querySelector("#article").contentDocument.querySelector(".copyright")',timeout=30000)
+              data=page.evaluate('JSON.parse(document.querySelector("#article-data").textContent)')
+              result['source_bytes']=len(data['fragment'].encode());result['source_sha256']=hashlib.sha256(data['fragment'].encode()).hexdigest()
+              assert result['source_sha256']=='cca0460eeead582abe5124577a2e7bc5cc9425e3be74c070215d7eebe9760c06'
+              frame=page.frames[1];frame.wait_for_function('Array.from(document.images).every(i=>i.complete&&i.naturalWidth>0)')
+              result['paragraph_count']=frame.locator('.article-body p').count()
+              page.locator('#copy').click();page.wait_for_function('document.querySelector("#status").textContent.includes("已複製")')
+              copied=page.evaluate('navigator.clipboard.readText()');result['clipboard_exact']=copied==data['fragment'];assert result['clipboard_exact']
+              result['copy_status']=page.locator('#status').inner_text()
+              page.locator('[data-tab="source"]').click();result['source_field_exact']=page.locator('#source').input_value()==data['fragment']
+              page.locator('[data-tab="audit"]').click();result['audit_entries']=page.locator('#audit details').count()
+              page.locator('[data-tab="preview"]').click();result['javascript_errors']=errs
+              page.screenshot(path=str(out/'live-desktop.png'));page.set_viewport_size({'width':390,'height':844});page.screenshot(path=str(out/'live-mobile.png'))
+              result['status']='LIVE_PREVIEW_AND_CLIPBOARD_VERIFIED';b.close()
+          except Exception as e:
+            result['status']='FAILED';result['error']=str(e)
+          (out/'result.json').write_text(json.dumps(result,ensure_ascii=False,indent=2));print(json.dumps(result,ensure_ascii=False,indent=2))
           PY
       - uses: actions/upload-artifact@v4
         with:
