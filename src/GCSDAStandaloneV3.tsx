@@ -47,21 +47,21 @@ const navItems = [
 ] as const;
 
 const directory = [
-  ["創會理事長", "莊鈞翔 博士", "中華企業策略永續發展學會 創辦人"],
-  ["副理事長", "范英峰", "鎂宥新工程有限公司 總經理"],
-  ["秘書長", "黃朝福 會計師", "朝陽會計師事務所 所長"],
-  ["常務理事", "陳錚程", "玉山銀行 襄理"],
-  ["理事", "謝秉錡 律師", "謝秉錡律師事務所 主持律師"],
-  ["理事", "高毓謙 律師", "博理法律事務所"],
-  ["理事", "林柏劭 律師", "欣成法律事務所 主持律師"],
-  ["理事", "賴祺元 律師", "賴祺元律師事務所 所長"],
-  ["理事", "劉煒達 律師", "亞森銧國際法律事務所 所長"],
-  ["理事", "林政男 律師", "上海申浩律師事務所 合夥律師"],
-  ["候補理事", "游筑雅", "鈺田工業有限公司 業務經理"],
-  ["常務監事", "廖經舜", "旭研電機有限公司 總經理"],
-  ["監事", "李克成 建築師", "李克成建築師事務所 所長"],
-  ["監事", "林家豪", "樂業國際事業有限公司 執行長"],
-  ["候補監事", "陳冠宏", "裕富數位資融股份有限公司 副理"],
+  ["創會理事長", "莊鈞翔 博士"],
+  ["副理事長", "范英峰"],
+  ["秘書長", "黃朝福 會計師"],
+  ["常務理事", "陳錚程"],
+  ["理事", "謝秉錡 律師"],
+  ["理事", "高毓謙 律師"],
+  ["理事", "林柏劭 律師"],
+  ["理事", "賴祺元 律師"],
+  ["理事", "劉煒達 律師"],
+  ["理事", "林政男 律師"],
+  ["候補理事", "游筑雅"],
+  ["常務監事", "廖經舜"],
+  ["監事", "李克成 建築師"],
+  ["監事", "林家豪"],
+  ["候補監事", "陳冠宏"],
 ] as const;
 
 const charterHighlights = [
@@ -103,9 +103,9 @@ function PageHead({eyebrow,title,lead}:{eyebrow:string;title:string;lead:string}
 
 function Home(){return <><section className="g4-home"><div className="g4-home-media"/><div className="g4-wrap"><div className="g4-home-copy"><div className="g4-kicker">GCSDA · NATIONAL PROFESSIONAL ASSOCIATION · TAIWAN</div><h1>讓策略、治理與永續，<br/>成為共同語言。</h1><p>中華企業策略永續發展學會連結企業、專業與學術，透過正式組織、章程、會員共同體與跨域交流，逐步累積可被延續的治理知識與實務連結。</p><div className="g4-actions"><Link className="primary" to="/about">認識學會</Link><Link to="/membership">會員與入會</Link></div></div></div></section><section className="g4-values"><div className="g4-wrap g4-valuegrid">{[["01","策略為先","先理解方向與真正問題，再談資源配置。"],["02","治理為本","讓權力、責任與程序有正式制度位置。"],["03","跨域協作","不同專業保有責任邊界，再形成共同語言。"],["04","永續累積","讓活動與交流逐步沉澱為可被傳承的知識資產。"]].map(([n,t,d])=><div className="g4-value" key={n}><span>{n}</span><h3>{t}</h3><p>{d}</p></div>)}</div></section><section className="g4-section"><div className="g4-wrap"><div className="g4-kicker">INSTITUTIONAL FOUNDATION</div><h2 className="g4-title">一個談治理的組織，本身必須先被治理。</h2><p className="g4-lead">學會以會員大會、理事會、監事會與章程形成正式組織基礎；網站呈現的治理身分、職權與會員制度，均應回到正式章程與會務文件。</p><div className="g4-grid">{[["01","正式立案","主管機關為內政部，組織區域為全國。"],["02","會員共同體","會員資格、權利義務與會費依正式章程及決議。"],["03","專業協作","連結法律、會計、策略、產業與學術，但不混淆各自責任。"]].map(x=><div className="g4-card" key={x[0]}><span>{x[0]}</span><h3>{x[1]}</h3><p>{x[2]}</p></div>)}</div><div className="g4-actions"><Link to="/governance">理解組織治理 →</Link></div></div></section><section className="g4-section soft"><div className="g4-wrap"><div className="g4-kicker">MEMBERSHIP & COMMUNITY</div><h2 className="g4-title">加入的不是一項服務，而是一個治理共同體。</h2><p className="g4-lead">會員制度的核心是長期參與、共同學習、正式會務與跨域交流，而不是把學會變成商業顧問銷售入口。</p><div className="g4-actions"><Link className="primary" to="/membership">了解會員與入會</Link><Link to="/events">活動與大會</Link></div></div></section><section className="g4-final"><div className="g4-kicker">GCSDA</div><h2>把一次性的交流，轉化為可以逐年累積的制度與知識。</h2><p>學會不以尚未發生的成果裝飾網站；網站僅收錄資料已完成並可核對之正式活動、研究、出版與公告紀錄。</p></section></>}
 
-function About(){return <div className="g4-page"><PageHead eyebrow="INSTITUTIONAL IDENTITY" title="讓企業、專業與學術在治理議題上，形成可以持續對話的正式共同體。" lead="GCSDA 以公司治理法遵、企業策略、風險控管、跨界交流與永續發展為核心，透過正式社團制度，把一次性交流轉化為可以逐年累積的組織與知識。"/><section className="g4-section"><div className="g4-wrap"><div className="g4-list">{charterHighlights.slice(0,3).map(([a,b])=><div className="g4-row" key={a}><b>{a}</b><div>{b}</div></div>)}<div className="g4-row"><b>法定立案</b><div>內政部 114/8 台內團字第 1140030747 號。</div></div></div><div className="g4-note"><h3>GCSDA 與 STT Governance 是不同機構主體。</h3><p>兩者可以在治理知識、活動或內容上形成合作與互相連結，但學會的會員大會、理事會、監事會、章程與法定責任不由 STT 取代；STT 亦不因連結學會而成為學會之法定機關。</p></div></div></section></div>}
+function About(){return <div className="g4-page"><PageHead eyebrow="INSTITUTIONAL IDENTITY" title="讓企業、專業與學術在治理議題上，形成可以持續對話的正式共同體。" lead="GCSDA 以公司治理法遵、企業策略、風險控管、跨界交流與永續發展為核心，透過正式社團制度，把一次性交流轉化為可以逐年累積的組織與知識。"/><section className="g4-section"><div className="g4-wrap"><div className="g4-list">{charterHighlights.slice(0,3).map(([a,b])=><div className="g4-row" key={a}><b>{a}</b><div>{b}</div></div>)}<div className="g4-row"><b>法定立案</b><div>內政部 114/8 台內團字第 1140030747 號。</div></div></div><div className="g4-note"><h3>GCSDA 與 STT Governance 是不同機構主體。</h3><p>兩者可以在治理知識、活動或內容上互相連結，但會員、會務、理監事、章程與法定責任均由 GCSDA 自身制度承擔；STT Governance 不取代學會之法定機關。</p></div></div></section></div>}
 
-function Governance(){return <div className="g4-page"><PageHead eyebrow="INSTITUTIONAL GOVERNANCE" title="學會本身先接受治理：權力來源、任期、職權與責任都應可被理解。" lead="網站公開學會正式治理架構與第一屆理監事名錄；具體人數、職權、任期與程序以章程及正式會務文件為準。"/><section className="g4-section"><div className="g4-wrap"><div className="g4-grid">{[["01","會員大會","作為學會正式治理體系的一部分，其法定職權依章程與人民團體相關規範。"],["02","理事會","理事 9 人、常務理事 3 人；理事長、副理事長與候補理事之配置依正式章程。"],["03","監事會","監事 3 人、常務監事 1 人、候補監事 1 人；負責監察相關職權。"]].map(x=><div className="g4-card" key={x[0]}><span>{x[0]}</span><h3>{x[1]}</h3><p>{x[2]}</p></div>)}</div><div className="g4-kicker" style={{marginTop:58}}>FIRST BOARD & SUPERVISORS</div><h2 className="g4-title">第一屆理監事會</h2><div className="g4-directory">{directory.map(([role,name,title])=><div className="g4-person" key={`${role}-${name}`}><small>{role}</small><h3>{name}</h3><p>{title}</p></div>)}</div><div className="g4-note"><h3>職務資訊</h3><p>名錄中的外部公司／機構職銜屬會務公開資訊的一部分；公開資訊以會員本人或正式會務資料之最新版本為準。</p></div></div></section></div>}
+function Governance(){return <div className="g4-page"><PageHead eyebrow="INSTITUTIONAL GOVERNANCE" title="學會本身先接受治理：權力來源、任期、職權與責任都應可被理解。" lead="學會以會員大會、理事會與監事會構成正式治理架構；各機關之人數、職權、任期與程序，以章程及正式會務文件為依據。"/><section className="g4-section"><div className="g4-wrap"><div className="g4-grid">{[["01","會員大會","作為學會正式治理體系的一部分，其法定職權依章程與人民團體相關規範。"],["02","理事會","理事 9 人、常務理事 3 人；理事長、副理事長與候補理事之配置依正式章程。"],["03","監事會","監事 3 人、常務監事 1 人、候補監事 1 人；負責監察相關職權。"]].map(x=><div className="g4-card" key={x[0]}><span>{x[0]}</span><h3>{x[1]}</h3><p>{x[2]}</p></div>)}</div><div className="g4-kicker" style={{marginTop:58}}>FIRST BOARD & SUPERVISORS</div><h2 className="g4-title">第一屆理監事會</h2><div className="g4-directory">{directory.map(([role,name])=><div className="g4-person" key={`${role}-${name}`}><small>{role}</small><h3>{name}</h3></div>)}</div><div className="g4-note"><h3>名錄依據</h3><p>本頁僅呈現學會治理職務與姓名；外部公司、機構或專業職銜不在此頁延伸，以避免不同組織身分彼此混淆。</p></div></div></section></div>}
 
 function Council(){return <div className="g4-page"><PageHead eyebrow="STRATEGIC GOVERNANCE COUNCIL" title="跨域專業，不等於權責混同。" lead="策略治理聯席會以議題為中心，連結法律、會計、策略、產業與學術專業，在各自責任邊界內形成交流、研究與治理實務的共同語言。"/><section className="g4-section"><div className="g4-wrap"><div className="g4-grid">{[["01","議題導向","從企業治理、策略、法遵、永續與其他正式議題出發，不以固定專家名單製造全能顧問印象。"],["02","專業邊界","不同專業者只在其資格、經驗與責任範圍內提供意見；必要時由具正式資格者承接專業工作。"],["03","紀錄與成果","正式講座、交流紀錄或研究成果完成後再公開，不以尚未發生的合作或研究裝飾網站。"]].map(x=><div className="g4-card" key={x[0]}><span>{x[0]}</span><h3>{x[1]}</h3><p>{x[2]}</p></div>)}</div><div className="g4-note"><h3>制度界線</h3><p>策略治理聯席會屬學會之專業協作／交流機制；除非正式章程或會員大會／理事會決議另有明文，不取代會員大會、理事會或監事會之法定職權。</p></div></div></section></div>}
 
