@@ -14,7 +14,7 @@
     "verification": "All seven source fields exactly match the uploaded 212-record snapshot after restoring its original whitespace."
   },
   "schemaVersion": "2.0",
-  "syncedAt": "2026-09-22T21:25:34.850804+00:00",
+  "syncedAt": "2026-09-23T04:52:14.490788+00:00",
   "sync": {
     "method": "public-author-index-and-more",
     "complete": true,
