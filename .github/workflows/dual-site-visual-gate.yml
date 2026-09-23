@@ -35,6 +35,19 @@ jobs:
           npm run build > /tmp/visual-gate/build.log 2>&1
           npm install --no-save --package-lock=false playwright > /tmp/visual-gate/playwright-install.log 2>&1
           npx playwright install --with-deps chromium > /tmp/visual-gate/browser-setup.log 2>&1
+      - name: Source governance guard
+        env:
+          SITE: ${{ matrix.site }}
+        run: |
+          if [ "$SITE" = "stt" ]; then
+            ! grep -R -E 'eric-governance-principal-approved|portrait-front|portrait-seated|eric-home-authority-20260921' src
+            ! grep -R -E '12d94f8d4b|a6e96eff8e' src
+            grep -R -q 'c700d8beb2' src
+            grep -R -q 'e424001f8c' src
+          else
+            grep -R -q '申請入會' src/GCSDAStandaloneV3.tsx
+            grep -R -q 'e424001f8c' src/GCSDAStandaloneV3.tsx
+          fi
       - name: Browser visual gate
         env:
           SITE: ${{ matrix.site }}
