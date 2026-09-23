@@ -1,0 +1,136 @@
+name: Publish verified CIS review to existing preview branches
+on:
+  push:
+    branches: [stt-convergence-20260923]
+    paths: [.github/workflows/publish-cis-review.yml]
+permissions:
+  contents: write
+concurrency:
+  group: cis-review-publication
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - site: stt
+            branch: stt-convergence-20260923
+          - site: gcsda
+            branch: gcsda-convergence-20260923
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ matrix.branch }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Transfer only website sources and original assets
+        env:
+          SITE: ${{ matrix.site }}
+          BRANCH: ${{ matrix.branch }}
+          PAYLOAD: 'https://sdmntpraustraliaeast.oaiusercontent.com/files/00000000-14f8-81fa-9e51-b55d1f9459bf/raw?se=2026-09-23T18%3A50%3A42Z&sp=r&sv=2026-02-06&sr=b&scid=2d67354b-c946-5c32-822f-3d0732a4a855&skoid=f5e14fda-2af7-44a3-9d18-d372ffcad871&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-23T18%3A34%3A33Z&ske=2026-09-24T18%3A34%3A33Z&sks=b&skv=2026-02-06&sig=PzUygPLDpAIJpWICs59bGOBJ1C4TYXbi6IGSgkiDY40%3D'
+        run: |
+          test "$BRANCH" = "stt-convergence-20260923" -o "$BRANCH" = "gcsda-convergence-20260923"
+          test "$(git branch --show-current)" = "$BRANCH"
+          mkdir -p /tmp/cis-review
+          git ls-remote origin refs/heads/main > /tmp/cis-review/main-before.txt
+          curl --fail --silent --show-error --location --max-time 90 "$PAYLOAD" -o /tmp/cis-payload.zip
+          echo '643728c7a7623bf5d705216cb9bac465992db220c456bff691528f0feb2d4613  /tmp/cis-payload.zip' | sha256sum -c -
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib,json,os,zipfile,re
+          site=os.environ['SITE'];root=Path.cwd().resolve();pending=[]
+          with zipfile.ZipFile('/tmp/cis-payload.zip') as z:
+            manifest=json.loads(z.read('manifest.json'))
+            for item in manifest['files']:
+              if item['site']!=site:continue
+              path=item['path'];target=(root/path).resolve()
+              assert root in target.parents and path.startswith(('src/','public/')),path
+              content=z.read(site+'/'+path);assert hashlib.sha256(content).hexdigest()==item['after_sha256'],path
+              old=hashlib.sha256(target.read_bytes()).hexdigest() if target.exists() else None
+              assert old in [item['before_sha256'],item['after_sha256']],('Source changed',path)
+              pending.append((target,content,item))
+            for target,content,item in pending:
+              target.parent.mkdir(parents=True,exist_ok=True);target.write_bytes(content)
+          Path('/tmp/cis-review/asset-manifest.json').write_text(json.dumps([i for _,_,i in pending if i['path'].startswith('public/')],indent=2))
+          source=Path('src/data/pagePresentation.ts').read_text()
+          data=json.loads(re.search(r'export const PAGE_PRESENTATION[^=]*=\s*(\{[\s\S]*\});',source).group(1))
+          Path('/tmp/cis-review/routes.json').write_text(json.dumps(data,ensure_ascii=False))
+          Path('/tmp/cis-review/change-paths.json').write_text(json.dumps([i['path'] for _,_,i in pending]))
+          PY
+      - name: Build the real React application and run existing tests
+        run: |
+          npm ci > /tmp/cis-review/install.log 2>&1
+          npm run lint > /tmp/cis-review/typecheck.log 2>&1
+          npm run build > /tmp/cis-review/build.log 2>&1
+          node --experimental-strip-types --test tests/*.test.mjs > /tmp/cis-review/tests.log 2>&1
+          npm install --no-save --package-lock=false playwright > /tmp/cis-review/browser-install.log 2>&1
+          npx playwright install --with-deps chromium > /tmp/cis-review/browser-setup.log 2>&1
+      - name: Verify every page and its real image requests
+        env:
+          SITE: ${{ matrix.site }}
+        run: |
+          npx vite preview --host 127.0.0.1 --port 4173 > /tmp/cis-review/server.log 2>&1 &
+          cat > .cis-review-check.mjs <<'JS'
+          import fs from 'node:fs';
+          import { chromium } from 'playwright';
+          const routes=JSON.parse(fs.readFileSync('/tmp/cis-review/routes.json','utf8'));
+          const browser=await chromium.launch({headless:true});const results=[];
+          for(const width of [390,820,1440]){
+            const context=await browser.newContext({viewport:{width,height:1000},reducedMotion:'reduce'});
+            const page=await context.newPage();
+            for(const [route,record] of Object.entries(routes)){
+              const errors=[];const onError=e=>errors.push(e.message);page.on('pageerror',onError);
+              try{
+                await page.goto('http://127.0.0.1:4173'+route,{waitUntil:'networkidle',timeout:30000});
+                await page.evaluate(()=>document.fonts.ready);
+                await page.evaluate(async()=>{for(let y=0;y<document.documentElement.scrollHeight;y+=700){scrollTo(0,y);await new Promise(r=>setTimeout(r,40));}scrollTo(0,0);});
+                await page.waitForTimeout(180);
+                const state=await page.evaluate(()=>({h1:document.querySelectorAll('h1').length,title:document.querySelector('h1')?.textContent,overflow:document.documentElement.scrollWidth>innerWidth+1,images:[...document.images].map(i=>({src:i.getAttribute('src'),loaded:i.complete&&i.naturalWidth>0,naturalWidth:i.naturalWidth,naturalHeight:i.naturalHeight})),hero:document.querySelector('.cis-hero-art img')?.getAttribute('src')}));
+                const broken=state.images.filter(i=>!i.loaded);
+                const passed=state.h1===1&&!state.overflow&&!broken.length&&!errors.length&&(!record.image||record.image===state.hero);
+                results.push({route,width,...state,errors,passed});
+                if(['/', '/engagement','/institutions','/eric-chuang','/governance','/membership'].includes(route))await page.screenshot({path:'/tmp/cis-review/'+process.env.SITE+'-'+(route.slice(1)||'home')+'-'+width+'.png',fullPage:true});
+              }catch(e){results.push({route,width,passed:false,error:String(e)});}
+              page.off('pageerror',onError);
+            }
+            await context.close();
+          }
+          await browser.close();
+          fs.writeFileSync('/tmp/cis-review/browser-results.json',JSON.stringify(results,null,2));
+          const failed=results.filter(x=>!x.passed);
+          fs.writeFileSync('/tmp/cis-review/summary.json',JSON.stringify({site:process.env.SITE,pages:Object.keys(routes).length,renders:results.length,failed,realReactBuild:true,originalPngTransferred:true,productionChanged:false,realMailDeliveryVerified:false},null,2));
+          console.log(JSON.stringify({renders:results.length,failed},null,2));
+          if(failed.length)process.exitCode=1;
+          JS
+          node .cis-review-check.mjs > /tmp/cis-review/browser.log 2>&1
+          rm .cis-review-check.mjs
+      - name: Publish only to the existing review branch
+        env:
+          SITE: ${{ matrix.site }}
+          BRANCH: ${{ matrix.branch }}
+        run: |
+          mkdir -p docs/qa
+          cp /tmp/cis-review/summary.json docs/qa/20260924-online-review.json
+          cp /tmp/cis-review/asset-manifest.json docs/qa/20260924-online-assets.json
+          python3 - <<'PY'
+          import json,subprocess
+          paths=json.load(open('/tmp/cis-review/change-paths.json'))
+          subprocess.run(['git','add','--',*paths,'docs/qa/20260924-online-review.json','docs/qa/20260924-online-assets.json'],check=True)
+          PY
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m "$SITE: publish three-class typography and full original-image review"
+          git push origin "HEAD:$BRANCH"
+          git rev-parse HEAD > /tmp/cis-review/source-sha.txt
+          git ls-remote origin refs/heads/main > /tmp/cis-review/main-after.txt
+          cmp /tmp/cis-review/main-before.txt /tmp/cis-review/main-after.txt
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: cis-live-review-${{ matrix.site }}
+          path: /tmp/cis-review/
+          retention-days: 7
