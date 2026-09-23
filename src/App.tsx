@@ -16,6 +16,7 @@ import { DomainDetail, DomainsIndex } from "./pages/Domains";
 import { BooksCanonical, InternalComplianceCanonical, ResearchCanonical } from "./pages/CanonicalLibrary";
 import Legal from "./pages/Legal";
 import { STT_OFFICIAL_LOGO_SRC } from "./sttLogo";
+import { applyGovernedMetadata } from "./seo";
 
 type ShellProps = { children: ReactNode };
 
@@ -64,6 +65,10 @@ function PublicShell({ children }: ShellProps) {
   useEffect(() => {
     setMenuOpen(false);
     window.scrollTo({ top: 0, behavior: "auto" });
+  }, [location.pathname]);
+
+  useEffect(() => {
+    applyGovernedMetadata(location.pathname);
   }, [location.pathname]);
 
   return (
@@ -223,6 +228,7 @@ function AppRoutes() {
 
 function AppFrame() {
   useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const lenis = new Lenis({ duration: 1.1, smoothWheel: true, wheelMultiplier: 1, touchMultiplier: 1.2, lerp: 0.09 });
     let frame = 0;
     const raf = (time: number) => { lenis.raf(time); frame = requestAnimationFrame(raf); };
