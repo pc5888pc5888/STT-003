@@ -7,16 +7,16 @@ import { FORMAL_META, STT_CANONICAL_ORIGIN } from "./src/seo";
 
 const FORMAL_HTML_FILES: Record<string, string> = {
   "/": "index.html",
-  "/problems": "problems.html",
-  "/how-stt-works": "how-stt-works.html",
-  "/engagement": "engagement.html",
-  "/insights": "insights.html",
-  "/about": "about.html",
-  "/eric-chuang": "eric-chuang.html",
-  "/institutions": "institutions.html",
-  "/start": "start.html",
-  "/privacy": "privacy.html",
-  "/professional-boundary": "professional-boundary.html",
+  "/problems": "seo-problems.html",
+  "/how-stt-works": "seo-how-stt-works.html",
+  "/engagement": "seo-engagement.html",
+  "/insights": "seo-insights.html",
+  "/about": "seo-about.html",
+  "/eric-chuang": "seo-eric-chuang.html",
+  "/institutions": "seo-institutions.html",
+  "/start": "seo-start.html",
+  "/privacy": "seo-privacy.html",
+  "/professional-boundary": "seo-professional-boundary.html",
 };
 
 function escapeHtml(value: string) {
