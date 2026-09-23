@@ -15,7 +15,7 @@ jobs:
     steps:
       - name: Receive the previously verified website payload
         env:
-          PAYLOAD: 'https://sdmntprnznorth.oaiusercontent.com/files/00000000-3f68-820b-81ab-c029d2548f80/raw?se=2026-09-23T19%3A06%3A27Z&sp=r&sv=2026-02-06&sr=b&scid=8d486521-6b83-5218-8b44-e49223d16d42&skoid=f5e14fda-2af7-44a3-9d18-d372ffcad871&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-23T18%3A29%3A55Z&ske=2026-09-24T18%3A29%3A55Z&sks=b&skv=2026-02-06&sig=oTtSTpYkGViJByUolEgGPqEgwoNzit2Y3J3tTcv8rCQ%3D'
+          PAYLOAD: 'https://sdmntprnznorth.oaiusercontent.com/files/00000000-75f8-820b-9009-302a4cdb53f5/raw?se=2026-09-23T19%3A11%3A48Z&sp=r&sv=2026-02-06&sr=b&scid=888d50a1-e03a-55aa-9c6b-7fe5cdec3f59&skoid=f5e14fda-2af7-44a3-9d18-d372ffcad871&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-23T18%3A30%3A27Z&ske=2026-09-24T18%3A30%3A27Z&sks=b&skv=2026-02-06&sig=yK2iS%2BTCbiS6aodheHrtg64voA%2Bkxdcacqx1Gashj0A%3D'
         run: |
           mkdir -p /tmp/cis-review
           curl --fail --silent --show-error --location --max-time 90 "$PAYLOAD" -o /tmp/cis-payload.zip
@@ -33,11 +33,8 @@ jobs:
             /public/images/gcsda-logo.png
             /public/404.html
             /public/visual-approved/
-            /package.json
-            /package-lock.json
-            /tsconfig*.json
-            /vite.config.ts
-            /vercel.json
+            /*.json
+            /*.ts
             /index.html
       - uses: actions/setup-node@v4
         with:
@@ -46,14 +43,18 @@ jobs:
         run: |
           curl --fail --silent --show-error --location --max-time 30 'https://raw.githubusercontent.com/pc5888pc5888/STT-003/c59fbe853afb2294a886c69ddef24e028030591d/.github/workflows/publish-cis-review.yml' -o /tmp/pinned-cis-workflow.yml
           python3 - <<'PY'
-          import yaml,subprocess
+          import yaml,subprocess,pathlib
           workflow=yaml.safe_load(open('/tmp/pinned-cis-workflow.yml'))
           steps=workflow['jobs']['publish-gcsda']['steps']
           names=['Apply only the verified GCSDA change set','Build and check all GCSDA pages','Publish to the existing GCSDA preview branch only']
           for name in names:
               step=next(s for s in steps if s.get('name')==name)
               print(name,flush=True)
-              subprocess.run(['bash','--noprofile','--norc','-e','-o','pipefail','-c',step['run']],check=True)
+              try:subprocess.run(['bash','--noprofile','--norc','-e','-o','pipefail','-c',step['run']],check=True)
+              except subprocess.CalledProcessError:
+                  for log in pathlib.Path('/tmp/cis-review').glob('*.log'):
+                      print(log.name,log.read_text()[-5000:],flush=True)
+                  raise
           PY
       - uses: actions/upload-artifact@v4
         if: always()
