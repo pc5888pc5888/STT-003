@@ -223,7 +223,6 @@ export default function Start() {
               {sending ? "正在送出…" : "提交治理情境"}
             </button>
             {sendError && <p role="alert" className="mt-4 text-sm leading-7 text-[#8a4f3d]">{sendError}</p>}
-            <p className="mt-5 max-w-[760px] text-xs leading-6 text-[#8a8278]">Phase 1 不提供檔案上傳。</p>
           </div>
         </form>
       </section>
