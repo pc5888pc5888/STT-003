@@ -1,0 +1,116 @@
+name: Restore owner-selected full-width presentation
+on:
+  push:
+    branches: [stt-convergence-20260923]
+    paths: [.github/workflows/restore-owner-fullwidth.yml]
+permissions:
+  contents: write
+concurrency:
+  group: owner-fullwidth-restoration
+  cancel-in-progress: false
+jobs:
+  restore:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - site: stt
+            branch: stt-convergence-20260923
+          - site: gcsda
+            branch: gcsda-convergence-20260923
+    steps:
+      - name: Receive bounded source update before checkout
+        env:
+          INPUT_URL: 'https://sdmntprnznorth.oaiusercontent.com/files/00000000-0c28-820b-8886-b2cb53eb5bbf/raw?se=2026-09-23T19%3A54%3A01Z&sp=r&sv=2026-02-06&sr=b&scid=99a10d2b-8ef9-5576-a66e-8bb6818e2e7c&skoid=f5e14fda-2af7-44a3-9d18-d372ffcad871&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-23T10%3A45%3A58Z&ske=2026-09-24T10%3A45%3A58Z&sks=b&skv=2026-02-06&sig=OX7e9D70bPAMFHz0fnoJFyQhZY/AWk%2BFxRR2hs6/VAA%3D'
+        run: |
+          mkdir -p /tmp/fullwidth-evidence
+          curl --fail --silent --show-error --location --max-time 60 "$INPUT_URL" -o /tmp/fullwidth-input.zip
+          echo 'c864627c38ebb1c68b553a0f9c3e591966ec5f980e7021a4eec963bc55a44979  /tmp/fullwidth-input.zip' | sha256sum -c -
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ matrix.branch }}
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /*
+            !/*/
+            /src/
+            /api/
+            /tests/
+            /docs/qa/
+            /public/visual-approved/
+            /public/visual-bank/stt/user-approved-six/
+            /public/images/STT-Governance-Official-Logo.png
+            /public/images/gcsda-logo.png
+            /public/404.html
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Apply only source-matching files
+        env:
+          SITE: ${{ matrix.site }}
+          BRANCH: ${{ matrix.branch }}
+        run: |
+          test "$(git branch --show-current)" = "$BRANCH"
+          git ls-remote origin refs/heads/main > /tmp/fullwidth-evidence/main-before.txt
+          python3 - <<'PY'
+          import os,json,hashlib,zipfile
+          from pathlib import Path
+          root=Path.cwd().resolve();site=os.environ['SITE'];pending=[]
+          with zipfile.ZipFile('/tmp/fullwidth-input.zip') as z:
+            manifest=json.loads(z.read('manifest.json'))
+            for item in manifest['files']:
+              if item['site']!=site:continue
+              path=item['path'];p=(root/path).resolve()
+              assert root in p.parents and path.startswith(('src/','public/'))
+              raw=z.read(site+'/'+path)
+              assert hashlib.sha256(raw).hexdigest()==item['after_sha256']
+              current=hashlib.sha256(p.read_bytes()).hexdigest() if p.exists() else None
+              assert current==item['before_sha256'],('Concurrent change',path,current)
+              pending.append((p,raw,item))
+            for p,raw,item in pending:p.parent.mkdir(parents=True,exist_ok=True);p.write_bytes(raw)
+            Path('.verify-fullwidth.mjs').write_bytes(z.read('verify.mjs'))
+          Path('/tmp/fullwidth-evidence/changed.json').write_text(json.dumps([i for _,_,i in pending],indent=2))
+          PY
+          git diff --stat > /tmp/fullwidth-evidence/diff-stat.txt
+      - name: Build and test actual applications
+        run: |
+          npm ci > /tmp/fullwidth-evidence/install.log 2>&1
+          npm run lint > /tmp/fullwidth-evidence/typecheck.log 2>&1
+          npm run build > /tmp/fullwidth-evidence/build.log 2>&1
+          node --experimental-strip-types --test tests/*.test.mjs > /tmp/fullwidth-evidence/unit-tests.log 2>&1
+          npm install --no-save --package-lock=false playwright > /tmp/fullwidth-evidence/browser-install.log 2>&1
+          npx playwright install --with-deps chromium > /tmp/fullwidth-evidence/browser-setup.log 2>&1
+      - name: Verify full-width images, original aspect and title bounds
+        env:
+          SITE: ${{ matrix.site }}
+        run: |
+          npx vite preview --host 127.0.0.1 --port 4173 > /tmp/fullwidth-evidence/preview.log 2>&1 &
+          node .verify-fullwidth.mjs > /tmp/fullwidth-evidence/browser.log 2>&1
+      - name: Save verified changes to the same review branch
+        env:
+          SITE: ${{ matrix.site }}
+          BRANCH: ${{ matrix.branch }}
+        run: |
+          mkdir -p docs/qa
+          cp /tmp/fullwidth-evidence/summary.json docs/qa/20260924-fullwidth-review.json
+          cp /tmp/fullwidth-evidence/changed.json docs/qa/20260924-fullwidth-source.json
+          python3 - <<'PY'
+          import json,subprocess
+          paths=[x['path'] for x in json.load(open('/tmp/fullwidth-evidence/changed.json'))]
+          subprocess.run(['git','add','--',*paths,'docs/qa/20260924-fullwidth-review.json','docs/qa/20260924-fullwidth-source.json'],check=True)
+          PY
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m "$SITE: restore full-width imagery and correct owner-selected portrait"
+          git push origin "HEAD:$BRANCH"
+          git rev-parse HEAD > /tmp/fullwidth-evidence/source-sha.txt
+          git ls-remote origin refs/heads/main > /tmp/fullwidth-evidence/main-after.txt
+          cmp /tmp/fullwidth-evidence/main-before.txt /tmp/fullwidth-evidence/main-after.txt
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: fullwidth-restoration-${{ matrix.site }}
+          path: /tmp/fullwidth-evidence/
+          retention-days: 7
