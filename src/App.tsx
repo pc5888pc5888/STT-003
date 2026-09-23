@@ -21,7 +21,7 @@ import { applyGovernedMetadata } from "./seo";
 
 type ShellProps = { children: ReactNode };
 
-const GCSDA_URL = "https://stt-003-git-gcsda-build-baseline-5234de-pc5888pc5888s-projects.vercel.app";
+const GCSDA_URL = "https://stt-003-git-gcsda-convergence-20260923-pc5888pc5888s-projects.vercel.app";
 const HUMANISTIC_INTERVIEW_URL = "/humanistic-interview/";
 const STT_PRESS_URL = "/books";
 
