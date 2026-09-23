@@ -8,6 +8,8 @@ type Props = {
   lead?: string;
   image?: string;
   imagePosition?: string;
+  imageFit?: "cover" | "contain";
+  titleLines?: readonly string[];
   id?: string;
   children?: ReactNode;
 };
@@ -19,21 +21,25 @@ export default function UnifiedTitleHero({
   lead,
   image,
   imagePosition = "center",
+  imageFit = "cover",
+  titleLines,
   id,
   children,
 }: Props) {
-  const lines = splitTitleAtBalancedPunctuation(title);
+  const governedLines = splitTitleAtBalancedPunctuation(title);
+  const lines = titleLines?.length ? titleLines : governedLines;
   const density = title.length >= 34 ? " is-long" : title.length >= 20 ? " is-medium" : " is-short";
   const visualState = image ? " has-image" : " is-text-only";
+  const imageMode = image && imageFit === "contain" ? " is-contain" : "";
   return (
-    <section className={"stt-title-hero" + density + visualState} aria-labelledby={id}>
+    <section className={"stt-title-hero" + density + visualState + imageMode} aria-labelledby={id}>
       {image ? (
         <img
           className="stt-title-hero__image"
           src={image}
           alt=""
           aria-hidden="true"
-          style={{ objectPosition: imagePosition }}
+          style={{ objectPosition: imagePosition, objectFit: imageFit }}
           draggable={false}
         />
       ) : null}
