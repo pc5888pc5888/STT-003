@@ -2,7 +2,7 @@
   "example": {
     "url": "https://94m.com.tw/articles/ed1d40",
     "status": 200,
-    "sha256": "273e43fa52a203a1f485677938204ceb6db6b5cddcaf91e3a1b68d7e06ca03f4",
+    "sha256": "a3d02b74d16276b8a4d6936def3fc176fb2cf48b4c8f6a79840be01ac26ad078",
     "images": [
       {
         "alt": "莊鈞翔博士法律專欄｜以法律專業為基礎，以治理思維為高度",
@@ -112,12 +112,12 @@
   },
   "presale": {
     "url": "https://glrs.moi.gov.tw/LawContent.aspx?id=FL003296",
-    "error": "HTTPSConnectionPool(host='glrs.moi.gov.tw', port=443): Max retries exceeded with url: /LawContent.aspx?id=FL003296 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7fb6ee8a8920>, 'Connection to glrs.moi.gov.tw timed out. (connect timeout=45)'))"
+    "error": "HTTPSConnectionPool(host='glrs.moi.gov.tw', port=443): Max retries exceeded with url: /LawContent.aspx?id=FL003296 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7fb6abeec920>, 'Connection to glrs.moi.gov.tw timed out. (connect timeout=45)'))"
   },
   "central_bank": {
     "url": "https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=G0410001",
     "status": 200,
-    "sha256": "cfd0194f33a2cdc848eca2cdfba7323431d3d3cd765e01c1c9540e5f57988c34",
+    "sha256": "4f4041acbb6b87f3e8853fc218195d455b1390bbb4852926c3c52880bd5a9464",
     "pdf_links": [
       {
         "text": "網站使用手冊",
@@ -132,7 +132,7 @@
   "procedure": {
     "url": "https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=A0030055",
     "status": 200,
-    "sha256": "53e2a656b20649758760efc689f08c47ee566f0dec6ebd11b4765c9006aba9e4",
+    "sha256": "faa3b35cc14ca7985a5b80c2a1ce839759b79014ecb76f8b6a3b2d1b166ef7d0",
     "pdf_links": [
       {
         "text": "網站使用手冊",
@@ -147,7 +147,7 @@
   "obu": {
     "url": "https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=G0380037",
     "status": 200,
-    "sha256": "48f971a3967f18ee11cab5f20ba3fbc0a54c4334ce293a74a121d6a2d3477fe6",
+    "sha256": "95c396a887ab561d6b7dff3f7b96a04abe2dc2665589c261f58656cba72dd1e5",
     "pdf_links": [
       {
         "text": "網站使用手冊",
@@ -162,7 +162,7 @@
   "obu_rules": {
     "url": "https://law.fsc.gov.tw/LawContent.aspx?id=FL006484",
     "status": 200,
-    "sha256": "ac686c2c54b6f063f8ae9cf31aaea74be9683ee7bd9c3d3b6f2b4c61d04a8d62",
+    "sha256": "a0ca9be4c2e5c79027ba3c6e1d3cf286604a61617d9a75334c460a9fd00ddf58",
     "pdf_links": [
       {
         "text": "使用手冊",

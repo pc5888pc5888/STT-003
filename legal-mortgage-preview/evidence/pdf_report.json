@@ -1,0 +1,12 @@
+{
+  "cbc_rules_pdf": {
+    "url": "https://www.cbc.gov.tw/tw/dl-227611-e262ea5d31724ec696a8e2fa75a94600.html",
+    "sha256": "2a25deedd97fd0f86a0a81324c43c0396eabd9ab5447d5add99c9bd02903b1bf",
+    "pages": 4
+  },
+  "presale_pdf": {
+    "url": "https://www.ey.gov.tw/File/17FD66C7511F7121?A=C",
+    "sha256": "687bc24884e70088c02e73ba5c9b9b32e7959e6d182102d36dc667887aaa9fbc",
+    "pages": 10
+  }
+}
