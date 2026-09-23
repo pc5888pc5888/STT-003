@@ -34,8 +34,9 @@ function parseBody(req: any): AnyRecord {
   return out;
 }
 
-function createReceiptId() {
-  return `COOP-${Date.now()}-${Math.random().toString(36).slice(2, 8).toUpperCase()}`;
+function createReceiptId(route: string) {
+  const prefix = route === "governance-intake" ? "GOV" : "COOP";
+  return `${prefix}-${Date.now()}-${Math.random().toString(36).slice(2, 8).toUpperCase()}`;
 }
 
 const routeNames: Record<string, string> = {
@@ -64,14 +65,15 @@ export default async function handler(req: any, res: any) {
   const apiKey = process.env.RESEND_API_KEY?.trim();
   if (!apiKey) return json(res, 503, { ok: false, error: "Delivery unavailable" });
 
-  const receiptId = createReceiptId();
+  const receiptId = createReceiptId(route);
   const contact = textValue(body, "contact");
   const receivedAt = new Date().toLocaleString("zh-TW", { timeZone: "Asia/Taipei", hour12: false });
   const from = process.env.RESEND_FROM_EMAIL?.trim() || DEFAULT_RESEND_FROM;
   const routeName = routeNames[route];
 
+  const intakeKind = route === "governance-intake" ? "治理受理" : "合作受理";
   const mailText = [
-    "【STT Governance｜合作受理新送件】",
+    `【STT Governance｜${intakeKind}新送件】`,
     `受理類型：${routeName}`,
     `收件編號：${receiptId}`,
     `收件時間：${receivedAt}`,
@@ -90,7 +92,7 @@ export default async function handler(req: any, res: any) {
       body: JSON.stringify({
         from,
         to: [RECIPIENT],
-        subject: `[STT 合作受理] ${routeName}｜${receiptId}`,
+        subject: `[STT ${intakeKind}] ${routeName}｜${receiptId}`,
         text: mailText,
       }),
     });
