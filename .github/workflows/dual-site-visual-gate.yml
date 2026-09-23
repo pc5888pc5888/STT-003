@@ -40,7 +40,7 @@ jobs:
           SITE: ${{ matrix.site }}
         run: |
           npx vite preview --host 127.0.0.1 --port 4173 > /tmp/visual-gate/preview.log 2>&1 &
-          cat > /tmp/visual-gate/check.mjs <<'JS'
+          cat > .visual-gate-check.mjs <<'JS'
           import fs from 'node:fs';
           import { chromium } from 'playwright';
           const site=process.env.SITE;
@@ -113,7 +113,8 @@ jobs:
           console.log(JSON.stringify({site,total:checks.length,failed},null,2));
           if(failed.length) process.exitCode=1;
           JS
-          node /tmp/visual-gate/check.mjs
+          node .visual-gate-check.mjs
+          rm .visual-gate-check.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
