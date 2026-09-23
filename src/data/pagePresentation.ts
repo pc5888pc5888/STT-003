@@ -20,7 +20,7 @@ export const PAGE_PRESENTATION: Record<string, PagePresentation> = {
       "在治理議題上持續對話。"
     ],
     "type": 2,
-    "image": "/visual-approved/bank-25.png",
+    "image": "/visual-approved/bank-23.png",
     "originalTitle": "讓企業、專業與學術在治理議題上，形成可以持續對話的正式共同體。",
     "context": "讓企業、專業與學術在治理議題上，形成可以持續對話的正式共同體。",
     "portrait": false,
@@ -34,7 +34,7 @@ export const PAGE_PRESENTATION: Record<string, PagePresentation> = {
       "都應可被理解。"
     ],
     "type": 3,
-    "image": "/visual-approved/bank-27.png",
+    "image": "/visual-approved/bank-25.png",
     "originalTitle": "學會本身先接受治理：權力來源、任期、職權與責任都應可被理解。",
     "context": null,
     "portrait": false,
@@ -98,7 +98,7 @@ export const PAGE_PRESENTATION: Record<string, PagePresentation> = {
       "章程與公告"
     ],
     "type": 1,
-    "image": "/visual-approved/bank-23.png",
+    "image": "/visual-approved/bank-27.png",
     "originalTitle": "章程不是網站附件，而是學會權力來源、會員權利義務與制度運作的正式依據。",
     "context": "章程不是網站附件，而是學會權力來源、會員權利義務與制度運作的正式依據。",
     "portrait": false,
