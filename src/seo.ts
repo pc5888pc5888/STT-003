@@ -1,6 +1,6 @@
 export const STT_CANONICAL_ORIGIN = "https://stt-003.vercel.app";
 
-type MetaRecord = {
+export type MetaRecord = {
   title: string;
   description: string;
   image?: string;
@@ -8,7 +8,7 @@ type MetaRecord = {
   robots?: string;
 };
 
-const FORMAL_META: Record<string, MetaRecord> = {
+export const FORMAL_META: Record<string, MetaRecord> = {
   "/": {
     title: "STT Governance｜重大決策・企業治理・家族治理",
     description: "STT Governance 協助企業、家族與重大決策者，在結果尚未不可逆之前，釐清問題、證據、權力、責任與選項，建立可承擔、可追溯的治理結構。",
@@ -68,6 +68,7 @@ const FORMAL_META: Record<string, MetaRecord> = {
     description: "STT Governance 網站表單與網站資料使用說明。",
     image: "/images/STT-Governance-Official-Logo.png",
     label: "隱私與資料使用",
+    robots: "noindex,follow",
   },
   "/professional-boundary": {
     title: "專業服務與資訊邊界｜STT Governance",
@@ -117,6 +118,7 @@ export function applyGovernedMetadata(pathname: string) {
     document.title = formal.title;
     upsertMeta('meta[name="description"]', { name: "description", content: formal.description });
     upsertMeta('meta[name="robots"]', { name: "robots", content: formal.robots ?? "index,follow" });
+    upsertMeta('meta[property="og:site_name"]', { property: "og:site_name", content: "STT Governance" });
     upsertMeta('meta[property="og:title"]', { property: "og:title", content: formal.title });
     upsertMeta('meta[property="og:description"]', { property: "og:description", content: formal.description });
     upsertMeta('meta[property="og:type"]', { property: "og:type", content: normalized === "/eric-chuang" ? "profile" : "website" });
