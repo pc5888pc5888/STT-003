@@ -1,0 +1,119 @@
+name: Final dual-site visual and flipbook audit
+on:
+  push:
+    branches: [stt-convergence-20260923]
+    paths: [.github/workflows/final-dual-site-audit.yml]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install browser
+        run: |
+          npm init -y >/dev/null 2>&1
+          npm install --no-save playwright >/tmp/install.log 2>&1
+          npx playwright install --with-deps chromium >/tmp/browser-setup.log 2>&1
+      - name: Inspect deployed sites and flipbooks
+        env:
+          STT: 'https://stt-003-git-stt-convergence-20260923-pc5888pc5888s-projects.vercel.app'
+          GCSDA: 'https://stt-003-git-gcsda-convergence-20260923-pc5888pc5888s-projects.vercel.app'
+        run: |
+          mkdir -p /tmp/audit
+          cat > /tmp/audit/check.mjs <<'JS'
+          import fs from 'node:fs';
+          import { chromium } from 'playwright';
+          const browser=await chromium.launch({headless:true});
+          const report={sites:[],flipbooks:[]};
+          const configs=[
+            ['stt',process.env.STT,['/','/problems','/how-stt-works','/engagement','/insights','/about','/eric-chuang','/institutions','/start','/privacy','/professional-boundary','/research','/books']],
+            ['gcsda',process.env.GCSDA,['/','/about','/governance','/council','/membership','/events','/knowledge','/charter','/privacy']]
+          ];
+          for(const [site,base,routes] of configs){
+            for(const [label,w,h] of [['desktop',1440,1000],['tablet',820,1100],['mobile',390,844]]){
+              const ctx=await browser.newContext({viewport:{width:w,height:h},reducedMotion:'reduce'});
+              const page=await ctx.newPage();
+              for(const route of routes){
+                const errors=[]; page.on('pageerror',e=>errors.push(e.message));
+                try{
+                  const res=await page.goto(base+route,{waitUntil:'networkidle',timeout:30000});
+                  await page.evaluate(()=>document.fonts.ready);
+                  const state=await page.evaluate(()=>{
+                    const hero=document.querySelector('.cis-hero');
+                    const img=hero?.querySelector('img');
+                    const imgRect=img?.getBoundingClientRect();
+                    const copy=hero?.querySelector('.cis-hero-copy');
+                    const cs=copy?getComputedStyle(copy):null;
+                    const h1=document.querySelector('h1');
+                    return {
+                      status:document.readyState,
+                      h1:h1?.textContent?.trim(),
+                      h1Count:document.querySelectorAll('h1').length,
+                      heroImage:img?.getAttribute('src')||null,
+                      heroImageLoaded:img?img.complete&&img.naturalWidth>0:null,
+                      heroImageNatural:[img?.naturalWidth||0,img?.naturalHeight||0],
+                      heroImageRect:imgRect?[Math.round(imgRect.left),Math.round(imgRect.width),Math.round(imgRect.height)]:null,
+                      copyBg:cs?.backgroundColor||null,
+                      copyBoxShadow:cs?.boxShadow||null,
+                      copyBorder:cs?.borderStyle||null,
+                      overflow:document.documentElement.scrollWidth>innerWidth+1,
+                      cta:[...document.querySelectorAll('header a')].map(a=>({text:a.textContent?.trim(),href:a.getAttribute('href'),class:a.className})),
+                      broken:[...document.images].filter(i=>!i.complete||i.naturalWidth===0).map(i=>i.getAttribute('src'))
+                    };
+                  });
+                  const fullWidth=state.heroImageRect?Math.abs(state.heroImageRect[0])<=2&&Math.abs(state.heroImageRect[1]-w)<=2:true;
+                  const noOpaqueCard=state.heroImage?(label!=='desktop'||!state.copyBg||state.copyBg==='rgba(0, 0, 0, 0)'||state.copyBg==='transparent'):true;
+                  report.sites.push({site,route,label,http:res?.status(),...state,fullWidth,noOpaqueCard,errors});
+                  if(label==='desktop' && ['/', '/about','/engagement','/eric-chuang','/institutions','/membership'].includes(route)){
+                    await page.screenshot({path:`/tmp/audit/${site}-${route==='/'?'home':route.slice(1)}.png`,fullPage:true});
+                  }
+                }catch(e){report.sites.push({site,route,label,error:String(e),errors});}
+              }
+              await ctx.close();
+            }
+          }
+          for(const [id,url] of [
+            ['e424001f8c','https://heyzine.com/flip-book/e424001f8c.html'],
+            ['c700d8beb2','https://heyzine.com/flip-book/c700d8beb2.html']
+          ]){
+            const ctx=await browser.newContext({viewport:{width:1440,height:1000}});
+            const page=await ctx.newPage();
+            try{
+              const res=await page.goto(url,{waitUntil:'networkidle',timeout:45000});
+              await page.waitForTimeout(3500);
+              const state=await page.evaluate(()=>({
+                title:document.title,
+                text:document.body.innerText.slice(0,12000),
+                metas:[...document.querySelectorAll('meta')].map(m=>({name:m.getAttribute('name'),property:m.getAttribute('property'),content:m.getAttribute('content')})).filter(x=>x.content),
+                images:[...document.images].map(i=>({src:i.currentSrc||i.src,w:i.naturalWidth,h:i.naturalHeight})).filter(i=>i.src),
+                iframes:[...document.querySelectorAll('iframe')].map(i=>i.src),
+                scripts:[...document.scripts].map(s=>s.src).filter(Boolean)
+              }));
+              await page.screenshot({path:`/tmp/audit/heyzine-${id}.png`,fullPage:false});
+              report.flipbooks.push({id,url,http:res?.status(),...state});
+            }catch(e){report.flipbooks.push({id,url,error:String(e)});}
+            await ctx.close();
+          }
+          await browser.close();
+          fs.writeFileSync('/tmp/audit/report.json',JSON.stringify(report,null,2));
+          const failures=report.sites.filter(x=>x.error||x.http!==200||x.h1Count!==1||x.overflow||x.broken?.length||x.errors?.length||x.fullWidth===false||x.noOpaqueCard===false);
+          fs.writeFileSync('/tmp/audit/summary.json',JSON.stringify({
+            rendered:report.sites.length,
+            failures,
+            sttDesktopCta:report.sites.find(x=>x.site==='stt'&&x.route==='/'&&x.label==='desktop')?.cta,
+            gcsdaDesktopCta:report.sites.find(x=>x.site==='gcsda'&&x.route==='/'&&x.label==='desktop')?.cta,
+            flipbooks:report.flipbooks.map(x=>({id:x.id,title:x.title,http:x.http,error:x.error,metas:x.metas}))
+          },null,2));
+          JS
+          node /tmp/audit/check.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: final-dual-site-audit
+          path: /tmp/audit/
+          retention-days: 7
