@@ -11,6 +11,7 @@ import Success from "./pages/Success";
 import { ProjectsHub } from "./pages/PublicCore";
 import Method from "./pages/Method";
 import Engagement from "./pages/Engagement";
+import { AboutPage, EricPage, InstitutionsPage, PrivacyPage, ProfessionalBoundaryPage } from "./pages/InstitutionalPages";
 import { DomainDetail, DomainsIndex } from "./pages/Domains";
 import { BooksCanonical, InternalComplianceCanonical, ResearchCanonical } from "./pages/CanonicalLibrary";
 import Legal from "./pages/Legal";
@@ -38,18 +39,6 @@ const SECONDARY_NAVIGATION = [
 function ExternalRedirect({ url }: { url: string }) {
   useEffect(() => { window.location.replace(url); }, [url]);
   return <div className="stt-g0-redirect">正在前往外部頁面…</div>;
-}
-
-function GatePending({ gate, title }: { gate: string; title: string }) {
-  return (
-    <section className="stt-g0-gate" aria-labelledby="g0-gate-title">
-      <div className="stt-g0-gate__inner">
-        <p className="stt-g0-kicker">G0 PREVIEW · ROUTE ESTABLISHED</p>
-        <h1 id="g0-gate-title">{title}</h1>
-        <p>此路由已納入正式網站骨架；正文內容刻意保留至 {gate} Gate 依已核准 Page Specification 施工。</p>
-      </div>
-    </section>
-  );
 }
 
 function NotFound() {
@@ -171,12 +160,12 @@ function AppRoutes() {
 
       <Route path="/engagement" element={<Engagement />} />
       <Route path="/insights" element={<Columns />} />
-      <Route path="/about" element={<GatePending gate="G5" title="關於 STT Governance" />} />
-      <Route path="/eric-chuang" element={<GatePending gate="G5" title="莊鈞翔博士" />} />
-      <Route path="/institutions" element={<GatePending gate="G7" title="機構合作" />} />
+      <Route path="/about" element={<AboutPage />} />
+      <Route path="/eric-chuang" element={<EricPage />} />
+      <Route path="/institutions" element={<InstitutionsPage />} />
       <Route path="/start" element={<Start />} />
-      <Route path="/privacy" element={<GatePending gate="G8" title="隱私與資料使用" />} />
-      <Route path="/professional-boundary" element={<GatePending gate="G8" title="專業服務邊界" />} />
+      <Route path="/privacy" element={<PrivacyPage />} />
+      <Route path="/professional-boundary" element={<ProfessionalBoundaryPage />} />
 
       <Route path="/research" element={<ResearchCanonical />} />
       <Route path="/books" element={<BooksCanonical />} />
