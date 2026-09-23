@@ -1,0 +1,51 @@
+name: Deploy legal article preview
+on:
+  push:
+    branches: [preview/legal-mortgage-20260923-r2]
+    paths: [.github/workflows/legal-mortgage-deploy-preview.yml]
+permissions:
+  contents: write
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Receive verified self-contained preview
+        run: |
+          mkdir -p /tmp/stt-legal-site legal-mortgage-preview/deployment
+          curl --fail --location --max-time 90 'https://sdmntprnznorth.oaiusercontent.com/files/00000000-0f7c-820b-b325-5eb5dc5ca8f8/raw?se=2026-09-23T09%3A47%3A17Z&sp=r&sv=2026-02-06&sr=b&scid=0e6bdbc5-da9e-5c10-9319-9958ea4593d0&skoid=f5e14fda-2af7-44a3-9d18-d372ffcad871&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-23T07%3A12%3A24Z&ske=2026-09-24T07%3A12%3A24Z&sks=b&skv=2026-02-06&sig=Qe4iBHv1Qx0P5ZKld1/DkXnfFxuYtkvd7a8EQSTHUXs%3D' -o /tmp/stt-legal-site/index.html
+          echo '643883ea23eba6293e731dd9e973824a556cbe833f416194b521a9609673bb89  /tmp/stt-legal-site/index.html' | sha256sum -c -
+          tar -czf /tmp/stt-legal-site.tgz -C /tmp/stt-legal-site .
+      - name: Deploy independent preview
+        run: |
+          curl --fail --silent --show-error --max-time 180 -X POST 'https://codex-deploy-skills.vercel.sh/api/deploy' -F 'file=@/tmp/stt-legal-site.tgz' -F 'framework=null' > legal-mortgage-preview/deployment/result.json
+          python - <<'PY'
+          import json,pathlib,time,urllib.request,hashlib
+          p=pathlib.Path('legal-mortgage-preview/deployment/result.json')
+          d=json.loads(p.read_text());print(json.dumps(d,ensure_ascii=False,indent=2))
+          u=d.get('previewUrl');assert u,d
+          expected='643883ea23eba6293e731dd9e973824a556cbe833f416194b521a9609673bb89'
+          for i in range(36):
+              try:
+                  r=urllib.request.urlopen(u,timeout=20);b=r.read();h=hashlib.sha256(b).hexdigest()
+                  if r.status==200 and h==expected:
+                      d.update(http_status=200,served_sha256=h,source_match=True)
+                      break
+              except Exception:pass
+              time.sleep(5)
+          p.write_text(json.dumps(d,ensure_ascii=False,indent=2))
+          assert d.get('source_match'),d
+          PY
+      - name: Record actual preview result
+        if: always()
+        run: |
+          git config user.name 'STT preview verification'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add legal-mortgage-preview/deployment
+          git diff --cached --quiet || git commit -m 'Record independent preview deployment [skip ci]'
+          git push origin HEAD:preview/legal-mortgage-20260923-r2
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: legal-mortgage-live-preview
+          path: legal-mortgage-preview/deployment
