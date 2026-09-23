@@ -10,6 +10,7 @@ import Start from "./pages/Start";
 import Success from "./pages/Success";
 import { ProjectsHub } from "./pages/PublicCore";
 import Method from "./pages/Method";
+import Engagement from "./pages/Engagement";
 import { DomainDetail, DomainsIndex } from "./pages/Domains";
 import { BooksCanonical, InternalComplianceCanonical, ResearchCanonical } from "./pages/CanonicalLibrary";
 import Legal from "./pages/Legal";
@@ -168,7 +169,7 @@ function AppRoutes() {
       <Route path="/problems/:id" element={<ProblemDetail />} />
       <Route path="/how-stt-works" element={<Method />} />
 
-      <Route path="/engagement" element={<GatePending gate="G4" title="治理委任" />} />
+      <Route path="/engagement" element={<Engagement />} />
       <Route path="/insights" element={<Columns />} />
       <Route path="/about" element={<GatePending gate="G5" title="關於 STT Governance" />} />
       <Route path="/eric-chuang" element={<GatePending gate="G5" title="莊鈞翔博士" />} />
