@@ -1,0 +1,107 @@
+name: Apply and verify isolated website convergence
+on:
+  push:
+    branches: [stt-convergence-20260923]
+    paths: [docs/qa/CONVERGENCE_REQUEST.md]
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: dual-site-convergence-implementation
+  cancel-in-progress: false
+jobs:
+  implementation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - site: stt
+            branch: stt-convergence-20260923
+            routes: '/,/problems,/how-stt-works,/engagement,/insights,/about,/eric-chuang,/institutions,/start,/privacy,/professional-boundary,/research,/books'
+          - site: gcsda
+            branch: gcsda-convergence-20260923
+            routes: '/,/about,/governance,/council,/membership,/events,/knowledge,/charter,/privacy'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          path: control
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ matrix.branch }}
+          path: site
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Source-locked implementation
+        working-directory: site
+        env:
+          SITE: ${{ matrix.site }}
+          TARGET_BRANCH: ${{ matrix.branch }}
+        run: |
+          test "$TARGET_BRANCH" = "stt-convergence-20260923" -o "$TARGET_BRANCH" = "gcsda-convergence-20260923"
+          test "$(git branch --show-current)" = "$TARGET_BRANCH"
+          mkdir -p /tmp/convergence-evidence
+          git rev-parse HEAD > /tmp/convergence-evidence/before-sha.txt
+          python3 ../control/scripts/convergence_apply.py "$SITE" > /tmp/convergence-evidence/changes.json
+          test -z "$(git diff --name-only -- public src/assets)"
+          git diff --stat > /tmp/convergence-evidence/diff-stat.txt
+          git diff > /tmp/convergence-evidence/implementation.patch
+      - name: Type check, build, and mocked backend tests
+        working-directory: site
+        env:
+          SITE: ${{ matrix.site }}
+        run: |
+          npm ci > /tmp/convergence-evidence/install.log 2>&1
+          npm run lint > /tmp/convergence-evidence/typecheck.log 2>&1
+          if [ "$SITE" = "stt" ]; then node --experimental-strip-types --test tests/governance-intake.test.mjs > /tmp/convergence-evidence/api-tests.log 2>&1; fi
+          npm run build > /tmp/convergence-evidence/build.log 2>&1
+      - name: Browser verifier installation
+        working-directory: site
+        run: |
+          npm install --no-save --package-lock=false playwright @axe-core/playwright > /tmp/convergence-evidence/browser-install.log 2>&1
+          npx playwright install --with-deps chromium > /tmp/convergence-evidence/browser-setup.log 2>&1
+      - name: Route, responsive, accessibility and mocked form verification
+        working-directory: site
+        env:
+          QA_SITE: ${{ matrix.site }}
+          QA_ROUTES: ${{ matrix.routes }}
+        run: |
+          cp ../control/scripts/convergence_browser.mjs .convergence-browser.mjs
+          npx vite preview --host 127.0.0.1 --port 4173 > /tmp/convergence-evidence/preview.log 2>&1 &
+          node .convergence-browser.mjs
+          rm .convergence-browser.mjs
+      - name: Commit only to the isolated website branch
+        working-directory: site
+        env:
+          SITE: ${{ matrix.site }}
+          TARGET_BRANCH: ${{ matrix.branch }}
+        run: |
+          mkdir -p docs/qa
+          cp /tmp/convergence-evidence/changes.json docs/qa/CONVERGENCE_CHANGES.json
+          cp /tmp/convergence-evidence/browser-summary.json docs/qa/CONVERGENCE_BROWSER_SUMMARY.json
+          git add src api tests vite.config.ts vercel.json docs/qa/CONVERGENCE_CHANGES.json docs/qa/CONVERGENCE_BROWSER_SUMMARY.json
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m "$SITE: apply verified convergence fixes; production unchanged"
+          git push origin "HEAD:$TARGET_BRANCH"
+          git rev-parse HEAD > /tmp/convergence-evidence/source-sha.txt
+          git ls-tree -r -l HEAD > /tmp/convergence-evidence/source-tree.txt
+          python3 - <<'PY'
+          import pathlib,subprocess,zipfile
+          files=subprocess.check_output(['git','ls-files','-z']).decode().split('\0')
+          allowed={'.ts','.tsx','.js','.jsx','.mjs','.cjs','.json','.md','.txt','.css','.html','.xml','.yml','.yaml','.toml','.svg','.csv','.py'}
+          with zipfile.ZipFile('/tmp/convergence-evidence/source.zip','w',zipfile.ZIP_DEFLATED) as z:
+              for f in files:
+                  p=pathlib.Path(f)
+                  if p.is_file() and p.suffix in allowed and p.stat().st_size<3000000:z.write(p,f)
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: verified-convergence-${{ matrix.site }}-${{ github.run_number }}
+          path: /tmp/convergence-evidence/
+          retention-days: 7
