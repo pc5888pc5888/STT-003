@@ -1,9 +1,29 @@
 import { useState, type ReactNode } from "react";
-import { BrowserRouter, Navigate, Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import { BrowserRouter, Link, NavLink, Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 
-const STT_URL = "https://stt-003-git-rebuild-stt-approved-8c858b-pc5888pc5888s-projects.vercel.app";
+const STT_URL = "https://stt-003.vercel.app/";
 const LINE_URL = "https://line.me/R/ti/p/@387nbnjs";
+
+const TITLE_BREAK_MARKS = ["，", "；", "：", "！", "？", "｜", ",", ";", ":", "!", "?", "|"] as const;
+
+function splitBalancedTitle(title:string){
+  const text=title.trim();
+  const candidates:{index:number;score:number}[]=[];
+  for(let i=0;i<text.length-1;i+=1){
+    if(!TITLE_BREAK_MARKS.includes(text[i] as (typeof TITLE_BREAK_MARKS)[number])) continue;
+    const left=text.slice(0,i+1).trim();
+    const right=text.slice(i+1).trim();
+    if(!left||!right) continue;
+    const ratio=Math.min(left.length,right.length)/Math.max(left.length,right.length);
+    const score=Math.abs((i+1)-text.length/2)+(ratio<0.45?10:0);
+    candidates.push({index:i,score});
+  }
+  if(!candidates.length) return [text];
+  candidates.sort((a,b)=>a.score-b.score||b.index-a.index);
+  const i=candidates[0].index;
+  return [text.slice(0,i+1).trim(),text.slice(i+1).trim()];
+}
 
 const navItems = [
   ["關於學會", "/about"],
@@ -50,11 +70,10 @@ function Styles(){return <style>{`
 function Shell({children}:{children:ReactNode}){
   const nav=useNavigate(); const loc=useLocation(); const[open,setOpen]=useState(false);
   const go=(p:string)=>{setOpen(false);nav(p);window.scrollTo({top:0,behavior:"smooth"})};
-  const openStt=()=>{setOpen(false);window.location.href=STT_URL};
-  return <div className="g4"><Styles/><header className="g4-head"><div className="g4-wrap g4-headin"><button className="g4-brand" onClick={()=>go('/')}><b>GCSDA</b><small>中華企業策略永續發展學會</small></button><nav className="g4-nav">{navItems.map(([l,p])=><button key={p} className={loc.pathname===p?"active":""} onClick={()=>go(p)}>{l}</button>)}<button className="g4-stt" onClick={openStt}>STT Governance ↗</button></nav><button className="g4-menu" onClick={()=>setOpen(true)} aria-label="Menu"><Menu/></button></div></header>{open&&<div className="g4-drawer" onClick={()=>setOpen(false)}><div className="g4-drawerpanel" onClick={e=>e.stopPropagation()}><button className="g4-close" onClick={()=>setOpen(false)}><X/></button>{navItems.map(([l,p])=><button key={p} onClick={()=>go(p)}>{l}</button>)}<button onClick={openStt}>STT Governance ↗</button></div></div>}<main>{children}</main><footer className="g4-footer"><div className="g4-wrap g4-footergrid"><div><b>中華企業策略永續發展學會｜GCSDA</b><p>依法成立之全國性專業社團。以公司治理法遵、企業策略、風險控管、跨界交流與永續發展為核心，逐步累積正式組織與治理知識。</p></div><div><a href={LINE_URL} target="_blank" rel="noreferrer">會員與聯絡</a><button onClick={openStt}>STT Governance ↗</button><button onClick={()=>go('/privacy')}>隱私</button></div></div></footer></div>
+  return <div className="g4"><Styles/><header className="g4-head"><div className="g4-wrap g4-headin"><Link className="g4-brand" to="/" aria-label="GCSDA 首頁"><b>GCSDA</b><small>中華企業策略永續發展學會</small></Link><nav className="g4-nav" aria-label="主要導覽">{navItems.map(([l,p])=><NavLink key={p} className={({isActive})=>isActive?"active":""} to={p}>{l}</NavLink>)}<a className="g4-stt" href={STT_URL}>STT Governance ↗</a></nav><button className="g4-menu" onClick={()=>setOpen(true)} aria-label="開啟選單" aria-expanded={open}><Menu/></button></div></header>{open&&<div className="g4-drawer" onClick={()=>setOpen(false)}><div className="g4-drawerpanel" onClick={e=>e.stopPropagation()}><button className="g4-close" onClick={()=>setOpen(false)} aria-label="關閉選單"><X/></button>{navItems.map(([l,p])=><Link key={p} to={p} onClick={()=>setOpen(false)}>{l}</Link>)}<a href={STT_URL} onClick={()=>setOpen(false)}>STT Governance ↗</a></div></div>}<main>{children}</main><footer className="g4-footer"><div className="g4-wrap g4-footergrid"><div><b>中華企業策略永續發展學會｜GCSDA</b><p>依法成立之全國性專業社團。以公司治理法遵、企業策略、風險控管、跨界交流與永續發展為核心，逐步累積正式組織與治理知識。</p></div><div><a href={LINE_URL} target="_blank" rel="noreferrer">會員與聯絡</a><a href={STT_URL}>STT Governance ↗</a><Link to="/privacy">隱私</Link></div></div></footer></div>
 }
 
-function PageHead({eyebrow,title,lead}:{eyebrow:string;title:string;lead:string}){return <section className="g4-pagehead"><div className="g4-wrap"><div className="g4-kicker">{eyebrow}</div><h1>{title}</h1><p>{lead}</p></div></section>}
+function PageHead({eyebrow,title,lead}:{eyebrow:string;title:string;lead:string}){const lines=splitBalancedTitle(title);return <section className="g4-pagehead"><div className="g4-wrap"><div className="g4-kicker">{eyebrow}</div><h1 aria-label={title}>{lines.map((line,i)=><span className="g4-title-line" key={i}>{line}</span>)}</h1><p>{lead}</p></div></section>}
 
 function Home(){const nav=useNavigate();return <><section className="g4-home"><div className="g4-home-media"/><div className="g4-wrap"><div className="g4-home-copy"><div className="g4-kicker">GCSDA · NATIONAL PROFESSIONAL ASSOCIATION · TAIWAN</div><h1>讓策略、治理與永續，<br/>成為共同語言。</h1><p>中華企業策略永續發展學會連結企業、專業與學術，透過正式組織、章程、會員共同體與跨域交流，逐步累積可被延續的治理知識與實務連結。</p><div className="g4-actions"><button className="primary" onClick={()=>nav('/about')}>認識學會</button><button onClick={()=>nav('/membership')}>會員與入會</button></div></div></div></section><section className="g4-values"><div className="g4-wrap g4-valuegrid">{[["01","策略為先","先理解方向與真正問題，再談資源配置。"],["02","治理為本","讓權力、責任與程序有正式制度位置。"],["03","跨域協作","不同專業保有責任邊界，再形成共同語言。"],["04","永續累積","讓活動與交流逐步沉澱為可被傳承的知識資產。"]].map(([n,t,d])=><div className="g4-value" key={n}><span>{n}</span><h3>{t}</h3><p>{d}</p></div>)}</div></section><section className="g4-section"><div className="g4-wrap"><div className="g4-kicker">INSTITUTIONAL FOUNDATION</div><h2 className="g4-title">一個談治理的組織，本身必須先被治理。</h2><p className="g4-lead">學會以會員大會、理事會、監事會與章程形成正式組織基礎；網站呈現的治理身分、職權與會員制度，均應回到正式章程與會務文件。</p><div className="g4-grid">{[["01","正式立案","主管機關為內政部，組織區域為全國。"],["02","會員共同體","會員資格、權利義務與會費依正式章程及決議。"],["03","專業協作","連結法律、會計、策略、產業與學術，但不混淆各自責任。"]].map(x=><div className="g4-card" key={x[0]}><span>{x[0]}</span><h3>{x[1]}</h3><p>{x[2]}</p></div>)}</div><div className="g4-actions"><button onClick={()=>nav('/governance')}>理解組織治理 →</button></div></div></section><section className="g4-section soft"><div className="g4-wrap"><div className="g4-kicker">MEMBERSHIP & COMMUNITY</div><h2 className="g4-title">加入的不是一項服務，而是一個治理共同體。</h2><p className="g4-lead">會員制度的核心是長期參與、共同學習、正式會務與跨域交流，而不是把學會變成商業顧問銷售入口。</p><div className="g4-actions"><button className="primary" onClick={()=>nav('/membership')}>了解會員與入會</button><button onClick={()=>nav('/events')}>活動與大會</button></div></div></section><section className="g4-final"><div className="g4-kicker">GCSDA</div><h2>把一次性的交流，轉化為可以逐年累積的制度與知識。</h2><p>學會不以尚未發生的成果裝飾網站；正式活動、研究、出版與公告，均在資料完成後逐步建立公開紀錄。</p></section></>}
 
@@ -74,5 +93,8 @@ function Charter(){return <div className="g4-page"><PageHead eyebrow="CHARTER & 
 
 function Privacy(){return <div className="g4-page"><PageHead eyebrow="PRIVACY" title="隱私與資料使用" lead="學會網站以會務、會員聯絡與活動資訊為主要用途；正式隱私條款仍需依實際收集欄位、第三方服務與資料保存流程完成法務校對。"/><section className="g4-section"><div className="g4-wrap"><div className="g4-list"><div className="g4-row"><b>會員資料</b><div>僅在辦理入會、會務聯絡、活動通知與依法所需範圍內使用；正式資料項目與保存期限應依實際制度揭露。</div></div><div className="g4-row"><b>外部連結</b><div>LINE、STT Governance 或其他第三方網站之資料處理由其各自服務條款與隱私規則管理。</div></div><div className="g4-row"><b>正式定稿</b><div>Cookie、流量分析、表單、第三方嵌入與主機紀錄等若實際啟用，應在正式上線前一併納入隱私條款。</div></div></div></div></section></div>}
 
-function AppRoutes(){return <Routes><Route path="/" element={<Home/>}/><Route path="/about" element={<About/>}/><Route path="/governance" element={<Governance/>}/><Route path="/council" element={<Council/>}/><Route path="/membership" element={<Membership/>}/><Route path="/events" element={<Events/>}/><Route path="/knowledge" element={<Knowledge/>}/><Route path="/charter" element={<Charter/>}/><Route path="/privacy" element={<Privacy/>}/><Route path="*" element={<Navigate to="/" replace/>}/></Routes>}
+
+function NotFound(){return <div className="g4-page"><PageHead eyebrow="404" title="找不到這個頁面。" lead="這個網址不在中華企業策略永續發展學會目前公開的正式網站路由中。"/><section className="g4-section"><div className="g4-wrap"><div className="g4-actions"><Link className="primary" to="/">回到學會首頁</Link></div></div></section></div>}
+
+function AppRoutes(){return <Routes><Route path="/" element={<Home/>}/><Route path="/about" element={<About/>}/><Route path="/governance" element={<Governance/>}/><Route path="/council" element={<Council/>}/><Route path="/membership" element={<Membership/>}/><Route path="/events" element={<Events/>}/><Route path="/knowledge" element={<Knowledge/>}/><Route path="/charter" element={<Charter/>}/><Route path="/privacy" element={<Privacy/>}/><Route path="*" element={<NotFound/>}/></Routes>}
 export default function GCSDAStandaloneV3(){return <BrowserRouter><Shell><AppRoutes/></Shell></BrowserRouter>}
