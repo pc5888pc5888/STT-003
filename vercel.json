@@ -1,6 +1,14 @@
 {
   "rewrites": [
     {
+      "source": "/legal-mortgage-preview",
+      "destination": "/legal-mortgage-preview/site/index.html"
+    },
+    {
+      "source": "/legal-mortgage-preview/",
+      "destination": "/legal-mortgage-preview/site/index.html"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }
