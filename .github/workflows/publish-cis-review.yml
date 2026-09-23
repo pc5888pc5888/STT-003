@@ -35,7 +35,7 @@ jobs:
             /public/visual-approved/
             /package.json
             /package-lock.json
-            /tsconfig.json
+            /tsconfig*.json
             /vite.config.ts
             /vercel.json
             /index.html
