@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import UnifiedTitleHero from "../components/UnifiedTitleHero";
 
 const engagements = [
   {
@@ -53,25 +54,12 @@ export default function Engagement() {
 
   return (
     <div className="stt-g4-engagement">
-      <section className="stt-g4-hero" aria-labelledby="engagement-title">
-        <div className="stt-g4-shell stt-g4-hero__grid">
-          <div className="stt-g4-hero__copy">
-            <p className="stt-g4-kicker">GOVERNANCE ENGAGEMENT</p>
-            <h1 id="engagement-title">
-              <span>當一件事情值得被正式治理，</span>
-              <span>就不應只停留在一次諮詢。</span>
-            </h1>
-            <p>
-              STT 依事件複雜度、決策層級與持續時間，以治理判讀、治理架構與年度治理委任三種方式介入。不是所有事件都需要長期委任；介入深度應與錯誤成本相稱。
-            </p>
-          </div>
-          <div className="stt-g4-hero__linework" aria-hidden="true">
-            <span />
-            <span />
-            <span />
-          </div>
-        </div>
-      </section>
+      <UnifiedTitleHero
+        kicker="GOVERNANCE ENGAGEMENT"
+        title="當一件事情值得被正式治理，就不應只停留在一次諮詢。"
+        lead="STT 依事件複雜度、決策層級與持續時間，以治理判讀、治理架構與年度治理委任三種方式介入。不是所有事件都需要長期委任；介入深度應與錯誤成本相稱。"
+        id="engagement-title"
+      />
 
       <nav className="stt-g4-index" aria-label="治理委任三種深度">
         <div className="stt-g4-shell stt-g4-index__grid">
