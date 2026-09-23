@@ -1,4 +1,5 @@
 import { useParams } from "react-router-dom";
+import UnifiedTitleHero from "../components/UnifiedTitleHero";
 
 type LegalPage = { title: string; eyebrow: string; body: string[] };
 
@@ -27,7 +28,7 @@ const pages: Record<string, LegalPage> = {
     body: [
       "第一次透過網站說明治理需求時，應只提供完成初步分流所必要的資訊。未經正式受理與資料邊界確認前，不建議提交完整訴訟卷證、敏感個資、未公開商業秘密或大量機密文件。",
       "若後續需要進一步資料交換，應依案件性質確認資料目的、可接觸人員、保存方式、AI 是否可使用以及必要的刪除、退出或替代機制。",
-      "正式隱私條款仍需依實際網站收集欄位、第三方服務、分析工具、Cookie、主機與聯絡流程完成法務校對後定稿。",
+      "網站僅就實際啟用之資料收集欄位、第三方服務、分析工具、Cookie、主機與聯絡流程說明其資料使用範圍。",
     ],
   },
   "digital-content-policy": {
@@ -35,7 +36,7 @@ const pages: Record<string, LegalPage> = {
     title: "數位內容與交易政策",
     body: [
       "本頁僅在網站實際提供數位內容交易、付款或交付時適用。商品名稱、價格、付款方式、交付方式、退款與例外條件必須依實際交易流程及適用法律清楚揭露。",
-      "未啟用正式交易流程前，本頁不得以範本文字假裝已建立付款、退費或交付制度。",
+      "數位內容交易如由 STT Press 或第三方平台提供，實際付款、交付、退款與例外條件以該交易頁面及適用規範為準。",
     ],
   },
 };
@@ -44,6 +45,6 @@ export default function Legal(){
   const {slug="intellectual-property"}=useParams();
   const page=pages[slug]??pages["intellectual-property"];
   return <div className="legal-root"><style>{`
-    .legal-root{min-height:100vh;background:#fbfaf7;color:#2b261f}.legal-wrap{max-width:900px;margin:0 auto;padding:90px 28px 120px}.legal-kicker{font-size:10px;letter-spacing:.26em;color:#8b642f}.legal-root h1{margin:20px 0 0;font:400 clamp(40px,5vw,64px)/1.35 'Noto Serif TC',Georgia,serif}.legal-rule{height:1px;background:#ddcfba;margin:34px 0}.legal-root p{margin:0;padding:22px 0;border-bottom:1px solid #e2d6c4;color:#6f675e;line-height:2}
-  `}</style><div className="legal-wrap"><div className="legal-kicker">{page.eyebrow}</div><h1>{page.title}</h1><div className="legal-rule"/>{page.body.map((p)=><p key={p}>{p}</p>)}</div></div>;
+    .legal-root{min-height:100vh;background:#fbfaf7;color:#2b261f}.legal-wrap{max-width:900px;margin:0 auto;padding:76px 28px 120px}.legal-root .legal-wrap p{margin:0;padding:22px 0;border-bottom:1px solid #e2d6c4;color:#6f675e;line-height:2}
+  `}</style><UnifiedTitleHero kicker={page.eyebrow} title={page.title} id="legal-title"/><div className="legal-wrap">{page.body.map((p)=><p key={p}>{p}</p>)}</div></div>;
 }
