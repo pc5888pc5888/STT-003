@@ -1,0 +1,108 @@
+/* STT / GCSDA — bounded typography and original-asset presentation.
+   This file owns the three title classes. Page-specific styles own body structure. */
+:root{--cis-paper:#fbfaf7;--cis-white:#fffdf9;--cis-ink:#29251f;--cis-muted:#5c554b;--cis-gold:#886237;--cis-line:#d9cbb6;--cis-serif:"Noto Serif TC","Noto Serif CJK TC","Songti TC","PMingLiU",serif;--cis-ui:Inter,"Noto Sans TC","Noto Sans CJK TC",sans-serif}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:115px}body{margin:0;background:var(--cis-paper);color:var(--cis-ink)}
+#root{font-family:var(--cis-serif);font-size:17px;line-height:1.9;background:var(--cis-paper);color:var(--cis-ink)}
+#root :where(button,input,select,textarea){font:inherit}#root a{color:var(--cis-gold);text-underline-offset:5px}#root img{max-width:100%}#root :where(h1,h2,h3,p){overflow-wrap:break-word}
+#root :where(h2,h3){font-family:var(--cis-serif)!important;font-weight:500!important;letter-spacing:0!important;line-height:1.55!important}
+#root main h2{font-size:28px!important;margin-top:0}#root main h3{font-size:22px!important}
+#root main :where(p,dd,li){font-family:var(--cis-serif);font-size:17px;line-height:1.95;color:var(--cis-muted)}
+#root :where(button,a,input,select,textarea):focus-visible{outline:2px solid var(--cis-gold);outline-offset:5px}
+#root .cis-hero{position:relative;background:var(--cis-paper);border-bottom:1px solid var(--cis-line);overflow:visible;isolation:isolate}
+#root .cis-hero-inner{width:min(1280px,calc(100% - 96px));margin:0 auto;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px;align-items:center;min-height:500px;padding:56px 0}
+#root .cis-hero-copy{min-width:0;max-width:610px}#root .cis-kicker{font-family:var(--cis-ui)!important;font-size:11px!important;line-height:1.8!important;font-weight:600;letter-spacing:.14em!important;color:var(--cis-gold)!important;margin:0 0 20px!important}
+#root .cis-hero .cis-title{font-family:var(--cis-serif)!important;line-height:1.4!important;font-weight:500!important;letter-spacing:0!important;margin:0!important;padding:0!important;max-width:none!important;width:100%;transform:none!important;white-space:normal!important;text-wrap:initial!important;color:var(--cis-ink)!important}
+#root .cis-title-1 .cis-title{font-size:42px!important}#root .cis-title-2 .cis-title{font-size:36px!important}#root .cis-title-3 .cis-title{font-size:31px!important;line-height:1.5!important}
+#root .cis-hero .cis-title-line{display:block!important;white-space:nowrap!important;letter-spacing:0!important;word-break:normal!important;font:inherit!important}
+#root .cis-hero .cis-lead{font-size:17px!important;line-height:1.95!important;margin:22px 0 0!important;max-width:35em;color:var(--cis-muted)!important}
+#root .cis-hero .cis-subtitle{font-size:19px!important;line-height:1.8!important;margin:20px 0 0!important;color:#40392f!important}
+#root .cis-hero .cis-byline{font-family:Georgia,serif!important;font-size:23px!important;line-height:1.55!important;margin:13px 0 0!important;color:var(--cis-gold)!important}
+#root .cis-hero-art{margin:0;align-self:center;min-width:0}#root .cis-hero-art img{display:block;width:100%;height:auto!important;max-height:440px;object-fit:contain!important;object-position:center;filter:none;transform:none!important;border-radius:0;box-shadow:none}
+#root .cis-portrait .cis-hero-art img{height:430px!important;width:100%;object-fit:contain!important}
+#root .cis-actions{display:flex;flex-wrap:wrap;gap:13px;margin-top:25px;align-items:center}
+#root .cis-actions>a{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:11px 17px;border:1px solid var(--cis-line);text-decoration:none;font-size:15px!important;font-weight:500;line-height:1.5!important;background:transparent;color:var(--cis-gold)!important}
+#root .cis-actions .cis-primary{background:var(--cis-gold)!important;color:white!important;border-color:var(--cis-gold)}
+#root .cis-text-only .cis-hero-inner{display:block;min-height:0;padding:60px 0 52px;max-width:1040px}#root .cis-text-only .cis-hero-copy{max-width:870px}#root .cis-text-only .cis-lead{max-width:48em}
+#root .cis-context{background:#f4efe5;border-bottom:1px solid var(--cis-line);padding:24px 48px}#root .cis-context p{max-width:1040px;margin:0 auto;font-size:18px!important;line-height:1.85!important;color:#514334}
+#root .cis-utility{width:min(940px,calc(100% - 80px));padding:50px 0 75px;margin:auto}#root .cis-utility a{display:inline-block;margin:12px 24px 0 0}
+/* Stable navigation and honest institutional identity. */
+#root .stt-g0-header__inner{max-width:1376px;min-height:94px;padding:0 48px;grid-template-columns:minmax(250px,1fr) auto auto;gap:20px}
+#root .stt-g0-brand{width:305px;max-width:100%}#root .stt-g0-brand img{height:auto;max-height:78px;object-fit:contain;object-position:left center}
+#root .stt-g0-desktop-nav{height:94px;align-items:stretch}#root .stt-g0-nav-link{font:14px/1.5 var(--cis-serif);padding:0 12px;letter-spacing:0;border:none}
+#root .stt-g0-primary-cta{font:15px/1.5 var(--cis-serif);padding:13px 19px;min-height:46px;background:var(--cis-gold)!important;color:white!important;text-decoration:none;border:0;border-radius:2px}
+#root .stt-g0-menu-button{display:none}#root .stt-g0-mobile-menu{background:var(--cis-paper)}
+#root .stt-g0-footer{padding:38px 0;border-top:1px solid var(--cis-line);background:#f3eee4}#root .stt-g0-footer__inner{width:min(1280px,calc(100% - 96px));margin:auto;gap:30px}
+#root .stt-g0-footer__links{gap:12px 22px;display:flex;flex-wrap:wrap}#root .stt-g0-footer__links a{font-size:14px!important}
+#root .g4{font-family:var(--cis-serif)!important}#root .g4-head,#root .g4-headin{height:94px}#root .g4-wrap{max-width:1280px;padding-left:32px;padding-right:32px}
+#root .g4-brand b{font:500 25px/1.25 Georgia,serif;letter-spacing:.08em}#root .g4-brand small{font:14px/1.7 var(--cis-serif);letter-spacing:0}
+#root .g4-nav a{font:13.5px/1.5 var(--cis-serif);padding:0 9px;height:94px}#root .g4-stt{font-size:12px!important;border-radius:2px!important;padding:9px 12px!important}
+/* Body rhythm is not derived from hero length. */
+#root :is(.stt-g1-section,.stt-g2-group,.stt-g3-step,.stt-g4-engagement-row,.stt-inst-section,.g4-section){padding-top:62px!important;padding-bottom:62px!important}
+#root :is(.stt-g1-shell,.stt-g2-shell,.stt-g3-shell,.stt-g4-shell,.stt-inst-shell){width:min(1180px,calc(100% - 80px));max-width:1180px;margin:0 auto;padding-left:0;padding-right:0}
+#root :is(.stt-g1-kicker,.stt-g2-kicker,.stt-g3-kicker,.stt-g4-kicker,.stt-inst-kicker,.stt-insights-kicker,.g4-kicker){font:600 11px/1.8 var(--cis-ui)!important;letter-spacing:.12em!important;color:var(--cis-gold)!important;margin-bottom:14px}
+#root :is(.stt-g1-lead,.stt-g2-group__lead,.stt-g4-boundary p,.stt-inst-body p,.g4-lead){font-size:17px!important;line-height:1.95!important;max-width:48em}
+#root :is(.stt-g1-threshold h3,.stt-g1-output h3,.stt-g1-engagement-row h3){font-size:23px!important}
+#root :is(.stt-g2-index__grid,.stt-g4-index__grid){min-height:112px}#root :is(.stt-g2-index a,.stt-g4-index a){padding:23px 28px}#root :is(.stt-g2-index strong,.stt-g4-index strong){font-size:21px!important;font-weight:500}
+#root :is(.stt-g2-index span,.stt-g4-index small,.stt-g4-index span){font-size:11px!important;line-height:1.8;letter-spacing:.05em!important}
+#root .stt-g1-authority__image img{width:100%;max-height:500px;object-fit:contain!important;transform:none!important}#root .stt-g1-final{padding:64px 36px!important}#root .stt-g1-final h2{max-width:900px;margin:0 auto}
+#root .stt-g4-engagement-row__grid{gap:48px}#root .stt-g4-engagement-row__head>span{font-size:26px!important}#root .stt-g4-engagement-row__head>p{font:11px/1.8 var(--cis-ui)!important;letter-spacing:.12em;color:var(--cis-gold)!important}
+#root .stt-g4-engagement-row dt{font:15px/1.8 var(--cis-serif)!important;color:var(--cis-gold)!important}#root .stt-g4-engagement-row dd{font-size:17px!important;line-height:1.95!important}
+#root .stt-inst-grid{gap:0}#root .stt-inst-grid article{padding:25px;border:1px solid var(--cis-line);background:var(--cis-white)}#root .stt-inst-grid strong{font-size:20px;font-weight:500}#root .stt-inst-list{padding-left:22px}
+/* Retained libraries, domain essays and problem dossiers. */
+#root :is(.lib-body,.domain-body,.pd4-body,.stt-canon-body){padding:58px 0 80px;background:var(--cis-paper)}
+#root :is(.lib-wrap,.domain-wrap,.pd4-wrap,.stt-canon-wrap){width:min(1120px,calc(100% - 80px));margin:0 auto}
+#root :is(.lib-row,.pd4-row){display:grid;grid-template-columns:55px minmax(0,1fr) auto;gap:28px;padding:32px 0;border-bottom:1px solid var(--cis-line)}
+#root .lib-index{font:13px/2 var(--cis-ui);color:var(--cis-gold)}#root .lib-meta{font-size:14px;color:var(--cis-gold)}#root .lib-row h2{font-size:24px!important;max-width:38em;margin:0 0 10px}
+#root :is(.lib-actions,.domain-related){display:flex;flex-wrap:wrap;gap:14px;align-items:center}#root :is(.lib-actions a,.lib-back,.domain-related a,.domain-card>a){font-size:15px;text-decoration:none;border-bottom:1px solid var(--cis-line);padding:8px 0;display:inline-block}
+#root :is(.lib-note,.domain-detail,.lib-panel){margin:34px 0;padding:28px;border:1px solid var(--cis-line);background:var(--cis-white)}#root .lib-columns{display:grid;grid-template-columns:1fr 1fr;gap:32px}
+#root :is(.domain-grid,.stt-canon-grid){display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px}#root :is(.domain-card,.stt-canon-card){padding:28px;background:var(--cis-white);border:1px solid var(--cis-line)}
+#root :is(.pd4-grid,.pd4-columns){display:grid;grid-template-columns:1fr 1fr;gap:30px}#root .pd4-root section:not(.cis-hero){padding:56px 0}#root .pd4-cta a{display:inline-block;padding:13px 20px;background:var(--cis-gold)!important;color:white!important;text-decoration:none;font-size:16px}
+#root .stt-canon-statement{font-size:22px!important;max-width:45em;margin:0 0 34px}#root .stt-canon-final{padding:50px 0;background:#f3eee4}
+/* Association content keeps its independent framework and contact path. */
+#root .g4-page{padding-bottom:40px}#root .g4-grid{gap:0;margin-top:32px}#root .g4-card{min-height:0;padding:26px}#root .g4-card :is(h2,h3){font-size:23px!important}#root .g4-card p{font-size:16px!important;line-height:1.95!important}
+#root .g4-title{font-size:28px!important}#root .g4-note{margin-top:32px;padding:26px;border:1px solid var(--cis-line)}#root .g4-note :is(h2,h3){font-size:22px!important}#root .g4-value{padding:27px 23px;min-height:0}#root .g4-value h2{font-size:22px!important}
+#root .g4-row{grid-template-columns:160px minmax(0,1fr);font-size:17px;line-height:1.9}#root .g4-person h3{font-size:24px!important}#root .g4-person p{font-size:15px!important}#root .g4-person small{font-size:13px!important}#root .g4-event h3{font-size:23px!important}#root .g4-final{padding:65px 30px!important}#root .g4-final h2{max-width:820px;font-size:29px!important;margin:0 auto}#root .g4-footer p{font-size:15px!important}
+/* Intake is a usable reading form, never a giant marketing hero. */
+#root .stt-intake-page>section:not(.cis-hero){padding:45px 40px}#root .stt-intake-page>section:not(.cis-hero)>div,#root .stt-intake-page form{max-width:940px;margin:auto}
+#root .stt-intake-page form>fieldset{padding:0;border:0;min-width:0}#root .stt-intake-page form>fieldset>div>label,#root .stt-intake-page form>fieldset>div>fieldset{display:grid;grid-template-columns:40px minmax(0,1fr);gap:20px;background:#fffdf9;padding:27px;border:0;border-bottom:1px solid var(--cis-line);margin:0;min-width:0}
+#root .stt-intake-page form label>span>span{font-size:21px;line-height:1.6;display:block}#root .stt-intake-page :is(input:not([type=radio]):not([name=bot-field]),textarea,select){width:100%;max-width:100%;border:1px solid #cabb9f;padding:12px 14px;border-radius:0;background:var(--cis-paper);color:var(--cis-ink);font-size:17px;margin-top:16px}
+#root .stt-intake-page textarea{min-height:130px;resize:vertical}#root .stt-intake-page input[type=radio]{margin:12px 8px 12px 0;accent-color:var(--cis-gold)}#root .stt-intake-page input[name=bot-field]{display:none}#root .stt-intake-page button[type=submit]{padding:13px 22px;border:none;background:var(--cis-gold)!important;color:white!important;font-size:16px;margin-top:20px;cursor:pointer}#root .stt-intake-page form .cis-form-status{color:#854021}
+.sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
+#root .site-skip-link{position:fixed;left:12px;top:-120px;z-index:999;background:white;padding:12px 20px}#root .site-skip-link:focus{top:12px}
+@media(max-width:1150px){
+#root .stt-g0-desktop-nav,#root .stt-g0-header__inner>.stt-g0-primary-cta,#root .g4-nav{display:none!important}#root .stt-g0-menu-button,#root .g4-menu{display:flex!important;margin-left:auto;align-items:center;padding:12px;border:1px solid var(--cis-line);background:transparent}#root .stt-g0-header__inner{grid-template-columns:1fr auto;min-height:88px;padding:0 32px}#root .g4-head,#root .g4-headin{height:88px}
+#root .cis-hero-inner{width:calc(100% - 64px);gap:28px;min-height:460px;padding:44px 0}#root .cis-title-1 .cis-title{font-size:36px!important}#root .cis-title-2 .cis-title{font-size:29px!important}#root .cis-title-3 .cis-title{font-size:26px!important}
+}
+@media(max-width:850px){
+#root .cis-hero-inner{grid-template-columns:1fr;gap:30px;min-height:0;padding:42px 0 36px;width:calc(100% - 64px)}#root .cis-hero-copy{max-width:680px}#root .cis-hero-art img{max-height:390px}#root .cis-hero-art{width:100%;max-width:660px;margin:0 auto}#root .cis-portrait .cis-hero-art img{height:365px!important}
+#root .cis-title-1 .cis-title{font-size:38px!important}#root .cis-title-2 .cis-title{font-size:34px!important}#root .cis-title-3 .cis-title{font-size:30px!important}
+#root .cis-hero .cis-lead{max-width:44em}#root .cis-context{padding:22px 32px}#root .cis-context p{font-size:17px!important}
+#root .lib-columns,#root .domain-grid,#root .stt-canon-grid{grid-template-columns:1fr}#root .g4-row{grid-template-columns:140px minmax(0,1fr)}
+}
+@media(max-width:560px){
+#root{font-size:16px}#root main :where(p,dd,li){font-size:16px!important;line-height:1.9!important}#root main h2{font-size:24px!important}#root main h3{font-size:21px!important}
+#root .stt-g0-header__inner{min-height:78px;padding:0 24px;gap:12px}#root .stt-g0-brand{width:255px}#root .stt-g0-header__inner .stt-g0-brand img{max-height:65px}#root .g4-head,#root .g4-headin{height:78px}#root .g4-wrap{padding-left:24px;padding-right:24px}#root .g4-brand small{font-size:12px}
+#root .cis-hero-inner{width:calc(100% - 48px);gap:27px;padding:34px 0 30px}#root .cis-title-1 .cis-title{font-size:clamp(24px,6.5vw,29px)!important}#root .cis-title-2 .cis-title{font-size:clamp(23px,6.4vw,27px)!important}#root .cis-title-3 .cis-title{font-size:clamp(22px,6vw,25px)!important;line-height:1.5!important}
+#root .cis-hero .cis-title{line-height:1.5!important}#root .cis-kicker{font-size:10px!important;margin-bottom:17px!important;letter-spacing:.1em!important}#root .cis-hero .cis-lead{font-size:16px!important;line-height:1.9!important;margin-top:18px!important}#root .cis-hero .cis-subtitle{font-size:17px!important;margin-top:16px!important}#root .cis-hero .cis-byline{font-size:21px!important}
+#root .cis-hero-art img{max-height:270px}#root .cis-portrait .cis-hero-art img{height:330px!important}#root .cis-text-only .cis-hero-inner{padding:38px 0 33px}#root .cis-actions{gap:11px;margin-top:21px}#root .cis-actions>a{font-size:14px!important;padding:11px 14px}
+#root .cis-context{padding:22px 24px}#root .cis-context p{font-size:16px!important;line-height:1.9!important}#root .cis-utility{width:calc(100% - 48px);padding:35px 0 50px}
+#root :is(.stt-g1-shell,.stt-g2-shell,.stt-g3-shell,.stt-g4-shell,.stt-inst-shell,.lib-wrap,.domain-wrap,.pd4-wrap,.stt-canon-wrap){width:calc(100% - 48px)}
+#root :is(.stt-g1-section,.stt-g2-group,.stt-g3-step,.stt-g4-engagement-row,.stt-inst-section,.g4-section){padding-top:40px!important;padding-bottom:40px!important}
+#root .stt-g4-engagement-row__grid{display:block}#root .stt-g4-engagement-row__head{margin-bottom:24px}#root .stt-g4-engagement-row dd{font-size:16px!important}#root .stt-g4-engagement-row__body>div{grid-template-columns:74px minmax(0,1fr);gap:14px;padding:17px 0}
+#root :is(.stt-g2-index__grid,.stt-g4-index__grid){display:grid;grid-template-columns:1fr;min-height:0}#root :is(.stt-g2-index a,.stt-g4-index a){padding:17px 20px;border-right:0;border-bottom:1px solid var(--cis-line)}#root :is(.stt-g2-index strong,.stt-g4-index strong){font-size:19px!important}
+#root .lib-row{grid-template-columns:28px 1fr;gap:14px}#root .lib-row .lib-actions{grid-column:2}#root .lib-row h2{font-size:22px!important}#root .lib-note,#root .lib-panel,#root .domain-card,#root .domain-detail,#root .stt-canon-card{padding:23px;margin-top:23px}
+#root .g4-grid,#root .g4-directory,#root .g4-valuegrid{grid-template-columns:1fr}#root .g4-row{grid-template-columns:1fr;gap:10px}#root .g4-event{grid-template-columns:1fr;gap:14px}#root .g4-event h3{font-size:21px!important}#root .g4-card{padding:23px}#root .g4-note{padding:23px}#root .g4-final h2{font-size:24px!important}
+#root .stt-intake-page>section:not(.cis-hero){padding:34px 24px}#root .stt-intake-page form>fieldset>div>label,#root .stt-intake-page form>fieldset>div>fieldset{grid-template-columns:24px 1fr;gap:12px;padding:22px 16px}#root .stt-intake-page form label>span>span{font-size:19px}#root .stt-intake-page input,#root .stt-intake-page textarea,#root .stt-intake-page select{font-size:16px}
+#root .stt-g0-footer__inner{width:calc(100% - 48px);display:block}#root .stt-g0-footer__links{margin-top:24px}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+#portable-navigation{position:fixed;inset:0 0 0 auto;margin:0;width:min(410px,100%);height:100dvh;max-height:none;max-width:none;border:0;border-left:1px solid var(--cis-line);background:var(--cis-paper);padding:28px}
+#portable-navigation::backdrop{background:rgba(30,26,20,.35)}#portable-navigation nav{display:flex;flex-direction:column;margin-top:28px}#portable-navigation nav a{display:block;height:auto;padding:19px 0;border-bottom:1px solid var(--cis-line);font:18px/1.8 var(--cis-serif);text-decoration:none;color:var(--cis-ink)}#portable-navigation .portable-close{padding:10px 0;background:none;border:0;font:16px var(--cis-serif);color:var(--cis-gold)}
+
+/* The final phrase is not left stranded below a wide line of explanation. */
+#root main p{ text-wrap:pretty; }
+
+@media(max-width:350px){
+#root .stt-g0-header__inner{padding:0 16px}#root .stt-g0-brand{width:214px}#root .stt-g0-menu-button{padding:9px}
+#root .cis-title-1 .cis-title{font-size:20.5px!important}#root .cis-title-2 .cis-title{font-size:19px!important}#root .cis-title-3 .cis-title{font-size:19px!important}
+}

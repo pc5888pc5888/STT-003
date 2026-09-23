@@ -2,7 +2,7 @@ import { useEffect, type ReactNode } from "react";
 import { Link } from "react-router-dom";
 import UnifiedTitleHero from "../components/UnifiedTitleHero";
 
-const STT_PRESS_URL = "https://stt-003.vercel.app/#hero";
+const STT_PRESS_URL = "/books";
 const M_MEDIA_URL = "https://94m.com.tw/editors/ed55fc";
 
 function usePageMeta(title:string, description:string){

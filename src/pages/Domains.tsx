@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { Navigate, useNavigate, useParams } from "react-router-dom";
+import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
 import STTPageHero from "../components/STTPageHero";
 import { DOMAIN_VISUALS } from "../sttVisuals";
 
@@ -23,12 +23,12 @@ function DomainShell({ children }: { children: ReactNode }) { return <div classN
 export function DomainsIndex(){
   const navigate=useNavigate();
   return <DomainShell><STTPageHero visual="domainsIndex" eyebrow="GOVERNANCE KNOWLEDGE DOMAINS" title="這些不是服務套餐，而是 STT 用來理解複雜問題的治理知識領域。" titleLines={["這些不是服務套餐，", "而是 STT 用來理解複雜問題的治理知識領域。"]} lead="同一個事件可能同時涉及公司治理、接班、法務、契約或 AI。知識領域的作用，是幫助判讀與專業路由，而不是要求使用者先替自己選對顧問種類。" />
-    <section className="domain-body"><div className="domain-wrap"><div className="domain-grid">{domains.map((d,i)=><article className="domain-card" key={d.slug}><small>{String(i+1).padStart(2,"0")}</small><h2>{d.title}</h2><p>{d.subtitle}</p><button onClick={()=>navigate(`/domains/${d.slug}`)}>進入領域 →</button></article>)}</div></div></section></DomainShell>;
+    <section className="domain-body"><div className="domain-wrap"><div className="domain-grid">{domains.map((d,i)=><article className="domain-card" key={d.slug}><small>{String(i+1).padStart(2,"0")}</small><h2>{d.title}</h2><p>{d.subtitle}</p><Link to={`/domains/${d.slug}`}>進入領域 →</Link></article>)}</div></div></section></DomainShell>;
 }
 
 export function DomainDetail(){
   const {slug="corporate-governance"}=useParams(); const navigate=useNavigate(); const domain=domains.find((d)=>d.slug===slug); if(!domain) return <Navigate to="/domains" replace />;
   const visual=DOMAIN_VISUALS[domain.slug];
   return <DomainShell><STTPageHero visual={visual} eyebrow={domain.eyebrow} title={domain.title} titleLines={domain.titleLines} lead={domain.subtitle} />
-    <section className="domain-body"><div className="domain-wrap">{domain.principles.map((p)=><article className="domain-detail" key={p.title}><h2>{p.title}</h2><p>{p.body}</p></article>)}<div className="domain-related"><button onClick={()=>navigate('/domains')}>← 回到治理知識領域</button>{domain.related.map((r)=><button key={r.path} onClick={()=>navigate(r.path)}>{r.label} →</button>)}</div></div></section></DomainShell>;
+    <section className="domain-body"><div className="domain-wrap">{domain.principles.map((p)=><article className="domain-detail" key={p.title}><h2>{p.title}</h2><p>{p.body}</p></article>)}<div className="domain-related"><Link to="/domains">← 回到治理知識領域</Link>{domain.related.map((r)=><Link key={r.path} to={r.path}>{r.label} →</Link>)}</div></div></section></DomainShell>;
 }

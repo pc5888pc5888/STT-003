@@ -1,3 +1,4 @@
+import GovernedHero from "../components/GovernedHero";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
@@ -101,26 +102,7 @@ export default function HomeCanonical() {
 
   return (
     <div className="stt-g1-home">
-      <section
-        id="hero"
-        className="stt-g1-hero"
-        style={{ backgroundImage: 'url("/visual-bank/stt/user-approved-six/home.png")' }}
-        aria-labelledby="home-hero-title"
-      >
-        <div className="stt-g1-shell">
-          <div className="stt-g1-hero__copy">
-            <p className="stt-g1-kicker">STT GOVERNANCE · STRATEGY · GOVERNANCE · JUDGMENT</p>
-            <h1 id="home-hero-title">讓重要的事，走得更遠。</h1>
-            <p className="stt-g1-lead">
-              STT Governance 協助企業、家族與重大決策者，在結果尚未不可逆之前，先釐清問題、證據、權力、責任與選項，再決定是否行動，以及如何留下可以承擔、可以追溯的治理結構。
-            </p>
-            <div className="stt-g1-actions">
-              <Link className="stt-g1-button is-primary" to="/problems">從正在發生的問題開始 →</Link>
-              <Link className="stt-g1-button" to="/how-stt-works">理解 STT 如何判讀</Link>
-            </div>
-          </div>
-        </div>
-      </section>
+      <GovernedHero kicker="STT GOVERNANCE · STRATEGY · GOVERNANCE · JUDGMENT" title="讓重要的事，走得更遠。" lead="STT Governance 協助企業、家族與重大決策者，在結果尚未不可逆之前，先釐清問題、證據、權力、責任與選項，再決定是否行動，以及如何留下可以承擔、可以追溯的治理結構。"><Link className="cis-primary" to="/problems">從正在發生的問題開始 →</Link><Link to="/how-stt-works">理解 STT 如何判讀</Link></GovernedHero>
 
       <section className="stt-g1-section">
         <div className="stt-g1-shell">
@@ -236,7 +218,7 @@ export default function HomeCanonical() {
             </div>
           </div>
           <figure className="stt-g1-authority__portrait">
-            <img src="/images/eric-home-authority-20260921.jpg" alt="莊鈞翔博士正式坐姿肖像" />
+            <img src="/visual-approved/portrait-seated.png" alt="莊鈞翔博士正式坐姿肖像" />
             <figcaption>FOUNDER · GOVERNANCE PRINCIPAL · FINAL JUDGMENT</figcaption>
           </figure>
         </div>
@@ -266,7 +248,7 @@ export default function HomeCanonical() {
 
           <div className="stt-g1-evidence-strip">
             <img
-              src="/images/內在法遵 Internal Compliance《 為你的內心，打造一座不可侵犯的至聖所 》 數位閱讀完整版.png"
+              src="/visual-approved/bank-20.png"
               alt="內在法遵 Internal Compliance 出版封面"
             />
             <div>

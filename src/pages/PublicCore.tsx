@@ -1,6 +1,6 @@
 import FullBleedHero, { JudgmentFoundations } from "../components/FullBleedHero";
 import STTPageHero from "../components/STTPageHero";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 type PageKind = "method" | "publications" | "projects" | "stt";
 type Section = { number: string; title: string; body: string; action?: string; path?: string };
@@ -77,10 +77,10 @@ function CanonicalPage({ kind }: { kind: PageKind }) {
     <section className="stt-canon-body"><div className="stt-canon-wrap">
       <p className="stt-canon-statement">{page.statement}</p>
       <div className="stt-canon-grid">{page.sections.map((section, index) => <article className="stt-canon-card" id={kind === "method" ? `judgment-step-${Number(section.number)}` : undefined} key={`${kind}-${index}-${section.title}`}>
-        {section.number && <small>{section.number}</small>}<h2>{section.title}</h2><p>{section.body}</p>{section.action && section.path && <button type="button" onClick={() => openPath(section.path!)}>{section.action} →</button>}
+        {section.number && <small>{section.number}</small>}<h2>{section.title}</h2><p>{section.body}</p>{section.action && section.path && <Link to={section.path}>{section.action} →</Link>}
       </article>)}</div>
     </div></section>
-    <section className="stt-canon-final"><div className="stt-canon-wrap"><p className="stt-master-kicker">FINAL JUDGMENT</p><h2>{page.finalTitle}</h2><p>{page.finalBody}</p>{page.finalAction && page.finalPath && <button type="button" onClick={() => openPath(page.finalPath!)}>{page.finalAction} →</button>}</div></section>
+    <section className="stt-canon-final"><div className="stt-canon-wrap"><p className="stt-master-kicker">FINAL JUDGMENT</p><h2>{page.finalTitle}</h2><p>{page.finalBody}</p>{page.finalAction && page.finalPath && <Link to={page.finalPath}>{page.finalAction} →</Link>}</div></section>
   </div>;
 }
 

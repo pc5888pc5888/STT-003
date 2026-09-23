@@ -1,3 +1,4 @@
+import GovernedHero from "../components/GovernedHero";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
@@ -90,22 +91,7 @@ export default function Method() {
 
   return (
     <div className="stt-g3-method">
-      <section
-        className="stt-g3-hero"
-        style={{ backgroundImage: 'url("/visual-bank/stt/user-approved-six/method.png")' }}
-        aria-labelledby="method-title"
-      >
-        <div className="stt-g3-shell">
-          <div className="stt-g3-hero__copy">
-            <p className="stt-g3-kicker">HOW STT JUDGES</p>
-            <h1 id="method-title">如何判讀</h1>
-            <h2>在採取行動之前，先完成判讀。</h2>
-            <p>
-              STT 的判讀，不是快速給答案，而是先回到事件結構：問題是否被正確定義、證據是否足夠、權力是否越界、責任如何承擔、風險是否可逆，然後才決定是否進入下一步。
-            </p>
-          </div>
-        </div>
-      </section>
+      <GovernedHero kicker="GOVERNANCE JUDGMENT" title="如何判讀" lead="STT 的判讀，不是快速給答案，而是先回到事件結構：問題是否被正確定義、證據是否足夠、權力是否越界、責任如何承擔、風險是否可逆，然後才決定是否進入下一步。"></GovernedHero>
 
       <nav className="stt-g3-index" aria-label="七階段判讀路徑">
         <div className="stt-g3-shell stt-g3-index__grid">
