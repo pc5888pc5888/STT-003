@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, type ReactNode } from "react";
 import { Link } from "react-router-dom";
 import UnifiedTitleHero from "../components/UnifiedTitleHero";
 
@@ -18,7 +18,7 @@ function usePageMeta(title:string, description:string){
   },[title,description]);
 }
 
-function Section({kicker,title,children,id}:{kicker?:string;title:string;children:React.ReactNode;id?:string}){
+function Section({kicker,title,children,id}:{kicker?:string;title:string;children:ReactNode;id?:string}){
   return <section className="stt-inst-section" id={id}><div className="stt-inst-shell">{kicker&&<p className="stt-inst-kicker">{kicker}</p>}<h2>{title}</h2><div className="stt-inst-body">{children}</div></div></section>;
 }
 
