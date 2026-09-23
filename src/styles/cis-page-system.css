@@ -133,3 +133,14 @@
  #root .cis-with-image .cis-hero-copy .cis-title-line{white-space:normal!important}
  #root .cis-with-image .cis-hero-copy .cis-lead{max-width:42em}
 }
+
+
+/* GCSDA: full-width image remains visually continuous; copy is not a pasted white card. */
+#root .g4 .cis-with-image{position:relative}
+#root .g4 .cis-with-image::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(90deg,rgba(251,250,247,.78) 0%,rgba(251,250,247,.54) 23%,rgba(251,250,247,.24) 42%,rgba(251,250,247,.06) 60%,rgba(251,250,247,0) 78%)}
+#root .g4 .cis-with-image .cis-hero-copy{z-index:2;background:transparent!important;padding:0!important;border:0!important;box-shadow:none!important}
+#root .g4 .cis-with-image .cis-hero-art{z-index:0}
+@media(max-width:900px){
+  #root .g4 .cis-with-image::before{display:none}
+  #root .g4 .cis-with-image .cis-hero-copy{background:var(--cis-paper)!important;padding:30px 28px 36px!important}
+}
