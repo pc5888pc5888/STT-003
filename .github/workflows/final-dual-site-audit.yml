@@ -21,11 +21,11 @@ jobs:
           npx playwright install --with-deps chromium >/tmp/browser-setup.log 2>&1
       - name: Inspect deployed sites and flipbooks
         env:
-          STT: 'https://stt-003-git-stt-convergence-20260923-pc5888pc5888s-projects.vercel.app'
-          GCSDA: 'https://stt-003-git-gcsda-convergence-20260923-pc5888pc5888s-projects.vercel.app'
+          STT: 'https://stt-003-git-stt-convergence-20260923-pc5888pc5888s-projects.vercel.app/?_vercel_share=1xbu7ar3OUSXIlutblVGIF0LmZQU6gpe'
+          GCSDA: 'https://stt-003-git-gcsda-convergence-20260923-pc5888pc5888s-projects.vercel.app/?_vercel_share=NebawyGPb17X9g7rUR8fxkFzk4pb9xvA'
         run: |
           mkdir -p /tmp/audit
-          cat > /tmp/audit/check.mjs <<'JS'
+          cat > check.mjs <<'JS'
           import fs from 'node:fs';
           import { chromium } from 'playwright';
           const browser=await chromium.launch({headless:true});
@@ -110,7 +110,7 @@ jobs:
             flipbooks:report.flipbooks.map(x=>({id:x.id,title:x.title,http:x.http,error:x.error,metas:x.metas}))
           },null,2));
           JS
-          node /tmp/audit/check.mjs
+          node check.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
