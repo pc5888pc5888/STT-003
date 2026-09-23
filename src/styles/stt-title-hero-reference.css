@@ -385,9 +385,10 @@
     linear-gradient(90deg,#fbfaf7 0%,#fbfaf7 51%,#f7f2ea 51%,#f7f2ea 100%);
 }
 .stt-title-hero.is-contain .stt-title-hero__image{
-  inset:34px 3% 0 auto;
-  width:44%;
-  height:calc(100% - 34px);
+  inset:auto 8% 0 auto;
+  width:min(28vw,360px);
+  height:auto;
+  max-height:calc(100% - 54px);
   object-fit:contain!important;
   object-position:right bottom!important;
   z-index:-1;
@@ -412,9 +413,10 @@
     background:#fbfaf7;
   }
   .stt-title-hero.is-contain .stt-title-hero__image{
-    inset:18px 8% auto auto;
-    width:55%;
-    height:55%;
+    inset:28px 8% auto auto;
+    width:min(42vw,320px);
+    height:auto;
+    max-height:48%;
     object-position:right top!important;
   }
   .stt-title-hero.is-contain .stt-title-hero__veil{
@@ -437,8 +439,9 @@
   .stt-title-hero.is-contain .stt-title-hero__image{
     right:50%;
     transform:translateX(50%);
-    width:72%;
-    height:48%;
+    width:min(68vw,260px);
+    height:auto;
+    max-height:42%;
     object-position:center top!important;
   }
 }
