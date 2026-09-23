@@ -1,0 +1,177 @@
+{
+  "example": {
+    "url": "https://94m.com.tw/articles/ed1d40",
+    "status": 200,
+    "sha256": "273e43fa52a203a1f485677938204ceb6db6b5cddcaf91e3a1b68d7e06ca03f4",
+    "images": [
+      {
+        "alt": "莊鈞翔博士法律專欄｜以法律專業為基礎，以治理思維為高度",
+        "sha256": "f2effb52fc848ee1b9abf2fd507e8af0c5f13bd4b7150fe3eb2f677d057795cb",
+        "size": 4356603
+      },
+      {
+        "alt": "莊鈞翔博士",
+        "sha256": "2f283f4ffe59ba9e3055911b8ad9ba906ac9ae2e57d88a60c4447962e95972cc",
+        "size": 1486646
+      },
+      {
+        "alt": "莊鈞翔博士簽名",
+        "sha256": "43c7d8bb7f8e31c7cae3b82619e7720494b0c968ee976561232883d5fe85fa13",
+        "size": 40341
+      }
+    ],
+    "style_sha256": [
+      "3aa3b8e8aaea43c165dc2a689a148679227c31d78c62f43d2477fc4dafeb9392"
+    ]
+  },
+  "cbc_rules": {
+    "url": "https://www.cbc.gov.tw/tw/cp-4217-192880-d9bde-1.html",
+    "status": 200,
+    "sha256": "1e5e54762c8d525859db605944032e5a46a0de180bc96af22e9e3842af65b47f",
+    "pdf_links": [
+      {
+        "text": "PDF",
+        "href": "https://www.cbc.gov.tw/tw/dl-227611-e262ea5d31724ec696a8e2fa75a94600.html"
+      }
+    ]
+  },
+  "cbc_qa": {
+    "url": "https://www.cbc.gov.tw/tw/cp-4223-124873-79d4c-1.html",
+    "status": 200,
+    "sha256": "49784b6dcf5d78caeff804dcfcc00b16ebf0f0df72d2527cd819d54969cbb84c",
+    "pdf_links": [
+      {
+        "text": "中央銀行對金融機構辦理不動產抵押貸款業務規定問與答(115.9.18生效)",
+        "href": "https://www.cbc.gov.tw/dl-227702-d82559a407814bb8b6797e6d81215f4e.html"
+      },
+      {
+        "text": "PDF",
+        "href": "https://www.cbc.gov.tw/tw/dl-187942-5eb0f3a8d65c419386704679063632f1.html"
+      },
+      {
+        "text": "PDF",
+        "href": "https://www.cbc.gov.tw/tw/dl-187943-db7d4d842d2a4e0986f3d94497e000f0.html"
+      },
+      {
+        "text": "PDF",
+        "href": "https://www.cbc.gov.tw/tw/dl-187944-5e4b4b9933fb48658d0d5901d192eecd.html"
+      },
+      {
+        "text": "PDF",
+        "href": "https://www.cbc.gov.tw/tw/dl-187945-4c884f3c89d14d6cb535d954ba5551d9.html"
+      },
+      {
+        "text": "PDF",
+        "href": "https://www.cbc.gov.tw/tw/dl-187946-722a3619f10e4a91b23f472b3dc08b7f.html"
+      },
+      {
+        "text": "PDF",
+        "href": "https://www.cbc.gov.tw/tw/dl-190483-4fd4f6c243df498cb5ddadd6d9c3f097.html"
+      },
+      {
+        "text": "PDF",
+        "href": "https://www.cbc.gov.tw/tw/dl-191063-af6d12fb0b804a44970bf76fb98eecfe.html"
+      },
+      {
+        "text": "PDF",
+        "href": "https://www.cbc.gov.tw/tw/dl-194583-79e6f94fe5cf41a2bc6fd086c67f5483.html"
+      },
+      {
+        "text": "PDF",
+        "href": "https://www.cbc.gov.tw/tw/dl-196121-18c357c11aed43fca59ec28383251bfd.html"
+      },
+      {
+        "text": "PDF",
+        "href": "https://www.cbc.gov.tw/tw/dl-196480-1b84ee985e2541eebf1c3200e30b599e.html"
+      },
+      {
+        "text": "PDF",
+        "href": "https://www.cbc.gov.tw/tw/dl-206176-426db455259049fea2e55656cb58dd4d.html"
+      },
+      {
+        "text": "PDF",
+        "href": "https://www.cbc.gov.tw/tw/dl-209002-787ec41e6180412098624e76a29ecc5c.html"
+      },
+      {
+        "text": "PDF",
+        "href": "https://www.cbc.gov.tw/tw/dl-210110-4198dbe99d284a97926e80ae677d5f59.html"
+      },
+      {
+        "text": "PDF",
+        "href": "https://www.cbc.gov.tw/tw/dl-223837-94a868c614b3425494ba95f36cdd4818.html"
+      },
+      {
+        "text": "PDF",
+        "href": "https://www.cbc.gov.tw/tw/dl-225093-6ff8f5af835e459b8242f8f44eae09ea.html"
+      },
+      {
+        "text": "PDF",
+        "href": "https://www.cbc.gov.tw/tw/dl-227702-d82559a407814bb8b6797e6d81215f4e.html"
+      }
+    ]
+  },
+  "presale": {
+    "url": "https://glrs.moi.gov.tw/LawContent.aspx?id=FL003296",
+    "error": "HTTPSConnectionPool(host='glrs.moi.gov.tw', port=443): Max retries exceeded with url: /LawContent.aspx?id=FL003296 (Caused by ConnectTimeoutError(<urllib3.connection.HTTPSConnection object at 0x7fb6ee8a8920>, 'Connection to glrs.moi.gov.tw timed out. (connect timeout=45)'))"
+  },
+  "central_bank": {
+    "url": "https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=G0410001",
+    "status": 200,
+    "sha256": "cfd0194f33a2cdc848eca2cdfba7323431d3d3cd765e01c1c9540e5f57988c34",
+    "pdf_links": [
+      {
+        "text": "網站使用手冊",
+        "href": "/Service/網站使用手冊.pdf"
+      },
+      {
+        "text": "會員服務介紹",
+        "href": "/Service/全國法規資料庫會員服務介紹.pdf"
+      }
+    ]
+  },
+  "procedure": {
+    "url": "https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=A0030055",
+    "status": 200,
+    "sha256": "53e2a656b20649758760efc689f08c47ee566f0dec6ebd11b4765c9006aba9e4",
+    "pdf_links": [
+      {
+        "text": "網站使用手冊",
+        "href": "/Service/網站使用手冊.pdf"
+      },
+      {
+        "text": "會員服務介紹",
+        "href": "/Service/全國法規資料庫會員服務介紹.pdf"
+      }
+    ]
+  },
+  "obu": {
+    "url": "https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=G0380037",
+    "status": 200,
+    "sha256": "48f971a3967f18ee11cab5f20ba3fbc0a54c4334ce293a74a121d6a2d3477fe6",
+    "pdf_links": [
+      {
+        "text": "網站使用手冊",
+        "href": "/Service/網站使用手冊.pdf"
+      },
+      {
+        "text": "會員服務介紹",
+        "href": "/Service/全國法規資料庫會員服務介紹.pdf"
+      }
+    ]
+  },
+  "obu_rules": {
+    "url": "https://law.fsc.gov.tw/LawContent.aspx?id=FL006484",
+    "status": 200,
+    "sha256": "ac686c2c54b6f063f8ae9cf31aaea74be9683ee7bd9c3d3b6f2b4c61d04a8d62",
+    "pdf_links": [
+      {
+        "text": "使用手冊",
+        "href": "/UseManual/使用手冊20171020.pdf"
+      },
+      {
+        "text": "使用手冊",
+        "href": "/UseManual/使用手冊20171020.pdf"
+      }
+    ]
+  }
+}
