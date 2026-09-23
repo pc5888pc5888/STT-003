@@ -1,0 +1,62 @@
+name: Prepare editorial workspace
+on:
+  push:
+    branches: [stt-convergence-20260923]
+    paths: [.github/workflows/editorial-workspace.yml]
+permissions:
+  contents: read
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    strategy:
+      matrix:
+        include:
+          - site: stt
+            ref: ef7904776ca0652a396085fb42852977f3707f38
+          - site: gcsda
+            ref: ab3aa9410c22044ebe60798919ef7af8604a33c0
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ matrix.ref }}
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm ci && npm run build
+      - name: Bundle exact working files and asset inventory
+        env:
+          SITE: ${{ matrix.site }}
+        run: |
+          mkdir -p /tmp/editorial
+          python3 - <<'PY'
+          from pathlib import Path
+          from PIL import Image
+          import zipfile,json,os,hashlib
+          files=[]
+          for folder in ['src','api','tests','public','dist']:
+              files.extend(p for p in Path(folder).rglob('*') if p.is_file())
+          files.extend(p for p in Path('.').glob('*') if p.suffix in ['.json','.ts','.html','.js'])
+          with zipfile.ZipFile('/tmp/editorial/site.zip','w',zipfile.ZIP_DEFLATED) as z:
+              for p in files:z.write(p)
+          if os.environ['SITE']=='stt':
+              with zipfile.ZipFile('/tmp/editorial/dependencies.zip','w',zipfile.ZIP_DEFLATED) as z:
+                  for p in Path('node_modules').rglob('*'):
+                      if p.is_file():z.write(p)
+          assets=[]
+          for p in Path('public').rglob('*'):
+              if p.suffix.lower() not in ['.png','.webp','.jpg','.jpeg']:continue
+              try:
+                  with Image.open(p) as im:
+                      im.load();size=im.size
+                  assets.append({'path':str(p),'size':size,'sha256':hashlib.sha256(p.read_bytes()).hexdigest()})
+              except Exception as e:assets.append({'path':str(p),'decodeError':str(e)})
+          Path('/tmp/editorial/assets.json').write_text(json.dumps(assets,indent=2))
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: editorial-workspace-${{ matrix.site }}
+          path: /tmp/editorial/
+          retention-days: 3
