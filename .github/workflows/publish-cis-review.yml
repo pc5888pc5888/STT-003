@@ -13,9 +13,9 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - name: Receive the already verified website payload
+      - name: Receive the previously verified website payload
         env:
-          PAYLOAD: 'https://sdmntprnznorth.oaiusercontent.com/files/00000000-8f64-820b-adaa-ec8ca7165d08/raw?se=2026-09-23T18%3A58%3A10Z&sp=r&sv=2026-02-06&sr=b&scid=b10db248-9dac-5764-b15e-1d2d27275a32&skoid=f5e14fda-2af7-44a3-9d18-d372ffcad871&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-23T18%3A50%3A20Z&ske=2026-09-24T18%3A50%3A20Z&sks=b&skv=2026-02-06&sig=oj6UxvNuPKikFPxlGTn6nupfh7JRwKqLS148dl6f/XE%3D'
+          PAYLOAD: 'https://sdmntprnznorth.oaiusercontent.com/files/00000000-3f68-820b-81ab-c029d2548f80/raw?se=2026-09-23T19%3A06%3A27Z&sp=r&sv=2026-02-06&sr=b&scid=8d486521-6b83-5218-8b44-e49223d16d42&skoid=f5e14fda-2af7-44a3-9d18-d372ffcad871&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-23T18%3A29%3A55Z&ske=2026-09-24T18%3A29%3A55Z&sks=b&skv=2026-02-06&sig=oTtSTpYkGViJByUolEgGPqEgwoNzit2Y3J3tTcv8rCQ%3D'
         run: |
           mkdir -p /tmp/cis-review
           curl --fail --silent --show-error --location --max-time 90 "$PAYLOAD" -o /tmp/cis-payload.zip
@@ -42,87 +42,19 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Apply only the verified GCSDA change set
+      - name: Apply, build, test and publish the source-locked GCSDA change
         run: |
-          test "$(git branch --show-current)" = gcsda-convergence-20260923
-          git ls-remote origin refs/heads/main > /tmp/cis-review/main-before.txt
+          curl --fail --silent --show-error --location --max-time 30 'https://raw.githubusercontent.com/pc5888pc5888/STT-003/c59fbe853afb2294a886c69ddef24e028030591d/.github/workflows/publish-cis-review.yml' -o /tmp/pinned-cis-workflow.yml
           python3 - <<'PY'
-          from pathlib import Path
-          import hashlib,json,zipfile,re
-          root=Path.cwd().resolve();pending=[]
-          with zipfile.ZipFile('/tmp/cis-payload.zip') as z:
-            for item in json.loads(z.read('manifest.json'))['files']:
-              if item['site']!='gcsda':continue
-              target=(root/item['path']).resolve()
-              assert root in target.parents and item['path'].startswith(('src/','public/'))
-              content=z.read('gcsda/'+item['path'])
-              assert hashlib.sha256(content).hexdigest()==item['after_sha256']
-              old=hashlib.sha256(target.read_bytes()).hexdigest() if target.exists() else None
-              assert old in [item['before_sha256'],item['after_sha256']],item['path']
-              pending.append((target,content,item))
-          for target,content,item in pending:
-            target.parent.mkdir(parents=True,exist_ok=True);target.write_bytes(content)
-          Path('/tmp/cis-review/asset-manifest.json').write_text(json.dumps([i for _,_,i in pending if i['path'].startswith('public/')],indent=2))
-          Path('/tmp/cis-review/change-paths.json').write_text(json.dumps([i['path'] for _,_,i in pending]))
-          source=Path('src/data/pagePresentation.ts').read_text()
-          data=json.loads(re.search(r'export const PAGE_PRESENTATION[^=]*=\s*(\{[\s\S]*\});',source).group(1))
-          Path('/tmp/cis-review/routes.json').write_text(json.dumps(data,ensure_ascii=False))
+          import yaml,subprocess
+          workflow=yaml.safe_load(open('/tmp/pinned-cis-workflow.yml'))
+          steps=workflow['jobs']['publish-gcsda']['steps']
+          names=['Apply only the verified GCSDA change set','Build and check all GCSDA pages','Publish to the existing GCSDA preview branch only']
+          for name in names:
+              step=next(s for s in steps if s.get('name')==name)
+              print(name,flush=True)
+              subprocess.run(['bash','--noprofile','--norc','-e','-o','pipefail','-c',step['run']],check=True)
           PY
-      - name: Build and check all GCSDA pages
-        run: |
-          npm ci > /tmp/cis-review/install.log 2>&1
-          npm run lint > /tmp/cis-review/typecheck.log 2>&1
-          npm run build > /tmp/cis-review/build.log 2>&1
-          node --experimental-strip-types --test tests/*.test.mjs > /tmp/cis-review/tests.log 2>&1
-          npm install --no-save --package-lock=false playwright > /tmp/cis-review/browser-install.log 2>&1
-          npx playwright install --with-deps chromium > /tmp/cis-review/browser-setup.log 2>&1
-          npx vite preview --host 127.0.0.1 --port 4173 > /tmp/cis-review/server.log 2>&1 &
-          cat > .cis-review-check.mjs <<'JS'
-          import fs from 'node:fs';
-          import {chromium} from 'playwright';
-          const routes=JSON.parse(fs.readFileSync('/tmp/cis-review/routes.json','utf8'));
-          const browser=await chromium.launch({headless:true}),results=[];
-          for(const width of [390,820,1440]){
-            const context=await browser.newContext({viewport:{width,height:1000},reducedMotion:'reduce'}),page=await context.newPage();
-            for(const [route,record] of Object.entries(routes)){
-              const errors=[];const handler=e=>errors.push(e.message);page.on('pageerror',handler);
-              try{
-                await page.goto('http://127.0.0.1:4173'+route,{waitUntil:'networkidle',timeout:30000});
-                await page.evaluate(()=>document.fonts.ready);
-                await page.evaluate(async()=>{for(let y=0;y<document.documentElement.scrollHeight;y+=700){scrollTo(0,y);await new Promise(r=>setTimeout(r,40));}scrollTo(0,0);});
-                await page.waitForTimeout(150);
-                const state=await page.evaluate(()=>({h1:document.querySelectorAll('h1').length,title:document.querySelector('h1')?.textContent,overflow:document.documentElement.scrollWidth>innerWidth+1,broken:[...document.images].filter(i=>!i.complete||i.naturalWidth===0).map(i=>i.getAttribute('src')),hero:document.querySelector('.cis-hero-art img')?.getAttribute('src')}));
-                const passed=state.h1===1&&!state.overflow&&!state.broken.length&&!errors.length&&(!record.image||record.image===state.hero);
-                results.push({route,width,...state,errors,passed});
-                if(['/', '/governance','/membership'].includes(route))await page.screenshot({path:'/tmp/cis-review/gcsda-'+(route.slice(1)||'home')+'-'+width+'.png',fullPage:true});
-              }catch(error){results.push({route,width,error:String(error),passed:false});}
-              page.off('pageerror',handler);
-            }
-            await context.close();
-          }
-          await browser.close();const failed=results.filter(x=>!x.passed);
-          fs.writeFileSync('/tmp/cis-review/browser-results.json',JSON.stringify(results,null,2));
-          fs.writeFileSync('/tmp/cis-review/summary.json',JSON.stringify({site:'gcsda',pages:Object.keys(routes).length,renders:results.length,failed,realReactBuild:true,originalPngTransferred:true,productionChanged:false,realMailDeliveryVerified:false},null,2));
-          if(failed.length){console.log(JSON.stringify(failed,null,2));process.exitCode=1;}
-          JS
-          node .cis-review-check.mjs > /tmp/cis-review/browser.log 2>&1
-      - name: Publish to the existing GCSDA preview branch only
-        run: |
-          mkdir -p docs/qa
-          cp /tmp/cis-review/summary.json docs/qa/20260924-online-review.json
-          cp /tmp/cis-review/asset-manifest.json docs/qa/20260924-online-assets.json
-          python3 - <<'PY'
-          import json,subprocess
-          paths=json.load(open('/tmp/cis-review/change-paths.json'))
-          subprocess.run(['git','add','--sparse','--',*paths,'docs/qa/20260924-online-review.json','docs/qa/20260924-online-assets.json'],check=True)
-          PY
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git commit -m 'gcsda: publish three-class typography and full original-image review'
-          git push origin HEAD:gcsda-convergence-20260923
-          git rev-parse HEAD > /tmp/cis-review/source-sha.txt
-          git ls-remote origin refs/heads/main > /tmp/cis-review/main-after.txt
-          cmp /tmp/cis-review/main-before.txt /tmp/cis-review/main-after.txt
       - uses: actions/upload-artifact@v4
         if: always()
         with:
