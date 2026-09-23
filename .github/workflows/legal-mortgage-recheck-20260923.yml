@@ -1,0 +1,67 @@
+name: Recheck cited legal texts
+on:
+  push:
+    branches: [preview/legal-mortgage-20260923-r2]
+    paths: [.github/workflows/legal-mortgage-recheck-20260923.yml]
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python -m pip -q install requests beautifulsoup4 pymupdf
+      - name: Obtain current official sources without substituting search snippets
+        run: |
+          python - <<'PY'
+          import requests,json,pathlib,hashlib,concurrent.futures,fitz
+          from bs4 import BeautifulSoup
+          from datetime import datetime,timezone
+          out=pathlib.Path('legal-recheck');out.mkdir(exist_ok=True)
+          urls={
+          'cbc_index':'https://www.cbc.gov.tw/tw/lp-4217-1.html',
+          'cbc_rules_page':'https://www.cbc.gov.tw/tw/cp-4217-192880-d9bde-1.html',
+          'cbc_rules_pdf':'https://www.cbc.gov.tw/tw/dl-227611-e262ea5d31724ec696a8e2fa75a94600.html',
+          'cbc_qa_page':'https://www.cbc.gov.tw/tw/cp-4223-124873-79d4c-1.html',
+          'cbc_qa_pdf':'https://www.cbc.gov.tw/dl-227702-d82559a407814bb8b6797e6d81215f4e.html',
+          'central_bank':'https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=G0410001',
+          'procedure':'https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=A0030055',
+          'bank72':'https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=G0380001&flno=72-2',
+          'consumer17':'https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=J0170001&flno=17',
+          'civil148':'https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=B0000001&flno=148',
+          'presale_page':'https://glrs.moi.gov.tw/LawContent.aspx?id=FL003296',
+          'presale_pdf':'https://www.ey.gov.tw/File/17FD66C7511F7121?A=C',
+          'obu':'https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=G0380037',
+          'obu_rules':'https://law.fsc.gov.tw/LawContent.aspx?id=FL006484',
+          'fed':'https://www.federalreserve.gov/aboutthefed/section2a.htm',
+          'ecb':'https://www.ecb.europa.eu/ecb/our-values/independence/html/index.en.html',
+          'ecb_account':'https://www.ecb.europa.eu/ecb/our-values/accountability/html/index.en.html'}
+          def get(item):
+              k,u=item
+              try:
+                  r=requests.get(u,timeout=35);r.raise_for_status()
+                  info={'url':u,'final_url':r.url,'status':r.status_code,'sha256':hashlib.sha256(r.content).hexdigest(),'bytes':len(r.content),'retrieved_at':datetime.now(timezone.utc).isoformat()}
+                  if r.content.startswith(b'%PDF'):
+                      (out/(k+'.pdf')).write_bytes(r.content)
+                      doc=fitz.open(stream=r.content,filetype='pdf');pages=[p.get_text() for p in doc]
+                      (out/(k+'.txt')).write_text('\n'.join('[PAGE %d]\n%s'%(i+1,t) for i,t in enumerate(pages)),encoding='utf-8')
+                      info['pages']=len(doc)
+                      for i,p in enumerate(doc):
+                          if k=='cbc_rules_pdf' or (k=='presale_pdf' and i in [0,6,7]) or (k=='cbc_qa_pdf' and any(v in pages[i] for v in ['Q11','Q12','Q13','Q14','Q15','Q16','房貸戶數','繼承'])):
+                              p.get_pixmap(matrix=fitz.Matrix(1.5,1.5)).save(str(out/(k+'-'+str(i)+'.png')))
+                  else:
+                      r.encoding='utf-8';s=BeautifulSoup(r.text,'html.parser');(out/(k+'.html')).write_text(r.text,encoding='utf-8')
+                      info['title']=s.title.get_text() if s.title else ''
+                      info['pdf_links']=[{'text':a.get_text(' ',strip=True),'href':a.get('href')} for a in s.select('a[href]') if 'PDF' in a.get_text() or '/dl-' in a.get('href','') or '.pdf' in a.get('href','').lower()]
+                      for el in s(['style','script']):el.decompose()
+                      (out/(k+'.txt')).write_text(s.get_text('\n',strip=True),encoding='utf-8')
+                  return k,info
+              except Exception as e:return k,{'url':u,'error':str(e)}
+          with concurrent.futures.ThreadPoolExecutor(max_workers=8) as ex:report=dict(ex.map(get,urls.items()))
+          (out/'report.json').write_text(json.dumps(report,ensure_ascii=False,indent=2),encoding='utf-8')
+          print(json.dumps({k:{'status':v.get('status'),'bytes':v.get('bytes'),'error':v.get('error')} for k,v in report.items()},ensure_ascii=False))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: legal-recheck-official-sources
+          path: legal-recheck
