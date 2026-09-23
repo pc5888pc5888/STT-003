@@ -126,10 +126,7 @@ export default function Engagement() {
         <div className="stt-g4-shell stt-g4-boundary__grid">
           <div>
             <p className="stt-g4-kicker">PROFESSIONAL BOUNDARY</p>
-            <h2>
-              <span>治理整合不等於</span>
-              <span>取代專業。</span>
-            </h2>
+            <h2>治理整合不等於取代專業。</h2>
           </div>
           <div>
             <p>
