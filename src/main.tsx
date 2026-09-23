@@ -18,6 +18,7 @@ import "./styles/stt-g3-method.css";
 import "./styles/stt-g4-engagement.css";
 import "./styles/stt-title-hero-reference.css";
 import "./styles/stt-institutional-pages.css";
+import "./styles/stt-g6-insights.css";
 import "./titleRules";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
