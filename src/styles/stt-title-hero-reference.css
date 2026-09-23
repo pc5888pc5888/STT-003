@@ -83,13 +83,13 @@
 
 .stt-title-hero.is-medium h1{
   max-width:900px;
-  font-size:clamp(46px,4.8vw,68px);
+  font-size:clamp(44px,4.3vw,62px);
   line-height:1.18;
 }
 
 .stt-title-hero.is-long h1{
   max-width:1060px;
-  font-size:clamp(42px,3.65vw,56px);
+  font-size:clamp(40px,3.35vw,52px);
   line-height:1.24;
   letter-spacing:-.03em;
 }
