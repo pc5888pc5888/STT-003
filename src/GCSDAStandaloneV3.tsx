@@ -93,6 +93,14 @@ function Shell({children}:{children:ReactNode}){
       "/privacy":"隱私與資料使用｜GCSDA",
     };
     document.title=labels[loc.pathname]||"找不到頁面｜GCSDA";
+    const descriptions:Record<string,string>={
+      "/":"中華企業策略永續發展學會 GCSDA｜企業策略、公司治理法遵、跨界交流與永續發展之全國性專業社團。",
+      "/about":"認識中華企業策略永續發展學會 GCSDA 的成立宗旨、策略圭臬、法定身分與 STT Governance 之獨立關係。",
+      "/governance":"了解 GCSDA 會員大會、理事會、監事會及第一屆理監事治理架構。",
+    };
+    let meta=document.querySelector<HTMLMetaElement>('meta[name="description"]');
+    if(!meta){meta=document.createElement("meta");meta.name="description";document.head.appendChild(meta)}
+    meta.content=descriptions[loc.pathname]||"中華企業策略永續發展學會 GCSDA 官方網站。";
     setOpen(false);
     window.scrollTo({top:0,behavior:"auto"});
   },[loc.pathname]);
