@@ -7,3 +7,5 @@
 /* Existing #root [class*="text-white"] forces dark text; override this control only. */
 #root .stt-intake-page button[type="submit"]{color:#fff!important}
 .stt-g0-shell .stt-g1-spine__number,.stt-g0-shell .stt-g2-deep-links>span,.stt-g0-shell .stt-g3-ai-boundary a,.stt-g0-shell .stt-insights-g6 button[data-active="true"]{color:#805b32!important}
+/* The eight retained problem pages share this existing intake link. */
+#root .pd4-cta a{background:#805b32!important;color:#fff!important}

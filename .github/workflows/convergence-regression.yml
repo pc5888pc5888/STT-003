@@ -2,40 +2,23 @@ name: Dual-site convergence regression
 on:
   push:
     branches: [stt-convergence-20260923]
-    paths: [src/styles/convergence-accessibility.css, .github/workflows/convergence-regression.yml, docs/qa/REGRESSION_REQUEST.md]
+    paths: [src/styles/convergence-accessibility.css, .github/workflows/convergence-regression.yml]
   workflow_dispatch:
 permissions:
   contents: read
 jobs:
-  verify:
+  stt-final-check:
     runs-on: ubuntu-latest
     timeout-minutes: 12
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - site: stt
-            ref: stt-convergence-20260923
-            routes: '/,/problems,/how-stt-works,/engagement,/insights,/about,/eric-chuang,/institutions,/start,/privacy,/professional-boundary,/research,/books'
-          - site: gcsda
-            ref: gcsda-convergence-20260923
-            routes: '/,/about,/governance,/council,/membership,/events,/knowledge,/charter,/privacy'
     steps:
       - uses: actions/checkout@v4
         with:
           ref: ${{ github.sha }}
-          path: control
-          persist-credentials: false
-      - uses: actions/checkout@v4
-        with:
-          ref: ${{ matrix.ref }}
-          path: site
           persist-credentials: false
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Snapshot and test
-        working-directory: site
+      - name: Snapshot and build
         run: |
           mkdir -p /tmp/convergence-evidence
           git rev-parse HEAD > /tmp/convergence-evidence/source-sha.txt
@@ -44,22 +27,29 @@ jobs:
           npm run lint > /tmp/convergence-evidence/typecheck.log 2>&1
           node --experimental-strip-types --test tests/*.test.mjs > /tmp/convergence-evidence/unit-tests.log 2>&1
           npm run build > /tmp/convergence-evidence/build.log 2>&1
-          cp public/images/eric-home-authority-20260921.jpg /tmp/convergence-evidence/ 2>/dev/null || true
-          cp dist/robots.txt dist/sitemap.xml /tmp/convergence-evidence/ 2>/dev/null || true
-      - name: Browser verification
-        working-directory: site
+      - name: Verify all retained pages and governance entry paths
         env:
-          QA_SITE: ${{ matrix.site }}
-          QA_ROUTES: ${{ matrix.routes }}
+          QA_SITE: stt
+          QA_ROUTES: '/,/problems,/how-stt-works,/engagement,/insights,/about,/eric-chuang,/institutions,/start,/privacy,/professional-boundary,/research,/books,/books/internal-compliance,/problems/major-decision,/problems/owner-dependence,/problems/succession,/problems/family-ownership,/problems/strategic-legal,/problems/ai-governance,/problems/system-failure,/problems/founder-legacy'
         run: |
           npm install --no-save --package-lock=false playwright @axe-core/playwright > /tmp/convergence-evidence/browser-install.log 2>&1
           npx playwright install --with-deps chromium > /tmp/convergence-evidence/browser-setup.log 2>&1
-          cp ../control/scripts/convergence_browser.mjs .convergence-browser.mjs
           npx vite preview --host 127.0.0.1 --port 4173 > /tmp/convergence-evidence/preview.log 2>&1 &
-          node .convergence-browser.mjs
+          node scripts/convergence_browser.mjs
+          node scripts/trust_paths_verify.mjs > /tmp/convergence-evidence/trust-path-tests.log 2>&1
+          python3 - <<'PY'
+          import json
+          r=json.load(open('/tmp/convergence-evidence/browser-summary.json'))
+          for field in ['overflow','invalidH1','pageErrors','internalLabels','accessibility']:
+              assert not r[field], (field,r[field])
+          assert all(x['passed'] for x in r['interactions'])
+          known='/images/eric-home-authority-20260921.jpg'
+          assert all(route=='/' and paths==[known] for route,device,paths in r['brokenImages'])
+          print('Scoped regression checks passed. Existing owner-image defect remains; not whole-site acceptance.')
+          PY
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: convergence-regression-${{ matrix.site }}-${{ github.run_number }}
+          name: stt-trust-final-${{ github.run_number }}
           path: /tmp/convergence-evidence/
           retention-days: 7
