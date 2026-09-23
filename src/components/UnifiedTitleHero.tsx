@@ -24,8 +24,9 @@ export default function UnifiedTitleHero({
 }: Props) {
   const lines = splitTitleAtBalancedPunctuation(title);
   const density = title.length >= 34 ? " is-long" : title.length >= 20 ? " is-medium" : " is-short";
+  const visualState = image ? " has-image" : " is-text-only";
   return (
-    <section className={"stt-title-hero" + density} aria-labelledby={id}>
+    <section className={"stt-title-hero" + density + visualState} aria-labelledby={id}>
       {image ? (
         <img
           className="stt-title-hero__image"
@@ -35,11 +36,7 @@ export default function UnifiedTitleHero({
           style={{ objectPosition: imagePosition }}
           draggable={false}
         />
-      ) : (
-        <div className="stt-title-hero__linework" aria-hidden="true">
-          <span /><span /><span />
-        </div>
-      )}
+      ) : null}
       <div className="stt-title-hero__veil" aria-hidden="true" />
       <div className="stt-title-hero__shell">
         <div className="stt-title-hero__copy">
