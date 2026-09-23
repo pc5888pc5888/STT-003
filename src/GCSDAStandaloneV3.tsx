@@ -1,5 +1,5 @@
-import { useState, type ReactNode } from "react";
-import { BrowserRouter, Link, NavLink, Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import { useEffect, useState, type ReactNode } from "react";
+import { BrowserRouter, Link, NavLink, Route, Routes, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 
 const STT_URL = "https://stt-003.vercel.app/";
@@ -68,14 +68,29 @@ function Styles(){return <style>{`
 `}</style>}
 
 function Shell({children}:{children:ReactNode}){
-  const nav=useNavigate(); const loc=useLocation(); const[open,setOpen]=useState(false);
-  const go=(p:string)=>{setOpen(false);nav(p);window.scrollTo({top:0,behavior:"smooth"})};
+  const loc=useLocation(); const[open,setOpen]=useState(false);
+  useEffect(()=>{
+    const labels:Record<string,string>={
+      "/":"GCSDA｜中華企業策略永續發展學會",
+      "/about":"關於學會｜GCSDA",
+      "/governance":"組織治理｜GCSDA",
+      "/council":"策略治理聯席會｜GCSDA",
+      "/membership":"會員與入會｜GCSDA",
+      "/events":"活動與大會｜GCSDA",
+      "/knowledge":"知識與研究｜GCSDA",
+      "/charter":"章程與公告｜GCSDA",
+      "/privacy":"隱私與資料使用｜GCSDA",
+    };
+    document.title=labels[loc.pathname]||"找不到頁面｜GCSDA";
+    setOpen(false);
+    window.scrollTo({top:0,behavior:"auto"});
+  },[loc.pathname]);
   return <div className="g4"><Styles/><header className="g4-head"><div className="g4-wrap g4-headin"><Link className="g4-brand" to="/" aria-label="GCSDA 首頁"><b>GCSDA</b><small>中華企業策略永續發展學會</small></Link><nav className="g4-nav" aria-label="主要導覽">{navItems.map(([l,p])=><NavLink key={p} className={({isActive})=>isActive?"active":""} to={p}>{l}</NavLink>)}<a className="g4-stt" href={STT_URL}>STT Governance ↗</a></nav><button className="g4-menu" onClick={()=>setOpen(true)} aria-label="開啟選單" aria-expanded={open}><Menu/></button></div></header>{open&&<div className="g4-drawer" onClick={()=>setOpen(false)}><div className="g4-drawerpanel" onClick={e=>e.stopPropagation()}><button className="g4-close" onClick={()=>setOpen(false)} aria-label="關閉選單"><X/></button>{navItems.map(([l,p])=><Link key={p} to={p} onClick={()=>setOpen(false)}>{l}</Link>)}<a href={STT_URL} onClick={()=>setOpen(false)}>STT Governance ↗</a></div></div>}<main>{children}</main><footer className="g4-footer"><div className="g4-wrap g4-footergrid"><div><b>中華企業策略永續發展學會｜GCSDA</b><p>依法成立之全國性專業社團。以公司治理法遵、企業策略、風險控管、跨界交流與永續發展為核心，逐步累積正式組織與治理知識。</p></div><div><a href={LINE_URL} target="_blank" rel="noreferrer">會員與聯絡</a><a href={STT_URL}>STT Governance ↗</a><Link to="/privacy">隱私</Link></div></div></footer></div>
 }
 
 function PageHead({eyebrow,title,lead}:{eyebrow:string;title:string;lead:string}){const lines=splitBalancedTitle(title);return <section className="g4-pagehead"><div className="g4-wrap"><div className="g4-kicker">{eyebrow}</div><h1 aria-label={title}>{lines.map((line,i)=><span className="g4-title-line" key={i}>{line}</span>)}</h1><p>{lead}</p></div></section>}
 
-function Home(){const nav=useNavigate();return <><section className="g4-home"><div className="g4-home-media"/><div className="g4-wrap"><div className="g4-home-copy"><div className="g4-kicker">GCSDA · NATIONAL PROFESSIONAL ASSOCIATION · TAIWAN</div><h1>讓策略、治理與永續，<br/>成為共同語言。</h1><p>中華企業策略永續發展學會連結企業、專業與學術，透過正式組織、章程、會員共同體與跨域交流，逐步累積可被延續的治理知識與實務連結。</p><div className="g4-actions"><button className="primary" onClick={()=>nav('/about')}>認識學會</button><button onClick={()=>nav('/membership')}>會員與入會</button></div></div></div></section><section className="g4-values"><div className="g4-wrap g4-valuegrid">{[["01","策略為先","先理解方向與真正問題，再談資源配置。"],["02","治理為本","讓權力、責任與程序有正式制度位置。"],["03","跨域協作","不同專業保有責任邊界，再形成共同語言。"],["04","永續累積","讓活動與交流逐步沉澱為可被傳承的知識資產。"]].map(([n,t,d])=><div className="g4-value" key={n}><span>{n}</span><h3>{t}</h3><p>{d}</p></div>)}</div></section><section className="g4-section"><div className="g4-wrap"><div className="g4-kicker">INSTITUTIONAL FOUNDATION</div><h2 className="g4-title">一個談治理的組織，本身必須先被治理。</h2><p className="g4-lead">學會以會員大會、理事會、監事會與章程形成正式組織基礎；網站呈現的治理身分、職權與會員制度，均應回到正式章程與會務文件。</p><div className="g4-grid">{[["01","正式立案","主管機關為內政部，組織區域為全國。"],["02","會員共同體","會員資格、權利義務與會費依正式章程及決議。"],["03","專業協作","連結法律、會計、策略、產業與學術，但不混淆各自責任。"]].map(x=><div className="g4-card" key={x[0]}><span>{x[0]}</span><h3>{x[1]}</h3><p>{x[2]}</p></div>)}</div><div className="g4-actions"><button onClick={()=>nav('/governance')}>理解組織治理 →</button></div></div></section><section className="g4-section soft"><div className="g4-wrap"><div className="g4-kicker">MEMBERSHIP & COMMUNITY</div><h2 className="g4-title">加入的不是一項服務，而是一個治理共同體。</h2><p className="g4-lead">會員制度的核心是長期參與、共同學習、正式會務與跨域交流，而不是把學會變成商業顧問銷售入口。</p><div className="g4-actions"><button className="primary" onClick={()=>nav('/membership')}>了解會員與入會</button><button onClick={()=>nav('/events')}>活動與大會</button></div></div></section><section className="g4-final"><div className="g4-kicker">GCSDA</div><h2>把一次性的交流，轉化為可以逐年累積的制度與知識。</h2><p>學會不以尚未發生的成果裝飾網站；正式活動、研究、出版與公告，均在資料完成後逐步建立公開紀錄。</p></section></>}
+function Home(){return <><section className="g4-home"><div className="g4-home-media"/><div className="g4-wrap"><div className="g4-home-copy"><div className="g4-kicker">GCSDA · NATIONAL PROFESSIONAL ASSOCIATION · TAIWAN</div><h1>讓策略、治理與永續，<br/>成為共同語言。</h1><p>中華企業策略永續發展學會連結企業、專業與學術，透過正式組織、章程、會員共同體與跨域交流，逐步累積可被延續的治理知識與實務連結。</p><div className="g4-actions"><Link className="primary" to="/about">認識學會</Link><Link to="/membership">會員與入會</Link></div></div></div></section><section className="g4-values"><div className="g4-wrap g4-valuegrid">{[["01","策略為先","先理解方向與真正問題，再談資源配置。"],["02","治理為本","讓權力、責任與程序有正式制度位置。"],["03","跨域協作","不同專業保有責任邊界，再形成共同語言。"],["04","永續累積","讓活動與交流逐步沉澱為可被傳承的知識資產。"]].map(([n,t,d])=><div className="g4-value" key={n}><span>{n}</span><h3>{t}</h3><p>{d}</p></div>)}</div></section><section className="g4-section"><div className="g4-wrap"><div className="g4-kicker">INSTITUTIONAL FOUNDATION</div><h2 className="g4-title">一個談治理的組織，本身必須先被治理。</h2><p className="g4-lead">學會以會員大會、理事會、監事會與章程形成正式組織基礎；網站呈現的治理身分、職權與會員制度，均應回到正式章程與會務文件。</p><div className="g4-grid">{[["01","正式立案","主管機關為內政部，組織區域為全國。"],["02","會員共同體","會員資格、權利義務與會費依正式章程及決議。"],["03","專業協作","連結法律、會計、策略、產業與學術，但不混淆各自責任。"]].map(x=><div className="g4-card" key={x[0]}><span>{x[0]}</span><h3>{x[1]}</h3><p>{x[2]}</p></div>)}</div><div className="g4-actions"><Link to="/governance">理解組織治理 →</Link></div></div></section><section className="g4-section soft"><div className="g4-wrap"><div className="g4-kicker">MEMBERSHIP & COMMUNITY</div><h2 className="g4-title">加入的不是一項服務，而是一個治理共同體。</h2><p className="g4-lead">會員制度的核心是長期參與、共同學習、正式會務與跨域交流，而不是把學會變成商業顧問銷售入口。</p><div className="g4-actions"><Link className="primary" to="/membership">了解會員與入會</Link><Link to="/events">活動與大會</Link></div></div></section><section className="g4-final"><div className="g4-kicker">GCSDA</div><h2>把一次性的交流，轉化為可以逐年累積的制度與知識。</h2><p>學會不以尚未發生的成果裝飾網站；正式活動、研究、出版與公告，均在資料完成後逐步建立公開紀錄。</p></section></>}
 
 function About(){return <div className="g4-page"><PageHead eyebrow="INSTITUTIONAL IDENTITY" title="讓企業、專業與學術在治理議題上，形成可以持續對話的正式共同體。" lead="GCSDA 以公司治理法遵、企業策略、風險控管、跨界交流與永續發展為核心，透過正式社團制度，把一次性交流轉化為可以逐年累積的組織與知識。"/><section className="g4-section"><div className="g4-wrap"><div className="g4-list">{charterHighlights.slice(0,3).map(([a,b])=><div className="g4-row" key={a}><b>{a}</b><div>{b}</div></div>)}<div className="g4-row"><b>法定立案</b><div>內政部 114/8 台內團字第 1140030747 號。</div></div></div><div className="g4-note"><h3>GCSDA 與 STT Governance 是不同機構主體。</h3><p>兩者可以在治理知識、活動或內容上形成合作與互相連結，但學會的會員大會、理事會、監事會、章程與法定責任不由 STT 取代；STT 亦不因連結學會而成為學會之法定機關。</p></div></div></section></div>}
 
