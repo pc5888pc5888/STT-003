@@ -8,7 +8,7 @@ permissions:
 jobs:
   prepare:
     runs-on: ubuntu-latest
-    timeout-minutes: 12
+    timeout-minutes: 10
     strategy:
       fail-fast: false
       matrix:
@@ -25,27 +25,56 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - run: npm ci && npm run build
-      - name: Bundle exact source and build dependencies
+      - run: npm ci
+      - name: Bundle source, dependencies and active art only
         run: |
           mkdir -p /tmp/editorial
           python3 - <<'PY'
           from pathlib import Path
           import zipfile
           files=[]
-          for folder in ['src','api','tests','public']:
+          for folder in ['src','api','tests','node_modules']:
               files.extend(p for p in Path(folder).rglob('*') if p.is_file())
-          files.extend(p for p in Path('.').glob('*') if p.suffix in ['.json','.ts','.html','.js','.png','.jpg','.webp'])
-          with zipfile.ZipFile('/tmp/editorial/site.zip','w',zipfile.ZIP_DEFLATED,compresslevel=1) as z:
+          files.extend(p for p in Path('.').glob('*') if p.suffix in ['.json','.ts','.html','.js'])
+          with zipfile.ZipFile('/tmp/editorial/source-deps.zip','w',zipfile.ZIP_DEFLATED,compresslevel=1) as z:
               for p in files:z.write(p)
-          with zipfile.ZipFile('/tmp/editorial/dependencies.zip','w',zipfile.ZIP_DEFLATED,compresslevel=1) as z:
-              for p in Path('node_modules').rglob('*'):
-                  if p.is_file():z.write(p)
+          assets=[]
+          for p in Path('public').rglob('*'):
+              if not p.is_file():continue
+              name=str(p)
+              if p.suffix.lower() in ['.png','.webp','.jpg','.jpeg','.svg']:
+                  if any(s in name for s in ['user-approved-six/','originals-20260910/','primary-semantic/','visual-bank/gcsda/','images/','cooperation-hero-20260917','eric-chuang-hero-20260917','portrait-read','portrait-open','STT-Press-Seal']):assets.append(p)
+              elif p.suffix.lower() not in ['.woff','.woff2','.ttf','.otf'] and p.stat().st_size<5000000:assets.append(p)
+          group=0;size=0;z=zipfile.ZipFile('/tmp/editorial/art-0.zip','w',zipfile.ZIP_DEFLATED,compresslevel=1)
+          for p in assets:
+              if size+p.stat().st_size>240000000:
+                  z.close();group+=1;size=0;z=zipfile.ZipFile('/tmp/editorial/art-'+str(group)+'.zip','w',zipfile.ZIP_DEFLATED,compresslevel=1)
+              z.write(p);size+=p.stat().st_size
+          z.close()
           PY
       - uses: actions/upload-artifact@v4
-        if: always()
         with:
-          name: editorial-workspace-${{ matrix.site }}
-          path: /tmp/editorial/
+          name: editorial-source-${{ matrix.site }}
+          path: /tmp/editorial/source-deps.zip
+          retention-days: 3
+          compression-level: 0
+      - uses: actions/upload-artifact@v4
+        with:
+          name: editorial-art-${{ matrix.site }}-0
+          path: /tmp/editorial/art-0.zip
+          retention-days: 3
+          compression-level: 0
+      - uses: actions/upload-artifact@v4
+        with:
+          name: editorial-art-${{ matrix.site }}-1
+          path: /tmp/editorial/art-1.zip
+          if-no-files-found: ignore
+          retention-days: 3
+          compression-level: 0
+      - uses: actions/upload-artifact@v4
+        with:
+          name: editorial-art-${{ matrix.site }}-2
+          path: /tmp/editorial/art-2.zip
+          if-no-files-found: ignore
           retention-days: 3
           compression-level: 0
