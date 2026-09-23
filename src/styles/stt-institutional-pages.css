@@ -1,0 +1,117 @@
+/* Institutional pages — shared section system below unified title hero */
+
+.stt-inst-page{
+  --inst-paper:#fbfaf7;
+  --inst-paper-2:#f5f1e8;
+  --inst-ink:#26231f;
+  --inst-muted:#70685f;
+  --inst-gold:#b8925d;
+  --inst-gold-deep:#8f693d;
+  --inst-line:#d8c8ad;
+  background:var(--inst-paper);
+  color:var(--inst-ink);
+}
+
+.stt-inst-shell{
+  width:min(1180px,calc(100% - 48px));
+  margin:0 auto;
+}
+
+.stt-inst-section{
+  padding:clamp(78px,9vw,122px) 0;
+  border-bottom:1px solid var(--inst-line);
+}
+
+.stt-inst-section:nth-of-type(even){
+  background:var(--inst-paper-2);
+}
+
+.stt-inst-kicker{
+  margin:0;
+  color:var(--inst-gold-deep);
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:.2em;
+  line-height:1.5;
+}
+
+.stt-inst-section h2{
+  max-width:900px;
+  margin:15px 0 0;
+  font-family:"Noto Serif TC","Noto Serif CJK TC","Songti TC","PMingLiU",serif;
+  font-size:clamp(32px,4vw,52px);
+  font-weight:500;
+  line-height:1.34;
+  letter-spacing:-.025em;
+}
+
+.stt-inst-body{
+  max-width:980px;
+  margin-top:28px;
+}
+
+.stt-inst-body>p{
+  margin:0;
+  color:var(--inst-muted);
+  font-size:16px;
+  line-height:1.95;
+}
+
+.stt-inst-body>a{
+  display:inline-flex;
+  margin-top:24px;
+  padding-bottom:4px;
+  border-bottom:1px solid var(--inst-gold);
+  color:var(--inst-gold-deep);
+  text-decoration:none;
+  font-size:13px;
+}
+
+.stt-inst-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  margin-top:34px;
+  border-top:1px solid var(--inst-line);
+  border-left:1px solid var(--inst-line);
+}
+
+.stt-inst-grid article{
+  min-height:170px;
+  padding:28px;
+  border-right:1px solid var(--inst-line);
+  border-bottom:1px solid var(--inst-line);
+  background:rgba(255,255,255,.62);
+}
+
+.stt-inst-grid strong{
+  font-family:"Noto Serif TC",serif;
+  font-size:23px;
+  font-weight:500;
+}
+
+.stt-inst-grid p{
+  margin:12px 0 0;
+  color:var(--inst-muted);
+  font-size:14px;
+  line-height:1.85;
+}
+
+.stt-inst-list{
+  margin:0;
+  padding:0;
+  list-style:none;
+  border-top:1px solid var(--inst-line);
+}
+
+.stt-inst-list li{
+  padding:17px 0;
+  border-bottom:1px solid var(--inst-line);
+  color:var(--inst-muted);
+  line-height:1.75;
+}
+
+@media(max-width:720px){
+  .stt-inst-shell{width:min(100% - 28px,1180px)}
+  .stt-inst-section{padding:62px 0}
+  .stt-inst-grid{grid-template-columns:1fr}
+}

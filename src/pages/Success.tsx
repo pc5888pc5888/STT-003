@@ -1,14 +1,17 @@
 import { ExternalLink, MessageCircle } from "lucide-react";
+import UnifiedTitleHero from "../components/UnifiedTitleHero";
 
 export default function SuccessPage() {
   return (
-    <div className="min-h-screen bg-[#fbfaf7] px-6 py-20 text-[#2b261f] lg:px-10 lg:py-28">
-      <div className="mx-auto max-w-[920px]">
-        <p className="text-[10px] uppercase tracking-[0.26em] text-[#8b642f]">STT PRESS · DIGITAL DELIVERY</p>
-        <h1 className="mt-6 font-serif text-5xl font-normal leading-tight lg:text-7xl">付款完成</h1>
-        <p className="mt-4 text-xs uppercase tracking-[0.2em] text-[#9a6f3b]">Payment Confirmed</p>
-
-        <div className="mt-10 border-y border-[#ddcfba] py-9">
+    <div className="min-h-screen bg-[#fbfaf7] text-[#2b261f]">
+      <UnifiedTitleHero
+        kicker="STT PRESS · DIGITAL DELIVERY"
+        title="付款完成"
+        subtitle="Payment Confirmed"
+        id="success-title"
+      />
+      <div className="mx-auto max-w-[920px] px-6 py-16 lg:px-10 lg:py-20">
+        <div className="border-y border-[#ddcfba] py-9">
           <p className="max-w-[800px] font-serif text-2xl leading-[1.8] text-[#5f5549]">
             感謝您購買《內在法遵 Internal Compliance｜為你的內心，打造一座不可侵犯的至聖所》數位閱讀完整版。
           </p>

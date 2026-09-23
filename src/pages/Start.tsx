@@ -1,5 +1,6 @@
 import { FormEvent, useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";
+import UnifiedTitleHero from "../components/UnifiedTitleHero";
 
 type IntakeField = {
   key: string;
@@ -205,16 +206,14 @@ export default function Start() {
 
   return (
     <div className="stt-intake-page bg-[#fbfaf7] text-[#26231f]">
-      <section className="stt-intake-hero border-b border-[#d8c8ad] px-6 py-16 lg:px-10 lg:py-24">
-        <div className="mx-auto max-w-[980px]">
-          <p className="stt-intake-kicker text-[11px] uppercase tracking-[0.26em] text-[#a37a43]">{schema.eyebrow}</p>
-          <h1 className="stt-intake-title mt-5 font-serif text-4xl leading-tight lg:text-6xl" aria-label={schema.title}>
-            {splitTitleAtBalancedPunctuation(schema.title).map((line, index) => <span className="stt-intake-title-line" key={index}>{line}</span>)}
-          </h1>
-          <p className="stt-intake-lead mt-6 max-w-[760px] text-base leading-8 text-[#6d675f] lg:text-lg">{schema.intro}</p>
-          <div className="stt-intake-route mt-7 inline-flex border border-[#d8c8ad] bg-white px-4 py-2 text-xs text-[#7b6d59]">目前入口｜{schema.label}</div>
-        </div>
-      </section>
+      <UnifiedTitleHero
+        kicker={schema.eyebrow}
+        title={schema.title}
+        lead={schema.intro}
+        id="start-title"
+      >
+        <div className="stt-intake-route">目前入口｜{schema.label}</div>
+      </UnifiedTitleHero>
 
       <section className="stt-intake-body px-6 py-10 lg:px-10 lg:py-16">
         <form onSubmit={submit} className="stt-intake-form mx-auto max-w-[980px] space-y-5">
