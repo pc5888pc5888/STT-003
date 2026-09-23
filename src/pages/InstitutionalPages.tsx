@@ -139,16 +139,9 @@ export function PrivacyPage(){
     <UnifiedTitleHero
       kicker="PRIVACY & DATA USE"
       title="隱私與資料使用"
-      subtitle="第一次提交，只整理問題與下一步。"
-      lead="本網站第一階段只整理問題與下一步，不提供即時法律結論，也不要求第一次提交大量敏感資訊。正式受理後，才依案件建立資料與 AI 使用邊界。"
+      lead="本頁應由站主依實際表單工具、資料儲存位置、寄送服務與保存期間完成最終版本。AI 不得自行宣稱加密、ISO 認證、特定保存年限或跨境處理狀態。未確認項目一律標示 TBD_OWNER_INPUT，不得發布虛構內容。"
       id="privacy-title"
     />
-    <Section kicker="DATA MINIMIZATION" title="第一次受理，不要求大量敏感資料。">
-      <p>請不要在第一階段提供不必要的身分證件、金融帳戶、醫療資料、完整營業秘密或其他高度敏感資訊；Phase 1 不提供檔案上傳。</p>
-    </Section>
-    <Section kicker="IMPLEMENTATION BOUNDARY" title="網站只揭露可以被確認的資料處理事實。">
-      <p>在實際表單工具、資料儲存位置、寄送服務與保存期間未被正式確認前，STT 不在網站上自行宣稱特定加密、ISO 認證、特定保存年限或跨境處理狀態。</p>
-    </Section>
   </div>;
 }
 
