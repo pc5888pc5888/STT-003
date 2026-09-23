@@ -1,0 +1,40 @@
+name: Capture legal M Media reference
+on:
+  push:
+    branches: [preview/legal-mortgage-20260923-r2]
+    paths: [.github/workflows/legal-mmedia-reference-20260923.yml]
+permissions:
+  contents: read
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python -m pip -q install requests beautifulsoup4
+      - name: Capture exact source and current preview
+        run: |
+          mkdir -p /tmp/legal-reference
+          python - <<'PY'
+          import requests,pathlib,json,shutil,hashlib
+          from bs4 import BeautifulSoup
+          out=pathlib.Path('/tmp/legal-reference')
+          u='https://94m.com.tw/articles/007816?from_admin=true'
+          r=requests.get(u,timeout=40);r.raise_for_status();r.encoding='utf-8'
+          (out/'reference-full.html').write_text(r.text,encoding='utf-8')
+          s=BeautifulSoup(r.text,'html.parser');root=s.select_one('#stt-legal-v2');assert root
+          styles=[str(x) for x in s.select('style') if '#stt-legal-v2' in x.get_text()]
+          (out/'reference-fragment.html').write_text(''.join(styles)+str(root),encoding='utf-8')
+          (out/'reference-text.txt').write_text(root.get_text('\n',strip=True),encoding='utf-8')
+          old=pathlib.Path('public/legal-mortgage-preview/index.html').read_text()
+          (out/'current-workbench.html').write_text(old,encoding='utf-8')
+          p=json.loads(BeautifulSoup(old,'html.parser').select_one('#article-data').string)
+          (out/'current-fragment.html').write_text(p['fragment'],encoding='utf-8')
+          (out/'current-audit.html').write_text(p['audit'],encoding='utf-8')
+          shutil.copy('legal-mortgage-preview/site-verification.json',out/'previous-verification.json')
+          print(json.dumps({'reference_title':s.title.get_text(),'reference_h1':root.select_one('h1').get_text(),'current_fragment_sha256':hashlib.sha256(p['fragment'].encode()).hexdigest(),'reference_headings':[x.get_text() for x in root.select('h1,h2,h3,.section-label')],'reference_css_lengths':[len(x) for x in styles]},ensure_ascii=False))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: legal-mmedia-reference-current
+          path: /tmp/legal-reference
+          retention-days: 7
