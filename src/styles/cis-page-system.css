@@ -188,6 +188,18 @@
 #root .stt-g3-step dt{font:500 13px/1.8 var(--cis-serif)!important;color:#9a6e3d!important}
 #root .stt-g3-step dd{margin:0!important;color:#474139!important;font-size:17px!important;line-height:1.9!important}
 
+/* Intake page: the approved hero is followed directly by one quiet data-minimization note, then the form. */
+#root .stt-intake-brief{border-bottom:1px solid var(--cis-line);background:#fbfaf7;padding:24px 40px!important}
+#root .stt-intake-brief>div{width:min(940px,100%);margin:0 auto!important}
+#root .stt-intake-brief strong{display:block;font:500 19px/1.65 var(--cis-serif);color:#2c2823}
+#root .stt-intake-brief p{margin:8px 0 0!important;max-width:58em;font-size:16px!important;line-height:1.9!important;color:#474139!important}
+
+/* Typography must remain crisp against the ivory system; high trust does not mean low contrast. */
+#root main :where(p,dd,li){color:#3f3a34!important}
+#root main :where(h2,h3){color:#24211e!important}
+#root .cis-hero .cis-title{color:#161513!important}
+#root .cis-hero .cis-lead{color:#3e3933!important}
+
 /* Intake page: no white card rows; fields sit in a continuous governance dossier. */
 #root .stt-intake-page form>fieldset>div>label,
 #root .stt-intake-page form>fieldset>div>fieldset{background:transparent!important;border-left:0!important;border-right:0!important}
@@ -206,6 +218,7 @@
   #root .stt-g0-shell .cis-with-image.cis-portrait .cis-hero-art img{object-fit:contain!important;object-position:right center!important;background:#fbfaf7!important}
 }
 @media(max-width:900px){
+  #root .stt-intake-brief{padding:20px 24px!important}
   #root .stt-g0-header__inner{padding:0 24px!important}
   #root .stt-g0-shell .cis-with-image .cis-hero-copy,
   #root .stt-g0-shell .cis-with-image.cis-clear-left .cis-hero-copy,
