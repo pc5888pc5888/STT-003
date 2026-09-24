@@ -11,8 +11,8 @@ export const PAGE_PRESENTATION: Record<string, PagePresentation> = {
     "originalTitle": "讓重要的事，走得更遠。",
     "context": null,
     "portrait": false,
-    "imageWidth": 1491,
-    "imageHeight": 1055
+    "imageWidth": 1672,
+    "imageHeight": 941
   },
   "/problems": {
     "lines": [
@@ -23,8 +23,8 @@ export const PAGE_PRESENTATION: Record<string, PagePresentation> = {
     "originalTitle": "你正在面對什麼",
     "context": null,
     "portrait": false,
-    "imageWidth": 1491,
-    "imageHeight": 1055
+    "imageWidth": 1672,
+    "imageHeight": 941
   },
   "/how-stt-works": {
     "lines": [
@@ -35,8 +35,8 @@ export const PAGE_PRESENTATION: Record<string, PagePresentation> = {
     "originalTitle": "如何判讀",
     "context": null,
     "portrait": false,
-    "imageWidth": 1491,
-    "imageHeight": 1055
+    "imageWidth": 1672,
+    "imageHeight": 941
   },
   "/engagement": {
     "lines": [
@@ -61,8 +61,8 @@ export const PAGE_PRESENTATION: Record<string, PagePresentation> = {
     "originalTitle": "判讀不是臨時形成的意見，而是長期累積的制度研究。",
     "context": null,
     "portrait": false,
-    "imageWidth": 1491,
-    "imageHeight": 1055
+    "imageWidth": 1672,
+    "imageHeight": 941
   },
   "/about": {
     "lines": [
@@ -74,8 +74,8 @@ export const PAGE_PRESENTATION: Record<string, PagePresentation> = {
     "originalTitle": "STT Governance 不是一般顧問公司，而是高位階治理文明平台。",
     "context": "STT Governance 不是一般顧問公司，而是高位階治理文明平台。",
     "portrait": false,
-    "imageWidth": 1491,
-    "imageHeight": 1055
+    "imageWidth": 1672,
+    "imageHeight": 941
   },
   "/eric-chuang": {
     "lines": [
@@ -108,10 +108,12 @@ export const PAGE_PRESENTATION: Record<string, PagePresentation> = {
       "先把正在發生的事情說清楚。"
     ],
     "type": 1,
-    "image": null,
+    "image": "/visual-bank/stt/cooperation-hero-20260917.png",
     "originalTitle": "先把正在發生的事情說清楚。",
     "context": null,
-    "portrait": false
+    "portrait": false,
+    "imageWidth": 1672,
+    "imageHeight": 941
   },
   "/privacy": {
     "lines": [
@@ -154,8 +156,8 @@ export const PAGE_PRESENTATION: Record<string, PagePresentation> = {
     "originalTitle": "著作正典",
     "context": null,
     "portrait": false,
-    "imageWidth": 1491,
-    "imageHeight": 1055
+    "imageWidth": 1672,
+    "imageHeight": 941
   },
   "/books/internal-compliance": {
     "lines": [
