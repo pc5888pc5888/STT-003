@@ -29,7 +29,7 @@ export function AboutPage(){
       kicker="ABOUT STT GOVERNANCE"
       title="STT Governance 不是一般顧問公司，而是高位階治理文明平台。"
       subtitle="STT 不以提供更多意見為目的，而是建立可以承擔後果的治理秩序。"
-      lead="STT Governance 是以重大決策、企業與家族治理為核心的治理判讀與制度設計平台。當一個問題同時牽涉策略、權力、證據、責任、法遵或家族關係時，單一專業工具往往不足以回答「應不應該做」以及「誰應該承擔」。STT 的工作，是先建立治理結構，再讓適當的專業工具進入。"
+      lead="STT Governance 是以重大決策、企業與家族治理為核心的治理判讀與制度設計平台；當一個問題同時牽涉策略、權力、證據、責任、法遵或家族關係時，STT 先建立治理結構，再讓適當的專業工具進入。"
       image="/visual-bank/stt/user-approved-six/about-stt.png"
       imagePosition="center right"
       id="about-title"
@@ -51,7 +51,7 @@ export function AboutPage(){
     </Section>
 
     <Section kicker="HUMAN AUTHORITY" title="最終判讀仍須有人承擔。">
-      <p>STT 使用 AI 協助研究、整理、比對與版本追蹤，但重大治理判讀、授權與是否執行，仍由人類決策者與治理程序承擔。</p>
+      <p>STT 使用 AI 協助研究、整理、比對與版本追蹤，但重大治理判讀、授權與是否執行仍由人類決策者與治理程序承擔。</p>
       <Link to="/eric-chuang">莊鈞翔博士 →</Link>
     </Section>
   </div>;
@@ -87,7 +87,7 @@ export function EricPage(){
     </Section>
 
     <Section kicker="PUBLIC INTERPRETATION" title="公開判讀與專欄。">
-      <p>公開專欄與第三方媒體發表用來呈現研究如何進入現實事件。M 傳媒屬外部第三方媒體，僅標示為發表來源。</p>
+      <p>公開專欄與第三方媒體發表用來呈現研究如何進入現實事件；M 傳媒屬外部第三方媒體，僅標示為發表來源。</p>
       <a href={M_MEDIA_URL} target="_blank" rel="noreferrer">M 傳媒｜外部第三方發表來源 ↗</a>
     </Section>
 
