@@ -57,7 +57,7 @@ export default function Engagement() {
       <UnifiedTitleHero
         kicker="GOVERNANCE ENGAGEMENT"
         title="當一件事情值得被正式治理，就不應只停留在一次諮詢。"
-        lead="STT 依事件複雜度、決策層級與持續時間，以治理判讀、治理架構與年度治理委任三種方式介入。不是所有事件都需要長期委任；介入深度應與錯誤成本相稱。"
+        lead="STT 依事件複雜度、決策層級與持續時間，以治理判讀、治理架構與年度治理委任三種方式介入；不是所有事件都需要長期委任，介入深度應與錯誤成本相稱。"
         id="engagement-title"
       />
 
