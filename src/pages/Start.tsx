@@ -158,17 +158,14 @@ export default function Start() {
         id="start-title"
       />
 
-      <section className="border-b border-[#d8c8ad] px-6 py-12 lg:px-10 lg:py-16">
-        <div className="mx-auto max-w-[980px]">
-          <p className="text-[11px] font-bold tracking-[0.2em] text-[#8f693d]">DATA MINIMIZATION</p>
-          <h2 className="mt-4 font-serif text-3xl leading-snug lg:text-4xl">第一次提交，只整理問題與下一步。</h2>
-          <p className="mt-5 max-w-[850px] text-sm leading-8 text-[#70685f] lg:text-base">
-            本頁第一階段只整理問題與下一步，不提供即時法律結論，也不要求第一次提交大量敏感資訊；正式受理後再依案件建立資料與 AI 使用邊界，因此此階段不需要提供身分證件、金融帳戶、醫療資料、完整營業秘密或其他高度敏感資訊。
-          </p>
+      <section className="stt-intake-brief">
+        <div>
+          <strong>第一次提交，只整理問題與下一步</strong>
+          <p>本頁不提供即時法律結論，也不要求首次提交大量敏感資訊；正式受理後再依案件確認資料需求與 AI 使用邊界，因此此階段無須提供身分證件、金融帳戶、醫療資料、完整營業秘密或其他高度敏感資訊。</p>
         </div>
       </section>
 
-      <section className="px-6 py-12 lg:px-10 lg:py-18">
+      <section className="px-6 py-12 lg:px-10 lg:py-18" id="intake-form">
         <form onSubmit={submit} aria-busy={sending} className="mx-auto max-w-[980px]" noValidate={false}>
           <fieldset disabled={sending} className="m-0 min-w-0 border-0 p-0"><legend className="sr-only">治理受理必要資訊</legend>
           <div className="border-t border-[#d8c8ad]">
