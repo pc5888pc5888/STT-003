@@ -138,7 +138,7 @@ export default function Problems() {
 
   return (
     <div className="stt-g2-problems">
-      <GovernedHero kicker="PROBLEM FIRST · GOVERNANCE BEFORE SOLUTION" title="你正在面對什麼" lead="企業重大決策、家族治理、接班安排、股權與控制、法遵壓力及 AI 使用，表面看似不同，底層往往都指向問題定義、權責配置、證據判讀與風險承擔。" subtitle="先釐清你正在面對的是什麼，再決定怎麼處理。"></GovernedHero>
+      <GovernedHero kicker="PROBLEM FIRST · GOVERNANCE BEFORE SOLUTION" title="你正在面對什麼" lead="企業重大決策、家族治理、接班安排、股權與控制、法遵壓力及 AI 使用，表面看似不同，底層往往都指向問題定義、權責配置、證據判讀與風險承擔；先釐清你正在面對的是什麼，再決定怎麼處理。"></GovernedHero>
 
       <nav className="stt-g2-index" aria-label="四大治理問題">
         <div className="stt-g2-shell stt-g2-index__grid">
