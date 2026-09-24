@@ -114,7 +114,7 @@ export function InstitutionsPage(){
       kicker="INSTITUTIONAL GOVERNANCE"
       title="當單一專業工具不足以處理整體治理問題，需要的是一個更上位的判讀架構。"
       titleLines={["當單一專業工具不足以處理整體治理問題，", "需要的是一個更上位的判讀架構。"]}
-      lead="重大治理事件可能同時牽涉法律、財務、家族、策略、權力與執行。STT 負責治理整合與問題架構；各專業仍在自身責任範圍內執行。"
+      lead="重大治理事件可能同時牽涉法律、財務、家族、策略、權力與執行；STT 負責治理整合與問題架構，各專業仍在自身責任範圍內執行。"
       image="/visual-bank/stt/cooperation-hero-20260917.png"
       imagePosition="center right"
       id="institutions-title"
@@ -139,7 +139,7 @@ export function PrivacyPage(){
     <UnifiedTitleHero
       kicker="PRIVACY & DATA USE"
       title="隱私與資料使用"
-      lead="第一次受理以整理治理情境與必要聯絡資訊為限。請勿提供身分證件、金融帳戶、醫療資料、完整營業秘密或其他不必要的敏感內容。"
+      lead="第一次受理以整理治理情境與必要聯絡資訊為限；請勿提供身分證件、金融帳戶、醫療資料、完整營業秘密或其他不必要的敏感內容。"
       id="privacy-title"
     />
     <Section title="初次受理的必要資訊">
@@ -164,7 +164,7 @@ export function ProfessionalBoundaryPage(){
     <UnifiedTitleHero
       kicker="PROFESSIONAL BOUNDARY"
       title="治理判讀與專業服務邊界"
-      lead="STT 網站內容用於說明治理方法、研究觀點與受理流程，不構成對特定個案的即時法律、稅務、投資、醫療或其他依法需由特定專業人員提供之意見。正式案件如需特定專業工作，由客戶既有團隊或另行確認之適當專業執行。"
+      lead="STT 網站內容用於說明治理方法、研究觀點與受理流程，不構成對特定個案的即時法律、稅務、投資、醫療或其他依法需由特定專業人員提供之意見；正式案件如需特定專業工作，由客戶既有團隊或另行確認之適當專業執行。"
       id="boundary-title"
     />
   </div>;
