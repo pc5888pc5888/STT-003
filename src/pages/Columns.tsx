@@ -321,7 +321,7 @@ export default function Columns() {
           )}
 
           <p className="stt-insights-catalog-note">
-            外部文章索引最後核對：{checkedTime(catalog.syncedAt)}（臺灣時間）。標題、分類與摘錄依第三方來源保存，完整內容請閱讀原始來源。
+            外部文章索引最後核對：{checkedTime(catalog.syncedAt)}（臺灣時間）；標題、分類與摘錄依第三方來源保存，完整內容請閱讀原始來源。
           </p>
         </div>
       </section>
