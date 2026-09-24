@@ -220,6 +220,7 @@
   #root .stt-g0-shell .cis-with-image .cis-hero-inner{min-height:calc(100svh - 92px)!important;height:calc(100svh - 92px)!important}
   #root .stt-g0-shell .cis-with-image .cis-hero-art{height:100%!important;overflow:hidden!important}
   #root .stt-g0-shell .cis-with-image .cis-hero-art img{width:100%!important;height:100%!important;object-fit:cover!important;object-position:center!important}
+  #root .stt-g0-shell .cis-with-image.cis-clear-left .cis-hero-art img{object-position:right center!important}
   #root .stt-g0-shell .cis-with-image.cis-portrait .cis-hero-art img{object-fit:contain!important;object-position:right center!important;background:#fbfaf7!important}
 }
 @media(max-width:900px){
