@@ -150,8 +150,8 @@
 /* Header: restore the 9/15 visual grammar — no boxed active tabs, no boxed brand, outlined pill CTA. */
 #root .stt-g0-header{background:rgba(255,255,255,.96)!important;border-bottom:1px solid rgba(136,98,55,.16)!important;backdrop-filter:blur(10px)}
 #root .stt-g0-header__inner{min-height:92px!important;padding:0 52px!important;max-width:1540px!important}
-#root .stt-g0-brand{border:0!important;outline:0!important;background:transparent!important;box-shadow:none!important;padding:0!important}
-#root .stt-g0-brand img{max-height:68px!important;width:auto!important}
+#root .stt-g0-brand{width:340px!important;max-width:100%!important;border:0!important;outline:0!important;background:transparent!important;box-shadow:none!important;padding:0!important}
+#root .stt-g0-brand img{display:block!important;width:100%!important;height:auto!important;max-height:72px!important;object-fit:contain!important;object-position:left center!important}
 #root .stt-g0-desktop-nav{height:92px!important;gap:4px}
 #root .stt-g0-nav-link{position:relative!important;height:92px!important;display:inline-flex!important;align-items:center!important;padding:0 15px!important;border:0!important;background:transparent!important;box-shadow:none!important;color:#2d2924!important;font-size:15px!important}
 #root .stt-g0-nav-link.is-active{color:#7f592f!important;background:transparent!important;border:0!important}
