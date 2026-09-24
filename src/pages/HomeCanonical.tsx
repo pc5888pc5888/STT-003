@@ -102,7 +102,7 @@ export default function HomeCanonical() {
 
   return (
     <div className="stt-g1-home">
-      <GovernedHero kicker="STT GOVERNANCE · STRATEGY · GOVERNANCE · JUDGMENT" title="讓重要的事，走得更遠。" lead="STT Governance 協助企業、家族與重大決策者，在結果尚未不可逆之前，先釐清問題、證據、權力、責任與選項，再決定是否行動，以及如何留下可以承擔、可以追溯的治理結構。"><Link className="cis-primary" to="/problems">從正在發生的問題開始 →</Link><Link to="/how-stt-works">理解 STT 如何判讀</Link></GovernedHero>
+      <GovernedHero kicker="STT GOVERNANCE · STRATEGY · GOVERNANCE · JUDGMENT" title="讓重要的事，走得更遠。" lead="STT Governance 協助企業、家族與重大決策者，在結果尚未不可逆之前先釐清問題、證據、權力、責任與選項，再決定是否行動，以及如何留下可以承擔、可以追溯的治理結構。"><Link className="cis-primary" to="/problems">從正在發生的問題開始 →</Link><Link to="/how-stt-works">理解 STT 如何判讀</Link></GovernedHero>
 
       <section className="stt-g1-section">
         <div className="stt-g1-shell">
