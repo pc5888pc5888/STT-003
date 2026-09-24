@@ -1,3 +1,4 @@
+// GCSDA independent association site; STT classical architecture language is intentionally excluded.
 import GovernedHero from "./components/GovernedHero";
 import "./styles/cis-page-system.css";
 import { FormEvent, useEffect, useRef, useState, type ReactNode } from "react";
