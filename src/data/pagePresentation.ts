@@ -57,12 +57,12 @@ export const PAGE_PRESENTATION: Record<string, PagePresentation> = {
       "而是長期累積的制度研究。"
     ],
     "type": 2,
-    "image": "/visual-approved/bank-05.png",
+    "image": "/visual-bank/stt/user-approved-six/columns.png",
     "originalTitle": "判讀不是臨時形成的意見，而是長期累積的制度研究。",
     "context": null,
     "portrait": false,
-    "imageWidth": 1672,
-    "imageHeight": 941
+    "imageWidth": 1491,
+    "imageHeight": 1055
   },
   "/about": {
     "lines": [
@@ -70,7 +70,7 @@ export const PAGE_PRESENTATION: Record<string, PagePresentation> = {
       "高位階治理文明平台"
     ],
     "type": 2,
-    "image": "/visual-approved/secondary-07.png",
+    "image": "/visual-bank/stt/user-approved-six/about-stt.png",
     "originalTitle": "STT Governance 不是一般顧問公司，而是高位階治理文明平台。",
     "context": "STT Governance 不是一般顧問公司，而是高位階治理文明平台。",
     "portrait": false,
@@ -150,12 +150,12 @@ export const PAGE_PRESENTATION: Record<string, PagePresentation> = {
       "著作正典"
     ],
     "type": 1,
-    "image": "/visual-approved/bank-08.png",
+    "image": "/visual-bank/stt/user-approved-six/publications.png",
     "originalTitle": "著作正典",
     "context": null,
     "portrait": false,
-    "imageWidth": 1672,
-    "imageHeight": 941
+    "imageWidth": 1491,
+    "imageHeight": 1055
   },
   "/books/internal-compliance": {
     "lines": [
