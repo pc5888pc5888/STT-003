@@ -72,7 +72,7 @@ export const PAGE_PRESENTATION: Record<string, PagePresentation> = {
     "type": 2,
     "image": "/visual-bank/stt/user-approved-six/about-stt.png",
     "originalTitle": "STT Governance 不是一般顧問公司，而是高位階治理文明平台。",
-    "context": "STT Governance 不是一般顧問公司，而是高位階治理文明平台。",
+    "context": null,
     "portrait": false,
     "imageWidth": 1672,
     "imageHeight": 941
