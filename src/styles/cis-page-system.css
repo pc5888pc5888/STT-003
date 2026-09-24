@@ -144,3 +144,75 @@
   #root .stt-g0-shell .cis-with-image::before{display:none}
   #root .stt-g0-shell .cis-with-image .cis-hero-copy{background:var(--cis-paper)!important;padding:30px 28px 36px!important}
 }
+
+
+/* 2026-09-24 OWNER RESTORE — 2026-09-15 STT GOLDEN REFERENCE */
+/* Header: restore the 9/15 visual grammar — no boxed active tabs, no boxed brand, outlined pill CTA. */
+#root .stt-g0-header{background:rgba(255,255,255,.96)!important;border-bottom:1px solid rgba(136,98,55,.16)!important;backdrop-filter:blur(10px)}
+#root .stt-g0-header__inner{min-height:92px!important;padding:0 52px!important;max-width:1540px!important}
+#root .stt-g0-brand{border:0!important;outline:0!important;background:transparent!important;box-shadow:none!important;padding:0!important}
+#root .stt-g0-brand img{max-height:68px!important;width:auto!important}
+#root .stt-g0-desktop-nav{height:92px!important;gap:4px}
+#root .stt-g0-nav-link{position:relative!important;height:92px!important;display:inline-flex!important;align-items:center!important;padding:0 15px!important;border:0!important;background:transparent!important;box-shadow:none!important;color:#2d2924!important;font-size:15px!important}
+#root .stt-g0-nav-link.is-active{color:#7f592f!important;background:transparent!important;border:0!important}
+#root .stt-g0-nav-link.is-active::after{content:"";position:absolute;left:15px;right:15px;bottom:14px;height:2px;background:var(--cis-gold)}
+#root .stt-g0-primary-cta{min-height:48px!important;padding:11px 26px!important;border:1.5px solid var(--cis-gold)!important;border-radius:999px!important;background:rgba(255,255,255,.88)!important;color:#6f4d28!important;box-shadow:none!important;font-size:15px!important}
+
+/* Hero: image remains the page canvas; copy sits inside the designed clear field, never on a white card. */
+#root .stt-g0-shell .cis-with-image{overflow:hidden!important;background:#fff!important}
+#root .stt-g0-shell .cis-with-image::before{background:linear-gradient(90deg,rgba(251,250,247,.58) 0%,rgba(251,250,247,.34) 24%,rgba(251,250,247,.12) 42%,rgba(251,250,247,0) 62%)!important}
+#root .stt-g0-shell .cis-with-image.cis-clear-left::before{background:linear-gradient(90deg,rgba(251,250,247,.32) 0%,rgba(251,250,247,.14) 26%,rgba(251,250,247,0) 52%)!important}
+#root .stt-g0-shell .cis-with-image .cis-hero-copy{align-self:center!important;max-width:640px!important;width:min(43%,640px)!important;margin:0 0 0 max(52px,calc((100% - 1500px)/2))!important;padding:0!important;background:transparent!important;border:0!important;box-shadow:none!important}
+#root .stt-g0-shell .cis-with-image .cis-title{color:#171613!important;text-shadow:0 1px 0 rgba(255,255,255,.22)}
+#root .stt-g0-shell .cis-with-image .cis-lead{color:#3f3932!important;max-width:34em!important}
+#root .stt-g0-shell .cis-with-image .cis-subtitle{color:#302b26!important}
+#root .stt-g0-shell .cis-with-image .cis-kicker{color:#805a31!important}
+#root .cis-actions{gap:14px!important;margin-top:26px!important}
+#root .cis-actions>a{min-height:48px!important;padding:11px 24px!important;border:1.4px solid #a87843!important;border-radius:999px!important;background:rgba(255,255,255,.86)!important;color:#805a31!important;box-shadow:none!important}
+#root .cis-actions .cis-primary{background:#b68b56!important;border-color:#b68b56!important;color:#fff!important}
+
+/* Do not wash body copy into the ivory background. */
+#root main :where(p,dd,li){color:#4b453d!important}
+#root main :where(dt,small){color:#7b5a36}
+#root :is(.stt-g1-lead,.stt-g2-group__lead,.stt-g4-boundary p,.stt-inst-body p){color:#4b453d!important}
+
+/* Method page: remove the white label blocks and restore a clear process hierarchy. */
+#root .stt-g3-step{display:grid!important;grid-template-columns:72px minmax(210px,270px) minmax(0,1fr)!important;gap:32px!important;align-items:start!important;background:transparent!important;border-top:1px solid var(--cis-line)!important;border-bottom:0!important}
+#root .stt-g3-step__number{font:400 25px/1.2 Georgia,serif!important;color:#9a6e3d!important}
+#root .stt-g3-step>header{background:transparent!important;border:0!important;box-shadow:none!important;padding:0!important;margin:0!important}
+#root .stt-g3-step>header small{display:block!important;margin:0 0 13px!important;background:transparent!important;color:#9a6e3d!important;font:600 10px/1.7 var(--cis-ui)!important;letter-spacing:.12em!important}
+#root .stt-g3-step>header h3{margin:0!important;color:#28241f!important;font-size:23px!important}
+#root .stt-g3-step dl{margin:0!important}
+#root .stt-g3-step dl>div{display:grid!important;grid-template-columns:96px minmax(0,1fr)!important;gap:24px!important;padding:0 0 16px!important;margin:0 0 16px!important;border-bottom:1px solid rgba(217,203,182,.72)!important;background:transparent!important}
+#root .stt-g3-step dl>div:last-child{margin-bottom:0!important;border-bottom:0!important}
+#root .stt-g3-step dt{font:500 13px/1.8 var(--cis-serif)!important;color:#9a6e3d!important}
+#root .stt-g3-step dd{margin:0!important;color:#474139!important;font-size:17px!important;line-height:1.9!important}
+
+/* Intake page: no white card rows; fields sit in a continuous governance dossier. */
+#root .stt-intake-page form>fieldset>div>label,
+#root .stt-intake-page form>fieldset>div>fieldset{background:transparent!important;border-left:0!important;border-right:0!important}
+#root .stt-intake-page :is(input:not([type=radio]):not([name=bot-field]),textarea,select){background:#fffdf9!important;border-color:#cdbb9e!important}
+#root .stt-intake-page>section:not(.cis-hero){background:#fbfaf7!important}
+
+/* Accessibility controls should belong to the CIS, not appear as a black floating capsule. */
+#root .stt-accessibility-toggle{width:48px!important;height:48px!important;border-radius:999px!important;border:1px solid #c6a173!important;background:rgba(255,255,255,.95)!important;color:#8a6237!important;box-shadow:0 8px 24px rgba(67,52,32,.08)!important;display:flex!important;align-items:center!important;justify-content:center!important}
+#root .stt-accessibility-tools{background:transparent!important;box-shadow:none!important}
+
+/* Desktop hero should read as one complete first screen, like the 9/15 approved reference. */
+@media(min-width:901px){
+  #root .stt-g0-shell .cis-with-image .cis-hero-inner{min-height:calc(100svh - 92px)!important;height:calc(100svh - 92px)!important}
+  #root .stt-g0-shell .cis-with-image .cis-hero-art{height:100%!important;overflow:hidden!important}
+  #root .stt-g0-shell .cis-with-image .cis-hero-art img{width:100%!important;height:100%!important;object-fit:cover!important;object-position:center!important}
+  #root .stt-g0-shell .cis-with-image.cis-portrait .cis-hero-art img{object-fit:contain!important;object-position:right center!important;background:#fbfaf7!important}
+}
+@media(max-width:900px){
+  #root .stt-g0-header__inner{padding:0 24px!important}
+  #root .stt-g0-shell .cis-with-image .cis-hero-copy,
+  #root .stt-g0-shell .cis-with-image.cis-clear-left .cis-hero-copy,
+  #root .stt-g0-shell .cis-with-image.cis-portrait .cis-hero-copy{width:auto!important;max-width:none!important;margin:0!important;padding:28px 24px 34px!important;background:#fbfaf7!important}
+  #root .stt-g0-shell .cis-with-image::before{display:none!important}
+  #root .stt-g0-shell .cis-with-image .cis-hero-art{height:auto!important}
+  #root .stt-g0-shell .cis-with-image .cis-hero-art img{height:auto!important;object-fit:contain!important}
+  #root .stt-g3-step{grid-template-columns:54px minmax(0,1fr)!important;gap:18px!important}
+  #root .stt-g3-step dl{grid-column:2!important}
+}
