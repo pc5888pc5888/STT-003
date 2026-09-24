@@ -50,7 +50,7 @@ function setMeta() {
     meta.name = "description";
     document.head.appendChild(meta);
   }
-  meta.content = "先告訴 STT 現在發生了什麼、最不希望接下來發生什麼，以及希望事情最後變成什麼。第一次只整理問題與下一步，不要求大量敏感資料。";
+  meta.content = "先告訴 STT 現在發生了什麼、最不希望接下來發生什麼，以及希望事情最後變成什麼；第一次只整理問題與下一步，不要求大量敏感資料。";
 }
 
 export default function Start() {
@@ -116,7 +116,7 @@ export default function Start() {
       setSubmitted(true);
       window.scrollTo({ top: 0, behavior: "smooth" });
     } catch {
-      setSendError("送出未完成。你填寫的內容仍保留在本頁，請稍後再試。");
+      setSendError("送出未完成；你填寫的內容仍保留在本頁，請稍後再試。");
     } finally {
       inFlight.current = false;
       setSending(false);
