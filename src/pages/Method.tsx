@@ -109,7 +109,7 @@ export default function Method() {
           <p className="stt-g3-kicker">JUDGMENT FOUNDATIONS</p>
           <h2>四個面向，讓重要判斷站得住。</h2>
           <p className="stt-g3-foundations__intro">
-            Problem｜真正問題。Evidence｜可採信證據。Trade-off｜取捨與代價。Authority & Accountability｜誰有權、誰承擔。這四項不是四種服務，也不是另一套流程，而是每個治理判讀都必須同時檢查的基礎。
+            Problem｜真正問題；Evidence｜可採信證據；Trade-off｜取捨與代價；Authority & Accountability｜誰有權、誰承擔，這四項不是四種服務，也不是另一套流程，而是每個治理判讀都必須同時檢查的基礎。
           </p>
           <div className="stt-g3-foundation-grid">
             {foundations.map(([number, en, zh]) => (
