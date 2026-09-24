@@ -18,6 +18,9 @@ jobs:
           cp public/images/gcsda-logo.png /tmp/logos/gcsda-logo.png
           cp public/首頁表頭logo.png /tmp/logos/header-logo.png
           cp public/images/logo-header.png /tmp/logos/logo-header.png
+          cp public/images/gcsda_001.png /tmp/logos/gcsda_001.png
+          cp public/images/gcsda_002.png /tmp/logos/gcsda_002.png
+          cp public/images/gcsda_003.png /tmp/logos/gcsda_003.png
       - uses: actions/upload-artifact@v4
         with:
           name: gcsda-logo-options
