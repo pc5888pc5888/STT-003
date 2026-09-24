@@ -1,4 +1,4 @@
-name: Golden Master source-true verification
+name: Golden Master source-true verification # 2026-09-24 final visual rerun
 on:
   push:
     branches: [stt-convergence-20260923]
