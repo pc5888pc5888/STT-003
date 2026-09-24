@@ -144,3 +144,30 @@
   #root .g4 .cis-with-image::before{display:none}
   #root .g4 .cis-with-image .cis-hero-copy{background:var(--cis-paper)!important;padding:30px 28px 36px!important}
 }
+
+
+/* 2026-09-24 GCSDA INDEPENDENT ASSOCIATION CORRECTION */
+/* GCSDA is not a visual derivative of STT.  No Roman-column / temple / sphere hero language. */
+#root .g4 .cis-text-only{background:#fbfaf7!important;border-bottom:1px solid #ddceb8!important}
+#root .g4 .cis-text-only .cis-hero-inner{max-width:1180px!important;width:min(1180px,calc(100% - 80px))!important;padding:72px 0 64px!important}
+#root .g4 .cis-text-only .cis-hero-copy{max-width:900px!important}
+#root .g4 .cis-title{color:#27231e!important}
+#root .g4 .cis-lead{color:#514a42!important}
+#root .g4 main :where(p,dd,li){color:#514a42!important}
+
+/* Association navigation: quiet underline, never a boxed tab. */
+#root .g4-nav a{position:relative!important;border:0!important;background:transparent!important;box-shadow:none!important}
+#root .g4-nav a.active{background:transparent!important;border:0!important;color:#835c2e!important}
+#root .g4-nav a.active::after{content:"";position:absolute;left:10px;right:10px;bottom:14px;height:2px;background:#9b6e38}
+#root .g4-join{border-radius:999px!important}
+#root .g4-brand{border:0!important;box-shadow:none!important;background:transparent!important}
+#root .g4-brand img{display:block;width:min(430px,34vw);max-height:68px;object-fit:contain;object-position:left center}
+
+/* Accessibility controls remain visible but do not introduce a black foreign object. */
+#root .stt-accessibility-toggle{width:48px!important;height:48px!important;border-radius:999px!important;border:1px solid #c6a173!important;background:rgba(255,255,255,.95)!important;color:#8a6237!important;box-shadow:0 8px 24px rgba(67,52,32,.08)!important;display:flex!important;align-items:center!important;justify-content:center!important}
+#root .stt-accessibility-tools{background:transparent!important;box-shadow:none!important}
+
+@media(max-width:760px){
+  #root .g4 .cis-text-only .cis-hero-inner{width:calc(100% - 48px)!important;padding:48px 0 42px!important}
+  #root .g4-brand img{width:min(270px,66vw);max-height:58px}
+}
