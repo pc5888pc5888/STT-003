@@ -79,7 +79,7 @@ jobs:
                 const cardOk=!state.heroSrc||label!=='desktop'||['rgba(0, 0, 0, 0)','transparent'].includes(state.copyBg);
                 const passed=response?.status()===200&&state.h1.length===1&&!state.overflow&&!state.broken.length&&!errors.length&&fullWidth&&cardOk;
                 results.push({route,label,width,...state,fullWidth,cardOk,errors,passed});
-                if(label==='desktop'&&['/','/about','/engagement','/eric-chuang','/institutions','/membership','/knowledge','/books'].includes(route))await page.screenshot({path:`/tmp/golden/${site}-${route==='/'?'home':route.slice(1).replaceAll('/','-')}.png`,fullPage:true});
+                if(label==='desktop'&&['/','/problems','/how-stt-works','/engagement','/insights','/about','/eric-chuang','/institutions','/start','/membership','/knowledge','/books'].includes(route))await page.screenshot({path:`/tmp/golden/${site}-${route==='/'?'home':route.slice(1).replaceAll('/','-')}.png`,fullPage:true});
               }catch(error){results.push({route,label,width,error:String(error),passed:false});}
               page.off('pageerror',h);
             }
@@ -95,6 +95,14 @@ jobs:
             results.push({check:'owner portrait exact bytes',sha,passed:sha==='891c3d1b19ba4ac32792543928473f0938fae0bfe529d1ac46e3dabf34f780fe'});
             const eng=results.find(x=>x.route==='/engagement'&&x.label==='desktop');
             results.push({check:'engagement approved visual 34',actual:eng?.heroSrc,passed:eng?.heroSrc==='/visual-approved/bank-14.png'});
+            const startPage=results.find(x=>x.route==='/start'&&x.label==='desktop');
+            results.push({check:'start has approved intake/cooperation visual',actual:startPage?.heroSrc,passed:startPage?.heroSrc==='/visual-bank/stt/cooperation-hero-20260917.png'});
+            const method=results.find(x=>x.route==='/how-stt-works'&&x.label==='desktop');
+            results.push({check:'method uses 9/15 Golden Reference visual',actual:method?.heroSrc,passed:method?.heroSrc==='/visual-bank/stt/user-approved-six/method.png'});
+            const about=results.find(x=>x.route==='/about'&&x.label==='desktop');
+            results.push({check:'about uses 9/15 Golden Reference visual',actual:about?.heroSrc,passed:about?.heroSrc==='/visual-bank/stt/user-approved-six/about-stt.png'});
+            const navProbe=await (async()=>{const ctx=await browser.newContext({viewport:{width:1440,height:1000}});const p=await ctx.newPage();await p.goto('http://127.0.0.1:4173/how-stt-works',{waitUntil:'networkidle'});const v=await p.evaluate(()=>{const a=document.querySelector('.stt-g0-nav-link.is-active');if(!a)return null;const cs=getComputedStyle(a),after=getComputedStyle(a,'::after');return{border:cs.borderStyle,afterHeight:after.height,afterDisplay:after.display}});await ctx.close();return v;})();
+            results.push({check:'STT active navigation is underline not box',actual:navProbe,passed:navProbe?.border==='none'&&navProbe?.afterHeight==='2px'});
             const inst=results.find(x=>x.route==='/institutions'&&x.label==='desktop');
             results.push({check:'institutions approved path-convergence visual',actual:inst?.heroSrc,passed:inst?.heroSrc==='/visual-approved/secondary-05.png'});
             const books=results.find(x=>x.route==='/books'&&x.label==='desktop');
@@ -105,6 +113,14 @@ jobs:
             results.push({check:'STT is not GCSDA primary CTA',passed:!home?.header.some(x=>x.text?.includes('STT Governance')&&String(x.cls).includes('g4-join'))});
             const knowledge=results.find(x=>x.route==='/knowledge'&&x.label==='desktop');
             results.push({check:'family governance flipbook labeled by title',passed:knowledge?.links.some(x=>x.href==='https://heyzine.com/flip-book/e424001f8c.html'&&x.text?.includes('2026 永續家族治理實務實錄'))});
+            const gcsdaDesktop=results.filter(x=>x.site===undefined?false:true);
+            const gcsdaCore=results.filter(x=>x.label==='desktop');
+            results.push({check:'GCSDA core pages do not use STT-style hero background art',passed:gcsdaCore.every(x=>!x.heroSrc),actual:gcsdaCore.map(x=>({route:x.route,heroSrc:x.heroSrc}))});
+            const membership=results.find(x=>x.route==='/membership'&&x.label==='desktop');
+            const membershipProbe=await (async()=>{const ctx=await browser.newContext({viewport:{width:1440,height:1200}});const p=await ctx.newPage();await p.goto('http://127.0.0.1:4173/membership',{waitUntil:'networkidle'});const v=await p.evaluate(()=>({brand:document.querySelector('.g4-brand img')?.getAttribute('src')||null,text:document.body.innerText,fields:document.querySelectorAll('#gcsda-membership-form input,#gcsda-membership-form select,#gcsda-membership-form textarea').length,activeBorder:document.querySelector('.g4-nav a.active')?getComputedStyle(document.querySelector('.g4-nav a.active')).borderStyle:null,activeAfter:document.querySelector('.g4-nav a.active')?getComputedStyle(document.querySelector('.g4-nav a.active'),'::after').height:null}));await ctx.close();return v;})();
+            results.push({check:'GCSDA header uses institutional logo image',actual:membershipProbe?.brand,passed:membershipProbe?.brand==='/images/gcsda-logo.png'});
+            results.push({check:'GCSDA membership is a real qualification application',actual:{fields:membershipProbe?.fields},passed:(membershipProbe?.fields||0)>=15&&['姓名','聯絡電話','電子郵件','現職單位／機構','主要專業領域','申請加入學會的原因','會員資格治理聲明'].every(t=>membershipProbe?.text.includes(t))});
+            results.push({check:'GCSDA active navigation is underline not box',actual:{border:membershipProbe?.activeBorder,after:membershipProbe?.activeAfter},passed:membershipProbe?.activeBorder==='none'&&membershipProbe?.activeAfter==='2px'});
           }
           await browser.close();
           const failed=results.filter(x=>x.passed===false);
