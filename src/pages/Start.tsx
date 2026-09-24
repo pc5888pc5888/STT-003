@@ -129,13 +129,13 @@ export default function Start() {
         <UnifiedTitleHero
           kicker="GOVERNANCE ENGAGEMENT"
           title="提交後"
-          lead="STT 將先判斷事件是否適合進入治理程序，以及需要補充哪些非敏感資訊。正式受理之前，不進行完整個案判斷，也不要求提交不必要的機敏資料。"
+          lead="STT 將先判斷事件是否適合進入治理程序，以及需要補充哪些非敏感資訊；正式受理之前不進行完整個案判斷，也不要求提交不必要的機敏資料。"
           id="start-success-title"
         />
         <section className="px-6 py-14 lg:px-10 lg:py-20">
           <div className="mx-auto max-w-[900px] border-t border-[#d8c8ad] pt-8">
             {receiptId && <p role="status" className="text-sm text-[#8f693d]">送件編號｜{receiptId}</p>}
-            <p className="mt-4 text-sm leading-7">郵件服務已受理這次送件。此狀態不代表正式委任成立。</p>
+            <p className="mt-4 text-sm leading-7">郵件服務已受理這次送件；此狀態不代表正式委任成立。</p>
             <button
               type="button"
               onClick={() => setSubmitted(false)}
@@ -163,7 +163,7 @@ export default function Start() {
           <p className="text-[11px] font-bold tracking-[0.2em] text-[#8f693d]">DATA MINIMIZATION</p>
           <h2 className="mt-4 font-serif text-3xl leading-snug lg:text-4xl">第一次提交，只整理問題與下一步。</h2>
           <p className="mt-5 max-w-[850px] text-sm leading-8 text-[#70685f] lg:text-base">
-            本頁第一階段只整理問題與下一步，不提供即時法律結論，也不要求第一次提交大量敏感資訊。正式受理後，才依案件建立資料與 AI 使用邊界。請不要在此階段提供不必要的身分證件、金融帳戶、醫療資料、完整營業秘密或其他高度敏感資訊。
+            本頁第一階段只整理問題與下一步，不提供即時法律結論，也不要求第一次提交大量敏感資訊；正式受理後再依案件建立資料與 AI 使用邊界，因此此階段不需要提供身分證件、金融帳戶、醫療資料、完整營業秘密或其他高度敏感資訊。
           </p>
         </div>
       </section>
