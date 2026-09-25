@@ -225,7 +225,11 @@
 }
 @media(max-width:900px){
   #root .stt-intake-brief{padding:20px 24px!important}
-  #root .stt-g0-header__inner{padding:0 24px!important}
+  #root .stt-g0-header{overflow:hidden!important}
+  #root .stt-g0-header__inner{padding:0 24px!important;min-width:0!important;grid-template-columns:minmax(0,1fr) auto!important}
+  #root .stt-g0-brand{width:min(255px,calc(100vw - 112px))!important;min-width:0!important;max-width:100%!important}
+  #root .stt-g0-brand img{display:block!important;width:100%!important;max-width:100%!important;height:auto!important}
+  #root .stt-g0-menu-button{flex:0 0 auto!important}
   #root .stt-g0-shell .cis-with-image .cis-hero-copy,
   #root .stt-g0-shell .cis-with-image.cis-clear-left .cis-hero-copy,
   #root .stt-g0-shell .cis-with-image.cis-portrait .cis-hero-copy{width:auto!important;max-width:none!important;margin:0!important;padding:28px 24px 34px!important;background:#fbfaf7!important}
