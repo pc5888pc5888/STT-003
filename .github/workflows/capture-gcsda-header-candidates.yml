@@ -1,0 +1,22 @@
+name: Capture GCSDA header candidates
+on:
+  push:
+    branches: [gcsda-convergence-20260923]
+    paths: [.github/workflows/capture-gcsda-header-candidates.yml]
+permissions:
+  contents: read
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/upload-artifact@v4
+        with:
+          name: gcsda-header-candidates
+          path: |
+            public/首頁表頭logo.png
+            public/images/index-logo-002.png
+            public/images/index-logo-003.png
+            public/images/gcsda_001.png
+            public/images/gcsda_003.png
+          retention-days: 3
