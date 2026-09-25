@@ -3,6 +3,7 @@ import { BrowserRouter, Link, Navigate, NavLink, Route, Routes, useLocation } fr
 import { Menu, X } from "lucide-react";
 import Lenis from "lenis";
 import Home from "./pages/HomeCanonical";
+import NotFound from "./components/NotFound";
 import Columns from "./pages/Columns";
 import Problems from "./pages/Problems";
 import ProblemDetail from "./pages/ProblemDetail";
@@ -20,9 +21,9 @@ import { applyGovernedMetadata } from "./seo";
 
 type ShellProps = { children: ReactNode };
 
-const GCSDA_URL = "https://stt-003-git-gcsda-build-baseline-5234de-pc5888pc5888s-projects.vercel.app";
+const GCSDA_URL = "https://stt-003-git-gcsda-convergence-20260923-pc5888pc5888s-projects.vercel.app";
 const HUMANISTIC_INTERVIEW_URL = "/humanistic-interview/";
-const STT_PRESS_URL = "https://stt-003.vercel.app/#hero";
+const STT_PRESS_URL = "/books";
 
 const PRIMARY_NAVIGATION = [
   { label: "你正在面對什麼", path: "/problems" },
@@ -42,21 +43,6 @@ function ExternalRedirect({ url }: { url: string }) {
   return <div className="stt-g0-redirect">正在前往外部頁面…</div>;
 }
 
-function NotFound() {
-  return (
-    <section className="stt-g0-gate" aria-labelledby="not-found-title">
-      <div className="stt-g0-gate__inner">
-        <p className="stt-g0-kicker">404</p>
-        <h1 id="not-found-title">找不到這個頁面。</h1>
-        <p>這個網址不在目前的 STT Governance 正式路由中。</p>
-        <div className="stt-g0-gate__actions">
-          <Link to="/">回到首頁</Link>
-          <Link to="/start">開始治理判讀</Link>
-        </div>
-      </div>
-    </section>
-  );
-}
 
 function PublicShell({ children }: ShellProps) {
   const location = useLocation();
@@ -64,15 +50,38 @@ function PublicShell({ children }: ShellProps) {
 
   useEffect(() => {
     setMenuOpen(false);
-    window.scrollTo({ top: 0, behavior: "auto" });
-  }, [location.pathname]);
+    const frame = requestAnimationFrame(() => {
+      if (location.hash) {
+        let id = location.hash.slice(1);
+        try { id = decodeURIComponent(id); } catch { /* Keep the literal fragment. */ }
+        const target = document.getElementById(id);
+        if (target) { target.scrollIntoView({ block: "start", behavior: "instant" }); return; }
+      }
+      window.scrollTo({ top: 0, behavior: "instant" });
+    });
+    return () => cancelAnimationFrame(frame);
+  }, [location.pathname, location.hash]);
 
   useEffect(() => {
     applyGovernedMetadata(location.pathname);
   }, [location.pathname]);
 
+  useEffect(() => {
+    if (!menuOpen) return;
+    document.querySelector<HTMLAnchorElement>("#stt-g0-mobile-menu a")?.focus();
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key !== "Escape") return;
+      event.preventDefault();
+      setMenuOpen(false);
+      document.querySelector<HTMLButtonElement>(".stt-g0-menu-button")?.focus();
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [menuOpen]);
+
   return (
     <div className="stt-g0-shell">
+      <a className="site-skip-link" href="#main-content">跳至主要內容</a>
       <header className="stt-g0-header">
         <div className="stt-g0-header__inner">
           <Link to="/" className="stt-g0-brand" aria-label="STT Governance 首頁">
@@ -128,7 +137,7 @@ function PublicShell({ children }: ShellProps) {
         )}
       </header>
 
-      <main className="stt-g0-main">{children}</main>
+      <main id="main-content" tabIndex={-1} className="stt-g0-main">{children}</main>
 
       <footer className="stt-g0-footer">
         <div className="stt-g0-footer__inner">
@@ -155,7 +164,7 @@ function PublicShell({ children }: ShellProps) {
 function AppRoutes() {
   return (
     <Routes>
-      <Route path="/" element={<Home onNavigate={() => undefined} />} />
+      <Route path="/" element={<Home />} />
       <Route path="/index.html" element={<Navigate to="/" replace />} />
       <Route path="/governance.html" element={<Navigate to="/problems" replace />} />
 

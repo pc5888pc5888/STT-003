@@ -1,0 +1,136 @@
+name: Dual-site visual gate
+on:
+  push:
+    branches: [stt-convergence-20260923]
+    paths: [.github/workflows/dual-site-visual-gate.yml]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  visual:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - site: stt
+            ref: stt-convergence-20260923
+          - site: gcsda
+            ref: gcsda-convergence-20260923
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ matrix.ref }}
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Build
+        run: |
+          mkdir -p /tmp/visual-gate
+          git rev-parse HEAD > /tmp/visual-gate/source-sha.txt
+          npm ci > /tmp/visual-gate/install.log 2>&1
+          npm run lint > /tmp/visual-gate/typecheck.log 2>&1
+          npm run build > /tmp/visual-gate/build.log 2>&1
+          npm install --no-save --package-lock=false playwright > /tmp/visual-gate/playwright-install.log 2>&1
+          npx playwright install --with-deps chromium > /tmp/visual-gate/browser-setup.log 2>&1
+      - name: Source governance guard
+        env:
+          SITE: ${{ matrix.site }}
+        run: |
+          if [ "$SITE" = "stt" ]; then
+            ! grep -R -E 'eric-governance-principal-approved|portrait-front|portrait-seated|eric-home-authority-20260921' src
+            ! grep -R -E '12d94f8d4b|a6e96eff8e' src
+            grep -R -q 'c700d8beb2' src
+            grep -R -q 'e424001f8c' src
+          else
+            grep -R -q '申請入會' src/GCSDAStandaloneV3.tsx
+            grep -R -q 'e424001f8c' src/GCSDAStandaloneV3.tsx
+          fi
+      - name: Browser visual gate
+        env:
+          SITE: ${{ matrix.site }}
+        run: |
+          npx vite preview --host 127.0.0.1 --port 4173 > /tmp/visual-gate/preview.log 2>&1 &
+          cat > .visual-gate-check.mjs <<'JS'
+          import fs from 'node:fs';
+          import { chromium } from 'playwright';
+          const site=process.env.SITE;
+          const source=fs.readFileSync('src/data/pagePresentation.ts','utf8');
+          const json=source.match(/export const PAGE_PRESENTATION[^=]*=\s*(\{[\s\S]*\});/)[1];
+          const pages=JSON.parse(json);
+          const browser=await chromium.launch({headless:true});
+          const checks=[];
+          for(const [label,width,height] of [['desktop',1440,1000],['tablet',820,1100],['mobile',390,844]]){
+            const context=await browser.newContext({viewport:{width,height},reducedMotion:'reduce'});
+            const page=await context.newPage();
+            for(const [route,record] of Object.entries(pages)){
+              if(route==='/404') continue;
+              const errors=[]; const handler=e=>errors.push(e.message); page.on('pageerror',handler);
+              try{
+                await page.goto('http://127.0.0.1:4173'+route,{waitUntil:'networkidle',timeout:30000});
+                await page.evaluate(()=>document.fonts.ready);
+                await page.evaluate(async()=>{for(let y=0;y<document.documentElement.scrollHeight;y+=700){scrollTo(0,y);await new Promise(r=>setTimeout(r,25));}scrollTo(0,0)});
+                await page.waitForTimeout(120);
+                const state=await page.evaluate(()=> {
+                  const hero=document.querySelector('.cis-hero');
+                  const copy=document.querySelector('.cis-hero-copy');
+                  const img=document.querySelector('.cis-hero-art img');
+                  const rect=img?.getBoundingClientRect();
+                  return {
+                    h1:document.querySelectorAll('h1').length,
+                    overflow:document.documentElement.scrollWidth>innerWidth+1,
+                    broken:[...document.images].filter(i=>!i.complete||i.naturalWidth===0).map(i=>i.getAttribute('src')),
+                    heroSrc:img?.getAttribute('src')||null,
+                    imageWidth:rect?.width||0,
+                    imageLeft:rect?.left||0,
+                    copyBg:copy?getComputedStyle(copy).backgroundColor:null,
+                    titleSize:document.querySelector('h1')?parseFloat(getComputedStyle(document.querySelector('h1')).fontSize):0,
+                    hero:!!hero
+                  };
+                });
+                const expectsImage=!!record.image;
+                const fullWidth = !expectsImage || label!=='desktop' || (Math.abs(state.imageWidth-width)<2 && Math.abs(state.imageLeft)<2);
+                let passed=state.h1===1&&!state.overflow&&!state.broken.length&&errors.length===0&&state.hero&&(!expectsImage||state.heroSrc===record.image)&&fullWidth;
+                if(label==='desktop'&&expectsImage) passed=passed && (state.copyBg==='rgba(0, 0, 0, 0)'||state.copyBg==='transparent');
+                checks.push({route,label,...state,expected:record.image,passed});
+              }catch(e){checks.push({route,label,error:String(e),passed:false});}
+              page.off('pageerror',handler);
+            }
+            await context.close();
+          }
+          if(site==='gcsda'){
+            const context=await browser.newContext({viewport:{width:1440,height:1000}});
+            const page=await context.newPage();
+            await page.goto('http://127.0.0.1:4173/about',{waitUntil:'networkidle'});
+            checks.push({special:'GCSDA header primary CTA',passed:await page.locator('header a.g4-join').count()===1 && (await page.locator('header a.g4-join').innerText())==='申請入會' && (await page.locator('header a.g4-join').getAttribute('href'))==='/membership'});
+            checks.push({special:'STT is not GCSDA header primary CTA',passed:await page.locator('header .g4-stt').count()===0});
+            await page.goto('http://127.0.0.1:4173/',{waitUntil:'networkidle'});
+            checks.push({special:'GCSDA home primary action',passed:await page.locator('.cis-actions a.cis-primary').first().innerText()==='申請入會'});
+            await context.close();
+          } else {
+            const context=await browser.newContext({viewport:{width:1440,height:1000}});
+            const page=await context.newPage();
+            await page.goto('http://127.0.0.1:4173/eric-chuang',{waitUntil:'networkidle'});
+            checks.push({special:'Eric exact owner-selected portrait path',passed:await page.locator('.cis-hero-art img').getAttribute('src')==='/visual-approved/eric-page-owner-original.png'});
+            await page.goto('http://127.0.0.1:4173/engagement',{waitUntil:'networkidle'});
+            checks.push({special:'Engagement approved asset 34',passed:await page.locator('.cis-hero-art img').getAttribute('src')==='/visual-approved/bank-14.png'});
+            await page.goto('http://127.0.0.1:4173/institutions',{waitUntil:'networkidle'});
+            checks.push({special:'Institutions approved mapped image',passed:await page.locator('.cis-hero-art img').getAttribute('src')==='/visual-approved/secondary-05.png'});
+            await context.close();
+          }
+          await browser.close();
+          const failed=checks.filter(x=>!x.passed);
+          fs.writeFileSync('/tmp/visual-gate/results.json',JSON.stringify({site,total:checks.length,failed,checks},null,2));
+          console.log(JSON.stringify({site,total:checks.length,failed},null,2));
+          if(failed.length) process.exitCode=1;
+          JS
+          node .visual-gate-check.mjs
+          rm .visual-gate-check.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: visual-gate-${{ matrix.site }}
+          path: /tmp/visual-gate/
+          retention-days: 7

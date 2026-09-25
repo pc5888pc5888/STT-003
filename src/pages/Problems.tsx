@@ -1,3 +1,4 @@
+import GovernedHero from "../components/GovernedHero";
 import { useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 
@@ -133,32 +134,11 @@ export default function Problems() {
     meta.content = description;
   }, []);
 
-  useEffect(() => {
-    if (!location.hash) return;
-    const target = document.getElementById(location.hash.slice(1));
-    if (target) {
-      requestAnimationFrame(() => target.scrollIntoView({ block: "start" }));
-    }
-  }, [location.hash]);
+
 
   return (
     <div className="stt-g2-problems">
-      <section
-        className="stt-g2-hero"
-        style={{ backgroundImage: 'url("/visual-bank/stt/user-approved-six/problems.png")' }}
-        aria-labelledby="problems-title"
-      >
-        <div className="stt-g2-shell">
-          <div className="stt-g2-hero__copy">
-            <p className="stt-g2-kicker">PROBLEM FIRST · GOVERNANCE BEFORE SOLUTION</p>
-            <h1 id="problems-title">你正在面對什麼</h1>
-            <h2>先釐清你正在面對的是什麼，再決定怎麼處理。</h2>
-            <p>
-              企業重大決策、家族治理、接班安排、股權與控制、法遵壓力及 AI 使用，表面看似不同，底層往往都指向問題定義、權責配置、證據判讀與風險承擔。
-            </p>
-          </div>
-        </div>
-      </section>
+      <GovernedHero kicker="PROBLEM FIRST · GOVERNANCE BEFORE SOLUTION" title="你正在面對什麼" lead="企業重大決策、家族治理、接班安排、股權與控制、法遵壓力及 AI 使用，表面看似不同，底層往往都指向問題定義、權責配置、證據判讀與風險承擔；先釐清你正在面對的是什麼，再決定怎麼處理。"></GovernedHero>
 
       <nav className="stt-g2-index" aria-label="四大治理問題">
         <div className="stt-g2-shell stt-g2-index__grid">

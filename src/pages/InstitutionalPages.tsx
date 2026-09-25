@@ -2,7 +2,7 @@ import { useEffect, type ReactNode } from "react";
 import { Link } from "react-router-dom";
 import UnifiedTitleHero from "../components/UnifiedTitleHero";
 
-const STT_PRESS_URL = "https://stt-003.vercel.app/#hero";
+const STT_PRESS_URL = "/books";
 const M_MEDIA_URL = "https://94m.com.tw/editors/ed55fc";
 
 function usePageMeta(title:string, description:string){
@@ -29,14 +29,14 @@ export function AboutPage(){
       kicker="ABOUT STT GOVERNANCE"
       title="STT Governance 不是一般顧問公司，而是高位階治理文明平台。"
       subtitle="STT 不以提供更多意見為目的，而是建立可以承擔後果的治理秩序。"
-      lead="STT Governance 是以重大決策、企業與家族治理為核心的治理判讀與制度設計平台。當一個問題同時牽涉策略、權力、證據、責任、法遵或家族關係時，單一專業工具往往不足以回答「應不應該做」以及「誰應該承擔」。STT 的工作，是先建立治理結構，再讓適當的專業工具進入。"
+      lead="STT Governance 是以重大決策、企業與家族治理為核心的治理判讀與制度設計平台；當一個問題同時牽涉策略、權力、證據、責任、法遵或家族關係時，STT 先建立治理結構，再讓適當的專業工具進入。"
       image="/visual-bank/stt/user-approved-six/about-stt.png"
       imagePosition="center right"
       id="about-title"
     />
 
     <Section kicker="POSITION" title="STT 處理的，是不同專業之上的治理問題。">
-      <p>STT 不把法律、財務、信託、AI 或策略各自當成孤立產品。它先確認治理目的、權力邊界、證據基礎與不可承擔風險，再確認需要哪些專業工具，以及它們如何共同服務同一個決策。</p>
+      <p>STT 不把法律、財務、信託、AI 或策略各自當成孤立產品，而是先確認治理目的、權力邊界、證據基礎與不可承擔風險，再確認需要哪些專業工具，以及它們如何共同服務同一個決策。</p>
       <Link to="/how-stt-works">STT 如何判讀 →</Link>
     </Section>
 
@@ -51,7 +51,7 @@ export function AboutPage(){
     </Section>
 
     <Section kicker="HUMAN AUTHORITY" title="最終判讀仍須有人承擔。">
-      <p>STT 使用 AI 協助研究、整理、比對與版本追蹤，但重大治理判讀、授權與是否執行，仍由人類決策者與治理程序承擔。</p>
+      <p>STT 使用 AI 協助研究、整理、比對與版本追蹤，但重大治理判讀、授權與是否執行仍由人類決策者與治理程序承擔。</p>
       <Link to="/eric-chuang">莊鈞翔博士 →</Link>
     </Section>
   </div>;
@@ -65,14 +65,14 @@ export function EricPage(){
       title="莊鈞翔博士 Eric Chuang, Ph.D."
       titleLines={["莊鈞翔博士", "Eric Chuang, Ph.D."]}
       subtitle="STT Governance 創辦人｜治理總控者｜制度設計與重大決策判讀。"
-      image="/images/eric-governance-principal-approved.jpg"
+      image="/visual-approved/eric-page-owner-original.png"
       imageFit="contain"
       imagePosition="right bottom"
       id="eric-title"
     />
 
     <Section kicker="GOVERNANCE ROLE" title="判讀者的工作，不是替別人做決定。">
-      <p>莊鈞翔博士在 STT 的角色，是建立判讀架構、辨識不可承擔風險、設計治理制度，並在重大事件中維持問題、證據、權力與責任的邊界。最終決定仍由具決策權的人承擔。</p>
+      <p>莊鈞翔博士在 STT 的角色，是建立判讀架構、辨識不可承擔風險、設計治理制度，並在重大事件中維持問題、證據、權力與責任的邊界；最終決定仍由具決策權的人承擔。</p>
     </Section>
 
     <Section kicker="RESEARCH" title="長期研究主軸。">
@@ -87,7 +87,7 @@ export function EricPage(){
     </Section>
 
     <Section kicker="PUBLIC INTERPRETATION" title="公開判讀與專欄。">
-      <p>公開專欄與第三方媒體發表用來呈現研究如何進入現實事件。M 傳媒屬外部第三方媒體，僅標示為發表來源。</p>
+      <p>公開專欄與第三方媒體發表用來呈現研究如何進入現實事件；M 傳媒屬外部第三方媒體，僅標示為發表來源。</p>
       <a href={M_MEDIA_URL} target="_blank" rel="noreferrer">M 傳媒｜外部第三方發表來源 ↗</a>
     </Section>
 
@@ -114,7 +114,7 @@ export function InstitutionsPage(){
       kicker="INSTITUTIONAL GOVERNANCE"
       title="當單一專業工具不足以處理整體治理問題，需要的是一個更上位的判讀架構。"
       titleLines={["當單一專業工具不足以處理整體治理問題，", "需要的是一個更上位的判讀架構。"]}
-      lead="重大治理事件可能同時牽涉法律、財務、家族、策略、權力與執行。STT 負責治理整合與問題架構；各專業仍在自身責任範圍內執行。"
+      lead="重大治理事件可能同時牽涉法律、財務、家族、策略、權力與執行；STT 負責治理整合與問題架構，各專業則在自身責任範圍內執行。"
       image="/visual-bank/stt/cooperation-hero-20260917.png"
       imagePosition="center right"
       id="institutions-title"
@@ -127,7 +127,7 @@ export function InstitutionsPage(){
     </Section>
 
     <Section kicker="COLLABORATION" title="合作不是互相導客，而是把複雜問題放回正確層級。">
-      <p>可合作方向：重大案件治理架構、家族與接班案件、AI 治理制度、Institutional Governance Protocol、跨專業決策卷宗。實際合作範圍依案件責任與保密需求另行確認。</p>
+      <p>可合作方向包括重大案件治理架構、家族與接班案件、AI 治理制度、Institutional Governance Protocol 與跨專業決策卷宗，實際合作範圍則依案件責任與保密需求另行確認。</p>
       <Link to="/start?type=institution">提出機構合作情境 →</Link>
     </Section>
   </div>;
@@ -139,9 +139,22 @@ export function PrivacyPage(){
     <UnifiedTitleHero
       kicker="PRIVACY & DATA USE"
       title="隱私與資料使用"
-      lead="本頁應由站主依實際表單工具、資料儲存位置、寄送服務與保存期間完成最終版本。AI 不得自行宣稱加密、ISO 認證、特定保存年限或跨境處理狀態。未確認項目一律標示 TBD_OWNER_INPUT，不得發布虛構內容。"
+      lead="第一次受理以整理治理情境與必要聯絡資訊為限，請勿提供身分證件、金融帳戶、醫療資料、完整營業秘密或其他不必要的敏感內容。"
       id="privacy-title"
     />
+    <Section title="初次受理的必要資訊">
+      <p>受理表收集姓名或稱謂、可回覆之聯絡方式、事件中的角色、目前發生的事情、不希望發生的結果、期待形成的狀態、決策期限與事件類型。</p>
+      <p>本表不提供檔案上傳，請以足以理解情境的文字說明，避免提交不必要的個人或第三人敏感資料。</p>
+    </Section>
+    <Section title="表單寄送流程">
+      <p>本站受理程式以 Resend 作為指定郵件寄送服務；只有郵件服務回覆受理時頁面才顯示送件成功，若部署環境尚未完成寄送設定或郵件服務未受理，系統會回報送件失敗而不把未寄出的內容宣告為成功，且送件不等於正式委任成立。</p>
+      <p>寄送失敗時，填寫內容保留在目前頁面，供檢查與重試；重新整理或離開頁面可能使尚未送出的內容消失。</p>
+    </Section>
+    <Section title="資料提供與後續處理">
+      <p>初次提交只整理問題與下一步，進一步提供案件資料之前，應先確認正式受理範圍、資料需求與使用邊界。</p>
+      <p>前往外部平台聯絡或瀏覽出版內容時，該平台依其自身服務條款與隱私規則處理相關資料。</p>
+      <Link to="/professional-boundary">專業服務與資訊邊界 →</Link>
+    </Section>
   </div>;
 }
 
@@ -151,7 +164,7 @@ export function ProfessionalBoundaryPage(){
     <UnifiedTitleHero
       kicker="PROFESSIONAL BOUNDARY"
       title="治理判讀與專業服務邊界"
-      lead="STT 網站內容用於說明治理方法、研究觀點與受理流程，不構成對特定個案的即時法律、稅務、投資、醫療或其他依法需由特定專業人員提供之意見。正式案件如需特定專業工作，由客戶既有團隊或另行確認之適當專業執行。"
+      lead="STT 網站內容用於說明治理方法、研究觀點與受理流程，不構成對特定個案的即時法律、稅務、投資、醫療或其他依法需由特定專業人員提供之意見；正式案件如需特定專業工作，則由客戶既有團隊或另行確認之適當專業執行。"
       id="boundary-title"
     />
   </div>;

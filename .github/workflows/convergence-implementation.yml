@@ -1,0 +1,126 @@
+name: Apply and verify isolated website convergence
+on:
+  push:
+    branches: [stt-convergence-20260923]
+    paths: [scripts/trust_paths_apply.py, scripts/trust_paths_verify.mjs]
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: dual-site-convergence-implementation
+  cancel-in-progress: false
+jobs:
+  continuation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - site: stt
+            branch: stt-convergence-20260923
+            base: 2d54080df5681a0c28465a41cb7c4847c9f703c3
+            routes: '/,/problems,/how-stt-works,/engagement,/insights,/about,/eric-chuang,/institutions,/start,/privacy,/professional-boundary,/research,/books,/books/internal-compliance,/problems/major-decision,/problems/owner-dependence,/problems/succession,/problems/family-ownership,/problems/strategic-legal,/problems/ai-governance,/problems/system-failure,/problems/founder-legacy'
+          - site: gcsda
+            branch: gcsda-convergence-20260923
+            base: 7d8d3d923aac532da7b7df461973e981313f4734
+            routes: '/,/about,/governance,/council,/membership,/events,/knowledge,/charter,/privacy'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          path: control
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ matrix.branch }}
+          path: site
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check exact page baseline and apply bounded changes
+        working-directory: site
+        env:
+          SITE: ${{ matrix.site }}
+          BRANCH: ${{ matrix.branch }}
+          BASE: ${{ matrix.base }}
+        run: |
+          test "$BRANCH" = "stt-convergence-20260923" -o "$BRANCH" = "gcsda-convergence-20260923"
+          test "$(git branch --show-current)" = "$BRANCH"
+          test -z "$(git diff "$BASE" HEAD -- src api public vite.config.ts vercel.json)"
+          mkdir -p /tmp/convergence-evidence
+          git rev-parse HEAD > /tmp/convergence-evidence/before-sha.txt
+          git ls-remote origin refs/heads/main > /tmp/convergence-evidence/main-before.txt
+          python3 ../control/scripts/trust_paths_apply.py "$SITE" > /tmp/convergence-evidence/changes.json
+          test -z "$(git diff --name-only -- '*.png' '*.jpg' '*.jpeg' '*.webp' '*.svg')"
+          git diff --stat > /tmp/convergence-evidence/diff-stat.txt
+          git diff > /tmp/convergence-evidence/implementation.patch
+      - name: Type checking and build
+        working-directory: site
+        run: |
+          npm ci > /tmp/convergence-evidence/install.log 2>&1
+          npm run lint > /tmp/convergence-evidence/typecheck.log 2>&1
+          node --experimental-strip-types --test tests/*.test.mjs > /tmp/convergence-evidence/unit-tests.log 2>&1
+          npm run build > /tmp/convergence-evidence/build.log 2>&1
+      - name: Browser and decision-path verification
+        working-directory: site
+        env:
+          QA_SITE: ${{ matrix.site }}
+          QA_ROUTES: ${{ matrix.routes }}
+        run: |
+          npm install --no-save --package-lock=false playwright @axe-core/playwright > /tmp/convergence-evidence/browser-install.log 2>&1
+          npx playwright install --with-deps chromium > /tmp/convergence-evidence/browser-setup.log 2>&1
+          cp ../control/scripts/convergence_browser.mjs .convergence-browser.mjs
+          cp ../control/scripts/trust_paths_verify.mjs .trust-paths-verify.mjs
+          npx vite preview --host 127.0.0.1 --port 4173 > /tmp/convergence-evidence/preview.log 2>&1 &
+          node .convergence-browser.mjs
+          node .trust-paths-verify.mjs > /tmp/convergence-evidence/trust-path-tests.log 2>&1
+      - name: Commit only the bounded change set to its original work branch
+        working-directory: site
+        env:
+          SITE: ${{ matrix.site }}
+          BRANCH: ${{ matrix.branch }}
+        run: |
+          mkdir -p docs/qa
+          cp /tmp/convergence-evidence/browser-summary.json docs/qa/TRUST_PATH_BROWSER_SUMMARY.json
+          cp /tmp/convergence-evidence/trust-path-checks.json docs/qa/TRUST_PATH_CHECKS.json
+          python3 - <<'PY'
+          import json,subprocess
+          changed=json.load(open('/tmp/convergence-evidence/changes.json'))['changed']
+          subprocess.run(['git','add','--',*changed,'docs/qa/TRUST_PATH_BROWSER_SUMMARY.json','docs/qa/TRUST_PATH_CHECKS.json'],check=True)
+          PY
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m "$SITE: restore traceable page identity and bounded governance entry paths"
+          git push origin "HEAD:$BRANCH"
+          git rev-parse HEAD > /tmp/convergence-evidence/source-sha.txt
+          git ls-remote origin refs/heads/main > /tmp/convergence-evidence/main-after.txt
+          cmp /tmp/convergence-evidence/main-before.txt /tmp/convergence-evidence/main-after.txt
+          git ls-tree -r -l HEAD > /tmp/convergence-evidence/source-tree.txt
+      - name: Collect inspectable source and route outputs
+        if: always()
+        working-directory: site
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import zipfile
+          out=Path('/tmp/convergence-evidence');out.mkdir(exist_ok=True)
+          with zipfile.ZipFile(out/'modified-source.zip','w',zipfile.ZIP_DEFLATED) as z:
+              for root in ['src','api','tests','docs/qa']:
+                  for p in Path(root).rglob('*'):
+                      if p.is_file() and p.suffix in {'.ts','.tsx','.mjs','.css','.md','.json'}:z.write(p)
+              for f in ['vite.config.ts','vercel.json','public/404.html']:
+                  if Path(f).exists():z.write(f)
+          with zipfile.ZipFile(out/'static-metadata.zip','w',zipfile.ZIP_DEFLATED) as z:
+              for p in Path('dist').glob('*.html'):z.write(p,p.name)
+              for f in ['sitemap.xml','robots.txt']:
+                  p=Path('dist')/f
+                  if p.exists():z.write(p,p.name)
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: trust-paths-${{ matrix.site }}-${{ github.run_number }}
+          path: /tmp/convergence-evidence/
+          retention-days: 7

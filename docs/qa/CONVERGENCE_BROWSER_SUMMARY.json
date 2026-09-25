@@ -1,0 +1,238 @@
+{
+  "site": "stt",
+  "environment": "local production build; Vercel routing and real mail delivery not certified",
+  "routes": [
+    "/",
+    "/problems",
+    "/how-stt-works",
+    "/engagement",
+    "/insights",
+    "/about",
+    "/eric-chuang",
+    "/institutions",
+    "/start",
+    "/privacy",
+    "/professional-boundary",
+    "/research",
+    "/books"
+  ],
+  "renderCount": 39,
+  "viewportChecks": {
+    "desktop": [
+      1440,
+      1000
+    ],
+    "tablet": [
+      820,
+      1180
+    ],
+    "mobile": [
+      390,
+      844
+    ]
+  },
+  "overflow": [],
+  "invalidH1": [],
+  "brokenImages": [
+    [
+      "/",
+      "desktop",
+      [
+        "/images/eric-home-authority-20260921.jpg"
+      ]
+    ],
+    [
+      "/",
+      "tablet",
+      [
+        "/images/eric-home-authority-20260921.jpg"
+      ]
+    ],
+    [
+      "/",
+      "mobile",
+      [
+        "/images/eric-home-authority-20260921.jpg"
+      ]
+    ]
+  ],
+  "pageErrors": [],
+  "internalLabels": [],
+  "accessibility": [
+    {
+      "route": "/problems",
+      "device": "desktop",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodeCount": 2
+        }
+      ]
+    },
+    {
+      "route": "/how-stt-works",
+      "device": "desktop",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodeCount": 1
+        }
+      ]
+    },
+    {
+      "route": "/insights",
+      "device": "desktop",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodeCount": 1
+        }
+      ]
+    },
+    {
+      "route": "/start",
+      "device": "desktop",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodeCount": 1
+        }
+      ]
+    },
+    {
+      "route": "/",
+      "device": "tablet",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodeCount": 7
+        }
+      ]
+    },
+    {
+      "route": "/problems",
+      "device": "tablet",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodeCount": 2
+        }
+      ]
+    },
+    {
+      "route": "/how-stt-works",
+      "device": "tablet",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodeCount": 1
+        }
+      ]
+    },
+    {
+      "route": "/insights",
+      "device": "tablet",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodeCount": 1
+        }
+      ]
+    },
+    {
+      "route": "/start",
+      "device": "tablet",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodeCount": 1
+        }
+      ]
+    },
+    {
+      "route": "/",
+      "device": "mobile",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodeCount": 7
+        }
+      ]
+    },
+    {
+      "route": "/problems",
+      "device": "mobile",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodeCount": 2
+        }
+      ]
+    },
+    {
+      "route": "/how-stt-works",
+      "device": "mobile",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodeCount": 1
+        }
+      ]
+    },
+    {
+      "route": "/insights",
+      "device": "mobile",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodeCount": 1
+        }
+      ]
+    },
+    {
+      "route": "/start",
+      "device": "mobile",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodeCount": 1
+        }
+      ]
+    }
+  ],
+  "interactions": [
+    {
+      "name": "mobile menu Escape closes and restores trigger focus",
+      "passed": true
+    },
+    {
+      "name": "skip link reaches the main landmark",
+      "passed": true
+    },
+    {
+      "name": "institution route prefills only event category",
+      "passed": true
+    },
+    {
+      "name": "failure and false success preserve values; retry uses same key; valid acknowledgement changes state (MOCK ONLY)",
+      "passed": true
+    }
+  ],
+  "productionModified": false,
+  "realInboxDeliveryVerified": false,
+  "wholeSiteAccepted": false
+}

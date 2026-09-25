@@ -195,7 +195,7 @@ export default function Columns() {
           </div>
           <div>
             <p>
-              STT 自有來源標示為 STT Press / STT Intelligence 等實際來源；於 M 傳媒或其他媒體發表的文章必須標示「外部發表／第三方媒體」，並連到原始來源。不得將 M 傳媒描述為 STT 旗下、合作自媒體或自有新聞平台。
+              STT 自有來源標示為 STT Press / STT Intelligence 等實際來源；於 M 傳媒或其他媒體發表的文章必須標示「外部發表／第三方媒體」並連到原始來源，不得將 M 傳媒描述為 STT 旗下、合作自媒體或自有新聞平台。
             </p>
             <a href={AUTHOR} target="_blank" rel="noreferrer">
               M 傳媒｜莊鈞翔博士外部第三方作者頁 <ArrowUpRight size={15} aria-hidden="true" />
@@ -321,7 +321,7 @@ export default function Columns() {
           )}
 
           <p className="stt-insights-catalog-note">
-            外部文章索引最後核對：{checkedTime(catalog.syncedAt)}（臺灣時間）。標題、分類與摘錄依第三方來源保存；完整內容請閱讀原始來源。
+            外部文章索引最後核對：{checkedTime(catalog.syncedAt)}（臺灣時間）；標題、分類與摘錄依第三方來源保存，完整內容請閱讀原始來源。
           </p>
         </div>
       </section>

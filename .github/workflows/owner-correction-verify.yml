@@ -1,0 +1,100 @@
+name: Owner correction verification 2026-09-24
+on:
+  push:
+    branches: [stt-convergence-20260923]
+    paths: [.github/workflows/owner-correction-verify.yml]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - site: stt
+            ref: stt-convergence-20260923
+          - site: gcsda
+            ref: gcsda-convergence-20260923
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ matrix.ref }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Build
+        run: |
+          npm ci
+          npm run lint
+          npm run build
+          npm install --no-save --package-lock=false playwright
+          npx playwright install --with-deps chromium
+      - name: Visual assertions
+        env:
+          SITE: ${{ matrix.site }}
+        run: |
+          mkdir -p /tmp/review
+          npx vite preview --host 127.0.0.1 --port 4173 >/tmp/review/server.log 2>&1 &
+          for i in {1..30}; do curl -fsS http://127.0.0.1:4173/ >/dev/null && break; sleep 1; done
+          curl -fsS http://127.0.0.1:4173/ >/dev/null
+          cat > .owner-check.mjs <<'JS'
+          import fs from 'node:fs';
+          import {chromium} from 'playwright';
+          const site=process.env.SITE;
+          const browser=await chromium.launch({headless:true});
+          const page=await browser.newPage({viewport:{width:1536,height:960}});
+          const result={site,checks:[]};
+          const check=(name,passed,actual)=>result.checks.push({name,passed,actual});
+          if(site==='stt'){
+            for(const route of ['/','/how-stt-works','/start','/about','/insights','/books']){
+              await page.goto('http://127.0.0.1:4173'+route,{waitUntil:'networkidle'});
+              await page.screenshot({path:`/tmp/review/stt-${route==='/'?'home':route.slice(1)}.png`,fullPage:false});
+              const data=await page.evaluate(()=>({
+                h1:document.querySelector('h1')?.textContent?.trim(),
+                heroImg:document.querySelector('.cis-hero img')?.getAttribute('src')||null,
+                active:[...document.querySelectorAll('.stt-g0-nav-link.is-active')].map(x=>x.textContent?.trim()),
+                cta:document.querySelector('.stt-g0-primary-cta')?.textContent?.trim(),
+                stepHeaderBg:getComputedStyle(document.querySelector('.stt-g3-step header')||document.body).backgroundColor,
+                widgetBg:getComputedStyle(document.querySelector('.stt-accessibility-toggle')||document.body).backgroundColor,
+              }));
+              if(route==='/') check('home approved 9/15 hero',data.heroImg==='/visual-bank/stt/user-approved-six/home.png',data.heroImg);
+              if(route==='/how-stt-works') check('method approved 9/15 hero',data.heroImg==='/visual-bank/stt/user-approved-six/method.png',data.heroImg);
+              if(route==='/about') check('about approved 9/15 hero',data.heroImg==='/visual-bank/stt/user-approved-six/about-stt.png',data.heroImg);
+              if(route==='/insights') check('columns approved 9/15 hero',data.heroImg==='/visual-bank/stt/user-approved-six/columns.png',data.heroImg);
+              if(route==='/books') check('publishing approved 9/15 hero',data.heroImg==='/visual-bank/stt/user-approved-six/publications.png',data.heroImg);
+              if(route==='/start') check('start image still requires owner-approved asset',data.heroImg===null,data.heroImg);
+              if(route==='/how-stt-works') check('method title block transparent',data.stepHeaderBg==='rgba(0, 0, 0, 0)',data.stepHeaderBg);
+              check('primary CTA wording',data.cta==='開始治理判讀',data.cta);
+            }
+          }else{
+            for(const route of ['/','/about','/membership','/knowledge']){
+              await page.goto('http://127.0.0.1:4173'+route,{waitUntil:'networkidle'});
+              await page.screenshot({path:`/tmp/review/gcsda-${route==='/'?'home':route.slice(1)}.png`,fullPage:false});
+              const data=await page.evaluate(()=>({
+                heroImg:document.querySelector('.cis-hero img')?.getAttribute('src')||null,
+                brandImg:document.querySelector('.g4-brand img')?.getAttribute('src')||null,
+                join:document.querySelector('.g4-join')?.textContent?.trim(),
+                fields:document.querySelectorAll('.g4-membership-form input:not(.g4-honeypot),.g4-membership-form select,.g4-membership-form textarea').length,
+              }));
+              check(route+' no STT classical hero',data.heroImg===null,data.heroImg);
+              check(route+' GCSDA logo in header',data.brandImg==='/images/gcsda-logo.png',data.brandImg);
+              check(route+' join CTA',data.join==='申請入會',data.join);
+              if(route==='/membership') check('membership has real application fields',data.fields>=6,data.fields);
+            }
+          }
+          await browser.close();
+          fs.writeFileSync('/tmp/review/result.json',JSON.stringify(result,null,2));
+          const failed=result.checks.filter(x=>!x.passed && x.name!=='start image still requires owner-approved asset');
+          console.log(JSON.stringify(result,null,2));
+          if(failed.length) process.exitCode=1;
+          JS
+          node .owner-check.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: owner-correction-${{ matrix.site }}
+          path: /tmp/review/
+          retention-days: 7

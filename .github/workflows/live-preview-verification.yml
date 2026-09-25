@@ -1,0 +1,36 @@
+name: Verify actual online previews
+on:
+  push:
+    branches: [stt-convergence-20260923]
+    paths: [.github/workflows/live-preview-verification.yml]
+permissions:
+  contents: read
+jobs:
+  live-browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Open actual STT and GCSDA review links in clean browsers
+        env:
+          STT_URL: 'https://stt-003-ra24md5a7-pc5888pc5888s-projects.vercel.app/?_vercel_share=S9pHN0eWBs1ZNfjwl2FsKIRD13tuAutb'
+          GCSDA_URL: 'https://stt-003-ahi0c6q3x-pc5888pc5888s-projects.vercel.app/?_vercel_share=5GLJWrYALc9ML6Y36e417etJHSbCaWuU'
+        run: |
+          curl --fail --silent --show-error --location --max-time 30 'https://raw.githubusercontent.com/pc5888pc5888/STT-003/63a916d5fcbe8204c32248938f5609b72c701afa/.github/workflows/live-preview-verification.yml' -o /tmp/live-check.yml
+          python3 - <<'PY'
+          import yaml,subprocess
+          workflow=yaml.safe_load(open('/tmp/live-check.yml'))
+          step=next(s for s in workflow['jobs']['live-browser']['steps'] if s.get('name')=='Read-only online browser verification')
+          subprocess.run(['bash','--noprofile','--norc','-e','-o','pipefail','-c',step['run']],check=True)
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: online-preview-browser-evidence
+          path: |
+            /tmp/live-preview/*.json
+            /tmp/live-preview/*.png
+            /tmp/live-preview/*.log
+          retention-days: 3
