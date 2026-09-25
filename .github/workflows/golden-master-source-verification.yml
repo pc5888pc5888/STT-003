@@ -137,3 +137,4 @@ jobs:
           path: /tmp/golden/
           retention-days: 7
 # verification-rerun: 2026-09-24-copy-and-layout-pass
+# verification-rerun: 2026-09-25-final-mobile-logo-pass
