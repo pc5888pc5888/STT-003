@@ -1,0 +1,46 @@
+name: Recover owner GCSDA horizontal logo
+on:
+  push:
+    branches: [gcsda-convergence-20260923]
+    paths: [.github/workflows/recover-gcsda-owner-logo.yml]
+permissions:
+  contents: write
+jobs:
+  recover:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 50
+      - name: Recover previously embedded owner-supplied logo
+        run: |
+          git show a2d139ad4ff4ea97d48abe3b1791a06556983ce9:src/GCSDAStandaloneV3.tsx > /tmp/old.tsx
+          node <<'JS'
+          const fs=require('fs');
+          const s=fs.readFileSync('/tmp/old.tsx','utf8');
+          const m=s.match(/const GCSDA_HEADER_LOGO_DATA = "(data:image\/[a-zA-Z0-9.+-]+;base64,[^"]+)";/);
+          if(!m) throw new Error('embedded owner logo not found');
+          const [meta,b64]=m[1].split(',');
+          const buf=Buffer.from(b64,'base64');
+          fs.writeFileSync('/tmp/recovered-logo.bin',buf);
+          console.log(meta,buf.length);
+          JS
+          file /tmp/recovered-logo.bin
+          python - <<'PY'
+          from PIL import Image
+          p='/tmp/recovered-logo.bin'
+          try:
+            im=Image.open(p)
+            print('PIL',im.format,im.size,im.mode)
+            im.save('/tmp/recovered-logo.png','PNG',optimize=True)
+            print('saved',__import__('os').path.getsize('/tmp/recovered-logo.png'))
+          except Exception as e:
+            print('PIL_ERROR',repr(e))
+            raise
+          PY
+          sha256sum /tmp/recovered-logo.png
+      - uses: actions/upload-artifact@v4
+        with:
+          name: recovered-gcsda-owner-logo
+          path: /tmp/recovered-logo.png
+          retention-days: 3
