@@ -1,0 +1,11 @@
+{
+  "site": "gcsda",
+  "changed": [
+    "src/GCSDAStandaloneV3.tsx",
+    "src/styles/gcsda-accessibility.css",
+    "src/gcsdaMetadata.ts",
+    "vite.config.ts",
+    "vercel.json",
+    "tests/gcsda-config.test.mjs"
+  ]
+}
