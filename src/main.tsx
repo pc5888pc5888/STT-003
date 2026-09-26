@@ -11,6 +11,7 @@ import "./styles/stt-approved-heroes-20260915.css";
 import "./styles/stt-hero-layer-fix-20260915.css";
 import "./styles/stt-exact-source-fit-20260915.css";
 import "./styles/stt-mobile-first-editorial.css";
+import "./styles/stt-g0-shell.css";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode><AppProviders><App /></AppProviders></React.StrictMode>
