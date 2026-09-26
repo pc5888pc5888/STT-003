@@ -161,7 +161,7 @@
 #root .g4-nav a.active::after{content:"";position:absolute;left:10px;right:10px;bottom:14px;height:2px;background:#9b6e38}
 #root .g4-join{border-radius:999px!important}
 #root .g4-brand{border:0!important;box-shadow:none!important;background:transparent!important}
-#root .g4-brand img{display:block;width:min(430px,34vw);max-height:68px;object-fit:contain;object-position:left center}
+#root .g4-brand img{display:block;height:68px;width:auto;max-width:min(430px,34vw);max-height:none;object-fit:contain;object-position:left center}
 
 /* Accessibility controls remain visible but do not introduce a black foreign object. */
 #root .stt-accessibility-toggle{width:48px!important;height:48px!important;border-radius:999px!important;border:1px solid #c6a173!important;background:rgba(255,255,255,.95)!important;color:#8a6237!important;box-shadow:0 8px 24px rgba(67,52,32,.08)!important;display:flex!important;align-items:center!important;justify-content:center!important}
@@ -169,5 +169,5 @@
 
 @media(max-width:760px){
   #root .g4 .cis-text-only .cis-hero-inner{width:calc(100% - 48px)!important;padding:48px 0 42px!important}
-  #root .g4-brand img{width:min(270px,66vw);max-height:58px}
+  #root .g4-brand img{height:58px;width:auto;max-width:min(270px,66vw);max-height:none}
 }
