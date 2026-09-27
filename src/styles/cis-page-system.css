@@ -305,3 +305,58 @@
  #root .lib-book-visual{max-width:320px;margin:auto}
  #root .stt-humanistic-entry__inner{width:calc(100% - 48px)}
 }
+
+
+/* 2026-09-27 FINAL OWNER VISUAL CORRECTION
+   One unmistakable image/copy treatment on both sites: solid white reading field at left,
+   then a continuous left-to-right fade into the approved image. */
+@media(min-width:901px){
+  #root .stt-g0-shell .cis-with-image::before{
+    display:block!important;
+    content:""!important;
+    position:absolute!important;
+    inset:0!important;
+    z-index:1!important;
+    pointer-events:none!important;
+    background:linear-gradient(90deg,
+      rgba(255,255,255,1) 0%,
+      rgba(255,255,255,1) 30%,
+      rgba(255,255,255,.98) 38%,
+      rgba(255,255,255,.88) 46%,
+      rgba(255,255,255,.68) 54%,
+      rgba(255,255,255,.40) 62%,
+      rgba(255,255,255,.16) 70%,
+      rgba(255,255,255,0) 78%)!important;
+  }
+  #root .stt-g0-shell .cis-with-image.cis-clear-left::before{
+    background:linear-gradient(90deg,
+      rgba(255,255,255,1) 0%,
+      rgba(255,255,255,1) 30%,
+      rgba(255,255,255,.98) 38%,
+      rgba(255,255,255,.88) 46%,
+      rgba(255,255,255,.68) 54%,
+      rgba(255,255,255,.40) 62%,
+      rgba(255,255,255,.16) 70%,
+      rgba(255,255,255,0) 78%)!important;
+  }
+  #root .stt-g0-shell .cis-with-image .cis-hero-art img{
+    object-position:right center!important;
+  }
+}
+
+/* Dual-site header geometry: same header height, same logo visual height, same nav rhythm. */
+#root .stt-g0-header,#root .stt-g0-header__inner{min-height:92px!important;height:92px!important}
+#root .stt-g0-brand{width:300px!important;max-width:300px!important;height:64px!important;display:flex!important;align-items:center!important;overflow:hidden!important}
+#root .stt-g0-brand img{display:block!important;width:auto!important;height:58px!important;max-width:300px!important;max-height:58px!important;object-fit:contain!important;object-position:left center!important}
+#root .stt-g0-desktop-nav,#root .stt-g0-nav-link{height:92px!important}
+#root .stt-g0-nav-link{font-size:15px!important;line-height:1.5!important}
+#root .stt-g0-primary-cta{min-height:46px!important;border-radius:999px!important;padding:10px 20px!important}
+
+/* Publication images must be complete and uncropped. */
+#root .lib-book-visual{display:flex!important;align-items:center!important;justify-content:center!important;background:#fff!important;overflow:visible!important}
+#root .lib-book-visual img{display:block!important;width:100%!important;height:auto!important;aspect-ratio:auto!important;object-fit:contain!important;object-position:center!important;max-height:none!important;background:#fff!important}
+
+@media(max-width:900px){
+  #root .stt-g0-brand{width:min(260px,calc(100vw - 110px))!important;max-width:min(260px,calc(100vw - 110px))!important;height:56px!important}
+  #root .stt-g0-brand img{height:48px!important;max-height:48px!important;max-width:100%!important}
+}
