@@ -3,11 +3,54 @@ import STTPageHero from "../components/STTPageHero";
 import { Link } from "react-router-dom";
 import { books, masterPapers, phdPapers } from "../data/mockData";
 
+const publicationCanon = [
+  {
+    title: "2026 永續家族治理實務實錄",
+    enTitle: "Special Issue on Sustainable Family Governance Practices",
+    image: "/books/2026-sustainable-family-governance.webp",
+    previewUrl: "https://heyzine.com/flip-book/e424001f8c.html",
+  },
+  {
+    title: "內在法遵",
+    enTitle: "Internal Compliance",
+    image: "/books/internal-compliance.webp",
+    previewUrl: "https://heyzine.com/flip-book/c700d8beb2.html",
+    canonicalUrl: "/books/internal-compliance",
+  },
+  {
+    title: "內在法遵 AI Governance",
+    enTitle: "AI Governance",
+    image: "/books/ai-governance.webp",
+  },
+  {
+    title: "內在法遵 Family Governance",
+    enTitle: "Family Governance",
+    image: "/books/family-governance.webp",
+  },
+] as const;
+
 function LibraryShell({ children }: { children: ReactNode }) { return <div className="lib-root">{children}</div>; }
 
 export function BooksCanonical(){
   return <LibraryShell><STTPageHero visual="books" eyebrow="BOOKS · STT PRESS" title="著作正典" lead="STT Press 將治理思想、研究與制度經驗整理為可以閱讀、引用與傳承的正式文本。" />
-    <section className="lib-body"><div className="lib-wrap"><div className="lib-list">{books.map((book,index)=><article className="lib-row" key={book.id}><div className="lib-index">{String(index+1).padStart(2,"0")}</div><div><h2>{book.title}</h2><div className="lib-meta">{book.author}｜{book.publisher}</div>{book.id==="b1"&&<p>《內在法遵》在本網站被定位為內在治理思想正典，處理責任、邊界、節制與判斷主權；不與企業契約、付款、稽核等企業法遵制度混為同一概念。</p>}</div><div className="lib-actions">{book.id==="b1"&&<Link to="/books/internal-compliance">正典頁</Link>}{book.previewUrl&&<a href={book.previewUrl} target="_blank" rel="noreferrer">{book.id==="b1"?"線上翻閱《內在法遵 Internal Compliance》 ↗":"線上翻閱《2026 永續家族治理實務實錄》 ↗"}</a>}</div></article>)}</div><div className="lib-note"><h2>正式出版資訊</h2><p>書名、版本、年份、出版狀態與外部預覽連結均依正式出版資料呈現。</p></div></div></section></LibraryShell>;
+    <section className="lib-body"><div className="lib-wrap">
+      <div className="lib-book-grid" aria-label="STT Governance Publication Series 2026">
+        {publicationCanon.map((book)=><article className="lib-book-card" key={book.title}>
+          <figure className="lib-book-visual"><img src={book.image} alt={book.title} loading="eager" /></figure>
+          <div>
+            <div className="lib-meta">STT GOVERNANCE · PUBLICATION SERIES 2026</div>
+            <h2>{book.title}</h2>
+            <p>{book.enTitle}</p>
+            <div className="lib-actions">
+              {"canonicalUrl" in book && book.canonicalUrl && <Link to={book.canonicalUrl}>正典頁</Link>}
+              {book.previewUrl && <a href={book.previewUrl} target="_blank" rel="noreferrer">線上翻閱 ↗</a>}
+            </div>
+          </div>
+        </article>)}
+      </div>
+      <div className="lib-list">{books.map((book,index)=><article className="lib-row" key={book.id}><div className="lib-index">{String(index+1).padStart(2,"0")}</div><div><h2>{book.title}</h2><div className="lib-meta">{book.author}｜{book.publisher}</div>{book.id==="b1"&&<p>《內在法遵》在本網站被定位為內在治理思想正典，處理責任、邊界、節制與判斷主權；不與企業契約、付款、稽核等企業法遵制度混為同一概念。</p>}</div><div className="lib-actions">{book.id==="b1"&&<Link to="/books/internal-compliance">正典頁</Link>}{book.previewUrl&&<a href={book.previewUrl} target="_blank" rel="noreferrer">{book.id==="b1"?"線上翻閱《內在法遵 Internal Compliance》 ↗":"線上翻閱《2026 永續家族治理實務實錄》 ↗"}</a>}</div></article>)}</div>
+      <div className="lib-note"><h2>正式出版資訊</h2><p>書名、版本、年份、出版狀態與外部預覽連結均依正式出版資料呈現。</p></div>
+    </div></section></LibraryShell>;
 }
 
 export function InternalComplianceCanonical(){
