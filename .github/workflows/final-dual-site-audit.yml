@@ -215,7 +215,7 @@ jobs:
             missingBooks,
             lowResolutionBooks,
             headers:report.headers,
-            note:'Screenshots are mandatory review evidence. CSS presence and build success alone are never visual PASS.'
+            note:'Screenshots are mandatory review evidence. CSS presence, successful builds, and naturalWidth alone are never visual PASS.'
           },null,2));
 
           if(failures.length||bookFailures.length||missingBooks.length){
