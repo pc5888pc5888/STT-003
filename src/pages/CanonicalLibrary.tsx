@@ -7,13 +7,13 @@ const publicationCanon = [
   {
     title: "2026 永續家族治理實務實錄",
     enTitle: "Special Issue on Sustainable Family Governance Practices",
-    image: "/books/2026-sustainable-family-governance.webp",
+    image: "/books/2026-sustainable-family-governance.jpg",
     previewUrl: "https://heyzine.com/flip-book/e424001f8c.html",
   },
   {
     title: "內在法遵 Internal Compliance",
     enTitle: "Digital Canonical Edition",
-    image: "/books/internal-compliance.webp",
+    image: "/books/internal-compliance.jpg",
     previewUrl: "https://heyzine.com/flip-book/c700d8beb2.html",
     canonicalUrl: "/books/internal-compliance",
   },
