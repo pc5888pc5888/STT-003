@@ -48,7 +48,6 @@ export function BooksCanonical(){
           </div>
         </article>)}
       </div>
-      <div className="lib-list">{books.map((book,index)=><article className="lib-row" key={book.id}><div className="lib-index">{String(index+1).padStart(2,"0")}</div><div><h2>{book.title}</h2><div className="lib-meta">{book.author}｜{book.publisher}</div>{book.id==="b1"&&<p>《內在法遵》在本網站被定位為內在治理思想正典，處理責任、邊界、節制與判斷主權；不與企業契約、付款、稽核等企業法遵制度混為同一概念。</p>}</div><div className="lib-actions">{book.id==="b1"&&<Link to="/books/internal-compliance">正典頁</Link>}{book.previewUrl&&<a href={book.previewUrl} target="_blank" rel="noreferrer">{book.id==="b1"?"線上翻閱《內在法遵 Internal Compliance》 ↗":"線上翻閱《2026 永續家族治理實務實錄》 ↗"}</a>}</div></article>)}</div>
       <div className="lib-note"><h2>正式出版資訊</h2><p>書名、版本、年份、出版狀態與外部預覽連結均依正式出版資料呈現。</p></div>
     </div></section></LibraryShell>;
 }
