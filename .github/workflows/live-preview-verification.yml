@@ -27,7 +27,7 @@ jobs:
           GCSDA_URL: https://stt-003-git-gcsda-convergence-20260923-pc5888pc5888s-projects.vercel.app
         run: |
           mkdir -p /tmp/live-preview
-          cat > /tmp/live-check.mjs <<'JS'
+          cat > live-check.mjs <<'JS'
           import fs from 'node:fs';
           import path from 'node:path';
           import { pathToFileURL } from 'node:url';
@@ -153,11 +153,11 @@ jobs:
             'ChatGPT Image 2026年9月3日 上午02_00_07 (3).png'
           ].filter(p=>fs.existsSync(p));
           const cells=candidatePaths.map((p,i)=>`<figure><img src="${encodeURI(p)}"><figcaption>${i+1}. ${p}</figcaption></figure>`).join('');
-          fs.writeFileSync('/tmp/candidate.html',`<!doctype html><meta charset="utf-8"><style>body{font-family:Arial;margin:24px;background:#eee}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}figure{margin:0;background:white;padding:12px}img{display:block;width:100%;height:500px;object-fit:contain;background:#fafafa}figcaption{font-size:13px;overflow-wrap:anywhere;margin-top:8px}</style><div class="grid">${cells}</div>`);
+          fs.writeFileSync('candidate.html',`<!doctype html><meta charset="utf-8"><style>body{font-family:Arial;margin:24px;background:#eee}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}figure{margin:0;background:white;padding:12px}img{display:block;width:100%;height:500px;object-fit:contain;background:#fafafa}figcaption{font-size:13px;overflow-wrap:anywhere;margin-top:8px}</style><div class="grid">${cells}</div>`);
           {
             const ctx=await browser.newContext({viewport:{width:1500,height:2200}});
             const page=await ctx.newPage();
-            await page.goto(pathToFileURL('/tmp/candidate.html').href,{waitUntil:'load'});
+            await page.goto(pathToFileURL('candidate.html').href,{waitUntil:'load'});
             const dims=await page.evaluate(()=>[...document.images].map(i=>({src:decodeURI(i.getAttribute('src')),naturalWidth:i.naturalWidth,naturalHeight:i.naturalHeight,complete:i.complete})));
             report.candidateFiles=dims;
             await page.screenshot({path:'/tmp/live-preview/repository-book-candidates.png',fullPage:true});
@@ -175,7 +175,7 @@ jobs:
           },null,2));
           if(hardFailures.length) process.exitCode=1;
           JS
-          node /tmp/live-check.mjs
+          node live-check.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
