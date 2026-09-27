@@ -168,6 +168,19 @@ export default function Columns() {
         </div>
       </section>
 
+      <section className="stt-humanistic-entry" aria-labelledby="humanistic-20q-title">
+        <div className="stt-humanistic-entry__inner">
+          <div>
+            <p className="stt-insights-kicker">HUMANISTIC LANDSCAPE INDUSTRY · 20 QUESTIONS JOURNEY</p>
+            <h2 id="humanistic-20q-title">人文地景產專欄｜20 Questions Journey</h2>
+          </div>
+          <div>
+            <p>五站、二十題的深度採訪旅程，以生活直覺、生命轉折、時間視角、城市與社會，以及留下什麼為路徑，讓受訪者在正式採訪前留下可被理解的人生紋理。</p>
+            <a href="https://shimmering-longma-509244.netlify.app/" target="_blank" rel="noreferrer">進入 20 Questions Journey <ArrowUpRight size={15} aria-hidden="true" /></a>
+          </div>
+        </div>
+      </section>
+
       <section className="stt-insights-evidence" aria-labelledby="insights-evidence-title">
         <div className="stt-insights-shell stt-insights-evidence-grid">
           <div>
