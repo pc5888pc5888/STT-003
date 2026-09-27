@@ -146,6 +146,12 @@
 #root .g4 .cis-lead{color:#514a42!important}
 #root .g4 main :where(p,dd,li){color:#514a42!important}
 
+/* Optical header alignment with STT: same left origin, same visible seal diameter. */
+@media(min-width:1151px){
+  #root .g4-head .g4-wrap{max-width:1540px!important;padding-left:52px!important;padding-right:52px!important}
+}
+#root .g4-brand img{transform:translateX(-2px) scale(1.09)!important;transform-origin:left center!important}
+
 /* Association navigation: quiet underline, never a boxed tab. */
 #root .g4-nav a{position:relative!important;border:0!important;background:transparent!important;box-shadow:none!important}
 #root .g4-nav a.active{background:transparent!important;border:0!important;color:#835c2e!important}
