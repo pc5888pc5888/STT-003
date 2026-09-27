@@ -21,4 +21,9 @@ jobs:
             public/images/內在法遵 Internal Compliance《 為你的內心，打造一座不可侵犯的至聖所 》 數位閱讀完整版.png
             public/images/internal compliance02.png
             public/images/Family Office02.png
+            public/visual-approved/bank-20.png
+            public/books/2026-sustainable-family-governance.webp
+            public/books/internal-compliance.webp
+            public/books/ai-governance.webp
+            public/books/family-governance.webp
           retention-days: 3
