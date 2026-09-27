@@ -241,49 +241,53 @@
 }
 
 
-/* 2026-09-27 OWNER CIS LOCK — all image+copy heroes use one left-white → transparent fusion.
-   No pasted white card; no page-specific improvisation. */
-#root .cis-with-image{position:relative!important;isolation:isolate!important;background:#fbfaf7!important}
+/* 2026-09-28 OWNER CIS LOCK — dual-site image+copy pages use one unmistakable left-white → transparent fusion. */
+#root .cis-with-image{position:relative!important;isolation:isolate!important;background:#fff!important;overflow:hidden!important}
 #root .cis-with-image::before{
   content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
   background:linear-gradient(90deg,
-    rgba(255,255,255,.99) 0%,
-    rgba(255,255,255,.97) 19%,
-    rgba(255,255,255,.88) 34%,
-    rgba(255,255,255,.62) 48%,
-    rgba(255,255,255,.26) 62%,
-    rgba(255,255,255,.06) 74%,
-    rgba(255,255,255,0) 84%);
+    #ffffff 0%,
+    rgba(255,255,255,.995) 20%,
+    rgba(255,255,255,.97) 34%,
+    rgba(255,255,255,.86) 45%,
+    rgba(255,255,255,.62) 56%,
+    rgba(255,255,255,.30) 67%,
+    rgba(255,255,255,.08) 77%,
+    rgba(255,255,255,0) 86%)!important;
 }
 #root .cis-with-image .cis-hero-art{z-index:0!important}
 #root .cis-with-image .cis-hero-copy,
 #root .cis-with-image.cis-portrait .cis-hero-copy,
 #root .cis-with-image.cis-clear-left .cis-hero-copy{
   z-index:2!important;background:transparent!important;border:0!important;box-shadow:none!important;
-  padding:0!important;max-width:600px!important;width:min(42%,600px)!important;
+  padding:0!important;max-width:650px!important;width:min(42%,650px)!important;
   margin:clamp(46px,6vw,88px) 0 clamp(42px,5vw,72px) max(52px,calc((100% - 1376px)/2))!important;
 }
-#root .cis-with-image .cis-title{color:#151411!important;text-shadow:0 1px 0 rgba(255,255,255,.34)}
-#root .cis-with-image .cis-lead,#root .cis-with-image .cis-subtitle{color:#3c3731!important}
+#root .cis-with-image .cis-title{color:#151411!important;text-shadow:none!important}
+#root .cis-with-image .cis-lead,#root .cis-with-image .cis-subtitle{color:#35302b!important}
 
-/* One dual-site header grammar: same height, underline state, type rhythm and pill CTA. */
-#root .stt-g0-header{background:rgba(255,253,249,.97)!important;border-bottom:1px solid rgba(180,138,80,.24)!important;backdrop-filter:blur(12px)}
-#root .stt-g0-nav-link{position:relative!important;background:transparent!important;border:0!important;color:#5f574e!important}
+/* One dual-site header grammar: same header height, same logo frame, same navigation rhythm and same pill CTA. */
+#root .stt-g0-header{background:rgba(255,253,249,.98)!important;border-bottom:1px solid rgba(180,138,80,.24)!important;backdrop-filter:blur(12px)}
+#root .stt-g0-header__inner{min-height:92px!important;height:92px!important;max-width:1540px!important;padding:0 52px!important}
+#root .stt-g0-brand{width:340px!important;height:70px!important;max-width:340px!important;display:flex!important;align-items:center!important;border:0!important;background:transparent!important;box-shadow:none!important;padding:0!important}
+#root .stt-g0-brand img{display:block!important;width:100%!important;height:100%!important;max-height:none!important;object-fit:contain!important;object-position:left center!important}
+#root .stt-g0-desktop-nav{height:92px!important;gap:4px!important}
+#root .stt-g0-nav-link{position:relative!important;height:92px!important;display:inline-flex!important;align-items:center!important;padding:0 14px!important;border:0!important;background:transparent!important;color:#5f574e!important;font:500 15px/1.5 var(--cis-serif)!important}
 #root .stt-g0-nav-link.is-active{color:#835c2e!important}
 #root .stt-g0-nav-link.is-active::after{content:"";position:absolute;left:12px;right:12px;bottom:14px;height:2px;background:#9b6e38}
-#root .stt-g0-primary-cta{border:1px solid #9b6e38!important;border-radius:999px!important;background:transparent!important;color:#805a30!important;padding:11px 20px!important}
+#root .stt-g0-primary-cta{min-height:48px!important;padding:11px 22px!important;border:1px solid #9b6e38!important;border-radius:999px!important;background:transparent!important;color:#805a30!important;font:500 15px/1.5 var(--cis-serif)!important;box-shadow:none!important}
 
-/* Publication canon: the four owner-supplied book visuals are visible, not hidden in metadata. */
-#root .lib-book-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px;margin:8px 0 44px}
-#root .lib-book-card{display:grid;grid-template-columns:minmax(190px,38%) minmax(0,1fr);gap:26px;align-items:center;padding:24px;border:1px solid var(--cis-line);background:var(--cis-white)}
-#root .lib-book-visual{margin:0;background:#f7f1e7;overflow:hidden}
-#root .lib-book-visual img{display:block;width:100%;height:auto;aspect-ratio:1122/1402;object-fit:cover}
-#root .lib-book-card h2{font-size:24px!important;margin:0 0 10px}
-#root .lib-book-card .lib-meta{margin-bottom:12px}
-#root .lib-book-card p{margin:0 0 14px}
-#root .lib-book-card .lib-actions{margin-top:16px}
+/* Publication canon: all four supplied posters are shown complete. No crop, no hidden lower edge, no duplicate legacy list. */
+#root .lib-book-grid{display:grid!important;grid-template-columns:1fr!important;gap:30px!important;margin:8px 0 44px!important}
+#root .lib-book-card{display:grid!important;grid-template-columns:minmax(300px,430px) minmax(0,1fr)!important;gap:36px!important;align-items:center!important;padding:28px!important;border:1px solid var(--cis-line)!important;background:var(--cis-white)!important}
+#root .lib-book-visual{margin:0!important;background:#fbfaf7!important;overflow:visible!important}
+#root .lib-book-visual img{display:block!important;width:100%!important;height:auto!important;max-height:none!important;aspect-ratio:auto!important;object-fit:contain!important;object-position:center!important}
+#root .lib-book-card h2{font-size:28px!important;margin:0 0 10px!important}
+#root .lib-book-card .lib-meta{margin-bottom:12px!important}
+#root .lib-book-card p{margin:0 0 14px!important}
+#root .lib-book-card .lib-actions{margin-top:16px!important}
 
-/* Humanistic Landscape Industry column — existing 20 Questions Journey is an official existing asset. */
+/* Existing Humanistic Landscape Industry 20 Questions Journey remains a formal STT research/publication entry. */
 #root .stt-humanistic-entry{padding:54px 0;border-top:1px solid var(--cis-line);border-bottom:1px solid var(--cis-line);background:#f7f2e9}
 #root .stt-humanistic-entry__inner{width:min(1180px,calc(100% - 80px));margin:auto;display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:44px;align-items:end}
 #root .stt-humanistic-entry h2{font-size:30px!important;margin:0 0 14px}
@@ -291,72 +295,13 @@
 #root .stt-humanistic-entry a{display:inline-flex;margin-top:22px;padding:12px 20px;border:1px solid #9b6e38;border-radius:999px;text-decoration:none;color:#805a30!important;background:#fffdf9}
 
 @media(max-width:900px){
- #root .cis-with-image::before{display:none!important}
- #root .cis-with-image .cis-hero-copy,
- #root .cis-with-image.cis-portrait .cis-hero-copy,
- #root .cis-with-image.cis-clear-left .cis-hero-copy{
-   width:auto!important;max-width:none!important;margin:0!important;padding:30px 28px 36px!important;background:var(--cis-paper)!important;
- }
- #root .lib-book-grid{grid-template-columns:1fr}
- #root .stt-humanistic-entry__inner{grid-template-columns:1fr;width:calc(100% - 64px);gap:18px}
-}
-@media(max-width:560px){
- #root .lib-book-card{grid-template-columns:1fr;padding:18px}
- #root .lib-book-visual{max-width:320px;margin:auto}
- #root .stt-humanistic-entry__inner{width:calc(100% - 48px)}
-}
-
-
-/* 2026-09-27 FINAL OWNER VISUAL CORRECTION
-   One unmistakable image/copy treatment on both sites: solid white reading field at left,
-   then a continuous left-to-right fade into the approved image. */
-@media(min-width:901px){
-  #root .stt-g0-shell .cis-with-image::before{
-    display:block!important;
-    content:""!important;
-    position:absolute!important;
-    inset:0!important;
-    z-index:1!important;
-    pointer-events:none!important;
-    background:linear-gradient(90deg,
-      rgba(255,255,255,1) 0%,
-      rgba(255,255,255,1) 30%,
-      rgba(255,255,255,.98) 38%,
-      rgba(255,255,255,.88) 46%,
-      rgba(255,255,255,.68) 54%,
-      rgba(255,255,255,.40) 62%,
-      rgba(255,255,255,.16) 70%,
-      rgba(255,255,255,0) 78%)!important;
-  }
-  #root .stt-g0-shell .cis-with-image.cis-clear-left::before{
-    background:linear-gradient(90deg,
-      rgba(255,255,255,1) 0%,
-      rgba(255,255,255,1) 30%,
-      rgba(255,255,255,.98) 38%,
-      rgba(255,255,255,.88) 46%,
-      rgba(255,255,255,.68) 54%,
-      rgba(255,255,255,.40) 62%,
-      rgba(255,255,255,.16) 70%,
-      rgba(255,255,255,0) 78%)!important;
-  }
-  #root .stt-g0-shell .cis-with-image .cis-hero-art img{
-    object-position:right center!important;
-  }
-}
-
-/* Dual-site header geometry: same header height, same logo visual height, same nav rhythm. */
-#root .stt-g0-header,#root .stt-g0-header__inner{min-height:92px!important;height:92px!important}
-#root .stt-g0-brand{width:300px!important;max-width:300px!important;height:64px!important;display:flex!important;align-items:center!important;overflow:hidden!important}
-#root .stt-g0-brand img{display:block!important;width:auto!important;height:58px!important;max-width:300px!important;max-height:58px!important;object-fit:contain!important;object-position:left center!important}
-#root .stt-g0-desktop-nav,#root .stt-g0-nav-link{height:92px!important}
-#root .stt-g0-nav-link{font-size:15px!important;line-height:1.5!important}
-#root .stt-g0-primary-cta{min-height:46px!important;border-radius:999px!important;padding:10px 20px!important}
-
-/* Publication images must be complete and uncropped. */
-#root .lib-book-visual{display:flex!important;align-items:center!important;justify-content:center!important;background:#fff!important;overflow:visible!important}
-#root .lib-book-visual img{display:block!important;width:100%!important;height:auto!important;aspect-ratio:auto!important;object-fit:contain!important;object-position:center!important;max-height:none!important;background:#fff!important}
-
-@media(max-width:900px){
-  #root .stt-g0-brand{width:min(260px,calc(100vw - 110px))!important;max-width:min(260px,calc(100vw - 110px))!important;height:56px!important}
-  #root .stt-g0-brand img{height:48px!important;max-height:48px!important;max-width:100%!important}
+  #root .stt-g0-header__inner{height:82px!important;min-height:82px!important;padding:0 24px!important}
+  #root .stt-g0-brand{width:min(250px,calc(100vw - 105px))!important;height:58px!important;max-width:none!important}
+  #root .cis-with-image::before{display:none!important}
+  #root .cis-with-image .cis-hero-copy,
+  #root .cis-with-image.cis-clear-left .cis-hero-copy,
+  #root .cis-with-image.cis-portrait .cis-hero-copy{width:auto!important;max-width:none!important;margin:0!important;padding:28px 24px 34px!important;background:#fbfaf7!important}
+  #root .lib-book-card{grid-template-columns:1fr!important;gap:22px!important;padding:20px!important}
+  #root .lib-book-visual{max-width:520px!important;margin:0 auto!important}
+  #root .stt-humanistic-entry__inner{width:calc(100% - 48px);grid-template-columns:1fr;gap:20px}
 }
