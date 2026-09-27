@@ -22,7 +22,7 @@ import { applyGovernedMetadata } from "./seo";
 type ShellProps = { children: ReactNode };
 
 const GCSDA_URL = "https://stt-003-git-gcsda-convergence-20260923-pc5888pc5888s-projects.vercel.app";
-const HUMANISTIC_INTERVIEW_URL = "/humanistic-interview/";
+const HUMANISTIC_INTERVIEW_URL = "https://shimmering-longma-509244.netlify.app/";
 const STT_PRESS_URL = "/books";
 
 const PRIMARY_NAVIGATION = [
@@ -151,6 +151,7 @@ function PublicShell({ children }: ShellProps) {
             <Link to="/institutions">機構合作</Link>
             <Link to="/research">研究與論文</Link>
             <a href={STT_PRESS_URL}>STT Press</a>
+            <a href={HUMANISTIC_INTERVIEW_URL} target="_blank" rel="noreferrer">人文地景產｜20 Questions ↗</a>
             <a href={GCSDA_URL} target="_blank" rel="noreferrer">GCSDA｜中華企業策略永續發展學會 ↗</a>
             <Link to="/privacy">隱私</Link>
             <Link to="/professional-boundary">專業服務邊界</Link>
