@@ -53,6 +53,7 @@ jobs:
       - name: Render and inspect exact production bundles
         run: |
           mkdir -p /tmp/audit
+          printf 'STT_HEAD=%s\nGCSDA_HEAD=%s\n' "$(git -C "$GITHUB_WORKSPACE/stt-src" rev-parse HEAD)" "$(git -C "$GITHUB_WORKSPACE/gcsda-src" rev-parse HEAD)" > /tmp/audit/source-heads.txt
           cat > "$GITHUB_WORKSPACE/audit-run/check.mjs" <<'JS'
           import fs from 'node:fs';
           import { chromium } from 'playwright';
