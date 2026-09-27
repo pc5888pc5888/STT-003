@@ -11,8 +11,8 @@ const publicationCanon = [
     previewUrl: "https://heyzine.com/flip-book/e424001f8c.html",
   },
   {
-    title: "內在法遵",
-    enTitle: "Internal Compliance",
+    title: "內在法遵 Internal Compliance",
+    enTitle: "Digital Canonical Edition",
     image: "/books/internal-compliance.webp",
     previewUrl: "https://heyzine.com/flip-book/c700d8beb2.html",
     canonicalUrl: "/books/internal-compliance",
@@ -36,7 +36,7 @@ export function BooksCanonical(){
     <section className="lib-body"><div className="lib-wrap">
       <div className="lib-book-grid" aria-label="STT Governance Publication Series 2026">
         {publicationCanon.map((book)=><article className="lib-book-card" key={book.title}>
-          <figure className="lib-book-visual"><img src={book.image} alt={book.title} loading="eager" /></figure>
+          <figure className="lib-book-visual"><img src={book.image} alt={book.title} loading="eager" decoding="async" data-publication-cover={book.title} /></figure>
           <div>
             <div className="lib-meta">STT GOVERNANCE · PUBLICATION SERIES 2026</div>
             <h2>{book.title}</h2>
