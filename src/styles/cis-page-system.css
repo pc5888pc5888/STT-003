@@ -121,13 +121,13 @@
 #root .cis-with-image .cis-lead{max-width:31em!important}
 #root .cis-with-image .cis-title{color:#151411!important;text-shadow:none!important}
 #root .cis-with-image .cis-lead,#root .cis-with-image .cis-subtitle{color:#35302b!important}
-@media(min-width:901px) and (max-width:1200px){
+@media(min-width:761px) and (max-width:1200px){
   #root .cis-with-image .cis-hero-copy,#root .cis-with-image.cis-portrait .cis-hero-copy,#root .cis-with-image.cis-clear-left .cis-hero-copy{width:min(39%,500px)!important;max-width:500px!important;margin-left:36px!important}
   #root .cis-with-image.cis-title-1 .cis-title{font-size:36px!important}
   #root .cis-with-image.cis-title-2 .cis-title{font-size:31px!important}
   #root .cis-with-image.cis-title-3 .cis-title{font-size:28px!important}
 }
-@media(max-width:900px){
+@media(max-width:760px){
   #root .cis-with-image .cis-hero-inner{display:flex!important;flex-direction:column!important;gap:0!important;width:100%!important}
   #root .cis-with-image::before{display:none!important}
   #root .cis-with-image .cis-hero-art{order:0!important;flex:none!important;width:100%!important;margin:0!important;height:auto!important}
