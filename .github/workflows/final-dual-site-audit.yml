@@ -22,9 +22,9 @@ jobs:
       - name: Inspect the actual Vercel branch aliases
         env:
           STT_ORIGIN: 'https://stt-003-git-stt-convergence-20260923-pc5888pc5888s-projects.vercel.app'
-          STT_SHARE: 'uecbEPsLzg4JtpHlAElxDI35R1St9Sij'
+          STT_ACCESS: 'https://stt-003-git-stt-convergence-20260923-pc5888pc5888s-projects.vercel.app/?_vercel_share=uecbEPsLzg4JtpHlAElxDI35R1St9Sij'
           GCSDA_ORIGIN: 'https://stt-003-git-gcsda-convergence-20260923-pc5888pc5888s-projects.vercel.app'
-          GCSDA_SHARE: '9PhBzIS63FbaNlsS8OOtDl1T407InQj9'
+          GCSDA_ACCESS: 'https://stt-003-git-gcsda-convergence-20260923-pc5888pc5888s-projects.vercel.app/?_vercel_share=9PhBzIS63FbaNlsS8OOtDl1T407InQj9'
         run: |
           mkdir -p /tmp/audit
           cat > check.mjs <<'JS'
@@ -35,7 +35,7 @@ jobs:
           const report={generatedAt:new Date().toISOString(),sites:[],books:null};
           const configs=[
             {
-              site:'stt',origin:process.env.STT_ORIGIN,share:process.env.STT_SHARE,
+              site:'stt',origin:process.env.STT_ORIGIN,access:process.env.STT_ACCESS,
               routes:['/','/problems','/how-stt-works','/engagement','/insights','/about','/eric-chuang','/institutions','/start','/research','/books'],
               expectedImages:{
                 '/':'/visual-bank/stt/user-approved-six/home.png',
@@ -47,7 +47,7 @@ jobs:
               }
             },
             {
-              site:'gcsda',origin:process.env.GCSDA_ORIGIN,share:process.env.GCSDA_SHARE,
+              site:'gcsda',origin:process.env.GCSDA_ORIGIN,access:process.env.GCSDA_ACCESS,
               routes:['/','/about','/governance','/council','/membership','/events','/knowledge','/charter'],
               expectedImages:{
                 '/':'/visual-bank/gcsda/home-approved.webp',
@@ -62,13 +62,17 @@ jobs:
             }
           ];
 
-          const urlFor=(cfg,route)=>`${cfg.origin}${route}?_vercel_share=${cfg.share}`;
+          const urlFor=(cfg,route)=>`${cfg.origin}${route}`;
           const safe=(route)=>route==='/'?'home':route.slice(1).replaceAll('/','-');
 
           for(const cfg of configs){
             for(const [label,w,h] of [['desktop',1440,1000],['tablet',820,1100],['mobile',390,844]]){
               const ctx=await browser.newContext({viewport:{width:w,height:h},reducedMotion:'reduce'});
               const page=await ctx.newPage();
+              await page.goto(cfg.access,{waitUntil:'networkidle',timeout:30000});
+              if((await page.locator('h1').first().textContent().catch(()=>''))?.includes('Log in to Vercel')){
+                throw new Error(`Vercel shareable access did not establish a bypass session for ${cfg.site}`);
+              }
               for(const route of cfg.routes){
                 const errors=[];
                 const onError=e=>errors.push(e.message);
@@ -144,7 +148,9 @@ jobs:
           {
             const ctx=await browser.newContext({viewport:{width:1440,height:1100},reducedMotion:'reduce'});
             const page=await ctx.newPage();
-            const res=await page.goto(`${process.env.STT_ORIGIN}/books?_vercel_share=${process.env.STT_SHARE}`,{waitUntil:'networkidle',timeout:30000});
+            await page.goto(process.env.STT_ACCESS,{waitUntil:'networkidle',timeout:30000});
+            if((await page.locator('h1').first().textContent().catch(()=>''))?.includes('Log in to Vercel')) throw new Error('Vercel shareable access did not establish STT bypass session');
+            const res=await page.goto(`${process.env.STT_ORIGIN}/books`,{waitUntil:'networkidle',timeout:30000});
             await page.evaluate(()=>document.fonts.ready);
             const covers=await page.evaluate(()=>[...document.querySelectorAll('[data-publication-cover]')].map(img=>({
               title:img.getAttribute('data-publication-cover'),
