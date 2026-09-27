@@ -33,9 +33,9 @@
 #root .stt-g0-menu-button{display:none}#root .stt-g0-mobile-menu{background:var(--cis-paper)}
 #root .stt-g0-footer{padding:38px 0;border-top:1px solid var(--cis-line);background:#f3eee4}#root .stt-g0-footer__inner{width:min(1280px,calc(100% - 96px));margin:auto;gap:30px}
 #root .stt-g0-footer__links{gap:12px 22px;display:flex;flex-wrap:wrap}#root .stt-g0-footer__links a{font-size:14px!important}
-#root .g4{font-family:var(--cis-serif)!important}#root .g4-head,#root .g4-headin{height:94px}#root .g4-wrap{max-width:1280px;padding-left:32px;padding-right:32px}
-#root .g4-brand b{font:500 25px/1.25 Georgia,serif;letter-spacing:.08em}#root .g4-brand small{font:14px/1.7 var(--cis-serif);letter-spacing:0}
-#root .g4-nav a{font:13.5px/1.5 var(--cis-serif);padding:0 9px;height:94px}#root .g4-stt{font-size:12px!important;border-radius:2px!important;padding:9px 12px!important}
+#root .g4{font-family:var(--cis-serif)!important}#root .g4-head,#root .g4-headin{height:92px!important}#root .g4-wrap{max-width:1280px;padding-left:32px;padding-right:32px}
+#root .g4-brand{width:340px!important;height:70px!important;max-width:340px!important;display:flex!important;align-items:center!important;flex:0 0 340px!important}
+#root .g4-nav a{font:500 15px/1.5 var(--cis-serif)!important;padding:0 14px!important;height:92px!important}
 /* Body rhythm is not derived from hero length. */
 #root :is(.stt-g1-section,.stt-g2-group,.stt-g3-step,.stt-g4-engagement-row,.stt-inst-section,.g4-section){padding-top:62px!important;padding-bottom:62px!important}
 #root :is(.stt-g1-shell,.stt-g2-shell,.stt-g3-shell,.stt-g4-shell,.stt-inst-shell){width:min(1180px,calc(100% - 80px));max-width:1180px;margin:0 auto;padding-left:0;padding-right:0}
@@ -159,9 +159,9 @@
 #root .g4-nav a{position:relative!important;border:0!important;background:transparent!important;box-shadow:none!important}
 #root .g4-nav a.active{background:transparent!important;border:0!important;color:#835c2e!important}
 #root .g4-nav a.active::after{content:"";position:absolute;left:10px;right:10px;bottom:14px;height:2px;background:#9b6e38}
-#root .g4-join{border-radius:999px!important}
+#root .g4-join{min-height:48px!important;border:1px solid #9b6e38!important;border-radius:999px!important;background:transparent!important;color:#805a30!important;padding:11px 22px!important;font:500 15px/1.5 var(--cis-serif)!important}
 #root .g4-brand{border:0!important;box-shadow:none!important;background:transparent!important}
-#root .g4-brand img{display:block;height:68px;width:auto;max-width:min(430px,34vw);max-height:none;object-fit:contain;object-position:left center}
+#root .g4-brand img{display:block!important;width:100%!important;height:100%!important;max-width:none!important;max-height:none!important;object-fit:contain!important;object-position:left center!important}
 
 /* Accessibility controls remain visible but do not introduce a black foreign object. */
 #root .stt-accessibility-toggle{width:48px!important;height:48px!important;border-radius:999px!important;border:1px solid #c6a173!important;background:rgba(255,255,255,.95)!important;color:#8a6237!important;box-shadow:0 8px 24px rgba(67,52,32,.08)!important;display:flex!important;align-items:center!important;justify-content:center!important}
@@ -169,5 +169,5 @@
 
 @media(max-width:760px){
   #root .g4 .cis-text-only .cis-hero-inner{width:calc(100% - 48px)!important;padding:48px 0 42px!important}
-  #root .g4-brand img{height:58px;width:auto;max-width:min(270px,66vw);max-height:none}
+  #root .g4-brand{width:min(250px,calc(100vw - 105px))!important;height:58px!important;max-width:none!important;flex:0 1 auto!important}#root .g4-brand img{width:100%!important;height:100%!important;max-width:none!important;max-height:none!important}
 }
