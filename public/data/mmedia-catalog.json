@@ -14,28 +14,42 @@
     "verification": "All seven source fields exactly match the uploaded 212-record snapshot after restoring its original whitespace."
   },
   "schemaVersion": "2.0",
-  "syncedAt": "2026-09-27T05:25:57.016133+00:00",
+  "syncedAt": "2026-09-27T12:11:23.679312+00:00",
   "sync": {
     "method": "public-author-index-and-more",
     "complete": true,
     "pagesFetched": 35,
-    "observed": 214,
+    "observed": 215,
     "retainedNotSeen": 0,
     "changes": {
-      "added": 0,
+      "added": 1,
       "updated": 0,
       "reclassified": 0
     }
   },
   "stats": {
-    "total": 214,
-    "uniqueUrls": 214,
-    "legal": 199,
+    "total": 215,
+    "uniqueUrls": 215,
+    "legal": 200,
     "humanistic": 4,
     "news": 11,
     "pending": 0
   },
   "articles": [
+    {
+      "url": "https://94m.com.tw/articles/dcb150",
+      "title": "【當房貸不再跟著財富走】中央銀行獨立性、信用管制與「誰承擔政策成本」的法治追問",
+      "date": "2026/09/27 10:57",
+      "category": "法律",
+      "author": "莊鈞翔博士",
+      "authorUrl": "https://94m.com.tw/editors/ed55fc",
+      "excerpt": "政策正當性不能終止效果檢驗；中華企業策略永續發展學會 創會理事長 莊鈞翔 博士藉本文真正要追問的，不是中央銀行「應不應該」受到政治指揮，也不是替任何政黨評價貨幣政策，而是：當總體金融穩定的正當目的被轉化為個別家庭可直接感受的授信限制時，負擔如何分配？不同收入型態、資產結構與資金來源的人，受到的約束是否相同？如果不同，差異來自法律分類、銀行風險模型、資金可得性，還是其他可被驗證的制度條件？這些問題不能靠政治動機推定回答，也不能因政策目的正當就停止追問。",
+      "id": "mmedia-dcb150",
+      "sourceArticleId": "dcb150",
+      "series": "legal",
+      "seriesTitle": "莊博士法律新聞專欄",
+      "source": "M傳媒"
+    },
     {
       "url": "https://94m.com.tw/articles/89dca4",
       "title": "【 回頭以後，路就不只通向自己 】范英峰在工程、科研、學會與信仰之間，走出一條有方向也有溫度的路｜人文地景產專欄",
