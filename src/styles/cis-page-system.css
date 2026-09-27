@@ -107,45 +107,35 @@
 #root .cis-title-1 .cis-title{font-size:20.5px!important}#root .cis-title-2 .cis-title{font-size:19px!important}#root .cis-title-3 .cis-title{font-size:19px!important}
 }
 
-/* 2026-09-24: image is the full-width canvas, not a second grid column.
-   Natural image ratio is retained. No crop, filters, masks or image regeneration. */
-#root .cis-with-image .cis-hero-inner{width:100%;max-width:none;min-height:0;padding:0;margin:0;display:grid;grid-template-columns:minmax(0,1fr);gap:0;align-items:start}
-#root .cis-with-image .cis-hero-art{grid-area:1/1;margin:0;align-self:start;width:100%;max-width:none;min-width:0;z-index:0}
-#root .cis-with-image .cis-hero-art img,#root .cis-with-image.cis-portrait .cis-hero-art img{display:block;width:100%;max-width:none;height:auto!important;max-height:none!important;object-fit:contain!important;object-position:center;transform:none!important;filter:none;border:0;border-radius:0;box-shadow:none}
-#root .cis-with-image .cis-hero-copy{grid-area:1/1;align-self:start;position:relative;z-index:1;min-width:0;width:calc(100% - 96px);max-width:580px;margin:clamp(30px,4.5vw,76px) 0 40px max(48px,calc((100% - 1280px)/2));padding:24px 28px;background:rgba(251,250,247,.94);border:0;box-shadow:none}
-#root .cis-with-image.cis-portrait .cis-hero-copy,#root .cis-with-image.cis-clear-left .cis-hero-copy{align-self:center;max-width:550px;width:41%;padding:0;margin-top:36px;margin-bottom:36px;background:transparent}
-#root .cis-with-image .cis-title-1{font-size:42px}
-#root .cis-with-image .cis-hero-copy .cis-title-line{white-space:normal!important;text-wrap:balance}
-#root .cis-with-image .cis-lead{max-width:31em}
-#root .stt-g1-authority{grid-template-columns:minmax(0,1fr)!important}
-#root .stt-g1-authority__copy{max-width:880px}
+/* GOVERNED HERO MASTER — the only image+copy hero rule.
+   Desktop/tablet: 0–30% white reading field; 30–50% slow release;
+   50–70% visible feather; 70–82% image merge; 82%+ untouched image.
+   Mobile: image and text are separated vertically. */
+#root .cis-with-image{position:relative!important;isolation:isolate!important;overflow:hidden!important;background:#fff!important}
+#root .cis-with-image .cis-hero-inner{width:100%!important;max-width:none!important;min-height:0!important;padding:0!important;margin:0!important;display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:0!important;align-items:stretch!important}
+#root .cis-with-image .cis-hero-art{grid-area:1/1!important;margin:0!important;width:100%!important;max-width:none!important;min-width:0!important;z-index:0!important}
+#root .cis-with-image .cis-hero-art img,#root .cis-with-image.cis-portrait .cis-hero-art img{display:block!important;width:100%!important;max-width:none!important;height:auto!important;max-height:none!important;object-fit:contain!important;object-position:center!important;transform:none!important;filter:none!important;border:0!important;border-radius:0!important;box-shadow:none!important}
+#root .cis-with-image::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(90deg,#fff 0%,#fff 30%,rgba(255,255,255,.99) 38%,rgba(255,255,255,.90) 50%,rgba(255,255,255,.62) 60%,rgba(255,255,255,.34) 70%,rgba(255,255,255,.12) 77%,rgba(255,255,255,0) 82%)!important}
+#root .cis-with-image .cis-hero-copy,#root .cis-with-image.cis-portrait .cis-hero-copy,#root .cis-with-image.cis-clear-left .cis-hero-copy{grid-area:1/1!important;align-self:center!important;position:relative!important;z-index:2!important;width:min(36%,590px)!important;max-width:590px!important;min-width:0!important;margin:clamp(40px,5vw,76px) 0 clamp(40px,5vw,76px) max(52px,calc((100% - 1376px)/2))!important;padding:0!important;background:transparent!important;border:0!important;box-shadow:none!important}
+#root .cis-with-image .cis-hero-copy .cis-title-line{white-space:normal!important;text-wrap:balance!important}
+#root .cis-with-image .cis-lead{max-width:31em!important}
+#root .cis-with-image .cis-title{color:#151411!important;text-shadow:none!important}
+#root .cis-with-image .cis-lead,#root .cis-with-image .cis-subtitle{color:#35302b!important}
 @media(min-width:901px) and (max-width:1200px){
- #root .cis-with-image .cis-hero-copy{max-width:500px;padding:22px 24px;margin-left:36px}
- #root .cis-with-image.cis-portrait .cis-hero-copy,#root .cis-with-image.cis-clear-left .cis-hero-copy{width:43%;padding:0;max-width:none}
- #root .cis-with-image.cis-title-1 .cis-title{font-size:36px!important}
- #root .cis-with-image.cis-title-2 .cis-title{font-size:31px!important}
- #root .cis-with-image.cis-title-3 .cis-title{font-size:28px!important}
+  #root .cis-with-image .cis-hero-copy,#root .cis-with-image.cis-portrait .cis-hero-copy,#root .cis-with-image.cis-clear-left .cis-hero-copy{width:min(39%,500px)!important;max-width:500px!important;margin-left:36px!important}
+  #root .cis-with-image.cis-title-1 .cis-title{font-size:36px!important}
+  #root .cis-with-image.cis-title-2 .cis-title{font-size:31px!important}
+  #root .cis-with-image.cis-title-3 .cis-title{font-size:28px!important}
 }
 @media(max-width:900px){
- #root .cis-with-image .cis-hero-inner{display:flex;flex-direction:column;gap:0;padding:0;min-height:0;width:100%}
- #root .cis-with-image .cis-hero-art{order:0;flex:none;width:100%;margin:0}
- #root .cis-with-image .cis-hero-copy,#root .cis-with-image.cis-portrait .cis-hero-copy,#root .cis-with-image.cis-clear-left .cis-hero-copy{order:1;flex:none;align-self:stretch;width:auto;max-width:none;margin:0;padding:30px 28px 36px;background:var(--cis-paper)}
- #root .cis-with-image .cis-hero-copy .cis-title-line{white-space:normal!important}
- #root .cis-with-image .cis-hero-copy .cis-lead{max-width:42em}
+  #root .cis-with-image .cis-hero-inner{display:flex!important;flex-direction:column!important;gap:0!important;width:100%!important}
+  #root .cis-with-image::before{display:none!important}
+  #root .cis-with-image .cis-hero-art{order:0!important;flex:none!important;width:100%!important;margin:0!important;height:auto!important}
+  #root .cis-with-image .cis-hero-art img,#root .cis-with-image.cis-portrait .cis-hero-art img{width:100%!important;height:auto!important;object-fit:contain!important;object-position:center!important}
+  #root .cis-with-image .cis-hero-copy,#root .cis-with-image.cis-portrait .cis-hero-copy,#root .cis-with-image.cis-clear-left .cis-hero-copy{order:1!important;flex:none!important;align-self:stretch!important;width:auto!important;max-width:none!important;margin:0!important;padding:30px 28px 36px!important;background:var(--cis-paper)!important}
+  #root .cis-with-image .cis-hero-copy .cis-title-line{white-space:normal!important}
+  #root .cis-with-image .cis-hero-copy .cis-lead{max-width:42em!important}
 }
-
-
-/* STT: approved image is the page canvas; copy integrates with the canvas instead of sitting in a white card. */
-#root .stt-g0-shell .cis-with-image{position:relative}
-#root .stt-g0-shell .cis-with-image::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(90deg,rgba(251,250,247,.76) 0%,rgba(251,250,247,.5) 23%,rgba(251,250,247,.2) 42%,rgba(251,250,247,.05) 60%,rgba(251,250,247,0) 78%)}
-#root .stt-g0-shell .cis-with-image .cis-hero-copy{z-index:2;background:transparent!important;padding:0!important;border:0!important;box-shadow:none!important}
-#root .stt-g0-shell .cis-with-image .cis-hero-art{z-index:0}
-@media(max-width:900px){
-  #root .stt-g0-shell .cis-with-image::before{display:none}
-  #root .stt-g0-shell .cis-with-image .cis-hero-copy{background:var(--cis-paper)!important;padding:30px 28px 36px!important}
-}
-
-
 /* 2026-09-24 OWNER RESTORE — 2026-09-15 STT GOLDEN REFERENCE */
 /* Header: restore the 9/15 visual grammar — no boxed active tabs, no boxed brand, outlined pill CTA. */
 #root .stt-g0-header{background:rgba(255,255,255,.96)!important;border-bottom:1px solid rgba(136,98,55,.16)!important;backdrop-filter:blur(10px)}
@@ -157,19 +147,6 @@
 #root .stt-g0-nav-link.is-active{color:#7f592f!important;background:transparent!important;border:0!important}
 #root .stt-g0-nav-link.is-active::after{content:"";position:absolute;left:15px;right:15px;bottom:14px;height:2px;background:var(--cis-gold)}
 #root .stt-g0-primary-cta{min-height:48px!important;padding:11px 26px!important;border:1.5px solid var(--cis-gold)!important;border-radius:999px!important;background:rgba(255,255,255,.88)!important;color:#6f4d28!important;box-shadow:none!important;font-size:15px!important}
-
-/* Hero: image remains the page canvas; copy sits inside the designed clear field, never on a white card. */
-#root .stt-g0-shell .cis-with-image{overflow:hidden!important;background:#fff!important}
-#root .stt-g0-shell .cis-with-image::before{background:linear-gradient(90deg,rgba(251,250,247,.58) 0%,rgba(251,250,247,.34) 24%,rgba(251,250,247,.12) 42%,rgba(251,250,247,0) 62%)!important}
-#root .stt-g0-shell .cis-with-image.cis-clear-left::before{background:linear-gradient(90deg,rgba(251,250,247,.32) 0%,rgba(251,250,247,.14) 26%,rgba(251,250,247,0) 52%)!important}
-#root .stt-g0-shell .cis-with-image .cis-hero-copy{align-self:center!important;max-width:640px!important;width:min(43%,640px)!important;margin:0 0 0 max(52px,calc((100% - 1500px)/2))!important;padding:0!important;background:transparent!important;border:0!important;box-shadow:none!important}
-#root .stt-g0-shell .cis-with-image .cis-title{color:#171613!important;text-shadow:0 1px 0 rgba(255,255,255,.22)}
-#root .stt-g0-shell .cis-with-image .cis-lead{color:#3f3932!important;max-width:34em!important}
-#root .stt-g0-shell .cis-with-image .cis-subtitle{color:#302b26!important}
-#root .stt-g0-shell .cis-with-image .cis-kicker{color:#805a31!important}
-#root .cis-actions{gap:14px!important;margin-top:26px!important}
-#root .cis-actions>a{min-height:48px!important;padding:11px 24px!important;border:1.4px solid #a87843!important;border-radius:999px!important;background:rgba(255,255,255,.86)!important;color:#805a31!important;box-shadow:none!important}
-#root .cis-actions .cis-primary{background:#b68b56!important;border-color:#b68b56!important;color:#fff!important}
 
 /* Do not wash body copy into the ivory background. */
 #root main :where(p,dd,li){color:#4b453d!important}
@@ -210,19 +187,6 @@
 #root .stt-accessibility-toggle{width:48px!important;height:48px!important;border-radius:999px!important;border:1px solid #c6a173!important;background:rgba(255,255,255,.95)!important;color:#8a6237!important;box-shadow:0 8px 24px rgba(67,52,32,.08)!important;display:flex!important;align-items:center!important;justify-content:center!important}
 #root .stt-accessibility-tools{background:transparent!important;box-shadow:none!important}
 
-/* Desktop hero should read as one complete first screen, like the 9/15 approved reference. */
-@media(min-width:901px){
-  /* 9/15 Golden Reference: the approved clear-left pages carry a decisive black headline, not a timid caption. */
-  #root .stt-g0-shell .cis-with-image.cis-clear-left.cis-title-1 .cis-title{font-size:clamp(52px,4.35vw,66px)!important;line-height:1.2!important}
-  #root .stt-g0-shell .cis-with-image.cis-clear-left.cis-title-2 .cis-title{font-size:clamp(46px,3.8vw,58px)!important;line-height:1.24!important}
-  #root .stt-g0-shell .cis-with-image.cis-clear-left.cis-title-3 .cis-title{font-size:clamp(40px,3.25vw,50px)!important;line-height:1.3!important}
-  #root .stt-g0-shell .cis-with-image.cis-clear-left .cis-hero-copy{max-width:700px!important;width:min(46%,700px)!important}
-  #root .stt-g0-shell .cis-with-image .cis-hero-inner{min-height:calc(100svh - 92px)!important;height:calc(100svh - 92px)!important}
-  #root .stt-g0-shell .cis-with-image .cis-hero-art{height:100%!important;overflow:hidden!important}
-  #root .stt-g0-shell .cis-with-image .cis-hero-art img{width:100%!important;height:100%!important;object-fit:cover!important;object-position:center!important}
-  #root .stt-g0-shell .cis-with-image.cis-clear-left .cis-hero-art img{object-position:right center!important}
-  #root .stt-g0-shell .cis-with-image.cis-portrait .cis-hero-art img{object-fit:contain!important;object-position:right center!important;background:#fbfaf7!important}
-}
 @media(max-width:900px){
   #root .stt-intake-brief{padding:20px 24px!important}
   #root .stt-g0-header{overflow:hidden!important}
@@ -230,41 +194,10 @@
   #root .stt-g0-brand{width:min(255px,calc(100vw - 112px))!important;min-width:0!important;max-width:100%!important}
   #root .stt-g0-brand img{display:block!important;width:100%!important;max-width:100%!important;height:auto!important}
   #root .stt-g0-menu-button{flex:0 0 auto!important}
-  #root .stt-g0-shell .cis-with-image .cis-hero-copy,
-  #root .stt-g0-shell .cis-with-image.cis-clear-left .cis-hero-copy,
-  #root .stt-g0-shell .cis-with-image.cis-portrait .cis-hero-copy{width:auto!important;max-width:none!important;margin:0!important;padding:28px 24px 34px!important;background:#fbfaf7!important}
-  #root .stt-g0-shell .cis-with-image::before{display:none!important}
-  #root .stt-g0-shell .cis-with-image .cis-hero-art{height:auto!important}
-  #root .stt-g0-shell .cis-with-image .cis-hero-art img{height:auto!important;object-fit:contain!important}
   #root .stt-g3-step{grid-template-columns:54px minmax(0,1fr)!important;gap:18px!important}
   #root .stt-g3-step dl{grid-column:2!important}
 }
 
-
-/* 2026-09-28 OWNER CIS LOCK — dual-site image+copy pages use one unmistakable left-white → transparent fusion. */
-#root .cis-with-image{position:relative!important;isolation:isolate!important;background:#fff!important;overflow:hidden!important}
-#root .cis-with-image::before{
-  content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
-  background:linear-gradient(90deg,
-    #ffffff 0%,
-    rgba(255,255,255,.995) 20%,
-    rgba(255,255,255,.97) 34%,
-    rgba(255,255,255,.86) 45%,
-    rgba(255,255,255,.62) 56%,
-    rgba(255,255,255,.30) 67%,
-    rgba(255,255,255,.08) 77%,
-    rgba(255,255,255,0) 86%)!important;
-}
-#root .cis-with-image .cis-hero-art{z-index:0!important}
-#root .cis-with-image .cis-hero-copy,
-#root .cis-with-image.cis-portrait .cis-hero-copy,
-#root .cis-with-image.cis-clear-left .cis-hero-copy{
-  z-index:2!important;background:transparent!important;border:0!important;box-shadow:none!important;
-  padding:0!important;max-width:650px!important;width:min(42%,650px)!important;
-  margin:clamp(46px,6vw,88px) 0 clamp(42px,5vw,72px) max(52px,calc((100% - 1376px)/2))!important;
-}
-#root .cis-with-image .cis-title{color:#151411!important;text-shadow:none!important}
-#root .cis-with-image .cis-lead,#root .cis-with-image .cis-subtitle{color:#35302b!important}
 
 /* One dual-site header grammar: same header height, same logo frame, same navigation rhythm and same pill CTA. */
 #root .stt-g0-header{background:rgba(255,253,249,.98)!important;border-bottom:1px solid rgba(180,138,80,.24)!important;backdrop-filter:blur(12px)}
@@ -297,10 +230,6 @@
 @media(max-width:900px){
   #root .stt-g0-header__inner{height:82px!important;min-height:82px!important;padding:0 24px!important}
   #root .stt-g0-brand{width:min(250px,calc(100vw - 105px))!important;height:58px!important;max-width:none!important}
-  #root .cis-with-image::before{display:none!important}
-  #root .cis-with-image .cis-hero-copy,
-  #root .cis-with-image.cis-clear-left .cis-hero-copy,
-  #root .cis-with-image.cis-portrait .cis-hero-copy{width:auto!important;max-width:none!important;margin:0!important;padding:28px 24px 34px!important;background:#fbfaf7!important}
   #root .lib-book-card{grid-template-columns:1fr!important;gap:22px!important;padding:20px!important}
   #root .lib-book-visual{max-width:520px!important;margin:0 auto!important}
   #root .stt-humanistic-entry__inner{width:calc(100% - 48px);grid-template-columns:1fr;gap:20px}
