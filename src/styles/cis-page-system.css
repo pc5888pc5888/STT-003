@@ -239,3 +239,69 @@
   #root .stt-g3-step{grid-template-columns:54px minmax(0,1fr)!important;gap:18px!important}
   #root .stt-g3-step dl{grid-column:2!important}
 }
+
+
+/* 2026-09-27 OWNER CIS LOCK — all image+copy heroes use one left-white → transparent fusion.
+   No pasted white card; no page-specific improvisation. */
+#root .cis-with-image{position:relative!important;isolation:isolate!important;background:#fbfaf7!important}
+#root .cis-with-image::before{
+  content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:linear-gradient(90deg,
+    rgba(255,255,255,.99) 0%,
+    rgba(255,255,255,.97) 19%,
+    rgba(255,255,255,.88) 34%,
+    rgba(255,255,255,.62) 48%,
+    rgba(255,255,255,.26) 62%,
+    rgba(255,255,255,.06) 74%,
+    rgba(255,255,255,0) 84%);
+}
+#root .cis-with-image .cis-hero-art{z-index:0!important}
+#root .cis-with-image .cis-hero-copy,
+#root .cis-with-image.cis-portrait .cis-hero-copy,
+#root .cis-with-image.cis-clear-left .cis-hero-copy{
+  z-index:2!important;background:transparent!important;border:0!important;box-shadow:none!important;
+  padding:0!important;max-width:600px!important;width:min(42%,600px)!important;
+  margin:clamp(46px,6vw,88px) 0 clamp(42px,5vw,72px) max(52px,calc((100% - 1376px)/2))!important;
+}
+#root .cis-with-image .cis-title{color:#151411!important;text-shadow:0 1px 0 rgba(255,255,255,.34)}
+#root .cis-with-image .cis-lead,#root .cis-with-image .cis-subtitle{color:#3c3731!important}
+
+/* One dual-site header grammar: same height, underline state, type rhythm and pill CTA. */
+#root .stt-g0-header{background:rgba(255,253,249,.97)!important;border-bottom:1px solid rgba(180,138,80,.24)!important;backdrop-filter:blur(12px)}
+#root .stt-g0-nav-link{position:relative!important;background:transparent!important;border:0!important;color:#5f574e!important}
+#root .stt-g0-nav-link.is-active{color:#835c2e!important}
+#root .stt-g0-nav-link.is-active::after{content:"";position:absolute;left:12px;right:12px;bottom:14px;height:2px;background:#9b6e38}
+#root .stt-g0-primary-cta{border:1px solid #9b6e38!important;border-radius:999px!important;background:transparent!important;color:#805a30!important;padding:11px 20px!important}
+
+/* Publication canon: the four owner-supplied book visuals are visible, not hidden in metadata. */
+#root .lib-book-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px;margin:8px 0 44px}
+#root .lib-book-card{display:grid;grid-template-columns:minmax(190px,38%) minmax(0,1fr);gap:26px;align-items:center;padding:24px;border:1px solid var(--cis-line);background:var(--cis-white)}
+#root .lib-book-visual{margin:0;background:#f7f1e7;overflow:hidden}
+#root .lib-book-visual img{display:block;width:100%;height:auto;aspect-ratio:1122/1402;object-fit:cover}
+#root .lib-book-card h2{font-size:24px!important;margin:0 0 10px}
+#root .lib-book-card .lib-meta{margin-bottom:12px}
+#root .lib-book-card p{margin:0 0 14px}
+#root .lib-book-card .lib-actions{margin-top:16px}
+
+/* Humanistic Landscape Industry column — existing 20 Questions Journey is an official existing asset. */
+#root .stt-humanistic-entry{padding:54px 0;border-top:1px solid var(--cis-line);border-bottom:1px solid var(--cis-line);background:#f7f2e9}
+#root .stt-humanistic-entry__inner{width:min(1180px,calc(100% - 80px));margin:auto;display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:44px;align-items:end}
+#root .stt-humanistic-entry h2{font-size:30px!important;margin:0 0 14px}
+#root .stt-humanistic-entry p{font-size:17px!important;line-height:1.95!important;margin:0}
+#root .stt-humanistic-entry a{display:inline-flex;margin-top:22px;padding:12px 20px;border:1px solid #9b6e38;border-radius:999px;text-decoration:none;color:#805a30!important;background:#fffdf9}
+
+@media(max-width:900px){
+ #root .cis-with-image::before{display:none!important}
+ #root .cis-with-image .cis-hero-copy,
+ #root .cis-with-image.cis-portrait .cis-hero-copy,
+ #root .cis-with-image.cis-clear-left .cis-hero-copy{
+   width:auto!important;max-width:none!important;margin:0!important;padding:30px 28px 36px!important;background:var(--cis-paper)!important;
+ }
+ #root .lib-book-grid{grid-template-columns:1fr}
+ #root .stt-humanistic-entry__inner{grid-template-columns:1fr;width:calc(100% - 64px);gap:18px}
+}
+@media(max-width:560px){
+ #root .lib-book-card{grid-template-columns:1fr;padding:18px}
+ #root .lib-book-visual{max-width:320px;margin:auto}
+ #root .stt-humanistic-entry__inner{width:calc(100% - 48px)}
+}
