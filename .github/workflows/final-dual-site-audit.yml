@@ -9,33 +9,59 @@ permissions:
 jobs:
   audit:
     runs-on: ubuntu-latest
-    timeout-minutes: 12
+    timeout-minutes: 15
     steps:
+      - name: Checkout STT branch
+        uses: actions/checkout@v4
+        with:
+          ref: stt-convergence-20260923
+          path: stt-src
+      - name: Checkout GCSDA branch
+        uses: actions/checkout@v4
+        with:
+          ref: gcsda-convergence-20260923
+          path: gcsda-src
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Install Chromium browser
+      - name: Build both exact branch sources
         run: |
+          set -e
+          for d in stt-src gcsda-src; do
+            cd "$GITHUB_WORKSPACE/$d"
+            if [ -f package-lock.json ]; then npm ci; else npm install; fi
+            npm run build
+          done
+      - name: Install Chromium audit runtime
+        run: |
+          mkdir -p "$GITHUB_WORKSPACE/audit-run"
+          cd "$GITHUB_WORKSPACE/audit-run"
           npm init -y >/dev/null 2>&1
-          npm install --no-save playwright >/tmp/install.log 2>&1
+          npm install --no-save playwright >/tmp/playwright-install.log 2>&1
           npx playwright install --with-deps chromium >/tmp/browser-setup.log 2>&1
-      - name: Inspect the actual Vercel branch aliases
-        env:
-          STT_ORIGIN: 'https://stt-003-git-stt-convergence-20260923-pc5888pc5888s-projects.vercel.app'
-          STT_ACCESS: 'https://stt-003-git-stt-convergence-20260923-pc5888pc5888s-projects.vercel.app/?_vercel_share=uecbEPsLzg4JtpHlAElxDI35R1St9Sij'
-          GCSDA_ORIGIN: 'https://stt-003-git-gcsda-convergence-20260923-pc5888pc5888s-projects.vercel.app'
-          GCSDA_ACCESS: 'https://stt-003-git-gcsda-convergence-20260923-pc5888pc5888s-projects.vercel.app/?_vercel_share=9PhBzIS63FbaNlsS8OOtDl1T407InQj9'
+      - name: Start production previews
+        run: |
+          (cd "$GITHUB_WORKSPACE/stt-src" && npx vite preview --host 127.0.0.1 --port 4173 > /tmp/stt-preview.log 2>&1 & echo $! > /tmp/stt-preview.pid)
+          (cd "$GITHUB_WORKSPACE/gcsda-src" && npx vite preview --host 127.0.0.1 --port 4174 > /tmp/gcsda-preview.log 2>&1 & echo $! > /tmp/gcsda-preview.pid)
+          for port in 4173 4174; do
+            for i in $(seq 1 60); do
+              if curl -fsS "http://127.0.0.1:$port/" >/dev/null; then break; fi
+              sleep 1
+            done
+            curl -fsS "http://127.0.0.1:$port/" >/dev/null
+          done
+      - name: Render and inspect exact production bundles
         run: |
           mkdir -p /tmp/audit
-          cat > check.mjs <<'JS'
+          cat > "$GITHUB_WORKSPACE/audit-run/check.mjs" <<'JS'
           import fs from 'node:fs';
           import { chromium } from 'playwright';
 
           const browser=await chromium.launch({headless:true});
-          const report={generatedAt:new Date().toISOString(),sites:[],books:null};
+          const report={generatedAt:new Date().toISOString(),sites:[],books:null,headers:[]};
           const configs=[
             {
-              site:'stt',origin:process.env.STT_ORIGIN,access:process.env.STT_ACCESS,
+              site:'stt',origin:'http://127.0.0.1:4173',
               routes:['/','/problems','/how-stt-works','/engagement','/insights','/about','/eric-chuang','/institutions','/start','/research','/books'],
               expectedImages:{
                 '/':'/visual-bank/stt/user-approved-six/home.png',
@@ -47,7 +73,7 @@ jobs:
               }
             },
             {
-              site:'gcsda',origin:process.env.GCSDA_ORIGIN,access:process.env.GCSDA_ACCESS,
+              site:'gcsda',origin:'http://127.0.0.1:4174',
               routes:['/','/about','/governance','/council','/membership','/events','/knowledge','/charter'],
               expectedImages:{
                 '/':'/visual-bank/gcsda/home-approved.webp',
@@ -61,36 +87,28 @@ jobs:
               }
             }
           ];
-
-          const urlFor=(cfg,route)=>`${cfg.origin}${route}`;
           const safe=(route)=>route==='/'?'home':route.slice(1).replaceAll('/','-');
+          const rect=e=>{const r=e?.getBoundingClientRect();return r?{left:r.left,top:r.top,right:r.right,bottom:r.bottom,width:r.width,height:r.height}:null};
 
           for(const cfg of configs){
             for(const [label,w,h] of [['desktop',1440,1000],['tablet',820,1100],['mobile',390,844]]){
               const ctx=await browser.newContext({viewport:{width:w,height:h},reducedMotion:'reduce'});
               const page=await ctx.newPage();
-              await page.goto(cfg.access,{waitUntil:'networkidle',timeout:30000});
-              if((await page.locator('h1').first().textContent().catch(()=>''))?.includes('Log in to Vercel')){
-                throw new Error(`Vercel shareable access did not establish a bypass session for ${cfg.site}`);
-              }
               for(const route of cfg.routes){
                 const errors=[];
                 const onError=e=>errors.push(e.message);
                 page.on('pageerror',onError);
                 try{
-                  const res=await page.goto(urlFor(cfg,route),{waitUntil:'networkidle',timeout:30000});
+                  const res=await page.goto(cfg.origin+route,{waitUntil:'networkidle',timeout:30000});
                   await page.evaluate(()=>document.fonts.ready);
                   const state=await page.evaluate(()=>{
                     const hero=document.querySelector('.cis-hero');
-                    const art=hero?.querySelector('.cis-hero-art');
-                    const img=art?.querySelector('img');
+                    const img=hero?.querySelector('.cis-hero-art img');
                     const copy=hero?.querySelector('.cis-hero-copy');
                     const brand=document.querySelector('header a img');
                     const rr=e=>{const r=e?.getBoundingClientRect();return r?{left:r.left,top:r.top,right:r.right,bottom:r.bottom,width:r.width,height:r.height}:null};
-                    const pseudo=hero?getComputedStyle(hero,'::before'):null;
-                    const imgStyle=img?getComputedStyle(img):null;
-                    const copyStyle=copy?getComputedStyle(copy):null;
                     return {
+                      title:document.title,
                       h1:document.querySelector('h1')?.textContent?.trim()||null,
                       h1Count:document.querySelectorAll('h1').length,
                       heroClass:hero?.className||null,
@@ -98,11 +116,12 @@ jobs:
                       heroImageLoaded:img?img.complete&&img.naturalWidth>0:null,
                       heroImageNatural:img?[img.naturalWidth,img.naturalHeight]:null,
                       heroImageRect:rr(img),
-                      heroImageFit:imgStyle?.objectFit||null,
+                      heroImageFit:img?getComputedStyle(img).objectFit:null,
                       copyRect:rr(copy),
-                      copyBg:copyStyle?.backgroundColor||null,
-                      heroGradient:pseudo?.backgroundImage||null,
+                      copyBg:copy?getComputedStyle(copy).backgroundColor:null,
+                      heroGradient:hero?getComputedStyle(hero,'::before').backgroundImage:null,
                       brandRect:rr(brand),
+                      brandNatural:brand?[brand.naturalWidth,brand.naturalHeight]:null,
                       overflow:document.documentElement.scrollWidth>innerWidth+1,
                       broken:[...document.images].filter(i=>!i.complete||i.naturalWidth===0).map(i=>i.getAttribute('src'))
                     };
@@ -121,18 +140,22 @@ jobs:
                     state.heroGradient.includes('82%')
                   );
 
-                  const row={
+                  report.sites.push({
                     site:cfg.site,route,label,http:res?.status(),...state,
                     expectedImage:expected,hasExpected,imageLoaded,
                     desktopCopyInReadingZone,mobileSeparated,gradientGeometry,errors
-                  };
-                  report.sites.push(row);
+                  });
 
-                  if(label==='desktop' && expected){
+                  if(label==='desktop'&&expected){
                     await page.screenshot({path:`/tmp/audit/${cfg.site}-${safe(route)}-desktop.png`,fullPage:false});
                   }
-                  if(label==='mobile' && ['/', '/problems','/about','/membership','/books'].includes(route)){
+                  if(label==='mobile'&&['/','/problems','/about','/membership','/books'].includes(route)){
                     await page.screenshot({path:`/tmp/audit/${cfg.site}-${safe(route)}-mobile.png`,fullPage:false});
+                  }
+                  if(label==='desktop'&&route==='/'){
+                    const header=page.locator('header').first();
+                    await header.screenshot({path:`/tmp/audit/${cfg.site}-header-desktop.png`});
+                    report.headers.push({site:cfg.site,brandRect:state.brandRect,brandNatural:state.brandNatural});
                   }
                 }catch(e){
                   report.sites.push({site:cfg.site,route,label,error:String(e),errors});
@@ -144,13 +167,10 @@ jobs:
             }
           }
 
-          // Four-book verification uses the actual deployed /books page.
           {
             const ctx=await browser.newContext({viewport:{width:1440,height:1100},reducedMotion:'reduce'});
             const page=await ctx.newPage();
-            await page.goto(process.env.STT_ACCESS,{waitUntil:'networkidle',timeout:30000});
-            if((await page.locator('h1').first().textContent().catch(()=>''))?.includes('Log in to Vercel')) throw new Error('Vercel shareable access did not establish STT bypass session');
-            const res=await page.goto(`${process.env.STT_ORIGIN}/books`,{waitUntil:'networkidle',timeout:30000});
+            const res=await page.goto('http://127.0.0.1:4173/books',{waitUntil:'networkidle',timeout:30000});
             await page.evaluate(()=>document.fonts.ready);
             const covers=await page.evaluate(()=>[...document.querySelectorAll('[data-publication-cover]')].map(img=>({
               title:img.getAttribute('data-publication-cover'),
@@ -184,6 +204,7 @@ jobs:
           );
           const bookFailures=(report.books?.covers||[]).filter(x=>!x.complete||x.naturalWidth<=0||x.naturalHeight<=0||x.objectFit!=='contain');
           const missingBooks=requiredBookTitles.filter(t=>!(report.books?.covers||[]).some(x=>x.title===t));
+          const lowResolutionBooks=(report.books?.covers||[]).filter(x=>x.naturalWidth<800||x.naturalHeight<1000);
 
           fs.writeFileSync('/tmp/audit/report.json',JSON.stringify(report,null,2));
           fs.writeFileSync('/tmp/audit/summary.json',JSON.stringify({
@@ -191,14 +212,17 @@ jobs:
             automatedFailures:failures,
             bookFailures,
             missingBooks,
-            note:'Screenshots are mandatory review evidence. Computed CSS alone is not accepted as visual PASS.'
+            lowResolutionBooks,
+            headers:report.headers,
+            note:'Screenshots are mandatory review evidence. CSS presence and build success alone are never visual PASS.'
           },null,2));
 
           if(failures.length||bookFailures.length||missingBooks.length){
-            console.error(JSON.stringify({failures,bookFailures,missingBooks},null,2));
+            console.error(JSON.stringify({failures,bookFailures,missingBooks,lowResolutionBooks},null,2));
             process.exitCode=1;
           }
           JS
+          cd "$GITHUB_WORKSPACE/audit-run"
           node check.mjs
       - uses: actions/upload-artifact@v4
         if: always()
@@ -206,3 +230,8 @@ jobs:
           name: final-dual-site-browser-audit
           path: /tmp/audit/
           retention-days: 3
+      - name: Stop previews
+        if: always()
+        run: |
+          [ -f /tmp/stt-preview.pid ] && kill "$(cat /tmp/stt-preview.pid)" || true
+          [ -f /tmp/gcsda-preview.pid ] && kill "$(cat /tmp/gcsda-preview.pid)" || true
