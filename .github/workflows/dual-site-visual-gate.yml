@@ -83,6 +83,8 @@ jobs:
                     overflow:document.documentElement.scrollWidth>innerWidth+1,
                     broken:[...document.images].filter(i=>!i.complete||i.naturalWidth===0).map(i=>i.getAttribute('src')),
                     heroSrc:img?.getAttribute('src')||null,
+                    naturalWidth:img?.naturalWidth||0,
+                    naturalHeight:img?.naturalHeight||0,
                     imageWidth:rect?.width||0,
                     imageLeft:rect?.left||0,
                     copyBg:copy?getComputedStyle(copy).backgroundColor:null,
@@ -92,7 +94,10 @@ jobs:
                 });
                 const expectsImage=!!record.image;
                 const fullWidth = !expectsImage || label!=='desktop' || (Math.abs(state.imageWidth-width)<2 && Math.abs(state.imageLeft)<2);
-                let passed=state.h1===1&&!state.overflow&&!state.broken.length&&errors.length===0&&state.hero&&(!expectsImage||state.heroSrc===record.image)&&fullWidth;
+                const targetWidth=Number(record.imageWidth||0);
+                const targetHeight=Number(record.imageHeight||0);
+                const resolutionPass=!expectsImage || ((targetWidth===0||state.naturalWidth>=targetWidth) && (targetHeight===0||state.naturalHeight>=targetHeight));
+                let passed=state.h1===1&&!state.overflow&&!state.broken.length&&errors.length===0&&state.hero&&(!expectsImage||state.heroSrc===record.image)&&fullWidth&&resolutionPass;
                 if(label==='desktop'&&expectsImage) passed=passed && (state.copyBg==='rgba(0, 0, 0, 0)'||state.copyBg==='transparent');
                 checks.push({route,label,...state,expected:record.image,passed});
               }catch(e){checks.push({route,label,error:String(e),passed:false});}
@@ -118,6 +123,30 @@ jobs:
             checks.push({special:'Engagement approved asset 34',passed:await page.locator('.cis-hero-art img').getAttribute('src')==='/visual-approved/bank-14.png'});
             await page.goto('http://127.0.0.1:4173/institutions',{waitUntil:'networkidle'});
             checks.push({special:'Institutions approved mapped image',passed:await page.locator('.cis-hero-art img').getAttribute('src')==='/visual-approved/secondary-05.png'});
+            await page.goto('http://127.0.0.1:4173/books',{waitUntil:'networkidle'});
+            const officialBookDimensions={
+              '2026 永續家族治理實務實錄':[1122,1402],
+              '內在法遵 Internal Compliance':[800,1000],
+              '內在法遵 AI Governance':[774,968],
+              '內在法遵 Family Governance':[758,946],
+            };
+            const bookState=await page.evaluate(()=>[...document.querySelectorAll('[data-publication-cover]')].map(img=>({
+              title:img.getAttribute('data-publication-cover'),
+              src:img.getAttribute('src'),
+              naturalWidth:img.naturalWidth,
+              naturalHeight:img.naturalHeight,
+              objectFit:getComputedStyle(img).objectFit,
+              aspectRatio:getComputedStyle(img).aspectRatio
+            })));
+            for(const [title,[w,h]] of Object.entries(officialBookDimensions)){
+              const found=bookState.find(x=>x.title===title);
+              checks.push({
+                special:'Official publication image — '+title,
+                actual:found||null,
+                expected:{naturalWidth:w,naturalHeight:h,objectFit:'contain',aspectRatio:'auto'},
+                passed:Boolean(found&&found.naturalWidth===w&&found.naturalHeight===h&&found.objectFit==='contain'&&found.aspectRatio==='auto')
+              });
+            }
             await context.close();
           }
           await browser.close();
