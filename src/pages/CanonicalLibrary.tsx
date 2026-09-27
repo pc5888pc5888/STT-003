@@ -43,7 +43,7 @@ export function BooksCanonical(){
             <p>{book.enTitle}</p>
             <div className="lib-actions">
               {"canonicalUrl" in book && book.canonicalUrl && <Link to={book.canonicalUrl}>正典頁</Link>}
-              {book.previewUrl && <a href={book.previewUrl} target="_blank" rel="noreferrer">線上翻閱 ↗</a>}
+              {"previewUrl" in book && book.previewUrl && <a href={book.previewUrl} target="_blank" rel="noreferrer">線上翻閱 ↗</a>}
             </div>
           </div>
         </article>)}
