@@ -7,7 +7,7 @@ export default function GovernedHero({kicker,title,subtitle,lead,image,id,childr
   const {pathname}=useLocation();
   const page=PAGE_PRESENTATION[pathname.replace(/\/$/,"")||"/"];
   const lines=page?.lines||[title];
-  const picture=page ? page.image : image;
+  const picture=image ?? page?.image ?? undefined;
   const titleId=id||"page-title";
   const clearLeft=picture?.includes("/user-approved-six/");
   return <>
