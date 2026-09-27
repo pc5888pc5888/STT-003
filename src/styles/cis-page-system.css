@@ -137,7 +137,7 @@
 
 /* GCSDA: full-width image remains visually continuous; copy is not a pasted white card. */
 #root .g4 .cis-with-image{position:relative}
-#root .g4 .cis-with-image::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(90deg,rgba(251,250,247,.78) 0%,rgba(251,250,247,.54) 23%,rgba(251,250,247,.24) 42%,rgba(251,250,247,.06) 60%,rgba(251,250,247,0) 78%)}
+#root .g4 .cis-with-image::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(90deg,#ffffff 0%,rgba(255,255,255,.995) 20%,rgba(255,255,255,.97) 34%,rgba(255,255,255,.86) 45%,rgba(255,255,255,.62) 56%,rgba(255,255,255,.30) 67%,rgba(255,255,255,.08) 77%,rgba(255,255,255,0) 86%)!important}
 #root .g4 .cis-with-image .cis-hero-copy{z-index:2;background:transparent!important;padding:0!important;border:0!important;box-shadow:none!important}
 #root .g4 .cis-with-image .cis-hero-art{z-index:0}
 @media(max-width:900px){
@@ -168,6 +168,15 @@
 #root .stt-accessibility-tools{background:transparent!important;box-shadow:none!important}
 
 @media(max-width:760px){
+  #root .g4{max-width:100vw!important;overflow-x:hidden!important}
   #root .g4 .cis-text-only .cis-hero-inner{width:calc(100% - 48px)!important;padding:48px 0 42px!important}
+  #root .g4-membership-wizard,#root .g4-membership-form,#root .g4-form-stepper,#root .g4-form-panel,#root .g4-form-grid,#root .g4-choice-grid{max-width:100%!important;min-width:0!important}
+  #root .g4-membership-wizard{overflow:hidden!important}
+  #root .g4-form-stepper{grid-template-columns:repeat(2,minmax(0,1fr))!important;width:100%!important}
+  #root .g4-form-step-indicator{min-width:0!important;padding:12px 9px!important}
+  #root .g4-form-step-indicator span{min-width:0!important;overflow-wrap:anywhere!important}
+  #root .g4-membership-form :is(input,select,textarea){min-width:0!important;max-width:100%!important}
+  #root .g4-form-nav{max-width:100%!important;flex-wrap:wrap!important}
+  #root .g4-form-nav button{max-width:100%!important;white-space:normal!important}
   #root .g4-brand{width:min(250px,calc(100vw - 105px))!important;height:58px!important;max-width:none!important;flex:0 1 auto!important}#root .g4-brand img{width:100%!important;height:100%!important;max-width:none!important;max-height:none!important}
 }
