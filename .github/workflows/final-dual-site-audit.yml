@@ -1,4 +1,4 @@
-name: Final dual-site visual and flipbook audit
+name: Final dual-site browser audit
 on:
   push:
     branches: [stt-convergence-20260923]
@@ -14,106 +14,189 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Install browser
+      - name: Install Chromium browser
         run: |
           npm init -y >/dev/null 2>&1
           npm install --no-save playwright >/tmp/install.log 2>&1
           npx playwright install --with-deps chromium >/tmp/browser-setup.log 2>&1
-      - name: Inspect deployed sites and flipbooks
+      - name: Inspect the actual Vercel branch aliases
         env:
-          STT: 'https://stt-003-git-stt-convergence-20260923-pc5888pc5888s-projects.vercel.app/?_vercel_share=1xbu7ar3OUSXIlutblVGIF0LmZQU6gpe'
-          GCSDA: 'https://stt-003-git-gcsda-convergence-20260923-pc5888pc5888s-projects.vercel.app/?_vercel_share=NebawyGPb17X9g7rUR8fxkFzk4pb9xvA'
+          STT_ORIGIN: 'https://stt-003-git-stt-convergence-20260923-pc5888pc5888s-projects.vercel.app'
+          STT_SHARE: 'uecbEPsLzg4JtpHlAElxDI35R1St9Sij'
+          GCSDA_ORIGIN: 'https://stt-003-git-gcsda-convergence-20260923-pc5888pc5888s-projects.vercel.app'
+          GCSDA_SHARE: '9PhBzIS63FbaNlsS8OOtDl1T407InQj9'
         run: |
           mkdir -p /tmp/audit
           cat > check.mjs <<'JS'
           import fs from 'node:fs';
           import { chromium } from 'playwright';
+
           const browser=await chromium.launch({headless:true});
-          const report={sites:[],flipbooks:[]};
+          const report={generatedAt:new Date().toISOString(),sites:[],books:null};
           const configs=[
-            ['stt',process.env.STT,['/','/problems','/how-stt-works','/engagement','/insights','/about','/eric-chuang','/institutions','/start','/privacy','/professional-boundary','/research','/books']],
-            ['gcsda',process.env.GCSDA,['/','/about','/governance','/council','/membership','/events','/knowledge','/charter','/privacy']]
+            {
+              site:'stt',origin:process.env.STT_ORIGIN,share:process.env.STT_SHARE,
+              routes:['/','/problems','/how-stt-works','/engagement','/insights','/about','/eric-chuang','/institutions','/start','/research','/books'],
+              expectedImages:{
+                '/':'/visual-bank/stt/user-approved-six/home.png',
+                '/problems':'/visual-bank/stt/user-approved-six/problems.png',
+                '/how-stt-works':'/visual-bank/stt/user-approved-six/method.png',
+                '/insights':'/visual-bank/stt/user-approved-six/columns.png',
+                '/about':'/visual-bank/stt/user-approved-six/about-stt.png',
+                '/books':'/visual-bank/stt/user-approved-six/publications.png'
+              }
+            },
+            {
+              site:'gcsda',origin:process.env.GCSDA_ORIGIN,share:process.env.GCSDA_SHARE,
+              routes:['/','/about','/governance','/council','/membership','/events','/knowledge','/charter'],
+              expectedImages:{
+                '/':'/visual-bank/gcsda/home-approved.webp',
+                '/about':'/visual-bank/gcsda/about.webp',
+                '/governance':'/visual-bank/gcsda/governance.webp',
+                '/council':'/visual-bank/gcsda/council.webp',
+                '/membership':'/visual-bank/gcsda/membership.webp',
+                '/events':'/visual-bank/gcsda/events.webp',
+                '/knowledge':'/visual-bank/gcsda/knowledge.webp',
+                '/charter':'/visual-bank/gcsda/charter.webp'
+              }
+            }
           ];
-          for(const [site,base,routes] of configs){
+
+          const urlFor=(cfg,route)=>`${cfg.origin}${route}?_vercel_share=${cfg.share}`;
+          const safe=(route)=>route==='/'?'home':route.slice(1).replaceAll('/','-');
+
+          for(const cfg of configs){
             for(const [label,w,h] of [['desktop',1440,1000],['tablet',820,1100],['mobile',390,844]]){
               const ctx=await browser.newContext({viewport:{width:w,height:h},reducedMotion:'reduce'});
               const page=await ctx.newPage();
-              for(const route of routes){
-                const errors=[]; page.on('pageerror',e=>errors.push(e.message));
+              for(const route of cfg.routes){
+                const errors=[];
+                const onError=e=>errors.push(e.message);
+                page.on('pageerror',onError);
                 try{
-                  const res=await page.goto(base+route,{waitUntil:'networkidle',timeout:30000});
+                  const res=await page.goto(urlFor(cfg,route),{waitUntil:'networkidle',timeout:30000});
                   await page.evaluate(()=>document.fonts.ready);
                   const state=await page.evaluate(()=>{
                     const hero=document.querySelector('.cis-hero');
-                    const img=hero?.querySelector('img');
-                    const imgRect=img?.getBoundingClientRect();
+                    const art=hero?.querySelector('.cis-hero-art');
+                    const img=art?.querySelector('img');
                     const copy=hero?.querySelector('.cis-hero-copy');
-                    const cs=copy?getComputedStyle(copy):null;
-                    const h1=document.querySelector('h1');
+                    const brand=document.querySelector('header a img');
+                    const rr=e=>{const r=e?.getBoundingClientRect();return r?{left:r.left,top:r.top,right:r.right,bottom:r.bottom,width:r.width,height:r.height}:null};
+                    const pseudo=hero?getComputedStyle(hero,'::before'):null;
+                    const imgStyle=img?getComputedStyle(img):null;
+                    const copyStyle=copy?getComputedStyle(copy):null;
                     return {
-                      status:document.readyState,
-                      h1:h1?.textContent?.trim(),
+                      h1:document.querySelector('h1')?.textContent?.trim()||null,
                       h1Count:document.querySelectorAll('h1').length,
+                      heroClass:hero?.className||null,
                       heroImage:img?.getAttribute('src')||null,
                       heroImageLoaded:img?img.complete&&img.naturalWidth>0:null,
-                      heroImageNatural:[img?.naturalWidth||0,img?.naturalHeight||0],
-                      heroImageRect:imgRect?[Math.round(imgRect.left),Math.round(imgRect.width),Math.round(imgRect.height)]:null,
-                      copyBg:cs?.backgroundColor||null,
-                      copyBoxShadow:cs?.boxShadow||null,
-                      copyBorder:cs?.borderStyle||null,
+                      heroImageNatural:img?[img.naturalWidth,img.naturalHeight]:null,
+                      heroImageRect:rr(img),
+                      heroImageFit:imgStyle?.objectFit||null,
+                      copyRect:rr(copy),
+                      copyBg:copyStyle?.backgroundColor||null,
+                      heroGradient:pseudo?.backgroundImage||null,
+                      brandRect:rr(brand),
                       overflow:document.documentElement.scrollWidth>innerWidth+1,
-                      cta:[...document.querySelectorAll('header a')].map(a=>({text:a.textContent?.trim(),href:a.getAttribute('href'),class:a.className})),
                       broken:[...document.images].filter(i=>!i.complete||i.naturalWidth===0).map(i=>i.getAttribute('src'))
                     };
                   });
-                  const fullWidth=state.heroImageRect?Math.abs(state.heroImageRect[0])<=2&&Math.abs(state.heroImageRect[1]-w)<=2:true;
-                  const noOpaqueCard=state.heroImage?(label!=='desktop'||!state.copyBg||state.copyBg==='rgba(0, 0, 0, 0)'||state.copyBg==='transparent'):true;
-                  report.sites.push({site,route,label,http:res?.status(),...state,fullWidth,noOpaqueCard,errors});
-                  if(label==='desktop' && ['/', '/about','/engagement','/eric-chuang','/institutions','/membership'].includes(route)){
-                    await page.screenshot({path:`/tmp/audit/${site}-${route==='/'?'home':route.slice(1)}.png`,fullPage:true});
+
+                  const expected=cfg.expectedImages[route]||null;
+                  const hasExpected=!expected||state.heroImage===expected;
+                  const imageLoaded=!expected||Boolean(state.heroImageLoaded&&state.heroImageNatural?.[0]>0&&state.heroImageNatural?.[1]>0);
+                  const desktopCopyInReadingZone=label==='mobile'||!state.copyRect||state.copyRect.right<=w*.50+2;
+                  const mobileSeparated=label!=='mobile'||!state.heroImageRect||!state.copyRect||state.copyRect.top>=state.heroImageRect.bottom-2;
+                  const gradientGeometry=label==='mobile'||!expected||(
+                    typeof state.heroGradient==='string' &&
+                    state.heroGradient.includes('30%') &&
+                    state.heroGradient.includes('50%') &&
+                    state.heroGradient.includes('70%') &&
+                    state.heroGradient.includes('82%')
+                  );
+
+                  const row={
+                    site:cfg.site,route,label,http:res?.status(),...state,
+                    expectedImage:expected,hasExpected,imageLoaded,
+                    desktopCopyInReadingZone,mobileSeparated,gradientGeometry,errors
+                  };
+                  report.sites.push(row);
+
+                  if(label==='desktop' && expected){
+                    await page.screenshot({path:`/tmp/audit/${cfg.site}-${safe(route)}-desktop.png`,fullPage:false});
                   }
-                }catch(e){report.sites.push({site,route,label,error:String(e),errors});}
+                  if(label==='mobile' && ['/', '/problems','/about','/membership','/books'].includes(route)){
+                    await page.screenshot({path:`/tmp/audit/${cfg.site}-${safe(route)}-mobile.png`,fullPage:false});
+                  }
+                }catch(e){
+                  report.sites.push({site:cfg.site,route,label,error:String(e),errors});
+                }finally{
+                  page.off('pageerror',onError);
+                }
               }
               await ctx.close();
             }
           }
-          for(const [id,url] of [
-            ['e424001f8c','https://heyzine.com/flip-book/e424001f8c.html'],
-            ['c700d8beb2','https://heyzine.com/flip-book/c700d8beb2.html']
-          ]){
-            const ctx=await browser.newContext({viewport:{width:1440,height:1000}});
+
+          // Four-book verification uses the actual deployed /books page.
+          {
+            const ctx=await browser.newContext({viewport:{width:1440,height:1100},reducedMotion:'reduce'});
             const page=await ctx.newPage();
-            try{
-              const res=await page.goto(url,{waitUntil:'networkidle',timeout:45000});
-              await page.waitForTimeout(3500);
-              const state=await page.evaluate(()=>({
-                title:document.title,
-                text:document.body.innerText.slice(0,12000),
-                metas:[...document.querySelectorAll('meta')].map(m=>({name:m.getAttribute('name'),property:m.getAttribute('property'),content:m.getAttribute('content')})).filter(x=>x.content),
-                images:[...document.images].map(i=>({src:i.currentSrc||i.src,w:i.naturalWidth,h:i.naturalHeight})).filter(i=>i.src),
-                iframes:[...document.querySelectorAll('iframe')].map(i=>i.src),
-                scripts:[...document.scripts].map(s=>s.src).filter(Boolean)
-              }));
-              await page.screenshot({path:`/tmp/audit/heyzine-${id}.png`,fullPage:false});
-              report.flipbooks.push({id,url,http:res?.status(),...state});
-            }catch(e){report.flipbooks.push({id,url,error:String(e)});}
+            const res=await page.goto(`${process.env.STT_ORIGIN}/books?_vercel_share=${process.env.STT_SHARE}`,{waitUntil:'networkidle',timeout:30000});
+            await page.evaluate(()=>document.fonts.ready);
+            const covers=await page.evaluate(()=>[...document.querySelectorAll('[data-publication-cover]')].map(img=>({
+              title:img.getAttribute('data-publication-cover'),
+              src:img.getAttribute('src'),
+              complete:img.complete,
+              naturalWidth:img.naturalWidth,
+              naturalHeight:img.naturalHeight,
+              renderedWidth:Math.round(img.getBoundingClientRect().width),
+              renderedHeight:Math.round(img.getBoundingClientRect().height),
+              objectFit:getComputedStyle(img).objectFit,
+              aspectRatio:getComputedStyle(img).aspectRatio
+            })));
+            report.books={http:res?.status(),covers};
+            await page.screenshot({path:'/tmp/audit/stt-books-full.png',fullPage:true});
             await ctx.close();
           }
+
           await browser.close();
+
+          const requiredBookTitles=[
+            '2026 永續家族治理實務實錄',
+            '內在法遵 Internal Compliance',
+            '內在法遵 AI Governance',
+            '內在法遵 Family Governance'
+          ];
+          const failures=report.sites.filter(x=>
+            x.error||x.http!==200||x.h1Count!==1||x.overflow||x.broken?.length||
+            x.hasExpected===false||x.imageLoaded===false||
+            x.desktopCopyInReadingZone===false||x.mobileSeparated===false||x.gradientGeometry===false||
+            x.errors?.length
+          );
+          const bookFailures=(report.books?.covers||[]).filter(x=>!x.complete||x.naturalWidth<=0||x.naturalHeight<=0||x.objectFit!=='contain');
+          const missingBooks=requiredBookTitles.filter(t=>!(report.books?.covers||[]).some(x=>x.title===t));
+
           fs.writeFileSync('/tmp/audit/report.json',JSON.stringify(report,null,2));
-          const failures=report.sites.filter(x=>x.error||x.http!==200||x.h1Count!==1||x.overflow||x.broken?.length||x.errors?.length||x.fullWidth===false||x.noOpaqueCard===false);
           fs.writeFileSync('/tmp/audit/summary.json',JSON.stringify({
-            rendered:report.sites.length,
-            failures,
-            sttDesktopCta:report.sites.find(x=>x.site==='stt'&&x.route==='/'&&x.label==='desktop')?.cta,
-            gcsdaDesktopCta:report.sites.find(x=>x.site==='gcsda'&&x.route==='/'&&x.label==='desktop')?.cta,
-            flipbooks:report.flipbooks.map(x=>({id:x.id,title:x.title,http:x.http,error:x.error,metas:x.metas}))
+            browserRenderedRoutes:report.sites.length,
+            automatedFailures:failures,
+            bookFailures,
+            missingBooks,
+            note:'Screenshots are mandatory review evidence. Computed CSS alone is not accepted as visual PASS.'
           },null,2));
+
+          if(failures.length||bookFailures.length||missingBooks.length){
+            console.error(JSON.stringify({failures,bookFailures,missingBooks},null,2));
+            process.exitCode=1;
+          }
           JS
           node check.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: final-dual-site-audit
+          name: final-dual-site-browser-audit
           path: /tmp/audit/
-          retention-days: 7
+          retention-days: 3
