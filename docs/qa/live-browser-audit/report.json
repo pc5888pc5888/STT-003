@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-29T03:06:45.055Z",
+  "generatedAt": "2026-09-29T03:24:58.946Z",
   "sites": [
     {
       "site": "stt",
@@ -669,27 +669,27 @@
       "title": "著作正典｜STT Governance",
       "h1": "著作正典",
       "h1Count": 1,
-      "heroClass": "cis-hero cis-title-1 cis-with-image",
-      "heroImage": "/visual-bank/stt/primary-semantic/publications-stt-press-library.png",
+      "heroClass": "cis-hero cis-title-1 cis-with-image cis-clear-left",
+      "heroImage": "/visual-bank/stt/user-approved-six/publications.png",
       "heroImageLoaded": true,
       "heroImageNatural": [
-        1672,
-        941
+        1491,
+        1055
       ],
       "heroImageRect": {
         "left": 0,
         "top": 93,
         "right": 1440,
-        "bottom": 903.421875,
+        "bottom": 1111.90625,
         "width": 1440,
-        "height": 810.421875
+        "height": 1018.90625
       },
       "heroImageFit": "contain",
       "copyRect": {
         "left": 52,
-        "top": 392.265625,
+        "top": 496.515625,
         "right": 570.390625,
-        "bottom": 604.140625,
+        "bottom": 708.390625,
         "width": 518.390625,
         "height": 211.875
       },
@@ -720,7 +720,7 @@
       "overflow": false,
       "broken": [],
       "expectedImage": "/visual-bank/stt/user-approved-six/publications.png",
-      "hasExpected": false,
+      "hasExpected": true,
       "imageLoaded": true,
       "desktopCopyInReadingZone": true,
       "mobileSeparated": true,
@@ -1395,27 +1395,27 @@
       "title": "著作正典｜STT Governance",
       "h1": "著作正典",
       "h1Count": 1,
-      "heroClass": "cis-hero cis-title-1 cis-with-image",
-      "heroImage": "/visual-bank/stt/primary-semantic/publications-stt-press-library.png",
+      "heroClass": "cis-hero cis-title-1 cis-with-image cis-clear-left",
+      "heroImage": "/visual-bank/stt/user-approved-six/publications.png",
       "heroImageLoaded": true,
       "heroImageNatural": [
-        1672,
-        941
+        1491,
+        1055
       ],
       "heroImageRect": {
         "left": 0,
         "top": 83,
         "right": 820,
-        "bottom": 544.484375,
+        "bottom": 663.203125,
         "width": 820,
-        "height": 461.484375
+        "height": 580.203125
       },
       "heroImageFit": "contain",
       "copyRect": {
         "left": 36,
-        "top": 195.4375,
+        "top": 254.796875,
         "right": 355.796875,
-        "bottom": 432.046875,
+        "bottom": 491.40625,
         "width": 319.796875,
         "height": 236.609375
       },
@@ -1446,7 +1446,7 @@
       "overflow": false,
       "broken": [],
       "expectedImage": "/visual-bank/stt/user-approved-six/publications.png",
-      "hasExpected": false,
+      "hasExpected": true,
       "imageLoaded": true,
       "desktopCopyInReadingZone": true,
       "mobileSeparated": true,
@@ -2121,27 +2121,27 @@
       "title": "著作正典｜STT Governance",
       "h1": "著作正典",
       "h1Count": 1,
-      "heroClass": "cis-hero cis-title-1 cis-with-image",
-      "heroImage": "/visual-bank/stt/primary-semantic/publications-stt-press-library.png",
+      "heroClass": "cis-hero cis-title-1 cis-with-image cis-clear-left",
+      "heroImage": "/visual-bank/stt/user-approved-six/publications.png",
       "heroImageLoaded": true,
       "heroImageNatural": [
-        1672,
-        941
+        1491,
+        1055
       ],
       "heroImageRect": {
         "left": 0,
         "top": 83,
         "right": 390,
-        "bottom": 302.484375,
+        "bottom": 358.953125,
         "width": 390,
-        "height": 219.484375
+        "height": 275.953125
       },
       "heroImageFit": "contain",
       "copyRect": {
         "left": 0,
-        "top": 302.484375,
+        "top": 358.953125,
         "right": 390,
-        "bottom": 541.28125,
+        "bottom": 597.75,
         "width": 390,
         "height": 238.796875
       },
@@ -2172,7 +2172,7 @@
       "overflow": false,
       "broken": [],
       "expectedImage": "/visual-bank/stt/user-approved-six/publications.png",
-      "hasExpected": false,
+      "hasExpected": true,
       "imageLoaded": true,
       "desktopCopyInReadingZone": true,
       "mobileSeparated": true,
