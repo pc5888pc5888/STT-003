@@ -259,7 +259,7 @@ jobs:
             note:'Screenshots are mandatory review evidence. CSS presence, successful builds, and naturalWidth alone are never visual PASS.'
           },null,2));
 
-          if(failures.length||bookFailures.length||missingBooks.length||logoOpticalFailure){
+          if(failures.length||bookFailures.length||missingBooks.length||lowResolutionBooks.length||logoOpticalFailure){
             console.error(JSON.stringify({failures,bookFailures,missingBooks,lowResolutionBooks,logoOptical:{sttSeal,gcsdaSeal,difference:logoOpticalDifference,passed:!logoOpticalFailure}},null,2));
             process.exitCode=1;
           }
