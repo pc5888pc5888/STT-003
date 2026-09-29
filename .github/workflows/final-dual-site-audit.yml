@@ -2,10 +2,15 @@ name: Final dual-site browser audit
 on:
   push:
     branches: [stt-convergence-20260923]
-    paths: [.github/workflows/final-dual-site-audit.yml]
+    paths:
+      - .github/workflows/final-dual-site-audit.yml
+      - src/**
+      - public/**
+      - package.json
+      - package-lock.json
   workflow_dispatch:
 permissions:
-  contents: read
+  contents: write
 jobs:
   audit:
     runs-on: ubuntu-latest
@@ -108,6 +113,34 @@ jobs:
                     const copy=hero?.querySelector('.cis-hero-copy');
                     const brand=document.querySelector('header a img');
                     const rr=e=>{const r=e?.getBoundingClientRect();return r?{left:r.left,top:r.top,right:r.right,bottom:r.bottom,width:r.width,height:r.height}:null};
+                    const optical=img=>{
+                      if(!img||!img.complete||!img.naturalWidth||!img.naturalHeight) return null;
+                      const canvas=document.createElement('canvas');
+                      canvas.width=img.naturalWidth; canvas.height=img.naturalHeight;
+                      const ctx=canvas.getContext('2d',{willReadFrequently:true});
+                      if(!ctx) return null;
+                      ctx.drawImage(img,0,0);
+                      const data=ctx.getImageData(0,0,canvas.width,canvas.height).data;
+                      const maxX=Math.max(1,Math.floor(canvas.width*.36));
+                      let minX=maxX,minY=canvas.height,maxInkX=-1,maxY=-1;
+                      for(let y=0;y<canvas.height;y++){
+                        for(let x=0;x<maxX;x++){
+                          const i=(y*canvas.width+x)*4;
+                          const a=data[i+3],r=data[i],g=data[i+1],b=data[i+2];
+                          const ink=a>18 && (255-r>12 || 255-g>12 || 255-b>12);
+                          if(!ink) continue;
+                          if(x<minX)minX=x;if(x>maxInkX)maxInkX=x;if(y<minY)minY=y;if(y>maxY)maxY=y;
+                        }
+                      }
+                      if(maxInkX<0||maxY<0) return null;
+                      const sourceHeight=maxY-minY+1;
+                      const rendered=img.getBoundingClientRect();
+                      return {
+                        sourceBox:{left:minX,top:minY,width:maxInkX-minX+1,height:sourceHeight},
+                        visibleLeftMarkHeight:sourceHeight/img.naturalHeight*rendered.height,
+                        visibleLeftMarkTop:minY/img.naturalHeight*rendered.height
+                      };
+                    };
                     return {
                       title:document.title,
                       h1:document.querySelector('h1')?.textContent?.trim()||null,
@@ -123,6 +156,7 @@ jobs:
                       heroGradient:hero?getComputedStyle(hero,'::before').backgroundImage:null,
                       brandRect:rr(brand),
                       brandNatural:brand?[brand.naturalWidth,brand.naturalHeight]:null,
+                      brandOptical:optical(brand),
                       overflow:document.documentElement.scrollWidth>innerWidth+1,
                       broken:[...document.images].filter(i=>!i.complete||i.naturalWidth===0).map(i=>i.getAttribute('src'))
                     };
@@ -150,13 +184,13 @@ jobs:
                   if(label==='desktop'&&expected){
                     await page.screenshot({path:`/tmp/audit/${cfg.site}-${safe(route)}-desktop.png`,fullPage:false});
                   }
-                  if(label==='mobile'&&['/','/problems','/about','/membership','/books'].includes(route)){
-                    await page.screenshot({path:`/tmp/audit/${cfg.site}-${safe(route)}-mobile.png`,fullPage:false});
+                  if(expected && (cfg.site==='gcsda'||['/','/problems','/books'].includes(route)) && label!=='desktop'){
+                    await page.screenshot({path:`/tmp/audit/${cfg.site}-${safe(route)}-${label}.png`,fullPage:false});
                   }
                   if(label==='desktop'&&route==='/'){
                     const header=page.locator('header').first();
                     await header.screenshot({path:`/tmp/audit/${cfg.site}-header-desktop.png`});
-                    report.headers.push({site:cfg.site,brandRect:state.brandRect,brandNatural:state.brandNatural});
+                    report.headers.push({site:cfg.site,brandRect:state.brandRect,brandNatural:state.brandNatural,brandOptical:state.brandOptical});
                   }
                 }catch(e){
                   report.sites.push({site:cfg.site,route,label,error:String(e),errors});
@@ -206,6 +240,12 @@ jobs:
           const bookFailures=(report.books?.covers||[]).filter(x=>!x.complete||x.naturalWidth<=0||x.naturalHeight<=0||x.objectFit!=='contain');
           const missingBooks=requiredBookTitles.filter(t=>!(report.books?.covers||[]).some(x=>x.title===t));
           const lowResolutionBooks=(report.books?.covers||[]).filter(x=>x.naturalWidth<800||x.naturalHeight<1000);
+          const sttHeader=report.headers.find(x=>x.site==='stt');
+          const gcsdaHeader=report.headers.find(x=>x.site==='gcsda');
+          const sttSeal=sttHeader?.brandOptical?.visibleLeftMarkHeight??null;
+          const gcsdaSeal=gcsdaHeader?.brandOptical?.visibleLeftMarkHeight??null;
+          const logoOpticalDifference=(sttSeal!=null&&gcsdaSeal!=null)?Math.abs(sttSeal-gcsdaSeal):null;
+          const logoOpticalFailure=logoOpticalDifference==null||logoOpticalDifference>2;
 
           fs.writeFileSync('/tmp/audit/report.json',JSON.stringify(report,null,2));
           fs.writeFileSync('/tmp/audit/summary.json',JSON.stringify({
@@ -215,11 +255,12 @@ jobs:
             missingBooks,
             lowResolutionBooks,
             headers:report.headers,
+            logoOptical:{sttSeal,gcsdaSeal,difference:logoOpticalDifference,passed:!logoOpticalFailure},
             note:'Screenshots are mandatory review evidence. CSS presence, successful builds, and naturalWidth alone are never visual PASS.'
           },null,2));
 
-          if(failures.length||bookFailures.length||missingBooks.length){
-            console.error(JSON.stringify({failures,bookFailures,missingBooks,lowResolutionBooks},null,2));
+          if(failures.length||bookFailures.length||missingBooks.length||logoOpticalFailure){
+            console.error(JSON.stringify({failures,bookFailures,missingBooks,lowResolutionBooks,logoOptical:{sttSeal,gcsdaSeal,difference:logoOpticalDifference,passed:!logoOpticalFailure}},null,2));
             process.exitCode=1;
           }
           JS
@@ -231,6 +272,21 @@ jobs:
           name: final-dual-site-browser-audit
           path: /tmp/audit/
           retention-days: 3
+      - name: Publish browser evidence to STT branch
+        if: always()
+        run: |
+          set -e
+          cd "$GITHUB_WORKSPACE/stt-src"
+          rm -rf docs/qa/live-browser-audit
+          mkdir -p docs/qa/live-browser-audit
+          cp -a /tmp/audit/. docs/qa/live-browser-audit/
+          git config user.name "stt-governance-audit"
+          git config user.email "actions@users.noreply.github.com"
+          git add docs/qa/live-browser-audit
+          if ! git diff --cached --quiet; then
+            git commit -m "qa: publish live dual-site browser evidence"
+            git push origin HEAD:stt-convergence-20260923
+          fi
       - name: Stop previews
         if: always()
         run: |
