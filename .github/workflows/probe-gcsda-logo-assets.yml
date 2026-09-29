@@ -1,0 +1,22 @@
+name: Probe GCSDA logo assets
+on:
+  push:
+    branches: [gcsda-convergence-20260923]
+    paths: [.github/workflows/probe-gcsda-logo-assets.yml]
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Inspect candidate logo assets
+        run: |
+          file public/images/gcsda-logo.png || true
+          file public/images/logo-header.png || true
+          file public/首頁表頭logo.png || true
+          file public/images/index-logo-002.png || true
+          file public/images/index-logo-003.png || true
+          file public/images/gcsda_001.png || true
+          file public/images/gcsda_002.png || true
+          file public/images/gcsda_003.png || true

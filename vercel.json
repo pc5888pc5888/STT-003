@@ -1,12 +1,58 @@
 {
   "rewrites": [
-    { "source": "/about", "destination": "/index.html" },
-    { "source": "/governance", "destination": "/index.html" },
-    { "source": "/council", "destination": "/index.html" },
-    { "source": "/membership", "destination": "/index.html" },
-    { "source": "/events", "destination": "/index.html" },
-    { "source": "/knowledge", "destination": "/index.html" },
-    { "source": "/charter", "destination": "/index.html" },
-    { "source": "/privacy", "destination": "/index.html" }
+    {
+      "source": "/about",
+      "destination": "/gcsda-about.html"
+    },
+    {
+      "source": "/governance",
+      "destination": "/gcsda-governance.html"
+    },
+    {
+      "source": "/council",
+      "destination": "/gcsda-council.html"
+    },
+    {
+      "source": "/membership",
+      "destination": "/gcsda-membership.html"
+    },
+    {
+      "source": "/events",
+      "destination": "/gcsda-events.html"
+    },
+    {
+      "source": "/knowledge",
+      "destination": "/gcsda-knowledge.html"
+    },
+    {
+      "source": "/charter",
+      "destination": "/gcsda-charter.html"
+    },
+    {
+      "source": "/privacy",
+      "destination": "/gcsda-privacy.html"
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/about.html",
+      "destination": "/about",
+      "permanent": true
+    },
+    {
+      "source": "/governance.html",
+      "destination": "/governance",
+      "permanent": true
+    },
+    {
+      "source": "/insights.html",
+      "destination": "/knowledge",
+      "permanent": true
+    },
+    {
+      "source": "/contact.html",
+      "destination": "/membership",
+      "permanent": true
+    }
   ]
 }
