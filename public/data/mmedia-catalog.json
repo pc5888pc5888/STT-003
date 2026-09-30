@@ -14,16 +14,16 @@
     "verification": "All seven source fields exactly match the uploaded 212-record snapshot after restoring its original whitespace."
   },
   "schemaVersion": "2.0",
-  "syncedAt": "2026-09-29T22:22:35.093003+00:00",
+  "syncedAt": "2026-09-30T05:41:13.047601+00:00",
   "sync": {
     "method": "public-author-index-and-more",
     "complete": true,
     "pagesFetched": 38,
-    "observed": 232,
-    "retainedNotSeen": 0,
+    "observed": 231,
+    "retainedNotSeen": 1,
     "changes": {
       "added": 0,
-      "updated": 0,
+      "updated": 1,
       "reclassified": 0
     }
   },
@@ -211,7 +211,7 @@
       "category": "法律",
       "author": "莊鈞翔博士",
       "authorUrl": "https://94m.com.tw/editors/ed55fc",
-      "excerpt": "多戶交屋不是找一招解套，而是測試整體承擔能力；中華企業策略永續發展學會 創會理事長 莊鈞翔 博士以六戶同時進入交屋期的案件為例，真正的策略價值不在於找到一個可以讓全部交易維持原樣的「技...",
+      "excerpt": "多戶交屋不是找一招解套，而是測試整體承擔能力；中華企業策略永續發展學會 創會理事長 莊鈞翔 博士以六戶同時進入交屋期的案件為例，真正的策略價值不在於找到一個可以讓全部交易維持原樣的「技巧」，而在於把每一戶的買方、付款責任、可用現金、貸款條件、家庭同意與退出成本拆開。任何親屬承接、境外財力、短期融資或契約調整，都只能在其法律與商業條件成立時成為候選工具；資產防禦不是確保所有部位都留下，而是讓家族在資訊完整、責任真實的前提下，仍保有調整、協商與退出的選擇權。",
       "id": "mmedia-77f330",
       "sourceArticleId": "77f330",
       "series": "legal",
