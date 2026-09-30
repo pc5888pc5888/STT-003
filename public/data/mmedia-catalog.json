@@ -14,28 +14,56 @@
     "verification": "All seven source fields exactly match the uploaded 212-record snapshot after restoring its original whitespace."
   },
   "schemaVersion": "2.0",
-  "syncedAt": "2026-09-30T12:45:39.506087+00:00",
+  "syncedAt": "2026-09-30T22:22:31.146950+00:00",
   "sync": {
     "method": "public-author-index-and-more",
     "complete": true,
     "pagesFetched": 38,
-    "observed": 231,
+    "observed": 233,
     "retainedNotSeen": 1,
     "changes": {
-      "added": 0,
-      "updated": 1,
+      "added": 2,
+      "updated": 0,
       "reclassified": 0
     }
   },
   "stats": {
-    "total": 232,
-    "uniqueUrls": 232,
-    "legal": 217,
-    "humanistic": 4,
+    "total": 234,
+    "uniqueUrls": 234,
+    "legal": 218,
+    "humanistic": 5,
     "news": 11,
     "pending": 0
   },
   "articles": [
+    {
+      "url": "https://94m.com.tw/articles/299447",
+      "title": "【 有人曾給他一點空間，後來他把它留給下一個人 】把「被允許成為自己」慢慢活成一種陪伴 高銘宏 傳道 專訪",
+      "date": "2026/09/30 17:54",
+      "category": "社會",
+      "author": "莊鈞翔博士",
+      "authorUrl": "https://94m.com.tw/editors/ed55fc",
+      "excerpt": "當一個曾經走過不同位置、不同工作節奏，也曾在信仰中學著放下「人定勝天」重量的人，開始對年輕人說「你所有做過的都沒有白費，都不是彎路」，那句話真正有分量的地方，不是它保證人生從此順利，而是說話的人自己知道，有些路確實要走過以後，才明白它沒有白費。",
+      "id": "mmedia-299447",
+      "sourceArticleId": "299447",
+      "series": "humanistic",
+      "seriesTitle": "莊博士人文地景產專欄",
+      "source": "M傳媒"
+    },
+    {
+      "url": "https://94m.com.tw/articles/d4fe23",
+      "title": "【 中小企業的輕量化合規指南 】沒有數十億算力預算，也能建立自己的 AI 能力：從「買模型」轉向「管資料、管用途、管責任」",
+      "date": "2026/09/30 17:18",
+      "category": "法律",
+      "author": "莊鈞翔博士",
+      "authorUrl": "https://94m.com.tw/editors/ed55fc",
+      "excerpt": "維修單、客服紀錄、報價邏輯、品質異常、老師傅筆記、常見退貨原因，這些資料若經過清理與權限確認，可以成為企業自己的 RAG 知識基礎；它不需要幾千億參數，只需要在特定任務上準確；所以中華企業策略永續發展學會 創會理事長 莊鈞翔 博士希望這篇把「AI 競賽」重新定義；中小企業沒有必要和科技巨頭比模型規模，而應該比誰更了解自己的業務；開源不是免費午餐，商用以前必須先讀授權；開源模型與工具降低了 AI 導入門檻，但企業最容易把「可以下載」誤解為「可以無限制商用」。",
+      "id": "mmedia-d4fe23",
+      "sourceArticleId": "d4fe23",
+      "series": "legal",
+      "seriesTitle": "莊博士法律新聞專欄",
+      "source": "M傳媒"
+    },
     {
       "url": "https://94m.com.tw/articles/cee607",
       "title": "【 高階硬體製造的智慧財產防護 】從 IT／OT 邊界到跨國合作契約，台灣製造業如何在開放合作中保住真正的 know-how",
