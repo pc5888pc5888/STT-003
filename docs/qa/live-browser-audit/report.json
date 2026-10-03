@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-03T04:42:14.792Z",
+  "generatedAt": "2026-10-03T18:42:46.206Z",
   "sites": [
     {
       "site": "stt",
@@ -312,10 +312,7 @@
         "visibleLeftMarkTop": 12.962962962962962
       },
       "overflow": false,
-      "broken": [
-        "/books/ai-governance.webp",
-        "/books/family-governance.webp"
-      ],
+      "broken": [],
       "expectedImage": "/visual-bank/stt/user-approved-six/columns.png",
       "hasExpected": true,
       "imageLoaded": true,
@@ -991,10 +988,7 @@
         "visibleLeftMarkTop": 10.74074074074074
       },
       "overflow": false,
-      "broken": [
-        "/books/ai-governance.webp",
-        "/books/family-governance.webp"
-      ],
+      "broken": [],
       "expectedImage": "/visual-bank/stt/user-approved-six/columns.png",
       "hasExpected": true,
       "imageLoaded": true,
@@ -1670,10 +1664,7 @@
         "visibleLeftMarkTop": 10.74074074074074
       },
       "overflow": false,
-      "broken": [
-        "/books/ai-governance.webp",
-        "/books/family-governance.webp"
-      ],
+      "broken": [],
       "expectedImage": "/visual-bank/stt/user-approved-six/columns.png",
       "hasExpected": true,
       "imageLoaded": true,
@@ -3653,10 +3644,10 @@
         "title": "內在法遵 AI Governance",
         "src": "/books/ai-governance.webp",
         "complete": true,
-        "naturalWidth": 0,
-        "naturalHeight": 0,
+        "naturalWidth": 160,
+        "naturalHeight": 200,
         "renderedWidth": 430,
-        "renderedHeight": 32,
+        "renderedHeight": 538,
         "objectFit": "contain",
         "aspectRatio": "auto"
       },
@@ -3664,10 +3655,10 @@
         "title": "內在法遵 Family Governance",
         "src": "/books/family-governance.webp",
         "complete": true,
-        "naturalWidth": 0,
-        "naturalHeight": 0,
+        "naturalWidth": 160,
+        "naturalHeight": 200,
         "renderedWidth": 430,
-        "renderedHeight": 32,
+        "renderedHeight": 538,
         "objectFit": "contain",
         "aspectRatio": "auto"
       }
