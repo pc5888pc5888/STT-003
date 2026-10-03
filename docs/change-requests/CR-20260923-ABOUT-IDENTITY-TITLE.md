@@ -38,3 +38,12 @@ The body copy explaining governance judgment and institutional design remains un
 ## Production
 
 Preview implementation only until G5 QA passes.
+
+
+## 2026-10-03 execution reaffirmation
+
+- Reaffirmed for BUILD-LOCK correction by project owner via project chat.
+- Required rendered H1 remains exactly:
+  - STT Governance 不是一般顧問公司，
+  - 而是高位階治理文明平台。
+- This is a restoration of the approved identity statement, not a new positioning change.

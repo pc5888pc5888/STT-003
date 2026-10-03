@@ -2,7 +2,6 @@ import { useEffect, type ReactNode } from "react";
 import { Link } from "react-router-dom";
 import UnifiedTitleHero from "../components/UnifiedTitleHero";
 
-const STT_PRESS_URL = "/books";
 const M_MEDIA_URL = "https://94m.com.tw/editors/ed55fc";
 
 function usePageMeta(title:string, description:string){
@@ -93,7 +92,6 @@ export function EricPage(){
 
     <Section kicker="PUBLICATION" title="出版與制度文本。">
       <p>由 STT Press 與其他正式通路發行之著作，以治理、決策、人機主權、家族與制度文明為核心。</p>
-      <a href={STT_PRESS_URL}>STT Press →</a>
     </Section>
 
     <Section kicker="ACADEMIC & INSTITUTIONAL ROLES" title="學術與公共角色。">
@@ -115,8 +113,6 @@ export function InstitutionsPage(){
       title="當單一專業工具不足以處理整體治理問題，需要的是一個更上位的判讀架構。"
       titleLines={["當單一專業工具不足以處理整體治理問題，", "需要的是一個更上位的判讀架構。"]}
       lead="重大治理事件可能同時牽涉法律、財務、家族、策略、權力與執行；STT 負責治理整合與問題架構，各專業則在自身責任範圍內執行。"
-      image="/visual-bank/stt/cooperation-hero-20260917.png"
-      imagePosition="center right"
       id="institutions-title"
     >
       <Link to="/start?type=institution">提出機構合作情境 →</Link>

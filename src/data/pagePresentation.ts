@@ -44,7 +44,7 @@ export const PAGE_PRESENTATION: Record<string, PagePresentation> = {
       "就不應只停留在一次諮詢。"
     ],
     "type": 2,
-    "image": "/visual-approved/bank-14.png",
+    "image": null,
     "originalTitle": "當一件事情值得被正式治理，就不應只停留在一次諮詢。",
     "context": null,
     "portrait": false,
@@ -66,8 +66,8 @@ export const PAGE_PRESENTATION: Record<string, PagePresentation> = {
   },
   "/about": {
     "lines": [
-      "STT Governance",
-      "高位階治理文明平台"
+      "STT Governance 不是一般顧問公司，",
+      "而是高位階治理文明平台。"
     ],
     "type": 2,
     "image": "/visual-bank/stt/user-approved-six/about-stt.png",
@@ -96,7 +96,7 @@ export const PAGE_PRESENTATION: Record<string, PagePresentation> = {
       "先建立共同的判讀架構。"
     ],
     "type": 2,
-    "image": "/visual-approved/secondary-05.png",
+    "image": null,
     "originalTitle": "當單一專業工具不足以處理整體治理問題，需要的是一個更上位的判讀架構。",
     "context": "當單一專業工具不足以處理整體治理問題，需要的是一個更上位的判讀架構。",
     "portrait": false,
@@ -108,7 +108,7 @@ export const PAGE_PRESENTATION: Record<string, PagePresentation> = {
       "先把正在發生的事情說清楚。"
     ],
     "type": 1,
-    "image": "/visual-bank/stt/cooperation-hero-20260917.png",
+    "image": null,
     "originalTitle": "先把正在發生的事情說清楚。",
     "context": null,
     "portrait": false,
