@@ -17,22 +17,23 @@
   "schemaVersion": "2.0",
   "syncedAt": "2026-10-03T03:35:00+00:00",
   "sync": {
-    "method": "main-complete-snapshot-plus-owner-uploaded-author-page",
+    "method": "owner-uploaded-author-page-reconciliation",
     "complete": false,
     "pagesFetched": 1,
-    "observed": 240,
-    "retainedNotSeen": 210,
+    "observed": 30,
+    "retainedNotSeen": 209,
     "changes": {
-      "added": 6,
+      "added": 25,
       "updated": 0,
-      "reclassified": 0
+      "reclassified": 0,
+      "duplicatesRemoved": 1
     },
-    "note": "Build-lock correction used the current main 234-record catalog as baseline and appended six newer records visible in the owner-uploaded M Media author page. Full remote pagination was not re-run in this correction."
+    "note": "Relative to the 214-record convergence baseline, the owner-uploaded author page contributes 24 new legal-column articles plus one Humanistic Landscape interview. A stale duplicate record (cee607) matching the current 9aa6b5 article was removed. Full remote pagination was not re-run in this correction."
   },
   "stats": {
-    "total": 240,
-    "uniqueUrls": 240,
-    "legal": 224,
+    "total": 239,
+    "uniqueUrls": 239,
+    "legal": 223,
     "humanistic": 5,
     "news": 11,
     "pending": 0
@@ -160,20 +161,6 @@
       "excerpt": "IT 與 OT 的邊界，是法律治理與資安治理真正交會的地方，中華企業策略永續發展學會 創會理事長 莊鈞翔 博士指出，企業資訊系統與工廠操作系統長期具有不同風險；辦公室 IT 系統的重點在資料與帳號；OT 則直接涉及設備、產線與安全；AI 導入後，兩者開始大量連接，這也是風險增加的原因；如果所有感測資料、機台控制、維修紀錄都直接連到外部雲端，任何帳號失守或供應鏈漏洞都可能造成更大影響。\r\n反過來，完全斷網又可能失去遠端分析與更新的效率；企業需要的是分層，而不是極端。",
       "id": "mmedia-9aa6b5",
       "sourceArticleId": "9aa6b5",
-      "series": "legal",
-      "seriesTitle": "莊博士法律新聞專欄",
-      "source": "M傳媒"
-    },
-    {
-      "url": "https://94m.com.tw/articles/cee607",
-      "title": "【 高階硬體製造的智慧財產防護 】從 IT／OT 邊界到跨國合作契約，台灣製造業如何在開放合作中保住真正的 know-how",
-      "date": "2026/09/29 12:19",
-      "category": "法律",
-      "author": "莊鈞翔博士",
-      "authorUrl": "https://94m.com.tw/editors/ed55fc",
-      "excerpt": "IT 與 OT 的邊界，是法律治理與資安治理真正交會的地方，中華企業策略永續發展學會 創會理事長 莊鈞翔 博士指出，企業資訊系統與工廠操作系統長期具有不同風險；辦公室 IT 系統的重點在資料與帳號；OT 則直接涉及設備、產線與安全；AI 導入後，兩者開始大量連接，這也是風險增加的原因；如果所有感測資料、機台控制、維修紀錄都直接連到外部雲端，任何帳號失守或供應鏈漏洞都可能造成更大影響。\r\n反過來，完全斷網又可能失去遠端分析與更新的效率；企業需要的是分層，而不是極端。",
-      "id": "mmedia-cee607",
-      "sourceArticleId": "cee607",
       "series": "legal",
       "seriesTitle": "莊博士法律新聞專欄",
       "source": "M傳媒"

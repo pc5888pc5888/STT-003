@@ -19,7 +19,7 @@ Status: ACTIVE BUILD — correction applied to `stt-convergence-20260923`; produ
    - /legal/* → approved utility routes
    Legacy governance URLs remain redirects into approved /problems, /insights, or /professional-boundary routes.
 6. sitemap.xml now includes the approved /privacy route.
-7. M Media external-publication catalog synchronized from the current main baseline plus six newer articles dated 2026-10-01 through 2026-10-02.
+7. M Media external-publication catalog reconciled to the owner-uploaded author page: 24 new legal-column articles relative to the 214-record convergence baseline, plus one Humanistic Landscape interview already present in the newer main snapshot. One stale duplicate article ID was removed; final catalog contains 239 unique article URLs.
 
 ## Deliberately unresolved
 - STT Press formal destination: existing specification and later correction record conflict. No temporary /books destination is presented as STT Press.
