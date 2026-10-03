@@ -20,7 +20,7 @@ export const PAGE_PRESENTATION: Record<string, PagePresentation> = {
       "在治理議題上持續對話。"
     ],
     "type": 2,
-    "image": "/visual-bank/gcsda/about.webp",
+    "image": "/visual-bank/gcsda/about.png",
     "originalTitle": "讓企業、專業與學術在治理議題上，形成可以持續對話的正式共同體。",
     "context": "讓企業、專業與學術在治理議題上，形成可以持續對話的正式共同體。",
     "portrait": false,
@@ -34,7 +34,7 @@ export const PAGE_PRESENTATION: Record<string, PagePresentation> = {
       "都應可被理解。"
     ],
     "type": 3,
-    "image": "/visual-bank/gcsda/governance.webp",
+    "image": "/visual-bank/gcsda/governance.png",
     "originalTitle": "學會本身先接受治理：權力來源、任期、職權與責任都應可被理解。",
     "context": null,
     "portrait": false,
@@ -47,7 +47,7 @@ export const PAGE_PRESENTATION: Record<string, PagePresentation> = {
       "不等於權責混同。"
     ],
     "type": 2,
-    "image": "/visual-bank/gcsda/council.webp",
+    "image": "/visual-bank/gcsda/council.png",
     "originalTitle": "跨域專業，不等於權責混同。",
     "context": null,
     "portrait": false,
@@ -60,7 +60,7 @@ export const PAGE_PRESENTATION: Record<string, PagePresentation> = {
       "形成專業共同體。"
     ],
     "type": 2,
-    "image": "/visual-bank/gcsda/membership.webp",
+    "image": "/visual-bank/gcsda/membership.png",
     "originalTitle": "加入學會，是進入一個以策略、治理、法遵與永續為共同語言的專業共同體。",
     "context": "加入學會，是進入一個以策略、治理、法遵與永續為共同語言的專業共同體。",
     "portrait": false,
@@ -73,7 +73,7 @@ export const PAGE_PRESENTATION: Record<string, PagePresentation> = {
       "知識累積的正式紀錄。"
     ],
     "type": 2,
-    "image": "/visual-bank/gcsda/events.webp",
+    "image": "/visual-bank/gcsda/events.png",
     "originalTitle": "活動不是一次性聚會，而是學會制度運作與知識累積的正式紀錄。",
     "context": "活動不是一次性聚會，而是學會制度運作與知識累積的正式紀錄。",
     "portrait": false,
@@ -86,7 +86,7 @@ export const PAGE_PRESENTATION: Record<string, PagePresentation> = {
       "沉澱為可傳承的治理知識。"
     ],
     "type": 2,
-    "image": "/visual-bank/gcsda/knowledge.webp",
+    "image": "/visual-bank/gcsda/knowledge.png",
     "originalTitle": "讓活動與交流沉澱為可以再次學習、引用與傳承的治理知識。",
     "context": "讓活動與交流沉澱為可以再次學習、引用與傳承的治理知識。",
     "portrait": false,
@@ -98,7 +98,7 @@ export const PAGE_PRESENTATION: Record<string, PagePresentation> = {
       "章程與公告"
     ],
     "type": 1,
-    "image": "/visual-bank/gcsda/charter.webp",
+    "image": "/visual-bank/gcsda/charter.png",
     "originalTitle": "章程不是網站附件，而是學會權力來源、會員權利義務與制度運作的正式依據。",
     "context": "章程不是網站附件，而是學會權力來源、會員權利義務與制度運作的正式依據。",
     "portrait": false,

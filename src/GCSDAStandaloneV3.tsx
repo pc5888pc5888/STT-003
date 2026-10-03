@@ -41,13 +41,13 @@ function splitBalancedTitle(title:string){
 
 const pageVisuals:Record<string,string|undefined>={
   "/":"/visual-bank/gcsda/home-approved.webp",
-  "/about":"/visual-bank/gcsda/about.webp",
-  "/governance":"/visual-bank/gcsda/governance.webp",
-  "/council":"/visual-bank/gcsda/council.webp",
-  "/membership":"/visual-bank/gcsda/membership.webp",
-  "/events":"/visual-bank/gcsda/events.webp",
-  "/knowledge":"/visual-bank/gcsda/knowledge.webp",
-  "/charter":"/visual-bank/gcsda/charter.webp",
+  "/about":"/visual-bank/gcsda/about.png",
+  "/governance":"/visual-bank/gcsda/governance.png",
+  "/council":"/visual-bank/gcsda/council.png",
+  "/membership":"/visual-bank/gcsda/membership.png",
+  "/events":"/visual-bank/gcsda/events.png",
+  "/knowledge":"/visual-bank/gcsda/knowledge.png",
+  "/charter":"/visual-bank/gcsda/charter.png",
   "/privacy":undefined,
 };
 
