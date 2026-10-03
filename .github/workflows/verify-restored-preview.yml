@@ -1,0 +1,59 @@
+name: Verify restored online presentation
+on:
+  push:
+    branches: [stt-convergence-20260923]
+    paths: [.github/workflows/verify-restored-preview.yml]
+permissions:
+  contents: read
+jobs:
+  online:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check actual preview without submitting forms
+        env:
+          PREVIEW: 'https://stt-003-jmmawfmlb-pc5888pc5888s-projects.vercel.app/eric-chuang?_vercel_share=0QzWwFFp9a0vyajp0NIcGyYOi0eR1UzA'
+        run: |
+          mkdir -p /tmp/verified-online
+          cd /tmp/verified-online
+          npm install --no-save playwright > setup.log 2>&1
+          npx playwright install --with-deps chromium >> setup.log 2>&1
+          cat > check.mjs <<'JS'
+          import fs from 'node:fs';
+          import { createHash } from 'node:crypto';
+          import {chromium} from 'playwright';
+          const browser=await chromium.launch({headless:true});
+          const context=await browser.newContext({viewport:{width:1440,height:1000},reducedMotion:'reduce'});
+          const page=await context.newPage();const result=[];
+          try{
+            await page.goto(process.env.PREVIEW,{waitUntil:'networkidle',timeout:40000});
+            await page.waitForSelector('.cis-hero',{timeout:12000});
+            for(const route of ['/eric-chuang','/','/engagement','/institutions']){
+              await page.goto(new URL(route,process.env.PREVIEW).href,{waitUntil:'networkidle',timeout:30000});
+              await page.evaluate(()=>document.fonts.ready);
+              const state=await page.evaluate(()=>{const i=document.querySelector('.cis-hero-art img'),r=i?.getBoundingClientRect();return {title:document.querySelector('h1')?.textContent,src:i?.getAttribute('src'),width:r?.width,left:r?.left,ratio:r?r.width/r.height:0,naturalRatio:i?i.naturalWidth/i.naturalHeight:0,loaded:!!i?.naturalWidth,overflow:document.documentElement.scrollWidth>innerWidth+1};});
+              const passed=state.loaded&&!state.overflow&&Math.abs(state.width-1440)<2&&Math.abs(state.left)<2&&Math.abs(state.ratio-state.naturalRatio)<.005;
+              result.push({route,...state,passed});
+              if(route==='/eric-chuang'){
+                const raw=await context.request.get(new URL(state.src,process.env.PREVIEW).href);const sha=createHash('sha256').update(await raw.body()).digest('hex');
+                result.push({check:'exact original portrait bytes',sha256:sha,passed:sha==='891c3d1b19ba4ac32792543928473f0938fae0bfe529d1ac46e3dabf34f780fe'});
+              }
+              await page.screenshot({path:(route.slice(1)||'home')+'.png',fullPage:true});
+            }
+          }catch(error){result.push({passed:false,error:String(error),title:await page.title()});}
+          await browser.close();
+          fs.writeFileSync('result.json',JSON.stringify({actualOnline:true,checks:result,formsSubmitted:false,productionChanged:false},null,2));
+          if(result.some(x=>!x.passed))process.exitCode=1;
+          JS
+          node check.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: restored-online-verification
+          path: |
+            /tmp/verified-online/result.json
+            /tmp/verified-online/*.png
+          retention-days: 3

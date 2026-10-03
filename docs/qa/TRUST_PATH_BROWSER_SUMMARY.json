@@ -1,0 +1,357 @@
+{
+  "site": "stt",
+  "environment": "local production build; Vercel routing and real mail delivery not certified",
+  "routes": [
+    "/",
+    "/problems",
+    "/how-stt-works",
+    "/engagement",
+    "/insights",
+    "/about",
+    "/eric-chuang",
+    "/institutions",
+    "/start",
+    "/privacy",
+    "/professional-boundary",
+    "/research",
+    "/books",
+    "/books/internal-compliance",
+    "/problems/major-decision",
+    "/problems/owner-dependence",
+    "/problems/succession",
+    "/problems/family-ownership",
+    "/problems/strategic-legal",
+    "/problems/ai-governance",
+    "/problems/system-failure",
+    "/problems/founder-legacy"
+  ],
+  "renderCount": 66,
+  "viewportChecks": {
+    "desktop": [
+      1440,
+      1000
+    ],
+    "tablet": [
+      820,
+      1180
+    ],
+    "mobile": [
+      390,
+      844
+    ]
+  },
+  "overflow": [],
+  "invalidH1": [],
+  "brokenImages": [
+    [
+      "/",
+      "desktop",
+      [
+        "/images/eric-home-authority-20260921.jpg"
+      ]
+    ],
+    [
+      "/",
+      "tablet",
+      [
+        "/images/eric-home-authority-20260921.jpg"
+      ]
+    ],
+    [
+      "/",
+      "mobile",
+      [
+        "/images/eric-home-authority-20260921.jpg"
+      ]
+    ]
+  ],
+  "pageErrors": [],
+  "internalLabels": [],
+  "accessibility": [
+    {
+      "route": "/problems/major-decision",
+      "device": "desktop",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodeCount": 1
+        }
+      ]
+    },
+    {
+      "route": "/problems/owner-dependence",
+      "device": "desktop",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodeCount": 1
+        }
+      ]
+    },
+    {
+      "route": "/problems/succession",
+      "device": "desktop",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodeCount": 1
+        }
+      ]
+    },
+    {
+      "route": "/problems/family-ownership",
+      "device": "desktop",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodeCount": 1
+        }
+      ]
+    },
+    {
+      "route": "/problems/strategic-legal",
+      "device": "desktop",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodeCount": 1
+        }
+      ]
+    },
+    {
+      "route": "/problems/ai-governance",
+      "device": "desktop",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodeCount": 1
+        }
+      ]
+    },
+    {
+      "route": "/problems/system-failure",
+      "device": "desktop",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodeCount": 1
+        }
+      ]
+    },
+    {
+      "route": "/problems/founder-legacy",
+      "device": "desktop",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodeCount": 1
+        }
+      ]
+    },
+    {
+      "route": "/problems/major-decision",
+      "device": "tablet",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodeCount": 1
+        }
+      ]
+    },
+    {
+      "route": "/problems/owner-dependence",
+      "device": "tablet",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodeCount": 1
+        }
+      ]
+    },
+    {
+      "route": "/problems/succession",
+      "device": "tablet",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodeCount": 1
+        }
+      ]
+    },
+    {
+      "route": "/problems/family-ownership",
+      "device": "tablet",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodeCount": 1
+        }
+      ]
+    },
+    {
+      "route": "/problems/strategic-legal",
+      "device": "tablet",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodeCount": 1
+        }
+      ]
+    },
+    {
+      "route": "/problems/ai-governance",
+      "device": "tablet",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodeCount": 1
+        }
+      ]
+    },
+    {
+      "route": "/problems/system-failure",
+      "device": "tablet",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodeCount": 1
+        }
+      ]
+    },
+    {
+      "route": "/problems/founder-legacy",
+      "device": "tablet",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodeCount": 1
+        }
+      ]
+    },
+    {
+      "route": "/problems/major-decision",
+      "device": "mobile",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodeCount": 1
+        }
+      ]
+    },
+    {
+      "route": "/problems/owner-dependence",
+      "device": "mobile",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodeCount": 1
+        }
+      ]
+    },
+    {
+      "route": "/problems/succession",
+      "device": "mobile",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodeCount": 1
+        }
+      ]
+    },
+    {
+      "route": "/problems/family-ownership",
+      "device": "mobile",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodeCount": 1
+        }
+      ]
+    },
+    {
+      "route": "/problems/strategic-legal",
+      "device": "mobile",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodeCount": 1
+        }
+      ]
+    },
+    {
+      "route": "/problems/ai-governance",
+      "device": "mobile",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodeCount": 1
+        }
+      ]
+    },
+    {
+      "route": "/problems/system-failure",
+      "device": "mobile",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodeCount": 1
+        }
+      ]
+    },
+    {
+      "route": "/problems/founder-legacy",
+      "device": "mobile",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodeCount": 1
+        }
+      ]
+    }
+  ],
+  "interactions": [
+    {
+      "name": "mobile menu Escape closes and restores trigger focus",
+      "passed": true
+    },
+    {
+      "name": "skip link reaches the main landmark",
+      "passed": true
+    },
+    {
+      "name": "institution route prefills only event category",
+      "passed": true
+    },
+    {
+      "name": "failure and false success preserve values; retry uses same key; valid acknowledgement changes state (MOCK ONLY)",
+      "passed": true
+    }
+  ],
+  "productionModified": false,
+  "realInboxDeliveryVerified": false,
+  "wholeSiteAccepted": false
+}

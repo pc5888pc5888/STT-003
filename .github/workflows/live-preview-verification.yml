@@ -1,0 +1,184 @@
+name: Verify actual online previews
+on:
+  push:
+    branches: [stt-convergence-20260923]
+    paths: [.github/workflows/live-preview-verification.yml]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  live-browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: stt-convergence-20260923
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Chromium
+        run: |
+          npm install --no-save --package-lock=false playwright >/tmp/playwright-install.log 2>&1
+          npx playwright install --with-deps chromium >/tmp/browser-install.log 2>&1
+      - name: Render actual branch aliases and repository image candidates
+        env:
+          STT_URL: https://stt-003-git-stt-convergence-20260923-pc5888pc5888s-projects.vercel.app
+          GCSDA_URL: https://stt-003-git-gcsda-convergence-20260923-pc5888pc5888s-projects.vercel.app
+        run: |
+          mkdir -p /tmp/live-preview
+          cat > live-check.mjs <<'JS'
+          import fs from 'node:fs';
+          import path from 'node:path';
+          import { pathToFileURL } from 'node:url';
+          import { chromium } from 'playwright';
+
+          const browser=await chromium.launch({headless:true});
+          const report={generatedAt:new Date().toISOString(),sites:[],books:null,headers:[],candidateFiles:[]};
+          const sites=[
+            {
+              name:'stt',base:process.env.STT_URL,
+              routes:['/','/problems','/how-stt-works','/engagement','/insights','/about','/books'],
+              expected:{
+                '/':'/visual-bank/stt/user-approved-six/home.png',
+                '/problems':'/visual-bank/stt/user-approved-six/problems.png',
+                '/how-stt-works':'/visual-bank/stt/user-approved-six/method.png',
+                '/insights':'/visual-bank/stt/user-approved-six/columns.png',
+                '/about':'/visual-bank/stt/user-approved-six/about-stt.png',
+                '/books':'/visual-bank/stt/user-approved-six/publications.png'
+              }
+            },
+            {
+              name:'gcsda',base:process.env.GCSDA_URL,
+              routes:['/','/about','/governance','/council','/membership','/events','/knowledge','/charter'],
+              expected:{
+                '/':'/visual-bank/gcsda/home-approved.webp',
+                '/about':'/visual-bank/gcsda/about.webp',
+                '/governance':'/visual-bank/gcsda/governance.webp',
+                '/council':'/visual-bank/gcsda/council.webp',
+                '/membership':'/visual-bank/gcsda/membership.webp',
+                '/events':'/visual-bank/gcsda/events.webp',
+                '/knowledge':'/visual-bank/gcsda/knowledge.webp',
+                '/charter':'/visual-bank/gcsda/charter.webp'
+              }
+            }
+          ];
+          const devices=[['desktop',1440,1000],['tablet',820,1100],['mobile',390,844]];
+          const safe=r=>r==='/'?'home':r.slice(1).replaceAll('/','-');
+          for(const site of sites){
+            for(const [label,width,height] of devices){
+              const ctx=await browser.newContext({viewport:{width,height},reducedMotion:'reduce'});
+              const page=await ctx.newPage();
+              for(const route of site.routes){
+                const errors=[];
+                const onErr=e=>errors.push(e.message);
+                page.on('pageerror',onErr);
+                try{
+                  const response=await page.goto(site.base+route,{waitUntil:'networkidle',timeout:45000});
+                  await page.evaluate(()=>document.fonts.ready);
+                  await page.waitForTimeout(250);
+                  const state=await page.evaluate(()=>{
+                    const hero=document.querySelector('.cis-hero');
+                    const img=hero?.querySelector('.cis-hero-art img');
+                    const copy=hero?.querySelector('.cis-hero-copy');
+                    const brand=document.querySelector('header a img');
+                    const rect=e=>{const r=e?.getBoundingClientRect();return r?{left:r.left,top:r.top,right:r.right,bottom:r.bottom,width:r.width,height:r.height}:null};
+                    return {
+                      url:location.href,
+                      h1:document.querySelector('h1')?.textContent?.trim()||null,
+                      h1Count:document.querySelectorAll('h1').length,
+                      heroImage:img?.getAttribute('src')||null,
+                      heroImageLoaded:img?img.complete&&img.naturalWidth>0:null,
+                      heroNatural:img?[img.naturalWidth,img.naturalHeight]:null,
+                      imageRect:rect(img),
+                      copyRect:rect(copy),
+                      gradient:hero?getComputedStyle(hero,'::before').backgroundImage:null,
+                      brandRect:rect(brand),
+                      brandNatural:brand?[brand.naturalWidth,brand.naturalHeight]:null,
+                      overflow:document.documentElement.scrollWidth>innerWidth+1,
+                      broken:[...document.images].filter(i=>!i.complete||i.naturalWidth===0).map(i=>i.getAttribute('src'))
+                    };
+                  });
+                  report.sites.push({site:site.name,route,label,http:response?.status(),expected:site.expected[route]||null,...state,errors});
+                  if(label==='desktop' || (label==='tablet'&&['/problems','/about','/books','/membership'].includes(route)) || (label==='mobile'&&['/problems','/about','/books','/membership','/'].includes(route))){
+                    await page.screenshot({path:`/tmp/live-preview/${site.name}-${safe(route)}-${label}.png`,fullPage:false});
+                  }
+                  if(route==='/'&&label==='desktop'){
+                    await page.locator('header').first().screenshot({path:`/tmp/live-preview/${site.name}-header-desktop.png`});
+                    report.headers.push({site:site.name,brandRect:state.brandRect,brandNatural:state.brandNatural});
+                  }
+                }catch(error){
+                  report.sites.push({site:site.name,route,label,error:String(error),errors});
+                }finally{
+                  page.off('pageerror',onErr);
+                }
+              }
+              await ctx.close();
+            }
+          }
+
+          {
+            const ctx=await browser.newContext({viewport:{width:1440,height:1100},reducedMotion:'reduce'});
+            const page=await ctx.newPage();
+            try{
+              const response=await page.goto(process.env.STT_URL+'/books',{waitUntil:'networkidle',timeout:45000});
+              await page.evaluate(()=>document.fonts.ready);
+              const covers=await page.evaluate(()=>[...document.querySelectorAll('[data-publication-cover]')].map(img=>({
+                title:img.getAttribute('data-publication-cover'),
+                src:img.getAttribute('src'),
+                complete:img.complete,
+                naturalWidth:img.naturalWidth,
+                naturalHeight:img.naturalHeight,
+                renderedWidth:Math.round(img.getBoundingClientRect().width),
+                renderedHeight:Math.round(img.getBoundingClientRect().height),
+                objectFit:getComputedStyle(img).objectFit,
+                aspectRatio:getComputedStyle(img).aspectRatio
+              })));
+              report.books={http:response?.status(),covers};
+              await page.screenshot({path:'/tmp/live-preview/stt-books-live-full.png',fullPage:true});
+            }catch(error){report.books={error:String(error)}}
+            await ctx.close();
+          }
+
+          const candidatePaths=[
+            '920243ba-0712-43d5-9ce2-5a27ccfec24e.png',
+            'c71e80bc-8547-400a-93b5-7a60a089e647.png',
+            '9f821aea-54c5-4e3f-b59e-ddec5fce22d2.png',
+            'aa98d786-033c-4821-81e8-2a97581f5da2.png',
+            'f34f14b9-69fd-4301-a04b-aea017577015.png',
+            '77b0731c-582d-475b-b5cf-846085368fb7.png',
+            'ChatGPT Image 2026年9月3日 上午02_00_05 (2).png',
+            'ChatGPT Image 2026年9月3日 上午02_00_05 (1).png',
+            'ChatGPT Image 2026年9月3日 上午02_00_09 (4).png',
+            'ChatGPT Image 2026年9月3日 上午02_00_07 (3).png'
+          ].filter(p=>fs.existsSync(p));
+          const cells=candidatePaths.map((p,i)=>`<figure><img src="${encodeURI(p)}"><figcaption>${i+1}. ${p}</figcaption></figure>`).join('');
+          fs.writeFileSync('candidate.html',`<!doctype html><meta charset="utf-8"><style>body{font-family:Arial;margin:24px;background:#eee}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}figure{margin:0;background:white;padding:12px}img{display:block;width:100%;height:500px;object-fit:contain;background:#fafafa}figcaption{font-size:13px;overflow-wrap:anywhere;margin-top:8px}</style><div class="grid">${cells}</div>`);
+          {
+            const ctx=await browser.newContext({viewport:{width:1500,height:2200}});
+            const page=await ctx.newPage();
+            await page.goto(pathToFileURL('candidate.html').href,{waitUntil:'load'});
+            const dims=await page.evaluate(()=>[...document.images].map(i=>({src:decodeURI(i.getAttribute('src')),naturalWidth:i.naturalWidth,naturalHeight:i.naturalHeight,complete:i.complete})));
+            report.candidateFiles=dims;
+            await page.screenshot({path:'/tmp/live-preview/repository-book-candidates.png',fullPage:true});
+            await ctx.close();
+          }
+
+          await browser.close();
+          fs.writeFileSync('/tmp/live-preview/report.json',JSON.stringify(report,null,2));
+          const hardFailures=report.sites.filter(x=>x.error||x.http!==200||x.h1Count!==1||x.overflow||x.broken?.length||x.errors?.length||(x.expected&&x.heroImage!==x.expected)||(x.expected&&x.heroImageLoaded!==true));
+          fs.writeFileSync('/tmp/live-preview/summary.json',JSON.stringify({
+            hardFailures,
+            headers:report.headers,
+            books:report.books,
+            note:'Human screenshot review remains mandatory. A 200 response, CSS gradient, or naturalWidth is not visual acceptance.'
+          },null,2));
+          if(hardFailures.length) process.exitCode=1;
+          JS
+          node live-check.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: actual-live-browser-evidence
+          path: /tmp/live-preview/
+          retention-days: 3

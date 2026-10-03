@@ -1,0 +1,293 @@
+name: Final dual-site browser audit
+on:
+  push:
+    branches: [stt-convergence-20260923]
+    paths:
+      - .github/workflows/final-dual-site-audit.yml
+      - src/**
+      - public/**
+      - package.json
+      - package-lock.json
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout STT branch
+        uses: actions/checkout@v4
+        with:
+          ref: stt-convergence-20260923
+          path: stt-src
+      - name: Checkout GCSDA branch
+        uses: actions/checkout@v4
+        with:
+          ref: gcsda-convergence-20260923
+          path: gcsda-src
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Build both exact branch sources
+        run: |
+          set -e
+          for d in stt-src gcsda-src; do
+            cd "$GITHUB_WORKSPACE/$d"
+            if [ -f package-lock.json ]; then npm ci; else npm install; fi
+            npm run build
+          done
+      - name: Install Chromium audit runtime
+        run: |
+          mkdir -p "$GITHUB_WORKSPACE/audit-run"
+          cd "$GITHUB_WORKSPACE/audit-run"
+          npm init -y >/dev/null 2>&1
+          npm install --no-save playwright >/tmp/playwright-install.log 2>&1
+          npx playwright install --with-deps chromium >/tmp/browser-setup.log 2>&1
+      - name: Start production previews
+        run: |
+          (cd "$GITHUB_WORKSPACE/stt-src" && npx vite preview --host 127.0.0.1 --port 4173 > /tmp/stt-preview.log 2>&1 & echo $! > /tmp/stt-preview.pid)
+          (cd "$GITHUB_WORKSPACE/gcsda-src" && npx vite preview --host 127.0.0.1 --port 4174 > /tmp/gcsda-preview.log 2>&1 & echo $! > /tmp/gcsda-preview.pid)
+          for port in 4173 4174; do
+            for i in $(seq 1 60); do
+              if curl -fsS "http://127.0.0.1:$port/" >/dev/null; then break; fi
+              sleep 1
+            done
+            curl -fsS "http://127.0.0.1:$port/" >/dev/null
+          done
+      - name: Render and inspect exact production bundles
+        run: |
+          mkdir -p /tmp/audit
+          printf 'STT_HEAD=%s\nGCSDA_HEAD=%s\n' "$(git -C "$GITHUB_WORKSPACE/stt-src" rev-parse HEAD)" "$(git -C "$GITHUB_WORKSPACE/gcsda-src" rev-parse HEAD)" > /tmp/audit/source-heads.txt
+          cat > "$GITHUB_WORKSPACE/audit-run/check.mjs" <<'JS'
+          import fs from 'node:fs';
+          import { chromium } from 'playwright';
+
+          const browser=await chromium.launch({headless:true});
+          const report={generatedAt:new Date().toISOString(),sites:[],books:null,headers:[]};
+          const configs=[
+            {
+              site:'stt',origin:'http://127.0.0.1:4173',
+              routes:['/','/problems','/how-stt-works','/engagement','/insights','/about','/eric-chuang','/institutions','/start','/privacy','/professional-boundary'],
+              expectedImages:{
+                '/':'/visual-bank/stt/user-approved-six/home.png',
+                '/problems':'/visual-bank/stt/user-approved-six/problems.png',
+                '/how-stt-works':'/visual-bank/stt/user-approved-six/method.png',
+                '/insights':'/visual-bank/stt/user-approved-six/columns.png',
+                '/about':'/visual-bank/stt/user-approved-six/about-stt.png'
+              }
+            },
+            {
+              site:'gcsda',origin:'http://127.0.0.1:4174',
+              routes:['/','/about','/governance','/council','/membership','/events','/knowledge','/charter'],
+              expectedImages:{
+                '/':'/visual-bank/gcsda/home-approved.webp',
+                '/about':'/visual-bank/gcsda/about.webp',
+                '/governance':'/visual-bank/gcsda/governance.webp',
+                '/council':'/visual-bank/gcsda/council.webp',
+                '/membership':'/visual-bank/gcsda/membership.webp',
+                '/events':'/visual-bank/gcsda/events.webp',
+                '/knowledge':'/visual-bank/gcsda/knowledge.webp',
+                '/charter':'/visual-bank/gcsda/charter.webp'
+              }
+            }
+          ];
+          const safe=(route)=>route==='/'?'home':route.slice(1).replaceAll('/','-');
+          const rect=e=>{const r=e?.getBoundingClientRect();return r?{left:r.left,top:r.top,right:r.right,bottom:r.bottom,width:r.width,height:r.height}:null};
+
+          for(const cfg of configs){
+            for(const [label,w,h] of [['desktop',1440,1000],['tablet',820,1100],['mobile',390,844]]){
+              const ctx=await browser.newContext({viewport:{width:w,height:h},reducedMotion:'reduce'});
+              const page=await ctx.newPage();
+              for(const route of cfg.routes){
+                const errors=[];
+                const onError=e=>errors.push(e.message);
+                page.on('pageerror',onError);
+                try{
+                  const res=await page.goto(cfg.origin+route,{waitUntil:'networkidle',timeout:30000});
+                  await page.evaluate(()=>document.fonts.ready);
+                  const state=await page.evaluate(()=>{
+                    const hero=document.querySelector('.cis-hero');
+                    const img=hero?.querySelector('.cis-hero-art img');
+                    const copy=hero?.querySelector('.cis-hero-copy');
+                    const brand=document.querySelector('header a img');
+                    const rr=e=>{const r=e?.getBoundingClientRect();return r?{left:r.left,top:r.top,right:r.right,bottom:r.bottom,width:r.width,height:r.height}:null};
+                    const optical=img=>{
+                      if(!img||!img.complete||!img.naturalWidth||!img.naturalHeight) return null;
+                      const canvas=document.createElement('canvas');
+                      canvas.width=img.naturalWidth; canvas.height=img.naturalHeight;
+                      const ctx=canvas.getContext('2d',{willReadFrequently:true});
+                      if(!ctx) return null;
+                      ctx.drawImage(img,0,0);
+                      const data=ctx.getImageData(0,0,canvas.width,canvas.height).data;
+                      const maxX=Math.max(1,Math.floor(canvas.width*.36));
+                      let minX=maxX,minY=canvas.height,maxInkX=-1,maxY=-1;
+                      for(let y=0;y<canvas.height;y++){
+                        for(let x=0;x<maxX;x++){
+                          const i=(y*canvas.width+x)*4;
+                          const a=data[i+3],r=data[i],g=data[i+1],b=data[i+2];
+                          const ink=a>18 && (255-r>12 || 255-g>12 || 255-b>12);
+                          if(!ink) continue;
+                          if(x<minX)minX=x;if(x>maxInkX)maxInkX=x;if(y<minY)minY=y;if(y>maxY)maxY=y;
+                        }
+                      }
+                      if(maxInkX<0||maxY<0) return null;
+                      const sourceHeight=maxY-minY+1;
+                      const rendered=img.getBoundingClientRect();
+                      return {
+                        sourceBox:{left:minX,top:minY,width:maxInkX-minX+1,height:sourceHeight},
+                        visibleLeftMarkHeight:sourceHeight/img.naturalHeight*rendered.height,
+                        visibleLeftMarkTop:minY/img.naturalHeight*rendered.height
+                      };
+                    };
+                    return {
+                      title:document.title,
+                      h1:document.querySelector('h1')?.textContent?.trim()||null,
+                      h1Count:document.querySelectorAll('h1').length,
+                      heroClass:hero?.className||null,
+                      heroImage:img?.getAttribute('src')||null,
+                      heroImageLoaded:img?img.complete&&img.naturalWidth>0:null,
+                      heroImageNatural:img?[img.naturalWidth,img.naturalHeight]:null,
+                      heroImageRect:rr(img),
+                      heroImageFit:img?getComputedStyle(img).objectFit:null,
+                      copyRect:rr(copy),
+                      copyBg:copy?getComputedStyle(copy).backgroundColor:null,
+                      heroGradient:hero?getComputedStyle(hero,'::before').backgroundImage:null,
+                      brandRect:rr(brand),
+                      brandNatural:brand?[brand.naturalWidth,brand.naturalHeight]:null,
+                      brandOptical:optical(brand),
+                      overflow:document.documentElement.scrollWidth>innerWidth+1,
+                      broken:[...document.images].filter(i=>!i.complete||i.naturalWidth===0).map(i=>i.getAttribute('src'))
+                    };
+                  });
+
+                  const expected=cfg.expectedImages[route]||null;
+                  const hasExpected=!expected||state.heroImage===expected;
+                  const imageLoaded=!expected||Boolean(state.heroImageLoaded&&state.heroImageNatural?.[0]>0&&state.heroImageNatural?.[1]>0);
+                  const desktopCopyInReadingZone=label==='mobile'||!state.heroImageRect||!state.copyRect||state.copyRect.right<=w*.50+2;
+                  const mobileSeparated=label!=='mobile'||!state.heroImageRect||!state.copyRect||state.copyRect.top>=state.heroImageRect.bottom-2;
+                  const gradientGeometry=label==='mobile'||!expected||(
+                    typeof state.heroGradient==='string' &&
+                    state.heroGradient.includes('30%') &&
+                    state.heroGradient.includes('50%') &&
+                    state.heroGradient.includes('70%') &&
+                    state.heroGradient.includes('82%')
+                  );
+
+                  report.sites.push({
+                    site:cfg.site,route,label,http:res?.status(),...state,
+                    expectedImage:expected,hasExpected,imageLoaded,
+                    desktopCopyInReadingZone,mobileSeparated,gradientGeometry,errors
+                  });
+
+                  if(label==='desktop'&&expected){
+                    await page.screenshot({path:`/tmp/audit/${cfg.site}-${safe(route)}-desktop.png`,fullPage:false});
+                  }
+                  if(expected && (cfg.site==='gcsda'||['/','/problems','/insights'].includes(route)) && label!=='desktop'){
+                    await page.screenshot({path:`/tmp/audit/${cfg.site}-${safe(route)}-${label}.png`,fullPage:false});
+                  }
+                  if(label==='desktop'&&route==='/'){
+                    const header=page.locator('header').first();
+                    await header.screenshot({path:`/tmp/audit/${cfg.site}-header-desktop.png`});
+                    report.headers.push({site:cfg.site,brandRect:state.brandRect,brandNatural:state.brandNatural,brandOptical:state.brandOptical});
+                  }
+                }catch(e){
+                  report.sites.push({site:cfg.site,route,label,error:String(e),errors});
+                }finally{
+                  page.off('pageerror',onError);
+                }
+              }
+              await ctx.close();
+            }
+          }
+
+          {
+            const ctx=await browser.newContext({viewport:{width:1440,height:1100},reducedMotion:'reduce'});
+            const page=await ctx.newPage();
+            const res=await page.goto('http://127.0.0.1:4173/insights#publications',{waitUntil:'networkidle',timeout:30000});
+            await page.evaluate(()=>document.fonts.ready);
+            const covers=await page.evaluate(()=>[...document.querySelectorAll('[data-publication-cover]')].map(img=>({
+              title:img.getAttribute('data-publication-cover'),
+              src:img.getAttribute('src'),
+              complete:img.complete,
+              naturalWidth:img.naturalWidth,
+              naturalHeight:img.naturalHeight,
+              renderedWidth:Math.round(img.getBoundingClientRect().width),
+              renderedHeight:Math.round(img.getBoundingClientRect().height),
+              objectFit:getComputedStyle(img).objectFit,
+              aspectRatio:getComputedStyle(img).aspectRatio
+            })));
+            report.books={http:res?.status(),route:'/insights#publications',covers};
+            await page.screenshot({path:'/tmp/audit/stt-insights-publications-full.png',fullPage:true});
+            await ctx.close();
+          }
+
+          await browser.close();
+
+          const requiredBookTitles=[
+            '2026 永續家族治理實務實錄',
+            '內在法遵 Internal Compliance',
+            '內在法遵 AI Governance',
+            '內在法遵 Family Governance'
+          ];
+          const failures=report.sites.filter(x=>
+            x.error||x.http!==200||x.h1Count!==1||x.overflow||x.broken?.length||
+            x.hasExpected===false||x.imageLoaded===false||
+            x.desktopCopyInReadingZone===false||x.mobileSeparated===false||x.gradientGeometry===false||
+            x.errors?.length
+          );
+          const bookFailures=(report.books?.covers||[]).filter(x=>!x.complete||x.naturalWidth<=0||x.naturalHeight<=0||x.objectFit!=='contain');
+          const missingBooks=requiredBookTitles.filter(t=>!(report.books?.covers||[]).some(x=>x.title===t));
+          const lowResolutionBooks=(report.books?.covers||[]).filter(x=>x.naturalWidth<800||x.naturalHeight<1000);
+          const sttHeader=report.headers.find(x=>x.site==='stt');
+          const gcsdaHeader=report.headers.find(x=>x.site==='gcsda');
+          const sttSeal=sttHeader?.brandOptical?.visibleLeftMarkHeight??null;
+          const gcsdaSeal=gcsdaHeader?.brandOptical?.visibleLeftMarkHeight??null;
+          const logoOpticalDifference=(sttSeal!=null&&gcsdaSeal!=null)?Math.abs(sttSeal-gcsdaSeal):null;
+          const logoOpticalFailure=logoOpticalDifference==null||logoOpticalDifference>2;
+
+          fs.writeFileSync('/tmp/audit/report.json',JSON.stringify(report,null,2));
+          fs.writeFileSync('/tmp/audit/summary.json',JSON.stringify({
+            browserRenderedRoutes:report.sites.length,
+            automatedFailures:failures,
+            bookFailures,
+            missingBooks,
+            lowResolutionBooks,
+            headers:report.headers,
+            logoOptical:{sttSeal,gcsdaSeal,difference:logoOpticalDifference,passed:!logoOpticalFailure},
+            note:'Screenshots are mandatory review evidence. CSS presence, successful builds, and naturalWidth alone are never visual PASS.'
+          },null,2));
+
+          if(failures.length||bookFailures.length||missingBooks.length||lowResolutionBooks.length||logoOpticalFailure){
+            console.error(JSON.stringify({failures,bookFailures,missingBooks,lowResolutionBooks,logoOptical:{sttSeal,gcsdaSeal,difference:logoOpticalDifference,passed:!logoOpticalFailure}},null,2));
+            process.exitCode=1;
+          }
+          JS
+          cd "$GITHUB_WORKSPACE/audit-run"
+          node check.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: final-dual-site-browser-audit
+          path: /tmp/audit/
+          retention-days: 3
+      - name: Publish browser evidence to STT branch
+        if: always()
+        run: |
+          set -e
+          cd "$GITHUB_WORKSPACE/stt-src"
+          rm -rf docs/qa/live-browser-audit
+          mkdir -p docs/qa/live-browser-audit
+          cp -a /tmp/audit/. docs/qa/live-browser-audit/
+          git config user.name "stt-governance-audit"
+          git config user.email "actions@users.noreply.github.com"
+          git add docs/qa/live-browser-audit
+          if ! git diff --cached --quiet; then
+            git commit -m "qa: publish live dual-site browser evidence"
+            git push origin HEAD:stt-convergence-20260923
+          fi
+      - name: Stop previews
+        if: always()
+        run: |
+          [ -f /tmp/stt-preview.pid ] && kill "$(cat /tmp/stt-preview.pid)" || true
+          [ -f /tmp/gcsda-preview.pid ] && kill "$(cat /tmp/gcsda-preview.pid)" || true

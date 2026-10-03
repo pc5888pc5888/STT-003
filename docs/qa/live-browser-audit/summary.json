@@ -1,0 +1,89 @@
+{
+  "browserRenderedRoutes": 57,
+  "automatedFailures": [],
+  "bookFailures": [],
+  "missingBooks": [],
+  "lowResolutionBooks": [
+    {
+      "title": "內在法遵 AI Governance",
+      "src": "/books/ai-governance.webp",
+      "complete": true,
+      "naturalWidth": 160,
+      "naturalHeight": 200,
+      "renderedWidth": 430,
+      "renderedHeight": 538,
+      "objectFit": "contain",
+      "aspectRatio": "auto"
+    },
+    {
+      "title": "內在法遵 Family Governance",
+      "src": "/books/family-governance.webp",
+      "complete": true,
+      "naturalWidth": 160,
+      "naturalHeight": 200,
+      "renderedWidth": 430,
+      "renderedHeight": 538,
+      "objectFit": "contain",
+      "aspectRatio": "auto"
+    }
+  ],
+  "headers": [
+    {
+      "site": "stt",
+      "brandRect": {
+        "left": 52,
+        "top": 11,
+        "right": 392,
+        "bottom": 81,
+        "width": 340,
+        "height": 70
+      },
+      "brandNatural": [
+        3181,
+        891
+      ],
+      "brandOptical": {
+        "sourceBox": {
+          "left": 22,
+          "top": 165,
+          "width": 1123,
+          "height": 591
+        },
+        "visibleLeftMarkHeight": 46.43097643097643,
+        "visibleLeftMarkTop": 12.962962962962962
+      }
+    },
+    {
+      "site": "gcsda",
+      "brandRect": {
+        "left": 50,
+        "top": 7.849998474121094,
+        "right": 420.6000061035156,
+        "bottom": 84.1500015258789,
+        "width": 370.6000061035156,
+        "height": 76.30000305175781
+      },
+      "brandNatural": [
+        600,
+        200
+      ],
+      "brandOptical": {
+        "sourceBox": {
+          "left": 13,
+          "top": 39,
+          "width": 203,
+          "height": 120
+        },
+        "visibleLeftMarkHeight": 45.78000183105468,
+        "visibleLeftMarkTop": 14.878500595092774
+      }
+    }
+  ],
+  "logoOptical": {
+    "sttSeal": 46.43097643097643,
+    "gcsdaSeal": 45.78000183105468,
+    "difference": 0.6509745999217458,
+    "passed": true
+  },
+  "note": "Screenshots are mandatory review evidence. CSS presence, successful builds, and naturalWidth alone are never visual PASS."
+}

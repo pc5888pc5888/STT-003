@@ -1,0 +1,64 @@
+name: Publish GCSDA original-image review
+on:
+  push:
+    branches: [stt-convergence-20260923]
+    paths: [.github/workflows/publish-cis-review.yml]
+permissions:
+  contents: write
+concurrency:
+  group: cis-review-publication
+  cancel-in-progress: true
+jobs:
+  publish-gcsda:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Receive the previously verified website payload
+        env:
+          PAYLOAD: 'https://sdmntprnznorth.oaiusercontent.com/files/00000000-75f8-820b-9009-302a4cdb53f5/raw?se=2026-09-23T19%3A11%3A48Z&sp=r&sv=2026-02-06&sr=b&scid=888d50a1-e03a-55aa-9c6b-7fe5cdec3f59&skoid=f5e14fda-2af7-44a3-9d18-d372ffcad871&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-09-23T18%3A30%3A27Z&ske=2026-09-24T18%3A30%3A27Z&sks=b&skv=2026-02-06&sig=yK2iS%2BTCbiS6aodheHrtg64voA%2Bkxdcacqx1Gashj0A%3D'
+        run: |
+          mkdir -p /tmp/cis-review
+          curl --fail --silent --show-error --location --max-time 90 "$PAYLOAD" -o /tmp/cis-payload.zip
+          echo '643728c7a7623bf5d705216cb9bac465992db220c456bff691528f0feb2d4613  /tmp/cis-payload.zip' | sha256sum -c -
+      - uses: actions/checkout@v4
+        timeout-minutes: 3
+        with:
+          ref: gcsda-convergence-20260923
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /src/
+            /api/
+            /tests/
+            /docs/qa/
+            /public/images/gcsda-logo.png
+            /public/404.html
+            /public/visual-approved/
+            /*.json
+            /*.ts
+            /index.html
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Apply, build, test and publish the source-locked GCSDA change
+        run: |
+          curl --fail --silent --show-error --location --max-time 30 'https://raw.githubusercontent.com/pc5888pc5888/STT-003/c59fbe853afb2294a886c69ddef24e028030591d/.github/workflows/publish-cis-review.yml' -o /tmp/pinned-cis-workflow.yml
+          python3 - <<'PY'
+          import yaml,subprocess,pathlib
+          workflow=yaml.safe_load(open('/tmp/pinned-cis-workflow.yml'))
+          steps=workflow['jobs']['publish-gcsda']['steps']
+          names=['Apply only the verified GCSDA change set','Build and check all GCSDA pages','Publish to the existing GCSDA preview branch only']
+          for name in names:
+              step=next(s for s in steps if s.get('name')==name)
+              print(name,flush=True)
+              try:subprocess.run(['bash','--noprofile','--norc','-e','-o','pipefail','-c',step['run']],check=True)
+              except subprocess.CalledProcessError:
+                  for log in pathlib.Path('/tmp/cis-review').glob('*.log'):
+                      print(log.name,log.read_text()[-5000:],flush=True)
+                  raise
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: cis-online-gcsda
+          path: /tmp/cis-review/
+          retention-days: 7
