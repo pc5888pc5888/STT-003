@@ -6,7 +6,8 @@
     "archiveSha256": "751993f7891473ac2a8dda8caebb90c52c0cb75e2cb8760709e8627f9866ef25",
     "htmlSha256": "f04def45bad5826a8d635026a271716370969b616fef808327136849c32bf307",
     "contentScope": "作者專區文章卡片的標題、分類、日期、摘要與原文網址；不是全文資料庫。",
-    "latestOwnerSnapshot": "2026-10-02"
+    "latestOwnerSnapshot": "2026-10-02",
+    "latestOwnerAdminList": "2026-10-04"
   },
   "baseline": {
     "total": 212,
@@ -15,23 +16,24 @@
     "verification": "All seven source fields exactly match the uploaded 212-record snapshot after restoring its original whitespace."
   },
   "schemaVersion": "2.0",
-  "syncedAt": "2026-10-04T02:40:00+08:00",
+  "syncedAt": "2026-10-04T05:54:00+08:00",
   "sync": {
-    "method": "owner-uploaded-author-page-plus-main-baseline",
+    "method": "owner-supplied-admin-url-list",
     "complete": true,
-    "pagesFetched": 1,
-    "observed": 30,
-    "retainedNotSeen": 210,
+    "pagesFetched": 0,
+    "observed": 25,
+    "retainedNotSeen": 214,
     "changes": {
-      "added": 6,
+      "added": 0,
       "updated": 0,
-      "reclassified": 0
+      "reclassified": 0,
+      "deduplicated": 1
     }
   },
   "stats": {
-    "total": 240,
-    "uniqueUrls": 240,
-    "legal": 224,
+    "total": 239,
+    "uniqueUrls": 239,
+    "legal": 223,
     "humanistic": 5,
     "news": 11,
     "pending": 0
@@ -145,20 +147,6 @@
       "excerpt": "維修單、客服紀錄、報價邏輯、品質異常、老師傅筆記、常見退貨原因，這些資料若經過清理與權限確認，可以成為企業自己的 RAG 知識基礎；它不需要幾千億參數，只需要在特定任務上準確；所以中華企業策略永續發展學會 創會理事長 莊鈞翔 博士希望這篇把「AI 競賽」重新定義；中小企業沒有必要和科技巨頭比模型規模，而應該比誰更了解自己的業務；開源不是免費午餐，商用以前必須先讀授權；開源模型與工具降低了 AI 導入門檻，但企業最容易把「可以下載」誤解為「可以無限制商用」。",
       "id": "mmedia-d4fe23",
       "sourceArticleId": "d4fe23",
-      "series": "legal",
-      "seriesTitle": "莊博士法律新聞專欄",
-      "source": "M傳媒"
-    },
-    {
-      "url": "https://94m.com.tw/articles/cee607",
-      "title": "【 高階硬體製造的智慧財產防護 】從 IT／OT 邊界到跨國合作契約，台灣製造業如何在開放合作中保住真正的 know-how",
-      "date": "2026/09/29 12:19",
-      "category": "法律",
-      "author": "莊鈞翔博士",
-      "authorUrl": "https://94m.com.tw/editors/ed55fc",
-      "excerpt": "IT 與 OT 的邊界，是法律治理與資安治理真正交會的地方，中華企業策略永續發展學會 創會理事長 莊鈞翔 博士指出，企業資訊系統與工廠操作系統長期具有不同風險；辦公室 IT 系統的重點在資料與帳號；OT 則直接涉及設備、產線與安全；AI 導入後，兩者開始大量連接，這也是風險增加的原因；如果所有感測資料、機台控制、維修紀錄都直接連到外部雲端，任何帳號失守或供應鏈漏洞都可能造成更大影響。\r\n反過來，完全斷網又可能失去遠端分析與更新的效率；企業需要的是分層，而不是極端。",
-      "id": "mmedia-cee607",
-      "sourceArticleId": "cee607",
       "series": "legal",
       "seriesTitle": "莊博士法律新聞專欄",
       "source": "M傳媒"
