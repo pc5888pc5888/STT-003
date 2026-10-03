@@ -68,14 +68,13 @@ jobs:
           const configs=[
             {
               site:'stt',origin:'http://127.0.0.1:4173',
-              routes:['/','/problems','/how-stt-works','/engagement','/insights','/about','/eric-chuang','/institutions','/start','/research','/books'],
+              routes:['/','/problems','/how-stt-works','/engagement','/insights','/about','/eric-chuang','/institutions','/start','/privacy','/professional-boundary'],
               expectedImages:{
                 '/':'/visual-bank/stt/user-approved-six/home.png',
                 '/problems':'/visual-bank/stt/user-approved-six/problems.png',
                 '/how-stt-works':'/visual-bank/stt/user-approved-six/method.png',
                 '/insights':'/visual-bank/stt/user-approved-six/columns.png',
-                '/about':'/visual-bank/stt/user-approved-six/about-stt.png',
-                '/books':'/visual-bank/stt/user-approved-six/publications.png'
+                '/about':'/visual-bank/stt/user-approved-six/about-stt.png'
               }
             },
             {
@@ -165,7 +164,7 @@ jobs:
                   const expected=cfg.expectedImages[route]||null;
                   const hasExpected=!expected||state.heroImage===expected;
                   const imageLoaded=!expected||Boolean(state.heroImageLoaded&&state.heroImageNatural?.[0]>0&&state.heroImageNatural?.[1]>0);
-                  const desktopCopyInReadingZone=label==='mobile'||!state.copyRect||state.copyRect.right<=w*.50+2;
+                  const desktopCopyInReadingZone=label==='mobile'||!state.heroImageRect||!state.copyRect||state.copyRect.right<=w*.50+2;
                   const mobileSeparated=label!=='mobile'||!state.heroImageRect||!state.copyRect||state.copyRect.top>=state.heroImageRect.bottom-2;
                   const gradientGeometry=label==='mobile'||!expected||(
                     typeof state.heroGradient==='string' &&
@@ -184,7 +183,7 @@ jobs:
                   if(label==='desktop'&&expected){
                     await page.screenshot({path:`/tmp/audit/${cfg.site}-${safe(route)}-desktop.png`,fullPage:false});
                   }
-                  if(expected && (cfg.site==='gcsda'||['/','/problems','/books'].includes(route)) && label!=='desktop'){
+                  if(expected && (cfg.site==='gcsda'||['/','/problems','/insights'].includes(route)) && label!=='desktop'){
                     await page.screenshot({path:`/tmp/audit/${cfg.site}-${safe(route)}-${label}.png`,fullPage:false});
                   }
                   if(label==='desktop'&&route==='/'){
@@ -205,7 +204,7 @@ jobs:
           {
             const ctx=await browser.newContext({viewport:{width:1440,height:1100},reducedMotion:'reduce'});
             const page=await ctx.newPage();
-            const res=await page.goto('http://127.0.0.1:4173/books',{waitUntil:'networkidle',timeout:30000});
+            const res=await page.goto('http://127.0.0.1:4173/insights#publications',{waitUntil:'networkidle',timeout:30000});
             await page.evaluate(()=>document.fonts.ready);
             const covers=await page.evaluate(()=>[...document.querySelectorAll('[data-publication-cover]')].map(img=>({
               title:img.getAttribute('data-publication-cover'),
@@ -218,8 +217,8 @@ jobs:
               objectFit:getComputedStyle(img).objectFit,
               aspectRatio:getComputedStyle(img).aspectRatio
             })));
-            report.books={http:res?.status(),covers};
-            await page.screenshot({path:'/tmp/audit/stt-books-full.png',fullPage:true});
+            report.books={http:res?.status(),route:'/insights#publications',covers};
+            await page.screenshot({path:'/tmp/audit/stt-insights-publications-full.png',fullPage:true});
             await ctx.close();
           }
 
