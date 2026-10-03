@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-29T03:24:58.946Z",
+  "generatedAt": "2026-10-03T04:22:53.029Z",
   "sites": [
     {
       "site": "stt",
@@ -207,32 +207,22 @@
       "title": "治理委任｜STT Governance",
       "h1": "當一件事情值得被正式治理，就不應只停留在一次諮詢。",
       "h1Count": 1,
-      "heroClass": "cis-hero cis-title-2 cis-with-image",
-      "heroImage": "/visual-approved/bank-14.png",
-      "heroImageLoaded": true,
-      "heroImageNatural": [
-        1672,
-        941
-      ],
-      "heroImageRect": {
-        "left": 0,
-        "top": 93,
-        "right": 1440,
-        "bottom": 903.421875,
-        "width": 1440,
-        "height": 810.421875
-      },
-      "heroImageFit": "contain",
+      "heroClass": "cis-hero cis-title-2 cis-text-only",
+      "heroImage": null,
+      "heroImageLoaded": null,
+      "heroImageNatural": null,
+      "heroImageRect": null,
+      "heroImageFit": null,
       "copyRect": {
-        "left": 52,
-        "top": 367.203125,
-        "right": 570.390625,
-        "bottom": 629.203125,
-        "width": 518.390625,
-        "height": 262
+        "left": 200,
+        "top": 153,
+        "right": 1070,
+        "bottom": 381.859375,
+        "width": 870,
+        "height": 228.859375
       },
       "copyBg": "rgba(0, 0, 0, 0)",
-      "heroGradient": "linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255) 30%, rgba(255, 255, 255, 0.99) 38%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.34) 70%, rgba(255, 255, 255, 0.12) 77%, rgba(255, 255, 255, 0) 82%)",
+      "heroGradient": "none",
       "brandRect": {
         "left": 52,
         "top": 11,
@@ -260,7 +250,7 @@
       "expectedImage": null,
       "hasExpected": true,
       "imageLoaded": true,
-      "desktopCopyInReadingZone": true,
+      "desktopCopyInReadingZone": false,
       "mobileSeparated": true,
       "gradientGeometry": true,
       "errors": []
@@ -337,7 +327,7 @@
       "label": "desktop",
       "http": 200,
       "title": "關於 STT Governance｜治理判讀與制度設計",
-      "h1": "STT Governance高位階治理文明平台",
+      "h1": "STT Governance 不是一般顧問公司，而是高位階治理文明平台。",
       "h1Count": 1,
       "heroClass": "cis-hero cis-title-2 cis-with-image cis-clear-left",
       "heroImage": "/visual-bank/stt/user-approved-six/about-stt.png",
@@ -357,11 +347,11 @@
       "heroImageFit": "contain",
       "copyRect": {
         "left": 52,
-        "top": 427.265625,
+        "top": 402.0625,
         "right": 570.390625,
-        "bottom": 777.640625,
+        "bottom": 802.828125,
         "width": 518.390625,
-        "height": 350.375
+        "height": 400.765625
       },
       "copyBg": "rgba(0, 0, 0, 0)",
       "heroGradient": "linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255) 30%, rgba(255, 255, 255, 0.99) 38%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.34) 70%, rgba(255, 255, 255, 0.12) 77%, rgba(255, 255, 255, 0) 82%)",
@@ -471,32 +461,22 @@
       "title": "機構合作｜STT Governance",
       "h1": "跨專業治理整合，先建立共同的判讀架構。",
       "h1Count": 1,
-      "heroClass": "cis-hero cis-title-2 cis-with-image cis-clear-left",
-      "heroImage": "/visual-bank/stt/cooperation-hero-20260917.png",
-      "heroImageLoaded": true,
-      "heroImageNatural": [
-        1672,
-        941
-      ],
-      "heroImageRect": {
-        "left": 0,
-        "top": 93,
-        "right": 1440,
-        "bottom": 903.421875,
-        "width": 1440,
-        "height": 810.421875
-      },
-      "heroImageFit": "contain",
+      "heroClass": "cis-hero cis-title-2 cis-text-only",
+      "heroImage": null,
+      "heroImageLoaded": null,
+      "heroImageNatural": null,
+      "heroImageRect": null,
+      "heroImageFit": null,
       "copyRect": {
-        "left": 52,
-        "top": 348.03125,
-        "right": 570.390625,
-        "bottom": 648.390625,
-        "width": 518.390625,
+        "left": 200,
+        "top": 153,
+        "right": 1070,
+        "bottom": 453.359375,
+        "width": 870,
         "height": 300.359375
       },
       "copyBg": "rgba(0, 0, 0, 0)",
-      "heroGradient": "linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255) 30%, rgba(255, 255, 255, 0.99) 38%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.34) 70%, rgba(255, 255, 255, 0.12) 77%, rgba(255, 255, 255, 0) 82%)",
+      "heroGradient": "none",
       "brandRect": {
         "left": 52,
         "top": 11,
@@ -524,7 +504,7 @@
       "expectedImage": null,
       "hasExpected": true,
       "imageLoaded": true,
-      "desktopCopyInReadingZone": true,
+      "desktopCopyInReadingZone": false,
       "mobileSeparated": true,
       "gradientGeometry": true,
       "errors": []
@@ -537,32 +517,22 @@
       "title": "開始治理判讀｜STT Governance",
       "h1": "先把正在發生的事情說清楚。",
       "h1Count": 1,
-      "heroClass": "cis-hero cis-title-1 cis-with-image cis-clear-left",
-      "heroImage": "/visual-bank/stt/cooperation-hero-20260917.png",
-      "heroImageLoaded": true,
-      "heroImageNatural": [
-        1672,
-        941
-      ],
-      "heroImageRect": {
-        "left": 0,
-        "top": 93,
-        "right": 1440,
-        "bottom": 903.421875,
-        "width": 1440,
-        "height": 810.421875
-      },
-      "heroImageFit": "contain",
+      "heroClass": "cis-hero cis-title-1 cis-text-only",
+      "heroImage": null,
+      "heroImageLoaded": null,
+      "heroImageNatural": null,
+      "heroImageRect": null,
+      "heroImageFit": null,
       "copyRect": {
-        "left": 52,
-        "top": 375.375,
-        "right": 570.390625,
-        "bottom": 621.046875,
-        "width": 518.390625,
-        "height": 245.671875
+        "left": 200,
+        "top": 153,
+        "right": 1070,
+        "bottom": 306.734375,
+        "width": 870,
+        "height": 153.734375
       },
       "copyBg": "rgba(0, 0, 0, 0)",
-      "heroGradient": "linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255) 30%, rgba(255, 255, 255, 0.99) 38%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.34) 70%, rgba(255, 255, 255, 0.12) 77%, rgba(255, 255, 255, 0) 82%)",
+      "heroGradient": "none",
       "brandRect": {
         "left": 52,
         "top": 11,
@@ -590,7 +560,7 @@
       "expectedImage": null,
       "hasExpected": true,
       "imageLoaded": true,
-      "desktopCopyInReadingZone": true,
+      "desktopCopyInReadingZone": false,
       "mobileSeparated": true,
       "gradientGeometry": true,
       "errors": []
@@ -600,32 +570,32 @@
       "route": "/research",
       "label": "desktop",
       "http": 200,
-      "title": "研究與論文｜STT Governance",
-      "h1": "研究與論文",
+      "title": "研究與出版｜STT Governance",
+      "h1": "判讀不是臨時形成的意見，而是長期累積的制度研究。",
       "h1Count": 1,
-      "heroClass": "cis-hero cis-title-1 cis-with-image",
-      "heroImage": "/visual-bank/stt/originals-20260910/insights.webp",
+      "heroClass": "cis-hero cis-title-2 cis-with-image cis-clear-left",
+      "heroImage": "/visual-bank/stt/user-approved-six/columns.png",
       "heroImageLoaded": true,
       "heroImageNatural": [
-        1672,
-        941
+        1491,
+        1055
       ],
       "heroImageRect": {
         "left": 0,
         "top": 93,
         "right": 1440,
-        "bottom": 903.421875,
+        "bottom": 1111.90625,
         "width": 1440,
-        "height": 810.421875
+        "height": 1018.90625
       },
       "heroImageFit": "contain",
       "copyRect": {
         "left": 52,
-        "top": 375.703125,
+        "top": 471.453125,
         "right": 570.390625,
-        "bottom": 620.71875,
+        "bottom": 733.453125,
         "width": 518.390625,
-        "height": 245.015625
+        "height": 262
       },
       "copyBg": "rgba(0, 0, 0, 0)",
       "heroGradient": "linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255) 30%, rgba(255, 255, 255, 0.99) 38%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.34) 70%, rgba(255, 255, 255, 0.12) 77%, rgba(255, 255, 255, 0) 82%)",
@@ -666,11 +636,11 @@
       "route": "/books",
       "label": "desktop",
       "http": 200,
-      "title": "著作正典｜STT Governance",
-      "h1": "著作正典",
+      "title": "研究與出版｜STT Governance",
+      "h1": "判讀不是臨時形成的意見，而是長期累積的制度研究。",
       "h1Count": 1,
-      "heroClass": "cis-hero cis-title-1 cis-with-image cis-clear-left",
-      "heroImage": "/visual-bank/stt/user-approved-six/publications.png",
+      "heroClass": "cis-hero cis-title-2 cis-with-image cis-clear-left",
+      "heroImage": "/visual-bank/stt/user-approved-six/columns.png",
       "heroImageLoaded": true,
       "heroImageNatural": [
         1491,
@@ -687,11 +657,11 @@
       "heroImageFit": "contain",
       "copyRect": {
         "left": 52,
-        "top": 496.515625,
+        "top": 471.453125,
         "right": 570.390625,
-        "bottom": 708.390625,
+        "bottom": 733.453125,
         "width": 518.390625,
-        "height": 211.875
+        "height": 262
       },
       "copyBg": "rgba(0, 0, 0, 0)",
       "heroGradient": "linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255) 30%, rgba(255, 255, 255, 0.99) 38%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.34) 70%, rgba(255, 255, 255, 0.12) 77%, rgba(255, 255, 255, 0) 82%)",
@@ -720,7 +690,7 @@
       "overflow": false,
       "broken": [],
       "expectedImage": "/visual-bank/stt/user-approved-six/publications.png",
-      "hasExpected": true,
+      "hasExpected": false,
       "imageLoaded": true,
       "desktopCopyInReadingZone": true,
       "mobileSeparated": true,
@@ -933,32 +903,22 @@
       "title": "治理委任｜STT Governance",
       "h1": "當一件事情值得被正式治理，就不應只停留在一次諮詢。",
       "h1Count": 1,
-      "heroClass": "cis-hero cis-title-2 cis-with-image",
-      "heroImage": "/visual-approved/bank-14.png",
-      "heroImageLoaded": true,
-      "heroImageNatural": [
-        1672,
-        941
-      ],
-      "heroImageRect": {
-        "left": 0,
-        "top": 83,
-        "right": 820,
-        "bottom": 544.484375,
-        "width": 820,
-        "height": 461.484375
-      },
-      "heroImageFit": "contain",
+      "heroClass": "cis-hero cis-title-2 cis-text-only",
+      "heroImage": null,
+      "heroImageLoaded": null,
+      "heroImageNatural": null,
+      "heroImageRect": null,
+      "heroImageFit": null,
       "copyRect": {
-        "left": 36,
-        "top": 129.78125,
-        "right": 355.796875,
-        "bottom": 497.703125,
-        "width": 319.796875,
-        "height": 367.921875
+        "left": 32,
+        "top": 143,
+        "right": 788,
+        "bottom": 366.265625,
+        "width": 756,
+        "height": 223.265625
       },
       "copyBg": "rgba(0, 0, 0, 0)",
-      "heroGradient": "linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255) 30%, rgba(255, 255, 255, 0.99) 38%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.34) 70%, rgba(255, 255, 255, 0.12) 77%, rgba(255, 255, 255, 0) 82%)",
+      "heroGradient": "none",
       "brandRect": {
         "left": 24,
         "top": 12,
@@ -986,7 +946,7 @@
       "expectedImage": null,
       "hasExpected": true,
       "imageLoaded": true,
-      "desktopCopyInReadingZone": true,
+      "desktopCopyInReadingZone": false,
       "mobileSeparated": true,
       "gradientGeometry": true,
       "errors": []
@@ -1063,7 +1023,7 @@
       "label": "tablet",
       "http": 200,
       "title": "關於 STT Governance｜治理判讀與制度設計",
-      "h1": "STT Governance高位階治理文明平台",
+      "h1": "STT Governance 不是一般顧問公司，而是高位階治理文明平台。",
       "h1Count": 1,
       "heroClass": "cis-hero cis-title-2 cis-with-image cis-clear-left",
       "heroImage": "/visual-bank/stt/user-approved-six/about-stt.png",
@@ -1083,11 +1043,11 @@
       "heroImageFit": "contain",
       "copyRect": {
         "left": 36,
-        "top": 171.765625,
+        "top": 128.375,
         "right": 355.796875,
-        "bottom": 574.421875,
+        "bottom": 617.8125,
         "width": 319.796875,
-        "height": 402.65625
+        "height": 489.4375
       },
       "copyBg": "rgba(0, 0, 0, 0)",
       "heroGradient": "linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255) 30%, rgba(255, 255, 255, 0.99) 38%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.34) 70%, rgba(255, 255, 255, 0.12) 77%, rgba(255, 255, 255, 0) 82%)",
@@ -1197,32 +1157,22 @@
       "title": "機構合作｜STT Governance",
       "h1": "跨專業治理整合，先建立共同的判讀架構。",
       "h1Count": 1,
-      "heroClass": "cis-hero cis-title-2 cis-with-image cis-clear-left",
-      "heroImage": "/visual-bank/stt/cooperation-hero-20260917.png",
-      "heroImageLoaded": true,
-      "heroImageNatural": [
-        1672,
-        941
-      ],
-      "heroImageRect": {
-        "left": 0,
-        "top": 91.265625,
-        "right": 820,
-        "bottom": 552.75,
-        "width": 820,
-        "height": 461.484375
-      },
-      "heroImageFit": "contain",
+      "heroClass": "cis-hero cis-title-2 cis-text-only",
+      "heroImage": null,
+      "heroImageLoaded": null,
+      "heroImageNatural": null,
+      "heroImageRect": null,
+      "heroImageFit": null,
       "copyRect": {
-        "left": 36,
-        "top": 124,
-        "right": 355.796875,
-        "bottom": 520.03125,
-        "width": 319.796875,
-        "height": 396.03125
+        "left": 32,
+        "top": 143,
+        "right": 788,
+        "bottom": 437.765625,
+        "width": 756,
+        "height": 294.765625
       },
       "copyBg": "rgba(0, 0, 0, 0)",
-      "heroGradient": "linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255) 30%, rgba(255, 255, 255, 0.99) 38%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.34) 70%, rgba(255, 255, 255, 0.12) 77%, rgba(255, 255, 255, 0) 82%)",
+      "heroGradient": "none",
       "brandRect": {
         "left": 24,
         "top": 12,
@@ -1250,7 +1200,7 @@
       "expectedImage": null,
       "hasExpected": true,
       "imageLoaded": true,
-      "desktopCopyInReadingZone": true,
+      "desktopCopyInReadingZone": false,
       "mobileSeparated": true,
       "gradientGeometry": true,
       "errors": []
@@ -1263,32 +1213,22 @@
       "title": "開始治理判讀｜STT Governance",
       "h1": "先把正在發生的事情說清楚。",
       "h1Count": 1,
-      "heroClass": "cis-hero cis-title-1 cis-with-image cis-clear-left",
-      "heroImage": "/visual-bank/stt/cooperation-hero-20260917.png",
-      "heroImageLoaded": true,
-      "heroImageNatural": [
-        1672,
-        941
-      ],
-      "heroImageRect": {
-        "left": 0,
-        "top": 83,
-        "right": 820,
-        "bottom": 544.484375,
-        "width": 820,
-        "height": 461.484375
-      },
-      "heroImageFit": "contain",
+      "heroClass": "cis-hero cis-title-1 cis-text-only",
+      "heroImage": null,
+      "heroImageLoaded": null,
+      "heroImageNatural": null,
+      "heroImageRect": null,
+      "heroImageFit": null,
       "copyRect": {
-        "left": 36,
-        "top": 182.734375,
-        "right": 355.796875,
-        "bottom": 444.734375,
-        "width": 319.796875,
-        "height": 262
+        "left": 32,
+        "top": 143,
+        "right": 788,
+        "bottom": 291.125,
+        "width": 756,
+        "height": 148.125
       },
       "copyBg": "rgba(0, 0, 0, 0)",
-      "heroGradient": "linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255) 30%, rgba(255, 255, 255, 0.99) 38%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.34) 70%, rgba(255, 255, 255, 0.12) 77%, rgba(255, 255, 255, 0) 82%)",
+      "heroGradient": "none",
       "brandRect": {
         "left": 24,
         "top": 12,
@@ -1316,7 +1256,7 @@
       "expectedImage": null,
       "hasExpected": true,
       "imageLoaded": true,
-      "desktopCopyInReadingZone": true,
+      "desktopCopyInReadingZone": false,
       "mobileSeparated": true,
       "gradientGeometry": true,
       "errors": []
@@ -1326,32 +1266,32 @@
       "route": "/research",
       "label": "tablet",
       "http": 200,
-      "title": "研究與論文｜STT Governance",
-      "h1": "研究與論文",
+      "title": "研究與出版｜STT Governance",
+      "h1": "判讀不是臨時形成的意見，而是長期累積的制度研究。",
       "h1Count": 1,
-      "heroClass": "cis-hero cis-title-1 cis-with-image",
-      "heroImage": "/visual-bank/stt/originals-20260910/insights.webp",
+      "heroClass": "cis-hero cis-title-2 cis-with-image cis-clear-left",
+      "heroImage": "/visual-bank/stt/user-approved-six/columns.png",
       "heroImageLoaded": true,
       "heroImageNatural": [
-        1672,
-        941
+        1491,
+        1055
       ],
       "heroImageRect": {
         "left": 0,
         "top": 83,
         "right": 820,
-        "bottom": 544.484375,
+        "bottom": 663.203125,
         "width": 820,
-        "height": 461.484375
+        "height": 580.203125
       },
       "heroImageFit": "contain",
       "copyRect": {
         "left": 36,
-        "top": 162.296875,
+        "top": 189.140625,
         "right": 355.796875,
-        "bottom": 465.1875,
+        "bottom": 557.0625,
         "width": 319.796875,
-        "height": 302.890625
+        "height": 367.921875
       },
       "copyBg": "rgba(0, 0, 0, 0)",
       "heroGradient": "linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255) 30%, rgba(255, 255, 255, 0.99) 38%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.34) 70%, rgba(255, 255, 255, 0.12) 77%, rgba(255, 255, 255, 0) 82%)",
@@ -1392,11 +1332,11 @@
       "route": "/books",
       "label": "tablet",
       "http": 200,
-      "title": "著作正典｜STT Governance",
-      "h1": "著作正典",
+      "title": "研究與出版｜STT Governance",
+      "h1": "判讀不是臨時形成的意見，而是長期累積的制度研究。",
       "h1Count": 1,
-      "heroClass": "cis-hero cis-title-1 cis-with-image cis-clear-left",
-      "heroImage": "/visual-bank/stt/user-approved-six/publications.png",
+      "heroClass": "cis-hero cis-title-2 cis-with-image cis-clear-left",
+      "heroImage": "/visual-bank/stt/user-approved-six/columns.png",
       "heroImageLoaded": true,
       "heroImageNatural": [
         1491,
@@ -1413,11 +1353,11 @@
       "heroImageFit": "contain",
       "copyRect": {
         "left": 36,
-        "top": 254.796875,
+        "top": 189.140625,
         "right": 355.796875,
-        "bottom": 491.40625,
+        "bottom": 557.0625,
         "width": 319.796875,
-        "height": 236.609375
+        "height": 367.921875
       },
       "copyBg": "rgba(0, 0, 0, 0)",
       "heroGradient": "linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255) 30%, rgba(255, 255, 255, 0.99) 38%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.34) 70%, rgba(255, 255, 255, 0.12) 77%, rgba(255, 255, 255, 0) 82%)",
@@ -1446,7 +1386,7 @@
       "overflow": false,
       "broken": [],
       "expectedImage": "/visual-bank/stt/user-approved-six/publications.png",
-      "hasExpected": true,
+      "hasExpected": false,
       "imageLoaded": true,
       "desktopCopyInReadingZone": true,
       "mobileSeparated": true,
@@ -1659,32 +1599,22 @@
       "title": "治理委任｜STT Governance",
       "h1": "當一件事情值得被正式治理，就不應只停留在一次諮詢。",
       "h1Count": 1,
-      "heroClass": "cis-hero cis-title-2 cis-with-image",
-      "heroImage": "/visual-approved/bank-14.png",
-      "heroImageLoaded": true,
-      "heroImageNatural": [
-        1672,
-        941
-      ],
-      "heroImageRect": {
-        "left": 0,
-        "top": 83,
-        "right": 390,
-        "bottom": 302.484375,
-        "width": 390,
-        "height": 219.484375
-      },
-      "heroImageFit": "contain",
+      "heroClass": "cis-hero cis-title-2 cis-text-only",
+      "heroImage": null,
+      "heroImageLoaded": null,
+      "heroImageNatural": null,
+      "heroImageRect": null,
+      "heroImageFit": null,
       "copyRect": {
-        "left": 0,
-        "top": 302.484375,
-        "right": 390,
-        "bottom": 617.890625,
-        "width": 390,
-        "height": 315.40625
+        "left": 24,
+        "top": 121,
+        "right": 366,
+        "bottom": 370.40625,
+        "width": 342,
+        "height": 249.40625
       },
-      "copyBg": "rgb(251, 250, 247)",
-      "heroGradient": "linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255) 30%, rgba(255, 255, 255, 0.99) 38%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.34) 70%, rgba(255, 255, 255, 0.12) 77%, rgba(255, 255, 255, 0) 82%)",
+      "copyBg": "rgba(0, 0, 0, 0)",
+      "heroGradient": "none",
       "brandRect": {
         "left": 24,
         "top": 12,
@@ -1789,7 +1719,7 @@
       "label": "mobile",
       "http": 200,
       "title": "關於 STT Governance｜治理判讀與制度設計",
-      "h1": "STT Governance高位階治理文明平台",
+      "h1": "STT Governance 不是一般顧問公司，而是高位階治理文明平台。",
       "h1Count": 1,
       "heroClass": "cis-hero cis-title-2 cis-with-image cis-clear-left",
       "heroImage": "/visual-bank/stt/user-approved-six/about-stt.png",
@@ -1811,9 +1741,9 @@
         "left": 0,
         "top": 358.953125,
         "right": 390,
-        "bottom": 781.9375,
+        "bottom": 819.359375,
         "width": 390,
-        "height": 422.984375
+        "height": 460.40625
       },
       "copyBg": "rgb(251, 250, 247)",
       "heroGradient": "linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255) 30%, rgba(255, 255, 255, 0.99) 38%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.34) 70%, rgba(255, 255, 255, 0.12) 77%, rgba(255, 255, 255, 0) 82%)",
@@ -1923,32 +1853,22 @@
       "title": "機構合作｜STT Governance",
       "h1": "跨專業治理整合，先建立共同的判讀架構。",
       "h1Count": 1,
-      "heroClass": "cis-hero cis-title-2 cis-with-image cis-clear-left",
-      "heroImage": "/visual-bank/stt/cooperation-hero-20260917.png",
-      "heroImageLoaded": true,
-      "heroImageNatural": [
-        1672,
-        941
-      ],
-      "heroImageRect": {
-        "left": 0,
-        "top": 83,
-        "right": 390,
-        "bottom": 302.484375,
-        "width": 390,
-        "height": 219.484375
-      },
-      "heroImageFit": "contain",
+      "heroClass": "cis-hero cis-title-2 cis-text-only",
+      "heroImage": null,
+      "heroImageLoaded": null,
+      "heroImageNatural": null,
+      "heroImageRect": null,
+      "heroImageFit": null,
       "copyRect": {
-        "left": 0,
-        "top": 302.484375,
-        "right": 390,
-        "bottom": 654.5,
-        "width": 390,
-        "height": 352.015625
+        "left": 24,
+        "top": 121,
+        "right": 366,
+        "bottom": 407.015625,
+        "width": 342,
+        "height": 286.015625
       },
-      "copyBg": "rgb(251, 250, 247)",
-      "heroGradient": "linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255) 30%, rgba(255, 255, 255, 0.99) 38%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.34) 70%, rgba(255, 255, 255, 0.12) 77%, rgba(255, 255, 255, 0) 82%)",
+      "copyBg": "rgba(0, 0, 0, 0)",
+      "heroGradient": "none",
       "brandRect": {
         "left": 24,
         "top": 12,
@@ -1989,32 +1909,22 @@
       "title": "開始治理判讀｜STT Governance",
       "h1": "先把正在發生的事情說清楚。",
       "h1Count": 1,
-      "heroClass": "cis-hero cis-title-1 cis-with-image cis-clear-left",
-      "heroImage": "/visual-bank/stt/cooperation-hero-20260917.png",
-      "heroImageLoaded": true,
-      "heroImageNatural": [
-        1672,
-        941
-      ],
-      "heroImageRect": {
-        "left": 0,
-        "top": 83,
-        "right": 390,
-        "bottom": 302.484375,
-        "width": 390,
-        "height": 219.484375
-      },
-      "heroImageFit": "contain",
+      "heroClass": "cis-hero cis-title-1 cis-text-only",
+      "heroImage": null,
+      "heroImageLoaded": null,
+      "heroImageNatural": null,
+      "heroImageRect": null,
+      "heroImageFit": null,
       "copyRect": {
-        "left": 0,
-        "top": 302.484375,
-        "right": 390,
-        "bottom": 520.28125,
-        "width": 390,
-        "height": 217.796875
+        "left": 24,
+        "top": 121,
+        "right": 366,
+        "bottom": 272.796875,
+        "width": 342,
+        "height": 151.796875
       },
-      "copyBg": "rgb(251, 250, 247)",
-      "heroGradient": "linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255) 30%, rgba(255, 255, 255, 0.99) 38%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.34) 70%, rgba(255, 255, 255, 0.12) 77%, rgba(255, 255, 255, 0) 82%)",
+      "copyBg": "rgba(0, 0, 0, 0)",
+      "heroGradient": "none",
       "brandRect": {
         "left": 24,
         "top": 12,
@@ -2052,32 +1962,32 @@
       "route": "/research",
       "label": "mobile",
       "http": 200,
-      "title": "研究與論文｜STT Governance",
-      "h1": "研究與論文",
+      "title": "研究與出版｜STT Governance",
+      "h1": "判讀不是臨時形成的意見，而是長期累積的制度研究。",
       "h1Count": 1,
-      "heroClass": "cis-hero cis-title-1 cis-with-image",
-      "heroImage": "/visual-bank/stt/originals-20260910/insights.webp",
+      "heroClass": "cis-hero cis-title-2 cis-with-image cis-clear-left",
+      "heroImage": "/visual-bank/stt/user-approved-six/columns.png",
       "heroImageLoaded": true,
       "heroImageNatural": [
-        1672,
-        941
+        1491,
+        1055
       ],
       "heroImageRect": {
         "left": 0,
         "top": 83,
         "right": 390,
-        "bottom": 302.484375,
+        "bottom": 358.953125,
         "width": 390,
-        "height": 219.484375
+        "height": 275.953125
       },
       "heroImageFit": "contain",
       "copyRect": {
         "left": 0,
-        "top": 302.484375,
+        "top": 358.953125,
         "right": 390,
-        "bottom": 602.0625,
+        "bottom": 674.359375,
         "width": 390,
-        "height": 299.578125
+        "height": 315.40625
       },
       "copyBg": "rgb(251, 250, 247)",
       "heroGradient": "linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255) 30%, rgba(255, 255, 255, 0.99) 38%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.34) 70%, rgba(255, 255, 255, 0.12) 77%, rgba(255, 255, 255, 0) 82%)",
@@ -2118,11 +2028,11 @@
       "route": "/books",
       "label": "mobile",
       "http": 200,
-      "title": "著作正典｜STT Governance",
-      "h1": "著作正典",
+      "title": "研究與出版｜STT Governance",
+      "h1": "判讀不是臨時形成的意見，而是長期累積的制度研究。",
       "h1Count": 1,
-      "heroClass": "cis-hero cis-title-1 cis-with-image cis-clear-left",
-      "heroImage": "/visual-bank/stt/user-approved-six/publications.png",
+      "heroClass": "cis-hero cis-title-2 cis-with-image cis-clear-left",
+      "heroImage": "/visual-bank/stt/user-approved-six/columns.png",
       "heroImageLoaded": true,
       "heroImageNatural": [
         1491,
@@ -2141,9 +2051,9 @@
         "left": 0,
         "top": 358.953125,
         "right": 390,
-        "bottom": 597.75,
+        "bottom": 674.359375,
         "width": 390,
-        "height": 238.796875
+        "height": 315.40625
       },
       "copyBg": "rgb(251, 250, 247)",
       "heroGradient": "linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255) 30%, rgba(255, 255, 255, 0.99) 38%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.34) 70%, rgba(255, 255, 255, 0.12) 77%, rgba(255, 255, 255, 0) 82%)",
@@ -2172,7 +2082,7 @@
       "overflow": false,
       "broken": [],
       "expectedImage": "/visual-bank/stt/user-approved-six/publications.png",
-      "hasExpected": true,
+      "hasExpected": false,
       "imageLoaded": true,
       "desktopCopyInReadingZone": true,
       "mobileSeparated": true,
@@ -3766,52 +3676,7 @@
   ],
   "books": {
     "http": 200,
-    "covers": [
-      {
-        "title": "2026 永續家族治理實務實錄",
-        "src": "/books/2026-sustainable-family-governance.jpg",
-        "complete": true,
-        "naturalWidth": 990,
-        "naturalHeight": 1400,
-        "renderedWidth": 430,
-        "renderedHeight": 608,
-        "objectFit": "contain",
-        "aspectRatio": "auto"
-      },
-      {
-        "title": "內在法遵 Internal Compliance",
-        "src": "/books/internal-compliance.jpg",
-        "complete": true,
-        "naturalWidth": 990,
-        "naturalHeight": 1400,
-        "renderedWidth": 430,
-        "renderedHeight": 608,
-        "objectFit": "contain",
-        "aspectRatio": "auto"
-      },
-      {
-        "title": "內在法遵 AI Governance",
-        "src": "/books/ai-governance.webp",
-        "complete": true,
-        "naturalWidth": 160,
-        "naturalHeight": 200,
-        "renderedWidth": 430,
-        "renderedHeight": 538,
-        "objectFit": "contain",
-        "aspectRatio": "auto"
-      },
-      {
-        "title": "內在法遵 Family Governance",
-        "src": "/books/family-governance.webp",
-        "complete": true,
-        "naturalWidth": 160,
-        "naturalHeight": 200,
-        "renderedWidth": 430,
-        "renderedHeight": 538,
-        "objectFit": "contain",
-        "aspectRatio": "auto"
-      }
-    ]
+    "covers": []
   },
   "headers": [
     {
