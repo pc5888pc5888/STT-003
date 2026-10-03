@@ -1,7 +1,127 @@
 {
   "rewrites": [
     {
-      "source": "/(.*)",
+      "source": "/problems/:path*",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/how-stt-works",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/engagement",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/insights",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/insights.html",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/insights/index",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/about",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/about.html",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/eric-chuang",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/institutions",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/start",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/privacy",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/professional-boundary",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/research",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/papers",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/books/:path*",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/domains/:path*",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/projects",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/publications",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/stt",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/institution/:path*",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/cooperation",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/contact.html",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/success",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/legal/:path*",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/digital-product-policy",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/internal-compliance/:path*",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/governance/:path*",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/governance.html",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/gcsda.html",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/humanistic-20q",
       "destination": "/index.html"
     }
   ]
