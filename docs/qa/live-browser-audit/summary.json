@@ -3,30 +3,7 @@
   "automatedFailures": [],
   "bookFailures": [],
   "missingBooks": [],
-  "lowResolutionBooks": [
-    {
-      "title": "內在法遵 AI Governance",
-      "src": "/books/ai-governance.webp",
-      "complete": true,
-      "naturalWidth": 160,
-      "naturalHeight": 200,
-      "renderedWidth": 430,
-      "renderedHeight": 538,
-      "objectFit": "contain",
-      "aspectRatio": "auto"
-    },
-    {
-      "title": "內在法遵 Family Governance",
-      "src": "/books/family-governance.webp",
-      "complete": true,
-      "naturalWidth": 160,
-      "naturalHeight": 200,
-      "renderedWidth": 430,
-      "renderedHeight": 538,
-      "objectFit": "contain",
-      "aspectRatio": "auto"
-    }
-  ],
+  "lowResolutionBooks": [],
   "headers": [
     {
       "site": "stt",

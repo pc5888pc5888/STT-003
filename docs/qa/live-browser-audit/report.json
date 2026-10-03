@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-03T22:15:09.318Z",
+  "generatedAt": "2026-10-03T22:42:32.781Z",
   "sites": [
     {
       "site": "stt",
@@ -2104,26 +2104,26 @@
       "h1": "企業、專業與學術，在治理議題上持續對話。",
       "h1Count": 1,
       "heroClass": "cis-hero cis-title-2 cis-with-image",
-      "heroImage": "/visual-bank/gcsda/about.webp",
+      "heroImage": "/visual-bank/gcsda/about.png",
       "heroImageLoaded": true,
       "heroImageNatural": [
-        600,
-        338
+        1672,
+        941
       ],
       "heroImageRect": {
         "left": 0,
         "top": 92,
         "right": 1440,
-        "bottom": 903.1875,
+        "bottom": 902.421875,
         "width": 1440,
-        "height": 811.1875
+        "height": 810.421875
       },
       "heroImageFit": "contain",
       "copyRect": {
         "left": 52,
-        "top": 366.59375,
+        "top": 366.203125,
         "right": 570.390625,
-        "bottom": 628.59375,
+        "bottom": 628.203125,
         "width": 518.390625,
         "height": 262
       },
@@ -2153,7 +2153,7 @@
       },
       "overflow": false,
       "broken": [],
-      "expectedImage": "/visual-bank/gcsda/about.webp",
+      "expectedImage": "/visual-bank/gcsda/about.png",
       "hasExpected": true,
       "imageLoaded": true,
       "desktopCopyInReadingZone": true,
@@ -2170,26 +2170,26 @@
       "h1": "學會本身先接受治理：權力、職權與責任都應可被理解。",
       "h1Count": 1,
       "heroClass": "cis-hero cis-title-3 cis-with-image",
-      "heroImage": "/visual-bank/gcsda/governance.webp",
+      "heroImage": "/visual-bank/gcsda/governance.png",
       "heroImageLoaded": true,
       "heroImageNatural": [
-        420,
-        236
+        1672,
+        941
       ],
       "heroImageRect": {
         "left": 0,
         "top": 92,
         "right": 1440,
-        "bottom": 901.140625,
+        "bottom": 902.421875,
         "width": 1440,
-        "height": 809.140625
+        "height": 810.421875
       },
       "heroImageFit": "contain",
       "copyRect": {
         "left": 52,
-        "top": 362.78125,
+        "top": 363.421875,
         "right": 570.390625,
-        "bottom": 630.359375,
+        "bottom": 631,
         "width": 518.390625,
         "height": 267.578125
       },
@@ -2219,7 +2219,7 @@
       },
       "overflow": false,
       "broken": [],
-      "expectedImage": "/visual-bank/gcsda/governance.webp",
+      "expectedImage": "/visual-bank/gcsda/governance.png",
       "hasExpected": true,
       "imageLoaded": true,
       "desktopCopyInReadingZone": true,
@@ -2236,26 +2236,26 @@
       "h1": "跨域專業，不等於權責混同。",
       "h1Count": 1,
       "heroClass": "cis-hero cis-title-2 cis-with-image",
-      "heroImage": "/visual-bank/gcsda/council.webp",
+      "heroImage": "/visual-bank/gcsda/council.png",
       "heroImageLoaded": true,
       "heroImageNatural": [
-        220,
-        124
+        1672,
+        941
       ],
       "heroImageRect": {
         "left": 0,
         "top": 92,
         "right": 1440,
-        "bottom": 903.625,
+        "bottom": 902.421875,
         "width": 1440,
-        "height": 811.625
+        "height": 810.421875
       },
       "heroImageFit": "contain",
       "copyRect": {
         "left": 52,
-        "top": 383.375,
+        "top": 382.78125,
         "right": 570.390625,
-        "bottom": 612.234375,
+        "bottom": 611.640625,
         "width": 518.390625,
         "height": 228.859375
       },
@@ -2285,7 +2285,7 @@
       },
       "overflow": false,
       "broken": [],
-      "expectedImage": "/visual-bank/gcsda/council.webp",
+      "expectedImage": "/visual-bank/gcsda/council.png",
       "hasExpected": true,
       "imageLoaded": true,
       "desktopCopyInReadingZone": true,
@@ -2302,26 +2302,26 @@
       "h1": "以策略、治理、法遵與永續，形成專業共同體。",
       "h1Count": 1,
       "heroClass": "cis-hero cis-title-2 cis-with-image",
-      "heroImage": "/visual-bank/gcsda/membership.webp",
+      "heroImage": "/visual-bank/gcsda/membership.png",
       "heroImageLoaded": true,
       "heroImageNatural": [
-        220,
-        124
+        1672,
+        941
       ],
       "heroImageRect": {
         "left": 0,
         "top": 92,
         "right": 1440,
-        "bottom": 903.625,
+        "bottom": 902.421875,
         "width": 1440,
-        "height": 811.625
+        "height": 810.421875
       },
       "heroImageFit": "contain",
       "copyRect": {
         "left": 52,
-        "top": 383.375,
+        "top": 382.78125,
         "right": 570.390625,
-        "bottom": 612.234375,
+        "bottom": 611.640625,
         "width": 518.390625,
         "height": 228.859375
       },
@@ -2351,7 +2351,7 @@
       },
       "overflow": false,
       "broken": [],
-      "expectedImage": "/visual-bank/gcsda/membership.webp",
+      "expectedImage": "/visual-bank/gcsda/membership.png",
       "hasExpected": true,
       "imageLoaded": true,
       "desktopCopyInReadingZone": true,
@@ -2368,26 +2368,26 @@
       "h1": "活動，是制度運作與知識累積的正式紀錄。",
       "h1Count": 1,
       "heroClass": "cis-hero cis-title-2 cis-with-image",
-      "heroImage": "/visual-bank/gcsda/events.webp",
+      "heroImage": "/visual-bank/gcsda/events.png",
       "heroImageLoaded": true,
       "heroImageNatural": [
-        420,
-        236
+        1672,
+        941
       ],
       "heroImageRect": {
         "left": 0,
         "top": 92,
         "right": 1440,
-        "bottom": 901.140625,
+        "bottom": 902.421875,
         "width": 1440,
-        "height": 809.140625
+        "height": 810.421875
       },
       "heroImageFit": "contain",
       "copyRect": {
         "left": 52,
-        "top": 382.140625,
+        "top": 382.78125,
         "right": 570.390625,
-        "bottom": 611,
+        "bottom": 611.640625,
         "width": 518.390625,
         "height": 228.859375
       },
@@ -2417,7 +2417,7 @@
       },
       "overflow": false,
       "broken": [],
-      "expectedImage": "/visual-bank/gcsda/events.webp",
+      "expectedImage": "/visual-bank/gcsda/events.png",
       "hasExpected": true,
       "imageLoaded": true,
       "desktopCopyInReadingZone": true,
@@ -2434,26 +2434,26 @@
       "h1": "讓活動與交流，沉澱為可傳承的治理知識。",
       "h1Count": 1,
       "heroClass": "cis-hero cis-title-2 cis-with-image",
-      "heroImage": "/visual-bank/gcsda/knowledge.webp",
+      "heroImage": "/visual-bank/gcsda/knowledge.png",
       "heroImageLoaded": true,
       "heroImageNatural": [
-        220,
-        124
+        1672,
+        941
       ],
       "heroImageRect": {
         "left": 0,
         "top": 92,
         "right": 1440,
-        "bottom": 903.625,
+        "bottom": 902.421875,
         "width": 1440,
-        "height": 811.625
+        "height": 810.421875
       },
       "heroImageFit": "contain",
       "copyRect": {
         "left": 52,
-        "top": 383.375,
+        "top": 382.78125,
         "right": 570.390625,
-        "bottom": 612.234375,
+        "bottom": 611.640625,
         "width": 518.390625,
         "height": 228.859375
       },
@@ -2483,7 +2483,7 @@
       },
       "overflow": false,
       "broken": [],
-      "expectedImage": "/visual-bank/gcsda/knowledge.webp",
+      "expectedImage": "/visual-bank/gcsda/knowledge.png",
       "hasExpected": true,
       "imageLoaded": true,
       "desktopCopyInReadingZone": true,
@@ -2500,26 +2500,26 @@
       "h1": "章程與公告",
       "h1Count": 1,
       "heroClass": "cis-hero cis-title-1 cis-with-image",
-      "heroImage": "/visual-bank/gcsda/charter.webp",
+      "heroImage": "/visual-bank/gcsda/charter.png",
       "heroImageLoaded": true,
       "heroImageNatural": [
-        420,
-        236
+        1672,
+        941
       ],
       "heroImageRect": {
         "left": 0,
         "top": 92,
         "right": 1440,
-        "bottom": 901.140625,
+        "bottom": 902.421875,
         "width": 1440,
-        "height": 809.140625
+        "height": 810.421875
       },
       "heroImageFit": "contain",
       "copyRect": {
         "left": 52,
-        "top": 403.125,
+        "top": 403.765625,
         "right": 570.390625,
-        "bottom": 590,
+        "bottom": 590.640625,
         "width": 518.390625,
         "height": 186.875
       },
@@ -2549,7 +2549,7 @@
       },
       "overflow": false,
       "broken": [],
-      "expectedImage": "/visual-bank/gcsda/charter.webp",
+      "expectedImage": "/visual-bank/gcsda/charter.png",
       "hasExpected": true,
       "imageLoaded": true,
       "desktopCopyInReadingZone": true,
@@ -2632,26 +2632,26 @@
       "h1": "企業、專業與學術，在治理議題上持續對話。",
       "h1Count": 1,
       "heroClass": "cis-hero cis-title-2 cis-with-image",
-      "heroImage": "/visual-bank/gcsda/about.webp",
+      "heroImage": "/visual-bank/gcsda/about.png",
       "heroImageLoaded": true,
       "heroImageNatural": [
-        600,
-        338
+        1672,
+        941
       ],
       "heroImageRect": {
         "left": 0,
         "top": 92,
         "right": 820,
-        "bottom": 553.921875,
+        "bottom": 553.484375,
         "width": 820,
-        "height": 461.921875
+        "height": 461.484375
       },
       "heroImageFit": "contain",
       "copyRect": {
         "left": 36,
-        "top": 160.6875,
+        "top": 160.46875,
         "right": 355.796875,
-        "bottom": 485.21875,
+        "bottom": 485,
         "width": 319.796875,
         "height": 324.53125
       },
@@ -2681,7 +2681,7 @@
       },
       "overflow": false,
       "broken": [],
-      "expectedImage": "/visual-bank/gcsda/about.webp",
+      "expectedImage": "/visual-bank/gcsda/about.png",
       "hasExpected": true,
       "imageLoaded": true,
       "desktopCopyInReadingZone": true,
@@ -2698,26 +2698,26 @@
       "h1": "學會本身先接受治理：權力、職權與責任都應可被理解。",
       "h1Count": 1,
       "heroClass": "cis-hero cis-title-3 cis-with-image",
-      "heroImage": "/visual-bank/gcsda/governance.webp",
+      "heroImage": "/visual-bank/gcsda/governance.png",
       "heroImageLoaded": true,
       "heroImageNatural": [
-        420,
-        236
+        1672,
+        941
       ],
       "heroImageRect": {
         "left": 0,
         "top": 92,
         "right": 820,
-        "bottom": 552.75,
+        "bottom": 553.484375,
         "width": 820,
-        "height": 460.75
+        "height": 461.484375
       },
       "heroImageFit": "contain",
       "copyRect": {
         "left": 36,
-        "top": 178.765625,
+        "top": 179.125,
         "right": 355.796875,
-        "bottom": 465.984375,
+        "bottom": 466.34375,
         "width": 319.796875,
         "height": 287.21875
       },
@@ -2747,7 +2747,7 @@
       },
       "overflow": false,
       "broken": [],
-      "expectedImage": "/visual-bank/gcsda/governance.webp",
+      "expectedImage": "/visual-bank/gcsda/governance.png",
       "hasExpected": true,
       "imageLoaded": true,
       "desktopCopyInReadingZone": true,
@@ -2764,26 +2764,26 @@
       "h1": "跨域專業，不等於權責混同。",
       "h1Count": 1,
       "heroClass": "cis-hero cis-title-2 cis-with-image",
-      "heroImage": "/visual-bank/gcsda/council.webp",
+      "heroImage": "/visual-bank/gcsda/council.png",
       "heroImageLoaded": true,
       "heroImageNatural": [
-        220,
-        124
+        1672,
+        941
       ],
       "heroImageRect": {
         "left": 0,
         "top": 92,
         "right": 820,
-        "bottom": 554.171875,
+        "bottom": 553.484375,
         "width": 820,
-        "height": 462.171875
+        "height": 461.484375
       },
       "heroImageFit": "contain",
       "copyRect": {
         "left": 36,
-        "top": 182.515625,
+        "top": 182.171875,
         "right": 355.796875,
-        "bottom": 463.65625,
+        "bottom": 463.3125,
         "width": 319.796875,
         "height": 281.140625
       },
@@ -2813,7 +2813,7 @@
       },
       "overflow": false,
       "broken": [],
-      "expectedImage": "/visual-bank/gcsda/council.webp",
+      "expectedImage": "/visual-bank/gcsda/council.png",
       "hasExpected": true,
       "imageLoaded": true,
       "desktopCopyInReadingZone": true,
@@ -2830,26 +2830,26 @@
       "h1": "以策略、治理、法遵與永續，形成專業共同體。",
       "h1Count": 1,
       "heroClass": "cis-hero cis-title-2 cis-with-image",
-      "heroImage": "/visual-bank/gcsda/membership.webp",
+      "heroImage": "/visual-bank/gcsda/membership.png",
       "heroImageLoaded": true,
       "heroImageNatural": [
-        220,
-        124
+        1672,
+        941
       ],
       "heroImageRect": {
         "left": 0,
         "top": 92,
         "right": 820,
-        "bottom": 554.171875,
+        "bottom": 553.484375,
         "width": 820,
-        "height": 462.171875
+        "height": 461.484375
       },
       "heroImageFit": "contain",
       "copyRect": {
         "left": 36,
-        "top": 177.390625,
+        "top": 177.046875,
         "right": 355.796875,
-        "bottom": 468.78125,
+        "bottom": 468.4375,
         "width": 319.796875,
         "height": 291.390625
       },
@@ -2879,7 +2879,7 @@
       },
       "overflow": false,
       "broken": [],
-      "expectedImage": "/visual-bank/gcsda/membership.webp",
+      "expectedImage": "/visual-bank/gcsda/membership.png",
       "hasExpected": true,
       "imageLoaded": true,
       "desktopCopyInReadingZone": true,
@@ -2896,26 +2896,26 @@
       "h1": "活動，是制度運作與知識累積的正式紀錄。",
       "h1Count": 1,
       "heroClass": "cis-hero cis-title-2 cis-with-image",
-      "heroImage": "/visual-bank/gcsda/events.webp",
+      "heroImage": "/visual-bank/gcsda/events.png",
       "heroImageLoaded": true,
       "heroImageNatural": [
-        420,
-        236
+        1672,
+        941
       ],
       "heroImageRect": {
         "left": 0,
         "top": 92,
         "right": 820,
-        "bottom": 552.75,
+        "bottom": 553.484375,
         "width": 820,
-        "height": 460.75
+        "height": 461.484375
       },
       "heroImageFit": "contain",
       "copyRect": {
         "left": 36,
-        "top": 198.375,
+        "top": 198.734375,
         "right": 355.796875,
-        "bottom": 446.375,
+        "bottom": 446.734375,
         "width": 319.796875,
         "height": 248
       },
@@ -2945,7 +2945,7 @@
       },
       "overflow": false,
       "broken": [],
-      "expectedImage": "/visual-bank/gcsda/events.webp",
+      "expectedImage": "/visual-bank/gcsda/events.png",
       "hasExpected": true,
       "imageLoaded": true,
       "desktopCopyInReadingZone": true,
@@ -2962,26 +2962,26 @@
       "h1": "讓活動與交流，沉澱為可傳承的治理知識。",
       "h1Count": 1,
       "heroClass": "cis-hero cis-title-2 cis-with-image",
-      "heroImage": "/visual-bank/gcsda/knowledge.webp",
+      "heroImage": "/visual-bank/gcsda/knowledge.png",
       "heroImageLoaded": true,
       "heroImageNatural": [
-        220,
-        124
+        1672,
+        941
       ],
       "heroImageRect": {
         "left": 0,
         "top": 92,
         "right": 820,
-        "bottom": 554.171875,
+        "bottom": 553.484375,
         "width": 820,
-        "height": 462.171875
+        "height": 461.484375
       },
       "heroImageFit": "contain",
       "copyRect": {
         "left": 36,
-        "top": 160.8125,
+        "top": 160.46875,
         "right": 355.796875,
-        "bottom": 485.34375,
+        "bottom": 485,
         "width": 319.796875,
         "height": 324.53125
       },
@@ -3011,7 +3011,7 @@
       },
       "overflow": false,
       "broken": [],
-      "expectedImage": "/visual-bank/gcsda/knowledge.webp",
+      "expectedImage": "/visual-bank/gcsda/knowledge.png",
       "hasExpected": true,
       "imageLoaded": true,
       "desktopCopyInReadingZone": true,
@@ -3028,26 +3028,26 @@
       "h1": "章程與公告",
       "h1Count": 1,
       "heroClass": "cis-hero cis-title-1 cis-with-image",
-      "heroImage": "/visual-bank/gcsda/charter.webp",
+      "heroImage": "/visual-bank/gcsda/charter.png",
       "heroImageLoaded": true,
       "heroImageNatural": [
-        420,
-        236
+        1672,
+        941
       ],
       "heroImageRect": {
         "left": 0,
         "top": 92,
         "right": 820,
-        "bottom": 552.75,
+        "bottom": 553.484375,
         "width": 820,
-        "height": 460.75
+        "height": 461.484375
       },
       "heroImageFit": "contain",
       "copyRect": {
         "left": 36,
-        "top": 200,
+        "top": 200.359375,
         "right": 355.796875,
-        "bottom": 444.75,
+        "bottom": 445.109375,
         "width": 319.796875,
         "height": 244.75
       },
@@ -3077,7 +3077,7 @@
       },
       "overflow": false,
       "broken": [],
-      "expectedImage": "/visual-bank/gcsda/charter.webp",
+      "expectedImage": "/visual-bank/gcsda/charter.png",
       "hasExpected": true,
       "imageLoaded": true,
       "desktopCopyInReadingZone": true,
@@ -3160,26 +3160,26 @@
       "h1": "企業、專業與學術，在治理議題上持續對話。",
       "h1Count": 1,
       "heroClass": "cis-hero cis-title-2 cis-with-image",
-      "heroImage": "/visual-bank/gcsda/about.webp",
+      "heroImage": "/visual-bank/gcsda/about.png",
       "heroImageLoaded": true,
       "heroImageNatural": [
-        600,
-        338
+        1672,
+        941
       ],
       "heroImageRect": {
         "left": 0,
         "top": 92,
         "right": 390,
-        "bottom": 311.6875,
+        "bottom": 311.484375,
         "width": 390,
-        "height": 219.6875
+        "height": 219.484375
       },
       "heroImageFit": "contain",
       "copyRect": {
         "left": 0,
-        "top": 311.6875,
+        "top": 311.484375,
         "right": 390,
-        "bottom": 627.09375,
+        "bottom": 626.890625,
         "width": 390,
         "height": 315.40625
       },
@@ -3209,7 +3209,7 @@
       },
       "overflow": false,
       "broken": [],
-      "expectedImage": "/visual-bank/gcsda/about.webp",
+      "expectedImage": "/visual-bank/gcsda/about.png",
       "hasExpected": true,
       "imageLoaded": true,
       "desktopCopyInReadingZone": true,
@@ -3226,26 +3226,26 @@
       "h1": "學會本身先接受治理：權力、職權與責任都應可被理解。",
       "h1Count": 1,
       "heroClass": "cis-hero cis-title-3 cis-with-image",
-      "heroImage": "/visual-bank/gcsda/governance.webp",
+      "heroImage": "/visual-bank/gcsda/governance.png",
       "heroImageLoaded": true,
       "heroImageNatural": [
-        420,
-        236
+        1672,
+        941
       ],
       "heroImageRect": {
         "left": 0,
         "top": 92,
         "right": 390,
-        "bottom": 311.140625,
+        "bottom": 311.484375,
         "width": 390,
-        "height": 219.140625
+        "height": 219.484375
       },
       "heroImageFit": "contain",
       "copyRect": {
         "left": 0,
-        "top": 311.140625,
+        "top": 311.484375,
         "right": 390,
-        "bottom": 626.640625,
+        "bottom": 626.984375,
         "width": 390,
         "height": 315.5
       },
@@ -3275,7 +3275,7 @@
       },
       "overflow": false,
       "broken": [],
-      "expectedImage": "/visual-bank/gcsda/governance.webp",
+      "expectedImage": "/visual-bank/gcsda/governance.png",
       "hasExpected": true,
       "imageLoaded": true,
       "desktopCopyInReadingZone": true,
@@ -3292,26 +3292,26 @@
       "h1": "跨域專業，不等於權責混同。",
       "h1Count": 1,
       "heroClass": "cis-hero cis-title-2 cis-with-image",
-      "heroImage": "/visual-bank/gcsda/council.webp",
+      "heroImage": "/visual-bank/gcsda/council.png",
       "heroImageLoaded": true,
       "heroImageNatural": [
-        220,
-        124
+        1672,
+        941
       ],
       "heroImageRect": {
         "left": 0,
         "top": 92,
         "right": 390,
-        "bottom": 311.8125,
+        "bottom": 311.484375,
         "width": 390,
-        "height": 219.8125
+        "height": 219.484375
       },
       "heroImageFit": "contain",
       "copyRect": {
         "left": 0,
-        "top": 311.8125,
+        "top": 311.484375,
         "right": 390,
-        "bottom": 596.828125,
+        "bottom": 596.5,
         "width": 390,
         "height": 285.015625
       },
@@ -3341,7 +3341,7 @@
       },
       "overflow": false,
       "broken": [],
-      "expectedImage": "/visual-bank/gcsda/council.webp",
+      "expectedImage": "/visual-bank/gcsda/council.png",
       "hasExpected": true,
       "imageLoaded": true,
       "desktopCopyInReadingZone": true,
@@ -3358,26 +3358,26 @@
       "h1": "以策略、治理、法遵與永續，形成專業共同體。",
       "h1Count": 1,
       "heroClass": "cis-hero cis-title-2 cis-with-image",
-      "heroImage": "/visual-bank/gcsda/membership.webp",
+      "heroImage": "/visual-bank/gcsda/membership.png",
       "heroImageLoaded": true,
       "heroImageNatural": [
-        220,
-        124
+        1672,
+        941
       ],
       "heroImageRect": {
         "left": 0,
         "top": 92,
         "right": 390,
-        "bottom": 311.8125,
+        "bottom": 311.484375,
         "width": 390,
-        "height": 219.8125
+        "height": 219.484375
       },
       "heroImageFit": "contain",
       "copyRect": {
         "left": 0,
-        "top": 311.8125,
+        "top": 311.484375,
         "right": 390,
-        "bottom": 596.828125,
+        "bottom": 596.5,
         "width": 390,
         "height": 285.015625
       },
@@ -3407,7 +3407,7 @@
       },
       "overflow": false,
       "broken": [],
-      "expectedImage": "/visual-bank/gcsda/membership.webp",
+      "expectedImage": "/visual-bank/gcsda/membership.png",
       "hasExpected": true,
       "imageLoaded": true,
       "desktopCopyInReadingZone": true,
@@ -3424,26 +3424,26 @@
       "h1": "活動，是制度運作與知識累積的正式紀錄。",
       "h1Count": 1,
       "heroClass": "cis-hero cis-title-2 cis-with-image",
-      "heroImage": "/visual-bank/gcsda/events.webp",
+      "heroImage": "/visual-bank/gcsda/events.png",
       "heroImageLoaded": true,
       "heroImageNatural": [
-        420,
-        236
+        1672,
+        941
       ],
       "heroImageRect": {
         "left": 0,
         "top": 92,
         "right": 390,
-        "bottom": 311.140625,
+        "bottom": 311.484375,
         "width": 390,
-        "height": 219.140625
+        "height": 219.484375
       },
       "heroImageFit": "contain",
       "copyRect": {
         "left": 0,
-        "top": 311.140625,
+        "top": 311.484375,
         "right": 390,
-        "bottom": 596.15625,
+        "bottom": 596.5,
         "width": 390,
         "height": 285.015625
       },
@@ -3473,7 +3473,7 @@
       },
       "overflow": false,
       "broken": [],
-      "expectedImage": "/visual-bank/gcsda/events.webp",
+      "expectedImage": "/visual-bank/gcsda/events.png",
       "hasExpected": true,
       "imageLoaded": true,
       "desktopCopyInReadingZone": true,
@@ -3490,26 +3490,26 @@
       "h1": "讓活動與交流，沉澱為可傳承的治理知識。",
       "h1Count": 1,
       "heroClass": "cis-hero cis-title-2 cis-with-image",
-      "heroImage": "/visual-bank/gcsda/knowledge.webp",
+      "heroImage": "/visual-bank/gcsda/knowledge.png",
       "heroImageLoaded": true,
       "heroImageNatural": [
-        220,
-        124
+        1672,
+        941
       ],
       "heroImageRect": {
         "left": 0,
         "top": 92,
         "right": 390,
-        "bottom": 311.8125,
+        "bottom": 311.484375,
         "width": 390,
-        "height": 219.8125
+        "height": 219.484375
       },
       "heroImageFit": "contain",
       "copyRect": {
         "left": 0,
-        "top": 311.8125,
+        "top": 311.484375,
         "right": 390,
-        "bottom": 596.828125,
+        "bottom": 596.5,
         "width": 390,
         "height": 285.015625
       },
@@ -3539,7 +3539,7 @@
       },
       "overflow": false,
       "broken": [],
-      "expectedImage": "/visual-bank/gcsda/knowledge.webp",
+      "expectedImage": "/visual-bank/gcsda/knowledge.png",
       "hasExpected": true,
       "imageLoaded": true,
       "desktopCopyInReadingZone": true,
@@ -3556,26 +3556,26 @@
       "h1": "章程與公告",
       "h1Count": 1,
       "heroClass": "cis-hero cis-title-1 cis-with-image",
-      "heroImage": "/visual-bank/gcsda/charter.webp",
+      "heroImage": "/visual-bank/gcsda/charter.png",
       "heroImageLoaded": true,
       "heroImageNatural": [
-        420,
-        236
+        1672,
+        941
       ],
       "heroImageRect": {
         "left": 0,
         "top": 92,
         "right": 390,
-        "bottom": 311.140625,
+        "bottom": 311.484375,
         "width": 390,
-        "height": 219.140625
+        "height": 219.484375
       },
       "heroImageFit": "contain",
       "copyRect": {
         "left": 0,
-        "top": 311.140625,
+        "top": 311.484375,
         "right": 390,
-        "bottom": 559.328125,
+        "bottom": 559.671875,
         "width": 390,
         "height": 248.1875
       },
@@ -3605,7 +3605,7 @@
       },
       "overflow": false,
       "broken": [],
-      "expectedImage": "/visual-bank/gcsda/charter.webp",
+      "expectedImage": "/visual-bank/gcsda/charter.png",
       "hasExpected": true,
       "imageLoaded": true,
       "desktopCopyInReadingZone": true,
@@ -3644,10 +3644,10 @@
         "title": "內在法遵 AI Governance",
         "src": "/books/ai-governance.webp",
         "complete": true,
-        "naturalWidth": 160,
-        "naturalHeight": 200,
+        "naturalWidth": 1448,
+        "naturalHeight": 2048,
         "renderedWidth": 430,
-        "renderedHeight": 538,
+        "renderedHeight": 608,
         "objectFit": "contain",
         "aspectRatio": "auto"
       },
@@ -3655,10 +3655,10 @@
         "title": "內在法遵 Family Governance",
         "src": "/books/family-governance.webp",
         "complete": true,
-        "naturalWidth": 160,
-        "naturalHeight": 200,
+        "naturalWidth": 1448,
+        "naturalHeight": 2048,
         "renderedWidth": 430,
-        "renderedHeight": 538,
+        "renderedHeight": 608,
         "objectFit": "contain",
         "aspectRatio": "auto"
       }
