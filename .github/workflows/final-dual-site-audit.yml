@@ -223,15 +223,39 @@ jobs:
             const photo=page.locator('[data-gcsda-council-photo]');
             await photo.scrollIntoViewIfNeeded();
             await page.waitForFunction(()=>{const img=document.querySelector('[data-gcsda-council-photo]');return img?.complete&&img.naturalWidth>0;});
-            report.gcsdaCouncil=await photo.evaluate(img=>({
-              complete:img.complete,
-              naturalWidth:img.naturalWidth,
-              naturalHeight:img.naturalHeight,
-              renderedWidth:Math.round(img.getBoundingClientRect().width),
-              renderedHeight:Math.round(img.getBoundingClientRect().height),
-              objectFit:getComputedStyle(img).objectFit,
-              alt:img.getAttribute('alt')
-            }));
+            report.gcsdaCouncil=await photo.evaluate(img=>{
+              const canvas=document.createElement('canvas');
+              canvas.width=img.naturalWidth;canvas.height=img.naturalHeight;
+              const ctx=canvas.getContext('2d',{willReadFrequently:true});
+              let nonWhitePixelRatio=0;
+              if(ctx){
+                ctx.drawImage(img,0,0);
+                const px=ctx.getImageData(0,0,canvas.width,canvas.height).data;
+                let nonWhite=0,total=0;
+                for(let i=0;i<px.length;i+=16){
+                  const a=px[i+3];
+                  if(a<20)continue;
+                  total++;
+                  const r=px[i],g=px[i+1],b=px[i+2];
+                  if(r<235||g<235||b<235)nonWhite++;
+                }
+                nonWhitePixelRatio=total?nonWhite/total:0;
+              }
+              const cs=getComputedStyle(img);
+              return {
+                complete:img.complete,
+                naturalWidth:img.naturalWidth,
+                naturalHeight:img.naturalHeight,
+                renderedWidth:Math.round(img.getBoundingClientRect().width),
+                renderedHeight:Math.round(img.getBoundingClientRect().height),
+                objectFit:cs.objectFit,
+                opacity:Number(cs.opacity),
+                visibility:cs.visibility,
+                display:cs.display,
+                nonWhitePixelRatio,
+                alt:img.getAttribute('alt')
+              };
+            });
             await page.screenshot({path:'/tmp/audit/gcsda-council-evidence-full.png',fullPage:true});
             await ctx.close();
           }
@@ -369,7 +393,7 @@ jobs:
               x.organizationSchema!=='Organization'
             )
           ).map(x=>({route:x.route,robotsMeta:x.robotsMeta,canonical:x.canonical,organizationSchema:x.organizationSchema}));
-          const gcsdaCouncilFailure=!report.gcsdaCouncil||!report.gcsdaCouncil.complete||report.gcsdaCouncil.naturalWidth<1000||report.gcsdaCouncil.naturalHeight<560||report.gcsdaCouncil.objectFit!=='contain';
+          const gcsdaCouncilFailure=!report.gcsdaCouncil||!report.gcsdaCouncil.complete||report.gcsdaCouncil.naturalWidth<700||report.gcsdaCouncil.naturalHeight<394||report.gcsdaCouncil.objectFit!=='contain'||report.gcsdaCouncil.opacity<=0||report.gcsdaCouncil.visibility==='hidden'||report.gcsdaCouncil.display==='none'||report.gcsdaCouncil.nonWhitePixelRatio<0.08;
           const gcsdaMembershipFallbackFailure=!report.gcsdaMembership||report.gcsdaMembership.deliveryState!=='fallback'||report.gcsdaMembership.formPresent||!report.gcsdaMembership.lineLink;
           const gcsdaMembershipOnlineFailure=!report.gcsdaMembershipOnline||report.gcsdaMembershipOnline.deliveryState!=='online'||!report.gcsdaMembershipOnline.successText?.includes('入會申請已送出');
           const gcsdaBuildFailure=!report.gcsdaBuild||!report.gcsdaBuild.sitemapHasAllRoutes||!report.gcsdaBuild.robotsIndexable||!report.gcsdaBuild.staticCanonical||!report.gcsdaBuild.staticOrganizationSchema;
