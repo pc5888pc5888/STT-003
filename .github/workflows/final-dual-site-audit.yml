@@ -256,12 +256,12 @@ jobs:
           );
           const heroCopyAnchorFailures=report.sites.filter(x=>{
             if(!x.expectedImage||x.label==='mobile'||x.heroClass?.includes('cis-portrait')||!x.copyRect||!x.heroImageRect) return false;
-            const expectedOffset=x.label==='desktop'?364:50;
+            const expectedOffset=x.label==='desktop'?180:50;
             const actualOffset=x.copyRect.top-x.heroImageRect.top;
             return Math.abs(actualOffset-expectedOffset)>2;
           }).map(x=>({
             site:x.site,route:x.route,label:x.label,
-            expectedOffset:x.label==='desktop'?364:50,
+            expectedOffset:x.label==='desktop'?180:50,
             actualOffset:x.copyRect.top-x.heroImageRect.top
           }));
           const desktopHeroes=report.sites.filter(x=>x.label==='desktop'&&x.expectedImage&&x.heroImageSha256);
