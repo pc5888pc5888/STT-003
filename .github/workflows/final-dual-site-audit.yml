@@ -1,4 +1,5 @@
 name: Final dual-site browser audit
+# QA refresh: GCSDA intrinsic-dimension correction included in final evidence run.
 on:
   push:
     branches: [stt-convergence-20260923]
