@@ -33,11 +33,12 @@ jobs:
       - name: Build both exact branch sources
         run: |
           set -e
-          for d in stt-src gcsda-src; do
-            cd "$GITHUB_WORKSPACE/$d"
-            if [ -f package-lock.json ]; then npm ci; else npm install; fi
-            npm run build
-          done
+          cd "$GITHUB_WORKSPACE/stt-src"
+          if [ -f package-lock.json ]; then npm ci; else npm install; fi
+          npm run build
+          cd "$GITHUB_WORKSPACE/gcsda-src"
+          if [ -f package-lock.json ]; then npm ci; else npm install; fi
+          VITE_GCSDA_SITE_ORIGIN=https://gcsda.example.invalid npm run build
       - name: Install Chromium audit runtime
         run: |
           mkdir -p "$GITHUB_WORKSPACE/audit-run"
@@ -67,7 +68,7 @@ jobs:
           import { chromium } from 'playwright';
 
           const browser=await chromium.launch({headless:true});
-          const report={generatedAt:new Date().toISOString(),sites:[],books:null,headers:[]};
+          const report={generatedAt:new Date().toISOString(),sites:[],books:null,headers:[],gcsdaCouncil:null,gcsdaMembership:null,gcsdaMembershipOnline:null,gcsdaBuild:null};
           const configs=[
             {
               site:'stt',origin:'http://127.0.0.1:4173',sourceRoot:path.join(process.env.GITHUB_WORKSPACE,'stt-src','public'),
@@ -82,7 +83,7 @@ jobs:
             },
             {
               site:'gcsda',origin:'http://127.0.0.1:4174',sourceRoot:path.join(process.env.GITHUB_WORKSPACE,'gcsda-src','public'),
-              routes:['/','/about','/governance','/council','/membership','/events','/knowledge','/charter'],
+              routes:['/','/about','/governance','/council','/membership','/events','/knowledge','/charter','/privacy'],
               expectedImages:{
                 '/':'/visual-bank/gcsda/home-approved.webp',
                 '/about':'/visual-bank/gcsda/about.png',
@@ -160,7 +161,10 @@ jobs:
                       brandNatural:brand?[brand.naturalWidth,brand.naturalHeight]:null,
                       brandOptical:optical(brand),
                       overflow:document.documentElement.scrollWidth>innerWidth+1,
-                      broken:[...document.images].filter(i=>!i.complete||i.naturalWidth===0).map(i=>i.getAttribute('src'))
+                      broken:[...document.images].filter(i=>!i.complete||i.naturalWidth===0).map(i=>i.getAttribute('src')),
+                      canonical:document.querySelector('link[rel="canonical"]')?.getAttribute('href')||null,
+                      robotsMeta:document.querySelector('meta[name="robots"]')?.getAttribute('content')||null,
+                      organizationSchema:(()=>{try{return JSON.parse(document.querySelector('#gcsda-organization-schema')?.textContent||'null')?.['@type']||null}catch{return null}})()
                     };
                   });
 
@@ -210,6 +214,87 @@ jobs:
               }
               await ctx.close();
             }
+          }
+
+          {
+            const ctx=await browser.newContext({viewport:{width:1440,height:1100},reducedMotion:'reduce'});
+            const page=await ctx.newPage();
+            await page.goto('http://127.0.0.1:4174/council',{waitUntil:'networkidle',timeout:30000});
+            const photo=page.locator('[data-gcsda-council-photo]');
+            await photo.scrollIntoViewIfNeeded();
+            await page.waitForFunction(()=>{const img=document.querySelector('[data-gcsda-council-photo]');return img?.complete&&img.naturalWidth>0;});
+            report.gcsdaCouncil=await photo.evaluate(img=>({
+              complete:img.complete,
+              naturalWidth:img.naturalWidth,
+              naturalHeight:img.naturalHeight,
+              renderedWidth:Math.round(img.getBoundingClientRect().width),
+              renderedHeight:Math.round(img.getBoundingClientRect().height),
+              objectFit:getComputedStyle(img).objectFit,
+              alt:img.getAttribute('alt')
+            }));
+            await page.screenshot({path:'/tmp/audit/gcsda-council-evidence-full.png',fullPage:true});
+            await ctx.close();
+          }
+
+          {
+            const ctx=await browser.newContext({viewport:{width:1440,height:1100},reducedMotion:'reduce'});
+            const page=await ctx.newPage();
+            await page.goto('http://127.0.0.1:4174/membership',{waitUntil:'networkidle',timeout:30000});
+            await page.waitForSelector('[data-membership-delivery="fallback"]',{timeout:10000});
+            report.gcsdaMembership=await page.evaluate(()=>({
+              deliveryState:document.querySelector('[data-membership-delivery]')?.getAttribute('data-membership-delivery')||null,
+              formPresent:Boolean(document.querySelector('#gcsda-membership-form')),
+              lineLink:Boolean(document.querySelector('[data-membership-delivery="fallback"] a[href*="line.me"]'))
+            }));
+            await page.screenshot({path:'/tmp/audit/gcsda-membership-fallback-full.png',fullPage:true});
+            await ctx.close();
+          }
+
+          {
+            const ctx=await browser.newContext({viewport:{width:1440,height:1100},reducedMotion:'reduce'});
+            const page=await ctx.newPage();
+            await page.route('**/api/gcsda-membership-submit',async route=>{
+              const method=route.request().method();
+              if(method==='GET')return route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({ok:true,resendConfigured:true,recipientConfigured:true,acceptsFiles:false})});
+              if(method==='POST')return route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({ok:true,receiptId:'GCSDA-QA-TEST'})});
+              return route.fulfill({status:405,contentType:'application/json',body:JSON.stringify({ok:false})});
+            });
+            await page.goto('http://127.0.0.1:4174/membership',{waitUntil:'networkidle',timeout:30000});
+            await page.waitForSelector('#gcsda-membership-form',{timeout:10000});
+            await page.getByLabel('姓名').fill('GCSDA QA');
+            await page.getByLabel('聯絡電話').fill('0912345678');
+            await page.getByLabel('電子郵件').fill('qa@example.invalid');
+            await page.getByRole('button',{name:'下一步：專業背景'}).click();
+            await page.getByLabel('現職單位／機構').fill('QA Organization');
+            await page.getByLabel('職稱').fill('QA');
+            await page.getByLabel('法律',{exact:true}).check();
+            await page.getByRole('button',{name:'下一步：參與申請'}).click();
+            await page.getByLabel('申請來源').selectOption({label:'自主申請'});
+            await page.getByLabel('申請加入學會的原因').fill('這是一段只用於自動化驗收的測試文字，用來確認會員申請流程、必填欄位、步驟切換與成功狀態皆可正常運作，不會送出真實資料。');
+            await page.getByRole('button',{name:'下一步：確認資料'}).click();
+            await page.getByText('我確認以上資料真實').locator('..').getByRole('checkbox').check();
+            await page.getByText('我同意學會於會員資格審查').locator('..').getByRole('checkbox').check();
+            await page.getByRole('button',{name:'送出會員資格申請'}).click();
+            await page.waitForFunction(()=>document.querySelector('.g4-form-status')?.textContent?.includes('入會申請已送出'));
+            report.gcsdaMembershipOnline=await page.evaluate(()=>({
+              deliveryState:document.querySelector('[data-membership-delivery]')?.getAttribute('data-membership-delivery')||null,
+              successText:document.querySelector('.g4-form-status')?.textContent?.trim()||null
+            }));
+            await ctx.close();
+          }
+
+          {
+            const dist=path.join(process.env.GITHUB_WORKSPACE,'gcsda-src','dist');
+            const sitemap=fs.readFileSync(path.join(dist,'sitemap.xml'),'utf8');
+            const robots=fs.readFileSync(path.join(dist,'robots.txt'),'utf8');
+            const aboutHtml=fs.readFileSync(path.join(dist,'gcsda-about.html'),'utf8');
+            const routes=['/','/about','/governance','/council','/membership','/events','/knowledge','/charter','/privacy'];
+            report.gcsdaBuild={
+              sitemapHasAllRoutes:routes.every(route=>sitemap.includes('https://gcsda.example.invalid'+route)),
+              robotsIndexable:robots.includes('Allow: /')&&robots.includes('https://gcsda.example.invalid/sitemap.xml'),
+              staticCanonical:aboutHtml.includes('rel="canonical" href="https://gcsda.example.invalid/about"'),
+              staticOrganizationSchema:aboutHtml.includes('"@type":"Organization"')
+            };
           }
 
           {
@@ -277,6 +362,17 @@ jobs:
               }
             }
           }
+          const gcsdaMetadataFailures=report.sites.filter(x=>
+            x.site==='gcsda'&&x.label==='desktop'&&(
+              x.robotsMeta!=='index,follow'||
+              x.canonical!=='https://gcsda.example.invalid'+x.route||
+              x.organizationSchema!=='Organization'
+            )
+          ).map(x=>({route:x.route,robotsMeta:x.robotsMeta,canonical:x.canonical,organizationSchema:x.organizationSchema}));
+          const gcsdaCouncilFailure=!report.gcsdaCouncil||!report.gcsdaCouncil.complete||report.gcsdaCouncil.naturalWidth<1000||report.gcsdaCouncil.naturalHeight<560||report.gcsdaCouncil.objectFit!=='contain';
+          const gcsdaMembershipFallbackFailure=!report.gcsdaMembership||report.gcsdaMembership.deliveryState!=='fallback'||report.gcsdaMembership.formPresent||!report.gcsdaMembership.lineLink;
+          const gcsdaMembershipOnlineFailure=!report.gcsdaMembershipOnline||report.gcsdaMembershipOnline.deliveryState!=='online'||!report.gcsdaMembershipOnline.successText?.includes('入會申請已送出');
+          const gcsdaBuildFailure=!report.gcsdaBuild||!report.gcsdaBuild.sitemapHasAllRoutes||!report.gcsdaBuild.robotsIndexable||!report.gcsdaBuild.staticCanonical||!report.gcsdaBuild.staticOrganizationSchema;
           const sttHeader=report.headers.find(x=>x.site==='stt');
           const gcsdaHeader=report.headers.find(x=>x.site==='gcsda');
           const sttSeal=sttHeader?.brandOptical?.visibleLeftMarkHeight??null;
@@ -294,13 +390,22 @@ jobs:
             gcsdaHeroResolutionFailures,
             heroCopyAnchorFailures,
             crossSiteHeroCollisions,
+            gcsdaMetadataFailures,
+            gcsdaCouncil:report.gcsdaCouncil,
+            gcsdaMembership:report.gcsdaMembership,
+            gcsdaMembershipOnline:report.gcsdaMembershipOnline,
+            gcsdaBuild:report.gcsdaBuild,
+            gcsdaCouncilFailure,
+            gcsdaMembershipFallbackFailure,
+            gcsdaMembershipOnlineFailure,
+            gcsdaBuildFailure,
             headers:report.headers,
             logoOptical:{sttSeal,gcsdaSeal,difference:logoOpticalDifference,passed:!logoOpticalFailure},
             note:'Screenshots are mandatory review evidence. CSS presence, successful builds, and naturalWidth alone are never visual PASS.'
           },null,2));
 
-          if(failures.length||bookFailures.length||missingBooks.length||lowResolutionBooks.length||gcsdaHeroResolutionFailures.length||heroCopyAnchorFailures.length||crossSiteHeroCollisions.length||logoOpticalFailure){
-            console.error(JSON.stringify({failures,bookFailures,missingBooks,lowResolutionBooks,gcsdaHeroResolutionFailures,heroCopyAnchorFailures,crossSiteHeroCollisions,logoOptical:{sttSeal,gcsdaSeal,difference:logoOpticalDifference,passed:!logoOpticalFailure}},null,2));
+          if(failures.length||bookFailures.length||missingBooks.length||lowResolutionBooks.length||gcsdaHeroResolutionFailures.length||heroCopyAnchorFailures.length||crossSiteHeroCollisions.length||gcsdaMetadataFailures.length||gcsdaCouncilFailure||gcsdaMembershipFallbackFailure||gcsdaMembershipOnlineFailure||gcsdaBuildFailure||logoOpticalFailure){
+            console.error(JSON.stringify({failures,bookFailures,missingBooks,lowResolutionBooks,gcsdaHeroResolutionFailures,heroCopyAnchorFailures,crossSiteHeroCollisions,gcsdaMetadataFailures,gcsdaCouncil:report.gcsdaCouncil,gcsdaMembership:report.gcsdaMembership,gcsdaMembershipOnline:report.gcsdaMembershipOnline,gcsdaBuild:report.gcsdaBuild,gcsdaCouncilFailure,gcsdaMembershipFallbackFailure,gcsdaMembershipOnlineFailure,gcsdaBuildFailure,logoOptical:{sttSeal,gcsdaSeal,difference:logoOpticalDifference,passed:!logoOpticalFailure}},null,2));
             process.exitCode=1;
           }
           JS
