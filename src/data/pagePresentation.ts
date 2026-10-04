@@ -66,10 +66,11 @@ export const PAGE_PRESENTATION: Record<string, PagePresentation> = {
   },
   "/about": {
     "lines": [
-      "STT Governance 不是一般顧問公司，",
+      "STT Governance",
+      "不是一般顧問公司，",
       "而是高位階治理文明平台。"
     ],
-    "type": 2,
+    "type": 3,
     "image": "/visual-bank/stt/user-approved-six/about-stt.png",
     "originalTitle": "STT Governance 不是一般顧問公司，而是高位階治理文明平台。",
     "context": null,
