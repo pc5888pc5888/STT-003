@@ -51,8 +51,8 @@ export const PAGE_PRESENTATION: Record<string, PagePresentation> = {
     "originalTitle": "跨域專業，不等於權責混同。",
     "context": null,
     "portrait": false,
-    "imageWidth": 1491,
-    "imageHeight": 1055
+    "imageWidth": 1672,
+    "imageHeight": 941
   },
   "/membership": {
     "lines": [
