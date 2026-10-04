@@ -10,11 +10,15 @@
   "gcsdaMetadataFailures": [],
   "gcsdaCouncil": {
     "complete": true,
-    "naturalWidth": 1000,
-    "naturalHeight": 563,
-    "renderedWidth": 970,
-    "renderedHeight": 546,
+    "naturalWidth": 700,
+    "naturalHeight": 394,
+    "renderedWidth": 670,
+    "renderedHeight": 377,
     "objectFit": "contain",
+    "opacity": 1,
+    "visibility": "visible",
+    "display": "block",
+    "nonWhitePixelRatio": 0.43976794778825234,
     "alt": "策略治理聯席會成員團體照"
   },
   "gcsdaMembership": {
