@@ -174,8 +174,8 @@ function AppRoutes() {
       <Route path="/professional-boundary" element={<ProfessionalBoundaryPage />} />
 
       <Route path="/research" element={<Navigate to="/insights" replace />} />
-      <Route path="/books" element={<Navigate to="/insights" replace />} />
-      <Route path="/books/internal-compliance" element={<Navigate to="/insights" replace />} />
+      <Route path="/books" element={<Navigate to="/insights?theme=civilization" replace />} />
+      <Route path="/books/internal-compliance" element={<Navigate to="/insights?theme=civilization" replace />} />
 
       <Route path="/domains" element={<Navigate to="/how-stt-works" replace />} />
       <Route path="/domains/:slug" element={<Navigate to="/how-stt-works" replace />} />
