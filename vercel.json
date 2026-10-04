@@ -127,6 +127,16 @@
   ],
   "redirects": [
     {
+      "source": "/books",
+      "destination": "/insights?theme=civilization",
+      "permanent": true
+    },
+    {
+      "source": "/books/internal-compliance",
+      "destination": "/insights?theme=civilization",
+      "permanent": true
+    },
+    {
       "source": "/publications",
       "destination": "/insights",
       "permanent": true
