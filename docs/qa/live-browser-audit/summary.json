@@ -5,6 +5,7 @@
   "missingBooks": [],
   "lowResolutionBooks": [],
   "gcsdaHeroResolutionFailures": [],
+  "heroCopyAnchorFailures": [],
   "crossSiteHeroCollisions": [],
   "headers": [
     {
