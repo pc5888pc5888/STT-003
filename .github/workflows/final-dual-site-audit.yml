@@ -61,13 +61,15 @@ jobs:
           printf 'STT_HEAD=%s\nGCSDA_HEAD=%s\n' "$(git -C "$GITHUB_WORKSPACE/stt-src" rev-parse HEAD)" "$(git -C "$GITHUB_WORKSPACE/gcsda-src" rev-parse HEAD)" > /tmp/audit/source-heads.txt
           cat > "$GITHUB_WORKSPACE/audit-run/check.mjs" <<'JS'
           import fs from 'node:fs';
+          import path from 'node:path';
+          import crypto from 'node:crypto';
           import { chromium } from 'playwright';
 
           const browser=await chromium.launch({headless:true});
           const report={generatedAt:new Date().toISOString(),sites:[],books:null,headers:[]};
           const configs=[
             {
-              site:'stt',origin:'http://127.0.0.1:4173',
+              site:'stt',origin:'http://127.0.0.1:4173',sourceRoot:path.join(process.env.GITHUB_WORKSPACE,'stt-src','public'),
               routes:['/','/problems','/how-stt-works','/engagement','/insights','/about','/eric-chuang','/institutions','/start','/privacy','/professional-boundary'],
               expectedImages:{
                 '/':'/visual-bank/stt/user-approved-six/home.png',
@@ -78,7 +80,7 @@ jobs:
               }
             },
             {
-              site:'gcsda',origin:'http://127.0.0.1:4174',
+              site:'gcsda',origin:'http://127.0.0.1:4174',sourceRoot:path.join(process.env.GITHUB_WORKSPACE,'gcsda-src','public'),
               routes:['/','/about','/governance','/council','/membership','/events','/knowledge','/charter'],
               expectedImages:{
                 '/':'/visual-bank/gcsda/home-approved.webp',
@@ -174,9 +176,17 @@ jobs:
                     state.heroGradient.includes('82%')
                   );
 
+                  let heroImageSha256=null;
+                  if(state.heroImage?.startsWith('/')){
+                    const heroFile=path.join(cfg.sourceRoot,state.heroImage.slice(1));
+                    if(fs.existsSync(heroFile)){
+                      heroImageSha256=crypto.createHash('sha256').update(fs.readFileSync(heroFile)).digest('hex');
+                    }
+                  }
+
                   report.sites.push({
                     site:cfg.site,route,label,http:res?.status(),...state,
-                    expectedImage:expected,hasExpected,imageLoaded,
+                    expectedImage:expected,hasExpected,imageLoaded,heroImageSha256,
                     desktopCopyInReadingZone,mobileSeparated,gradientGeometry,errors
                   });
 
@@ -239,6 +249,23 @@ jobs:
           const bookFailures=(report.books?.covers||[]).filter(x=>!x.complete||x.naturalWidth<=0||x.naturalHeight<=0||x.objectFit!=='contain');
           const missingBooks=requiredBookTitles.filter(t=>!(report.books?.covers||[]).some(x=>x.title===t));
           const lowResolutionBooks=(report.books?.covers||[]).filter(x=>x.naturalWidth<800||x.naturalHeight<1000);
+          const gcsdaHeroResolutionFailures=report.sites.filter(x=>
+            x.site==='gcsda'&&x.label==='desktop'&&x.expectedImage&&x.route!=='/'&&
+            (!x.heroImageNatural||x.heroImageNatural[0]<1400||x.heroImageNatural[1]<900)
+          );
+          const desktopHeroes=report.sites.filter(x=>x.label==='desktop'&&x.expectedImage&&x.heroImageSha256);
+          const crossSiteHeroCollisions=[];
+          for(const stt of desktopHeroes.filter(x=>x.site==='stt')){
+            for(const gcsda of desktopHeroes.filter(x=>x.site==='gcsda')){
+              if(stt.heroImageSha256===gcsda.heroImageSha256){
+                crossSiteHeroCollisions.push({
+                  sha256:stt.heroImageSha256,
+                  stt:{route:stt.route,image:stt.heroImage},
+                  gcsda:{route:gcsda.route,image:gcsda.heroImage}
+                });
+              }
+            }
+          }
           const sttHeader=report.headers.find(x=>x.site==='stt');
           const gcsdaHeader=report.headers.find(x=>x.site==='gcsda');
           const sttSeal=sttHeader?.brandOptical?.visibleLeftMarkHeight??null;
@@ -253,13 +280,15 @@ jobs:
             bookFailures,
             missingBooks,
             lowResolutionBooks,
+            gcsdaHeroResolutionFailures,
+            crossSiteHeroCollisions,
             headers:report.headers,
             logoOptical:{sttSeal,gcsdaSeal,difference:logoOpticalDifference,passed:!logoOpticalFailure},
             note:'Screenshots are mandatory review evidence. CSS presence, successful builds, and naturalWidth alone are never visual PASS.'
           },null,2));
 
-          if(failures.length||bookFailures.length||missingBooks.length||lowResolutionBooks.length||logoOpticalFailure){
-            console.error(JSON.stringify({failures,bookFailures,missingBooks,lowResolutionBooks,logoOptical:{sttSeal,gcsdaSeal,difference:logoOpticalDifference,passed:!logoOpticalFailure}},null,2));
+          if(failures.length||bookFailures.length||missingBooks.length||lowResolutionBooks.length||gcsdaHeroResolutionFailures.length||crossSiteHeroCollisions.length||logoOpticalFailure){
+            console.error(JSON.stringify({failures,bookFailures,missingBooks,lowResolutionBooks,gcsdaHeroResolutionFailures,crossSiteHeroCollisions,logoOptical:{sttSeal,gcsdaSeal,difference:logoOpticalDifference,passed:!logoOpticalFailure}},null,2));
             process.exitCode=1;
           }
           JS
