@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-04T02:28:12.681Z",
+  "generatedAt": "2026-10-04T11:24:03.830Z",
   "sites": [
     {
       "site": "stt",
@@ -9,7 +9,7 @@
       "title": "STT Governance｜重大決策・企業治理・家族治理",
       "h1": "讓重要的事，走得更遠。",
       "h1Count": 1,
-      "heroClass": "cis-hero cis-title-2 cis-with-image cis-clear-left",
+      "heroClass": "cis-hero cis-title-1 cis-with-image cis-clear-left",
       "heroImage": "/visual-bank/stt/user-approved-six/home.png",
       "heroImageLoaded": true,
       "heroImageNatural": [
@@ -27,11 +27,11 @@
       "heroImageFit": "contain",
       "copyRect": {
         "left": 52,
-        "top": 435.703125,
+        "top": 456.6875,
         "right": 570.390625,
-        "bottom": 769.203125,
+        "bottom": 748.203125,
         "width": 518.390625,
-        "height": 333.5
+        "height": 291.515625
       },
       "copyBg": "rgba(0, 0, 0, 0)",
       "heroGradient": "linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255) 30%, rgba(255, 255, 255, 0.99) 38%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.34) 70%, rgba(255, 255, 255, 0.12) 77%, rgba(255, 255, 255, 0) 82%)",
@@ -332,9 +332,9 @@
       "label": "desktop",
       "http": 200,
       "title": "關於 STT Governance｜治理判讀與制度設計",
-      "h1": "STT Governance 不是一般顧問公司，而是高位階治理文明平台。",
+      "h1": "STT Governance不是一般顧問公司，而是高位階治理文明平台。",
       "h1Count": 1,
-      "heroClass": "cis-hero cis-title-2 cis-with-image cis-clear-left",
+      "heroClass": "cis-hero cis-title-3 cis-with-image cis-clear-left",
       "heroImage": "/visual-bank/stt/user-approved-six/about-stt.png",
       "heroImageLoaded": true,
       "heroImageNatural": [
@@ -352,11 +352,11 @@
       "heroImageFit": "contain",
       "copyRect": {
         "left": 52,
-        "top": 402.0625,
+        "top": 407.90625,
         "right": 570.390625,
-        "bottom": 802.828125,
+        "bottom": 797,
         "width": 518.390625,
-        "height": 400.765625
+        "height": 389.09375
       },
       "copyBg": "rgba(0, 0, 0, 0)",
       "heroGradient": "linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255) 30%, rgba(255, 255, 255, 0.99) 38%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.34) 70%, rgba(255, 255, 255, 0.12) 77%, rgba(255, 255, 255, 0) 82%)",
@@ -696,7 +696,7 @@
       "title": "STT Governance｜重大決策・企業治理・家族治理",
       "h1": "讓重要的事，走得更遠。",
       "h1Count": 1,
-      "heroClass": "cis-hero cis-title-2 cis-with-image cis-clear-left",
+      "heroClass": "cis-hero cis-title-1 cis-with-image cis-clear-left",
       "heroImage": "/visual-bank/stt/user-approved-six/home.png",
       "heroImageLoaded": true,
       "heroImageNatural": [
@@ -714,11 +714,11 @@
       "heroImageFit": "contain",
       "copyRect": {
         "left": 36,
-        "top": 140.5625,
+        "top": 133.5625,
         "right": 355.796875,
-        "bottom": 605.640625,
+        "bottom": 612.640625,
         "width": 319.796875,
-        "height": 465.078125
+        "height": 479.078125
       },
       "copyBg": "rgba(0, 0, 0, 0)",
       "heroGradient": "linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255) 30%, rgba(255, 255, 255, 0.99) 38%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.34) 70%, rgba(255, 255, 255, 0.12) 77%, rgba(255, 255, 255, 0) 82%)",
@@ -1019,9 +1019,9 @@
       "label": "tablet",
       "http": 200,
       "title": "關於 STT Governance｜治理判讀與制度設計",
-      "h1": "STT Governance 不是一般顧問公司，而是高位階治理文明平台。",
+      "h1": "STT Governance不是一般顧問公司，而是高位階治理文明平台。",
       "h1Count": 1,
-      "heroClass": "cis-hero cis-title-2 cis-with-image cis-clear-left",
+      "heroClass": "cis-hero cis-title-3 cis-with-image cis-clear-left",
       "heroImage": "/visual-bank/stt/user-approved-six/about-stt.png",
       "heroImageLoaded": true,
       "heroImageNatural": [
@@ -1039,11 +1039,11 @@
       "heroImageFit": "contain",
       "copyRect": {
         "left": 36,
-        "top": 128.375,
+        "top": 131.15625,
         "right": 355.796875,
-        "bottom": 617.8125,
+        "bottom": 615.03125,
         "width": 319.796875,
-        "height": 489.4375
+        "height": 483.875
       },
       "copyBg": "rgba(0, 0, 0, 0)",
       "heroGradient": "linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255) 30%, rgba(255, 255, 255, 0.99) 38%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.34) 70%, rgba(255, 255, 255, 0.12) 77%, rgba(255, 255, 255, 0) 82%)",
@@ -1383,7 +1383,7 @@
       "title": "STT Governance｜重大決策・企業治理・家族治理",
       "h1": "讓重要的事，走得更遠。",
       "h1Count": 1,
-      "heroClass": "cis-hero cis-title-2 cis-with-image cis-clear-left",
+      "heroClass": "cis-hero cis-title-1 cis-with-image cis-clear-left",
       "heroImage": "/visual-bank/stt/user-approved-six/home.png",
       "heroImageLoaded": true,
       "heroImageNatural": [
@@ -1403,9 +1403,9 @@
         "left": 0,
         "top": 358.953125,
         "right": 390,
-        "bottom": 816.359375,
+        "bottom": 779.53125,
         "width": 390,
-        "height": 457.40625
+        "height": 420.578125
       },
       "copyBg": "rgb(251, 250, 247)",
       "heroGradient": "linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255) 30%, rgba(255, 255, 255, 0.99) 38%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.34) 70%, rgba(255, 255, 255, 0.12) 77%, rgba(255, 255, 255, 0) 82%)",
@@ -1706,9 +1706,9 @@
       "label": "mobile",
       "http": 200,
       "title": "關於 STT Governance｜治理判讀與制度設計",
-      "h1": "STT Governance 不是一般顧問公司，而是高位階治理文明平台。",
+      "h1": "STT Governance不是一般顧問公司，而是高位階治理文明平台。",
       "h1Count": 1,
-      "heroClass": "cis-hero cis-title-2 cis-with-image cis-clear-left",
+      "heroClass": "cis-hero cis-title-3 cis-with-image cis-clear-left",
       "heroImage": "/visual-bank/stt/user-approved-six/about-stt.png",
       "heroImageLoaded": true,
       "heroImageNatural": [
@@ -1728,9 +1728,9 @@
         "left": 0,
         "top": 358.953125,
         "right": 390,
-        "bottom": 819.359375,
+        "bottom": 812.421875,
         "width": 390,
-        "height": 460.40625
+        "height": 453.46875
       },
       "copyBg": "rgb(251, 250, 247)",
       "heroGradient": "linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255) 30%, rgba(255, 255, 255, 0.99) 38%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.34) 70%, rgba(255, 255, 255, 0.12) 77%, rgba(255, 255, 255, 0) 82%)",
