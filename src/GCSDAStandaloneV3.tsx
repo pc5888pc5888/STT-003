@@ -186,7 +186,7 @@ function About(){return <div className="g4-page"><PageHead eyebrow="INSTITUTIONA
 
 function Governance(){return <div className="g4-page"><PageHead eyebrow="INSTITUTIONAL GOVERNANCE" title="學會本身先接受治理：權力來源、任期、職權與責任都應可被理解。" lead="網站公開學會正式治理架構與第一屆理監事名錄；具體人數、職權、任期與程序以章程及正式會務文件為準。"/><section className="g4-section"><div className="g4-wrap"><div className="g4-grid">{[["01","會員大會","作為學會正式治理體系的一部分，其法定職權依章程與人民團體相關規範。"],["02","理事會","理事 9 人、常務理事 3 人；理事長、副理事長與候補理事之配置依正式章程。"],["03","監事會","監事 3 人、常務監事 1 人、候補監事 1 人；負責監察相關職權。"]].map(x=><div className="g4-card" key={x[0]}><span>{x[0]}</span><h2>{x[1]}</h2><p>{x[2]}</p></div>)}</div><div className="g4-kicker" style={{marginTop:58}}>FIRST BOARD & SUPERVISORS</div><h2 className="g4-title">第一屆理監事會</h2><div className="g4-directory">{directory.map(([role,name,title])=><div className="g4-person" key={`${role}-${name}`}><small>{role}</small><h3>{name}</h3>{title&&<p>{title}</p>}</div>)}</div><div className="g4-note"><h3>職務資訊</h3><p>名錄以學會職務為主；外部機構職銜僅在有正式公開依據時呈現，並以本人或所屬機構最新公開資訊為準。</p></div></div></section></div>}
 
-function Council(){return <div className="g4-page"><PageHead eyebrow="STRATEGIC GOVERNANCE COUNCIL" title="跨域專業，不等於權責混同。" lead="策略治理聯席會以議題為中心，連結法律、會計、策略、產業與學術專業，在各自責任邊界內形成交流、研究與治理實務的共同語言。"/><section className="g4-section"><div className="g4-wrap"><div className="g4-grid">{[["01","議題導向","從企業治理、策略、法遵、永續與其他正式議題出發，不以固定專家名單製造全能顧問印象。"],["02","專業邊界","不同專業者只在其資格、經驗與責任範圍內提供意見；必要時由具正式資格者承接專業工作。"],["03","紀錄與成果","正式講座、交流紀錄或研究成果完成後再公開，不以尚未發生的合作或研究裝飾網站。"]].map(x=><div className="g4-card" key={x[0]}><span>{x[0]}</span><h2>{x[1]}</h2><p>{x[2]}</p></div>)}</div><div className="g4-note"><h2>制度界線</h2><p>策略治理聯席會屬學會之專業協作／交流機制；除非正式章程或會員大會／理事會決議另有明文，不取代會員大會、理事會或監事會之法定職權。</p></div></div></section></div>}
+function Council(){return <div className="g4-page"><PageHead eyebrow="STRATEGIC GOVERNANCE COUNCIL" title="跨域專業，不等於權責混同。" lead="策略治理聯席會以議題為中心，連結法律、會計、策略、產業與學術專業，在各自責任邊界內形成交流、研究與治理實務的共同語言。"/><section className="g4-section"><div className="g4-wrap"><div className="g4-grid">{[["01","議題導向","從企業治理、策略、法遵、永續與其他正式議題出發，不以固定專家名單製造全能顧問印象。"],["02","專業邊界","不同專業者只在其資格、經驗與責任範圍內提供意見；必要時由具正式資格者承接專業工作。"],["03","紀錄與成果","正式講座、交流紀錄或研究成果完成後再公開，不以尚未發生的合作或研究裝飾網站。"]].map(x=><div className="g4-card" key={x[0]}><span>{x[0]}</span><h2>{x[1]}</h2><p>{x[2]}</p></div>)}</div><div className="g4-council-evidence"><div className="g4-kicker">COUNCIL COMMUNITY</div><h2 className="g4-title">策略治理聯席會成員</h2><p className="g4-lead">聯席會以跨域專業交流為核心；不同專業者仍在各自資格、職權與責任邊界內參與討論與協作。</p><figure className="g4-council-photo"><img data-gcsda-council-photo src="/images/gcsda-council-members.webp" alt="策略治理聯席會成員團體照" width="1000" height="563" loading="lazy" decoding="async"/><figcaption>策略治理聯席會成員團體照（學會提供）。</figcaption></figure></div><div className="g4-note"><h2>制度界線</h2><p>策略治理聯席會屬學會之專業協作／交流機制；除非正式章程或會員大會／理事會決議另有明文，不取代會員大會、理事會或監事會之法定職權。</p></div></div></section></div>}
 
 function Membership(){
   const formRef=useRef<HTMLFormElement>(null);
@@ -199,6 +199,15 @@ function Membership(){
   });
   const [status,setStatus]=useState<"idle"|"sending"|"sent"|"error">("idle");
   const [message,setMessage]=useState("");
+  const [deliveryAvailable,setDeliveryAvailable]=useState<boolean|null>(null);
+  useEffect(()=>{
+    let active=true;
+    fetch("/api/gcsda-membership-submit",{method:"GET",headers:{"Accept":"application/json"}})
+      .then(response=>response.ok?response.json():Promise.reject(new Error("capability_unavailable")))
+      .then(result=>{if(active)setDeliveryAvailable(Boolean(result?.resendConfigured&&result?.recipientConfigured));})
+      .catch(()=>{if(active)setDeliveryAvailable(false);});
+    return()=>{active=false;};
+  },[]);
   const update=(key:string,value:any)=>setForm(current=>({...current,[key]:value}));
   const toggleList=(key:"expertise"|"participation_areas",value:string)=>setForm(current=>{
     const list=current[key];
@@ -253,7 +262,7 @@ function Membership(){
           ].map(([n,t,d])=><div className="g4-membership-flow-item" key={n}><b>{n}</b><strong>{t}</strong><span>{d}</span></div>)}
         </div>
 
-        <form id="gcsda-membership-form" ref={formRef} className="g4-membership-form g4-membership-wizard" onSubmit={submit} aria-busy={status==="sending"}>
+        {deliveryAvailable===null?<div className="g4-note g4-membership-delivery" data-membership-delivery="checking"><h3>正在確認線上申請入口</h3><p>若線上送件尚未啟用，本頁會自動提供學會正式會務聯絡方式。</p></div>:deliveryAvailable===false?<div className="g4-note g4-membership-delivery" data-membership-delivery="fallback"><h3>請先透過 LINE 會務聯絡提出入會申請</h3><p>線上表單寄送目前尚未啟用；為避免資料填寫後無法送達，網站暫不顯示送件表單。請由學會 LINE 會務入口聯絡，後續資格審查仍依章程與正式會務程序辦理。</p><div className="g4-actions"><a className="primary" href={LINE_URL} target="_blank" rel="noreferrer">LINE 會務聯絡 ↗</a></div></div>:<form id="gcsda-membership-form" ref={formRef} className="g4-membership-form g4-membership-wizard" onSubmit={submit} aria-busy={status==="sending"} data-membership-delivery="online">
           <div className="g4-form-stepper" aria-label="入會申請步驟">
             {["基本資料","專業背景","參與申請","確認送出"].map((label,index)=>{
               const n=index+1; return <div className={`g4-form-step-indicator${step===n?" is-active":""}${step>n?" is-done":""}`} key={label}><em>{step>n?"✓":n}</em><span>{label}</span></div>;
@@ -318,7 +327,7 @@ function Membership(){
           </section>
 
           {message&&<p className={status==="error"?"g4-form-error":"g4-form-status"} role="status">{message}</p>}
-        </form>
+        </form>}
 
         <div className="g4-actions g4-membership-contact"><a href={LINE_URL} target="_blank" rel="noreferrer">LINE 會務聯絡 ↗</a></div>
       </div>
@@ -334,7 +343,7 @@ function Knowledge(){return <div className="g4-page"><PageHead eyebrow="KNOWLEDG
 
 function Charter(){return <div className="g4-page"><PageHead eyebrow="CHARTER & NOTICE" title="章程不是網站附件，而是學會權力來源、會員權利義務與制度運作的正式依據。" lead="本頁呈現可由現有會務資料確認的章程摘要與法定立案資訊；章程全文、公告與會務文件僅收錄已正式核定且可公開之版本。"/><section className="g4-section"><div className="g4-wrap"><div className="g4-list">{charterHighlights.map(([a,b])=><div className="g4-row" key={a}><b>{a}</b><div>{b}</div></div>)}</div><div className="g4-note"><h2>組織法定立案</h2><p>內政部 114/8 台內團字第 1140030747 號。</p></div><div className="g4-note"><h2>公告與正式文件</h2><p>此區只收錄已正式核定、可公開之章程、公告、會員大會或理監事會相關文件；網站說明文字不取代正式法定文件。</p></div></div></section></div>}
 
-function Privacy(){return <div className="g4-page"><PageHead eyebrow="PRIVACY" title="隱私與資料使用" lead="本頁說明學會網站的聯絡入口與資料提供方式。入會、會務與活動事項由 GCSDA 自身的會務程序處理，不因網站互相連結而成為 STT 的治理委任。"/><section className="g4-section"><div className="g4-wrap"><div className="g4-list"><div className="g4-row"><b>入會與會務聯絡</b><div>會員頁提供基本入會申請表，送出內容用於後續資格審查與會務聯絡；網站另保留 LINE 外部服務作為補充聯絡入口，本表不提供檔案上傳。<div className="g4-actions"><a href={LINE_URL} target="_blank" rel="noreferrer">入會與會務聯絡 ↗</a></div></div></div><div className="g4-row"><b>資料提供範圍</b><div>初次聯絡請先說明會務事項與必要聯絡資訊，避免主動傳送身分證件、金融帳戶、醫療資料或其他不必要的敏感內容。正式入會所需資料與程序，請依學會提供的正式說明辦理。</div></div><div className="g4-row"><b>外部服務與機構界線</b><div>進入 LINE 或其他外部網站後，相關服務由各自平台提供。GCSDA 與 STT Governance 是不同機構主體；學會入會不等於 STT 治理委任。</div></div></div></div></section></div>}
+function Privacy(){return <div className="g4-page"><PageHead eyebrow="PRIVACY" title="隱私與資料使用" lead="本頁說明學會網站的聯絡入口與資料提供方式。入會、會務與活動事項由 GCSDA 自身的會務程序處理，不因網站互相連結而成為 STT 的治理委任。"/><section className="g4-section"><div className="g4-wrap"><div className="g4-list"><div className="g4-row"><b>入會與會務聯絡</b><div>會員頁會先確認線上送件功能是否已正式啟用；啟用時，申請資料由網站後端轉送至學會指定的會務收件管道，用於資格審查與後續聯絡；未啟用時，網站不要求填寫表單，改提供 LINE 會務聯絡入口。本頁不提供檔案上傳。<div className="g4-actions"><a href={LINE_URL} target="_blank" rel="noreferrer">入會與會務聯絡 ↗</a></div></div></div><div className="g4-row"><b>資料提供範圍</b><div>初次聯絡請先說明會務事項與必要聯絡資訊，避免主動傳送身分證件、金融帳戶、醫療資料或其他不必要的敏感內容。正式入會所需資料與程序，請依學會提供的正式說明辦理。</div></div><div className="g4-row"><b>外部服務與機構界線</b><div>進入 LINE 或其他外部網站後，相關服務由各自平台提供。GCSDA 與 STT Governance 是不同機構主體；學會入會不等於 STT 治理委任。</div></div></div></div></section></div>}
 
 
 function NotFound(){return <div className="g4-page"><PageHead eyebrow="404" title="找不到這個頁面。" lead="這個網址不在中華企業策略永續發展學會目前公開的正式網站路由中。"/><section className="g4-section"><div className="g4-wrap"><div className="g4-actions"><Link className="primary" to="/">回到學會首頁</Link></div></div></section></div>}

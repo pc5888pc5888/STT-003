@@ -49,6 +49,10 @@ export function applyGcsdaMetadata(path:string){
  document.title=title;set("description",description);set("robots",origin&&meta?"index,follow":"noindex,follow");
  set("og:title",title,true);set("og:description",description,true);set("og:site_name","中華企業策略永續發展學會｜GCSDA",true);set("og:type","website",true);set("og:locale","zh_TW",true);
  document.head.querySelectorAll('link[rel="canonical"]').forEach(el=>el.remove());
- if(origin&&meta){const link=document.createElement("link");link.rel="canonical";link.href=origin+path;document.head.appendChild(link);set("og:url",origin+path,true);set("og:image",origin+"/images/gcsda-logo.png",true);}
- else{document.head.querySelectorAll('meta[property="og:url"],meta[property="og:image"]').forEach(el=>el.remove());}
+ document.getElementById("gcsda-organization-schema")?.remove();
+ if(origin&&meta){
+  const link=document.createElement("link");link.rel="canonical";link.href=origin+path;document.head.appendChild(link);set("og:url",origin+path,true);set("og:image",origin+"/images/gcsda-logo.png",true);set("og:image:alt","中華企業策略永續發展學會 GCSDA 標誌",true);
+  const schema=document.createElement("script");schema.id="gcsda-organization-schema";schema.type="application/ld+json";schema.text=JSON.stringify({"@context":"https://schema.org","@type":"Organization","name":"中華企業策略永續發展學會","alternateName":"GCSDA","url":origin,"logo":origin+"/images/gcsda-logo.png"});document.head.appendChild(schema);
+ }
+ else{document.head.querySelectorAll('meta[property="og:url"],meta[property="og:image"],meta[property="og:image:alt"]').forEach(el=>el.remove());}
 }
