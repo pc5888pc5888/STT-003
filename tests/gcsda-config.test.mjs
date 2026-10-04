@@ -1,0 +1,3 @@
+import test from 'node:test';import assert from 'node:assert/strict';import {GCSDA_META,verifiedGcsdaOrigin} from '../src/gcsdaMetadata.ts';
+test('GCSDA formal route set is independent',()=>{assert.equal(Object.keys(GCSDA_META).length,9);assert.ok(GCSDA_META['/charter']);assert.equal(GCSDA_META['/engagement'],undefined);assert.equal(new Set(Object.values(GCSDA_META).map(m=>m.title)).size,9)});
+test('no invented production origin',()=>{for(const value of [undefined,'','http://example.org','https://stt-003.vercel.app','https://example-git-draft.vercel.app','https://example.org/private','https://user:password@example.org'])assert.equal(verifiedGcsdaOrigin(value),'');assert.equal(verifiedGcsdaOrigin('https://example.org'),'https://example.org')});

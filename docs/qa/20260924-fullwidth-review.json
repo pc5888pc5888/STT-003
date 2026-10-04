@@ -1,0 +1,11 @@
+{
+  "site": "gcsda",
+  "pageCount": 10,
+  "renders": 30,
+  "failed": [],
+  "fullWidthNaturalAspectChecked": true,
+  "wrongDatabasePortraitsRemoved": true,
+  "productionChanged": false,
+  "wholeProjectAccepted": false,
+  "realMailVerified": false
+}
