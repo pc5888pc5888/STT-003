@@ -12,12 +12,15 @@ import gcsdaLogo2 from "./gcsda-logo-parts/part2";
 import gcsdaLogo3 from "./gcsda-logo-parts/part3";
 import gcsdaLogo4 from "./gcsda-logo-parts/part4";
 import gcsdaLogo5 from "./gcsda-logo-parts/part5";
+import gcsdaCouncilPhoto0 from "./gcsda-council-photo-parts/part0";
+import gcsdaCouncilPhoto1 from "./gcsda-council-photo-parts/part1";
 
 const STT_URL = "https://stt-003.vercel.app/";
 const LINE_URL = "https://line.me/R/ti/p/@387nbnjs";
 const GCSDA_HEADER_LOGO_DATA =
   "data:image/webp;base64," +
   gcsdaLogo0 + gcsdaLogo1 + gcsdaLogo2 + gcsdaLogo3 + gcsdaLogo4 + gcsdaLogo5;
+const GCSDA_COUNCIL_PHOTO_DATA = "data:image/webp;base64," + gcsdaCouncilPhoto0 + gcsdaCouncilPhoto1;
 
 const TITLE_BREAK_MARKS = ["，", "；", "：", "！", "？", "｜", ",", ";", ":", "!", "?", "|"] as const;
 
@@ -186,7 +189,7 @@ function About(){return <div className="g4-page"><PageHead eyebrow="INSTITUTIONA
 
 function Governance(){return <div className="g4-page"><PageHead eyebrow="INSTITUTIONAL GOVERNANCE" title="學會本身先接受治理：權力來源、任期、職權與責任都應可被理解。" lead="網站公開學會正式治理架構與第一屆理監事名錄；具體人數、職權、任期與程序以章程及正式會務文件為準。"/><section className="g4-section"><div className="g4-wrap"><div className="g4-grid">{[["01","會員大會","作為學會正式治理體系的一部分，其法定職權依章程與人民團體相關規範。"],["02","理事會","理事 9 人、常務理事 3 人；理事長、副理事長與候補理事之配置依正式章程。"],["03","監事會","監事 3 人、常務監事 1 人、候補監事 1 人；負責監察相關職權。"]].map(x=><div className="g4-card" key={x[0]}><span>{x[0]}</span><h2>{x[1]}</h2><p>{x[2]}</p></div>)}</div><div className="g4-kicker" style={{marginTop:58}}>FIRST BOARD & SUPERVISORS</div><h2 className="g4-title">第一屆理監事會</h2><div className="g4-directory">{directory.map(([role,name,title])=><div className="g4-person" key={`${role}-${name}`}><small>{role}</small><h3>{name}</h3>{title&&<p>{title}</p>}</div>)}</div><div className="g4-note"><h3>職務資訊</h3><p>名錄以學會職務為主；外部機構職銜僅在有正式公開依據時呈現，並以本人或所屬機構最新公開資訊為準。</p></div></div></section></div>}
 
-function Council(){return <div className="g4-page"><PageHead eyebrow="STRATEGIC GOVERNANCE COUNCIL" title="跨域專業，不等於權責混同。" lead="策略治理聯席會以議題為中心，連結法律、會計、策略、產業與學術專業，在各自責任邊界內形成交流、研究與治理實務的共同語言。"/><section className="g4-section"><div className="g4-wrap"><div className="g4-grid">{[["01","議題導向","從企業治理、策略、法遵、永續與其他正式議題出發，不以固定專家名單製造全能顧問印象。"],["02","專業邊界","不同專業者只在其資格、經驗與責任範圍內提供意見；必要時由具正式資格者承接專業工作。"],["03","紀錄與成果","正式講座、交流紀錄或研究成果完成後再公開，不以尚未發生的合作或研究裝飾網站。"]].map(x=><div className="g4-card" key={x[0]}><span>{x[0]}</span><h2>{x[1]}</h2><p>{x[2]}</p></div>)}</div><div className="g4-council-evidence"><div className="g4-kicker">COUNCIL COMMUNITY</div><h2 className="g4-title">策略治理聯席會成員</h2><p className="g4-lead">聯席會以跨域專業交流為核心；不同專業者仍在各自資格、職權與責任邊界內參與討論與協作。</p><figure className="g4-council-photo"><img data-gcsda-council-photo src="/images/gcsda-council-members.webp" alt="策略治理聯席會成員團體照" width="1000" height="563" loading="eager" decoding="async"/><figcaption>策略治理聯席會成員團體照（學會提供）。</figcaption></figure></div><div className="g4-note"><h2>制度界線</h2><p>策略治理聯席會屬學會之專業協作／交流機制；除非正式章程或會員大會／理事會決議另有明文，不取代會員大會、理事會或監事會之法定職權。</p></div></div></section></div>}
+function Council(){return <div className="g4-page"><PageHead eyebrow="STRATEGIC GOVERNANCE COUNCIL" title="跨域專業，不等於權責混同。" lead="策略治理聯席會以議題為中心，連結法律、會計、策略、產業與學術專業，在各自責任邊界內形成交流、研究與治理實務的共同語言。"/><section className="g4-section"><div className="g4-wrap"><div className="g4-grid">{[["01","議題導向","從企業治理、策略、法遵、永續與其他正式議題出發，不以固定專家名單製造全能顧問印象。"],["02","專業邊界","不同專業者只在其資格、經驗與責任範圍內提供意見；必要時由具正式資格者承接專業工作。"],["03","紀錄與成果","正式講座、交流紀錄或研究成果完成後再公開，不以尚未發生的合作或研究裝飾網站。"]].map(x=><div className="g4-card" key={x[0]}><span>{x[0]}</span><h2>{x[1]}</h2><p>{x[2]}</p></div>)}</div><div className="g4-council-evidence"><div className="g4-kicker">COUNCIL COMMUNITY</div><h2 className="g4-title">策略治理聯席會成員</h2><p className="g4-lead">聯席會以跨域專業交流為核心；不同專業者仍在各自資格、職權與責任邊界內參與討論與協作。</p><figure className="g4-council-photo"><img data-gcsda-council-photo src={GCSDA_COUNCIL_PHOTO_DATA} alt="策略治理聯席會成員團體照" width="700" height="394" loading="eager" decoding="async"/><figcaption>策略治理聯席會成員團體照（學會提供）。</figcaption></figure></div><div className="g4-note"><h2>制度界線</h2><p>策略治理聯席會屬學會之專業協作／交流機制；除非正式章程或會員大會／理事會決議另有明文，不取代會員大會、理事會或監事會之法定職權。</p></div></div></section></div>}
 
 function Membership(){
   const formRef=useRef<HTMLFormElement>(null);
