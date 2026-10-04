@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-04T11:34:46.621Z",
+  "generatedAt": "2026-10-04T21:21:43.073Z",
   "sites": [
     {
       "site": "stt",
@@ -27,9 +27,9 @@
       "heroImageFit": "contain",
       "copyRect": {
         "left": 52,
-        "top": 457,
+        "top": 273,
         "right": 570.390625,
-        "bottom": 748.515625,
+        "bottom": 564.515625,
         "width": 518.390625,
         "height": 291.515625
       },
@@ -94,9 +94,9 @@
       "heroImageFit": "contain",
       "copyRect": {
         "left": 52,
-        "top": 457,
+        "top": 273,
         "right": 570.390625,
-        "bottom": 677.015625,
+        "bottom": 493.015625,
         "width": 518.390625,
         "height": 220.015625
       },
@@ -161,9 +161,9 @@
       "heroImageFit": "contain",
       "copyRect": {
         "left": 52,
-        "top": 457,
+        "top": 273,
         "right": 570.390625,
-        "bottom": 677.015625,
+        "bottom": 493.015625,
         "width": 518.390625,
         "height": 220.015625
       },
@@ -285,9 +285,9 @@
       "heroImageFit": "contain",
       "copyRect": {
         "left": 52,
-        "top": 457,
+        "top": 273,
         "right": 570.390625,
-        "bottom": 719,
+        "bottom": 535,
         "width": 518.390625,
         "height": 262
       },
@@ -352,9 +352,9 @@
       "heroImageFit": "contain",
       "copyRect": {
         "left": 52,
-        "top": 457,
+        "top": 273,
         "right": 570.390625,
-        "bottom": 846.09375,
+        "bottom": 662.09375,
         "width": 518.390625,
         "height": 389.09375
       },
@@ -2088,9 +2088,9 @@
       "heroImageFit": "contain",
       "copyRect": {
         "left": 52,
-        "top": 456,
+        "top": 272,
         "right": 570.390625,
-        "bottom": 789.5,
+        "bottom": 605.5,
         "width": 518.390625,
         "height": 333.5
       },
@@ -2155,9 +2155,9 @@
       "heroImageFit": "contain",
       "copyRect": {
         "left": 52,
-        "top": 456,
+        "top": 272,
         "right": 570.390625,
-        "bottom": 718,
+        "bottom": 534,
         "width": 518.390625,
         "height": 262
       },
@@ -2222,9 +2222,9 @@
       "heroImageFit": "contain",
       "copyRect": {
         "left": 52,
-        "top": 456,
+        "top": 272,
         "right": 570.390625,
-        "bottom": 723.578125,
+        "bottom": 539.578125,
         "width": 518.390625,
         "height": 267.578125
       },
@@ -2289,9 +2289,9 @@
       "heroImageFit": "contain",
       "copyRect": {
         "left": 52,
-        "top": 456,
+        "top": 272,
         "right": 570.390625,
-        "bottom": 684.859375,
+        "bottom": 500.859375,
         "width": 518.390625,
         "height": 228.859375
       },
@@ -2356,9 +2356,9 @@
       "heroImageFit": "contain",
       "copyRect": {
         "left": 52,
-        "top": 456,
+        "top": 272,
         "right": 570.390625,
-        "bottom": 684.859375,
+        "bottom": 500.859375,
         "width": 518.390625,
         "height": 228.859375
       },
@@ -2423,9 +2423,9 @@
       "heroImageFit": "contain",
       "copyRect": {
         "left": 52,
-        "top": 456,
+        "top": 272,
         "right": 570.390625,
-        "bottom": 684.859375,
+        "bottom": 500.859375,
         "width": 518.390625,
         "height": 228.859375
       },
@@ -2490,9 +2490,9 @@
       "heroImageFit": "contain",
       "copyRect": {
         "left": 52,
-        "top": 456,
+        "top": 272,
         "right": 570.390625,
-        "bottom": 684.859375,
+        "bottom": 500.859375,
         "width": 518.390625,
         "height": 228.859375
       },
@@ -2557,9 +2557,9 @@
       "heroImageFit": "contain",
       "copyRect": {
         "left": 52,
-        "top": 456,
+        "top": 272,
         "right": 570.390625,
-        "bottom": 642.875,
+        "bottom": 458.875,
         "width": 518.390625,
         "height": 186.875
       },
