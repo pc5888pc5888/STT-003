@@ -177,3 +177,21 @@
   #root .g4-form-nav button{max-width:100%!important;white-space:normal!important}
   #root .g4-brand{width:min(250px,calc(100vw - 105px))!important;height:58px!important;max-width:none!important;flex:0 1 auto!important}#root .g4-brand img{width:100%!important;height:100%!important;max-width:none!important;max-height:none!important}
 }
+
+/* FIRST-VIEW TITLE ANCHOR — owner-approved homepage composition.
+   Desktop/tablet image-backed thematic pages share one visual title origin.
+   Mobile remains image-first, text-second. */
+@media(min-width:1201px){
+  #root .cis-with-image:not(.cis-portrait) .cis-hero-copy{
+    align-self:start!important;
+    margin-top:364px!important;
+    margin-bottom:0!important;
+  }
+}
+@media(min-width:761px) and (max-width:1200px){
+  #root .cis-with-image:not(.cis-portrait) .cis-hero-copy{
+    align-self:start!important;
+    margin-top:50px!important;
+    margin-bottom:0!important;
+  }
+}
