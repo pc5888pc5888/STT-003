@@ -3,10 +3,9 @@ export type PagePresentation = { lines: string[]; type: number; image: string | 
 export const PAGE_PRESENTATION: Record<string, PagePresentation> = {
   "/": {
     "lines": [
-      "讓重要的事，",
-      "走得更遠。"
+      "讓重要的事，走得更遠。"
     ],
-    "type": 2,
+    "type": 1,
     "image": "/visual-bank/stt/user-approved-six/home.png",
     "originalTitle": "讓重要的事，走得更遠。",
     "context": null,
