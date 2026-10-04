@@ -1,5 +1,5 @@
 {
-  "browserRenderedRoutes": 57,
+  "browserRenderedRoutes": 60,
   "automatedFailures": [],
   "bookFailures": [],
   "missingBooks": [],
@@ -7,6 +7,35 @@
   "gcsdaHeroResolutionFailures": [],
   "heroCopyAnchorFailures": [],
   "crossSiteHeroCollisions": [],
+  "gcsdaMetadataFailures": [],
+  "gcsdaCouncil": {
+    "complete": true,
+    "naturalWidth": 1000,
+    "naturalHeight": 563,
+    "renderedWidth": 970,
+    "renderedHeight": 546,
+    "objectFit": "contain",
+    "alt": "策略治理聯席會成員團體照"
+  },
+  "gcsdaMembership": {
+    "deliveryState": "fallback",
+    "formPresent": false,
+    "lineLink": true
+  },
+  "gcsdaMembershipOnline": {
+    "deliveryState": "online",
+    "successText": "入會申請已送出；送出後進入申請待審狀態，學會將依章程及會務程序進行資料核對與資格審查。"
+  },
+  "gcsdaBuild": {
+    "sitemapHasAllRoutes": true,
+    "robotsIndexable": true,
+    "staticCanonical": true,
+    "staticOrganizationSchema": true
+  },
+  "gcsdaCouncilFailure": false,
+  "gcsdaMembershipFallbackFailure": false,
+  "gcsdaMembershipOnlineFailure": false,
+  "gcsdaBuildFailure": false,
   "headers": [
     {
       "site": "stt",
