@@ -254,6 +254,16 @@ jobs:
             x.site==='gcsda'&&x.label==='desktop'&&x.expectedImage&&x.route!=='/'&&
             (!x.heroImageNatural||x.heroImageNatural[0]<1400||x.heroImageNatural[1]<900)
           );
+          const heroCopyAnchorFailures=report.sites.filter(x=>{
+            if(!x.expectedImage||x.label==='mobile'||x.heroClass?.includes('cis-portrait')||!x.copyRect||!x.heroImageRect) return false;
+            const expectedOffset=x.label==='desktop'?364:50;
+            const actualOffset=x.copyRect.top-x.heroImageRect.top;
+            return Math.abs(actualOffset-expectedOffset)>2;
+          }).map(x=>({
+            site:x.site,route:x.route,label:x.label,
+            expectedOffset:x.label==='desktop'?364:50,
+            actualOffset:x.copyRect.top-x.heroImageRect.top
+          }));
           const desktopHeroes=report.sites.filter(x=>x.label==='desktop'&&x.expectedImage&&x.heroImageSha256);
           const crossSiteHeroCollisions=[];
           for(const stt of desktopHeroes.filter(x=>x.site==='stt')){
@@ -282,14 +292,15 @@ jobs:
             missingBooks,
             lowResolutionBooks,
             gcsdaHeroResolutionFailures,
+            heroCopyAnchorFailures,
             crossSiteHeroCollisions,
             headers:report.headers,
             logoOptical:{sttSeal,gcsdaSeal,difference:logoOpticalDifference,passed:!logoOpticalFailure},
             note:'Screenshots are mandatory review evidence. CSS presence, successful builds, and naturalWidth alone are never visual PASS.'
           },null,2));
 
-          if(failures.length||bookFailures.length||missingBooks.length||lowResolutionBooks.length||gcsdaHeroResolutionFailures.length||crossSiteHeroCollisions.length||logoOpticalFailure){
-            console.error(JSON.stringify({failures,bookFailures,missingBooks,lowResolutionBooks,gcsdaHeroResolutionFailures,crossSiteHeroCollisions,logoOptical:{sttSeal,gcsdaSeal,difference:logoOpticalDifference,passed:!logoOpticalFailure}},null,2));
+          if(failures.length||bookFailures.length||missingBooks.length||lowResolutionBooks.length||gcsdaHeroResolutionFailures.length||heroCopyAnchorFailures.length||crossSiteHeroCollisions.length||logoOpticalFailure){
+            console.error(JSON.stringify({failures,bookFailures,missingBooks,lowResolutionBooks,gcsdaHeroResolutionFailures,heroCopyAnchorFailures,crossSiteHeroCollisions,logoOptical:{sttSeal,gcsdaSeal,difference:logoOpticalDifference,passed:!logoOpticalFailure}},null,2));
             process.exitCode=1;
           }
           JS

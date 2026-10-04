@@ -234,3 +234,21 @@
   #root .lib-book-visual{max-width:520px!important;margin:0 auto!important}
   #root .stt-humanistic-entry__inner{width:calc(100% - 48px);grid-template-columns:1fr;gap:20px}
 }
+
+/* FIRST-VIEW TITLE ANCHOR — owner-approved homepage composition.
+   Desktop/tablet image-backed thematic pages share one visual title origin.
+   Mobile remains image-first, text-second. */
+@media(min-width:1201px){
+  #root .cis-with-image:not(.cis-portrait) .cis-hero-copy{
+    align-self:start!important;
+    margin-top:364px!important;
+    margin-bottom:0!important;
+  }
+}
+@media(min-width:761px) and (max-width:1200px){
+  #root .cis-with-image:not(.cis-portrait) .cis-hero-copy{
+    align-self:start!important;
+    margin-top:50px!important;
+    margin-bottom:0!important;
+  }
+}
