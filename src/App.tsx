@@ -17,6 +17,7 @@ import { applyGovernedMetadata } from "./seo";
 type ShellProps = { children: ReactNode };
 
 const HUMANISTIC_INTERVIEW_URL = "https://shimmering-longma-509244.netlify.app/";
+const GCSDA_URL = "https://gcsda-governance.vercel.app/";
 
 const PRIMARY_NAVIGATION = [
   { label: "你正在面對什麼", path: "/problems" },
@@ -144,6 +145,7 @@ function PublicShell({ children }: ShellProps) {
             <Link to="/institutions">機構合作</Link>
             <Link to="/insights">研究與出版</Link>
             <a href={HUMANISTIC_INTERVIEW_URL} target="_blank" rel="noreferrer">人文地景產｜20 Questions ↗</a>
+            <a href={GCSDA_URL} target="_blank" rel="noreferrer">中華企業策略永續發展學會｜GCSDA ↗</a>
             <Link to="/privacy">隱私</Link>
             <Link to="/professional-boundary">專業服務邊界</Link>
           </nav>
@@ -193,8 +195,8 @@ function AppRoutes() {
       <Route path="/contact.html" element={<Navigate to="/start" replace />} />
 
       <Route path="/humanistic-20q" element={<ExternalRedirect url={HUMANISTIC_INTERVIEW_URL} />} />
-      <Route path="/institution/gcsda" element={<Navigate to="/about" replace />} />
-      <Route path="/gcsda.html" element={<Navigate to="/about" replace />} />
+      <Route path="/institution/gcsda" element={<ExternalRedirect url={GCSDA_URL} />} />
+      <Route path="/gcsda.html" element={<ExternalRedirect url={GCSDA_URL} />} />
 
       <Route path="/internal-compliance" element={<Navigate to="/insights" replace />} />
       <Route path="/internal-compliance/pillars" element={<Navigate to="/insights" replace />} />
