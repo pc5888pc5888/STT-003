@@ -8,10 +8,11 @@
 - Frozen release branch: `gcsda-release-20261005`
 - Browser audit workflow source head: `c2336dd585de586e4510c1892087a8fc342ec0d0`
 - QA evidence publisher head: `706cb1cd3a37891c2b2b38e948df7560b9b6e27b`
-- Website build status: **G10_QA_PASS / READY_FOR_PRODUCTION_ORIGIN**
-- Production publication status: **SOURCE_REQUIRED — official standalone GCSDA origin/domain not yet supplied**
+- Website build status: **G10_QA_PASS / BUILD_LOCKED**
+- Production publication status: **LIVE_COMPLETE**
+- Official free origin: **https://gcsda-governance.vercel.app**
 
-This acceptance does not promote the shared STT Vercel project to GCSDA production and does not treat a branch preview hostname as the association's official URL.
+This acceptance uses the owner-approved no-cost Vercel-hosted origin `https://gcsda-governance.vercel.app` as the association's official public URL. STT remains at its own hostname and organizational identity; the GCSDA public hostname resolves only to the frozen GCSDA release.
 
 ## Canonical public routes
 
@@ -99,18 +100,20 @@ The live preview intentionally remains noindex until an owner-approved standalon
 - GCSDA production-build failure: false
 - STT publication book failures: 0
 
-## Open owner input before indexed public launch
+## Public launch state
 
-### SOURCE_REQUIRED — official standalone GCSDA origin/domain
+Owner approved a no-cost hosting model equivalent to the STT Vercel approach. The official public GCSDA origin is:
 
-No formal standalone GCSDA domain is present in the approved project sources or current Vercel team domains. Do not invent one and do not use `stt-003.vercel.app` as the association canonical.
+- https://gcsda-governance.vercel.app
 
-Once the owner supplies/approves the official origin:
-1. deploy this frozen release to an independent GCSDA production target;
-2. set `VITE_GCSDA_SITE_ORIGIN=https://<official-domain>`;
-3. configure the production membership mail environment in that GCSDA target;
-4. rebuild;
-5. verify DNS/TLS/canonical/robots/sitemap and one real controlled membership delivery;
-6. then mark **LIVE_COMPLETE / BUILD_LOCKED**.
+The release was rebuilt with this origin and verified after deployment:
+1. homepage and canonical public routes return HTTP 200;
+2. `robots.txt` returns `Allow: /`;
+3. `sitemap.xml` lists all nine public routes using the official GCSDA origin;
+4. page canonical, Open Graph URL/image and Organization JSON-LD use the official GCSDA origin;
+5. unknown routes return real HTTP 404;
+6. the site is indexable (`index,follow`).
 
-Until then the branch-preview site is suitable for final owner review and functional use, but remains intentionally non-indexed.
+Membership delivery remains governance-safe: when the optional mail backend is not configured, the site does not expose a form that cannot deliver and routes applicants to the existing LINE secretariat entry. The previously approved membership application source identifies `pc5888@gmail.com` as the migration reference should a dedicated mail backend later be enabled.
+
+Status: **LIVE_COMPLETE / BUILD_LOCKED**.
