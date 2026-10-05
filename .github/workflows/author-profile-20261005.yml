@@ -1,0 +1,181 @@
+name: Approved dual-site author alignment 20261005
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/author-profile-20261005.yml'
+      - 'scripts/maintenance/align_author_profile_20261005.py'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: owner-author-profile-20261005
+  cancel-in-progress: false
+jobs:
+  align-and-verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Prepare isolated source versions
+        run: |
+          set -euo pipefail
+          git fetch --depth=1 origin main gcsda-release-20261005
+          git fetch --depth=1 origin refs/heads/gcsda-release-20261005:refs/remotes/origin/gcsda-release-20261005
+          git worktree add --detach /tmp/stt-author origin/main
+          git worktree add --detach /tmp/gcsda-author origin/gcsda-release-20261005
+          mkdir -p "$GITHUB_WORKSPACE/author-profile-qa"
+          python scripts/maintenance/align_author_profile_20261005.py /tmp/stt-author stt
+          python scripts/maintenance/align_author_profile_20261005.py /tmp/gcsda-author gcsda
+          cmp /tmp/stt-author/src/data/authorProfile.json /tmp/gcsda-author/src/data/authorProfile.json
+      - name: Build both sites before changing release branches
+        run: |
+          set -euo pipefail
+          for dir in /tmp/stt-author /tmp/gcsda-author; do
+            (cd "$dir" && npm ci && npm run build)
+          done
+          npm install --prefix /tmp/author-browser playwright agent-browser
+          /tmp/author-browser/node_modules/.bin/playwright install --with-deps chromium
+          /tmp/author-browser/node_modules/.bin/agent-browser install
+      - name: Start built-site previews and capture browser snapshots
+        run: |
+          set -euo pipefail
+          (cd /tmp/stt-author && nohup node node_modules/vite/bin/vite.js preview --host 127.0.0.1 --port 4173 >/tmp/stt-author-preview.log 2>&1 &)
+          (cd /tmp/gcsda-author && nohup node node_modules/vite/bin/vite.js preview --host 127.0.0.1 --port 4174 >/tmp/gcsda-author-preview.log 2>&1 &)
+          for i in $(seq 1 20); do curl -fsS http://127.0.0.1:4173/ >/dev/null && curl -fsS http://127.0.0.1:4174/ >/dev/null && break; sleep 1; done
+          /tmp/author-browser/node_modules/.bin/agent-browser open http://127.0.0.1:4173/eric-chuang
+          /tmp/author-browser/node_modules/.bin/agent-browser snapshot -i >author-profile-qa/stt-interactive-snapshot.txt
+          /tmp/author-browser/node_modules/.bin/agent-browser open http://127.0.0.1:4174/governance
+          /tmp/author-browser/node_modules/.bin/agent-browser snapshot -i >author-profile-qa/gcsda-interactive-snapshot.txt
+          /tmp/author-browser/node_modules/.bin/agent-browser close
+      - name: Exact copy and responsive browser acceptance
+        run: |
+          cat >/tmp/author-browser/verify.cjs <<'JS'
+          const {chromium} = require('playwright');
+          const fs = require('fs');
+          const path = require('path');
+          const assert = require('assert/strict');
+          const profile = JSON.parse(fs.readFileSync('/tmp/stt-author/src/data/authorProfile.json','utf8'));
+          const out = path.join(process.env.GITHUB_WORKSPACE, 'author-profile-qa');
+          const live = process.argv.includes('--live');
+          const targets = live ? [
+            ['stt','https://stt-003.vercel.app/eric-chuang'],
+            ['gcsda','https://gcsda-governance.vercel.app/governance#author-profile']
+          ] : [
+            ['stt','http://127.0.0.1:4173/eric-chuang'],
+            ['gcsda','http://127.0.0.1:4174/governance#author-profile']
+          ];
+          const results = [];
+          (async()=>{
+            const browser=await chromium.launch({headless:true});
+            try {
+              for(const [site,url] of targets){
+                for(const [label,width,height] of [['desktop',1440,1000],['tablet',768,1024],['mobile',390,844]]){
+                  const context=await browser.newContext({viewport:{width,height},deviceScaleFactor:1});
+                  const page=await context.newPage();
+                  const errors=[];
+                  page.on('pageerror',e=>errors.push(e.message));
+                  await page.goto(url,{waitUntil:'networkidle',timeout:60000});
+                  await page.locator('[data-author-profile]').waitFor({timeout:15000});
+                  const actual=await page.locator('[data-author-profile]').evaluate(el=>({
+                    positions:Array.from(el.querySelectorAll('[data-author-positions] li'),n=>n.textContent),
+                    publications:Array.from(el.querySelectorAll('[data-author-publications] li'),n=>n.textContent),
+                    overflow:el.scrollWidth>el.clientWidth+1
+                  }));
+                  assert.deepEqual(actual.positions,profile.positions);
+                  assert.deepEqual(actual.publications,profile.publications);
+                  assert.equal(actual.overflow,false,'author block overflow');
+                  const body=await page.locator('body').innerText();
+                  assert(body.includes(profile.englishName));
+                  assert(body.includes(profile.chineseName));
+                  assert(!body.includes('Eric Chuang, Ph.D.'),'stale English author identity');
+                  assert.equal(await page.locator('h1').count(),1);
+                  assert.deepEqual(errors,[]);
+                  const meta=await page.evaluate(()=>({title:document.title,canonical:document.querySelector('link[rel="canonical"]')?.href,lang:document.documentElement.lang,schemas:Array.from(document.querySelectorAll('script[type="application/ld+json"]'),n=>{try{return JSON.parse(n.textContent)}catch{return null}})}));
+                  if(site==='stt'){
+                    const person=meta.schemas.find(s=>s?.['@type']==='Person');
+                    assert(person,'missing Person schema');
+                    assert.equal(person.name,profile.chineseName);
+                    assert.equal(person.alternateName,profile.englishName);
+                    assert.equal(person.jobTitle,profile.positions[0]);
+                    assert(body.includes('最終決定仍由具決策權的人承擔'));
+                    assert(body.includes('M 傳媒屬外部第三方媒體'));
+                  } else {
+                    assert(body.includes('第一屆理監事會'));
+                    assert(body.includes('范英峰'));
+                    assert(body.includes('黃朝福'));
+                  }
+                  await page.screenshot({path:path.join(out,`${live?'live':'built'}-${site}-${label}-full.png`),fullPage:true});
+                  await page.locator('[data-author-profile]').screenshot({path:path.join(out,`${live?'live':'built'}-${site}-${label}-author.png`)});
+                  results.push({site,url:page.url(),viewport:{width,height},positions:actual.positions,publications:actual.publications,authorOverflow:actual.overflow,pageErrors:errors,meta});
+                  await context.close();
+                }
+              }
+              if(live){
+                const page=await browser.newPage();
+                await page.goto('https://stt-003.vercel.app/books',{waitUntil:'networkidle',timeout:60000});
+                assert.equal(new URL(page.url()).pathname,'/insights');
+                assert.equal(new URL(page.url()).searchParams.get('theme'),'civilization');
+                assert.equal(await page.locator('[data-publication-cover]').count(),4);
+                results.push({route:'/books',finalUrl:page.url(),publicationCovers:4,title:await page.title()});
+              }
+              fs.writeFileSync(path.join(out,`${live?'live':'built'}-report.json`),JSON.stringify({status:'PASS',scope:'author-profile-only',checkedAt:new Date().toISOString(),results},null,2));
+              console.log(JSON.stringify({status:'PASS',live,checks:results.length}));
+            } finally {await browser.close();}
+          })().catch(e=>{console.error(e);process.exit(1)});
+          JS
+          node /tmp/author-browser/verify.cjs
+      - name: Commit only approved source files without force push
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          import json, subprocess
+          manifest={}
+          for site,branch in [('stt','main'),('gcsda','gcsda-release-20261005')]:
+            root=Path('/tmp')/(site+'-author')
+            files=json.loads((root/'.author-profile-changed.json').read_text())
+            def git(*args):
+              return subprocess.check_output(['git',*args],cwd=root,text=True).strip()
+            git('config','user.name','github-actions[bot]')
+            git('config','user.email','41898282+github-actions[bot]@users.noreply.github.com')
+            git('add','--',*files)
+            staged=git('diff','--cached','--name-only').splitlines()
+            assert set(staged)==set(files),(site,staged)
+            assert not any(p.startswith('public/') for p in staged)
+            git('diff','--cached','--check')
+            git('commit','-m',f'content: align {site} author profile with owner-approved book biography')
+            sha=git('rev-parse','HEAD')
+            git('push','origin',f'HEAD:refs/heads/{branch}')
+            manifest[site]={'branch':branch,'sha':sha,'files':files}
+            print('AUTHOR_PROFILE_COMMIT',site,sha,flush=True)
+          Path('author-profile-qa/release.json').write_text(json.dumps(manifest,indent=2))
+          PY
+      - name: Publish build evidence before live URL verification
+        uses: actions/upload-artifact@v4
+        with:
+          name: author-profile-built-evidence
+          path: author-profile-qa
+          retention-days: 30
+      - name: Wait for operator-bound official origins and verify actual pages
+        run: |
+          set -euo pipefail
+          ok=0
+          for attempt in $(seq 1 24); do
+            if node /tmp/author-browser/verify.cjs --live; then ok=1; break; fi
+            echo "Live author alignment not yet available on both official origins; attempt $attempt/24"
+            sleep 10
+          done
+          test "$ok" = 1
+      - name: Preserve all build and live evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: author-profile-complete-evidence
+          path: author-profile-qa
+          retention-days: 30
