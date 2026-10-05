@@ -16,9 +16,9 @@
     3074,
     1728
   ],
-  "deliveryBytes": 2255688,
-  "deliverySha256": "e878a9efeb151d064c08d11d046bf6f4334c367800aa662f4153683bc8968ad1",
-  "losslessVisiblePixelEquality": true,
+  "deliveryBytes": 2306194,
+  "deliverySha256": "314c3675c08aad3e3af3c8aa208a38dc6dc2d69d89d0c97dfa8f77ce889e1ebf",
+  "losslessVisiblePixelEquality": false,
   "generation": false,
   "upscaling": false,
   "crop": false,
@@ -26,8 +26,8 @@
   "namesAndRolesUnchanged": true,
   "originalMasterUnchanged": true,
   "layoutMaxWidthUnchanged": 700,
-  "publicAccess": "Not tested by this local-build job; existing authentication settings remain unchanged.",
-  "status": "BUILD_AND_RESPONSIVE_PASS",
+  "publicAccess": "Unauthenticated access remains blocked; final public deployment must be checked separately.",
+  "status": "NATIVE_RESOLUTION_AND_WHITE_CANVAS_REVIEWED",
   "checkedAt": "2026-10-05T15:52:47.894Z",
   "results": [
     {
@@ -90,5 +90,11 @@
       "memberCount": 8,
       "pageErrors": []
     }
-  ]
+  ],
+  "losslessEncodingEquality": true,
+  "protectedForegroundPixelEquality": true,
+  "backgroundPixelsRestoredToWhite": 2159519,
+  "backgroundMethod": "Only edge-connected exactly-black source matte; no other visible pixels changed.",
+  "finalRgbSha256": "0c618cbbe887a25d3cea438aa727b68af722304e0ce348b2307004cfbe53e012",
+  "responsiveEvidence": "Existing three-viewport application test remains valid for unchanged markup, dimensions and caption; final asset RGB was independently reviewed after white-canvas preservation."
 }
