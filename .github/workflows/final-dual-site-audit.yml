@@ -1,0 +1,463 @@
+name: Final dual-site browser audit
+# QA refresh: GCSDA intrinsic-dimension correction included in final evidence run.
+on:
+  push:
+    branches: [stt-convergence-20260923]
+    paths:
+      - .github/workflows/final-dual-site-audit.yml
+      - src/**
+      - public/**
+      - package.json
+      - package-lock.json
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout STT branch
+        uses: actions/checkout@v4
+        with:
+          ref: stt-convergence-20260923
+          path: stt-src
+      - name: Checkout GCSDA branch
+        uses: actions/checkout@v4
+        with:
+          ref: gcsda-convergence-20260923
+          path: gcsda-src
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Build both exact branch sources
+        run: |
+          set -e
+          cd "$GITHUB_WORKSPACE/stt-src"
+          if [ -f package-lock.json ]; then npm ci; else npm install; fi
+          npm run build
+          cd "$GITHUB_WORKSPACE/gcsda-src"
+          if [ -f package-lock.json ]; then npm ci; else npm install; fi
+          VITE_GCSDA_SITE_ORIGIN=https://gcsda.example.invalid npm run build
+      - name: Install Chromium audit runtime
+        run: |
+          mkdir -p "$GITHUB_WORKSPACE/audit-run"
+          cd "$GITHUB_WORKSPACE/audit-run"
+          npm init -y >/dev/null 2>&1
+          npm install --no-save playwright >/tmp/playwright-install.log 2>&1
+          npx playwright install --with-deps chromium >/tmp/browser-setup.log 2>&1
+      - name: Start production previews
+        run: |
+          (cd "$GITHUB_WORKSPACE/stt-src" && npx vite preview --host 127.0.0.1 --port 4173 > /tmp/stt-preview.log 2>&1 & echo $! > /tmp/stt-preview.pid)
+          (cd "$GITHUB_WORKSPACE/gcsda-src" && npx vite preview --host 127.0.0.1 --port 4174 > /tmp/gcsda-preview.log 2>&1 & echo $! > /tmp/gcsda-preview.pid)
+          for port in 4173 4174; do
+            for i in $(seq 1 60); do
+              if curl -fsS "http://127.0.0.1:$port/" >/dev/null; then break; fi
+              sleep 1
+            done
+            curl -fsS "http://127.0.0.1:$port/" >/dev/null
+          done
+      - name: Render and inspect exact production bundles
+        run: |
+          mkdir -p /tmp/audit
+          printf 'STT_HEAD=%s\nGCSDA_HEAD=%s\n' "$(git -C "$GITHUB_WORKSPACE/stt-src" rev-parse HEAD)" "$(git -C "$GITHUB_WORKSPACE/gcsda-src" rev-parse HEAD)" > /tmp/audit/source-heads.txt
+          cat > "$GITHUB_WORKSPACE/audit-run/check.mjs" <<'JS'
+          import fs from 'node:fs';
+          import path from 'node:path';
+          import crypto from 'node:crypto';
+          import { chromium } from 'playwright';
+
+          const browser=await chromium.launch({headless:true});
+          const report={generatedAt:new Date().toISOString(),sites:[],books:null,headers:[],gcsdaCouncil:null,gcsdaMembership:null,gcsdaMembershipOnline:null,gcsdaBuild:null};
+          const configs=[
+            {
+              site:'stt',origin:'http://127.0.0.1:4173',sourceRoot:path.join(process.env.GITHUB_WORKSPACE,'stt-src','public'),
+              routes:['/','/problems','/how-stt-works','/engagement','/insights','/about','/eric-chuang','/institutions','/start','/privacy','/professional-boundary'],
+              expectedImages:{
+                '/':'/visual-bank/stt/user-approved-six/home.png',
+                '/problems':'/visual-bank/stt/user-approved-six/problems.png',
+                '/how-stt-works':'/visual-bank/stt/user-approved-six/method.png',
+                '/insights':'/visual-bank/stt/user-approved-six/columns.png',
+                '/about':'/visual-bank/stt/user-approved-six/about-stt.png'
+              }
+            },
+            {
+              site:'gcsda',origin:'http://127.0.0.1:4174',sourceRoot:path.join(process.env.GITHUB_WORKSPACE,'gcsda-src','public'),
+              routes:['/','/about','/governance','/council','/membership','/events','/knowledge','/charter','/privacy'],
+              expectedImages:{
+                '/':'/visual-bank/gcsda/home-approved.webp',
+                '/about':'/visual-bank/gcsda/about.png',
+                '/governance':'/visual-bank/gcsda/governance.png',
+                '/council':'/visual-bank/gcsda/council.png',
+                '/membership':'/visual-bank/gcsda/membership.png',
+                '/events':'/visual-bank/gcsda/events.png',
+                '/knowledge':'/visual-bank/gcsda/knowledge.png',
+                '/charter':'/visual-bank/gcsda/charter.png'
+              }
+            }
+          ];
+          const safe=(route)=>route==='/'?'home':route.slice(1).replaceAll('/','-');
+          const rect=e=>{const r=e?.getBoundingClientRect();return r?{left:r.left,top:r.top,right:r.right,bottom:r.bottom,width:r.width,height:r.height}:null};
+
+          for(const cfg of configs){
+            for(const [label,w,h] of [['desktop',1440,1000],['tablet',820,1100],['mobile',390,844]]){
+              const ctx=await browser.newContext({viewport:{width:w,height:h},reducedMotion:'reduce'});
+              const page=await ctx.newPage();
+              for(const route of cfg.routes){
+                const errors=[];
+                const onError=e=>errors.push(e.message);
+                page.on('pageerror',onError);
+                try{
+                  const res=await page.goto(cfg.origin+route,{waitUntil:'networkidle',timeout:30000});
+                  await page.evaluate(()=>document.fonts.ready);
+                  const state=await page.evaluate(()=>{
+                    const hero=document.querySelector('.cis-hero');
+                    const img=hero?.querySelector('.cis-hero-art img');
+                    const copy=hero?.querySelector('.cis-hero-copy');
+                    const brand=document.querySelector('header a img');
+                    const rr=e=>{const r=e?.getBoundingClientRect();return r?{left:r.left,top:r.top,right:r.right,bottom:r.bottom,width:r.width,height:r.height}:null};
+                    const optical=img=>{
+                      if(!img||!img.complete||!img.naturalWidth||!img.naturalHeight) return null;
+                      const canvas=document.createElement('canvas');
+                      canvas.width=img.naturalWidth; canvas.height=img.naturalHeight;
+                      const ctx=canvas.getContext('2d',{willReadFrequently:true});
+                      if(!ctx) return null;
+                      ctx.drawImage(img,0,0);
+                      const data=ctx.getImageData(0,0,canvas.width,canvas.height).data;
+                      const maxX=Math.max(1,Math.floor(canvas.width*.36));
+                      let minX=maxX,minY=canvas.height,maxInkX=-1,maxY=-1;
+                      for(let y=0;y<canvas.height;y++){
+                        for(let x=0;x<maxX;x++){
+                          const i=(y*canvas.width+x)*4;
+                          const a=data[i+3],r=data[i],g=data[i+1],b=data[i+2];
+                          const ink=a>18 && (255-r>12 || 255-g>12 || 255-b>12);
+                          if(!ink) continue;
+                          if(x<minX)minX=x;if(x>maxInkX)maxInkX=x;if(y<minY)minY=y;if(y>maxY)maxY=y;
+                        }
+                      }
+                      if(maxInkX<0||maxY<0) return null;
+                      const sourceHeight=maxY-minY+1;
+                      const rendered=img.getBoundingClientRect();
+                      return {
+                        sourceBox:{left:minX,top:minY,width:maxInkX-minX+1,height:sourceHeight},
+                        visibleLeftMarkHeight:sourceHeight/img.naturalHeight*rendered.height,
+                        visibleLeftMarkTop:minY/img.naturalHeight*rendered.height
+                      };
+                    };
+                    return {
+                      title:document.title,
+                      h1:document.querySelector('h1')?.textContent?.trim()||null,
+                      h1Count:document.querySelectorAll('h1').length,
+                      heroClass:hero?.className||null,
+                      heroImage:img?.getAttribute('src')||null,
+                      heroImageLoaded:img?img.complete&&img.naturalWidth>0:null,
+                      heroImageNatural:img?[img.naturalWidth,img.naturalHeight]:null,
+                      heroImageRect:rr(img),
+                      heroImageFit:img?getComputedStyle(img).objectFit:null,
+                      copyRect:rr(copy),
+                      copyBg:copy?getComputedStyle(copy).backgroundColor:null,
+                      heroGradient:hero?getComputedStyle(hero,'::before').backgroundImage:null,
+                      brandRect:rr(brand),
+                      brandNatural:brand?[brand.naturalWidth,brand.naturalHeight]:null,
+                      brandOptical:optical(brand),
+                      overflow:document.documentElement.scrollWidth>innerWidth+1,
+                      broken:[...document.images].filter(i=>!i.complete||i.naturalWidth===0).map(i=>i.getAttribute('src')),
+                      canonical:document.querySelector('link[rel="canonical"]')?.getAttribute('href')||null,
+                      robotsMeta:document.querySelector('meta[name="robots"]')?.getAttribute('content')||null,
+                      organizationSchema:(()=>{try{return JSON.parse(document.querySelector('#gcsda-organization-schema')?.textContent||'null')?.['@type']||null}catch{return null}})()
+                    };
+                  });
+
+                  const expected=cfg.expectedImages[route]||null;
+                  const hasExpected=!expected||state.heroImage===expected;
+                  const imageLoaded=!expected||Boolean(state.heroImageLoaded&&state.heroImageNatural?.[0]>0&&state.heroImageNatural?.[1]>0);
+                  const desktopCopyInReadingZone=label==='mobile'||!state.heroImageRect||!state.copyRect||state.copyRect.right<=w*.50+2;
+                  const mobileSeparated=label!=='mobile'||!state.heroImageRect||!state.copyRect||state.copyRect.top>=state.heroImageRect.bottom-2;
+                  const gradientGeometry=label==='mobile'||!expected||(
+                    typeof state.heroGradient==='string' &&
+                    state.heroGradient.includes('30%') &&
+                    state.heroGradient.includes('50%') &&
+                    state.heroGradient.includes('70%') &&
+                    state.heroGradient.includes('82%')
+                  );
+
+                  let heroImageSha256=null;
+                  if(state.heroImage?.startsWith('/')){
+                    const heroFile=path.join(cfg.sourceRoot,state.heroImage.slice(1));
+                    if(fs.existsSync(heroFile)){
+                      heroImageSha256=crypto.createHash('sha256').update(fs.readFileSync(heroFile)).digest('hex');
+                    }
+                  }
+
+                  report.sites.push({
+                    site:cfg.site,route,label,http:res?.status(),...state,
+                    expectedImage:expected,hasExpected,imageLoaded,heroImageSha256,
+                    desktopCopyInReadingZone,mobileSeparated,gradientGeometry,errors
+                  });
+
+                  if(label==='desktop'&&expected){
+                    await page.screenshot({path:`/tmp/audit/${cfg.site}-${safe(route)}-desktop.png`,fullPage:false});
+                  }
+                  if(expected && (cfg.site==='gcsda'||['/','/problems','/insights'].includes(route)) && label!=='desktop'){
+                    await page.screenshot({path:`/tmp/audit/${cfg.site}-${safe(route)}-${label}.png`,fullPage:false});
+                  }
+                  if(label==='desktop'&&route==='/'){
+                    const header=page.locator('header').first();
+                    await header.screenshot({path:`/tmp/audit/${cfg.site}-header-desktop.png`});
+                    report.headers.push({site:cfg.site,brandRect:state.brandRect,brandNatural:state.brandNatural,brandOptical:state.brandOptical});
+                  }
+                }catch(e){
+                  report.sites.push({site:cfg.site,route,label,error:String(e),errors});
+                }finally{
+                  page.off('pageerror',onError);
+                }
+              }
+              await ctx.close();
+            }
+          }
+
+          {
+            const ctx=await browser.newContext({viewport:{width:1440,height:1100},reducedMotion:'reduce'});
+            const page=await ctx.newPage();
+            await page.goto('http://127.0.0.1:4174/council',{waitUntil:'networkidle',timeout:30000});
+            const photo=page.locator('[data-gcsda-council-photo]');
+            await photo.scrollIntoViewIfNeeded();
+            await page.waitForFunction(()=>{const img=document.querySelector('[data-gcsda-council-photo]');return img?.complete&&img.naturalWidth>0;});
+            report.gcsdaCouncil=await photo.evaluate(img=>{
+              const canvas=document.createElement('canvas');
+              canvas.width=img.naturalWidth;canvas.height=img.naturalHeight;
+              const ctx=canvas.getContext('2d',{willReadFrequently:true});
+              let nonWhitePixelRatio=0;
+              if(ctx){
+                ctx.drawImage(img,0,0);
+                const px=ctx.getImageData(0,0,canvas.width,canvas.height).data;
+                let nonWhite=0,total=0;
+                for(let i=0;i<px.length;i+=16){
+                  const a=px[i+3];
+                  if(a<20)continue;
+                  total++;
+                  const r=px[i],g=px[i+1],b=px[i+2];
+                  if(r<235||g<235||b<235)nonWhite++;
+                }
+                nonWhitePixelRatio=total?nonWhite/total:0;
+              }
+              const cs=getComputedStyle(img);
+              return {
+                complete:img.complete,
+                naturalWidth:img.naturalWidth,
+                naturalHeight:img.naturalHeight,
+                renderedWidth:Math.round(img.getBoundingClientRect().width),
+                renderedHeight:Math.round(img.getBoundingClientRect().height),
+                objectFit:cs.objectFit,
+                opacity:Number(cs.opacity),
+                visibility:cs.visibility,
+                display:cs.display,
+                nonWhitePixelRatio,
+                alt:img.getAttribute('alt')
+              };
+            });
+            await page.screenshot({path:'/tmp/audit/gcsda-council-evidence-full.png',fullPage:true});
+            await ctx.close();
+          }
+
+          {
+            const ctx=await browser.newContext({viewport:{width:1440,height:1100},reducedMotion:'reduce'});
+            const page=await ctx.newPage();
+            await page.goto('http://127.0.0.1:4174/membership',{waitUntil:'networkidle',timeout:30000});
+            await page.waitForSelector('[data-membership-delivery="fallback"]',{timeout:10000});
+            report.gcsdaMembership=await page.evaluate(()=>({
+              deliveryState:document.querySelector('[data-membership-delivery]')?.getAttribute('data-membership-delivery')||null,
+              formPresent:Boolean(document.querySelector('#gcsda-membership-form')),
+              lineLink:Boolean(document.querySelector('[data-membership-delivery="fallback"] a[href*="line.me"]'))
+            }));
+            await page.screenshot({path:'/tmp/audit/gcsda-membership-fallback-full.png',fullPage:true});
+            await ctx.close();
+          }
+
+          {
+            const ctx=await browser.newContext({viewport:{width:1440,height:1100},reducedMotion:'reduce'});
+            const page=await ctx.newPage();
+            await page.route('**/api/gcsda-membership-submit',async route=>{
+              const method=route.request().method();
+              if(method==='GET')return route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({ok:true,resendConfigured:true,recipientConfigured:true,acceptsFiles:false})});
+              if(method==='POST')return route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({ok:true,receiptId:'GCSDA-QA-TEST'})});
+              return route.fulfill({status:405,contentType:'application/json',body:JSON.stringify({ok:false})});
+            });
+            await page.goto('http://127.0.0.1:4174/membership',{waitUntil:'networkidle',timeout:30000});
+            await page.waitForSelector('#gcsda-membership-form',{timeout:10000});
+            await page.getByLabel('姓名').fill('GCSDA QA');
+            await page.getByLabel('聯絡電話').fill('0912345678');
+            await page.getByLabel('電子郵件').fill('qa@example.invalid');
+            await page.getByRole('button',{name:'下一步：專業背景'}).click();
+            await page.getByLabel('現職單位／機構').fill('QA Organization');
+            await page.getByLabel('職稱').fill('QA');
+            await page.getByLabel('法律',{exact:true}).check();
+            await page.getByRole('button',{name:'下一步：參與申請'}).click();
+            await page.getByLabel('申請來源').selectOption({label:'自主申請'});
+            await page.getByLabel('申請加入學會的原因').fill('這是一段只用於自動化驗收的測試文字，用來確認會員申請流程、必填欄位、步驟切換與成功狀態皆可正常運作，不會送出真實資料。');
+            await page.getByRole('button',{name:'下一步：確認資料'}).click();
+            await page.getByText('我確認以上資料真實').locator('..').getByRole('checkbox').check();
+            await page.getByText('我同意學會於會員資格審查').locator('..').getByRole('checkbox').check();
+            await page.getByRole('button',{name:'送出會員資格申請'}).click();
+            await page.waitForFunction(()=>document.querySelector('.g4-form-status')?.textContent?.includes('入會申請已送出'));
+            report.gcsdaMembershipOnline=await page.evaluate(()=>({
+              deliveryState:document.querySelector('[data-membership-delivery]')?.getAttribute('data-membership-delivery')||null,
+              successText:document.querySelector('.g4-form-status')?.textContent?.trim()||null
+            }));
+            await ctx.close();
+          }
+
+          {
+            const dist=path.join(process.env.GITHUB_WORKSPACE,'gcsda-src','dist');
+            const sitemap=fs.readFileSync(path.join(dist,'sitemap.xml'),'utf8');
+            const robots=fs.readFileSync(path.join(dist,'robots.txt'),'utf8');
+            const aboutHtml=fs.readFileSync(path.join(dist,'gcsda-about.html'),'utf8');
+            const routes=['/','/about','/governance','/council','/membership','/events','/knowledge','/charter','/privacy'];
+            report.gcsdaBuild={
+              sitemapHasAllRoutes:routes.every(route=>sitemap.includes('https://gcsda.example.invalid'+route)),
+              robotsIndexable:robots.includes('Allow: /')&&robots.includes('https://gcsda.example.invalid/sitemap.xml'),
+              staticCanonical:aboutHtml.includes('rel="canonical" href="https://gcsda.example.invalid/about"'),
+              staticOrganizationSchema:aboutHtml.includes('"@type":"Organization"')
+            };
+          }
+
+          {
+            const ctx=await browser.newContext({viewport:{width:1440,height:1100},reducedMotion:'reduce'});
+            const page=await ctx.newPage();
+            const res=await page.goto('http://127.0.0.1:4173/insights#publications',{waitUntil:'networkidle',timeout:30000});
+            await page.evaluate(()=>document.fonts.ready);
+            const covers=await page.evaluate(()=>[...document.querySelectorAll('[data-publication-cover]')].map(img=>({
+              title:img.getAttribute('data-publication-cover'),
+              src:img.getAttribute('src'),
+              complete:img.complete,
+              naturalWidth:img.naturalWidth,
+              naturalHeight:img.naturalHeight,
+              renderedWidth:Math.round(img.getBoundingClientRect().width),
+              renderedHeight:Math.round(img.getBoundingClientRect().height),
+              objectFit:getComputedStyle(img).objectFit,
+              aspectRatio:getComputedStyle(img).aspectRatio
+            })));
+            report.books={http:res?.status(),route:'/insights#publications',covers};
+            await page.screenshot({path:'/tmp/audit/stt-insights-publications-full.png',fullPage:true});
+            await ctx.close();
+          }
+
+          await browser.close();
+
+          const requiredBookTitles=[
+            '2026 永續家族治理實務實錄',
+            '內在法遵 Internal Compliance',
+            '內在法遵 AI Governance',
+            '內在法遵 Family Governance'
+          ];
+          const failures=report.sites.filter(x=>
+            x.error||x.http!==200||x.h1Count!==1||x.overflow||x.broken?.length||
+            x.hasExpected===false||x.imageLoaded===false||
+            x.desktopCopyInReadingZone===false||x.mobileSeparated===false||x.gradientGeometry===false||
+            x.errors?.length
+          );
+          const bookFailures=(report.books?.covers||[]).filter(x=>!x.complete||x.naturalWidth<=0||x.naturalHeight<=0||x.objectFit!=='contain');
+          const missingBooks=requiredBookTitles.filter(t=>!(report.books?.covers||[]).some(x=>x.title===t));
+          const lowResolutionBooks=(report.books?.covers||[]).filter(x=>x.naturalWidth<800||x.naturalHeight<1000);
+          const gcsdaHeroResolutionFailures=report.sites.filter(x=>
+            x.site==='gcsda'&&x.label==='desktop'&&x.expectedImage&&x.route!=='/'&&
+            (!x.heroImageNatural||x.heroImageNatural[0]<1400||x.heroImageNatural[1]<900)
+          );
+          const heroCopyAnchorFailures=report.sites.filter(x=>{
+            if(!x.expectedImage||x.label==='mobile'||x.heroClass?.includes('cis-portrait')||!x.copyRect||!x.heroImageRect) return false;
+            const expectedOffset=x.label==='desktop'?180:50;
+            const actualOffset=x.copyRect.top-x.heroImageRect.top;
+            return Math.abs(actualOffset-expectedOffset)>2;
+          }).map(x=>({
+            site:x.site,route:x.route,label:x.label,
+            expectedOffset:x.label==='desktop'?180:50,
+            actualOffset:x.copyRect.top-x.heroImageRect.top
+          }));
+          const desktopHeroes=report.sites.filter(x=>x.label==='desktop'&&x.expectedImage&&x.heroImageSha256);
+          const crossSiteHeroCollisions=[];
+          for(const stt of desktopHeroes.filter(x=>x.site==='stt')){
+            for(const gcsda of desktopHeroes.filter(x=>x.site==='gcsda')){
+              if(stt.heroImageSha256===gcsda.heroImageSha256){
+                crossSiteHeroCollisions.push({
+                  sha256:stt.heroImageSha256,
+                  stt:{route:stt.route,image:stt.heroImage},
+                  gcsda:{route:gcsda.route,image:gcsda.heroImage}
+                });
+              }
+            }
+          }
+          const gcsdaMetadataFailures=report.sites.filter(x=>
+            x.site==='gcsda'&&x.label==='desktop'&&(
+              x.robotsMeta!=='index,follow'||
+              x.canonical!=='https://gcsda.example.invalid'+x.route||
+              x.organizationSchema!=='Organization'
+            )
+          ).map(x=>({route:x.route,robotsMeta:x.robotsMeta,canonical:x.canonical,organizationSchema:x.organizationSchema}));
+          const gcsdaCouncilFailure=!report.gcsdaCouncil||!report.gcsdaCouncil.complete||report.gcsdaCouncil.naturalWidth<700||report.gcsdaCouncil.naturalHeight<394||report.gcsdaCouncil.objectFit!=='contain'||report.gcsdaCouncil.opacity<=0||report.gcsdaCouncil.visibility==='hidden'||report.gcsdaCouncil.display==='none'||report.gcsdaCouncil.nonWhitePixelRatio<0.08;
+          const gcsdaMembershipFallbackFailure=!report.gcsdaMembership||report.gcsdaMembership.deliveryState!=='fallback'||report.gcsdaMembership.formPresent||!report.gcsdaMembership.lineLink;
+          const gcsdaMembershipOnlineFailure=!report.gcsdaMembershipOnline||report.gcsdaMembershipOnline.deliveryState!=='online'||!report.gcsdaMembershipOnline.successText?.includes('入會申請已送出');
+          const gcsdaBuildFailure=!report.gcsdaBuild||!report.gcsdaBuild.sitemapHasAllRoutes||!report.gcsdaBuild.robotsIndexable||!report.gcsdaBuild.staticCanonical||!report.gcsdaBuild.staticOrganizationSchema;
+          const sttHeader=report.headers.find(x=>x.site==='stt');
+          const gcsdaHeader=report.headers.find(x=>x.site==='gcsda');
+          const sttSeal=sttHeader?.brandOptical?.visibleLeftMarkHeight??null;
+          const gcsdaSeal=gcsdaHeader?.brandOptical?.visibleLeftMarkHeight??null;
+          const logoOpticalDifference=(sttSeal!=null&&gcsdaSeal!=null)?Math.abs(sttSeal-gcsdaSeal):null;
+          const logoOpticalFailure=logoOpticalDifference==null||logoOpticalDifference>2;
+
+          fs.writeFileSync('/tmp/audit/report.json',JSON.stringify(report,null,2));
+          fs.writeFileSync('/tmp/audit/summary.json',JSON.stringify({
+            browserRenderedRoutes:report.sites.length,
+            automatedFailures:failures,
+            bookFailures,
+            missingBooks,
+            lowResolutionBooks,
+            gcsdaHeroResolutionFailures,
+            heroCopyAnchorFailures,
+            crossSiteHeroCollisions,
+            gcsdaMetadataFailures,
+            gcsdaCouncil:report.gcsdaCouncil,
+            gcsdaMembership:report.gcsdaMembership,
+            gcsdaMembershipOnline:report.gcsdaMembershipOnline,
+            gcsdaBuild:report.gcsdaBuild,
+            gcsdaCouncilFailure,
+            gcsdaMembershipFallbackFailure,
+            gcsdaMembershipOnlineFailure,
+            gcsdaBuildFailure,
+            headers:report.headers,
+            logoOptical:{sttSeal,gcsdaSeal,difference:logoOpticalDifference,passed:!logoOpticalFailure},
+            note:'Screenshots are mandatory review evidence. CSS presence, successful builds, and naturalWidth alone are never visual PASS.'
+          },null,2));
+
+          if(failures.length||bookFailures.length||missingBooks.length||lowResolutionBooks.length||gcsdaHeroResolutionFailures.length||heroCopyAnchorFailures.length||crossSiteHeroCollisions.length||gcsdaMetadataFailures.length||gcsdaCouncilFailure||gcsdaMembershipFallbackFailure||gcsdaMembershipOnlineFailure||gcsdaBuildFailure||logoOpticalFailure){
+            console.error(JSON.stringify({failures,bookFailures,missingBooks,lowResolutionBooks,gcsdaHeroResolutionFailures,heroCopyAnchorFailures,crossSiteHeroCollisions,gcsdaMetadataFailures,gcsdaCouncil:report.gcsdaCouncil,gcsdaMembership:report.gcsdaMembership,gcsdaMembershipOnline:report.gcsdaMembershipOnline,gcsdaBuild:report.gcsdaBuild,gcsdaCouncilFailure,gcsdaMembershipFallbackFailure,gcsdaMembershipOnlineFailure,gcsdaBuildFailure,logoOptical:{sttSeal,gcsdaSeal,difference:logoOpticalDifference,passed:!logoOpticalFailure}},null,2));
+            process.exitCode=1;
+          }
+          JS
+          cd "$GITHUB_WORKSPACE/audit-run"
+          node check.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: final-dual-site-browser-audit
+          path: /tmp/audit/
+          retention-days: 3
+      - name: Publish browser evidence to STT branch
+        if: always()
+        run: |
+          set -e
+          cd "$GITHUB_WORKSPACE/stt-src"
+          rm -rf docs/qa/live-browser-audit
+          mkdir -p docs/qa/live-browser-audit
+          cp -a /tmp/audit/. docs/qa/live-browser-audit/
+          git config user.name "stt-governance-audit"
+          git config user.email "actions@users.noreply.github.com"
+          git add docs/qa/live-browser-audit
+          if ! git diff --cached --quiet; then
+            git commit -m "qa: publish live dual-site browser evidence"
+            git push origin HEAD:stt-convergence-20260923
+          fi
+      - name: Stop previews
+        if: always()
+        run: |
+          [ -f /tmp/stt-preview.pid ] && kill "$(cat /tmp/stt-preview.pid)" || true
+          [ -f /tmp/gcsda-preview.pid ] && kill "$(cat /tmp/gcsda-preview.pid)" || true

@@ -1,0 +1,20 @@
+/* G9 — accessibility hardening */
+
+:where(a, button, input, select, textarea, summary, [tabindex]):focus-visible{
+  outline:2px solid #8f693d;
+  outline-offset:3px;
+}
+
+:where(input, select, textarea):focus-visible{
+  border-color:#8f693d;
+}
+
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto!important}
+  *, *::before, *::after{
+    scroll-behavior:auto!important;
+    animation-duration:.01ms!important;
+    animation-iteration-count:1!important;
+    transition-duration:.01ms!important;
+  }
+}

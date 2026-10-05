@@ -1,51 +1,71 @@
-const TITLE_SELECTORS = [
-  "h1",
-  "h2",
-  ".stt-canon-sub",
-  ".domain-hero p",
-  ".lib-hero p",
-  ".gr-lead",
-  ".pd4-hero p",
-  ".legal-root h1 + p",
-  "[data-stt-title-sentence]",
-].join(",");
+import { splitTitleAtBalancedPunctuation } from "./utils/titleBreak";
 
-function sentenceCount(text: string) {
-  return (text.match(/。/g) || []).length;
+const TITLE_SELECTORS = ["main h1", "main h2", "[data-stt-title-auto]"].join(",");
+
+function naturalLineCount(el: HTMLElement) {
+  const style = window.getComputedStyle(el);
+  const fontSize = parseFloat(style.fontSize) || 16;
+  const rawLineHeight = parseFloat(style.lineHeight);
+  const lineHeight = Number.isFinite(rawLineHeight) ? rawLineHeight : fontSize * 1.2;
+  const height = el.getBoundingClientRect().height;
+  return Math.max(1, Math.round(height / lineHeight));
 }
 
-function applySentenceBreak(el: HTMLElement) {
-  if (el.dataset.sttSentenceBreak === "1") return;
-  if (el.children.length > 0 && !el.hasAttribute("data-stt-title-sentence")) return;
+function isReactGovernedTitle(el: HTMLElement) {
+  return Boolean(
+    el.querySelector(".stt-editorial-title-line, .stt-intake-title-line")
+  );
+}
 
-  const text = (el.textContent || "").trim();
-  if (!text || sentenceCount(text) < 2) return;
+function applyTitleBreak(el: HTMLElement) {
+  if (isReactGovernedTitle(el)) return;
 
-  const firstStop = text.indexOf("。");
-  if (firstStop < 0 || firstStop >= text.length - 1) return;
+  const currentText = (el.textContent || "").replace(/\s+/g, " ").trim();
+  if (!currentText) return;
 
-  const first = text.slice(0, firstStop + 1).trim();
-  const second = text.slice(firstStop + 1).trim();
-  if (!second) return;
+  let original = el.dataset.sttOriginalTitle || currentText;
+  if (currentText !== original) {
+    original = currentText;
+    el.dataset.sttOriginalTitle = original;
+    el.dataset.sttTitleState = "single";
+    delete el.dataset.sttTitleSignature;
+  } else if (!el.dataset.sttOriginalTitle) {
+    el.dataset.sttOriginalTitle = original;
+  }
 
-  const firstLine = document.createElement("span");
-  firstLine.className = "stt-title-line";
-  firstLine.textContent = first;
+  const width = Math.round(el.getBoundingClientRect().width);
+  const signature = `${width}|${original}`;
+  if (el.dataset.sttTitleSignature === signature) return;
 
-  const secondLine = document.createElement("span");
-  secondLine.className = "stt-title-line";
-  secondLine.textContent = second;
+  if (el.dataset.sttTitleState === "split") {
+    el.textContent = original;
+  }
 
-  el.dataset.sttSentenceBreak = "1";
-  el.replaceChildren(firstLine, secondLine);
+  const shouldSplit =
+    el.hasAttribute("data-stt-force-title-break") || naturalLineCount(el) > 1;
+  const governedLines = splitTitleAtBalancedPunctuation(original);
+
+  if (shouldSplit && governedLines.length === 2) {
+    const firstLine = document.createElement("span");
+    firstLine.className = "stt-title-line";
+    firstLine.textContent = governedLines[0];
+
+    const secondLine = document.createElement("span");
+    secondLine.className = "stt-title-line";
+    secondLine.textContent = governedLines[1];
+
+    el.replaceChildren(firstLine, secondLine);
+    el.dataset.sttTitleState = "split";
+  } else {
+    el.textContent = original;
+    el.dataset.sttTitleState = "single";
+  }
+
+  el.dataset.sttTitleSignature = signature;
 }
 
 function applyTitleRules() {
-  document.documentElement.dataset.sttRoute = window.location.pathname || "/";
-  document.querySelectorAll<HTMLElement>(TITLE_SELECTORS).forEach(applySentenceBreak);
-  const heading = document.querySelector("main h1")?.textContent?.trim();
-  const title = window.location.pathname === "/" ? "STT Governance｜策略智庫" : heading ? `${heading} · STT Governance` : "STT Governance｜策略智庫";
-  if (document.title !== title) document.title = title;
+  document.querySelectorAll<HTMLElement>(TITLE_SELECTORS).forEach(applyTitleBreak);
 }
 
 let queued = false;
@@ -60,10 +80,18 @@ function scheduleTitleRules() {
 
 if (typeof window !== "undefined") {
   document.addEventListener("DOMContentLoaded", scheduleTitleRules, { once: true });
-  window.addEventListener("popstate", scheduleTitleRules);
+  window.addEventListener("resize", () => {
+    document
+      .querySelectorAll<HTMLElement>(TITLE_SELECTORS)
+      .forEach((el) => delete el.dataset.sttTitleSignature);
+    scheduleTitleRules();
+  });
+
   new MutationObserver(scheduleTitleRules).observe(document.documentElement, {
     subtree: true,
     childList: true,
+    characterData: true,
   });
+
   scheduleTitleRules();
 }

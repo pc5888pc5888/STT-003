@@ -37,8 +37,8 @@ export const PRIMARY_THEMES: Record<PrimaryTheme, PrimaryItem> = {
   },
   stt: {
     label: "關於 STT", visual: "aboutStt",
-    title: "STT 不是一般顧問公司，而是高位階治理文明平台。",
-    titleLines: ["STT 不是一般顧問公司，", "而是高位階治理文明平台。"],
+    title: "STT Governance 不是一般顧問公司，而是高位階治理文明平台。",
+    titleLines: ["STT Governance 不是一般顧問公司，", "而是高位階治理文明平台。"],
     lead: "在 STT，治理不是口號，而是一套面對現實、判讀局勢、設計制度、協助決策與建立長期信任的工作方法。莊鈞翔博士主導判讀與制度設計，AI 作為治理幕僚與作業系統輔助。",
     actions: [{ text: "認識 STT", to: "/institution/eric-chuang", primary: true }, { text: "理解治理定位", to: "/problems" }],
   },

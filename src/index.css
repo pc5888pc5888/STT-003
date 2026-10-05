@@ -192,3 +192,11 @@
 .scrollbar-none::-webkit-scrollbar {
   display: none;
 }
+
+/* Governance title wrapping: when a heading needs multiple lines,
+   the first intentional break occurs immediately after its first structural punctuation mark. */
+.stt-title-line,
+.stt-editorial-title-line,
+.stt-intake-title-line {
+  display: block;
+}

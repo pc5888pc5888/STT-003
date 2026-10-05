@@ -1,6 +1,6 @@
 import FullBleedHero, { JudgmentFoundations } from "../components/FullBleedHero";
 import STTPageHero from "../components/STTPageHero";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 type PageKind = "method" | "publications" | "projects" | "stt";
 type Section = { number: string; title: string; body: string; action?: string; path?: string };
@@ -49,7 +49,7 @@ const pages: Record<PageKind, PageConfig> = {
     finalBody: "人文地景產採訪與治理記憶可以彼此銜接，但受訪者的原始回答、公開版本與後續詮釋仍須清楚分層。",
   },
   stt: {
-    eyebrow: "ABOUT STT GOVERNANCE", title: "STT 是治理判讀與制度設計平台，不是把更多意見堆在一起的顧問目錄。",
+    eyebrow: "ABOUT STT GOVERNANCE", title: "STT Governance 是治理判讀與制度設計平台，不是把更多意見堆在一起的顧問目錄。",
     subtitle: "前台從人的真實問題開始；後台才進入證據、反方、策略資格、專業路由、人機權力邊界與最終治理判讀。",
     statement: "外界看的是入口；系統承接的是複雜度；最終責任仍然必須回到人。",
     sections: [
@@ -72,15 +72,15 @@ function CanonicalPage({ kind }: { kind: PageKind }) {
     else navigate(path);
   };
   return <div className={`stt-canon stt-editorial-page stt-editorial-${kind}`}>
-    {primary ? <FullBleedHero theme={kind as "method" | "publications" | "stt"} /> : <STTPageHero visual="projects" eyebrow={page.eyebrow} title={page.title} titleLines={["人文地景產採訪｜", "把仍能被說清楚的", "記憶留下。"]} lead={page.subtitle} />}
+    {primary ? <FullBleedHero theme={kind as "method" | "publications" | "stt"} /> : <STTPageHero visual="projects" eyebrow={page.eyebrow} title={page.title} titleLines={["人文地景產採訪｜", "把仍能被說清楚的記憶留下。"]} lead={page.subtitle} />}
     {kind === "method" && <JudgmentFoundations />}
     <section className="stt-canon-body"><div className="stt-canon-wrap">
       <p className="stt-canon-statement">{page.statement}</p>
       <div className="stt-canon-grid">{page.sections.map((section, index) => <article className="stt-canon-card" id={kind === "method" ? `judgment-step-${Number(section.number)}` : undefined} key={`${kind}-${index}-${section.title}`}>
-        {section.number && <small>{section.number}</small>}<h2>{section.title}</h2><p>{section.body}</p>{section.action && section.path && <button type="button" onClick={() => openPath(section.path!)}>{section.action} →</button>}
+        {section.number && <small>{section.number}</small>}<h2>{section.title}</h2><p>{section.body}</p>{section.action && section.path && <Link to={section.path}>{section.action} →</Link>}
       </article>)}</div>
     </div></section>
-    <section className="stt-canon-final"><div className="stt-canon-wrap"><p className="stt-master-kicker">FINAL JUDGMENT</p><h2>{page.finalTitle}</h2><p>{page.finalBody}</p>{page.finalAction && page.finalPath && <button type="button" onClick={() => openPath(page.finalPath!)}>{page.finalAction} →</button>}</div></section>
+    <section className="stt-canon-final"><div className="stt-canon-wrap"><p className="stt-master-kicker">FINAL JUDGMENT</p><h2>{page.finalTitle}</h2><p>{page.finalBody}</p>{page.finalAction && page.finalPath && <Link to={page.finalPath}>{page.finalAction} →</Link>}</div></section>
   </div>;
 }
 

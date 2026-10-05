@@ -1,8 +1,215 @@
 {
   "rewrites": [
     {
-      "source": "/(.*)",
+      "source": "/problems/major-decision",
+      "destination": "/seo-problems-major-decision.html"
+    },
+    {
+      "source": "/problems/owner-dependence",
+      "destination": "/seo-problems-owner-dependence.html"
+    },
+    {
+      "source": "/problems/succession",
+      "destination": "/seo-problems-succession.html"
+    },
+    {
+      "source": "/problems/family-ownership",
+      "destination": "/seo-problems-family-ownership.html"
+    },
+    {
+      "source": "/problems/strategic-legal",
+      "destination": "/seo-problems-strategic-legal.html"
+    },
+    {
+      "source": "/problems/ai-governance",
+      "destination": "/seo-problems-ai-governance.html"
+    },
+    {
+      "source": "/problems/system-failure",
+      "destination": "/seo-problems-system-failure.html"
+    },
+    {
+      "source": "/problems/founder-legacy",
+      "destination": "/seo-problems-founder-legacy.html"
+    },
+    {
+      "source": "/research",
+      "destination": "/seo-research.html"
+    },
+    {
+      "source": "/books",
+      "destination": "/seo-books.html"
+    },
+    {
+      "source": "/books/internal-compliance",
+      "destination": "/seo-books-internal-compliance.html"
+    },
+    {
+      "source": "/problems",
+      "destination": "/seo-problems.html"
+    },
+    {
+      "source": "/how-stt-works",
+      "destination": "/seo-how-stt-works.html"
+    },
+    {
+      "source": "/engagement",
+      "destination": "/seo-engagement.html"
+    },
+    {
+      "source": "/insights",
+      "destination": "/seo-insights.html"
+    },
+    {
+      "source": "/about",
+      "destination": "/seo-about.html"
+    },
+    {
+      "source": "/eric-chuang",
+      "destination": "/seo-eric-chuang.html"
+    },
+    {
+      "source": "/institutions",
+      "destination": "/seo-institutions.html"
+    },
+    {
+      "source": "/start",
+      "destination": "/seo-start.html"
+    },
+    {
+      "source": "/privacy",
+      "destination": "/seo-privacy.html"
+    },
+    {
+      "source": "/professional-boundary",
+      "destination": "/seo-professional-boundary.html"
+    },
+    {
+      "source": "/domains/:path*",
       "destination": "/index.html"
+    },
+    {
+      "source": "/projects",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/institution/:path*",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/success",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/legal/:path*",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/digital-product-policy",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/internal-compliance/:path*",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/governance/:path*",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/gcsda.html",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/humanistic-20q",
+      "destination": "/index.html"
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/books",
+      "destination": "/insights?theme=civilization",
+      "permanent": true
+    },
+    {
+      "source": "/books/internal-compliance",
+      "destination": "/insights?theme=civilization",
+      "permanent": true
+    },
+    {
+      "source": "/publications",
+      "destination": "/insights",
+      "permanent": true
+    },
+    {
+      "source": "/insights.html",
+      "destination": "/insights",
+      "permanent": true
+    },
+    {
+      "source": "/insights/index",
+      "destination": "/insights",
+      "permanent": true
+    },
+    {
+      "source": "/papers",
+      "destination": "/research",
+      "permanent": true
+    },
+    {
+      "source": "/stt",
+      "destination": "/about",
+      "permanent": true
+    },
+    {
+      "source": "/about.html",
+      "destination": "/about",
+      "permanent": true
+    },
+    {
+      "source": "/institution/eric-chuang",
+      "destination": "/eric-chuang",
+      "permanent": true
+    },
+    {
+      "source": "/cooperation",
+      "destination": "/engagement",
+      "permanent": true
+    },
+    {
+      "source": "/contact.html",
+      "destination": "/start",
+      "permanent": true
+    },
+    {
+      "source": "/internal-compliance",
+      "destination": "/books/internal-compliance",
+      "permanent": true
+    },
+    {
+      "source": "/internal-compliance/pillars",
+      "destination": "/books/internal-compliance",
+      "permanent": true
+    },
+    {
+      "source": "/internal-compliance/academic",
+      "destination": "/books/internal-compliance",
+      "permanent": true
+    },
+    {
+      "source": "/internal-compliance/publication",
+      "destination": "/books/internal-compliance",
+      "permanent": true
+    },
+    {
+      "source": "/governance.html",
+      "destination": "/problems",
+      "permanent": true
+    },
+    {
+      "source": "/legal/privacy",
+      "destination": "/privacy",
+      "permanent": true
     }
   ]
 }

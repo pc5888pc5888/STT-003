@@ -496,18 +496,18 @@ export const books: Book[] = [
     author: "莊鈞翔博士",
     publisher: "策略智庫數位出版 STT Press",
     tags: ["內在管理", "法遵精神", "企業家必讀"],
-    previewUrl: "https://heyzine.com/flip-book/12d94f8d4b.html"
+    previewUrl: "https://heyzine.com/flip-book/c700d8beb2.html"
   },
   {
     id: "b2",
-    title: "《2025 永續家族治理實務實錄》",
+    title: "2026 永續家族治理實務實錄",
     description: "法律架構、資本效率與策略演進之整合判讀。莊博士以系統化方法將法律精要融入管理實務之作。",
     price: 0,
     cover: "/images/paper_family_governance_white_paper.png",
     author: "莊鈞翔博士",
     publisher: "策略智庫數位出版 STT Press",
     tags: ["家族治理", "法律架構", "策略演進"],
-    previewUrl: "https://heyzine.com/flip-book/a6e96eff8e.html"
+    previewUrl: "https://heyzine.com/flip-book/e424001f8c.html"
   }
 ];
 
