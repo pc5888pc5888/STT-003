@@ -2,6 +2,9 @@ import { useEffect, type ReactNode } from "react";
 import { Link } from "react-router-dom";
 import UnifiedTitleHero from "../components/UnifiedTitleHero";
 
+import AuthorProfile from "../components/AuthorProfile";
+import AUTHOR_PROFILE from "../data/authorProfile.json";
+
 const M_MEDIA_URL = "https://94m.com.tw/editors/ed55fc";
 
 function usePageMeta(title:string, description:string){
@@ -61,14 +64,15 @@ export function EricPage(){
   return <div className="stt-inst-page">
     <UnifiedTitleHero
       kicker="GOVERNANCE PRINCIPAL"
-      title="莊鈞翔博士 Eric Chuang, Ph.D."
-      titleLines={["莊鈞翔博士", "Eric Chuang, Ph.D."]}
-      subtitle="STT Governance 創辦人｜治理總控者｜制度設計與重大決策判讀。"
+      title={AUTHOR_PROFILE.chineseName}
+      subtitle={AUTHOR_PROFILE.positions[0]}
       image="/visual-approved/eric-page-owner-original.png"
       imageFit="contain"
       imagePosition="right bottom"
       id="eric-title"
     />
+
+    <section className="stt-inst-section"><div className="stt-inst-shell"><AuthorProfile /></div></section>
 
     <Section kicker="GOVERNANCE ROLE" title="判讀者的工作，不是替別人做決定。">
       <p>莊鈞翔博士在 STT 的角色，是建立判讀架構、辨識不可承擔風險、設計治理制度，並在重大事件中維持問題、證據、權力與責任的邊界；最終決定仍由具決策權的人承擔。</p>
@@ -90,18 +94,6 @@ export function EricPage(){
       <a href={M_MEDIA_URL} target="_blank" rel="noreferrer">M 傳媒｜外部第三方發表來源 ↗</a>
     </Section>
 
-    <Section kicker="PUBLICATION" title="出版與制度文本。">
-      <p>由 STT Press 與其他正式通路發行之著作，以治理、決策、人機主權、家族與制度文明為核心。</p>
-    </Section>
-
-    <Section kicker="ACADEMIC & INSTITUTIONAL ROLES" title="學術與公共角色。">
-      <ul className="stt-inst-list">
-        <li>商學博士（逢甲大學）。</li>
-        <li>逢甲大學商學院兼任助理教授。</li>
-        <li>中華企業策略永續發展學會（GCSDA）創會理事長。</li>
-        <li>STT Press 執行長暨創辦人。</li>
-      </ul>
-    </Section>
   </div>;
 }
 

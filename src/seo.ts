@@ -1,3 +1,4 @@
+import AUTHOR_PROFILE from "./data/authorProfile.json";
 import { RETAINED_META } from "./data/retainedRouteMetadata";
 export const STT_CANONICAL_ORIGIN = "https://stt-003.vercel.app";
 
@@ -171,10 +172,11 @@ export function applyGovernedMetadata(pathname: string) {
     addSchema({
       "@context": "https://schema.org",
       "@type": "Person",
-      name: "莊鈞翔博士 Eric Chuang, Ph.D.",
+      name: AUTHOR_PROFILE.chineseName,
+      alternateName: AUTHOR_PROFILE.englishName,
       url: canonical,
       image: `${STT_CANONICAL_ORIGIN}/visual-approved/eric-page-owner-original.png`,
-      jobTitle: "STT Governance 創辦人｜治理總控者｜制度設計與重大決策判讀",
+      jobTitle: AUTHOR_PROFILE.positions[0],
       affiliation: {
         "@type": "Organization",
         name: "STT Governance",

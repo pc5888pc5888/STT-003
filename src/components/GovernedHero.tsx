@@ -15,10 +15,11 @@ export default function GovernedHero({kicker,title,subtitle,lead,image,id,childr
       <div className="cis-hero-inner">
         <div className="cis-hero-copy">
           <p className="cis-kicker">{kicker}</p>
+          {page?.byline && page.bylineBefore && <p className="cis-byline" lang="en">{page.byline}</p>}
           <h1 id={titleId} className="cis-title" aria-label={lines.join("")}>
             {lines.map((line,i)=><span key={i} className="cis-title-line">{line}</span>)}
           </h1>
-          {page?.byline&&<p className="cis-byline" lang="en">{page.byline}</p>}
+          {page?.byline&&!page.bylineBefore&&<p className="cis-byline" lang="en">{page.byline}</p>}
           {subtitle&&<p className="cis-subtitle">{subtitle}</p>}
           {lead&&<p className="cis-lead">{lead}</p>}
           {children&&<div className="cis-actions">{children}</div>}

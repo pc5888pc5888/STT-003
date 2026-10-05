@@ -1,3 +1,4 @@
+import AUTHOR_PROFILE from "./src/data/authorProfile.json";
 import tailwindcss from "@tailwindcss/vite";
 import react from "@vitejs/plugin-react";
 import fs from "node:fs";
@@ -43,10 +44,11 @@ function schemaTags(route: string, label: string, image?: string) {
     schemas.push({
       "@context": "https://schema.org",
       "@type": "Person",
-      name: "莊鈞翔博士 Eric Chuang, Ph.D.",
+      name: AUTHOR_PROFILE.chineseName,
+      alternateName: AUTHOR_PROFILE.englishName,
       url: canonical,
       image: `${STT_CANONICAL_ORIGIN}${image ?? "/images/eric-governance-principal-approved.jpg"}`,
-      jobTitle: "STT Governance 創辦人｜治理總控者｜制度設計與重大決策判讀",
+      jobTitle: AUTHOR_PROFILE.positions[0],
       affiliation: {
         "@type": "Organization",
         name: "STT Governance",

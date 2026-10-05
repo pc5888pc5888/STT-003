@@ -1,5 +1,6 @@
+import AUTHOR_PROFILE from "./authorProfile.json";
 // User-directed three-class typography; original wording retained in the change register.
-export type PagePresentation = { lines: string[]; type: number; image: string | null; originalTitle: string; context?: string | null; portrait?: boolean; byline?: string; imageWidth?: number; imageHeight?: number };
+export type PagePresentation = { lines: string[]; type: number; image: string | null; originalTitle: string; context?: string | null; portrait?: boolean; byline?: string; bylineBefore?: boolean; imageWidth?: number; imageHeight?: number };
 export const PAGE_PRESENTATION: Record<string, PagePresentation> = {
   "/": {
     "lines": [
@@ -79,14 +80,15 @@ export const PAGE_PRESENTATION: Record<string, PagePresentation> = {
   },
   "/eric-chuang": {
     "lines": [
-      "莊鈞翔博士"
+      AUTHOR_PROFILE.chineseName
     ],
     "type": 1,
     "image": "/visual-approved/eric-page-owner-original.png",
-    "originalTitle": "莊鈞翔博士 Eric Chuang, Ph.D.",
+    "originalTitle": `${AUTHOR_PROFILE.englishName} ${AUTHOR_PROFILE.chineseName}`,
     "context": null,
     "portrait": true,
-    "byline": "Eric Chuang, Ph.D.",
+    "byline": AUTHOR_PROFILE.englishName,
+    "bylineBefore": true,
     "imageWidth": 2048,
     "imageHeight": 1152
   },
