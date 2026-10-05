@@ -1,0 +1,52 @@
+name: Council photo source resolution audit
+'on':
+  push:
+    branches: [gcsda-release-20261005]
+    paths: ['.github/workflows/council-resolution-audit-20261005.yml']
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Inspect existing source images without changing them
+        run: |
+          python3 -m pip install --quiet Pillow numpy
+          python3 - <<'PY'
+          from pathlib import Path
+          from PIL import Image, ImageOps
+          import base64, hashlib, io, json, re
+          import numpy as np
+          out=Path('council-source-audit'); out.mkdir()
+          parts=[]
+          for n in range(2):
+              text=Path(f'src/gcsda-council-photo-parts/part{n}.ts').read_text()
+              parts.append(re.search(r'[\"\']([A-Za-z0-9+/=]+)[\"\']',text).group(1))
+          payload=base64.b64decode(''.join(parts))
+          (out/'current.webp').write_bytes(payload)
+          current=Image.open(io.BytesIO(payload)).convert('RGB'); current.load()
+          current.save(out/'current.png')
+          a=np.asarray(current,dtype=float)
+          report={'sourceHead':__import__('subprocess').check_output(['git','rev-parse','HEAD'],text=True).strip(),'current':{'dimensions':current.size,'bytes':len(payload),'sha256':hashlib.sha256(payload).hexdigest()},'candidates':[]}
+          for file in ['public/images/gcsda_team_2026.png','public/images/gcsda_team_new.png','public/images/group-001.png']:
+              p=Path(file); b=p.read_bytes()
+              entry={'path':file,'bytes':len(b),'gitBlobSha':hashlib.sha1(b'blob '+str(len(b)).encode()+b'\0'+b).hexdigest()}
+              try:
+                  im=Image.open(io.BytesIO(b)); im.load(); im=ImageOps.exif_transpose(im).convert('RGB')
+                  small=im.resize(current.size,Image.Resampling.LANCZOS)
+                  rms=float(np.sqrt(np.mean((a-np.asarray(small,dtype=float))**2)))
+                  entry.update(dimensions=im.size,format=Image.open(io.BytesIO(b)).format,rmseToCurrent=rms,aspectDifference=abs(im.width/im.height-current.width/current.height))
+                  preview=im.copy();preview.thumbnail((1400,1000));preview.save(out/(p.stem+'-preview.png'))
+              except Exception as exc:
+                  entry['error']=str(exc)
+              report['candidates'].append(entry)
+          (out/'report.json').write_text(json.dumps(report,ensure_ascii=False,indent=2))
+          print(json.dumps(report,ensure_ascii=False,indent=2))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: council-source-resolution-audit
+          path: council-source-audit
+          retention-days: 7
