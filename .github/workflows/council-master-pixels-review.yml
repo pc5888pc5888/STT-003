@@ -1,0 +1,34 @@
+name: Review council master pixels
+'on':
+  push:
+    branches: [gcsda-photo-resolution-review-20261005]
+    paths: ['.github/workflows/council-master-pixels-review.yml']
+permissions:
+  contents: read
+jobs:
+  pixels:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - name: Fetch exact existing master for local review
+        run: |
+          python3 -m pip install --quiet Pillow
+          mkdir -p council-master-review
+          python3 - <<'PY'
+          from pathlib import Path
+          from PIL import Image
+          import urllib.request,io,hashlib,json
+          data=urllib.request.urlopen('https://raw.githubusercontent.com/pc5888pc5888/STT-003/d47ac47d6bf5e434ec34596f964a933b3ea03ceb/public/images/group-001.png',timeout=60).read()
+          assert hashlib.sha1(b'blob '+str(len(data)).encode()+b'\0'+data).hexdigest()=='7c0eb2002173a4badbcdd189614afec097be2997'
+          out=Path('council-master-review');(out/'original.png').write_bytes(data)
+          im=Image.open(io.BytesIO(data));im.load();rgba=im.convert('RGBA')
+          white=Image.alpha_composite(Image.new('RGBA',im.size,'white'),rgba).convert('RGB');white.thumbnail((1400,1000));white.save(out/'composited-white-preview.png')
+          alpha=rgba.getchannel('A');alpha.thumbnail((1400,1000));alpha.save(out/'alpha-preview.png')
+          report={'mode':im.mode,'size':im.size,'infoKeys':list(im.info),'rgbaSamples':[(xy,rgba.getpixel(xy)) for xy in [(0,0),(20,20),(200,100),(1500,20),(3073,1727)]],'alphaHistogram':rgba.getchannel('A').histogram()}
+          (out/'pixel-report.json').write_text(json.dumps(report,indent=2));print(json.dumps(report,indent=2))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: council-master-pixel-review
+          path: council-master-review
+          retention-days: 7
