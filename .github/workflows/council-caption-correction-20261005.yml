@@ -7,7 +7,8 @@ permissions:
   contents: write
 jobs:
   caption:
-    if: github.event.head_commit.message == 'ci: apply owner-requested council caption punctuation only'
+    if: >-
+      github.event.head_commit.message == 'ci: apply owner-requested council caption punctuation only'
     runs-on: ubuntu-latest
     timeout-minutes: 8
     steps:
