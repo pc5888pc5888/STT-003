@@ -22,3 +22,14 @@ Retain the existing approved council group photo. Add an explicit "照片人物�
 - Do not infer or add people not supported by the supplied reference.
 - Do not change the first-board directory, association governance structure, navigation, fees, or STT/GCSDA institutional separation.
 - Uploaded reference images are not published by this change.
+
+
+## Owner-approved caption correction — 2026-10-05
+
+Explicit owner instruction changes only the group-photo caption on /council.
+
+Before: 策略治理聯席會成員團體照（學會提供）。人物辨識依照片由左至右列示如下。
+
+After: 策略治理聯席會成員團體照，人物辨識依照片由左至右列示如下。（學會提供）
+
+All other source bytes, names, roles, images, layout, routing and STT files remain unchanged. Public-access restrictions are outside this correction; a successful build is not a claim of public browser acceptance.
