@@ -12,7 +12,7 @@ jobs:
     steps:
       - name: Receive approved image and verify exact original bytes
         env:
-          APPROVED_ASSET_URL: 'https://sdmntprnznorth.oaiusercontent.com/files/00000000-76a0-820b-9ead-e1848bffa1ee/raw?se=2026-10-07T02%3A05%3A28Z&sp=r&sv=2026-02-06&sr=b&scid=3e718342-23b8-5609-b665-7ca8e7e153b6&skoid=f5e14fda-2af7-44a3-9d18-d372ffcad871&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-10-06T20%3A43%3A17Z&ske=2026-10-07T20%3A43%3A17Z&sks=b&skv=2026-02-06&sig=uEa%2BqNxuF5dt7WQVOPkxcWtrGmmFGvUwKG0U5u70TNI%3D'
+          APPROVED_ASSET_URL: 'https://oaisdmntprnznorth.blob.core.windows.net/files/00000000-1494-820b-a70d-b006b55451d5/raw?se=2026-10-07T02%3A08%3A28Z&sp=r&sv=2026-02-06&sr=b&scid=01a11413-82de-7e7d-8ca3-27d7ef589532&skoid=f5e14fda-2af7-44a3-9d18-d372ffcad871&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-10-07T00%3A32%3A18Z&ske=2026-10-08T00%3A32%3A18Z&sks=b&skv=2026-02-06&sig=1NLB2SzaQPRWwoQkOH6gkhjA9Q9Mte2wgOY47B5fYDU%3D'
         run: |
           python3 - <<'PY'
           import hashlib, os, struct, urllib.request
@@ -30,55 +30,50 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Apply only the approved asset, display sizing and scoped amendment
+      - name: Apply only the approved asset and scoped amendment
         run: |
           python3 - <<'PY'
           import hashlib, json, shutil
           from pathlib import Path
-          p=Path('src/GCSDAStandaloneV3.tsx')
-          before=p.read_bytes()
+          p=Path('src/GCSDAStandaloneV3.tsx'); before=p.read_bytes()
           assert hashlib.sha1(b'blob '+str(len(before)).encode()+b'\0'+before).hexdigest()=='4614e70c58623f2fedde6db48379d98fda485e21','Source changed; stop rather than overwrite'
           text=before.decode()
-          replacements=[('/images/gcsda-council-members-original-3074.webp','/images/gcsda-council-approved-background-1672.png'),('width="3074" height="1728"','width="1672" height="941"'),('<div className="g4-council-evidence">','<div className="g4-council-evidence" id="council-members">')]
-          for old,new in replacements:
-              assert text.count(old)==1,(old,text.count(old))
+          for old,new in [('/images/gcsda-council-members-original-3074.webp','/images/gcsda-council-approved-background-1672.png'),('width="3074" height="1728"','width="1672" height="941"'),('<div className="g4-council-evidence">','<div className="g4-council-evidence" id="council-members">')]:
+              assert text.count(old)==1
               text=text.replace(old,new,1)
           caption='策略治理聯席會成員團體照，人物辨識依照片由左至右列示如下。（學會提供）'
           assert caption in text
           p.write_text(text,encoding='utf-8')
-          css=Path('src/styles/cis-page-system.css')
-          before_css=css.read_bytes()
+          css=Path('src/styles/cis-page-system.css'); before_css=css.read_bytes()
           assert hashlib.sha1(b'blob '+str(len(before_css)).encode()+b'\0'+before_css).hexdigest()=='7a0b28485f50a44f42fd2c82484c639926f84f70','Styles changed; stop rather than overwrite'
-          text=before_css.decode()
-          old='#root .g4-council-photo{margin:30px auto 0;max-width:700px;'
+          text=before_css.decode(); old='#root .g4-council-photo{margin:30px auto 0;max-width:700px;'
           assert text.count(old)==1
           text=text.replace(old,'#root .g4-council-photo{margin:30px auto 0;max-width:860px;',1)
           assert text.count('aspect-ratio:3074/1728')==1
           text=text.replace('aspect-ratio:3074/1728','aspect-ratio:1672/941',1)
           css.write_text(text,encoding='utf-8')
-          image=Path('public/images/gcsda-council-approved-background-1672.png')
-          assert not image.exists()
-          image.parent.mkdir(parents=True,exist_ok=True)
-          shutil.copyfile('/tmp/gcsda-approved-master.png',image)
-          registry={'assetId':'GCSDA-COUNCIL-APPROVED-BACKGROUND-20261007','status':'OWNER_APPROVED','sourceFilename':'策略治理聯席會企業合影.png','sourceFileId':'file_0000000081c481fd98efff78acd537f1','sourceType':'owner-approved AI-assisted background composite; not an event photograph','approval':'User approved this specific image and instructed high-resolution website placement, then requested direct website execution.','path':'/images/gcsda-council-approved-background-1672.png','width':1672,'height':941,'bytes':image.stat().st_size,'sha256':hashlib.sha256(image.read_bytes()).hexdigest(),'decodedRgbSha256':'3a726a3598772c76f3693cd79d158be5755ce499f893503eda3a6a44b59bf713','processing':'None: original PNG copied byte-for-byte. No generation, face editing, upscaling, crop, sharpen or recompression.','route':'/council#council-members','caption':caption,'oldAssetRetained':'/images/gcsda-council-members-original-3074.webp'}
-          reg=Path('docs/assets/GCSDA_COUNCIL_APPROVED_BACKGROUND_20261007.json');reg.parent.mkdir(parents=True,exist_ok=True);reg.write_text(json.dumps(registry,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          image=Path('public/images/gcsda-council-approved-background-1672.png'); assert not image.exists()
+          image.parent.mkdir(parents=True,exist_ok=True); shutil.copyfile('/tmp/gcsda-approved-master.png',image)
+          registry={'assetId':'GCSDA-COUNCIL-APPROVED-BACKGROUND-20261007','status':'OWNER_APPROVED','sourceFilename':'策略治理聯席會企業合影.png','sourceFileId':'file_0000000081c481fd98efff78acd537f1','sourceType':'owner-approved AI-assisted background composite; not an event photograph','approval':'User approved this specific image and instructed high-resolution website placement, then requested direct execution.','path':'/images/gcsda-council-approved-background-1672.png','width':1672,'height':941,'bytes':image.stat().st_size,'sha256':hashlib.sha256(image.read_bytes()).hexdigest(),'decodedRgbSha256':'3a726a3598772c76f3693cd79d158be5755ce499f893503eda3a6a44b59bf713','processing':'None: original PNG copied byte-for-byte. No generation, face editing, upscaling, crop, sharpen or recompression.','route':'/council#council-members','caption':caption,'oldAssetRetained':'/images/gcsda-council-members-original-3074.webp'}
+          reg=Path('docs/assets/GCSDA_COUNCIL_APPROVED_BACKGROUND_20261007.json'); reg.parent.mkdir(parents=True,exist_ok=True); reg.write_text(json.dumps(registry,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
           cr=Path('docs/change-requests/CR-20261007-GCSDA-COUNCIL-APPROVED-BACKGROUND.md')
-          cr.write_text('\n'.join(['# CR-20261007-GCSDA-COUNCIL-APPROVED-BACKGROUND','','Status: OWNER APPROVED / BUILT-SITE QA REQUIRED BEFORE COMMIT; live public acceptance is separate.','Approved source: 策略治理聯席會企業合影.png, file_0000000081c481fd98efff78acd537f1.','Owner instruction: 好喔請以高解析度放置網站中; 直接給我正確網站內容.','','## Scope and authority','Replace only the /council body group illustration with the specific approved professional-background composite. This is the expressly approved VIS-001 asset replacement and a narrow exception to the prior GCSDA visual-map no-dark/composite restriction for this one body image only. It does not authorize dark site styling or replacement of institutional Hero assets.','The reference is a designed composite, not proof of a real meeting, office location or photographed event. No new claim about an event or facility is added.','Keep all existing names, roles, ordering, caption, alt, other locked copy, header logo, navigation and STT pages. Do not change any person pixels in the approved PNG.','','## Before and after','Before: /images/gcsda-council-members-original-3074.webp in a 700px figure.','After: /images/gcsda-council-approved-background-1672.png, exact original 1672x941 PNG, in a responsive maximum 860px figure. The 830px desktop image supports 2x pixel density without source enlargement.','Add the non-navigational #council-members anchor to the existing body section. No route changes.','Caption retained: '+caption,'Original white image retained for traceability; no deletion or replacement of its bytes.','','## Asset registry and acceptance','Registry: docs/assets/GCSDA_COUNCIL_APPROVED_BACKGROUND_20261007.json.','Require PNG SHA-256 equality to approved source, native dimensions, proportional containment, eight unchanged member cards, exact caption, desktop/tablet/mobile browser tests and a successful build.','Release branch remains gcsda-release-20261005. Never merge/promote the association over STT main.','Do not change project-wide deployment protection, plans, secrets, social channels, forms or infrastructure. Public accessibility and whole-site BUILD_LOCK must not be inferred from build success.','']),encoding='utf-8')
+          lines=['# CR-20261007-GCSDA-COUNCIL-APPROVED-BACKGROUND','','Status: OWNER APPROVED / built-site QA required before commit; live public acceptance is separate.','Approved source: 策略治理聯席會企業合影.png, file_0000000081c481fd98efff78acd537f1.','Owner instruction: 好喔請以高解析度放置網站中; 直接給我正確網站內容.','','## Scope and authority','Replace only the /council body group illustration with the specific approved professional-background composite. This is the expressly approved VIS-001 asset replacement and a narrow exception to the prior GCSDA visual-map no-dark/composite restriction for this one body image. Site styling and institutional Hero assets remain unchanged.','This designed composite is not proof of a real meeting, office location or photographed event. No new claim about an event or facility is added.','Keep names, roles, order, caption, alt, other locked copy, logo, navigation and STT pages. Do not edit pixels of the approved image.','','## Before and after','Before: /images/gcsda-council-members-original-3074.webp, 700px figure.','After: /images/gcsda-council-approved-background-1672.png, byte-identical 1672x941 original PNG, responsive maximum 860px figure. The 830px desktop image supports 2x density without source enlargement.','Add #council-members to the existing body section; no route or navigation changes.','Caption retained: '+caption,'Original white image bytes retained for traceability.','','## Registry and acceptance','Registry: docs/assets/GCSDA_COUNCIL_APPROVED_BACKGROUND_20261007.json.','Require PNG SHA-256 equality, native dimensions, containment, eight unchanged member cards, caption equality, desktop/tablet/mobile browser tests and successful build before commit.','Release remains gcsda-release-20261005. Never promote GCSDA over STT main.','Project-wide protection, plans, secrets, social channels, forms and infrastructure unchanged. Public accessibility and whole-site BUILD_LOCK are not inferred from build success.','']
+          cr.write_text('\n'.join(lines),encoding='utf-8')
           PY
           git diff --check
-      - name: Build unchanged application with approved asset
+      - name: Build and prepare browser verification
         run: |
           npm ci
           npm run build
           npm install --prefix /tmp/gcsda-browser playwright
           /tmp/gcsda-browser/node_modules/.bin/playwright install --with-deps chromium
-      - name: Verify native image, caption and responsive rendering
+      - name: Verify native image and responsive content
         run: |
           mkdir -p approved-council-qa
           node node_modules/vite/bin/vite.js preview --host 127.0.0.1 --port 4173 > /tmp/gcsda-preview.log 2>&1 &
           cat > /tmp/gcsda-browser/verify.cjs <<'JS'
           const {chromium}=require('playwright');
-          const fs=require('fs');const assert=require('assert/strict');const crypto=require('crypto');
+          const fs=require('fs'),assert=require('assert/strict'),crypto=require('crypto');
           const caption='策略治理聯席會成員團體照，人物辨識依照片由左至右列示如下。（學會提供）';
           (async()=>{const browser=await chromium.launch({headless:true});const results=[];try{
             for(const [label,width,height,dpr] of [['desktop',1440,1000,2],['tablet',768,1024,2],['mobile',390,844,3]]){
@@ -96,7 +91,7 @@ jobs:
           }finally{await browser.close();}})().catch(e=>{console.error(e);process.exit(1)});
           JS
           node /tmp/gcsda-browser/verify.cjs
-      - name: Commit only verified publication changes and remove one-time transfer runner
+      - name: Commit verified changes and remove one-time transfer runner
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
