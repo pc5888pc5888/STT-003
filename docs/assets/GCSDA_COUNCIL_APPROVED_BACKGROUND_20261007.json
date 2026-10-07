@@ -1,0 +1,18 @@
+{
+  "assetId": "GCSDA-COUNCIL-APPROVED-BACKGROUND-20261007",
+  "status": "OWNER_APPROVED",
+  "sourceFilename": "策略治理聯席會企業合影.png",
+  "sourceFileId": "file_0000000081c481fd98efff78acd537f1",
+  "sourceType": "owner-approved AI-assisted background composite; not an event photograph",
+  "approval": "User approved this specific image and instructed high-resolution website placement, then requested direct execution.",
+  "path": "/images/gcsda-council-approved-background-1672.png",
+  "width": 1672,
+  "height": 941,
+  "bytes": 2134336,
+  "sha256": "908ea4dbcf5e15e26e3760760f7362b9c020426fcf879b0a69cf8c0e76f2791f",
+  "decodedRgbSha256": "3a726a3598772c76f3693cd79d158be5755ce499f893503eda3a6a44b59bf713",
+  "processing": "None: original PNG copied byte-for-byte. No generation, face editing, upscaling, crop, sharpen or recompression.",
+  "route": "/council#council-members",
+  "caption": "策略治理聯席會成員團體照，人物辨識依照片由左至右列示如下。（學會提供）",
+  "oldAssetRetained": "/images/gcsda-council-members-original-3074.webp"
+}
