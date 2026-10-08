@@ -1,0 +1,38 @@
+name: Replace GCSDA council image
+on:
+  push:
+    branches: [gcsda-release-20261005]
+    paths: ['.github/workflows/replace-gcsda-council-image-20261008.yml']
+permissions:
+  contents: write
+jobs:
+  replace:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: gcsda-release-20261005
+      - name: Replace only the council image
+        env:
+          IMAGE_URL: "https://lh7-rt.googleusercontent.com/docsz/AD_4nXfcEUOdHTAGrfapgGRV3jYvuwa6SoQfKcxWl3KgYLVn8FDxsco6FLGj4n1S_9IWXnoCL_y0XUnMfUvbqkTrYoGA9F4gwwL1dIY_COyCOtqIHiXJrmy0artWJTJh1-bTZKa7RvofXg5Rwnz8bagOI7Lj2Q5lWGhWc0t3A0aXRcrida8S7Vo=s2048?key=T9SaAzwqRuSKktK6fHPpQQ"
+        run: |
+          python3 - <<'PY'
+          import hashlib, struct, urllib.request
+          from pathlib import Path
+          u=__import__('os').environ['IMAGE_URL']
+          b=urllib.request.urlopen(u, timeout=60).read()
+          assert hashlib.sha256(b).hexdigest()=='7c4ec51e16be6ebb5fabc335506e2b8040b1fab401f2080f6eaf476a589a0386'
+          assert b[:8]==b'\x89PNG\r\n\x1a\n'
+          assert struct.unpack('>II', b[16:24])==(1672,941)
+          Path('public/images/gcsda-council-approved-background-1672.png').write_bytes(b)
+          PY
+          git diff --check
+      - name: Commit exact replacement
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add public/images/gcsda-council-approved-background-1672.png
+          git rm .github/workflows/replace-gcsda-council-image-20261008.yml
+          git commit -m 'asset: replace GCSDA council portrait with approved image'
+          git push origin HEAD:gcsda-release-20261005
