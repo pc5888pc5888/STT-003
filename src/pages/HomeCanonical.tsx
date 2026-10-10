@@ -1,3 +1,4 @@
+import GovernedHero from "../components/GovernedHero";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
@@ -101,26 +102,7 @@ export default function HomeCanonical() {
 
   return (
     <div className="stt-g1-home">
-      <section
-        id="hero"
-        className="stt-g1-hero"
-        style={{ backgroundImage: 'url("/visual-bank/stt/user-approved-six/home.png")' }}
-        aria-labelledby="home-hero-title"
-      >
-        <div className="stt-g1-shell">
-          <div className="stt-g1-hero__copy">
-            <p className="stt-g1-kicker">STT GOVERNANCE · STRATEGY · GOVERNANCE · JUDGMENT</p>
-            <h1 id="home-hero-title">讓重要的事，走得更遠。</h1>
-            <p className="stt-g1-lead">
-              STT Governance 協助企業、家族與重大決策者，在結果尚未不可逆之前，先釐清問題、證據、權力、責任與選項，再決定是否行動，以及如何留下可以承擔、可以追溯的治理結構。
-            </p>
-            <div className="stt-g1-actions">
-              <Link className="stt-g1-button is-primary" to="/problems">從正在發生的問題開始 →</Link>
-              <Link className="stt-g1-button" to="/how-stt-works">理解 STT 如何判讀</Link>
-            </div>
-          </div>
-        </div>
-      </section>
+      <GovernedHero kicker="STT GOVERNANCE · STRATEGY · GOVERNANCE · JUDGMENT" title="讓重要的事，走得更遠。" lead="STT Governance 協助企業、家族與重大決策者，在結果尚未不可逆之前先釐清問題、證據、權力、責任與選項，再決定是否行動，以及如何留下可以承擔、可以追溯的治理結構。"><Link className="cis-primary" to="/problems">從正在發生的問題開始 →</Link><Link to="/how-stt-works">理解 STT 如何判讀</Link></GovernedHero>
 
       <section className="stt-g1-section">
         <div className="stt-g1-shell">
@@ -229,16 +211,13 @@ export default function HomeCanonical() {
             <p className="stt-g1-kicker">JUDGMENT AUTHORITY</p>
             <h2>重大治理判讀，最終仍須由人承擔。</h2>
             <p className="stt-g1-lead is-secondary">
-              莊鈞翔博士為 STT Governance 創辦人與治理總控者，長期研究與實務聚焦於企業策略、公司治理與法遵、家族企業接班以及 AI 治理。STT 以 AI 作為研究、整理、比對與治理作業系統，但不將最終判斷權交由 AI。
+              莊鈞翔博士為 STT Governance 創辦人與治理總控者，長期研究與實務聚焦於企業策略、公司治理與法遵、家族企業接班以及 AI 治理；STT 以 AI 作為研究、整理、比對與治理作業系統，但不將最終判斷權交由 AI。
             </p>
             <div className="stt-g1-actions">
               <Link className="stt-g1-button" to="/eric-chuang">認識治理判讀者 →</Link>
             </div>
           </div>
-          <figure className="stt-g1-authority__portrait">
-            <img src="/images/eric-home-authority-20260921.jpg" alt="莊鈞翔博士正式坐姿肖像" />
-            <figcaption>FOUNDER · GOVERNANCE PRINCIPAL · FINAL JUDGMENT</figcaption>
-          </figure>
+
         </div>
       </section>
 
@@ -250,7 +229,7 @@ export default function HomeCanonical() {
               <h2>判讀不是臨時形成的意見，而是長期累積的制度研究。</h2>
             </div>
             <p className="stt-g1-lead is-secondary">
-              研究與出版內容依四個主題呈現：家族與接班、公司治理、AI 與決策治理、治理文明。來源可包含 STT Intelligence、STT Press，以及莊鈞翔博士於第三方媒體正式發表之文章。
+              研究與出版內容依家族與接班、公司治理、AI 與決策治理、治理文明四個主題呈現，來源可包含 STT Intelligence、STT Press，以及莊鈞翔博士於第三方媒體正式發表之文章。
             </p>
           </div>
 
@@ -266,7 +245,7 @@ export default function HomeCanonical() {
 
           <div className="stt-g1-evidence-strip">
             <img
-              src="/images/內在法遵 Internal Compliance《 為你的內心，打造一座不可侵犯的至聖所 》 數位閱讀完整版.png"
+              src="/visual-approved/bank-20.png"
               alt="內在法遵 Internal Compliance 出版封面"
             />
             <div>

@@ -1,0 +1,102 @@
+{
+  "browserRenderedRoutes": 60,
+  "automatedFailures": [],
+  "bookFailures": [],
+  "missingBooks": [],
+  "lowResolutionBooks": [],
+  "gcsdaHeroResolutionFailures": [],
+  "heroCopyAnchorFailures": [],
+  "crossSiteHeroCollisions": [],
+  "gcsdaMetadataFailures": [],
+  "gcsdaCouncil": {
+    "complete": true,
+    "naturalWidth": 700,
+    "naturalHeight": 394,
+    "renderedWidth": 670,
+    "renderedHeight": 377,
+    "objectFit": "contain",
+    "opacity": 1,
+    "visibility": "visible",
+    "display": "block",
+    "nonWhitePixelRatio": 0.43976794778825234,
+    "alt": "策略治理聯席會成員團體照"
+  },
+  "gcsdaMembership": {
+    "deliveryState": "fallback",
+    "formPresent": false,
+    "lineLink": true
+  },
+  "gcsdaMembershipOnline": {
+    "deliveryState": "online",
+    "successText": "入會申請已送出；送出後進入申請待審狀態，學會將依章程及會務程序進行資料核對與資格審查。"
+  },
+  "gcsdaBuild": {
+    "sitemapHasAllRoutes": true,
+    "robotsIndexable": true,
+    "staticCanonical": true,
+    "staticOrganizationSchema": true
+  },
+  "gcsdaCouncilFailure": false,
+  "gcsdaMembershipFallbackFailure": false,
+  "gcsdaMembershipOnlineFailure": false,
+  "gcsdaBuildFailure": false,
+  "headers": [
+    {
+      "site": "stt",
+      "brandRect": {
+        "left": 52,
+        "top": 11,
+        "right": 392,
+        "bottom": 81,
+        "width": 340,
+        "height": 70
+      },
+      "brandNatural": [
+        3181,
+        891
+      ],
+      "brandOptical": {
+        "sourceBox": {
+          "left": 22,
+          "top": 165,
+          "width": 1123,
+          "height": 591
+        },
+        "visibleLeftMarkHeight": 46.43097643097643,
+        "visibleLeftMarkTop": 12.962962962962962
+      }
+    },
+    {
+      "site": "gcsda",
+      "brandRect": {
+        "left": 50,
+        "top": 7.849998474121094,
+        "right": 420.6000061035156,
+        "bottom": 84.1500015258789,
+        "width": 370.6000061035156,
+        "height": 76.30000305175781
+      },
+      "brandNatural": [
+        600,
+        200
+      ],
+      "brandOptical": {
+        "sourceBox": {
+          "left": 13,
+          "top": 39,
+          "width": 203,
+          "height": 120
+        },
+        "visibleLeftMarkHeight": 45.78000183105468,
+        "visibleLeftMarkTop": 14.878500595092774
+      }
+    }
+  ],
+  "logoOptical": {
+    "sttSeal": 46.43097643097643,
+    "gcsdaSeal": 45.78000183105468,
+    "difference": 0.6509745999217458,
+    "passed": true
+  },
+  "note": "Screenshots are mandatory review evidence. CSS presence, successful builds, and naturalWidth alone are never visual PASS."
+}

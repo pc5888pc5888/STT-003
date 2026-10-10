@@ -1,0 +1,4155 @@
+{
+  "generatedAt": "2026-10-10T00:25:53.381Z",
+  "sites": [
+    {
+      "site": "stt",
+      "route": "/",
+      "label": "desktop",
+      "http": 200,
+      "title": "STT Governance｜重大決策・企業治理・家族治理",
+      "h1": "讓重要的事，走得更遠。",
+      "h1Count": 1,
+      "heroClass": "cis-hero cis-title-1 cis-with-image cis-clear-left",
+      "heroImage": "/visual-bank/stt/user-approved-six/home.png",
+      "heroImageLoaded": true,
+      "heroImageNatural": [
+        1491,
+        1055
+      ],
+      "heroImageRect": {
+        "left": 0,
+        "top": 93,
+        "right": 1440,
+        "bottom": 1111.90625,
+        "width": 1440,
+        "height": 1018.90625
+      },
+      "heroImageFit": "contain",
+      "copyRect": {
+        "left": 52,
+        "top": 273,
+        "right": 570.390625,
+        "bottom": 564.515625,
+        "width": 518.390625,
+        "height": 291.515625
+      },
+      "copyBg": "rgba(0, 0, 0, 0)",
+      "heroGradient": "linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255) 30%, rgba(255, 255, 255, 0.99) 38%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.34) 70%, rgba(255, 255, 255, 0.12) 77%, rgba(255, 255, 255, 0) 82%)",
+      "brandRect": {
+        "left": 52,
+        "top": 11,
+        "right": 392,
+        "bottom": 81,
+        "width": 340,
+        "height": 70
+      },
+      "brandNatural": [
+        3181,
+        891
+      ],
+      "brandOptical": {
+        "sourceBox": {
+          "left": 22,
+          "top": 165,
+          "width": 1123,
+          "height": 591
+        },
+        "visibleLeftMarkHeight": 46.43097643097643,
+        "visibleLeftMarkTop": 12.962962962962962
+      },
+      "overflow": false,
+      "broken": [],
+      "canonical": "https://stt-003.vercel.app/",
+      "robotsMeta": "index,follow",
+      "organizationSchema": null,
+      "expectedImage": "/visual-bank/stt/user-approved-six/home.png",
+      "hasExpected": true,
+      "imageLoaded": true,
+      "heroImageSha256": "d87b1039a686ad6a92be4eb2aadbc6d32111278ffd59869137e77e939708ff39",
+      "desktopCopyInReadingZone": true,
+      "mobileSeparated": true,
+      "gradientGeometry": true,
+      "errors": []
+    },
+    {
+      "site": "stt",
+      "route": "/problems",
+      "label": "desktop",
+      "http": 200,
+      "title": "你正在面對什麼｜STT Governance",
+      "h1": "你正在面對什麼",
+      "h1Count": 1,
+      "heroClass": "cis-hero cis-title-1 cis-with-image cis-clear-left",
+      "heroImage": "/visual-bank/stt/user-approved-six/problems.png",
+      "heroImageLoaded": true,
+      "heroImageNatural": [
+        1491,
+        1055
+      ],
+      "heroImageRect": {
+        "left": 0,
+        "top": 93,
+        "right": 1440,
+        "bottom": 1111.90625,
+        "width": 1440,
+        "height": 1018.90625
+      },
+      "heroImageFit": "contain",
+      "copyRect": {
+        "left": 52,
+        "top": 273,
+        "right": 570.390625,
+        "bottom": 493.015625,
+        "width": 518.390625,
+        "height": 220.015625
+      },
+      "copyBg": "rgba(0, 0, 0, 0)",
+      "heroGradient": "linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255) 30%, rgba(255, 255, 255, 0.99) 38%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.34) 70%, rgba(255, 255, 255, 0.12) 77%, rgba(255, 255, 255, 0) 82%)",
+      "brandRect": {
+        "left": 52,
+        "top": 11,
+        "right": 392,
+        "bottom": 81,
+        "width": 340,
+        "height": 70
+      },
+      "brandNatural": [
+        3181,
+        891
+      ],
+      "brandOptical": {
+        "sourceBox": {
+          "left": 22,
+          "top": 165,
+          "width": 1123,
+          "height": 591
+        },
+        "visibleLeftMarkHeight": 46.43097643097643,
+        "visibleLeftMarkTop": 12.962962962962962
+      },
+      "overflow": false,
+      "broken": [],
+      "canonical": "https://stt-003.vercel.app/problems",
+      "robotsMeta": "index,follow",
+      "organizationSchema": null,
+      "expectedImage": "/visual-bank/stt/user-approved-six/problems.png",
+      "hasExpected": true,
+      "imageLoaded": true,
+      "heroImageSha256": "964923d0ba8ddc9589fcd8a254d6daca2f71643d2e6702236bff2902d38850c9",
+      "desktopCopyInReadingZone": true,
+      "mobileSeparated": true,
+      "gradientGeometry": true,
+      "errors": []
+    },
+    {
+      "site": "stt",
+      "route": "/how-stt-works",
+      "label": "desktop",
+      "http": 200,
+      "title": "STT 如何判讀｜治理判讀方法",
+      "h1": "如何判讀",
+      "h1Count": 1,
+      "heroClass": "cis-hero cis-title-1 cis-with-image cis-clear-left",
+      "heroImage": "/visual-bank/stt/user-approved-six/method.png",
+      "heroImageLoaded": true,
+      "heroImageNatural": [
+        1491,
+        1055
+      ],
+      "heroImageRect": {
+        "left": 0,
+        "top": 93,
+        "right": 1440,
+        "bottom": 1111.90625,
+        "width": 1440,
+        "height": 1018.90625
+      },
+      "heroImageFit": "contain",
+      "copyRect": {
+        "left": 52,
+        "top": 273,
+        "right": 570.390625,
+        "bottom": 493.015625,
+        "width": 518.390625,
+        "height": 220.015625
+      },
+      "copyBg": "rgba(0, 0, 0, 0)",
+      "heroGradient": "linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255) 30%, rgba(255, 255, 255, 0.99) 38%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.34) 70%, rgba(255, 255, 255, 0.12) 77%, rgba(255, 255, 255, 0) 82%)",
+      "brandRect": {
+        "left": 52,
+        "top": 11,
+        "right": 392,
+        "bottom": 81,
+        "width": 340,
+        "height": 70
+      },
+      "brandNatural": [
+        3181,
+        891
+      ],
+      "brandOptical": {
+        "sourceBox": {
+          "left": 22,
+          "top": 165,
+          "width": 1123,
+          "height": 591
+        },
+        "visibleLeftMarkHeight": 46.43097643097643,
+        "visibleLeftMarkTop": 12.962962962962962
+      },
+      "overflow": false,
+      "broken": [],
+      "canonical": "https://stt-003.vercel.app/how-stt-works",
+      "robotsMeta": "index,follow",
+      "organizationSchema": null,
+      "expectedImage": "/visual-bank/stt/user-approved-six/method.png",
+      "hasExpected": true,
+      "imageLoaded": true,
+      "heroImageSha256": "e64be189148c76ce2dd5b13efba5a9512e2cb003692f87991c95d35322602753",
+      "desktopCopyInReadingZone": true,
+      "mobileSeparated": true,
+      "gradientGeometry": true,
+      "errors": []
+    },
+    {
+      "site": "stt",
+      "route": "/engagement",
+      "label": "desktop",
+      "http": 200,
+      "title": "治理委任｜STT Governance",
+      "h1": "當一件事情值得被正式治理，就不應只停留在一次諮詢。",
+      "h1Count": 1,
+      "heroClass": "cis-hero cis-title-2 cis-text-only",
+      "heroImage": null,
+      "heroImageLoaded": null,
+      "heroImageNatural": null,
+      "heroImageRect": null,
+      "heroImageFit": null,
+      "copyRect": {
+        "left": 200,
+        "top": 153,
+        "right": 1070,
+        "bottom": 381.859375,
+        "width": 870,
+        "height": 228.859375
+      },
+      "copyBg": "rgba(0, 0, 0, 0)",
+      "heroGradient": "none",
+      "brandRect": {
+        "left": 52,
+        "top": 11,
+        "right": 392,
+        "bottom": 81,
+        "width": 340,
+        "height": 70
+      },
+      "brandNatural": [
+        3181,
+        891
+      ],
+      "brandOptical": {
+        "sourceBox": {
+          "left": 22,
+          "top": 165,
+          "width": 1123,
+          "height": 591
+        },
+        "visibleLeftMarkHeight": 46.43097643097643,
+        "visibleLeftMarkTop": 12.962962962962962
+      },
+      "overflow": false,
+      "broken": [],
+      "canonical": "https://stt-003.vercel.app/engagement",
+      "robotsMeta": "index,follow",
+      "organizationSchema": null,
+      "expectedImage": null,
+      "hasExpected": true,
+      "imageLoaded": true,
+      "heroImageSha256": null,
+      "desktopCopyInReadingZone": true,
+      "mobileSeparated": true,
+      "gradientGeometry": true,
+      "errors": []
+    },
+    {
+      "site": "stt",
+      "route": "/insights",
+      "label": "desktop",
+      "http": 200,
+      "title": "研究與出版｜STT Governance",
+      "h1": "判讀不是臨時形成的意見，而是長期累積的制度研究。",
+      "h1Count": 1,
+      "heroClass": "cis-hero cis-title-2 cis-with-image cis-clear-left",
+      "heroImage": "/visual-bank/stt/user-approved-six/columns.png",
+      "heroImageLoaded": true,
+      "heroImageNatural": [
+        1491,
+        1055
+      ],
+      "heroImageRect": {
+        "left": 0,
+        "top": 93,
+        "right": 1440,
+        "bottom": 1111.90625,
+        "width": 1440,
+        "height": 1018.90625
+      },
+      "heroImageFit": "contain",
+      "copyRect": {
+        "left": 52,
+        "top": 273,
+        "right": 570.390625,
+        "bottom": 535,
+        "width": 518.390625,
+        "height": 262
+      },
+      "copyBg": "rgba(0, 0, 0, 0)",
+      "heroGradient": "linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255) 30%, rgba(255, 255, 255, 0.99) 38%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.34) 70%, rgba(255, 255, 255, 0.12) 77%, rgba(255, 255, 255, 0) 82%)",
+      "brandRect": {
+        "left": 52,
+        "top": 11,
+        "right": 392,
+        "bottom": 81,
+        "width": 340,
+        "height": 70
+      },
+      "brandNatural": [
+        3181,
+        891
+      ],
+      "brandOptical": {
+        "sourceBox": {
+          "left": 22,
+          "top": 165,
+          "width": 1123,
+          "height": 591
+        },
+        "visibleLeftMarkHeight": 46.43097643097643,
+        "visibleLeftMarkTop": 12.962962962962962
+      },
+      "overflow": false,
+      "broken": [],
+      "canonical": "https://stt-003.vercel.app/insights",
+      "robotsMeta": "index,follow",
+      "organizationSchema": null,
+      "expectedImage": "/visual-bank/stt/user-approved-six/columns.png",
+      "hasExpected": true,
+      "imageLoaded": true,
+      "heroImageSha256": "03cc644c1f32e05252ebc4defae7149dd6ddc0a8a36f7965436f0c2dff284417",
+      "desktopCopyInReadingZone": true,
+      "mobileSeparated": true,
+      "gradientGeometry": true,
+      "errors": []
+    },
+    {
+      "site": "stt",
+      "route": "/about",
+      "label": "desktop",
+      "http": 200,
+      "title": "關於 STT Governance｜治理判讀與制度設計",
+      "h1": "STT Governance不是一般顧問公司，而是高位階治理文明平台。",
+      "h1Count": 1,
+      "heroClass": "cis-hero cis-title-3 cis-with-image cis-clear-left",
+      "heroImage": "/visual-bank/stt/user-approved-six/about-stt.png",
+      "heroImageLoaded": true,
+      "heroImageNatural": [
+        1491,
+        1055
+      ],
+      "heroImageRect": {
+        "left": 0,
+        "top": 93,
+        "right": 1440,
+        "bottom": 1111.90625,
+        "width": 1440,
+        "height": 1018.90625
+      },
+      "heroImageFit": "contain",
+      "copyRect": {
+        "left": 52,
+        "top": 273,
+        "right": 570.390625,
+        "bottom": 662.09375,
+        "width": 518.390625,
+        "height": 389.09375
+      },
+      "copyBg": "rgba(0, 0, 0, 0)",
+      "heroGradient": "linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255) 30%, rgba(255, 255, 255, 0.99) 38%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.34) 70%, rgba(255, 255, 255, 0.12) 77%, rgba(255, 255, 255, 0) 82%)",
+      "brandRect": {
+        "left": 52,
+        "top": 11,
+        "right": 392,
+        "bottom": 81,
+        "width": 340,
+        "height": 70
+      },
+      "brandNatural": [
+        3181,
+        891
+      ],
+      "brandOptical": {
+        "sourceBox": {
+          "left": 22,
+          "top": 165,
+          "width": 1123,
+          "height": 591
+        },
+        "visibleLeftMarkHeight": 46.43097643097643,
+        "visibleLeftMarkTop": 12.962962962962962
+      },
+      "overflow": false,
+      "broken": [],
+      "canonical": "https://stt-003.vercel.app/about",
+      "robotsMeta": "index,follow",
+      "organizationSchema": null,
+      "expectedImage": "/visual-bank/stt/user-approved-six/about-stt.png",
+      "hasExpected": true,
+      "imageLoaded": true,
+      "heroImageSha256": "6ae927ed6e822b3699005a734b169f7b098cd353fe6c688f381730c41da1d33d",
+      "desktopCopyInReadingZone": true,
+      "mobileSeparated": true,
+      "gradientGeometry": true,
+      "errors": []
+    },
+    {
+      "site": "stt",
+      "route": "/eric-chuang",
+      "label": "desktop",
+      "http": 200,
+      "title": "莊鈞翔博士｜治理判讀與制度設計｜STT Governance",
+      "h1": "莊鈞翔博士",
+      "h1Count": 1,
+      "heroClass": "cis-hero cis-title-1 cis-with-image cis-portrait",
+      "heroImage": "/visual-approved/eric-page-owner-original.png",
+      "heroImageLoaded": true,
+      "heroImageNatural": [
+        2048,
+        1152
+      ],
+      "heroImageRect": {
+        "left": 0,
+        "top": 93,
+        "right": 1440,
+        "bottom": 903,
+        "width": 1440,
+        "height": 810
+      },
+      "heroImageFit": "contain",
+      "copyRect": {
+        "left": 52,
+        "top": 380.1875,
+        "right": 570.390625,
+        "bottom": 615.796875,
+        "width": 518.390625,
+        "height": 235.609375
+      },
+      "copyBg": "rgba(0, 0, 0, 0)",
+      "heroGradient": "linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255) 30%, rgba(255, 255, 255, 0.99) 38%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.34) 70%, rgba(255, 255, 255, 0.12) 77%, rgba(255, 255, 255, 0) 82%)",
+      "brandRect": {
+        "left": 52,
+        "top": 11,
+        "right": 392,
+        "bottom": 81,
+        "width": 340,
+        "height": 70
+      },
+      "brandNatural": [
+        3181,
+        891
+      ],
+      "brandOptical": {
+        "sourceBox": {
+          "left": 22,
+          "top": 165,
+          "width": 1123,
+          "height": 591
+        },
+        "visibleLeftMarkHeight": 46.43097643097643,
+        "visibleLeftMarkTop": 12.962962962962962
+      },
+      "overflow": false,
+      "broken": [],
+      "canonical": "https://stt-003.vercel.app/eric-chuang",
+      "robotsMeta": "index,follow",
+      "organizationSchema": null,
+      "expectedImage": null,
+      "hasExpected": true,
+      "imageLoaded": true,
+      "heroImageSha256": "891c3d1b19ba4ac32792543928473f0938fae0bfe529d1ac46e3dabf34f780fe",
+      "desktopCopyInReadingZone": true,
+      "mobileSeparated": true,
+      "gradientGeometry": true,
+      "errors": []
+    },
+    {
+      "site": "stt",
+      "route": "/institutions",
+      "label": "desktop",
+      "http": 200,
+      "title": "機構合作｜STT Governance",
+      "h1": "跨專業治理整合，先建立共同的判讀架構。",
+      "h1Count": 1,
+      "heroClass": "cis-hero cis-title-2 cis-text-only",
+      "heroImage": null,
+      "heroImageLoaded": null,
+      "heroImageNatural": null,
+      "heroImageRect": null,
+      "heroImageFit": null,
+      "copyRect": {
+        "left": 200,
+        "top": 153,
+        "right": 1070,
+        "bottom": 453.359375,
+        "width": 870,
+        "height": 300.359375
+      },
+      "copyBg": "rgba(0, 0, 0, 0)",
+      "heroGradient": "none",
+      "brandRect": {
+        "left": 52,
+        "top": 11,
+        "right": 392,
+        "bottom": 81,
+        "width": 340,
+        "height": 70
+      },
+      "brandNatural": [
+        3181,
+        891
+      ],
+      "brandOptical": {
+        "sourceBox": {
+          "left": 22,
+          "top": 165,
+          "width": 1123,
+          "height": 591
+        },
+        "visibleLeftMarkHeight": 46.43097643097643,
+        "visibleLeftMarkTop": 12.962962962962962
+      },
+      "overflow": false,
+      "broken": [],
+      "canonical": "https://stt-003.vercel.app/institutions",
+      "robotsMeta": "index,follow",
+      "organizationSchema": null,
+      "expectedImage": null,
+      "hasExpected": true,
+      "imageLoaded": true,
+      "heroImageSha256": null,
+      "desktopCopyInReadingZone": true,
+      "mobileSeparated": true,
+      "gradientGeometry": true,
+      "errors": []
+    },
+    {
+      "site": "stt",
+      "route": "/start",
+      "label": "desktop",
+      "http": 200,
+      "title": "開始治理判讀｜STT Governance",
+      "h1": "先把正在發生的事情說清楚。",
+      "h1Count": 1,
+      "heroClass": "cis-hero cis-title-1 cis-text-only",
+      "heroImage": null,
+      "heroImageLoaded": null,
+      "heroImageNatural": null,
+      "heroImageRect": null,
+      "heroImageFit": null,
+      "copyRect": {
+        "left": 200,
+        "top": 153,
+        "right": 1070,
+        "bottom": 306.734375,
+        "width": 870,
+        "height": 153.734375
+      },
+      "copyBg": "rgba(0, 0, 0, 0)",
+      "heroGradient": "none",
+      "brandRect": {
+        "left": 52,
+        "top": 11,
+        "right": 392,
+        "bottom": 81,
+        "width": 340,
+        "height": 70
+      },
+      "brandNatural": [
+        3181,
+        891
+      ],
+      "brandOptical": {
+        "sourceBox": {
+          "left": 22,
+          "top": 165,
+          "width": 1123,
+          "height": 591
+        },
+        "visibleLeftMarkHeight": 46.43097643097643,
+        "visibleLeftMarkTop": 12.962962962962962
+      },
+      "overflow": false,
+      "broken": [],
+      "canonical": "https://stt-003.vercel.app/start",
+      "robotsMeta": "index,follow",
+      "organizationSchema": null,
+      "expectedImage": null,
+      "hasExpected": true,
+      "imageLoaded": true,
+      "heroImageSha256": null,
+      "desktopCopyInReadingZone": true,
+      "mobileSeparated": true,
+      "gradientGeometry": true,
+      "errors": []
+    },
+    {
+      "site": "stt",
+      "route": "/privacy",
+      "label": "desktop",
+      "http": 200,
+      "title": "隱私與資料使用｜STT Governance",
+      "h1": "隱私與資料使用",
+      "h1Count": 1,
+      "heroClass": "cis-hero cis-title-1 cis-text-only",
+      "heroImage": null,
+      "heroImageLoaded": null,
+      "heroImageNatural": null,
+      "heroImageRect": null,
+      "heroImageFit": null,
+      "copyRect": {
+        "left": 200,
+        "top": 153,
+        "right": 1070,
+        "bottom": 339.875,
+        "width": 870,
+        "height": 186.875
+      },
+      "copyBg": "rgba(0, 0, 0, 0)",
+      "heroGradient": "none",
+      "brandRect": {
+        "left": 52,
+        "top": 11,
+        "right": 392,
+        "bottom": 81,
+        "width": 340,
+        "height": 70
+      },
+      "brandNatural": [
+        3181,
+        891
+      ],
+      "brandOptical": {
+        "sourceBox": {
+          "left": 22,
+          "top": 165,
+          "width": 1123,
+          "height": 591
+        },
+        "visibleLeftMarkHeight": 46.43097643097643,
+        "visibleLeftMarkTop": 12.962962962962962
+      },
+      "overflow": false,
+      "broken": [],
+      "canonical": "https://stt-003.vercel.app/privacy",
+      "robotsMeta": "noindex,follow",
+      "organizationSchema": null,
+      "expectedImage": null,
+      "hasExpected": true,
+      "imageLoaded": true,
+      "heroImageSha256": null,
+      "desktopCopyInReadingZone": true,
+      "mobileSeparated": true,
+      "gradientGeometry": true,
+      "errors": []
+    },
+    {
+      "site": "stt",
+      "route": "/professional-boundary",
+      "label": "desktop",
+      "http": 200,
+      "title": "專業服務與資訊邊界｜STT Governance",
+      "h1": "治理判讀與專業服務邊界",
+      "h1Count": 1,
+      "heroClass": "cis-hero cis-title-1 cis-text-only",
+      "heroImage": null,
+      "heroImageLoaded": null,
+      "heroImageNatural": null,
+      "heroImageRect": null,
+      "heroImageFit": null,
+      "copyRect": {
+        "left": 200,
+        "top": 153,
+        "right": 1070,
+        "bottom": 373.015625,
+        "width": 870,
+        "height": 220.015625
+      },
+      "copyBg": "rgba(0, 0, 0, 0)",
+      "heroGradient": "none",
+      "brandRect": {
+        "left": 52,
+        "top": 11,
+        "right": 392,
+        "bottom": 81,
+        "width": 340,
+        "height": 70
+      },
+      "brandNatural": [
+        3181,
+        891
+      ],
+      "brandOptical": {
+        "sourceBox": {
+          "left": 22,
+          "top": 165,
+          "width": 1123,
+          "height": 591
+        },
+        "visibleLeftMarkHeight": 46.43097643097643,
+        "visibleLeftMarkTop": 12.962962962962962
+      },
+      "overflow": false,
+      "broken": [],
+      "canonical": "https://stt-003.vercel.app/professional-boundary",
+      "robotsMeta": "index,follow",
+      "organizationSchema": null,
+      "expectedImage": null,
+      "hasExpected": true,
+      "imageLoaded": true,
+      "heroImageSha256": null,
+      "desktopCopyInReadingZone": true,
+      "mobileSeparated": true,
+      "gradientGeometry": true,
+      "errors": []
+    },
+    {
+      "site": "stt",
+      "route": "/",
+      "label": "tablet",
+      "http": 200,
+      "title": "STT Governance｜重大決策・企業治理・家族治理",
+      "h1": "讓重要的事，走得更遠。",
+      "h1Count": 1,
+      "heroClass": "cis-hero cis-title-1 cis-with-image cis-clear-left",
+      "heroImage": "/visual-bank/stt/user-approved-six/home.png",
+      "heroImageLoaded": true,
+      "heroImageNatural": [
+        1491,
+        1055
+      ],
+      "heroImageRect": {
+        "left": 0,
+        "top": 83,
+        "right": 820,
+        "bottom": 663.203125,
+        "width": 820,
+        "height": 580.203125
+      },
+      "heroImageFit": "contain",
+      "copyRect": {
+        "left": 36,
+        "top": 133,
+        "right": 355.796875,
+        "bottom": 612.078125,
+        "width": 319.796875,
+        "height": 479.078125
+      },
+      "copyBg": "rgba(0, 0, 0, 0)",
+      "heroGradient": "linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255) 30%, rgba(255, 255, 255, 0.99) 38%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.34) 70%, rgba(255, 255, 255, 0.12) 77%, rgba(255, 255, 255, 0) 82%)",
+      "brandRect": {
+        "left": 24,
+        "top": 12,
+        "right": 274,
+        "bottom": 70,
+        "width": 250,
+        "height": 58
+      },
+      "brandNatural": [
+        3181,
+        891
+      ],
+      "brandOptical": {
+        "sourceBox": {
+          "left": 22,
+          "top": 165,
+          "width": 1123,
+          "height": 591
+        },
+        "visibleLeftMarkHeight": 38.47138047138047,
+        "visibleLeftMarkTop": 10.74074074074074
+      },
+      "overflow": false,
+      "broken": [],
+      "canonical": "https://stt-003.vercel.app/",
+      "robotsMeta": "index,follow",
+      "organizationSchema": null,
+      "expectedImage": "/visual-bank/stt/user-approved-six/home.png",
+      "hasExpected": true,
+      "imageLoaded": true,
+      "heroImageSha256": "d87b1039a686ad6a92be4eb2aadbc6d32111278ffd59869137e77e939708ff39",
+      "desktopCopyInReadingZone": true,
+      "mobileSeparated": true,
+      "gradientGeometry": true,
+      "errors": []
+    },
+    {
+      "site": "stt",
+      "route": "/problems",
+      "label": "tablet",
+      "http": 200,
+      "title": "你正在面對什麼｜STT Governance",
+      "h1": "你正在面對什麼",
+      "h1Count": 1,
+      "heroClass": "cis-hero cis-title-1 cis-with-image cis-clear-left",
+      "heroImage": "/visual-bank/stt/user-approved-six/problems.png",
+      "heroImageLoaded": true,
+      "heroImageNatural": [
+        1491,
+        1055
+      ],
+      "heroImageRect": {
+        "left": 0,
+        "top": 83,
+        "right": 820,
+        "bottom": 663.203125,
+        "width": 820,
+        "height": 580.203125
+      },
+      "heroImageFit": "contain",
+      "copyRect": {
+        "left": 36,
+        "top": 133,
+        "right": 355.796875,
+        "bottom": 430.6875,
+        "width": 319.796875,
+        "height": 297.6875
+      },
+      "copyBg": "rgba(0, 0, 0, 0)",
+      "heroGradient": "linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255) 30%, rgba(255, 255, 255, 0.99) 38%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.34) 70%, rgba(255, 255, 255, 0.12) 77%, rgba(255, 255, 255, 0) 82%)",
+      "brandRect": {
+        "left": 24,
+        "top": 12,
+        "right": 274,
+        "bottom": 70,
+        "width": 250,
+        "height": 58
+      },
+      "brandNatural": [
+        3181,
+        891
+      ],
+      "brandOptical": {
+        "sourceBox": {
+          "left": 22,
+          "top": 165,
+          "width": 1123,
+          "height": 591
+        },
+        "visibleLeftMarkHeight": 38.47138047138047,
+        "visibleLeftMarkTop": 10.74074074074074
+      },
+      "overflow": false,
+      "broken": [],
+      "canonical": "https://stt-003.vercel.app/problems",
+      "robotsMeta": "index,follow",
+      "organizationSchema": null,
+      "expectedImage": "/visual-bank/stt/user-approved-six/problems.png",
+      "hasExpected": true,
+      "imageLoaded": true,
+      "heroImageSha256": "964923d0ba8ddc9589fcd8a254d6daca2f71643d2e6702236bff2902d38850c9",
+      "desktopCopyInReadingZone": true,
+      "mobileSeparated": true,
+      "gradientGeometry": true,
+      "errors": []
+    },
+    {
+      "site": "stt",
+      "route": "/how-stt-works",
+      "label": "tablet",
+      "http": 200,
+      "title": "STT 如何判讀｜治理判讀方法",
+      "h1": "如何判讀",
+      "h1Count": 1,
+      "heroClass": "cis-hero cis-title-1 cis-with-image cis-clear-left",
+      "heroImage": "/visual-bank/stt/user-approved-six/method.png",
+      "heroImageLoaded": true,
+      "heroImageNatural": [
+        1491,
+        1055
+      ],
+      "heroImageRect": {
+        "left": 0,
+        "top": 83,
+        "right": 820,
+        "bottom": 663.203125,
+        "width": 820,
+        "height": 580.203125
+      },
+      "heroImageFit": "contain",
+      "copyRect": {
+        "left": 36,
+        "top": 133,
+        "right": 355.796875,
+        "bottom": 410.890625,
+        "width": 319.796875,
+        "height": 277.890625
+      },
+      "copyBg": "rgba(0, 0, 0, 0)",
+      "heroGradient": "linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255) 30%, rgba(255, 255, 255, 0.99) 38%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.34) 70%, rgba(255, 255, 255, 0.12) 77%, rgba(255, 255, 255, 0) 82%)",
+      "brandRect": {
+        "left": 24,
+        "top": 12,
+        "right": 274,
+        "bottom": 70,
+        "width": 250,
+        "height": 58
+      },
+      "brandNatural": [
+        3181,
+        891
+      ],
+      "brandOptical": {
+        "sourceBox": {
+          "left": 22,
+          "top": 165,
+          "width": 1123,
+          "height": 591
+        },
+        "visibleLeftMarkHeight": 38.47138047138047,
+        "visibleLeftMarkTop": 10.74074074074074
+      },
+      "overflow": false,
+      "broken": [],
+      "canonical": "https://stt-003.vercel.app/how-stt-works",
+      "robotsMeta": "index,follow",
+      "organizationSchema": null,
+      "expectedImage": "/visual-bank/stt/user-approved-six/method.png",
+      "hasExpected": true,
+      "imageLoaded": true,
+      "heroImageSha256": "e64be189148c76ce2dd5b13efba5a9512e2cb003692f87991c95d35322602753",
+      "desktopCopyInReadingZone": true,
+      "mobileSeparated": true,
+      "gradientGeometry": true,
+      "errors": []
+    },
+    {
+      "site": "stt",
+      "route": "/engagement",
+      "label": "tablet",
+      "http": 200,
+      "title": "治理委任｜STT Governance",
+      "h1": "當一件事情值得被正式治理，就不應只停留在一次諮詢。",
+      "h1Count": 1,
+      "heroClass": "cis-hero cis-title-2 cis-text-only",
+      "heroImage": null,
+      "heroImageLoaded": null,
+      "heroImageNatural": null,
+      "heroImageRect": null,
+      "heroImageFit": null,
+      "copyRect": {
+        "left": 32,
+        "top": 143,
+        "right": 788,
+        "bottom": 366.265625,
+        "width": 756,
+        "height": 223.265625
+      },
+      "copyBg": "rgba(0, 0, 0, 0)",
+      "heroGradient": "none",
+      "brandRect": {
+        "left": 24,
+        "top": 12,
+        "right": 274,
+        "bottom": 70,
+        "width": 250,
+        "height": 58
+      },
+      "brandNatural": [
+        3181,
+        891
+      ],
+      "brandOptical": {
+        "sourceBox": {
+          "left": 22,
+          "top": 165,
+          "width": 1123,
+          "height": 591
+        },
+        "visibleLeftMarkHeight": 38.47138047138047,
+        "visibleLeftMarkTop": 10.74074074074074
+      },
+      "overflow": false,
+      "broken": [],
+      "canonical": "https://stt-003.vercel.app/engagement",
+      "robotsMeta": "index,follow",
+      "organizationSchema": null,
+      "expectedImage": null,
+      "hasExpected": true,
+      "imageLoaded": true,
+      "heroImageSha256": null,
+      "desktopCopyInReadingZone": true,
+      "mobileSeparated": true,
+      "gradientGeometry": true,
+      "errors": []
+    },
+    {
+      "site": "stt",
+      "route": "/insights",
+      "label": "tablet",
+      "http": 200,
+      "title": "研究與出版｜STT Governance",
+      "h1": "判讀不是臨時形成的意見，而是長期累積的制度研究。",
+      "h1Count": 1,
+      "heroClass": "cis-hero cis-title-2 cis-with-image cis-clear-left",
+      "heroImage": "/visual-bank/stt/user-approved-six/columns.png",
+      "heroImageLoaded": true,
+      "heroImageNatural": [
+        1491,
+        1055
+      ],
+      "heroImageRect": {
+        "left": 0,
+        "top": 83,
+        "right": 820,
+        "bottom": 663.203125,
+        "width": 820,
+        "height": 580.203125
+      },
+      "heroImageFit": "contain",
+      "copyRect": {
+        "left": 36,
+        "top": 133,
+        "right": 355.796875,
+        "bottom": 500.921875,
+        "width": 319.796875,
+        "height": 367.921875
+      },
+      "copyBg": "rgba(0, 0, 0, 0)",
+      "heroGradient": "linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255) 30%, rgba(255, 255, 255, 0.99) 38%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.34) 70%, rgba(255, 255, 255, 0.12) 77%, rgba(255, 255, 255, 0) 82%)",
+      "brandRect": {
+        "left": 24,
+        "top": 12,
+        "right": 274,
+        "bottom": 70,
+        "width": 250,
+        "height": 58
+      },
+      "brandNatural": [
+        3181,
+        891
+      ],
+      "brandOptical": {
+        "sourceBox": {
+          "left": 22,
+          "top": 165,
+          "width": 1123,
+          "height": 591
+        },
+        "visibleLeftMarkHeight": 38.47138047138047,
+        "visibleLeftMarkTop": 10.74074074074074
+      },
+      "overflow": false,
+      "broken": [],
+      "canonical": "https://stt-003.vercel.app/insights",
+      "robotsMeta": "index,follow",
+      "organizationSchema": null,
+      "expectedImage": "/visual-bank/stt/user-approved-six/columns.png",
+      "hasExpected": true,
+      "imageLoaded": true,
+      "heroImageSha256": "03cc644c1f32e05252ebc4defae7149dd6ddc0a8a36f7965436f0c2dff284417",
+      "desktopCopyInReadingZone": true,
+      "mobileSeparated": true,
+      "gradientGeometry": true,
+      "errors": []
+    },
+    {
+      "site": "stt",
+      "route": "/about",
+      "label": "tablet",
+      "http": 200,
+      "title": "關於 STT Governance｜治理判讀與制度設計",
+      "h1": "STT Governance不是一般顧問公司，而是高位階治理文明平台。",
+      "h1Count": 1,
+      "heroClass": "cis-hero cis-title-3 cis-with-image cis-clear-left",
+      "heroImage": "/visual-bank/stt/user-approved-six/about-stt.png",
+      "heroImageLoaded": true,
+      "heroImageNatural": [
+        1491,
+        1055
+      ],
+      "heroImageRect": {
+        "left": 0,
+        "top": 83,
+        "right": 820,
+        "bottom": 663.203125,
+        "width": 820,
+        "height": 580.203125
+      },
+      "heroImageFit": "contain",
+      "copyRect": {
+        "left": 36,
+        "top": 133,
+        "right": 355.796875,
+        "bottom": 616.875,
+        "width": 319.796875,
+        "height": 483.875
+      },
+      "copyBg": "rgba(0, 0, 0, 0)",
+      "heroGradient": "linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255) 30%, rgba(255, 255, 255, 0.99) 38%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.34) 70%, rgba(255, 255, 255, 0.12) 77%, rgba(255, 255, 255, 0) 82%)",
+      "brandRect": {
+        "left": 24,
+        "top": 12,
+        "right": 274,
+        "bottom": 70,
+        "width": 250,
+        "height": 58
+      },
+      "brandNatural": [
+        3181,
+        891
+      ],
+      "brandOptical": {
+        "sourceBox": {
+          "left": 22,
+          "top": 165,
+          "width": 1123,
+          "height": 591
+        },
+        "visibleLeftMarkHeight": 38.47138047138047,
+        "visibleLeftMarkTop": 10.74074074074074
+      },
+      "overflow": false,
+      "broken": [],
+      "canonical": "https://stt-003.vercel.app/about",
+      "robotsMeta": "index,follow",
+      "organizationSchema": null,
+      "expectedImage": "/visual-bank/stt/user-approved-six/about-stt.png",
+      "hasExpected": true,
+      "imageLoaded": true,
+      "heroImageSha256": "6ae927ed6e822b3699005a734b169f7b098cd353fe6c688f381730c41da1d33d",
+      "desktopCopyInReadingZone": true,
+      "mobileSeparated": true,
+      "gradientGeometry": true,
+      "errors": []
+    },
+    {
+      "site": "stt",
+      "route": "/eric-chuang",
+      "label": "tablet",
+      "http": 200,
+      "title": "莊鈞翔博士｜治理判讀與制度設計｜STT Governance",
+      "h1": "莊鈞翔博士",
+      "h1Count": 1,
+      "heroClass": "cis-hero cis-title-1 cis-with-image cis-portrait",
+      "heroImage": "/visual-approved/eric-page-owner-original.png",
+      "heroImageLoaded": true,
+      "heroImageNatural": [
+        2048,
+        1152
+      ],
+      "heroImageRect": {
+        "left": 0,
+        "top": 83,
+        "right": 820,
+        "bottom": 544.25,
+        "width": 820,
+        "height": 461.25
+      },
+      "heroImageFit": "contain",
+      "copyRect": {
+        "left": 36,
+        "top": 200.015625,
+        "right": 355.796875,
+        "bottom": 427.21875,
+        "width": 319.796875,
+        "height": 227.203125
+      },
+      "copyBg": "rgba(0, 0, 0, 0)",
+      "heroGradient": "linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255) 30%, rgba(255, 255, 255, 0.99) 38%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.34) 70%, rgba(255, 255, 255, 0.12) 77%, rgba(255, 255, 255, 0) 82%)",
+      "brandRect": {
+        "left": 24,
+        "top": 12,
+        "right": 274,
+        "bottom": 70,
+        "width": 250,
+        "height": 58
+      },
+      "brandNatural": [
+        3181,
+        891
+      ],
+      "brandOptical": {
+        "sourceBox": {
+          "left": 22,
+          "top": 165,
+          "width": 1123,
+          "height": 591
+        },
+        "visibleLeftMarkHeight": 38.47138047138047,
+        "visibleLeftMarkTop": 10.74074074074074
+      },
+      "overflow": false,
+      "broken": [],
+      "canonical": "https://stt-003.vercel.app/eric-chuang",
+      "robotsMeta": "index,follow",
+      "organizationSchema": null,
+      "expectedImage": null,
+      "hasExpected": true,
+      "imageLoaded": true,
+      "heroImageSha256": "891c3d1b19ba4ac32792543928473f0938fae0bfe529d1ac46e3dabf34f780fe",
+      "desktopCopyInReadingZone": true,
+      "mobileSeparated": true,
+      "gradientGeometry": true,
+      "errors": []
+    },
+    {
+      "site": "stt",
+      "route": "/institutions",
+      "label": "tablet",
+      "http": 200,
+      "title": "機構合作｜STT Governance",
+      "h1": "跨專業治理整合，先建立共同的判讀架構。",
+      "h1Count": 1,
+      "heroClass": "cis-hero cis-title-2 cis-text-only",
+      "heroImage": null,
+      "heroImageLoaded": null,
+      "heroImageNatural": null,
+      "heroImageRect": null,
+      "heroImageFit": null,
+      "copyRect": {
+        "left": 32,
+        "top": 143,
+        "right": 788,
+        "bottom": 437.765625,
+        "width": 756,
+        "height": 294.765625
+      },
+      "copyBg": "rgba(0, 0, 0, 0)",
+      "heroGradient": "none",
+      "brandRect": {
+        "left": 24,
+        "top": 12,
+        "right": 274,
+        "bottom": 70,
+        "width": 250,
+        "height": 58
+      },
+      "brandNatural": [
+        3181,
+        891
+      ],
+      "brandOptical": {
+        "sourceBox": {
+          "left": 22,
+          "top": 165,
+          "width": 1123,
+          "height": 591
+        },
+        "visibleLeftMarkHeight": 38.47138047138047,
+        "visibleLeftMarkTop": 10.74074074074074
+      },
+      "overflow": false,
+      "broken": [],
+      "canonical": "https://stt-003.vercel.app/institutions",
+      "robotsMeta": "index,follow",
+      "organizationSchema": null,
+      "expectedImage": null,
+      "hasExpected": true,
+      "imageLoaded": true,
+      "heroImageSha256": null,
+      "desktopCopyInReadingZone": true,
+      "mobileSeparated": true,
+      "gradientGeometry": true,
+      "errors": []
+    },
+    {
+      "site": "stt",
+      "route": "/start",
+      "label": "tablet",
+      "http": 200,
+      "title": "開始治理判讀｜STT Governance",
+      "h1": "先把正在發生的事情說清楚。",
+      "h1Count": 1,
+      "heroClass": "cis-hero cis-title-1 cis-text-only",
+      "heroImage": null,
+      "heroImageLoaded": null,
+      "heroImageNatural": null,
+      "heroImageRect": null,
+      "heroImageFit": null,
+      "copyRect": {
+        "left": 32,
+        "top": 143,
+        "right": 788,
+        "bottom": 291.125,
+        "width": 756,
+        "height": 148.125
+      },
+      "copyBg": "rgba(0, 0, 0, 0)",
+      "heroGradient": "none",
+      "brandRect": {
+        "left": 24,
+        "top": 12,
+        "right": 274,
+        "bottom": 70,
+        "width": 250,
+        "height": 58
+      },
+      "brandNatural": [
+        3181,
+        891
+      ],
+      "brandOptical": {
+        "sourceBox": {
+          "left": 22,
+          "top": 165,
+          "width": 1123,
+          "height": 591
+        },
+        "visibleLeftMarkHeight": 38.47138047138047,
+        "visibleLeftMarkTop": 10.74074074074074
+      },
+      "overflow": false,
+      "broken": [],
+      "canonical": "https://stt-003.vercel.app/start",
+      "robotsMeta": "index,follow",
+      "organizationSchema": null,
+      "expectedImage": null,
+      "hasExpected": true,
+      "imageLoaded": true,
+      "heroImageSha256": null,
+      "desktopCopyInReadingZone": true,
+      "mobileSeparated": true,
+      "gradientGeometry": true,
+      "errors": []
+    },
+    {
+      "site": "stt",
+      "route": "/privacy",
+      "label": "tablet",
+      "http": 200,
+      "title": "隱私與資料使用｜STT Governance",
+      "h1": "隱私與資料使用",
+      "h1Count": 1,
+      "heroClass": "cis-hero cis-title-1 cis-text-only",
+      "heroImage": null,
+      "heroImageLoaded": null,
+      "heroImageNatural": null,
+      "heroImageRect": null,
+      "heroImageFit": null,
+      "copyRect": {
+        "left": 32,
+        "top": 143,
+        "right": 788,
+        "bottom": 324.265625,
+        "width": 756,
+        "height": 181.265625
+      },
+      "copyBg": "rgba(0, 0, 0, 0)",
+      "heroGradient": "none",
+      "brandRect": {
+        "left": 24,
+        "top": 12,
+        "right": 274,
+        "bottom": 70,
+        "width": 250,
+        "height": 58
+      },
+      "brandNatural": [
+        3181,
+        891
+      ],
+      "brandOptical": {
+        "sourceBox": {
+          "left": 22,
+          "top": 165,
+          "width": 1123,
+          "height": 591
+        },
+        "visibleLeftMarkHeight": 38.47138047138047,
+        "visibleLeftMarkTop": 10.74074074074074
+      },
+      "overflow": false,
+      "broken": [],
+      "canonical": "https://stt-003.vercel.app/privacy",
+      "robotsMeta": "noindex,follow",
+      "organizationSchema": null,
+      "expectedImage": null,
+      "hasExpected": true,
+      "imageLoaded": true,
+      "heroImageSha256": null,
+      "desktopCopyInReadingZone": true,
+      "mobileSeparated": true,
+      "gradientGeometry": true,
+      "errors": []
+    },
+    {
+      "site": "stt",
+      "route": "/professional-boundary",
+      "label": "tablet",
+      "http": 200,
+      "title": "專業服務與資訊邊界｜STT Governance",
+      "h1": "治理判讀與專業服務邊界",
+      "h1Count": 1,
+      "heroClass": "cis-hero cis-title-1 cis-text-only",
+      "heroImage": null,
+      "heroImageLoaded": null,
+      "heroImageNatural": null,
+      "heroImageRect": null,
+      "heroImageFit": null,
+      "copyRect": {
+        "left": 32,
+        "top": 143,
+        "right": 788,
+        "bottom": 357.40625,
+        "width": 756,
+        "height": 214.40625
+      },
+      "copyBg": "rgba(0, 0, 0, 0)",
+      "heroGradient": "none",
+      "brandRect": {
+        "left": 24,
+        "top": 12,
+        "right": 274,
+        "bottom": 70,
+        "width": 250,
+        "height": 58
+      },
+      "brandNatural": [
+        3181,
+        891
+      ],
+      "brandOptical": {
+        "sourceBox": {
+          "left": 22,
+          "top": 165,
+          "width": 1123,
+          "height": 591
+        },
+        "visibleLeftMarkHeight": 38.47138047138047,
+        "visibleLeftMarkTop": 10.74074074074074
+      },
+      "overflow": false,
+      "broken": [],
+      "canonical": "https://stt-003.vercel.app/professional-boundary",
+      "robotsMeta": "index,follow",
+      "organizationSchema": null,
+      "expectedImage": null,
+      "hasExpected": true,
+      "imageLoaded": true,
+      "heroImageSha256": null,
+      "desktopCopyInReadingZone": true,
+      "mobileSeparated": true,
+      "gradientGeometry": true,
+      "errors": []
+    },
+    {
+      "site": "stt",
+      "route": "/",
+      "label": "mobile",
+      "http": 200,
+      "title": "STT Governance｜重大決策・企業治理・家族治理",
+      "h1": "讓重要的事，走得更遠。",
+      "h1Count": 1,
+      "heroClass": "cis-hero cis-title-1 cis-with-image cis-clear-left",
+      "heroImage": "/visual-bank/stt/user-approved-six/home.png",
+      "heroImageLoaded": true,
+      "heroImageNatural": [
+        1491,
+        1055
+      ],
+      "heroImageRect": {
+        "left": 0,
+        "top": 83,
+        "right": 390,
+        "bottom": 358.953125,
+        "width": 390,
+        "height": 275.953125
+      },
+      "heroImageFit": "contain",
+      "copyRect": {
+        "left": 0,
+        "top": 358.953125,
+        "right": 390,
+        "bottom": 779.53125,
+        "width": 390,
+        "height": 420.578125
+      },
+      "copyBg": "rgb(251, 250, 247)",
+      "heroGradient": "linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255) 30%, rgba(255, 255, 255, 0.99) 38%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.34) 70%, rgba(255, 255, 255, 0.12) 77%, rgba(255, 255, 255, 0) 82%)",
+      "brandRect": {
+        "left": 24,
+        "top": 12,
+        "right": 274,
+        "bottom": 70,
+        "width": 250,
+        "height": 58
+      },
+      "brandNatural": [
+        3181,
+        891
+      ],
+      "brandOptical": {
+        "sourceBox": {
+          "left": 22,
+          "top": 165,
+          "width": 1123,
+          "height": 591
+        },
+        "visibleLeftMarkHeight": 38.47138047138047,
+        "visibleLeftMarkTop": 10.74074074074074
+      },
+      "overflow": false,
+      "broken": [],
+      "canonical": "https://stt-003.vercel.app/",
+      "robotsMeta": "index,follow",
+      "organizationSchema": null,
+      "expectedImage": "/visual-bank/stt/user-approved-six/home.png",
+      "hasExpected": true,
+      "imageLoaded": true,
+      "heroImageSha256": "d87b1039a686ad6a92be4eb2aadbc6d32111278ffd59869137e77e939708ff39",
+      "desktopCopyInReadingZone": true,
+      "mobileSeparated": true,
+      "gradientGeometry": true,
+      "errors": []
+    },
+    {
+      "site": "stt",
+      "route": "/problems",
+      "label": "mobile",
+      "http": 200,
+      "title": "你正在面對什麼｜STT Governance",
+      "h1": "你正在面對什麼",
+      "h1Count": 1,
+      "heroClass": "cis-hero cis-title-1 cis-with-image cis-clear-left",
+      "heroImage": "/visual-bank/stt/user-approved-six/problems.png",
+      "heroImageLoaded": true,
+      "heroImageNatural": [
+        1491,
+        1055
+      ],
+      "heroImageRect": {
+        "left": 0,
+        "top": 83,
+        "right": 390,
+        "bottom": 358.953125,
+        "width": 390,
+        "height": 275.953125
+      },
+      "heroImageFit": "contain",
+      "copyRect": {
+        "left": 0,
+        "top": 358.953125,
+        "right": 390,
+        "bottom": 667.921875,
+        "width": 390,
+        "height": 308.96875
+      },
+      "copyBg": "rgb(251, 250, 247)",
+      "heroGradient": "linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255) 30%, rgba(255, 255, 255, 0.99) 38%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.34) 70%, rgba(255, 255, 255, 0.12) 77%, rgba(255, 255, 255, 0) 82%)",
+      "brandRect": {
+        "left": 24,
+        "top": 12,
+        "right": 274,
+        "bottom": 70,
+        "width": 250,
+        "height": 58
+      },
+      "brandNatural": [
+        3181,
+        891
+      ],
+      "brandOptical": {
+        "sourceBox": {
+          "left": 22,
+          "top": 165,
+          "width": 1123,
+          "height": 591
+        },
+        "visibleLeftMarkHeight": 38.47138047138047,
+        "visibleLeftMarkTop": 10.74074074074074
+      },
+      "overflow": false,
+      "broken": [],
+      "canonical": "https://stt-003.vercel.app/problems",
+      "robotsMeta": "index,follow",
+      "organizationSchema": null,
+      "expectedImage": "/visual-bank/stt/user-approved-six/problems.png",
+      "hasExpected": true,
+      "imageLoaded": true,
+      "heroImageSha256": "964923d0ba8ddc9589fcd8a254d6daca2f71643d2e6702236bff2902d38850c9",
+      "desktopCopyInReadingZone": true,
+      "mobileSeparated": true,
+      "gradientGeometry": true,
+      "errors": []
+    },
+    {
+      "site": "stt",
+      "route": "/how-stt-works",
+      "label": "mobile",
+      "http": 200,
+      "title": "STT 如何判讀｜治理判讀方法",
+      "h1": "如何判讀",
+      "h1Count": 1,
+      "heroClass": "cis-hero cis-title-1 cis-with-image cis-clear-left",
+      "heroImage": "/visual-bank/stt/user-approved-six/method.png",
+      "heroImageLoaded": true,
+      "heroImageNatural": [
+        1491,
+        1055
+      ],
+      "heroImageRect": {
+        "left": 0,
+        "top": 83,
+        "right": 390,
+        "bottom": 358.953125,
+        "width": 390,
+        "height": 275.953125
+      },
+      "heroImageFit": "contain",
+      "copyRect": {
+        "left": 0,
+        "top": 358.953125,
+        "right": 390,
+        "bottom": 637.53125,
+        "width": 390,
+        "height": 278.578125
+      },
+      "copyBg": "rgb(251, 250, 247)",
+      "heroGradient": "linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255) 30%, rgba(255, 255, 255, 0.99) 38%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.34) 70%, rgba(255, 255, 255, 0.12) 77%, rgba(255, 255, 255, 0) 82%)",
+      "brandRect": {
+        "left": 24,
+        "top": 12,
+        "right": 274,
+        "bottom": 70,
+        "width": 250,
+        "height": 58
+      },
+      "brandNatural": [
+        3181,
+        891
+      ],
+      "brandOptical": {
+        "sourceBox": {
+          "left": 22,
+          "top": 165,
+          "width": 1123,
+          "height": 591
+        },
+        "visibleLeftMarkHeight": 38.47138047138047,
+        "visibleLeftMarkTop": 10.74074074074074
+      },
+      "overflow": false,
+      "broken": [],
+      "canonical": "https://stt-003.vercel.app/how-stt-works",
+      "robotsMeta": "index,follow",
+      "organizationSchema": null,
+      "expectedImage": "/visual-bank/stt/user-approved-six/method.png",
+      "hasExpected": true,
+      "imageLoaded": true,
+      "heroImageSha256": "e64be189148c76ce2dd5b13efba5a9512e2cb003692f87991c95d35322602753",
+      "desktopCopyInReadingZone": true,
+      "mobileSeparated": true,
+      "gradientGeometry": true,
+      "errors": []
+    },
+    {
+      "site": "stt",
+      "route": "/engagement",
+      "label": "mobile",
+      "http": 200,
+      "title": "治理委任｜STT Governance",
+      "h1": "當一件事情值得被正式治理，就不應只停留在一次諮詢。",
+      "h1Count": 1,
+      "heroClass": "cis-hero cis-title-2 cis-text-only",
+      "heroImage": null,
+      "heroImageLoaded": null,
+      "heroImageNatural": null,
+      "heroImageRect": null,
+      "heroImageFit": null,
+      "copyRect": {
+        "left": 24,
+        "top": 121,
+        "right": 366,
+        "bottom": 370.40625,
+        "width": 342,
+        "height": 249.40625
+      },
+      "copyBg": "rgba(0, 0, 0, 0)",
+      "heroGradient": "none",
+      "brandRect": {
+        "left": 24,
+        "top": 12,
+        "right": 274,
+        "bottom": 70,
+        "width": 250,
+        "height": 58
+      },
+      "brandNatural": [
+        3181,
+        891
+      ],
+      "brandOptical": {
+        "sourceBox": {
+          "left": 22,
+          "top": 165,
+          "width": 1123,
+          "height": 591
+        },
+        "visibleLeftMarkHeight": 38.47138047138047,
+        "visibleLeftMarkTop": 10.74074074074074
+      },
+      "overflow": false,
+      "broken": [],
+      "canonical": "https://stt-003.vercel.app/engagement",
+      "robotsMeta": "index,follow",
+      "organizationSchema": null,
+      "expectedImage": null,
+      "hasExpected": true,
+      "imageLoaded": true,
+      "heroImageSha256": null,
+      "desktopCopyInReadingZone": true,
+      "mobileSeparated": true,
+      "gradientGeometry": true,
+      "errors": []
+    },
+    {
+      "site": "stt",
+      "route": "/insights",
+      "label": "mobile",
+      "http": 200,
+      "title": "研究與出版｜STT Governance",
+      "h1": "判讀不是臨時形成的意見，而是長期累積的制度研究。",
+      "h1Count": 1,
+      "heroClass": "cis-hero cis-title-2 cis-with-image cis-clear-left",
+      "heroImage": "/visual-bank/stt/user-approved-six/columns.png",
+      "heroImageLoaded": true,
+      "heroImageNatural": [
+        1491,
+        1055
+      ],
+      "heroImageRect": {
+        "left": 0,
+        "top": 83,
+        "right": 390,
+        "bottom": 358.953125,
+        "width": 390,
+        "height": 275.953125
+      },
+      "heroImageFit": "contain",
+      "copyRect": {
+        "left": 0,
+        "top": 358.953125,
+        "right": 390,
+        "bottom": 674.359375,
+        "width": 390,
+        "height": 315.40625
+      },
+      "copyBg": "rgb(251, 250, 247)",
+      "heroGradient": "linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255) 30%, rgba(255, 255, 255, 0.99) 38%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.34) 70%, rgba(255, 255, 255, 0.12) 77%, rgba(255, 255, 255, 0) 82%)",
+      "brandRect": {
+        "left": 24,
+        "top": 12,
+        "right": 274,
+        "bottom": 70,
+        "width": 250,
+        "height": 58
+      },
+      "brandNatural": [
+        3181,
+        891
+      ],
+      "brandOptical": {
+        "sourceBox": {
+          "left": 22,
+          "top": 165,
+          "width": 1123,
+          "height": 591
+        },
+        "visibleLeftMarkHeight": 38.47138047138047,
+        "visibleLeftMarkTop": 10.74074074074074
+      },
+      "overflow": false,
+      "broken": [],
+      "canonical": "https://stt-003.vercel.app/insights",
+      "robotsMeta": "index,follow",
+      "organizationSchema": null,
+      "expectedImage": "/visual-bank/stt/user-approved-six/columns.png",
+      "hasExpected": true,
+      "imageLoaded": true,
+      "heroImageSha256": "03cc644c1f32e05252ebc4defae7149dd6ddc0a8a36f7965436f0c2dff284417",
+      "desktopCopyInReadingZone": true,
+      "mobileSeparated": true,
+      "gradientGeometry": true,
+      "errors": []
+    },
+    {
+      "site": "stt",
+      "route": "/about",
+      "label": "mobile",
+      "http": 200,
+      "title": "關於 STT Governance｜治理判讀與制度設計",
+      "h1": "STT Governance不是一般顧問公司，而是高位階治理文明平台。",
+      "h1Count": 1,
+      "heroClass": "cis-hero cis-title-3 cis-with-image cis-clear-left",
+      "heroImage": "/visual-bank/stt/user-approved-six/about-stt.png",
+      "heroImageLoaded": true,
+      "heroImageNatural": [
+        1491,
+        1055
+      ],
+      "heroImageRect": {
+        "left": 0,
+        "top": 83,
+        "right": 390,
+        "bottom": 358.953125,
+        "width": 390,
+        "height": 275.953125
+      },
+      "heroImageFit": "contain",
+      "copyRect": {
+        "left": 0,
+        "top": 358.953125,
+        "right": 390,
+        "bottom": 812.421875,
+        "width": 390,
+        "height": 453.46875
+      },
+      "copyBg": "rgb(251, 250, 247)",
+      "heroGradient": "linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255) 30%, rgba(255, 255, 255, 0.99) 38%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.34) 70%, rgba(255, 255, 255, 0.12) 77%, rgba(255, 255, 255, 0) 82%)",
+      "brandRect": {
+        "left": 24,
+        "top": 12,
+        "right": 274,
+        "bottom": 70,
+        "width": 250,
+        "height": 58
+      },
+      "brandNatural": [
+        3181,
+        891
+      ],
+      "brandOptical": {
+        "sourceBox": {
+          "left": 22,
+          "top": 165,
+          "width": 1123,
+          "height": 591
+        },
+        "visibleLeftMarkHeight": 38.47138047138047,
+        "visibleLeftMarkTop": 10.74074074074074
+      },
+      "overflow": false,
+      "broken": [],
+      "canonical": "https://stt-003.vercel.app/about",
+      "robotsMeta": "index,follow",
+      "organizationSchema": null,
+      "expectedImage": "/visual-bank/stt/user-approved-six/about-stt.png",
+      "hasExpected": true,
+      "imageLoaded": true,
+      "heroImageSha256": "6ae927ed6e822b3699005a734b169f7b098cd353fe6c688f381730c41da1d33d",
+      "desktopCopyInReadingZone": true,
+      "mobileSeparated": true,
+      "gradientGeometry": true,
+      "errors": []
+    },
+    {
+      "site": "stt",
+      "route": "/eric-chuang",
+      "label": "mobile",
+      "http": 200,
+      "title": "莊鈞翔博士｜治理判讀與制度設計｜STT Governance",
+      "h1": "莊鈞翔博士",
+      "h1Count": 1,
+      "heroClass": "cis-hero cis-title-1 cis-with-image cis-portrait",
+      "heroImage": "/visual-approved/eric-page-owner-original.png",
+      "heroImageLoaded": true,
+      "heroImageNatural": [
+        2048,
+        1152
+      ],
+      "heroImageRect": {
+        "left": 0,
+        "top": 83,
+        "right": 390,
+        "bottom": 302.375,
+        "width": 390,
+        "height": 219.375
+      },
+      "heroImageFit": "contain",
+      "copyRect": {
+        "left": 0,
+        "top": 302.375,
+        "right": 390,
+        "bottom": 564.125,
+        "width": 390,
+        "height": 261.75
+      },
+      "copyBg": "rgb(251, 250, 247)",
+      "heroGradient": "linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255) 30%, rgba(255, 255, 255, 0.99) 38%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.34) 70%, rgba(255, 255, 255, 0.12) 77%, rgba(255, 255, 255, 0) 82%)",
+      "brandRect": {
+        "left": 24,
+        "top": 12,
+        "right": 274,
+        "bottom": 70,
+        "width": 250,
+        "height": 58
+      },
+      "brandNatural": [
+        3181,
+        891
+      ],
+      "brandOptical": {
+        "sourceBox": {
+          "left": 22,
+          "top": 165,
+          "width": 1123,
+          "height": 591
+        },
+        "visibleLeftMarkHeight": 38.47138047138047,
+        "visibleLeftMarkTop": 10.74074074074074
+      },
+      "overflow": false,
+      "broken": [],
+      "canonical": "https://stt-003.vercel.app/eric-chuang",
+      "robotsMeta": "index,follow",
+      "organizationSchema": null,
+      "expectedImage": null,
+      "hasExpected": true,
+      "imageLoaded": true,
+      "heroImageSha256": "891c3d1b19ba4ac32792543928473f0938fae0bfe529d1ac46e3dabf34f780fe",
+      "desktopCopyInReadingZone": true,
+      "mobileSeparated": true,
+      "gradientGeometry": true,
+      "errors": []
+    },
+    {
+      "site": "stt",
+      "route": "/institutions",
+      "label": "mobile",
+      "http": 200,
+      "title": "機構合作｜STT Governance",
+      "h1": "跨專業治理整合，先建立共同的判讀架構。",
+      "h1Count": 1,
+      "heroClass": "cis-hero cis-title-2 cis-text-only",
+      "heroImage": null,
+      "heroImageLoaded": null,
+      "heroImageNatural": null,
+      "heroImageRect": null,
+      "heroImageFit": null,
+      "copyRect": {
+        "left": 24,
+        "top": 121,
+        "right": 366,
+        "bottom": 407.015625,
+        "width": 342,
+        "height": 286.015625
+      },
+      "copyBg": "rgba(0, 0, 0, 0)",
+      "heroGradient": "none",
+      "brandRect": {
+        "left": 24,
+        "top": 12,
+        "right": 274,
+        "bottom": 70,
+        "width": 250,
+        "height": 58
+      },
+      "brandNatural": [
+        3181,
+        891
+      ],
+      "brandOptical": {
+        "sourceBox": {
+          "left": 22,
+          "top": 165,
+          "width": 1123,
+          "height": 591
+        },
+        "visibleLeftMarkHeight": 38.47138047138047,
+        "visibleLeftMarkTop": 10.74074074074074
+      },
+      "overflow": false,
+      "broken": [],
+      "canonical": "https://stt-003.vercel.app/institutions",
+      "robotsMeta": "index,follow",
+      "organizationSchema": null,
+      "expectedImage": null,
+      "hasExpected": true,
+      "imageLoaded": true,
+      "heroImageSha256": null,
+      "desktopCopyInReadingZone": true,
+      "mobileSeparated": true,
+      "gradientGeometry": true,
+      "errors": []
+    },
+    {
+      "site": "stt",
+      "route": "/start",
+      "label": "mobile",
+      "http": 200,
+      "title": "開始治理判讀｜STT Governance",
+      "h1": "先把正在發生的事情說清楚。",
+      "h1Count": 1,
+      "heroClass": "cis-hero cis-title-1 cis-text-only",
+      "heroImage": null,
+      "heroImageLoaded": null,
+      "heroImageNatural": null,
+      "heroImageRect": null,
+      "heroImageFit": null,
+      "copyRect": {
+        "left": 24,
+        "top": 121,
+        "right": 366,
+        "bottom": 272.796875,
+        "width": 342,
+        "height": 151.796875
+      },
+      "copyBg": "rgba(0, 0, 0, 0)",
+      "heroGradient": "none",
+      "brandRect": {
+        "left": 24,
+        "top": 12,
+        "right": 274,
+        "bottom": 70,
+        "width": 250,
+        "height": 58
+      },
+      "brandNatural": [
+        3181,
+        891
+      ],
+      "brandOptical": {
+        "sourceBox": {
+          "left": 22,
+          "top": 165,
+          "width": 1123,
+          "height": 591
+        },
+        "visibleLeftMarkHeight": 38.47138047138047,
+        "visibleLeftMarkTop": 10.74074074074074
+      },
+      "overflow": false,
+      "broken": [],
+      "canonical": "https://stt-003.vercel.app/start",
+      "robotsMeta": "index,follow",
+      "organizationSchema": null,
+      "expectedImage": null,
+      "hasExpected": true,
+      "imageLoaded": true,
+      "heroImageSha256": null,
+      "desktopCopyInReadingZone": true,
+      "mobileSeparated": true,
+      "gradientGeometry": true,
+      "errors": []
+    },
+    {
+      "site": "stt",
+      "route": "/privacy",
+      "label": "mobile",
+      "http": 200,
+      "title": "隱私與資料使用｜STT Governance",
+      "h1": "隱私與資料使用",
+      "h1Count": 1,
+      "heroClass": "cis-hero cis-title-1 cis-text-only",
+      "heroImage": null,
+      "heroImageLoaded": null,
+      "heroImageNatural": null,
+      "heroImageRect": null,
+      "heroImageFit": null,
+      "copyRect": {
+        "left": 24,
+        "top": 121,
+        "right": 366,
+        "bottom": 303.1875,
+        "width": 342,
+        "height": 182.1875
+      },
+      "copyBg": "rgba(0, 0, 0, 0)",
+      "heroGradient": "none",
+      "brandRect": {
+        "left": 24,
+        "top": 12,
+        "right": 274,
+        "bottom": 70,
+        "width": 250,
+        "height": 58
+      },
+      "brandNatural": [
+        3181,
+        891
+      ],
+      "brandOptical": {
+        "sourceBox": {
+          "left": 22,
+          "top": 165,
+          "width": 1123,
+          "height": 591
+        },
+        "visibleLeftMarkHeight": 38.47138047138047,
+        "visibleLeftMarkTop": 10.74074074074074
+      },
+      "overflow": false,
+      "broken": [],
+      "canonical": "https://stt-003.vercel.app/privacy",
+      "robotsMeta": "noindex,follow",
+      "organizationSchema": null,
+      "expectedImage": null,
+      "hasExpected": true,
+      "imageLoaded": true,
+      "heroImageSha256": null,
+      "desktopCopyInReadingZone": true,
+      "mobileSeparated": true,
+      "gradientGeometry": true,
+      "errors": []
+    },
+    {
+      "site": "stt",
+      "route": "/professional-boundary",
+      "label": "mobile",
+      "http": 200,
+      "title": "專業服務與資訊邊界｜STT Governance",
+      "h1": "治理判讀與專業服務邊界",
+      "h1Count": 1,
+      "heroClass": "cis-hero cis-title-1 cis-text-only",
+      "heroImage": null,
+      "heroImageLoaded": null,
+      "heroImageNatural": null,
+      "heroImageRect": null,
+      "heroImageFit": null,
+      "copyRect": {
+        "left": 24,
+        "top": 121,
+        "right": 366,
+        "bottom": 363.96875,
+        "width": 342,
+        "height": 242.96875
+      },
+      "copyBg": "rgba(0, 0, 0, 0)",
+      "heroGradient": "none",
+      "brandRect": {
+        "left": 24,
+        "top": 12,
+        "right": 274,
+        "bottom": 70,
+        "width": 250,
+        "height": 58
+      },
+      "brandNatural": [
+        3181,
+        891
+      ],
+      "brandOptical": {
+        "sourceBox": {
+          "left": 22,
+          "top": 165,
+          "width": 1123,
+          "height": 591
+        },
+        "visibleLeftMarkHeight": 38.47138047138047,
+        "visibleLeftMarkTop": 10.74074074074074
+      },
+      "overflow": false,
+      "broken": [],
+      "canonical": "https://stt-003.vercel.app/professional-boundary",
+      "robotsMeta": "index,follow",
+      "organizationSchema": null,
+      "expectedImage": null,
+      "hasExpected": true,
+      "imageLoaded": true,
+      "heroImageSha256": null,
+      "desktopCopyInReadingZone": true,
+      "mobileSeparated": true,
+      "gradientGeometry": true,
+      "errors": []
+    },
+    {
+      "site": "gcsda",
+      "route": "/",
+      "label": "desktop",
+      "http": 200,
+      "title": "GCSDA｜中華企業策略永續發展學會",
+      "h1": "讓策略、治理與永續，成為共同語言。",
+      "h1Count": 1,
+      "heroClass": "cis-hero cis-title-2 cis-with-image",
+      "heroImage": "/visual-bank/gcsda/home-approved.webp",
+      "heroImageLoaded": true,
+      "heroImageNatural": [
+        800,
+        450
+      ],
+      "heroImageRect": {
+        "left": 0,
+        "top": 92,
+        "right": 1440,
+        "bottom": 902,
+        "width": 1440,
+        "height": 810
+      },
+      "heroImageFit": "contain",
+      "copyRect": {
+        "left": 52,
+        "top": 272,
+        "right": 570.390625,
+        "bottom": 605.5,
+        "width": 518.390625,
+        "height": 333.5
+      },
+      "copyBg": "rgba(0, 0, 0, 0)",
+      "heroGradient": "linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255) 30%, rgba(255, 255, 255, 0.99) 38%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.34) 70%, rgba(255, 255, 255, 0.12) 77%, rgba(255, 255, 255, 0) 82%)",
+      "brandRect": {
+        "left": 50,
+        "top": 7.849998474121094,
+        "right": 420.6000061035156,
+        "bottom": 84.1500015258789,
+        "width": 370.6000061035156,
+        "height": 76.30000305175781
+      },
+      "brandNatural": [
+        600,
+        200
+      ],
+      "brandOptical": {
+        "sourceBox": {
+          "left": 13,
+          "top": 39,
+          "width": 203,
+          "height": 120
+        },
+        "visibleLeftMarkHeight": 45.78000183105468,
+        "visibleLeftMarkTop": 14.878500595092774
+      },
+      "overflow": false,
+      "broken": [],
+      "canonical": "https://gcsda.example.invalid/",
+      "robotsMeta": "index,follow",
+      "organizationSchema": "Organization",
+      "expectedImage": "/visual-bank/gcsda/home-approved.webp",
+      "hasExpected": true,
+      "imageLoaded": true,
+      "heroImageSha256": "1846c3115a2c2bca303c305792ecd9e64e25351969ea21aa020fb25db77511b7",
+      "desktopCopyInReadingZone": true,
+      "mobileSeparated": true,
+      "gradientGeometry": true,
+      "errors": []
+    },
+    {
+      "site": "gcsda",
+      "route": "/about",
+      "label": "desktop",
+      "http": 200,
+      "title": "關於學會｜GCSDA",
+      "h1": "企業、專業與學術，在治理議題上持續對話。",
+      "h1Count": 1,
+      "heroClass": "cis-hero cis-title-2 cis-with-image",
+      "heroImage": "/visual-bank/gcsda/about.png",
+      "heroImageLoaded": true,
+      "heroImageNatural": [
+        1672,
+        941
+      ],
+      "heroImageRect": {
+        "left": 0,
+        "top": 92,
+        "right": 1440,
+        "bottom": 902.421875,
+        "width": 1440,
+        "height": 810.421875
+      },
+      "heroImageFit": "contain",
+      "copyRect": {
+        "left": 52,
+        "top": 272,
+        "right": 570.390625,
+        "bottom": 534,
+        "width": 518.390625,
+        "height": 262
+      },
+      "copyBg": "rgba(0, 0, 0, 0)",
+      "heroGradient": "linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255) 30%, rgba(255, 255, 255, 0.99) 38%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.34) 70%, rgba(255, 255, 255, 0.12) 77%, rgba(255, 255, 255, 0) 82%)",
+      "brandRect": {
+        "left": 50,
+        "top": 7.849998474121094,
+        "right": 420.6000061035156,
+        "bottom": 84.1500015258789,
+        "width": 370.6000061035156,
+        "height": 76.30000305175781
+      },
+      "brandNatural": [
+        600,
+        200
+      ],
+      "brandOptical": {
+        "sourceBox": {
+          "left": 13,
+          "top": 39,
+          "width": 203,
+          "height": 120
+        },
+        "visibleLeftMarkHeight": 45.78000183105468,
+        "visibleLeftMarkTop": 14.878500595092774
+      },
+      "overflow": false,
+      "broken": [],
+      "canonical": "https://gcsda.example.invalid/about",
+      "robotsMeta": "index,follow",
+      "organizationSchema": "Organization",
+      "expectedImage": "/visual-bank/gcsda/about.png",
+      "hasExpected": true,
+      "imageLoaded": true,
+      "heroImageSha256": "ed557da54c5845bca034741d37bcbc08814cd9dae269019f5be1a5d641325b40",
+      "desktopCopyInReadingZone": true,
+      "mobileSeparated": true,
+      "gradientGeometry": true,
+      "errors": []
+    },
+    {
+      "site": "gcsda",
+      "route": "/governance",
+      "label": "desktop",
+      "http": 200,
+      "title": "組織治理｜GCSDA",
+      "h1": "學會本身先接受治理：權力、職權與責任都應可被理解。",
+      "h1Count": 1,
+      "heroClass": "cis-hero cis-title-3 cis-with-image",
+      "heroImage": "/visual-bank/gcsda/governance.png",
+      "heroImageLoaded": true,
+      "heroImageNatural": [
+        1672,
+        941
+      ],
+      "heroImageRect": {
+        "left": 0,
+        "top": 92,
+        "right": 1440,
+        "bottom": 902.421875,
+        "width": 1440,
+        "height": 810.421875
+      },
+      "heroImageFit": "contain",
+      "copyRect": {
+        "left": 52,
+        "top": 272,
+        "right": 570.390625,
+        "bottom": 539.578125,
+        "width": 518.390625,
+        "height": 267.578125
+      },
+      "copyBg": "rgba(0, 0, 0, 0)",
+      "heroGradient": "linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255) 30%, rgba(255, 255, 255, 0.99) 38%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.34) 70%, rgba(255, 255, 255, 0.12) 77%, rgba(255, 255, 255, 0) 82%)",
+      "brandRect": {
+        "left": 50,
+        "top": 7.849998474121094,
+        "right": 420.6000061035156,
+        "bottom": 84.1500015258789,
+        "width": 370.6000061035156,
+        "height": 76.30000305175781
+      },
+      "brandNatural": [
+        600,
+        200
+      ],
+      "brandOptical": {
+        "sourceBox": {
+          "left": 13,
+          "top": 39,
+          "width": 203,
+          "height": 120
+        },
+        "visibleLeftMarkHeight": 45.78000183105468,
+        "visibleLeftMarkTop": 14.878500595092774
+      },
+      "overflow": false,
+      "broken": [],
+      "canonical": "https://gcsda.example.invalid/governance",
+      "robotsMeta": "index,follow",
+      "organizationSchema": "Organization",
+      "expectedImage": "/visual-bank/gcsda/governance.png",
+      "hasExpected": true,
+      "imageLoaded": true,
+      "heroImageSha256": "63f21faa8492b32dd256e24088bb67dbec633ba9ddc6fca5b28593db90cac605",
+      "desktopCopyInReadingZone": true,
+      "mobileSeparated": true,
+      "gradientGeometry": true,
+      "errors": []
+    },
+    {
+      "site": "gcsda",
+      "route": "/council",
+      "label": "desktop",
+      "http": 200,
+      "title": "策略治理聯席會｜GCSDA",
+      "h1": "跨域專業，不等於權責混同。",
+      "h1Count": 1,
+      "heroClass": "cis-hero cis-title-2 cis-with-image",
+      "heroImage": "/visual-bank/gcsda/council.png",
+      "heroImageLoaded": true,
+      "heroImageNatural": [
+        1672,
+        941
+      ],
+      "heroImageRect": {
+        "left": 0,
+        "top": 92,
+        "right": 1440,
+        "bottom": 902.421875,
+        "width": 1440,
+        "height": 810.421875
+      },
+      "heroImageFit": "contain",
+      "copyRect": {
+        "left": 52,
+        "top": 272,
+        "right": 570.390625,
+        "bottom": 500.859375,
+        "width": 518.390625,
+        "height": 228.859375
+      },
+      "copyBg": "rgba(0, 0, 0, 0)",
+      "heroGradient": "linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255) 30%, rgba(255, 255, 255, 0.99) 38%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.34) 70%, rgba(255, 255, 255, 0.12) 77%, rgba(255, 255, 255, 0) 82%)",
+      "brandRect": {
+        "left": 50,
+        "top": 7.849998474121094,
+        "right": 420.6000061035156,
+        "bottom": 84.1500015258789,
+        "width": 370.6000061035156,
+        "height": 76.30000305175781
+      },
+      "brandNatural": [
+        600,
+        200
+      ],
+      "brandOptical": {
+        "sourceBox": {
+          "left": 13,
+          "top": 39,
+          "width": 203,
+          "height": 120
+        },
+        "visibleLeftMarkHeight": 45.78000183105468,
+        "visibleLeftMarkTop": 14.878500595092774
+      },
+      "overflow": false,
+      "broken": [],
+      "canonical": "https://gcsda.example.invalid/council",
+      "robotsMeta": "index,follow",
+      "organizationSchema": "Organization",
+      "expectedImage": "/visual-bank/gcsda/council.png",
+      "hasExpected": true,
+      "imageLoaded": true,
+      "heroImageSha256": "3eeb5a932e9582c5e602ff56a712e1fdd504ef4c14d9c1ebb417e9f9bfa90f42",
+      "desktopCopyInReadingZone": true,
+      "mobileSeparated": true,
+      "gradientGeometry": true,
+      "errors": []
+    },
+    {
+      "site": "gcsda",
+      "route": "/membership",
+      "label": "desktop",
+      "http": 200,
+      "title": "會員與入會｜GCSDA",
+      "h1": "以策略、治理、法遵與永續，形成專業共同體。",
+      "h1Count": 1,
+      "heroClass": "cis-hero cis-title-2 cis-with-image",
+      "heroImage": "/visual-bank/gcsda/membership.png",
+      "heroImageLoaded": true,
+      "heroImageNatural": [
+        1672,
+        941
+      ],
+      "heroImageRect": {
+        "left": 0,
+        "top": 92,
+        "right": 1440,
+        "bottom": 902.421875,
+        "width": 1440,
+        "height": 810.421875
+      },
+      "heroImageFit": "contain",
+      "copyRect": {
+        "left": 52,
+        "top": 272,
+        "right": 570.390625,
+        "bottom": 500.859375,
+        "width": 518.390625,
+        "height": 228.859375
+      },
+      "copyBg": "rgba(0, 0, 0, 0)",
+      "heroGradient": "linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255) 30%, rgba(255, 255, 255, 0.99) 38%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.34) 70%, rgba(255, 255, 255, 0.12) 77%, rgba(255, 255, 255, 0) 82%)",
+      "brandRect": {
+        "left": 50,
+        "top": 7.849998474121094,
+        "right": 420.6000061035156,
+        "bottom": 84.1500015258789,
+        "width": 370.6000061035156,
+        "height": 76.30000305175781
+      },
+      "brandNatural": [
+        600,
+        200
+      ],
+      "brandOptical": {
+        "sourceBox": {
+          "left": 13,
+          "top": 39,
+          "width": 203,
+          "height": 120
+        },
+        "visibleLeftMarkHeight": 45.78000183105468,
+        "visibleLeftMarkTop": 14.878500595092774
+      },
+      "overflow": false,
+      "broken": [],
+      "canonical": "https://gcsda.example.invalid/membership",
+      "robotsMeta": "index,follow",
+      "organizationSchema": "Organization",
+      "expectedImage": "/visual-bank/gcsda/membership.png",
+      "hasExpected": true,
+      "imageLoaded": true,
+      "heroImageSha256": "95ceabad1952a7a6d60cb4e24b26a69fe68470237107ac12fbfb8977f3bf9d73",
+      "desktopCopyInReadingZone": true,
+      "mobileSeparated": true,
+      "gradientGeometry": true,
+      "errors": []
+    },
+    {
+      "site": "gcsda",
+      "route": "/events",
+      "label": "desktop",
+      "http": 200,
+      "title": "活動與大會｜GCSDA",
+      "h1": "活動，是制度運作與知識累積的正式紀錄。",
+      "h1Count": 1,
+      "heroClass": "cis-hero cis-title-2 cis-with-image",
+      "heroImage": "/visual-bank/gcsda/events.png",
+      "heroImageLoaded": true,
+      "heroImageNatural": [
+        1672,
+        941
+      ],
+      "heroImageRect": {
+        "left": 0,
+        "top": 92,
+        "right": 1440,
+        "bottom": 902.421875,
+        "width": 1440,
+        "height": 810.421875
+      },
+      "heroImageFit": "contain",
+      "copyRect": {
+        "left": 52,
+        "top": 272,
+        "right": 570.390625,
+        "bottom": 500.859375,
+        "width": 518.390625,
+        "height": 228.859375
+      },
+      "copyBg": "rgba(0, 0, 0, 0)",
+      "heroGradient": "linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255) 30%, rgba(255, 255, 255, 0.99) 38%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.34) 70%, rgba(255, 255, 255, 0.12) 77%, rgba(255, 255, 255, 0) 82%)",
+      "brandRect": {
+        "left": 50,
+        "top": 7.849998474121094,
+        "right": 420.6000061035156,
+        "bottom": 84.1500015258789,
+        "width": 370.6000061035156,
+        "height": 76.30000305175781
+      },
+      "brandNatural": [
+        600,
+        200
+      ],
+      "brandOptical": {
+        "sourceBox": {
+          "left": 13,
+          "top": 39,
+          "width": 203,
+          "height": 120
+        },
+        "visibleLeftMarkHeight": 45.78000183105468,
+        "visibleLeftMarkTop": 14.878500595092774
+      },
+      "overflow": false,
+      "broken": [],
+      "canonical": "https://gcsda.example.invalid/events",
+      "robotsMeta": "index,follow",
+      "organizationSchema": "Organization",
+      "expectedImage": "/visual-bank/gcsda/events.png",
+      "hasExpected": true,
+      "imageLoaded": true,
+      "heroImageSha256": "14be1fb309fe047c83c242bcdf01eda428d6f292ffe02c4b439cc0c268c67522",
+      "desktopCopyInReadingZone": true,
+      "mobileSeparated": true,
+      "gradientGeometry": true,
+      "errors": []
+    },
+    {
+      "site": "gcsda",
+      "route": "/knowledge",
+      "label": "desktop",
+      "http": 200,
+      "title": "知識與研究｜GCSDA",
+      "h1": "讓活動與交流，沉澱為可傳承的治理知識。",
+      "h1Count": 1,
+      "heroClass": "cis-hero cis-title-2 cis-with-image",
+      "heroImage": "/visual-bank/gcsda/knowledge.png",
+      "heroImageLoaded": true,
+      "heroImageNatural": [
+        1672,
+        941
+      ],
+      "heroImageRect": {
+        "left": 0,
+        "top": 92,
+        "right": 1440,
+        "bottom": 902.421875,
+        "width": 1440,
+        "height": 810.421875
+      },
+      "heroImageFit": "contain",
+      "copyRect": {
+        "left": 52,
+        "top": 272,
+        "right": 570.390625,
+        "bottom": 500.859375,
+        "width": 518.390625,
+        "height": 228.859375
+      },
+      "copyBg": "rgba(0, 0, 0, 0)",
+      "heroGradient": "linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255) 30%, rgba(255, 255, 255, 0.99) 38%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.34) 70%, rgba(255, 255, 255, 0.12) 77%, rgba(255, 255, 255, 0) 82%)",
+      "brandRect": {
+        "left": 50,
+        "top": 7.849998474121094,
+        "right": 420.6000061035156,
+        "bottom": 84.1500015258789,
+        "width": 370.6000061035156,
+        "height": 76.30000305175781
+      },
+      "brandNatural": [
+        600,
+        200
+      ],
+      "brandOptical": {
+        "sourceBox": {
+          "left": 13,
+          "top": 39,
+          "width": 203,
+          "height": 120
+        },
+        "visibleLeftMarkHeight": 45.78000183105468,
+        "visibleLeftMarkTop": 14.878500595092774
+      },
+      "overflow": false,
+      "broken": [],
+      "canonical": "https://gcsda.example.invalid/knowledge",
+      "robotsMeta": "index,follow",
+      "organizationSchema": "Organization",
+      "expectedImage": "/visual-bank/gcsda/knowledge.png",
+      "hasExpected": true,
+      "imageLoaded": true,
+      "heroImageSha256": "acdf45286cb73768ac59353de3c1935250fe9d20501ce00cb1c5428a545b8a09",
+      "desktopCopyInReadingZone": true,
+      "mobileSeparated": true,
+      "gradientGeometry": true,
+      "errors": []
+    },
+    {
+      "site": "gcsda",
+      "route": "/charter",
+      "label": "desktop",
+      "http": 200,
+      "title": "章程與公告｜GCSDA",
+      "h1": "章程與公告",
+      "h1Count": 1,
+      "heroClass": "cis-hero cis-title-1 cis-with-image",
+      "heroImage": "/visual-bank/gcsda/charter.png",
+      "heroImageLoaded": true,
+      "heroImageNatural": [
+        1672,
+        941
+      ],
+      "heroImageRect": {
+        "left": 0,
+        "top": 92,
+        "right": 1440,
+        "bottom": 902.421875,
+        "width": 1440,
+        "height": 810.421875
+      },
+      "heroImageFit": "contain",
+      "copyRect": {
+        "left": 52,
+        "top": 272,
+        "right": 570.390625,
+        "bottom": 458.875,
+        "width": 518.390625,
+        "height": 186.875
+      },
+      "copyBg": "rgba(0, 0, 0, 0)",
+      "heroGradient": "linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255) 30%, rgba(255, 255, 255, 0.99) 38%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.34) 70%, rgba(255, 255, 255, 0.12) 77%, rgba(255, 255, 255, 0) 82%)",
+      "brandRect": {
+        "left": 50,
+        "top": 7.849998474121094,
+        "right": 420.6000061035156,
+        "bottom": 84.1500015258789,
+        "width": 370.6000061035156,
+        "height": 76.30000305175781
+      },
+      "brandNatural": [
+        600,
+        200
+      ],
+      "brandOptical": {
+        "sourceBox": {
+          "left": 13,
+          "top": 39,
+          "width": 203,
+          "height": 120
+        },
+        "visibleLeftMarkHeight": 45.78000183105468,
+        "visibleLeftMarkTop": 14.878500595092774
+      },
+      "overflow": false,
+      "broken": [],
+      "canonical": "https://gcsda.example.invalid/charter",
+      "robotsMeta": "index,follow",
+      "organizationSchema": "Organization",
+      "expectedImage": "/visual-bank/gcsda/charter.png",
+      "hasExpected": true,
+      "imageLoaded": true,
+      "heroImageSha256": "5cc905e9ef93ef9d2ed5cd7f571022f41d6dddcce5ede607db383b9932e5b3de",
+      "desktopCopyInReadingZone": true,
+      "mobileSeparated": true,
+      "gradientGeometry": true,
+      "errors": []
+    },
+    {
+      "site": "gcsda",
+      "route": "/privacy",
+      "label": "desktop",
+      "http": 200,
+      "title": "隱私與資料使用｜GCSDA",
+      "h1": "隱私與資料使用",
+      "h1Count": 1,
+      "heroClass": "cis-hero cis-title-1 cis-text-only",
+      "heroImage": null,
+      "heroImageLoaded": null,
+      "heroImageNatural": null,
+      "heroImageRect": null,
+      "heroImageFit": null,
+      "copyRect": {
+        "left": 130,
+        "top": 164,
+        "right": 1030,
+        "bottom": 350.875,
+        "width": 900,
+        "height": 186.875
+      },
+      "copyBg": "rgba(0, 0, 0, 0)",
+      "heroGradient": "none",
+      "brandRect": {
+        "left": 50,
+        "top": 7.849998474121094,
+        "right": 420.6000061035156,
+        "bottom": 84.1500015258789,
+        "width": 370.6000061035156,
+        "height": 76.30000305175781
+      },
+      "brandNatural": [
+        600,
+        200
+      ],
+      "brandOptical": {
+        "sourceBox": {
+          "left": 13,
+          "top": 39,
+          "width": 203,
+          "height": 120
+        },
+        "visibleLeftMarkHeight": 45.78000183105468,
+        "visibleLeftMarkTop": 14.878500595092774
+      },
+      "overflow": false,
+      "broken": [],
+      "canonical": "https://gcsda.example.invalid/privacy",
+      "robotsMeta": "index,follow",
+      "organizationSchema": "Organization",
+      "expectedImage": null,
+      "hasExpected": true,
+      "imageLoaded": true,
+      "heroImageSha256": null,
+      "desktopCopyInReadingZone": true,
+      "mobileSeparated": true,
+      "gradientGeometry": true,
+      "errors": []
+    },
+    {
+      "site": "gcsda",
+      "route": "/",
+      "label": "tablet",
+      "http": 200,
+      "title": "GCSDA｜中華企業策略永續發展學會",
+      "h1": "讓策略、治理與永續，成為共同語言。",
+      "h1Count": 1,
+      "heroClass": "cis-hero cis-title-2 cis-with-image",
+      "heroImage": "/visual-bank/gcsda/home-approved.webp",
+      "heroImageLoaded": true,
+      "heroImageNatural": [
+        800,
+        450
+      ],
+      "heroImageRect": {
+        "left": 0,
+        "top": 92,
+        "right": 820,
+        "bottom": 553.25,
+        "width": 820,
+        "height": 461.25
+      },
+      "heroImageFit": "contain",
+      "copyRect": {
+        "left": 36,
+        "top": 142,
+        "right": 355.796875,
+        "bottom": 514.4375,
+        "width": 319.796875,
+        "height": 372.4375
+      },
+      "copyBg": "rgba(0, 0, 0, 0)",
+      "heroGradient": "linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255) 30%, rgba(255, 255, 255, 0.99) 38%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.34) 70%, rgba(255, 255, 255, 0.12) 77%, rgba(255, 255, 255, 0) 82%)",
+      "brandRect": {
+        "left": 30,
+        "top": 7.849998474121094,
+        "right": 400.6000061035156,
+        "bottom": 84.1500015258789,
+        "width": 370.6000061035156,
+        "height": 76.30000305175781
+      },
+      "brandNatural": [
+        600,
+        200
+      ],
+      "brandOptical": {
+        "sourceBox": {
+          "left": 13,
+          "top": 39,
+          "width": 203,
+          "height": 120
+        },
+        "visibleLeftMarkHeight": 45.78000183105468,
+        "visibleLeftMarkTop": 14.878500595092774
+      },
+      "overflow": false,
+      "broken": [],
+      "canonical": "https://gcsda.example.invalid/",
+      "robotsMeta": "index,follow",
+      "organizationSchema": "Organization",
+      "expectedImage": "/visual-bank/gcsda/home-approved.webp",
+      "hasExpected": true,
+      "imageLoaded": true,
+      "heroImageSha256": "1846c3115a2c2bca303c305792ecd9e64e25351969ea21aa020fb25db77511b7",
+      "desktopCopyInReadingZone": true,
+      "mobileSeparated": true,
+      "gradientGeometry": true,
+      "errors": []
+    },
+    {
+      "site": "gcsda",
+      "route": "/about",
+      "label": "tablet",
+      "http": 200,
+      "title": "關於學會｜GCSDA",
+      "h1": "企業、專業與學術，在治理議題上持續對話。",
+      "h1Count": 1,
+      "heroClass": "cis-hero cis-title-2 cis-with-image",
+      "heroImage": "/visual-bank/gcsda/about.png",
+      "heroImageLoaded": true,
+      "heroImageNatural": [
+        1672,
+        941
+      ],
+      "heroImageRect": {
+        "left": 0,
+        "top": 92,
+        "right": 820,
+        "bottom": 553.484375,
+        "width": 820,
+        "height": 461.484375
+      },
+      "heroImageFit": "contain",
+      "copyRect": {
+        "left": 36,
+        "top": 142,
+        "right": 355.796875,
+        "bottom": 466.53125,
+        "width": 319.796875,
+        "height": 324.53125
+      },
+      "copyBg": "rgba(0, 0, 0, 0)",
+      "heroGradient": "linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255) 30%, rgba(255, 255, 255, 0.99) 38%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.34) 70%, rgba(255, 255, 255, 0.12) 77%, rgba(255, 255, 255, 0) 82%)",
+      "brandRect": {
+        "left": 30,
+        "top": 7.849998474121094,
+        "right": 400.6000061035156,
+        "bottom": 84.1500015258789,
+        "width": 370.6000061035156,
+        "height": 76.30000305175781
+      },
+      "brandNatural": [
+        600,
+        200
+      ],
+      "brandOptical": {
+        "sourceBox": {
+          "left": 13,
+          "top": 39,
+          "width": 203,
+          "height": 120
+        },
+        "visibleLeftMarkHeight": 45.78000183105468,
+        "visibleLeftMarkTop": 14.878500595092774
+      },
+      "overflow": false,
+      "broken": [],
+      "canonical": "https://gcsda.example.invalid/about",
+      "robotsMeta": "index,follow",
+      "organizationSchema": "Organization",
+      "expectedImage": "/visual-bank/gcsda/about.png",
+      "hasExpected": true,
+      "imageLoaded": true,
+      "heroImageSha256": "ed557da54c5845bca034741d37bcbc08814cd9dae269019f5be1a5d641325b40",
+      "desktopCopyInReadingZone": true,
+      "mobileSeparated": true,
+      "gradientGeometry": true,
+      "errors": []
+    },
+    {
+      "site": "gcsda",
+      "route": "/governance",
+      "label": "tablet",
+      "http": 200,
+      "title": "組織治理｜GCSDA",
+      "h1": "學會本身先接受治理：權力、職權與責任都應可被理解。",
+      "h1Count": 1,
+      "heroClass": "cis-hero cis-title-3 cis-with-image",
+      "heroImage": "/visual-bank/gcsda/governance.png",
+      "heroImageLoaded": true,
+      "heroImageNatural": [
+        1672,
+        941
+      ],
+      "heroImageRect": {
+        "left": 0,
+        "top": 92,
+        "right": 820,
+        "bottom": 553.484375,
+        "width": 820,
+        "height": 461.484375
+      },
+      "heroImageFit": "contain",
+      "copyRect": {
+        "left": 36,
+        "top": 142,
+        "right": 355.796875,
+        "bottom": 429.21875,
+        "width": 319.796875,
+        "height": 287.21875
+      },
+      "copyBg": "rgba(0, 0, 0, 0)",
+      "heroGradient": "linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255) 30%, rgba(255, 255, 255, 0.99) 38%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.34) 70%, rgba(255, 255, 255, 0.12) 77%, rgba(255, 255, 255, 0) 82%)",
+      "brandRect": {
+        "left": 30,
+        "top": 7.849998474121094,
+        "right": 400.6000061035156,
+        "bottom": 84.1500015258789,
+        "width": 370.6000061035156,
+        "height": 76.30000305175781
+      },
+      "brandNatural": [
+        600,
+        200
+      ],
+      "brandOptical": {
+        "sourceBox": {
+          "left": 13,
+          "top": 39,
+          "width": 203,
+          "height": 120
+        },
+        "visibleLeftMarkHeight": 45.78000183105468,
+        "visibleLeftMarkTop": 14.878500595092774
+      },
+      "overflow": false,
+      "broken": [],
+      "canonical": "https://gcsda.example.invalid/governance",
+      "robotsMeta": "index,follow",
+      "organizationSchema": "Organization",
+      "expectedImage": "/visual-bank/gcsda/governance.png",
+      "hasExpected": true,
+      "imageLoaded": true,
+      "heroImageSha256": "63f21faa8492b32dd256e24088bb67dbec633ba9ddc6fca5b28593db90cac605",
+      "desktopCopyInReadingZone": true,
+      "mobileSeparated": true,
+      "gradientGeometry": true,
+      "errors": []
+    },
+    {
+      "site": "gcsda",
+      "route": "/council",
+      "label": "tablet",
+      "http": 200,
+      "title": "策略治理聯席會｜GCSDA",
+      "h1": "跨域專業，不等於權責混同。",
+      "h1Count": 1,
+      "heroClass": "cis-hero cis-title-2 cis-with-image",
+      "heroImage": "/visual-bank/gcsda/council.png",
+      "heroImageLoaded": true,
+      "heroImageNatural": [
+        1672,
+        941
+      ],
+      "heroImageRect": {
+        "left": 0,
+        "top": 92,
+        "right": 820,
+        "bottom": 553.484375,
+        "width": 820,
+        "height": 461.484375
+      },
+      "heroImageFit": "contain",
+      "copyRect": {
+        "left": 36,
+        "top": 142,
+        "right": 355.796875,
+        "bottom": 423.140625,
+        "width": 319.796875,
+        "height": 281.140625
+      },
+      "copyBg": "rgba(0, 0, 0, 0)",
+      "heroGradient": "linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255) 30%, rgba(255, 255, 255, 0.99) 38%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.34) 70%, rgba(255, 255, 255, 0.12) 77%, rgba(255, 255, 255, 0) 82%)",
+      "brandRect": {
+        "left": 30,
+        "top": 7.849998474121094,
+        "right": 400.6000061035156,
+        "bottom": 84.1500015258789,
+        "width": 370.6000061035156,
+        "height": 76.30000305175781
+      },
+      "brandNatural": [
+        600,
+        200
+      ],
+      "brandOptical": {
+        "sourceBox": {
+          "left": 13,
+          "top": 39,
+          "width": 203,
+          "height": 120
+        },
+        "visibleLeftMarkHeight": 45.78000183105468,
+        "visibleLeftMarkTop": 14.878500595092774
+      },
+      "overflow": false,
+      "broken": [],
+      "canonical": "https://gcsda.example.invalid/council",
+      "robotsMeta": "index,follow",
+      "organizationSchema": "Organization",
+      "expectedImage": "/visual-bank/gcsda/council.png",
+      "hasExpected": true,
+      "imageLoaded": true,
+      "heroImageSha256": "3eeb5a932e9582c5e602ff56a712e1fdd504ef4c14d9c1ebb417e9f9bfa90f42",
+      "desktopCopyInReadingZone": true,
+      "mobileSeparated": true,
+      "gradientGeometry": true,
+      "errors": []
+    },
+    {
+      "site": "gcsda",
+      "route": "/membership",
+      "label": "tablet",
+      "http": 200,
+      "title": "會員與入會｜GCSDA",
+      "h1": "以策略、治理、法遵與永續，形成專業共同體。",
+      "h1Count": 1,
+      "heroClass": "cis-hero cis-title-2 cis-with-image",
+      "heroImage": "/visual-bank/gcsda/membership.png",
+      "heroImageLoaded": true,
+      "heroImageNatural": [
+        1672,
+        941
+      ],
+      "heroImageRect": {
+        "left": 0,
+        "top": 92,
+        "right": 820,
+        "bottom": 553.484375,
+        "width": 820,
+        "height": 461.484375
+      },
+      "heroImageFit": "contain",
+      "copyRect": {
+        "left": 36,
+        "top": 142,
+        "right": 355.796875,
+        "bottom": 433.390625,
+        "width": 319.796875,
+        "height": 291.390625
+      },
+      "copyBg": "rgba(0, 0, 0, 0)",
+      "heroGradient": "linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255) 30%, rgba(255, 255, 255, 0.99) 38%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.34) 70%, rgba(255, 255, 255, 0.12) 77%, rgba(255, 255, 255, 0) 82%)",
+      "brandRect": {
+        "left": 30,
+        "top": 7.849998474121094,
+        "right": 400.6000061035156,
+        "bottom": 84.1500015258789,
+        "width": 370.6000061035156,
+        "height": 76.30000305175781
+      },
+      "brandNatural": [
+        600,
+        200
+      ],
+      "brandOptical": {
+        "sourceBox": {
+          "left": 13,
+          "top": 39,
+          "width": 203,
+          "height": 120
+        },
+        "visibleLeftMarkHeight": 45.78000183105468,
+        "visibleLeftMarkTop": 14.878500595092774
+      },
+      "overflow": false,
+      "broken": [],
+      "canonical": "https://gcsda.example.invalid/membership",
+      "robotsMeta": "index,follow",
+      "organizationSchema": "Organization",
+      "expectedImage": "/visual-bank/gcsda/membership.png",
+      "hasExpected": true,
+      "imageLoaded": true,
+      "heroImageSha256": "95ceabad1952a7a6d60cb4e24b26a69fe68470237107ac12fbfb8977f3bf9d73",
+      "desktopCopyInReadingZone": true,
+      "mobileSeparated": true,
+      "gradientGeometry": true,
+      "errors": []
+    },
+    {
+      "site": "gcsda",
+      "route": "/events",
+      "label": "tablet",
+      "http": 200,
+      "title": "活動與大會｜GCSDA",
+      "h1": "活動，是制度運作與知識累積的正式紀錄。",
+      "h1Count": 1,
+      "heroClass": "cis-hero cis-title-2 cis-with-image",
+      "heroImage": "/visual-bank/gcsda/events.png",
+      "heroImageLoaded": true,
+      "heroImageNatural": [
+        1672,
+        941
+      ],
+      "heroImageRect": {
+        "left": 0,
+        "top": 92,
+        "right": 820,
+        "bottom": 553.484375,
+        "width": 820,
+        "height": 461.484375
+      },
+      "heroImageFit": "contain",
+      "copyRect": {
+        "left": 36,
+        "top": 142,
+        "right": 355.796875,
+        "bottom": 390,
+        "width": 319.796875,
+        "height": 248
+      },
+      "copyBg": "rgba(0, 0, 0, 0)",
+      "heroGradient": "linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255) 30%, rgba(255, 255, 255, 0.99) 38%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.34) 70%, rgba(255, 255, 255, 0.12) 77%, rgba(255, 255, 255, 0) 82%)",
+      "brandRect": {
+        "left": 30,
+        "top": 7.849998474121094,
+        "right": 400.6000061035156,
+        "bottom": 84.1500015258789,
+        "width": 370.6000061035156,
+        "height": 76.30000305175781
+      },
+      "brandNatural": [
+        600,
+        200
+      ],
+      "brandOptical": {
+        "sourceBox": {
+          "left": 13,
+          "top": 39,
+          "width": 203,
+          "height": 120
+        },
+        "visibleLeftMarkHeight": 45.78000183105468,
+        "visibleLeftMarkTop": 14.878500595092774
+      },
+      "overflow": false,
+      "broken": [],
+      "canonical": "https://gcsda.example.invalid/events",
+      "robotsMeta": "index,follow",
+      "organizationSchema": "Organization",
+      "expectedImage": "/visual-bank/gcsda/events.png",
+      "hasExpected": true,
+      "imageLoaded": true,
+      "heroImageSha256": "14be1fb309fe047c83c242bcdf01eda428d6f292ffe02c4b439cc0c268c67522",
+      "desktopCopyInReadingZone": true,
+      "mobileSeparated": true,
+      "gradientGeometry": true,
+      "errors": []
+    },
+    {
+      "site": "gcsda",
+      "route": "/knowledge",
+      "label": "tablet",
+      "http": 200,
+      "title": "知識與研究｜GCSDA",
+      "h1": "讓活動與交流，沉澱為可傳承的治理知識。",
+      "h1Count": 1,
+      "heroClass": "cis-hero cis-title-2 cis-with-image",
+      "heroImage": "/visual-bank/gcsda/knowledge.png",
+      "heroImageLoaded": true,
+      "heroImageNatural": [
+        1672,
+        941
+      ],
+      "heroImageRect": {
+        "left": 0,
+        "top": 92,
+        "right": 820,
+        "bottom": 553.484375,
+        "width": 820,
+        "height": 461.484375
+      },
+      "heroImageFit": "contain",
+      "copyRect": {
+        "left": 36,
+        "top": 142,
+        "right": 355.796875,
+        "bottom": 466.53125,
+        "width": 319.796875,
+        "height": 324.53125
+      },
+      "copyBg": "rgba(0, 0, 0, 0)",
+      "heroGradient": "linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255) 30%, rgba(255, 255, 255, 0.99) 38%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.34) 70%, rgba(255, 255, 255, 0.12) 77%, rgba(255, 255, 255, 0) 82%)",
+      "brandRect": {
+        "left": 30,
+        "top": 7.849998474121094,
+        "right": 400.6000061035156,
+        "bottom": 84.1500015258789,
+        "width": 370.6000061035156,
+        "height": 76.30000305175781
+      },
+      "brandNatural": [
+        600,
+        200
+      ],
+      "brandOptical": {
+        "sourceBox": {
+          "left": 13,
+          "top": 39,
+          "width": 203,
+          "height": 120
+        },
+        "visibleLeftMarkHeight": 45.78000183105468,
+        "visibleLeftMarkTop": 14.878500595092774
+      },
+      "overflow": false,
+      "broken": [],
+      "canonical": "https://gcsda.example.invalid/knowledge",
+      "robotsMeta": "index,follow",
+      "organizationSchema": "Organization",
+      "expectedImage": "/visual-bank/gcsda/knowledge.png",
+      "hasExpected": true,
+      "imageLoaded": true,
+      "heroImageSha256": "acdf45286cb73768ac59353de3c1935250fe9d20501ce00cb1c5428a545b8a09",
+      "desktopCopyInReadingZone": true,
+      "mobileSeparated": true,
+      "gradientGeometry": true,
+      "errors": []
+    },
+    {
+      "site": "gcsda",
+      "route": "/charter",
+      "label": "tablet",
+      "http": 200,
+      "title": "章程與公告｜GCSDA",
+      "h1": "章程與公告",
+      "h1Count": 1,
+      "heroClass": "cis-hero cis-title-1 cis-with-image",
+      "heroImage": "/visual-bank/gcsda/charter.png",
+      "heroImageLoaded": true,
+      "heroImageNatural": [
+        1672,
+        941
+      ],
+      "heroImageRect": {
+        "left": 0,
+        "top": 92,
+        "right": 820,
+        "bottom": 553.484375,
+        "width": 820,
+        "height": 461.484375
+      },
+      "heroImageFit": "contain",
+      "copyRect": {
+        "left": 36,
+        "top": 142,
+        "right": 355.796875,
+        "bottom": 386.75,
+        "width": 319.796875,
+        "height": 244.75
+      },
+      "copyBg": "rgba(0, 0, 0, 0)",
+      "heroGradient": "linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255) 30%, rgba(255, 255, 255, 0.99) 38%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.34) 70%, rgba(255, 255, 255, 0.12) 77%, rgba(255, 255, 255, 0) 82%)",
+      "brandRect": {
+        "left": 30,
+        "top": 7.849998474121094,
+        "right": 400.6000061035156,
+        "bottom": 84.1500015258789,
+        "width": 370.6000061035156,
+        "height": 76.30000305175781
+      },
+      "brandNatural": [
+        600,
+        200
+      ],
+      "brandOptical": {
+        "sourceBox": {
+          "left": 13,
+          "top": 39,
+          "width": 203,
+          "height": 120
+        },
+        "visibleLeftMarkHeight": 45.78000183105468,
+        "visibleLeftMarkTop": 14.878500595092774
+      },
+      "overflow": false,
+      "broken": [],
+      "canonical": "https://gcsda.example.invalid/charter",
+      "robotsMeta": "index,follow",
+      "organizationSchema": "Organization",
+      "expectedImage": "/visual-bank/gcsda/charter.png",
+      "hasExpected": true,
+      "imageLoaded": true,
+      "heroImageSha256": "5cc905e9ef93ef9d2ed5cd7f571022f41d6dddcce5ede607db383b9932e5b3de",
+      "desktopCopyInReadingZone": true,
+      "mobileSeparated": true,
+      "gradientGeometry": true,
+      "errors": []
+    },
+    {
+      "site": "gcsda",
+      "route": "/privacy",
+      "label": "tablet",
+      "http": 200,
+      "title": "隱私與資料使用｜GCSDA",
+      "h1": "隱私與資料使用",
+      "h1Count": 1,
+      "heroClass": "cis-hero cis-title-1 cis-text-only",
+      "heroImage": null,
+      "heroImageLoaded": null,
+      "heroImageNatural": null,
+      "heroImageRect": null,
+      "heroImageFit": null,
+      "copyRect": {
+        "left": 40,
+        "top": 164,
+        "right": 780,
+        "bottom": 345.265625,
+        "width": 740,
+        "height": 181.265625
+      },
+      "copyBg": "rgba(0, 0, 0, 0)",
+      "heroGradient": "none",
+      "brandRect": {
+        "left": 30,
+        "top": 7.849998474121094,
+        "right": 400.6000061035156,
+        "bottom": 84.1500015258789,
+        "width": 370.6000061035156,
+        "height": 76.30000305175781
+      },
+      "brandNatural": [
+        600,
+        200
+      ],
+      "brandOptical": {
+        "sourceBox": {
+          "left": 13,
+          "top": 39,
+          "width": 203,
+          "height": 120
+        },
+        "visibleLeftMarkHeight": 45.78000183105468,
+        "visibleLeftMarkTop": 14.878500595092774
+      },
+      "overflow": false,
+      "broken": [],
+      "canonical": "https://gcsda.example.invalid/privacy",
+      "robotsMeta": "index,follow",
+      "organizationSchema": "Organization",
+      "expectedImage": null,
+      "hasExpected": true,
+      "imageLoaded": true,
+      "heroImageSha256": null,
+      "desktopCopyInReadingZone": true,
+      "mobileSeparated": true,
+      "gradientGeometry": true,
+      "errors": []
+    },
+    {
+      "site": "gcsda",
+      "route": "/",
+      "label": "mobile",
+      "http": 200,
+      "title": "GCSDA｜中華企業策略永續發展學會",
+      "h1": "讓策略、治理與永續，成為共同語言。",
+      "h1Count": 1,
+      "heroClass": "cis-hero cis-title-2 cis-with-image",
+      "heroImage": "/visual-bank/gcsda/home-approved.webp",
+      "heroImageLoaded": true,
+      "heroImageNatural": [
+        800,
+        450
+      ],
+      "heroImageRect": {
+        "left": 0,
+        "top": 92,
+        "right": 390,
+        "bottom": 311.375,
+        "width": 390,
+        "height": 219.375
+      },
+      "heroImageFit": "contain",
+      "copyRect": {
+        "left": 0,
+        "top": 311.375,
+        "right": 390,
+        "bottom": 711.78125,
+        "width": 390,
+        "height": 400.40625
+      },
+      "copyBg": "rgb(251, 250, 247)",
+      "heroGradient": "linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255) 30%, rgba(255, 255, 255, 0.99) 38%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.34) 70%, rgba(255, 255, 255, 0.12) 77%, rgba(255, 255, 255, 0) 82%)",
+      "brandRect": {
+        "left": 22,
+        "top": 14.389999389648438,
+        "right": 294.5,
+        "bottom": 77.61000061035156,
+        "width": 272.5,
+        "height": 63.220001220703125
+      },
+      "brandNatural": [
+        600,
+        200
+      ],
+      "brandOptical": {
+        "sourceBox": {
+          "left": 13,
+          "top": 39,
+          "width": 203,
+          "height": 120
+        },
+        "visibleLeftMarkHeight": 37.932000732421876,
+        "visibleLeftMarkTop": 12.32790023803711
+      },
+      "overflow": false,
+      "broken": [],
+      "canonical": "https://gcsda.example.invalid/",
+      "robotsMeta": "index,follow",
+      "organizationSchema": "Organization",
+      "expectedImage": "/visual-bank/gcsda/home-approved.webp",
+      "hasExpected": true,
+      "imageLoaded": true,
+      "heroImageSha256": "1846c3115a2c2bca303c305792ecd9e64e25351969ea21aa020fb25db77511b7",
+      "desktopCopyInReadingZone": true,
+      "mobileSeparated": true,
+      "gradientGeometry": true,
+      "errors": []
+    },
+    {
+      "site": "gcsda",
+      "route": "/about",
+      "label": "mobile",
+      "http": 200,
+      "title": "關於學會｜GCSDA",
+      "h1": "企業、專業與學術，在治理議題上持續對話。",
+      "h1Count": 1,
+      "heroClass": "cis-hero cis-title-2 cis-with-image",
+      "heroImage": "/visual-bank/gcsda/about.png",
+      "heroImageLoaded": true,
+      "heroImageNatural": [
+        1672,
+        941
+      ],
+      "heroImageRect": {
+        "left": 0,
+        "top": 92,
+        "right": 390,
+        "bottom": 311.484375,
+        "width": 390,
+        "height": 219.484375
+      },
+      "heroImageFit": "contain",
+      "copyRect": {
+        "left": 0,
+        "top": 311.484375,
+        "right": 390,
+        "bottom": 626.890625,
+        "width": 390,
+        "height": 315.40625
+      },
+      "copyBg": "rgb(251, 250, 247)",
+      "heroGradient": "linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255) 30%, rgba(255, 255, 255, 0.99) 38%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.34) 70%, rgba(255, 255, 255, 0.12) 77%, rgba(255, 255, 255, 0) 82%)",
+      "brandRect": {
+        "left": 22,
+        "top": 14.389999389648438,
+        "right": 294.5,
+        "bottom": 77.61000061035156,
+        "width": 272.5,
+        "height": 63.220001220703125
+      },
+      "brandNatural": [
+        600,
+        200
+      ],
+      "brandOptical": {
+        "sourceBox": {
+          "left": 13,
+          "top": 39,
+          "width": 203,
+          "height": 120
+        },
+        "visibleLeftMarkHeight": 37.932000732421876,
+        "visibleLeftMarkTop": 12.32790023803711
+      },
+      "overflow": false,
+      "broken": [],
+      "canonical": "https://gcsda.example.invalid/about",
+      "robotsMeta": "index,follow",
+      "organizationSchema": "Organization",
+      "expectedImage": "/visual-bank/gcsda/about.png",
+      "hasExpected": true,
+      "imageLoaded": true,
+      "heroImageSha256": "ed557da54c5845bca034741d37bcbc08814cd9dae269019f5be1a5d641325b40",
+      "desktopCopyInReadingZone": true,
+      "mobileSeparated": true,
+      "gradientGeometry": true,
+      "errors": []
+    },
+    {
+      "site": "gcsda",
+      "route": "/governance",
+      "label": "mobile",
+      "http": 200,
+      "title": "組織治理｜GCSDA",
+      "h1": "學會本身先接受治理：權力、職權與責任都應可被理解。",
+      "h1Count": 1,
+      "heroClass": "cis-hero cis-title-3 cis-with-image",
+      "heroImage": "/visual-bank/gcsda/governance.png",
+      "heroImageLoaded": true,
+      "heroImageNatural": [
+        1672,
+        941
+      ],
+      "heroImageRect": {
+        "left": 0,
+        "top": 92,
+        "right": 390,
+        "bottom": 311.484375,
+        "width": 390,
+        "height": 219.484375
+      },
+      "heroImageFit": "contain",
+      "copyRect": {
+        "left": 0,
+        "top": 311.484375,
+        "right": 390,
+        "bottom": 626.984375,
+        "width": 390,
+        "height": 315.5
+      },
+      "copyBg": "rgb(251, 250, 247)",
+      "heroGradient": "linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255) 30%, rgba(255, 255, 255, 0.99) 38%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.34) 70%, rgba(255, 255, 255, 0.12) 77%, rgba(255, 255, 255, 0) 82%)",
+      "brandRect": {
+        "left": 22,
+        "top": 14.389999389648438,
+        "right": 294.5,
+        "bottom": 77.61000061035156,
+        "width": 272.5,
+        "height": 63.220001220703125
+      },
+      "brandNatural": [
+        600,
+        200
+      ],
+      "brandOptical": {
+        "sourceBox": {
+          "left": 13,
+          "top": 39,
+          "width": 203,
+          "height": 120
+        },
+        "visibleLeftMarkHeight": 37.932000732421876,
+        "visibleLeftMarkTop": 12.32790023803711
+      },
+      "overflow": false,
+      "broken": [],
+      "canonical": "https://gcsda.example.invalid/governance",
+      "robotsMeta": "index,follow",
+      "organizationSchema": "Organization",
+      "expectedImage": "/visual-bank/gcsda/governance.png",
+      "hasExpected": true,
+      "imageLoaded": true,
+      "heroImageSha256": "63f21faa8492b32dd256e24088bb67dbec633ba9ddc6fca5b28593db90cac605",
+      "desktopCopyInReadingZone": true,
+      "mobileSeparated": true,
+      "gradientGeometry": true,
+      "errors": []
+    },
+    {
+      "site": "gcsda",
+      "route": "/council",
+      "label": "mobile",
+      "http": 200,
+      "title": "策略治理聯席會｜GCSDA",
+      "h1": "跨域專業，不等於權責混同。",
+      "h1Count": 1,
+      "heroClass": "cis-hero cis-title-2 cis-with-image",
+      "heroImage": "/visual-bank/gcsda/council.png",
+      "heroImageLoaded": true,
+      "heroImageNatural": [
+        1672,
+        941
+      ],
+      "heroImageRect": {
+        "left": 0,
+        "top": 92,
+        "right": 390,
+        "bottom": 311.484375,
+        "width": 390,
+        "height": 219.484375
+      },
+      "heroImageFit": "contain",
+      "copyRect": {
+        "left": 0,
+        "top": 311.484375,
+        "right": 390,
+        "bottom": 596.5,
+        "width": 390,
+        "height": 285.015625
+      },
+      "copyBg": "rgb(251, 250, 247)",
+      "heroGradient": "linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255) 30%, rgba(255, 255, 255, 0.99) 38%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.34) 70%, rgba(255, 255, 255, 0.12) 77%, rgba(255, 255, 255, 0) 82%)",
+      "brandRect": {
+        "left": 22,
+        "top": 14.389999389648438,
+        "right": 294.5,
+        "bottom": 77.61000061035156,
+        "width": 272.5,
+        "height": 63.220001220703125
+      },
+      "brandNatural": [
+        600,
+        200
+      ],
+      "brandOptical": {
+        "sourceBox": {
+          "left": 13,
+          "top": 39,
+          "width": 203,
+          "height": 120
+        },
+        "visibleLeftMarkHeight": 37.932000732421876,
+        "visibleLeftMarkTop": 12.32790023803711
+      },
+      "overflow": false,
+      "broken": [],
+      "canonical": "https://gcsda.example.invalid/council",
+      "robotsMeta": "index,follow",
+      "organizationSchema": "Organization",
+      "expectedImage": "/visual-bank/gcsda/council.png",
+      "hasExpected": true,
+      "imageLoaded": true,
+      "heroImageSha256": "3eeb5a932e9582c5e602ff56a712e1fdd504ef4c14d9c1ebb417e9f9bfa90f42",
+      "desktopCopyInReadingZone": true,
+      "mobileSeparated": true,
+      "gradientGeometry": true,
+      "errors": []
+    },
+    {
+      "site": "gcsda",
+      "route": "/membership",
+      "label": "mobile",
+      "http": 200,
+      "title": "會員與入會｜GCSDA",
+      "h1": "以策略、治理、法遵與永續，形成專業共同體。",
+      "h1Count": 1,
+      "heroClass": "cis-hero cis-title-2 cis-with-image",
+      "heroImage": "/visual-bank/gcsda/membership.png",
+      "heroImageLoaded": true,
+      "heroImageNatural": [
+        1672,
+        941
+      ],
+      "heroImageRect": {
+        "left": 0,
+        "top": 92,
+        "right": 390,
+        "bottom": 311.484375,
+        "width": 390,
+        "height": 219.484375
+      },
+      "heroImageFit": "contain",
+      "copyRect": {
+        "left": 0,
+        "top": 311.484375,
+        "right": 390,
+        "bottom": 596.5,
+        "width": 390,
+        "height": 285.015625
+      },
+      "copyBg": "rgb(251, 250, 247)",
+      "heroGradient": "linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255) 30%, rgba(255, 255, 255, 0.99) 38%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.34) 70%, rgba(255, 255, 255, 0.12) 77%, rgba(255, 255, 255, 0) 82%)",
+      "brandRect": {
+        "left": 22,
+        "top": 14.389999389648438,
+        "right": 294.5,
+        "bottom": 77.61000061035156,
+        "width": 272.5,
+        "height": 63.220001220703125
+      },
+      "brandNatural": [
+        600,
+        200
+      ],
+      "brandOptical": {
+        "sourceBox": {
+          "left": 13,
+          "top": 39,
+          "width": 203,
+          "height": 120
+        },
+        "visibleLeftMarkHeight": 37.932000732421876,
+        "visibleLeftMarkTop": 12.32790023803711
+      },
+      "overflow": false,
+      "broken": [],
+      "canonical": "https://gcsda.example.invalid/membership",
+      "robotsMeta": "index,follow",
+      "organizationSchema": "Organization",
+      "expectedImage": "/visual-bank/gcsda/membership.png",
+      "hasExpected": true,
+      "imageLoaded": true,
+      "heroImageSha256": "95ceabad1952a7a6d60cb4e24b26a69fe68470237107ac12fbfb8977f3bf9d73",
+      "desktopCopyInReadingZone": true,
+      "mobileSeparated": true,
+      "gradientGeometry": true,
+      "errors": []
+    },
+    {
+      "site": "gcsda",
+      "route": "/events",
+      "label": "mobile",
+      "http": 200,
+      "title": "活動與大會｜GCSDA",
+      "h1": "活動，是制度運作與知識累積的正式紀錄。",
+      "h1Count": 1,
+      "heroClass": "cis-hero cis-title-2 cis-with-image",
+      "heroImage": "/visual-bank/gcsda/events.png",
+      "heroImageLoaded": true,
+      "heroImageNatural": [
+        1672,
+        941
+      ],
+      "heroImageRect": {
+        "left": 0,
+        "top": 92,
+        "right": 390,
+        "bottom": 311.484375,
+        "width": 390,
+        "height": 219.484375
+      },
+      "heroImageFit": "contain",
+      "copyRect": {
+        "left": 0,
+        "top": 311.484375,
+        "right": 390,
+        "bottom": 596.5,
+        "width": 390,
+        "height": 285.015625
+      },
+      "copyBg": "rgb(251, 250, 247)",
+      "heroGradient": "linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255) 30%, rgba(255, 255, 255, 0.99) 38%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.34) 70%, rgba(255, 255, 255, 0.12) 77%, rgba(255, 255, 255, 0) 82%)",
+      "brandRect": {
+        "left": 22,
+        "top": 14.389999389648438,
+        "right": 294.5,
+        "bottom": 77.61000061035156,
+        "width": 272.5,
+        "height": 63.220001220703125
+      },
+      "brandNatural": [
+        600,
+        200
+      ],
+      "brandOptical": {
+        "sourceBox": {
+          "left": 13,
+          "top": 39,
+          "width": 203,
+          "height": 120
+        },
+        "visibleLeftMarkHeight": 37.932000732421876,
+        "visibleLeftMarkTop": 12.32790023803711
+      },
+      "overflow": false,
+      "broken": [],
+      "canonical": "https://gcsda.example.invalid/events",
+      "robotsMeta": "index,follow",
+      "organizationSchema": "Organization",
+      "expectedImage": "/visual-bank/gcsda/events.png",
+      "hasExpected": true,
+      "imageLoaded": true,
+      "heroImageSha256": "14be1fb309fe047c83c242bcdf01eda428d6f292ffe02c4b439cc0c268c67522",
+      "desktopCopyInReadingZone": true,
+      "mobileSeparated": true,
+      "gradientGeometry": true,
+      "errors": []
+    },
+    {
+      "site": "gcsda",
+      "route": "/knowledge",
+      "label": "mobile",
+      "http": 200,
+      "title": "知識與研究｜GCSDA",
+      "h1": "讓活動與交流，沉澱為可傳承的治理知識。",
+      "h1Count": 1,
+      "heroClass": "cis-hero cis-title-2 cis-with-image",
+      "heroImage": "/visual-bank/gcsda/knowledge.png",
+      "heroImageLoaded": true,
+      "heroImageNatural": [
+        1672,
+        941
+      ],
+      "heroImageRect": {
+        "left": 0,
+        "top": 92,
+        "right": 390,
+        "bottom": 311.484375,
+        "width": 390,
+        "height": 219.484375
+      },
+      "heroImageFit": "contain",
+      "copyRect": {
+        "left": 0,
+        "top": 311.484375,
+        "right": 390,
+        "bottom": 596.5,
+        "width": 390,
+        "height": 285.015625
+      },
+      "copyBg": "rgb(251, 250, 247)",
+      "heroGradient": "linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255) 30%, rgba(255, 255, 255, 0.99) 38%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.34) 70%, rgba(255, 255, 255, 0.12) 77%, rgba(255, 255, 255, 0) 82%)",
+      "brandRect": {
+        "left": 22,
+        "top": 14.389999389648438,
+        "right": 294.5,
+        "bottom": 77.61000061035156,
+        "width": 272.5,
+        "height": 63.220001220703125
+      },
+      "brandNatural": [
+        600,
+        200
+      ],
+      "brandOptical": {
+        "sourceBox": {
+          "left": 13,
+          "top": 39,
+          "width": 203,
+          "height": 120
+        },
+        "visibleLeftMarkHeight": 37.932000732421876,
+        "visibleLeftMarkTop": 12.32790023803711
+      },
+      "overflow": false,
+      "broken": [],
+      "canonical": "https://gcsda.example.invalid/knowledge",
+      "robotsMeta": "index,follow",
+      "organizationSchema": "Organization",
+      "expectedImage": "/visual-bank/gcsda/knowledge.png",
+      "hasExpected": true,
+      "imageLoaded": true,
+      "heroImageSha256": "acdf45286cb73768ac59353de3c1935250fe9d20501ce00cb1c5428a545b8a09",
+      "desktopCopyInReadingZone": true,
+      "mobileSeparated": true,
+      "gradientGeometry": true,
+      "errors": []
+    },
+    {
+      "site": "gcsda",
+      "route": "/charter",
+      "label": "mobile",
+      "http": 200,
+      "title": "章程與公告｜GCSDA",
+      "h1": "章程與公告",
+      "h1Count": 1,
+      "heroClass": "cis-hero cis-title-1 cis-with-image",
+      "heroImage": "/visual-bank/gcsda/charter.png",
+      "heroImageLoaded": true,
+      "heroImageNatural": [
+        1672,
+        941
+      ],
+      "heroImageRect": {
+        "left": 0,
+        "top": 92,
+        "right": 390,
+        "bottom": 311.484375,
+        "width": 390,
+        "height": 219.484375
+      },
+      "heroImageFit": "contain",
+      "copyRect": {
+        "left": 0,
+        "top": 311.484375,
+        "right": 390,
+        "bottom": 559.671875,
+        "width": 390,
+        "height": 248.1875
+      },
+      "copyBg": "rgb(251, 250, 247)",
+      "heroGradient": "linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255) 30%, rgba(255, 255, 255, 0.99) 38%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.34) 70%, rgba(255, 255, 255, 0.12) 77%, rgba(255, 255, 255, 0) 82%)",
+      "brandRect": {
+        "left": 22,
+        "top": 14.389999389648438,
+        "right": 294.5,
+        "bottom": 77.61000061035156,
+        "width": 272.5,
+        "height": 63.220001220703125
+      },
+      "brandNatural": [
+        600,
+        200
+      ],
+      "brandOptical": {
+        "sourceBox": {
+          "left": 13,
+          "top": 39,
+          "width": 203,
+          "height": 120
+        },
+        "visibleLeftMarkHeight": 37.932000732421876,
+        "visibleLeftMarkTop": 12.32790023803711
+      },
+      "overflow": false,
+      "broken": [],
+      "canonical": "https://gcsda.example.invalid/charter",
+      "robotsMeta": "index,follow",
+      "organizationSchema": "Organization",
+      "expectedImage": "/visual-bank/gcsda/charter.png",
+      "hasExpected": true,
+      "imageLoaded": true,
+      "heroImageSha256": "5cc905e9ef93ef9d2ed5cd7f571022f41d6dddcce5ede607db383b9932e5b3de",
+      "desktopCopyInReadingZone": true,
+      "mobileSeparated": true,
+      "gradientGeometry": true,
+      "errors": []
+    },
+    {
+      "site": "gcsda",
+      "route": "/privacy",
+      "label": "mobile",
+      "http": 200,
+      "title": "隱私與資料使用｜GCSDA",
+      "h1": "隱私與資料使用",
+      "h1Count": 1,
+      "heroClass": "cis-hero cis-title-1 cis-text-only",
+      "heroImage": null,
+      "heroImageLoaded": null,
+      "heroImageNatural": null,
+      "heroImageRect": null,
+      "heroImageFit": null,
+      "copyRect": {
+        "left": 24,
+        "top": 140,
+        "right": 366,
+        "bottom": 352.578125,
+        "width": 342,
+        "height": 212.578125
+      },
+      "copyBg": "rgba(0, 0, 0, 0)",
+      "heroGradient": "none",
+      "brandRect": {
+        "left": 22,
+        "top": 14.389999389648438,
+        "right": 294.5,
+        "bottom": 77.61000061035156,
+        "width": 272.5,
+        "height": 63.220001220703125
+      },
+      "brandNatural": [
+        600,
+        200
+      ],
+      "brandOptical": {
+        "sourceBox": {
+          "left": 13,
+          "top": 39,
+          "width": 203,
+          "height": 120
+        },
+        "visibleLeftMarkHeight": 37.932000732421876,
+        "visibleLeftMarkTop": 12.32790023803711
+      },
+      "overflow": false,
+      "broken": [],
+      "canonical": "https://gcsda.example.invalid/privacy",
+      "robotsMeta": "index,follow",
+      "organizationSchema": "Organization",
+      "expectedImage": null,
+      "hasExpected": true,
+      "imageLoaded": true,
+      "heroImageSha256": null,
+      "desktopCopyInReadingZone": true,
+      "mobileSeparated": true,
+      "gradientGeometry": true,
+      "errors": []
+    }
+  ],
+  "books": {
+    "http": 200,
+    "route": "/insights#publications",
+    "covers": [
+      {
+        "title": "2026 永續家族治理實務實錄",
+        "src": "/books/2026-sustainable-family-governance.jpg",
+        "complete": true,
+        "naturalWidth": 990,
+        "naturalHeight": 1400,
+        "renderedWidth": 430,
+        "renderedHeight": 608,
+        "objectFit": "contain",
+        "aspectRatio": "auto"
+      },
+      {
+        "title": "內在法遵 Internal Compliance",
+        "src": "/books/internal-compliance.jpg",
+        "complete": true,
+        "naturalWidth": 990,
+        "naturalHeight": 1400,
+        "renderedWidth": 430,
+        "renderedHeight": 608,
+        "objectFit": "contain",
+        "aspectRatio": "auto"
+      },
+      {
+        "title": "內在法遵 AI Governance",
+        "src": "/books/ai-governance.webp",
+        "complete": true,
+        "naturalWidth": 1448,
+        "naturalHeight": 2048,
+        "renderedWidth": 430,
+        "renderedHeight": 608,
+        "objectFit": "contain",
+        "aspectRatio": "auto"
+      },
+      {
+        "title": "內在法遵 Family Governance",
+        "src": "/books/family-governance.webp",
+        "complete": true,
+        "naturalWidth": 1448,
+        "naturalHeight": 2048,
+        "renderedWidth": 430,
+        "renderedHeight": 608,
+        "objectFit": "contain",
+        "aspectRatio": "auto"
+      }
+    ]
+  },
+  "headers": [
+    {
+      "site": "stt",
+      "brandRect": {
+        "left": 52,
+        "top": 11,
+        "right": 392,
+        "bottom": 81,
+        "width": 340,
+        "height": 70
+      },
+      "brandNatural": [
+        3181,
+        891
+      ],
+      "brandOptical": {
+        "sourceBox": {
+          "left": 22,
+          "top": 165,
+          "width": 1123,
+          "height": 591
+        },
+        "visibleLeftMarkHeight": 46.43097643097643,
+        "visibleLeftMarkTop": 12.962962962962962
+      }
+    },
+    {
+      "site": "gcsda",
+      "brandRect": {
+        "left": 50,
+        "top": 7.849998474121094,
+        "right": 420.6000061035156,
+        "bottom": 84.1500015258789,
+        "width": 370.6000061035156,
+        "height": 76.30000305175781
+      },
+      "brandNatural": [
+        600,
+        200
+      ],
+      "brandOptical": {
+        "sourceBox": {
+          "left": 13,
+          "top": 39,
+          "width": 203,
+          "height": 120
+        },
+        "visibleLeftMarkHeight": 45.78000183105468,
+        "visibleLeftMarkTop": 14.878500595092774
+      }
+    }
+  ],
+  "gcsdaCouncil": {
+    "complete": true,
+    "naturalWidth": 700,
+    "naturalHeight": 394,
+    "renderedWidth": 670,
+    "renderedHeight": 377,
+    "objectFit": "contain",
+    "opacity": 1,
+    "visibility": "visible",
+    "display": "block",
+    "nonWhitePixelRatio": 0.43976794778825234,
+    "alt": "策略治理聯席會成員團體照"
+  },
+  "gcsdaMembership": {
+    "deliveryState": "fallback",
+    "formPresent": false,
+    "lineLink": true
+  },
+  "gcsdaMembershipOnline": {
+    "deliveryState": "online",
+    "successText": "入會申請已送出；送出後進入申請待審狀態，學會將依章程及會務程序進行資料核對與資格審查。"
+  },
+  "gcsdaBuild": {
+    "sitemapHasAllRoutes": true,
+    "robotsIndexable": true,
+    "staticCanonical": true,
+    "staticOrganizationSchema": true
+  }
+}

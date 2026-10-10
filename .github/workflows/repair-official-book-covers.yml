@@ -1,0 +1,32 @@
+name: Repair official publication covers
+on:
+  push:
+    branches: [stt-convergence-20260923]
+    paths: [.github/workflows/repair-official-book-covers.yml]
+permissions:
+  contents: write
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: stt-convergence-20260923
+      - name: Restore current official flipbook covers
+        run: |
+          set -e
+          mkdir -p public/books
+          curl -fL --max-time 30 'https://cdnm.heyzine.com/files/uploaded/e424001f8ce96b6d3bb9c6c754aef26d241d1d7d.pdf-thumb.jpg' -o public/books/2026-sustainable-family-governance.jpg
+          curl -fL --max-time 30 'https://cdnm.heyzine.com/files/uploaded/v3/c700d8beb2dae65bbe06c2e40b7d71680d06a381.pdf-thumb.jpg' -o public/books/internal-compliance.jpg
+          test "$(stat -c%s public/books/2026-sustainable-family-governance.jpg)" -gt 100000
+          test "$(stat -c%s public/books/internal-compliance.jpg)" -gt 100000
+          file public/books/2026-sustainable-family-governance.jpg public/books/internal-compliance.jpg
+      - name: Commit verified cover files
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/books/2026-sustainable-family-governance.jpg public/books/internal-compliance.jpg
+          git diff --cached --quiet && exit 0
+          git commit -m "assets: restore verified official covers for published books"
+          git push origin HEAD:stt-convergence-20260923

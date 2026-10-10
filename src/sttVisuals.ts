@@ -21,7 +21,7 @@ export const STT_VISUALS = {
   domainStrategicLegal: "/visual-bank/stt/originals-20260910/strategic-legal.webp",
   domainComplianceContract: "/visual-bank/stt/originals-20260910/internal-compliance.webp",
   domainHumanAiGovernance: "/visual-bank/stt/originals-20260910/ai-governance.webp",
-  books: "/visual-bank/stt/primary-semantic/publications-stt-press-library.png",
+  books: "/visual-bank/stt/user-approved-six/publications.png",
   internalCompliance: "/visual-bank/stt/originals-20260910/internal-compliance.webp",
   research: "/visual-bank/stt/originals-20260910/insights.webp",
   projects: "/visual-bank/stt/originals-20260910/stt-platform.webp",
