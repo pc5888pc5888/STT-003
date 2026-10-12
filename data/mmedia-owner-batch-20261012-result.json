@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-10-12T07:06:17.607374+00:00",
+  "checkedAt": "2026-10-12T07:08:16.142347+00:00",
   "ownerAssignedSeries": "legal",
   "requestedUnique": 24,
   "baselineStats": {
@@ -11,14 +11,24 @@
     "pending": 0
   },
   "resultStats": {
-    "total": 244,
-    "uniqueUrls": 244,
-    "legal": 228,
+    "total": 253,
+    "uniqueUrls": 253,
+    "legal": 237,
     "humanistic": 5,
     "news": 11,
     "pending": 0
   },
-  "newlyAddedIds": [],
+  "newlyAddedIds": [
+    "a715b9",
+    "96a310",
+    "71a227",
+    "e93863",
+    "c788fa",
+    "a20485",
+    "32f4bd",
+    "2b8798",
+    "eb48c1"
+  ],
   "existingRetainedOnceIds": [
     "b60ae0",
     "3a43d6",
@@ -36,16 +46,7 @@
     "73e350",
     "503bd6",
     "c3a49d",
-    "60fee1",
-    "a715b9",
-    "96a310",
-    "71a227",
-    "e93863",
-    "c788fa",
-    "a20485",
-    "32f4bd",
-    "2b8798",
-    "eb48c1"
+    "60fee1"
   ],
   "sourceChecks": [
     {
@@ -55,7 +56,14 @@
       "finalUrl": "https://94m.com.tw/",
       "publicArticleTitle": null,
       "publicArticleAvailable": false,
-      "error": "Source too large"
+      "providedPreview": {
+        "url": "https://94m.com.tw/articles/f30f4f?from_admin=true",
+        "httpStatus": 200,
+        "title": "【 當代法治文化修復 】從權利義務對等性論公民法律素養的實踐",
+        "nearTitleDateCandidates": [
+          "2026/10/12 13:45"
+        ]
+      }
     },
     {
       "articleId": "73e350",
@@ -64,7 +72,14 @@
       "finalUrl": "https://94m.com.tw/",
       "publicArticleTitle": null,
       "publicArticleAvailable": false,
-      "error": "Source too large"
+      "providedPreview": {
+        "url": "https://94m.com.tw/articles/73e350?from_admin=true",
+        "httpStatus": 200,
+        "title": "【 人機協同的法權終局 】論自動化決策系統下的「主體責任與選擇權」",
+        "nearTitleDateCandidates": [
+          "2026/10/12 13:38"
+        ]
+      }
     },
     {
       "articleId": "503bd6",
@@ -73,13 +88,30 @@
       "finalUrl": "https://94m.com.tw/",
       "publicArticleTitle": null,
       "publicArticleAvailable": false,
-      "error": "Source too large"
+      "providedPreview": {
+        "url": "https://94m.com.tw/articles/503bd6?from_admin=true",
+        "httpStatus": 200,
+        "title": "【 數據安全與防詐治理 】企業資料治理（Data Governance）的實質合規思辨",
+        "nearTitleDateCandidates": [
+          "2026/10/12 13:09"
+        ]
+      }
     },
     {
       "articleId": "c3a49d",
       "canonicalUrl": "https://94m.com.tw/articles/c3a49d",
-      "error": "IncompleteRead(0 bytes read)",
-      "publicArticleAvailable": false
+      "httpStatus": 200,
+      "finalUrl": "https://94m.com.tw/",
+      "publicArticleTitle": null,
+      "publicArticleAvailable": false,
+      "providedPreview": {
+        "url": "https://94m.com.tw/articles/c3a49d?from_admin=true",
+        "httpStatus": 200,
+        "title": "【 全球 AI 供應鏈的物理核心 】論多軌布局與製造韌性之法理防線",
+        "nearTitleDateCandidates": [
+          "2026/10/12 12:52"
+        ]
+      }
     },
     {
       "articleId": "60fee1",
@@ -88,61 +120,86 @@
       "finalUrl": "https://94m.com.tw/",
       "publicArticleTitle": null,
       "publicArticleAvailable": false,
-      "error": "Source too large"
+      "providedPreview": {
+        "url": "https://94m.com.tw/articles/60fee1?from_admin=true",
+        "httpStatus": 200,
+        "title": "【 無形資產評價融資與市場韌性 】當代企業應具備的價值重構策略",
+        "nearTitleDateCandidates": [
+          "2026/10/12 11:09"
+        ]
+      }
     },
     {
       "articleId": "a715b9",
       "canonicalUrl": "https://94m.com.tw/articles/a715b9",
-      "error": "Source too large",
-      "publicArticleAvailable": false
+      "httpStatus": 200,
+      "finalUrl": "https://94m.com.tw/articles/a715b9",
+      "publicArticleTitle": "【 從法規遵循邁向策略治理 】企業建構「組織自主性」與擺脫路徑依賴的合規路徑",
+      "publicArticleAvailable": true
     },
     {
       "articleId": "96a310",
       "canonicalUrl": "https://94m.com.tw/articles/96a310",
-      "error": "Source too large",
-      "publicArticleAvailable": false
+      "httpStatus": 200,
+      "finalUrl": "https://94m.com.tw/articles/96a310",
+      "publicArticleTitle": "【 外資還沒匯款，先要老闆簽本票 】跨境融資、個人責任與公司土地的界線",
+      "publicArticleAvailable": true
     },
     {
       "articleId": "71a227",
       "canonicalUrl": "https://94m.com.tw/articles/71a227",
-      "error": "Source too large",
-      "publicArticleAvailable": false
+      "httpStatus": 200,
+      "finalUrl": "https://94m.com.tw/articles/71a227",
+      "publicArticleTitle": "【 土地已經信託，建商卻不開工 】合建卡住時，地主如何續建或拿回產權",
+      "publicArticleAvailable": true
     },
     {
       "articleId": "e93863",
       "canonicalUrl": "https://94m.com.tw/articles/e93863",
-      "error": "Source too large",
-      "publicArticleAvailable": false
+      "httpStatus": 200,
+      "finalUrl": "https://94m.com.tw/articles/e93863",
+      "publicArticleTitle": "【 公司否認欠款，總部為什麼先被查封 】假扣押、反擔保與銀行往來的處理",
+      "publicArticleAvailable": true
     },
     {
       "articleId": "c788fa",
       "canonicalUrl": "https://94m.com.tw/articles/c788fa",
-      "error": "Source too large",
-      "publicArticleAvailable": false
+      "httpStatus": 200,
+      "finalUrl": "https://94m.com.tw/articles/c788fa",
+      "publicArticleTitle": "【 廠房買了、鑰匙拿了，門鎖卻被換掉 】未登記建物一屋二賣怎麼處理",
+      "publicArticleAvailable": true
     },
     {
       "articleId": "a20485",
       "canonicalUrl": "https://94m.com.tw/articles/a20485",
-      "error": "Source too large",
-      "publicArticleAvailable": false
+      "httpStatus": 200,
+      "finalUrl": "https://94m.com.tw/articles/a20485",
+      "publicArticleTitle": "【 買樓還保證每年收百分之八租金 】售後回租的好收益，藏在哪些條件裡",
+      "publicArticleAvailable": true
     },
     {
       "articleId": "32f4bd",
       "canonicalUrl": "https://94m.com.tw/articles/32f4bd",
-      "error": "Source too large",
-      "publicArticleAvailable": false
+      "httpStatus": 200,
+      "finalUrl": "https://94m.com.tw/articles/32f4bd",
+      "publicArticleTitle": "【 信寄到舊地址，土地持分就賣掉了 】優先購買權的通知與十五日期限",
+      "publicArticleAvailable": true
     },
     {
       "articleId": "2b8798",
       "canonicalUrl": "https://94m.com.tw/articles/2b8798",
-      "error": "Source too large",
-      "publicArticleAvailable": false
+      "httpStatus": 200,
+      "finalUrl": "https://94m.com.tw/articles/2b8798",
+      "publicArticleTitle": "【 家族持有九成，總部還是可能被拍賣 】共有分割該怎麼談、怎麼準備",
+      "publicArticleAvailable": true
     },
     {
       "articleId": "eb48c1",
       "canonicalUrl": "https://94m.com.tw/articles/eb48c1",
-      "error": "Source too large",
-      "publicArticleAvailable": false
+      "httpStatus": 200,
+      "finalUrl": "https://94m.com.tw/articles/eb48c1",
+      "publicArticleTitle": "【 祖產怎麼變成別人的 】從一份陌生遺囑查回真正的權利",
+      "publicArticleAvailable": true
     }
   ],
   "articles": [
@@ -150,99 +207,99 @@
       "articleId": "f30f4f",
       "status": "SOURCE_REQUIRED_PUBLICATION",
       "series": "legal",
-      "title": null,
+      "title": "【 當代法治文化修復 】從權利義務對等性論公民法律素養的實踐",
       "date": null
     },
     {
       "articleId": "73e350",
       "status": "SOURCE_REQUIRED_PUBLICATION",
       "series": "legal",
-      "title": null,
+      "title": "【 人機協同的法權終局 】論自動化決策系統下的「主體責任與選擇權」",
       "date": null
     },
     {
       "articleId": "503bd6",
       "status": "SOURCE_REQUIRED_PUBLICATION",
       "series": "legal",
-      "title": null,
+      "title": "【 數據安全與防詐治理 】企業資料治理（Data Governance）的實質合規思辨",
       "date": null
     },
     {
       "articleId": "c3a49d",
       "status": "SOURCE_REQUIRED_PUBLICATION",
       "series": "legal",
-      "title": null,
+      "title": "【 全球 AI 供應鏈的物理核心 】論多軌布局與製造韌性之法理防線",
       "date": null
     },
     {
       "articleId": "60fee1",
       "status": "SOURCE_REQUIRED_PUBLICATION",
       "series": "legal",
-      "title": null,
+      "title": "【 無形資產評價融資與市場韌性 】當代企業應具備的價值重構策略",
       "date": null
     },
     {
       "articleId": "a715b9",
-      "status": "SOURCE_REQUIRED_PUBLICATION",
+      "status": "ADDED",
       "series": "legal",
-      "title": null,
-      "date": null
+      "title": "【 從法規遵循邁向策略治理 】企業建構「組織自主性」與擺脫路徑依賴的合規路徑",
+      "date": "2026/10/11 21:11"
     },
     {
       "articleId": "96a310",
-      "status": "SOURCE_REQUIRED_PUBLICATION",
+      "status": "ADDED",
       "series": "legal",
-      "title": null,
-      "date": null
+      "title": "【 外資還沒匯款，先要老闆簽本票 】跨境融資、個人責任與公司土地的界線",
+      "date": "2026/10/11 16:18"
     },
     {
       "articleId": "71a227",
-      "status": "SOURCE_REQUIRED_PUBLICATION",
+      "status": "ADDED",
       "series": "legal",
-      "title": null,
-      "date": null
+      "title": "【 土地已經信託，建商卻不開工 】合建卡住時，地主如何續建或拿回產權",
+      "date": "2026/10/11 15:23"
     },
     {
       "articleId": "e93863",
-      "status": "SOURCE_REQUIRED_PUBLICATION",
+      "status": "ADDED",
       "series": "legal",
-      "title": null,
-      "date": null
+      "title": "【 公司否認欠款，總部為什麼先被查封 】假扣押、反擔保與銀行往來的處理",
+      "date": "2026/10/11 12:39"
     },
     {
       "articleId": "c788fa",
-      "status": "SOURCE_REQUIRED_PUBLICATION",
+      "status": "ADDED",
       "series": "legal",
-      "title": null,
-      "date": null
+      "title": "【 廠房買了、鑰匙拿了，門鎖卻被換掉 】未登記建物一屋二賣怎麼處理",
+      "date": "2026/10/11 12:17"
     },
     {
       "articleId": "a20485",
-      "status": "SOURCE_REQUIRED_PUBLICATION",
+      "status": "ADDED",
       "series": "legal",
-      "title": null,
-      "date": null
+      "title": "【 買樓還保證每年收百分之八租金 】售後回租的好收益，藏在哪些條件裡",
+      "date": "2026/10/11 11:53"
     },
     {
       "articleId": "32f4bd",
-      "status": "SOURCE_REQUIRED_PUBLICATION",
+      "status": "ADDED",
       "series": "legal",
-      "title": null,
-      "date": null
+      "title": "【 信寄到舊地址，土地持分就賣掉了 】優先購買權的通知與十五日期限",
+      "date": "2026/10/11 11:04"
     },
     {
       "articleId": "2b8798",
-      "status": "SOURCE_REQUIRED_PUBLICATION",
+      "status": "ADDED",
       "series": "legal",
-      "title": null,
-      "date": null
+      "title": "【 家族持有九成，總部還是可能被拍賣 】共有分割該怎麼談、怎麼準備",
+      "date": "2026/10/11 10:30"
     },
     {
       "articleId": "eb48c1",
-      "status": "SOURCE_REQUIRED_PUBLICATION",
+      "status": "ADDED",
       "series": "legal",
-      "title": null,
-      "date": null
+      "title": "【 祖產怎麼變成別人的 】從一份陌生遺囑查回真正的權利",
+      "date": "2026/10/11 10:04"
     },
     {
       "articleId": "b60ae0",
