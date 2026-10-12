@@ -1,0 +1,51 @@
+name: STT owner legal-column batch 20261012
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/stt-mmedia-owner-batch-20261012.yml'
+      - 'scripts/mmedia_owner_batch_20261012.py'
+permissions:
+  contents: write
+concurrency:
+  group: stt-mmedia-catalog
+  cancel-in-progress: false
+defaults:
+  run:
+    shell: bash
+jobs:
+  apply-owner-batch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: main
+          fetch-depth: 1
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - name: Validate and apply only the owner-specified article batch
+        run: |
+          set -euo pipefail
+          pip -q install beautifulsoup4==4.13.4
+          python -m unittest discover -s tests -p 'test_mmedia_sync.py' -v
+          python scripts/mmedia_owner_batch_20261012.py
+          python -m unittest discover -s tests -p 'test_mmedia_sync.py' -v
+      - name: Persist verified catalog and batch audit
+        run: |
+          set -euo pipefail
+          git config user.name 'STT Column Index'
+          git config user.email 'actions@users.noreply.github.com'
+          git add public/data/mmedia-catalog.json data/mmedia-owner-batch-20261012-result.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'data: apply verified owner legal-column batch without duplicates'
+          git push origin HEAD:main
+      - name: Preserve bounded update evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: stt-owner-legal-batch-20261012
+          path: data/mmedia-owner-batch-20261012-result.json
+          retention-days: 14
