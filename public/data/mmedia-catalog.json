@@ -14,19 +14,18 @@
     "verification": "All seven source fields exactly match the uploaded 212-record snapshot after restoring its original whitespace."
   },
   "schemaVersion": "2.0",
-  "syncedAt": "2026-10-12T12:20:04.064743+00:00",
+  "syncedAt": "2026-10-12T15:40:38.810933+00:00",
   "sync": {
-    "method": "owner-specified-public-author-cards",
-    "complete": false,
-    "pagesFetched": 1,
-    "observed": 12,
-    "retainedNotSeen": 246,
+    "method": "public-author-index-and-more",
+    "complete": true,
+    "pagesFetched": 42,
+    "observed": 257,
+    "retainedNotSeen": 1,
     "changes": {
-      "added": 5,
+      "added": 0,
       "updated": 0,
       "reclassified": 0
-    },
-    "scope": "Owner-specified 24 article IDs only; not a complete historical source crawl."
+    }
   },
   "stats": {
     "total": 258,
