@@ -3,7 +3,7 @@ A failed unrelated historical pagination must not prevent this bounded update.
 Never turn preview visibility into a claim of public publication.
 """
 from __future__ import annotations
-import concurrent.futures, datetime as dt, json, pathlib, re, urllib.request
+import concurrent.futures, datetime as dt, json, pathlib, re, urllib.parse, urllib.request
 from bs4 import BeautifulSoup
 import mmedia_sync as sync
 
@@ -12,11 +12,15 @@ HEADERS = {'User-Agent': 'Mozilla/5.0 (compatible; STT-Owner-Batch/1.0)', 'Accep
 
 def fetch(url: str) -> tuple[str, str, int]:
     with urllib.request.urlopen(urllib.request.Request(url, headers=HEADERS), timeout=25) as response:
-        raw = response.read(8_000_001)
-        if len(raw) > 8_000_000: raise ValueError('Source too large')
         final = response.geturl()
         if urllib.parse.urlparse(final).hostname != '94m.com.tw': raise ValueError('Unexpected source redirect')
-        return raw.decode('utf-8'), final, response.status
+        # Article bodies contain very large embedded images. Only the first HTML
+        # fragment containing the title/byline is needed for link verification.
+        # Author-index cards, the actual metadata source, must still be read fully.
+        header_only = '/articles/' in urllib.parse.urlparse(url).path
+        raw = response.read(2_000_000 if header_only else 8_000_001)
+        if not header_only and len(raw) > 8_000_000: raise ValueError('Author index too large')
+        return raw.decode('utf-8', errors='replace'), final, response.status
 
 def inspect_source(article_id: str) -> dict:
     url = sync.ORIGIN + '/articles/' + article_id
