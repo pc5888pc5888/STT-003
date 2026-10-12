@@ -14,29 +14,99 @@
     "verification": "All seven source fields exactly match the uploaded 212-record snapshot after restoring its original whitespace."
   },
   "schemaVersion": "2.0",
-  "syncedAt": "2026-10-12T07:08:16.142347+00:00",
+  "syncedAt": "2026-10-12T12:20:04.064743+00:00",
   "sync": {
     "method": "owner-specified-public-author-cards",
     "complete": false,
     "pagesFetched": 1,
     "observed": 12,
-    "retainedNotSeen": 241,
+    "retainedNotSeen": 246,
     "changes": {
-      "added": 9,
+      "added": 5,
       "updated": 0,
       "reclassified": 0
     },
     "scope": "Owner-specified 24 article IDs only; not a complete historical source crawl."
   },
   "stats": {
-    "total": 253,
-    "uniqueUrls": 253,
-    "legal": 237,
+    "total": 258,
+    "uniqueUrls": 258,
+    "legal": 242,
     "humanistic": 5,
     "news": 11,
     "pending": 0
   },
   "articles": [
+    {
+      "url": "https://94m.com.tw/articles/f30f4f",
+      "title": "【 當代法治文化修復 】從權利義務對等性論公民法律素養的實踐",
+      "date": "2026/10/12 13:45",
+      "category": "法律",
+      "author": "莊鈞翔博士",
+      "authorUrl": "https://94m.com.tw/editors/ed55fc",
+      "excerpt": "我們都可能對某些人、某些專業、某些媒體、某些制度或某些熟悉觀點比較容易相信，這是人性，也不需要假裝自己完全沒有立場；真正危險的是，當立場先決定了答案，證據只剩下事後挑選支持材料的工具，我們就會慢慢失去一種很重要的能力，也就是在喜歡的說法面前仍願意查證，在不喜歡的說法面前也願意先聽完理由。\r\n\r\n中華企業策略永續發展學會 創會理事長 莊鈞翔 博士本法律專欄想和讀者談法治文化，不是要求所有人變成同一種價值觀，更不是教人凡事反對權威；它真正想做的是把人重新放回法律主體的位置，讓權利能主張、義務能理解、事實要證明、來源要查核、未知可以誠實保留。當一個人不再只等別人告訴他誰對誰錯，而開始知道如何用證據、程序與相同標準檢查自己的判斷，所謂法治修復才真正從內心發生。",
+      "id": "mmedia-f30f4f",
+      "sourceArticleId": "f30f4f",
+      "series": "legal",
+      "seriesTitle": "莊博士法律新聞專欄",
+      "source": "M傳媒"
+    },
+    {
+      "url": "https://94m.com.tw/articles/73e350",
+      "title": "【 人機協同的法權終局 】論自動化決策系統下的「主體責任與選擇權」",
+      "date": "2026/10/12 13:38",
+      "category": "法律",
+      "author": "莊鈞翔博士",
+      "authorUrl": "https://94m.com.tw/editors/ed55fc",
+      "excerpt": "AI最吸引人的地方，是它可以在很短時間內整理大量資訊、給出分數、建議甚至直接執行工作，這種效率也最容易製造另一種風險，也就是人看到一個看起來精準、專業又有數字支持的答案後，反而停止追問它根據什麼資料、用了什麼假設、適不適合眼前這個個案；真正值得警覺的不是機器比人聰明，而是人因為機器看起來很聰明，就把原本應該由自己承擔的判斷一起交出去。\r\n\r\n中華企業策略永續發展學會 創會理事長 莊鈞翔 博士藉這篇法律專欄不是反對AI，也不是把人工判斷浪漫化；人會犯錯，模型也會犯錯，成熟的人機協同應該做的是讓兩者互相補強，同時讓重大決策仍然有人能說明理由、提出異議、停止流程並承擔結果。當使用者面對權威輸出仍願意回到來源再看一次，技術才是在擴張人的能力，而不是讓人的主體性悄悄退場。",
+      "id": "mmedia-73e350",
+      "sourceArticleId": "73e350",
+      "series": "legal",
+      "seriesTitle": "莊博士法律新聞專欄",
+      "source": "M傳媒"
+    },
+    {
+      "url": "https://94m.com.tw/articles/503bd6",
+      "title": "【 數據安全與防詐治理 】企業資料治理（Data Governance）的實質合規思辨",
+      "date": "2026/10/12 13:09",
+      "category": "法律",
+      "author": "莊鈞翔博士",
+      "authorUrl": "https://94m.com.tw/editors/ed55fc",
+      "excerpt": "很多公司並不是沒有個資政策、資安教育或防詐流程，真正的問題常出現在「制度存在」與「制度有效」之間，文件寫得很完整，權限卻多年沒有清理；員工每年都上課，付款流程仍可以被一封假郵件改掉；公司買了昂貴資安工具，卻說不清楚哪些資料最重要、誰可以存取、事故發生後能不能還原，這些落差才是資料治理最需要面對的地方。\r\n\r\n中華企業策略永續發展學會 創會理事長 莊鈞翔 博士藉本法律專欄想讓讀者形成一個比「有沒有做」更重要的習慣，也就是繼續追問「做了以後，風險真的降低了嗎」；這不是對制度抱持敵意，而是把信任從口號移到可以驗證的控制、紀錄與結果，當企業習慣用同一套標準檢查自己喜歡與不喜歡的答案，數據安全就不再只是資訊部門的責任，而會成為組織如何面對事實的一種治理能力。",
+      "id": "mmedia-503bd6",
+      "sourceArticleId": "503bd6",
+      "series": "legal",
+      "seriesTitle": "莊博士法律新聞專欄",
+      "source": "M傳媒"
+    },
+    {
+      "url": "https://94m.com.tw/articles/c3a49d",
+      "title": "【 全球 AI 供應鏈的物理核心 】論多軌布局與製造韌性之法理防線",
+      "date": "2026/10/12 12:52",
+      "category": "法律",
+      "author": "莊鈞翔博士",
+      "authorUrl": "https://94m.com.tw/editors/ed55fc",
+      "excerpt": "AI產業看起來像雲端裡的演算法競賽，真正支撐它的卻是電力、晶片、材料、設備、物流、人才、軟體與跨境法規共同形成的物理網路；任何一個節點高度集中都可能提高效率，但同一件事也可能讓企業在規則改變、供應中斷或區域風險發生時缺少轉身空間，所以真正需要治理的不是「集中一定不好」，而是公司是否知道自己把多少命運押在同一個地方。\r\n\r\n中華企業策略永續發展學會 創會理事長 莊鈞翔 博士藉由本法律專欄，並不神化或唱衰任何單一產業，因為成功與集中風險可以同時存在，真正值得保留的能力，是即使一條路過去非常成功，企業仍願意定期重新檢查替代來源、契約限制、技術控制、現金緩衝與跨境規範；畢竟，當成功仍被允許接受檢驗，製造韌性才不是對風險的恐懼，而是面對不確定時仍保有選項。",
+      "id": "mmedia-c3a49d",
+      "sourceArticleId": "c3a49d",
+      "series": "legal",
+      "seriesTitle": "莊博士法律新聞專欄",
+      "source": "M傳媒"
+    },
+    {
+      "url": "https://94m.com.tw/articles/60fee1",
+      "title": "【 無形資產評價融資與市場韌性 】當代企業應具備的價值重構策略",
+      "date": "2026/10/12 11:09",
+      "category": "法律",
+      "author": "莊鈞翔博士",
+      "authorUrl": "https://94m.com.tw/editors/ed55fc",
+      "excerpt": "許多企業主談資產時，腦中最先浮現的是土地、廠房、設備與現金，因為這些東西看得到、摸得到，也比較容易被金融機構放進授信模型。可是公司真正讓客戶願意買單的，可能是多年累積的技術、品牌、軟體、專利、營業秘密、長期契約與組織知識，如果這些價值從未被辨識、確權與管理，企業很容易在不知不覺中接受別人替自己定義「什麼才算有價值」。\r\n\r\n中華企業策略永續發展學會 創會理事長 莊鈞翔 博士藉此篇法律專欄，並非把不動產貶低成落伍資產，也不是主張無形資產一定比有形資產更值錢；真正重要的是把價值判斷拿回來，用法律確認公司究竟擁有什麼，用評價方法說明它如何產生經濟利益，再讓金融市場決定願意用什麼條件承擔風險，當企業不再只因外界熟悉某種資產就忽略自己的真正競爭力，價值重構才不會只是一句漂亮口號。",
+      "id": "mmedia-60fee1",
+      "sourceArticleId": "60fee1",
+      "series": "legal",
+      "seriesTitle": "莊博士法律新聞專欄",
+      "source": "M傳媒"
+    },
     {
       "url": "https://94m.com.tw/articles/a715b9",
       "title": "【 從法規遵循邁向策略治理 】企業建構「組織自主性」與擺脫路徑依賴的合規路徑",
@@ -3584,14 +3654,8 @@
   "ownerAssignments": {
     "registry": "data/mmedia-owner-series.json",
     "requested": 24,
-    "archived": 19,
-    "awaitingPublicSource": [
-      "503bd6",
-      "60fee1",
-      "73e350",
-      "c3a49d",
-      "f30f4f"
-    ],
+    "archived": 24,
+    "awaitingPublicSource": [],
     "note": "Series is owner-authorized. Missing public source records are not a classification rejection; no publication date or public availability is invented."
   }
 }
