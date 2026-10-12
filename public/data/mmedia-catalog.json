@@ -14,18 +14,19 @@
     "verification": "All seven source fields exactly match the uploaded 212-record snapshot after restoring its original whitespace."
   },
   "schemaVersion": "2.0",
-  "syncedAt": "2026-10-11T22:06:14.920159+00:00",
+  "syncedAt": "2026-10-12T07:06:17.607374+00:00",
   "sync": {
-    "method": "public-author-index-and-more",
-    "complete": true,
-    "pagesFetched": 40,
-    "observed": 243,
-    "retainedNotSeen": 1,
+    "method": "owner-specified-public-author-cards",
+    "complete": false,
+    "pagesFetched": 1,
+    "observed": 3,
+    "retainedNotSeen": 241,
     "changes": {
       "added": 0,
       "updated": 0,
       "reclassified": 0
-    }
+    },
+    "scope": "Owner-specified 24 article IDs only; not a complete historical source crawl."
   },
   "stats": {
     "total": 244,
@@ -3453,5 +3454,27 @@
       "source": "M傳媒"
     }
   ],
-  "pending": []
+  "pending": [],
+  "ownerAssignments": {
+    "registry": "data/mmedia-owner-series.json",
+    "requested": 24,
+    "archived": 10,
+    "awaitingPublicSource": [
+      "2b8798",
+      "32f4bd",
+      "503bd6",
+      "60fee1",
+      "71a227",
+      "73e350",
+      "96a310",
+      "a20485",
+      "a715b9",
+      "c3a49d",
+      "c788fa",
+      "e93863",
+      "eb48c1",
+      "f30f4f"
+    ],
+    "note": "Series is owner-authorized. Missing public source records are not a classification rejection; no publication date or public availability is invented."
+  }
 }

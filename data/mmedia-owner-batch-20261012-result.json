@@ -1,0 +1,326 @@
+{
+  "checkedAt": "2026-10-12T07:06:17.607374+00:00",
+  "ownerAssignedSeries": "legal",
+  "requestedUnique": 24,
+  "baselineStats": {
+    "total": 244,
+    "uniqueUrls": 244,
+    "legal": 228,
+    "humanistic": 5,
+    "news": 11,
+    "pending": 0
+  },
+  "resultStats": {
+    "total": 244,
+    "uniqueUrls": 244,
+    "legal": 228,
+    "humanistic": 5,
+    "news": 11,
+    "pending": 0
+  },
+  "newlyAddedIds": [],
+  "existingRetainedOnceIds": [
+    "b60ae0",
+    "3a43d6",
+    "d8eb94",
+    "088d9f",
+    "e884f0",
+    "087264",
+    "0364df",
+    "baaf84",
+    "04edae",
+    "e479da"
+  ],
+  "awaitingPublicSourceIds": [
+    "f30f4f",
+    "73e350",
+    "503bd6",
+    "c3a49d",
+    "60fee1",
+    "a715b9",
+    "96a310",
+    "71a227",
+    "e93863",
+    "c788fa",
+    "a20485",
+    "32f4bd",
+    "2b8798",
+    "eb48c1"
+  ],
+  "sourceChecks": [
+    {
+      "articleId": "f30f4f",
+      "canonicalUrl": "https://94m.com.tw/articles/f30f4f",
+      "httpStatus": 200,
+      "finalUrl": "https://94m.com.tw/",
+      "publicArticleTitle": null,
+      "publicArticleAvailable": false,
+      "error": "Source too large"
+    },
+    {
+      "articleId": "73e350",
+      "canonicalUrl": "https://94m.com.tw/articles/73e350",
+      "httpStatus": 200,
+      "finalUrl": "https://94m.com.tw/",
+      "publicArticleTitle": null,
+      "publicArticleAvailable": false,
+      "error": "Source too large"
+    },
+    {
+      "articleId": "503bd6",
+      "canonicalUrl": "https://94m.com.tw/articles/503bd6",
+      "httpStatus": 200,
+      "finalUrl": "https://94m.com.tw/",
+      "publicArticleTitle": null,
+      "publicArticleAvailable": false,
+      "error": "Source too large"
+    },
+    {
+      "articleId": "c3a49d",
+      "canonicalUrl": "https://94m.com.tw/articles/c3a49d",
+      "error": "IncompleteRead(0 bytes read)",
+      "publicArticleAvailable": false
+    },
+    {
+      "articleId": "60fee1",
+      "canonicalUrl": "https://94m.com.tw/articles/60fee1",
+      "httpStatus": 200,
+      "finalUrl": "https://94m.com.tw/",
+      "publicArticleTitle": null,
+      "publicArticleAvailable": false,
+      "error": "Source too large"
+    },
+    {
+      "articleId": "a715b9",
+      "canonicalUrl": "https://94m.com.tw/articles/a715b9",
+      "error": "Source too large",
+      "publicArticleAvailable": false
+    },
+    {
+      "articleId": "96a310",
+      "canonicalUrl": "https://94m.com.tw/articles/96a310",
+      "error": "Source too large",
+      "publicArticleAvailable": false
+    },
+    {
+      "articleId": "71a227",
+      "canonicalUrl": "https://94m.com.tw/articles/71a227",
+      "error": "Source too large",
+      "publicArticleAvailable": false
+    },
+    {
+      "articleId": "e93863",
+      "canonicalUrl": "https://94m.com.tw/articles/e93863",
+      "error": "Source too large",
+      "publicArticleAvailable": false
+    },
+    {
+      "articleId": "c788fa",
+      "canonicalUrl": "https://94m.com.tw/articles/c788fa",
+      "error": "Source too large",
+      "publicArticleAvailable": false
+    },
+    {
+      "articleId": "a20485",
+      "canonicalUrl": "https://94m.com.tw/articles/a20485",
+      "error": "Source too large",
+      "publicArticleAvailable": false
+    },
+    {
+      "articleId": "32f4bd",
+      "canonicalUrl": "https://94m.com.tw/articles/32f4bd",
+      "error": "Source too large",
+      "publicArticleAvailable": false
+    },
+    {
+      "articleId": "2b8798",
+      "canonicalUrl": "https://94m.com.tw/articles/2b8798",
+      "error": "Source too large",
+      "publicArticleAvailable": false
+    },
+    {
+      "articleId": "eb48c1",
+      "canonicalUrl": "https://94m.com.tw/articles/eb48c1",
+      "error": "Source too large",
+      "publicArticleAvailable": false
+    }
+  ],
+  "articles": [
+    {
+      "articleId": "f30f4f",
+      "status": "SOURCE_REQUIRED_PUBLICATION",
+      "series": "legal",
+      "title": null,
+      "date": null
+    },
+    {
+      "articleId": "73e350",
+      "status": "SOURCE_REQUIRED_PUBLICATION",
+      "series": "legal",
+      "title": null,
+      "date": null
+    },
+    {
+      "articleId": "503bd6",
+      "status": "SOURCE_REQUIRED_PUBLICATION",
+      "series": "legal",
+      "title": null,
+      "date": null
+    },
+    {
+      "articleId": "c3a49d",
+      "status": "SOURCE_REQUIRED_PUBLICATION",
+      "series": "legal",
+      "title": null,
+      "date": null
+    },
+    {
+      "articleId": "60fee1",
+      "status": "SOURCE_REQUIRED_PUBLICATION",
+      "series": "legal",
+      "title": null,
+      "date": null
+    },
+    {
+      "articleId": "a715b9",
+      "status": "SOURCE_REQUIRED_PUBLICATION",
+      "series": "legal",
+      "title": null,
+      "date": null
+    },
+    {
+      "articleId": "96a310",
+      "status": "SOURCE_REQUIRED_PUBLICATION",
+      "series": "legal",
+      "title": null,
+      "date": null
+    },
+    {
+      "articleId": "71a227",
+      "status": "SOURCE_REQUIRED_PUBLICATION",
+      "series": "legal",
+      "title": null,
+      "date": null
+    },
+    {
+      "articleId": "e93863",
+      "status": "SOURCE_REQUIRED_PUBLICATION",
+      "series": "legal",
+      "title": null,
+      "date": null
+    },
+    {
+      "articleId": "c788fa",
+      "status": "SOURCE_REQUIRED_PUBLICATION",
+      "series": "legal",
+      "title": null,
+      "date": null
+    },
+    {
+      "articleId": "a20485",
+      "status": "SOURCE_REQUIRED_PUBLICATION",
+      "series": "legal",
+      "title": null,
+      "date": null
+    },
+    {
+      "articleId": "32f4bd",
+      "status": "SOURCE_REQUIRED_PUBLICATION",
+      "series": "legal",
+      "title": null,
+      "date": null
+    },
+    {
+      "articleId": "2b8798",
+      "status": "SOURCE_REQUIRED_PUBLICATION",
+      "series": "legal",
+      "title": null,
+      "date": null
+    },
+    {
+      "articleId": "eb48c1",
+      "status": "SOURCE_REQUIRED_PUBLICATION",
+      "series": "legal",
+      "title": null,
+      "date": null
+    },
+    {
+      "articleId": "b60ae0",
+      "status": "EXISTING_RETAINED_ONCE",
+      "series": "legal",
+      "title": "【 官司贏了，為什麼還拿不到錢 】看懂最高限額抵押權與分配表異議",
+      "date": "2026/10/09 21:01"
+    },
+    {
+      "articleId": "3a43d6",
+      "status": "EXISTING_RETAINED_ONCE",
+      "series": "legal",
+      "title": "【 房子快賣了，卻突然冒出二十年租約 】先看懂租約，再處理點交",
+      "date": "2026/10/09 20:19"
+    },
+    {
+      "articleId": "d8eb94",
+      "status": "EXISTING_RETAINED_ONCE",
+      "series": "legal",
+      "title": "【 買方說先過戶才能貸款，賣方該答應嗎？ 】看懂尾款、履約保障與新增抵押的風險",
+      "date": "2026/10/09 20:07"
+    },
+    {
+      "articleId": "088d9f",
+      "status": "EXISTING_RETAINED_ONCE",
+      "series": "legal",
+      "title": "【 房子是我的，拿回權狀卻被告搶奪 】從借名爭議到權狀扣押，屋主該怎麼保護自己",
+      "date": "2026/10/08 17:19"
+    },
+    {
+      "articleId": "e884f0",
+      "status": "EXISTING_RETAINED_ONCE",
+      "series": "legal",
+      "title": "【 人機協同的法權終局 】從資料、模型、算力到能源：當 AI 成為基礎設施，人類如何保住最後的選擇權、責任與尊嚴",
+      "date": "2026/10/02 18:51"
+    },
+    {
+      "articleId": "087264",
+      "status": "EXISTING_RETAINED_ONCE",
+      "series": "legal",
+      "title": "【 全球 AI 供應鏈的物理核心 】先進製程、跨國設廠、智慧財產與能源韌性：台灣真正要守的不是神話，而是可持續的製造能力",
+      "date": "2026/10/02 18:39"
+    },
+    {
+      "articleId": "0364df",
+      "status": "EXISTING_RETAINED_ONCE",
+      "series": "legal",
+      "title": "【 燃燒的資料中心 】從電網、長期購電到低碳承諾：AI 的「雲端」其實是一個高度物理化的能源法律問題",
+      "date": "2026/10/02 18:17"
+    },
+    {
+      "articleId": "baaf84",
+      "status": "EXISTING_RETAINED_ONCE",
+      "series": "legal",
+      "title": "【 地緣政治與國家安全的法權妥協 】當 AI、晶片與雲端同時成為商業資產與戰略資源，反壟斷、產業政策與企業合規如何重新取得平衡",
+      "date": "2026/10/02 13:00"
+    },
+    {
+      "articleId": "04edae",
+      "status": "EXISTING_RETAINED_ONCE",
+      "series": "legal",
+      "title": "【 高頻交易與實體供應鏈數據聯動 】當速度、資料與算力形成新的資訊優勢，證券市場的公平界線應如何被重新理解",
+      "date": "2026/10/02 11:40"
+    },
+    {
+      "articleId": "e479da",
+      "status": "EXISTING_RETAINED_ONCE",
+      "series": "legal",
+      "title": "【從快思考到慢思考 】推理型 AI、算力經濟與企業採購：模型變得更強之後，成本與責任也跟著變大",
+      "date": "2026/10/01 06:12"
+    }
+  ],
+  "qa": {
+    "uniqueArticleIds": true,
+    "historicalArticlesRetained": true,
+    "outsideBatchUnchanged": true,
+    "allArchivedOwnerArticlesLegal": true,
+    "wholeSiteAcceptance": "NOT_CLAIMED",
+    "productionVisualVerification": "NOT_RUN_BY_THIS_SCRIPT"
+  }
+}
