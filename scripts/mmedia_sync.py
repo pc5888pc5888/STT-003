@@ -1,7 +1,7 @@
 """Read the public author index; never delete an archived article on absence.
 The /articles/more POST is the site's public read-only '查看更多' operation.
-No login, CMS credentials or article-body scraping. The explicit published column label
-「人文地景產專欄」 is authoritative for that series even when M傳媒 uses a broader source category.
+No login, CMS credentials or article-body scraping. Explicit owner series assignments
+are authoritative; a supplied article's subject never overrides its assigned column.
 """
 from __future__ import annotations
 import argparse, datetime as dt, hashlib, http.cookiejar, json, pathlib, re, sys, time
@@ -11,6 +11,7 @@ from bs4 import BeautifulSoup
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 CATALOG = ROOT / 'public/data/mmedia-catalog.json'
 CONTRACT = ROOT / 'data/mmedia-baseline-contract.json'
+OWNER_ASSIGNMENTS = ROOT / 'data/mmedia-owner-series.json'
 AUTHOR = 'https://94m.com.tw/editors/ed55fc'
 ORIGIN = 'https://94m.com.tw'
 FIELDS = ('url', 'title', 'date', 'category', 'author', 'authorUrl', 'excerpt')
@@ -18,13 +19,33 @@ SERIES = {'法律': 'legal', '社會': 'humanistic', '熱門社會': 'humanistic
 TITLES = {'legal': '莊博士法律新聞專欄', 'humanistic': '莊博士人文地景產專欄', 'news': '莊博士新聞採訪專欄'}
 HUMANISTIC_LABEL = '人文地景產專欄'
 
+def load_owner_series() -> dict[str, str]:
+    data = json.loads(OWNER_ASSIGNMENTS.read_text(encoding='utf-8'))
+    assignments = data.get('seriesByArticleId')
+    if not isinstance(assignments, dict) or not assignments:
+        raise ValueError('Owner series registry is missing or malformed')
+    if any(not re.fullmatch(r'[A-Za-z0-9_-]+', key) or value not in TITLES for key, value in assignments.items()):
+        raise ValueError('Invalid owner series assignment')
+    return assignments
+
+OWNER_SERIES = load_owner_series()
+
 def absolute(value: str) -> str:
     u = urllib.parse.urlparse(urllib.parse.urljoin(ORIGIN, str(value or '')))
     return urllib.parse.urlunparse((u.scheme, u.netloc, u.path, '', '', ''))
 
+def owner_series_for(row: dict) -> str | None:
+    url = absolute(row.get('url', ''))
+    if not re.fullmatch(r'https://94m\.com\.tw/articles/[A-Za-z0-9_-]+', url):
+        return None
+    return OWNER_SERIES.get(url.rsplit('/', 1)[-1])
+
 def series_for(row: dict) -> str | None:
-    # M傳媒 may publish this named column under a broader category such as「專家」.
-    # The explicit column label is narrower and therefore authoritative only for this series.
+    # Owner assignment is an explicit editorial decision, never a subject inference.
+    assigned = owner_series_for(row)
+    if assigned:
+        return assigned
+    # Preserve the previously approved mapping for articles outside the owner's batch.
     if HUMANISTIC_LABEL in str(row.get('title', '')):
         return 'humanistic'
     return SERIES.get(str(row.get('category', '')))
@@ -133,10 +154,23 @@ def merge(previous: dict, rows: list[dict], checked_at: str, pages: int) -> dict
             if any(old.get(k) != item.get(k) for k in (*FIELDS, 'series')): changes['updated'] += 1
         else: changes['added'] += 1
         archive[row['url']] = item
+    # Absence from a current source page cannot undo an explicit owner assignment.
+    for url, item in archive.items():
+        assigned = owner_series_for(item)
+        if assigned and item.get('series') != assigned:
+            item['series'] = assigned; item['seriesTitle'] = TITLES[assigned]
+            changes['reclassified'] += 1; changes['updated'] += 1
+        if assigned:
+            pending.pop(url, None)
     articles = sorted(archive.values(), key=lambda r: (r['date'], r['url']), reverse=True)
+    archived_ids = {r['url'].rsplit('/', 1)[-1] for r in articles}
+    awaiting = sorted(set(OWNER_SERIES) - archived_ids)
     return {**previous, 'schemaVersion': '2.0', 'syncedAt': checked_at,
             'sync': {'method': 'public-author-index-and-more', 'complete': True, 'pagesFetched': pages, 'observed': len(rows),
                      'retainedNotSeen': len(set(archive) - seen), 'changes': changes},
+            'ownerAssignments': {'registry': 'data/mmedia-owner-series.json', 'requested': len(OWNER_SERIES),
+                                 'archived': len(set(OWNER_SERIES) & archived_ids), 'awaitingPublicSource': awaiting,
+                                 'note': 'Series is owner-authorized. Missing public source records are not a classification rejection; no publication date or public availability is invented.'},
             'stats': {'total': len(articles), 'uniqueUrls': len(archive), **{key: sum(r['series'] == key for r in articles) for key in TITLES}, 'pending': len(pending)},
             'articles': articles, 'pending': sorted(pending.values(), key=lambda r: r['url'])}
 
@@ -154,7 +188,7 @@ def main() -> None:
     if result['stats']['total'] < contract['total']: raise ValueError('Baseline article loss detected')
     CATALOG.parent.mkdir(parents=True, exist_ok=True)
     temp = CATALOG.with_suffix('.tmp'); temp.write_text(json.dumps(result, ensure_ascii=False, indent=2) + '\n', encoding='utf-8'); temp.replace(CATALOG)
-    print(json.dumps({'checkedAt': checked, 'stats': result['stats'], 'sync': result['sync'], 'baseline': result['baseline']}, ensure_ascii=False, indent=2))
+    print(json.dumps({'checkedAt': checked, 'stats': result['stats'], 'sync': result['sync'], 'baseline': result['baseline'], 'ownerAssignments': result['ownerAssignments']}, ensure_ascii=False, indent=2))
 
 if __name__=='__main__':
     try: main()
