@@ -19,7 +19,7 @@ const LINE_URL = "https://line.me/R/ti/p/@387nbnjs";
 const GCSDA_HEADER_LOGO_DATA =
   "data:image/webp;base64," +
   gcsdaLogo0 + gcsdaLogo1 + gcsdaLogo2 + gcsdaLogo3 + gcsdaLogo4 + gcsdaLogo5;
-const GCSDA_COUNCIL_PHOTO_SRC = "/images/gcsda-council-approved-background-1672.png";
+const GCSDA_COUNCIL_PHOTO_SRC = "/images/gcsda-council-owner-ac6c81de615e.png";
 
 const TITLE_BREAK_MARKS = ["，", "；", "：", "！", "？", "｜", ",", ";", ":", "!", "?", "|"] as const;
 
