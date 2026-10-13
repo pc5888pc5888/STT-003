@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef } from "react";
-import { Link, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import { ArrowUpRight, Search } from "lucide-react";
 import UnifiedTitleHero from "../components/UnifiedTitleHero";
 import bundled from "../../public/data/mmedia-catalog.json";
@@ -21,6 +21,31 @@ type Catalog = { articles: Column[]; syncedAt: string; mode?: "archive" | "bundl
 
 const AUTHOR = "https://94m.com.tw/editors/ed55fc";
 const PAGE_SIZE = 12;
+
+const PUBLICATIONS = [
+  {
+    title: "2026 永續家族治理實務實錄",
+    enTitle: "Special Issue on Sustainable Family Governance Practices",
+    image: "/books/2026-sustainable-family-governance.jpg",
+    previewUrl: "https://heyzine.com/flip-book/e424001f8c.html",
+  },
+  {
+    title: "內在法遵 Internal Compliance",
+    enTitle: "Digital Canonical Edition",
+    image: "/books/internal-compliance.jpg",
+    previewUrl: "https://heyzine.com/flip-book/c700d8beb2.html",
+  },
+  {
+    title: "內在法遵 AI Governance",
+    enTitle: "AI Governance",
+    image: "/books/ai-governance.webp",
+  },
+  {
+    title: "內在法遵 Family Governance",
+    enTitle: "Family Governance",
+    image: "/books/family-governance.webp",
+  },
+] as const;
 
 const THEMES: Array<{ key: Theme; label: string; en: string; description: string; anchor: string }> = [
   {
@@ -168,6 +193,19 @@ export default function Columns() {
         </div>
       </section>
 
+      <section className="stt-humanistic-entry" aria-labelledby="humanistic-20q-title">
+        <div className="stt-humanistic-entry__inner">
+          <div>
+            <p className="stt-insights-kicker">HUMANISTIC LANDSCAPE INDUSTRY · 20 QUESTIONS JOURNEY</p>
+            <h2 id="humanistic-20q-title">人文地景產專欄｜20 Questions Journey</h2>
+          </div>
+          <div>
+            <p>五站、二十題的深度採訪旅程，以生活直覺、生命轉折、時間視角、城市與社會，以及留下什麼為路徑，讓受訪者在正式採訪前留下可被理解的人生紋理。</p>
+            <a href="https://shimmering-longma-509244.netlify.app/" target="_blank" rel="noreferrer">進入 20 Questions Journey <ArrowUpRight size={15} aria-hidden="true" /></a>
+          </div>
+        </div>
+      </section>
+
       <section className="stt-insights-evidence" aria-labelledby="insights-evidence-title">
         <div className="stt-insights-shell stt-insights-evidence-grid">
           <div>
@@ -175,14 +213,40 @@ export default function Columns() {
             <h2 id="insights-evidence-title">研究與出版，分層呈現。</h2>
           </div>
           <div className="stt-insights-evidence-links">
-            <Link to="/research">
+            <div>
               <strong>研究與論文</strong>
-              <span>四份學術資料依原始文件身分如實呈現。</span>
-            </Link>
-            <Link to="/books">
+              <span>學術資料依原始文件身分如實呈現；研究結果與後續推論分開處理。</span>
+            </div>
+            <a href="#publications">
               <strong>出版與治理文本</strong>
-              <span>出版內容依正式出版狀態呈現，不把研究論文改寫成未核准的新書承諾。</span>
-            </Link>
+              <span>四本正式出版圖像與既有閱讀入口集中在本頁，不另擴張母站頂層路由。</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section className="lib-body" id="publications" aria-labelledby="publications-title">
+        <div className="lib-wrap">
+          <p className="stt-insights-kicker">STT PRESS · PUBLICATION EVIDENCE</p>
+          <h2 id="publications-title">出版與治理文本</h2>
+          <div className="lib-book-grid" aria-label="STT Governance Publication Series 2026">
+            {PUBLICATIONS.map((book) => (
+              <article className="lib-book-card" key={book.title}>
+                <figure className="lib-book-visual">
+                  <img src={book.image} alt={book.title} loading="eager" decoding="async" data-publication-cover={book.title} />
+                </figure>
+                <div>
+                  <div className="lib-meta">STT GOVERNANCE · PUBLICATION SERIES 2026</div>
+                  <h2>{book.title}</h2>
+                  <p>{book.enTitle}</p>
+                  {"previewUrl" in book && book.previewUrl && (
+                    <div className="lib-actions">
+                      <a href={book.previewUrl} target="_blank" rel="noreferrer">線上翻閱《{book.title}》 ↗</a>
+                    </div>
+                  )}
+                </div>
+              </article>
+            ))}
           </div>
         </div>
       </section>
@@ -195,7 +259,7 @@ export default function Columns() {
           </div>
           <div>
             <p>
-              STT 自有來源標示為 STT Press / STT Intelligence 等實際來源；於 M 傳媒或其他媒體發表的文章必須標示「外部發表／第三方媒體」，並連到原始來源。不得將 M 傳媒描述為 STT 旗下、合作自媒體或自有新聞平台。
+              STT 自有來源標示為 STT Press / STT Intelligence 等實際來源；於 M 傳媒或其他媒體發表的文章必須標示「外部發表／第三方媒體」並連到原始來源，不得將 M 傳媒描述為 STT 旗下、合作自媒體或自有新聞平台。
             </p>
             <a href={AUTHOR} target="_blank" rel="noreferrer">
               M 傳媒｜莊鈞翔博士外部第三方作者頁 <ArrowUpRight size={15} aria-hidden="true" />
@@ -321,7 +385,7 @@ export default function Columns() {
           )}
 
           <p className="stt-insights-catalog-note">
-            外部文章索引最後核對：{checkedTime(catalog.syncedAt)}（臺灣時間）。標題、分類與摘錄依第三方來源保存；完整內容請閱讀原始來源。
+            外部文章索引最後核對：{checkedTime(catalog.syncedAt)}（臺灣時間）；標題、分類與摘錄依第三方來源保存，完整內容請閱讀原始來源。
           </p>
         </div>
       </section>

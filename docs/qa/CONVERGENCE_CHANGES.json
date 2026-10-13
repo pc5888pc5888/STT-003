@@ -1,0 +1,12 @@
+{
+  "site": "stt",
+  "changed": [
+    "src/App.tsx",
+    "src/pages/InstitutionalPages.tsx",
+    "src/pages/Start.tsx",
+    "api/cooperation-submit.ts",
+    "src/main.tsx",
+    "src/styles/convergence-accessibility.css",
+    "tests/governance-intake.test.mjs"
+  ]
+}

@@ -1,3 +1,4 @@
+import GovernedHero from "../components/GovernedHero";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
@@ -90,22 +91,7 @@ export default function Method() {
 
   return (
     <div className="stt-g3-method">
-      <section
-        className="stt-g3-hero"
-        style={{ backgroundImage: 'url("/visual-bank/stt/user-approved-six/method.png")' }}
-        aria-labelledby="method-title"
-      >
-        <div className="stt-g3-shell">
-          <div className="stt-g3-hero__copy">
-            <p className="stt-g3-kicker">HOW STT JUDGES</p>
-            <h1 id="method-title">如何判讀</h1>
-            <h2>在採取行動之前，先完成判讀。</h2>
-            <p>
-              STT 的判讀，不是快速給答案，而是先回到事件結構：問題是否被正確定義、證據是否足夠、權力是否越界、責任如何承擔、風險是否可逆，然後才決定是否進入下一步。
-            </p>
-          </div>
-        </div>
-      </section>
+      <GovernedHero kicker="GOVERNANCE JUDGMENT" title="如何判讀" lead="STT 的判讀，不是快速給答案，而是先回到事件結構：問題是否被正確定義、證據是否足夠、權力是否越界、責任如何承擔、風險是否可逆，然後才決定是否進入下一步。"></GovernedHero>
 
       <nav className="stt-g3-index" aria-label="七階段判讀路徑">
         <div className="stt-g3-shell stt-g3-index__grid">
@@ -123,7 +109,7 @@ export default function Method() {
           <p className="stt-g3-kicker">JUDGMENT FOUNDATIONS</p>
           <h2>四個面向，讓重要判斷站得住。</h2>
           <p className="stt-g3-foundations__intro">
-            Problem｜真正問題。Evidence｜可採信證據。Trade-off｜取捨與代價。Authority & Accountability｜誰有權、誰承擔。這四項不是四種服務，也不是另一套流程，而是每個治理判讀都必須同時檢查的基礎。
+            Problem｜真正問題；Evidence｜可採信證據；Trade-off｜取捨與代價；Authority & Accountability｜誰有權、誰承擔，這四項不是四種服務，也不是另一套流程，而是每個治理判讀都必須同時檢查的基礎。
           </p>
           <div className="stt-g3-foundation-grid">
             {foundations.map(([number, en, zh]) => (
@@ -178,7 +164,7 @@ export default function Method() {
           </div>
           <div>
             <p>
-              AI 可以協助整理、比對、追蹤、發現矛盾並形成工作底稿；是否採信、是否授權、是否進入執行，仍由人類決策者與 STT 的治理判讀程序完成。正式案件依資料敏感度建立使用邊界，不預設所有資料都可以進入 AI。
+              AI 可以協助整理、比對、追蹤、發現矛盾並形成工作底稿；是否採信、是否授權、是否進入執行，仍由人類決策者與 STT 的治理判讀程序完成，正式案件則依資料敏感度建立使用邊界，不預設所有資料都可以進入 AI。
             </p>
             <Link to="/engagement">理解治理介入 →</Link>
           </div>

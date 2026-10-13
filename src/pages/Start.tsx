@@ -1,5 +1,5 @@
-import { FormEvent, useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { FormEvent, useEffect, useRef, useState } from "react";
+import { Link, useSearchParams } from "react-router-dom";
 import UnifiedTitleHero from "../components/UnifiedTitleHero";
 
 type IntakeData = {
@@ -50,11 +50,13 @@ function setMeta() {
     meta.name = "description";
     document.head.appendChild(meta);
   }
-  meta.content = "先告訴 STT 現在發生了什麼、最不希望接下來發生什麼，以及希望事情最後變成什麼。第一次只整理問題與下一步，不要求大量敏感資料。";
+  meta.content = "先告訴 STT 現在發生了什麼、最不希望接下來發生什麼，以及希望事情最後變成什麼；第一次只整理問題與下一步，不要求大量敏感資料。";
 }
 
 export default function Start() {
   const [searchParams] = useSearchParams();
+  const requestKey = useRef("");
+  const inFlight = useRef(false);
   const [data, setData] = useState<IntakeData>(EMPTY_DATA);
   const [submitted, setSubmitted] = useState(false);
   const [receiptId, setReceiptId] = useState("");
@@ -63,6 +65,7 @@ export default function Start() {
 
   useEffect(() => {
     setMeta();
+    requestKey.current = "";
     const type = searchParams.get("type");
     const route = searchParams.get("route");
     const eventType = type === "institution" ? "機構合作" : route ? (routeDefaults[route] ?? "") : "";
@@ -73,23 +76,32 @@ export default function Start() {
   }, [searchParams]);
 
   const update = <K extends keyof IntakeData>(key: K, value: IntakeData[K]) => {
+    requestKey.current = "";
     setData((current) => ({ ...current, [key]: value }));
   };
 
   const submit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    if (inFlight.current) return;
     setSendError("");
+    if ([data.name, data.contact, data.situation, data.undesired, data.desired].some(value => !value.trim())) {
+      setSendError("請填寫必要資訊，內容不能僅包含空白。");
+      return;
+    }
 
     if (data.deadline_status === "有" && !data.deadline_date) {
       setSendError("若存在明確決策期限，請填寫日期。");
       return;
     }
 
+    inFlight.current = true;
+    requestKey.current ||= crypto.randomUUID();
     setSending(true);
     try {
       const response = await fetch("/api/cooperation-submit", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", "Idempotency-Key": requestKey.current },
+        signal: AbortSignal.timeout(20000),
         body: JSON.stringify({
           route: "governance-intake",
           route_label: "治理判讀受理",
@@ -104,8 +116,9 @@ export default function Start() {
       setSubmitted(true);
       window.scrollTo({ top: 0, behavior: "smooth" });
     } catch {
-      setSendError("送出未完成。你填寫的內容仍保留在本頁，請稍後再試。");
+      setSendError("送出未完成；你填寫的內容仍保留在本頁，請稍後再試。");
     } finally {
+      inFlight.current = false;
       setSending(false);
     }
   };
@@ -116,12 +129,13 @@ export default function Start() {
         <UnifiedTitleHero
           kicker="GOVERNANCE ENGAGEMENT"
           title="提交後"
-          lead="STT 將先判斷事件是否適合進入治理程序，以及需要補充哪些非敏感資訊。正式受理之前，不進行完整個案判斷，也不要求提交不必要的機敏資料。"
+          lead="STT 將先判斷事件是否適合進入治理程序，以及需要補充哪些非敏感資訊；正式受理之前不進行完整個案判斷，也不要求提交不必要的機敏資料。"
           id="start-success-title"
         />
         <section className="px-6 py-14 lg:px-10 lg:py-20">
           <div className="mx-auto max-w-[900px] border-t border-[#d8c8ad] pt-8">
-            {receiptId && <p className="text-sm text-[#8f693d]">收件編號｜{receiptId}</p>}
+            {receiptId && <p role="status" className="text-sm text-[#8f693d]">送件編號｜{receiptId}</p>}
+            <p className="mt-4 text-sm leading-7">郵件服務已受理這次送件；此狀態不代表正式委任成立。</p>
             <button
               type="button"
               onClick={() => setSubmitted(false)}
@@ -144,18 +158,16 @@ export default function Start() {
         id="start-title"
       />
 
-      <section className="border-b border-[#d8c8ad] px-6 py-12 lg:px-10 lg:py-16">
-        <div className="mx-auto max-w-[980px]">
-          <p className="text-[11px] font-bold tracking-[0.2em] text-[#8f693d]">DATA MINIMIZATION</p>
-          <h2 className="mt-4 font-serif text-3xl leading-snug lg:text-4xl">第一次提交，只整理問題與下一步。</h2>
-          <p className="mt-5 max-w-[850px] text-sm leading-8 text-[#70685f] lg:text-base">
-            本頁第一階段只整理問題與下一步，不提供即時法律結論，也不要求第一次提交大量敏感資訊。正式受理後，才依案件建立資料與 AI 使用邊界。請不要在此階段提供不必要的身分證件、金融帳戶、醫療資料、完整營業秘密或其他高度敏感資訊。
-          </p>
+      <section className="stt-intake-brief">
+        <div>
+          <strong>第一次提交，只整理問題與下一步</strong>
+          <p>本頁不提供即時法律結論，也不要求首次提交大量敏感資訊；正式受理後再依案件確認資料需求與 AI 使用邊界，因此此階段無須提供身分證件、金融帳戶、醫療資料、完整營業秘密或其他高度敏感資訊。</p>
         </div>
       </section>
 
-      <section className="px-6 py-12 lg:px-10 lg:py-18">
-        <form onSubmit={submit} className="mx-auto max-w-[980px]" noValidate={false}>
+      <section className="px-6 py-12 lg:px-10 lg:py-18" id="intake-form">
+        <form onSubmit={submit} aria-busy={sending} className="mx-auto max-w-[980px]" noValidate={false}>
+          <fieldset disabled={sending} className="m-0 min-w-0 border-0 p-0"><legend className="sr-only">治理受理必要資訊</legend>
           <div className="border-t border-[#d8c8ad]">
             <TextField number="01" label="姓名或稱謂" value={data.name} onChange={(value) => update("name", value)} required />
             <TextField number="02" label="Email 或可回覆之聯絡方式" value={data.contact} onChange={(value) => update("contact", value)} required />
@@ -214,7 +226,9 @@ export default function Start() {
             className="hidden"
           />
 
+          </fieldset>
           <div className="border-t border-[#d8c8ad] pt-8">
+            <p className="mb-5 text-sm leading-7"><Link to="/privacy">隱私與資料使用</Link>｜<Link to="/professional-boundary">專業服務與資訊邊界</Link></p>
             <button
               type="submit"
               disabled={sending}
@@ -238,6 +252,8 @@ function TextField({ number, label, value, onChange, required = false }: { numbe
         <span className="block font-serif text-xl leading-snug lg:text-2xl">{label}</span>
         <input
           type="text"
+          maxLength={number === "01" ? 120 : 300}
+          autoComplete={number === "01" ? "name" : "off"}
           required={required}
           value={value}
           onChange={(event) => onChange(event.target.value)}
@@ -255,6 +271,7 @@ function TextAreaField({ number, label, value, onChange, required = false }: { n
       <span>
         <span className="block font-serif text-xl leading-snug lg:text-2xl">{label}</span>
         <textarea
+          maxLength={4000}
           required={required}
           value={value}
           onChange={(event) => onChange(event.target.value)}

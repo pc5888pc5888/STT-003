@@ -1,0 +1,91 @@
+name: Temporary STT live visual acceptance
+on:
+  push:
+    branches: [stt-convergence-20260923]
+    paths: [.github/workflows/temp-live-visual-acceptance.yml]
+permissions:
+  contents: read
+jobs:
+  capture-live:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Playwright Chromium
+        run: |
+          npm install --no-save --package-lock=false playwright >/tmp/pw-install.log 2>&1
+          npx playwright install --with-deps chromium >/tmp/pw-browser.log 2>&1
+      - name: Capture STT protected branch alias
+        run: |
+          mkdir -p /tmp/stt-live
+          cat > stt-live.mjs <<'JS'
+          import fs from 'node:fs';
+          import { chromium } from 'playwright';
+
+          const base='https://stt-003-git-stt-convergence-20260923-pc5888pc5888s-projects.vercel.app';
+          const share='43rax2od2jk7Uw1kEXLKajR8BF2rAxlH';
+          const routes=['/','/problems','/how-stt-works','/engagement','/insights','/about','/books'];
+          const devices=[['desktop',1440,1000],['tablet',820,1100],['mobile',390,844]];
+          const safe=r=>r==='/'?'home':r.slice(1).replaceAll('/','-');
+          const report={generatedAt:new Date().toISOString(),pages:[],books:null};
+
+          const browser=await chromium.launch({headless:true});
+          for(const [label,width,height] of devices){
+            const ctx=await browser.newContext({viewport:{width,height},reducedMotion:'reduce'});
+            const page=await ctx.newPage();
+            const auth=await page.goto(base+'/?_vercel_share='+share,{waitUntil:'networkidle',timeout:45000});
+            report.pages.push({special:'auth',label,http:auth?.status(),url:page.url(),title:await page.title()});
+            for(const route of routes){
+              const response=await page.goto(base+route,{waitUntil:'networkidle',timeout:45000});
+              await page.evaluate(()=>document.fonts.ready);
+              await page.waitForTimeout(250);
+              const state=await page.evaluate(()=>{
+                const hero=document.querySelector('.cis-hero');
+                const img=hero?.querySelector('.cis-hero-art img');
+                const copy=hero?.querySelector('.cis-hero-copy');
+                const brand=document.querySelector('header a img');
+                const rect=e=>{const r=e?.getBoundingClientRect();return r?{left:r.left,top:r.top,right:r.right,bottom:r.bottom,width:r.width,height:r.height}:null};
+                return {
+                  url:location.href,title:document.title,h1:document.querySelector('h1')?.textContent?.trim()||null,
+                  h1Count:document.querySelectorAll('h1').length,heroClass:hero?.className||null,
+                  heroImage:img?.getAttribute('src')||null,heroNatural:img?[img.naturalWidth,img.naturalHeight]:null,
+                  heroLoaded:img?img.complete&&img.naturalWidth>0:null,heroRect:rect(img),copyRect:rect(copy),
+                  gradient:hero?getComputedStyle(hero,'::before').backgroundImage:null,
+                  brandRect:rect(brand),brandNatural:brand?[brand.naturalWidth,brand.naturalHeight]:null,
+                  overflow:document.documentElement.scrollWidth>innerWidth+1,
+                  broken:[...document.images].filter(i=>!i.complete||i.naturalWidth===0).map(i=>i.getAttribute('src'))
+                };
+              });
+              report.pages.push({route,label,http:response?.status(),...state});
+              await page.screenshot({path:`/tmp/stt-live/stt-${safe(route)}-${label}.png`,fullPage:false});
+            }
+            await ctx.close();
+          }
+          {
+            const ctx=await browser.newContext({viewport:{width:1440,height:1100},reducedMotion:'reduce'});
+            const page=await ctx.newPage();
+            await page.goto(base+'/?_vercel_share='+share,{waitUntil:'networkidle',timeout:45000});
+            await page.goto(base+'/books',{waitUntil:'networkidle',timeout:45000});
+            await page.evaluate(()=>document.fonts.ready);
+            report.books=await page.evaluate(()=>[...document.querySelectorAll('[data-publication-cover]')].map(img=>({
+              title:img.getAttribute('data-publication-cover'),src:img.getAttribute('src'),
+              naturalWidth:img.naturalWidth,naturalHeight:img.naturalHeight,
+              renderedWidth:Math.round(img.getBoundingClientRect().width),renderedHeight:Math.round(img.getBoundingClientRect().height),
+              objectFit:getComputedStyle(img).objectFit,aspectRatio:getComputedStyle(img).aspectRatio
+            })));
+            await page.screenshot({path:'/tmp/stt-live/stt-books-full.png',fullPage:true});
+            await ctx.close();
+          }
+          await browser.close();
+          fs.writeFileSync('/tmp/stt-live/report.json',JSON.stringify(report,null,2));
+          JS
+          node stt-live.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: temporary-stt-live-evidence
+          path: /tmp/stt-live/
+          retention-days: 1

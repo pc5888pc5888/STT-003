@@ -5,19 +5,9 @@ import path from "node:path";
 import { defineConfig, type Plugin } from "vite";
 import { FORMAL_META, STT_CANONICAL_ORIGIN } from "./src/seo";
 
-const FORMAL_HTML_FILES: Record<string, string> = {
-  "/": "index.html",
-  "/problems": "seo-problems.html",
-  "/how-stt-works": "seo-how-stt-works.html",
-  "/engagement": "seo-engagement.html",
-  "/insights": "seo-insights.html",
-  "/about": "seo-about.html",
-  "/eric-chuang": "seo-eric-chuang.html",
-  "/institutions": "seo-institutions.html",
-  "/start": "seo-start.html",
-  "/privacy": "seo-privacy.html",
-  "/professional-boundary": "seo-professional-boundary.html",
-};
+const FORMAL_HTML_FILES: Record<string, string> = Object.fromEntries(
+  Object.keys(FORMAL_META).map(route => [route, route === "/" ? "index.html" : "seo-" + route.slice(1).replaceAll("/", "-") + ".html"]),
+);
 
 function escapeHtml(value: string) {
   return value
@@ -114,6 +104,9 @@ function formalSeoPages(): Plugin {
         html = html.replace("</head>", `${staticHead}\n  </head>`);
         fs.writeFileSync(path.join(outDir, fileName), html, "utf8");
       });
+      const urls = Object.entries(FORMAL_META).filter(([,meta])=>!meta.robots?.includes("noindex"))
+        .map(([route])=>`  <url><loc>${STT_CANONICAL_ORIGIN}${route}</loc></url>`).join("\n");
+      fs.writeFileSync(path.join(outDir,"sitemap.xml"), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`);
     },
   };
 }

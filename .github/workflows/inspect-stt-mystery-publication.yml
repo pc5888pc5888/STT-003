@@ -1,0 +1,17 @@
+name: Inspect STT mystery publication asset
+on:
+  push:
+    branches: [stt-convergence-20260923]
+    paths: [.github/workflows/inspect-stt-mystery-publication.yml]
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/upload-artifact@v4
+        with:
+          name: stt-mystery-publication
+          path: public/images/5555.png
+          retention-days: 2

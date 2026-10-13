@@ -1,0 +1,29 @@
+name: Capture STT book image candidates
+on:
+  push:
+    branches: [stt-convergence-20260923]
+    paths: [.github/workflows/capture-stt-book-images.yml]
+permissions:
+  contents: read
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/upload-artifact@v4
+        with:
+          name: stt-book-image-candidates
+          path: |
+            public/images/paper_internal compliance.png
+            public/images/paper_internal_compliance_002.png
+            public/images/paper_family governance white paper.png
+            public/images/paper_family_governance_white_paper.png
+            public/images/內在法遵 Internal Compliance《 為你的內心，打造一座不可侵犯的至聖所 》 數位閱讀完整版.png
+            public/images/internal compliance02.png
+            public/images/Family Office02.png
+            public/visual-approved/bank-20.png
+            public/books/2026-sustainable-family-governance.webp
+            public/books/internal-compliance.webp
+            public/books/ai-governance.webp
+            public/books/family-governance.webp
+          retention-days: 3

@@ -1,0 +1,48 @@
+name: Inspect publication visuals
+on:
+  push:
+    branches: [stt-convergence-20260923]
+    paths: [.github/workflows/inspect-publication-visuals.yml]
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Inspect and compose
+        run: |
+          python - <<'PY'
+          from PIL import Image,ImageOps,ImageDraw
+          from pathlib import Path
+          files=[
+            'public/books/2026-sustainable-family-governance.webp',
+            'public/books/internal-compliance.webp',
+            'public/books/ai-governance.webp',
+            'public/books/family-governance.webp',
+          ]
+          ims=[]
+          for f in files:
+            p=Path(f)
+            try:
+              im=Image.open(p); im.load()
+              print(f, im.format, im.size, im.mode, p.stat().st_size)
+              thumb=ImageOps.contain(im.convert('RGB'),(320,400))
+              canvas=Image.new('RGB',(340,440),'white')
+              canvas.paste(thumb,((340-thumb.width)//2,10))
+              ImageDraw.Draw(canvas).text((12,416),p.name,fill='black')
+              ims.append(canvas)
+            except Exception as e:
+              print('BROKEN',f,repr(e))
+              canvas=Image.new('RGB',(340,440),'white')
+              ImageDraw.Draw(canvas).text((12,200),'BROKEN '+p.name,fill='black')
+              ims.append(canvas)
+          out=Image.new('RGB',(680,880),'#ddd')
+          for i,im in enumerate(ims): out.paste(im,((i%2)*340,(i//2)*440))
+          out.save('/tmp/publication-contact-sheet.jpg',quality=90)
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: publication-contact-sheet
+          path: /tmp/publication-contact-sheet.jpg
+          retention-days: 3

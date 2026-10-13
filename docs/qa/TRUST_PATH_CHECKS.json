@@ -1,0 +1,147 @@
+{
+  "site": "stt",
+  "checks": [
+    {
+      "name": "direct metadata /problems/major-decision",
+      "passed": true
+    },
+    {
+      "name": "direct metadata /problems/owner-dependence",
+      "passed": true
+    },
+    {
+      "name": "direct metadata /problems/succession",
+      "passed": true
+    },
+    {
+      "name": "direct metadata /problems/family-ownership",
+      "passed": true
+    },
+    {
+      "name": "direct metadata /problems/strategic-legal",
+      "passed": true
+    },
+    {
+      "name": "direct metadata /problems/ai-governance",
+      "passed": true
+    },
+    {
+      "name": "direct metadata /problems/system-failure",
+      "passed": true
+    },
+    {
+      "name": "direct metadata /problems/founder-legacy",
+      "passed": true
+    },
+    {
+      "name": "direct metadata /research",
+      "passed": true
+    },
+    {
+      "name": "direct metadata /books",
+      "passed": true
+    },
+    {
+      "name": "direct metadata /books/internal-compliance",
+      "passed": true
+    },
+    {
+      "name": "event-to-intake major-decision",
+      "passed": true
+    },
+    {
+      "name": "event-to-intake owner-dependence",
+      "passed": true
+    },
+    {
+      "name": "event-to-intake succession",
+      "passed": true
+    },
+    {
+      "name": "event-to-intake family-ownership",
+      "passed": true
+    },
+    {
+      "name": "event-to-intake strategic-legal",
+      "passed": true
+    },
+    {
+      "name": "event-to-intake ai-governance",
+      "passed": true
+    },
+    {
+      "name": "event-to-intake system-failure",
+      "passed": true
+    },
+    {
+      "name": "event-to-intake founder-legacy",
+      "passed": true
+    },
+    {
+      "name": "privacy to research clears inherited noindex and metadata",
+      "passed": true
+    },
+    {
+      "name": "book detail uses a semantic link and its own metadata",
+      "passed": true
+    },
+    {
+      "name": "direct method fragment event-definition",
+      "passed": true
+    },
+    {
+      "name": "direct method fragment stakeholder-authority",
+      "passed": true
+    },
+    {
+      "name": "direct method fragment evidence",
+      "passed": true
+    },
+    {
+      "name": "direct method fragment hard-stop",
+      "passed": true
+    },
+    {
+      "name": "direct method fragment options",
+      "passed": true
+    },
+    {
+      "name": "direct method fragment judgment",
+      "passed": true
+    },
+    {
+      "name": "direct method fragment governance",
+      "passed": true
+    },
+    {
+      "name": "home threshold fragment family-succession",
+      "passed": true
+    },
+    {
+      "name": "home threshold fragment ownership-authority",
+      "passed": true
+    },
+    {
+      "name": "home threshold fragment major-decisions",
+      "passed": true
+    },
+    {
+      "name": "home threshold fragment ai-decision-governance",
+      "passed": true
+    },
+    {
+      "name": "unknown problem keeps URL and displays not-found without canonical",
+      "passed": true
+    },
+    {
+      "name": "retained route rewrites are exact and aliases match existing meanings",
+      "passed": true
+    },
+    {
+      "name": "sitemap contains retained records and excludes provisional privacy",
+      "passed": true
+    }
+  ],
+  "realMailVerified": false,
+  "productionHttpVerified": false
+}

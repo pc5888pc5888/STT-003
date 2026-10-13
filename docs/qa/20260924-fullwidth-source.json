@@ -1,0 +1,32 @@
+[
+  {
+    "site": "stt",
+    "path": "src/components/GovernedHero.tsx",
+    "before_sha256": "6ddc7e9bd423b5b87c3b2a831e0df5749558ba6c8fadde07e7f31b0a32734543",
+    "after_sha256": "943a9b0f525d37a02fe7a44ddd0bd63c95291c939422db9452cec84fd73e5250"
+  },
+  {
+    "site": "stt",
+    "path": "src/styles/cis-page-system.css",
+    "before_sha256": "9616f0d174194d5702ffd9e86334dc7bcd1bfebe3bfd76487857bd3c23c7ec16",
+    "after_sha256": "4da6d05f176c8635b3fb881c2da5eecb8a07338d0fbbc4730a25a342047a39fd"
+  },
+  {
+    "site": "stt",
+    "path": "public/visual-approved/eric-page-owner-original.png",
+    "before_sha256": null,
+    "after_sha256": "891c3d1b19ba4ac32792543928473f0938fae0bfe529d1ac46e3dabf34f780fe"
+  },
+  {
+    "site": "stt",
+    "path": "src/data/pagePresentation.ts",
+    "before_sha256": "8437a6bd3c66145ad53e8c8b44062468eca70d30d296f989ac031a6e434a8866",
+    "after_sha256": "ab544bc9919fda89f72b4ccd20658beb7866d2f98a8f351cf4e49c5bc301ee50"
+  },
+  {
+    "site": "stt",
+    "path": "src/pages/HomeCanonical.tsx",
+    "before_sha256": "f8af2a983f4fcb11d9080b70d6e1c7023f201f1c4b60ff8b13cc469eefa11007",
+    "after_sha256": "e3a1c19ee806a61af0b5ae62f0037fce20d24cab0a80f762717c6f110067084b"
+  }
+]

@@ -1,0 +1,73 @@
+name: Audit repository visual assets
+on:
+  push:
+    branches: [stt-convergence-20260923]
+    paths: [.github/workflows/repo-asset-audit.yml]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  audit-assets:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: stt-convergence-20260923
+      - name: Match exact owner-supplied publication hashes
+        run: |
+          mkdir -p /tmp/asset-audit/gcsda-candidates
+          {
+            echo 'OFFICIAL SHA256 TARGETS'
+            echo '2026-sustainable-family-governance 38a643bac7ba8ffd2258e11e5ab8907d0e18e6638f60fe3472bd41c3ec5742e7'
+            echo 'internal-compliance 0e610c3114ec6401e5c9c58642fd81491f8fa7ade3cb13f30e8f1dbfaefc1d94'
+            echo 'ai-governance 85328b2d85e27666b4a1177164850fa871d9842311efd1b7d69cdd000a81be77'
+            echo 'family-governance d10452b37c71bdf5b07a4f1db15f5c41ad6e79350144b75af34efd89a053ea7a'
+            echo
+            echo 'EXACT HASH MATCHES IN REPOSITORY'
+            find . -type f \( -iname '*.png' -o -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.webp' \) -print0 |
+              xargs -0 sha256sum |
+              grep -E '38a643bac7ba8ffd2258e11e5ab8907d0e18e6638f60fe3472bd41c3ec5742e7|0e610c3114ec6401e5c9c58642fd81491f8fa7ade3cb13f30e8f1dbfaefc1d94|85328b2d85e27666b4a1177164850fa871d9842311efd1b7d69cdd000a81be77|d10452b37c71bdf5b07a4f1db15f5c41ad6e79350144b75af34efd89a053ea7a' || true
+            echo
+            echo 'CURRENT PUBLICATION ASSETS'
+            for f in public/books/*; do [ -f "$f" ] && sha256sum "$f"; done
+          } > /tmp/asset-audit/book-hash-audit.txt
+
+      - name: Package GCSDA source candidates
+        run: |
+          set -e
+          files=(
+            'public/images/bg-portal-columns.png'
+            'public/images/gcsda_team_new.png'
+            'public/images/group-001.png'
+            'public/images/gcsda_003.png'
+            'public/images/gcsda_team_2026.png'
+            'public/images/bg-insights-globe.png'
+            'public/images/paper_corporate_governance.png'
+            'public/images/gcsda-logo.png'
+          )
+          for f in "${files[@]}"; do
+            if [ -f "$f" ]; then
+              cp "$f" /tmp/asset-audit/gcsda-candidates/
+            fi
+          done
+          find public/visual-bank/gcsda -maxdepth 1 -type f -print -exec cp {} /tmp/asset-audit/gcsda-candidates/ \; 2>/dev/null || true
+          {
+            echo 'GCSDA SOURCE CANDIDATES'
+            for f in "${files[@]}"; do
+              if [ -f "$f" ]; then
+                stat -c '%n | %s bytes' "$f"
+              else
+                echo "MISSING | $f"
+              fi
+            done
+            echo
+            echo 'CURRENT GCSDA VISUAL BANK'
+            find public/visual-bank/gcsda -maxdepth 1 -type f -printf '%p | %s bytes\n' 2>/dev/null || true
+          } > /tmp/asset-audit/gcsda-assets.txt
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: repository-visual-asset-audit
+          path: /tmp/asset-audit/
+          retention-days: 3

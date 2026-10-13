@@ -1,0 +1,68 @@
+name: Match owner book cover sources
+on:
+  push:
+    branches: [stt-convergence-20260923]
+    paths:
+      - '.github/workflows/match-owner-book-cover-sources.yml'
+permissions:
+  contents: write
+jobs:
+  match:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: stt-convergence-20260923
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Compare low-res covers against repository image assets
+        run: |
+          python -m pip install --quiet pillow ImageHash
+          python - <<'PY'
+          from PIL import Image
+          import imagehash, pathlib, os
+          root=pathlib.Path('.')
+          targets=[
+            pathlib.Path('public/books/ai-governance.webp'),
+            pathlib.Path('public/books/family-governance.webp'),
+          ]
+          exts={'.png','.jpg','.jpeg','.webp'}
+          out=[]
+          for target in targets:
+              t=Image.open(target).convert('RGB')
+              tph=imagehash.phash(t)
+              tw,th=t.size
+              out.append(f'TARGET {target} {tw}x{th} phash={tph}')
+              rows=[]
+              for p in root.joinpath('public').rglob('*'):
+                  if not p.is_file() or p.suffix.lower() not in exts or p==target:
+                      continue
+                  try:
+                      size=os.path.getsize(p)
+                      if size < 100000:
+                          continue
+                      im=Image.open(p).convert('RGB')
+                      w,h=im.size
+                      ratio_gap=abs((w/h)-(tw/th))
+                      ph=imagehash.phash(im)
+                      rows.append((tph-ph, ratio_gap, -size, str(p), w,h,size,str(ph)))
+                  except Exception:
+                      pass
+              rows.sort()
+              for dist,gap,negsize,p,w,h,size,ph in rows[:20]:
+                  out.append(f'  dist={dist:02d} ratio_gap={gap:.5f} {w}x{h} bytes={size} {p} phash={ph}')
+              out.append('')
+          pathlib.Path('docs/qa').mkdir(parents=True,exist_ok=True)
+          pathlib.Path('docs/qa/book-cover-source-match.txt').write_text('\n'.join(out),encoding='utf-8')
+          print('\n'.join(out))
+          PY
+      - name: Publish comparison report
+        run: |
+          git config user.name "stt-governance-audit"
+          git config user.email "actions@users.noreply.github.com"
+          git add docs/qa/book-cover-source-match.txt
+          git diff --cached --quiet && exit 0
+          git commit -m "qa: compare publication covers with retained high-resolution assets"
+          git push origin HEAD:stt-convergence-20260923

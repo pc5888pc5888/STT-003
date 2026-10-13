@@ -1,0 +1,43 @@
+TARGET public/books/ai-governance.webp 160x200 phash=f0cfcd32b4c448cd
+  dist=20 ratio_gap=0.09286 990x1400 bytes=246559 public/books/2026-sustainable-family-governance.jpg phash=c1c70776bc71688e
+  dist=26 ratio_gap=0.00962 4223x5343 bytes=7897272 public/images/Eric-Chuang-02.png phash=ce396932b3c66934
+  dist=26 ratio_gap=0.00962 4223x5343 bytes=7897272 public/images/Eric-Chuang-Portrait03.png phash=ce396932b3c66934
+  dist=26 ratio_gap=0.00962 4223x5343 bytes=7897272 public/images/Portrait-Column.png phash=ce396932b3c66934
+  dist=26 ratio_gap=0.00962 4223x5343 bytes=7897272 public/images/portrait-007.png phash=ce396932b3c66934
+  dist=26 ratio_gap=0.61327 1491x1055 bytes=2469322 public/visual-approved/secondary-13.png phash=db2cd976804fd08b
+  dist=26 ratio_gap=0.61327 1491x1055 bytes=2249242 public/visual-approved/secondary-08.png phash=c0dd28af7504457f
+  dist=26 ratio_gap=0.61327 1491x1055 bytes=2213134 public/visual-approved/secondary-03.png phash=c1fe442b93517ec4
+  dist=26 ratio_gap=0.61327 1491x1055 bytes=2168612 public/visual-approved/secondary-17.png phash=c4ccf82739d46c33
+  dist=26 ratio_gap=0.61327 1491x1055 bytes=2145648 public/visual-approved/secondary-15.png phash=bb0c0d1b7d470cf1
+  dist=26 ratio_gap=1.04828 7748x4192 bytes=3840883 public/images/5555.png phash=fec183bec111ccc5
+  dist=26 ratio_gap=1.41729 1000x451 bytes=615926 public/images/index_title_001.png phash=c03f6f6c6cd83885
+  dist=26 ratio_gap=2.37640 2665x839 bytes=2343777 public/images/gcsda_001.png phash=d56a2a392f95489d
+  dist=26 ratio_gap=2.46304 1439x441 bytes=160621 public/images/index-logo-003.png phash=c0d87b272770d88f
+  dist=26 ratio_gap=2.77015 3181x891 bytes=183439 public/images/STT-Governance-Official-Logo.png phash=fd4c022336fc7958
+  dist=28 ratio_gap=0.00029 1122x1402 bytes=2638681 public/humanistic-interview/assets/stations/station-04.png phash=80fd5c628770cf6a
+  dist=28 ratio_gap=0.01886 2916x3733 bytes=12238267 public/images/內在法遵 Internal Compliance《 為你的內心，打造一座不可侵犯的至聖所 》 數位閱讀完整版.png phash=952fd26a3ec03fc0
+  dist=28 ratio_gap=0.04963 695x818 bytes=336617 public/images/Eric-Chuang-13.png phash=cc396c33b2c73319
+  dist=28 ratio_gap=0.09286 990x1400 bytes=261178 public/books/internal-compliance.jpg phash=88c15b74ac9c96fc
+  dist=28 ratio_gap=0.11016 4660x5120 bytes=17547048 public/images/Eric-Chuang-15.png phash=cccc2f3333c0d333
+
+TARGET public/books/family-governance.webp 160x200 phash=ddf18f7890c46896
+  dist=22 ratio_gap=0.00029 1122x1402 bytes=2549439 public/humanistic-interview/assets/stations/station-02.png phash=94f31b1ce15b4897
+  dist=22 ratio_gap=0.00962 4223x5343 bytes=7897272 public/images/Eric-Chuang-02.png phash=ce396932b3c66934
+  dist=22 ratio_gap=0.00962 4223x5343 bytes=7897272 public/images/Eric-Chuang-Portrait03.png phash=ce396932b3c66934
+  dist=22 ratio_gap=0.00962 4223x5343 bytes=7897272 public/images/Portrait-Column.png phash=ce396932b3c66934
+  dist=22 ratio_gap=0.00962 4223x5343 bytes=7897272 public/images/portrait-007.png phash=ce396932b3c66934
+  dist=22 ratio_gap=0.09286 990x1400 bytes=246559 public/books/2026-sustainable-family-governance.jpg phash=c1c70776bc71688e
+  dist=24 ratio_gap=0.10781 4648x5120 bytes=18159036 public/images/Eric-Chuang-17.png phash=d9990f2766e46632
+  dist=26 ratio_gap=0.00000 4096x5120 bytes=7971024 public/images/Eric-Chuang-19.png phash=999966663366669a
+  dist=26 ratio_gap=0.00029 1122x1402 bytes=2564280 public/humanistic-interview/assets/stations/station-01.png phash=83f5565186734c9e
+  dist=26 ratio_gap=0.61327 1491x1055 bytes=2167158 public/visual-approved/secondary-05.png phash=c7549b67848a6baa
+  dist=26 ratio_gap=0.61327 1491x1055 bytes=1879560 public/visual-approved/secondary-09.png phash=99fada2da8857e20
+  dist=26 ratio_gap=0.69271 4096x2744 bytes=16013234 public/images/gcsda_team_new.png phash=d4f523200a0f3efe
+  dist=26 ratio_gap=0.97683 1672x941 bytes=2103969 public/visual-bank/stt/cooperation-hero-20260917.png phash=d1b4cba7aa80a2be
+  dist=26 ratio_gap=1.02651 1695x928 bytes=1379896 public/images/bg-strategist-spotlight.png phash=e1e11e1ee1c11e3e
+  dist=26 ratio_gap=1.04828 7748x4192 bytes=3840883 public/images/5555.png phash=fec183bec111ccc5
+  dist=26 ratio_gap=2.37640 2665x839 bytes=2343777 public/images/gcsda_001.png phash=d56a2a392f95489d
+  dist=28 ratio_gap=0.04963 695x818 bytes=336617 public/images/Eric-Chuang-13.png phash=cc396c33b2c73319
+  dist=28 ratio_gap=0.05824 1080x1456 bytes=1879534 public/images/portrait-002.png phash=cc383b64b3431fb4
+  dist=28 ratio_gap=0.10027 2102x3004 bytes=3274325 public/images/portrait-009.png phash=ce38396cb3c73a21
+  dist=28 ratio_gap=0.10781 4648x5120 bytes=18461964 public/images/Eric-Chuang-14.png phash=cc994e623bf9c612
