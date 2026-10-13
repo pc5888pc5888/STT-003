@@ -1,0 +1,54 @@
+name: Replace only council image
+on:
+  push:
+    branches: [gcsda-release-20261005]
+    paths: ['.github/workflows/council-image-efddb81d-only.yml']
+permissions:
+  contents: write
+jobs:
+  replace:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: gcsda-release-20261005
+          fetch-depth: 2
+      - name: Install exact owner-provided public website image
+        run: |
+          python3 - <<'PY'
+          import hashlib, struct, urllib.request, subprocess
+          from pathlib import Path
+          url='https://sdmntprseasia.oaiusercontent.com/files/00000000-ab78-8207-b7ac-3a4ad4d0784c/raw?se=2026-10-13T02%3A56%3A47Z&sp=r&sv=2026-02-06&sr=b&scid=f2c7c671-1bcb-51f2-923d-9d1b9fe6be07&skoid=bb372dd6-3b2a-4af2-b355-c26497ba23cd&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-10-13T00%3A11%3A06Z&ske=2026-10-14T00%3A11%3A06Z&sks=b&skv=2026-02-06&sig=5TG1K5IARlIkqXyRIaiOVCzhe9xr15AjaCX2QNophoQ%3D'
+          image=urllib.request.urlopen(url,timeout=60).read()
+          assert len(image)==2997955
+          assert hashlib.sha256(image).hexdigest()=='efddb81d49e4c14e64ef25e4e26614abb510fdb65623e8e6da28c347749bdfbb'
+          assert image[:8]==b'\x89PNG\r\n\x1a\n'
+          assert struct.unpack('>II',image[16:24])==(1672,941)
+          src=Path('src/GCSDAStandaloneV3.tsx')
+          assert subprocess.check_output(['git','hash-object',str(src)],text=True).strip()=='f42c741aa6410968c07c91a795956e2237d4d78b', 'Source changed; stop'
+          before=src.read_bytes()
+          old=b'const GCSDA_COUNCIL_PHOTO_SRC = "/images/gcsda-council-owner-ac6c81de615e.png";'
+          new=b'const GCSDA_COUNCIL_PHOTO_SRC = "/images/gcsda-council-owner-efddb81d49e4.png";'
+          assert before.count(old)==1
+          after=before.replace(old,new,1)
+          assert after.replace(new,old,1)==before
+          target=Path('public/images/gcsda-council-owner-efddb81d49e4.png')
+          assert not target.exists()
+          target.write_bytes(image)
+          src.write_bytes(after)
+          print('Verified exact upload: 2997955 bytes; 1672 x 941; SHA256 efddb81d49e4c14e64ef25e4e26614abb510fdb65623e8e6da28c347749bdfbb')
+          PY
+          git rm .github/workflows/council-image-efddb81d-only.yml
+          git add public/images/gcsda-council-owner-efddb81d49e4.png src/GCSDAStandaloneV3.tsx
+          git diff --cached --check
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'asset(gcsda): replace only council photo with latest owner upload' -m 'CR-20261013-EFDDB81D: explicitly approved by owner. Source upload file_00000000b8c48209b17abb2735bc2460, SHA256 efddb81d49e4c14e64ef25e4e26614abb510fdb65623e8e6da28c347749bdfbb. Only the image asset and one image source line change. No pixel edits, crop, copy, CSS, routing or STT changes.'
+          success=0
+          for attempt in 1 2 3 4 5; do
+            if git push origin HEAD:gcsda-release-20261005; then success=1; break; fi
+            sleep 5
+          done
+          test "$success" = 1
+          git diff ef425410c42ef68ac91cf5a66a1cf9e5e013edb9 HEAD --stat
