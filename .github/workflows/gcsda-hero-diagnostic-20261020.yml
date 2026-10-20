@@ -1,96 +1,67 @@
-name: Current GCSDA hero diagnosis
+name: Current GCSDA image integrity diagnosis
 on:
   push:
     branches: [main]
     paths: [.github/workflows/gcsda-hero-diagnostic-20261020.yml]
-  workflow_dispatch:
 permissions:
   contents: read
 jobs:
   inspect:
     runs-on: ubuntu-latest
-    timeout-minutes: 12
+    timeout-minutes: 8
     steps:
       - uses: actions/checkout@v4
         with:
           ref: 60303eb4370fa0738430af3f78ce171428b56fa4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '24'
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Build the exact currently deployed association source
+      - name: Inspect original bytes and candidate originals without modifying sources
         run: |
-          mkdir -p hero-evidence
-          git rev-parse HEAD > hero-evidence/source-sha.txt
-          npm ci > hero-evidence/npm.log 2>&1
-          npm run build > hero-evidence/build.log 2>&1
-          python -m pip install playwright==1.57.0 pillow > hero-evidence/browser-install.log 2>&1
-          python -m playwright install --with-deps chromium >> hero-evidence/browser-install.log 2>&1
-      - name: Inspect image pixels and actual computed rendering without submissions
-        run: |
+          mkdir -p image-evidence
+          python -m pip install pillow playwright==1.57.0 > image-evidence/install.log 2>&1
+          python -m playwright install --with-deps chromium >> image-evidence/install.log 2>&1
           python - <<'PY'
           from pathlib import Path
-          from PIL import Image,ImageStat
-          from playwright.sync_api import sync_playwright
+          from PIL import Image
+          import json,struct,hashlib,shutil,subprocess
+          out=Path('image-evidence');p=Path('public/visual-bank/gcsda/home-approved.webp');b=p.read_bytes()
+          report={'source_commit':subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip(),'path':str(p),'actual_bytes':len(b),'sha256':hashlib.sha256(b).hexdigest(),'magic':b[:4].decode('ascii'),'format':b[8:12].decode('ascii'),'riff_declared_total_bytes':struct.unpack('<I',b[4:8])[0]+8,'chunk_declared_payload_bytes':struct.unpack('<I',b[16:20])[0]}
+          try:
+            im=Image.open(p);report['header_dimensions']=im.size;im.load();report['full_decode']='PASS'
+          except Exception as e:report['full_decode']='FAIL';report['decode_error']=str(e)
+          shutil.copyfile(p,out/'current-home-approved.webp')
+          candidates=[]
+          for p in Path('public').rglob('*'):
+            if p.suffix.lower() not in ('.png','.jpg','.jpeg','.webp','.avif'):continue
+            if not any(x in str(p).lower() for x in ('gcsda','home','association')):continue
+            item={'path':str(p),'bytes':p.stat().st_size,'sha256':hashlib.sha256(p.read_bytes()).hexdigest()}
+            try:
+              im=Image.open(p);item['size']=im.size;im.load();item['full_decode']='PASS'
+            except Exception as e:item['full_decode']='FAIL';item['error']=str(e)
+            candidates.append(item)
+          (out/'original-byte-integrity.json').write_text(json.dumps(report,indent=2));(out/'candidate-originals.json').write_text(json.dumps(candidates,indent=2))
+          print(json.dumps(report,indent=2))
+          PY
+      - name: Verify actual browser decode and untouched source
+        run: |
+          python - <<'PY'
           from http.server import ThreadingHTTPServer,SimpleHTTPRequestHandler
           from functools import partial
-          from urllib.parse import urlsplit
-          from urllib.request import Request,urlopen
-          from urllib.error import HTTPError
-          import threading,json,hashlib,re
-          out=Path('hero-evidence')
-          sources={}
-          for p in Path('src').rglob('*'):
-            if p.suffix not in ('.css','.tsx','.ts'):continue
-            matches=[]
-            for n,line in enumerate(p.read_text(errors='replace').splitlines(),1):
-              if any(x in line for x in ('cis-hero-art','home-approved','pageVisuals','GovernedHero','background-image:none','background-image: none')):matches.append({'line':n,'text':line})
-            if matches:sources[str(p)]=matches
-          (out/'source-matches.json').write_text(json.dumps(sources,ensure_ascii=False,indent=2))
-          assets=[]
-          for p in Path('public/visual-bank/gcsda').glob('*'):
-            if p.suffix not in ('.png','.webp','.jpg'):continue
-            try:
-              im=Image.open(p).convert('RGB');thumb=im.copy();thumb.thumbnail((600,400));thumb.save(out/(p.stem+'-'+p.suffix[1:]+'.jpg'))
-              assets.append({'path':str(p),'bytes':p.stat().st_size,'sha256':hashlib.sha256(p.read_bytes()).hexdigest(),'size':im.size,'mean':ImageStat.Stat(im.resize((100,100))).mean,'extrema':im.getextrema()})
-            except Exception as e:assets.append({'path':str(p),'error':str(e)})
-          (out/'assets.json').write_text(json.dumps(assets,indent=2))
-          class Handler(SimpleHTTPRequestHandler):
-            def do_GET(self):
-              if urlsplit(self.path).path in ('/about','/governance','/council','/membership','/events','/knowledge','/charter','/privacy'):self.path='/index.html'
-              return super().do_GET()
-            def log_message(self,*args):pass
-          server=ThreadingHTTPServer(('127.0.0.1',4173),partial(Handler,directory='dist'));threading.Thread(target=server.serve_forever,daemon=True).start()
-          checks=[]
-          with sync_playwright() as pw:
-            browser=pw.chromium.launch()
-            for width in (390,768,1440):
-              ctx=browser.new_context(viewport={'width':width,'height':960},reduced_motion='reduce')
-              ctx.route('**/*',lambda r:r.abort() if r.request.method not in ('GET','HEAD') else r.continue_())
-              page=ctx.new_page();errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
-              for route in ('/','/about','/governance','/council','/membership','/events','/knowledge','/charter','/privacy'):
-                page.goto('http://127.0.0.1:4173'+route,wait_until='networkidle')
-                row=page.evaluate('''() => {const hero=document.querySelector('.cis-hero');const img=hero?.querySelector('img');const style=e=>{const s=getComputedStyle(e),r=e.getBoundingClientRect();return {tag:e.tagName,cls:e.className,display:s.display,visibility:s.visibility,opacity:s.opacity,z:s.zIndex,position:s.position,width:r.width,height:r.height,top:r.top,background:s.background,mask:s.maskImage,content:s.content}};return {hero:hero?.outerHTML,image:img?{src:img.getAttribute('src'),currentSrc:img.currentSrc,naturalWidth:img.naturalWidth,naturalHeight:img.naturalHeight,complete:img.complete}:null,ancestors:img?[img,img.parentElement,img.parentElement.parentElement,hero].map(style):[],before:hero?getComputedStyle(hero,'::before').background:null,after:hero?getComputedStyle(hero,'::after').background:null,overflow:document.documentElement.scrollWidth>innerWidth+1}}''')
-                row.update({'route':route,'width':width,'errors':errors[:]});checks.append(row)
-                if route in ('/','/about'):page.screenshot(path=str(out/('gcsda-'+('home' if route=='/' else 'about')+'-'+str(width)+'.png')))
-              ctx.close()
-            browser.close()
+          from pathlib import Path
+          from playwright.sync_api import sync_playwright
+          import threading,json
+          server=ThreadingHTTPServer(('127.0.0.1',4173),partial(SimpleHTTPRequestHandler,directory='public'));threading.Thread(target=server.serve_forever,daemon=True).start()
+          with sync_playwright() as p:
+            b=p.chromium.launch();page=b.new_page();page.goto('http://127.0.0.1:4173/')
+            result=page.evaluate('''async()=>{const img=new Image();img.src='/visual-bank/gcsda/home-approved.webp';let error=null;try{await img.decode()}catch(e){error={name:e.name,message:e.message}};return {decode:!error,error,naturalWidth:img.naturalWidth,naturalHeight:img.naturalHeight,complete:img.complete}}''')
+            Path('image-evidence/browser-decode.json').write_text(json.dumps(result,indent=2));print(json.dumps(result));b.close()
           server.shutdown()
-          (out/'computed-rendering.json').write_text(json.dumps(checks,ensure_ascii=False,indent=2))
-          for row in checks:
-            print(json.dumps({k:row[k] for k in ('route','width','image','ancestors','errors')},ensure_ascii=False))
-          try:
-            r=urlopen(Request('https://gcsda-governance.vercel.app/',headers={'User-Agent':'STT-GCSDA-Anonymous-Check'}),timeout=25)
-            (out/'anonymous-access.json').write_text(json.dumps({'status':r.status,'final_url':r.url}));r.close()
-          except Exception as e:(out/'anonymous-access.json').write_text(json.dumps({'error':str(e)}))
           PY
-      - name: Read-only source verification
-        run: git diff --exit-code
+          git diff --exit-code
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: gcsda-current-hero-evidence
-          path: hero-evidence/
+          name: gcsda-image-integrity-evidence
+          path: image-evidence/
           retention-days: 7
