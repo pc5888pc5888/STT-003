@@ -1,0 +1,93 @@
+version: '2026-10-21.1'
+change_request: CR-20261020-INTERVIEW-CONTENT-SEPARATION
+approval: OWNER_AUTHORIZED_AFTER_INTERVIEW_ENTRY_ACCEPTANCE
+scope: STT_PUBLIC_CONTENT_ONLY
+origin: https://stt-003.vercel.app
+source_branch: main
+accepted_interview:
+  route: /humanistic-interview/
+  navigation_label: 受訪者專區
+  change: NONE
+  html_sha256: 8a5b2fc70abd2c30d44ef4a0b81f5438a0406d08f28cab781ed806dc9255953d
+  controller_sha256: 18ebf4306ab80099bfbbf2844f314b417eb4dc7432a7d32b8badd69c40a3e609
+pages:
+  - id: PAGE-INSIGHTS
+    route: /insights
+    purpose: RESEARCH_AND_PUBLICATION_OVERVIEW
+    canonical: https://stt-003.vercel.app/insights
+    hero_copy: RETAIN_APPROVED
+    hero_asset: /visual-bank/stt/user-approved-six/columns.png
+    full_book_or_article_list: false
+  - id: PAGE-BOOKS
+    route: /books
+    label: 電子書與出版
+    purpose: APPROVED_BOOKS_AND_EXISTING_READING_LINKS
+    canonical: https://stt-003.vercel.app/books
+    book_records: src/data/contentRegistry.ts#BOOKS
+    unavailable_links: SHOW_HONEST_UNAVAILABLE_TEXT_NO_FAKE_BUTTON
+  - id: PAGE-COLUMNS
+    route: /columns
+    label: 專欄與報導
+    purpose: ALL_PUBLIC_WORKS_SEARCH
+    canonical: https://stt-003.vercel.app/columns
+  - id: PAGE-COLUMNS-LEGAL
+    route: /columns/legal
+    label: 法律專欄
+    series: legal
+    canonical: https://stt-003.vercel.app/columns/legal
+  - id: PAGE-COLUMNS-HUMANISTIC
+    route: /columns/humanistic
+    label: 人文地景產專欄
+    series: humanistic
+    canonical: https://stt-003.vercel.app/columns/humanistic
+    purpose: PUBLIC_FINISHED_WORKS_NOT_INTERVIEW_PREPARATION
+  - id: PAGE-COLUMNS-NEWS
+    route: /columns/news
+    label: 報導與其他發表
+    series: news
+    canonical: https://stt-003.vercel.app/columns/news
+navigation:
+  primary: KEEP_ACCEPTED_SIX_DESTINATIONS_AND_GOVERNANCE_CTA
+  publication_subnavigation: PAGE_LOCAL_SEMANTIC_LINKS
+  footer: ADD_BOOKS_LEGAL_HUMANISTIC_KEEP_EXISTING_LINKS
+source_registry:
+  existing: public/data/mmedia-catalog.json
+  existing_blob_at_start: 52f0a3fa2d9ff681c1a4e1d6ab82a45b92f4c915
+  additional_verified_works: public/data/additional-publications.json
+  runtime_adapter: src/data/contentRegistry.ts
+  separation: [series, theme, author, publication_sources]
+  multiple_sources_per_work: true
+  third_party_full_text_copying: false
+  unpublished_interview_answers: NEVER_PUBLIC
+  automatic_media_rebranding: false
+publishing_workflow:
+  - Confirm the work title, author, date, series, source URLs and permitted public excerpt.
+  - Keep existing imported articles in their source catalog; add other verified sources through additional-publications.json.
+  - Use one work id with multiple sources for a work published on multiple platforms, not duplicate cards.
+  - Add a new series only with verified public works. A series can be selected at /columns?series=its-key; a new standalone route requires its page metadata and routing record.
+  - Do not mark M Media or another independent publisher as STT owned.
+  - Run build and publication acceptance. Invalid series, duplicate ids or source URLs, missing attribution or unsafe URLs stop the registry validation.
+  - Publish to the existing main branch and verify canonical production pages; do not create another website.
+legacy_routing:
+  /books/internal-compliance: /books#internal-compliance
+  /publications: /books
+  '/insights#publications': /books
+  '/insights?theme=...': '/columns?theme=...'
+  /research: /insights
+  /papers: /insights
+qa:
+  - Verify all original records and approved covers are retained unchanged.
+  - Verify series isolation, search, sorting, pagination, empty state and return navigation.
+  - Verify direct requests, static metadata, canonical, Open Graph, sitemap and unknown-route 404.
+  - Verify desktop, tablet and mobile screenshots, single H1, image decode, keyboard use and no horizontal overflow.
+  - Compare accepted questionnaire and API sources; do not submit real responses for publication QA.
+open_items:
+  research_originals: CONTENT_REQUIRED_AND_SOURCE_REQUIRED_BEFORE_INDEPENDENT_RESEARCH_LIST
+  books_without_reading_links: AI_GOVERNANCE_AND_FAMILY_GOVERNANCE_RETAIN_COVERS_NO_INVENTED_URLS
+  gcsda_hero: NEXT_SEQUENTIAL_TASK_NOT_CHANGED_BY_THIS_SPEC
+  remote_legacy_host_deletion: NOT_PERFORMED_BY_CONTENT_SEPARATION
+phase:
+  website: ACTIVE_BUILD
+  facebook: HOLD
+  line: HOLD
+  paid_external_browsers: PROHIBITED_WITHOUT_NEW_EXPLICIT_CONSENT
