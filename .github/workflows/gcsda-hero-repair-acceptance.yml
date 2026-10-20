@@ -1,0 +1,72 @@
+name: GCSDA original-art hero repair acceptance
+on:
+  push:
+    branches: [gcsda-release-20261005]
+    paths:
+      - .github/workflows/gcsda-hero-repair-acceptance.yml
+      - scripts/gcsda-hero-repair-qa.py
+      - src/components/GovernedHero.tsx
+      - src/styles/gcsda-hero-repair.css
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: gcsda-current-hero-repair
+  cancel-in-progress: false
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      GCSDA_BASELINE_DIR: ${{ runner.temp }}/gcsda-hero-baseline
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: gcsda-release-20261005
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify original public content, assets, membership and metadata are unchanged
+        run: |
+          set -euo pipefail
+          mkdir -p qa-gcsda-hero-repair
+          git fetch --depth=1 origin 60303eb4370fa0738430af3f78ce171428b56fa4
+          git diff --exit-code 60303eb4370fa0738430af3f78ce171428b56fa4 HEAD -- public api src/GCSDAStandaloneV3.tsx src/data/pagePresentation.ts src/gcsdaMetadata.ts src/gcsda-logo-parts src/App.tsx package.json package-lock.json
+      - name: Build current and exact previous release locally
+        run: |
+          set -euo pipefail
+          npm ci > qa-gcsda-hero-repair/npm-ci.log 2>&1
+          npm run build > qa-gcsda-hero-repair/build-current.log 2>&1
+          npm run lint > qa-gcsda-hero-repair/typecheck.log 2>&1
+          mkdir -p "$GCSDA_BASELINE_DIR"
+          git archive 60303eb4370fa0738430af3f78ce171428b56fa4 | tar -x -C "$GCSDA_BASELINE_DIR"
+          ln -s "$GITHUB_WORKSPACE/node_modules" "$GCSDA_BASELINE_DIR/node_modules"
+          cd "$GCSDA_BASELINE_DIR"
+          npm run build > "$GITHUB_WORKSPACE/qa-gcsda-hero-repair/build-baseline.log" 2>&1
+      - name: Install open-source test engine on the standard runner
+        run: |
+          python3 -m pip install playwright==1.57.0 pillow > qa-gcsda-hero-repair/install.log 2>&1
+          python3 -m playwright install --with-deps chromium >> qa-gcsda-hero-repair/install.log 2>&1
+      - name: Inspect fully decoded artwork and actual rendered pages without submissions
+        run: python3 scripts/gcsda-hero-repair-qa.py
+      - name: Confirm read-only verification and record exact built asset names
+        run: |
+          git diff --exit-code
+          python3 - <<'PY'
+          from pathlib import Path
+          import json,hashlib,re
+          root=Path('dist')
+          files=[p for p in root.rglob('*') if p.is_file() and p.suffix in ('.html','.js','.css')]
+          data=[{'path':str(p.relative_to(root)),'sha256':hashlib.sha256(p.read_bytes()).hexdigest(),'bytes':p.stat().st_size} for p in files]
+          Path('qa-gcsda-hero-repair/built-assets.json').write_text(json.dumps(data,indent=2))
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: gcsda-original-art-hero-repair
+          path: qa-gcsda-hero-repair/
+          retention-days: 7
