@@ -1,57 +1,68 @@
-name: Current STT source inventory
+name: Retire obsolete STT sources once
 on:
   push:
     branches: [main]
     paths: [.github/workflows/audit-humanistic-netlify-exact.yml]
   workflow_dispatch:
 permissions:
-  contents: read
+  contents: write
+concurrency:
+  group: stt-current-source-cleanup-once
+  cancel-in-progress: false
 jobs:
-  inventory:
+  cleanup:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
-      - name: Export exact text sources and public route evidence, read only
-        run: |
-          python3 - <<'PY'
-          from pathlib import Path
-          from urllib.request import Request, urlopen
-          from urllib.error import HTTPError
-          import subprocess, hashlib, json, re, shutil
-          root=Path.cwd(); out=Path('/tmp/stt-current-inventory');out.mkdir()
-          files=subprocess.check_output(['git','ls-files','-z']).decode().split('\0')
-          inventory=[]; refs=[]
-          extensions={'.md','.json','.ts','.tsx','.js','.jsx','.mjs','.cjs','.py','.html','.css','.yaml','.yml','.toml','.txt'}
-          for name in files:
-            if not name:continue
-            p=root/name
-            if not p.is_file():continue
-            raw=p.read_bytes()
-            inventory.append({'path':name,'bytes':len(raw),'sha256':hashlib.sha256(raw).hexdigest(),'git_blob':hashlib.sha1(b'blob '+str(len(raw)).encode()+b'\0'+raw).hexdigest()})
-            if p.suffix in extensions and not name.startswith('.env') and len(raw)<5000000:
-              dst=out/'source'/name;dst.parent.mkdir(parents=True,exist_ok=True);dst.write_bytes(raw)
-              text=raw.decode('utf-8',errors='replace')
-              for n,line in enumerate(text.splitlines(),1):
-                if re.search(r'netlify|mirror.humanistic|repair_humanistic|patch_humanistic|patch-interview|HomeCanonical|HomeLegacy',line,re.I):
-                  if 'base64,' not in line:refs.append({'path':name,'line':n,'text':line[:500]})
-          (out/'inventory.json').write_text(json.dumps(inventory,ensure_ascii=False,indent=2))
-          (out/'legacy-references.json').write_text(json.dumps(refs,ensure_ascii=False,indent=2))
-          (out/'source-commit.txt').write_text(subprocess.check_output(['git','rev-parse','HEAD']).decode())
-          public=[]
-          for label,url in [('current','https://stt-003.vercel.app/humanistic-interview/'),('controller','https://stt-003.vercel.app/humanistic-interview/interview.js?v=20261020.2'),('old-host','https://shimmering-longma-509244.netlify.app/')]:
-            try:
-              with urlopen(Request(url,headers={'User-Agent':'STT-Read-Only-Inventory'}),timeout=25) as r:
-                raw=r.read();(out/(label+'.txt')).write_bytes(raw)
-                text=raw.decode('utf-8',errors='replace');title=re.search(r'<title>(.*?)</title>',text,re.S)
-                public.append({'label':label,'requested':url,'final_url':r.url,'status':r.status,'sha256':hashlib.sha256(raw).hexdigest(),'title':title.group(1) if title else None})
-            except Exception as e:public.append({'label':label,'requested':url,'error':str(e)})
-          (out/'public-status.json').write_text(json.dumps(public,ensure_ascii=False,indent=2))
-          print('TRACKED_FILES',len(inventory));print('LEGACY_REFERENCES',len(refs));print(json.dumps(public,ensure_ascii=False))
-          PY
-      - uses: actions/upload-artifact@v4
         with:
-          name: stt-current-source-inventory
-          path: /tmp/stt-current-inventory/
-          include-hidden-files: true
-          retention-days: 3
+          ref: main
+          fetch-depth: 10
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Apply only the owner-authorized, unchanged-baseline removal list
+        run: python3 scripts/retire-obsolete-stt-once.py apply
+      - name: Build existing website and verify synthetic API contract
+        run: |
+          set -euo pipefail
+          npm ci > qa-current-site-cleanup/npm-ci.log 2>&1
+          npm run build 2>&1 | tee qa-current-site-cleanup/build.log
+          node --check public/humanistic-interview/interview.js
+          node scripts/interview-delivery-api-qa.mjs 2>&1 | tee qa-current-site-cleanup/api-contract.log
+      - name: Install open-source test engines on existing standard runner
+        run: |
+          python3 -m pip install playwright==1.57.0 > qa-current-site-cleanup/playwright-install.log 2>&1
+          python3 -m playwright install --with-deps chromium webkit >> qa-current-site-cleanup/playwright-install.log 2>&1
+      - name: Chromium synthetic regression, no real email
+        env:
+          QA_ENGINE: chromium
+        run: python3 scripts/interview-delivery-browser-qa.py
+      - name: WebKit synthetic regression, no real email
+        env:
+          QA_ENGINE: webkit
+        run: python3 scripts/interview-delivery-browser-qa.py
+      - name: Verify all retained source and artwork; remove this one-time tooling
+        run: python3 scripts/retire-obsolete-stt-once.py verify
+      - name: Commit only accepted removals and source-of-truth corrections
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$(git ls-remote origin refs/heads/main | cut -f1)"
+          git add --pathspec-from-file=qa-current-site-cleanup/stage-paths.txt
+          git diff --cached --stat | tee qa-current-site-cleanup/committed-stat.txt
+          git config user.name 'STT Current Site Cleanup'
+          git config user.email 'actions@users.noreply.github.com'
+          git commit -m 'chore: remove 69 obsolete sources; preserve current STT content and make interview QA read-only [mirror-skip]'
+          git push origin HEAD:main
+          git rev-parse HEAD > qa-current-site-cleanup/cleanup-commit.txt
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: stt-current-site-cleanup-evidence
+          path: |
+            qa-current-site-cleanup/
+            qa-interview/*-results.json
+          retention-days: 7
