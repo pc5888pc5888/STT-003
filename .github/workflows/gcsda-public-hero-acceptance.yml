@@ -1,0 +1,37 @@
+name: GCSDA anonymous public hero acceptance
+on:
+  push:
+    branches: [gcsda-release-20261005]
+    paths:
+      - .github/workflows/gcsda-public-hero-acceptance.yml
+      - scripts/gcsda-public-hero-qa.py
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: gcsda-release-20261005
+          fetch-depth: 1
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install open-source verification engine
+        run: |
+          mkdir -p qa-gcsda-public-hero
+          python3 -m pip install playwright==1.57.0 pillow > qa-gcsda-public-hero/install.log 2>&1
+          python3 -m playwright install --with-deps chromium >> qa-gcsda-public-hero/install.log 2>&1
+      - name: Verify canonical public pages, original pixels and interview preservation
+        run: python3 scripts/gcsda-public-hero-qa.py
+      - name: Read-only source check
+        run: git diff --exit-code
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: gcsda-anonymous-public-hero
+          path: qa-gcsda-public-hero/
+          retention-days: 7
