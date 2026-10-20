@@ -1,0 +1,46 @@
+name: Interview delivery acceptance
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/interview-delivery-acceptance.yml
+      - scripts/interview-delivery-acceptance.mjs
+      - scripts/patch-interview-delivery.py
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: interview-delivery-acceptance
+  cancel-in-progress: false
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Export exact source and inspect delivery routes without private submissions
+        run: |
+          mkdir -p /tmp/interview-incident
+          cp public/humanistic-interview/index.html /tmp/interview-incident/index.html
+          cp public/humanistic-interview/stt-mobile-bridge.css /tmp/interview-incident/
+          cp api/humanistic-submit.ts vercel.json package.json /tmp/interview-incident/
+          python3 - <<'PY'
+          from pathlib import Path
+          import re, hashlib, json
+          s=Path('public/humanistic-interview/index.html').read_text()
+          Path('/tmp/interview-incident/readable.html').write_text(re.sub(r'data:image/[^;]+;base64,[A-Za-z0-9+/=]+','data:image/omitted-for-audit',s))
+          Path('/tmp/interview-incident/delivery.js').write_text('\n'.join(re.findall(r'<script\b[^>]*>(.*?)</script>',s,re.S|re.I)))
+          print('HTML_SHA256', hashlib.sha256(s.encode()).hexdigest())
+          print('QUESTION_COUNT',len(re.findall(r'<textarea[^>]+data-q=',s)))
+          print('MIRROR_WORKFLOW_EXISTS',Path('.github/workflows/mirror-humanistic-interview.yml').exists())
+          for p in Path('.').rglob('*'):
+            if not p.is_file() or '.git' in p.parts or p.suffix not in ('.md','.json','.tsx','.ts','.yml','.yaml'):continue
+            if p.stat().st_size>1000000:continue
+            text=p.read_text(errors='ignore')
+            if 'shimmering-longma-509244.netlify.app' in text: print('OLD_INTERVIEW_REFERENCE',str(p))
+          PY
+          node --check /tmp/interview-incident/delivery.js
+      - uses: actions/upload-artifact@v4
+        with:
+          name: interview-incident-source
+          path: /tmp/interview-incident/
+          retention-days: 3
