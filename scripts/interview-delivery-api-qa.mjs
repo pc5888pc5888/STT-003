@@ -1,0 +1,22 @@
+import assert from 'node:assert/strict';
+import handler from '../api/humanistic-submit.ts';
+process.env.RESEND_API_KEY='QA-NOT-A-REAL-KEY';
+let calls=[];let upstream={ok:true,status:200,json:async()=>({id:'qa-provider-id'})};
+globalThis.fetch=async(url,options)=>{calls.push({url,options});return upstream};
+const body={protocol_version:'2',consent:'true',submission_id:'00000000-0000-4000-8000-000000000001',submitted_at:'2026-10-20T12:00:00Z',participant_name:'QA synthetic',participant_email:''};
+for(let i=1;i<=20;i++)body[`q${String(i).padStart(2,'0')}`]=`測試回答${i}\n📝 & + # <tag>`;
+async function run(data=body,method='POST',headers={}){const res={code:0,headers:{},value:null,status(x){this.code=x;return this},setHeader(k,v){this.headers[k]=v;return this},end(x){this.value=JSON.parse(x)}};await handler({method,body:data,headers},res);return res}
+assert.equal((await run()).value.providerId,'qa-provider-id');
+assert.equal((await run()).value.receiptId,'HUM-00000000-0000-4000-8000-000000000001');
+assert.equal(calls[0].options.body,calls[1].options.body);assert.equal(calls[0].options.headers['Idempotency-Key'],calls[1].options.headers['Idempotency-Key']);
+const sent=JSON.parse(calls[0].options.body);assert.deepEqual(sent.to,['pc5888@gmail.com']);for(let i=1;i<=20;i++)assert.ok(sent.text.includes(`測試回答${i}\n📝 & + # <tag>`));
+assert.equal((await run({})).code,422);assert.equal((await run({...body,consent:'false'})).code,422);assert.equal((await run({...body,participant_email:'wrong'})).code,422);assert.equal((await run({...body,'bot-field':'filled'})).code,400);assert.equal((await run({...body,q01:'字'.repeat(150000)})).code,413);
+assert.equal((await run(body,'POST',{origin:'https://evil.example',host:'stt-003.vercel.app'})).code,403);
+assert.equal((await run(new URLSearchParams(body).toString(),'POST',{'content-type':'application/x-www-form-urlencoded'})).code,200);
+assert.equal((await run(JSON.stringify(body),'POST',{'content-type':'application/json'})).code,200);
+upstream={ok:true,status:200,json:async()=>({})};assert.equal((await run()).code,503);
+upstream={ok:false,status:429,json:async()=>({error:'quota'})};assert.equal((await run()).code,503);
+globalThis.fetch=async()=>{throw Error('offline')};assert.equal((await run()).code,503);
+assert.equal((await run(body,'DELETE')).code,405);assert.equal((await run(body,'GET')).value.resendConfigured,true);
+delete process.env.RESEND_API_KEY;assert.equal((await run()).code,503);
+console.log('PASS API contract: 20-answer integrity, JSON/form encoding, provider ID, same-body retry identity, validation, provider failure, offline, missing key. Synthetic provider only.');
