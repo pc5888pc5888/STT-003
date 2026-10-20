@@ -1,76 +1,110 @@
-name: STT Fixed Domain Live Verification
+name: Current STT public route verification
 on:
   push:
-    branches: [rebuild/stt-approved-white-gold-v1]
+    branches: [main]
     paths: [.github/workflows/stt-fixed-domain-verify.yml]
+  workflow_dispatch:
 permissions:
   contents: read
 jobs:
-  verify-public-site:
+  current-public-site:
     runs-on: ubuntu-latest
-    timeout-minutes: 8
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
         with:
-          ref: e008ccceffa22ac3525497425e2aa76c253a6fa0
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 24
-      - name: Prepare browser for public production only
+          python-version: '3.12'
+      - name: Check public routes and obsolete host redirects without credentials or submissions
         run: |
-          set -euo pipefail
-          sudo apt-get update -qq
-          sudo apt-get install -y fonts-noto-cjk
-          npm install -g agent-browser
-          npm install --prefix /tmp/stt-browser --no-save playwright
-      - name: Verify the fixed URL and actual API without authentication or mocks
-        run: |
-          set -euo pipefail
-          mkdir -p native-artwork-evidence
-          export CHROME_PATH="$(command -v google-chrome || command -v chromium)"
-          export AGENT_BROWSER_EXECUTABLE_PATH="$CHROME_PATH"
-          export STT_TEST_ORIGIN=https://stt-003.vercel.app
-          agent-browser open https://stt-003.vercel.app/#hero
-          agent-browser snapshot -i > native-artwork-evidence/live-home-snapshot.txt
-          agent-browser close
-          python - <<'PY'
+          python3 - <<'PY'
           from pathlib import Path
-          p=Path('scripts/test_native_artwork.mjs');s=p.read_text()
-          lines=s.splitlines(True)
-          mocks=[x for x in lines if "await page.route('**/api/mmedia'" in x]
-          assert len(mocks)==1
-          s=s.replace(mocks[0],'')
-          assert '.route(' not in s
-          s=s.replace('Actual production build in Chromium with supplied image bytes','Live https://stt-003.vercel.app in unauthenticated Chromium; no API mocks; production release e008ccceffa22ac3525497425e2aa76c253a6fa0')
-          p.write_text(s)
+          from urllib.request import Request,urlopen,build_opener,HTTPRedirectHandler
+          from urllib.error import HTTPError
+          from urllib.parse import urljoin,urlparse
+          from concurrent.futures import ThreadPoolExecutor
+          import json,hashlib,re
+          out=Path('current-public-evidence');out.mkdir(exist_ok=True)
+          base='https://stt-003.vercel.app'
+          class NoRedirect(HTTPRedirectHandler):
+            def redirect_request(self,*args,**kwargs):return None
+          def inspect(url):
+            try:
+              try:r=build_opener(NoRedirect).open(Request(url,headers={'User-Agent':'STT-Current-Route-Verification'}),timeout=20)
+              except HTTPError as e:r=e
+              with r:
+                text=r.read(512).decode('utf-8',errors='replace')
+                return {'url':url,'status':r.status,'location':r.headers.get('Location'),'sample':text[:120] if r.status>=400 else ''}
+            except Exception as e:return {'url':url,'error':str(e)}
+          suffix='-pc5888pc5888s-projects.vercel.app'
+          branch_aliases='''preview-human-landsca-0aae2e stt-convergence-20260923 g9-seo-aeo-a11y-20260923 g8-start-utility-20260923 g7-institutions-20260923 preview-legal-mortgag-ee57b3 g6-insights-20260923 preview-legal-mortgag-069812 g5-about-eric-20260923 g4-engagement-20260923 g3-method-20260921 g2-problems-20260921 g1-home-20260921 g0-global-shell-20260921 fix-user-exact-hero-b-b296da stt-two-heroes-clean-2c2cef stt-two-heroes-20260917 stt-two-hero-delivery-ddc5a0 fix-two-hero-display-31dbdf preview-two-hero-fix-33f1a6 fix-approved-hero-ass-10d12e stt-final-local-asset-a8ae4f stt-final-hero-local-74228b stt-cooperation-hero-a28ed4 asset-cooperation-her-5e721d fix-humanistic-vercel-14dec1 fix-stt-current-uploa-1cd8b8 fix-stt-final-user-ap-c08fbb fix-humanistic-publis-3712f9 fix-humanistic-exact-520d64 feature-humanistic-20-a17c53 fix-stt-exact-six-use-25a176 fix-stt-user-six-hero-574267 verify-stt-six-primar-7e3841 fix-stt-hero-native-d-a81594 fix-stt-hires-humanis-6f41db rebuild-stt-25-visual-9111b3 asset-stt-six-hero-se-cb7fc5 fix-stt-distinct-hero-162601 fix-stt-food-only-20260911 rebuild-stt-approved-8c858b rebuild-white-gold-go-9fb3c3 rebuild-white-gold-go-4eafa7 rebuild-white-gold-go-67654f'''.split()
+          aliases=['stt-legal-columns-copy-20261008.vercel.app']+['stt-003-git-'+x+suffix for x in branch_aliases]
+          assert len(aliases)==45 and len(set(aliases))==45
+          with ThreadPoolExecutor(max_workers=6) as pool:alias_results=list(pool.map(inspect,['https://'+x+'/' for x in aliases]))
+          for row in alias_results:
+            target=urlparse(urljoin(row['url'],row.get('location') or '')).hostname
+            row['canonical_redirect']=row.get('status') in (301,302,307,308) and target=='stt-003.vercel.app'
+            row['protected']=row.get('status') in (401,403) or target in ('vercel.com','vercel.live')
+          redirects={
+            '/humanistic-20q':'/humanistic-interview/',
+            '/humanistic-20q/':'/humanistic-interview/',
+            '/humanistic-20q/index.html':'/humanistic-interview/',
+            '/humanistic-interview':'/humanistic-interview/',
+            '/humanistic-interview/index.html':'/humanistic-interview/',
+            '/problems.html':'/problems'}
+          routes=[inspect(base+p) for p in redirects]
+          for row in routes:
+            target=urljoin(row['url'],row.get('location') or '')
+            row['pass']=row.get('status')==308 and target==base+redirects[urlparse(row['url']).path]
+          hashes=[]
+          for route,source in [('/humanistic-interview/','public/humanistic-interview/index.html'),('/humanistic-interview/interview.js?v=20261020.2','public/humanistic-interview/interview.js')]:
+            with urlopen(base+route,timeout=30) as r:raw=r.read();status=r.status
+            hashes.append({'route':route,'status':status,'sha256':hashlib.sha256(raw).hexdigest(),'matches_current_source':raw==Path(source).read_bytes()})
+          hosts=[inspect('https://shimmering-longma-509244.netlify.app/'),inspect('https://gcsda-governance.vercel.app/')]
+          results={'aliases':alias_results,'routes':routes,'current_source_hashes':hashes,'separate_hosts':hosts,'real_submissions':0,'paid_browser_service_used':False}
+          (out/'public-routes.json').write_text(json.dumps(results,ensure_ascii=False,indent=2))
+          print(json.dumps({'old_aliases_checked':len(aliases),'canonical_redirects':sum(x['canonical_redirect'] for x in alias_results),'protected_aliases':sum(x['protected'] for x in alias_results),'alias_other_results':[x for x in alias_results if not x['canonical_redirect'] and not x['protected']],'canonical_route_redirects':routes,'current_source_hashes':hashes,'separate_hosts':hosts},ensure_ascii=False,indent=2))
+          assert all(x['pass'] for x in routes),'Canonical legacy route mismatch'
+          assert all(x['matches_current_source'] for x in hashes),'Production interview differs from current source'
+          assert all(x['canonical_redirect'] or x['protected'] for x in alias_results),'An old alias is still serving another page or could not be verified'
           PY
-          node scripts/test_native_artwork.mjs
-          node --input-type=module <<'JS'
-          import fs from 'node:fs';
-          import assert from 'node:assert/strict';
-          const {chromium}=await import('/tmp/stt-browser/node_modules/playwright/index.mjs');
-          const base='https://stt-003.vercel.app';
-          const response=await fetch(base+'/api/mmedia');
-          assert.equal(response.status,200);assert.ok(response.headers.get('content-type')?.includes('application/json'));
-          const c=await response.json();assert.equal(c.ok,true);assert.equal(c.mode,'archive');assert.equal(c.articles.length,212);assert.equal(new Set(c.articles.map(a=>a.url)).size,212);
-          assert.deepEqual([c.stats.legal,c.stats.humanistic,c.stats.news],[199,2,11]);
-          const browser=await chromium.launch({executablePath:process.env.CHROME_PATH,args:['--no-sandbox']});
-          const page=await browser.newPage({viewport:{width:1440,height:1000}});
-          await page.goto(base+'/insights',{waitUntil:'networkidle'});
-          for(const [name,series,total] of [['瀏覽莊博士人文地景產專欄','humanistic',2],['瀏覽莊博士新聞採訪專欄','news',11],['瀏覽莊博士法律新聞專欄','legal',12]]){
-            await page.getByRole('button',{name,exact:true}).click();
-            assert.equal(await page.locator('article.stt-column-row').count(),total);
-            assert.equal(await page.locator(`article.stt-column-row[data-series="${series}"]`).count(),total);
-          }
-          const raw=await page.evaluate(async()=>{const r=await fetch('/api/mmedia');const c=await r.json();return {status:r.status,ok:c.ok,mode:c.mode,stats:c.stats};});
-          assert.equal(raw.status,200);assert.equal(raw.mode,'archive');
-          await browser.close();
-          fs.writeFileSync('native-artwork-evidence/live-api-and-filters.json',JSON.stringify({passed:true,origin:base,authenticated:false,mocked:false,httpStatus:response.status,mode:c.mode,stats:c.stats,syncedAt:c.syncedAt,liveBrowserApi:raw,threeSeriesFiltersPassed:true},null,2));
-          console.log(JSON.stringify({passed:true,httpStatus:response.status,mode:c.mode,stats:c.stats,threeSeriesFiltersPassed:true}));
-          JS
+      - name: Open-source Chromium smoke check, no external browser service
+        run: |
+          python3 -m pip install playwright==1.57.0 > /tmp/stt-current-browser-install.log 2>&1
+          python3 -m playwright install --with-deps chromium >> /tmp/stt-current-browser-install.log 2>&1
+          python3 - <<'PY'
+          from pathlib import Path
+          from playwright.sync_api import sync_playwright
+          import json
+          out=Path('current-public-evidence');results=[]
+          routes=['/','/problems','/how-stt-works','/engagement','/insights','/about','/eric-chuang','/institutions','/start','/privacy','/professional-boundary']
+          with sync_playwright() as p:
+            browser=p.chromium.launch()
+            for width in [390,768,1440]:
+              context=browser.new_context(viewport={'width':width,'height':900},reduced_motion='reduce')
+              context.route('**/*',lambda r:r.abort() if r.request.method not in ('GET','HEAD') else r.continue_())
+              page=context.new_page();errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
+              for route in routes:
+                before=len(errors)
+                try:
+                  response=page.goto('https://stt-003.vercel.app'+route,wait_until='networkidle',timeout=30000)
+                  main=page.locator('#main-content');main.wait_for(state='visible')
+                  row={'route':route,'width':width,'status':response.status,'title':page.title(),'main_text_chars':len(main.inner_text()),'canonical':page.locator('link[rel=canonical]').first.get_attribute('href'),'old_interview_links':page.locator('a[href*="shimmering-longma-509244.netlify.app"]').count(),'runtime_errors':errors[before:],'horizontal_overflow':page.evaluate('document.documentElement.scrollWidth>innerWidth+1')}
+                  row['pass']=row['status']==200 and row['main_text_chars']>50 and not row['old_interview_links'] and not row['runtime_errors']
+                  if route in ['/','/insights']:page.screenshot(path=str(out/('current-'+('home' if route=='/' else 'insights')+'-'+str(width)+'.png')))
+                except Exception as e:row={'route':route,'width':width,'pass':False,'error':str(e)}
+                results.append(row)
+              context.close()
+            browser.close()
+          (out/'mother-site-smoke.json').write_text(json.dumps(results,ensure_ascii=False,indent=2))
+          print(json.dumps({'checks':len(results),'passed':sum(x['pass'] for x in results),'failures':[x for x in results if not x['pass']],'horizontal_overflow':[{'route':x['route'],'width':x['width']} for x in results if x.get('horizontal_overflow')]},ensure_ascii=False,indent=2))
+          assert all(x['pass'] for x in results),'Current mother-site smoke check failed'
+          PY
+      - name: Verify this read-only check did not modify tracked sources
+        run: git diff --exit-code
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: stt-fixed-domain-live-verification
-          path: native-artwork-evidence/
+          name: stt-current-public-verification
+          path: current-public-evidence/
           retention-days: 7
