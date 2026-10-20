@@ -1,0 +1,13 @@
+/* CR-20261020-INTERVIEW-CONTENT-SEPARATION: interview entry only. */
+@media (min-width:1400px) {
+  #root .stt-g0-header .stt-g0-header__inner {grid-template-columns:340px minmax(0,1fr) auto!important;gap:20px!important;}
+  #root .stt-g0-header .stt-g0-desktop-nav {display:flex!important;justify-content:flex-end;min-width:0;}
+  #root .stt-g0-header .stt-g0-nav-link {padding-left:10px!important;padding-right:10px!important;}
+}
+@media (max-width:1399px) {
+  #root .stt-g0-header .stt-g0-desktop-nav,
+  #root .stt-g0-header .stt-g0-header__inner>.stt-g0-primary-cta {display:none!important;}
+  #root .stt-g0-header .stt-g0-header__inner {grid-template-columns:minmax(0,1fr) auto!important;}
+  #root .stt-g0-header .stt-g0-menu-button {display:flex!important;margin-left:auto;align-items:center;justify-content:center;padding:10px;border:1px solid var(--cis-line);background:transparent;}
+}
+#root .stt-g0-header .stt-g0-mobile-menu {max-height:calc(100dvh - 92px);overflow-y:auto;overscroll-behavior:contain;}
