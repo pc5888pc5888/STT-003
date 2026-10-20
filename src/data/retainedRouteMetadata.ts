@@ -1,4 +1,5 @@
-// Existing page copy and approved image paths; no new research or publication claims.
+import { CONTENT_META } from "./contentRegistry";
+// Existing problem copy/assets remain unchanged. Redirect-only URLs are not canonical pages.
 export const RETAINED_META = {
   "/problems/major-decision": {
     "title": "重大決策，不是先選 A、B、C；而是先確認這是不是正確的問題。｜STT Governance",
@@ -48,22 +49,5 @@ export const RETAINED_META = {
     "label": "人離開以後，很多最重要的事情就再也問不到了。",
     "image": "/visual-bank/stt/originals-20260910/founder-legacy.webp"
   },
-  "/research": {
-    "title": "研究與論文｜STT Governance",
-    "description": "研究頁只承載可追溯到原始論文的研究資料。論文題名、類型與來源入口依正式資料呈現；研究問題、方法、樣本、統計結果與結論，僅在原始論文可直接支持時陳述。",
-    "label": "研究與論文",
-    "image": "/visual-bank/stt/originals-20260910/insights.webp"
-  },
-  "/books": {
-    "title": "著作正典｜STT Governance",
-    "description": "這裡只呈現已存在於 STT 出版資料中的著作。書籍頁的責任是說清楚作品本身，而不是以黑金商城、過度權威宣稱或 AI 系統話術取代內容。",
-    "label": "著作正典",
-    "image": "/visual-bank/stt/primary-semantic/publications-stt-press-library.png"
-  },
-  "/books/internal-compliance": {
-    "title": "內在法遵｜STT Governance",
-    "description": "《內在法遵》不是企業稽核手冊，也不是契約審查流程。它處理的是一個人在權力、利益、壓力與不確定性中，如何保留自己的責任、邊界與判斷主權。",
-    "label": "內在法遵",
-    "image": "/visual-bank/stt/originals-20260910/internal-compliance.webp"
-  }
+  ...CONTENT_META,
 };
