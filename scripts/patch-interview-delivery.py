@@ -25,6 +25,7 @@ def patch_page(s):
 .bottom-tools.delivery-tools{left:50%!important;right:auto!important;bottom:max(12px,env(safe-area-inset-bottom))!important;transform:translateX(-50%);display:flex;gap:6px!important;max-width:calc(100vw - 20px);padding:6px;border-radius:18px;background:var(--paper)}
 .bottom-tools.delivery-tools .tool-btn{width:auto!important;min-width:58px!important;min-height:44px!important;height:44px!important;border-radius:12px;font-size:14px;padding:0 10px;white-space:nowrap}
 .screen{padding-bottom:110px!important}
+.screen .primary:hover{transform:none!important}
 @media(max-width:700px){.nav-row{bottom:80px!important}}
 #backup-preview[hidden]{display:none!important}
 </style>'''
