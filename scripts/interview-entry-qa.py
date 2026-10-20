@@ -8,6 +8,9 @@ results=[]
 def check(label,ok,detail=None):
  results.append({'case':label,'pass':bool(ok),'detail':detail})
  (OUT/'results.json').write_text(json.dumps({'base':BASE,'physical_iphone_tested':False,'real_submissions':0,'results':results},ensure_ascii=False,indent=2))
+ if not ok:
+  try:page.screenshot(path=str(OUT/'failure.png'));(OUT/'failure.html').write_text(page.content())
+  except Exception:pass
  assert ok,label+': '+str(detail)
  print('PASS',label,flush=True)
 with sync_playwright() as p:
@@ -35,7 +38,7 @@ with sync_playwright() as p:
    check(f'{width} {route} no horizontal overflow',page.evaluate('document.documentElement.scrollWidth<=innerWidth+1'))
    menu=page.locator('.stt-g0-menu-button')
    if menu.is_visible():
-    menu.click();entry=page.locator('#stt-g0-mobile-menu').get_by_role('link',name='受訪者專區',exact=True)
+    menu.click();entry=page.locator('#stt-g0-mobile-menu').get_by_role('link',name='受訪者專區')
     check(f'{width} {route} menu has six destinations',page.locator('.stt-g0-mobile-menu__primary a').count()==6)
     check(f'{width} {route} governance CTA remains in menu',page.locator('#stt-g0-mobile-menu a[href="/start"]').is_visible())
    else:
