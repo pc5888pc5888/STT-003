@@ -1,81 +1,44 @@
-# CHANGE REQUEST REQUIRED — 受訪者入口與出版內容分流
+# CR-20261020-INTERVIEW-CONTENT-SEPARATION — 受訪者入口分流
 
-CR ID：CR-20261020-INTERVIEW-CONTENT-SEPARATION。
-提出者：站主／莊鈞翔博士。日期：2026-10-20。
-狀態：PROPOSED；需求方向已由站主明確提出；導覽名稱與具體路由方案尚待核定。
-Approved by Founder：NO（本具體方案尚未核定；不否定站主已提出的拆分需求）。
-Implementation commit/deployment：NONE。本檔是提案，不是現行 Source of Truth 的永久變更。
+狀態：PARTIALLY_APPROVED_INTERVIEW_ONLY。
+Approved by Founder：YES，僅本次二十題独立入口。其餘出版分頁提案暫停，不於本輪施工。
+授權依據：站主已要求導覽列設獨立受訪者入口；在「先完成二十題的操作、獨立入口與驗收」及「把獨立入口正式上線」的具體回覆後，明確指示：「那趕快做啊，不要我問你時你都這樣理由藉口一大堆」。承接前述推薦名称「受訪者專區」，不重新要求相同授權。
 
-## 修改理由
+## CHANGE REQUEST REQUIRED — 本次限定例外
 
-單一現行 STT 網站應有明確分工的多個頁面，而不是將訪談取材、電子書、法律專欄與人文地景產專欄擠在 /insights。
-二十題是正式採訪前的受訪資料整理；人文地景產是公開作品系列。填答完成不等於同意立即刊登，也不預設必定刊登於某個媒體。
-專欄名稱與原始發表平台是不同欄位；M 傳媒只能是可核對的第三方來源之一，不能成為全部出版內容的資料結構。
+受影響規則：ROUTE-001 主導航五項限制、COPY-001 訪談入口名稱；其餘品牌定位、主 CTA、AI 與機構邊界不變。
+原導航：你正在面對什麼／STT 如何判讀／治理委任／研究與出版／關於 STT。
+本次核准：你正在面對什麼／STT 如何判讀／治理委任／研究與出版／受訪者專區／關於 STT。
+新增目的地：既有 /humanistic-interview/，直接完整載入原問卷文件；不新增第二份問卷、網域、登入或後端。
+主 CTA「開始治理判讀」仍指向 /start，不改成採訪入口。窄版選單保留該 CTA 的可到達性。
 
-## 導覽提案
+## 本次實際施工範圍
 
-建議新增清楚可见的「受訪者專區」，直接使用現有 /humanistic-interview/，不另建第二份問卷或另一個網域。
-名稱候選：受訪者專區（推薦，辨識對象最清楚）、專訪準備室、深度訪談、訪談準備與填寫。
+src/App.tsx：新增主導航「受訪者專區」；桌面與行動版使用完整文件導覽，避免 React Router 把獨立靜態問卷當成不存在的 SPA 路由。頁尾改為「受訪者專區｜二十題訪談準備」，同一分頁、同一網址。
+src/pages/Columns.tsx：僅移除將「人文地景產專欄｜20 Questions Journey」混同的採訪準備區塊。公開文章條目、來源、電子書與已核准圖片不改。
+src/styles/interview-entry-navigation.css、src/main.tsx：窄螢幕改用可捲動選單；不縮小 Logo、不擠壓既有治理 CTA。
 
-建議主導航由五項調整為六項：
-你正在面對什麼 / STT 如何判讀 / 治理委任 / 研究與出版 / 受訪者專區 / 關於 STT。
-「開始治理判讀」仍是既有唯一治理受理主 CTA，不改成採訪或媒體合作入口。
+本次不改原問卷 HTML、JavaScript、二十題題目、同意文字、圖片、暫存鍵、草稿 schema、複製／儲存／下載／讀回／送件邏輯、API 金鑰或指定收件人。原始問卷頁內既有標題不於此入口移設中重写；網站入口名稱與公開專欄作品分類分開。
 
-研究與出版保留為總覽入口與可操作子選單，不再承載全部完整內容。子頁獨立不等於每項都擴張成頂層按鈕。
+## 正式規格增補
 
-## 頁面分工與建議路徑（未上線）
+本 CR 是 01_NON_DRIFT_RULES.md 的 ROUTE-001、02_SITE_TREE.md、site_source_of_truth.yaml 的 nav.main，以及 Master Build Spec 的導航／Insights 訪談區塊之限定核准增補。新增的 nav、page、copy、link、QA 對照均列於本檔；其他原規格不變。
+Project 上傳的 v1.0 原檔未被 GitHub 操作覆寫；不得宣稱已同步覆寫 Project 附件。本 CR 對應之程式庫部署才是本次施工成果。
+PAGE-INTERVIEW：採訪前準備與二十題填答，不是公開成果目錄。
+COPY-INTERVIEW-NAV：受訪者專區。
+COPY-INTERVIEW-FOOTER：受訪者專區｜二十題訪談準備。
+LINK-INTERVIEW：桌面導航、行動導航、頁尾均指向 https://stt-003.vercel.app/humanistic-interview/；canonical 與舊路徑轉址保留。
 
-/insights：研究與出版總覽，只保留清楚的分類介紹及通往各獨立頁的入口。
-/books：電子書與出版；保留核准封面與正式書籍資訊，逐本核對閱讀／取得連結；不虛構價格、銷售方案、預覽或版權許可。
-/columns：專欄與報導索引；各系列由自身名稱組織，支援日後不同系列與不同發表平台，不預先建立空白系列。
-/columns/legal：法律專欄；只列該系列作品及各篇真實來源，不改寫成法律服務銷售頁。
-/columns/humanistic：人文地景產專欄；只呈現已完成、可公開的作品，不放未審核原始回答。
-/research：研究與論文；只有原始文件、作者、版本與公開範圍核對後才上線實際條目，不以介紹文字假裝可讀研究檔案。
-/humanistic-interview/：受訪者專區與現有二十題程序。保留唯一實際填答路徑；維持複製、儲存、下載、讀回、送出及失敗保留等功能；不更換暫存鍵、答案欄位、草稿格式或送件 API。
+## 驗收
 
-## 入口文案提案（不是改寫二十題題目）
+新增入口在桌面／手機選單可見；滑鼠、觸控尺寸及鍵盤 Enter 均實際載入原靜態問卷，不能只是網址變了但顯示 404。不得有 Logo／導航／CTA 重疊或水平溢出。
+/insights 不再出現混同的採訪準備區塊，原有書目與文章仍在。
+原問卷 HTML／控制程式／API 與此輪開始前一致；沿用既有四項操作驗證，不以更換入口為由重做送件機制。實體 iPhone／Safari 未操作不得標記通過。
+Implementation commit、production check、未完成項目：寫入 docs/qa/INTERVIEW-ENTRY-DELIVERY-20261020.md，未有主機／HTTP 證據前不寫已上線。
 
-目前公開區塊：
-HUMANISTIC LANDSCAPE INDUSTRY · 20 QUESTIONS JOURNEY
-人文地景產專欄｜20 Questions Journey
+## 其他提案保留待後續，不在本輪同步執行
 
-建議受訪者入口：
-INTERVIEW PREPARATION · 20 QUESTIONS JOURNEY
-受訪者專區｜二十題訪談準備
-
-提案說明文字：
-在正式採訪之前，透過五站、二十題，整理生活經驗、重要轉折，以及你希望被理解的觀點。這些回答是採訪準備資料，不會因為填寫完成就直接公開；後續稿件與涉及你的直接引言，仍依採訪確認程序處理。
-
-建議按鈕：開始訪談準備。
-公開作品頁則使用「人文地景產專欄」本身的名稱，不再與 20 Questions 串成同一標題。
-
-## 多系列、多平台的最小內容登錄
-
-沿用現有靜態內容檔即可，不新增資料庫、CMS、會員登入或付費第三方工具。
-每筆內容分開記錄：內容類型、所屬系列、治理主題、作者、原始發表平台、發表日期、原文連結與可公開範圍。
-M 傳媒來源文字必須由該筆內容的真實來源決定，不繼續在全部卡片寫死 M 傳媒。
-同一作品在多平台發表時，以單一作品及多個可核對來源連結處理，不重複堆成多篇不同作品。
-受訪草稿與未公開回答不得加入公開內容目錄、搜尋索引、sitemap、分析追蹤內容或公開程式庫。
-STT 有權公開的全文才放本站；外部發表依可公開範圍使用標題、摘要與原文連結，不擅自整篇搬入。
-
-## 受影響的正式文件與程式
-
-規則：ROUTE-001（主導航五項）、COPY-001、MEDIA-001；其餘品牌、人類／AI 角色與機構界線不變。
-須依核定方案更新本 Project 的 01_NON_DRIFT_RULES.md、02_SITE_TREE.md、site_source_of_truth.yaml、Master Build Spec 的導航／Insights 範圍，以及相關 Page Specification、copy_registry、link_routing_matrix、SEO registry、QA acceptance。
-程式：src/App.tsx、src/pages/Columns.tsx、vercel.json、src/seo.ts、相關靜態 SEO HTML、public/sitemap.xml、文章／書籍目錄與對應測試。
-應移除 /books、/research 被導回 /insights 的相關伺服器與前端規則，再以現行資料新建專責頁；不得恢復已退役的整套 Books/Papers/Home 舊程式。
-舊連結依其內容性質逐一導向對應新頁，不把所有舊路徑再集中重導到總覽。
-
-## 驗收條件
-
-從桌面／行動導覽均可直接識別並進入受訪者專區；新增導覽不壓縮品牌、擠掉主 CTA 或造成水平溢出；鍵盤與觸控皆可操作子選單。
-電子書、法律專欄、人文地景產專欄與採訪程序各有自己的頁面任務及唯一 canonical；外部來源標記依每篇真實資料，不受單一媒體綁定。
-既有 /humanistic-interview/ 保持單一問卷；舊連結轉址、草稿讀回、複製、儲存、下載、送出與失敗保留均須回歸；實體 iPhone/Safari 與實際受訪者使用情境未實測前不得列 PASS。
-逐頁驗證可點的書籍／原文連結、空狀態、日期與來源、metadata、sitemap、404、桌面／平板／手機截圖。施工規則文字不得留在公開頁面。
-
-## 執行順序與邊界
-
-先核定新增入口名稱及具體分頁方案，再同步更新正式規格與程式，最後做整頁視覺與實際操作驗收。核定前可完成來源盤點與非破壞性診斷，不擅自發布新導航。
-GCSDA 原圖完整性與排版修復是獨立工作項，不因其共用程式庫就替換 STT 素材或合併兩站。
-舊 Netlify／Vercel 部署退役沿用 CR-SINGLE-CURRENT-20261020-03，不把新分頁任務當成舊站已刪除。
-本次不新增任何付費瀏覽器、付費測試環境、外部服務或社群渠道，不改變 Facebook / LINE 的 HOLD。
+/insights 保留研究與出版總覽；/books 電子書；/columns、/columns/legal、/columns/humanistic 各自呈現公開作品；/research 僅以核對來源上線。這些仍待後續分頁施工，不恢復已退役的 Books/Papers/Home 舊程式。
+二十題是採訪準備，人文地景產是公開成果。多系列與多發表平台須逐篇記錄，不能把全部作品寫死為 M 傳媒。M 傳媒是外部第三方來源，不屬 STT。
+GCSDA 排版／底圖與電子書／其他專欄全部暫停。Netlify／Vercel 歷史部署退役仍屬 CR-SINGLE-CURRENT-20261020-03，不能把本次改入口冒充已刪站。
+不新增付費瀏覽器、付費測試環境、服務或社群渠道；Facebook／LINE HOLD 不變。
