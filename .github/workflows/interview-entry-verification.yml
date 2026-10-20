@@ -1,0 +1,60 @@
+name: Verify single respondent entry
+on:
+  push:
+    branches: [main]
+    paths: [.github/workflows/interview-entry-verification.yml]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Build and verify unchanged questionnaire source
+        run: |
+          set -euo pipefail
+          mkdir -p qa-interview-entry
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib
+          expected={'public/humanistic-interview/index.html':'6b0ad4acf014f3dbfda2397f2b7db5597290b677','public/humanistic-interview/interview.js':'4fb411cb3a72806f6eb5a57923778f18b78448c8'}
+          for name,sha in expected.items():
+            raw=Path(name).read_bytes()
+            assert hashlib.sha1(b'blob '+str(len(raw)).encode()+b'\0'+raw).hexdigest()==sha,name
+          print('Original interview markup and controller unchanged')
+          PY
+          npm ci > qa-interview-entry/npm-ci.log 2>&1
+          npm run build > qa-interview-entry/build.log 2>&1
+          node scripts/interview-delivery-api-qa.mjs > qa-interview-entry/api-contract.log 2>&1
+      - name: Install open-source test engines
+        run: |
+          python3 -m pip install playwright==1.57.0 > qa-interview-entry/install.log 2>&1
+          python3 -m playwright install --with-deps chromium webkit >> qa-interview-entry/install.log 2>&1
+      - name: Existing four-operation and failure regressions with synthetic data only
+        run: |
+          set -euo pipefail
+          QA_ENGINE=chromium python3 scripts/interview-delivery-browser-qa.py > qa-interview-entry/chromium.log 2>&1
+          QA_ENGINE=webkit python3 scripts/interview-delivery-browser-qa.py > qa-interview-entry/webkit.log 2>&1
+      - name: Actual canonical navigation and questionnaire loading, no submissions
+        run: python3 scripts/interview-entry-qa.py
+      - name: Confirm tests did not rewrite tracked sources
+        run: git diff --exit-code
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: single-respondent-entry-verification
+          path: |
+            qa-interview-entry/
+            qa-interview/*-results.json
+          retention-days: 7
