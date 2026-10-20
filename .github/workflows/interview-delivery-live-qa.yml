@@ -1,9 +1,5 @@
 name: Interview live delivery verification
 on:
-  push:
-    branches: [main]
-    paths:
-      - .github/workflows/interview-delivery-live-qa.yml
   workflow_dispatch:
 permissions:
   contents: read
