@@ -4,43 +4,68 @@ on:
     branches: [main]
     paths:
       - .github/workflows/interview-delivery-acceptance.yml
-      - scripts/interview-delivery-acceptance.mjs
+      - scripts/interview-delivery-browser-qa.py
+      - scripts/interview-delivery-api-qa.mjs
       - scripts/patch-interview-delivery.py
+      - public/humanistic-interview/interview.js
   workflow_dispatch:
 permissions:
-  contents: read
+  contents: write
 concurrency:
   group: interview-delivery-acceptance
   cancel-in-progress: false
 jobs:
-  inspect:
+  validate-and-apply:
     runs-on: ubuntu-latest
+    timeout-minutes: 18
     steps:
       - uses: actions/checkout@v4
-      - name: Export exact source and inspect delivery routes without private submissions
-        run: |
-          mkdir -p /tmp/interview-incident
-          cp public/humanistic-interview/index.html /tmp/interview-incident/index.html
-          cp public/humanistic-interview/stt-mobile-bridge.css /tmp/interview-incident/
-          cp api/humanistic-submit.ts vercel.json package.json /tmp/interview-incident/
-          python3 - <<'PY'
-          from pathlib import Path
-          import re, hashlib, json
-          s=Path('public/humanistic-interview/index.html').read_text()
-          Path('/tmp/interview-incident/readable.html').write_text(re.sub(r'data:image/[^;]+;base64,[A-Za-z0-9+/=]+','data:image/omitted-for-audit',s))
-          Path('/tmp/interview-incident/delivery.js').write_text('\n'.join(re.findall(r'<script\b[^>]*>(.*?)</script>',s,re.S|re.I)))
-          print('HTML_SHA256', hashlib.sha256(s.encode()).hexdigest())
-          print('QUESTION_COUNT',len(re.findall(r'<textarea[^>]+data-q=',s)))
-          print('MIRROR_WORKFLOW_EXISTS',Path('.github/workflows/mirror-humanistic-interview.yml').exists())
-          for p in Path('.').rglob('*'):
-            if not p.is_file() or '.git' in p.parts or p.suffix not in ('.md','.json','.tsx','.ts','.yml','.yaml'):continue
-            if p.stat().st_size>1000000:continue
-            text=p.read_text(errors='ignore')
-            if 'shimmering-longma-509244.netlify.app' in text: print('OLD_INTERVIEW_REFERENCE',str(p))
-          PY
-          node --check /tmp/interview-incident/delivery.js
-      - uses: actions/upload-artifact@v4
         with:
-          name: interview-incident-source
-          path: /tmp/interview-incident/
-          retention-days: 3
+          ref: main
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Apply only guarded interview routing and controls
+        run: |
+          python3 scripts/patch-interview-delivery.py
+          node --check public/humanistic-interview/interview.js
+          node scripts/interview-delivery-api-qa.mjs
+      - name: Install isolated browser testing tools
+        run: |
+          python3 -m pip install playwright==1.57.0
+          python3 -m playwright install --with-deps chromium webkit
+      - name: Chromium desktop and mobile-width functional acceptance
+        env:
+          QA_ENGINE: chromium
+        run: python3 scripts/interview-delivery-browser-qa.py
+      - name: WebKit desktop and mobile-width functional acceptance
+        env:
+          QA_ENGINE: webkit
+        run: python3 scripts/interview-delivery-browser-qa.py
+      - name: Verify existing website still builds
+        run: |
+          npm ci
+          npm run build
+      - name: Publish only after every gate passes
+        run: |
+          git config user.name 'STT Interview Acceptance'
+          git config user.email 'actions@users.noreply.github.com'
+          git add public/humanistic-interview/index.html src/App.tsx vercel.json
+          git diff --cached --stat
+          if ! git diff --cached --quiet; then
+            git commit -m 'fix: unify interview route and publish browser-verified recovery controls [mirror-skip]'
+            git push origin HEAD:main
+          fi
+          mkdir -p qa-interview
+          git rev-parse HEAD > qa-interview/source-commit.txt
+          sha256sum public/humanistic-interview/index.html public/humanistic-interview/interview.js api/humanistic-submit.ts > qa-interview/source-sha256.txt
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: interview-delivery-acceptance
+          path: qa-interview/
+          retention-days: 7
