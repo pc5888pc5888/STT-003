@@ -16,7 +16,7 @@ import { applyGovernedMetadata } from "./seo";
 
 type ShellProps = { children: ReactNode };
 
-const HUMANISTIC_INTERVIEW_URL = "https://shimmering-longma-509244.netlify.app/";
+const HUMANISTIC_INTERVIEW_URL = "/humanistic-interview/";
 const GCSDA_URL = "https://gcsda-governance.vercel.app/";
 
 const PRIMARY_NAVIGATION = [

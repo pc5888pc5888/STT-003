@@ -201,7 +201,7 @@ export default function Columns() {
           </div>
           <div>
             <p>五站、二十題的深度採訪旅程，以生活直覺、生命轉折、時間視角、城市與社會，以及留下什麼為路徑，讓受訪者在正式採訪前留下可被理解的人生紋理。</p>
-            <a href="https://shimmering-longma-509244.netlify.app/" target="_blank" rel="noreferrer">進入 20 Questions Journey <ArrowUpRight size={15} aria-hidden="true" /></a>
+            <a href="/humanistic-interview/" target="_blank" rel="noreferrer">進入 20 Questions Journey <ArrowUpRight size={15} aria-hidden="true" /></a>
           </div>
         </div>
       </section>
