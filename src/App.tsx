@@ -24,6 +24,7 @@ const PRIMARY_NAVIGATION = [
   { label: "STT 如何判讀", path: "/how-stt-works" },
   { label: "治理委任", path: "/engagement" },
   { label: "研究與出版", path: "/insights" },
+  { label: "受訪者專區", path: HUMANISTIC_INTERVIEW_URL },
   { label: "關於 STT", path: "/about" },
 ] as const;
 
@@ -87,6 +88,7 @@ function PublicShell({ children }: ShellProps) {
               <NavLink
                 key={item.path}
                 to={item.path}
+                reloadDocument={item.path === HUMANISTIC_INTERVIEW_URL}
                 className={({ isActive }) => `stt-g0-nav-link${isActive ? " is-active" : ""}`}
               >
                 {item.label}
@@ -115,7 +117,7 @@ function PublicShell({ children }: ShellProps) {
             <div className="stt-g0-mobile-menu__inner">
               <div className="stt-g0-mobile-menu__primary">
                 {PRIMARY_NAVIGATION.map((item, index) => (
-                  <NavLink key={item.path} to={item.path}>
+                  <NavLink key={item.path} to={item.path} reloadDocument={item.path === HUMANISTIC_INTERVIEW_URL}>
                     <span>{String(index + 1).padStart(2, "0")}</span>
                     <strong>{item.label}</strong>
                   </NavLink>
@@ -125,6 +127,7 @@ function PublicShell({ children }: ShellProps) {
                 {SECONDARY_NAVIGATION.map((item) => (
                   <NavLink key={item.path} to={item.path}>{item.label}</NavLink>
                 ))}
+                <Link to="/start">開始治理判讀</Link>
               </div>
             </div>
           </nav>
@@ -144,7 +147,7 @@ function PublicShell({ children }: ShellProps) {
             <Link to="/eric-chuang">莊鈞翔博士</Link>
             <Link to="/institutions">機構合作</Link>
             <Link to="/insights">研究與出版</Link>
-            <a href={HUMANISTIC_INTERVIEW_URL} target="_blank" rel="noreferrer">人文地景產｜20 Questions ↗</a>
+            <a href={HUMANISTIC_INTERVIEW_URL}>受訪者專區｜二十題訪談準備</a>
             <a href={GCSDA_URL} target="_blank" rel="noreferrer">中華企業策略永續發展學會｜GCSDA ↗</a>
             <Link to="/privacy">隱私</Link>
             <Link to="/professional-boundary">專業服務邊界</Link>
