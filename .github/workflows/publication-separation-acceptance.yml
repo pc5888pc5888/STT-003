@@ -5,6 +5,7 @@ on:
     paths:
       - .github/workflows/publication-separation-acceptance.yml
       - scripts/publication-separation-qa.py
+      - scripts/publication-cover-qa.py
   workflow_dispatch:
 permissions:
   contents: read
@@ -50,10 +51,12 @@ jobs:
         run: npm run lint > qa-publication-separation/typecheck.log 2>&1
       - name: Install open-source Chromium on this standard runner
         run: |
-          python3 -m pip install playwright==1.57.0 > qa-publication-separation/install.log 2>&1
+          python3 -m pip install playwright==1.57.0 pillow > qa-publication-separation/install.log 2>&1
           python3 -m playwright install --with-deps chromium >> qa-publication-separation/install.log 2>&1
       - name: Verify actual canonical pages and accepted entry without submissions
         run: python3 scripts/publication-separation-qa.py
+      - name: Verify each cover after scrolling and decoding and check existing reading URLs
+        run: python3 scripts/publication-cover-qa.py
       - name: Verify tests did not modify tracked sources
         run: git diff --exit-code
       - uses: actions/upload-artifact@v4
