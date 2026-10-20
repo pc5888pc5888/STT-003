@@ -19,6 +19,7 @@ import "./styles/stt-g9-accessibility.css";
 import "./styles/convergence-accessibility.css";
 
 import "./styles/cis-page-system.css";
+import "./styles/interview-entry-navigation.css";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode><AppProviders><App /></AppProviders></React.StrictMode>
