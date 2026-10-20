@@ -6,63 +6,48 @@ on:
       - .github/workflows/interview-delivery-acceptance.yml
       - scripts/interview-delivery-browser-qa.py
       - scripts/interview-delivery-api-qa.mjs
-      - scripts/patch-interview-delivery.py
-      - public/humanistic-interview/interview.js
+      - scripts/finalize-interview.mjs
+      - public/humanistic-interview/**
+      - api/humanistic-submit.ts
+      - vercel.json
   workflow_dispatch:
 permissions:
-  contents: write
+  contents: read
 concurrency:
   group: interview-delivery-acceptance
-  cancel-in-progress: false
+  cancel-in-progress: true
 jobs:
-  validate-and-apply:
+  verify-current-source:
     runs-on: ubuntu-latest
-    timeout-minutes: 18
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
-        with:
-          ref: main
-          fetch-depth: 1
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Apply only guarded interview routing and controls
+      - name: Verify current controller and synthetic API contract without changing source
         run: |
-          python3 scripts/patch-interview-delivery.py
           node --check public/humanistic-interview/interview.js
           node scripts/interview-delivery-api-qa.mjs
-      - name: Install isolated browser testing tools
+          npm ci
+          npm run build
+      - name: Use open-source test engines only, no external browser service
         run: |
           python3 -m pip install playwright==1.57.0
           python3 -m playwright install --with-deps chromium webkit
-      - name: Chromium desktop and mobile-width functional acceptance
+      - name: Chromium synthetic regression
         env:
           QA_ENGINE: chromium
         run: python3 scripts/interview-delivery-browser-qa.py
-      - name: WebKit desktop and mobile-width functional acceptance
+      - name: WebKit synthetic regression
         env:
           QA_ENGINE: webkit
         run: python3 scripts/interview-delivery-browser-qa.py
-      - name: Verify existing website still builds
-        run: |
-          npm ci
-          npm run build
-      - name: Publish only after every gate passes
-        run: |
-          git config user.name 'STT Interview Acceptance'
-          git config user.email 'actions@users.noreply.github.com'
-          git add public/humanistic-interview/index.html vercel.json
-          if test -s qa-interview/changed-source-files.txt; then git add --pathspec-from-file=qa-interview/changed-source-files.txt; fi
-          git diff --cached --stat
-          if ! git diff --cached --quiet; then
-            git commit -m 'fix: unify interview route and publish browser-verified recovery controls [mirror-skip]'
-            git push origin HEAD:main
-          fi
-          git rev-parse HEAD > qa-interview/source-commit.txt
-          sha256sum public/humanistic-interview/index.html public/humanistic-interview/interview.js api/humanistic-submit.ts > qa-interview/source-sha256.txt
+      - name: Assert tests did not rewrite tracked source
+        run: git diff --exit-code
       - uses: actions/upload-artifact@v4
         if: always()
         with:
