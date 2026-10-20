@@ -1,0 +1,64 @@
+name: Publication separation acceptance
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/publication-separation-acceptance.yml
+      - scripts/publication-separation-qa.py
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: stt-publication-separation-acceptance
+  cancel-in-progress: false
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate unchanged accepted questionnaire and original catalog
+        run: |
+          mkdir -p qa-publication-separation
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib
+          expected={'public/humanistic-interview/index.html':'6b0ad4acf014f3dbfda2397f2b7db5597290b677','public/humanistic-interview/interview.js':'4fb411cb3a72806f6eb5a57923778f18b78448c8','public/data/mmedia-catalog.json':'52f0a3fa2d9ff681c1a4e1d6ab82a45b92f4c915'}
+          for name,expected_sha in expected.items():
+            raw=Path(name).read_bytes()
+            actual=hashlib.sha1(b'blob '+str(len(raw)).encode()+b'\0'+raw).hexdigest()
+            assert actual==expected_sha,name
+          print('Accepted questionnaire and all original source records unchanged')
+          PY
+          git fetch --depth=1 origin 06c460c8fe84c81ff3184e93167b1c02ae5887f8
+          git diff --exit-code 06c460c8fe84c81ff3184e93167b1c02ae5887f8 HEAD -- api public/humanistic-interview public/books src/styles/interview-entry-navigation.css
+      - name: Build and validate publication data
+        run: |
+          npm ci > qa-publication-separation/npm-ci.log 2>&1
+          npm run build > qa-publication-separation/build.log 2>&1
+          npx tsx -e "import {WORKS,BOOKS,SERIES,sourceLabel} from './src/data/contentRegistry.ts'; import source from './public/data/mmedia-catalog.json'; import assert from 'node:assert/strict'; for(const a of source.articles){const w=WORKS.find(x=>x.id===a.id);assert(w);for(const k of ['title','excerpt','date','author','category','series'])assert.equal(w[k],a[k]);assert.equal(w.sources[0].url,a.url)} assert.equal(BOOKS.length,4);assert.equal(BOOKS.filter(x=>x.previewUrl).length,2);assert.equal(sourceLabel({publisher:'Verified alternate publisher',url:'https://example.org/',relation:'external'}),'外部發表／第三方媒體 · Verified alternate publisher'); console.log('PASS all original fields, four books, two existing links and source-independent labels');" > qa-publication-separation/catalog-contract.log 2>&1
+      - name: Type check
+        run: npm run lint > qa-publication-separation/typecheck.log 2>&1
+      - name: Install open-source Chromium on this standard runner
+        run: |
+          python3 -m pip install playwright==1.57.0 > qa-publication-separation/install.log 2>&1
+          python3 -m playwright install --with-deps chromium >> qa-publication-separation/install.log 2>&1
+      - name: Verify actual canonical pages and accepted entry without submissions
+        run: python3 scripts/publication-separation-qa.py
+      - name: Verify tests did not modify tracked sources
+        run: git diff --exit-code
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: publication-separation-verification
+          path: qa-publication-separation/
+          retention-days: 7
