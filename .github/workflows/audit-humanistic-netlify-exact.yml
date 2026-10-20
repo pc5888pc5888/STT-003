@@ -1,32 +1,57 @@
-name: Audit Humanistic Netlify Exact Source
-
+name: Current STT source inventory
 on:
   push:
     branches: [main]
-    paths:
-      - .github/workflows/audit-humanistic-netlify-exact.yml
+    paths: [.github/workflows/audit-humanistic-netlify-exact.yml]
   workflow_dispatch:
-
 permissions:
   contents: read
-
 jobs:
-  audit:
+  inventory:
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
-      - name: Inspect existing Humanistic deployment without assuming asset paths
-        shell: bash
+      - name: Export exact text sources and public route evidence, read only
         run: |
-          set -euo pipefail
-          root='https://fluffy-crumble-cd749c.netlify.app'
-          curl -fL --retry 2 --connect-timeout 20 --max-time 120 "$root/" -o /tmp/humanistic-index.html
-          echo 'ROOT SHA256:'
-          sha256sum /tmp/humanistic-index.html
-          echo 'EXPECTED ORIGINAL INDEX SHA256: 672ce2789a433177d40e230b4b80a2faae1d0878f82535f88a3e663e54955d0f'
-          echo 'TITLE:'
-          grep -o '<title>[^<]*' /tmp/humanistic-index.html | head -1 || true
-          echo 'REFERENCED ASSETS:'
-          grep -Eo '(src|href)=["'"'][^"'"']+["'"']' /tmp/humanistic-index.html | sed -E 's/^(src|href)=["'"']|["'"']$//g' | sort -u || true
-          echo 'STATION REFERENCES:'
-          grep -Eo '[^"'"']*station-[0-9][0-9][^"'"']*' /tmp/humanistic-index.html | sort -u || true
+          python3 - <<'PY'
+          from pathlib import Path
+          from urllib.request import Request, urlopen
+          from urllib.error import HTTPError
+          import subprocess, hashlib, json, re, shutil
+          root=Path.cwd(); out=Path('/tmp/stt-current-inventory');out.mkdir()
+          files=subprocess.check_output(['git','ls-files','-z']).decode().split('\0')
+          inventory=[]; refs=[]
+          extensions={'.md','.json','.ts','.tsx','.js','.jsx','.mjs','.cjs','.py','.html','.css','.yaml','.yml','.toml','.txt'}
+          for name in files:
+            if not name:continue
+            p=root/name
+            if not p.is_file():continue
+            raw=p.read_bytes()
+            inventory.append({'path':name,'bytes':len(raw),'sha256':hashlib.sha256(raw).hexdigest(),'git_blob':hashlib.sha1(b'blob '+str(len(raw)).encode()+b'\0'+raw).hexdigest()})
+            if p.suffix in extensions and not name.startswith('.env') and len(raw)<5000000:
+              dst=out/'source'/name;dst.parent.mkdir(parents=True,exist_ok=True);dst.write_bytes(raw)
+              text=raw.decode('utf-8',errors='replace')
+              for n,line in enumerate(text.splitlines(),1):
+                if re.search(r'netlify|mirror.humanistic|repair_humanistic|patch_humanistic|patch-interview|HomeCanonical|HomeLegacy',line,re.I):
+                  if 'base64,' not in line:refs.append({'path':name,'line':n,'text':line[:500]})
+          (out/'inventory.json').write_text(json.dumps(inventory,ensure_ascii=False,indent=2))
+          (out/'legacy-references.json').write_text(json.dumps(refs,ensure_ascii=False,indent=2))
+          (out/'source-commit.txt').write_text(subprocess.check_output(['git','rev-parse','HEAD']).decode())
+          public=[]
+          for label,url in [('current','https://stt-003.vercel.app/humanistic-interview/'),('controller','https://stt-003.vercel.app/humanistic-interview/interview.js?v=20261020.2'),('old-host','https://shimmering-longma-509244.netlify.app/')]:
+            try:
+              with urlopen(Request(url,headers={'User-Agent':'STT-Read-Only-Inventory'}),timeout=25) as r:
+                raw=r.read();(out/(label+'.txt')).write_bytes(raw)
+                text=raw.decode('utf-8',errors='replace');title=re.search(r'<title>(.*?)</title>',text,re.S)
+                public.append({'label':label,'requested':url,'final_url':r.url,'status':r.status,'sha256':hashlib.sha256(raw).hexdigest(),'title':title.group(1) if title else None})
+            except Exception as e:public.append({'label':label,'requested':url,'error':str(e)})
+          (out/'public-status.json').write_text(json.dumps(public,ensure_ascii=False,indent=2))
+          print('TRACKED_FILES',len(inventory));print('LEGACY_REFERENCES',len(refs));print(json.dumps(public,ensure_ascii=False))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: stt-current-source-inventory
+          path: /tmp/stt-current-inventory/
+          include-hidden-files: true
+          retention-days: 3
