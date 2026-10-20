@@ -47,15 +47,22 @@ jobs:
         run: python3 scripts/interview-delivery-browser-qa.py
       - name: Verify all retained source and artwork; remove this one-time tooling
         run: python3 scripts/retire-obsolete-stt-once.py verify
-      - name: Commit only accepted removals and source-of-truth corrections
+      - name: Commit accepted content cleanup without changing workflow definitions using this token
         run: |
           set -euo pipefail
           test "$(git rev-parse HEAD)" = "$(git ls-remote origin refs/heads/main | cut -f1)"
+          git restore --source=HEAD -- .github/workflows/interview-delivery-acceptance.yml .github/workflows/interview-delivery-live-qa.yml
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('docs/qa/CURRENT-SITE-CLEANUP-20261020.md')
+          s=p.read_text().replace('訪談驗收 workflow 改為 contents:read，不再執行遷移腳本或 git push；真實寄信驗證改為手動觸發。此輪清理未寄出真實測試郵件。','訪談驗收 workflow 的唯讀修正與真實寄信測試改為手動觸發，已於本次工作目錄測試，但 runner token 不具 workflows 更新權限，須另由已授權的 GitHub connector 更新；不得在工具確認前宣稱已更新。此輪清理未寄出真實測試郵件。').replace('保留与驗證','保留與驗證')
+          p.write_text(s)
+          PY
           git add --pathspec-from-file=qa-current-site-cleanup/stage-paths.txt
           git diff --cached --stat | tee qa-current-site-cleanup/committed-stat.txt
           git config user.name 'STT Current Site Cleanup'
           git config user.email 'actions@users.noreply.github.com'
-          git commit -m 'chore: remove 69 obsolete sources; preserve current STT content and make interview QA read-only [mirror-skip]'
+          git commit -m 'chore: remove 69 obsolete STT sources without changing current page content [mirror-skip]'
           git push origin HEAD:main
           git rev-parse HEAD > qa-current-site-cleanup/cleanup-commit.txt
       - uses: actions/upload-artifact@v4
