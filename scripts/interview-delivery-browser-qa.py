@@ -10,6 +10,14 @@ results=[]
 def record(case,ok):
  assert ok,case
  results.append({'case':case,'pass':True});print('PASS',case,flush=True)
+def safe_click(page,locator,label,errors):
+ try:locator.click(timeout=10000)
+ except Exception:
+  samples=[]
+  for _ in range(8):
+   samples.append(page.evaluate("""()=>{const b=document.querySelector('.screen.active .q-next');if(!b)return {screen:document.querySelector('.screen.active')?.id};const c=getComputedStyle(b);return {screen:document.querySelector('.screen.active')?.id,rect:b.getBoundingClientRect().toJSON(),transform:c.transform,animation:c.animation,transition:c.transition,hover:b.matches(':hover'),scrollY,active:document.activeElement?.id,animations:document.getAnimations().map(x=>({state:x.playState,target:x.effect?.target?.className}))}}"""));page.wait_for_timeout(100)
+  report={'step':label,'errors':errors,'samples':samples};print('NAV_DIAGNOSTIC',json.dumps(report,ensure_ascii=False),flush=True)
+  (OUT/(ENGINE+'-nav-error.json')).write_text(json.dumps(report,ensure_ascii=False,indent=2));page.screenshot(path=str(OUT/(ENGINE+'-nav-error.png')),full_page=True);raise
 with sync_playwright() as p:
  browser=getattr(p,ENGINE).launch()
  def context(mobile=False,blocked=False):
@@ -45,13 +53,13 @@ with sync_playwright() as p:
   name=('mobile ' if mobile else 'desktop ')+ENGINE
   c,page,mode,errors=context(mobile)
   visited=[]
-  # Use visible controls from welcome through all stations, all questions and confirmation.
   for step in range(40):
    active=page.locator('.screen.active');sid=active.get_attribute('id')
    if sid=='submit':break
-   q=active.get_attribute('data-qscreen')
-   if q:active.locator('textarea[data-q]').fill(texts[q]);visited.append(int(q));active.locator('.q-next').click()
-   else:active.locator('[data-next]').click()
+   q=active.get_attribute('data-qscreen');print('NAV',name,sid,flush=True)
+   if q:
+    active.locator('textarea[data-q]').fill(texts[q]);visited.append(int(q));safe_click(page,active.locator('.q-next'),sid,errors)
+   else:safe_click(page,active.locator('[data-next]'),sid,errors)
   record(name+' visible 20-question journey in correct order',visited==list(range(1,21)) and page.locator('#submit').is_visible())
   fill(page)
   page.locator('#toolbar-copy').click();page.wait_for_function("document.getElementById('backup-feedback').textContent.includes('已複製')")
