@@ -1,16 +1,31 @@
-# 專案紀錄與規則 (Project Records & Rules)
+# STT Governance — 現行網站施工入口
 
-## 官方資訊
-- **正式對外網址**：https://tinyurl.com/2xktunfw
-- **主要品牌名稱**：策略智庫數位出版 STT Press
-- **主要作者**：莊鈞翔博士 Eric Chuang, Ph.D.
+本檔是程式庫操作指引；Project Instructions、Project Charter、Non-Drift Rules、Source of Truth、正式 Page Specifications 與 Registries 的權限高於本檔。
 
-## UI/UX 規範
-- **Logo 尺寸**：左上角 Logo 需維持在較精簡的比例（目前設定為 `w-40 lg:w-56`），避免壓迫視覺空間。
-- **首頁主視覺**：中央標誌與文字層級需適中，確保在標準螢幕下能看到底部的導覽按鈕。
-- **文字排版**：名言金句採用「；」區分語句，不使用強制換行符號（<br />），由容器寬度自然折行。
+## 只維護現行 STT 母站
 
-## 執行與協作規範 (Critical Execution & Collaboration Axioms)
-- **嚴禁不實陳述或草率回報**：使用者最痛恨未經徹底檢查、甚至含有錯誤便言之過早或草率保證「100% 已修復或完美運作」的說辭。任何功能回報或宣告，必須基於對受損或調整之檔案進行主動且完整的程式碼合規檢查。
-- **透明與誠實優先**：如果存在無法核實、尚待測試的部分，或在不同視窗大小/極端狀態可能存有之異常，必須主動揭露並具體列出，絕不能含糊帶過。
-- **謹慎驗證所有按鈕與連結**：在修改介面或選單時，必須嚴加確認其點擊跳轉行為在 SPA 路由或 HTML 實體頁面（Vite/Express 渲染）下皆能正確導向至莊博士預期之目標頁面，確保無任何按位破壞、殘存無用組件或是按鍵跳轉空白之情事。
+正式母站：https://stt-003.vercel.app/
+二十題訪談：https://stt-003.vercel.app/humanistic-interview/
+程式庫：pc5888pc5888/STT-003；現行分支：main。
+首頁來源：src/pages/HomeCanonical.tsx；路由來源：src/App.tsx 與 vercel.json。
+訪談唯一來源：public/humanistic-interview/index.html 與 interview.js；送件只使用既有 /api/humanistic-submit。
+
+不得以舊分支、舊首頁、Netlify 版本、聊天記憶、過去施工稿或公開預覽取代現行版本。歷史 Git commit 與 QA 紀錄僅供追溯，不是現行施工輸入。不得把 STT Press 再列為母站主品牌，或恢復未核對的短網址入口。
+
+## 已核准內容保持不動
+
+STT Governance 的定位、莊鈞翔博士角色、AI 邊界、正式文案、Logo、人物與出版圖片，以高階治理文件及核准 Registry 為準。缺資料不補造；修改 LOCKED 內容須走 Change Request。不要從零重做現行網站。
+
+GCSDA 是獨立組織網站，不屬於 STT 舊問卷刪除範圍；不得刪除 gcsda-governance.vercel.app 或其現行發布。M 傳媒是外部第三方媒體。
+
+## 費用與操作邊界
+
+未取得站主事前明確同意，不得使用按量付費的外部瀏覽器、建立付費雲端測試環境、要求儲值、提供儲值連結，或新增付費服務。優先使用既有程式庫、主機管理連線及本機／既有測試。遇到權限不足，直接回報缺少哪個帳戶管理存取，不改推付費工具。
+
+## 驗收與清理
+
+發布前執行 npm run build；其中的訪談檢查只讀取正式來源，不改寫問卷。測試不得自動還原舊來源或直接寫回現行頁面。
+
+每次清理須列出實際刪除檔案、保留項目、網址影響、QA 與未完成項目。轉址不等於刪除部署；移除連結不等於舊站已下架；READY 不等於全站 QA_PASS。保留追溯紀錄，但不得再以過時文件指揮施工。
+
+目前 WEBSITE 仍為 ACTIVE_BUILD；本次清理不授予全站 BUILD_LOCK／QA_PASS，不解除 Facebook、LINE 的 HOLD。

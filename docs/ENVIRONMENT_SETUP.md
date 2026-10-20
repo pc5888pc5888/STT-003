@@ -1,71 +1,11 @@
-# STT Governance Runtime Environment Setup
+# STT Governance — 現行執行環境
 
-This project follows a server-only secret policy. API keys, access tokens, provider URLs that reveal private infrastructure, and credential-like values must never be committed to the repository or exposed through Vite client variables.
+母站只使用既有 Vercel 專案 stt-003，正式入口為 https://stt-003.vercel.app/。本檔取代先前將 Netlify、Dify、TTS 與 EmailJS 列為主要環境的過時操作說明；不新增或重新啟用該套網站。
 
-## Primary runtime: Netlify
+二十題訪談使用 /humanistic-interview/ 與同站 /api/humanistic-submit。既有郵件傳送在伺服器端使用 RESEND_API_KEY；RESEND_FROM_EMAIL 只在既有服務需要時設定。指定收件人保持原設定，憑證不得寫入版本庫、瀏覽器變數、HTML 或日誌。
 
-Open the Netlify project, then go to Site configuration or Project configuration → Environment variables.
+本次僅校正操作文件，不變更現行環境變數值、不增加供應商、不建立答案資料庫、不重新啟用公開 AI 聊天或語音功能。其他既有 API 的設定須依各自正式規格核對，不得由本文件推定全部已啟用或可刪除。
 
-Add only the variables required by the providers you enable.
+GCSDA 的凍結發布及其分支限定環境設定是獨立網站所需，排除於此次 STT 清理。舊 Netlify 問卷是否下架，須以該 Netlify 帳戶實際操作和公開 URL 驗證為準，不能因本程式庫已清理就標記完成。
 
-### Dify
-
-- `DIFY_API_BASE_URL`
-- `DIFY_API_KEY`
-- `DIFY_APP_ID` when the selected Dify application flow requires it
-
-The browser never reads these variables. It calls `/api/ai/stream`, and the Netlify Function reads the Dify variables at runtime.
-
-### Text-to-speech
-
-Provider selector:
-
-- `TTS_PROVIDER` = `openai` or `elevenlabs`
-
-OpenAI:
-
-- `OPENAI_API_KEY`
-- `OPENAI_TTS_API_URL`
-- `OPENAI_TTS_MODEL`
-- `OPENAI_TTS_VOICE`
-
-ElevenLabs:
-
-- `ELEVENLABS_API_KEY`
-- `ELEVENLABS_TTS_API_URL`
-- `ELEVENLABS_MODEL_ID`
-
-The browser calls `/api/tts`. Provider credentials remain server-side.
-
-### Contact delivery
-
-- `EMAILJS_API_URL`
-- `EMAILJS_SERVICE_ID`
-- `EMAILJS_TEMPLATE_ID`
-- `EMAILJS_PUBLIC_KEY`
-- `EMAILJS_PRIVATE_KEY` when used by the account configuration
-
-The browser calls `/api/contact`; the delivery configuration is resolved in the server function.
-
-### Application origin
-
-- `APP_URL`
-
-Use this only when a server-side function needs the canonical public application origin.
-
-## GitHub environment variables and secrets
-
-GitHub repository or environment secrets are appropriate for GitHub Actions workflows. They are not automatically available inside Netlify Functions. If Netlify is the production runtime, runtime provider credentials should be stored in Netlify Environment Variables unless a deliberate CI synchronization process is implemented.
-
-## Prohibited patterns
-
-Do not use any of these patterns for secrets:
-
-- `VITE_DIFY_API_KEY`
-- `VITE_OPENAI_API_KEY`
-- `VITE_ELEVENLABS_API_KEY`
-- `VITE_GEMINI_API_KEY`
-- API keys inside `.ts`, `.tsx`, `.js`, `.json`, `.html`, or CSS files
-- secrets committed to `.env`, `.env.local`, `.env.production`, or any other environment file
-
-The repository keeps `.env.example` as a name-only contract. Real values must remain in the deployment platform's protected environment store.
+未取得站主事前明確同意，不使用付費外部瀏覽器、不建立付費測試環境、不要求儲值。遇到權限阻擋，保留未完成狀態並指出所需帳戶管理存取。

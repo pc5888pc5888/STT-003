@@ -231,6 +231,16 @@
       "source": "/humanistic-interview",
       "destination": "/humanistic-interview/",
       "permanent": true
+    },
+    {
+      "source": "/humanistic-20q/index.html",
+      "destination": "/humanistic-interview/",
+      "permanent": true
+    },
+    {
+      "source": "/problems.html",
+      "destination": "/problems",
+      "permanent": true
     }
   ],
   "headers": [
