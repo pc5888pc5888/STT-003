@@ -5,6 +5,7 @@ import Lenis from "lenis";
 import Home from "./pages/HomeCanonical";
 import NotFound from "./components/NotFound";
 import Columns from "./pages/Columns";
+import { BooksPage, PublishedWorksPage } from "./pages/PublicationLibrary";
 import Problems from "./pages/Problems";
 import ProblemDetail from "./pages/ProblemDetail";
 import Start from "./pages/Start";
@@ -38,10 +39,10 @@ function ExternalRedirect({ url }: { url: string }) {
   return <div className="stt-g0-redirect">正在前往外部頁面…</div>;
 }
 
-
 function PublicShell({ children }: ShellProps) {
   const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
+  const publicationPage = location.pathname === "/books" || location.pathname === "/columns" || location.pathname.startsWith("/columns/");
 
   useEffect(() => {
     setMenuOpen(false);
@@ -57,9 +58,7 @@ function PublicShell({ children }: ShellProps) {
     return () => cancelAnimationFrame(frame);
   }, [location.pathname, location.hash]);
 
-  useEffect(() => {
-    applyGovernedMetadata(location.pathname);
-  }, [location.pathname]);
+  useEffect(() => { applyGovernedMetadata(location.pathname); }, [location.pathname]);
 
   useEffect(() => {
     if (!menuOpen) return;
@@ -79,78 +78,46 @@ function PublicShell({ children }: ShellProps) {
       <a className="site-skip-link" href="#main-content">跳至主要內容</a>
       <header className="stt-g0-header">
         <div className="stt-g0-header__inner">
-          <Link to="/" className="stt-g0-brand" aria-label="STT Governance 首頁">
-            <img src={STT_OFFICIAL_LOGO_SRC} alt="STT Governance" />
-          </Link>
-
+          <Link to="/" className="stt-g0-brand" aria-label="STT Governance 首頁"><img src={STT_OFFICIAL_LOGO_SRC} alt="STT Governance" /></Link>
           <nav className="stt-g0-desktop-nav" aria-label="主要導覽">
             {PRIMARY_NAVIGATION.map((item) => (
-              <NavLink
-                key={item.path}
-                to={item.path}
-                reloadDocument={item.path === HUMANISTIC_INTERVIEW_URL}
-                className={({ isActive }) => `stt-g0-nav-link${isActive ? " is-active" : ""}`}
-              >
+              <NavLink key={item.path} to={item.path} reloadDocument={item.path === HUMANISTIC_INTERVIEW_URL}
+                className={({ isActive }) => `stt-g0-nav-link${isActive || (item.path === "/insights" && publicationPage) ? " is-active" : ""}`}>
                 {item.label}
               </NavLink>
             ))}
           </nav>
-
-          <Link to="/start" className="stt-g0-primary-cta">
-            開始治理判讀
-          </Link>
-
-          <button
-            type="button"
-            className="stt-g0-menu-button"
-            aria-label={menuOpen ? "關閉選單" : "開啟選單"}
-            aria-expanded={menuOpen}
-            aria-controls="stt-g0-mobile-menu"
-            onClick={() => setMenuOpen((value) => !value)}
-          >
+          <Link to="/start" className="stt-g0-primary-cta">開始治理判讀</Link>
+          <button type="button" className="stt-g0-menu-button" aria-label={menuOpen ? "關閉選單" : "開啟選單"} aria-expanded={menuOpen} aria-controls="stt-g0-mobile-menu" onClick={() => setMenuOpen((value) => !value)}>
             {menuOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
           </button>
         </div>
-
         {menuOpen && (
           <nav id="stt-g0-mobile-menu" className="stt-g0-mobile-menu" aria-label="行動版導覽">
             <div className="stt-g0-mobile-menu__inner">
               <div className="stt-g0-mobile-menu__primary">
                 {PRIMARY_NAVIGATION.map((item, index) => (
-                  <NavLink key={item.path} to={item.path} reloadDocument={item.path === HUMANISTIC_INTERVIEW_URL}>
-                    <span>{String(index + 1).padStart(2, "0")}</span>
-                    <strong>{item.label}</strong>
-                  </NavLink>
+                  <NavLink key={item.path} to={item.path} reloadDocument={item.path === HUMANISTIC_INTERVIEW_URL}><span>{String(index + 1).padStart(2, "0")}</span><strong>{item.label}</strong></NavLink>
                 ))}
               </div>
               <div className="stt-g0-mobile-menu__secondary">
-                {SECONDARY_NAVIGATION.map((item) => (
-                  <NavLink key={item.path} to={item.path}>{item.label}</NavLink>
-                ))}
+                {SECONDARY_NAVIGATION.map((item) => <NavLink key={item.path} to={item.path}>{item.label}</NavLink>)}
                 <Link to="/start">開始治理判讀</Link>
               </div>
             </div>
           </nav>
         )}
       </header>
-
       <main id="main-content" tabIndex={-1} className="stt-g0-main">{children}</main>
-
       <footer className="stt-g0-footer">
         <div className="stt-g0-footer__inner">
-          <div className="stt-g0-footer__brand">
-            <strong>STT Governance</strong>
-            <span>治理判讀與制度設計</span>
-          </div>
-
+          <div className="stt-g0-footer__brand"><strong>STT Governance</strong><span>治理判讀與制度設計</span></div>
           <nav className="stt-g0-footer__links" aria-label="頁尾導覽">
-            <Link to="/eric-chuang">莊鈞翔博士</Link>
-            <Link to="/institutions">機構合作</Link>
-            <Link to="/insights">研究與出版</Link>
+            <Link to="/eric-chuang">莊鈞翔博士</Link><Link to="/institutions">機構合作</Link><Link to="/insights">研究與出版</Link>
+            <Link to="/books">電子書與出版</Link><Link to="/columns/legal">法律專欄</Link><Link to="/columns/humanistic">人文地景產專欄</Link>
             <a href={HUMANISTIC_INTERVIEW_URL}>受訪者專區｜二十題訪談準備</a>
             <a href={GCSDA_URL} target="_blank" rel="noreferrer">中華企業策略永續發展學會｜GCSDA ↗</a>
-            <Link to="/privacy">隱私</Link>
-            <Link to="/professional-boundary">專業服務邊界</Link>
+            <Link to="/privacy">隱私</Link><Link to="/professional-boundary">專業服務邊界</Link>
           </nav>
         </div>
       </footer>
@@ -164,30 +131,29 @@ function AppRoutes() {
       <Route path="/" element={<Home />} />
       <Route path="/index.html" element={<Navigate to="/" replace />} />
       <Route path="/governance.html" element={<Navigate to="/problems" replace />} />
-
       <Route path="/problems" element={<Problems />} />
       <Route path="/problems/:id" element={<ProblemDetail />} />
       <Route path="/how-stt-works" element={<Method />} />
-
       <Route path="/engagement" element={<Engagement />} />
       <Route path="/insights" element={<Columns />} />
+      <Route path="/books" element={<BooksPage />} />
+      <Route path="/columns" element={<PublishedWorksPage />} />
+      <Route path="/columns/legal" element={<PublishedWorksPage series="legal" />} />
+      <Route path="/columns/humanistic" element={<PublishedWorksPage series="humanistic" />} />
+      <Route path="/columns/news" element={<PublishedWorksPage series="news" />} />
       <Route path="/about" element={<AboutPage />} />
       <Route path="/eric-chuang" element={<EricPage />} />
       <Route path="/institutions" element={<InstitutionsPage />} />
       <Route path="/start" element={<Start />} />
       <Route path="/privacy" element={<PrivacyPage />} />
       <Route path="/professional-boundary" element={<ProfessionalBoundaryPage />} />
-
       <Route path="/research" element={<Navigate to="/insights" replace />} />
-      <Route path="/books" element={<Navigate to="/insights?theme=civilization" replace />} />
-      <Route path="/books/internal-compliance" element={<Navigate to="/insights?theme=civilization" replace />} />
-
+      <Route path="/books/internal-compliance" element={<Navigate to="/books#internal-compliance" replace />} />
       <Route path="/domains" element={<Navigate to="/how-stt-works" replace />} />
       <Route path="/domains/:slug" element={<Navigate to="/how-stt-works" replace />} />
       <Route path="/projects" element={<Navigate to="/insights" replace />} />
       <Route path="/success" element={<Navigate to="/start" replace />} />
-
-      <Route path="/publications" element={<Navigate to="/insights" replace />} />
+      <Route path="/publications" element={<Navigate to="/books" replace />} />
       <Route path="/insights.html" element={<Navigate to="/insights" replace />} />
       <Route path="/insights/index" element={<Navigate to="/insights" replace />} />
       <Route path="/papers" element={<Navigate to="/insights" replace />} />
@@ -196,17 +162,14 @@ function AppRoutes() {
       <Route path="/institution/eric-chuang" element={<Navigate to="/eric-chuang" replace />} />
       <Route path="/cooperation" element={<Navigate to="/engagement" replace />} />
       <Route path="/contact.html" element={<Navigate to="/start" replace />} />
-
       <Route path="/humanistic-20q" element={<ExternalRedirect url={HUMANISTIC_INTERVIEW_URL} />} />
       <Route path="/institution/gcsda" element={<ExternalRedirect url={GCSDA_URL} />} />
       <Route path="/gcsda.html" element={<ExternalRedirect url={GCSDA_URL} />} />
-
-      <Route path="/internal-compliance" element={<Navigate to="/insights" replace />} />
-      <Route path="/internal-compliance/pillars" element={<Navigate to="/insights" replace />} />
+      <Route path="/internal-compliance" element={<Navigate to="/books#internal-compliance" replace />} />
+      <Route path="/internal-compliance/pillars" element={<Navigate to="/books#internal-compliance" replace />} />
       <Route path="/internal-compliance/simulator" element={<Navigate to="/problems" replace />} />
       <Route path="/internal-compliance/academic" element={<Navigate to="/insights" replace />} />
-      <Route path="/internal-compliance/publication" element={<Navigate to="/insights" replace />} />
-
+      <Route path="/internal-compliance/publication" element={<Navigate to="/books#internal-compliance" replace />} />
       <Route path="/governance/corporate" element={<Navigate to="/problems" replace />} />
       <Route path="/governance/corporate/modules" element={<Navigate to="/problems" replace />} />
       <Route path="/governance/corporate/simulator" element={<Navigate to="/problems" replace />} />
@@ -220,13 +183,11 @@ function AppRoutes() {
       <Route path="/governance/digital/console" element={<Navigate to="/problems#ai-decision-governance" replace />} />
       <Route path="/governance/digital/academic" element={<Navigate to="/insights" replace />} />
       <Route path="/governance/esgai" element={<Navigate to="/problems#ai-decision-governance" replace />} />
-
       <Route path="/legal" element={<Navigate to="/professional-boundary" replace />} />
       <Route path="/legal/privacy" element={<Navigate to="/privacy" replace />} />
       <Route path="/legal/ai-usage-disclosure" element={<Navigate to="/professional-boundary" replace />} />
       <Route path="/legal/:slug" element={<Navigate to="/professional-boundary" replace />} />
       <Route path="/digital-product-policy" element={<Navigate to="/professional-boundary" replace />} />
-
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
@@ -241,10 +202,6 @@ function AppFrame() {
     frame = requestAnimationFrame(raf);
     return () => { cancelAnimationFrame(frame); lenis.destroy(); };
   }, []);
-
   return <PublicShell><AppRoutes /></PublicShell>;
 }
-
-export default function App() {
-  return <BrowserRouter><AppFrame /></BrowserRouter>;
-}
+export default function App() { return <BrowserRouter><AppFrame /></BrowserRouter>; }
