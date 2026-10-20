@@ -27,20 +27,29 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Validate unchanged accepted questionnaire and original catalog
+      - name: Validate unchanged accepted questionnaire and original article fields
         run: |
+          set -euo pipefail
           mkdir -p qa-publication-separation
+          git fetch --depth=1 origin 06c460c8fe84c81ff3184e93167b1c02ae5887f8
           python3 - <<'PY'
           from pathlib import Path
-          import hashlib
-          expected={'public/humanistic-interview/index.html':'6b0ad4acf014f3dbfda2397f2b7db5597290b677','public/humanistic-interview/interview.js':'4fb411cb3a72806f6eb5a57923778f18b78448c8','public/data/mmedia-catalog.json':'52f0a3fa2d9ff681c1a4e1d6ab82a45b92f4c915'}
+          import hashlib,json,subprocess
+          expected={'public/humanistic-interview/index.html':'6b0ad4acf014f3dbfda2397f2b7db5597290b677','public/humanistic-interview/interview.js':'4fb411cb3a72806f6eb5a57923778f18b78448c8'}
           for name,expected_sha in expected.items():
             raw=Path(name).read_bytes()
             actual=hashlib.sha1(b'blob '+str(len(raw)).encode()+b'\0'+raw).hexdigest()
             assert actual==expected_sha,name
-          print('Accepted questionnaire and all original source records unchanged')
+          original=json.loads(subprocess.check_output(['git','show','06c460c8fe84c81ff3184e93167b1c02ae5887f8:public/data/mmedia-catalog.json'],text=True))
+          current=json.loads(Path('public/data/mmedia-catalog.json').read_text())
+          records={a['id']:a for a in current['articles']}
+          assert len(records)==len(current['articles']),'Duplicate source article ids'
+          for article in original['articles']:
+            assert records.get(article['id'])==article,'Original article changed: '+article['id']
+          evidence={'original_records':len(original['articles']),'current_records':len(records),'original_records_preserved':True,'current_synced_at':current.get('syncedAt'),'timestamp_is_not_article_content':True}
+          Path('qa-publication-separation/source-preservation.json').write_text(json.dumps(evidence,ensure_ascii=False,indent=2))
+          print('Accepted questionnaire and all original article fields unchanged; sync timestamp may advance')
           PY
-          git fetch --depth=1 origin 06c460c8fe84c81ff3184e93167b1c02ae5887f8
           git diff --exit-code 06c460c8fe84c81ff3184e93167b1c02ae5887f8 HEAD -- api public/humanistic-interview public/books src/styles/interview-entry-navigation.css
       - name: Build and validate publication data
         run: |
