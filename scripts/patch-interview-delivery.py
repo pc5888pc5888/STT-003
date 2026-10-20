@@ -15,8 +15,7 @@ def patch_page(s):
  s=s.replace('id="netlify-form"','id="interview-form"')
  old='<div class="bottom-tools"><button class="tool-btn" id="save-now" title="立即保存" type="button">✓</button><button class="tool-btn" id="export-json" title="匯出 JSON" type="button">⇩</button></div>'
  new='<div class="bottom-tools delivery-tools" aria-label="回答工具"><button class="tool-btn" id="toolbar-copy" type="button">複製</button><button class="tool-btn" id="save-now" type="button">儲存</button><button class="tool-btn" id="toolbar-download" type="button">下載</button><button class="tool-btn" id="toolbar-submit" type="button">送出</button></div>'
- assert s.count(old)==1
- s=s.replace(old,new)
+ assert s.count(old)==1;s=s.replace(old,new)
  marker='<div class="backup-actions">';assert s.count(marker)==1
  s=s.replace(marker,marker+'\n<button class="ghost" id="save-draft-final" type="button">儲存可續填草稿</button>',1)
  welcome=s.index('<section class="screen landing active"');end=s.index('</section>',welcome);close=s.rfind('</div>',welcome,end)
@@ -25,7 +24,8 @@ def patch_page(s):
  style='''<style id="delivery-controls-style">
 .bottom-tools.delivery-tools{left:50%!important;right:auto!important;bottom:max(12px,env(safe-area-inset-bottom))!important;transform:translateX(-50%);display:flex;gap:6px!important;max-width:calc(100vw - 20px);padding:6px;border-radius:18px;background:var(--paper)}
 .bottom-tools.delivery-tools .tool-btn{width:auto!important;min-width:58px!important;min-height:44px!important;height:44px!important;border-radius:12px;font-size:14px;padding:0 10px;white-space:nowrap}
-.screen{padding-bottom:110px!important}.nav-row{bottom:80px!important}
+.screen{padding-bottom:110px!important}
+@media(max-width:700px){.nav-row{bottom:80px!important}}
 #backup-preview[hidden]{display:none!important}
 </style>'''
  s=s.replace('</head>',style+'</head>',1)
@@ -44,17 +44,21 @@ def patch_config(c):
  c['headers']=[r for r in c.get('headers',[]) if r['source']!='/humanistic-interview/:path*']+[{'source':'/humanistic-interview/:path*','headers':[{'key':'Cache-Control','value':'no-store'},{'key':'Referrer-Policy','value':'same-origin'},{'key':'X-Content-Type-Options','value':'nosniff'}]}]
  return c
 def main():
+ out=Path('qa-interview');out.mkdir(exist_ok=True)
  p=Path('public/humanistic-interview/index.html');raw=p.read_bytes()
  if 'stt-delivery-version' not in raw.decode():assert gitsha(raw)=='abb06850a55ad0ac617ece96b52a4d80a2109614','Interview source changed; review before patch'
- assert Path('public/humanistic-interview/interview.js').is_file()
- p.write_text(patch_page(raw.decode()))
- app=Path('src/App.tsx');raw=app.read_bytes()
- if OLD in raw.decode():
-  assert gitsha(raw)=='64190b6f81ef0a823b5f0161da831b1b1e5a4a04','App changed; review routing before patch'
-  app.write_text(raw.decode().replace(OLD,'/humanistic-interview/'))
- config=Path('vercel.json');config.write_text(json.dumps(patch_config(json.loads(config.read_text())),ensure_ascii=False,indent=2)+'\n')
+ assert Path('public/humanistic-interview/interview.js').is_file();p.write_text(patch_page(raw.decode()))
+ changes=[]
  for f in Path('src').rglob('*'):
-  if f.is_file() and f.suffix in ('.ts','.tsx','.js','.jsx'):assert OLD not in f.read_text(errors='ignore'),f'Old active route still in {f}'
+  if not f.is_file() or f.suffix not in ('.ts','.tsx','.js','.jsx'):continue
+  original=f.read_text();count=original.count(OLD)
+  if count:
+   changed=original.replace(OLD,'/humanistic-interview/')
+   assert len(original)-len(changed)==count*(len(OLD)-len('/humanistic-interview/'))
+   f.write_text(changed);changes.append(str(f));print('INTERVIEW_URL_ONLY',str(f),count)
+  assert OLD not in f.read_text()
+ (out/'changed-source-files.txt').write_text(''.join(f+'\n' for f in changes))
+ config=Path('vercel.json');config.write_text(json.dumps(patch_config(json.loads(config.read_text())),ensure_ascii=False,indent=2)+'\n')
  assert not Path('.github/workflows/mirror-humanistic-interview.yml').exists()
- print('PATCH_APPLIED: interview page, App interview destination, Vercel aliases. Approved 20 questions/art/privacy preserved.')
+ print('PATCH_APPLIED: canonical interview, exact old-URL replacements, Vercel aliases. Approved20 questions/art/privacy preserved.')
 if __name__=='__main__':main()
