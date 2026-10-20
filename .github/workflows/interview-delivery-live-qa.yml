@@ -1,0 +1,35 @@
+name: Interview live delivery verification
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/interview-delivery-live-qa.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: interview-live-delivery-verification
+  cancel-in-progress: false
+jobs:
+  live-verification:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install browser verifier
+        run: |
+          python3 -m pip install playwright==1.57.0
+          python3 -m playwright install --with-deps chromium
+      - name: Verify canonical production route files and synthetic delivery
+        run: python3 scripts/interview-delivery-live-qa.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: interview-live-verification
+          path: qa-interview-live/
+          retention-days: 7
