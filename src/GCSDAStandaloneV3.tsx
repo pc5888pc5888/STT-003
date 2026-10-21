@@ -240,7 +240,7 @@ function FounderChairman(){return <div className="g4-page">
 
   <section className="g4-section"><div className="g4-wrap">
     <div className="g4-kicker">FOUNDING VISION</div>
-    <h2 className="g4-title">創會理念｜讓專業交流進入制度。</h2>
+    <h2 className="g4-title">創會理念｜讓專業交流進入制度</h2>
     <p className="g4-lead">一個專業共同體能否長久，不只取決於議題是否重要，更取決於它是否具備清楚的制度、責任邊界，以及能夠持續累積的共同語言。</p>
     <p className="g4-lead">企業所面對的重大問題，往往不只屬於單一專業。策略可能牽涉法律、財務、家族關係、權力配置與組織責任；永續、數位與 AI 的加入，更使企業治理逐漸成為跨領域、跨世代與跨制度的共同議題。</p>
     <p className="g4-lead">莊鈞翔博士創立 GCSDA，希望建立一個正式而持續的專業平台，使不同領域的參與者在保有各自專業責任的前提下，就策略、治理、法遵、風險與永續議題形成共同語言。學會追求的不是把不同專業混合成一種「全能答案」，而是讓不同專業在清楚的角色與責任邊界中，產生真正有價值的交流與合作。</p>
@@ -248,7 +248,7 @@ function FounderChairman(){return <div className="g4-page">
 
   <section className="g4-section soft"><div className="g4-wrap">
     <div className="g4-kicker">PROFESSIONAL & RESEARCH CONTEXT</div>
-    <h2 className="g4-title">治理、策略與永續，是同一個長期問題的不同面向。</h2>
+    <h2 className="g4-title">治理、策略與永續，是同一個長期問題的不同面向</h2>
     <p className="g4-lead">莊博士長期研究與實務關注企業治理、企業策略、公司治理與法遵、家族治理、企業接班、永續發展，以及 AI 與數位治理。核心關切始終是：當企業面對重大選擇時，如何使權力、責任、制度與專業回到正確位置，使決策不只可以執行，也能被理解、被追溯，並對其後果負責。</p>
     <div className="g4-grid">{founderDomains.map(([title,description],index)=><div className="g4-card" key={title}><span>{String(index+1).padStart(2,"0")}</span><h3>{title}</h3><p>{description}</p></div>)}</div>
   </div></section>
@@ -261,19 +261,19 @@ function FounderChairman(){return <div className="g4-page">
 
   <section className="g4-section soft"><div className="g4-wrap">
     <div className="g4-kicker">CURRENT POSITION</div>
-    <h2 className="g4-title">現任職務。</h2>
+    <h2 className="g4-title">現任職務</h2>
     <div className="g4-list">{founderPositions.map(position=><div className="g4-row" key={position}><b>POSITION</b><div>{position}</div></div>)}</div>
   </div></section>
 
   <section className="g4-section"><div className="g4-wrap">
     <div className="g4-kicker">SELECTED PUBLICATIONS</div>
-    <h2 className="g4-title">代表研究與著作。</h2>
+    <h2 className="g4-title">代表研究與著作</h2>
     <div className="g4-list">{founderSelectedPublications.map(title=><div className="g4-row" key={title}><b>PUBLICATION</b><div>{title}</div></div>)}</div>
   </div></section>
 
   <section className="g4-section soft"><div className="g4-wrap">
     <div className="g4-kicker">INSTITUTIONAL BOUNDARY</div>
-    <h2 className="g4-title">創會者提出方向，制度決定權力如何被使用。</h2>
+    <h2 className="g4-title">創會者提出方向，制度決定權力如何被使用</h2>
     <p className="g4-lead">創會理事長代表學會成立初衷、治理方向與制度精神，但不等同於學會全部權力。GCSDA 的正式治理仍依會員大會、理事會、監事會、章程及正式會務程序運作。</p>
     <div className="g4-note"><h3>GCSDA 與 STT Governance 為不同機構主體</h3><p>莊鈞翔博士同時為 STT Governance 創辦人；兩者可在治理知識、研究與內容上互相連結，但學會的會員、章程、理監事治理與法定責任仍由 GCSDA 自身制度承擔。</p></div>
   </div></section>
