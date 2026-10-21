@@ -27,3 +27,7 @@ The `/governance` page incorrectly appended a full personal AuthorProfile after 
 - Existing approved 001–008 hero assets and their route mapping
 - Other GCSDA page copy/routes
 - STT main branch and STT website
+
+## Implementation note
+
+The first deployment exposed a routing defect: Vite generated `gcsda-founder-chairman.html`, but `vercel.json` did not yet rewrite `/founder-chairman` to that static route, so the public URL returned 404. The rewrite is now explicitly added and must be verified on the canonical public alias before this change is considered QA complete.

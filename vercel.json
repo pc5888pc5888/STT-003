@@ -5,6 +5,10 @@
       "destination": "/gcsda-about.html"
     },
     {
+      "source": "/founder-chairman",
+      "destination": "/gcsda-founder-chairman.html"
+    },
+    {
       "source": "/governance",
       "destination": "/gcsda-governance.html"
     },
