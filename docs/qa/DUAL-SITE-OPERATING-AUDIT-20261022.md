@@ -138,3 +138,28 @@ Prepare now, but do not publish:
 Until these are closed:
 WEBSITE_STATUS = ACTIVE_BUILD
 LINE = HOLD
+
+
+## Additional hardening completed during audit
+
+### 7. Public-deployment AI key exposure — CORRECTED
+A sensitive `VITE_GEMINI_API_KEY` environment variable was present in production/preview targets. Current public sites do not require it. The variable was retargeted to development only; its secret value was not read or copied.
+
+### 8. Baseline HTTP security headers — CORRECTED
+Both STT and GCSDA now define global:
+- X-Content-Type-Options: nosniff
+- Referrer-Policy: strict-origin-when-cross-origin
+- X-Frame-Options: SAMEORIGIN
+- Permissions-Policy: camera=(), microphone=(), geolocation=()
+
+### 9. Institutional domain maturity — HIGH
+Both canonical sites currently use vercel.app hostnames. For a high-trust institutional platform, owner-approved custom domains should be considered before final BUILD_LOCK and Search Console setup.
+
+SOURCE_REQUIRED:
+- approved STT canonical custom domain
+- approved GCSDA canonical custom domain
+
+Do not invent or purchase domains without owner approval.
+
+### 10. Founder metadata — CORRECTED
+GCSDA /founder-chairman now uses profile Open Graph metadata, the approved founder portrait as social image, and Person structured data alongside the association Organization schema.
