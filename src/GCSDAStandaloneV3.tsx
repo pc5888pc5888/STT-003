@@ -1,4 +1,3 @@
-import AuthorProfile from "./components/AuthorProfile";
 // GCSDA independent association site; STT classical architecture language is intentionally excluded.
 import GovernedHero from "./components/GovernedHero";
 import "./styles/cis-page-system.css";
@@ -107,6 +106,37 @@ const councilPhotoMembers = [
   ["08", "賴祺元 律師", "理事", "賴祺元律師事務所 所長"],
 ] as const;
 
+const founderDomains = [
+  ["企業治理與重大決策", "關注企業在重大選擇中的權力、責任、風險與制度安排。"],
+  ["公司治理與法遵", "從治理結構與內部合規角度，理解制度如何進入組織決策。"],
+  ["家族治理與企業接班", "研究家族價值、接班安排與跨世代治理的長期秩序。"],
+  ["策略與營運治理", "將企業策略、營運風險與組織責任放在同一治理脈絡中理解。"],
+  ["永續與減碳治理", "連結 ESG、減碳管理與企業長期治理能力。"],
+  ["AI 與數位治理", "關注 AI 能力、限制、人機責任與企業數位治理邊界。"],
+] as const;
+
+const founderSelectedBackground = [
+  ["AI／數位治理", "已完成 21 項 Anthropic AI／Claude 專業課程，內容涵蓋 Claude Platform、Claude Code、API、Amazon Bedrock、Google Vertex AI、AI Fluency、MCP、Agent Skills、Subagents 與 AI Workflow；並取得 Google for Education｜Gemini Certified Educator 資格。"],
+  ["永續／減碳", "具永續發展碳管理 SDCMM 甲級管理師、ESG 不動產淨零 RENZM 甲級管理師，以及中華經濟研究院綠色經濟研究中心減碳管理師等專業資格。"],
+  ["法遵／勞資治理", "具兩岸勞資法務管理甲級管理師資格；相關訓練課程經 TÜV Rheinland 審查認證。"],
+] as const;
+
+const founderPositions = [
+  "STT Governance 策略智庫｜創辦人暨執行長",
+  "中華企業策略永續發展學會｜創會理事長",
+  "臺灣厝買賣文化發展協會｜永續長",
+  "逢甲大學商學院｜兼任助理教授",
+  "M 傳媒法律策略專欄｜特約評論（外部第三方媒體）",
+] as const;
+
+const founderSelectedPublications = [
+  "內在法遵 Internal Compliance｜為你的內心，打造一座不可侵犯的至聖所",
+  "內在法遵 AI Governance｜為你的判斷，守住最後不可外包的決定權",
+  "內在法遵 Family Governance｜為你的家族，留下比財富更能穿越世代的秩序",
+  "2026 永續家族治理實務錄",
+  "臺灣企業接班人的佈局規劃與傳承家族價值",
+] as const;
+
 const charterHighlights = [
   ["宗旨", "推廣公司治理法遵精神，促進企業智庫策略有效應用，建構企業界、民間團體及學術界之跨界交流平台，強化風險控管並提升企業永續發展動能。"],
   ["策略圭臬", "策略為先、治理為本、管理為終。"],
@@ -201,7 +231,54 @@ function Home(){return <><GovernedHero kicker="GCSDA · NATIONAL PROFESSIONAL AS
 
 function About(){return <div className="g4-page"><PageHead eyebrow="INSTITUTIONAL IDENTITY" title="讓企業、專業與學術在治理議題上，形成可以持續對話的正式共同體。" lead="GCSDA 以公司治理法遵、企業策略、風險控管、跨界交流與永續發展為核心，透過正式社團制度，把一次性交流轉化為可以逐年累積的組織與知識。"/><section className="g4-section"><div className="g4-wrap"><div className="g4-list">{charterHighlights.slice(0,3).map(([a,b])=><div className="g4-row" key={a}><b>{a}</b><div>{b}</div></div>)}<div className="g4-row"><b>法定立案</b><div>內政部 114/8 台內團字第 1140030747 號。</div></div></div><div className="g4-note"><h2>GCSDA 與 STT Governance 是不同機構主體。</h2><p>兩者可以在治理知識、活動或內容上形成合作與互相連結，但學會的會員大會、理事會、監事會、章程與法定責任不由 STT 取代；STT 亦不因連結學會而成為學會之法定機關。</p></div></div></section></div>}
 
-function FounderChairman(){return <div className="g4-page"><PageHead eyebrow="FOUNDER CHAIRMAN" title="創會理事長｜莊鈞翔博士" lead="莊鈞翔博士為中華企業策略永續發展學會創會理事長。本頁獨立說明其學會角色、治理與研究脈絡；學會之法定權力與會務程序仍依會員大會、理事會、監事會及章程運作。"/><section className="g4-section"><div className="g4-wrap"><div className="g4-kicker">FOUNDING ROLE</div><h2 className="g4-title">創會角色與制度邊界</h2><p className="g4-lead">創會理事長負責提出學會成立方向與治理精神，推動企業、專業與學術在策略、治理、法遵與永續議題上形成可持續的正式交流；創會身分不取代學會依法設置之會員大會、理事會、監事會及正式會務程序。</p><div className="g4-note"><h3>GCSDA 與 STT Governance 為不同機構主體</h3><p>莊鈞翔博士同時為 STT Governance 創辦人；兩者可在治理知識、研究與內容上互相連結，但學會的會員、章程、理監事治理與法定責任仍由 GCSDA 自身制度承擔。</p></div></div></section><section className="g4-section soft"><div className="g4-wrap"><AuthorProfile showName /></div></section></div>}
+function FounderChairman(){return <div className="g4-page">
+  <PageHead
+    eyebrow="FOUNDER CHAIRMAN"
+    title="創會理事長｜莊鈞翔博士"
+    lead="莊鈞翔博士為中華企業策略永續發展學會創會理事長。創會的核心，不是增加一個活動平台，而是讓企業、專業與學術在治理議題上形成可以持續累積的正式共同體。"
+  />
+
+  <section className="g4-section"><div className="g4-wrap">
+    <div className="g4-kicker">FOUNDING VISION</div>
+    <h2 className="g4-title">創會理念｜讓專業交流進入制度。</h2>
+    <p className="g4-lead">一個專業共同體能否長久，不只取決於議題是否重要，更取決於它是否具備清楚的制度、責任邊界，以及能夠持續累積的共同語言。</p>
+    <p className="g4-lead">企業所面對的重大問題，往往不只屬於單一專業。策略可能牽涉法律、財務、家族關係、權力配置與組織責任；永續、數位與 AI 的加入，更使企業治理逐漸成為跨領域、跨世代與跨制度的共同議題。</p>
+    <p className="g4-lead">莊鈞翔博士創立 GCSDA，希望建立一個正式而持續的專業平台，使不同領域的參與者在保有各自專業責任的前提下，就策略、治理、法遵、風險與永續議題形成共同語言。學會追求的不是把不同專業混合成一種「全能答案」，而是讓不同專業在清楚的角色與責任邊界中，產生真正有價值的交流與合作。</p>
+  </div></section>
+
+  <section className="g4-section soft"><div className="g4-wrap">
+    <div className="g4-kicker">PROFESSIONAL & RESEARCH CONTEXT</div>
+    <h2 className="g4-title">治理、策略與永續，是同一個長期問題的不同面向。</h2>
+    <p className="g4-lead">莊博士長期研究與實務關注企業治理、企業策略、公司治理與法遵、家族治理、企業接班、永續發展，以及 AI 與數位治理。核心關切始終是：當企業面對重大選擇時，如何使權力、責任、制度與專業回到正確位置，使決策不只可以執行，也能被理解、被追溯，並對其後果負責。</p>
+    <div className="g4-grid">{founderDomains.map(([title,description],index)=><div className="g4-card" key={title}><span>{String(index+1).padStart(2,"0")}</span><h3>{title}</h3><p>{description}</p></div>)}</div>
+  </div></section>
+
+  <section className="g4-section"><div className="g4-wrap">
+    <div className="g4-kicker">SELECTED PROFESSIONAL BACKGROUND</div>
+    <h2 className="g4-title">代表性專業背景。</h2>
+    <p className="g4-lead">以下僅呈現與學會創會脈絡直接相關的代表性專業背景；課程完成、專業資格與個人認證依其實際性質分別表述，不將所有學習紀錄統稱為「國際認證」。</p>
+    <div className="g4-grid">{founderSelectedBackground.map(([title,description],index)=><div className="g4-card" key={title}><span>{String(index+1).padStart(2,"0")}</span><h3>{title}</h3><p>{description}</p></div>)}</div>
+  </div></section>
+
+  <section className="g4-section soft"><div className="g4-wrap">
+    <div className="g4-kicker">CURRENT POSITION</div>
+    <h2 className="g4-title">現任職務。</h2>
+    <div className="g4-list">{founderPositions.map(position=><div className="g4-row" key={position}><b>POSITION</b><div>{position}</div></div>)}</div>
+  </div></section>
+
+  <section className="g4-section"><div className="g4-wrap">
+    <div className="g4-kicker">SELECTED PUBLICATIONS</div>
+    <h2 className="g4-title">代表研究與著作。</h2>
+    <div className="g4-list">{founderSelectedPublications.map(title=><div className="g4-row" key={title}><b>PUBLICATION</b><div>{title}</div></div>)}</div>
+  </div></section>
+
+  <section className="g4-section soft"><div className="g4-wrap">
+    <div className="g4-kicker">INSTITUTIONAL BOUNDARY</div>
+    <h2 className="g4-title">創會者提出方向，制度決定權力如何被使用。</h2>
+    <p className="g4-lead">創會理事長代表學會成立初衷、治理方向與制度精神，但不等同於學會全部權力。GCSDA 的正式治理仍依會員大會、理事會、監事會、章程及正式會務程序運作。</p>
+    <div className="g4-note"><h3>GCSDA 與 STT Governance 為不同機構主體</h3><p>莊鈞翔博士同時為 STT Governance 創辦人；兩者可在治理知識、研究與內容上互相連結，但學會的會員、章程、理監事治理與法定責任仍由 GCSDA 自身制度承擔。</p></div>
+  </div></section>
+</div>}
 
 function Governance(){return <div className="g4-page"><PageHead eyebrow="INSTITUTIONAL GOVERNANCE" title="學會本身先接受治理：權力來源、任期、職權與責任都應可被理解。" lead="網站公開學會正式治理架構與第一屆理監事名錄；具體人數、職權、任期與程序以章程及正式會務文件為準。"/><section className="g4-section"><div className="g4-wrap"><div className="g4-grid">{[["01","會員大會","作為學會正式治理體系的一部分，其法定職權依章程與人民團體相關規範。"],["02","理事會","理事 9 人、常務理事 3 人；理事長、副理事長與候補理事之配置依正式章程。"],["03","監事會","監事 3 人、常務監事 1 人、候補監事 1 人；負責監察相關職權。"]].map(x=><div className="g4-card" key={x[0]}><span>{x[0]}</span><h2>{x[1]}</h2><p>{x[2]}</p></div>)}</div><div className="g4-kicker" style={{marginTop:58}}>FIRST BOARD & SUPERVISORS</div><h2 className="g4-title">第一屆理監事會</h2><div className="g4-directory">{directory.map(([role,name,title])=><div className="g4-person" key={`${role}-${name}`}><small>{role}</small><h3>{name}</h3>{title&&<p>{title}</p>}</div>)}</div><div className="g4-note"><h3>職務資訊</h3><p>名錄以學會職務為主；外部機構職銜僅在有正式公開依據時呈現，並以本人或所屬機構最新公開資訊為準。</p></div></div></section></div>}
 
