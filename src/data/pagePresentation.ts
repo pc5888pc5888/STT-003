@@ -7,12 +7,12 @@ export const PAGE_PRESENTATION: Record<string, PagePresentation> = {
       "成為共同語言。"
     ],
     "type": 2,
-    "image": "/visual-bank/gcsda/home-approved.webp",
+    "image": "/visual-bank/gcsda/001.webp",
     "originalTitle": "讓策略、治理與永續，成為共同語言。",
     "context": null,
     "portrait": false,
-    "imageWidth": 1672,
-    "imageHeight": 941
+    "imageWidth": 1200,
+    "imageHeight": 675
   },
   "/about": {
     "lines": [
@@ -20,12 +20,12 @@ export const PAGE_PRESENTATION: Record<string, PagePresentation> = {
       "在治理議題上持續對話。"
     ],
     "type": 2,
-    "image": "/visual-bank/gcsda/about.png",
+    "image": "/visual-bank/gcsda/002.webp",
     "originalTitle": "讓企業、專業與學術在治理議題上，形成可以持續對話的正式共同體。",
     "context": "讓企業、專業與學術在治理議題上，形成可以持續對話的正式共同體。",
     "portrait": false,
-    "imageWidth": 1672,
-    "imageHeight": 941
+    "imageWidth": 1200,
+    "imageHeight": 675
   },
   "/governance": {
     "lines": [
@@ -34,12 +34,12 @@ export const PAGE_PRESENTATION: Record<string, PagePresentation> = {
       "都應可被理解。"
     ],
     "type": 3,
-    "image": "/visual-bank/gcsda/governance.png",
+    "image": "/visual-bank/gcsda/003.webp",
     "originalTitle": "學會本身先接受治理：權力來源、任期、職權與責任都應可被理解。",
     "context": null,
     "portrait": false,
-    "imageWidth": 1672,
-    "imageHeight": 941
+    "imageWidth": 1200,
+    "imageHeight": 675
   },
   "/council": {
     "lines": [
@@ -47,12 +47,12 @@ export const PAGE_PRESENTATION: Record<string, PagePresentation> = {
       "不等於權責混同。"
     ],
     "type": 2,
-    "image": "/visual-bank/gcsda/council.png",
+    "image": "/visual-bank/gcsda/004.webp",
     "originalTitle": "跨域專業，不等於權責混同。",
     "context": null,
     "portrait": false,
-    "imageWidth": 1672,
-    "imageHeight": 941
+    "imageWidth": 1200,
+    "imageHeight": 675
   },
   "/membership": {
     "lines": [
@@ -60,12 +60,12 @@ export const PAGE_PRESENTATION: Record<string, PagePresentation> = {
       "形成專業共同體。"
     ],
     "type": 2,
-    "image": "/visual-bank/gcsda/membership.png",
+    "image": "/visual-bank/gcsda/005.webp",
     "originalTitle": "加入學會，是進入一個以策略、治理、法遵與永續為共同語言的專業共同體。",
     "context": "加入學會，是進入一個以策略、治理、法遵與永續為共同語言的專業共同體。",
     "portrait": false,
-    "imageWidth": 1672,
-    "imageHeight": 941
+    "imageWidth": 1200,
+    "imageHeight": 675
   },
   "/events": {
     "lines": [
@@ -73,12 +73,12 @@ export const PAGE_PRESENTATION: Record<string, PagePresentation> = {
       "知識累積的正式紀錄。"
     ],
     "type": 2,
-    "image": "/visual-bank/gcsda/events.png",
+    "image": "/visual-bank/gcsda/006.webp",
     "originalTitle": "活動不是一次性聚會，而是學會制度運作與知識累積的正式紀錄。",
     "context": "活動不是一次性聚會，而是學會制度運作與知識累積的正式紀錄。",
     "portrait": false,
-    "imageWidth": 1672,
-    "imageHeight": 941
+    "imageWidth": 1200,
+    "imageHeight": 675
   },
   "/knowledge": {
     "lines": [
@@ -86,24 +86,24 @@ export const PAGE_PRESENTATION: Record<string, PagePresentation> = {
       "沉澱為可傳承的治理知識。"
     ],
     "type": 2,
-    "image": "/visual-bank/gcsda/knowledge.png",
+    "image": "/visual-bank/gcsda/007.webp",
     "originalTitle": "讓活動與交流沉澱為可以再次學習、引用與傳承的治理知識。",
     "context": "讓活動與交流沉澱為可以再次學習、引用與傳承的治理知識。",
     "portrait": false,
-    "imageWidth": 1672,
-    "imageHeight": 941
+    "imageWidth": 1200,
+    "imageHeight": 675
   },
   "/charter": {
     "lines": [
       "章程與公告"
     ],
     "type": 1,
-    "image": "/visual-bank/gcsda/charter.png",
+    "image": "/visual-bank/gcsda/008.webp",
     "originalTitle": "章程不是網站附件，而是學會權力來源、會員權利義務與制度運作的正式依據。",
     "context": "章程不是網站附件，而是學會權力來源、會員權利義務與制度運作的正式依據。",
     "portrait": false,
-    "imageWidth": 1672,
-    "imageHeight": 941
+    "imageWidth": 1200,
+    "imageHeight": 675
   },
   "/privacy": {
     "lines": [
