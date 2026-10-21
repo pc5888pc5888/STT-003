@@ -8,6 +8,10 @@ export const GCSDA_META: Record<string,{title:string;description:string}> = {
     "title": "關於學會｜GCSDA",
     "description": "認識中華企業策略永續發展學會的成立宗旨、法定身分與治理定位。"
   },
+  "/founder-chairman": {
+    "title": "創會理事長｜莊鈞翔博士｜GCSDA",
+    "description": "認識中華企業策略永續發展學會創會理事長莊鈞翔博士之學會角色、治理與研究脈絡。"
+  },
   "/governance": {
     "title": "組織治理｜GCSDA",
     "description": "了解中華企業策略永續發展學會的會員大會、理事會、監事會與第一屆理監事治理架構。"

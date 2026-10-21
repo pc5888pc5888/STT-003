@@ -44,6 +44,7 @@ function splitBalancedTitle(title:string){
 const pageVisuals:Record<string,string|undefined>={
   "/":"/visual-bank/gcsda/001.webp",
   "/about":"/visual-bank/gcsda/002.webp",
+  "/founder-chairman":undefined,
   "/governance":"/visual-bank/gcsda/003.webp",
   "/council":"/visual-bank/gcsda/004.webp",
   "/membership":"/visual-bank/gcsda/005.webp",
@@ -56,6 +57,7 @@ const pageVisuals:Record<string,string|undefined>={
 const pageDescriptions:Record<string,string>={
   "/":"中華企業策略永續發展學會連結企業、專業與學術，透過正式組織、章程、會員共同體與跨域交流，累積治理知識與實務連結。",
   "/about":"認識中華企業策略永續發展學會的成立宗旨、法定身分與治理定位。",
+  "/founder-chairman":"認識中華企業策略永續發展學會創會理事長莊鈞翔博士之學會角色、治理與研究脈絡。",
   "/governance":"了解中華企業策略永續發展學會的會員大會、理事會、監事會與第一屆理監事治理架構。",
   "/council":"了解策略治理聯席會的議題導向、專業邊界與跨域治理交流定位。",
   "/membership":"了解中華企業策略永續發展學會會員資格、會費與入會程序。",
@@ -67,6 +69,7 @@ const pageDescriptions:Record<string,string>={
 
 const navItems = [
   ["關於學會", "/about"],
+  ["創會理事長", "/founder-chairman"],
   ["組織治理", "/governance"],
   ["策略治理聯席會", "/council"],
   ["會員與入會", "/membership"],
@@ -149,6 +152,7 @@ function Shell({children}:{children:ReactNode}){
     const labels:Record<string,string>={
       "/":"GCSDA｜中華企業策略永續發展學會",
       "/about":"關於學會｜GCSDA",
+      "/founder-chairman":"創會理事長｜莊鈞翔博士｜GCSDA",
       "/governance":"組織治理｜GCSDA",
       "/council":"策略治理聯席會｜GCSDA",
       "/membership":"會員與入會｜GCSDA",
@@ -197,7 +201,9 @@ function Home(){return <><GovernedHero kicker="GCSDA · NATIONAL PROFESSIONAL AS
 
 function About(){return <div className="g4-page"><PageHead eyebrow="INSTITUTIONAL IDENTITY" title="讓企業、專業與學術在治理議題上，形成可以持續對話的正式共同體。" lead="GCSDA 以公司治理法遵、企業策略、風險控管、跨界交流與永續發展為核心，透過正式社團制度，把一次性交流轉化為可以逐年累積的組織與知識。"/><section className="g4-section"><div className="g4-wrap"><div className="g4-list">{charterHighlights.slice(0,3).map(([a,b])=><div className="g4-row" key={a}><b>{a}</b><div>{b}</div></div>)}<div className="g4-row"><b>法定立案</b><div>內政部 114/8 台內團字第 1140030747 號。</div></div></div><div className="g4-note"><h2>GCSDA 與 STT Governance 是不同機構主體。</h2><p>兩者可以在治理知識、活動或內容上形成合作與互相連結，但學會的會員大會、理事會、監事會、章程與法定責任不由 STT 取代；STT 亦不因連結學會而成為學會之法定機關。</p></div></div></section></div>}
 
-function Governance(){return <div className="g4-page"><PageHead eyebrow="INSTITUTIONAL GOVERNANCE" title="學會本身先接受治理：權力來源、任期、職權與責任都應可被理解。" lead="網站公開學會正式治理架構與第一屆理監事名錄；具體人數、職權、任期與程序以章程及正式會務文件為準。"/><section className="g4-section"><div className="g4-wrap"><div className="g4-grid">{[["01","會員大會","作為學會正式治理體系的一部分，其法定職權依章程與人民團體相關規範。"],["02","理事會","理事 9 人、常務理事 3 人；理事長、副理事長與候補理事之配置依正式章程。"],["03","監事會","監事 3 人、常務監事 1 人、候補監事 1 人；負責監察相關職權。"]].map(x=><div className="g4-card" key={x[0]}><span>{x[0]}</span><h2>{x[1]}</h2><p>{x[2]}</p></div>)}</div><div className="g4-kicker" style={{marginTop:58}}>FIRST BOARD & SUPERVISORS</div><h2 className="g4-title">第一屆理監事會</h2><div className="g4-directory">{directory.map(([role,name,title])=><div className="g4-person" key={`${role}-${name}`}><small>{role}</small><h3>{name}</h3>{title&&<p>{title}</p>}</div>)}</div><div className="g4-note"><h3>職務資訊</h3><p>名錄以學會職務為主；外部機構職銜僅在有正式公開依據時呈現，並以本人或所屬機構最新公開資訊為準。</p></div></div></section><section className="g4-section"><div className="g4-wrap"><p className="g4-kicker">創會理事長</p><AuthorProfile showName /></div></section></div>}
+function FounderChairman(){return <div className="g4-page"><PageHead eyebrow="FOUNDER CHAIRMAN" title="創會理事長｜莊鈞翔博士" lead="莊鈞翔博士為中華企業策略永續發展學會創會理事長。本頁獨立說明其學會角色、治理與研究脈絡；學會之法定權力與會務程序仍依會員大會、理事會、監事會及章程運作。"/><section className="g4-section"><div className="g4-wrap"><div className="g4-kicker">FOUNDING ROLE</div><h2 className="g4-title">創會角色與制度邊界</h2><p className="g4-lead">創會理事長負責提出學會成立方向與治理精神，推動企業、專業與學術在策略、治理、法遵與永續議題上形成可持續的正式交流；創會身分不取代學會依法設置之會員大會、理事會、監事會及正式會務程序。</p><div className="g4-note"><h3>GCSDA 與 STT Governance 為不同機構主體</h3><p>莊鈞翔博士同時為 STT Governance 創辦人；兩者可在治理知識、研究與內容上互相連結，但學會的會員、章程、理監事治理與法定責任仍由 GCSDA 自身制度承擔。</p></div></div></section><section className="g4-section soft"><div className="g4-wrap"><AuthorProfile showName /></div></section></div>}
+
+function Governance(){return <div className="g4-page"><PageHead eyebrow="INSTITUTIONAL GOVERNANCE" title="學會本身先接受治理：權力來源、任期、職權與責任都應可被理解。" lead="網站公開學會正式治理架構與第一屆理監事名錄；具體人數、職權、任期與程序以章程及正式會務文件為準。"/><section className="g4-section"><div className="g4-wrap"><div className="g4-grid">{[["01","會員大會","作為學會正式治理體系的一部分，其法定職權依章程與人民團體相關規範。"],["02","理事會","理事 9 人、常務理事 3 人；理事長、副理事長與候補理事之配置依正式章程。"],["03","監事會","監事 3 人、常務監事 1 人、候補監事 1 人；負責監察相關職權。"]].map(x=><div className="g4-card" key={x[0]}><span>{x[0]}</span><h2>{x[1]}</h2><p>{x[2]}</p></div>)}</div><div className="g4-kicker" style={{marginTop:58}}>FIRST BOARD & SUPERVISORS</div><h2 className="g4-title">第一屆理監事會</h2><div className="g4-directory">{directory.map(([role,name,title])=><div className="g4-person" key={`${role}-${name}`}><small>{role}</small><h3>{name}</h3>{title&&<p>{title}</p>}</div>)}</div><div className="g4-note"><h3>職務資訊</h3><p>名錄以學會職務為主；外部機構職銜僅在有正式公開依據時呈現，並以本人或所屬機構最新公開資訊為準。</p></div></div></section></div>}
 
 function Council(){return <div className="g4-page"><PageHead eyebrow="STRATEGIC GOVERNANCE COUNCIL" title="跨域專業，不等於權責混同。" lead="策略治理聯席會以議題為中心，連結法律、會計、策略、產業與學術專業，在各自責任邊界內形成交流、研究與治理實務的共同語言。"/><section className="g4-section"><div className="g4-wrap"><div className="g4-grid">{[["01","議題導向","從企業治理、策略、法遵、永續與其他正式議題出發，不以固定專家名單製造全能顧問印象。"],["02","專業邊界","不同專業者只在其資格、經驗與責任範圍內提供意見；必要時由具正式資格者承接專業工作。"],["03","紀錄與成果","正式講座、交流紀錄或研究成果完成後再公開，不以尚未發生的合作或研究裝飾網站。"]].map(x=><div className="g4-card" key={x[0]}><span>{x[0]}</span><h2>{x[1]}</h2><p>{x[2]}</p></div>)}</div><div className="g4-council-evidence" id="council-members"><div className="g4-kicker">COUNCIL COMMUNITY</div><h2 className="g4-title">策略治理聯席會成員</h2><p className="g4-lead">聯席會以跨域專業交流為核心；不同專業者仍在各自資格、職權與責任邊界內參與討論與協作。</p><figure className="g4-council-photo"><img data-gcsda-council-photo src={GCSDA_COUNCIL_PHOTO_SRC} alt="策略治理聯席會成員團體照；下方依照片由左至右列出人物姓名與職銜" width="1672" height="941" loading="eager" decoding="async"/><figcaption>策略治理聯席會成員團體照，人物辨識依照片由左至右列示如下。（學會提供）</figcaption></figure><div className="g4-kicker" style={{marginTop:34}}>PHOTO IDENTIFICATION · LEFT TO RIGHT</div><h3 className="g4-title" style={{fontSize:"clamp(26px,3vw,36px)"}}>照片人物辨識｜由左至右</h3><div className="g4-directory" data-council-photo-identification>{councilPhotoMembers.map(([n,name,role,title])=><div className="g4-person" key={n}><small>{n} · {role}</small><h3>{name}</h3><p>{title}</p></div>)}</div></div><div className="g4-note"><h2>制度界線</h2><p>策略治理聯席會屬學會之專業協作／交流機制；除非正式章程或會員大會／理事會決議另有明文，不取代會員大會、理事會或監事會之法定職權。</p></div></div></section></div>}
 
@@ -361,7 +367,7 @@ function Privacy(){return <div className="g4-page"><PageHead eyebrow="PRIVACY" t
 
 function NotFound(){return <div className="g4-page"><PageHead eyebrow="404" title="找不到這個頁面。" lead="這個網址不在中華企業策略永續發展學會目前公開的正式網站路由中。"/><section className="g4-section"><div className="g4-wrap"><div className="g4-actions"><Link className="primary" to="/">回到學會首頁</Link></div></div></section></div>}
 
-function AppRoutes(){return <Routes><Route path="/" element={<Home/>}/><Route path="/about" element={<About/>}/><Route path="/governance" element={<Governance/>}/><Route path="/council" element={<Council/>}/><Route path="/membership" element={<Membership/>}/><Route path="/events" element={<Events/>}/><Route path="/knowledge" element={<Knowledge/>}/><Route path="/charter" element={<Charter/>}/><Route path="/privacy" element={<Privacy/>}/><Route path="*" element={<NotFound/>}/></Routes>}
+function AppRoutes(){return <Routes><Route path="/" element={<Home/>}/><Route path="/about" element={<About/>}/><Route path="/founder-chairman" element={<FounderChairman/>}/><Route path="/governance" element={<Governance/>}/><Route path="/council" element={<Council/>}/><Route path="/membership" element={<Membership/>}/><Route path="/events" element={<Events/>}/><Route path="/knowledge" element={<Knowledge/>}/><Route path="/charter" element={<Charter/>}/><Route path="/privacy" element={<Privacy/>}/><Route path="*" element={<NotFound/>}/></Routes>}
 export default function GCSDAStandaloneV3(){return <BrowserRouter><Shell><AppRoutes/></Shell></BrowserRouter>}
 
 /* 2026-09-24 owner correction: keep the approved image as one continuous canvas. */

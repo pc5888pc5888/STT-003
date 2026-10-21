@@ -27,6 +27,16 @@ export const PAGE_PRESENTATION: Record<string, PagePresentation> = {
     "imageWidth": 1200,
     "imageHeight": 675
   },
+  "/founder-chairman": {
+    "lines": [
+      "創會理事長｜莊鈞翔博士"
+    ],
+    "type": 1,
+    "image": null,
+    "originalTitle": "創會理事長｜莊鈞翔博士",
+    "context": null,
+    "portrait": false
+  },
   "/governance": {
     "lines": [
       "學會本身先接受治理：",
