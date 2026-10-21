@@ -66,7 +66,7 @@ export function EricPage(){
       kicker="GOVERNANCE PRINCIPAL"
       title={AUTHOR_PROFILE.chineseName}
       subtitle="STT Governance 創辦人暨治理總控者"
-      image="/visual-approved/eric-page-owner-original.png"
+      image="/visual-bank/stt/eric-governance-principal-hero.webp"
       imageFit="contain"
       imagePosition="right bottom"
       id="eric-title"
