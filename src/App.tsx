@@ -25,12 +25,12 @@ const PRIMARY_NAVIGATION = [
   { label: "STT 如何判讀", path: "/how-stt-works" },
   { label: "治理委任", path: "/engagement" },
   { label: "研究與出版", path: "/insights" },
+  { label: "莊鈞翔博士", path: "/eric-chuang" },
   { label: "受訪者專區", path: HUMANISTIC_INTERVIEW_URL },
   { label: "關於 STT", path: "/about" },
 ] as const;
 
 const SECONDARY_NAVIGATION = [
-  { label: "莊鈞翔博士", path: "/eric-chuang" },
   { label: "機構合作", path: "/institutions" },
 ] as const;
 
