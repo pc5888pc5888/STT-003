@@ -276,3 +276,131 @@
     object-position:center center!important;
   }
 }
+
+/* DUAL-SITE TYPOGRAPHY LOCK — 2026-10-22
+   Same semantic role = same typography across STT and GCSDA.
+   Brand identity remains in logo, color, content and institutional structure — not arbitrary type drift. */
+:root{
+  --gov-serif:"Noto Serif TC","Noto Serif CJK TC","Songti TC","PMingLiU",Georgia,serif;
+  --gov-sans:"Noto Sans TC","Noto Sans CJK TC",Inter,system-ui,sans-serif;
+  --gov-body:17px;
+  --gov-body-mobile:16px;
+  --gov-line:1.95;
+  --gov-nav:15px;
+  --gov-kicker:11px;
+  --gov-h1-1:48px;
+  --gov-h1-2:42px;
+  --gov-h1-3:36px;
+  --gov-h2:28px;
+  --gov-h3:22px;
+  --gov-card:16px;
+  --gov-meta:14px;
+}
+
+/* Base reading system */
+#root,#root .g4{
+  font-family:var(--gov-serif)!important;
+  font-size:var(--gov-body)!important;
+  line-height:var(--gov-line)!important;
+}
+#root main :where(p,dd,li),
+#root .g4 main :where(p,dd,li){
+  font-family:var(--gov-serif)!important;
+  font-size:var(--gov-body)!important;
+  line-height:var(--gov-line)!important;
+  letter-spacing:0!important;
+}
+#root main :where(h1,h2,h3),
+#root .g4 main :where(h1,h2,h3){
+  font-family:var(--gov-serif)!important;
+  font-weight:500!important;
+  letter-spacing:0!important;
+}
+#root main h2,#root .g4 main h2{font-size:var(--gov-h2)!important;line-height:1.55!important}
+#root main h3,#root .g4 main h3{font-size:var(--gov-h3)!important;line-height:1.55!important}
+
+/* Governed hero scale */
+#root .cis-title-1 .cis-title{font-size:var(--gov-h1-1)!important;line-height:1.35!important}
+#root .cis-title-2 .cis-title{font-size:var(--gov-h1-2)!important;line-height:1.4!important}
+#root .cis-title-3 .cis-title{font-size:var(--gov-h1-3)!important;line-height:1.45!important}
+#root .cis-kicker,
+#root :is(.stt-g1-kicker,.stt-g2-kicker,.stt-g3-kicker,.stt-g4-kicker,.stt-inst-kicker,.stt-insights-kicker,.g4-kicker){
+  font-family:var(--gov-sans)!important;
+  font-size:var(--gov-kicker)!important;
+  font-weight:600!important;
+  line-height:1.8!important;
+  letter-spacing:.12em!important;
+}
+#root .cis-hero .cis-lead,
+#root .g4 .cis-hero .cis-lead,
+#root :is(.stt-g1-lead,.stt-g2-group__lead,.stt-g4-boundary p,.stt-inst-body>p,.g4-lead){
+  font-family:var(--gov-serif)!important;
+  font-size:var(--gov-body)!important;
+  line-height:var(--gov-line)!important;
+}
+
+/* Navigation and actions */
+#root .stt-g0-nav-link,
+#root .g4-nav a{
+  font-family:var(--gov-serif)!important;
+  font-size:var(--gov-nav)!important;
+  font-weight:500!important;
+  line-height:1.5!important;
+  letter-spacing:0!important;
+}
+#root :is(.stt-g0-primary-cta,.cis-actions>a,.g4-actions a,.g4-actions button,.g4-join){
+  font-family:var(--gov-serif)!important;
+  font-size:var(--gov-nav)!important;
+  line-height:1.5!important;
+}
+
+/* Cards, rows, lists and metadata */
+#root :is(.stt-inst-grid p,.g4-card p,.g4-value p,.g4-person p){
+  font-family:var(--gov-serif)!important;
+  font-size:var(--gov-card)!important;
+  line-height:1.9!important;
+}
+#root :is(.stt-inst-list li,.g4-row,.g4-row div,.g4-step p,.g4-event p){
+  font-family:var(--gov-serif)!important;
+  font-size:var(--gov-body)!important;
+  line-height:1.9!important;
+}
+#root :is(.stt-g0-footer__links a,.g4-footer p,.g4-person small,.g4-row b,.g4-badge){
+  font-size:var(--gov-meta)!important;
+  line-height:1.7!important;
+}
+
+/* Paragraph rhythm: prose only, never headings / lists / UI */
+#root .stt-inst-body>p + p,
+#root .g4-founder-page .g4-lead + .g4-lead{
+  margin-top:18px!important;
+}
+#root .stt-eric-page .stt-inst-body>p:not(.stt-eric-quote),
+#root .g4-founder-page .g4-lead{
+  text-indent:2em!important;
+  text-align:justify!important;
+  text-justify:inter-ideograph!important;
+}
+#root .stt-eric-page .stt-eric-quote{ text-indent:0!important; }
+
+/* Section rhythm */
+#root :is(.stt-g1-section,.stt-g2-group,.stt-g3-step,.stt-g4-engagement-row,.stt-inst-section,.g4-section){
+  padding-top:62px!important;
+  padding-bottom:62px!important;
+}
+#root :is(.stt-g1-shell,.stt-g2-shell,.stt-g3-shell,.stt-g4-shell,.stt-inst-shell,.g4-wrap){
+  max-width:1180px!important;
+}
+
+/* Mobile uses the same hierarchy at one smaller reading size. */
+@media(max-width:560px){
+  #root,#root .g4{font-size:var(--gov-body-mobile)!important}
+  #root main :where(p,dd,li),#root .g4 main :where(p,dd,li){font-size:var(--gov-body-mobile)!important;line-height:1.9!important}
+  #root main h2,#root .g4 main h2{font-size:24px!important}
+  #root main h3,#root .g4 main h3{font-size:21px!important}
+  #root .cis-title-1 .cis-title{font-size:29px!important;line-height:1.45!important}
+  #root .cis-title-2 .cis-title{font-size:27px!important;line-height:1.45!important}
+  #root .cis-title-3 .cis-title{font-size:25px!important;line-height:1.5!important}
+  #root .cis-hero .cis-lead,#root .g4 .cis-hero .cis-lead{font-size:var(--gov-body-mobile)!important;line-height:1.9!important}
+  #root :is(.stt-g1-section,.stt-g2-group,.stt-g3-step,.stt-g4-engagement-row,.stt-inst-section,.g4-section){padding-top:40px!important;padding-bottom:40px!important}
+}
