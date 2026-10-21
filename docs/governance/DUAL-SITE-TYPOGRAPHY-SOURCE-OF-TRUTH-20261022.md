@@ -79,3 +79,29 @@ STT /eric-chuang and GCSDA /founder-chairman use:
 ## Change control
 
 Future page-specific CSS must not override this baseline without an explicit Change Request.
+
+
+## First-view geometry
+
+Owner-supplied desktop screenshots establish the navigation-entry visual reference.
+
+For every image-backed primary page on both sites:
+- canvas: 16:9
+- same hero top/bottom geometry at the same viewport
+- same copy left origin
+- desktop copy top anchor: 180px into hero
+- desktop H1: 48px / 1.38 for short, medium and long title classes
+- tablet copy top anchor: 50px
+- tablet H1: 36px / 1.42
+- same Kicker and Lead hierarchy
+- same image cover behavior and reading-field veil
+- portrait/person pages receive no special size or vertical-centering exception
+- mobile remains image-first, text-second
+
+STT /eric-chuang:
+- English byline follows H1 so it cannot shift the H1 anchor downward.
+
+GCSDA /founder-chairman:
+- must use the same first-view geometry as /about, /governance, /council, /membership, /events, /knowledge and /charter.
+
+Any page-specific CSS that changes these first-view proportions requires an explicit Change Request.
