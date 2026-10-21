@@ -115,3 +115,14 @@
   .stt-inst-section{padding:62px 0}
   .stt-inst-grid{grid-template-columns:1fr}
 }
+
+
+/* ERIC PROFILE EDITORIAL RHYTHM — narrative paragraphs use formal two-character first-line indentation. */
+.stt-eric-page .stt-inst-body>p:not(.stt-eric-quote){
+  text-indent:2em;
+  text-align:justify;
+  text-justify:inter-ideograph;
+}
+.stt-eric-page .stt-eric-quote{
+  text-indent:0;
+}

@@ -258,3 +258,21 @@
 #root .cis-with-image.cis-portrait::before{
   display:none!important;
 }
+
+
+/* PORTRAIT HERO GEOMETRY LOCK — STT and GCSDA person pages share the same 1672×941 desktop canvas. */
+@media(min-width:761px){
+  #root .cis-with-image.cis-portrait .cis-hero-inner,
+  #root .cis-with-image.cis-portrait .cis-hero-art{
+    aspect-ratio:1672 / 941!important;
+  }
+  #root .cis-with-image.cis-portrait .cis-hero-art{
+    overflow:hidden!important;
+  }
+  #root .cis-with-image.cis-portrait .cis-hero-art img{
+    width:100%!important;
+    height:100%!important;
+    object-fit:cover!important;
+    object-position:center center!important;
+  }
+}
