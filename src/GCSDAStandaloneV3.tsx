@@ -1,7 +1,7 @@
 // GCSDA independent association site; STT classical architecture language is intentionally excluded.
 import GovernedHero from "./components/GovernedHero";
 import "./styles/cis-page-system.css";
-import { FormEvent, useEffect, useRef, useState, type ReactNode } from "react";
+import { FormEvent, useEffect, useLayoutEffect, useRef, useState, type ReactNode } from "react";
 import { BrowserRouter, Link, NavLink, Route, Routes, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { applyGcsdaMetadata } from "./gcsdaMetadata";
@@ -176,8 +176,29 @@ function Styles(){return <style>{`
 
 @media(max-width:760px){.g4-brand{width:min(250px,calc(100vw - 105px));height:58px;flex:0 1 auto}.g4-brand img{width:100%;height:100%;max-width:none;max-height:none}.g4-membership-form label{grid-template-columns:1fr;gap:8px}.g4-form-stepper{grid-template-columns:repeat(2,minmax(0,1fr))}.g4-form-step-indicator{min-width:0;padding:13px 10px}.g4-form-step-indicator:nth-child(2){border-right:0}.g4-form-step-indicator:nth-child(-n+2){border-bottom:1px solid var(--line)}.g4-form-panel{padding:22px 18px}.g4-form-grid,.g4-choice-grid{grid-template-columns:1fr}.g4-form-summary>div{grid-template-columns:1fr;gap:4px}.g4-form-nav{flex-wrap:wrap}.g4-form-nav button{max-width:100%;white-space:normal}.g4-nav a.active:after{display:none}}`}</style>}
 
+function enforceHeadingTypography(root: ParentNode) {
+  root.querySelectorAll<HTMLElement>("h1,h2,h3").forEach((heading) => {
+    const walker = document.createTreeWalker(heading, NodeFilter.SHOW_TEXT);
+    let node: Node | null;
+    while ((node = walker.nextNode())) {
+      if (node.textContent?.includes("。")) {
+        node.textContent = node.textContent.replace(/。/g, "");
+      }
+    }
+  });
+}
+
 function Shell({children}:{children:ReactNode}){
   const loc=useLocation(); const[open,setOpen]=useState(false);
+  useLayoutEffect(()=>{
+    const main=document.getElementById("main-content");
+    if(!main)return;
+    const enforce=()=>enforceHeadingTypography(main);
+    enforce();
+    const observer=new MutationObserver(enforce);
+    observer.observe(main,{childList:true,subtree:true,characterData:true});
+    return()=>observer.disconnect();
+  },[loc.pathname]);
   useEffect(()=>{
     const labels:Record<string,string>={
       "/":"GCSDA｜中華企業策略永續發展學會",
