@@ -1,4 +1,4 @@
-import { useEffect, useState, type ReactNode } from "react";
+import { useEffect, useLayoutEffect, useState, type ReactNode } from "react";
 import { BrowserRouter, Link, Navigate, NavLink, Route, Routes, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import Lenis from "lenis";
@@ -39,10 +39,32 @@ function ExternalRedirect({ url }: { url: string }) {
   return <div className="stt-g0-redirect">正在前往外部頁面…</div>;
 }
 
+function enforceHeadingTypography(root: ParentNode) {
+  root.querySelectorAll<HTMLElement>("h1,h2,h3").forEach((heading) => {
+    const walker = document.createTreeWalker(heading, NodeFilter.SHOW_TEXT);
+    let node: Node | null;
+    while ((node = walker.nextNode())) {
+      if (node.textContent?.includes("。")) {
+        node.textContent = node.textContent.replace(/。/g, "");
+      }
+    }
+  });
+}
+
 function PublicShell({ children }: ShellProps) {
   const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
   const publicationPage = location.pathname === "/books" || location.pathname === "/columns" || location.pathname.startsWith("/columns/");
+
+  useLayoutEffect(() => {
+    const main = document.getElementById("main-content");
+    if (!main) return;
+    const enforce = () => enforceHeadingTypography(main);
+    enforce();
+    const observer = new MutationObserver(enforce);
+    observer.observe(main, { childList: true, subtree: true, characterData: true });
+    return () => observer.disconnect();
+  }, [location.pathname]);
 
   useEffect(() => {
     setMenuOpen(false);
