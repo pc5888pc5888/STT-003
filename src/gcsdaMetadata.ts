@@ -51,12 +51,12 @@ export function applyGcsdaMetadata(path:string){
  function set(key:string,value:string,property=false){const attr=property?"property":"name";let el=document.head.querySelector<HTMLMetaElement>(`meta[${attr}="${key}"]`);if(!el){el=document.createElement("meta");el.setAttribute(attr,key);document.head.appendChild(el);}el.content=value;}
  const title=meta?.title||"找不到頁面｜GCSDA",description=meta?.description||"中華企業策略永續發展學會網站導覽。";
  document.title=title;set("description",description);set("robots",origin&&meta?"index,follow":"noindex,follow");
- set("og:title",title,true);set("og:description",description,true);set("og:site_name","中華企業策略永續發展學會｜GCSDA",true);set("og:type","website",true);set("og:locale","zh_TW",true);
+ const isFounder=path==="/founder-chairman";set("og:title",title,true);set("og:description",description,true);set("og:site_name","中華企業策略永續發展學會｜GCSDA",true);set("og:type",isFounder?"profile":"website",true);set("og:locale","zh_TW",true);
  document.head.querySelectorAll('link[rel="canonical"]').forEach(el=>el.remove());
- document.getElementById("gcsda-organization-schema")?.remove();
+ document.getElementById("gcsda-organization-schema")?.remove();document.getElementById("gcsda-founder-schema")?.remove();
  if(origin&&meta){
-  const link=document.createElement("link");link.rel="canonical";link.href=origin+path;document.head.appendChild(link);set("og:url",origin+path,true);set("og:image",origin+"/images/gcsda-logo.png",true);set("og:image:alt","中華企業策略永續發展學會 GCSDA 標誌",true);
-  const schema=document.createElement("script");schema.id="gcsda-organization-schema";schema.type="application/ld+json";schema.text=JSON.stringify({"@context":"https://schema.org","@type":"Organization","name":"中華企業策略永續發展學會","alternateName":"GCSDA","url":origin,"logo":origin+"/images/gcsda-logo.png"});document.head.appendChild(schema);
+  const link=document.createElement("link");link.rel="canonical";link.href=origin+path;document.head.appendChild(link);set("og:url",origin+path,true);set("og:image",origin+(isFounder?"/visual-bank/gcsda/founder-chairman-hero.webp":"/images/gcsda-logo.png"),true);set("og:image:alt",isFounder?"創會理事長莊鈞翔博士":"中華企業策略永續發展學會 GCSDA 標誌",true);
+  const schema=document.createElement("script");schema.id="gcsda-organization-schema";schema.type="application/ld+json";schema.text=JSON.stringify({"@context":"https://schema.org","@type":"Organization","name":"中華企業策略永續發展學會","alternateName":"GCSDA","url":origin,"logo":origin+"/images/gcsda-logo.png"});document.head.appendChild(schema);if(isFounder){const person=document.createElement("script");person.id="gcsda-founder-schema";person.type="application/ld+json";person.text=JSON.stringify({"@context":"https://schema.org","@type":"Person","name":"莊鈞翔博士","url":origin+"/founder-chairman","image":origin+"/visual-bank/gcsda/founder-chairman-hero.webp","jobTitle":"創會理事長","affiliation":{"@type":"Organization","name":"中華企業策略永續發展學會","alternateName":"GCSDA","url":origin}});document.head.appendChild(person);}
  }
  else{document.head.querySelectorAll('meta[property="og:url"],meta[property="og:image"],meta[property="og:image:alt"]').forEach(el=>el.remove());}
 }
