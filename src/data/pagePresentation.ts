@@ -83,14 +83,14 @@ export const PAGE_PRESENTATION: Record<string, PagePresentation> = {
       AUTHOR_PROFILE.chineseName
     ],
     "type": 1,
-    "image": "/visual-approved/eric-page-owner-original.png",
+    "image": "/visual-bank/stt/eric-governance-principal-hero.webp",
     "originalTitle": `${AUTHOR_PROFILE.englishName} ${AUTHOR_PROFILE.chineseName}`,
     "context": null,
     "portrait": true,
     "byline": AUTHOR_PROFILE.englishName,
     "bylineBefore": true,
-    "imageWidth": 2048,
-    "imageHeight": 1152
+    "imageWidth": 1672,
+    "imageHeight": 941
   },
   "/institutions": {
     "lines": [

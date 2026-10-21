@@ -43,3 +43,7 @@ The new image is used only by STT `/eric-chuang` as the page hero and its govern
 - governance intake /start
 - GCSDA site and its founder hero
 - previous image file remains archived and is no longer referenced by the formal Eric page
+
+## Registry alignment
+
+The `/eric-chuang` page-presentation registry is also updated to the same publication asset and exact 1672×941 dimensions. This prevents stale 2048×1152 intrinsic sizing from affecting browser layout reservation and keeps STT/GCSDA hero canvas proportions aligned.
