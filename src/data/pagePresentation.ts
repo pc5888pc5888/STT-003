@@ -88,7 +88,7 @@ export const PAGE_PRESENTATION: Record<string, PagePresentation> = {
     "context": null,
     "portrait": true,
     "byline": AUTHOR_PROFILE.englishName,
-    "bylineBefore": true,
+    "bylineBefore": false,
     "imageWidth": 1672,
     "imageHeight": 941
   },
