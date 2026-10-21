@@ -349,3 +349,43 @@
   #root .cis-hero .cis-lead,#root .g4 .cis-hero .cis-lead{font-size:var(--gov-body-mobile)!important;line-height:1.9!important}
   #root :is(.stt-g1-section,.stt-g2-group,.stt-g3-step,.stt-g4-engagement-row,.stt-inst-section,.g4-section){padding-top:40px!important;padding-bottom:40px!important}
 }
+
+/* DUAL-SITE TYPOGRAPHY DETAIL ALIGNMENT — 2026-10-22 */
+#root .g4-home h1{
+  font-family:var(--gov-serif)!important;
+  font-size:var(--gov-h1-1)!important;
+  font-weight:500!important;
+  line-height:1.35!important;
+  letter-spacing:0!important;
+}
+#root :is(.stt-inst-grid strong,.stt-g1-threshold h3,.stt-g1-output h3,.stt-g1-engagement-row h3,.g4-card h3,.g4-value h2,.g4-value h3){
+  font-family:var(--gov-serif)!important;
+  font-size:var(--gov-h3)!important;
+  font-weight:500!important;
+  line-height:1.55!important;
+  letter-spacing:0!important;
+}
+#root .g4-wrap{
+  width:min(1180px,calc(100% - 80px))!important;
+  max-width:1180px!important;
+  padding-left:0!important;
+  padding-right:0!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+}
+#root :where(input:not([type="radio"]),select,textarea){
+  font-family:var(--gov-serif)!important;
+  font-size:var(--gov-body)!important;
+  line-height:1.7!important;
+}
+#root :where(button){
+  font-family:var(--gov-serif)!important;
+}
+#root :is(.stt-inst-grid strong,.g4-card h3,.g4-row b,.g4-step b,.g4-event time){
+  font-variant-numeric:tabular-nums;
+}
+@media(max-width:560px){
+  #root .g4-home h1{font-size:29px!important;line-height:1.45!important}
+  #root .g4-wrap{width:calc(100% - 48px)!important;max-width:none!important}
+  #root :where(input:not([type="radio"]),select,textarea){font-size:var(--gov-body-mobile)!important}
+}
