@@ -203,3 +203,21 @@
 #root .g4-council-photo figcaption{padding:12px 4px 2px;color:#766d61;font:13px/1.7 var(--cis-serif);text-align:center}
 #root .g4-membership-delivery{margin:34px 0!important}
 @media(max-width:760px){#root .g4-council-evidence{margin-top:40px}#root .g4-council-photo{padding:8px;margin-top:22px}}
+
+
+/* PORTRAIT HERO GEOMETRY LOCK — GCSDA and STT person pages share the same 1672×941 desktop canvas. */
+@media(min-width:761px){
+  #root .cis-with-image.cis-portrait .cis-hero-inner,
+  #root .cis-with-image.cis-portrait .cis-hero-art{
+    aspect-ratio:1672 / 941!important;
+  }
+  #root .cis-with-image.cis-portrait .cis-hero-art{
+    overflow:hidden!important;
+  }
+  #root .cis-with-image.cis-portrait .cis-hero-art img{
+    width:100%!important;
+    height:100%!important;
+    object-fit:cover!important;
+    object-position:center center!important;
+  }
+}
