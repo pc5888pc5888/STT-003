@@ -2,7 +2,6 @@ import { useEffect, type ReactNode } from "react";
 import { Link } from "react-router-dom";
 import UnifiedTitleHero from "../components/UnifiedTitleHero";
 
-import AuthorProfile from "../components/AuthorProfile";
 import AUTHOR_PROFILE from "../data/authorProfile.json";
 
 const M_MEDIA_URL = "https://94m.com.tw/editors/ed55fc";
@@ -66,35 +65,81 @@ export function EricPage(){
     <UnifiedTitleHero
       kicker="GOVERNANCE PRINCIPAL"
       title={AUTHOR_PROFILE.chineseName}
-      subtitle={AUTHOR_PROFILE.positions[0]}
+      subtitle="STT Governance 創辦人暨治理總控者"
       image="/visual-approved/eric-page-owner-original.png"
       imageFit="contain"
       imagePosition="right bottom"
       id="eric-title"
     />
 
-    <section className="stt-inst-section"><div className="stt-inst-shell"><AuthorProfile /></div></section>
-
-    <Section kicker="GOVERNANCE ROLE" title="判讀者的工作，不是替別人做決定。">
-      <p>莊鈞翔博士在 STT 的角色，是建立判讀架構、辨識不可承擔風險、設計治理制度，並在重大事件中維持問題、證據、權力與責任的邊界；最終決定仍由具決策權的人承擔。</p>
+    <Section kicker="ABOUT ERIC" title="治理總控者與制度設計者。">
+      <p><strong>「AI 負責判斷之效率，人類重構決策之價值。」—— 莊鈞翔博士</strong></p>
+      <p style={{marginTop:18}}>真正困難的決策，往往不是因為資訊不足，而是問題、證據、權力、責任與後果同時交錯，卻沒有人先把它們放回正確的位置。</p>
+      <p style={{marginTop:18}}>莊鈞翔博士為 STT Governance 創辦人暨治理總控者，長期深耕企業治理、策略判讀、法遵風險、組織決策、家族治理與數位治理。以公司治理策略與內部合規架構的雙重視角，他所處理的核心，不是替決策者增加更多意見，而是在重大事情進入不可逆結果之前，先釐清真正的問題、證據基礎、權力來源、責任歸屬、可行選項與不可承擔風險，再建立可執行、可追溯並能承擔後果的治理結構。</p>
     </Section>
 
-    <Section kicker="RESEARCH" title="長期研究主軸。">
-      <ul className="stt-inst-list">
-        <li>企業接班與家族價值。</li>
-        <li>公司治理與法遵導入。</li>
-        <li>專業服務與永續治理。</li>
-        <li>AI 介入決策後的人機主權與責任。</li>
-        <li>內在法遵、決策憲政與治理文明。</li>
-      </ul>
+    <Section kicker="GOVERNANCE ROLE" title="判讀者的工作，不是替別人做決定。">
+      <p>莊博士在 STT 的角色，是建立重大決策的判讀架構。當一件事情同時涉及策略、股權、家族、法律、財務、組織、聲譽或 AI 時，首先需要處理的往往不是「找哪一位專家」，而是確認真正需要被治理的是什麼、誰擁有決策權、哪些證據足以支持判斷、哪些責任不能被轉移，以及哪些結果一旦發生就無法再承擔。</p>
+      <p style={{marginTop:18}}>STT 在此基礎上，再判斷法律、財務、信託、科技或其他專業應該在什麼位置進入。專業可以分工，最終治理責任不能失焦。</p>
+    </Section>
+
+    <Section kicker="CORE GOVERNANCE DOMAINS" title="核心治理領域。">
+      <div className="stt-inst-grid">
+        <article><strong>企業治理與重大決策</strong><p>釐清重大選擇中的權力、責任、風險、證據與不可承擔結果。</p></article>
+        <article><strong>家族治理與企業接班</strong><p>處理家族價值、接班安排、權責配置與跨世代治理秩序。</p></article>
+        <article><strong>公司治理與內部合規</strong><p>建立公司治理、法遵風險與內部制度之間可以被執行與追溯的結構。</p></article>
+        <article><strong>營運風險與契約治理</strong><p>將交易、營運與契約風險放回整體治理目的與責任邊界中判讀。</p></article>
+        <article><strong>組織決策與高階管理</strong><p>釐清決策權、授權、責任與程序，避免權力存在卻沒有可承擔的治理結構。</p></article>
+        <article><strong>AI Governance 與數位治理</strong><p>界定 AI 能力、限制、人機責任與企業導入後不可外包的最終決策權。</p></article>
+      </div>
+    </Section>
+
+    <Section kicker="AI GOVERNANCE & TECHNICAL PRACTICE" title="技術可以擴張，決策主權不能外包。">
+      <p>STT 深度使用 AI 協助研究、文獻整理、資料比對、版本追蹤、結構化分析與治理幕僚作業。莊博士對 AI 的理解，不停留在一般生成式工具使用，而持續延伸至模型平台、API、企業級模型整合、AI Fluency、Agentic AI、Model Context Protocol、Agent Skills、Subagents 與 AI Workflow 等技術實務。</p>
+      <p style={{marginTop:18}}>已完成 21 項 Anthropic AI／Claude 專業課程，並取得 Google for Education｜Gemini Certified Educator 資格。課程完成紀錄、技術實務與正式認證依其實際性質分別表述，不將所有學習紀錄統稱為「國際認證」。</p>
+      <div className="stt-inst-grid">
+        <article><strong>Claude Technical Practice</strong><p>涵蓋 Claude 101、Claude Platform 101、Claude Code 101、Claude Code in Action、Anthropic API、Amazon Bedrock、Google Vertex AI 與 Claude Cowork 等技術應用。</p></article>
+        <article><strong>AI Fluency & Education</strong><p>涵蓋 AI Fluency Framework & Foundations、AI Capabilities & Limitations，以及 Builders、Educators、Students、K–12、Nonprofits、Small Businesses 等應用與教學脈絡。</p></article>
+        <article><strong>Agentic AI & Model Protocol</strong><p>涵蓋 Model Context Protocol、MCP Advanced Topics、Agent Skills、Subagents 與多模型工作流治理。</p></article>
+        <article><strong>Google for Education</strong><p>Gemini Certified Educator｜Gemini 教育應用資格。</p></article>
+      </div>
+    </Section>
+
+    <Section kicker="HUMAN AUTHORITY" title="最終決策與後果，仍由人承擔。">
+      <p>技術可以加速研究、比對大量資料，也可以協助形成更完整的選項；但涉及重大治理判讀、權限授權、是否執行，以及最終後果承擔時，<strong>終局決策權（Ultimate Decision-making）與責任仍屬於人。</strong></p>
+      <p style={{marginTop:18}}>莊博士所建立的人機治理邊界，是讓 AI 成為更強大的治理幕僚，而不是把決策責任交給模型。技術輔助可以持續擴張，但核心決策與後果承擔，始終必須保有人類主權。</p>
+    </Section>
+
+    <Section kicker="PROFESSIONAL QUALIFICATIONS & TECHNICAL PRACTICE" title="專業資格與技術實務。">
+      <p>以下資格與技術實務用來證明跨領域理解與持續專業訓練；它們是治理判讀能力的佐證，而不是治理權力本身的來源。</p>
+      <div className="stt-inst-grid">
+        <article><strong>永續發展碳管理 SDCMM</strong><p>CEO 國際認證中心｜甲級管理師認證。</p></article>
+        <article><strong>ESG 不動產淨零 RENZM</strong><p>CEO 國際認證中心｜甲級管理師認證。</p></article>
+        <article><strong>減碳管理師</strong><p>中華經濟研究院綠色經濟研究中心｜Carbon Reduction Professional。</p></article>
+        <article><strong>兩岸勞資法務管理</strong><p>CEO 國際認證中心｜甲級管理師認證；相關訓練課程經 TÜV Rheinland 審查認證。</p></article>
+      </div>
+    </Section>
+
+    <Section kicker="CURRENT POSITION" title="現任職務。">
+      <ul className="stt-inst-list">{AUTHOR_PROFILE.positions.map(position=><li key={position}>{position}</li>)}</ul>
+      <p style={{marginTop:18}}>M 傳媒為外部第三方媒體，僅作為公開發表來源，不屬於 STT Governance 自有媒體體系。</p>
+    </Section>
+
+    <Section kicker="RESEARCH & PUBLICATIONS" title="研究與出版。">
+      <p>莊博士的研究與出版主軸，長期圍繞企業接班、家族價值、公司治理、法遵導入、專業服務永續、AI Governance，以及「內在法遵」所延伸的人類判斷與決策主權。</p>
+      <ul className="stt-inst-list">{AUTHOR_PROFILE.publications.map(title=><li key={title}>{title}</li>)}</ul>
       <Link to="/insights">進入研究與出版 →</Link>
     </Section>
 
-    <Section kicker="PUBLIC INTERPRETATION" title="公開判讀與專欄。">
+    <Section kicker="PUBLIC INTERPRETATION" title="公開判讀與第三方專欄。">
       <p>公開專欄與第三方媒體發表用來呈現研究如何進入現實事件；M 傳媒屬外部第三方媒體，僅標示為發表來源。</p>
       <a href={M_MEDIA_URL} target="_blank" rel="noreferrer">M 傳媒｜外部第三方發表來源 ↗</a>
     </Section>
 
+    <Section kicker="GOVERNANCE INTAKE" title="最後需要被回答的，不是誰給答案，而是誰能承擔決定。">
+      <p>在事情真正發生之前，是否已經有人把問題看清楚；是否知道哪些風險不能承擔；是否知道誰有權決定；以及最後，誰願意為這個決定負責。這就是 STT Governance 所說的治理判讀。</p>
+      <Link to="/start">開始治理判讀 →</Link>
+    </Section>
   </div>;
 }
 
