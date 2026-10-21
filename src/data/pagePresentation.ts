@@ -32,10 +32,12 @@ export const PAGE_PRESENTATION: Record<string, PagePresentation> = {
       "創會理事長｜莊鈞翔博士"
     ],
     "type": 1,
-    "image": null,
+    "image": "/visual-bank/gcsda/founder-chairman-hero.webp",
     "originalTitle": "創會理事長｜莊鈞翔博士",
     "context": null,
-    "portrait": false
+    "portrait": true,
+    "imageWidth": 1672,
+    "imageHeight": 941
   },
   "/governance": {
     "lines": [
