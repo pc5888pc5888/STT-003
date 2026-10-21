@@ -470,3 +470,13 @@
     padding-right:52px!important;
   }
 }
+
+/* GOVERNED NARRATIVE PARAGRAPH RULE — formal prose only; cards, rows, hero leads and UI are excluded. */
+#root .g4 :is(.g4-lead,.g4-note>p){
+  text-indent:2em!important;
+  text-align:justify!important;
+  text-justify:inter-ideograph!important;
+}
+#root .g4 .g4-lead + .g4-lead{
+  margin-top:18px!important;
+}
