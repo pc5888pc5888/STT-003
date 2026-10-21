@@ -252,3 +252,9 @@
     margin-bottom:0!important;
   }
 }
+
+
+/* Owner-approved Eric hero: show the supplied image without the global white veil. */
+#root .cis-with-image.cis-portrait::before{
+  display:none!important;
+}
