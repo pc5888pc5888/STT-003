@@ -444,3 +444,84 @@
   #root .g4-wrap{width:calc(100% - 48px)!important;max-width:none!important}
   #root :where(input:not([type="radio"]),select,textarea){font-size:var(--gov-body-mobile)!important}
 }
+
+/* DUAL-SITE FIRST-VIEW GEOMETRY LOCK — 2026-10-22
+   All image-backed primary pages use the same first-view canvas and title anchor.
+   Person pages do not receive a special hero geometry. */
+@media(min-width:1201px){
+  #root .cis-with-image .cis-hero-inner,
+  #root .cis-with-image .cis-hero-art{
+    aspect-ratio:16 / 9!important;
+  }
+  #root .cis-with-image .cis-hero-art{
+    overflow:hidden!important;
+  }
+  #root .cis-with-image .cis-hero-art img,
+  #root .cis-with-image.cis-portrait .cis-hero-art img{
+    width:100%!important;
+    height:100%!important;
+    max-height:none!important;
+    object-fit:cover!important;
+    object-position:center center!important;
+  }
+  #root .cis-with-image .cis-hero-copy,
+  #root .cis-with-image.cis-portrait .cis-hero-copy,
+  #root .cis-with-image.cis-clear-left .cis-hero-copy{
+    align-self:start!important;
+    margin-top:180px!important;
+    margin-bottom:0!important;
+    width:min(36%,590px)!important;
+    max-width:590px!important;
+  }
+  #root .cis-with-image::before,
+  #root .cis-with-image.cis-portrait::before{
+    display:block!important;
+  }
+  #root .cis-title-1 .cis-title,
+  #root .cis-title-2 .cis-title,
+  #root .cis-title-3 .cis-title{
+    font-size:48px!important;
+    line-height:1.38!important;
+    letter-spacing:0!important;
+  }
+}
+@media(min-width:761px) and (max-width:1200px){
+  #root .cis-with-image .cis-hero-inner,
+  #root .cis-with-image .cis-hero-art{
+    aspect-ratio:16 / 9!important;
+  }
+  #root .cis-with-image .cis-hero-art img,
+  #root .cis-with-image.cis-portrait .cis-hero-art img{
+    width:100%!important;
+    height:100%!important;
+    max-height:none!important;
+    object-fit:cover!important;
+    object-position:center center!important;
+  }
+  #root .cis-with-image .cis-hero-copy,
+  #root .cis-with-image.cis-portrait .cis-hero-copy,
+  #root .cis-with-image.cis-clear-left .cis-hero-copy{
+    align-self:start!important;
+    margin-top:50px!important;
+    margin-bottom:0!important;
+  }
+  #root .cis-with-image::before,
+  #root .cis-with-image.cis-portrait::before{
+    display:block!important;
+  }
+  #root .cis-title-1 .cis-title,
+  #root .cis-title-2 .cis-title,
+  #root .cis-title-3 .cis-title{
+    font-size:36px!important;
+    line-height:1.42!important;
+  }
+}
+/* Preserve full-width institutional headers while body content uses the shared 1180px reading measure. */
+@media(min-width:1151px){
+  #root .g4-head .g4-wrap{
+    width:100%!important;
+    max-width:1540px!important;
+    padding-left:52px!important;
+    padding-right:52px!important;
+  }
+}
