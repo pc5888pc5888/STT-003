@@ -57,6 +57,7 @@ function PublicShell({ children }: ShellProps) {
   const publicationPage = location.pathname === "/books" || location.pathname === "/columns" || location.pathname.startsWith("/columns/");
 
   useLayoutEffect(() => {
+    if (location.pathname === "/projects") return;
     const main = document.getElementById("main-content");
     if (!main) return;
     const enforce = () => enforceHeadingTypography(main);
