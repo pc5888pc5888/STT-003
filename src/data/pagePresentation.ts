@@ -4,7 +4,7 @@ export const PAGE_PRESENTATION: Record<string, PagePresentation> = {
   "/": {
     "lines": [
       "讓策略、治理與永續，",
-      "成為共同語言。"
+      "成為共同語言"
     ],
     "type": 2,
     "image": "/visual-bank/gcsda/001.webp",
@@ -17,7 +17,7 @@ export const PAGE_PRESENTATION: Record<string, PagePresentation> = {
   "/about": {
     "lines": [
       "企業、專業與學術，",
-      "在治理議題上持續對話。"
+      "在治理議題上持續對話"
     ],
     "type": 2,
     "image": "/visual-bank/gcsda/002.webp",
@@ -42,8 +42,7 @@ export const PAGE_PRESENTATION: Record<string, PagePresentation> = {
   "/governance": {
     "lines": [
       "學會本身先接受治理：",
-      "權力、職權與責任",
-      "都應可被理解。"
+      "權力、職權與責任都應可被理解"
     ],
     "type": 3,
     "image": "/visual-bank/gcsda/003.webp",
@@ -55,8 +54,7 @@ export const PAGE_PRESENTATION: Record<string, PagePresentation> = {
   },
   "/council": {
     "lines": [
-      "跨域專業，",
-      "不等於權責混同。"
+      "跨域專業，不等於權責混同"
     ],
     "type": 2,
     "image": "/visual-bank/gcsda/004.webp",
@@ -69,7 +67,7 @@ export const PAGE_PRESENTATION: Record<string, PagePresentation> = {
   "/membership": {
     "lines": [
       "以策略、治理、法遵與永續，",
-      "形成專業共同體。"
+      "形成專業共同體"
     ],
     "type": 2,
     "image": "/visual-bank/gcsda/005.webp",
@@ -82,7 +80,7 @@ export const PAGE_PRESENTATION: Record<string, PagePresentation> = {
   "/events": {
     "lines": [
       "活動，是制度運作與",
-      "知識累積的正式紀錄。"
+      "知識累積的正式紀錄"
     ],
     "type": 2,
     "image": "/visual-bank/gcsda/006.webp",
@@ -95,7 +93,7 @@ export const PAGE_PRESENTATION: Record<string, PagePresentation> = {
   "/knowledge": {
     "lines": [
       "讓活動與交流，",
-      "沉澱為可傳承的治理知識。"
+      "沉澱為可傳承的治理知識"
     ],
     "type": 2,
     "image": "/visual-bank/gcsda/007.webp",
