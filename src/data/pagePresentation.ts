@@ -4,7 +4,7 @@ export type PagePresentation = { lines: string[]; type: number; image: string | 
 export const PAGE_PRESENTATION: Record<string, PagePresentation> = {
   "/": {
     "lines": [
-      "讓重要的事，走得更遠。"
+      "讓重要的事，走得更遠"
     ],
     "type": 1,
     "image": "/visual-bank/stt/user-approved-six/home.png",
@@ -41,10 +41,10 @@ export const PAGE_PRESENTATION: Record<string, PagePresentation> = {
   "/engagement": {
     "lines": [
       "當一件事情值得被正式治理，",
-      "就不應只停留在一次諮詢。"
+      "就不應只停留在一次諮詢"
     ],
     "type": 2,
-    "image": null,
+    "image": "/visual-approved/bank-14.png",
     "originalTitle": "當一件事情值得被正式治理，就不應只停留在一次諮詢。",
     "context": null,
     "portrait": false,
@@ -54,7 +54,7 @@ export const PAGE_PRESENTATION: Record<string, PagePresentation> = {
   "/insights": {
     "lines": [
       "判讀不是臨時形成的意見，",
-      "而是長期累積的制度研究。"
+      "而是長期累積的制度研究"
     ],
     "type": 2,
     "image": "/visual-bank/stt/user-approved-six/columns.png",
@@ -68,7 +68,7 @@ export const PAGE_PRESENTATION: Record<string, PagePresentation> = {
     "lines": [
       "STT Governance",
       "不是一般顧問公司，",
-      "而是高位階治理文明平台。"
+      "而是高位階治理文明平台"
     ],
     "type": 3,
     "image": "/visual-bank/stt/user-approved-six/about-stt.png",
@@ -95,7 +95,7 @@ export const PAGE_PRESENTATION: Record<string, PagePresentation> = {
   "/institutions": {
     "lines": [
       "跨專業治理整合，",
-      "先建立共同的判讀架構。"
+      "先建立共同的判讀架構"
     ],
     "type": 2,
     "image": null,
@@ -107,7 +107,7 @@ export const PAGE_PRESENTATION: Record<string, PagePresentation> = {
   },
   "/start": {
     "lines": [
-      "先把正在發生的事情說清楚。"
+      "先把正在發生的事情說清楚"
     ],
     "type": 1,
     "image": null,
@@ -175,8 +175,7 @@ export const PAGE_PRESENTATION: Record<string, PagePresentation> = {
   },
   "/problems/major-decision": {
     "lines": [
-      "重大決策，",
-      "先確認正確的問題。"
+      "重大決策，先確認正確的問題"
     ],
     "type": 2,
     "image": "/visual-approved/secondary-04.png",
@@ -188,8 +187,7 @@ export const PAGE_PRESENTATION: Record<string, PagePresentation> = {
   },
   "/problems/owner-dependence": {
     "lines": [
-      "公司愈大，",
-      "組織更需要承接能力。"
+      "公司愈大，組織更需要承接能力"
     ],
     "type": 2,
     "image": "/visual-approved/secondary-15.png",
@@ -201,8 +199,7 @@ export const PAGE_PRESENTATION: Record<string, PagePresentation> = {
   },
   "/problems/succession": {
     "lines": [
-      "職位交出去，",
-      "不代表接班已經發生。"
+      "職位交出去，不代表接班已經發生"
     ],
     "type": 2,
     "image": "/visual-approved/secondary-10.png",
@@ -214,9 +211,8 @@ export const PAGE_PRESENTATION: Record<string, PagePresentation> = {
   },
   "/problems/family-ownership": {
     "lines": [
-      "家族有資產，",
-      "不代表家族已經知道",
-      "怎麼共同決定。"
+      "家族有資產，不代表家族已經知道",
+      "怎麼共同決定"
     ],
     "type": 3,
     "image": "/visual-approved/secondary-01.png",
@@ -228,9 +224,8 @@ export const PAGE_PRESENTATION: Record<string, PagePresentation> = {
   },
   "/problems/strategic-legal": {
     "lines": [
-      "法律上可以做，",
-      "和策略上值得做，",
-      "是兩個不同問題。"
+      "法律上可以做，和策略上值得做",
+      "是兩個不同問題"
     ],
     "type": 3,
     "image": "/visual-approved/secondary-09.png",
@@ -242,8 +237,8 @@ export const PAGE_PRESENTATION: Record<string, PagePresentation> = {
   },
   "/problems/ai-governance": {
     "lines": [
-      "AI 能做到，",
-      "不代表公司已經授權它做到。"
+      "AI 能做到，不代表公司已經",
+      "授權它做到"
     ],
     "type": 2,
     "image": "/visual-approved/secondary-06.png",
@@ -255,8 +250,7 @@ export const PAGE_PRESENTATION: Record<string, PagePresentation> = {
   },
   "/problems/system-failure": {
     "lines": [
-      "有 SOP，",
-      "制度還必須承受壓力。"
+      "有 SOP，制度還必須承受壓力"
     ],
     "type": 2,
     "image": "/visual-approved/secondary-12.png",
@@ -268,9 +262,8 @@ export const PAGE_PRESENTATION: Record<string, PagePresentation> = {
   },
   "/problems/founder-legacy": {
     "lines": [
-      "人離開以後，",
-      "很多最重要的事情",
-      "就再也問不到了。"
+      "人離開以後，很多最重要的事情",
+      "就再也問不到了"
     ],
     "type": 3,
     "image": "/visual-approved/secondary-07.png",
@@ -282,8 +275,7 @@ export const PAGE_PRESENTATION: Record<string, PagePresentation> = {
   },
   "/domains": {
     "lines": [
-      "理解複雜問題的",
-      "治理知識領域"
+      "理解複雜問題的治理知識領域"
     ],
     "type": 2,
     "image": "/visual-approved/secondary-13.png",
@@ -343,8 +335,7 @@ export const PAGE_PRESENTATION: Record<string, PagePresentation> = {
   },
   "/domains/human-ai-governance": {
     "lines": [
-      "AI Governance",
-      "人機治憲"
+      "AI Governance｜人機治憲"
     ],
     "type": 2,
     "image": "/visual-approved/bank-15.png",
@@ -357,7 +348,7 @@ export const PAGE_PRESENTATION: Record<string, PagePresentation> = {
   "/projects": {
     "lines": [
       "人文地景產採訪｜",
-      "把仍能被說清楚的記憶留下。"
+      "把仍能被說清楚的記憶留下"
     ],
     "type": 2,
     "image": "/visual-approved/secondary-17.png",

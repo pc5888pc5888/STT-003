@@ -837,3 +837,20 @@
     line-height:1.48!important;
   }
 }
+
+/* TITLE LINE-COUNT WIDTH LOCK — owner rule: 1 line where possible, otherwise max 2 except approved 3-line cases. */
+@media(min-width:1201px){
+  #root .cis-hero .cis-hero-copy,
+  #root .cis-hero.cis-with-image .cis-hero-copy,
+  #root .cis-hero.cis-profile-parity .cis-hero-copy{
+    width:min(760px,calc(100% - 112px))!important;
+    max-width:760px!important;
+  }
+  #root .cis-hero .cis-title{
+    width:100%!important;
+    max-width:760px!important;
+  }
+  #root .cis-hero .cis-lead{
+    max-width:35em!important;
+  }
+}

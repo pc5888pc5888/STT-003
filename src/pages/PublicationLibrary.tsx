@@ -49,8 +49,8 @@ export function PublicationOverview() {
 
 export function BooksPage() {
   return <div className="stt-library"><div className="stt-library-wrap">
-    <PublicationNavigation />
     <LibraryHeading kicker="STT GOVERNANCE · BOOKS & PUBLICATIONS" title="電子書與出版" lead="從完整著作閱讀治理思想。書籍資訊與線上翻閱入口集中於此，專欄與報導另有各自的作品頁。" />
+    <PublicationNavigation />
     <section className="stt-book-grid" aria-label="書籍目錄">
       {BOOKS.map(book => <article className="stt-book-card" key={book.id} id={book.id} data-book-id={book.id}>
         <figure><img src={book.image} alt={book.title} data-publication-cover={book.title} loading="eager" decoding="async" /></figure>
@@ -93,8 +93,8 @@ export function PublishedWorksPage({ series: fixedSeries }: { series?: string })
   }
   function clearFilters() { setParams({}); }
   return <div className="stt-library"><div className="stt-library-wrap">
-    <PublicationNavigation />
     <LibraryHeading kicker="STT GOVERNANCE · PUBLISHED WORKS" title={selectedSeries?.label || "專欄與報導"} lead={selectedSeries?.description || "從系列、治理主題與關鍵字閱讀公開作品。每篇內容均保留其原始發表來源，不以單一媒體作為全部作品的分類。"} />
+    <PublicationNavigation />
     {!fixedSeries && <nav className="stt-library-series" aria-label="作品系列"><Link to="/columns" aria-current={!seriesKey ? "page" : undefined}>全部作品</Link>{SERIES.filter(item => WORKS.some(work => work.series === item.key)).map(item => <Link key={item.key} to={seriesHref(item)}>{item.label}</Link>)}</nav>}
     <section className="stt-library-tools" aria-label="作品篩選">
       <label className="stt-library-search">搜尋作品<input type="search" aria-label="搜尋作品" value={query} onChange={event => update("q", event.target.value)} placeholder="標題、作者或關鍵字" /></label>
