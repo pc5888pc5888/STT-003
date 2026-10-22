@@ -7,6 +7,11 @@ const rules=[
   ["/membership",2],["/events",2],["/knowledge",2],["/charter",1],["/privacy",1]
 ];
 const errors=[];
+const gcsdaPage=fs.readFileSync("src/GCSDAStandaloneV3.tsx","utf8");
+if(!source.includes('"創會理事長｜莊鈞翔博士"')) errors.push("/founder-chairman exact title");
+if(!gcsdaPage.includes('title="創會理事長｜莊鈞翔博士"')) errors.push("FounderChairman title mismatch");
+if(!gcsdaPage.includes('subtitle="中華企業策略永續發展學會 創會理事長"')) errors.push("FounderChairman subtitle mismatch");
+if(gcsdaPage.includes('title="創辦人暨執行長｜莊鈞翔博士"')) errors.push("STT title leaked into GCSDA founder hero");
 for(const [route,count] of rules){
   const start=source.indexOf('"'+route+'": {');
   const ls=source.indexOf('"lines": [',start);
