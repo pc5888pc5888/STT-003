@@ -705,3 +705,135 @@
   filter:none!important;
   image-rendering:auto!important;
 }
+
+/* OWNER SCREENSHOT TITLE GEOMETRY STANDARD — 2026-10-22
+   Desktop reference: STT homepage screenshot supplied by owner.
+   All page-title heroes use the same Kicker / H1 / Lead origin and scale.
+   Title length may wrap; it must not trigger a smaller H1. */
+@media(min-width:1201px){
+  #root .cis-hero.cis-with-image{
+    position:relative!important;
+    min-height:0!important;
+    height:auto!important;
+    margin:0!important;
+    padding:0!important;
+    overflow:hidden!important;
+  }
+  #root .cis-hero.cis-with-image .cis-hero-inner{
+    position:relative!important;
+    display:block!important;
+    width:100%!important;
+    max-width:none!important;
+    min-width:0!important;
+    aspect-ratio:16 / 9!important;
+    min-height:0!important;
+    height:auto!important;
+    margin:0!important;
+    padding:0!important;
+  }
+  #root .cis-hero.cis-with-image .cis-hero-art{
+    position:absolute!important;
+    inset:0!important;
+    width:100%!important;
+    height:100%!important;
+    max-width:none!important;
+    min-width:0!important;
+    margin:0!important;
+    padding:0!important;
+  }
+  #root .cis-hero.cis-with-image .cis-hero-art img{
+    width:100%!important;
+    height:100%!important;
+    max-width:none!important;
+    max-height:none!important;
+    object-fit:cover!important;
+    object-position:center center!important;
+  }
+  #root .cis-hero .cis-hero-copy,
+  #root .cis-hero.cis-with-image .cis-hero-copy,
+  #root .cis-hero.cis-profile-parity .cis-hero-copy{
+    position:absolute!important;
+    top:180px!important;
+    left:56px!important;
+    width:min(36%,590px)!important;
+    max-width:590px!important;
+    min-width:0!important;
+    margin:0!important;
+    padding:0!important;
+    z-index:2!important;
+    align-self:auto!important;
+  }
+  #root .cis-hero .cis-kicker{
+    margin:0 0 20px!important;
+    font-size:11px!important;
+    line-height:1.8!important;
+    letter-spacing:.12em!important;
+  }
+  #root .cis-hero .cis-title,
+  #root .cis-title-1 .cis-title,
+  #root .cis-title-2 .cis-title,
+  #root .cis-title-3 .cis-title{
+    margin:0!important;
+    padding:0!important;
+    width:100%!important;
+    max-width:none!important;
+    font-size:48px!important;
+    line-height:1.38!important;
+    font-weight:500!important;
+    letter-spacing:0!important;
+  }
+  #root .cis-hero .cis-title-line{
+    white-space:normal!important;
+    text-wrap:balance!important;
+  }
+  #root .cis-hero .cis-lead{
+    margin:22px 0 0!important;
+    max-width:35em!important;
+    font-size:17px!important;
+    line-height:1.95!important;
+  }
+  #root .cis-hero.cis-text-only{
+    position:relative!important;
+    min-height:520px!important;
+    margin:0!important;
+    padding:0!important;
+  }
+  #root .cis-hero.cis-text-only .cis-hero-inner{
+    position:relative!important;
+    display:block!important;
+    width:100%!important;
+    max-width:none!important;
+    min-height:520px!important;
+    margin:0!important;
+    padding:0!important;
+  }
+}
+@media(min-width:761px) and (max-width:1200px){
+  #root .cis-hero .cis-hero-copy,
+  #root .cis-hero.cis-with-image .cis-hero-copy,
+  #root .cis-hero.cis-profile-parity .cis-hero-copy{
+    position:absolute!important;
+    top:50px!important;
+    left:36px!important;
+    width:min(42%,520px)!important;
+    max-width:520px!important;
+    margin:0!important;
+    padding:0!important;
+  }
+  #root .cis-hero .cis-title,
+  #root .cis-title-1 .cis-title,
+  #root .cis-title-2 .cis-title,
+  #root .cis-title-3 .cis-title{
+    font-size:36px!important;
+    line-height:1.42!important;
+  }
+}
+@media(max-width:760px){
+  #root .cis-hero .cis-title,
+  #root .cis-title-1 .cis-title,
+  #root .cis-title-2 .cis-title,
+  #root .cis-title-3 .cis-title{
+    font-size:28px!important;
+    line-height:1.48!important;
+  }
+}
