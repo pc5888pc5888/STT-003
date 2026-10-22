@@ -903,3 +903,31 @@
   #root .cis-hero.cis-profile-parity .cis-byline{font-size:clamp(14px,4.2vw,18px)!important;line-height:1.45!important}
   #root .cis-hero.cis-profile-parity .cis-subtitle{font-size:clamp(14px,4.2vw,18px)!important;line-height:1.55!important}
 }
+
+/* PROFILE IDENTITY THREE-LINE LOCK — 2026-10-22 */
+#root .cis-hero.cis-profile-parity .cis-title-line,
+#root .cis-hero.cis-profile-parity .cis-byline,
+#root .cis-hero.cis-profile-parity .cis-subtitle{
+  display:block!important;
+  white-space:nowrap!important;
+  text-wrap:nowrap!important;
+  word-break:keep-all!important;
+  overflow-wrap:normal!important;
+  max-width:none!important;
+}
+@media(min-width:1201px){
+  #root .cis-hero.cis-profile-parity .cis-title{font-size:48px!important;line-height:1.38!important}
+  #root .cis-hero.cis-profile-parity .cis-byline{font-size:23px!important;line-height:1.55!important}
+  #root .cis-hero.cis-profile-parity .cis-subtitle{font-size:19px!important;line-height:1.8!important}
+}
+@media(min-width:761px) and (max-width:1200px){
+  #root .cis-hero.cis-profile-parity .cis-hero-copy{width:min(68%,680px)!important;max-width:680px!important}
+  #root .cis-hero.cis-profile-parity .cis-title{font-size:clamp(26px,3.7vw,36px)!important}
+  #root .cis-hero.cis-profile-parity .cis-byline{font-size:20px!important}
+  #root .cis-hero.cis-profile-parity .cis-subtitle{font-size:18px!important}
+}
+@media(max-width:760px){
+  #root .cis-hero.cis-profile-parity .cis-title{font-size:clamp(17px,5.2vw,28px)!important;line-height:1.45!important}
+  #root .cis-hero.cis-profile-parity .cis-byline{font-size:clamp(13px,3.7vw,18px)!important;line-height:1.45!important}
+  #root .cis-hero.cis-profile-parity .cis-subtitle{font-size:clamp(13px,3.7vw,18px)!important;line-height:1.55!important}
+}
