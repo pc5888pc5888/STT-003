@@ -73,6 +73,9 @@ for(const file of walk("src").filter(p=>/\.(ts|tsx|js|jsx|json|css)$/.test(p))){
   if(profile.chineseName!=="莊鈞翔博士") errors.push("profile Chinese name mismatch");
   if(profile.englishName!=="CHUANG CHUN HSIANG Ph.D.") errors.push("profile English name mismatch");
   if(!page.includes('kicker=""')) errors.push("profile kicker must be empty");
+  const heroSource=fs.readFileSync("src/components/GovernedHero.tsx","utf8");
+  if(!heroSource.includes('{kicker&&<p className="cis-kicker">{kicker}</p>}')) errors.push("empty profile kicker must not render");
+  if(!src.includes('byline: AUTHOR_PROFILE.englishName')) errors.push("profile English byline binding missing");
   if(!page.includes('title="創辦人暨執行長｜莊鈞翔博士"')) errors.push("profile first line mismatch");
   if(!page.includes('subtitle="STT Governance 創辦人暨執行長"')) errors.push("profile third line mismatch");
   if(page.includes(blocked)) errors.push("blocked public wording remains");

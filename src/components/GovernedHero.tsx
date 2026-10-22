@@ -15,7 +15,7 @@ export default function GovernedHero({kicker,title,subtitle,lead,image,id,childr
     <section className={`cis-hero cis-title-${lines.length}${picture?" cis-with-image":" cis-text-only"}${page?.portrait?" cis-portrait":""}${clearLeft?" cis-clear-left":""}${profileParity?" cis-profile-parity":""}`} aria-labelledby={titleId}>
       <div className="cis-hero-inner">
         <div className="cis-hero-copy">
-          <p className="cis-kicker">{kicker}</p>
+          {kicker&&<p className="cis-kicker">{kicker}</p>}
           {page?.byline && page.bylineBefore && <p className="cis-byline" lang="en">{page.byline}</p>}
           <h1 id={titleId} className="cis-title" aria-label={lines.join("")}>
             {lines.map((line,i)=><span key={i} className="cis-title-line">{line}</span>)}
