@@ -49,3 +49,26 @@ for(const file of walk("src").filter(p=>/\.(ts|tsx|js|jsx|json|css)$/.test(p))){
     process.exit(1);
   }
 }
+
+/* PROFILE IDENTITY STACK QA — 2026-10-22 */
+{
+  const profile=JSON.parse(fs.readFileSync("src/data/authorProfile.json","utf8"));
+  const pageSource=fs.readFileSync("src/GCSDAStandaloneV3.tsx","utf8");
+  const presentation=fs.readFileSync("src/data/pagePresentation.ts","utf8");
+  const heroCss=fs.readFileSync("src/styles/gcsda-hero-repair.css","utf8");
+  const blocked="治理"+"總控者";
+  if(profile.chineseName!=="莊鈞翔博士") errors.push("GCSDA profile Chinese name mismatch");
+  if(profile.englishName!=="CHUANG CHUN HSIANG Ph.D.") errors.push("GCSDA profile English name mismatch");
+  if(!pageSource.includes('eyebrow=""')) errors.push("GCSDA profile kicker must be empty");
+  if(!pageSource.includes('title="創辦人暨執行長｜莊鈞翔博士"')) errors.push("GCSDA profile first line mismatch");
+  if(!pageSource.includes('subtitle="STT Governance 創辦人暨執行長"')) errors.push("GCSDA profile third line mismatch");
+  if(!presentation.includes('"byline": "CHUANG CHUN HSIANG Ph.D."')) errors.push("GCSDA profile byline mismatch");
+  if(pageSource.includes(blocked)) errors.push("blocked public wording remains");
+  for(const token of ["white-space:nowrap!important","word-break:keep-all!important","width:760px!important"]){
+    if(!heroCss.includes(token)) errors.push("GCSDA profile nowrap CSS missing "+token);
+  }
+}
+if(errors.length){
+  console.error("PROFILE IDENTITY QA FAILED: "+errors.join(", "));
+  process.exit(1);
+}
