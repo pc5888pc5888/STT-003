@@ -80,11 +80,11 @@ export const PAGE_PRESENTATION: Record<string, PagePresentation> = {
   },
   "/eric-chuang": {
     "lines": [
-      AUTHOR_PROFILE.chineseName
+      "創辦人暨執行長｜莊鈞翔博士"
     ],
     "type": 1,
     "image": "/visual-bank/stt/eric-governance-principal-hero.webp",
-    "originalTitle": `${AUTHOR_PROFILE.englishName} ${AUTHOR_PROFILE.chineseName}`,
+    "originalTitle": "創辦人暨執行長｜莊鈞翔博士",
     "context": null,
     "portrait": true,
     "byline": AUTHOR_PROFILE.englishName,
