@@ -31,8 +31,8 @@ if(profile.chineseName!=="莊鈞翔博士"){
   process.exit(1);
 }
 const pageSource=fs.readFileSync("src/GCSDAStandaloneV3.tsx","utf8");
-if(!pageSource.includes('title="創會理事長｜莊鈞翔博士"')){
-  console.error("PRESENTATION QA FAILED: founder-chairman title mismatch");
+if(!pageSource.includes('title="創辦人暨執行長｜莊鈞翔博士"')){
+  console.error("PRESENTATION QA FAILED: profile title mismatch");
   process.exit(1);
 }
 const bannedTerm="\u6cbb\u7406\u7e3d\u63a7\u8005";
