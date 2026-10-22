@@ -277,7 +277,8 @@ function FounderChairman(){return <div className="g4-page g4-founder-page">
 
   <section className="g4-section"><div className="g4-wrap">
     <h2 className="g4-title g4-title-bilingual">專業背景｜<span lang="en">PROFESSIONAL BACKGROUND</span></h2>
-    <p className="g4-lead">以下僅呈現與學會創會脈絡直接相關的代表性專業背景；課程完成、專業資格與個人認證依其實際性質分別表述，不將所有學習紀錄統稱為「國際認證」。</p>
+    <p className="g4-lead">本章節僅臚列與本學會創會理事長「創會宗旨、學術脈絡及核心治理」直接關聯之代表性資歷；為秉持法商學界之誠信揭露原則，所有學程研習、專業資格與各項認證成果，均依其客觀實質屬性分項獨立呈現。</p>
+    <p className="g4-lead">我們深信，嚴謹的資訊揭露是法遵精神的基石，更是實踐「策略為先、治理為本、管理為終」之核心。</p>
     <div className="g4-grid">{founderSelectedBackground.map(([title,description],index)=><div className="g4-card" key={title}><span>{String(index+1).padStart(2,"0")}</span><h3>{title}</h3><p>{description}</p></div>)}</div>
   </div></section>
 
