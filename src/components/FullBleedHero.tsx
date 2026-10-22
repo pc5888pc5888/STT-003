@@ -67,6 +67,6 @@ export function JudgmentFoundations() {
 export function STTRoles() {
   return <section className="stt-roles" id="stt-roles" aria-labelledby="stt-roles-title"><div className="stt-editorial-wrap">
     <p className="stt-editorial-label">治理主體與專業分工</p><h2 id="stt-roles-title">能力可以擴充，判斷主權不能外包。</h2>
-    <div className="stt-roles__grid"><article><h3>莊鈞翔博士｜治理總控者</h3><p>作為制度設計者與決策判讀者，莊博士統合問題形成、證據判讀、專業協作與決策責任，讓重大選擇有依據、有邊界，也有可以承接的安排。</p></article><article><h3>AI｜治理幕僚與作業輔助</h3><p>AI 協助整理資料、核對來源、形成工作底稿與執行已授權的作業；不自行擴張權限，不取代人類的價值取捨、最終授權與責任。</p></article></div>
+    <div className="stt-roles__grid"><article><h3>莊鈞翔博士｜創辦人暨執行長</h3><p>作為制度設計者與決策判讀者，莊博士統合問題形成、證據判讀、專業協作與決策責任，讓重大選擇有依據、有邊界，也有可以承接的安排。</p></article><article><h3>AI｜治理幕僚與作業輔助</h3><p>AI 協助整理資料、核對來源、形成工作底稿與執行已授權的作業；不自行擴張權限，不取代人類的價值取捨、最終授權與責任。</p></article></div>
   </div></section>;
 }
