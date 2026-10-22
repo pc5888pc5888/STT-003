@@ -348,7 +348,7 @@ export const PAGE_PRESENTATION: Record<string, PagePresentation> = {
   "/projects": {
     "lines": [
       "人文地景產採訪｜",
-      "把仍能被說清楚的記憶留下"
+      "把仍能被說清楚的記憶留下。"
     ],
     "type": 2,
     "image": "/visual-approved/secondary-17.png",
