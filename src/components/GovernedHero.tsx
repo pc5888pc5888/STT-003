@@ -9,9 +9,9 @@ export default function GovernedHero({kicker,title,subtitle,lead,image,id,childr
   const lines=page?.lines||[title];
   const picture=image ?? page?.image ?? undefined;
   const titleId=id||"page-title";
-  const clearLeft=Boolean(picture && (picture.includes("/user-approved-six/") || picture.includes("cooperation-hero-20260917")));
+  const clearLeft=Boolean(picture && (picture.includes("/user-approved-six/") || picture.includes("cooperation-hero-20260917")));\n  const profileParity=pathname==="/eric-chuang"||pathname==="/founder-chairman";
   return <>
-    <section className={`cis-hero cis-title-${lines.length}${picture?" cis-with-image":" cis-text-only"}${page?.portrait?" cis-portrait":""}${clearLeft?" cis-clear-left":""}`} aria-labelledby={titleId}>
+    <section className={`cis-hero cis-title-${lines.length}${picture?" cis-with-image":" cis-text-only"}${page?.portrait?" cis-portrait":""}${clearLeft?" cis-clear-left":""}${profileParity?" cis-profile-parity":""}`} aria-labelledby={titleId}>
       <div className="cis-hero-inner">
         <div className="cis-hero-copy">
           <p className="cis-kicker">{kicker}</p>
