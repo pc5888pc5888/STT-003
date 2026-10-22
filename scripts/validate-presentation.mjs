@@ -47,7 +47,7 @@ if(errors.length){
   console.error("PRESENTATION QA FAILED\n- "+errors.join("\n- "));
   process.exit(1);
 }
-console.log(JSON.stringify({presentationQA:"PASS",branch:isGcsda?"gcsda":"stt"}));
+
 
 const bannedTerm="\u6cbb\u7406\u7e3d\u63a7\u8005";
 function walk(dir){
@@ -80,3 +80,9 @@ for(const file of walk("src").filter(p=>/\.(ts|tsx|js|jsx|json|css)$/.test(p))){
     if(!css.includes(token)) errors.push("profile nowrap CSS missing "+token);
   }
 }
+
+if(errors.length){
+  console.error("PROFILE IDENTITY QA FAILED\n- "+errors.join("\n- "));
+  process.exit(1);
+}
+console.log(JSON.stringify({presentationQA:"PASS",profileIdentityQA:"PASS",branch:isGcsda?"gcsda":"stt"}));
