@@ -25,7 +25,7 @@ export default function GovernedHero({ kicker, title, subtitle, lead, image, id,
     <section className={`cis-hero gcsda-hero${route === "/" ? " gcsda-hero--home" : ""} cis-title-${lines.length}${picture ? " cis-with-image" : " cis-text-only"}${page?.portrait ? " cis-portrait" : ""}${clearLeft ? " cis-clear-left" : ""}${profileParity ? " cis-profile-parity" : ""}`} aria-labelledby={titleId} data-gcsda-hero="20261021.1">
       <div className="cis-hero-inner">
         <div className="cis-hero-copy">
-          <p className="cis-kicker">{kicker}</p>
+          {kicker && <p className="cis-kicker">{kicker}</p>}
           <h1 id={titleId} className="cis-title" aria-label={lines.join("")}>
             {lines.map((line, index) => <span key={index} className="cis-title-line">{line}</span>)}
           </h1>

@@ -24,11 +24,12 @@ for(const [route,count] of rules){
 if(profile.chineseName!=="莊鈞翔博士") errors.push("profile Chinese name");
 if(profile.englishName!=="CHUANG CHUN HSIANG Ph.D.") errors.push("profile English name");
 
-if(!presentation.includes('"創會理事長｜莊鈞翔博士"')) errors.push("founder presentation title");
+if(!presentation.includes('"創辦人暨執行長｜莊鈞翔博士"')) errors.push("founder presentation title");
 if(!presentation.includes('"byline": "CHUANG CHUN HSIANG Ph.D."')) errors.push("founder byline");
-if(!pageSource.includes('title="創會理事長｜莊鈞翔博士"')) errors.push("FounderChairman title");
-if(!pageSource.includes('subtitle="中華企業策略永續發展學會 創會理事長"')) errors.push("FounderChairman subtitle");
-if(pageSource.includes('title="創辦人暨執行長｜莊鈞翔博士"')) errors.push("STT title leaked into GCSDA hero");
+if(!pageSource.includes('title="創辦人暨執行長｜莊鈞翔博士"')) errors.push("FounderChairman title");
+if(!pageSource.includes('subtitle="STT Governance 創辦人暨執行長"')) errors.push("FounderChairman subtitle");
+const heroSource=fs.readFileSync("src/components/GovernedHero.tsx","utf8");
+if(!heroSource.includes('{kicker && <p className="cis-kicker">{kicker}</p>}')) errors.push("empty profile kicker must not render");
 
 for(const token of [
   "top:164px!important",
