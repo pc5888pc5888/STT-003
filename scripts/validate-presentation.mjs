@@ -23,7 +23,7 @@ if(errors.length){
   console.error("PRESENTATION QA FAILED: "+errors.join(", "));
   process.exit(1);
 }
-console.log(JSON.stringify({presentationQA:"PASS",branch:"gcsda"}));
+
 
 const profile=JSON.parse(fs.readFileSync("src/data/authorProfile.json","utf8"));
 if(profile.chineseName!=="莊鈞翔博士"){
@@ -72,3 +72,9 @@ if(errors.length){
   console.error("PROFILE IDENTITY QA FAILED: "+errors.join(", "));
   process.exit(1);
 }
+
+if(errors.length){
+  console.error("PROFILE IDENTITY QA FAILED\n- "+errors.join("\n- "));
+  process.exit(1);
+}
+console.log(JSON.stringify({presentationQA:"PASS",profileIdentityQA:"PASS",branch:"gcsda"}));
