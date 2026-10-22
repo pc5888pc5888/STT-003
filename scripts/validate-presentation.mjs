@@ -24,3 +24,28 @@ if(errors.length){
   process.exit(1);
 }
 console.log(JSON.stringify({presentationQA:"PASS",branch:"gcsda"}));
+
+const profile=JSON.parse(fs.readFileSync("src/data/authorProfile.json","utf8"));
+if(profile.chineseName!=="莊鈞翔博士"){
+  console.error("PRESENTATION QA FAILED: founder name spacing mismatch");
+  process.exit(1);
+}
+const pageSource=fs.readFileSync("src/GCSDAStandaloneV3.tsx","utf8");
+if(!pageSource.includes('title="創會理事長｜莊鈞翔博士"')){
+  console.error("PRESENTATION QA FAILED: founder-chairman title mismatch");
+  process.exit(1);
+}
+const bannedTerm="\u6cbb\u7406\u7e3d\u63a7\u8005";
+function walk(dir){
+  return fs.readdirSync(dir,{withFileTypes:true}).flatMap(entry=>{
+    const p=dir+"/"+entry.name;
+    return entry.isDirectory()?walk(p):[p];
+  });
+}
+for(const file of walk("src").filter(p=>/\.(ts|tsx|js|jsx|json|css)$/.test(p))){
+  const content=fs.readFileSync(file,"utf8");
+  if(content.includes(bannedTerm)){
+    console.error("PRESENTATION QA FAILED: prohibited legacy role wording in "+file);
+    process.exit(1);
+  }
+}
