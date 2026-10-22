@@ -62,3 +62,63 @@
 #root .stt-library :where(a,button,input,select,summary):focus-visible{outline:2px solid var(--library-gold);outline-offset:5px}
 @media(max-width:760px){.stt-library-wrap{width:calc(100% - 48px)}.stt-library-heading{padding:38px 0 30px}.stt-library-nav{gap:4px 20px;padding:18px 0}.stt-library-paths,.stt-book-grid,.stt-library-themes{grid-template-columns:minmax(0,1fr)}#root .stt-library-path{padding:25px 24px}.stt-library-section{padding:38px 0}.stt-book-grid{gap:32px;padding-bottom:30px}.stt-book-card figure{padding:20px;min-height:300px}#root .stt-book-card img{height:320px}.stt-library-tools{gap:16px}.stt-library-tools label:not(.stt-library-search){flex:1 1 130px}.stt-library-search{flex-basis:100%}#root .stt-work h2{font-size:23px!important}.stt-work{padding:27px 0}.stt-library-ending{padding-bottom:40px}}
 @media(prefers-reduced-motion:reduce){.stt-library *{scroll-behavior:auto!important}}
+
+/* OWNER SCREENSHOT TITLE STANDARD — publication subpages */
+@media(min-width:1201px){
+  .stt-library-heading{
+    box-sizing:border-box;
+    position:relative;
+    width:100vw;
+    max-width:none;
+    min-height:520px;
+    margin-left:calc(50% - 50vw);
+    padding:180px 56px 80px;
+  }
+  #root .stt-library-heading .stt-library-kicker{
+    margin:0 0 20px!important;
+    font-size:11px!important;
+    line-height:1.8!important;
+    letter-spacing:.12em!important;
+  }
+  #root .stt-library-heading h1{
+    margin:0!important;
+    padding:0!important;
+    max-width:590px!important;
+    font-size:48px!important;
+    line-height:1.38!important;
+    font-weight:500!important;
+    letter-spacing:0!important;
+    overflow-wrap:normal!important;
+  }
+  #root .stt-library-heading .stt-library-lead{
+    max-width:35em!important;
+    margin:22px 0 0!important;
+    font-size:17px!important;
+    line-height:1.95!important;
+  }
+}
+@media(min-width:761px) and (max-width:1200px){
+  .stt-library-heading{
+    box-sizing:border-box;
+    width:100vw;
+    max-width:none;
+    margin-left:calc(50% - 50vw);
+    padding:50px 36px 56px;
+  }
+  #root .stt-library-heading h1{
+    font-size:36px!important;
+    line-height:1.42!important;
+  }
+}
+@media(max-width:760px){
+  .stt-library-heading{
+    width:100vw;
+    max-width:none;
+    margin-left:calc(50% - 50vw);
+    padding:30px 24px 36px;
+  }
+  #root .stt-library-heading h1{
+    font-size:28px!important;
+    line-height:1.48!important;
+  }
+}
