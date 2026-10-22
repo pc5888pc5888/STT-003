@@ -48,3 +48,18 @@ if(errors.length){
   process.exit(1);
 }
 console.log(JSON.stringify({presentationQA:"PASS",branch:isGcsda?"gcsda":"stt"}));
+
+const bannedTerm="\u6cbb\u7406\u7e3d\u63a7\u8005";
+function walk(dir){
+  return fs.readdirSync(dir,{withFileTypes:true}).flatMap(entry=>{
+    const p=dir+"/"+entry.name;
+    return entry.isDirectory()?walk(p):[p];
+  });
+}
+for(const file of walk("src").filter(p=>/\.(ts|tsx|js|jsx|json|css)$/.test(p))){
+  const content=fs.readFileSync(file,"utf8");
+  if(content.includes(bannedTerm)){
+    console.error("PRESENTATION QA FAILED: prohibited legacy role wording in "+file);
+    process.exit(1);
+  }
+}

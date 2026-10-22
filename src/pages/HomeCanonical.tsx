@@ -211,7 +211,7 @@ export default function HomeCanonical() {
             <p className="stt-g1-kicker">JUDGMENT AUTHORITY</p>
             <h2>重大治理判讀，最終仍須由人承擔。</h2>
             <p className="stt-g1-lead is-secondary">
-              莊鈞翔博士為 STT Governance 創辦人與治理總控者，長期研究與實務聚焦於企業策略、公司治理與法遵、家族企業接班以及 AI 治理；STT 以 AI 作為研究、整理、比對與治理作業系統，但不將最終判斷權交由 AI。
+              莊鈞翔博士為 STT Governance 創辦人暨執行長，長期研究與實務聚焦於企業策略、公司治理與法遵、家族企業接班以及 AI 治理；STT 以 AI 作為研究、整理、比對與治理作業系統，但不將最終判斷權交由 AI。
             </p>
             <div className="stt-g1-actions">
               <Link className="stt-g1-button" to="/eric-chuang">認識治理判讀者 →</Link>
