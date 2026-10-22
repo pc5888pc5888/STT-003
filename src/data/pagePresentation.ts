@@ -29,11 +29,11 @@ export const PAGE_PRESENTATION: Record<string, PagePresentation> = {
   },
   "/founder-chairman": {
     "lines": [
-      "創辦人暨執行長｜莊鈞翔博士"
+      "創會理事長｜莊鈞翔博士"
     ],
     "type": 1,
     "image": "/visual-bank/gcsda/founder-chairman-hero.webp",
-    "originalTitle": "創辦人暨執行長｜莊鈞翔博士",
+    "originalTitle": "創會理事長｜莊鈞翔博士",
     "context": null,
     "portrait": true,
     "byline": "CHUANG CHUN HSIANG Ph.D.",
