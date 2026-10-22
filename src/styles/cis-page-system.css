@@ -854,3 +854,52 @@
     max-width:35em!important;
   }
 }
+
+/* PROFILE IDENTITY STACK LOCK — 2026-10-22 */
+#root .cis-hero.cis-profile-parity .cis-kicker:empty{display:none!important}
+#root .cis-hero.cis-profile-parity .cis-title-line,
+#root .cis-hero.cis-profile-parity .cis-byline,
+#root .cis-hero.cis-profile-parity .cis-subtitle{
+  white-space:nowrap!important;
+  overflow-wrap:normal!important;
+  word-break:keep-all!important;
+  text-wrap:nowrap!important;
+}
+#root .cis-hero.cis-profile-parity .cis-byline{
+  font-family:Georgia,serif!important;
+  font-size:23px!important;
+  line-height:1.55!important;
+  margin:13px 0 0!important;
+}
+#root .cis-hero.cis-profile-parity .cis-subtitle{
+  font-family:var(--gov-serif)!important;
+  font-size:19px!important;
+  line-height:1.8!important;
+  margin:10px 0 0!important;
+}
+@media(min-width:1201px){
+  #root .cis-hero.cis-profile-parity .cis-hero-copy{
+    width:760px!important;
+    max-width:760px!important;
+  }
+  #root .cis-hero.cis-profile-parity .cis-title{
+    font-size:48px!important;
+    line-height:1.38!important;
+    width:760px!important;
+    max-width:760px!important;
+  }
+}
+@media(min-width:761px) and (max-width:1200px){
+  #root .cis-hero.cis-profile-parity .cis-hero-copy{
+    width:calc(100% - 72px)!important;
+    max-width:760px!important;
+  }
+  #root .cis-hero.cis-profile-parity .cis-title{font-size:36px!important;line-height:1.42!important}
+  #root .cis-hero.cis-profile-parity .cis-byline{font-size:20px!important}
+  #root .cis-hero.cis-profile-parity .cis-subtitle{font-size:18px!important}
+}
+@media(max-width:760px){
+  #root .cis-hero.cis-profile-parity .cis-title{font-size:clamp(20px,6.2vw,28px)!important;line-height:1.4!important}
+  #root .cis-hero.cis-profile-parity .cis-byline{font-size:clamp(14px,4.2vw,18px)!important;line-height:1.45!important}
+  #root .cis-hero.cis-profile-parity .cis-subtitle{font-size:clamp(14px,4.2vw,18px)!important;line-height:1.55!important}
+}
