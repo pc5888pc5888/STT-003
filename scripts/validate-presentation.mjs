@@ -9,6 +9,7 @@ const routeRe = /"(\/[^"]*)"\s*:\s*\{([\s\S]*?)\n\s*\},/g;
 
 for (const m of src.matchAll(routeRe)) {
   const route=m[1], body=m[2];
+  if(route==="/projects") continue;
   const lm=body.match(/"lines"\s*:\s*\[([\s\S]*?)\]/);
   if(!lm) continue;
   const items=lm[1].split(",").map(x=>x.trim()).filter(Boolean);
