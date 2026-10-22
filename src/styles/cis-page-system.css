@@ -694,3 +694,14 @@
     background:var(--cis-paper)!important;
   }
 }
+
+/* PROFILE HERO CLARITY LOCK — approved HQ asset; no white veil over the portrait. */
+#root .cis-hero.cis-profile-parity::before{
+  display:none!important;
+  background:none!important;
+}
+#root .cis-hero.cis-profile-parity .cis-hero-art img{
+  opacity:1!important;
+  filter:none!important;
+  image-rendering:auto!important;
+}
