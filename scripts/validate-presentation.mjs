@@ -25,6 +25,11 @@ for (const m of src.matchAll(routeRe)) {
   }
 }
 if(!isGcsda){
+  const ericBlock=src.match(/"\/eric-chuang"\s*:\s*\{([\s\S]*?)\n\s*\},/)?.[1]||"";
+  if(!ericBlock.includes('"創辦人暨執行長｜莊鈞翔博士"')) errors.push("/eric-chuang exact founder CEO title missing");
+  const ericPage=fs.readFileSync("src/pages/InstitutionalPages.tsx","utf8");
+  if(!ericPage.includes('subtitle="STT Governance 創辦人暨執行長"')) errors.push("/eric-chuang formal subtitle mismatch");
+  if(ericPage.includes('subtitle="STT Governance 創辦人暨治理總控者"')) errors.push("/eric-chuang obsolete formal subtitle remains");
   const block=src.match(/"\/engagement"\s*:\s*\{([\s\S]*?)\n\s*\},/)?.[1]||"";
   if(!block.includes('"image": "/visual-approved/bank-14.png"')) errors.push("/engagement approved hero missing");
   if(!fs.existsSync("public/visual-approved/bank-14.png")) errors.push("/engagement hero file missing");

@@ -60,12 +60,12 @@ export function AboutPage(){
 }
 
 export function EricPage(){
-  usePageMeta("莊鈞翔博士｜治理判讀與制度設計｜STT Governance","莊鈞翔博士為 STT Governance 創辦人與治理總控者，研究與實務聚焦企業策略、公司治理與法遵、家族企業接班及 AI 治理。");
+  usePageMeta("莊鈞翔博士｜治理判讀與制度設計｜STT Governance","莊鈞翔博士為 STT Governance 創辦人暨執行長，並擔任治理總控者與制度設計者；研究與實務聚焦企業策略、公司治理與法遵、家族企業接班及 AI 治理。");
   return <div className="stt-inst-page stt-eric-page">
     <UnifiedTitleHero
       kicker="GOVERNANCE PRINCIPAL"
       title={AUTHOR_PROFILE.chineseName}
-      subtitle="STT Governance 創辦人暨治理總控者"
+      subtitle="STT Governance 創辦人暨執行長"
       image="/visual-bank/stt/eric-governance-principal-hero.webp"
       imageFit="contain"
       imagePosition="right bottom"
@@ -75,7 +75,7 @@ export function EricPage(){
     <Section kicker="ABOUT ERIC" title="治理總控者與制度設計者">
       <p className="stt-eric-quote"><strong>「AI 負責判斷之效率，人類重構決策之價值。」—— 莊鈞翔博士</strong></p>
       <p style={{marginTop:18}}>真正困難的決策，往往不是因為資訊不足，而是問題、證據、權力、責任與後果同時交錯，卻沒有人先把它們放回正確的位置。</p>
-      <p style={{marginTop:18}}>莊鈞翔博士為 STT Governance 創辦人暨治理總控者，長期深耕企業治理、策略判讀、法遵風險、組織決策、家族治理與數位治理。以公司治理策略與內部合規架構的雙重視角，他所處理的核心，不是替決策者增加更多意見，而是在重大事情進入不可逆結果之前，先釐清真正的問題、證據基礎、權力來源、責任歸屬、可行選項與不可承擔風險，再建立可執行、可追溯並能承擔後果的治理結構。</p>
+      <p style={{marginTop:18}}>莊鈞翔博士為 STT Governance 創辦人暨執行長，並擔任治理總控者與制度設計者，長期深耕企業治理、策略判讀、法遵風險、組織決策、家族治理與數位治理。以公司治理策略與內部合規架構的雙重視角，他所處理的核心，不是替決策者增加更多意見，而是在重大事情進入不可逆結果之前，先釐清真正的問題、證據基礎、權力來源、責任歸屬、可行選項與不可承擔風險，再建立可執行、可追溯並能承擔後果的治理結構。</p>
     </Section>
 
     <Section kicker="GOVERNANCE ROLE" title="判讀者的工作，不是替別人做決定">
