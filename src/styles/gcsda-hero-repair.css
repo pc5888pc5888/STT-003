@@ -315,3 +315,25 @@
     line-height:1.48!important;
   }
 }
+
+/* SCREEN-ABSOLUTE TITLE BASELINE — 2026-10-22 */
+@media(min-width:1201px){
+  #root .g4 .gcsda-hero.cis-hero .cis-hero-copy,
+  #root .g4 .gcsda-hero.cis-hero.cis-profile-parity .cis-hero-copy{
+    top:164px!important;
+    left:56px!important;
+    width:min(760px,calc(100% - 112px))!important;
+    max-width:760px!important;
+  }
+  #root .g4 .gcsda-hero.cis-hero .cis-title{
+    width:100%!important;
+    max-width:760px!important;
+    font-size:48px!important;
+    line-height:1.38!important;
+    font-weight:500!important;
+    letter-spacing:0!important;
+  }
+  #root .g4 .gcsda-hero.cis-hero .cis-lead{
+    max-width:35em!important;
+  }
+}
