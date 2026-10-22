@@ -191,3 +191,17 @@
     background:var(--cis-paper)!important;
   }
 }
+
+/* FOUNDER PROFILE CLARITY LOCK — approved HQ asset; no white veil over the portrait. */
+#root .g4 .gcsda-hero.cis-hero.cis-profile-parity::before{
+  display:none!important;
+  background:none!important;
+}
+#root .g4 .gcsda-hero.cis-hero.cis-profile-parity .cis-hero-art::after{
+  display:none!important;
+}
+#root .g4 .gcsda-hero.cis-hero.cis-profile-parity .cis-hero-art img{
+  opacity:1!important;
+  filter:none!important;
+  image-rendering:auto!important;
+}
