@@ -126,3 +126,18 @@
 .stt-eric-page .stt-eric-quote{
   text-indent:0;
 }
+
+/* ERIC AI FOUR-QUADRANT TYPOGRAPHY — 2026-10-22 */
+.stt-eric-ai-grid .stt-inst-card-subtitle{
+  display:block;
+  margin-top:6px;
+  color:var(--inst-gold-deep);
+  font-family:"Noto Serif TC","Noto Serif CJK TC","Songti TC","PMingLiU",serif;
+  font-size:14px;
+  font-style:italic;
+  font-weight:400;
+  line-height:1.6;
+}
+.stt-eric-ai-grid article>p{
+  margin-top:14px;
+}

@@ -78,9 +78,11 @@ export function EricPage(){
       <p style={{marginTop:18}}>莊鈞翔博士為 STT Governance 創辦人暨執行長，長期深耕企業治理、策略判讀、法遵風險、組織決策、家族治理與數位治理。以公司治理策略與內部合規架構的雙重視角，他所處理的核心，不是替決策者增加更多意見，而是在重大事情進入不可逆結果之前，先釐清真正的問題、證據基礎、權力來源、責任歸屬、可行選項與不可承擔風險，再建立可執行、可追溯並能承擔後果的治理結構。</p>
     </Section>
 
-    <Section kicker="GOVERNANCE ROLE" title="判讀者的工作，不是替別人做決定">
-      <p>莊博士在 STT 的角色，是建立重大決策的判讀架構。當一件事情同時涉及策略、股權、家族、法律、財務、組織、聲譽或 AI 時，首先需要處理的往往不是「找哪一位專家」，而是確認真正需要被治理的是什麼、誰擁有決策權、哪些證據足以支持判斷、哪些責任不能被轉移，以及哪些結果一旦發生就無法再承擔。</p>
-      <p style={{marginTop:18}}>STT 在此基礎上，再判斷法律、財務、信託、科技或其他專業應該在什麼位置進入。專業可以分工，最終治理責任不能失焦。</p>
+    <Section kicker="GOVERNANCE ROLE" title="治理判讀，是重新定義問題的頂層架構">
+      <p className="stt-eric-quote"><strong>「判讀者的工作，從不是替別人做決定，而是為決策者廓清迷霧。」—— 莊鈞翔博士</strong></p>
+      <p style={{marginTop:18}}>莊博士身為執行長在<strong>策略智庫智慧治理 STT Governance</strong>的核心角色，在於建構頂層的「重大決策判讀架構」；當一項戰略同時交織著商戰策略、股權結構、家族傳承、法律風險、財務合規、組織變革、企業聲譽甚至 AI 浪潮時，首要之務並非盲目尋求單一領域的專家，而是精準釐清「治理的本質是什麼」。</p>
+      <p style={{marginTop:18}}>我們必須在局勢交錯時，率先錨定：誰是終局裁決者？何種客觀證據足以支持判斷？何種核心責任絕不容轉移？以及何種風險結果一旦發生即無法承擔？</p>
+      <p style={{marginTop:18}}><strong>策略智庫智慧治理 STT Governance</strong>在此架構之上，引導法律、財務、信託或科技等多元專業，在最精準的時機與節點配置進入，畢竟，<strong>「專業可以分工，但最終治理責任絕不能失焦。」</strong></p>
     </Section>
 
     <Section kicker="CORE GOVERNANCE DOMAINS" title="核心治理領域">
@@ -95,13 +97,14 @@ export function EricPage(){
     </Section>
 
     <Section kicker="AI GOVERNANCE & TECHNICAL PRACTICE" title="技術可以擴張，決策主權不能外包">
-      <p>STT 深度使用 AI 協助研究、文獻整理、資料比對、版本追蹤、結構化分析與治理幕僚作業。莊博士對 AI 的理解，不停留在一般生成式工具使用，而持續延伸至模型平台、API、企業級模型整合、AI Fluency、Agentic AI、Model Context Protocol、Agent Skills、Subagents 與 AI Workflow 等技術實務。</p>
-      <p style={{marginTop:18}}>已完成 21 項 Anthropic AI／Claude 專業課程，並取得 Google for Education｜Gemini Certified Educator 資格。課程完成紀錄、技術實務與正式認證依其實際性質分別表述，不將所有學習紀錄統稱為「國際認證」。</p>
-      <div className="stt-inst-grid">
-        <article><strong>Claude Technical Practice</strong><p>涵蓋 Claude 101、Claude Platform 101、Claude Code 101、Claude Code in Action、Anthropic API、Amazon Bedrock、Google Vertex AI 與 Claude Cowork 等技術應用。</p></article>
-        <article><strong>AI Fluency & Education</strong><p>涵蓋 AI Fluency Framework & Foundations、AI Capabilities & Limitations，以及 Builders、Educators、Students、K–12、Nonprofits、Small Businesses 等應用與教學脈絡。</p></article>
-        <article><strong>Agentic AI & Model Protocol</strong><p>涵蓋 Model Context Protocol、MCP Advanced Topics、Agent Skills、Subagents 與多模型工作流治理。</p></article>
-        <article><strong>Google for Education</strong><p>Gemini Certified Educator｜Gemini 教育應用資格。</p></article>
+      <p><strong>策略智庫智慧治理 STT Governance</strong>深度導入前沿科技，全面賦能文獻研究、跨版本比對與幕僚分析。</p>
+      <p style={{marginTop:18}}><strong>莊鈞翔博士</strong>對 AI 的技術實踐已超越一般工具應用，他將核心研究聚焦於企業級模型整合、智能代理（Agentic AI）與自動化工作流之動態治理架構；目前，莊博士已實質推進並完成 <strong>21 項 Anthropic AI / Claude 核心技術學程</strong>，並取得 <strong>Google Gemini 專家資格</strong>。</p>
+      <p style={{marginTop:18}}>基於誠信揭露，所有技術實務、核心課程與認證成果，<strong>均依其客觀實質屬性分項獨立呈現如下：</strong></p>
+      <div className="stt-inst-grid stt-eric-ai-grid">
+        <article><strong>Claude Technical Practice</strong><em className="stt-inst-card-subtitle">Claude 技術實務</em><p>涵蓋 Claude 101、Claude Platform 101、Claude Code 101、Claude Code in Action、Anthropic API、Amazon Bedrock、Google Vertex AI 與 Claude Cowork 等技術應用。</p></article>
+        <article><strong>AI Fluency & Education</strong><em className="stt-inst-card-subtitle">AI 素養與教育脈絡</em><p>涵蓋 AI Fluency Framework & Foundations、AI Capabilities & Limitations，以及面向 Builders、Educators、Students、K-12、Nonprofits 與 Small Businesses 等應用與教學脈絡。</p></article>
+        <article><strong>Agentic AI & Model Protocol</strong><em className="stt-inst-card-subtitle">智能代理與模型協定</em><p>涵蓋 Model Context Protocol (MCP)、MCP Advanced Topics、Agent Skills、Subagents 與多模型工作流治理。</p></article>
+        <article><strong>Google for Education</strong><em className="stt-inst-card-subtitle">Google 教育應用認證</em><p>Gemini Certified Educator ｜ Gemini 教育應用專家資格。</p></article>
       </div>
     </Section>
 
