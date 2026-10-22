@@ -205,3 +205,113 @@
   filter:none!important;
   image-rendering:auto!important;
 }
+
+/* OWNER SCREENSHOT TITLE GEOMETRY STANDARD — GCSDA specificity override */
+@media(min-width:1201px){
+  #root .g4 .gcsda-hero.cis-hero.cis-with-image .cis-hero-inner{
+    position:relative!important;
+    display:block!important;
+    width:100%!important;
+    max-width:none!important;
+    min-width:0!important;
+    aspect-ratio:16 / 9!important;
+    min-height:0!important;
+    height:auto!important;
+    margin:0!important;
+    padding:0!important;
+  }
+  #root .g4 .gcsda-hero.cis-hero.cis-with-image .cis-hero-art{
+    position:absolute!important;
+    inset:0!important;
+    width:100%!important;
+    height:100%!important;
+    max-width:none!important;
+    min-width:0!important;
+    margin:0!important;
+    padding:0!important;
+  }
+  #root .g4 .gcsda-hero.cis-hero.cis-with-image .cis-hero-art img{
+    width:100%!important;
+    height:100%!important;
+    max-width:none!important;
+    max-height:none!important;
+    object-fit:cover!important;
+    object-position:center center!important;
+  }
+  #root .g4 .gcsda-hero.cis-hero .cis-hero-copy,
+  #root .g4 .gcsda-hero.cis-hero.cis-profile-parity .cis-hero-copy{
+    position:absolute!important;
+    top:180px!important;
+    left:56px!important;
+    width:min(36%,590px)!important;
+    max-width:590px!important;
+    min-width:0!important;
+    margin:0!important;
+    padding:0!important;
+    z-index:2!important;
+    align-self:auto!important;
+  }
+  #root .g4 .gcsda-hero.cis-hero .cis-kicker{
+    margin:0 0 20px!important;
+    font-size:11px!important;
+    line-height:1.8!important;
+    letter-spacing:.12em!important;
+  }
+  #root .g4 .gcsda-hero.cis-hero .cis-title,
+  #root .g4 .gcsda-hero.cis-hero.cis-title-1 .cis-title,
+  #root .g4 .gcsda-hero.cis-hero.cis-title-2 .cis-title,
+  #root .g4 .gcsda-hero.cis-hero.cis-title-3 .cis-title{
+    margin:0!important;
+    padding:0!important;
+    width:100%!important;
+    max-width:none!important;
+    font-size:48px!important;
+    line-height:1.38!important;
+    font-weight:500!important;
+    letter-spacing:0!important;
+  }
+  #root .g4 .gcsda-hero.cis-hero .cis-title-line{
+    white-space:normal!important;
+    text-wrap:balance!important;
+  }
+  #root .g4 .gcsda-hero.cis-hero .cis-lead{
+    margin:22px 0 0!important;
+    max-width:35em!important;
+    font-size:17px!important;
+    line-height:1.95!important;
+  }
+  #root .g4 .gcsda-hero.cis-text-only{
+    min-height:520px!important;
+  }
+  #root .g4 .gcsda-hero.cis-text-only .cis-hero-inner{
+    position:relative!important;
+    display:block!important;
+    width:100%!important;
+    max-width:none!important;
+    min-height:520px!important;
+    margin:0!important;
+    padding:0!important;
+  }
+}
+@media(min-width:761px) and (max-width:1200px){
+  #root .g4 .gcsda-hero.cis-hero .cis-hero-copy,
+  #root .g4 .gcsda-hero.cis-hero.cis-profile-parity .cis-hero-copy{
+    position:absolute!important;
+    top:50px!important;
+    left:36px!important;
+    width:min(42%,520px)!important;
+    max-width:520px!important;
+    margin:0!important;
+    padding:0!important;
+  }
+  #root .g4 .gcsda-hero.cis-hero .cis-title{
+    font-size:36px!important;
+    line-height:1.42!important;
+  }
+}
+@media(max-width:760px){
+  #root .g4 .gcsda-hero.cis-hero .cis-title{
+    font-size:28px!important;
+    line-height:1.48!important;
+  }
+}
