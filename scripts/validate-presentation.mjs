@@ -26,6 +26,16 @@ for (const m of src.matchAll(routeRe)) {
 }
 if(!isGcsda){
   const ericBlock=src.match(/"\/eric-chuang"\s*:\s*\{([\s\S]*?)\n\s*\},/)?.[1]||"";
+  if(!ericBlock.includes('"創辦人暨執行長｜莊鈞翔博士"')) errors.push("STT founder exact title missing");
+  const author=JSON.parse(fs.readFileSync("src/data/authorProfile.json","utf8"));
+  if(author.englishName!=="CHUANG CHUN HSIANG Ph.D.") errors.push("STT English byline mismatch");
+  const ericPage=fs.readFileSync("src/pages/InstitutionalPages.tsx","utf8");
+  if(!ericPage.includes('subtitle="STT Governance 創辦人暨執行長"')) errors.push("STT founder subtitle mismatch");
+  const profileCss=fs.readFileSync("src/styles/cis-page-system.css","utf8");
+  for(const token of ["PROFILE IDENTITY THREE-LINE LOCK","white-space:nowrap!important","text-wrap:nowrap!important"]){
+    if(!profileCss.includes(token)) errors.push("STT identity lock missing: "+token);
+  }
+  const ericBlock=src.match(/"\/eric-chuang"\s*:\s*\{([\s\S]*?)\n\s*\},/)?.[1]||"";
   if(!ericBlock.includes('"創辦人暨執行長｜莊鈞翔博士"')) errors.push("/eric-chuang exact founder CEO title missing");
   const ericPage=fs.readFileSync("src/pages/InstitutionalPages.tsx","utf8");
   if(!ericPage.includes('subtitle="STT Governance 創辦人暨執行長"')) errors.push("/eric-chuang formal subtitle mismatch");
