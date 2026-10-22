@@ -7,7 +7,7 @@
   "common": {
     "brand": "STT Governance",
     "platform": "策略智庫治理平台",
-    "founder": "莊鈞翔 博士",
+    "founder": "莊鈞翔博士",
     "home": "首頁",
     "learnMore": "深入了解",
     "readMore": "閱讀更多",
@@ -79,8 +79,8 @@
     },
     "authority": {
       "eyebrow": "Governance Authority",
-      "title": "由治理總控者負責最後判讀",
-      "role1": "治理總控者",
+      "title": "由莊鈞翔博士負責最後判讀",
+      "role1": "創辦人暨執行長",
       "role2": "制度設計者",
       "role3": "決策判讀者",
       "description": "AI 作為治理幕僚群與作業系統輔助，提供檢索、分析、流程與紀錄支援；重大判讀與治理主權仍由人類決策者掌握。",
