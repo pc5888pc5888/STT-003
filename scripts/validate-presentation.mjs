@@ -66,6 +66,30 @@ for(const file of walk("src").filter(p=>/\.(ts|tsx|js|jsx|json|css)$/.test(p))){
   if(fs.readFileSync(file,"utf8").includes(banned)) errors.push("prohibited legacy role wording in "+file);
 }
 
+
+const ericPage=fs.readFileSync("src/pages/InstitutionalPages.tsx","utf8");
+const author=JSON.parse(fs.readFileSync("src/data/authorProfile.json","utf8"));
+if(author.chineseName!=="莊鈞翔博士") errors.push("Eric Chinese name mismatch");
+if(author.englishName!=="CHUANG CHUN HSIANG Ph.D.") errors.push("Eric English name mismatch");
+for(const token of [
+  'kicker=""',
+  'title="創辦人暨執行長｜莊鈞翔博士"',
+  'subtitle="STT Governance 創辦人暨執行長"',
+  'Claude 技術實務',
+  'AI 素養與教育脈絡',
+  '智能代理與模型協定',
+  'Google 教育應用認證'
+]){
+  if(!ericPage.includes(token)) errors.push("Eric required content missing");
+}
+if(!src.includes("byline: AUTHOR_PROFILE.englishName")) errors.push("Eric English byline missing");
+if(!css.includes("white-space:nowrap!important")) errors.push("Eric nowrap lock missing");
+const publicFiles=["src/pages/InstitutionalPages.tsx","src/data/pagePresentation.ts","src/data/authorProfile.json"];
+for(const file of publicFiles){
+  const body=fs.readFileSync(file,"utf8");
+  if(body.includes("治理總控者")) errors.push("obsolete founder wording remains");
+}
+
 if(errors.length){
   console.error("PRESENTATION QA FAILED\n- "+errors.join("\n- "));
   process.exit(1);

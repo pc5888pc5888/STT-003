@@ -931,3 +931,25 @@
   #root .cis-hero.cis-profile-parity .cis-byline{font-size:clamp(13px,3.7vw,18px)!important;line-height:1.45!important}
   #root .cis-hero.cis-profile-parity .cis-subtitle{font-size:clamp(13px,3.7vw,18px)!important;line-height:1.55!important}
 }
+
+/* ERIC FOUR-QUADRANT CONTENT LOCK — 2026-10-23 */
+#root .stt-eric-ai-grid{
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:0!important;
+}
+#root .stt-eric-ai-grid article{min-height:220px!important}
+#root .stt-inst-card-subtitle{
+  display:block!important;
+  margin-top:6px!important;
+  font-family:var(--gov-serif)!important;
+  font-size:14px!important;
+  line-height:1.7!important;
+  font-style:normal!important;
+  font-weight:500!important;
+  color:var(--cis-gold)!important;
+}
+@media(max-width:760px){
+  #root .stt-eric-ai-grid{grid-template-columns:1fr!important}
+  #root .stt-eric-ai-grid article{min-height:0!important}
+}
