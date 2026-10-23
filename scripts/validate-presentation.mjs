@@ -30,7 +30,7 @@ for(const token of [
 for(const token of [
   'eyebrow=""',
   'title="創會理事長｜莊鈞翔博士"',
-  'subtitle="中華企業策略永續發展學會 創會理事長"',
+  'subtitle="STT Governance 創辦人暨執行長"',
   '本章節僅臚列與本學會「創會宗旨、學術脈絡及核心治理」直接關聯之代表性資歷',
   '治理、策略與永續：長期問題的動態多面體',
   '21 項 Anthropic AI / Claude 核心技術學程'
@@ -49,20 +49,17 @@ for(const token of [
 if(author.chineseName!=="莊鈞翔博士") errors.push("founder Chinese name");
 if(author.englishName!=="CHUANG CHUN HSIANG Ph.D.") errors.push("founder English name");
 
+for(const token of [
+  '"創會理事長｜莊鈞翔博士"',
+  '"byline": "CHUANG CHUN HSIANG Ph.D."'
+]) if(!source.includes(token)) errors.push("founder identity "+token);
+
+if(!page.includes('subtitle="STT Governance 創辦人暨執行長"')) errors.push("founder STT role subtitle");
+if(page.includes("治理總控者")) errors.push("legacy founder wording remains");
+if(!css.includes(".cis-profile-parity .cis-title-line") || !css.includes("white-space:nowrap!important")) errors.push("founder no-wrap rule");
+
 if(errors.length){
   console.error("PRESENTATION QA FAILED: "+errors.join(", "));
   process.exit(1);
 }
-console.log(JSON.stringify({presentationQA:"PASS",branch:"gcsda",renderBaseline:"2026-10-24"}));
-
-// FOUNDER IDENTITY STACK QA
-{
-  const page=fs.readFileSync("src/GCSDAStandaloneV3.tsx","utf8");
-  const pres=fs.readFileSync("src/data/pagePresentation.ts","utf8");
-  if(!pres.includes('"創會理事長｜莊鈞翔博士"')) errors.push("GCSDA founder H1 mismatch");
-  if(!pres.includes('"byline": "CHUANG CHUN HSIANG Ph.D."')) errors.push("GCSDA founder English byline mismatch");
-  if(!page.includes('subtitle="STT Governance 創辦人暨執行長"')) errors.push("GCSDA founder subtitle mismatch");
-  if(page.includes("治理總控者")) errors.push("legacy founder role wording remains on GCSDA public page");
-  const css2=fs.readFileSync("src/styles/gcsda-hero-repair.css","utf8");
-  if(!css2.includes(".cis-profile-parity .cis-title-line")||!css2.includes("white-space:nowrap!important")) errors.push("GCSDA profile no-wrap rule missing");
-}
+console.log(JSON.stringify({presentationQA:"PASS",profileIdentityQA:"PASS",branch:"gcsda",renderBaseline:"2026-10-24"}));
