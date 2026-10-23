@@ -21,8 +21,9 @@ if(!source.includes('"創會理事長｜莊鈞翔博士"')) errors.push("founder
 if(source.includes('"創辦人暨執行長｜莊鈞翔博士"')) errors.push("STT title leaked into GCSDA founder registry");
 if(!source.includes('"byline": "CHUANG CHUN HSIANG Ph.D."')) errors.push("founder English byline missing");
 if(!page.includes('title="創會理事長｜莊鈞翔博士"')) errors.push("founder page title mismatch");
+if(!page.includes('eyebrow="GCSDA"')) errors.push("founder site label mismatch");
 if(!page.includes('subtitle="中華企業策略永續發展學會 創會理事長"')) errors.push("founder subtitle mismatch");
-for(const token of ["top:164px!important","left:56px!important","font-size:48px!important","max-width:760px!important","PROFILE IDENTITY THREE-LINE LOCK","white-space:nowrap!important","text-wrap:nowrap!important"]){
+for(const token of ["top:164px!important","left:56px!important","font-size:48px!important","max-width:760px!important","PROFILE IDENTITY FOUR-LINE LOCK","white-space:nowrap!important","text-wrap:nowrap!important"]){
   if(!css.includes(token)) errors.push("geometry/identity "+token);
 }
 
@@ -47,3 +48,13 @@ if(errors.length){
   process.exit(1);
 }
 console.log(JSON.stringify({presentationQA:"PASS",branch:"gcsda"}));
+
+/* founder exact four-line stack */
+for(const token of [
+  'eyebrow="GCSDA"',
+  'title="創會理事長｜莊鈞翔博士"',
+  'subtitle="中華企業策略永續發展學會 創會理事長"'
+]){
+  if(!page.includes(token)) errors.push("founder identity exact token missing");
+}
+if(!source.includes('"byline": "CHUANG CHUN HSIANG Ph.D."')) errors.push("founder English line missing");
