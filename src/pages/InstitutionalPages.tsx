@@ -97,8 +97,8 @@ export function EricPage(){
     </Section>
 
     <Section kicker="AI GOVERNANCE & TECHNICAL PRACTICE" title="技術可以擴張，決策主權不能外包">
-      <p><strong>策略智庫智慧治理 STT Governance</strong>深度導入前沿科技，全面賦能文獻研究、跨版本比對與幕僚分析。</p>
-      <p style={{marginTop:18}}><strong>莊鈞翔博士</strong>對 AI 的技術實踐已超越一般工具應用，他將核心研究聚焦於企業級模型整合、智能代理（Agentic AI）與自動化工作流之動態治理架構；目前，莊博士已實質推進並完成 <strong>21 項 Anthropic AI / Claude 核心技術學程</strong>，並取得 <strong>Google Gemini 專家資格</strong>。</p>
+      <p><strong>策略智庫智慧治理 STT Governance</strong>深度導入前沿科技，全面應用於文獻研究、跨版本比對與幕僚分析。</p>
+      <p style={{marginTop:18}}><strong>莊鈞翔博士</strong>對 AI 的技術實踐已超越一般工具應用，他將核心研究聚焦於企業級模型整合、智能代理（Agentic AI）與自動化工作流之動態治理架構；目前，莊博士已實質推進並完成 <strong>21 項 Anthropic AI / Claude 核心技術學程</strong>，並取得 <strong>Google for Education｜Gemini Certified Educator 資格</strong>。</p>
       <p style={{marginTop:18}}>基於誠信揭露，所有技術實務、核心課程與認證成果，<strong>均依其客觀實質屬性分項獨立呈現如下：</strong></p>
       <div className="stt-inst-grid stt-eric-ai-grid">
         <article><strong>Claude Technical Practice</strong><em className="stt-inst-card-subtitle">Claude 技術實務</em><p>涵蓋 Claude 101、Claude Platform 101、Claude Code 101、Claude Code in Action、Anthropic API、Amazon Bedrock、Google Vertex AI 與 Claude Cowork 等技術應用。</p></article>
