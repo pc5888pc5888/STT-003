@@ -5,6 +5,8 @@ const page=fs.readFileSync("src/GCSDAStandaloneV3.tsx","utf8");
 const css=fs.readFileSync("src/styles/gcsda-hero-repair.css","utf8");
 const author=JSON.parse(fs.readFileSync("src/data/authorProfile.json","utf8"));
 const errors=[];
+const jaLocale=fs.readFileSync("src/i18n/locales/ja.json","utf8");
+if(jaLocale.includes("莊鈞翔 博士")) errors.push("legacy spaced founder name remains in ja locale");
 
 const rules=[
   ["/",2],["/about",2],["/founder-chairman",1],["/governance",2],["/council",1],

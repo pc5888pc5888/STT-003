@@ -1,6 +1,6 @@
 {
   "meta": {"locale":"ja","languageName":"日本語","htmlLang":"ja"},
-  "common": {"brand":"STT Governance","platform":"STT ガバナンス・プラットフォーム","founder":"莊鈞翔 博士","home":"ホーム","learnMore":"詳しく見る","readMore":"続きを読む","register":"申し込む","contact":"STT に連絡","submit":"送信","cancel":"キャンセル","close":"閉じる","confirm":"確認","back":"戻る","continue":"続ける","loading":"処理中","required":"必須","optional":"任意"},
+  "common": {"brand":"STT Governance","platform":"STT ガバナンス・プラットフォーム","founder":"莊鈞翔博士","home":"ホーム","learnMore":"詳しく見る","readMore":"続きを読む","register":"申し込む","contact":"STT に連絡","submit":"送信","cancel":"キャンセル","close":"閉じる","confirm":"確認","back":"戻る","continue":"続ける","loading":"処理中","required":"必須","optional":"任意"},
   "navigation": {"governance":"戦略ガバナンス","internalCompliance":"インターナル・コンプライアンス","digitalGovernance":"デジタル AI ガバナンス","pressInsights":"出版・インサイト","institution":"シンクタンク・創設者","events":"イベント・フォーラム","engagement":"ガバナンス委託"},
   "home": {
     "hero": {"eyebrow":"Strategic Think Tank","titleLine1":"秩序が、","titleLine2":"価値を時間の先へ運ぶ。","subtitle":"高度ガバナンス文明プラットフォーム","description":"制度設計、意思決定の判読、インターナル・コンプライアンス、デジタルガバナンスを通じて、企業と組織が不確実性の中でも信頼される秩序を構築できるよう支援します。","primaryAction":"ガバナンス構造へ","secondaryAction":"STT Governance について"},
