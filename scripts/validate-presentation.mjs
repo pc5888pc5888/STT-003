@@ -54,3 +54,15 @@ if(errors.length){
   process.exit(1);
 }
 console.log(JSON.stringify({presentationQA:"PASS",branch:"gcsda",renderBaseline:"2026-10-24"}));
+
+// FOUNDER IDENTITY STACK QA
+{
+  const page=fs.readFileSync("src/GCSDAStandaloneV3.tsx","utf8");
+  const pres=fs.readFileSync("src/data/pagePresentation.ts","utf8");
+  if(!pres.includes('"創會理事長｜莊鈞翔博士"')) errors.push("GCSDA founder H1 mismatch");
+  if(!pres.includes('"byline": "CHUANG CHUN HSIANG Ph.D."')) errors.push("GCSDA founder English byline mismatch");
+  if(!page.includes('subtitle="STT Governance 創辦人暨執行長"')) errors.push("GCSDA founder subtitle mismatch");
+  if(page.includes("治理總控者")) errors.push("legacy founder role wording remains on GCSDA public page");
+  const css2=fs.readFileSync("src/styles/gcsda-hero-repair.css","utf8");
+  if(!css2.includes(".cis-profile-parity .cis-title-line")||!css2.includes("white-space:nowrap!important")) errors.push("GCSDA profile no-wrap rule missing");
+}
