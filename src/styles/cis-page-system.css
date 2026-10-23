@@ -975,3 +975,24 @@
 }
 #root .cis-hero.cis-profile-parity .cis-byline{margin:12px 0 0!important}
 #root .cis-hero.cis-profile-parity .cis-subtitle{margin:8px 0 0!important}
+
+/* PROFILE IDENTITY SINGLE-LINE LOCK — owner approved 2026-10-23 */
+#root .cis-hero.cis-profile-parity .cis-title-line,
+#root .cis-hero.cis-profile-parity .cis-byline,
+#root .cis-hero.cis-profile-parity .cis-subtitle{
+  white-space:nowrap!important;
+  overflow-wrap:normal!important;
+  word-break:keep-all!important;
+}
+@media(min-width:1201px){
+  #root .cis-hero.cis-profile-parity .cis-hero-copy{width:min(760px,calc(100% - 112px))!important;max-width:760px!important}
+}
+@media(min-width:761px) and (max-width:1200px){
+  #root .cis-hero.cis-profile-parity .cis-hero-copy{width:calc(100% - 72px)!important;max-width:760px!important}
+  #root .cis-hero.cis-profile-parity .cis-title{font-size:30px!important;line-height:1.4!important}
+}
+@media(max-width:760px){
+  #root .cis-hero.cis-profile-parity .cis-title{font-size:clamp(16px,4.4vw,20px)!important;line-height:1.45!important}
+  #root .cis-hero.cis-profile-parity .cis-byline,
+  #root .cis-hero.cis-profile-parity .cis-subtitle{font-size:13px!important;white-space:nowrap!important}
+}
