@@ -82,7 +82,7 @@ for(const token of [
 ]){
   if(!ericPage.includes(token)) errors.push("Eric required content missing");
 }
-if(!src.includes("byline: AUTHOR_PROFILE.englishName")) errors.push("Eric English byline missing");
+if(!src.includes('"byline": AUTHOR_PROFILE.englishName')) errors.push("Eric English byline missing");
 if(!css.includes("white-space:nowrap!important")) errors.push("Eric nowrap lock missing");
 const publicFiles=["src/pages/InstitutionalPages.tsx","src/data/pagePresentation.ts","src/data/authorProfile.json"];
 for(const file of publicFiles){
