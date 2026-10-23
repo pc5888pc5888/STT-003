@@ -116,9 +116,9 @@ const founderDomains = [
 ] as const;
 
 const founderSelectedBackground: ReadonlyArray<readonly [string, ReactNode]> = [
-  ["AI／數位治理", <>深耕前沿 AI 架構與動態工作流治理，已實質推進並完成 <strong>21 項 Anthropic AI / Claude 核心技術學程</strong>（涵蓋 Platform、Code、API、Amazon Bedrock、Google Vertex AI、AI Fluency、MCP、Agent Skills 與 Subagents ），並取得 <strong>Google for Education | Gemini Certified Educator</strong> 專家資格。</>],
+  ["AI／數位治理", <>深耕前沿 AI 架構與動態工作流治理，已實質推進並完成 <strong>21 項 Anthropic AI / Claude 核心技術學程</strong>（涵蓋 Platform、Code、API、Amazon Bedrock、Google Vertex AI、AI Fluency、MCP、Agent Skills 與 Subagents ），並取得 <strong>Google for Education | Gemini Certified Educator</strong> 資格。</>],
   ["永續／減碳", <>聚焦企業綠色轉型與淨零路徑，具備<strong>永續發展碳管理（SDCMM）甲級管理師</strong>、<strong>ESG 不動產淨零（RENZM）甲級管理師</strong>，以及<strong>中華經濟研究院綠色經濟研究中心減碳管理師</strong>等實質專業資格。</>],
-  ["法遵／勞資治理", <>落實法律架構於組織實務的合規重構，具備<strong>兩岸勞資法務管理甲級管理師</strong>資歷；相關專業訓練課程均通過 <strong>TÜV Rheinland（德國萊因）</strong>之嚴謹審查與認證。</>],
+  ["法遵／勞資治理", <>落實法律架構於組織實務的合規重構，具備<strong>兩岸勞資法務管理甲級管理師</strong>資歷；相關訓練課程經 <strong>TÜV Rheinland（德國萊因）</strong> 審查認證。</>],
 ] as const;
 
 const founderPositions = [
