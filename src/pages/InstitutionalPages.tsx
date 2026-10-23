@@ -65,7 +65,7 @@ export function EricPage(){
     <UnifiedTitleHero
       kicker="STT Governance"
       title="創辦人暨執行長｜莊鈞翔博士"
-      subtitle="策略智庫智慧治理 創辦人暨執行長"
+      subtitle="STT Governance 創辦人暨執行長"
       image="/visual-bank/stt/eric-governance-principal-hero.webp"
       imageFit="contain"
       imagePosition="right bottom"
