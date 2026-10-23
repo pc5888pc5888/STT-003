@@ -457,3 +457,23 @@
   #root .g4 .gcsda-hero.cis-hero.cis-profile-parity .cis-byline,
   #root .g4 .gcsda-hero.cis-hero.cis-profile-parity .cis-subtitle{font-size:13px!important;white-space:nowrap!important}
 }
+
+/* FINAL RENDER-MEASURED CROSS-SITE TITLE ALIGNMENT — 2026-10-24
+   Measured against production STT at 1440/1024/390 with real CJK fonts. */
+@media(min-width:1201px){
+  #root .g4 .gcsda-hero.cis-hero .cis-hero-copy,
+  #root .g4 .gcsda-hero.cis-hero.cis-profile-parity .cis-hero-copy{
+    top:181px!important;
+    left:56px!important;
+  }
+}
+@media(max-width:760px){
+  #root .g4 .g4-head,
+  #root .g4 .g4-headin{
+    height:83px!important;
+    min-height:83px!important;
+  }
+  #root .g4 .gcsda-hero.cis-hero:not(.cis-profile-parity) .cis-hero-copy{
+    padding:89px 24px 42px!important;
+  }
+}
