@@ -63,9 +63,9 @@ export function EricPage(){
   usePageMeta("莊鈞翔博士｜治理判讀與制度設計｜STT Governance","莊鈞翔博士為 STT Governance 創辦人暨執行長，並負責制度設計與重大決策判讀；研究與實務聚焦企業策略、公司治理與法遵、家族企業接班及 AI 治理。");
   return <div className="stt-inst-page stt-eric-page">
     <UnifiedTitleHero
-      kicker=""
+      kicker="STT Governance"
       title="創辦人暨執行長｜莊鈞翔博士"
-      subtitle="STT Governance 創辦人暨執行長"
+      subtitle="策略智庫智慧治理 創辦人暨執行長"
       image="/visual-bank/stt/eric-governance-principal-hero.webp"
       imageFit="contain"
       imagePosition="right bottom"

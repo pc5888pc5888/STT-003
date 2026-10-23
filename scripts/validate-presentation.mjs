@@ -95,3 +95,18 @@ if(errors.length){
   process.exit(1);
 }
 console.log(JSON.stringify({presentationQA:"PASS",profileIdentityQA:"PASS",branch:"stt"}));
+
+/* PROFILE IDENTITY EXACT STACK */
+{
+  const ericPage=fs.readFileSync("src/pages/InstitutionalPages.tsx","utf8");
+  const exact=[
+    'kicker="STT Governance"',
+    'title="創辦人暨執行長｜莊鈞翔博士"',
+    'subtitle="策略智庫智慧治理 創辦人暨執行長"'
+  ];
+  for(const token of exact) if(!ericPage.includes(token)) errors.push("STT profile identity missing: "+token);
+  const registry=fs.readFileSync("src/data/pagePresentation.ts","utf8");
+  if(!registry.includes('byline: AUTHOR_PROFILE.englishName')) errors.push("STT English byline missing");
+  const css=fs.readFileSync("src/styles/cis-page-system.css","utf8");
+  if(!css.includes("PROFILE IDENTITY FOUR-LINE LOCK")) errors.push("STT profile nowrap lock missing");
+}

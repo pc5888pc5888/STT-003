@@ -953,3 +953,25 @@
   #root .stt-eric-ai-grid{grid-template-columns:1fr!important}
   #root .stt-eric-ai-grid article{min-height:0!important}
 }
+
+/* PROFILE IDENTITY FOUR-LINE LOCK — owner-approved exact stack */
+#root .cis-hero.cis-profile-parity .cis-kicker,
+#root .cis-hero.cis-profile-parity .cis-title-line,
+#root .cis-hero.cis-profile-parity .cis-byline,
+#root .cis-hero.cis-profile-parity .cis-subtitle{
+  display:block!important;
+  white-space:nowrap!important;
+  text-wrap:nowrap!important;
+  word-break:keep-all!important;
+  overflow-wrap:normal!important;
+  max-width:none!important;
+}
+#root .cis-hero.cis-profile-parity .cis-kicker{
+  margin:0 0 18px!important;
+  font-family:var(--gov-sans)!important;
+  font-size:12px!important;
+  line-height:1.6!important;
+  letter-spacing:.12em!important;
+}
+#root .cis-hero.cis-profile-parity .cis-byline{margin:12px 0 0!important}
+#root .cis-hero.cis-profile-parity .cis-subtitle{margin:8px 0 0!important}
