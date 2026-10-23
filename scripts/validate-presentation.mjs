@@ -80,3 +80,16 @@ if(errors.length){
   process.exit(1);
 }
 console.log(JSON.stringify({presentationQA:"PASS",profileIdentityQA:"PASS",branch:"stt"}));
+
+// FOUNDER IDENTITY STACK QA
+{
+  const page=fs.readFileSync("src/pages/InstitutionalPages.tsx","utf8");
+  const pres=fs.readFileSync("src/data/pagePresentation.ts","utf8");
+  const profile=fs.readFileSync("src/data/authorProfile.json","utf8");
+  if(!pres.includes('"創辦人暨執行長｜莊鈞翔博士"')) errors.push("STT founder H1 mismatch");
+  if(!profile.includes('"englishName": "CHUANG CHUN HSIANG Ph.D."')) errors.push("STT founder English byline mismatch");
+  if(!page.includes('subtitle="STT Governance 創辦人暨執行長"')) errors.push("STT founder subtitle mismatch");
+  if(page.includes("治理總控者")) errors.push("legacy founder role wording remains on STT public page");
+  const css=fs.readFileSync("src/styles/cis-page-system.css","utf8");
+  if(!css.includes(".cis-profile-parity .cis-title-line")||!css.includes("white-space:nowrap!important")) errors.push("STT profile no-wrap rule missing");
+}
