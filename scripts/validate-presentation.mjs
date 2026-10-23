@@ -33,9 +33,18 @@ if(!eric.includes('"創辦人暨執行長｜莊鈞翔博士"')) errors.push("fou
 if(!eric.includes("AUTHOR_PROFILE.englishName")) errors.push("English byline binding missing");
 if(profile.chineseName!=="莊鈞翔博士") errors.push("Chinese name mismatch");
 if(profile.englishName!=="CHUANG CHUN HSIANG Ph.D.") errors.push("English name mismatch");
-if(!page.includes('kicker=""')) errors.push("profile kicker must be empty");
-if(!page.includes('title="創辦人暨執行長｜莊鈞翔博士"')) errors.push("profile first line mismatch");
-if(!page.includes('subtitle="STT Governance 創辦人暨執行長"')) errors.push("profile third line mismatch");
+for(const token of [
+  'kicker=""',
+  'title="創辦人暨執行長｜莊鈞翔博士"',
+  'subtitle="STT Governance 創辦人暨執行長"',
+  '治理判讀，是重新定義問題的頂層架構',
+  'Claude 技術實務',
+  'AI 素養與教育脈絡',
+  '智能代理與模型協定',
+  'Google 教育應用認證'
+]){
+  if(!page.includes(token)) errors.push("Eric required content missing: "+token);
+}
 if(!hero.includes('{kicker&&<p className="cis-kicker">{kicker}</p>}')) errors.push("empty kicker suppression missing");
 
 const engagement=src.match(/"\/engagement"\s*:\s*\{([\s\S]*?)\n\s*\},/)?.[1]||"";
@@ -63,31 +72,7 @@ function walk(dir){
   });
 }
 for(const file of walk("src").filter(p=>/\.(ts|tsx|js|jsx|json|css)$/.test(p))){
-  if(fs.readFileSync(file,"utf8").includes(banned)) errors.push("prohibited legacy role wording in "+file);
-}
-
-
-const ericPage=fs.readFileSync("src/pages/InstitutionalPages.tsx","utf8");
-const author=JSON.parse(fs.readFileSync("src/data/authorProfile.json","utf8"));
-if(author.chineseName!=="莊鈞翔博士") errors.push("Eric Chinese name mismatch");
-if(author.englishName!=="CHUANG CHUN HSIANG Ph.D.") errors.push("Eric English name mismatch");
-for(const token of [
-  'kicker=""',
-  'title="創辦人暨執行長｜莊鈞翔博士"',
-  'subtitle="STT Governance 創辦人暨執行長"',
-  'Claude 技術實務',
-  'AI 素養與教育脈絡',
-  '智能代理與模型協定',
-  'Google 教育應用認證'
-]){
-  if(!ericPage.includes(token)) errors.push("Eric required content missing");
-}
-if(!src.includes('"byline": AUTHOR_PROFILE.englishName')) errors.push("Eric English byline missing");
-if(!css.includes("white-space:nowrap!important")) errors.push("Eric nowrap lock missing");
-const publicFiles=["src/pages/InstitutionalPages.tsx","src/data/pagePresentation.ts","src/data/authorProfile.json"];
-for(const file of publicFiles){
-  const body=fs.readFileSync(file,"utf8");
-  if(body.includes("治理總控者")) errors.push("obsolete founder wording remains");
+  if(fs.readFileSync(file,"utf8").includes(banned)) errors.push("prohibited legacy wording in "+file);
 }
 
 if(errors.length){
@@ -95,18 +80,3 @@ if(errors.length){
   process.exit(1);
 }
 console.log(JSON.stringify({presentationQA:"PASS",profileIdentityQA:"PASS",branch:"stt"}));
-
-/* PROFILE IDENTITY EXACT STACK */
-{
-  const ericPage=fs.readFileSync("src/pages/InstitutionalPages.tsx","utf8");
-  const exact=[
-    'kicker="STT Governance"',
-    'title="創辦人暨執行長｜莊鈞翔博士"',
-    'subtitle="策略智庫智慧治理 創辦人暨執行長"'
-  ];
-  for(const token of exact) if(!ericPage.includes(token)) errors.push("STT profile identity missing: "+token);
-  const registry=fs.readFileSync("src/data/pagePresentation.ts","utf8");
-  if(!registry.includes('byline: AUTHOR_PROFILE.englishName')) errors.push("STT English byline missing");
-  const css=fs.readFileSync("src/styles/cis-page-system.css","utf8");
-  if(!css.includes("PROFILE IDENTITY FOUR-LINE LOCK")) errors.push("STT profile nowrap lock missing");
-}
