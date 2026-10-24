@@ -385,7 +385,7 @@ function Membership(){
           ].map(([n,t,d])=><div className="g4-membership-flow-item" key={n}><b>{n}</b><strong>{t}</strong><span>{d}</span></div>)}
         </div>
 
-        {deliveryAvailable===null?<div className="g4-note g4-membership-delivery" data-membership-delivery="checking"><h3>正在確認線上申請入口</h3><p>若線上送件尚未啟用，本頁會自動提供學會正式會務聯絡方式。</p></div>:deliveryAvailable===false?<div className="g4-note g4-membership-delivery" data-membership-delivery="fallback"><h3>線上送件目前暫時無法使用</h3><p>為避免資料填寫後無法送達，本頁會在送件通道無法連線時停止顯示表單。此時請改由學會 LINE 會務入口聯絡，後續資格審查仍依章程與正式會務程序辦理。</p><div className="g4-actions"><a className="primary" href={LINE_URL} target="_blank" rel="noreferrer">LINE 會務聯絡 ↗</a></div></div>:<form id="gcsda-membership-form" ref={formRef} className="g4-membership-form g4-membership-wizard" onSubmit={submit} aria-busy={status==="sending"} data-membership-delivery="online">
+        {deliveryAvailable===null?<div className="g4-note g4-membership-delivery" data-membership-delivery="checking"><h3>正在確認入會申請入口</h3><p>系統正在確認目前可使用的正式送件方式。</p></div>:deliveryAvailable===false?<div className="g4-note g4-membership-delivery" data-membership-delivery="line"><h3>入會申請｜LINE 會務受理</h3><p>目前入會申請由學會 LINE 會務入口統一受理。請先透過 LINE 提出申請與基本聯絡資訊；後續資料核對、資格審查、會費通知與會員建檔，仍依章程及正式會務程序辦理。</p><div className="g4-actions"><a className="primary" data-membership-line-primary href={LINE_URL} target="_blank" rel="noreferrer">進入 LINE 會務申請 ↗</a></div></div>:<form id="gcsda-membership-form" ref={formRef} className="g4-membership-form g4-membership-wizard" onSubmit={submit} aria-busy={status==="sending"} data-membership-delivery="online">
           <div className="g4-form-stepper" aria-label="入會申請步驟">
             {["基本資料","專業背景","參與申請","確認送出"].map((label,index)=>{
               const n=index+1; return <div className={`g4-form-step-indicator${step===n?" is-active":""}${step>n?" is-done":""}`} key={label}><em>{step>n?"✓":n}</em><span>{label}</span></div>;
@@ -452,7 +452,6 @@ function Membership(){
           {message&&<p className={status==="error"?"g4-form-error":"g4-form-status"} role="status">{message}</p>}
         </form>}
 
-        <div className="g4-actions g4-membership-contact"><a href={LINE_URL} target="_blank" rel="noreferrer">LINE 會務聯絡 ↗</a></div>
       </div>
     </section>
 
