@@ -402,3 +402,26 @@ Relationship note:
 Publication gate:
 - do not publish in LINE Manager before WEBSITE_STATUS = QA_PASS / BUILD_LOCKED
 - once the gate passes, these exact identity lines and current-position registry become the profile source of truth for the two LINE Official Accounts
+
+
+## Regression quarantine — 2026-10-25
+
+Status: FUTURE PHASE INPUT ONLY / NO LINE MANAGER CHANGE
+
+The BUILD_LOCKED website, not any older LINE marketing draft, will be the visual and copy source of truth.
+
+The following pre-governance patterns are explicitly non-authoritative and must not be reused in the future LINE release:
+- sales-funnel or limited-time-benefit language
+- instant-consultation / instant-booking framing
+- generic technology-blue / SaaS / neon visual language
+- publication-recruitment menus presented as the primary STT Governance identity
+- any rich menu or welcome message that creates a second STT positioning system
+
+Future STT and GCSDA LINE surfaces must inherit from the final website CIS:
+- warm ivory / institutional gold / near-black warm gray
+- the frozen website typography hierarchy
+- the exact founder identity lines approved in this blueprint
+- the same institution separation rules
+- the website CTA and content taxonomy after BUILD_LOCK
+
+No live LINE OA modification is authorized by this audit. Release remains gated by WEBSITE_STATUS = QA_PASS / BUILD_LOCKED.

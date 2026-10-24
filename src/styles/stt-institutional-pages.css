@@ -241,3 +241,51 @@
 @media(max-width:760px){
   #root .stt-eric-domain-grid{grid-template-columns:1fr!important}
 }
+
+/* ERIC FOUNDER RECORD CIS — domain numbers and publication rows match GCSDA. */
+#root .stt-eric-domain-grid .stt-eric-domain-number{
+  display:block!important;
+  color:#835c2e!important;
+  font:400 12px/1.5 Georgia,"Times New Roman",serif!important;
+}
+#root .stt-eric-domain-grid h3{
+  margin:18px 0 0!important;
+  font-family:"Noto Serif TC","Noto Serif CJK TC","Songti TC","PMingLiU",Georgia,serif!important;
+  font-size:22px!important;
+  font-weight:500!important;
+  line-height:1.55!important;
+  letter-spacing:0!important;
+}
+#root .stt-eric-domain-grid article>p{
+  margin:12px 0 0!important;
+}
+#root .stt-eric-publication-list{
+  width:100%!important;
+  margin:34px 0 0!important;
+  border-top:1px solid #ddceb8!important;
+}
+#root .stt-eric-publication-row{
+  display:grid!important;
+  grid-template-columns:190px minmax(0,1fr)!important;
+  gap:34px!important;
+  padding:25px 0!important;
+  border-bottom:1px solid #ddceb8!important;
+  align-items:start!important;
+}
+#root .stt-eric-publication-row>b{
+  color:#835c2e!important;
+  font:400 14px/1.9 Georgia,"Times New Roman",serif!important;
+}
+#root .stt-eric-publication-row>div{
+  color:#5f584f!important;
+  font-family:"Noto Serif TC","Noto Serif CJK TC","Songti TC","PMingLiU",Georgia,serif!important;
+  font-size:17px!important;
+  line-height:1.9!important;
+}
+@media(max-width:760px){
+  #root .stt-eric-publication-row{
+    grid-template-columns:1fr!important;
+    gap:4px!important;
+    padding:22px 0!important;
+  }
+}

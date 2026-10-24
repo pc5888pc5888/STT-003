@@ -87,12 +87,12 @@ export function EricPage(){
 
     <Section kicker="CORE GOVERNANCE DOMAINS" title="核心治理領域">
       <div className="stt-inst-grid stt-eric-domain-grid">
-        <article><strong>企業治理與重大決策</strong><p>釐清重大選擇中的權力、責任、風險、證據與不可承擔結果。</p></article>
-        <article><strong>家族治理與企業接班</strong><p>處理家族價值、接班安排、權責配置與跨世代治理秩序。</p></article>
-        <article><strong>公司治理與內部合規</strong><p>建立公司治理、法遵風險與內部制度之間可以被執行與追溯的結構。</p></article>
-        <article><strong>營運風險與契約治理</strong><p>將交易、營運與契約風險放回整體治理目的與責任邊界中判讀。</p></article>
-        <article><strong>組織決策與高階管理</strong><p>釐清決策權、授權、責任與程序，避免權力存在卻沒有可承擔的治理結構。</p></article>
-        <article><strong>AI Governance 與數位治理</strong><p>界定 AI 能力、限制、人機責任與企業導入後不可外包的最終決策權。</p></article>
+        <article><span className="stt-eric-domain-number">01</span><h3>企業治理與重大決策</h3><p>釐清重大選擇中的權力、責任、風險、證據與不可承擔結果。</p></article>
+        <article><span className="stt-eric-domain-number">02</span><h3>家族治理與企業接班</h3><p>處理家族價值、接班安排、權責配置與跨世代治理秩序。</p></article>
+        <article><span className="stt-eric-domain-number">03</span><h3>公司治理與內部合規</h3><p>建立公司治理、法遵風險與內部制度之間可以被執行與追溯的結構。</p></article>
+        <article><span className="stt-eric-domain-number">04</span><h3>營運風險與契約治理</h3><p>將交易、營運與契約風險放回整體治理目的與責任邊界中判讀。</p></article>
+        <article><span className="stt-eric-domain-number">05</span><h3>組織決策與高階管理</h3><p>釐清決策權、授權、責任與程序，避免權力存在卻沒有可承擔的治理結構。</p></article>
+        <article><span className="stt-eric-domain-number">06</span><h3>AI Governance 與數位治理</h3><p>界定 AI 能力、限制、人機責任與企業導入後不可外包的最終決策權。</p></article>
       </div>
     </Section>
 
@@ -130,7 +130,7 @@ export function EricPage(){
 
     <Section kicker="RESEARCH & PUBLICATIONS" title="研究與出版">
       <p>莊博士的研究與出版主軸，長期圍繞企業接班、家族價值、公司治理、法遵導入、專業服務永續、AI Governance，以及「內在法遵」所延伸的人類判斷與決策主權。</p>
-      <ul className="stt-inst-list">{AUTHOR_PROFILE.publications.map(title=><li key={title}>{title}</li>)}</ul>
+      <div className="stt-eric-publication-list">{AUTHOR_PROFILE.publications.map(title=><div className="stt-eric-publication-row" key={title}><b>PUBLICATION</b><div>{title}</div></div>)}</div>
       <Link to="/insights">進入研究與出版 →</Link>
     </Section>
 
