@@ -88,3 +88,231 @@ Once the release gate passes, implementation in manager.line.biz should follow t
 - source tags
 - test on iOS / Android
 - verify each link resolves to correct institution
+
+
+---
+
+# Integrated Conversion & Notification Architecture — 2026-10-25
+
+Status: FUTURE PHASE INPUT / WEBSITE-SIDE PREPARATION ALLOWED / LINE MANAGER RELEASE STILL GATED
+
+## 1. Four endpoints, two institutional lanes
+
+The system must operate as two separate institutional conversion lanes:
+
+### STT lane
+STT website → formal governance intake → STT LINE OA relationship → owner notification → engagement acceptance → optional payment.
+
+### GCSDA lane
+GCSDA website → membership application → GCSDA LINE OA relationship → owner/association notification → qualification review → membership approval → optional dues payment.
+
+The two lanes may share technical infrastructure, but they must never share public identity, copy, rich menu, membership/service status, or legal meaning.
+
+## 2. Website remains the source of truth
+
+LINE is not the place where formal governance intake or membership approval is completed.
+
+- STT formal intake remains: /start
+- GCSDA formal membership application remains: /membership
+- LINE rich-menu actions route back to the correct governed website page.
+- LINE messages may acknowledge, remind, or route, but must not turn into an unstructured substitute for formal intake.
+- Sensitive documents are not requested through LINE by default.
+
+## 3. Unified event envelope
+
+Every conversion-worthy action should produce an internal event with a receipt ID.
+
+Minimum event types:
+
+- STT_GOVERNANCE_INTAKE_CREATED
+- STT_ENGAGEMENT_APPROVED
+- GCSDA_MEMBERSHIP_APPLICATION_CREATED
+- GCSDA_MEMBERSHIP_APPROVED
+- ORDER_CREATED
+- PAYMENT_REQUESTED
+- PAYMENT_SUCCEEDED
+- PAYMENT_FAILED
+
+Minimum non-sensitive event metadata:
+
+- receipt_id
+- institution
+- event_type
+- submitted_at
+- contact_name
+- contact_channel
+- source_channel
+- source_account
+- landing_route
+- utm_source
+- utm_medium
+- utm_campaign
+
+Detailed intake content remains in the formal delivery channel; LINE owner alerts should contain only enough information to identify and act on the event.
+
+## 4. Owner notification rule
+
+For every high-value event, use dual notification:
+
+1. Detailed email delivery.
+2. Short LINE push notification to the owner from the corresponding Official Account.
+
+Examples:
+
+STT:
+「STT 新治理送件｜GOV-xxxx｜重大決策｜請查正式收件內容」
+
+GCSDA:
+「GCSDA 新入會申請｜GCSDA-xxxx｜申請人：○○｜請進行資格審查」
+
+Payment:
+「付款完成｜PAY-xxxx｜TWD ○○○○｜來源：STT / GCSDA」
+
+LINE notifications must not include sensitive narrative, financial-account information, IDs, medical data, or full confidential case descriptions.
+
+## 5. Messaging API wiring
+
+Each Official Account requires its own Messaging API configuration.
+
+Required per account:
+- verified Official Account identity
+- Messaging API enabled
+- channel access credentials
+- webhook signing secret
+- owner user ID available to that channel
+
+Owner user ID acquisition flow:
+1. Owner adds the relevant Official Account.
+2. Owner sends a controlled setup message.
+3. Website backend receives the webhook.
+4. Backend verifies LINE signature.
+5. Owner user ID is recorded as the authorized notification target for that institution.
+
+Do not reuse an STT recipient identity as a GCSDA public identity.
+
+## 6. Minimal backend design
+
+Do not build a CRM first.
+
+Keep the existing formal endpoints:
+- STT: /api/cooperation-submit
+- GCSDA: /api/gcsda-membership-submit
+
+Add one shared internal notification function:
+- sendOwnerEventNotification(event)
+
+Later, when LINE credentials are supplied, that function can fan out to:
+- email
+- STT LINE push, or
+- GCSDA LINE push
+
+Add only two webhook endpoints when LINE Manager release begins:
+- /api/line/stt-webhook
+- /api/line/gcsda-webhook
+
+Webhook signature verification is mandatory.
+
+## 7. Current delivery gap
+
+STT:
+- production email delivery is configured.
+- website governance intake already has receipt IDs.
+
+GCSDA:
+- membership form exists.
+- production membership email delivery is not yet configured.
+- until the recipient and mail configuration are supplied, the current fallback remains the GCSDA LINE contact route.
+
+Therefore GCSDA cannot be considered conversion-complete until membership delivery is resolved.
+
+## 8. LINE Pay role
+
+LINE Pay is a payment rail, not the governance-intake or membership-approval mechanism.
+
+Recommended institutional sequence:
+
+### STT
+governance intake → suitability review → scope/mandate accepted → amount confirmed → payment request → payment confirmation → owner notification
+
+Never:
+public visitor → instant payment → implied governance engagement
+
+### GCSDA
+membership application → qualification review → approval → dues amount confirmed → payment request → payment confirmation → membership activation
+
+Never:
+payment → automatic membership qualification
+
+### Publications / orders
+If a future STT-controlled product or publication checkout exists:
+order created → LINE Pay request → confirm → order paid → owner notification
+
+Do not add a shopping cart merely to enable LINE Pay.
+
+## 9. Payment event states
+
+Use explicit status separation:
+
+- CREATED
+- REVIEW_REQUIRED
+- APPROVED_FOR_PAYMENT
+- PAYMENT_REQUESTED
+- PAID
+- FAILED
+- REFUNDED / CANCELLED
+
+No governance engagement or GCSDA membership becomes effective merely because a payment state is PAID unless the relevant institutional approval state is also satisfied.
+
+## 10. Cross-channel linkage
+
+STT website:
+- links to STT LINE OA only for STT relationship / follow-up
+- formal conversion remains /start
+
+GCSDA website:
+- links to GCSDA LINE OA only for association relationship / membership support
+- formal conversion remains /membership
+
+Cross-institution links:
+- clearly labelled as separate institutions
+- never pass a user into the other institution's LINE account without an explicit, labelled action
+
+## 11. Attribution
+
+The formal intake/membership forms should retain privacy-minimized attribution:
+
+- source_channel = website / line
+- source_account = stt / gcsda
+- landing_route
+- utm_source
+- utm_medium
+- utm_campaign
+
+This is enough to know whether a conversion came from the website or the relevant LINE OA without deploying a heavy tracking stack.
+
+## 12. Required inputs before live integration
+
+SOURCE_REQUIRED:
+- verified STT LINE Official Account ID and add-friend URL
+- STT Messaging API credentials
+- GCSDA Messaging API credentials
+- authorized owner user ID for each account
+- GCSDA formal membership notification recipient
+- LINE Pay merchant approval and merchant integration credentials, if payment is activated
+- approved membership dues/payment policy
+- approved STT post-engagement payment policy
+
+## 13. Release sequence
+
+A. Finish current website copy/visual QA and BUILD_LOCK.
+B. Resolve GCSDA membership delivery.
+C. Add privacy-minimized attribution to both formal forms.
+D. Enable Messaging API for each OA and verify webhook signatures.
+E. Bind owner notification target for each OA.
+F. Test website event → email + LINE owner alert.
+G. Publish STT OA profile / welcome / rich menu.
+H. Publish GCSDA OA profile / welcome / rich menu.
+I. If approved, add LINE Pay only after the relevant institutional approval step.
+J. Run end-to-end test for intake, membership, payment success/failure, and notification.
+
+The system is not considered complete until a test submission can be traced from source channel to website receipt ID to owner notification and, where applicable, payment status.
