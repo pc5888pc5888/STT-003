@@ -579,3 +579,41 @@
     top:91px!important;
   }
 }
+
+/* DUAL-SITE CIS FINAL PARITY — 2026-10-25 */
+@media(min-width:1201px){
+  #root .g4 .gcsda-hero.cis-hero.cis-profile-parity .cis-hero-copy{
+    top:220px!important;
+    left:56px!important;
+  }
+}
+@media(min-width:761px) and (max-width:1200px){
+  #root .g4 .gcsda-hero.cis-hero.cis-profile-parity .cis-hero-copy{
+    top:90px!important;
+    left:36px!important;
+  }
+}
+@media(max-width:900px){
+  #root .g4 .g4-head,
+  #root .g4 .g4-headin{
+    height:82px!important;
+    min-height:82px!important;
+  }
+  #root .g4 .g4-brand{
+    width:min(250px,calc(100vw - 105px))!important;
+    max-width:min(250px,calc(100vw - 105px))!important;
+    height:58px!important;
+    flex:0 1 auto!important;
+  }
+  #root .g4 .g4-brand img{
+    width:auto!important;
+    height:58px!important;
+    max-height:58px!important;
+    max-width:100%!important;
+  }
+}
+#root .g4 .g4-footer{
+  padding:38px 0!important;
+  border-top:1px solid #d8c8ad!important;
+  background:#f3eee4!important;
+}
