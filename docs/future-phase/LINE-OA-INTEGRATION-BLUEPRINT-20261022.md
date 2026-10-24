@@ -346,3 +346,59 @@ GCSDA LINE OA profile principle:
 - external appointments must not be presented as GCSDA subsidiaries or controlled entities
 
 Release remains gated by WEBSITE_STATUS = QA_PASS / BUILD_LOCKED.
+
+## Approved founder profile copy for future LINE release — 2026-10-25
+
+Status: FUTURE PHASE INPUT ONLY / DO NOT PUBLISH BEFORE WEBSITE QA_PASS / BUILD_LOCKED
+
+### STT LINE Official Account — approved founder introduction
+
+Primary identity:
+創辦人暨執行長｜莊鈞翔博士
+
+English name:
+CHUANG CHUN HSIANG Ph.D.
+
+Institution line:
+STT Governance 創辦人暨執行長
+
+Current professional positions:
+- 策略智庫數媒出版｜創辦人暨執行長
+- 策略智庫數媒新聞｜法遵長暨營運長
+- 策略智庫數媒新聞｜專家評論發行人
+- 中華企業策略永續發展學會｜創會理事長
+- 臺灣厝文化發展協會｜永續長
+- 數位媒體法遵暨審查委員會｜主委
+- Ｍ傳媒法律策略專欄｜特約評論
+- 逢甲大學商學院｜兼任助理教授
+
+Relationship note:
+上述職務分屬各自機構或法人。列示僅表示莊鈞翔博士之現任職務，不代表各機構均由莊博士創設、亦不代表均屬 STT Governance 所有。
+
+### GCSDA LINE Official Account — approved founder-chairman introduction
+
+Primary identity:
+創會理事長｜莊鈞翔博士
+
+English name:
+CHUANG CHUN HSIANG Ph.D.
+
+Institution line:
+中華企業策略永續發展學會｜創會理事長
+
+Current professional positions:
+- 策略智庫數媒出版｜創辦人暨執行長
+- 策略智庫數媒新聞｜法遵長暨營運長
+- 策略智庫數媒新聞｜專家評論發行人
+- 中華企業策略永續發展學會｜創會理事長
+- 臺灣厝文化發展協會｜永續長
+- 數位媒體法遵暨審查委員會｜主委
+- Ｍ傳媒法律策略專欄｜特約評論
+- 逢甲大學商學院｜兼任助理教授
+
+Relationship note:
+上述職務分屬各自機構或法人。GCSDA 為獨立專業學會；列示其他職務僅作莊鈞翔博士之專業背景，不代表相關機構為 GCSDA 之子單位、附屬機構或受其控制。
+
+Publication gate:
+- do not publish in LINE Manager before WEBSITE_STATUS = QA_PASS / BUILD_LOCKED
+- once the gate passes, these exact identity lines and current-position registry become the profile source of truth for the two LINE Official Accounts
