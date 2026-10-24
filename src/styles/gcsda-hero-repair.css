@@ -617,3 +617,19 @@
   border-top:1px solid #d8c8ad!important;
   background:#f3eee4!important;
 }
+
+/* GCSDA ACCESSIBILITY QA LOCK — keyboard focus + reduced motion */
+#root .g4 :where(a,button,input,select,textarea,summary):focus-visible{
+  outline:2px solid #835c2e!important;
+  outline-offset:4px!important;
+}
+@media(prefers-reduced-motion:reduce){
+  #root .g4 *,
+  #root .g4 *::before,
+  #root .g4 *::after{
+    scroll-behavior:auto!important;
+    animation-duration:.01ms!important;
+    animation-iteration-count:1!important;
+    transition-duration:.01ms!important;
+  }
+}
