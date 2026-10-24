@@ -125,7 +125,7 @@ export function EricPage(){
 
     <Section kicker="CURRENT POSITION" title="現任職務">
       <ul className="stt-inst-list">{AUTHOR_PROFILE.positions.map(position=><li key={position}>{position}</li>)}</ul>
-      <p style={{marginTop:18}}>M 傳媒為外部第三方媒體，僅作為公開發表來源，不屬於 STT Governance 自有媒體體系。</p>
+      <p style={{marginTop:18}}>上述職務分屬各自機構或法人，列示僅表示莊鈞翔博士之現任職務，不代表各機構均由莊博士創設、亦不代表均屬 STT Governance 所有；Ｍ傳媒為外部第三方媒體。</p>
     </Section>
 
     <Section kicker="RESEARCH & PUBLICATIONS" title="研究與出版">

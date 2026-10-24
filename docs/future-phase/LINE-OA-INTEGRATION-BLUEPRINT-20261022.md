@@ -316,3 +316,33 @@ I. If approved, add LINE Pay only after the relevant institutional approval step
 J. Run end-to-end test for intake, membership, payment success/failure, and notification.
 
 The system is not considered complete until a test submission can be traced from source channel to website receipt ID to owner notification and, where applicable, payment status.
+
+## Founder profile input — 2026-10-25
+
+Status: FUTURE PHASE INPUT ONLY / DO NOT PUBLISH BEFORE WEBSITE BUILD_LOCK
+
+The two LINE Official Accounts must use the same verified current-position registry as the websites. Listing a role means Dr. Chuang currently holds that role; it must not be interpreted as ownership, founder status, or legal control of that institution unless the role itself explicitly states so.
+
+Current positions:
+- 策略智庫數媒出版｜創辦人暨執行長
+- 策略智庫數媒新聞｜法遵長暨營運長
+- 策略智庫數媒新聞｜專家評論發行人
+- 中華企業策略永續發展學會｜創會理事長
+- 臺灣厝文化發展協會｜永續長
+- 數位媒體法遵暨審查委員會｜主委
+- Ｍ傳媒法律策略專欄｜特約評論
+- 逢甲大學商學院｜兼任助理教授
+
+STT LINE OA profile principle:
+- primary identity: 創辦人暨執行長｜莊鈞翔博士
+- show selected current positions when profile space permits
+- distinguish founder/executive roles from appointments at other organizations
+- do not imply every listed institution is STT-owned or founded by Dr. Chuang
+
+GCSDA LINE OA profile principle:
+- primary identity: 創會理事長｜莊鈞翔博士
+- the same current-position registry may be shown as personal professional context
+- GCSDA remains an independent association
+- external appointments must not be presented as GCSDA subsidiaries or controlled entities
+
+Release remains gated by WEBSITE_STATUS = QA_PASS / BUILD_LOCKED.
