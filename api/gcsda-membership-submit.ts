@@ -52,12 +52,18 @@ function cleanList(value: unknown, allowed: readonly string[]) {
 }
 
 export default async function handler(req: any, res: any) {
-  if (req.method === "GET") return json(res, 200, {
-    ok: true,
-    resendConfigured: Boolean(process.env.RESEND_API_KEY?.trim()),
-    recipientConfigured: Boolean(process.env.GCSDA_MEMBERSHIP_EMAIL?.trim()),
-    acceptsFiles: false,
-  });
+  if (req.method === "GET") {
+    const resendConfigured = Boolean(process.env.RESEND_API_KEY?.trim());
+    const recipientConfigured = Boolean(process.env.GCSDA_MEMBERSHIP_EMAIL?.trim());
+    return json(res, 200, {
+      ok: true,
+      resendConfigured,
+      recipientConfigured,
+      formSubmitConfigured: recipientConfigured,
+      deliveryConfigured: recipientConfigured,
+      acceptsFiles: false,
+    });
+  }
   if (req.method !== "POST") return json(res, 405, { ok: false, error: "Method not allowed" });
 
   const body = parseBody(req);
@@ -102,7 +108,7 @@ export default async function handler(req: any, res: any) {
 
   const apiKey = process.env.RESEND_API_KEY?.trim();
   const recipient = process.env.GCSDA_MEMBERSHIP_EMAIL?.trim();
-  if (!apiKey || !recipient) return json(res, 503, { ok: false, error: "Delivery unavailable" });
+  if (!recipient) return json(res, 503, { ok: false, error: "Delivery unavailable" });
 
   const from = process.env.RESEND_FROM_EMAIL?.trim() || DEFAULT_FROM;
   const receiptId = `GCSDA-${Date.now()}-${Math.random().toString(36).slice(2,8).toUpperCase()}`;
@@ -134,25 +140,64 @@ export default async function handler(req: any, res: any) {
     "申請人已確認資料真實，並同意學會於會員資格審查、聯繫、會務管理與必要行政作業範圍內處理本表資料。",
   ].join("\n");
 
+  if (apiKey) {
+    try {
+      const upstream = await fetch("https://api.resend.com/emails", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Authorization: `Bearer ${apiKey}` },
+        signal: AbortSignal.timeout(12000),
+        body: JSON.stringify({
+          from,
+          to: [recipient],
+          subject: `[GCSDA 會員資格申請] ${data.name}｜${receiptId}`,
+          text,
+        }),
+      });
+      const result = await upstream.json().catch(() => ({})) as { id?: unknown };
+      if (upstream.ok && typeof result.id === "string" && result.id.trim()) {
+        return json(res, 200, { ok: true, receiptId, transport: "resend" });
+      }
+    } catch {
+      // Continue to the approved fallback transport below.
+    }
+  }
+
   try {
-    const upstream = await fetch("https://api.resend.com/emails", {
+    const upstream = await fetch(`https://formsubmit.co/ajax/${encodeURIComponent(recipient)}`, {
       method: "POST",
-      headers: { "Content-Type": "application/json", Authorization: `Bearer ${apiKey}` },
+      headers: { "Content-Type": "application/json", "Accept": "application/json" },
       signal: AbortSignal.timeout(12000),
       body: JSON.stringify({
-        from,
-        to: [recipient],
-        subject: `[GCSDA 會員資格申請] ${data.name}｜${receiptId}`,
-        text,
+        _subject: `【GCSDA】新會員資格申請｜${data.name}｜${receiptId}`,
+        _template: "table",
+        _captcha: "false",
+        _url: "https://gcsda-governance.vercel.app/membership",
+        "申請編號": receiptId,
+        "姓名": data.name,
+        "聯絡電話": data.phone,
+        "電子郵件": data.email,
+        "LINE 顯示名稱": data.line_name || "未填",
+        "所在縣市": data.city || "未填",
+        "現職單位／機構": data.organization,
+        "職稱": data.job_title,
+        "主要專業領域": data.expertise.join("、"),
+        "其他專業領域": data.other_expertise || "未填",
+        "公開專業連結": data.profile_url || "未填",
+        "申請來源": data.application_source,
+        "推薦人／邀請人": data.referrer || "未填",
+        "申請加入學會的原因": data.motivation,
+        "希望參與的方向": data.participation_areas.length ? data.participation_areas.join("、") : "未填",
+        "可提供的專業價值": data.professional_value || "未填",
+        "會員資格治理聲明": data.truth ? "已確認" : "未確認",
+        "個資使用同意": data.privacy ? "已同意" : "未同意",
       }),
     });
-
-    const result = await upstream.json().catch(() => ({})) as { id?: unknown };
-    if (!upstream.ok || typeof result.id !== "string" || !result.id.trim()) {
+    const result = await upstream.json().catch(() => ({})) as { success?: unknown; message?: unknown };
+    const rejected = result.success === false || result.success === "false";
+    if (!upstream.ok || rejected) {
       return json(res, 503, { ok: false, error: "Delivery unavailable", receiptId });
     }
-
-    return json(res, 200, { ok: true, receiptId });
+    return json(res, 200, { ok: true, receiptId, transport: "formsubmit" });
   } catch {
     return json(res, 503, { ok: false, error: "Delivery unavailable", receiptId });
   }

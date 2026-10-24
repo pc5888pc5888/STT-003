@@ -327,7 +327,7 @@ function Membership(){
     let active=true;
     fetch("/api/gcsda-membership-submit",{method:"GET",headers:{"Accept":"application/json"}})
       .then(response=>response.ok?response.json():Promise.reject(new Error("capability_unavailable")))
-      .then(result=>{if(active)setDeliveryAvailable(Boolean(result?.resendConfigured&&result?.recipientConfigured));})
+      .then(result=>{if(active)setDeliveryAvailable(Boolean(result?.deliveryConfigured ?? (result?.resendConfigured&&result?.recipientConfigured)));})
       .catch(()=>{if(active)setDeliveryAvailable(false);});
     return()=>{active=false;};
   },[]);
@@ -385,7 +385,7 @@ function Membership(){
           ].map(([n,t,d])=><div className="g4-membership-flow-item" key={n}><b>{n}</b><strong>{t}</strong><span>{d}</span></div>)}
         </div>
 
-        {deliveryAvailable===null?<div className="g4-note g4-membership-delivery" data-membership-delivery="checking"><h3>正在確認線上申請入口</h3><p>若線上送件尚未啟用，本頁會自動提供學會正式會務聯絡方式。</p></div>:deliveryAvailable===false?<div className="g4-note g4-membership-delivery" data-membership-delivery="fallback"><h3>請先透過 LINE 會務聯絡提出入會申請</h3><p>線上表單寄送目前尚未啟用；為避免資料填寫後無法送達，網站暫不顯示送件表單。請由學會 LINE 會務入口聯絡，後續資格審查仍依章程與正式會務程序辦理。</p><div className="g4-actions"><a className="primary" href={LINE_URL} target="_blank" rel="noreferrer">LINE 會務聯絡 ↗</a></div></div>:<form id="gcsda-membership-form" ref={formRef} className="g4-membership-form g4-membership-wizard" onSubmit={submit} aria-busy={status==="sending"} data-membership-delivery="online">
+        {deliveryAvailable===null?<div className="g4-note g4-membership-delivery" data-membership-delivery="checking"><h3>正在確認線上申請入口</h3><p>若線上送件尚未啟用，本頁會自動提供學會正式會務聯絡方式。</p></div>:deliveryAvailable===false?<div className="g4-note g4-membership-delivery" data-membership-delivery="fallback"><h3>線上送件目前暫時無法使用</h3><p>為避免資料填寫後無法送達，本頁會在送件通道無法連線時停止顯示表單。此時請改由學會 LINE 會務入口聯絡，後續資格審查仍依章程與正式會務程序辦理。</p><div className="g4-actions"><a className="primary" href={LINE_URL} target="_blank" rel="noreferrer">LINE 會務聯絡 ↗</a></div></div>:<form id="gcsda-membership-form" ref={formRef} className="g4-membership-form g4-membership-wizard" onSubmit={submit} aria-busy={status==="sending"} data-membership-delivery="online">
           <div className="g4-form-stepper" aria-label="入會申請步驟">
             {["基本資料","專業背景","參與申請","確認送出"].map((label,index)=>{
               const n=index+1; return <div className={`g4-form-step-indicator${step===n?" is-active":""}${step>n?" is-done":""}`} key={label}><em>{step>n?"✓":n}</em><span>{label}</span></div>;
@@ -466,7 +466,7 @@ function Knowledge(){return <div className="g4-page"><PageHead eyebrow="KNOWLEDG
 
 function Charter(){return <div className="g4-page"><PageHead eyebrow="CHARTER & NOTICE" title="章程不是網站附件，而是學會權力來源、會員權利義務與制度運作的正式依據。" lead="本頁呈現可由現有會務資料確認的章程摘要與法定立案資訊；章程全文、公告與會務文件僅收錄已正式核定且可公開之版本。"/><section className="g4-section"><div className="g4-wrap"><div className="g4-list">{charterHighlights.map(([a,b])=><div className="g4-row" key={a}><b>{a}</b><div>{b}</div></div>)}</div><div className="g4-note"><h2>組織法定立案</h2><p>內政部 114/8 台內團字第 1140030747 號。</p></div><div className="g4-note"><h2>公告與正式文件</h2><p>此區只收錄已正式核定、可公開之章程、公告、會員大會或理監事會相關文件；網站說明文字不取代正式法定文件。</p></div></div></section></div>}
 
-function Privacy(){return <div className="g4-page"><PageHead eyebrow="PRIVACY" title="隱私與資料使用" lead="本頁說明學會網站的聯絡入口與資料提供方式。入會、會務與活動事項由 GCSDA 自身的會務程序處理，不因網站互相連結而成為 STT 的治理委任。"/><section className="g4-section"><div className="g4-wrap"><div className="g4-list"><div className="g4-row"><b>入會與會務聯絡</b><div>會員頁會先確認線上送件功能是否已正式啟用；啟用時，申請資料由網站後端轉送至學會指定的會務收件管道，用於資格審查與後續聯絡；未啟用時，網站不要求填寫表單，改提供 LINE 會務聯絡入口。本頁不提供檔案上傳。<div className="g4-actions"><a href={LINE_URL} target="_blank" rel="noreferrer">入會與會務聯絡 ↗</a></div></div></div><div className="g4-row"><b>資料提供範圍</b><div>初次聯絡請先說明會務事項與必要聯絡資訊，避免主動傳送身分證件、金融帳戶、醫療資料或其他不必要的敏感內容。正式入會所需資料與程序，請依學會提供的正式說明辦理。</div></div><div className="g4-row"><b>外部服務與機構界線</b><div>進入 LINE 或其他外部網站後，相關服務由各自平台提供。GCSDA 與 STT Governance 是不同機構主體；學會入會不等於 STT 治理委任。</div></div></div></div></section></div>}
+function Privacy(){return <div className="g4-page"><PageHead eyebrow="PRIVACY" title="隱私與資料使用" lead="本頁說明學會網站的聯絡入口與資料提供方式。入會、會務與活動事項由 GCSDA 自身的會務程序處理，不因網站互相連結而成為 STT 的治理委任。"/><section className="g4-section"><div className="g4-wrap"><div className="g4-list"><div className="g4-row"><b>入會與會務聯絡</b><div>會員頁會先確認線上送件通道是否可用；可用時，申請資料由網站後端透過受委託之電子郵件／表單傳送服務轉送至學會指定的會務收件管道，用於資格審查與後續聯絡；送件通道無法使用時，網站停止顯示表單並改提供 LINE 會務聯絡入口。本頁不提供檔案上傳。<div className="g4-actions"><a href={LINE_URL} target="_blank" rel="noreferrer">入會與會務聯絡 ↗</a></div></div></div><div className="g4-row"><b>資料提供範圍</b><div>初次聯絡請先說明會務事項與必要聯絡資訊，避免主動傳送身分證件、金融帳戶、醫療資料或其他不必要的敏感內容。正式入會所需資料與程序，請依學會提供的正式說明辦理。</div></div><div className="g4-row"><b>外部服務與機構界線</b><div>進入 LINE 或其他外部網站後，相關服務由各自平台提供。GCSDA 與 STT Governance 是不同機構主體；學會入會不等於 STT 治理委任。</div></div></div></div></section></div>}
 
 
 function NotFound(){return <div className="g4-page"><PageHead eyebrow="404" title="找不到這個頁面。" lead="這個網址不在中華企業策略永續發展學會目前公開的正式網站路由中。"/><section className="g4-section"><div className="g4-wrap"><div className="g4-actions"><Link className="primary" to="/">回到學會首頁</Link></div></div></section></div>}
