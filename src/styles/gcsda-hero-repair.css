@@ -524,3 +524,58 @@
   #root .g4 .gcsda-hero.cis-hero.cis-profile-parity .cis-byline{font-size:clamp(12px,3.4vw,15px)!important;line-height:1.45!important;margin:10px 0 0!important}
   #root .g4 .gcsda-hero.cis-hero.cis-profile-parity .cis-subtitle{font-size:clamp(12px,3.4vw,15px)!important;line-height:1.5!important;margin:7px 0 0!important}
 }
+
+/* FINAL TABLET HERO AND SCREEN-BASELINE CORRECTION — 2026-10-24 */
+@media(min-width:1201px){
+  #root .g4 .gcsda-hero.cis-hero.cis-profile-parity .cis-hero-copy{
+    top:221px!important;
+  }
+}
+@media(min-width:761px) and (max-width:1200px){
+  #root .g4 .gcsda-hero.cis-hero.cis-with-image:not(.cis-profile-parity) .cis-hero-inner{
+    position:relative!important;
+    display:block!important;
+    width:100%!important;
+    max-width:none!important;
+    min-height:0!important;
+    height:auto!important;
+    aspect-ratio:16 / 9!important;
+    margin:0!important;
+    padding:0!important;
+  }
+  #root .g4 .gcsda-hero.gcsda-hero--home.cis-with-image .cis-hero-inner{
+    min-height:0!important;
+    aspect-ratio:16 / 9!important;
+  }
+  #root .g4 .gcsda-hero.cis-hero.cis-with-image:not(.cis-profile-parity) .cis-hero-art{
+    position:absolute!important;
+    inset:0!important;
+    width:100%!important;
+    max-width:none!important;
+    height:100%!important;
+    margin:0!important;
+    padding:0!important;
+  }
+  #root .g4 .gcsda-hero.cis-hero.cis-with-image:not(.cis-profile-parity) .cis-hero-art img{
+    display:block!important;
+    width:100%!important;
+    height:100%!important;
+    max-width:none!important;
+    max-height:none!important;
+    object-fit:cover!important;
+    object-position:center center!important;
+  }
+  #root .g4 .gcsda-hero.cis-hero.cis-with-image:not(.cis-profile-parity) .cis-hero-copy{
+    position:absolute!important;
+    top:90px!important;
+    left:36px!important;
+    width:min(590px,58%)!important;
+    max-width:590px!important;
+    margin:0!important;
+    padding:0!important;
+    z-index:2!important;
+  }
+  #root .g4 .gcsda-hero.cis-hero.cis-profile-parity .cis-hero-copy{
+    top:91px!important;
+  }
+}
