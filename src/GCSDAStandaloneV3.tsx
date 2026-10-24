@@ -122,11 +122,14 @@ const founderSelectedBackground: ReadonlyArray<readonly [string, ReactNode]> = [
 ] as const;
 
 const founderPositions = [
-  "STT Governance 策略智庫｜創辦人暨執行長",
+  "策略智庫數媒出版｜創辦人暨執行長",
+  "策略智庫數媒新聞｜法遵長暨營運長",
+  "策略智庫數媒新聞｜專家評論發行人",
   "中華企業策略永續發展學會｜創會理事長",
-  "臺灣厝買賣文化發展協會｜永續長",
+  "臺灣厝文化發展協會｜永續長",
+  "數位媒體法遵暨審查委員會｜主委",
+  "Ｍ傳媒法律策略專欄｜特約評論",
   "逢甲大學商學院｜兼任助理教授",
-  "M 傳媒法律策略專欄｜特約評論（外部第三方媒體）",
 ] as const;
 
 const founderSelectedPublications = [
@@ -287,6 +290,7 @@ function FounderChairman(){return <div className="g4-page g4-founder-page">
     <div className="g4-kicker">CURRENT POSITION</div>
     <h2 className="g4-title">現任職務</h2>
     <div className="g4-list">{founderPositions.map(position=><div className="g4-row" key={position}><b>POSITION</b><div>{position}</div></div>)}</div>
+    <p className="g4-lead" style={{marginTop:18}}>上述職務分屬各自機構或法人，列示僅表示莊鈞翔博士之現任職務，不代表各機構均由莊博士創設、亦不代表均屬 GCSDA 或 STT Governance 所有；Ｍ傳媒為外部第三方媒體。</p>
   </div></section>
 
   <section className="g4-section"><div className="g4-wrap">
