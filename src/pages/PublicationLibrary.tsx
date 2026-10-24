@@ -48,8 +48,16 @@ export function PublicationOverview() {
 }
 
 export function BooksPage() {
-  return <div className="stt-library"><div className="stt-library-wrap">
-    <LibraryHeading kicker="STT GOVERNANCE · BOOKS & PUBLICATIONS" title="電子書與出版" lead="從完整著作閱讀治理思想。書籍資訊與線上翻閱入口集中於此，專欄與報導另有各自的作品頁。" />
+  return <div className="stt-library">
+    <UnifiedTitleHero
+      kicker="STT GOVERNANCE · BOOKS & PUBLICATIONS"
+      title="電子書與出版"
+      lead="從完整著作閱讀治理思想。書籍資訊與線上翻閱入口集中於此，專欄與報導另有各自的作品頁。"
+      image="/visual-bank/stt/user-approved-six/publications.png"
+      imagePosition="center right"
+      id="books-title"
+    />
+    <div className="stt-library-wrap">
     <PublicationNavigation />
     <section className="stt-book-grid" aria-label="書籍目錄">
       {BOOKS.map(book => <article className="stt-book-card" key={book.id} id={book.id} data-book-id={book.id}>

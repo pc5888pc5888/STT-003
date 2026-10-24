@@ -1006,3 +1006,13 @@
   #root .cis-hero.cis-profile-parity .cis-byline{font-size:clamp(12px,3.4vw,15px)!important;line-height:1.45!important;margin:10px 0 0!important}
   #root .cis-hero.cis-profile-parity .cis-subtitle{font-size:clamp(12px,3.4vw,15px)!important;line-height:1.5!important;margin:7px 0 0!important}
 }
+
+/* FINAL TABLET TITLE MEASURE — 2026-10-24 */
+@media(min-width:761px) and (max-width:1200px){
+  #root .cis-hero:not(.cis-profile-parity) .cis-hero-copy,
+  #root .cis-hero.cis-with-image:not(.cis-profile-parity) .cis-hero-copy,
+  #root .cis-hero.cis-text-only:not(.cis-profile-parity) .cis-hero-copy{
+    width:min(590px,58%)!important;
+    max-width:590px!important;
+  }
+}

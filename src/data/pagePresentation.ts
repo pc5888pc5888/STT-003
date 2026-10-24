@@ -151,11 +151,11 @@ export const PAGE_PRESENTATION: Record<string, PagePresentation> = {
   },
   "/books": {
     "lines": [
-      "著作正典"
+      "電子書與出版"
     ],
     "type": 1,
     "image": "/visual-bank/stt/user-approved-six/publications.png",
-    "originalTitle": "著作正典",
+    "originalTitle": "電子書與出版",
     "context": null,
     "portrait": false,
     "imageWidth": 1672,

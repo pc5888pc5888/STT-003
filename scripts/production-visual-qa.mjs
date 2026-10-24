@@ -50,7 +50,7 @@ const sttManaged={
 
 const sttSpecial=[
   "/columns","/columns/legal","/columns/humanistic","/columns/news",
-  "/internal-compliance","/internal-compliance/pillars","/internal-compliance/simulator","/internal-compliance/academic","/internal-compliance/publication",
+  "/internal-compliance/pillars","/internal-compliance/simulator","/internal-compliance/academic","/internal-compliance/publication",
   "/governance/corporate","/governance/corporate/modules","/governance/corporate/simulator","/governance/corporate/academic",
   "/governance/family","/governance/family/framework","/governance/family/stages","/governance/family/academic",
   "/governance/digital","/governance/digital/features","/governance/digital/console","/governance/digital/academic",
@@ -60,7 +60,10 @@ const sttSpecial=[
 
 const sttAliases=[
   "/index.html","/governance.html","/publications","/insights.html","/insights/index","/papers","/stt","/about.html",
-  "/institution/eric-chuang","/cooperation","/contact.html","/institution/gcsda","/gcsda.html","/internal-compliance"
+  "/institution/eric-chuang","/cooperation","/contact.html","/institution/gcsda","/gcsda.html",
+  "/research","/books/internal-compliance","/domains","/domains/corporate-governance","/domains/family-succession",
+  "/domains/strategic-legal","/domains/compliance-contract","/domains/human-ai-governance","/projects","/success",
+  "/internal-compliance"
 ];
 
 const gcsdaManaged={
@@ -106,7 +109,7 @@ for(const site of sites){
       try{
         response=await page.goto(url,{waitUntil:"domcontentloaded",timeout:45000});
         await page.waitForLoadState("networkidle",{timeout:5000}).catch(()=>{});
-        await page.waitForTimeout(250);
+        await page.waitForTimeout(180);
       }catch(e){navError=String(e);}
       const metrics=await page.evaluate(({route,kind})=>{
         const visible=(el)=>{
@@ -185,6 +188,7 @@ for(const site of sites){
       if(navError)issues.push("navigation-error");
       if(rec.status&&rec.status>=400&&spec.kind!=="notfound")issues.push("http-"+rec.status);
       if(spec.kind!=="alias"&&spec.kind!=="notfound"&&rec.h1Count!==1)issues.push("h1-count-"+rec.h1Count);
+      if(spec.kind==="alias"&&rec.status&&rec.status>=400)issues.push("alias-http-"+rec.status);
       if((rec.horizontalOverflow||0)>4)issues.push("horizontal-overflow-"+round(rec.horizontalOverflow));
       if(rec.brokenImages?.length)issues.push("broken-images-"+rec.brokenImages.length);
       if(rec.forbiddenText)issues.push("forbidden-public-text");
