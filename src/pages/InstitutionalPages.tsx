@@ -123,9 +123,9 @@ export function EricPage(){
       </div>
     </Section>
 
-    <Section kicker="CURRENT POSITION" title="現任職務">
-      <ul className="stt-inst-list">{AUTHOR_PROFILE.positions.map(position=><li key={position}>{position}</li>)}</ul>
-      <p style={{marginTop:18}}>上述職務分屬各自機構或法人，列示僅表示莊鈞翔博士之現任職務，不代表各機構均由莊博士創設、亦不代表均屬 STT Governance 所有；Ｍ傳媒為外部第三方媒體。</p>
+    <Section kicker="CURRENT POSITION" title="現任職務" id="eric-current-position">
+      <div className="stt-eric-position-list">{AUTHOR_PROFILE.positions.map(position=><div className="stt-eric-position-row" key={position}><b>POSITION</b><div>{position}</div></div>)}</div>
+      <p className="stt-eric-position-note">上述職務分屬各自機構或法人，列示僅表示莊鈞翔博士之現任職務，不代表各機構均由莊博士創設、亦不代表均屬 GCSDA 或 STT Governance 所有；Ｍ傳媒為外部第三方媒體。</p>
     </Section>
 
     <Section kicker="RESEARCH & PUBLICATIONS" title="研究與出版">
