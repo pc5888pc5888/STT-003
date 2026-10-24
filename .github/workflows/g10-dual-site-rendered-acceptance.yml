@@ -1,0 +1,256 @@
+name: G10 dual-site rendered acceptance
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/g10-dual-site-rendered-acceptance.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  rendered-acceptance:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout STT main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          path: stt
+          persist-credentials: false
+
+      - name: Checkout GCSDA release
+        uses: actions/checkout@v4
+        with:
+          ref: gcsda-release-20261005
+          path: gcsda
+          persist-credentials: false
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Build both current sources
+        run: |
+          set -euo pipefail
+          cd "$GITHUB_WORKSPACE/stt"
+          npm ci
+          npm run lint
+          npm run build
+          cd "$GITHUB_WORKSPACE/gcsda"
+          npm ci
+          npm run lint
+          npm run build
+
+      - name: Install browser QA runtime
+        run: |
+          set -euo pipefail
+          mkdir -p "$GITHUB_WORKSPACE/qa-runtime"
+          cd "$GITHUB_WORKSPACE/qa-runtime"
+          npm init -y >/dev/null 2>&1
+          npm install --no-save playwright @axe-core/playwright
+          npx playwright install --with-deps chromium
+
+      - name: Start local production previews
+        run: |
+          set -euo pipefail
+          (cd "$GITHUB_WORKSPACE/stt" && npx vite preview --host 127.0.0.1 --port 4173 >/tmp/stt-preview.log 2>&1 & echo $! >/tmp/stt-preview.pid)
+          (cd "$GITHUB_WORKSPACE/gcsda" && npx vite preview --host 127.0.0.1 --port 4174 >/tmp/gcsda-preview.log 2>&1 & echo $! >/tmp/gcsda-preview.pid)
+          for port in 4173 4174; do
+            for i in $(seq 1 60); do
+              if curl -fsS "http://127.0.0.1:$port/" >/dev/null; then break; fi
+              sleep 1
+            done
+            curl -fsS "http://127.0.0.1:$port/" >/dev/null
+          done
+
+      - name: Render desktop tablet mobile and run G10 checks
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/g10/screenshots
+          cat > "$GITHUB_WORKSPACE/qa-runtime/check.mjs" <<'JS'
+          import fs from 'node:fs';
+          import { chromium } from 'playwright';
+          import AxeBuilder from '@axe-core/playwright';
+
+          const configs=[
+            {
+              site:'stt',origin:'http://127.0.0.1:4173',
+              routes:['/','/problems','/how-stt-works','/engagement','/insights','/about','/eric-chuang','/institutions','/start','/privacy','/professional-boundary',
+                '/problems/major-decision','/problems/owner-dependence','/problems/succession','/problems/family-ownership','/problems/strategic-legal','/problems/ai-governance','/problems/system-failure','/problems/founder-legacy']
+            },
+            {
+              site:'gcsda',origin:'http://127.0.0.1:4174',
+              routes:['/','/about','/founder-chairman','/governance','/council','/membership','/events','/knowledge','/charter','/privacy']
+            }
+          ];
+          const devices=[['desktop',1440,1000],['tablet',820,1100],['mobile',390,844]];
+          const safe=s=>s==='/'?'home':s.slice(1).replaceAll('/','-');
+          const browser=await chromium.launch({headless:true});
+          const report={generatedAt:new Date().toISOString(),pages:[],special:[],identity:{}};
+
+          for(const cfg of configs){
+            for(const [label,width,height] of devices){
+              const context=await browser.newContext({viewport:{width,height},reducedMotion:'reduce'});
+              const page=await context.newPage();
+              await page.addInitScript(()=>{
+                window.__qaCLS=0;
+                try{
+                  new PerformanceObserver(list=>{
+                    for(const entry of list.getEntries()){
+                      if(!entry.hadRecentInput) window.__qaCLS += entry.value;
+                    }
+                  }).observe({type:'layout-shift',buffered:true});
+                }catch{}
+              });
+              for(const route of cfg.routes){
+                const pageErrors=[];
+                const onErr=e=>pageErrors.push(String(e?.message||e));
+                page.on('pageerror',onErr);
+                let rec={site:cfg.site,route,label,width,height,passed:false};
+                try{
+                  const response=await page.goto(cfg.origin+route,{waitUntil:'networkidle',timeout:30000});
+                  await page.evaluate(()=>document.fonts.ready);
+                  await page.waitForTimeout(150);
+                  const state=await page.evaluate(()=>{
+                    const rect=e=>{const r=e?.getBoundingClientRect();return r?{left:r.left,top:r.top,right:r.right,bottom:r.bottom,width:r.width,height:r.height}:null};
+                    const h1=document.querySelector('h1');
+                    const hero=document.querySelector('.cis-hero');
+                    const heroImg=hero?.querySelector('.cis-hero-art img');
+                    const title=document.querySelector('.cis-title');
+                    const byline=document.querySelector('.cis-byline');
+                    const subtitle=document.querySelector('.cis-subtitle');
+                    const oneLine=e=>{
+                      if(!e) return null;
+                      const cs=getComputedStyle(e);
+                      const lh=parseFloat(cs.lineHeight)||parseFloat(cs.fontSize)*1.4;
+                      const r=e.getBoundingClientRect();
+                      return {text:e.textContent?.trim()||'',rect:rect(e),fontSize:cs.fontSize,lineHeight:cs.lineHeight,whiteSpace:cs.whiteSpace,
+                        single:r.height<=lh*1.25 && e.scrollWidth<=e.clientWidth+1};
+                    };
+                    return {
+                      h1Count:document.querySelectorAll('h1').length,
+                      h1Text:h1?.textContent?.trim()||null,
+                      h1Rect:rect(h1),
+                      title:oneLine(title),
+                      byline:oneLine(byline),
+                      subtitle:oneLine(subtitle),
+                      overflow:document.documentElement.scrollWidth>innerWidth+1,
+                      broken:[...document.images].filter(i=>!i.complete||i.naturalWidth===0).map(i=>i.getAttribute('src')),
+                      heroImage:heroImg?.getAttribute('src')||null,
+                      heroLoaded:heroImg?heroImg.complete&&heroImg.naturalWidth>0:null,
+                      cls:Number(window.__qaCLS||0),
+                      bodyText:document.body.innerText,
+                      fileInputs:document.querySelectorAll('input[type="file"]').length
+                    };
+                  });
+                  const axe=await new AxeBuilder({page}).withTags(['wcag2a','wcag2aa','wcag21aa']).analyze();
+                  const severe=axe.violations.filter(v=>v.impact==='critical'||v.impact==='serious').map(v=>({id:v.id,impact:v.impact,description:v.description,nodes:v.nodes.length}));
+                  const expectedHero=route==='/engagement'&&cfg.site==='stt'?'/visual-approved/bank-14.png':null;
+                  const heroOkay=!expectedHero||(state.heroImage===expectedHero&&state.heroLoaded);
+                  const passed=response?.status()===200&&state.h1Count===1&&!state.overflow&&!state.broken.length&&state.cls<=0.1&&!pageErrors.length&&!severe.length&&heroOkay;
+                  rec={...rec,http:response?.status(),...state,pageErrors,severe,heroOkay,passed};
+                  await page.screenshot({path:`/tmp/g10/screenshots/${cfg.site}-${safe(route)}-${label}.png`,fullPage:true});
+                }catch(e){
+                  rec={...rec,error:String(e),pageErrors,passed:false};
+                }
+                report.pages.push(rec);
+                page.off('pageerror',onErr);
+              }
+              await context.close();
+            }
+          }
+
+          // Exact founder identity stacks: all three lines must remain single-line.
+          for(const spec of [
+            {site:'stt',origin:'http://127.0.0.1:4173',route:'/eric-chuang',h1:'創辦人暨執行長｜莊鈞翔博士',en:'CHUANG CHUN HSIANG Ph.D.',sub:'STT Governance 創辦人暨執行長'},
+            {site:'gcsda',origin:'http://127.0.0.1:4174',route:'/founder-chairman',h1:'創會理事長｜莊鈞翔博士',en:'CHUANG CHUN HSIANG Ph.D.',sub:'STT Governance 創辦人暨執行長'}
+          ]){
+            report.identity[spec.site]={};
+            for(const [label,width,height] of devices){
+              const context=await browser.newContext({viewport:{width,height},reducedMotion:'reduce'});
+              const page=await context.newPage();
+              await page.goto(spec.origin+spec.route,{waitUntil:'networkidle',timeout:30000});
+              await page.evaluate(()=>document.fonts.ready);
+              const state=await page.evaluate(({h1,en,sub})=>{
+                const measure=e=>{
+                  if(!e)return null;
+                  const cs=getComputedStyle(e), r=e.getBoundingClientRect(), lh=parseFloat(cs.lineHeight)||parseFloat(cs.fontSize)*1.4;
+                  return {text:e.textContent?.trim()||'',width:r.width,height:r.height,scrollWidth:e.scrollWidth,clientWidth:e.clientWidth,
+                    whiteSpace:cs.whiteSpace,fontSize:cs.fontSize,lineHeight:cs.lineHeight,
+                    single:r.height<=lh*1.25&&e.scrollWidth<=e.clientWidth+1};
+                };
+                const a=measure(document.querySelector('.cis-title'));
+                const b=measure(document.querySelector('.cis-byline'));
+                const c=measure(document.querySelector('.cis-subtitle'));
+                return {a,b,c,passed:a?.text===h1&&b?.text===en&&c?.text===sub&&a.single&&b.single&&c.single};
+              },spec);
+              report.identity[spec.site][label]=state;
+              await context.close();
+            }
+          }
+
+          // Cross-site desktop title baseline for founder pages.
+          const founderRects={};
+          for(const spec of [
+            {site:'stt',origin:'http://127.0.0.1:4173',route:'/eric-chuang'},
+            {site:'gcsda',origin:'http://127.0.0.1:4174',route:'/founder-chairman'}
+          ]){
+            const context=await browser.newContext({viewport:{width:1440,height:1000},reducedMotion:'reduce'});
+            const page=await context.newPage();
+            await page.goto(spec.origin+spec.route,{waitUntil:'networkidle',timeout:30000});
+            await page.evaluate(()=>document.fonts.ready);
+            founderRects[spec.site]=await page.locator('.cis-title').evaluate(e=>{const r=e.getBoundingClientRect();return {left:r.left,top:r.top,fontSize:getComputedStyle(e).fontSize}});
+            await context.close();
+          }
+          const baselineDiff=Math.abs(founderRects.stt.top-founderRects.gcsda.top);
+          const leftDiff=Math.abs(founderRects.stt.left-founderRects.gcsda.left);
+          report.special.push({name:'cross-site founder title baseline',founderRects,baselineDiff,leftDiff,passed:baselineDiff<=2&&leftDiff<=2&&founderRects.stt.fontSize===founderRects.gcsda.fontSize});
+
+          // Explicit forbidden wording and intake constraints.
+          {
+            const context=await browser.newContext({viewport:{width:1440,height:1000}});
+            const p=await context.newPage();
+            for(const [site,origin,route] of [['stt','http://127.0.0.1:4173','/eric-chuang'],['gcsda','http://127.0.0.1:4174','/founder-chairman']]){
+              await p.goto(origin+route,{waitUntil:'networkidle'});
+              const forbidden=await p.locator('body').innerText();
+              report.special.push({name:site+' legacy wording absent',passed:!forbidden.includes('治理總控者')});
+            }
+            await p.goto('http://127.0.0.1:4173/start',{waitUntil:'networkidle'});
+            const start=await p.evaluate(()=>({fileInputs:document.querySelectorAll('input[type="file"]').length,text:document.body.innerText}));
+            report.special.push({name:'STT intake has no file upload',passed:start.fileInputs===0});
+            report.special.push({name:'STT intake data minimization visible',passed:start.text.includes('無須提供身分證件')&&start.text.includes('金融帳戶')&&start.text.includes('醫療資料')});
+            await p.goto('http://127.0.0.1:4174/membership',{waitUntil:'networkidle'});
+            await p.waitForTimeout(300);
+            const mem=await p.evaluate(()=>({state:document.querySelector('[data-membership-delivery]')?.getAttribute('data-membership-delivery')||null,form:!!document.querySelector('#gcsda-membership-form'),text:document.body.innerText,line:!!document.querySelector('a[href*="line.me"],a[href*="lin.ee"]')}));
+            report.special.push({name:'GCSDA membership safe fallback when mail is unavailable',actual:mem,passed:mem.state==='fallback'&&!mem.form&&mem.text.includes('LINE 會務聯絡')&&mem.line});
+            await context.close();
+          }
+
+          await browser.close();
+          const pageFailures=report.pages.filter(x=>!x.passed);
+          const identityFailures=Object.entries(report.identity).flatMap(([site,states])=>Object.entries(states).filter(([,v])=>!v.passed).map(([device,v])=>({site,device,...v})));
+          const specialFailures=report.special.filter(x=>!x.passed);
+          report.summary={pageChecks:report.pages.length,pageFailures,identityFailures,specialFailures,passed:!pageFailures.length&&!identityFailures.length&&!specialFailures.length};
+          fs.writeFileSync('/tmp/g10/report.json',JSON.stringify(report,null,2));
+          console.log(JSON.stringify(report.summary,null,2));
+          if(!report.summary.passed) process.exitCode=1;
+          JS
+          cd "$GITHUB_WORKSPACE/qa-runtime"
+          node check.mjs
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: g10-dual-site-rendered-evidence
+          path: /tmp/g10/
+          retention-days: 7
+
+      - name: Stop previews
+        if: always()
+        run: |
+          [ -f /tmp/stt-preview.pid ] && kill "$(cat /tmp/stt-preview.pid)" || true
+          [ -f /tmp/gcsda-preview.pid ] && kill "$(cat /tmp/gcsda-preview.pid)" || true
