@@ -86,7 +86,7 @@ export function EricPage(){
     </Section>
 
     <Section kicker="CORE GOVERNANCE DOMAINS" title="核心治理領域">
-      <div className="stt-inst-grid">
+      <div className="stt-inst-grid stt-eric-domain-grid">
         <article><strong>企業治理與重大決策</strong><p>釐清重大選擇中的權力、責任、風險、證據與不可承擔結果。</p></article>
         <article><strong>家族治理與企業接班</strong><p>處理家族價值、接班安排、權責配置與跨世代治理秩序。</p></article>
         <article><strong>公司治理與內部合規</strong><p>建立公司治理、法遵風險與內部制度之間可以被執行與追溯的結構。</p></article>
