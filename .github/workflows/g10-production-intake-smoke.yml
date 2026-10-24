@@ -1,0 +1,64 @@
+name: G10 production intake smoke
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/g10-production-intake-smoke.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  production-intake:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Verify production intake health and one QA submission
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/g10-intake
+          curl -fsS https://stt-003.vercel.app/api/cooperation-submit | tee /tmp/g10-intake/health.json
+          python - <<'PY'
+          import json
+          j=json.load(open('/tmp/g10-intake/health.json'))
+          assert j.get('ok') is True
+          assert j.get('resendConfigured') is True
+          assert j.get('acceptsFiles') is False
+          PY
+
+          cat > /tmp/g10-intake/payload.json <<'JSON'
+          {
+            "route":"governance-intake",
+            "name":"G10 QA 自動驗收",
+            "contact":"g10-qa@example.invalid",
+            "role":"其他",
+            "situation":"G10 production smoke test：僅驗證治理受理郵件服務是否真正接受一筆無敏感資料的測試送件。",
+            "undesired":"不應建立正式委任、不應被誤認為真實個案，也不應包含任何真實個人資料。",
+            "desired":"API 回覆 ok=true、delivery=resend-email 並提供 receiptId，證明 production 受理鏈路已被郵件服務接受。",
+            "deadline_status":"無",
+            "deadline_date":"",
+            "event_type":"其他",
+            "bot-field":""
+          }
+          JSON
+
+          code=$(curl -sS -o /tmp/g10-intake/response.json -w '%{http_code}'             -X POST https://stt-003.vercel.app/api/cooperation-submit             -H 'Content-Type: application/json'             -H 'Idempotency-Key: g10qa-20261024-prod01'             --data-binary @/tmp/g10-intake/payload.json)
+          cat /tmp/g10-intake/response.json
+          test "$code" = "200"
+          python - <<'PY'
+          import json
+          j=json.load(open('/tmp/g10-intake/response.json'))
+          assert j.get('ok') is True, j
+          assert j.get('delivery') == 'resend-email', j
+          assert isinstance(j.get('receiptId'),str) and j['receiptId'].startswith('GOV-'), j
+          print(json.dumps({'productionIntakeQA':'PASS','receiptId':j['receiptId']},ensure_ascii=False))
+          PY
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: g10-production-intake-evidence
+          path: /tmp/g10-intake/
+          retention-days: 7
