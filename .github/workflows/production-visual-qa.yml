@@ -1,0 +1,34 @@
+name: Production Visual QA
+on:
+  push:
+    branches: [main]
+    paths:
+      - "src/**"
+      - "public/**"
+      - "scripts/production-visual-qa.mjs"
+      - ".github/workflows/production-visual-qa.yml"
+      - "package.json"
+  workflow_dispatch:
+
+jobs:
+  visual-qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Install Playwright
+        run: |
+          npm install --no-save playwright@1.49.1
+          npx playwright install --with-deps chromium
+      - name: Run production visual QA
+        run: node scripts/production-visual-qa.mjs
+      - name: Upload visual QA artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: production-visual-qa
+          path: artifacts/visual-qa
+          if-no-files-found: error
