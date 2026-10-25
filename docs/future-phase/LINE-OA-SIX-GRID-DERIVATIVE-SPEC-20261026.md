@@ -137,3 +137,33 @@ The existing files:
 
 are retained only as historical/pre-lock artifacts.
 They are not approved as final 2026-10-26 LINE release visuals.
+
+## 9. 2026-10-26 derivative preview state
+
+Status: PREVIEW_ONLY / NOT_FOR_RELEASE
+
+Source verification completed on 2026-10-26:
+- STT source SHA-256 reverified: `7aa3411b2ba2aa12d714823b415c6a7f663a9a3f6f17391fc70c93a217817281`
+- GCSDA source SHA-256 reverified: `425098cd7e481e3d6405bbfb04053cd93505c080cefa267a43afba53ab540b59`
+- both immutable sources are 1536 × 1024
+
+Offline preview derivatives have been created at the future LINE canvas size 2500 × 1686 and stored separately in Drive:
+- STT preview Drive ID: `1NAHgofnnFhYqERq0ANzlSyFfVRFlaYJg`
+  - SHA-256: `9842c42d45ad4c82492f0e104dcc0b180aba15809b41cf1ee0842a7f4e47872a`
+  - bytes: 996634
+- GCSDA preview Drive ID: `1lR_P5G7CCd4Drv-d0ySR-88s6c_X0uCl`
+  - SHA-256: `de51c70b72b3f5fa237ef60afe7daa0251d1e294d7e24c1a08d615ba764717c0`
+  - bytes: 936460
+
+Preview treatment:
+- locked source composition retained
+- six labels only; no promotional badges, icons or sales language
+- exact 3 × 2 action geometry retained
+- palette-compressed PNG used only to test LINE's 1 MB image constraint
+- previews are NOT owner-approved final release assets
+
+The release JSON action maps are now staged at:
+- `line/release/stt-richmenu-20261026.json`
+- `line/release/gcsda-richmenu-20261026.json`
+
+The final release PNG files remain intentionally absent until owner visual approval and WEBSITE_STATUS = QA_PASS / BUILD_LOCKED.

@@ -1,0 +1,55 @@
+{
+  "status": "FUTURE_PHASE_PREVIEW_NOT_FOR_RELEASE",
+  "version": "20261026",
+  "live_release": "PROHIBITED_WHILE_LINE_HOLD",
+  "source_assets": {
+    "stt": {
+      "file": "LINE_STT_6GRID_BG_LOCKED_20261026.png",
+      "drive_file_id": "17CEZ1w-UsIOGGpaftQrdY-e8WobFb5tU",
+      "sha256": "7aa3411b2ba2aa12d714823b415c6a7f663a9a3f6f17391fc70c93a217817281",
+      "dimensions": {
+        "width": 1536,
+        "height": 1024
+      }
+    },
+    "gcsda": {
+      "file": "LINE_GCSDA_6GRID_BG_LOCKED_20261026.png",
+      "drive_file_id": "15gNQmpw2kLT6dxRvfWIBeymQ5yMddfQL",
+      "sha256": "425098cd7e481e3d6405bbfb04053cd93505c080cefa267a43afba53ab540b59",
+      "dimensions": {
+        "width": 1536,
+        "height": 1024
+      }
+    }
+  },
+  "preview_candidates": {
+    "stt": {
+      "drive_file_id": "1NAHgofnnFhYqERq0ANzlSyFfVRFlaYJg",
+      "file": "LINE_STT_RICHMENU_20261026_PREVIEW_NOT_FOR_RELEASE.png",
+      "sha256": "9842c42d45ad4c82492f0e104dcc0b180aba15809b41cf1ee0842a7f4e47872a",
+      "size_bytes": 996634,
+      "dimensions": {
+        "width": 2500,
+        "height": 1686
+      },
+      "status": "OWNER_VISUAL_APPROVAL_REQUIRED"
+    },
+    "gcsda": {
+      "drive_file_id": "1lR_P5G7CCd4Drv-d0ySR-88s6c_X0uCl",
+      "file": "LINE_GCSDA_RICHMENU_20261026_PREVIEW_NOT_FOR_RELEASE.png",
+      "sha256": "de51c70b72b3f5fa237ef60afe7daa0251d1e294d7e24c1a08d615ba764717c0",
+      "size_bytes": 936460,
+      "dimensions": {
+        "width": 2500,
+        "height": 1686
+      },
+      "status": "OWNER_VISUAL_APPROVAL_REQUIRED"
+    }
+  },
+  "release_package": {
+    "stt_json": "line/release/stt-richmenu-20261026.json",
+    "gcsda_json": "line/release/gcsda-richmenu-20261026.json",
+    "stt_png": "PENDING_OWNER_APPROVAL",
+    "gcsda_png": "PENDING_OWNER_APPROVAL"
+  }
+}

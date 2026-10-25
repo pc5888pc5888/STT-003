@@ -49,8 +49,58 @@ if(!fs.existsSync(imagePath)){
 const config=JSON.parse(fs.readFileSync(configPath,"utf8"));
 const image=fs.readFileSync(imagePath);
 
+const expectedBounds=[{"x":0,"y":0,"width":833,"height":843},{"x":833,"y":0,"width":834,"height":843},{"x":1667,"y":0,"width":833,"height":843},{"x":0,"y":843,"width":833,"height":843},{"x":833,"y":843,"width":834,"height":843},{"x":1667,"y":843,"width":833,"height":843}];
+const expectedByAccount={
+  stt:{
+    labels:["開始治理判讀","你正在面對什麼","STT 如何判讀","莊鈞翔博士","研究與出版","關於 STT"],
+    uris:["https://stt-003.vercel.app/start?utm_source=line&utm_medium=oa&utm_campaign=stt_richmenu","https://stt-003.vercel.app/problems?utm_source=line&utm_medium=oa&utm_campaign=stt_richmenu","https://stt-003.vercel.app/how-stt-works?utm_source=line&utm_medium=oa&utm_campaign=stt_richmenu","https://stt-003.vercel.app/eric-chuang?utm_source=line&utm_medium=oa&utm_campaign=stt_richmenu","https://stt-003.vercel.app/insights?utm_source=line&utm_medium=oa&utm_campaign=stt_richmenu","https://stt-003.vercel.app/about?utm_source=line&utm_medium=oa&utm_campaign=stt_richmenu"]
+  },
+  gcsda:{
+    labels:["關於學會","創會理事長","會員與入會","活動與大會","知識與研究","章程與公告"],
+    uris:["https://gcsda-governance.vercel.app/about?utm_source=line&utm_medium=oa&utm_campaign=gcsda_richmenu","https://gcsda-governance.vercel.app/founder-chairman?utm_source=line&utm_medium=oa&utm_campaign=gcsda_richmenu","https://gcsda-governance.vercel.app/membership?utm_source=line&utm_medium=oa&utm_campaign=gcsda_richmenu","https://gcsda-governance.vercel.app/events?utm_source=line&utm_medium=oa&utm_campaign=gcsda_richmenu","https://gcsda-governance.vercel.app/knowledge?utm_source=line&utm_medium=oa&utm_campaign=gcsda_richmenu","https://gcsda-governance.vercel.app/charter?utm_source=line&utm_medium=oa&utm_campaign=gcsda_richmenu"]
+  }
+};
+
+function sameBounds(a,b){
+  return a?.x===b.x&&a?.y===b.y&&a?.width===b.width&&a?.height===b.height;
+}
+function releaseFail(message){
+  throw new Error("RICHMENU_RELEASE_QA: "+message);
+}
+
+if(config?.size?.width!==2500||config?.size?.height!==1686){
+  releaseFail("canvas must be exactly 2500x1686");
+}
+if(!Array.isArray(config?.areas)||config.areas.length!==6){
+  releaseFail("exactly six action areas are required");
+}
+const expected=expectedByAccount[account];
+for(let i=0;i<6;i++){
+  const area=config.areas[i];
+  if(!sameBounds(area?.bounds,expectedBounds[i])){
+    releaseFail("cell "+(i+1)+" bounds mismatch");
+  }
+  if(area?.action?.type!=="uri"){
+    releaseFail("cell "+(i+1)+" action must be uri");
+  }
+  if(area?.action?.label!==expected.labels[i]){
+    releaseFail("cell "+(i+1)+" label mismatch");
+  }
+  if(area?.action?.uri!==expected.uris[i]){
+    releaseFail("cell "+(i+1)+" uri mismatch");
+  }
+}
+
 if(image.length>1024*1024){
-  throw new Error("Rich menu image exceeds LINE 1 MB limit");
+  releaseFail("image exceeds LINE 1 MB limit");
+}
+if(image.length<24||image[0]!==0x89||image.toString("ascii",1,4)!=="PNG"){
+  releaseFail("release image must be PNG");
+}
+const pngWidth=image.readUInt32BE(16);
+const pngHeight=image.readUInt32BE(20);
+if(pngWidth!==2500||pngHeight!==1686){
+  releaseFail("PNG dimensions must be exactly 2500x1686");
 }
 
 const api="https://api.line.me";
