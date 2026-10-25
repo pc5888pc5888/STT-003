@@ -144,3 +144,26 @@ Not allowed:
 
 PREPARATION_PACKAGE = READY FOR OWNER REVIEW
 LIVE_RELEASE = NOT AUTHORIZED
+
+
+## Operational pre-release controls — added 2026-10-26
+
+PASS:
+- credential and release contract prepared
+- fail-closed release gate checker prepared
+- release and rollback runbook prepared
+- iOS / Android E2E acceptance matrix prepared
+- release gate explicitly checks final PNG presence, dimensions and 1 MB ceiling
+- release gate explicitly checks two separate credential sets
+- release gate explicitly checks GCSDA membership-delivery resolution
+
+New references:
+- docs/line/LINE-OA-CREDENTIAL-CONTRACT-20261026.md
+- docs/line/LINE-OA-RELEASE-RUNBOOK-20261026.md
+- docs/qa/LINE-OA-MOBILE-E2E-ACCEPTANCE-20261026.md
+- scripts/line/check-release-gate.mjs
+
+Current result:
+- PRE_RELEASE_OPERATIONS_PACKAGE = READY
+- FINAL_RELEASE_PNG = STILL PENDING OWNER APPROVAL / FILE PROMOTION
+- LIVE_RELEASE = STILL BLOCKED
