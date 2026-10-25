@@ -75,6 +75,15 @@ export default function Start() {
     setSendError("");
   }, [searchParams]);
 
+  const attribution = {
+    source_channel: searchParams.get("utm_source") === "line" ? "line" : "website",
+    source_account: "stt",
+    landing_route: "/start",
+    utm_source: (searchParams.get("utm_source") || "").slice(0, 80),
+    utm_medium: (searchParams.get("utm_medium") || "").slice(0, 80),
+    utm_campaign: (searchParams.get("utm_campaign") || "").slice(0, 120),
+  };
+
   const update = <K extends keyof IntakeData>(key: K, value: IntakeData[K]) => {
     requestKey.current = "";
     setData((current) => ({ ...current, [key]: value }));
@@ -106,6 +115,7 @@ export default function Start() {
           route: "governance-intake",
           route_label: "治理判讀受理",
           ...data,
+          ...attribution,
         }),
       });
       const result = await response.json().catch(() => ({}));

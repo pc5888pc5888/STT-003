@@ -5,6 +5,10 @@ const INTAKE_LIMITS: Record<string, number> = {
   undesired: 4000, desired: 4000, deadline_status: 1,
   deadline_date: 10, event_type: 30,
 };
+const ATTRIBUTION_LIMITS: Record<string, number> = {
+  source_channel: 20, source_account: 20, landing_route: 200,
+  utm_source: 80, utm_medium: 80, utm_campaign: 120,
+};
 const ROLES = ["企業主", "家族成員", "董事", "經理人", "專業顧問", "其他"];
 const EVENT_TYPES = ["重大決策", "家族接班", "股權治理", "AI 治理", "機構合作", "其他"];
 function validateIntake(body: AnyRecord): Record<string, string> | null {
@@ -21,7 +25,14 @@ function validateIntake(body: AnyRecord): Record<string, string> | null {
     const date = new Date(clean.deadline_date + "T00:00:00.000Z");
     if (!Number.isFinite(date.getTime()) || date.toISOString().slice(0, 10) !== clean.deadline_date) return null;
   } else { clean.deadline_date = ""; }
-  // Only the eight specified information categories reach the mail service.
+  for (const [key, max] of Object.entries(ATTRIBUTION_LIMITS)) {
+    const value = body[key];
+    if (value === undefined || value === null || value === "") { clean[key] = ""; continue; }
+    if (typeof value !== "string" || value.length > max) return null;
+    clean[key] = value.trim();
+  }
+  if (clean.source_channel && !["website","line"].includes(clean.source_channel)) return null;
+  if (clean.source_account && clean.source_account !== "stt") return null;
   return clean;
 }
 
@@ -57,6 +68,24 @@ function parseBody(req: any): AnyRecord {
   const out: AnyRecord = {};
   for (const [key, value] of params.entries()) out[key] = value;
   return out;
+}
+
+async function sendSttOwnerLineAlert(receiptId: string, eventType: string) {
+  const token = process.env.LINE_STT_CHANNEL_ACCESS_TOKEN?.trim();
+  const userId = process.env.LINE_STT_OWNER_USER_ID?.trim();
+  if (!token || !userId) return;
+  const message = `STT 新治理送件｜${receiptId}｜${eventType || "治理情境"}｜請查正式收件內容`;
+  try {
+    const response = await fetch("https://api.line.me/v2/bot/message/push", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+      signal: AbortSignal.timeout(8000),
+      body: JSON.stringify({ to: userId, messages: [{ type: "text", text: message }] }),
+    });
+    if (!response.ok) console.error("LINE_STT_OWNER_ALERT_FAILED", JSON.stringify({ receiptId, status: response.status }));
+  } catch (error) {
+    console.error("LINE_STT_OWNER_ALERT_FAILED", JSON.stringify({ receiptId, error: error instanceof Error ? error.name : "UnknownError" }));
+  }
 }
 
 function createReceiptId(route: string) {
@@ -151,6 +180,7 @@ export default async function handler(req: any, res: any) {
       route,
       sentAt: new Date().toISOString(),
     }));
+    if (route === "governance-intake") await sendSttOwnerLineAlert(receiptId, clean.event_type || "");
 
     return json(res, 200, { ok: true, delivery: "resend-email", receiptId });
   } catch (error) {
