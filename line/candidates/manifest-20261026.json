@@ -1,0 +1,24 @@
+{
+  "status": "OWNER_REVIEW_CANDIDATES_NOT_FOR_RELEASE",
+  "version": "20261026",
+  "release_gate": "WEBSITE_QA_PASS_BUILD_LOCKED",
+  "candidates": {
+    "stt": {
+      "file": "line/candidates/stt-richmenu-20261026-owner-review.png",
+      "source_drive_id": "1NAHgofnnFhYqERq0ANzlSyFfVRFlaYJg",
+      "sha256": "9842c42d45ad4c82492f0e104dcc0b180aba15809b41cf1ee0842a7f4e47872a",
+      "size_bytes": 996634,
+      "dimensions": {"width": 2500, "height": 1686},
+      "approval": "PENDING_OWNER_VISUAL_APPROVAL"
+    },
+    "gcsda": {
+      "file": "line/candidates/gcsda-richmenu-20261026-owner-review.png",
+      "source_drive_id": "1lR_P5G7CCd4Drv-d0ySR-88s6c_X0uCl",
+      "sha256": "de51c70b72b3f5fa237ef60afe7daa0251d1e294d7e24c1a08d615ba764717c0",
+      "size_bytes": 936460,
+      "dimensions": {"width": 2500, "height": 1686},
+      "approval": "PENDING_OWNER_VISUAL_APPROVAL"
+    }
+  },
+  "promotion_rule": "Do not copy into line/release/*.png until explicit owner visual approval AND WEBSITE_STATUS=QA_PASS/BUILD_LOCKED."
+}
