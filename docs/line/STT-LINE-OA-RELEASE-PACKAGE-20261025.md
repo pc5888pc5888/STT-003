@@ -1,5 +1,8 @@
 # STT LINE OA RELEASE PACKAGE — 2026-10-25
 
+STATUS = FUTURE_PHASE_INPUT / DO NOT RELEASE WHILE LINE = HOLD
+CURRENT VISUAL SOURCE OVERRIDE = LINE_STT_6GRID_BG_LOCKED_20261026.png
+
 ## Profile identity
 
 Primary: 創辦人暨執行長｜莊鈞翔博士
@@ -17,10 +20,19 @@ Private relationship, governed routing, research/publication notification, and p
 
 首次提交不需傳送身分證件、金融帳戶、完整契約、醫療資料或其他高敏感文件。LINE 不取代正式治理受理；正式入口以 STT Governance 官網為準。
 
-## Rich menu
+## Rich menu — future release map
 
-Image: line/stt-richmenu.png
-JSON: line/stt-richmenu.json
+Locked source image:
+LINE_STT_6GRID_BG_LOCKED_20261026.png
+
+Locked Drive file ID:
+17CEZ1w-UsIOGGpaftQrdY-e8WobFb5tU
+
+Previous visual:
+line/stt-richmenu.png = DEPRECATED_PRELOCK_VISUAL / DO NOT DEPLOY AS FINAL
+
+Action map:
+line/stt-richmenu.json = FUTURE_PHASE_ACTION_MAP only
 
 1. 開始治理判讀
 2. 你正在面對什麼
@@ -42,5 +54,8 @@ SOURCE_REQUIRED for Messaging API live activation:
 - channel secret
 - owner user ID
 
-Webhook URL after credentials are configured:
+Webhook target after the release gate is opened:
 https://stt-003.vercel.app/api/line/stt-webhook
+
+RELEASE GATE:
+WEBSITE_STATUS = QA_PASS / BUILD_LOCKED

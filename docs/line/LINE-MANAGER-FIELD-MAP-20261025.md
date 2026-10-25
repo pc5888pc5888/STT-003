@@ -1,5 +1,7 @@
 # LINE MANAGER FIELD MAP — 2026-10-25
 
+STATUS = FUTURE_PHASE_INPUT / NO LIVE MANAGER CHANGE WHILE HOLD
+
 ## STT Governance
 
 Display name:
@@ -25,11 +27,15 @@ https://line.me/R/ti/p/@783xkknh
 Welcome:
 See docs/line/STT-LINE-OA-RELEASE-PACKAGE-20261025.md
 
-Rich menu:
-line/stt-richmenu.png
+Rich-menu locked background source:
+LINE_STT_6GRID_BG_LOCKED_20261026.png
+
+Future action map:
 line/stt-richmenu.json
 
-Webhook:
+Do not use line/stt-richmenu.png as final visual.
+
+Webhook after release gate:
 https://stt-003.vercel.app/api/line/stt-webhook
 
 ## GCSDA
@@ -57,11 +63,15 @@ https://line.me/R/ti/p/@387nbnjs
 Welcome:
 See docs/line/GCSDA-LINE-OA-RELEASE-PACKAGE-20261025.md
 
-Rich menu:
-line/gcsda-richmenu.png
+Rich-menu locked background source:
+LINE_GCSDA_6GRID_BG_LOCKED_20261026.png
+
+Future action map:
 line/gcsda-richmenu.json
 
-Webhook:
+Do not use line/gcsda-richmenu.png as final visual.
+
+Webhook after release gate:
 https://gcsda-governance.vercel.app/api/line/gcsda-webhook
 
 ## Credentials still required

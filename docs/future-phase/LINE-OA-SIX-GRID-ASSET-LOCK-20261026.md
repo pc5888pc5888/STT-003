@@ -12,6 +12,8 @@ Selected source:
 - Visual rationale: governance worktable composition; institutional documents, globe, scales and classical material language; central 3×2 field remains usable for menu labels/icons.
 - SHA-256: 7aa3411b2ba2aa12d714823b415c6a7f663a9a3f6f17391fc70c93a217817281
 - Locked Drive folder: STT Digital Governance / FUTURE_PHASE_INPUT / LINE
+- Drive file ID: 15gNQmpw2kLT6dxRvfWIBeymQ5yMddfQL
+- Drive file ID: 17CEZ1w-UsIOGGpaftQrdY-e8WobFb5tU
 
 ## GCSDA LINE Official Account
 

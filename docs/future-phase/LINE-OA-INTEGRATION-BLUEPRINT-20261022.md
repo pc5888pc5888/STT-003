@@ -1,12 +1,19 @@
-# EXECUTION STATUS — ACTIVATED 2026-10-25
+# CURRENT PROJECT OVERRIDE — 2026-10-26
 
-Website G10 rendered acceptance has passed. This blueprint is now implemented through:
-- `docs/governance/LINE-PHASE-ACTIVATION-20261025.md`
-- `docs/line/STT-LINE-OA-RELEASE-PACKAGE-20261025.md`
-- `docs/line/GCSDA-LINE-OA-RELEASE-PACKAGE-20261025.md`
-- `line/stt-richmenu.json` / `line/gcsda-richmenu.json`
+STATUS: LINE = HOLD / FUTURE_PHASE_INPUT ONLY
 
-The earlier HOLD wording below is retained as historical design context, not current phase status.
+The earlier 2026-10-25 activation record is superseded for the current project phase. The owner has selected and locked two six-grid background assets, but live LINE Official Account construction/release remains gated by WEBSITE_STATUS = QA_PASS / BUILD_LOCKED.
+
+Allowed now: asset governance, layout/action-map preparation, QA/release documentation.
+Not allowed now: LINE Manager publication, live rich-menu replacement, live profile/welcome-message change, credential binding, live webhook activation.
+
+Locked visuals:
+- STT: LINE_STT_6GRID_BG_LOCKED_20261026.png
+- GCSDA: LINE_GCSDA_6GRID_BG_LOCKED_20261026.png
+
+See:
+- docs/future-phase/LINE-OA-SIX-GRID-ASSET-LOCK-20261026.md
+- docs/future-phase/LINE-OA-SIX-GRID-DERIVATIVE-SPEC-20261026.md
 
 ---
 
