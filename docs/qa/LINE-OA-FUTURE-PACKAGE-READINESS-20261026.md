@@ -63,8 +63,8 @@ PENDING:
 - LINE channel access token
 - LINE channel secret
 - authorized owner user ID
-- GCSDA membership notification recipient / delivery resolution
-- future GCSDA webhook implementation and live binding
+- real GCSDA membership POST E2E delivery evidence
+- GCSDA webhook credential binding (implementation already exists)
 - LINE Manager publication
 - iOS / Android end-to-end tap test
 - website BUILD_LOCKED / QA_PASS
@@ -188,3 +188,25 @@ PENDING:
 Owner-review candidates pinned:
 - line/candidates/stt-richmenu-20261026-owner-review.png
 - line/candidates/gcsda-richmenu-20261026-owner-review.png
+
+
+## Public capability audit — 2026-10-26
+
+PASS:
+- STT formal intake endpoint reports resendConfigured=true
+- GCSDA membership endpoint reports recipientConfigured=true
+- GCSDA membership endpoint reports formSubmitConfigured=true
+- GCSDA membership endpoint reports deliveryConfigured=true
+- STT privacy-minimized LINE attribution fields are implemented
+- GCSDA privacy-minimized LINE attribution fields are implemented
+- STT LINE webhook code exists and currently reports configured=false
+- GCSDA LINE webhook code exists and currently reports configured=false
+
+PENDING:
+- real GCSDA membership POST E2E delivery
+- secure LINE credential binding after release gate
+- owner user ID binding after release gate
+
+Reference:
+- docs/qa/LINE-OA-PUBLIC-CAPABILITY-AUDIT-20261026.md
+- scripts/line/audit-public-capabilities.mjs

@@ -231,18 +231,21 @@ Add only two webhook endpoints when LINE Manager release begins:
 
 Webhook signature verification is mandatory.
 
-## 7. Current delivery gap
+## 7. Current delivery state — updated 2026-10-26
 
 STT:
-- production email delivery is configured.
+- formal intake delivery is configured.
+- production capability endpoint reports resendConfigured=true.
 - website governance intake already has receipt IDs.
 
 GCSDA:
 - membership form exists.
-- production membership email delivery is not yet configured.
-- until the recipient and mail configuration are supplied, the current fallback remains the GCSDA LINE contact route.
+- formal recipient is configured on the GCSDA release branch.
+- public capability endpoint reports recipientConfigured=true, formSubmitConfigured=true and deliveryConfigured=true.
+- Resend is not currently configured in the GCSDA branch runtime, so the approved FormSubmit fallback remains the active delivery path when needed.
+- a real POST E2E delivery test is still required before BUILD_LOCK / LINE release.
 
-Therefore GCSDA cannot be considered conversion-complete until membership delivery is resolved.
+Therefore the GCSDA blocker is now E2E delivery evidence, not absence of a configured recipient.
 
 ## 8. LINE Pay role
 

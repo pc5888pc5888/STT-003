@@ -11,7 +11,8 @@
     "line:future:verify": "node scripts/line/verify-future-package.mjs",
     "line:release:check": "node scripts/line/check-release-gate.mjs",
     "line:candidate:promote:stt": "node scripts/line/promote-approved-candidate.mjs stt",
-    "line:candidate:promote:gcsda": "node scripts/line/promote-approved-candidate.mjs gcsda"
+    "line:candidate:promote:gcsda": "node scripts/line/promote-approved-candidate.mjs gcsda",
+    "line:capability:audit": "node scripts/line/audit-public-capabilities.mjs"
   },
   "dependencies": {
     "@base-ui/react": "^1.4.1",
