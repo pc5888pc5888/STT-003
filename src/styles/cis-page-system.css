@@ -1016,3 +1016,17 @@
     max-width:590px!important;
   }
 }
+
+/* G10 ACCESSIBILITY LOCK — method-page accent text must remain WCAG AA on ivory surfaces. */
+#root .stt-g3-method :is(
+  .stt-g3-kicker,
+  .stt-g3-index span,
+  .stt-g3-foundation-grid span,
+  .stt-g3-foundation-grid small,
+  .stt-g3-step__number,
+  .stt-g3-step header small,
+  .stt-g3-step dt,
+  .stt-g3-ai-boundary__grid a
+){
+  color:#704b20!important;
+}

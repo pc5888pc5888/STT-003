@@ -1,4 +1,4 @@
-# QA rerun: 2026-10-25 post-contrast-and-membership-fallback
+# QA rerun: 2026-10-25 final contrast cascade and fallback-copy gate
 name: G10 dual-site rendered acceptance
 
 on:
@@ -227,7 +227,7 @@ jobs:
             await p.goto('http://127.0.0.1:4174/membership',{waitUntil:'networkidle'});
             await p.waitForTimeout(300);
             const mem=await p.evaluate(()=>({state:document.querySelector('[data-membership-delivery]')?.getAttribute('data-membership-delivery')||null,form:!!document.querySelector('#gcsda-membership-form'),text:document.body.innerText,line:!!document.querySelector('a[href*="line.me"],a[href*="lin.ee"]')}));
-            report.special.push({name:'GCSDA membership safe fallback when mail is unavailable',actual:mem,passed:mem.state==='fallback'&&!mem.form&&mem.text.includes('LINE 會務聯絡')&&mem.line});
+            report.special.push({name:'GCSDA membership safe fallback when mail is unavailable',actual:mem,passed:mem.state==='fallback'&&!mem.form&&(mem.text.includes('LINE 會務受理')||mem.text.includes('LINE 會務聯絡'))&&mem.line});
             await context.close();
           }
 
