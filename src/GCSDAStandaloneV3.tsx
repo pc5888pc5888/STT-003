@@ -6,6 +6,7 @@ import { BrowserRouter, Link, NavLink, Route, Routes, useLocation } from "react-
 import { Menu, X } from "lucide-react";
 import { applyGcsdaMetadata } from "./gcsdaMetadata";
 import "./styles/gcsda-accessibility.css";
+import "./styles/gcsda-founder-editorial.css";
 import gcsdaLogo0 from "./gcsda-logo-parts/part0";
 import gcsdaLogo1 from "./gcsda-logo-parts/part1";
 import gcsdaLogo2 from "./gcsda-logo-parts/part2";
@@ -255,7 +256,7 @@ function Home(){return <><GovernedHero kicker="GCSDA · NATIONAL PROFESSIONAL AS
 
 function About(){return <div className="g4-page"><PageHead eyebrow="INSTITUTIONAL IDENTITY" title="讓企業、專業與學術在治理議題上，形成可以持續對話的正式共同體。" lead="GCSDA 以公司治理法遵、企業策略、風險控管、跨界交流與永續發展為核心，透過正式社團制度，把一次性交流轉化為可以逐年累積的組織與知識。"/><section className="g4-section"><div className="g4-wrap"><div className="g4-list">{charterHighlights.slice(0,3).map(([a,b])=><div className="g4-row" key={a}><b>{a}</b><div>{b}</div></div>)}<div className="g4-row"><b>法定立案</b><div>內政部 114/8 台內團字第 1140030747 號。</div></div></div><div className="g4-note"><h2>機構獨立性聲明｜INSTITUTIONAL INDEPENDENCE</h2><p><strong>中華企業策略永續發展學會 GCSDA 與策略智庫智慧治理 STT Governance 為各自獨立之法人主體。</strong></p><p>雙方於治理知識、活動與內容上建立策略合作；然而，<strong>GCSDA 之會員大會、理監事會、章程與法定責任均維持自主運作，不由 STT Governance 取代</strong>；同理，<strong>STT Governance</strong> 亦不因業務連結而成為 <strong>GCSDA</strong> 之法定機關，雙方權責分明。</p></div></div></section></div>}
 
-function FounderChairman(){return <div className="g4-page g4-founder-page">
+function FounderChairman(){return <div className="g4-page g4-founder-page g4-founder-editorial">
   <PageHead
     eyebrow=""
     title="創會理事長｜莊鈞翔博士"
@@ -263,50 +264,100 @@ function FounderChairman(){return <div className="g4-page g4-founder-page">
     lead="莊鈞翔博士為中華企業策略永續發展學會創會理事長。創會的核心，不是增加一個活動平台，而是讓企業、專業與學術在治理議題上形成可以持續累積的正式共同體。"
   />
 
-  <section className="g4-section"><div className="g4-wrap">
-    <div className="g4-kicker">FOUNDING VISION</div>
-    <h2 className="g4-title">創會理念｜讓專業交流進入制度</h2>
-    <p className="g4-lead">一個專業共同體能否長久，不只取決於議題的重要性，更取決於它是否具備清晰的制度、責任邊界，以及持續累積的共同語言。</p>
-    <p className="g4-lead">企業面對的重大挑戰，往往超越單一專業，商業策略交織著法律、財務、家族傳承、權力配置與組織責任；隨著永續、數位與 AI 的浪潮衝擊，更使企業治理成為跨領域、跨世代與跨制度的核心課題。</p>
-    <p className="g4-lead">莊鈞翔博士創立 GCSDA，旨在建立一個常設且具延續性的專業平台，使不同領域的專家在保有各自核心責任的前提下，就策略、治理、法遵、風險與永續等議題凝聚共識；學會追求的不是將多元專業混雜成某種「萬能答案」，而是讓各領域在清晰的角色邊界中，產生真正有價值的跨界協作。</p>
-  </div></section>
+  <section className="g4-section g4-founder-section g4-founder-section--vision">
+    <div className="g4-wrap g4-founder-split">
+      <header className="g4-founder-sectionhead">
+        <div className="g4-kicker">FOUNDING VISION</div>
+        <h2 className="g4-title">創會理念｜讓專業交流進入制度</h2>
+        <span className="g4-founder-rule" aria-hidden="true" />
+      </header>
+      <div className="g4-founder-prose">
+        <p className="g4-lead">一個專業共同體能否長久，不只取決於議題的重要性，更取決於它是否具備清晰的制度、責任邊界，以及持續累積的共同語言。</p>
+        <p className="g4-lead">企業面對的重大挑戰，往往超越單一專業，商業策略交織著法律、財務、家族傳承、權力配置與組織責任；隨著永續、數位與 AI 的浪潮衝擊，更使企業治理成為跨領域、跨世代與跨制度的核心課題。</p>
+        <p className="g4-lead">莊鈞翔博士創立 GCSDA，旨在建立一個常設且具延續性的專業平台，使不同領域的專家在保有各自核心責任的前提下，就策略、治理、法遵、風險與永續等議題凝聚共識；學會追求的不是將多元專業混雜成某種「萬能答案」，而是讓各領域在清晰的角色邊界中，產生真正有價值的跨界協作。</p>
+      </div>
+    </div>
+  </section>
 
-  <section className="g4-section soft"><div className="g4-wrap">
-    <div className="g4-kicker">PROFESSIONAL & RESEARCH CONTEXT</div>
-    <h2 className="g4-title">治理、策略與永續：長期問題的動態多面體</h2>
-    <p className="g4-founder-quote"><strong>「核心關切始終如一｜當企業面對重大選擇時，如何使權力、責任、制度與專業回到正確位置。」—— 莊鈞翔博士</strong></p>
-    <p className="g4-lead">莊鈞翔博士長期深耕並整合跨領域實務，將複雜的企業挑戰收斂為一套可落地、可追溯並對終局後果負責的動態框架；我們深信，每項關鍵抉擇不僅必須高效執行，更須在制度下被清晰理解。</p>
-    <p className="g4-lead g4-lead-intro">以此為核心，莊博士的實務關注與智慧治理架構，由以下六大板塊交織而成：</p>
-    <div className="g4-grid">{founderDomains.map(([title,description],index)=><div className="g4-card" key={title}><span>{String(index+1).padStart(2,"0")}</span><h3>{title}</h3><p>{description}</p></div>)}</div>
-  </div></section>
+  <section className="g4-section g4-founder-section g4-founder-section--thesis">
+    <div className="g4-wrap">
+      <div className="g4-founder-thesis-head">
+        <div>
+          <div className="g4-kicker">PROFESSIONAL & RESEARCH CONTEXT</div>
+          <h2 className="g4-title">治理、策略與永續：長期問題的動態多面體</h2>
+        </div>
+        <p className="g4-founder-quote"><strong>「核心關切始終如一｜當企業面對重大選擇時，如何使權力、責任、制度與專業回到正確位置。」—— 莊鈞翔博士</strong></p>
+      </div>
+      <div className="g4-founder-thesis-copy">
+        <p className="g4-lead">莊鈞翔博士長期深耕並整合跨領域實務，將複雜的企業挑戰收斂為一套可落地、可追溯並對終局後果負責的動態框架；我們深信，每項關鍵抉擇不僅必須高效執行，更須在制度下被清晰理解。</p>
+        <p className="g4-lead g4-lead-intro">以此為核心，莊博士的實務關注與智慧治理架構，由以下六大板塊交織而成：</p>
+      </div>
+      <div className="g4-founder-domain-matrix" aria-label="六大治理板塊">
+        {founderDomains.map(([title,description],index)=><article className="g4-founder-domain" key={title}>
+          <div className="g4-founder-domain__meta"><span>{String(index+1).padStart(2,"0")}</span><i aria-hidden="true" /></div>
+          <h3>{title}</h3>
+          <p>{description}</p>
+        </article>)}
+      </div>
+    </div>
+  </section>
 
-  <section className="g4-section"><div className="g4-wrap">
-    <h2 className="g4-title g4-title-bilingual">專業背景｜<span lang="en">PROFESSIONAL BACKGROUND</span></h2>
-    <p className="g4-lead">本章節僅臚列與本學會「創會宗旨、學術脈絡及核心治理」直接關聯之代表性資歷，為秉持誠信揭露原則，所有學程研習、專業資格與認證成果，均依其客觀實質屬性分項獨立呈現；我們深信，嚴謹的資訊揭露是法遵精神的基石，更是實踐「策略為先、治理為本、管理為終」之核心。</p>
-    <div className="g4-grid">{founderSelectedBackground.map(([title,description],index)=><div className="g4-card" key={title}><span>{String(index+1).padStart(2,"0")}</span><h3>{title}</h3><p>{description}</p></div>)}</div>
-  </div></section>
+  <section className="g4-section g4-founder-section g4-founder-section--credentials">
+    <div className="g4-wrap">
+      <div className="g4-founder-credentials-intro">
+        <div>
+          <div className="g4-kicker">PROFESSIONAL BACKGROUND</div>
+          <h2 className="g4-title g4-title-bilingual">專業背景｜<span lang="en">PROFESSIONAL BACKGROUND</span></h2>
+        </div>
+        <p className="g4-lead">本章節僅臚列與本學會「創會宗旨、學術脈絡及核心治理」直接關聯之代表性資歷，為秉持誠信揭露原則，所有學程研習、專業資格與認證成果，均依其客觀實質屬性分項獨立呈現；我們深信，嚴謹的資訊揭露是法遵精神的基石，更是實踐「策略為先、治理為本、管理為終」之核心。</p>
+      </div>
+      <div className="g4-founder-credential-grid">
+        {founderSelectedBackground.map(([title,description],index)=><article className="g4-founder-credential" key={title}>
+          <div className="g4-founder-credential__index">{String(index+1).padStart(2,"0")}</div>
+          <h3>{title}</h3>
+          <div className="g4-founder-credential__body">{description}</div>
+        </article>)}
+      </div>
+    </div>
+  </section>
 
-  <section className="g4-section soft"><div className="g4-wrap">
-    <div className="g4-kicker">CURRENT POSITION</div>
-    <h2 className="g4-title">現任職務</h2>
-    <div className="g4-list">{founderPositions.map(position=><div className="g4-row" key={position}><b>POSITION</b><div>{position}</div></div>)}</div>
-    <p className="g4-lead" style={{marginTop:18}}>上述職務分屬各自機構或法人，列示僅表示莊鈞翔博士之現任職務，不代表各機構均由莊博士創設、亦不代表均屬 GCSDA 或 STT Governance 所有；Ｍ傳媒為外部第三方媒體。</p>
-  </div></section>
+  <section className="g4-section soft g4-founder-section g4-founder-section--record">
+    <div className="g4-wrap g4-founder-record">
+      <header className="g4-founder-record__head">
+        <div className="g4-kicker">CURRENT POSITION</div>
+        <h2 className="g4-title">現任職務</h2>
+      </header>
+      <div>
+        <div className="g4-founder-record-list">{founderPositions.map((position,index)=><div className="g4-founder-record-row" key={position}><b>{String(index+1).padStart(2,"0")}</b><div>{position}</div></div>)}</div>
+        <p className="g4-lead g4-founder-record-note">上述職務分屬各自機構或法人，列示僅表示莊鈞翔博士之現任職務，不代表各機構均由莊博士創設、亦不代表均屬 GCSDA 或 STT Governance 所有；Ｍ傳媒為外部第三方媒體。</p>
+      </div>
+    </div>
+  </section>
 
-  <section className="g4-section"><div className="g4-wrap">
-    <div className="g4-kicker">SELECTED PUBLICATIONS</div>
-    <h2 className="g4-title">代表研究與著作</h2>
-    <div className="g4-list">{founderSelectedPublications.map(title=><div className="g4-row" key={title}><b>PUBLICATION</b><div>{title}</div></div>)}</div>
-  </div></section>
+  <section className="g4-section g4-founder-section g4-founder-section--publications">
+    <div className="g4-wrap g4-founder-record">
+      <header className="g4-founder-record__head">
+        <div className="g4-kicker">SELECTED PUBLICATIONS</div>
+        <h2 className="g4-title">代表研究與著作</h2>
+      </header>
+      <div className="g4-founder-record-list">{founderSelectedPublications.map((title,index)=><div className="g4-founder-record-row" key={title}><b>{String(index+1).padStart(2,"0")}</b><div>{title}</div></div>)}</div>
+    </div>
+  </section>
 
-  <section className="g4-section soft"><div className="g4-wrap">
-    <div className="g4-kicker">INSTITUTIONAL BOUNDARY</div>
-    <h2 className="g4-title">創會者提出方向，制度決定權力如何被使用</h2>
-    <p className="g4-lead">創會理事長代表學會成立初衷、治理方向與制度精神，但不等同於學會全部權力。GCSDA 的正式治理仍依會員大會、理事會、監事會、章程及正式會務程序運作。</p>
-    <div className="g4-note"><h3>GCSDA 與 STT Governance 為不同機構主體</h3><p>莊鈞翔博士同時為 STT Governance 創辦人；兩者可在治理知識、研究與內容上互相連結，但學會的會員、章程、理監事治理與法定責任仍由 GCSDA 自身制度承擔。</p></div>
-  </div></section>
+  <section className="g4-section soft g4-founder-section g4-founder-section--boundary">
+    <div className="g4-wrap g4-founder-split">
+      <header className="g4-founder-sectionhead">
+        <div className="g4-kicker">INSTITUTIONAL BOUNDARY</div>
+        <h2 className="g4-title">創會者提出方向，制度決定權力如何被使用</h2>
+        <span className="g4-founder-rule" aria-hidden="true" />
+      </header>
+      <div className="g4-founder-prose">
+        <p className="g4-lead">創會理事長代表學會成立初衷、治理方向與制度精神，但不等同於學會全部權力。GCSDA 的正式治理仍依會員大會、理事會、監事會、章程及正式會務程序運作。</p>
+        <div className="g4-founder-boundary-note"><h3>GCSDA 與 STT Governance 為不同機構主體</h3><p>莊鈞翔博士同時為 STT Governance 創辦人；兩者可在治理知識、研究與內容上互相連結，但學會的會員、章程、理監事治理與法定責任仍由 GCSDA 自身制度承擔。</p></div>
+      </div>
+    </div>
+  </section>
 </div>}
-
 function Governance(){return <div className="g4-page"><PageHead eyebrow="INSTITUTIONAL GOVERNANCE" title="學會本身先接受治理：權力來源、任期、職權與責任都應可被理解。" lead="網站公開學會正式治理架構與第一屆理監事名錄；具體人數、職權、任期與程序以章程及正式會務文件為準。"/><section className="g4-section"><div className="g4-wrap"><div className="g4-grid">{[["01","會員大會","作為學會正式治理體系的一部分，其法定職權依章程與人民團體相關規範。"],["02","理事會","理事 9 人、常務理事 3 人；理事長、副理事長與候補理事之配置依正式章程。"],["03","監事會","監事 3 人、常務監事 1 人、候補監事 1 人；負責監察相關職權。"]].map(x=><div className="g4-card" key={x[0]}><span>{x[0]}</span><h2>{x[1]}</h2><p>{x[2]}</p></div>)}</div><div className="g4-kicker" style={{marginTop:58}}>FIRST BOARD & SUPERVISORS</div><h2 className="g4-title">第一屆理監事會</h2><div className="g4-directory">{directory.map(([role,name,title])=><div className="g4-person" key={`${role}-${name}`}><small>{role}</small><h3>{name}</h3>{title&&<p>{title}</p>}</div>)}</div><div className="g4-note"><h3>職務資訊</h3><p>名錄以學會職務為主；外部機構職銜僅在有正式公開依據時呈現，並以本人或所屬機構最新公開資訊為準。</p></div></div></section></div>}
 
 function Council(){return <div className="g4-page"><PageHead eyebrow="STRATEGIC GOVERNANCE COUNCIL" title="跨域專業，不等於權責混同。" lead="策略治理聯席會以議題為中心，連結法律、會計、策略、產業與學術專業，在各自責任邊界內形成交流、研究與治理實務的共同語言。"/><section className="g4-section"><div className="g4-wrap"><div className="g4-grid">{[["01","議題導向","從企業治理、策略、法遵、永續與其他正式議題出發，不以固定專家名單製造全能顧問印象。"],["02","專業邊界","不同專業者只在其資格、經驗與責任範圍內提供意見；必要時由具正式資格者承接專業工作。"],["03","紀錄與成果","正式講座、交流紀錄或研究成果完成後再公開，不以尚未發生的合作或研究裝飾網站。"]].map(x=><div className="g4-card" key={x[0]}><span>{x[0]}</span><h2>{x[1]}</h2><p>{x[2]}</p></div>)}</div><div className="g4-council-evidence" id="council-members"><div className="g4-kicker">COUNCIL COMMUNITY</div><h2 className="g4-title">策略治理聯席會成員</h2><p className="g4-lead">聯席會以跨域專業交流為核心；不同專業者仍在各自資格、職權與責任邊界內參與討論與協作。</p><figure className="g4-council-photo"><img data-gcsda-council-photo src={GCSDA_COUNCIL_PHOTO_SRC} alt="策略治理聯席會成員團體照；下方依照片由左至右列出人物姓名與職銜" width="1672" height="941" loading="eager" decoding="async"/><figcaption>策略治理聯席會成員團體照，人物辨識依照片由左至右列示如下。（學會提供）</figcaption></figure><div className="g4-kicker" style={{marginTop:34}}>PHOTO IDENTIFICATION · LEFT TO RIGHT</div><h3 className="g4-title" style={{fontSize:"clamp(26px,3vw,36px)"}}>照片人物辨識｜由左至右</h3><div className="g4-directory" data-council-photo-identification>{councilPhotoMembers.map(([n,name,role,title])=><div className="g4-person" key={n}><small>{n} · {role}</small><h3>{name}</h3><p>{title}</p></div>)}</div></div><div className="g4-note"><h2>制度界線</h2><p>策略治理聯席會屬學會之專業協作／交流機制；除非正式章程或會員大會／理事會決議另有明文，不取代會員大會、理事會或監事會之法定職權。</p></div></div></section></div>}
