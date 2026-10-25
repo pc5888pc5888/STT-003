@@ -16,6 +16,11 @@ const LIMITS: Record<string, number> = {
   professional_value: 1200,
 };
 
+const ATTRIBUTION_LIMITS: Record<string, number> = {
+  source_channel: 20, source_account: 20, landing_route: 200,
+  utm_source: 80, utm_medium: 80, utm_campaign: 120,
+};
+
 const EXPERTISE_OPTIONS = [
   "企業經營／策略","公司治理／法遵","法律","會計／財稅","ESG／永續",
   "家族治理／企業接班","金融／資產治理","不動產／建築","科技／AI治理","學術／教育",
@@ -49,6 +54,24 @@ function cleanText(value: unknown, max: number) {
 function cleanList(value: unknown, allowed: readonly string[]) {
   if (!Array.isArray(value)) return [] as string[];
   return value.filter((item): item is string => typeof item === "string" && allowed.includes(item));
+}
+
+async function sendGcsdaOwnerLineAlert(receiptId: string, applicant: string) {
+  const token = process.env.LINE_GCSDA_CHANNEL_ACCESS_TOKEN?.trim();
+  const userId = process.env.LINE_GCSDA_OWNER_USER_ID?.trim();
+  if (!token || !userId) return;
+  const message = `GCSDA 新入會申請｜${receiptId}｜申請人：${applicant}｜請進行資格審查`;
+  try {
+    const response = await fetch("https://api.line.me/v2/bot/message/push", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+      signal: AbortSignal.timeout(8000),
+      body: JSON.stringify({ to: userId, messages: [{ type: "text", text: message }] }),
+    });
+    if (!response.ok) console.error("LINE_GCSDA_OWNER_ALERT_FAILED", JSON.stringify({ receiptId, status: response.status }));
+  } catch (error) {
+    console.error("LINE_GCSDA_OWNER_ALERT_FAILED", JSON.stringify({ receiptId, error: error instanceof Error ? error.name : "UnknownError" }));
+  }
 }
 
 export default async function handler(req: any, res: any) {
@@ -87,9 +110,17 @@ export default async function handler(req: any, res: any) {
     professional_value: cleanText(body.professional_value, LIMITS.professional_value),
     truth: body.truth === true,
     privacy: body.privacy === true,
+    source_channel: cleanText(body.source_channel, ATTRIBUTION_LIMITS.source_channel),
+    source_account: cleanText(body.source_account, ATTRIBUTION_LIMITS.source_account),
+    landing_route: cleanText(body.landing_route, ATTRIBUTION_LIMITS.landing_route),
+    utm_source: cleanText(body.utm_source, ATTRIBUTION_LIMITS.utm_source),
+    utm_medium: cleanText(body.utm_medium, ATTRIBUTION_LIMITS.utm_medium),
+    utm_campaign: cleanText(body.utm_campaign, ATTRIBUTION_LIMITS.utm_campaign),
   };
 
   if (
+    (data.source_channel && !["website","line"].includes(data.source_channel)) ||
+    (data.source_account && data.source_account !== "gcsda") ||
     !data.name || !data.phone || !data.email || !data.organization || !data.job_title ||
     !data.expertise.length || !APPLICATION_SOURCES.includes(data.application_source) ||
     data.motivation.length < 50 || !data.truth || !data.privacy
@@ -137,6 +168,14 @@ export default async function handler(req: any, res: any) {
     `希望參與的方向：${data.participation_areas.length ? data.participation_areas.join("、") : "未填"}`,
     `可提供的專業價值：${data.professional_value || "未填"}`,
     "",
+    "—— 來源標記 ——",
+    `source_channel：${data.source_channel || "website"}`,
+    `source_account：${data.source_account || "gcsda"}`,
+    `landing_route：${data.landing_route || "/membership"}`,
+    `utm_source：${data.utm_source || "—"}`,
+    `utm_medium：${data.utm_medium || "—"}`,
+    `utm_campaign：${data.utm_campaign || "—"}`,
+    "",
     "申請人已確認資料真實，並同意學會於會員資格審查、聯繫、會務管理與必要行政作業範圍內處理本表資料。",
   ].join("\n");
 
@@ -155,6 +194,7 @@ export default async function handler(req: any, res: any) {
       });
       const result = await upstream.json().catch(() => ({})) as { id?: unknown };
       if (upstream.ok && typeof result.id === "string" && result.id.trim()) {
+        await sendGcsdaOwnerLineAlert(receiptId, data.name);
         return json(res, 200, { ok: true, receiptId, transport: "resend" });
       }
     } catch {
@@ -190,6 +230,12 @@ export default async function handler(req: any, res: any) {
         "可提供的專業價值": data.professional_value || "未填",
         "會員資格治理聲明": data.truth ? "已確認" : "未確認",
         "個資使用同意": data.privacy ? "已同意" : "未同意",
+        "來源渠道": data.source_channel || "website",
+        "來源帳號": data.source_account || "gcsda",
+        "入口頁": data.landing_route || "/membership",
+        "utm_source": data.utm_source || "—",
+        "utm_medium": data.utm_medium || "—",
+        "utm_campaign": data.utm_campaign || "—",
       }),
     });
     const result = await upstream.json().catch(() => ({})) as { success?: unknown; message?: unknown };
@@ -197,6 +243,7 @@ export default async function handler(req: any, res: any) {
     if (!upstream.ok || rejected) {
       return json(res, 503, { ok: false, error: "Delivery unavailable", receiptId });
     }
+    await sendGcsdaOwnerLineAlert(receiptId, data.name);
     return json(res, 200, { ok: true, receiptId, transport: "formsubmit" });
   } catch {
     return json(res, 503, { ok: false, error: "Delivery unavailable", receiptId });
