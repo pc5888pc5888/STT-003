@@ -32,20 +32,7 @@ const sttManaged={
   "/start":{lines:1,image:false},
   "/privacy":{lines:1,image:false},
   "/professional-boundary":{lines:1,image:false},
-  "/research":{lines:1,image:true},
-  "/books":{lines:1,image:true},
-  "/books/internal-compliance":{lines:1,image:true},
-  "/domains":{lines:1,image:true},
-  "/domains/corporate-governance":{lines:1,image:true},
-  "/domains/family-succession":{lines:1,image:true},
-  "/domains/strategic-legal":{lines:1,image:true},
-  "/domains/compliance-contract":{lines:1,image:true},
-  "/domains/human-ai-governance":{lines:1,image:true},
-  "/projects":{lines:2,image:true,locked:true},
-  "/success":{lines:1,image:false},
-  "/legal/intellectual-property":{lines:1,image:false},
-  "/legal/ai-disclosure":{lines:1,image:false},
-  "/legal/digital-content-policy":{lines:1,image:false},
+  "/books":{lines:1,image:false},
 };
 
 const sttSpecial=[
