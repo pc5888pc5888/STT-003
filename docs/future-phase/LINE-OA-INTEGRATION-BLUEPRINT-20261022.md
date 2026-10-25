@@ -1,3 +1,15 @@
+# EXECUTION STATUS — ACTIVATED 2026-10-25
+
+Website G10 rendered acceptance has passed. This blueprint is now implemented through:
+- `docs/governance/LINE-PHASE-ACTIVATION-20261025.md`
+- `docs/line/STT-LINE-OA-RELEASE-PACKAGE-20261025.md`
+- `docs/line/GCSDA-LINE-OA-RELEASE-PACKAGE-20261025.md`
+- `line/stt-richmenu.json` / `line/gcsda-richmenu.json`
+
+The earlier HOLD wording below is retained as historical design context, not current phase status.
+
+---
+
 # FUTURE PHASE INPUT — LINE Official Account Integration Blueprint
 Date: 2026-10-22
 Status: HOLD UNTIL WEBSITE G10 PASS

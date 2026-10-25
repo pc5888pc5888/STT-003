@@ -1,3 +1,14 @@
+# SUPERSEDED — 2026-10-25
+
+This status record is historical. Current authoritative execution status:
+- WEBSITE_STATUS = BUILD_LOCKED
+- QA_STATUS = PASS
+- LINE_OFFICIAL_ACCOUNT = ACTIVE_BUILD
+
+See: `docs/governance/WEBSITE-BUILD-LOCK-20261025.md` and `docs/governance/LINE-PHASE-ACTIVATION-20261025.md`.
+
+---
+
 # WEBSITE QA STATUS — 2026-10-24
 
 WEBSITE_STATUS = ACTIVE_BUILD

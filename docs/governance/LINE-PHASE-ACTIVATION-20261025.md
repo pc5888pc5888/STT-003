@@ -16,8 +16,13 @@ They must not share public identity, welcome copy or rich menu.
 GCSDA add-friend:
 https://line.me/R/ti/p/@387nbnjs
 
+Verified from existing public STT materials:
+- STT LINE ID: @783xkknh
+- STT add-friend: https://line.me/R/ti/p/@783xkknh
+- GCSDA LINE ID: @387nbnjs
+- GCSDA add-friend: https://line.me/R/ti/p/@387nbnjs
+
 SOURCE_REQUIRED:
-- verified STT LINE Official Account ID / add-friend URL
 - LINE_STT_CHANNEL_ACCESS_TOKEN
 - LINE_STT_CHANNEL_SECRET
 - LINE_STT_OWNER_USER_ID

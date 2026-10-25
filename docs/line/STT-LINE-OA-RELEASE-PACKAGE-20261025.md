@@ -33,8 +33,11 @@ All links include privacy-minimized LINE attribution.
 
 ## Live release requirements
 
-SOURCE_REQUIRED:
-- verified STT OA add-friend URL
+Publicly documented STT OA:
+- LINE ID: @783xkknh
+- Add-friend URL: https://line.me/R/ti/p/@783xkknh
+
+SOURCE_REQUIRED for Messaging API live activation:
 - channel access token
 - channel secret
 - owner user ID
