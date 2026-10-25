@@ -1,4 +1,4 @@
-# QA rerun: 2026-10-25 current website heads
+# QA rerun: 2026-10-25 post-contrast-and-membership-fallback
 name: G10 dual-site rendered acceptance
 
 on:
