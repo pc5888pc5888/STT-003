@@ -444,3 +444,11 @@ Future STT and GCSDA LINE surfaces must inherit from the final website CIS:
 - the website CTA and content taxonomy after BUILD_LOCK
 
 No live LINE OA modification is authorized by this audit. Release remains gated by WEBSITE_STATUS = QA_PASS / BUILD_LOCKED.
+
+
+## Message automation continuation — 2026-10-26
+
+A deterministic message-routing and sensitive-data guard specification has been prepared as FUTURE_PHASE_INPUT:
+- docs/future-phase/LINE-OA-MESSAGE-AUTOMATION-SPEC-20261026.md
+
+This does not authorize live LINE Manager changes or webhook activation.
