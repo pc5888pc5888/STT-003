@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
+import crypto from "node:crypto";
 
 const root=process.cwd();
 const bounds=[{"x":0,"y":0,"width":833,"height":843},{"x":833,"y":0,"width":834,"height":843},{"x":1667,"y":0,"width":833,"height":843},{"x":0,"y":843,"width":833,"height":843},{"x":833,"y":843,"width":834,"height":843},{"x":1667,"y":843,"width":833,"height":843}];
@@ -9,6 +10,23 @@ const expected={
 };
 
 const errors=[];
+const candidateHashes={
+  stt:"9842c42d45ad4c82492f0e104dcc0b180aba15809b41cf1ee0842a7f4e47872a",
+  gcsda:"de51c70b72b3f5fa237ef60afe7daa0251d1e294d7e24c1a08d615ba764717c0"
+};
+function verifyCandidate(account){
+  const p=path.join(root,"line","candidates",account+"-richmenu-20261026-owner-review.png");
+  if(!fs.existsSync(p)){errors.push(account+": owner-review candidate missing");return;}
+  const b=fs.readFileSync(p);
+  if(b.length>1024*1024) errors.push(account+": candidate exceeds 1 MB");
+  if(b.length<24||b[0]!==0x89||b.toString("ascii",1,4)!=="PNG"){errors.push(account+": candidate not PNG");return;}
+  const w=b.readUInt32BE(16),h=b.readUInt32BE(20);
+  if(w!==2500||h!==1686) errors.push(account+": candidate dimensions");
+  const sha=crypto.createHash("sha256").update(b).digest("hex");
+  if(sha!==candidateHashes[account]) errors.push(account+": candidate hash drift");
+}
+verifyCandidate("stt");
+verifyCandidate("gcsda");
 for(const account of ["stt","gcsda"]){
   const p=path.join(root,"line","release",account+"-richmenu-20261026.json");
   if(!fs.existsSync(p)){errors.push(account+": json missing");continue;}
@@ -30,4 +48,4 @@ if(errors.length){
   console.error("LINE_FUTURE_PACKAGE_QA_FAILED\n- "+errors.join("\n- "));
   process.exit(1);
 }
-console.log(JSON.stringify({lineFuturePackageQA:"PASS",releaseImages:"PENDING_OWNER_APPROVAL",liveRelease:"HOLD"}));
+console.log(JSON.stringify({lineFuturePackageQA:"PASS",ownerReviewCandidates:"PINNED_AND_HASH_VERIFIED",releaseImages:"PENDING_OWNER_APPROVAL",liveRelease:"HOLD"}));

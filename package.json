@@ -9,7 +9,9 @@
     "lint": "tsc --noEmit",
     "start": "node dist/server.cjs",
     "line:future:verify": "node scripts/line/verify-future-package.mjs",
-    "line:release:check": "node scripts/line/check-release-gate.mjs"
+    "line:release:check": "node scripts/line/check-release-gate.mjs",
+    "line:candidate:promote:stt": "node scripts/line/promote-approved-candidate.mjs stt",
+    "line:candidate:promote:gcsda": "node scripts/line/promote-approved-candidate.mjs gcsda"
   },
   "dependencies": {
     "@base-ui/react": "^1.4.1",

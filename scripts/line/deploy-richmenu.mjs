@@ -26,6 +26,13 @@ if(releaseVisualVersion!=="20261026_LOCKED_DERIVATIVE"){
   process.exit(3);
 }
 
+const approvalKey=account==="stt"?"LINE_STT_VISUAL_APPROVAL":"LINE_GCSDA_VISUAL_APPROVAL";
+const approval=(process.env[approvalKey]||"").trim();
+if(approval!=="OWNER_APPROVED_20261026"){
+  console.error("LINE_HOLD: "+approvalKey+" must equal OWNER_APPROVED_20261026 before live publication.");
+  process.exit(3);
+}
+
 const tokenKey=account==="stt"?"LINE_STT_CHANNEL_ACCESS_TOKEN":"LINE_GCSDA_CHANNEL_ACCESS_TOKEN";
 const token=process.env[tokenKey]?.trim();
 if(!token){

@@ -167,3 +167,24 @@ Current result:
 - PRE_RELEASE_OPERATIONS_PACKAGE = READY
 - FINAL_RELEASE_PNG = STILL PENDING OWNER APPROVAL / FILE PROMOTION
 - LIVE_RELEASE = STILL BLOCKED
+
+
+## Owner-review candidate control — added 2026-10-26
+
+PASS:
+- STT owner-review candidate pinned in Git and SHA-256 verified
+- GCSDA owner-review candidate pinned in Git and SHA-256 verified
+- both candidates are 2500×1686
+- both candidates are below 1 MB
+- future-package verifier now blocks candidate hash drift
+- candidate promotion script is fail-closed
+- live deployment script now requires account-specific owner visual approval
+
+PENDING:
+- explicit owner visual approval for STT candidate
+- explicit owner visual approval for GCSDA candidate
+- promotion to line/release/*.png after WEBSITE QA_PASS / BUILD_LOCKED
+
+Owner-review candidates pinned:
+- line/candidates/stt-richmenu-20261026-owner-review.png
+- line/candidates/gcsda-richmenu-20261026-owner-review.png
