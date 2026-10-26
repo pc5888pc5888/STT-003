@@ -210,3 +210,26 @@ PENDING:
 Reference:
 - docs/qa/LINE-OA-PUBLIC-CAPABILITY-AUDIT-20261026.md
 - scripts/line/audit-public-capabilities.mjs
+
+
+## Pre-launch copy lock — added 2026-10-26
+
+PASS:
+- single machine-readable copy lock created: line/prep/line-oa-copy-lock-20261026.json
+- STT exact identity locked: 創辦人暨執行長｜莊鈞翔博士
+- GCSDA exact identity locked: 創會理事長｜莊鈞翔博士
+- both six-cell menus exactly match governed release JSON
+- all 12 current Rich Menu website destinations returned HTTP 200
+- deterministic-routing-only boundary preserved
+- no live release authorization was introduced
+
+References:
+- docs/future-phase/LINE-OA-PRELAUNCH-FROZEN-INPUT-20261026.md
+- docs/qa/LINE-OA-ROUTE-HEALTH-20261026.md
+- scripts/line/check-prep-lock.mjs
+
+Current result:
+- PREP_LOCK = READY
+- OWNER_VISUAL_APPROVAL = PENDING
+- WEBSITE_QA_PASS_BUILD_LOCKED = PENDING
+- LIVE_RELEASE = HOLD
