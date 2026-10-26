@@ -202,6 +202,40 @@ export default async function handler(req: any, res: any) {
     }
   }
 
+
+  const oidcToken = String(req.headers?.["x-vercel-oidc-token"] || "").trim();
+  if (oidcToken) {
+    try {
+      const relay = await fetch("https://stt-003.vercel.app/api/internal/gcsda-membership-delivery", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${oidcToken}`,
+        },
+        signal: AbortSignal.timeout(12000),
+        body: JSON.stringify({
+          to: recipient,
+          subject: `[GCSDA 會員資格申請] ${data.name}｜${receiptId}`,
+          text,
+        }),
+      });
+      const result = await relay.json().catch(() => ({})) as { id?: unknown };
+      if (relay.ok && typeof result.id === "string" && result.id.trim()) {
+        await sendGcsdaOwnerLineAlert(receiptId, data.name);
+        return json(res, 200, { ok: true, receiptId, transport: "resend-oidc-relay" });
+      }
+      console.error("GCSDA_MEMBERSHIP_OIDC_RELAY_FAILED", JSON.stringify({
+        receiptId,
+        status: relay.status,
+      }));
+    } catch (error) {
+      console.error("GCSDA_MEMBERSHIP_OIDC_RELAY_FAILED", JSON.stringify({
+        receiptId,
+        error: error instanceof Error ? error.name : "UnknownError",
+      }));
+    }
+  }
+
   try {
     const upstream = await fetch(`https://formsubmit.co/ajax/${encodeURIComponent(recipient)}`, {
       method: "POST",
