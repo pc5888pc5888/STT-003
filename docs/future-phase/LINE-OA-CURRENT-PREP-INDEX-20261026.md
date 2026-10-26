@@ -118,3 +118,22 @@ These are review candidates only and must not be promoted or published while LIN
 Do not reuse prior ebook-sales, author-recruitment, instant-booking or publication-funnel LINE structures as the governing architecture.
 
 LINE must remain a governed relationship and routing channel subordinate to the frozen website source of truth.
+
+
+## 8. Pre-launch frozen input
+
+Human-readable lock:
+- docs/future-phase/LINE-OA-PRELAUNCH-FROZEN-INPUT-20261026.md
+
+Machine-readable copy lock:
+- line/prep/line-oa-copy-lock-20261026.json
+
+Route-health evidence:
+- docs/qa/LINE-OA-ROUTE-HEALTH-20261026.md
+
+Offline validation:
+- npm run line:prep:lock
+
+Current state:
+PREP_LOCK = READY
+LIVE_RELEASE = HOLD
