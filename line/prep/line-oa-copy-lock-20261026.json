@@ -1,8 +1,11 @@
 {
-  "version": "20261026_PREP_LOCK_V1",
-  "status": "FUTURE_PHASE_PREP",
+  "version": "20261026_ACTIVE_BUILD_LOCK_V2",
+  "status": "ACTIVE_BUILD",
   "liveRelease": "HOLD",
-  "releaseGate": "WEBSITE_STATUS = QA_PASS / BUILD_LOCKED",
+  "releaseGate": "WEBSITE_STATUS = BUILD_LOCKED / QA_PASS — SATISFIED",
+  "websiteGateStatus": "PASS",
+  "phaseActivatedOn": "2026-10-25",
+  "progressFile": "line/prep/line-oa-progress-20261026.json",
   "stt": {
     "officialAccountId": "@783xkknh",
     "displayName": "STT Governance",
@@ -13,30 +16,12 @@
     "welcome": "歡迎加入 STT Governance。\n\n本帳號用於治理資訊、研究出版與正式受理後之關係維護。若你正面對重大決策、企業／家族治理或 AI 決策責任問題，請先由「開始治理判讀」整理情境。\n\n首次提交不需傳送身分證件、金融帳戶、完整契約、醫療資料或其他高敏感文件。LINE 不取代正式治理受理；正式入口以 STT Governance 官網為準。",
     "defaultReply": "這裡是 STT Governance 官方 LINE。\n\n若你正在處理重大決策、企業治理、家族治理或 AI 決策責任問題，建議先從「你正在面對什麼」確認問題類型；如需正式進入受理程序，請使用「開始治理判讀」。\n\n為降低不必要的資料暴露，請先不要在 LINE 傳送身分證件、金融帳戶、完整契約、醫療資料、完整資產／稅務資料或其他高敏感文件。",
     "richMenu": [
-      [
-        "開始治理判讀",
-        "https://stt-003.vercel.app/start?utm_source=line&utm_medium=oa&utm_campaign=stt_richmenu"
-      ],
-      [
-        "你正在面對什麼",
-        "https://stt-003.vercel.app/problems?utm_source=line&utm_medium=oa&utm_campaign=stt_richmenu"
-      ],
-      [
-        "STT 如何判讀",
-        "https://stt-003.vercel.app/how-stt-works?utm_source=line&utm_medium=oa&utm_campaign=stt_richmenu"
-      ],
-      [
-        "莊鈞翔博士",
-        "https://stt-003.vercel.app/eric-chuang?utm_source=line&utm_medium=oa&utm_campaign=stt_richmenu"
-      ],
-      [
-        "研究與出版",
-        "https://stt-003.vercel.app/insights?utm_source=line&utm_medium=oa&utm_campaign=stt_richmenu"
-      ],
-      [
-        "關於 STT",
-        "https://stt-003.vercel.app/about?utm_source=line&utm_medium=oa&utm_campaign=stt_richmenu"
-      ]
+      ["開始治理判讀","https://stt-003.vercel.app/start?utm_source=line&utm_medium=oa&utm_campaign=stt_richmenu"],
+      ["你正在面對什麼","https://stt-003.vercel.app/problems?utm_source=line&utm_medium=oa&utm_campaign=stt_richmenu"],
+      ["STT 如何判讀","https://stt-003.vercel.app/how-stt-works?utm_source=line&utm_medium=oa&utm_campaign=stt_richmenu"],
+      ["莊鈞翔博士","https://stt-003.vercel.app/eric-chuang?utm_source=line&utm_medium=oa&utm_campaign=stt_richmenu"],
+      ["研究與出版","https://stt-003.vercel.app/insights?utm_source=line&utm_medium=oa&utm_campaign=stt_richmenu"],
+      ["關於 STT","https://stt-003.vercel.app/about?utm_source=line&utm_medium=oa&utm_campaign=stt_richmenu"]
     ]
   },
   "gcsda": {
@@ -49,30 +34,12 @@
     "welcome": "歡迎加入中華企業策略永續發展學會 GCSDA。\n\n本帳號用於會務聯絡、會員申請、活動與治理知識資訊。入會申請請由「會員與入會」進入正式流程；送出申請不代表會員資格成立，後續依章程及正式會務程序審查。\n\nGCSDA 與 STT Governance 為不同機構主體。",
     "defaultReply": "這裡是中華企業策略永續發展學會 GCSDA 官方 LINE。\n\n會員申請請由「會員與入會」進入正式流程；活動、研究、組織治理及章程公告，請使用下方學會入口。\n\n請勿以 LINE 訊息取代正式入會申請或正式會務程序。",
     "richMenu": [
-      [
-        "關於學會",
-        "https://gcsda-governance.vercel.app/about?utm_source=line&utm_medium=oa&utm_campaign=gcsda_richmenu"
-      ],
-      [
-        "創會理事長",
-        "https://gcsda-governance.vercel.app/founder-chairman?utm_source=line&utm_medium=oa&utm_campaign=gcsda_richmenu"
-      ],
-      [
-        "會員與入會",
-        "https://gcsda-governance.vercel.app/membership?utm_source=line&utm_medium=oa&utm_campaign=gcsda_richmenu"
-      ],
-      [
-        "活動與大會",
-        "https://gcsda-governance.vercel.app/events?utm_source=line&utm_medium=oa&utm_campaign=gcsda_richmenu"
-      ],
-      [
-        "知識與研究",
-        "https://gcsda-governance.vercel.app/knowledge?utm_source=line&utm_medium=oa&utm_campaign=gcsda_richmenu"
-      ],
-      [
-        "章程與公告",
-        "https://gcsda-governance.vercel.app/charter?utm_source=line&utm_medium=oa&utm_campaign=gcsda_richmenu"
-      ]
+      ["關於學會","https://gcsda-governance.vercel.app/about?utm_source=line&utm_medium=oa&utm_campaign=gcsda_richmenu"],
+      ["創會理事長","https://gcsda-governance.vercel.app/founder-chairman?utm_source=line&utm_medium=oa&utm_campaign=gcsda_richmenu"],
+      ["會員與入會","https://gcsda-governance.vercel.app/membership?utm_source=line&utm_medium=oa&utm_campaign=gcsda_richmenu"],
+      ["活動與大會","https://gcsda-governance.vercel.app/events?utm_source=line&utm_medium=oa&utm_campaign=gcsda_richmenu"],
+      ["知識與研究","https://gcsda-governance.vercel.app/knowledge?utm_source=line&utm_medium=oa&utm_campaign=gcsda_richmenu"],
+      ["章程與公告","https://gcsda-governance.vercel.app/charter?utm_source=line&utm_medium=oa&utm_campaign=gcsda_richmenu"]
     ]
   },
   "automation": {
