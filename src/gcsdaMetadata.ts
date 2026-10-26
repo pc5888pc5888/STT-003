@@ -51,7 +51,7 @@ export function applyGcsdaMetadata(path:string){
  function set(key:string,value:string,property=false){const attr=property?"property":"name";let el=document.head.querySelector<HTMLMetaElement>(`meta[${attr}="${key}"]`);if(!el){el=document.createElement("meta");el.setAttribute(attr,key);document.head.appendChild(el);}el.content=value;}
  const title=meta?.title||"找不到頁面｜GCSDA",description=meta?.description||"中華企業策略永續發展學會網站導覽。";
  document.title=title;set("description",description);set("robots",origin&&meta?"index,follow":"noindex,follow");
- const isFounder=path==="/founder-chairman";set("og:title",title,true);set("og:description",description,true);set("og:site_name","中華企業策略永續發展學會｜GCSDA",true);set("og:type",isFounder?"profile":"website",true);set("og:locale","zh_TW",true);
+ const isFounder=path==="/founder-chairman";set("og:title",title,true);set("og:description",description,true);set("og:site_name","GCSDA｜中華企業策略永續發展學會",true);set("og:type",isFounder?"profile":"website",true);set("og:locale","zh_TW",true);
  document.head.querySelectorAll('link[rel="canonical"]').forEach(el=>el.remove());
  document.getElementById("gcsda-organization-schema")?.remove();document.getElementById("gcsda-founder-schema")?.remove();
  if(origin&&meta){

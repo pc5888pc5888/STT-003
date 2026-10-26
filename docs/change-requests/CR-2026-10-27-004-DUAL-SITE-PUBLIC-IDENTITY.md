@@ -1,0 +1,25 @@
+# CHANGE REQUEST — CR-2026-10-27-004
+
+- **Date:** 2026-10-27
+- **Requested and approved by:** 莊鈞翔博士（本次明確指示）
+- **Status:** FOUNDER_AUTHORIZED; WEB_IMPLEMENTED_PENDING_DEPLOYMENT_QA
+- **Business reason:** 統一雙站對外可見的官方網站呈現名稱，避免瀏覽器標題、分享中繼資料、機構識別文字不一致。
+- **Affected STT:** 首頁 title（HTML 與執行中 React）、Open Graph site_name / title、Organization / Breadcrumb schema、Logo alt/aria-label、頁尾機構名稱、學會外部連結顯示名稱。
+- **Affected GCSDA:** Open Graph site_name、頁尾機構名稱、首頁 Logo 回首頁輔助文字；既有首頁 HTML title 與 logo alt 已符合本次指示，保留不動。
+- **Old STT homepage title:** STT Governance｜重大決策・企業治理・家族治理
+- **New STT homepage title:** 策略智庫智慧治理｜STT Governance
+- **Old STT OG site_name:** STT Governance
+- **New STT OG site_name:** 策略智庫智慧治理｜STT Governance
+- **Old STT visible footer identity:** STT Governance
+- **New STT visible footer identity:** 策略智庫智慧治理｜STT Governance
+- **Old GCSDA OG site_name and footer:** 中華企業策略永續發展學會｜GCSDA
+- **New GCSDA OG site_name and footer:** GCSDA｜中華企業策略永續發展學會
+- **Official display-name rule:** STT = 「策略智庫智慧治理｜STT Governance」；GCSDA = 「GCSDA｜中華企業策略永續發展學會」。
+- **Brand and legal boundary:** STT Governance 為母品牌與治理判讀主體，GCSDA 為獨立學會；此次變更僅統一網站對外顯示名稱，沒有變更任何法定身分、組織關係、Logo、核准圖片、主標語或 LOCKED 治理內容。
+- **SEO/routing impact:** 首頁 title / OG / site_name / Organization identity 與無障礙名稱更新；既有 canonical、其他頁標題、路由及 CTA 均保留。
+- **Founder acceptance / phase decision:** NOT APPLICABLE（未宣告 BUILD_LOCKED、FOUNDER_ACCEPTED 或網站整體 QA_PASS）。
+- **Destructive action:** NO
+- **Additional paid tool:** NO
+- **Implementation:** STT main / GCSDA release branch；正式來源文件更新為 2026-10-27 Identity Amendment，以 ACTIVE_SOURCE_MANIFEST 指定最新版。
+- **QA:** 依部署後 HTML、程式碼、meta 與主機部署證據逐項記錄；實機多尺寸視覺檢驗如不可得標示 QA_EVIDENCE_GAP。
+- **Supersession:** 原 STT 首頁標題與雙站 OG site_name 的舊版規格，僅於本 CR 涉及範圍內由新值取代；其餘 v1.3_HARDENED LOCKED 規則持續有效。
