@@ -641,3 +641,206 @@
     left:36px!important;
   }
 }
+
+
+/* DUAL-SITE GOVERNANCE DESIGN CONTRACT — 2026-10-27
+   STT and GCSDA remain separate CIS identities, but share one responsive editorial system.
+   Shared: hero geometry, typography hierarchy, reading measure, action rhythm and breakpoints.
+   Independent: logo, institutional color accents, copy, imagery semantics, routes and legal identity.
+   This block intentionally overrides older GCSDA-only tablet hero repair rules. */
+
+@media(min-width:761px){
+  #root .g4 .gcsda-hero.cis-hero.cis-with-image:not(.cis-profile-parity){
+    position:relative!important;
+    min-height:0!important;
+    height:auto!important;
+    margin:0!important;
+    padding:0!important;
+    overflow:hidden!important;
+    background:var(--cis-paper,#fbfaf7)!important;
+  }
+  #root .g4 .gcsda-hero.cis-hero.cis-with-image:not(.cis-profile-parity) .cis-hero-inner{
+    position:relative!important;
+    display:block!important;
+    width:100%!important;
+    max-width:none!important;
+    min-width:0!important;
+    aspect-ratio:16 / 9!important;
+    min-height:0!important;
+    height:auto!important;
+    margin:0!important;
+    padding:0!important;
+    gap:0!important;
+  }
+  #root .g4 .gcsda-hero.cis-hero.cis-with-image:not(.cis-profile-parity) .cis-hero-art{
+    position:absolute!important;
+    inset:0!important;
+    width:100%!important;
+    height:100%!important;
+    max-width:none!important;
+    min-width:0!important;
+    margin:0!important;
+    padding:0!important;
+    overflow:hidden!important;
+    z-index:0!important;
+  }
+  #root .g4 .gcsda-hero.cis-hero.cis-with-image:not(.cis-profile-parity) .cis-hero-art img{
+    display:block!important;
+    width:100%!important;
+    height:100%!important;
+    max-width:none!important;
+    max-height:none!important;
+    object-fit:cover!important;
+    object-position:center center!important;
+    filter:none!important;
+    transform:none!important;
+  }
+  #root .g4 .gcsda-hero.cis-hero.cis-with-image:not(.cis-profile-parity)::before{
+    content:""!important;
+    display:block!important;
+    position:absolute!important;
+    inset:0!important;
+    z-index:1!important;
+    pointer-events:none!important;
+    background:linear-gradient(90deg,#fff 0%,#fff 30%,rgba(255,255,255,.99) 38%,rgba(255,255,255,.90) 50%,rgba(255,255,255,.62) 60%,rgba(255,255,255,.34) 70%,rgba(255,255,255,.12) 77%,rgba(255,255,255,0) 82%)!important;
+  }
+  #root .g4 .gcsda-hero.cis-hero.cis-with-image:not(.cis-profile-parity) .cis-hero-art::after{
+    display:none!important;
+    content:none!important;
+  }
+  #root .g4 .gcsda-hero.cis-hero.cis-with-image:not(.cis-profile-parity) .cis-hero-copy{
+    position:absolute!important;
+    z-index:2!important;
+    margin:0!important;
+    padding:0!important;
+    min-width:0!important;
+    background:transparent!important;
+    border:0!important;
+    box-shadow:none!important;
+    align-self:auto!important;
+  }
+  #root .g4 .gcsda-hero.cis-hero .cis-kicker{
+    font-family:var(--gov-sans,var(--cis-ui,system-ui))!important;
+    font-size:11px!important;
+    font-weight:600!important;
+    line-height:1.8!important;
+    letter-spacing:.12em!important;
+    margin:0 0 20px!important;
+  }
+  #root .g4 .gcsda-hero.cis-hero .cis-title{
+    font-family:var(--gov-serif,var(--cis-serif,serif))!important;
+    font-weight:500!important;
+    letter-spacing:0!important;
+    color:#151411!important;
+    text-shadow:none!important;
+  }
+  #root .g4 .gcsda-hero.cis-hero .cis-title-line{
+    white-space:normal!important;
+    word-break:normal!important;
+    overflow-wrap:normal!important;
+    text-wrap:balance!important;
+  }
+  #root .g4 .gcsda-hero.cis-hero .cis-lead{
+    font-family:var(--gov-serif,var(--cis-serif,serif))!important;
+    font-size:17px!important;
+    line-height:1.95!important;
+    margin:22px 0 0!important;
+    max-width:35em!important;
+    color:#35302b!important;
+  }
+  #root .g4 .gcsda-hero.cis-hero .cis-actions{
+    display:flex!important;
+    flex-wrap:wrap!important;
+    gap:13px!important;
+    margin-top:25px!important;
+    align-items:center!important;
+  }
+  #root .g4 .gcsda-hero.cis-hero .cis-actions>a{
+    min-height:46px!important;
+    padding:11px 17px!important;
+    font-family:var(--gov-serif,var(--cis-serif,serif))!important;
+    font-size:15px!important;
+    font-weight:500!important;
+    line-height:1.5!important;
+  }
+}
+@media(min-width:1201px){
+  #root .g4 .gcsda-hero.cis-hero.cis-with-image:not(.cis-profile-parity) .cis-hero-copy{
+    top:180px!important;
+    left:56px!important;
+    width:min(760px,calc(100% - 112px))!important;
+    max-width:760px!important;
+  }
+  #root .g4 .gcsda-hero.cis-hero:not(.cis-profile-parity) .cis-title{
+    font-size:48px!important;
+    line-height:1.38!important;
+  }
+}
+@media(min-width:761px) and (max-width:1200px){
+  #root .g4 .gcsda-hero.cis-hero.cis-with-image:not(.cis-profile-parity) .cis-hero-copy{
+    top:50px!important;
+    left:36px!important;
+    width:min(590px,58%)!important;
+    max-width:590px!important;
+    background:transparent!important;
+    padding:0!important;
+  }
+  #root .g4 .gcsda-hero.cis-hero:not(.cis-profile-parity) .cis-title{
+    font-size:36px!important;
+    line-height:1.42!important;
+  }
+}
+@media(max-width:760px){
+  #root .g4 .gcsda-hero.cis-hero.cis-with-image:not(.cis-profile-parity) .cis-hero-inner{
+    display:flex!important;
+    flex-direction:column!important;
+    width:100%!important;
+    max-width:none!important;
+    min-height:0!important;
+    margin:0!important;
+    padding:0!important;
+    gap:0!important;
+  }
+  #root .g4 .gcsda-hero.cis-hero.cis-with-image:not(.cis-profile-parity)::before{
+    display:none!important;
+    content:none!important;
+  }
+  #root .g4 .gcsda-hero.cis-hero.cis-with-image:not(.cis-profile-parity) .cis-hero-art{
+    position:relative!important;
+    inset:auto!important;
+    order:0!important;
+    width:100%!important;
+    height:auto!important;
+    max-width:none!important;
+    margin:0!important;
+    padding:0!important;
+  }
+  #root .g4 .gcsda-hero.cis-hero.cis-with-image:not(.cis-profile-parity) .cis-hero-art img{
+    position:relative!important;
+    width:100%!important;
+    height:auto!important;
+    object-fit:contain!important;
+    object-position:center!important;
+  }
+  #root .g4 .gcsda-hero.cis-hero.cis-with-image:not(.cis-profile-parity) .cis-hero-copy{
+    position:relative!important;
+    order:1!important;
+    top:auto!important;
+    left:auto!important;
+    width:auto!important;
+    max-width:none!important;
+    margin:0!important;
+    padding:30px 28px 36px!important;
+    background:var(--cis-paper,#fbfaf7)!important;
+    border:0!important;
+    box-shadow:none!important;
+  }
+  #root .g4 .gcsda-hero.cis-hero:not(.cis-profile-parity) .cis-title{
+    font-size:28px!important;
+    line-height:1.48!important;
+  }
+  #root .g4 .gcsda-hero.cis-hero:not(.cis-profile-parity) .cis-lead{
+    font-size:16px!important;
+    line-height:1.9!important;
+  }
+}
