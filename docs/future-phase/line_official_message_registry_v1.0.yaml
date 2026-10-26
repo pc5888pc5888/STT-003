@@ -1,0 +1,121 @@
+version: "1.0"
+date: "2026-10-26"
+status: "FUTURE_PHASE_PREP"
+formal_activation: "HOLD"
+
+greeting:
+  id: "greeting_v1"
+  enabled_after_unlock: true
+  text: |-
+    歡迎來到 STT Governance。
+
+    STT 處理的，不是一般資訊詢問，而是當一件重大事情同時牽涉問題、證據、權力、責任、風險與選項時，先建立可以承擔後果的治理判讀。
+
+    你可以先從圖文選單開始：
+    你正在面對什麼｜辨識目前事件是否已進入治理層級
+    STT 如何判讀｜理解治理判讀方法
+    治理委任｜了解正式治理介入
+    研究與出版｜閱讀治理研究與出版
+    莊鈞翔博士｜認識 STT Governance 創辦人暨執行長
+    開始治理判讀｜進入正式治理受理
+
+    LINE 僅作為資訊與路由入口；重大治理判斷不由自動訊息或 AI 代替。
+
+auto_responses:
+  - id: "start_v1"
+    keywords:
+      - "如何開始"
+      - "開始"
+      - "受理"
+      - "治理判讀"
+    text: |-
+      若你正面對一件錯誤成本高、涉及多方權責，或一旦執行就難以回復的事情，建議先完成治理判讀，再決定下一步。
+
+      正式入口：
+      https://stt-003.vercel.app/start?src=line&entry=autoreply&msg=start_v1
+
+  - id: "method_v1"
+    keywords:
+      - "怎麼判斷"
+      - "如何判讀"
+      - "STT方法"
+      - "方法"
+    text: |-
+      STT 不從快速答案開始，而是先釐清事件、問題、證據、權責、不可承擔風險與可行選項，再形成治理判讀。
+
+      完整方法：
+      https://stt-003.vercel.app/how-stt-works?src=line&entry=autoreply&msg=method_v1
+
+  - id: "engagement_v1"
+    keywords:
+      - "治理委任"
+      - "合作方式"
+      - "正式合作"
+      - "委任"
+    text: |-
+      正式治理介入依事件複雜度、決策層級、資料狀態與持續時間而定，不採標準套裝方案。
+
+      治理委任：
+      https://stt-003.vercel.app/engagement?src=line&entry=autoreply&msg=engagement_v1
+
+  - id: "founder_v1"
+    keywords:
+      - "莊鈞翔"
+      - "莊博士"
+      - "執行長"
+      - "創辦人"
+    text: |-
+      莊鈞翔博士為 STT Governance 創辦人暨執行長，負責建立重大決策判讀架構、制度設計與人類最終判斷責任。
+
+      人物頁：
+      https://stt-003.vercel.app/eric-chuang?src=line&entry=autoreply&msg=founder_v1
+
+  - id: "research_v1"
+    keywords:
+      - "研究"
+      - "出版"
+      - "專欄"
+      - "文章"
+    text: |-
+      STT 的研究與出版，用來呈現治理判讀如何累積為可追溯的制度研究與公共論述。
+
+      研究與出版：
+      https://stt-003.vercel.app/insights?src=line&entry=autoreply&msg=research_v1
+
+      第三方媒體內容均應標示為外部第三方發表來源。
+
+  - id: "ai_v1"
+    keywords:
+      - "AI"
+      - "人工智慧"
+      - "AI治理"
+      - "數位治理"
+    text: |-
+      STT 使用 AI 作為研究、整理、比對與治理作業支援；AI 不擁有最終治理判斷權，也不取代人類決策責任。
+
+      若問題已涉及 AI 授權、證據、責任或決策邊界，可先從：
+      https://stt-003.vercel.app/problems?src=line&entry=autoreply&msg=ai_v1
+      開始辨識。
+
+fallback:
+  id: "fallback_v1"
+  text: |-
+    目前這個 LINE 帳號的主要功能，是協助你找到正確的 STT Governance 資訊入口。
+
+    問題辨識：
+    https://stt-003.vercel.app/problems?src=line&entry=autoreply&msg=fallback_v1
+
+    治理方法：
+    https://stt-003.vercel.app/how-stt-works?src=line&entry=autoreply&msg=fallback_v1
+
+    正式受理：
+    https://stt-003.vercel.app/start?src=line&entry=autoreply&msg=fallback_v1
+
+    LINE 自動回覆不構成法律、財務、投資、醫療或其他特定專業意見，也不代表 STT 已完成個案治理判斷。
+
+governance:
+  primary_cta: "開始治理判讀"
+  primary_route: "https://stt-003.vercel.app/start"
+  chat_default_after_unlock: false
+  webhook_default_after_unlock: false
+  legacy_publishing_funnel: "DO_NOT_IMPLEMENT"

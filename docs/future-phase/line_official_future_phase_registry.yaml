@@ -1,4 +1,4 @@
-version: "1.0"
+version: "1.1"
 date: "2026-10-26"
 channel: "LINE Official Account"
 status: "FUTURE_PHASE_PREP"
@@ -59,3 +59,25 @@ qa:
   require_old_reply_reconciliation: true
   require_third_party_media_labeling: true
   require_ai_boundary: true
+
+activation_pack:
+  status: "READY_FOR_WEBSITE_UNLOCK"
+  file: "docs/future-phase/LINE_OFFICIAL_ACTIVATION_PACK_v1.0.md"
+  rich_menu_geometry: "docs/future-phase/line_official_richmenu_geometry_v1.0.yaml"
+  message_registry: "docs/future-phase/line_official_message_registry_v1.0.yaml"
+  runbook: "docs/future-phase/LINE_OFFICIAL_ACTIVATION_RUNBOOK_v1.0.md"
+
+phase1_technical_default:
+  implementation_tool: "LINE Official Account Manager"
+  rich_menu_scope: "default"
+  messaging_api_required: false
+  webhook_required: false
+  chat_enabled: false
+  greeting_enabled: true
+  auto_response_enabled: true
+
+live_state:
+  modified_by_future_phase_prep: false
+  rich_menu_uploaded: false
+  greeting_changed: false
+  auto_response_changed: false

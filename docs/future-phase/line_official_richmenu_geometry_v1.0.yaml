@@ -1,0 +1,72 @@
+version: "1.0"
+date: "2026-10-26"
+status: "FUTURE_PHASE_PREP"
+formal_activation: "HOLD"
+unlock_condition: "WEBSITE QA_PASS + BUILD_LOCKED"
+
+implementation:
+  preferred_tool: "LINE Official Account Manager"
+  scope: "default_rich_menu"
+  messaging_api_phase1: false
+  webhook_phase1: false
+
+image:
+  width: 2500
+  height: 1686
+  format_preferred: "PNG"
+  allowed_formats:
+    - "PNG"
+    - "JPEG"
+  max_file_size_bytes: 1048576
+  aspect_ratio: 1.4828
+  chat_bar_text: "STT Governance"
+
+grid:
+  columns: 3
+  rows: 2
+  areas:
+    - id: "01"
+      bounds: { x: 0, y: 0, width: 833, height: 843 }
+      label: "你正在面對什麼"
+      route: "https://stt-003.vercel.app/problems?src=line&entry=richmenu&slot=01"
+    - id: "02"
+      bounds: { x: 833, y: 0, width: 834, height: 843 }
+      label: "STT 如何判讀"
+      route: "https://stt-003.vercel.app/how-stt-works?src=line&entry=richmenu&slot=02"
+    - id: "03"
+      bounds: { x: 1667, y: 0, width: 833, height: 843 }
+      label: "治理委任"
+      route: "https://stt-003.vercel.app/engagement?src=line&entry=richmenu&slot=03"
+    - id: "04"
+      bounds: { x: 0, y: 843, width: 833, height: 843 }
+      label: "研究與出版"
+      route: "https://stt-003.vercel.app/insights?src=line&entry=richmenu&slot=04"
+    - id: "05"
+      bounds: { x: 833, y: 843, width: 834, height: 843 }
+      label: "莊鈞翔博士"
+      route: "https://stt-003.vercel.app/eric-chuang?src=line&entry=richmenu&slot=05"
+    - id: "06"
+      bounds: { x: 1667, y: 843, width: 833, height: 843 }
+      label: "開始治理判讀"
+      route: "https://stt-003.vercel.app/start?src=line&entry=richmenu&slot=06"
+
+visual_governance:
+  base: "warm white / ivory"
+  typography: "near-black warm gray"
+  institutional_accent: "restrained gold"
+  allowed_symbols:
+    - "boundary"
+    - "axis"
+    - "institutional rule"
+    - "seal treatment"
+  forbidden:
+    - "technology blue"
+    - "neon"
+    - "AI brain"
+    - "robot"
+    - "chip"
+    - "data globe"
+    - "future city"
+    - "promotional badge"
+    - "price"
+    - "limited-time language"
