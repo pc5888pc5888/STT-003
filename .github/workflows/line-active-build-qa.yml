@@ -1,0 +1,47 @@
+name: LINE Active Build QA
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "line/**"
+      - "scripts/line/**"
+      - "docs/governance/**"
+      - "docs/line/**"
+      - "docs/qa/LINE-OA-**"
+      - "package.json"
+      - "package-lock.json"
+      - ".github/workflows/line-active-build-qa.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  line-active-build-qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install
+        run: npm ci
+
+      - name: Copy lock
+        run: npm run line:prep:lock
+
+      - name: Future package integrity
+        run: npm run line:future:verify
+
+      - name: Static readiness
+        run: npm run line:static:check
+
+      - name: Active-build progress
+        run: npm run line:status
