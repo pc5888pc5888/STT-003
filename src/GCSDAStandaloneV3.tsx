@@ -1,4 +1,4 @@
-// GCSDA independent association site; STT classical architecture language is intentionally excluded.
+// GCSDA independent institutional CIS; shared STT/GCSDA responsive and editorial design contract, with independent brand assets, content, routes and legal identity.
 import GovernedHero from "./components/GovernedHero";
 import "./styles/cis-page-system.css";
 import { FormEvent, useEffect, useLayoutEffect, useRef, useState, type ReactNode } from "react";
