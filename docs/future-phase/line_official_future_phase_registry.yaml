@@ -1,0 +1,61 @@
+version: "1.0"
+date: "2026-10-26"
+channel: "LINE Official Account"
+status: "FUTURE_PHASE_PREP"
+formal_build: "HOLD"
+unlock_condition:
+  website_status:
+    - "QA_PASS"
+    - "BUILD_LOCKED"
+
+brand_source: "STT Governance official website"
+primary_cta:
+  label: "開始治理判讀"
+  route: "https://stt-003.vercel.app/start"
+
+rich_menu:
+  layout: "6-cell"
+  cells:
+    - id: "01"
+      label: "你正在面對什麼"
+      route: "https://stt-003.vercel.app/problems"
+      role: "problem_recognition"
+    - id: "02"
+      label: "STT 如何判讀"
+      route: "https://stt-003.vercel.app/how-stt-works"
+      role: "method"
+    - id: "03"
+      label: "治理委任"
+      route: "https://stt-003.vercel.app/engagement"
+      role: "engagement"
+    - id: "04"
+      label: "研究與出版"
+      route: "https://stt-003.vercel.app/insights"
+      role: "research_publication"
+    - id: "05"
+      label: "莊鈞翔博士"
+      route: "https://stt-003.vercel.app/eric-chuang"
+      role: "human_authority"
+    - id: "06"
+      label: "開始治理判讀"
+      route: "https://stt-003.vercel.app/start"
+      role: "formal_intake"
+
+legacy_material:
+  status: "DO_NOT_IMPLEMENT"
+  description: "ebook sales + project interview/publishing recruitment funnel"
+  reason: "inconsistent with current STT Governance positioning"
+
+automation:
+  live_changes_allowed: false
+  messaging_api_required: "TBD"
+  crm_required: false
+  database_required: false
+
+qa:
+  require_website_lock: true
+  require_link_check: true
+  require_visual_preview: true
+  require_old_reply_reconciliation: true
+  require_third_party_media_labeling: true
+  require_ai_boundary: true
