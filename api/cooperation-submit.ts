@@ -180,7 +180,7 @@ export default async function handler(req: any, res: any) {
       route,
       sentAt: new Date().toISOString(),
     }));
-    if (route === "governance-intake") await sendSttOwnerLineAlert(receiptId, clean.event_type || "");
+    if (route === "governance-intake") await sendSttOwnerLineAlert(receiptId, textValue(clean, "event_type"));
 
     return json(res, 200, { ok: true, delivery: "resend-email", receiptId });
   } catch (error) {
