@@ -88,7 +88,7 @@ const researchThemes = [
 
 export default function HomeCanonical() {
   useEffect(() => {
-    document.title = "策略智庫智慧治理｜STT Governance";
+    document.title = "STT Governance｜策略智庫智慧治理";
     const description =
       "STT Governance 協助企業、家族與重大決策者，在結果尚未不可逆之前，釐清問題、證據、權力、責任與選項，建立可承擔、可追溯的治理結構。";
     let meta = document.querySelector<HTMLMetaElement>('meta[name="description"]');

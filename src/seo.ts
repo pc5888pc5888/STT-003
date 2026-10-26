@@ -13,7 +13,7 @@ export type MetaRecord = {
 export const FORMAL_META: Record<string, MetaRecord> = {
   ...RETAINED_META,
   "/": {
-    title: "策略智庫智慧治理｜STT Governance",
+    title: "STT Governance｜策略智庫智慧治理",
     description: "STT Governance 協助企業、家族與重大決策者，在結果尚未不可逆之前，釐清問題、證據、權力、責任與選項，建立可承擔、可追溯的治理結構。",
     image: "/visual-bank/stt/user-approved-six/home.png",
     label: "首頁",
@@ -121,7 +121,7 @@ export function applyGovernedMetadata(pathname: string) {
     document.title = formal.title;
     upsertMeta('meta[name="description"]', { name: "description", content: formal.description });
     upsertMeta('meta[name="robots"]', { name: "robots", content: formal.robots ?? "index,follow" });
-    upsertMeta('meta[property="og:site_name"]', { property: "og:site_name", content: "策略智庫智慧治理｜STT Governance" });
+    upsertMeta('meta[property="og:site_name"]', { property: "og:site_name", content: "STT Governance｜策略智庫智慧治理" });
     upsertMeta('meta[property="og:title"]', { property: "og:title", content: formal.title });
     upsertMeta('meta[property="og:description"]', { property: "og:description", content: formal.description });
     upsertMeta('meta[property="og:type"]', { property: "og:type", content: normalized === "/eric-chuang" ? "profile" : "website" });
@@ -142,7 +142,7 @@ export function applyGovernedMetadata(pathname: string) {
   addSchema({
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: "策略智庫智慧治理｜STT Governance",
+    name: "STT Governance｜策略智庫智慧治理",
     alternateName: "STT Governance",
     url: `${STT_CANONICAL_ORIGIN}/`,
     logo: `${STT_CANONICAL_ORIGIN}/images/STT-Governance-Official-Logo.png`,
@@ -156,7 +156,7 @@ export function applyGovernedMetadata(pathname: string) {
         {
           "@type": "ListItem",
           position: 1,
-          name: "策略智庫智慧治理｜STT Governance",
+          name: "STT Governance｜策略智庫智慧治理",
           item: `${STT_CANONICAL_ORIGIN}/`,
         },
         {

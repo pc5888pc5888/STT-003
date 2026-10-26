@@ -23,7 +23,7 @@ function schemaTags(route: string, label: string, image?: string) {
     {
       "@context": "https://schema.org",
       "@type": "Organization",
-      name: "策略智庫智慧治理｜STT Governance",
+      name: "STT Governance｜策略智庫智慧治理",
       alternateName: "STT Governance",
       url: `${STT_CANONICAL_ORIGIN}/`,
       logo: `${STT_CANONICAL_ORIGIN}/images/STT-Governance-Official-Logo.png`,
@@ -35,7 +35,7 @@ function schemaTags(route: string, label: string, image?: string) {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       itemListElement: [
-        { "@type": "ListItem", position: 1, name: "策略智庫智慧治理｜STT Governance", item: `${STT_CANONICAL_ORIGIN}/` },
+        { "@type": "ListItem", position: 1, name: "STT Governance｜策略智庫智慧治理", item: `${STT_CANONICAL_ORIGIN}/` },
         { "@type": "ListItem", position: 2, name: label, item: canonical },
       ],
     });
@@ -83,7 +83,7 @@ function formalSeoPages(): Plugin {
         const staticHead = [
           `    <meta name="robots" content="${escapeHtml(meta.robots ?? "index,follow")}" />`,
           `    <link rel="canonical" href="${canonical}" />`,
-          '    <meta property="og:site_name" content="策略智庫智慧治理｜STT Governance" />',
+          '    <meta property="og:site_name" content="STT Governance｜策略智庫智慧治理" />',
           '    <meta property="og:locale" content="zh_TW" />',
           `    <meta property="og:type" content="${route === "/eric-chuang" ? "profile" : "website"}" />`,
           `    <meta property="og:title" content="${escapeHtml(meta.title)}" />`,

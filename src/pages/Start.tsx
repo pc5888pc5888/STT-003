@@ -239,6 +239,7 @@ export default function Start() {
           </fieldset>
           <div className="border-t border-[#d8c8ad] pt-8">
             <p className="mb-5 text-sm leading-7"><Link to="/privacy">隱私與資料使用</Link>｜<Link to="/professional-boundary">專業服務與資訊邊界</Link></p>
+            <p className="mb-5 text-sm leading-7 text-[#5f584f]">如需持續接收治理研究及後續聯絡資訊，可另行加入 <a href="https://line.me/R/ti/p/@783xkknh" target="_blank" rel="noopener noreferrer" className="underline underline-offset-4">STT LINE 官方帳號</a>。LINE 不取代本頁的正式治理受理，初次聯絡請勿透過 LINE 傳送高敏感資料。</p>
             <button
               type="submit"
               disabled={sending}
