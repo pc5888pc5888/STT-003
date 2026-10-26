@@ -1,0 +1,29 @@
+/* GCSDA institutional charter and assembly archive, scoped to the two requested pages. */
+.g4 .gcsda-record-lead{margin-top:18px;max-width:950px;line-height:1.95;color:var(--muted)}
+.g4 .gcsda-record-list{margin-top:34px;border-top:1px solid var(--line)}
+.g4 .gcsda-record-list .g4-event{grid-template-columns:174px minmax(0,1fr) auto;align-items:start;gap:30px}
+.g4 .gcsda-record-list .g4-event time{white-space:nowrap;font-size:17px;line-height:1.7}
+.g4 .gcsda-record-list .g4-event h3{font-size:clamp(19px,2vw,23px);line-height:1.6;overflow-wrap:anywhere}
+.g4 .gcsda-record-list .g4-event p{margin:12px 0 0}
+.g4 .gcsda-record-list .g4-badge{white-space:nowrap;font-size:12px;line-height:1.45}
+.g4 .gcsda-record-actions{margin-top:24px}
+.g4 .gcsda-record-actions a{display:inline-flex;align-items:center;border:1px solid var(--gold);padding:12px 19px;color:var(--gold2);text-decoration:none;font-size:14px}
+.g4 .gcsda-record-actions a:hover,.g4 .gcsda-record-actions a:focus-visible{background:var(--soft);text-decoration:underline}
+.g4 .gcsda-charter-toc{display:flex;flex-wrap:wrap;gap:10px;margin:27px 0 48px}
+.g4 .gcsda-charter-toc a{display:inline-block;padding:10px 15px;border:1px solid var(--line);color:var(--gold2);background:var(--surface);text-decoration:none;font:400 14px/1.6 "Noto Serif TC",Georgia,serif}
+.g4 .gcsda-charter-toc a:hover,.g4 .gcsda-charter-toc a:focus-visible{border-color:var(--gold2);text-decoration:underline}
+.g4 .gcsda-charter-chapter{scroll-margin-top:125px;padding:42px 0 35px;border-top:1px solid var(--line)}
+.g4 .gcsda-charter-chapter h3{margin:0 0 21px;color:var(--ink);font:400 clamp(23px,2.8vw,32px)/1.5 "Noto Serif TC",Georgia,serif}
+.g4 .gcsda-charter-article{margin:0;padding:18px 0;border-bottom:1px solid rgba(180,138,80,.17);white-space:pre-line;overflow-wrap:anywhere;color:var(--ink);font-size:16px;line-height:2.05;letter-spacing:.015em}
+.g4 .gcsda-charter-article:last-child{border-bottom:0}
+.g4 .gcsda-charter-text{max-width:1040px}
+.g4 .gcsda-charter-version{margin:20px 0 0;color:var(--muted);font-size:14px;line-height:1.9}
+@media(max-width:760px){
+ .g4 .gcsda-record-list .g4-event{grid-template-columns:minmax(0,1fr);gap:9px;padding:23px 0}
+ .g4 .gcsda-record-list .g4-event time{font-size:16px}
+ .g4 .gcsda-record-list .g4-event .g4-badge{justify-self:start;margin-top:4px}
+ .g4 .gcsda-charter-toc{gap:8px;margin-bottom:34px}
+ .g4 .gcsda-charter-toc a{font-size:13px;padding:9px 12px}
+ .g4 .gcsda-charter-chapter{padding:32px 0 24px;scroll-margin-top:105px}
+ .g4 .gcsda-charter-article{font-size:15px;line-height:1.95}
+}
