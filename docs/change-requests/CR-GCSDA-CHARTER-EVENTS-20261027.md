@@ -13,4 +13,11 @@
 - Assets: Existing approved assets only. No new photographs or logos.
 - Evidence limitation: Supplied charter text and activity names/dates are owner-provided; original signed charter, government correspondence and complete meeting minutes were not attached to this request. The website does not claim to display those underlying instruments.
 - Acceptance: 6 headings / 38 clauses in DOM; 8 unique dated records; date semantics (2025/2026) and exact ROC labels; `/charter` reachable from `/events`; desktop and mobile layout; build passes; live alias redeployed and independently verified.
-- Deploy / QA: PENDING verification.
+- Implementation branch: `gcsda-release-20261005`; code commit `28c8ca4a0a2e0bff97e073d1323b79d5a9c7e25a`.
+- Live branch deployment verified: `dpl_2Bx1dQLUr36Ss2gmZDjjb3LMLNGe` (`READY`) on `gcsda-governance.vercel.app`.
+- Live responses: `/events` and `/charter` HTTP 200, page title and canonical route verified.
+- Bundle integrity: `index-X63t12pV.js` has all 118 nonblank lines of the 6-chapter/38-article charter and 8/8 distinct milestone IDs; CSS `index-qt6U3LC8.css` includes scoped charter/timeline selectors.
+- Source verification: 6 chapter headings; article counts per chapter 6/9/12/5/3/3; first and last articles exact; 8 unique events.
+- Browser DOM / visual QA: NOT RUN — dedicated browser automation could not start owing to insufficient account credits. No visual/accessibility PASS is claimed.
+- Current status: CONTENT DEPLOYED / SOURCE & BUNDLE CHECKS PASS / BROWSER QA OPEN.
+
