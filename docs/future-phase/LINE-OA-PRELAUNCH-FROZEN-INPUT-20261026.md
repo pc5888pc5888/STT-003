@@ -1,8 +1,9 @@
 # LINE OA PRE-LAUNCH FROZEN INPUT — 2026-10-26
 
-STATUS: FUTURE_PHASE_PREP_LOCKED
-FORMAL_LINE_BUILD: HOLD
+STATUS: ACTIVE_BUILD_COPY_LOCKED
+FORMAL_LINE_BUILD: ACTIVE
 LIVE_RELEASE: HOLD
+WEBSITE_GATE: BUILD_LOCKED / QA_PASS — SATISFIED
 
 ## Purpose
 
@@ -75,7 +76,7 @@ Owner-review candidates remain:
 State:
 PENDING_OWNER_VISUAL_APPROVAL
 
-Do not promote or publish until WEBSITE_STATUS = QA_PASS / BUILD_LOCKED and explicit owner visual approval exists.
+Website gate is satisfied. Do not promote or publish until explicit owner visual approval exists and the remaining release gates pass.
 
 ## Machine-readable source
 
@@ -83,9 +84,9 @@ Do not promote or publish until WEBSITE_STATUS = QA_PASS / BUILD_LOCKED and expl
 
 ## Current release blockers
 
-1. Website BUILD_LOCK / QA_PASS
-2. owner visual approval
-3. secure Messaging API credentials
-4. authorized owner user IDs
-5. GCSDA membership real POST E2E evidence
+1. owner visual approval
+2. secure Messaging API credentials
+3. authorized owner user IDs
+4. GCSDA membership real POST E2E evidence
+5. LINE Manager publication evidence
 6. iOS / Android release evidence
