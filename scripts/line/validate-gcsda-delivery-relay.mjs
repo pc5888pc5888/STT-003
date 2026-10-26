@@ -2,7 +2,8 @@ import fs from "node:fs";
 const src=fs.readFileSync("api/internal/gcsda-membership-delivery.ts","utf8");
 const required=[
   "OIDC_GCSDA_MEMBERSHIP_RELAY",
-  "owner:pc5888pc5888s-projects:project:stt-003:environment:preview",
+  "EXPECTED_SUBJECT",
+  "environment:preview",
   "RESEND_API_KEY",
   "[GCSDA 會員資格申請]",
   "【GCSDA｜會員資格申請】",
