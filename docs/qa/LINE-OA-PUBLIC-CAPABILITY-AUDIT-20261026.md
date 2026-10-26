@@ -1,9 +1,11 @@
 # LINE OA PUBLIC CAPABILITY AUDIT — 2026-10-26
 
-STATUS: CURRENT PUBLIC-ENDPOINT EVIDENCE  
-LIVE LINE RELEASE: HOLD
+STATUS: ACTIVE_BUILD
+WEBSITE_GATE: PASS
+LIVE_RELEASE: HOLD
+LATEST_AUDIT_UTC: 2026-10-26T07:54:09Z
 
-This audit records only public capability flags and environment-variable presence by key. No secret value was read into this document.
+No secret value was read or stored.
 
 ## STT website intake
 
@@ -31,57 +33,31 @@ Observed:
 - deliveryConfigured = true
 - acceptsFiles = false
 
-Environment-name audit:
-- GCSDA_MEMBERSHIP_EMAIL exists for preview branch gcsda-release-20261005
-- RESEND_API_KEY exists for production
-- secret values were not decrypted or recorded
-
 Judgment:
-The earlier blocker "formal membership recipient missing" is no longer accurate.
-GCSDA membership delivery is configured through the existing recipient and FormSubmit fallback.
-A real POST E2E delivery test is still required before BUILD_LOCK / channel release.
+GCSDA delivery capability is configured. A real controlled POST E2E delivery test remains required before live LINE release.
 
-## STT LINE webhook
+## LINE webhooks
 
-Endpoint:
-https://stt-003.vercel.app/api/line/stt-webhook
-
-Observed:
+STT:
+- endpoint exists
 - HTTP 200
 - configured = false
 
-Judgment:
-Webhook code exists, but production credentials are not currently bound. This is correct while LINE remains HOLD.
-
-## GCSDA LINE webhook
-
-Endpoint:
-https://gcsda-governance.vercel.app/api/line/gcsda-webhook
-
-Observed:
+GCSDA:
+- endpoint exists
 - HTTP 200
 - configured = false
 
-Judgment:
-Webhook code exists, but credentials are not currently bound. This is correct while LINE remains HOLD.
+configured=false is expected until secure credential binding.
 
-## Attribution
+## Remaining blockers
 
-Code audit confirms:
-- STT /start sends source_channel, source_account, landing_route, utm_source, utm_medium, utm_campaign
-- STT backend validates attribution limits and source_account=stt
-- GCSDA /membership sends the same privacy-minimized attribution fields
-- GCSDA backend validates source_account=gcsda and records the attribution in delivery content
+- owner visual approval for both candidates
+- final release PNG promotion
+- STT token / secret / owner user ID
+- GCSDA token / secret / owner user ID
+- real GCSDA membership POST E2E evidence
+- LINE Manager publication
+- iOS / Android mobile E2E
 
-## Current blockers after this audit
-
-Still blocked:
-- WEBSITE_STATUS != QA_PASS / BUILD_LOCKED
-- final Rich Menu release PNGs not promoted
-- explicit owner visual approval not recorded for each candidate
-- LINE STT token / secret / owner user ID not bound
-- LINE GCSDA token / secret / owner user ID not bound
-- real GCSDA membership POST E2E not yet evidenced
-- mobile Rich Menu E2E not yet executed
-
-No live LINE Manager publication is authorized.
+WEBSITE BUILD_LOCKED / QA_PASS is satisfied and is no longer a blocker.
