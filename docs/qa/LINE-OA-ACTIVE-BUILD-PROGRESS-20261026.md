@@ -45,3 +45,16 @@ Audit: 2026-10-26T07:54:09Z
 - npm run line:release:check
 
 The release check is expected to remain blocked until real release inputs exist.
+
+
+## Additional implementation completed
+
+These items are implemented but do not change the strict 9-workstream release-gate count:
+
+- STT deterministic text router implemented in api/line/stt-webhook.ts
+- STT attachment sensitive-data guard implemented
+- STT webhook signature verification remains mandatory
+- release message registry expanded to the full governed auto-reply matrix
+- generative case-specific answering remains prohibited
+
+GCSDA webhook implementation is tracked separately on the GCSDA release branch.

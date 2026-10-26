@@ -1,10 +1,10 @@
 # LINE OA MESSAGE AUTOMATION SPEC — 2026-10-26
 
-STATUS: FUTURE_PHASE_INPUT ONLY
-LIVE RELEASE: HOLD UNTIL WEBSITE_STATUS = QA_PASS / BUILD_LOCKED
-SCOPE: non-live profile/message/routing preparation only
+STATUS: ACTIVE_BUILD IMPLEMENTATION SPEC
+WEBSITE GATE: QA_PASS / BUILD_LOCKED — SATISFIED\nLIVE RELEASE: HOLD UNTIL REMAINING RELEASE GATES PASS
+SCOPE: formal deterministic routing implementation; live credential binding/publication remains gated
 
-This specification continues the existing governed LINE package. It does not authorize any live LINE Manager edit, webhook credential binding, rich-menu publication or automated outbound campaign.
+This specification governs the active-build implementation for both LINE lanes. Deterministic webhook routing may be implemented and deployed in fail-closed mode; live LINE Manager publication, production credential binding and outbound campaigns remain release-gated.
 
 ## 1. Governing principle
 
@@ -133,7 +133,7 @@ utm_campaign=gcsda_autoreply
 
 ## 9. Sensitive-data guard
 
-Future webhook behavior:
+Active-build webhook behavior:
 
 ### Text
 If a user starts sending detailed case facts, the system may acknowledge receipt but must route to the formal website flow rather than solicit additional confidential detail in chat.
@@ -162,7 +162,7 @@ The automatic layer must not:
 
 When a user requests human contact, route to the applicable formal website process first.
 
-## 11. Webhook event policy for future implementation
+## 11. Webhook event policy — active implementation
 
 STT:
 - follow -> STT welcome message
@@ -250,5 +250,5 @@ RICH MENU ACTION MAP: PREPARED
 RICH MENU FINAL PNG: PENDING OWNER VISUAL APPROVAL
 AUTO-REPLY MATRIX: PREPARED
 SENSITIVE-DATA GUARD: PREPARED
-WEBHOOK LIVE ACTIVATION: HOLD
+WEBHOOK IMPLEMENTATION: BUILT / LIVE CREDENTIAL ACTIVATION: HOLD
 LINE MANAGER PUBLICATION: HOLD

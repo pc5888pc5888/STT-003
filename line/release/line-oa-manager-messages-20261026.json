@@ -1,6 +1,6 @@
 {
   "version": "20261026_MANAGER_READY_V1",
-  "status": "MANAGER_READY_NO_LIVE_WRITE",
+  "status": "ACTIVE_BUILD_MANAGER_READY_NO_LIVE_WRITE",
   "stt": {
     "displayName": "STT Governance",
     "lineId": "@783xkknh",
@@ -10,39 +10,93 @@
     "keywords": [
       {
         "keywords": [
+          "問題",
+          "怎麼開始",
+          "不知道從哪開始",
+          "我適合嗎"
+        ],
+        "url": "https://stt-003.vercel.app/problems?utm_source=line&utm_medium=oa&utm_campaign=stt_autoreply"
+      },
+      {
+        "keywords": [
           "開始",
+          "送件",
+          "正式受理",
           "治理判讀",
           "受理"
         ],
-        "url": "https://stt-003.vercel.app/start?utm_source=line&utm_medium=oa&utm_campaign=stt_keyword"
+        "url": "https://stt-003.vercel.app/start?utm_source=line&utm_medium=oa&utm_campaign=stt_autoreply"
       },
       {
         "keywords": [
-          "問題",
-          "我適合嗎"
-        ],
-        "url": "https://stt-003.vercel.app/problems?utm_source=line&utm_medium=oa&utm_campaign=stt_keyword"
-      },
-      {
-        "keywords": [
+          "判讀",
           "方法",
+          "STT 如何判讀",
           "怎麼判讀"
         ],
-        "url": "https://stt-003.vercel.app/how-stt-works?utm_source=line&utm_medium=oa&utm_campaign=stt_keyword"
+        "url": "https://stt-003.vercel.app/how-stt-works?utm_source=line&utm_medium=oa&utm_campaign=stt_autoreply"
       },
       {
         "keywords": [
+          "委任",
+          "合作",
+          "正式合作",
+          "治理介入"
+        ],
+        "url": "https://stt-003.vercel.app/engagement?utm_source=line&utm_medium=oa&utm_campaign=stt_autoreply"
+      },
+      {
+        "keywords": [
+          "莊鈞翔",
           "莊博士",
+          "創辦人",
           "執行長"
         ],
-        "url": "https://stt-003.vercel.app/eric-chuang?utm_source=line&utm_medium=oa&utm_campaign=stt_keyword"
+        "url": "https://stt-003.vercel.app/eric-chuang?utm_source=line&utm_medium=oa&utm_campaign=stt_autoreply"
       },
       {
         "keywords": [
           "研究",
-          "出版"
+          "文章",
+          "出版",
+          "著作"
         ],
-        "url": "https://stt-003.vercel.app/insights?utm_source=line&utm_medium=oa&utm_campaign=stt_keyword"
+        "url": "https://stt-003.vercel.app/insights?utm_source=line&utm_medium=oa&utm_campaign=stt_autoreply"
+      },
+      {
+        "keywords": [
+          "關於 STT",
+          "STT 是什麼"
+        ],
+        "url": "https://stt-003.vercel.app/about?utm_source=line&utm_medium=oa&utm_campaign=stt_autoreply"
+      },
+      {
+        "keywords": [
+          "機構合作",
+          "律師",
+          "會計",
+          "信託",
+          "家族辦公室"
+        ],
+        "url": "https://stt-003.vercel.app/institutions?utm_source=line&utm_medium=oa&utm_campaign=stt_autoreply"
+      },
+      {
+        "keywords": [
+          "隱私",
+          "資料",
+          "個資"
+        ],
+        "url": "https://stt-003.vercel.app/privacy?utm_source=line&utm_medium=oa&utm_campaign=stt_autoreply"
+      },
+      {
+        "keywords": [
+          "法律",
+          "稅務",
+          "投資",
+          "醫療",
+          "專業意見"
+        ],
+        "url": "https://stt-003.vercel.app/professional-boundary?utm_source=line&utm_medium=oa&utm_campaign=stt_autoreply"
       }
     ]
   },
@@ -56,37 +110,69 @@
       {
         "keywords": [
           "入會",
-          "會員"
+          "會員",
+          "申請"
         ],
-        "url": "https://gcsda-governance.vercel.app/membership?utm_source=line&utm_medium=oa&utm_campaign=gcsda_keyword"
+        "url": "https://gcsda-governance.vercel.app/membership?utm_source=line&utm_medium=oa&utm_campaign=gcsda_autoreply"
       },
       {
         "keywords": [
           "活動",
-          "大會"
+          "大會",
+          "講座"
         ],
-        "url": "https://gcsda-governance.vercel.app/events?utm_source=line&utm_medium=oa&utm_campaign=gcsda_keyword"
-      },
-      {
-        "keywords": [
-          "研究",
-          "知識"
-        ],
-        "url": "https://gcsda-governance.vercel.app/knowledge?utm_source=line&utm_medium=oa&utm_campaign=gcsda_keyword"
+        "url": "https://gcsda-governance.vercel.app/events?utm_source=line&utm_medium=oa&utm_campaign=gcsda_autoreply"
       },
       {
         "keywords": [
           "章程",
           "公告"
         ],
-        "url": "https://gcsda-governance.vercel.app/charter?utm_source=line&utm_medium=oa&utm_campaign=gcsda_keyword"
+        "url": "https://gcsda-governance.vercel.app/charter?utm_source=line&utm_medium=oa&utm_campaign=gcsda_autoreply"
       },
       {
         "keywords": [
-          "理事長",
-          "莊博士"
+          "莊鈞翔",
+          "莊博士",
+          "創會理事長"
         ],
-        "url": "https://gcsda-governance.vercel.app/founder-chairman?utm_source=line&utm_medium=oa&utm_campaign=gcsda_keyword"
+        "url": "https://gcsda-governance.vercel.app/founder-chairman?utm_source=line&utm_medium=oa&utm_campaign=gcsda_autoreply"
+      },
+      {
+        "keywords": [
+          "組織治理",
+          "理監事",
+          "權責"
+        ],
+        "url": "https://gcsda-governance.vercel.app/governance?utm_source=line&utm_medium=oa&utm_campaign=gcsda_autoreply"
+      },
+      {
+        "keywords": [
+          "聯席會",
+          "策略治理"
+        ],
+        "url": "https://gcsda-governance.vercel.app/council?utm_source=line&utm_medium=oa&utm_campaign=gcsda_autoreply"
+      },
+      {
+        "keywords": [
+          "研究",
+          "知識"
+        ],
+        "url": "https://gcsda-governance.vercel.app/knowledge?utm_source=line&utm_medium=oa&utm_campaign=gcsda_autoreply"
+      },
+      {
+        "keywords": [
+          "關於學會",
+          "GCSDA 是什麼"
+        ],
+        "url": "https://gcsda-governance.vercel.app/about?utm_source=line&utm_medium=oa&utm_campaign=gcsda_autoreply"
+      },
+      {
+        "keywords": [
+          "STT",
+          "STT Governance"
+        ],
+        "url": "https://stt-003.vercel.app/?utm_source=line&utm_medium=oa&utm_campaign=gcsda_autoreply"
       }
     ]
   }

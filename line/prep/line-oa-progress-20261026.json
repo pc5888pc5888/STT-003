@@ -19,23 +19,67 @@
     "percent": 100
   },
   "workstreams": [
-    {"id":"governance_and_copy_lock","status":"PASS"},
-    {"id":"website_gate","status":"PASS"},
-    {"id":"route_and_action_map_qa","status":"PASS"},
-    {"id":"owner_review_candidate_integrity","status":"PASS"},
-    {"id":"owner_visual_approval_and_release_png_promotion","status":"PENDING"},
-    {"id":"secure_credentials_and_owner_binding","status":"PENDING"},
-    {"id":"gcsda_membership_real_post_e2e","status":"PENDING"},
-    {"id":"line_manager_publication","status":"PENDING"},
-    {"id":"mobile_e2e","status":"PENDING"}
+    {
+      "id": "governance_and_copy_lock",
+      "status": "PASS"
+    },
+    {
+      "id": "website_gate",
+      "status": "PASS"
+    },
+    {
+      "id": "route_and_action_map_qa",
+      "status": "PASS"
+    },
+    {
+      "id": "owner_review_candidate_integrity",
+      "status": "PASS"
+    },
+    {
+      "id": "owner_visual_approval_and_release_png_promotion",
+      "status": "PENDING"
+    },
+    {
+      "id": "secure_credentials_and_owner_binding",
+      "status": "PENDING"
+    },
+    {
+      "id": "gcsda_membership_real_post_e2e",
+      "status": "PENDING"
+    },
+    {
+      "id": "line_manager_publication",
+      "status": "PENDING"
+    },
+    {
+      "id": "mobile_e2e",
+      "status": "PENDING"
+    }
   ],
   "latestVerification": {
     "auditedAtUtc": "2026-10-26T07:54:09Z",
     "routeHealth": "12/12 HTTP 200",
-    "sttIntake": {"http":200,"resendConfigured":true,"acceptsFiles":false},
-    "gcsdaMembership": {"http":200,"resendConfigured":false,"recipientConfigured":true,"formSubmitConfigured":true,"deliveryConfigured":true,"acceptsFiles":false},
-    "sttWebhook": {"http":200,"configured":false},
-    "gcsdaWebhook": {"http":200,"configured":false}
+    "sttIntake": {
+      "http": 200,
+      "resendConfigured": true,
+      "acceptsFiles": false
+    },
+    "gcsdaMembership": {
+      "http": 200,
+      "resendConfigured": false,
+      "recipientConfigured": true,
+      "formSubmitConfigured": true,
+      "deliveryConfigured": true,
+      "acceptsFiles": false
+    },
+    "sttWebhook": {
+      "http": 200,
+      "configured": false
+    },
+    "gcsdaWebhook": {
+      "http": 200,
+      "configured": false
+    }
   },
   "releaseBlockers": [
     "owner visual approval for both Rich Menu candidates",
@@ -43,5 +87,14 @@
     "real GCSDA membership POST E2E evidence",
     "LINE Manager publication",
     "iOS and Android mobile E2E"
-  ]
+  ],
+  "implementation": {
+    "deterministicWebhookRouting": {
+      "stt": "IMPLEMENTED_ON_MAIN",
+      "gcsda": "PENDING_BRANCH_PATCH",
+      "mode": "DETERMINISTIC_ROUTING_ONLY",
+      "attachmentGuard": true,
+      "signatureVerification": true
+    }
+  }
 }
