@@ -101,7 +101,7 @@ function PublicShell({ children }: ShellProps) {
       <a className="site-skip-link" href="#main-content">跳至主要內容</a>
       <header className="stt-g0-header">
         <div className="stt-g0-header__inner">
-          <Link to="/" className="stt-g0-brand" aria-label="STT Governance 首頁"><img src={STT_OFFICIAL_LOGO_SRC} alt="STT Governance" /></Link>
+          <Link to="/" className="stt-g0-brand" aria-label="策略智庫智慧治理｜STT Governance 首頁"><img src={STT_OFFICIAL_LOGO_SRC} alt="策略智庫智慧治理｜STT Governance" /></Link>
           <nav className="stt-g0-desktop-nav" aria-label="主要導覽">
             {PRIMARY_NAVIGATION.map((item) => (
               <NavLink key={item.path} to={item.path} reloadDocument={item.path === HUMANISTIC_INTERVIEW_URL}
@@ -134,12 +134,12 @@ function PublicShell({ children }: ShellProps) {
       <main id="main-content" tabIndex={-1} className="stt-g0-main">{children}</main>
       <footer className="stt-g0-footer">
         <div className="stt-g0-footer__inner">
-          <div className="stt-g0-footer__brand"><strong>STT Governance</strong><span>治理判讀與制度設計</span></div>
+          <div className="stt-g0-footer__brand"><strong>策略智庫智慧治理｜STT Governance</strong><span>治理判讀與制度設計</span></div>
           <nav className="stt-g0-footer__links" aria-label="頁尾導覽">
             <Link to="/eric-chuang">莊鈞翔博士</Link><Link to="/institutions">機構合作</Link><Link to="/insights">研究與出版</Link>
             <Link to="/books">電子書與出版</Link><Link to="/columns/legal">法律專欄</Link><Link to="/columns/humanistic">人文地景產專欄</Link>
             <a href={HUMANISTIC_INTERVIEW_URL}>受訪者專區｜二十題訪談準備</a>
-            <a href={GCSDA_URL} target="_blank" rel="noreferrer">中華企業策略永續發展學會｜GCSDA ↗</a>
+            <a href={GCSDA_URL} target="_blank" rel="noreferrer">GCSDA｜中華企業策略永續發展學會 ↗</a>
             <Link to="/privacy">隱私</Link><Link to="/professional-boundary">專業服務邊界</Link>
           </nav>
         </div>
