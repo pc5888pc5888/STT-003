@@ -14,7 +14,8 @@
     "line:candidate:promote:gcsda": "node scripts/line/promote-approved-candidate.mjs gcsda",
     "line:capability:audit": "node scripts/line/audit-public-capabilities.mjs",
     "line:static:check": "node scripts/line/check-static-readiness.mjs",
-    "line:prep:lock": "node scripts/line/check-prep-lock.mjs"
+    "line:prep:lock": "node scripts/line/check-prep-lock.mjs",
+    "line:status": "node scripts/line/check-progress.mjs"
   },
   "dependencies": {
     "@base-ui/react": "^1.4.1",
