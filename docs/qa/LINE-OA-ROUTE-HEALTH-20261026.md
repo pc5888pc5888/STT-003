@@ -1,28 +1,38 @@
-# LINE OA ROUTE HEALTH & PREP-LOCK QA — 2026-10-26
+# LINE OA ROUTE HEALTH & ACTIVE-BUILD QA — 2026-10-26
 
-STATUS: FUTURE_PHASE_PREP
-LIVE RELEASE: HOLD
-WEBSITE GATE: NOT YET QA_PASS / BUILD_LOCKED
+STATUS: ACTIVE_BUILD
+LIVE_RELEASE: HOLD
+WEBSITE_GATE: BUILD_LOCKED / QA_PASS — SATISFIED
+LATEST_AUDIT_UTC: 2026-10-26T07:54:09Z
 
-## Route health verified
+## Route health
 
-All twelve Rich Menu website destinations were checked against current production and returned HTTP 200 with HTML content.
+All 12 governed Rich Menu destinations were rechecked against production and returned HTTP 200.
 
-### STT
-- /start — 200
-- /problems — 200
-- /how-stt-works — 200
-- /eric-chuang — 200
-- /insights — 200
-- /about — 200
+STT:
+- /start
+- /problems
+- /how-stt-works
+- /eric-chuang
+- /insights
+- /about
 
-### GCSDA
-- /about — 200
-- /founder-chairman — 200
-- /membership — 200
-- /events — 200
-- /knowledge — 200
-- /charter — 200
+GCSDA:
+- /about
+- /founder-chairman
+- /membership
+- /events
+- /knowledge
+- /charter
+
+## Current capability flags
+
+- STT intake: HTTP 200 / resendConfigured=true / acceptsFiles=false
+- GCSDA membership: HTTP 200 / recipientConfigured=true / formSubmitConfigured=true / deliveryConfigured=true / acceptsFiles=false
+- STT LINE webhook: HTTP 200 / configured=false
+- GCSDA LINE webhook: HTTP 200 / configured=false
+
+Webhook configured=false is expected until secure credential binding.
 
 ## Identity lock
 
@@ -36,19 +46,16 @@ GCSDA:
 - CHUANG CHUN HSIANG Ph.D.
 - 中華企業策略永續發展學會｜創會理事長
 
-## Machine-readable copy source
+## Remaining blockers
 
-`line/prep/line-oa-copy-lock-20261026.json`
+Website is no longer a blocker.
 
-This file is the single machine-readable input for future LINE profile/welcome/default-reply identity copy.
+1. owner visual approval for both Rich Menu candidates
+2. final release PNG promotion after approval
+3. secure token / secret / owner user ID for both accounts
+4. real GCSDA membership POST E2E evidence
+5. LINE Manager publication
+6. iOS / Android mobile E2E
 
-It does not authorize live publication.
-
-## Release remains blocked by
-
-- WEBSITE_STATUS != QA_PASS / BUILD_LOCKED
-- owner Rich Menu visual approval not yet promoted to release PNG
-- LINE credentials not bound
-- owner user IDs not bound
-- GCSDA real membership POST E2E evidence pending
-- iOS / Android live tap-path evidence pending
+Machine-readable state:
+line/prep/line-oa-progress-20261026.json
