@@ -1,6 +1,7 @@
 # STT Governance — LINE Official Activation Runbook v1.0
 
 Status: FUTURE_PHASE_PREP  
+Formal activation: HOLD  
 Live execution: PROHIBITED UNTIL WEBSITE QA_PASS / BUILD_LOCKED  
 Date: 2026-10-26
 
