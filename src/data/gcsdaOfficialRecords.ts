@@ -208,7 +208,7 @@ export const gcsdaHistoricalEvents = [
     "iso": "2026-08-16",
     "title": "中華企業策略永續發展學會第一屆第二次會員大會",
     "category": "會員大會",
-    "detail": ""
+    "detail": "既有網站正式簡報資料記載：地點為沐青餐廳，本次大會由副理事長范英峰主持；該簡報不代替正式議事紀錄。"
   },
   {
     "id": "third-board-supervisor-20260816",
