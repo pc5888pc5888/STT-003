@@ -1,7 +1,7 @@
 {
-  "status": "FUTURE_PHASE_PREVIEW_NOT_FOR_RELEASE",
+  "status": "ACTIVE_BUILD_OWNER_REVIEW",
   "version": "20261026",
-  "live_release": "PROHIBITED_WHILE_LINE_HOLD",
+  "live_release": "HOLD_UNTIL_REMAINING_RELEASE_GATES_PASS",
   "source_assets": {
     "stt": {
       "file": "LINE_STT_6GRID_BG_LOCKED_20261026.png",
@@ -49,7 +49,7 @@
   "release_package": {
     "stt_json": "line/release/stt-richmenu-20261026.json",
     "gcsda_json": "line/release/gcsda-richmenu-20261026.json",
-    "stt_png": "PENDING_OWNER_APPROVAL",
-    "gcsda_png": "PENDING_OWNER_APPROVAL"
+    "stt_png": "PENDING_OWNER_VISUAL_APPROVAL",
+    "gcsda_png": "PENDING_OWNER_VISUAL_APPROVAL"
   }
 }

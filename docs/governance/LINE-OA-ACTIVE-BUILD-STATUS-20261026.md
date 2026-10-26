@@ -1,42 +1,22 @@
 # LINE OFFICIAL ACCOUNT CURRENT GOVERNANCE STATUS — 2026-10-26
 
-LINE_STATUS = FUTURE_PHASE_PREP
-FORMAL_LINE_BUILD = HOLD
+LINE_PHASE = ACTIVE_BUILD
+FORMAL_LINE_BUILD = ACTIVE
 LIVE_RELEASE = HOLD
-WEBSITE_PHASE = ACTIVE_BUILD
+WEBSITE_STATUS = QA_PASS / BUILD_LOCKED
+WEBSITE_GATE = SATISFIED
 
-## Current project override
+## Authority
 
-This document supersedes any earlier LINE_ACTIVE_BUILD interpretation.
+The project owner has formally accepted the website and authorized entry into LINE Official Account formal construction.
 
-Under the current Project Instructions:
-- WEBSITE remains the active construction priority.
-- LINE Official Account formal modification remains HOLD until WEBSITE_STATUS = QA_PASS / BUILD_LOCKED.
-- Only non-live preparation is authorized.
+Current website acceptance evidence:
+- docs/governance/WEBSITE-BUILD-LOCK-20261025.md
+- WEBSITE_STATUS = BUILD_LOCKED
+- QA_STATUS = PASS
+- LINE_OFFICIAL_ACCOUNT = ACTIVE_BUILD
 
-## Authorized work while HOLD
-
-Allowed:
-- account identity lock
-- website-derived CTA / route mapping
-- Rich Menu information architecture
-- owner-review candidate preparation
-- welcome-message drafting
-- deterministic auto-reply routing
-- sensitive-data guard specification
-- release / rollback documentation
-- credential contract design
-- offline/static QA
-
-Not allowed:
-- LINE Manager publication
-- live Rich Menu replacement
-- live account profile change
-- live welcome-message change
-- production credential binding
-- live webhook activation
-- LINE Pay activation
-- outbound campaign launch
+This document supersedes the erroneous FUTURE_PHASE_PREP / FORMAL_LINE_BUILD=HOLD state previously recorded here.
 
 ## Institutional lanes
 
@@ -53,7 +33,7 @@ Founder identity lock:
 CHUANG CHUN HSIANG Ph.D.
 STT Governance 創辦人暨執行長
 
-Formal website intake remains:
+Formal website intake:
 /start
 
 Rich Menu IA:
@@ -77,7 +57,7 @@ Founder identity lock:
 CHUANG CHUN HSIANG Ph.D.
 中華企業策略永續發展學會｜創會理事長
 
-Formal membership route remains:
+Formal membership route:
 /membership
 
 Rich Menu IA:
@@ -88,41 +68,48 @@ Rich Menu IA:
 5. 知識與研究
 6. 章程與公告
 
-## Candidate visual state
+## Current active-build progress
 
-STT:
-line/candidates/stt-richmenu-20261026-owner-review.png
-Status: PENDING_OWNER_VISUAL_APPROVAL
+PREP_PACKAGE = 100% (4/4)
+ACTIVE_BUILD = 44% (4/9)
 
-GCSDA:
-line/candidates/gcsda-richmenu-20261026-owner-review.png
-Status: PENDING_OWNER_VISUAL_APPROVAL
+PASS:
+1. governance / identity / copy lock
+2. website release gate
+3. Rich Menu action-map + 12-route health QA
+4. owner-review candidate integrity
 
-Do not promote either candidate into release assets while LINE remains HOLD.
+PENDING:
+5. owner visual approval + final PNG promotion
+6. secure Messaging API credentials + owner user ID binding
+7. real GCSDA membership POST E2E
+8. LINE Manager publication
+9. iOS / Android mobile E2E
 
-## Current preparation package
+## Live-release boundary
+
+Formal construction is active. Live publication remains fail-closed until the remaining release gates have real evidence.
+
+Required before live release:
+- explicit owner visual approval of final Rich Menu for each OA
+- secure account-specific Channel access token / Channel secret
+- correct owner user ID binding per OA
+- real GCSDA membership POST E2E evidence
+- LINE Manager publication evidence
+- iOS and Android six-cell tap-path validation
+
+No credential value is to be guessed or committed.
+
+## Current implementation package
 
 Primary references:
-- docs/future-phase/LINE-OA-INTEGRATION-BLUEPRINT-20261022.md
-- docs/future-phase/LINE-OA-MESSAGE-AUTOMATION-SPEC-20261026.md
-- docs/future-phase/LINE-OA-SIX-GRID-ASSET-LOCK-20261026.md
-- docs/future-phase/LINE-OA-OWNER-REVIEW-CANDIDATES-20261026.md
-- docs/line/LINE-MANAGER-FIELD-MAP-20261025.md
-- docs/line/STT-LINE-OA-RELEASE-PACKAGE-20261025.md
-- docs/line/GCSDA-LINE-OA-RELEASE-PACKAGE-20261025.md
-- docs/qa/LINE-OA-FUTURE-PACKAGE-READINESS-20261026.md
-
-## Release gate
-
-Formal LINE build may begin only after:
-WEBSITE_STATUS = QA_PASS / BUILD_LOCKED
-
-Live release additionally requires:
-- owner visual approval of final Rich Menu for the relevant OA
-- secure account-specific credentials
-- owner user ID binding
-- webhook signature verification
-- mobile tap-path validation
-- institution-specific E2E delivery evidence
+- docs/governance/LINE-PHASE-ACTIVATION-20261025.md
+- docs/governance/WEBSITE-BUILD-LOCK-20261025.md
+- docs/qa/LINE-OA-ACTIVE-BUILD-PROGRESS-20261026.md
+- line/prep/line-oa-progress-20261026.json
+- line/prep/line-oa-copy-lock-20261026.json
+- line/release/LINE-OA-MANAGER-IMPLEMENTATION-PACKAGE-20261026.md
+- docs/line/LINE-OA-RELEASE-RUNBOOK-20261026.md
+- docs/line/LINE-OA-CREDENTIAL-CONTRACT-20261026.md
 
 No LINE conversation constitutes STT formal engagement acceptance or GCSDA membership approval.
