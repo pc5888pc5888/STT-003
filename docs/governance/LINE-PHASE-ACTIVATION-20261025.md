@@ -1,10 +1,11 @@
 # LINE OFFICIAL ACCOUNT PHASE ACTIVATION — 2026-10-25
 
-CURRENT STATUS OVERRIDE — 2026-10-26
-STATUS = HOLD / FUTURE_PHASE_PREPARATION_ONLY
-GATE = WEBSITE BUILD_LOCKED / QA_PASS
+CURRENT STATUS — 2026-10-26
+LINE_PHASE = ACTIVE_BUILD
+LIVE_RELEASE = HOLD
+GATE = WEBSITE BUILD_LOCKED / QA_PASS — SATISFIED
 
-The 2026-10-25 activation package is retained as historical preparation. Under the current Project Instructions and the owner's 2026-10-26 asset-lock instruction, no LINE Manager release, live rich-menu replacement, welcome-message publication, webhook credential activation, or account-profile modification is authorized yet.
+The website prerequisite is satisfied. LINE implementation may continue. Live LINE Manager publication remains blocked by owner visual approval, credentials, GCSDA POST E2E evidence and mobile E2E gates.
 
 ## Institutional separation
 

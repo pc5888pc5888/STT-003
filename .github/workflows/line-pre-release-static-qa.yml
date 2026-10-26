@@ -1,0 +1,32 @@
+name: LINE pre-release static QA
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "line/**"
+      - "scripts/line/**"
+      - "docs/line/**"
+      - "docs/future-phase/LINE-OA-**"
+      - "docs/governance/WEBSITE-BUILD-LOCK-20261025.md"
+      - "docs/governance/LINE-OA-ACTIVE-BUILD-STATUS-20261026.md"
+      - ".github/workflows/line-pre-release-static-qa.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  static-line-gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Static release readiness
+        run: node scripts/line/check-static-readiness.mjs
+      - name: Future package integrity
+        run: node scripts/line/verify-future-package.mjs
+      - name: Public capability audit
+        run: node scripts/line/audit-public-capabilities.mjs
