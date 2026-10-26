@@ -241,6 +241,12 @@ export default async function handler(req: any, res: any) {
     const result = await upstream.json().catch(() => ({})) as { success?: unknown; message?: unknown };
     const rejected = result.success === false || result.success === "false";
     if (!upstream.ok || rejected) {
+      console.error("GCSDA_MEMBERSHIP_FALLBACK_FAILED", JSON.stringify({
+        receiptId,
+        status: upstream.status,
+        success: result.success ?? null,
+        message: typeof result.message === "string" ? result.message.slice(0, 240) : null,
+      }));
       return json(res, 503, { ok: false, error: "Delivery unavailable", receiptId });
     }
     await sendGcsdaOwnerLineAlert(receiptId, data.name);
