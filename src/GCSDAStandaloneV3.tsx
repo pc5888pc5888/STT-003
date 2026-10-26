@@ -5,6 +5,8 @@ import { FormEvent, useEffect, useLayoutEffect, useRef, useState, type ReactNode
 import { BrowserRouter, Link, NavLink, Route, Routes, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { applyGcsdaMetadata } from "./gcsdaMetadata";
+import { gcsdaCharterChapters, gcsdaHistoricalEvents } from "./data/gcsdaOfficialRecords";
+import "./styles/gcsda-official-records.css";
 import "./styles/gcsda-accessibility.css";
 import "./styles/gcsda-founder-editorial.css";
 import gcsdaLogo0 from "./gcsda-logo-parts/part0";
@@ -63,7 +65,7 @@ const pageDescriptions:Record<string,string>={
   "/membership":"了解中華企業策略永續發展學會會員資格、會費與入會程序。",
   "/events":"查閱中華企業策略永續發展學會會員大會、理監事會與正式活動紀錄。",
   "/knowledge":"查閱中華企業策略永續發展學會之企業策略、治理、法遵、風險控管與永續知識內容。",
-  "/charter":"查閱中華企業策略永續發展學會章程摘要、法定立案資訊與正式公告原則。",
+  "/charter":"完整閱讀中華企業策略永續發展學會章程六章三十八條，及法定立案資訊與會務公告。",
   "/privacy":"中華企業策略永續發展學會網站之會員聯絡、會務與資料使用說明。",
 };
 
@@ -520,11 +522,64 @@ function Membership(){
   </div>;
 }
 
-function Events(){return <div className="g4-page"><PageHead eyebrow="ASSEMBLY & PROGRAMS" title="活動不是一次性聚會，而是學會制度運作與知識累積的正式紀錄。" lead="會員大會、理監事會、專題講座與正式交流，依可核對之會務資料建立活動檔案；沒有正式資料的活動不預先虛構。"/><section className="g4-section"><div className="g4-wrap"><div className="g4-kicker">ASSEMBLY ARCHIVE</div><h2 className="g4-title">正式活動紀錄</h2><div className="g4-event" id="assembly-20260816"><time dateTime="2026-08-16">2026.08.16</time><div><h3>第一屆第二次會員大會暨第三次理監事聯席會議</h3><p>地點｜沐青餐廳；正式簡報記載本次大會由副理事長范英峰主持。</p><p className="gcsda-source-note">資料來源：2026 年 8 月 16 日會員大會正式簡報；該簡報不代替正式議事紀錄。</p></div><span className="g4-badge">FORMAL ASSEMBLY</span></div><div className="g4-note"><h3>活動檔案原則</h3><p>正式活動紀錄保留日期、活動名稱、性質與可公開之正式資料；不以未核對的成果數字、合作名單或媒體曝光作為裝飾。</p></div></div></section></div>}
+function Events(){
+  return <div className="g4-page">
+    <PageHead eyebrow="ASSEMBLY & PROGRAMS" title="活動不是一次性聚會，而是學會制度運作與知識累積的正式紀錄。" lead="依日期公開學會籌組、章程通過、會員大會及理監事會議紀錄。行政程序與正式會議分別標示，不將尚未提供的公文或議事紀錄寫成已公開文件。"/>
+    <section className="g4-section" aria-labelledby="gcsda-events-title">
+      <div className="g4-wrap">
+        <div className="g4-kicker">INSTITUTIONAL HISTORY · ASSEMBLY ARCHIVE</div>
+        <h2 className="g4-title" id="gcsda-events-title">學會籌組、成立與歷次會議紀錄</h2>
+        <p className="gcsda-record-lead">以下依民國紀年，逐筆登載中華企業策略永續發展學會的籌組程序、章程通過紀錄、會員大會及理監事會議。相同日期的不同會議各自列示。</p>
+        <div className="gcsda-record-list">
+          {gcsdaHistoricalEvents.map(record=><article className="g4-event" id={record.id} key={record.id}>
+            <time dateTime={record.iso}>{record.date}</time>
+            <div><h3>{record.title}</h3>{record.detail?<p>{record.detail}</p>:null}</div>
+            <span className="g4-badge">{record.category}</span>
+          </article>)}
+        </div>
+        <div className="g4-note">
+          <h3>章程通過與公開資料</h3>
+          <p>本會章程經114年07月01日第一屆第一次會員大會通過，六章三十八條全文已於「章程與公告」專頁公開。准予籌組以准籌公文為準；尚未提供之原始公文、正式議事紀錄或照片，不以網站說明替代。</p>
+          <div className="gcsda-record-actions"><Link to="/charter">閱讀中華企業策略永續發展學會章程全文</Link></div>
+        </div>
+      </div>
+    </section>
+  </div>;
+}
 
 function Knowledge(){return <div className="g4-page"><PageHead eyebrow="KNOWLEDGE & RESEARCH" title="讓活動與交流沉澱為可以再次學習、引用與傳承的治理知識。" lead="本頁作為學會知識資產入口，依可公開資料整理企業策略、公司治理、法遵、風險控管與永續相關之研究、講座與治理內容。"/><section className="g4-section"><div className="g4-wrap"><div className="g4-grid">{[["01","企業策略","聚焦企業方向、資源配置、決策結構與策略實務。"],["02","治理與法遵","聚焦公司治理、權責、風險控管、法遵精神與制度運作。"],["03","永續與跨域","聚焦企業永續、跨專業交流及可被組織承接的長期治理知識。"]].map(x=><div className="g4-card" key={x[0]}><span>{x[0]}</span><h2>{x[1]}</h2><p>{x[2]}</p></div>)}</div><div className="g4-note"><h2>正式知識典藏</h2><p>《2026 永續家族治理實務實錄》為目前可直接核對之公開治理出版資料，由 STT Intelligence／STT Press 與 GCSDA 脈絡共同呈現。</p><div className="g4-actions"><a href="https://heyzine.com/flip-book/e424001f8c.html" target="_blank" rel="noreferrer">線上翻閱《2026 永續家族治理實務實錄》 ↗</a></div></div><div className="g4-note"><h2>知識紀錄原則</h2><p>研究、出版與可公開文件均以已完成且可核對之資料為準，不以虛構篇數、合作機構、研究計畫或影響力數字替代實際成果。</p></div></div></section></div>}
 
-function Charter(){return <div className="g4-page"><PageHead eyebrow="CHARTER & NOTICE" title="章程不是網站附件，而是學會權力來源、會員權利義務與制度運作的正式依據。" lead="本頁呈現可由現有會務資料確認的章程摘要與法定立案資訊；章程全文、公告與會務文件僅收錄已正式核定且可公開之版本。"/><section className="g4-section"><div className="g4-wrap"><div className="g4-list">{charterHighlights.map(([a,b])=><div className="g4-row" key={a}><b>{a}</b><div>{b}</div></div>)}</div><div className="g4-note"><h2>組織法定立案</h2><p>內政部 114/8 台內團字第 1140030747 號。</p></div><div className="g4-note"><h2>公告與正式文件</h2><p>此區只收錄已正式核定、可公開之章程、公告、會員大會或理監事會相關文件；網站說明文字不取代正式法定文件。</p></div></div></section></div>}
+function Charter(){
+  return <div className="g4-page">
+    <PageHead eyebrow="CHARTER & NOTICE" title="章程不是網站附件，而是學會權力來源、會員權利義務與制度運作的正式依據。" lead="本頁完整刊載中華企業策略永續發展學會章程第一章至第六章、第一條至第三十八條，保留本次提供之正式文字及民國紀年。"/>
+    <section className="g4-section" aria-labelledby="gcsda-charter-title">
+      <div className="g4-wrap">
+        <div className="g4-kicker">FULL INSTITUTIONAL CHARTER</div>
+        <h2 className="g4-title" id="gcsda-charter-title">中華企業策略永續發展學會章程</h2>
+        <p className="gcsda-charter-version">本章程經本會114年07月01日第一屆第一次會員大會通過。以下依章次逐條完整刊登；條文原有用字、標點及數字記法均予保留。</p>
+        <nav className="gcsda-charter-toc" aria-label="章程章節索引">
+          {gcsdaCharterChapters.map(chapter=><a href={"#"+chapter.id} key={chapter.id}>{chapter.heading}</a>)}
+        </nav>
+        <div className="gcsda-charter-text">
+          {gcsdaCharterChapters.map(chapter=><section className="gcsda-charter-chapter" id={chapter.id} key={chapter.id} aria-labelledby={chapter.id+"-heading"}>
+            <h3 id={chapter.id+"-heading"}>{chapter.heading}</h3>
+            <div>{chapter.articles.map((article,index)=><p className="gcsda-charter-article" key={chapter.id+"-"+index}>{article}</p>)}</div>
+          </section>)}
+        </div>
+      </div>
+    </section>
+    <section className="g4-section soft" aria-labelledby="gcsda-charter-additional">
+      <div className="g4-wrap">
+        <h2 className="g4-title" id="gcsda-charter-additional">章程摘要與正式資訊</h2>
+        <div className="g4-list">{charterHighlights.map(([label,description])=><div className="g4-row" key={label}><b>{label}</b><div>{description}</div></div>)}</div>
+        <div className="g4-note"><h3>組織法定立案</h3><p>內政部 114/8 台內團字第 1140030747 號。</p></div>
+        <div className="g4-note"><h3>公告與正式文件</h3><p>本頁章程全文依本次提供版本刊載。會議紀錄、公文及其他公告文件，僅在取得適合公開的正式版本後另行發布；網站說明文字不取代正式法定文件。</p>
+          <div className="gcsda-record-actions"><Link to="/events">查閱學會籌組與歷次會議紀錄</Link></div>
+        </div>
+      </div>
+    </section>
+  </div>;
+}
 
 function Privacy(){return <div className="g4-page"><PageHead eyebrow="PRIVACY" title="隱私與資料使用" lead="本頁說明學會網站的聯絡入口與資料提供方式。入會、會務與活動事項由 GCSDA 自身的會務程序處理，不因網站互相連結而成為 STT 的治理委任。"/><section className="g4-section"><div className="g4-wrap"><div className="g4-list"><div className="g4-row"><b>入會與會務聯絡</b><div>會員頁會先確認線上送件通道是否可用；可用時，申請資料由網站後端透過受委託之電子郵件／表單傳送服務轉送至學會指定的會務收件管道，用於資格審查與後續聯絡；送件通道無法使用時，網站停止顯示表單並改提供 LINE 會務聯絡入口。本頁不提供檔案上傳。<div className="g4-actions"><a href={LINE_URL} target="_blank" rel="noreferrer">入會與會務聯絡 ↗</a></div></div></div><div className="g4-row"><b>資料提供範圍</b><div>初次聯絡請先說明會務事項與必要聯絡資訊，避免主動傳送身分證件、金融帳戶、醫療資料或其他不必要的敏感內容。正式入會所需資料與程序，請依學會提供的正式說明辦理。</div></div><div className="g4-row"><b>外部服務與機構界線</b><div>進入 LINE 或其他外部網站後，相關服務由各自平台提供。GCSDA 與 STT Governance 是不同機構主體；學會入會不等於 STT 治理委任。</div></div></div></div></section></div>}
 
