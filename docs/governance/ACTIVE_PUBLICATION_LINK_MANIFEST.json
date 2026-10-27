@@ -1,0 +1,21 @@
+{
+  "scope": "2026 永續家族治理實務實錄 — external reading URL only",
+  "status": "ACTIVE",
+  "effective_date": "2026-10-27",
+  "change_request": "CR-20261027-DUAL-SITE-BOOK-LINK",
+  "authority": "Current owner instruction supplies and authorizes the corrected Heyzine URL.",
+  "canonical_reading_url": "https://heyzine.com/flip-book/cc95743e15.html",
+  "superseded_reading_url": "https://heyzine.com/flip-book/e424001f8c.html",
+  "site_routes": {
+    "STT": "https://stt-003.vercel.app/books",
+    "GCSDA": "https://gcsda-governance.vercel.app/knowledge"
+  },
+  "implementation_files": [
+    "src/data/contentRegistry.ts",
+    "src/data/mockData.ts",
+    "scripts/publication-cover-qa.py"
+  ],
+  "preserved": "Book titles, covers, layout, other publication URLs, institutional identities and unrelated routes.",
+  "source_boundary": "This scoped manifest supplements the project governance baseline. It does not supersede unrelated active sources.",
+  "qa_reference": "docs/qa/BOOK-LINK-CORRECTION-20261027.md"
+}

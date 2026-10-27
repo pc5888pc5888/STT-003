@@ -12,7 +12,7 @@ export type BookRecord = { id: string; title: string; enTitle: string; image: st
 
 // These are the four existing approved records, not new books or new reading rights.
 export const BOOKS: BookRecord[] = [
-  { id: "sustainable-family-governance", title: "2026 永續家族治理實務實錄", enTitle: "Special Issue on Sustainable Family Governance Practices", image: "/books/2026-sustainable-family-governance.jpg", previewUrl: "https://heyzine.com/flip-book/e424001f8c.html" },
+  { id: "sustainable-family-governance", title: "2026 永續家族治理實務實錄", enTitle: "Special Issue on Sustainable Family Governance Practices", image: "/books/2026-sustainable-family-governance.jpg", previewUrl: "https://heyzine.com/flip-book/cc95743e15.html" },
   { id: "internal-compliance", title: "內在法遵 Internal Compliance", enTitle: "Digital Canonical Edition", image: "/books/internal-compliance.jpg", previewUrl: "https://heyzine.com/flip-book/c700d8beb2.html" },
   { id: "ai-governance", title: "內在法遵 AI Governance", enTitle: "AI Governance", image: "/books/ai-governance.webp" },
   { id: "family-governance", title: "內在法遵 Family Governance", enTitle: "Family Governance", image: "/books/family-governance.webp" },

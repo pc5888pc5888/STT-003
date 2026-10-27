@@ -507,7 +507,7 @@ export const books: Book[] = [
     author: "莊鈞翔博士",
     publisher: "策略智庫數位出版 STT Press",
     tags: ["家族治理", "法律架構", "策略演進"],
-    previewUrl: "https://heyzine.com/flip-book/e424001f8c.html"
+    previewUrl: "https://heyzine.com/flip-book/cc95743e15.html"
   }
 ];
 
