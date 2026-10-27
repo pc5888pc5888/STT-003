@@ -1,9 +1,9 @@
 {
-  "scope": "2026 永續家族治理實務實錄 — external reading URL only",
+  "scope": "STT book reading and sample links",
   "status": "ACTIVE",
   "effective_date": "2026-10-27",
-  "change_request": "CR-20261027-DUAL-SITE-BOOK-LINK",
-  "authority": "Current owner instruction supplies and authorizes the corrected Heyzine URL.",
+  "change_request": "CR-20261027-STT-THREE-BOOK-SAMPLES",
+  "authority": "Current owner instructions supply and authorize the canonical reading URL and three STT sample URLs.",
   "canonical_reading_url": "https://heyzine.com/flip-book/cc95743e15.html",
   "superseded_reading_url": "https://heyzine.com/flip-book/e424001f8c.html",
   "site_routes": {
@@ -12,10 +12,37 @@
   },
   "implementation_files": [
     "src/data/contentRegistry.ts",
+    "src/pages/PublicationLibrary.tsx",
     "src/data/mockData.ts",
+    "scripts/publication-separation-qa.py",
     "scripts/publication-cover-qa.py"
   ],
-  "preserved": "Book titles, covers, layout, other publication URLs, institutional identities and unrelated routes.",
+  "preserved": "Four approved book titles, covers, card order and CSS; 2026 sustainable-family-governance reading URL; GCSDA release is unchanged by this request.",
   "source_boundary": "This scoped manifest supplements the project governance baseline. It does not supersede unrelated active sources.",
-  "qa_reference": "docs/qa/BOOK-LINK-CORRECTION-20261027.md"
+  "qa_reference": "docs/qa/STT-THREE-BOOK-SAMPLES-20261027.md",
+  "manifest_version": "2.0",
+  "related_change_requests": [
+    "CR-20261027-DUAL-SITE-BOOK-LINK"
+  ],
+  "preview_books": [
+    {
+      "id": "internal-compliance",
+      "title": "內在法遵 Internal Compliance",
+      "url": "https://heyzine.com/flip-book/9319294c44.html",
+      "kind": "sample",
+      "replaces": "https://heyzine.com/flip-book/c700d8beb2.html"
+    },
+    {
+      "id": "family-governance",
+      "title": "內在法遵 Family Governance",
+      "url": "https://heyzine.com/flip-book/82e2c4ab42.html",
+      "kind": "sample"
+    },
+    {
+      "id": "ai-governance",
+      "title": "內在法遵 AI Governance",
+      "url": "https://heyzine.com/flip-book/0a14c7f49a.html",
+      "kind": "sample"
+    }
+  ]
 }

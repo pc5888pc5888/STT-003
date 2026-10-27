@@ -63,7 +63,7 @@ with sync_playwright() as p:
                 check(f'{width} four books retained',page.locator('[data-book-id]').count()==4)
                 check(f'{width} no articles in books',page.locator('[data-work-id]').count()==0)
                 check(f'{width} book images decoded',page.locator('[data-publication-cover]').evaluate_all('(els)=>els.every(x=>x.complete&&x.naturalWidth>0)'))
-                check(f'{width} exactly two existing reading links',page.locator('main a[href*="heyzine.com"]').count()==2)
+                check(f'{width} exactly four reading and sample links',page.locator('main a[href*="heyzine.com"]').count()==4)
             if route.startswith('/columns'):
                 key=route.rsplit('/',1)[-1];count=len(expected[key]) if key in expected else len(articles)
                 check(f'{width} count '+route,int(page.locator('[data-result-count]').get_attribute('data-result-count'))==count)

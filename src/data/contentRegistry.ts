@@ -8,14 +8,14 @@ export type PublishedWork = {
   category: string; series: string; theme?: Theme; sources: PublicationSource[];
 };
 export type SeriesRecord = { key: string; label: string; description: string; route?: string };
-export type BookRecord = { id: string; title: string; enTitle: string; image: string; previewUrl?: string };
+export type BookRecord = { id: string; title: string; enTitle: string; image: string; previewUrl?: string; isSample?: boolean };
 
-// These are the four existing approved records, not new books or new reading rights.
+// Keep approved book metadata; reading URLs and sample labels follow the publication link manifest.
 export const BOOKS: BookRecord[] = [
   { id: "sustainable-family-governance", title: "2026 永續家族治理實務實錄", enTitle: "Special Issue on Sustainable Family Governance Practices", image: "/books/2026-sustainable-family-governance.jpg", previewUrl: "https://heyzine.com/flip-book/cc95743e15.html" },
-  { id: "internal-compliance", title: "內在法遵 Internal Compliance", enTitle: "Digital Canonical Edition", image: "/books/internal-compliance.jpg", previewUrl: "https://heyzine.com/flip-book/c700d8beb2.html" },
-  { id: "ai-governance", title: "內在法遵 AI Governance", enTitle: "AI Governance", image: "/books/ai-governance.webp" },
-  { id: "family-governance", title: "內在法遵 Family Governance", enTitle: "Family Governance", image: "/books/family-governance.webp" },
+  { id: "internal-compliance", title: "內在法遵 Internal Compliance", enTitle: "Digital Canonical Edition", image: "/books/internal-compliance.jpg", previewUrl: "https://heyzine.com/flip-book/9319294c44.html", isSample: true },
+  { id: "ai-governance", title: "內在法遵 AI Governance", enTitle: "AI Governance", image: "/books/ai-governance.webp", previewUrl: "https://heyzine.com/flip-book/0a14c7f49a.html", isSample: true },
+  { id: "family-governance", title: "內在法遵 Family Governance", enTitle: "Family Governance", image: "/books/family-governance.webp", previewUrl: "https://heyzine.com/flip-book/82e2c4ab42.html", isSample: true },
 ];
 
 export const THEMES: Array<{ key: Theme; label: string; en: string; description: string; anchor: string }> = [

@@ -63,7 +63,7 @@ export function BooksPage() {
       {BOOKS.map(book => <article className="stt-book-card" key={book.id} id={book.id} data-book-id={book.id}>
         <figure><img src={book.image} alt={book.title} data-publication-cover={book.title} loading="eager" decoding="async" /></figure>
         <div className="stt-book-info"><h2>{book.title}</h2><p lang="en">{book.enTitle}</p>
-          {book.previewUrl ? <a className="stt-library-reading-link" href={book.previewUrl} target="_blank" rel="noopener noreferrer">線上翻閱《{book.title}》<span aria-hidden="true"> ↗</span><span className="stt-library-sr-only">（另開分頁）</span></a> : <p className="stt-library-availability">本書目前未提供線上翻閱連結。</p>}
+          {book.previewUrl ? <a className="stt-library-reading-link" href={book.previewUrl} target="_blank" rel="noopener noreferrer">{book.isSample ? "線上試閱" : "線上翻閱"}《{book.title}》<span aria-hidden="true"> ↗</span><span className="stt-library-sr-only">（另開分頁）</span></a> : <p className="stt-library-availability">本書目前未提供線上翻閱連結。</p>}
         </div>
       </article>)}
     </section>
