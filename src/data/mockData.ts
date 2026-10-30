@@ -496,7 +496,7 @@ export const books: Book[] = [
     author: "莊鈞翔博士",
     publisher: "策略智庫數位出版 STT Press",
     tags: ["內在管理", "法遵精神", "企業家必讀"],
-    previewUrl: "https://heyzine.com/flip-book/9319294c44.html"
+    previewUrl: "https://heyzine.com/flip-book/1791e68c21.html"
   },
   {
     id: "b2",

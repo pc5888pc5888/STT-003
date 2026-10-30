@@ -25,7 +25,7 @@ with sync_playwright() as p:
             report['rendering'].append(row);assert row['pass'],row
         page.evaluate('scrollTo(0,0)');page.wait_for_timeout(200);page.screenshot(path=str(OUT/f'books-scrolled-{width}.png'),full_page=True);c.close()
     c=browser.new_context()
-    for url in ['https://heyzine.com/flip-book/cc95743e15.html','https://heyzine.com/flip-book/9319294c44.html','https://heyzine.com/flip-book/0a14c7f49a.html','https://heyzine.com/flip-book/82e2c4ab42.html']:
+    for url in ['https://heyzine.com/flip-book/cc95743e15.html','https://heyzine.com/flip-book/1791e68c21.html','https://heyzine.com/flip-book/83cae21bf6.html','https://heyzine.com/flip-book/aeb7bf6cf5.html']:
         try:
             r=c.request.get(url,timeout=30000);report['external_reading_links'].append({'url':url,'status':r.status,'final_url':r.url,'http_available':r.ok})
         except Exception as e:report['external_reading_links'].append({'url':url,'error':str(e),'http_available':False})
