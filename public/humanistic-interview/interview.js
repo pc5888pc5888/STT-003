@@ -172,7 +172,7 @@ form.addEventListener('submit',async e=>{
  if(location.protocol==='file:'){status.textContent='本機預覽不能送出，請使用正式訪談網址。';return}
  if(!Object.values(answers).some(v=>v.trim())){status.textContent='目前沒有回答內容，請先填寫再送出。';return}
  const completed=answeredTotal();
- if(completed<20&&!window.confirm(`目前完成 \${completed} / 20 題，仍有 \${20-completed} 題留白。\\n\\n若是刻意留白，可以繼續送出；若不是，建議先返回確認頁補充。`)){status.textContent=`尚未送出。目前完成 \${completed} / 20 題；回答仍完整保留。`;return}
+ if(completed<20&&!window.confirm(`目前完成 ${completed} / 20 題，仍有 ${20-completed} 題留白。\n\n若是刻意留白，可以繼續送出；若不是，建議先返回確認頁補充。`)){status.textContent=`尚未送出。目前完成 ${completed} / 20 題；回答仍完整保留。`;return}
  deliveryPending=true;btn.disabled=true;lockEditing(true);status.textContent='正在送出，請保留此分頁……';let timer;
  try{
   syncFormFields();const payload=new URLSearchParams();for(const[k,v]of new FormData(form))payload.append(k,String(v));payload.set('consent','true');payload.set('protocol_version','2');
@@ -180,7 +180,7 @@ form.addEventListener('submit',async e=>{
   const controller=new AbortController(),timeout=new Promise((_,reject)=>{timer=setTimeout(()=>{controller.abort();reject(new Error('timeout'))},30000)});
   const operation=(async()=>{const response=await fetch('/api/humanistic-submit',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:payload.toString(),signal:controller.signal,cache:'no-store'}),result=await response.json();
    if(!response.ok||result.ok!==true||result.delivery!=='resend-email'||typeof result.receiptId!=='string'||!/^HUM-[A-Z0-9-]+$/i.test(result.receiptId)||typeof result.providerId!=='string'||!result.providerId)throw new Error('delivery_failed');return result})();
-  const result=await Promise.race([operation,timeout]);clearTimeout(timer);deliveryAccepted=true;sessionWrite(receiptKey,result.receiptId);sessionWrite(purgeMarker,'1');purgeSubmittedData();memoryEnvelope=null;showScreen(screens.findIndex(s=>s.id==='success'));const successMessage=document.getElementById('success-message');successMessage.textContent=`郵件服務已接受送件。收件編號：\${result.receiptId}`;successMessage.setAttribute('tabindex','-1');successMessage.focus({preventScroll:true});
+  const result=await Promise.race([operation,timeout]);clearTimeout(timer);deliveryAccepted=true;sessionWrite(receiptKey,result.receiptId);sessionWrite(purgeMarker,'1');purgeSubmittedData();memoryEnvelope=null;showScreen(screens.findIndex(s=>s.id==='success'));const successMessage=document.getElementById('success-message');successMessage.textContent=`郵件服務已接受送件。收件編號：${result.receiptId}`;successMessage.setAttribute('tabindex','-1');successMessage.focus({preventScroll:true});
  }catch{
   if(deliveryAccepted){status.textContent='已取得收件回覆；成功畫面未完整更新，請勿重複送出。'}
   else{status.textContent='尚未取得有效收件確認，回答未清除。請先儲存草稿或下載備份，不要關閉分頁；可再按送出重試。';backupPreview(backupText());backupFeedback('尚未確認送件成功。請先儲存草稿；未修改的重試會沿用同一送件識別。')}
