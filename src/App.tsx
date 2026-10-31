@@ -19,7 +19,7 @@ type ShellProps = { children: ReactNode };
 
 const HUMANISTIC_INTERVIEW_URL = "/humanistic-interview/";
 const GCSDA_URL = "https://gcsda-governance.vercel.app/";
-const STT_LINE_ADD_FRIEND_URL = "https://line.me/R/ti/p/@783xkknh";
+const STT_LINE_ADD_FRIEND_URL = "https://line.me/R/ti/p/%40783xkknh";
 
 const PRIMARY_NAVIGATION = [
   { label: "你正在面對什麼", path: "/problems" },
