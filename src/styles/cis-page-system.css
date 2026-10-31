@@ -1030,3 +1030,12 @@
 ){
   color:#704b20!important;
 }
+
+/* 2026-11-01 governed LINE relationship entry: website remains the formal intake layer. */
+#root .stt-line-entry{display:grid;grid-template-columns:minmax(0,1fr) 188px;gap:46px;align-items:center;padding:34px 36px;border:1px solid var(--cis-line);background:var(--cis-white)}
+#root .stt-line-entry__copy h2{margin-bottom:12px!important}
+#root .stt-line-entry__boundary{margin:20px 0 0!important;max-width:48em;font-size:14px!important;line-height:1.9!important;color:var(--cis-muted)!important}
+#root .stt-line-entry__qr{justify-self:end;display:grid;gap:9px;width:174px;padding:10px;border:1px solid var(--cis-line);background:#fff;text-decoration:none;text-align:center}
+#root .stt-line-entry__qr img{display:block;width:152px;height:152px;margin:auto;object-fit:contain}
+#root .stt-line-entry__qr span{font:12px/1.6 var(--cis-ui);color:var(--cis-muted)}
+@media(max-width:760px){#root .stt-line-entry{grid-template-columns:1fr;padding:28px 22px;gap:22px}#root .stt-line-entry__qr{display:none}}
