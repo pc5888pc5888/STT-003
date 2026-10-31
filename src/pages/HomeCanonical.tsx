@@ -2,6 +2,9 @@ import GovernedHero from "../components/GovernedHero";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
+const STT_LINE_ADD_FRIEND_URL = "https://line.me/R/ti/p/%40783xkknh";
+const STT_LINE_QR_SRC = "/line/stt-line-qr.svg";
+
 const situations = [
   {
     code: "01 · FAMILY / SUCCESSION",
@@ -257,6 +260,31 @@ export default function HomeCanonical() {
 
           <div className="stt-g1-actions">
             <Link className="stt-g1-button" to="/insights">進入研究與出版 →</Link>
+          </div>
+        </div>
+      </section>
+
+      <section className="stt-g1-section stt-g1-band" aria-labelledby="stt-line-title">
+        <div className="stt-g1-shell">
+          <div className="stt-line-entry">
+            <div className="stt-line-entry__copy">
+              <p className="stt-g1-kicker">OFFICIAL LINE · RELATIONSHIP CHANNEL</p>
+              <h2 id="stt-line-title">STT Governance 官方 LINE</h2>
+              <p className="stt-g1-lead is-secondary">
+                持續接收 STT Governance 的治理觀點、研究更新與重要資訊，也可透過官方 LINE 進行基本需求辨識與網站導引。
+              </p>
+              <div className="stt-g1-actions">
+                <a className="stt-g1-button" href={STT_LINE_ADD_FRIEND_URL} target="_blank" rel="noopener noreferrer">加入 STT LINE 官方帳號 ↗</a>
+                <Link to="/start">開始治理判讀 →</Link>
+              </div>
+              <p className="stt-line-entry__boundary">
+                涉及正式治理委任、重大事件或需進一步判讀之事項，請使用「開始治理判讀」正式受理入口；LINE 不取代正式受理程序。
+              </p>
+            </div>
+            <a className="stt-line-entry__qr" href={STT_LINE_ADD_FRIEND_URL} target="_blank" rel="noopener noreferrer" aria-label="掃描或開啟 STT LINE 官方帳號">
+              <img src={STT_LINE_QR_SRC} alt="掃描 QR Code 加入 STT LINE 官方帳號" />
+              <span>桌機可掃描 QR Code</span>
+            </a>
           </div>
         </div>
       </section>
