@@ -162,34 +162,43 @@
 
 @media(min-width:1121px) and (max-width:1399px){
   #root .g4 .g4-head .g4-headin{
-    width:calc(100% - 16px)!important;
-    padding:0 8px!important;
-    grid-template-columns:minmax(190px,240px) minmax(0,1fr) auto!important;
-    column-gap:8px!important;
+    width:calc(100% - 12px)!important;
+    padding:0 6px!important;
+    grid-template-columns:minmax(160px,190px) minmax(0,1fr) auto auto!important;
+    column-gap:5px!important;
   }
 
   #root .g4 .g4-head .g4-brand{
-    width:min(230px,100%)!important;
-    max-width:230px!important;
-    height:58px!important;
+    width:min(185px,100%)!important;
+    max-width:185px!important;
+    height:54px!important;
   }
 
-  #root .g4 .g4-head .g4-nav,
-  #root .g4 .g4-head .g4-lang-top,
-  #root .g4 .g4-head .g4-lang-switch{
-    display:none!important;
+  #root .g4 .g4-head .g4-nav{
+    display:grid!important;
+  }
+
+  #root .g4 .g4-head .g4-nav>a:not(.g4-lang-switch){
+    padding:0 3px!important;
+    font-size:10.5px!important;
+    line-height:1.18!important;
   }
 
   #root .g4 .g4-head .g4-head-cta{
-    grid-column:2!important;
-    justify-self:end!important;
+    padding:9px 10px!important;
+    font-size:11px!important;
+  }
+
+  #root .g4 .g4-head .g4-lang-top,
+  #root .g4 .g4-head .g4-lang-switch{
+    display:inline-flex!important;
+    padding-left:7px!important;
+    min-width:36px!important;
+    font-size:10px!important;
   }
 
   #root .g4 .g4-head .g4-menu{
-    grid-column:3!important;
-    grid-row:1!important;
-    display:inline-flex!important;
-    justify-self:end!important;
+    display:none!important;
   }
 }
 
