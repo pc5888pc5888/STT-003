@@ -33,12 +33,15 @@
     min-width:0;
   }
 
-  #root .stt-en-shell .stt-g0-primary-cta,
-  #root .stt-ja-shell .stt-g0-primary-cta,
-  #root .stt-ko-shell .stt-g0-primary-cta{
+  #root .stt-en-shell .stt-g0-header .stt-g0-header__inner>.stt-g0-primary-cta,
+  #root .stt-ja-shell .stt-g0-header .stt-g0-header__inner>.stt-g0-primary-cta,
+  #root .stt-ko-shell .stt-g0-header .stt-g0-header__inner>.stt-g0-primary-cta{
     grid-column:2;
     grid-row:1;
     display:inline-flex!important;
+    width:auto!important;
+    max-width:none!important;
+    min-width:max-content;
     justify-self:end;
   }
 
