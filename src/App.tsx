@@ -20,6 +20,7 @@ import { JapaneseAbout, JapaneseEngagement, JapaneseHome, JapaneseMethod, Japane
 import { KoreanAbout, KoreanEngagement, KoreanHome, KoreanMethod, KoreanShell, KoreanStart } from "./pages/KoreanFoundation";
 import { ResearchOverview, ResearchPaperPage } from "./pages/ResearchPapers";
 import { LocalizedInsights, LocalizedProblems } from "./pages/LocalizedFoundationPages";
+import LegalInsightsPreviewWorkbench from "./pages/LegalInsightsPreviewWorkbench";
 
 type ShellProps = { children: ReactNode };
 
@@ -304,6 +305,7 @@ function AppFrame() {
     frame = requestAnimationFrame(raf);
     return () => { cancelAnimationFrame(frame); lenis.destroy(); };
   }, []);
+  if (location.pathname === "/legal-insights-preview") return <LegalInsightsPreviewWorkbench />;
   const isEnglish = location.pathname === "/en" || location.pathname.startsWith("/en/");
   const isJapanese = location.pathname === "/ja" || location.pathname.startsWith("/ja/");
   const isKorean = location.pathname === "/ko" || location.pathname.startsWith("/ko/");
