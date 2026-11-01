@@ -8,6 +8,8 @@ export type MetaRecord = {
   image?: string;
   label: string;
   robots?: string;
+  language?: "zh-Hant-TW" | "en";
+  locale?: "zh_TW" | "en_US";
 };
 
 export const FORMAL_META: Record<string, MetaRecord> = {
@@ -79,6 +81,46 @@ export const FORMAL_META: Record<string, MetaRecord> = {
     image: "/images/STT-Governance-Official-Logo.png",
     label: "專業服務與資訊邊界",
   },
+  "/en": {
+    title: "STT Governance | Governance Judgment & Institutional Design",
+    description: "STT Governance helps enterprises, families and major decision-makers clarify problems, evidence, authority, accountability and viable options before decisions become irreversible.",
+    image: "/visual-bank/stt/user-approved-six/home.png",
+    label: "Home",
+    language: "en",
+    locale: "en_US",
+  },
+  "/en/how-stt-works": {
+    title: "How STT Works | Governance Judgment",
+    description: "A seven-stage governance judgment process covering event definition, authority, evidence, hard stops, options, judgment and governance implementation.",
+    image: "/visual-bank/stt/user-approved-six/method.png",
+    label: "How STT Works",
+    language: "en",
+    locale: "en_US",
+  },
+  "/en/engagement": {
+    title: "Governance Engagement | STT Governance",
+    description: "Explore STT Governance engagement through initial governance review, governance architecture and annual governance mandate.",
+    image: "/visual-approved/bank-14.png",
+    label: "Governance Engagement",
+    language: "en",
+    locale: "en_US",
+  },
+  "/en/about": {
+    title: "About STT Governance | Governance Judgment & Institutional Design",
+    description: "STT Governance is a high-level governance platform for major decisions, enterprise governance and family governance.",
+    image: "/visual-bank/stt/user-approved-six/about-stt.png",
+    label: "About STT",
+    language: "en",
+    locale: "en_US",
+  },
+  "/en/start": {
+    title: "Start a Governance Review | STT Governance",
+    description: "Describe what is happening, what outcome you most want to avoid, and what state you hope to achieve. The first submission is for problem framing and next-step triage.",
+    image: "/images/STT-Governance-Official-Logo.png",
+    label: "Start a Governance Review",
+    language: "en",
+    locale: "en_US",
+  },
 };
 
 function upsertMeta(selector: string, attributes: Record<string, string>) {
@@ -100,6 +142,37 @@ function upsertCanonical(href: string) {
   node.href = href;
 }
 
+const LANGUAGE_PAIRS: Record<string, { zh: string; en: string }> = {
+  "/": { zh: "/", en: "/en" },
+  "/en": { zh: "/", en: "/en" },
+  "/how-stt-works": { zh: "/how-stt-works", en: "/en/how-stt-works" },
+  "/en/how-stt-works": { zh: "/how-stt-works", en: "/en/how-stt-works" },
+  "/engagement": { zh: "/engagement", en: "/en/engagement" },
+  "/en/engagement": { zh: "/engagement", en: "/en/engagement" },
+  "/about": { zh: "/about", en: "/en/about" },
+  "/en/about": { zh: "/about", en: "/en/about" },
+  "/start": { zh: "/start", en: "/en/start" },
+  "/en/start": { zh: "/start", en: "/en/start" },
+};
+
+function syncLanguageAlternates(pathname: string) {
+  document.head.querySelectorAll('link[data-stt-language-alternate="true"]').forEach((node) => node.remove());
+  const pair = LANGUAGE_PAIRS[pathname];
+  if (!pair) return;
+  [
+    ["zh-Hant-TW", pair.zh],
+    ["en", pair.en],
+    ["x-default", pair.zh],
+  ].forEach(([hreflang, path]) => {
+    const node = document.createElement("link");
+    node.rel = "alternate";
+    node.hreflang = hreflang;
+    node.href = `${STT_CANONICAL_ORIGIN}${path}`;
+    node.dataset.sttLanguageAlternate = "true";
+    document.head.appendChild(node);
+  });
+}
+
 function removeSchemas() {
   document.head.querySelectorAll('script[data-stt-schema="true"]').forEach((node) => node.remove());
 }
@@ -116,6 +189,9 @@ export function applyGovernedMetadata(pathname: string) {
   const normalized = pathname !== "/" ? pathname.replace(/\/$/, "") : "/";
   const formal = FORMAL_META[normalized];
   const canonical = `${STT_CANONICAL_ORIGIN}${normalized === "/" ? "/" : normalized}`;
+  const isEnglish = formal?.language === "en" || normalized === "/en" || normalized.startsWith("/en/");
+  document.documentElement.lang = isEnglish ? "en" : "zh-Hant-TW";
+  syncLanguageAlternates(normalized);
 
   if (formal) {
     document.title = formal.title;
@@ -125,7 +201,7 @@ export function applyGovernedMetadata(pathname: string) {
     upsertMeta('meta[property="og:title"]', { property: "og:title", content: formal.title });
     upsertMeta('meta[property="og:description"]', { property: "og:description", content: formal.description });
     upsertMeta('meta[property="og:type"]', { property: "og:type", content: normalized === "/eric-chuang" ? "profile" : "website" });
-    upsertMeta('meta[property="og:locale"]', { property: "og:locale", content: "zh_TW" });
+    upsertMeta('meta[property="og:locale"]', { property: "og:locale", content: formal.locale ?? (isEnglish ? "en_US" : "zh_TW") });
     upsertMeta('meta[property="og:url"]', { property: "og:url", content: canonical });
     upsertMeta('meta[property="og:image"]', { property: "og:image", content: `${STT_CANONICAL_ORIGIN}${formal.image ?? "/images/STT-Governance-Official-Logo.png"}` });
     upsertMeta('meta[name="twitter:card"]', { name: "twitter:card", content: "summary_large_image" });
@@ -135,6 +211,7 @@ export function applyGovernedMetadata(pathname: string) {
   } else {
     upsertMeta('meta[name="robots"]', { name: "robots", content: "noindex,follow" });
     document.head.querySelectorAll('link[rel="canonical"],meta[property^="og:"],meta[name^="twitter:"]').forEach(node=>node.remove());
+    document.head.querySelectorAll('link[data-stt-language-alternate="true"]').forEach(node=>node.remove());
   }
 
   removeSchemas();
@@ -156,8 +233,8 @@ export function applyGovernedMetadata(pathname: string) {
         {
           "@type": "ListItem",
           position: 1,
-          name: "STT Governance｜策略智庫智慧治理",
-          item: `${STT_CANONICAL_ORIGIN}/`,
+          name: isEnglish ? "STT Governance" : "STT Governance｜策略智庫智慧治理",
+          item: isEnglish ? `${STT_CANONICAL_ORIGIN}/en` : `${STT_CANONICAL_ORIGIN}/`,
         },
         {
           "@type": "ListItem",
