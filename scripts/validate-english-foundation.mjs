@@ -49,6 +49,8 @@ requireToken(vite, 'LANGUAGE_PAIRS', "Static SEO language-pair support missing")
 requireToken(vite, 'const locale = meta.locale ?? (language === "en" ? "en_US" : "zh_TW");', "Static OG locale governance missing");
 requireToken(vite, '.replace(/<html lang="[^"]*">/, `<html lang="${language}">`)', "Static html lang governance missing");
 requireToken(css, '.stt-g0-lang-switch', "Language-switch styling missing");
+requireToken(css, 'grid-template-columns:340px minmax(0,1fr) auto auto!important', "Desktop language-switch header geometry missing");
+requireToken(css, 'grid-template-columns:minmax(0,1fr) auto auto!important', "Intermediate language-switch header geometry missing");
 
 const rewrites = Array.isArray(vercel.rewrites) ? vercel.rewrites : [];
 if (rewrites.some((item) => item?.source === "/en/:path*")) errors.push("Broad /en/:path* fallback is prohibited");
