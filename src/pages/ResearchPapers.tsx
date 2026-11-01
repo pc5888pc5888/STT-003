@@ -221,11 +221,10 @@ export function ResearchPaperPage(){
         <div className="research-audience">{p.audience.map(a=><span key={a}>{a}</span>)}</div>
       </section>
       <section className="research-reader" aria-labelledby="paper-reading-title">
-        <p className="research-section-kicker">OFFICIAL ONLINE READING</p>
-        <h2 id="paper-reading-title">正式線上閱覽</h2>
-        <p>完整論文使用正式 Heyzine 線上翻閱版本。桌面裝置可於下方閱覽；手機與小型螢幕請使用外部閱讀入口。本站不提供 PDF 下載。</p>
-        <div className="research-actions"><a className="research-primary" href={p.heyzine} target="_blank" rel="noopener noreferrer">進入 Heyzine 閱讀全文 ↗</a><Link to="/research">返回研究典藏 →</Link></div>
-        <div className="research-embed"><iframe title={p.title+"｜正式線上閱覽"} src={p.heyzine} loading="lazy" allowFullScreen /></div>
+        <p className="research-section-kicker">OFFICIAL EXTERNAL READING</p>
+        <h2 id="paper-reading-title">正式外部閱讀入口</h2>
+        <p>本站不內嵌、不預覽論文全文，也不提供 PDF 下載。需要閱讀完整論文時，請由下方正式外部入口前往 Heyzine。</p>
+        <div className="research-actions"><a className="research-primary" href={p.heyzine} target="_blank" rel="noopener noreferrer">前往 Heyzine 閱讀全文 ↗</a><Link to="/research">返回研究典藏 →</Link></div>
       </section>
       <section aria-labelledby="paper-related-title">
         <p className="research-section-kicker">RELATED RESEARCH & GOVERNANCE</p>
