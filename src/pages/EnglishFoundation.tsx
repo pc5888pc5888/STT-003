@@ -8,8 +8,10 @@ import { applyGovernedMetadata } from "../seo";
 const STT_LINE_ADD_FRIEND_URL = "https://line.me/R/ti/p/%40783xkknh";
 
 const EN_NAVIGATION = [
+  { label: "What You’re Facing", path: "/problems" },
   { label: "How STT Works", path: "/en/how-stt-works" },
   { label: "Governance Engagement", path: "/en/engagement" },
+  { label: "Research & Publications", path: "/insights" },
   { label: "About STT", path: "/en/about" },
 ] as const;
 
