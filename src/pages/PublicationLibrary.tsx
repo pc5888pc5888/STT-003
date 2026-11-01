@@ -34,8 +34,8 @@ export function PublicationOverview() {
         <p className="stt-library-kicker">CONTENT TYPES</p><h2 id="reading-paths-title">依內容類型閱讀。</h2>
         <div className="stt-library-paths">
           <Link className="stt-library-path" to="/research"><span>01 · RESEARCH</span><h3>研究與論文</h3><p>STT Research Papers｜研究論文典藏，建立研究、方法、制度與治理實務的可信脈絡。</p><strong>閱讀研究介紹 →</strong></Link>
-          <Link className="stt-library-path" to="/columns"><span>02 · COLUMNS</span><h3>專欄與觀點</h3><p>法律、人文、治理與外部發表作品，依主題與來源整理。</p><strong>閱讀專欄與觀點 →</strong></Link>
-          <Link className="stt-library-path" to="/books"><span>03 · BOOKS</span><h3>出版著作</h3><p>書籍資訊、正式封面與已提供的線上翻閱入口。</p><strong>進入出版著作 →</strong></Link>
+          <Link className="stt-library-path" to="/books"><span>02 · PUBLICATIONS</span><h3>出版著作</h3><p>STT Publications Library 將治理思想、制度方法與正式出版品整理為可長期閱讀的知識資產。</p><strong>進入出版著作 →</strong></Link>
+          <Link className="stt-library-path" to="/columns"><span>03 · INSIGHTS</span><h3>專欄與觀點</h3><p>法律、人文、治理與外部發表作品，依主題與來源整理。</p><strong>閱讀專欄與觀點 →</strong></Link>
         </div>
         <Link className="stt-library-text-link" to="/columns">搜尋全部專欄與報導 →</Link>
       </section>
