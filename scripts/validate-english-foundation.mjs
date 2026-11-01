@@ -18,8 +18,10 @@ const vercel = JSON.parse(read("vercel.json"));
 
 const routes = [
   "/en",
+  "/en/problems",
   "/en/how-stt-works",
   "/en/engagement",
+  "/en/insights",
   "/en/about",
   "/en/start",
 ];
@@ -38,6 +40,10 @@ requireToken(english, 'fetch("/api/cooperation-submit"', "English intake is not 
 requireToken(english, 'source_account:"stt"', "English intake attribution changed");
 requireToken(english, 'landing_route:"/en/start"', "English intake landing route missing");
 requireToken(english, 'https://line.me/R/ti/p/%40783xkknh', "English LINE public URL changed");
+requireToken(english, '{ label: "What You’re Facing", path: "/en/problems" }', "English Problems navigation missing");
+requireToken(english, '{ label: "Research & Publications", path: "/en/insights" }', "English Insights navigation missing");
+requireToken(english, '{ label: "Eric Chuang, Ph.D.", path: "/eric-chuang" }', "English founder navigation missing");
+requireToken(english, '{ label: "Interviewee Area", path: "/humanistic-interview/" }', "English interviewee navigation missing");
 
 const fetchCount = (english.match(/fetch\(/g) || []).length;
 if (fetchCount !== 1) errors.push(`English layer must have exactly one fetch call; found ${fetchCount}`);
@@ -70,8 +76,10 @@ const rewrites = Array.isArray(vercel.rewrites) ? vercel.rewrites : [];
 if (rewrites.some((item) => item?.source === "/en/:path*")) errors.push("Broad /en/:path* fallback is prohibited");
 const expectedRewrites = {
   "/en": "/seo-en.html",
+  "/en/problems": "/seo-en-problems.html",
   "/en/how-stt-works": "/seo-en-how-stt-works.html",
   "/en/engagement": "/seo-en-engagement.html",
+  "/en/insights": "/seo-en-insights.html",
   "/en/about": "/seo-en-about.html",
   "/en/start": "/seo-en-start.html",
 };
