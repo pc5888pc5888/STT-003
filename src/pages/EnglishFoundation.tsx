@@ -31,11 +31,21 @@ const EN_TO_JA: Record<string, string> = {
   "/en/start": "/ja/start",
 };
 
+const EN_TO_KO: Record<string, string> = {
+  "/en": "/ko",
+  "/en/": "/ko",
+  "/en/how-stt-works": "/ko/how-stt-works",
+  "/en/engagement": "/ko/engagement",
+  "/en/about": "/ko/about",
+  "/en/start": "/ko/start",
+};
+
 export function EnglishShell({ children }: { children: ReactNode }) {
   const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
   const zhPath = EN_TO_ZH[location.pathname] ?? "/";
   const jaPath = EN_TO_JA[location.pathname] ?? "/ja";
+  const koPath = EN_TO_KO[location.pathname] ?? "/ko";
 
   useEffect(() => {
     setMenuOpen(false);
@@ -63,6 +73,7 @@ export function EnglishShell({ children }: { children: ReactNode }) {
           <div className="stt-g0-lang-cluster" aria-label="Language switcher">
           <Link to={zhPath} hrefLang="zh-Hant-TW" lang="zh-Hant-TW" aria-label="切換至繁體中文">繁中</Link>
           <Link to={jaPath} hrefLang="ja" lang="ja" aria-label="日本語に切り替える">日本語</Link>
+          <Link to={koPath} hrefLang="ko" lang="ko" aria-label="한국어로 전환">한국어</Link>
         </div>
           <button type="button" className="stt-g0-menu-button" aria-label={menuOpen ? "Close menu" : "Open menu"} aria-expanded={menuOpen} aria-controls="stt-en-mobile-menu" onClick={() => setMenuOpen((value) => !value)}>
             {menuOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
@@ -80,6 +91,8 @@ export function EnglishShell({ children }: { children: ReactNode }) {
                 <Link to="/en/start">Start a Governance Review</Link>
                 <Link to={zhPath} hrefLang="zh-Hant-TW" lang="zh-Hant-TW">繁體中文</Link>
                 <Link to={jaPath} hrefLang="ja" lang="ja">日本語</Link>
+            <Link to={koPath} hrefLang="ko" lang="ko">한국어</Link>
+                <Link to={koPath} hrefLang="ko" lang="ko">한국어</Link>
               </div>
             </div>
           </nav>
