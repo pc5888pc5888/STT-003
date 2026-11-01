@@ -1,4 +1,4 @@
-# QA rerun: 2026-11-01 compact CTA specificity gate
+# QA rerun: 2026-11-01 wide translucent header design gate
 name: G10 dual-site rendered acceptance
 
 on:
@@ -234,8 +234,9 @@ jobs:
 
           // Multilingual desktop header geometry: full seven-item row above 1400px, compact governed menu below it.
           {
-            for(const width of [1440,1536]){
+            for(const width of [1280,1440,1536]){
               for(const spec of [
+                {code:'zh',home:'/'},
                 {code:'en',home:'/en'},
                 {code:'ja',home:'/ja'},
                 {code:'ko',home:'/ko'}
@@ -250,46 +251,31 @@ jobs:
                   const cta=rect(document.querySelector('.stt-g0-primary-cta'));
                   const lang=rect(document.querySelector('.stt-g0-lang-cluster'));
                   const links=[...document.querySelectorAll('.stt-g0-desktop-nav .stt-g0-nav-link')].map(rect);
+                  const header=document.querySelector('.stt-g0-header');
+                  const cs=header?getComputedStyle(header):null;
                   const overlap=(a,b)=>!!a&&!!b&&a.left<b.right&&a.right>b.left&&a.top<b.bottom&&a.bottom>b.top;
+                  const bg=cs?.backgroundColor||'';
+                  const alphaMatch=bg.match(/rgba?\([^,]+,[^,]+,[^,]+(?:,\s*([\d.]+))?\)/);
+                  const alpha=alphaMatch?.[1]!==undefined?Number(alphaMatch[1]):1;
                   return {
                     brand,nav,cta,lang,links,
                     brandNavOverlap:overlap(brand,nav),
                     ctaNavOverlap:overlap(cta,nav),
                     langNavOverlap:overlap(lang,nav),
                     navCount:links.length,
-                    headerOverflow:document.querySelector('.stt-g0-header')?.scrollWidth>innerWidth+1,
+                    navDisplay:document.querySelector('.stt-g0-desktop-nav')?getComputedStyle(document.querySelector('.stt-g0-desktop-nav')).display:null,
+                    menuDisplay:document.querySelector('.stt-g0-menu-button')?getComputedStyle(document.querySelector('.stt-g0-menu-button')).display:null,
+                    headerBackground:bg,
+                    headerAlpha:alpha,
+                    backdropFilter:cs?.backdropFilter||cs?.webkitBackdropFilter||'',
+                    headerOverflow:header?.scrollWidth>innerWidth+1,
                     documentOverflow:document.documentElement.scrollWidth>innerWidth+1
                   };
                 });
-                report.special.push({name:`multilingual desktop header geometry ${spec.code} ${width}`,actual:state,
-                  passed:state.navCount===7&&!state.brandNavOverlap&&!state.ctaNavOverlap&&!state.langNavOverlap&&!state.headerOverflow&&!state.documentOverflow});
+                report.special.push({name:`wide translucent header geometry ${spec.code} ${width}`,actual:state,
+                  passed:state.navCount===7&&state.navDisplay!=='none'&&state.menuDisplay==='none'&&!state.brandNavOverlap&&!state.ctaNavOverlap&&!state.langNavOverlap&&state.headerAlpha<1&&state.backdropFilter!=='none'&&!state.headerOverflow&&!state.documentOverflow});
                 await context.close();
               }
-            }
-
-            for(const spec of [
-              {code:'en',home:'/en'},
-              {code:'ja',home:'/ja'},
-              {code:'ko',home:'/ko'}
-            ]){
-              const context=await browser.newContext({viewport:{width:1280,height:1000},reducedMotion:'reduce'});
-              const page=await context.newPage();
-              await page.goto('http://127.0.0.1:4173'+spec.home,{waitUntil:'networkidle',timeout:30000});
-              const before=await page.evaluate(()=>({
-                desktopNavDisplay:getComputedStyle(document.querySelector('.stt-g0-desktop-nav')).display,
-                menuDisplay:getComputedStyle(document.querySelector('.stt-g0-menu-button')).display,
-                ctaWidth:document.querySelector('.stt-g0-primary-cta')?.getBoundingClientRect().width||0,
-                headerOverflow:document.querySelector('.stt-g0-header')?.scrollWidth>innerWidth+1,
-                documentOverflow:document.documentElement.scrollWidth>innerWidth+1
-              }));
-              await page.locator('.stt-g0-menu-button').click();
-              const after=await page.evaluate(()=>({
-                mobileCount:document.querySelectorAll('.stt-g0-mobile-menu__primary a').length,
-                mobileOverflow:document.documentElement.scrollWidth>innerWidth+1
-              }));
-              report.special.push({name:`multilingual compact header ${spec.code} 1280`,actual:{before,after},
-                passed:before.desktopNavDisplay==='none'&&before.menuDisplay!=='none'&&before.ctaWidth>0&&!before.headerOverflow&&!before.documentOverflow&&after.mobileCount===7&&!after.mobileOverflow});
-              await context.close();
             }
           }
 
