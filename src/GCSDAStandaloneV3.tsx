@@ -290,7 +290,7 @@ function FounderChairman(){return <div className="g4-page g4-founder-page g4-fou
   <PageHead
     eyebrow=""
     title="創會理事長｜莊鈞翔博士"
-    subtitle="STT Governance 創辦人暨執行長"
+    subtitle="中華企業策略永續發展學會｜創會理事長"
     lead="莊鈞翔博士為中華企業策略永續發展學會創會理事長。創會的核心，不是增加一個活動平台，而是讓企業、專業與學術在治理議題上形成可以持續累積的正式共同體。"
   />
 
