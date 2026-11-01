@@ -101,7 +101,6 @@ export function EnglishShell({ children }: { children: ReactNode }) {
                 <Link to="/en/start">Start a Governance Review</Link>
                 <Link to={zhPath} hrefLang="zh-Hant-TW" lang="zh-Hant-TW">繁體中文</Link>
                 <Link to={jaPath} hrefLang="ja" lang="ja">日本語</Link>
-            <Link to={koPath} hrefLang="ko" lang="ko">한국어</Link>
                 <Link to={koPath} hrefLang="ko" lang="ko">한국어</Link>
               </div>
             </div>
@@ -123,6 +122,7 @@ export function EnglishShell({ children }: { children: ReactNode }) {
             <a href={STT_LINE_ADD_FRIEND_URL} target="_blank" rel="noopener noreferrer">STT Official LINE ↗</a>
             <Link to={zhPath} hrefLang="zh-Hant-TW" lang="zh-Hant-TW">Traditional Chinese site</Link>
             <Link to={jaPath} hrefLang="ja" lang="ja">日本語</Link>
+            <Link to={koPath} hrefLang="ko" lang="ko">한국어</Link>
           </nav>
         </div>
       </footer>
