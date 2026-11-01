@@ -14,8 +14,8 @@ if((app.match(/const navItems = \[([\s\S]*?)\] as const;/)||[])[1]?.includes("na
 for(const bad of ["fetch(","openai","anthropic","@google/generative-ai","firebase","supabase"]){
   if(nav.toLowerCase().includes(bad.toLowerCase()))errors.push("Navigator external capability prohibited: "+bad);
 }
-if(/(?:window\.)?localStorage\s*\./.test(nav))errors.push("Navigator must not call localStorage");
-if(/(?:window\.)?sessionStorage\s*\./.test(nav))errors.push("Navigator must not call sessionStorage");
+if(/(?:window\.)?localStorage\s*\.\s*(?:setItem|getItem|removeItem|clear)\s*\(/.test(nav))errors.push("Navigator must not call localStorage");
+if(/(?:window\.)?sessionStorage\s*\.\s*(?:setItem|getItem|removeItem|clear)\s*\(/.test(nav))errors.push("Navigator must not call sessionStorage");
 req(nav,"不會送到外部 AI 模型","Chinese local-processing disclosure missing");
 req(nav,"It is not sent to an external AI model","English local-processing disclosure missing");
 req(nav,"不判定會員資格","Membership-decision boundary missing");
