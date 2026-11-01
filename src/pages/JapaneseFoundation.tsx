@@ -271,7 +271,7 @@ const EMPTY_DATA:IntakeData={name:"",contact:"",role:"",situation:"",undesired:"
 
 const ROLE_OPTIONS=[
   {value:"企業主",label:"企業オーナー"},
-  {value:"家族成員",label:"ファミリー成员"},
+  {value:"家族成員",label:"ファミリーメンバー"},
   {value:"董事",label:"取締役／ボードメンバー"},
   {value:"經理人",label:"経営幹部／マネージャー"},
   {value:"專業顧問",label:"専門アドバイザー"},
