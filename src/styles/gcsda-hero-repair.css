@@ -844,3 +844,15 @@
     line-height:1.9!important;
   }
 }
+
+/* 2026-11-01 founder-only portrait clarity correction; no global hero changes. */
+#root .g4 .gcsda-hero.cis-hero.cis-profile-parity::before,
+#root .g4 .gcsda-hero.cis-hero.cis-profile-parity .cis-hero-art::after{
+  background:none!important;
+  opacity:0!important;
+  pointer-events:none!important;
+}
+#root .g4 .gcsda-hero.cis-hero.cis-profile-parity .cis-hero-art img{
+  opacity:1!important;
+  filter:none!important;
+}
