@@ -109,6 +109,7 @@ export function GCSDAEnglishShell({
           <p>GCSDA is an independent professional association. Its membership, bylaws, board governance, institutional records and responsibilities remain under GCSDA's own formal procedures.</p>
         </div>
         <div>
+          <Link to="/en/navigator">Institutional Navigator</Link>
           <Link to={zhPath} hrefLang="zh-Hant-TW" lang="zh-Hant-TW">Traditional Chinese</Link>
           <a href={lineUrl} target="_blank" rel="noopener noreferrer">GCSDA Official LINE ↗</a>
           <a href={sttUrl} target="_blank" rel="noreferrer">STT Governance ↗</a>
@@ -147,6 +148,11 @@ export function GCSDAEnglishHome({lineUrl}:{lineUrl:string}){
         <div className="g4-card"><span>02</span><h3>Governance & Compliance</h3><p>Institutional discussion of authority, accountability, risk control and compliance.</p></div>
         <div className="g4-card"><span>03</span><h3>Sustainability & Cross-disciplinary Exchange</h3><p>Long-term knowledge connecting enterprise sustainability with governance practice.</p></div>
       </div>
+    </Section>
+
+    <Section kicker="INSTITUTIONAL NAVIGATOR" title="Find the formal institutional page without guessing the site structure.">
+      <p className="g4-lead">Describe what you are looking for and the local navigator will point you to the relevant GCSDA page. It does not make membership decisions or interpret bylaws.</p>
+      <div className="g4-actions"><Link className="primary" to="/en/navigator">Open Institutional Navigator →</Link></div>
     </Section>
 
     <Section kicker="FORMAL ENTRY" title="Institutional participation begins with the association's formal procedures." soft>
