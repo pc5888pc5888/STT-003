@@ -13,8 +13,10 @@ const vite=read("vite.config.ts");
 const css=read("src/styles/stt-korean-foundation.css");
 const sharedCss=read("src/styles/stt-japanese-foundation.css");
 const vercel=JSON.parse(read("vercel.json"));
+const pkg=JSON.parse(read("package.json"));
 
 const routes=["/ko","/ko/how-stt-works","/ko/engagement","/ko/about","/ko/start"];
+requireToken(pkg.scripts?.build??"", "validate-korean-foundation.mjs", "Korean gate is not wired into the build command");
 for(const route of routes){
   requireToken(app,`path="${route}"`,`Korean route missing: ${route}`);
   requireToken(seo,`"${route}": {`,`Korean metadata missing: ${route}`);
