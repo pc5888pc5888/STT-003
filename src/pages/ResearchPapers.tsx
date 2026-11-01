@@ -108,27 +108,9 @@ function PaperCard({paper}:{paper:Paper}) {
 
 export function ResearchOverview(){
   return <div className="research-shell">
-    <section className="research-hero research-overview-hero" aria-labelledby="research-overview-title">
-      <div className="research-hero-inner research-overview-layout">
-        <div className="research-overview-copy">
-          <p className="research-eyebrow">STT RESEARCH PAPERS / RESEARCH SERIES 01–04</p>
-          <h1 id="research-overview-title">STT Research Papers<span className="research-title-chinese">研究論文典藏</span></h1>
-          <p className="research-overview-lead">以研究證據理解治理問題，以制度設計承接長期判斷。</p>
-          <p>四篇研究分別討論專業服務與信任、企業策略與公司治理法遵、家族企業接班，以及跨世代領導與創新績效。每一篇均設有研究介紹、方法與主要發現，以及正式線上閱讀入口。</p>
-          <a className="research-text-jump" href="#research-catalog">瀏覽四篇研究介紹 ↓</a>
-        </div>
-        <div className="research-archive-scene" aria-label="四篇 STT 研究論文典藏展示">
-          <div className="research-archive-fluting" aria-hidden="true" />
-          <div className="research-archive-arch" aria-hidden="true" />
-          <div className="research-archive-globe" aria-hidden="true" />
-          <div className="research-archive-plinth" aria-hidden="true" />
-          <div className="research-archive-covers">
-            {PAPERS.map(p=><Link key={p.slug} className={"research-archive-cover research-archive-"+p.series} to={"/research/"+p.slug} aria-label={"研究系列 "+p.series+"："+p.title}>
-              <img src={p.cover} alt={p.title+"封面"} loading="eager" decoding="async" />
-            </Link>)}
-          </div>
-        </div>
-      </div>
+    <section className="research-owner-approved-hero" aria-labelledby="research-overview-title">
+      <h1 id="research-overview-title" className="research-sr-only">STT Research Papers｜研究論文典藏</h1>
+      <img src="/visual-bank/stt/owner-approved-20261101/research.webp" alt="STT Research Papers 研究論文典藏" fetchPriority="high" decoding="async" />
     </section>
     <div className="research-wrap">
       <PublicationNavigation />
