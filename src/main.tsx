@@ -7,6 +7,7 @@ import "./index.css";
 import "./styles/no-dark-theme.css";
 import "./styles/approved-gcsda.css";
 import "./styles/gcsda-institutional-navigator.css";
+import "./styles/gcsda-header-refinement.css";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
