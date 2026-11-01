@@ -1,8 +1,8 @@
 /* GCSDA Header Refinement — independent association CIS, shared governance-grade layout rules. */
 
 :root{
-  --gcsda-header-glass:rgba(255,253,249,.84);
-  --gcsda-header-glass-strong:rgba(255,253,249,.94);
+  --gcsda-header-glass:rgba(255,253,249,.76);
+  --gcsda-header-glass-strong:rgba(255,253,249,.88);
   --gcsda-header-line:rgba(155,110,56,.18);
   --gcsda-header-gold:#8b622f;
   --gcsda-header-ink:#51483e;
@@ -116,7 +116,7 @@
     margin:0!important;
     gap:0!important;
     border-top:1px solid rgba(155,110,56,.14)!important;
-    background:rgba(255,255,255,.20)!important;
+    background:rgba(255,255,255,.10)!important;
   }
 
   #root .g4 .g4-head .g4-nav>a:not(.g4-lang-switch){
@@ -245,5 +245,46 @@
 
   #root .g4 .g4-head .g4-head-cta{
     display:none!important;
+  }
+}
+
+
+/* HERO UNDER-HEADER EXPANSION — shared quality rule, independent GCSDA CIS. */
+@media(min-width:1121px){
+  #root .g4 .g4-home,
+  #root .g4 .g4-pagehead{
+    overflow:visible!important;
+  }
+
+  #root .g4 .g4-home .g4-home-media{
+    top:-132px!important;
+    right:0!important;
+    bottom:auto!important;
+    left:0!important;
+    height:calc(100% + 132px)!important;
+  }
+
+  #root .g4 .g4-pagehead .g4-pagehead-media{
+    top:-132px!important;
+    right:0!important;
+    bottom:auto!important;
+    left:0!important;
+    height:calc(100% + 132px)!important;
+  }
+
+  #root .g4 .g4-pagehead .g4-pagehead-veil{
+    top:-132px!important;
+    right:0!important;
+    bottom:auto!important;
+    left:0!important;
+    height:calc(100% + 132px)!important;
+  }
+
+  #root .g4 .g4-head{
+    background:rgba(255,253,249,.76)!important;
+  }
+
+  #root .g4 .g4-head .g4-nav{
+    background:rgba(255,255,255,.10)!important;
   }
 }
