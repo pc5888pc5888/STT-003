@@ -1,6 +1,22 @@
 {
   "rewrites": [
     {
+      "source": "/en",
+      "destination": "/gcsda-en.html"
+    },
+    {
+      "source": "/en/about",
+      "destination": "/gcsda-en-about.html"
+    },
+    {
+      "source": "/en/governance",
+      "destination": "/gcsda-en-governance.html"
+    },
+    {
+      "source": "/en/membership",
+      "destination": "/gcsda-en-membership.html"
+    },
+    {
       "source": "/about",
       "destination": "/gcsda-about.html"
     },
@@ -38,6 +54,26 @@
     }
   ],
   "redirects": [
+    {
+      "source": "/en/",
+      "destination": "/en",
+      "permanent": true
+    },
+    {
+      "source": "/en/about/",
+      "destination": "/en/about",
+      "permanent": true
+    },
+    {
+      "source": "/en/governance/",
+      "destination": "/en/governance",
+      "permanent": true
+    },
+    {
+      "source": "/en/membership/",
+      "destination": "/en/membership",
+      "permanent": true
+    },
     {
       "source": "/about.html",
       "destination": "/about",
