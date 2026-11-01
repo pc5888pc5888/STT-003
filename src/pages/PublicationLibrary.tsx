@@ -56,7 +56,7 @@ export function BooksPage() {
       kicker="STT GOVERNANCE · BOOKS & PUBLICATIONS"
       title="電子書與出版"
       lead="STT Publications Library 將正式出版品整理為可理解、可追溯的治理知識資產。先理解一本書處理的治理問題與思想位置，再由正式外部入口前往閱讀。"
-      image="/visual-bank/stt/user-approved-six/publications.png"
+      image="/visual-bank/stt/hero-hires/publications.png"
       imagePosition="center right"
       id="books-title"
     />
@@ -214,8 +214,17 @@ export function PublishedWorksPage({ series: fixedSeries }: { series?: string })
     if (scroll) requestAnimationFrame(() => listRef.current?.scrollIntoView({ block: "start", behavior: "auto" }));
   }
   function clearFilters() { setParams({}); }
-  return <div className="stt-library"><div className="stt-library-wrap">
-    <LibraryHeading kicker="STT GOVERNANCE · PUBLISHED WORKS" title={selectedSeries?.label || "專欄與報導"} lead={selectedSeries?.description || "從系列、治理主題與關鍵字閱讀公開作品。每篇內容均保留其原始發表來源，不以單一媒體作為全部作品的分類。"} />
+  return <div className="stt-library">
+    {!fixedSeries && !seriesKey ? <UnifiedTitleHero
+      kicker="STT GOVERNANCE · PUBLISHED WORKS"
+      title="專欄與報導"
+      lead="從系列、治理主題與關鍵字閱讀公開作品。每篇內容均保留其原始發表來源，不以單一媒體作為全部作品的分類。"
+      image="/visual-bank/stt/hero-hires/columns.png"
+      imagePosition="center right"
+      id="columns-title"
+    /> : null}
+    <div className="stt-library-wrap">
+    {fixedSeries || seriesKey ? <LibraryHeading kicker="STT GOVERNANCE · PUBLISHED WORKS" title={selectedSeries?.label || "專欄與報導"} lead={selectedSeries?.description || "從系列、治理主題與關鍵字閱讀公開作品。每篇內容均保留其原始發表來源，不以單一媒體作為全部作品的分類。"} /> : null}
     <PublicationNavigation />
     {!fixedSeries && <nav className="stt-library-series" aria-label="作品系列"><Link to="/columns" aria-current={!seriesKey ? "page" : undefined}>全部作品</Link>{SERIES.filter(item => WORKS.some(work => work.series === item.key)).map(item => <Link key={item.key} to={seriesHref(item)}>{item.label}</Link>)}</nav>}
     <section className="stt-library-tools" aria-label="作品篩選">
