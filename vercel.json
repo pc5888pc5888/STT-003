@@ -1,6 +1,26 @@
 {
   "rewrites": [
     {
+      "source": "/ko/start",
+      "destination": "/seo-ko-start.html"
+    },
+    {
+      "source": "/ko/about",
+      "destination": "/seo-ko-about.html"
+    },
+    {
+      "source": "/ko/engagement",
+      "destination": "/seo-ko-engagement.html"
+    },
+    {
+      "source": "/ko/how-stt-works",
+      "destination": "/seo-ko-how-stt-works.html"
+    },
+    {
+      "source": "/ko",
+      "destination": "/seo-ko.html"
+    },
+    {
       "source": "/ja/start",
       "destination": "/seo-ja-start.html"
     },
@@ -174,6 +194,31 @@
     }
   ],
   "redirects": [
+    {
+      "source": "/ko/start/",
+      "destination": "/ko/start",
+      "permanent": true
+    },
+    {
+      "source": "/ko/about/",
+      "destination": "/ko/about",
+      "permanent": true
+    },
+    {
+      "source": "/ko/engagement/",
+      "destination": "/ko/engagement",
+      "permanent": true
+    },
+    {
+      "source": "/ko/how-stt-works/",
+      "destination": "/ko/how-stt-works",
+      "permanent": true
+    },
+    {
+      "source": "/ko/",
+      "destination": "/ko",
+      "permanent": true
+    },
     {
       "source": "/ja/start/",
       "destination": "/ja/start",
