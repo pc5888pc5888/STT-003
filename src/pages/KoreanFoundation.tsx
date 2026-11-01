@@ -8,8 +8,10 @@ import { applyGovernedMetadata } from "../seo";
 const STT_LINE_ADD_FRIEND_URL = "https://line.me/R/ti/p/%40783xkknh";
 
 const KO_NAVIGATION = [
+  { label: "현재 직면한 문제", path: "/problems" },
   { label: "STT의 판단 방식", path: "/ko/how-stt-works" },
   { label: "거버넌스 위임", path: "/ko/engagement" },
+  { label: "연구·출판", path: "/insights" },
   { label: "STT 소개", path: "/ko/about" },
 ] as const;
 
