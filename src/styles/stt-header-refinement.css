@@ -2,8 +2,8 @@
    Purpose: wide, translucent, design-led navigation without sacrificing information architecture. */
 
 :root{
-  --stt-header-glass:rgba(255,253,249,.84);
-  --stt-header-glass-strong:rgba(255,253,249,.93);
+  --stt-header-glass:rgba(255,253,249,.76);
+  --stt-header-glass-strong:rgba(255,253,249,.88);
   --stt-header-line:rgba(155,110,56,.18);
   --stt-header-shadow:0 14px 40px rgba(55,42,27,.055);
 }
@@ -109,7 +109,7 @@
     min-height:56px!important;
     gap:0!important;
     border-top:1px solid rgba(155,110,56,.14)!important;
-    background:rgba(255,255,255,.20)!important;
+    background:rgba(255,255,255,.10)!important;
   }
 
   #root .stt-g0-shell .stt-g0-header .stt-g0-nav-link{
@@ -230,5 +230,50 @@
 
   #root .stt-g0-shell .stt-g0-header .stt-g0-header__inner>.stt-g0-primary-cta{
     display:none!important;
+  }
+}
+
+
+/* HERO UNDER-HEADER EXPANSION
+   The governed hero image is visually extended upward behind the translucent header.
+   This preserves the original asset while increasing its effective canvas by the full desktop header height. */
+@media(min-width:1121px){
+  #root .stt-g0-shell .stt-g0-main .cis-hero.cis-with-image{
+    overflow:visible!important;
+  }
+
+  #root .stt-g0-shell .stt-g0-main .cis-hero.cis-with-image .cis-hero-art{
+    top:-132px!important;
+    right:0!important;
+    bottom:auto!important;
+    left:0!important;
+    height:calc(100% + 132px)!important;
+    overflow:hidden!important;
+  }
+
+  #root .stt-g0-shell .stt-g0-main .cis-hero.cis-with-image .cis-hero-art img{
+    width:100%!important;
+    height:100%!important;
+    max-width:none!important;
+    max-height:none!important;
+    object-fit:cover!important;
+  }
+
+  #root .stt-g0-shell .stt-g0-main .cis-hero.cis-with-image::before{
+    top:-132px!important;
+    right:0!important;
+    bottom:auto!important;
+    left:0!important;
+    height:calc(100% + 132px)!important;
+  }
+
+  /* The publication overview heroes use the same visual rule:
+     the hero remains the source of truth; the header only reveals it through glass. */
+  #root .stt-g0-shell .stt-g0-header{
+    background:rgba(255,253,249,.76)!important;
+  }
+
+  #root .stt-g0-shell .stt-g0-header .stt-g0-desktop-nav{
+    background:rgba(255,255,255,.10)!important;
   }
 }
