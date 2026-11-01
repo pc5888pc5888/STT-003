@@ -1,4 +1,4 @@
-# QA rerun: 2026-11-01 multilingual two-tier header collision gate
+# QA rerun: 2026-11-01 compact-header and source-resolution gate
 name: G10 dual-site rendered acceptance
 
 on:
@@ -232,9 +232,9 @@ jobs:
             await context.close();
           }
 
-          // Multilingual desktop header geometry: no logo/nav/CTA/language collisions at common desktop widths.
+          // Multilingual desktop header geometry: full seven-item row above 1400px, compact governed menu below it.
           {
-            for(const width of [1280,1440,1536]){
+            for(const width of [1440,1536]){
               for(const spec of [
                 {code:'en',home:'/en'},
                 {code:'ja',home:'/ja'},
@@ -266,6 +266,53 @@ jobs:
                 await context.close();
               }
             }
+
+            for(const spec of [
+              {code:'en',home:'/en'},
+              {code:'ja',home:'/ja'},
+              {code:'ko',home:'/ko'}
+            ]){
+              const context=await browser.newContext({viewport:{width:1280,height:1000},reducedMotion:'reduce'});
+              const page=await context.newPage();
+              await page.goto('http://127.0.0.1:4173'+spec.home,{waitUntil:'networkidle',timeout:30000});
+              const before=await page.evaluate(()=>({
+                desktopNavDisplay:getComputedStyle(document.querySelector('.stt-g0-desktop-nav')).display,
+                menuDisplay:getComputedStyle(document.querySelector('.stt-g0-menu-button')).display,
+                ctaWidth:document.querySelector('.stt-g0-primary-cta')?.getBoundingClientRect().width||0,
+                headerOverflow:document.querySelector('.stt-g0-header')?.scrollWidth>innerWidth+1,
+                documentOverflow:document.documentElement.scrollWidth>innerWidth+1
+              }));
+              await page.locator('.stt-g0-menu-button').click();
+              const after=await page.evaluate(()=>({
+                mobileCount:document.querySelectorAll('.stt-g0-mobile-menu__primary a').length,
+                mobileOverflow:document.documentElement.scrollWidth>innerWidth+1
+              }));
+              report.special.push({name:`multilingual compact header ${spec.code} 1280`,actual:{before,after},
+                passed:before.desktopNavDisplay==='none'&&before.menuDisplay!=='none'&&before.ctaWidth>0&&!before.headerOverflow&&!before.documentOverflow&&after.mobileCount===7&&!after.mobileOverflow});
+              await context.close();
+            }
+          }
+
+          // Research imagery must never be enlarged beyond source resolution.
+          {
+            const context=await browser.newContext({viewport:{width:1536,height:1000},reducedMotion:'reduce'});
+            const page=await context.newPage();
+            await page.goto('http://127.0.0.1:4173/research/legal-service-sustainability',{waitUntil:'networkidle',timeout:30000});
+            const imageState=await page.evaluate(()=>{
+              const img=document.querySelector('.research-governance-image');
+              const r=img?.getBoundingClientRect();
+              return {
+                naturalWidth:img?.naturalWidth||0,
+                naturalHeight:img?.naturalHeight||0,
+                renderedWidth:r?.width||0,
+                renderedHeight:r?.height||0,
+                complete:!!img?.complete,
+                objectFit:img?getComputedStyle(img).objectFit:null
+              };
+            });
+            report.special.push({name:'research governance image source-resolution gate',actual:imageState,
+              passed:imageState.complete&&imageState.naturalWidth>=imageState.renderedWidth&&imageState.naturalHeight>=imageState.renderedHeight&&imageState.objectFit==='cover'});
+            await context.close();
           }
 
           // Multilingual navigation parity: desktop and opened mobile menu must preserve all seven positions.
