@@ -20,7 +20,7 @@ export default function GovernedHero({ kicker, title, subtitle, lead, image, id,
   const picture = requestedPicture === INCOMPLETE_HOME_DERIVATIVE ? COMPLETE_HOME_ART : requestedPicture;
   const titleId = id || "page-title";
   const clearLeft = picture?.includes("/user-approved-six/");
-  const profileParity = route === "/founder-chairman";
+  const profileParity = false;
   return <>
     <section className={`cis-hero gcsda-hero${route === "/" ? " gcsda-hero--home" : ""} cis-title-${lines.length}${picture ? " cis-with-image" : " cis-text-only"}${page?.portrait ? " cis-portrait" : ""}${clearLeft ? " cis-clear-left" : ""}${profileParity ? " cis-profile-parity" : ""}`} aria-labelledby={titleId} data-gcsda-hero="20261021.1">
       <div className="cis-hero-inner">
