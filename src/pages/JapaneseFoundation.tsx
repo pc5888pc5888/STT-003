@@ -8,16 +8,20 @@ import { applyGovernedMetadata } from "../seo";
 const STT_LINE_ADD_FRIEND_URL = "https://line.me/R/ti/p/%40783xkknh";
 
 const JA_NAVIGATION = [
-  { label: "いま直面している課題", path: "/problems" },
+  { label: "いま直面している課題", path: "/ja/problems" },
   { label: "STTの判断方法", path: "/ja/how-stt-works" },
   { label: "ガバナンス委任", path: "/ja/engagement" },
-  { label: "研究・出版", path: "/insights" },
+  { label: "研究・出版", path: "/ja/insights" },
+  { label: "莊鈞翔博士", path: "/eric-chuang" },
+  { label: "インタビュー対象者専用", path: "/humanistic-interview/" },
   { label: "STTについて", path: "/ja/about" },
 ] as const;
 
 const JA_TO_ZH:Record<string,string>={
   "/ja":"/",
   "/ja/":"/",
+  "/ja/problems":"/problems",
+  "/ja/insights":"/insights",
   "/ja/how-stt-works":"/how-stt-works",
   "/ja/engagement":"/engagement",
   "/ja/about":"/about",
@@ -27,6 +31,8 @@ const JA_TO_ZH:Record<string,string>={
 const JA_TO_EN:Record<string,string>={
   "/ja":"/en",
   "/ja/":"/en",
+  "/ja/problems":"/en/problems",
+  "/ja/insights":"/en/insights",
   "/ja/how-stt-works":"/en/how-stt-works",
   "/ja/engagement":"/en/engagement",
   "/ja/about":"/en/about",
@@ -36,6 +42,8 @@ const JA_TO_EN:Record<string,string>={
 const JA_TO_KO:Record<string,string>={
   "/ja":"/ko",
   "/ja/":"/ko",
+  "/ja/problems":"/ko/problems",
+  "/ja/insights":"/ko/insights",
   "/ja/how-stt-works":"/ko/how-stt-works",
   "/ja/engagement":"/ko/engagement",
   "/ja/about":"/ko/about",
@@ -64,7 +72,7 @@ export function JapaneseShell({children}:{children:ReactNode}){
           <img src={STT_OFFICIAL_LOGO_SRC} alt="STT Governance"/>
         </Link>
         <nav className="stt-g0-desktop-nav" aria-label="メインナビゲーション">
-          {JA_NAVIGATION.map(item=><NavLink key={item.path} to={item.path} className={({isActive})=>`stt-g0-nav-link${isActive?" is-active":""}`}>{item.label}</NavLink>)}
+          {JA_NAVIGATION.map(item=><NavLink key={item.path} to={item.path} reloadDocument={item.path==="/humanistic-interview/"} className={({isActive})=>`stt-g0-nav-link${isActive?" is-active":""}`}>{item.label}</NavLink>)}
         </nav>
         <Link to="/ja/start" className="stt-g0-primary-cta">ガバナンス判断を始める</Link>
         <div className="stt-g0-lang-cluster" aria-label="言語切替">
@@ -79,7 +87,7 @@ export function JapaneseShell({children}:{children:ReactNode}){
       {menuOpen&&<nav id="stt-ja-mobile-menu" className="stt-g0-mobile-menu" aria-label="モバイルナビゲーション">
         <div className="stt-g0-mobile-menu__inner">
           <div className="stt-g0-mobile-menu__primary">
-            {JA_NAVIGATION.map((item,index)=><NavLink key={item.path} to={item.path}><span>{String(index+1).padStart(2,"0")}</span><strong>{item.label}</strong></NavLink>)}
+            {JA_NAVIGATION.map((item,index)=><NavLink key={item.path} to={item.path} reloadDocument={item.path==="/humanistic-interview/"}><span>{String(index+1).padStart(2,"0")}</span><strong>{item.label}</strong></NavLink>)}
           </div>
           <div className="stt-g0-mobile-menu__secondary">
             <Link to="/ja/start">ガバナンス判断を始める</Link>
