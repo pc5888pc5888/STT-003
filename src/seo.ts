@@ -373,9 +373,7 @@ export function applyGovernedMetadata(pathname: string) {
       image: `${STT_CANONICAL_ORIGIN}${bookSchema.image}`,
       ...(bookSchema.author ? { author: { "@type": "Person", name: bookSchema.author } } : {}),
       ...(bookSchema.year ? { datePublished: bookSchema.year } : {}),
-      ...(bookSchema.publisher ? { publisher: { "@type": "Organization", name: bookSchema.publisher } } : {
-        publisher: { "@type": "Organization", name: "STT Governance｜策略智庫智慧治理", url: STT_CANONICAL_ORIGIN + "/" }
-      }),
+      ...(bookSchema.publisher ? { publisher: { "@type": "Organization", name: bookSchema.publisher } } : {}),
       about: bookSchema.theme,
       description: bookSchema.positioning,
       isPartOf: { "@type": "CollectionPage", name: "STT Publications Library", url: STT_CANONICAL_ORIGIN + "/books" },
