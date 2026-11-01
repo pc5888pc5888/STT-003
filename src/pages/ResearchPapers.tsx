@@ -117,10 +117,16 @@ export function ResearchOverview(){
           <p>四篇研究分別討論專業服務與信任、企業策略與公司治理法遵、家族企業接班，以及跨世代領導與創新績效。每一篇均設有研究介紹、方法與主要發現，以及正式線上閱讀入口。</p>
           <a className="research-text-jump" href="#research-catalog">瀏覽四篇研究介紹 ↓</a>
         </div>
-        <div className="research-cover-shelf" aria-label="四篇 STT 研究論文封面">
-          {PAPERS.map(p=><Link key={p.slug} className={"research-shelf-cover research-shelf-"+p.series} to={"/research/"+p.slug} aria-label={"研究系列 "+p.series+"："+p.title}>
-            <img src={p.cover} alt={p.title+"封面"} loading="eager" decoding="async" />
-          </Link>)}
+        <div className="research-archive-scene" aria-label="四篇 STT 研究論文典藏展示">
+          <div className="research-archive-fluting" aria-hidden="true" />
+          <div className="research-archive-arch" aria-hidden="true" />
+          <div className="research-archive-globe" aria-hidden="true" />
+          <div className="research-archive-plinth" aria-hidden="true" />
+          <div className="research-archive-covers">
+            {PAPERS.map(p=><Link key={p.slug} className={"research-archive-cover research-archive-"+p.series} to={"/research/"+p.slug} aria-label={"研究系列 "+p.series+"："+p.title}>
+              <img src={p.cover} alt={p.title+"封面"} loading="eager" decoding="async" />
+            </Link>)}
+          </div>
         </div>
       </div>
     </section>
