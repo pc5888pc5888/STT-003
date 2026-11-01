@@ -16,6 +16,7 @@ import { AboutPage, EricPage, InstitutionsPage, PrivacyPage, ProfessionalBoundar
 import { STT_OFFICIAL_LOGO_SRC } from "./sttLogo";
 import { applyGovernedMetadata } from "./seo";
 import { EnglishAbout, EnglishEngagement, EnglishHome, EnglishMethod, EnglishShell, EnglishStart } from "./pages/EnglishFoundation";
+import { ResearchOverview, ResearchPaperPage } from "./pages/ResearchPapers";
 
 type ShellProps = { children: ReactNode };
 
@@ -65,7 +66,7 @@ function enforceHeadingTypography(root: ParentNode) {
 function PublicShell({ children }: ShellProps) {
   const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
-  const publicationPage = location.pathname === "/books" || location.pathname === "/columns" || location.pathname.startsWith("/columns/");
+  const publicationPage = location.pathname === "/books" || location.pathname === "/research" || location.pathname.startsWith("/research/") || location.pathname === "/columns" || location.pathname.startsWith("/columns/");
   const englishPath = CHINESE_TO_ENGLISH[location.pathname] ?? "/en";
 
   useLayoutEffect(() => {
@@ -193,7 +194,8 @@ function AppRoutes() {
       <Route path="/start" element={<Start />} />
       <Route path="/privacy" element={<PrivacyPage />} />
       <Route path="/professional-boundary" element={<ProfessionalBoundaryPage />} />
-      <Route path="/research" element={<Navigate to="/insights" replace />} />
+      <Route path="/research" element={<ResearchOverview />} />
+      <Route path="/research/:slug" element={<ResearchPaperPage />} />
       <Route path="/books/internal-compliance" element={<Navigate to="/books#internal-compliance" replace />} />
       <Route path="/domains" element={<Navigate to="/how-stt-works" replace />} />
       <Route path="/domains/:slug" element={<Navigate to="/how-stt-works" replace />} />
