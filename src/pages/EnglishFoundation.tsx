@@ -110,7 +110,7 @@ export function EnglishHome() {
       <UnifiedTitleHero
         kicker="STT GOVERNANCE · JUDGMENT · INSTITUTIONAL DESIGN"
         title="Make important decisions governable before they become irreversible."
-        lead="STT Governance helps enterprises, families and major decision-makers clarify the real problem, evidence, authority, accountability and viable options before action is taken, then builds a governance structure that can be carried, explained and traced."
+        lead="STT Governance helps enterprises, families and major decision-makers clarify the real problem, evidence, authority, accountability and viable options before action is taken, then builds a governance structure whose authority, reasoning and accountability can be carried forward and traced."
         image="/visual-bank/stt/user-approved-six/home.png"
         imagePosition="center right"
         id="en-home-title"
@@ -160,7 +160,7 @@ export function EnglishMethod() {
       <UnifiedTitleHero
         kicker="GOVERNANCE JUDGMENT"
         title="How STT makes governance judgments"
-        lead="STT does not rush to an answer. It returns first to the structure of the event: whether the problem is properly defined, whether the evidence is sufficient, whether authority is being exceeded, who bears responsibility, and whether the risk can be reversed."
+        lead="STT does not rush to an answer. It returns first to the structure of the event: whether the problem is properly defined, whether the evidence is sufficient, whether authority has crossed its proper boundaries, who bears responsibility, and whether the risk remains reversible."
         id="en-method-title"
       />
       <nav className="stt-g3-index" aria-label="Seven-stage governance judgment process">
@@ -174,7 +174,7 @@ export function EnglishMethod() {
           <h2>Four dimensions keep a major judgment defensible.</h2>
           <p className="stt-g3-foundations__intro">Problem, Evidence, Trade-off, and Authority & Accountability are not separate services. They are the four foundations that must be tested together in every governance judgment.</p>
           <div className="stt-g3-foundation-grid">
-            {[["01","Problem","The real problem"],["02","Evidence","Reliable evidence"],["03","Trade-off","Costs and trade-offs"],["04","Authority & Accountability","Who may decide; who must answer"]].map(([number,en,desc]) => (
+            {[["01","Problem","The real problem"],["02","Evidence","Reliable evidence"],["03","Trade-off","Costs and trade-offs"],["04","Authority & Accountability","Who may decide; who is accountable"]].map(([number,en,desc]) => (
               <article key={number}><span>{number}</span><small>{en}</small><h3>{desc}</h3></article>
             ))}
           </div>
@@ -212,7 +212,7 @@ export function EnglishMethod() {
 const ENGAGEMENTS = [
   { code: "GOVERNANCE REVIEW", title: "Initial Governance Review", fit: "A major event has not yet been fully defined, or relevant parties hold conflicting views.", role: "Frame the event, stakeholders, authority, evidence gaps, irreversible risks and the next path.", outputs: "Governance Dossier / Decision Brief / next-step information list.", excludes: "Legal opinions, statutory accounting, tax, investment or other regulated professional work, and continuing engagement unless separately agreed." },
   { code: "GOVERNANCE ARCHITECTURE", title: "Governance Architecture", fit: "The issue crosses family, ownership, corporate governance, contracts, professional tools or departmental authority.", role: "Place individual professional tools back into the overall governance purpose and design the institutional, authority, process and professional-collaboration structure.", outputs: "Governance Architecture / Role & Authority Map / Decision Rules / scoped external professional work packages.", excludes: "Execution of legal, tax, audit, investment or other work that must be performed by an appropriately authorized professional." },
-  { code: "GOVERNANCE MANDATE", title: "Annual Governance Mandate", fit: "An enterprise or family repeatedly faces major decisions, succession, governance transition or multiple interlocking events.", role: "Establish gates for major matters, periodic governance reviews, decision judgment, policy/evidence records and necessary professional coordination.", outputs: "Annual Governance Protocol / Decision Memo / Evidence & Policy Record / governance follow-up.", excludes: "Unlimited on-demand consulting, round-the-clock private customer service or blanket outsourcing of professional functions." },
+  { code: "GOVERNANCE MANDATE", title: "Annual Governance Mandate", fit: "An enterprise or family repeatedly faces major decisions, succession, governance transition or multiple interlocking events.", role: "Establish decision gates for major matters, periodic governance reviews, major-decision judgment, policy and evidence records, and necessary professional coordination.", outputs: "Annual Governance Protocol / Decision Memo / Evidence & Policy Record / governance follow-up.", excludes: "Unlimited on-demand consulting, round-the-clock private customer service or blanket outsourcing of professional functions." },
 ] as const;
 
 export function EnglishEngagement() {
@@ -267,7 +267,7 @@ export function EnglishAbout() {
       </Section>
       <Section kicker="ECOSYSTEM" title="One governance platform, distinct functions.">
         <div className="stt-inst-grid">
-          <article><strong>STT Governance</strong><p>The mother platform for governance intake, judgment and final institutional integration.</p></article>
+          <article><strong>STT Governance</strong><p>The core platform for governance intake, judgment and final institutional integration.</p></article>
           <article><strong>ESGAI</strong><p>Governance operating-system and staff support for evidence, policy and decision workflows. It is not a parallel brand or an autonomous decision-maker.</p></article>
           <article><strong>STT Press</strong><p>Publishing and governance texts.</p></article>
           <article><strong>STT Intelligence</strong><p>Research, judgment and long-term knowledge assets.</p></article>
