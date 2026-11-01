@@ -1,4 +1,4 @@
-# QA rerun: 2026-11-01 wide translucent header design gate
+# QA rerun: 2026-11-01 dual-site wide translucent header and navigation parity gate
 name: G10 dual-site rendered acceptance
 
 on:
@@ -86,7 +86,8 @@ jobs:
             },
             {
               site:'gcsda',origin:'http://127.0.0.1:4174',
-              routes:['/','/about','/founder-chairman','/governance','/council','/membership','/events','/knowledge','/charter','/privacy']
+              routes:['/','/about','/founder-chairman','/governance','/council','/membership','/events','/knowledge','/charter','/privacy',
+                '/en','/en/about','/en/founder-chairman','/en/governance','/en/council','/en/membership','/en/events','/en/knowledge','/en/charter','/en/navigator']
             }
           ];
           const devices=[['desktop',1440,1000],['tablet',820,1100],['mobile',390,844]];
@@ -276,6 +277,78 @@ jobs:
                   passed:state.navCount===7&&state.navDisplay!=='none'&&state.menuDisplay==='none'&&!state.brandNavOverlap&&!state.ctaNavOverlap&&!state.langNavOverlap&&state.headerAlpha<1&&state.backdropFilter!=='none'&&!state.headerOverflow&&!state.documentOverflow});
                 await context.close();
               }
+            }
+          }
+
+          // GCSDA wide translucent header geometry and eight-item institutional parity.
+          {
+            const gcsdaLocales=[
+              {code:'zh',home:'/',labels:['關於學會','創會理事長','組織治理','策略治理聯席會','會員與入會','活動與大會','知識與研究','章程與公告'],
+                hrefs:['/about','/founder-chairman','/governance','/council','/membership','/events','/knowledge','/charter']},
+              {code:'en',home:'/en',labels:['About','Founding Chairman','Institutional Governance','Strategy Governance Council','Membership','Assemblies & Events','Knowledge & Research','Charter & Notices'],
+                hrefs:['/en/about','/en/founder-chairman','/en/governance','/en/council','/en/membership','/en/events','/en/knowledge','/en/charter']}
+            ];
+
+            for(const width of [1280,1440,1536]){
+              for(const spec of gcsdaLocales){
+                const context=await browser.newContext({viewport:{width,height:1000},reducedMotion:'reduce'});
+                const page=await context.newPage();
+                await page.goto('http://127.0.0.1:4174'+spec.home,{waitUntil:'networkidle',timeout:30000});
+                const state=await page.evaluate(()=>{
+                  const rect=e=>{const r=e?.getBoundingClientRect();return r?{left:r.left,right:r.right,top:r.top,bottom:r.bottom,width:r.width,height:r.height}:null};
+                  const brand=rect(document.querySelector('.g4-brand'));
+                  const nav=rect(document.querySelector('.g4-nav'));
+                  const cta=rect(document.querySelector('.g4-head-cta'));
+                  const lang=rect(document.querySelector('.g4-lang-top,.g4-lang-switch'));
+                  const header=document.querySelector('.g4-head');
+                  const links=[...document.querySelectorAll('.g4-nav>a:not(.g4-lang-switch)')].map(a=>({text:(a.textContent||'').trim(),href:new URL(a.href).pathname,rect:rect(a)}));
+                  const cs=header?getComputedStyle(header):null;
+                  const overlap=(a,b)=>!!a&&!!b&&a.left<b.right&&a.right>b.left&&a.top<b.bottom&&a.bottom>b.top;
+                  const bg=cs?.backgroundColor||'';
+                  const alphaMatch=bg.match(/rgba?\([^,]+,[^,]+,[^,]+(?:,\s*([\d.]+))?\)/);
+                  const alpha=alphaMatch?.[1]!==undefined?Number(alphaMatch[1]):1;
+                  return {
+                    brand,nav,cta,lang,links,
+                    brandNavOverlap:overlap(brand,nav),
+                    ctaNavOverlap:overlap(cta,nav),
+                    langNavOverlap:overlap(lang,nav),
+                    navDisplay:document.querySelector('.g4-nav')?getComputedStyle(document.querySelector('.g4-nav')).display:null,
+                    menuDisplay:document.querySelector('.g4-menu')?getComputedStyle(document.querySelector('.g4-menu')).display:null,
+                    headerAlpha:alpha,
+                    backdropFilter:cs?.backdropFilter||cs?.webkitBackdropFilter||'',
+                    headerOverflow:header?.scrollWidth>innerWidth+1,
+                    documentOverflow:document.documentElement.scrollWidth>innerWidth+1
+                  };
+                });
+                const labels=state.links.map(x=>x.text),hrefs=state.links.map(x=>x.href);
+                const navOkay=JSON.stringify(labels)===JSON.stringify(spec.labels)&&JSON.stringify(hrefs)===JSON.stringify(spec.hrefs);
+                report.special.push({name:`GCSDA wide translucent header geometry ${spec.code} ${width}`,actual:state,
+                  passed:navOkay&&state.links.length===8&&state.navDisplay!=='none'&&state.menuDisplay==='none'&&!state.brandNavOverlap&&!state.ctaNavOverlap&&!state.langNavOverlap&&state.headerAlpha<1&&state.backdropFilter!=='none'&&!state.headerOverflow&&!state.documentOverflow});
+                await context.close();
+              }
+            }
+
+            for(const spec of gcsdaLocales){
+              const context=await browser.newContext({viewport:{width:390,height:844},reducedMotion:'reduce'});
+              const page=await context.newPage();
+              await page.goto('http://127.0.0.1:4174'+spec.home,{waitUntil:'networkidle',timeout:30000});
+              await page.locator('.g4-menu').click();
+              await page.waitForTimeout(100);
+              const state=await page.evaluate(()=>{
+                const panel=document.querySelector('.g4-drawerpanel');
+                const links=[...(panel?.querySelectorAll('a[href]')||[])].map(a=>({text:(a.textContent||'').trim(),href:new URL(a.href).pathname}));
+                return {
+                  links,
+                  overflow:document.documentElement.scrollWidth>innerWidth+1,
+                  menuExpanded:document.querySelector('.g4-menu')?.getAttribute('aria-expanded')
+                };
+              });
+              const primary=state.links.slice(0,8);
+              const navOkay=JSON.stringify(primary.map(x=>x.text))===JSON.stringify(spec.labels)
+                && JSON.stringify(primary.map(x=>x.href))===JSON.stringify(spec.hrefs);
+              report.special.push({name:`GCSDA mobile eight-item navigation parity ${spec.code}`,actual:state,
+                passed:navOkay&&primary.length===8&&!state.overflow&&state.menuExpanded==='true'});
+              await context.close();
             }
           }
 
