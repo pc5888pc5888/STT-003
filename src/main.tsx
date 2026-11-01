@@ -20,6 +20,7 @@ import "./styles/convergence-accessibility.css";
 
 import "./styles/cis-page-system.css";
 import "./styles/interview-entry-navigation.css";
+import "./styles/stt-english-foundation.css";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode><AppProviders><App /></AppProviders></React.StrictMode>
