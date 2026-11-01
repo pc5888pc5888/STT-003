@@ -108,8 +108,6 @@
 .research-reader{padding-top:70px!important}
 .research-actions{display:flex;flex-wrap:wrap;gap:18px;margin:21px 0 28px}
 .research-actions a:not(.research-primary){border:1px solid #c6ad8b;padding:12px 18px}
-.research-embed{position:relative;width:100%;aspect-ratio:16/10;background:#f5f0e6;border:1px solid #e0d5c4}
-.research-embed iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 .research-related{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}
 .research-related a{display:flex;align-items:center;min-height:66px;padding:13px;border:1px solid #e2d3be;text-decoration:none;font-size:15px;line-height:1.7;color:#163451;background:#fff}
 .research-related a:hover{border-color:#ad854d}
@@ -179,7 +177,6 @@
   .research-method-section{padding-left:17px!important;padding-right:17px!important}
   .research-governance{padding:22px!important}
   .research-governance-visual{min-height:205px}.research-governance-image{min-height:205px}
-  .research-embed{display:none}
   .research-actions{display:grid}
   .research-actions a{width:100%;justify-content:center}
 }
