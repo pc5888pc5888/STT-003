@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
+import { createContext, useContext, useMemo, useState, type ReactNode } from "react";
 import zhTW from "./locales/zh-TW.json";
 import en from "./locales/en.json";
 import ja from "./locales/ja.json";
@@ -73,10 +73,8 @@ export function I18nProvider({ children }: { children: ReactNode }) {
     }
   };
 
-  useEffect(() => {
-    document.documentElement.lang = locale;
-    document.documentElement.dataset.sttLocale = locale;
-  }, [locale]);
+  // Route-level governance owns document language and SEO metadata.
+  // This provider only supplies translation state to components.
 
   const value = useMemo<I18nContextValue>(() => {
     const t = (key: string, fallback?: string) => {
