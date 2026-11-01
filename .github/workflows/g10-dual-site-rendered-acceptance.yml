@@ -1,4 +1,4 @@
-# QA rerun: 2026-11-01 compact-header and source-resolution gate
+# QA rerun: 2026-11-01 compact CTA specificity gate
 name: G10 dual-site rendered acceptance
 
 on:
