@@ -9,3 +9,25 @@
 #root .stt-ko-process-line{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:1px;margin:28px 0;border:1px solid var(--cis-line);background:var(--cis-line)}
 #root .stt-ko-process-line span{display:flex;align-items:center;justify-content:center;min-height:72px;padding:12px 8px;background:var(--cis-white);color:var(--cis-ink);text-align:center;font:600 12px/1.55 var(--cis-serif)}
 @media(max-width:760px){#root .stt-ko-process-line{grid-template-columns:1fr}#root .stt-ko-process-line span{min-height:0;justify-content:flex-start;padding:12px 16px}}
+
+
+/* Multilingual header parity: preserve all seven navigation items without desktop crowding. */
+@media(min-width:1121px) and (max-width:1280px){
+  #root .stt-en-shell .stt-g0-desktop-nav,
+  #root .stt-ja-shell .stt-g0-desktop-nav,
+  #root .stt-ko-shell .stt-g0-desktop-nav{display:none}
+  #root .stt-en-shell .stt-g0-menu-button,
+  #root .stt-ja-shell .stt-g0-menu-button,
+  #root .stt-ko-shell .stt-g0-menu-button{display:inline-flex}
+  #root .stt-en-shell .stt-g0-header__inner,
+  #root .stt-ja-shell .stt-g0-header__inner,
+  #root .stt-ko-shell .stt-g0-header__inner{grid-template-columns:minmax(120px,1fr) auto auto!important;gap:10px}
+}
+@media(min-width:1400px){
+  #root .stt-en-shell .stt-g0-header__inner,
+  #root .stt-ja-shell .stt-g0-header__inner,
+  #root .stt-ko-shell .stt-g0-header__inner{max-width:1560px;grid-template-columns:230px minmax(0,1fr) auto auto!important;gap:14px}
+  #root .stt-en-shell .stt-g0-nav-link,
+  #root .stt-ja-shell .stt-g0-nav-link,
+  #root .stt-ko-shell .stt-g0-nav-link{padding-left:9px;padding-right:9px;font-size:11px}
+}
