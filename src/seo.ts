@@ -351,7 +351,7 @@ export const LANGUAGE_PAIRS: Record<string, { zh: string; en?: string; ja?: stri
 };
 
 function syncLanguageAlternates(pathname: string) {
-  document.head.querySelectorAll('link[data-stt-language-alternate="true"]').forEach((node) => node.remove());
+  document.head.querySelectorAll('link[rel="alternate"][hreflang]').forEach((node) => node.remove());
   const pair = LANGUAGE_PAIRS[pathname];
   if (!pair) return;
   const alternatives: Array<[string, string]> = [["zh-Hant-TW", pair.zh]];
@@ -415,6 +415,7 @@ export function applyGovernedMetadata(pathname: string) {
   const isJapanese = language === "ja";
   const isKorean = language === "ko";
   document.documentElement.lang = language;
+  document.documentElement.dataset.sttLocale = language;
   syncLanguageAlternates(normalized);
 
   if (formal) {
