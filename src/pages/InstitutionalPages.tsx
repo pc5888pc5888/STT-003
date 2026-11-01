@@ -66,7 +66,7 @@ export function EricPage(){
       kicker=""
       title="創辦人暨執行長｜莊鈞翔博士"
       subtitle="STT Governance 創辦人暨執行長"
-      image="/visual-bank/stt/eric-governance-principal-hero.webp"
+      image="/visual-approved/eric-page-owner-original.png"
       imageFit="contain"
       imagePosition="right bottom"
       id="eric-title"

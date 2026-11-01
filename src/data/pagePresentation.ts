@@ -83,14 +83,14 @@ export const PAGE_PRESENTATION: Record<string, PagePresentation> = {
       "創辦人暨執行長｜莊鈞翔博士"
     ],
     "type": 1,
-    "image": "/visual-bank/stt/eric-governance-principal-hero.webp",
+    "image": "/visual-approved/eric-page-owner-original.png",
     "originalTitle": "創辦人暨執行長｜莊鈞翔博士",
     "context": null,
     "portrait": true,
     "byline": AUTHOR_PROFILE.englishName,
     "bylineBefore": false,
-    "imageWidth": 1672,
-    "imageHeight": 941
+    "imageWidth": 2048,
+    "imageHeight": 1152
   },
   "/institutions": {
     "lines": [
