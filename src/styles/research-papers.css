@@ -334,3 +334,9 @@
 #root .research-shell .research-actions a.research-primary:hover {
   color: #fff !important;
 }
+
+
+/* Owner-approved research hero artwork: exact composition, catalog remains below. */
+.research-owner-approved-hero{position:relative;width:100%;margin:0;background:#fcfbf8;border-bottom:1px solid var(--research-line);overflow:hidden}
+.research-owner-approved-hero img{display:block;width:100%;height:auto;max-width:none;margin:0}
+.research-sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
