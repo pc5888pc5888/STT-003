@@ -93,7 +93,6 @@ export function JapaneseShell({children}:{children:ReactNode}){
             <Link to="/ja/start">ガバナンス判断を始める</Link>
             <Link to={zhPath} hrefLang="zh-Hant-TW" lang="zh-Hant-TW">繁體中文</Link>
             <Link to={enPath} hrefLang="en" lang="en">English</Link>
-          <Link to={koPath} hrefLang="ko" lang="ko">한국어</Link>
             <Link to={koPath} hrefLang="ko" lang="ko">한국어</Link>
           </div>
         </div>
@@ -116,6 +115,7 @@ export function JapaneseShell({children}:{children:ReactNode}){
           <a href={STT_LINE_ADD_FRIEND_URL} target="_blank" rel="noopener noreferrer">STT 公式LINE ↗</a>
           <Link to={zhPath} hrefLang="zh-Hant-TW" lang="zh-Hant-TW">繁體中文</Link>
           <Link to={enPath} hrefLang="en" lang="en">English</Link>
+          <Link to={koPath} hrefLang="ko" lang="ko">한국어</Link>
         </nav>
       </div>
     </footer>
