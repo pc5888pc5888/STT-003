@@ -1,6 +1,14 @@
 {
   "rewrites": [
     {
+      "source": "/en",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/en/:path*",
+      "destination": "/index.html"
+    },
+    {
       "source": "/problems/major-decision",
       "destination": "/seo-problems-major-decision.html"
     },
