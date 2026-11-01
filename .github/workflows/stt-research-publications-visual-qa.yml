@@ -60,6 +60,11 @@ jobs:
               page.on('pageerror',error=>jsErrors.push(String(error)));
               const response=await page.goto('http://127.0.0.1:4173'+path,{waitUntil:'domcontentloaded',timeout:30000});
               await page.locator('h1').waitFor({timeout:15000});
+              // Load lazy catalog covers before checking real image availability.
+              await page.evaluate(() => {
+                document.querySelectorAll('.research-card__cover img,.research-shelf-cover img,.research-detail-cover img,.stt-publication-cover img,.stt-publication-card img').forEach(img => { img.loading='eager'; });
+              });
+              await page.waitForFunction(() => Array.from(document.querySelectorAll('.research-card__cover img,.research-shelf-cover img,.research-detail-cover img,.stt-publication-cover img,.stt-publication-card img')).every(img => img.complete && img.naturalWidth >= 170),null,{timeout:15000}).catch(()=>{});
               await page.waitForTimeout(200);
               const stats=await page.evaluate(()=>{
                 const images=Array.from(document.querySelectorAll('.research-card__cover img,.research-shelf-cover img,.research-detail-cover img,.stt-publication-cover img,.stt-publication-card img'));
