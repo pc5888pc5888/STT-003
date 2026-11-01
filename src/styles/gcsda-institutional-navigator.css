@@ -1,0 +1,117 @@
+/* GCSDA Institutional Navigator — local site guidance only. */
+.gcsda-navigator-wrap{max-width:1040px}
+.gcsda-navigator-form{
+  margin-top:12px;
+  padding:30px;
+  border:1px solid var(--line);
+  background:#fffdf9;
+}
+.gcsda-navigator-form label{
+  display:block;
+  color:var(--ink);
+  font:500 20px/1.6 "Noto Serif TC",Georgia,serif;
+}
+.gcsda-navigator-form textarea{
+  display:block;
+  width:100%;
+  min-height:170px;
+  margin-top:14px;
+  padding:16px 18px;
+  border:1px solid #d5c5ae;
+  border-radius:0;
+  background:var(--paper);
+  color:var(--ink);
+  font:16px/1.85 "Noto Serif TC",Georgia,serif;
+  resize:vertical;
+  outline:none;
+}
+.gcsda-navigator-form textarea:focus{border-color:var(--gold2)}
+.gcsda-navigator-form__meta{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:18px;
+  margin-top:14px;
+}
+.gcsda-navigator-form__meta span{
+  color:var(--muted);
+  font:12px/1.5 Inter,"Noto Sans TC",sans-serif;
+}
+.gcsda-navigator-form button{
+  min-height:46px;
+  padding:0 20px;
+  border:1px solid #9b6e38;
+  border-radius:999px;
+  background:#9b6e38;
+  color:#fff;
+  font:500 14px/1.5 "Noto Serif TC",Georgia,serif;
+  cursor:pointer;
+}
+.gcsda-navigator-form button:disabled{opacity:.45;cursor:not-allowed}
+.gcsda-navigator-local{
+  margin:18px 0 0;
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.85;
+}
+.gcsda-navigator-warning{
+  margin:16px 0 0;
+  padding:14px 16px;
+  border-left:3px solid #8a4f3d;
+  background:#fff8f4;
+  color:#744232;
+  font-size:14px;
+  line-height:1.8;
+}
+.gcsda-navigator-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  margin-top:36px;
+  border-top:1px solid var(--line);
+  border-left:1px solid var(--line);
+}
+.gcsda-navigator-card{
+  min-height:270px;
+  padding:26px;
+  display:flex;
+  flex-direction:column;
+  border-right:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+  background:#fffdf9;
+}
+.gcsda-navigator-card>span{
+  color:var(--gold2);
+  font:13px/1.5 Georgia,"Times New Roman",serif;
+}
+.gcsda-navigator-card h3{
+  margin:18px 0 0;
+  font:500 22px/1.5 "Noto Serif TC",Georgia,serif;
+}
+.gcsda-navigator-card p{
+  margin:12px 0 0;
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.85;
+}
+.gcsda-navigator-card a{
+  margin-top:auto;
+  padding-top:22px;
+  color:var(--gold2);
+  text-decoration:none;
+  font-size:13px;
+}
+.gcsda-navigator-page a:focus-visible,
+.gcsda-navigator-page button:focus-visible,
+.gcsda-navigator-page textarea:focus-visible{
+  outline:2px solid var(--gold2);
+  outline-offset:3px;
+}
+@media(max-width:900px){
+  .gcsda-navigator-grid{grid-template-columns:1fr}
+  .gcsda-navigator-card{min-height:0}
+}
+@media(max-width:640px){
+  .gcsda-navigator-form{padding:22px 18px}
+  .gcsda-navigator-form__meta{align-items:flex-start;flex-direction:column}
+  .gcsda-navigator-form button{width:100%}
+}
