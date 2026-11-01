@@ -8,8 +8,10 @@ import { applyGovernedMetadata } from "../seo";
 const STT_LINE_ADD_FRIEND_URL = "https://line.me/R/ti/p/%40783xkknh";
 
 const JA_NAVIGATION = [
+  { label: "いま直面している課題", path: "/problems" },
   { label: "STTの判断方法", path: "/ja/how-stt-works" },
   { label: "ガバナンス委任", path: "/ja/engagement" },
+  { label: "研究・出版", path: "/insights" },
   { label: "STTについて", path: "/ja/about" },
 ] as const;
 
