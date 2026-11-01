@@ -6,23 +6,38 @@ import { applyGcsdaMetadata } from "./gcsdaMetadata";
 
 const EN_NAV = [
   ["About", "/en/about"],
-  ["Governance", "/en/governance"],
+  ["Founding Chairman", "/en/founder-chairman"],
+  ["Institutional Governance", "/en/governance"],
+  ["Strategy Governance Council", "/en/council"],
   ["Membership", "/en/membership"],
+  ["Assemblies & Events", "/en/events"],
+  ["Knowledge & Research", "/en/knowledge"],
+  ["Charter & Notices", "/en/charter"],
 ] as const;
 
 const EN_TO_ZH: Record<string,string> = {
   "/en": "/",
   "/en/": "/",
   "/en/about": "/about",
+  "/en/founder-chairman": "/founder-chairman",
   "/en/governance": "/governance",
+  "/en/council": "/council",
   "/en/membership": "/membership",
+  "/en/events": "/events",
+  "/en/knowledge": "/knowledge",
+  "/en/charter": "/charter",
 };
 
 const VISUALS: Record<string,string> = {
   "/en": "/visual-bank/gcsda/001.webp",
   "/en/about": "/visual-bank/gcsda/002.webp",
+  "/en/founder-chairman": "/visual-bank/gcsda/founder-chairman-hero.webp",
   "/en/governance": "/visual-bank/gcsda/003.webp",
+  "/en/council": "/visual-bank/gcsda/004.webp",
   "/en/membership": "/visual-bank/gcsda/005.webp",
+  "/en/events": "/visual-bank/gcsda/006.webp",
+  "/en/knowledge": "/visual-bank/gcsda/007.webp",
+  "/en/charter": "/visual-bank/gcsda/008.webp",
 };
 
 export function GCSDAEnglishShell({
@@ -84,8 +99,9 @@ export function GCSDAEnglishShell({
         </Link>
         <nav className="g4-nav" aria-label="Primary navigation">
           {EN_NAV.map(([label,path])=><NavLink key={path} className={({isActive})=>isActive?"active":""} to={path}>{label}</NavLink>)}
-          <Link className="g4-lang-switch" to={zhPath} hrefLang="zh-Hant-TW" lang="zh-Hant-TW">繁中</Link>
         </nav>
+        <Link className="g4-join g4-head-cta" to="/en/membership">Membership</Link>
+        <Link className="g4-lang-top" to={zhPath} hrefLang="zh-Hant-TW" lang="zh-Hant-TW">繁中</Link>
         <button className="g4-menu" onClick={()=>setOpen(true)} aria-label="Open menu" aria-expanded={open} aria-controls="gcsda-en-mobile-menu"><Menu/></button>
       </div>
     </header>
@@ -211,6 +227,112 @@ export function GCSDAEnglishGovernance(){
         <Link className="primary" to="/governance">Official governance page</Link>
         <Link to="/charter">Official charter and notices</Link>
       </div>
+    </Section>
+  </div>;
+}
+
+
+export function GCSDAEnglishFounderChairman(){
+  return <div className="g4-page g4-en-page">
+    <GovernedHero
+      kicker="FOUNDING CHAIRMAN"
+      title="Founding Chairman | Chuang Chun-Hsiang, Ph.D."
+      subtitle="Founder & CEO, STT Governance"
+      lead="Dr. Chuang Chun-Hsiang serves as the founding chairman of GCSDA. The founding purpose is not to add another event platform, but to build a durable professional community in which enterprise, professional and academic participants can develop a shared language for governance."
+      image={VISUALS["/en/founder-chairman"]}
+    />
+    <Section kicker="FOUNDING VISION" title="Professional exchange becomes durable only when it enters an institutional structure.">
+      <p className="g4-lead">Major enterprise questions increasingly cross strategy, law, finance, succession, authority, sustainability, digital transformation and AI. GCSDA was established as a standing professional platform where different disciplines can collaborate while retaining their own qualifications, duties and accountability.</p>
+      <p className="g4-lead">The objective is not to combine professions into an all-purpose advisory identity. It is to make cross-disciplinary exchange more useful by keeping roles and responsibility boundaries explicit.</p>
+    </Section>
+    <Section kicker="INSTITUTIONAL BOUNDARY" title="The founding chairman provides direction; the association's formal institutions govern authority." soft>
+      <p className="g4-lead">The founding chairman represents the association's founding vision and institutional direction, but does not constitute the whole authority of GCSDA. Formal governance remains with the General Assembly, Board of Directors, Board of Supervisors, bylaws and formal association procedures.</p>
+      <p className="g4-lead">Dr. Chuang is also the founder of STT Governance. GCSDA and STT Governance may connect through governance knowledge, research and public content, while remaining separate institutional actors with separate membership, bylaws, governance and legal responsibilities.</p>
+      <div className="g4-actions"><Link className="primary" to="/founder-chairman">Open the formal Traditional Chinese profile</Link></div>
+    </Section>
+  </div>;
+}
+
+export function GCSDAEnglishCouncil(){
+  return <div className="g4-page g4-en-page">
+    <GovernedHero
+      kicker="STRATEGY GOVERNANCE COUNCIL"
+      title="Cross-disciplinary participation does not mean blurred authority."
+      lead="The Strategy Governance Council is issue-led. It connects legal, accounting, strategy, industry and academic perspectives while keeping each professional participant within the boundaries of their own qualifications, authority and responsibility."
+      image={VISUALS["/en/council"]}
+    />
+    <Section kicker="COUNCIL PRINCIPLES" title="Shared language is built without turning professional boundaries into a single advisory identity.">
+      <div className="g4-grid">
+        <div className="g4-card"><span>01</span><h3>Issue-led exchange</h3><p>Discussion begins with enterprise governance, strategy, compliance, sustainability and other defined institutional questions, not with a claim of an all-purpose expert team.</p></div>
+        <div className="g4-card"><span>02</span><h3>Professional boundaries</h3><p>Participants contribute only within the scope of their qualifications, experience and responsibility. Regulated professional work remains with appropriately authorized professionals.</p></div>
+        <div className="g4-card"><span>03</span><h3>Records & outputs</h3><p>Lectures, exchanges, research or other outputs are published only after they have actually taken place and can be formally verified.</p></div>
+      </div>
+    </Section>
+    <Section kicker="INSTITUTIONAL BOUNDARY" title="The Council does not replace the association's statutory governance bodies." soft>
+      <p className="g4-lead">Unless the bylaws or a formal resolution expressly provide otherwise, the Strategy Governance Council is a professional collaboration and exchange mechanism. It does not replace the General Assembly, Board of Directors or Board of Supervisors.</p>
+      <div className="g4-actions"><Link className="primary" to="/council">Open the formal Traditional Chinese Council page</Link></div>
+    </Section>
+  </div>;
+}
+
+export function GCSDAEnglishEvents(){
+  return <div className="g4-page g4-en-page">
+    <GovernedHero
+      kicker="ASSEMBLIES & EVENTS"
+      title="Events are institutional records, not one-off promotional moments."
+      lead="GCSDA records its formation process, charter approval, General Assembly meetings, board and supervisory meetings, and formal programs according to the records available for public disclosure."
+      image={VISUALS["/en/events"]}
+    />
+    <Section kicker="INSTITUTIONAL RECORD" title="Administrative procedures, formal meetings and public records remain distinguishable.">
+      <p className="g4-lead">The association does not present unavailable official letters, minutes, photographs or program outcomes as if they had already been published. Each record is disclosed only when the underlying material is available and suitable for public use.</p>
+      <div className="g4-grid">
+        <div className="g4-card"><span>01</span><h3>Formation</h3><p>Records concerning the association's organizational formation are separated from later meeting and program records.</p></div>
+        <div className="g4-card"><span>02</span><h3>Assemblies & boards</h3><p>General Assembly, Board of Directors and Board of Supervisors records are treated as distinct institutional events.</p></div>
+        <div className="g4-card"><span>03</span><h3>Public evidence</h3><p>Website explanations do not substitute for formal official letters, minutes or other primary records.</p></div>
+      </div>
+      <div className="g4-actions"><Link className="primary" to="/events">Open the formal Traditional Chinese archive</Link></div>
+    </Section>
+  </div>;
+}
+
+export function GCSDAEnglishKnowledge(){
+  return <div className="g4-page g4-en-page">
+    <GovernedHero
+      kicker="KNOWLEDGE & RESEARCH"
+      title="Professional exchange should accumulate into knowledge that can be learned, cited and carried forward."
+      lead="This page provides the English institutional entry to GCSDA's knowledge assets across enterprise strategy, corporate governance, compliance, risk control, sustainability and cross-disciplinary exchange."
+      image={VISUALS["/en/knowledge"]}
+    />
+    <Section kicker="KNOWLEDGE DOMAINS" title="Knowledge is organized by verified subject matter, not by inflated claims of influence.">
+      <div className="g4-grid">
+        <div className="g4-card"><span>01</span><h3>Enterprise Strategy</h3><p>Direction, resource allocation, decision structures and strategy practice.</p></div>
+        <div className="g4-card"><span>02</span><h3>Governance & Compliance</h3><p>Corporate governance, authority, accountability, risk control, compliance and institutional operation.</p></div>
+        <div className="g4-card"><span>03</span><h3>Sustainability & Cross-disciplinary Knowledge</h3><p>Enterprise sustainability and long-term governance knowledge that organizations can retain and reuse.</p></div>
+      </div>
+    </Section>
+    <Section kicker="RECORD PRINCIPLE" title="Research, publications and public documents are listed only when they are complete and verifiable." soft>
+      <p className="g4-lead">GCSDA does not substitute invented publication counts, partnerships, research programs or impact figures for actual completed work.</p>
+      <div className="g4-actions"><Link className="primary" to="/knowledge">Open the formal Traditional Chinese knowledge page</Link></div>
+    </Section>
+  </div>;
+}
+
+export function GCSDAEnglishCharter(){
+  return <div className="g4-page g4-en-page">
+    <GovernedHero
+      kicker="CHARTER & NOTICES"
+      title="The charter is the formal source of institutional authority, membership rights and governance procedure."
+      lead="GCSDA's formal charter contains six chapters and thirty-eight articles. It was approved by the first General Assembly on July 1, 2025. The Traditional Chinese text remains the authoritative published charter."
+      image={VISUALS["/en/charter"]}
+    />
+    <Section kicker="OFFICIAL SOURCE" title="The English edition explains the institutional structure without creating a second legal text.">
+      <p className="g4-lead">The charter governs the association's purpose, membership, organizational bodies, terms, authority, duties and other formal procedures. Because translated wording can affect legal interpretation, the complete Traditional Chinese charter remains the formal reference.</p>
+      <div className="g4-grid">
+        <div className="g4-card"><span>01</span><h3>Purpose & scope</h3><p>The association is national in scope and operates under the institutional framework stated in its charter and registration records.</p></div>
+        <div className="g4-card"><span>02</span><h3>Boards & supervision</h3><p>Board and supervisory composition, terms and duties remain governed by the formal charter.</p></div>
+        <div className="g4-card"><span>03</span><h3>Membership governance</h3><p>Member qualifications, rights, obligations and formal procedures are governed by the charter and association resolutions.</p></div>
+      </div>
+      <div className="g4-actions"><Link className="primary" to="/charter">Read the complete formal Traditional Chinese charter</Link></div>
     </Section>
   </div>;
 }
