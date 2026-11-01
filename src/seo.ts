@@ -45,18 +45,6 @@ export const FORMAL_META: Record<string, MetaRecord> = {
     image: "/visual-bank/stt/user-approved-six/columns.png",
     label: "研究與出版",
   },
-  "/books": {
-    title: "電子書與出版｜STT Governance",
-    description: "STT Governance 的電子書與治理出版，收錄書籍資訊、正式封面與已提供的線上閱讀入口。",
-    image: "/visual-bank/stt/owner-approved-20261101/books.webp",
-    label: "電子書與出版",
-  },
-  "/columns": {
-    title: "專欄與報導｜STT Governance",
-    description: "依系列與治理主題閱讀 STT Governance 的公開專欄與報導，逐篇標示作者、發表日期與原始來源。",
-    image: "/visual-bank/stt/owner-approved-20261101/columns.webp",
-    label: "專欄與報導",
-  },
   ...Object.fromEntries(BOOKS.map((book) => [`/books/${book.slug}`, {
     title: `${book.title}｜STT Publications`,
     description: book.positioning,
@@ -66,7 +54,7 @@ export const FORMAL_META: Record<string, MetaRecord> = {
   "/research": {
     title: "STT Research Papers｜研究論文典藏｜STT Governance",
     description: "STT Governance 研究論文典藏，整理家族治理、公司治理與法遵、法律服務永續、企業領導與世代接班等研究脈絡。",
-    image: "/visual-bank/stt/owner-approved-20261101/research.webp",
+    image: "/visual-bank/stt/user-approved-six/columns.png",
     label: "研究與論文",
   },
   "/research/legal-service-sustainability": {
