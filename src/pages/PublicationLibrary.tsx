@@ -1,6 +1,7 @@
 import { useMemo, useRef } from "react";
-import { Link, NavLink, Navigate, useLocation, useSearchParams } from "react-router-dom";
+import { Link, NavLink, Navigate, useLocation, useParams, useSearchParams } from "react-router-dom";
 import UnifiedTitleHero from "../components/UnifiedTitleHero";
+import NotFound from "../components/NotFound";
 import { BOOKS, SERIES, THEMES, WORKS, classifyTheme, isoDate, normalized, seriesHref, sourceLabel } from "../data/contentRegistry";
 import "../styles/publication-library.css";
 
@@ -31,15 +32,16 @@ export function PublicationOverview() {
     <div className="stt-library-wrap">
       <PublicationNavigation />
       <section className="stt-library-section" aria-labelledby="reading-paths-title">
-        <p className="stt-library-kicker">READING PATHS</p><h2 id="reading-paths-title">從你想閱讀的內容開始。</h2>
+        <p className="stt-library-kicker">CONTENT TYPES</p><h2 id="reading-paths-title">依內容類型閱讀。</h2>
         <div className="stt-library-paths">
-          <Link className="stt-library-path" to="/books"><span>01 · BOOKS</span><h3>電子書與出版</h3><p>書籍資訊、正式封面與已提供的線上翻閱入口。</p><strong>進入書籍頁 →</strong></Link>
-          {SERIES.filter(item => item.route).map((item, index) => <Link className="stt-library-path" key={item.key} to={seriesHref(item)}><span>{String(index + 2).padStart(2, "0")} · {item.key.toUpperCase()}</span><h3>{item.label}</h3><p>{item.description}</p><strong>閱讀作品 →</strong></Link>)}
+          <Link className="stt-library-path" to="/research"><span>01 · RESEARCH</span><h3>研究與論文</h3><p>STT Research Papers｜研究論文典藏，建立研究、方法、制度與治理實務的可信脈絡。</p><strong>閱讀研究介紹 →</strong></Link>
+          <Link className="stt-library-path" to="/books"><span>02 · PUBLICATIONS</span><h3>出版著作</h3><p>STT Publications Library 將治理思想、制度方法與正式出版品整理為可長期閱讀的知識資產。</p><strong>進入出版著作 →</strong></Link>
+          <Link className="stt-library-path" to="/columns"><span>03 · INSIGHTS</span><h3>專欄與觀點</h3><p>法律、人文、治理與外部發表作品，依主題與來源整理。</p><strong>閱讀專欄與觀點 →</strong></Link>
         </div>
         <Link className="stt-library-text-link" to="/columns">搜尋全部專欄與報導 →</Link>
       </section>
       <section className="stt-library-section" aria-labelledby="themes-title">
-        <p className="stt-library-kicker">GOVERNANCE THEMES</p><h2 id="themes-title">也可以沿著治理主題閱讀。</h2>
+        <p className="stt-library-kicker">GOVERNANCE THEMES</p><h2 id="themes-title">依治理主題閱讀。</h2>
         <div className="stt-library-themes">{THEMES.map(item => <article id={item.anchor} key={item.key}><p className="stt-library-kicker">{item.en}</p><h3>{item.label}</h3><p>{item.description}</p><Link to={`/columns?theme=${item.key}`}>查看此主題內容 →</Link></article>)}</div>
       </section>
       <section className="stt-library-note" aria-label="發表來源說明"><h2>作品與發表來源，分別標示。</h2><p>書籍、法律專欄、人物故事與報導各有自己的閱讀入口。每篇作品保留作者、日期與原始發表連結；M 傳媒及其他第三方平台的文章，均標示為外部發表。</p></section>
@@ -52,23 +54,136 @@ export function BooksPage() {
     <UnifiedTitleHero
       kicker="STT GOVERNANCE · BOOKS & PUBLICATIONS"
       title="電子書與出版"
-      lead="從完整著作閱讀治理思想。書籍資訊與線上翻閱入口集中於此，專欄與報導另有各自的作品頁。"
+      lead="STT Publications Library 將正式出版品整理為可理解、可追溯的治理知識資產。先理解一本書處理的治理問題與思想位置，再進入正式線上翻閱或試閱。"
       image="/visual-bank/stt/user-approved-six/publications.png"
       imagePosition="center right"
       id="books-title"
     />
     <div className="stt-library-wrap">
     <PublicationNavigation />
-    <section className="stt-book-grid" aria-label="書籍目錄">
-      {BOOKS.map(book => <article className="stt-book-card" key={book.id} id={book.id} data-book-id={book.id}>
+    <section className="stt-publications-intro" aria-labelledby="publications-library-title">
+      <p className="stt-library-kicker">STT PUBLICATIONS LIBRARY</p>
+      <h2 id="publications-library-title">正式出版資產</h2>
+      <p>出版著作負責把研究、治理思想與制度方法整合成可被長期閱讀的知識體系；與研究論文的證據與研究命題層不同，但維持相同的內容治理與視覺位階。</p>
+    </section>
+    <section className="stt-book-grid stt-publication-assets" aria-label="書籍目錄">
+      {BOOKS.map(book => <article className="stt-book-card stt-publication-card" key={book.id} id={book.id} data-book-id={book.id}>
         <figure><img src={book.image} alt={book.title} data-publication-cover={book.title} loading="eager" decoding="async" /></figure>
-        <div className="stt-book-info"><h2>{book.title}</h2><p lang="en">{book.enTitle}</p>
-          {book.previewUrl ? <a className="stt-library-reading-link" href={book.previewUrl} target="_blank" rel="noopener noreferrer">{book.isSample ? "線上試閱" : "線上翻閱"}《{book.title}》<span aria-hidden="true"> ↗</span><span className="stt-library-sr-only">（另開分頁）</span></a> : <p className="stt-library-availability">本書目前未提供線上翻閱連結。</p>}
+        <div className="stt-book-info">
+          <p className="stt-book-type">{book.publicationType}</p>
+          <h2>{book.title}</h2>
+          <p lang="en" className="stt-book-en">{book.enTitle}</p>
+          <p className="stt-book-positioning">{book.positioning}</p>
+          <p className="stt-book-summary">{book.summary.slice(0,2).join(" ")}</p>
+          <div className="stt-book-tags" aria-label="治理主題">{book.theme.map(item=><span key={item}>{item}</span>)}</div>
+          <div className="stt-book-card-actions">
+            <Link className="stt-publication-primary-link" to={"/books/"+book.slug}>閱讀本書介紹 →</Link>
+            <a className="stt-publication-secondary-link" href={book.previewUrl} target="_blank" rel="noopener noreferrer">{book.isSample ? "快速進入線上試閱 ↗" : "快速進入線上翻閱 ↗"}</a>
+          </div>
         </div>
       </article>)}
     </section>
-    <div className="stt-library-ending"><Link to="/insights">← 返回研究與出版總覽</Link><Link to="/columns">閱讀專欄與報導 →</Link></div>
+    <div className="stt-library-ending"><Link to="/insights">← 返回研究與出版總覽</Link><Link to="/research">閱讀研究與論文 →</Link></div>
   </div></div>;
+}
+
+export function BookDetailPage() {
+  const { slug = "" } = useParams();
+  const book = BOOKS.find(item => item.slug === slug);
+  if (!book) return <NotFound />;
+  const readingLabel = book.isSample ? "線上試閱本書" : "線上翻閱本書";
+  return <div className="stt-library stt-publication-detail">
+    <section className={"stt-publication-hero book-"+book.slug}>
+      <div className="stt-publication-hero__inner">
+        <div className="stt-publication-hero__copy">
+          <p className="stt-library-kicker">STT PUBLICATIONS / STT GOVERNANCE LIBRARY</p>
+          <p className="stt-book-type">{book.publicationType}</p>
+          <h1>{book.title}</h1>
+          <p className="stt-publication-en" lang="en">{book.enTitle}</p>
+          <dl className="stt-publication-meta">
+            {book.author && <div><dt>作者／編著</dt><dd>{book.author}</dd></div>}
+            {book.year && <div><dt>出版年份</dt><dd>{book.year}</dd></div>}
+            {book.publisher && <div><dt>出版者</dt><dd>{book.publisher}</dd></div>}
+          </dl>
+          <div className="stt-book-tags" aria-label="治理主題">{book.theme.map(item=><span key={item}>{item}</span>)}</div>
+          <p className="stt-publication-thesis">{book.positioning}</p>
+          <div className="stt-publication-hero-actions">
+            <a className="stt-publication-cta" href={book.previewUrl} target="_blank" rel="noopener noreferrer">{readingLabel} ↗</a>
+            <Link to="/books">返回出版總覽 →</Link>
+          </div>
+        </div>
+        <figure className="stt-publication-cover"><img src={book.image} alt={book.title+"正式封面"} /></figure>
+      </div>
+    </section>
+
+    <div className="stt-library-wrap stt-publication-body">
+      <PublicationNavigation />
+      <section aria-labelledby="book-problem-title">
+        <p className="stt-library-kicker">PUBLICATION QUESTION</p>
+        <h2 id="book-problem-title">這本書在處理什麼</h2>
+        {book.summary.map(p=><p key={p}>{p}</p>)}
+      </section>
+
+      <section aria-labelledby="book-core-title">
+        <p className="stt-library-kicker">CORE READING THEMES</p>
+        <h2 id="book-core-title">核心內容</h2>
+        <div className="stt-publication-topics">{book.coreTopics.map((topic,index)=><article key={topic.title}><span>{String(index+1).padStart(2,"0")}</span><h3>{topic.title}</h3><p>{topic.description}</p></article>)}</div>
+      </section>
+
+      <section aria-labelledby="book-audience-title">
+        <p className="stt-library-kicker">READER CONTEXT</p>
+        <h2 id="book-audience-title">適合誰閱讀</h2>
+        <div className="stt-publication-audience">{book.audience.map(item=><span key={item}>{item}</span>)}</div>
+      </section>
+
+      <section className="stt-publication-governance" aria-labelledby="book-governance-title">
+        <p className="stt-library-kicker">FROM PUBLICATION TO GOVERNANCE</p>
+        <h2 id="book-governance-title">從本書到 STT Governance</h2>
+        <p>{book.governanceConnection}</p>
+        <p className="stt-publication-chain">研究 → 思想 → 出版 → 方法 → 制度 → 治理實務</p>
+      </section>
+
+      <section className="stt-publication-reading" aria-labelledby="book-reading-title">
+        <p className="stt-library-kicker">OFFICIAL ONLINE READING</p>
+        <h2 id="book-reading-title">正式線上閱讀</h2>
+        <p>{book.isSample ? "本頁連結為正式線上試閱版本。" : "本頁連結為正式線上翻閱版本。"} 閱讀介面由 Heyzine 提供，內容仍屬本出版品之正式{book.isSample ? "試閱" : "閱讀"}版本。本站不提供 PDF 下載。</p>
+        <div className="stt-publication-reading-actions">
+          <a className="stt-publication-cta" href={book.previewUrl} target="_blank" rel="noopener noreferrer">{readingLabel} ↗</a>
+          <a href={book.previewUrl} target="_blank" rel="noopener noreferrer">另開閱讀視窗 ↗</a>
+        </div>
+        <div className="stt-publication-reader"><iframe title={book.title+" 線上閱讀"} src={book.previewUrl} loading="lazy" allowFullScreen /></div>
+      </section>
+
+      <section aria-labelledby="book-related-title">
+        <p className="stt-library-kicker">RELATED GOVERNANCE ASSETS</p>
+        <h2 id="book-related-title">延伸閱讀</h2>
+        <div className="stt-publication-related">
+          {book.slug === "sustainable-family-governance" && <>
+            <Link to="/research/family-business-succession">相關研究｜臺灣企業接班人的佈局規劃與傳承家族價值 →</Link>
+            <Link to="/books/family-governance">相關出版｜內在法遵 Family Governance →</Link>
+            <Link to="/problems#family-succession">相關治理主題｜家族與接班 →</Link>
+          </>}
+          {book.slug === "internal-compliance" && <>
+            <Link to="/research/corporate-governance-compliance">相關研究｜企業策略導入公司治理法遵精神 →</Link>
+            <Link to="/books/ai-governance">相關出版｜內在法遵 AI Governance →</Link>
+            <Link to="/how-stt-works">相關治理主題｜STT 如何判讀 →</Link>
+          </>}
+          {book.slug === "ai-governance" && <>
+            <Link to="/books/internal-compliance">思想來源｜內在法遵 Internal Compliance →</Link>
+            <Link to="/columns?theme=ai">相關專欄｜AI 與決策治理 →</Link>
+            <Link to="/problems#ai-decision-governance">相關治理主題｜AI 與決策治理 →</Link>
+          </>}
+          {book.slug === "family-governance" && <>
+            <Link to="/research/family-business-succession">相關研究｜臺灣企業接班人的佈局規劃與傳承家族價值 →</Link>
+            <Link to="/books/sustainable-family-governance">相關出版｜2026 永續家族治理實務實錄 →</Link>
+            <Link to="/problems#family-succession">相關治理主題｜家族與接班 →</Link>
+          </>}
+        </div>
+      </section>
+
+      <div className="stt-library-ending"><Link to="/books">← 返回出版總覽</Link><Link to="/research">研究與論文 →</Link></div>
+    </div>
+  </div>;
 }
 
 export function PublishedWorksPage({ series: fixedSeries }: { series?: string }) {

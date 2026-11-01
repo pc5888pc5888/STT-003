@@ -5,7 +5,7 @@ import Lenis from "lenis";
 import Home from "./pages/HomeCanonical";
 import NotFound from "./components/NotFound";
 import Columns from "./pages/Columns";
-import { BooksPage, PublishedWorksPage } from "./pages/PublicationLibrary";
+import { BookDetailPage, BooksPage, PublishedWorksPage } from "./pages/PublicationLibrary";
 import Problems from "./pages/Problems";
 import ProblemDetail from "./pages/ProblemDetail";
 import Start from "./pages/Start";
@@ -18,6 +18,7 @@ import { applyGovernedMetadata } from "./seo";
 import { EnglishAbout, EnglishEngagement, EnglishHome, EnglishMethod, EnglishShell, EnglishStart } from "./pages/EnglishFoundation";
 import { JapaneseAbout, JapaneseEngagement, JapaneseHome, JapaneseMethod, JapaneseShell, JapaneseStart } from "./pages/JapaneseFoundation";
 import { KoreanAbout, KoreanEngagement, KoreanHome, KoreanMethod, KoreanShell, KoreanStart } from "./pages/KoreanFoundation";
+import { ResearchOverview, ResearchPaperPage } from "./pages/ResearchPapers";
 
 type ShellProps = { children: ReactNode };
 
@@ -83,7 +84,7 @@ function enforceHeadingTypography(root: ParentNode) {
 function PublicShell({ children }: ShellProps) {
   const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
-  const publicationPage = location.pathname === "/books" || location.pathname === "/columns" || location.pathname.startsWith("/columns/");
+  const publicationPage = location.pathname === "/books" || location.pathname.startsWith("/books/") || location.pathname === "/research" || location.pathname.startsWith("/research/") || location.pathname === "/columns" || location.pathname.startsWith("/columns/");
   const englishPath = CHINESE_TO_ENGLISH[location.pathname] ?? "/en";
   const japanesePath = CHINESE_TO_JAPANESE[location.pathname] ?? "/ja";
   const koreanPath = CHINESE_TO_KOREAN[location.pathname] ?? "/ko";
@@ -222,6 +223,7 @@ function AppRoutes() {
       <Route path="/engagement" element={<Engagement />} />
       <Route path="/insights" element={<Columns />} />
       <Route path="/books" element={<BooksPage />} />
+      <Route path="/books/:slug" element={<BookDetailPage />} />
       <Route path="/columns" element={<PublishedWorksPage />} />
       <Route path="/columns/legal" element={<PublishedWorksPage series="legal" />} />
       <Route path="/columns/humanistic" element={<PublishedWorksPage series="humanistic" />} />
@@ -233,8 +235,8 @@ function AppRoutes() {
       <Route path="/start" element={<Start />} />
       <Route path="/privacy" element={<PrivacyPage />} />
       <Route path="/professional-boundary" element={<ProfessionalBoundaryPage />} />
-      <Route path="/research" element={<Navigate to="/insights" replace />} />
-      <Route path="/books/internal-compliance" element={<Navigate to="/books#internal-compliance" replace />} />
+      <Route path="/research" element={<ResearchOverview />} />
+      <Route path="/research/:slug" element={<ResearchPaperPage />} />
       <Route path="/domains" element={<Navigate to="/how-stt-works" replace />} />
       <Route path="/domains/:slug" element={<Navigate to="/how-stt-works" replace />} />
       <Route path="/projects" element={<Navigate to="/insights" replace />} />
@@ -251,11 +253,11 @@ function AppRoutes() {
       <Route path="/humanistic-20q" element={<ExternalRedirect url={HUMANISTIC_INTERVIEW_URL} />} />
       <Route path="/institution/gcsda" element={<ExternalRedirect url={GCSDA_URL} />} />
       <Route path="/gcsda.html" element={<ExternalRedirect url={GCSDA_URL} />} />
-      <Route path="/internal-compliance" element={<Navigate to="/books#internal-compliance" replace />} />
-      <Route path="/internal-compliance/pillars" element={<Navigate to="/books#internal-compliance" replace />} />
+      <Route path="/internal-compliance" element={<Navigate to="/books/internal-compliance" replace />} />
+      <Route path="/internal-compliance/pillars" element={<Navigate to="/books/internal-compliance" replace />} />
       <Route path="/internal-compliance/simulator" element={<Navigate to="/problems" replace />} />
       <Route path="/internal-compliance/academic" element={<Navigate to="/insights" replace />} />
-      <Route path="/internal-compliance/publication" element={<Navigate to="/books#internal-compliance" replace />} />
+      <Route path="/internal-compliance/publication" element={<Navigate to="/books/internal-compliance" replace />} />
       <Route path="/governance/corporate" element={<Navigate to="/problems" replace />} />
       <Route path="/governance/corporate/modules" element={<Navigate to="/problems" replace />} />
       <Route path="/governance/corporate/simulator" element={<Navigate to="/problems" replace />} />

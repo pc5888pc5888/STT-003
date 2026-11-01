@@ -1,5 +1,6 @@
 import AUTHOR_PROFILE from "./data/authorProfile.json";
 import { RETAINED_META } from "./data/retainedRouteMetadata";
+import { BOOKS } from "./data/contentRegistry";
 export const STT_CANONICAL_ORIGIN = "https://stt-003.vercel.app";
 
 export type MetaRecord = {
@@ -43,6 +44,42 @@ export const FORMAL_META: Record<string, MetaRecord> = {
     description: "STT Governance 的研究、專欄與出版，聚焦家族與接班、公司治理、AI 與決策治理，以及治理文明。",
     image: "/visual-bank/stt/user-approved-six/columns.png",
     label: "研究與出版",
+  },
+  ...Object.fromEntries(BOOKS.map((book) => [`/books/${book.slug}`, {
+    title: `${book.title}｜STT Publications`,
+    description: book.positioning,
+    image: book.image,
+    label: book.title,
+  }])),
+  "/research": {
+    title: "STT Research Papers｜研究論文典藏｜STT Governance",
+    description: "STT Governance 研究論文典藏，整理家族治理、公司治理與法遵、法律服務永續、企業領導與世代接班等研究脈絡。",
+    image: "/visual-bank/stt/user-approved-six/columns.png",
+    label: "研究與論文",
+  },
+  "/research/legal-service-sustainability": {
+    title: "顧客關係管理對服務永續之探討｜STT Research Papers",
+    description: "莊鈞翔博士論文研究：以 A 國際法律事務所為例，探討顧客關係管理、信任、服務創新與服務永續。",
+    image: "/visual-bank/stt/user-approved-six/columns.png",
+    label: "顧客關係管理對服務永續之探討",
+  },
+  "/research/corporate-governance-compliance": {
+    title: "企業策略導入公司治理法遵精神｜STT Research Papers",
+    description: "研究外部法律顧問團隊如何協助企業將公司治理、法遵、風險管理與企業策略整合進決策。",
+    image: "/visual-bank/stt/user-approved-six/columns.png",
+    label: "企業策略導入公司治理法遵精神",
+  },
+  "/research/family-business-succession": {
+    title: "臺灣企業接班人的佈局規劃與傳承家族價值｜STT Research Papers",
+    description: "研究臺灣家族企業接班、接班人培育、接班梯隊、家族價值與家族治理的制度化議題。",
+    image: "/visual-bank/stt/user-approved-six/columns.png",
+    label: "臺灣企業接班人的佈局規劃與傳承家族價值",
+  },
+  "/research/generational-entrepreneurs": {
+    title: "不同世代企業家人格特質、創新能力與經營績效｜STT Research Papers",
+    description: "研究不同世代企業家人格特質、創新能力、領導風格與企業經營績效之關係。",
+    image: "/visual-bank/stt/user-approved-six/columns.png",
+    label: "不同世代企業家人格特質、創新能力與企業經營績效",
   },
   "/about": {
     title: "關於 STT Governance｜治理判讀與制度設計",
@@ -270,6 +307,31 @@ function syncLanguageAlternates(pathname: string) {
   });
 }
 
+export const BOOK_SCHEMA = Object.fromEntries(BOOKS.map((book) => [`/books/${book.slug}`, book]));
+
+export const RESEARCH_SCHEMA: Record<string, { headline:string; name:string; author:string[]; datePublished:string; about:string[] }> = {
+  "/research/legal-service-sustainability": {
+    headline: "顧客關係管理對服務永續之探討：以 A 國際法律事務所為例",
+    name: "Discussion on Customer Relationship Management in Service Sustainability: A Case Study of A International Attorney Firm",
+    author: ["莊鈞翔"], datePublished: "2024-01", about: ["顧客關係管理","法律服務","服務永續","信任"]
+  },
+  "/research/corporate-governance-compliance": {
+    headline: "企業策略導入公司治理法遵精神：以外部法律顧問團隊協助為例",
+    name: "Integrating the Spirit of Corporate Governance and Legal Compliance into Business Strategy: The Assistance of External Legal Advisory Teams",
+    author: ["莊鈞翔"], datePublished: "2024-01", about: ["公司治理","法遵","企業策略","法律風險"]
+  },
+  "/research/family-business-succession": {
+    headline: "臺灣企業接班人的佈局規劃與傳承家族價值",
+    name: "Factors for Successful Succession of Taiwanese Family Businesses",
+    author: ["紀又綺","莊鈞翔"], datePublished: "2024-01", about: ["家族企業","接班","家族治理","家族價值"]
+  },
+  "/research/generational-entrepreneurs": {
+    headline: "不同世代企業家人格特質、創新能力對企業經營績效之影響－以領導風格為中介變數",
+    name: "The Relationship among Personality Traits of Different Generation Entrepreneurs, Innovation Ability and Performance – Leadership Style as an Intermediary Variable",
+    author: ["莊鈞翔"], datePublished: "2017-06", about: ["企業家","人格特質","創新能力","領導風格","經營績效"]
+  },
+};
+
 function removeSchemas() {
   document.head.querySelectorAll('script[data-stt-schema="true"]').forEach((node) => node.remove());
 }
@@ -307,6 +369,7 @@ export function applyGovernedMetadata(pathname: string) {
     upsertMeta('meta[name="twitter:card"]', { name: "twitter:card", content: "summary_large_image" });
     upsertMeta('meta[name="twitter:title"]', { name: "twitter:title", content: formal.title });
     upsertMeta('meta[name="twitter:description"]', { name: "twitter:description", content: formal.description });
+    upsertMeta('meta[name="twitter:image"]', { name: "twitter:image", content: `${STT_CANONICAL_ORIGIN}${formal.image ?? "/images/STT-Governance-Official-Logo.png"}` });
     upsertCanonical(canonical);
   } else {
     upsertMeta('meta[name="robots"]', { name: "robots", content: "noindex,follow" });
@@ -343,6 +406,40 @@ export function applyGovernedMetadata(pathname: string) {
           item: canonical,
         },
       ],
+    });
+  }
+
+  const bookSchema = BOOK_SCHEMA[normalized];
+  if (bookSchema) {
+    addSchema({
+      "@context": "https://schema.org",
+      "@type": "Book",
+      name: bookSchema.title,
+      alternateName: bookSchema.enTitle,
+      url: canonical,
+      image: `${STT_CANONICAL_ORIGIN}${bookSchema.image}`,
+      ...(bookSchema.author ? { author: { "@type": "Person", name: bookSchema.author } } : {}),
+      ...(bookSchema.year ? { datePublished: bookSchema.year } : {}),
+      ...(bookSchema.publisher ? { publisher: { "@type": "Organization", name: bookSchema.publisher } } : {}),
+      about: bookSchema.theme,
+      description: bookSchema.positioning,
+      isPartOf: { "@type": "CollectionPage", name: "STT Publications Library", url: STT_CANONICAL_ORIGIN + "/books" },
+    });
+  }
+
+  const researchSchema = RESEARCH_SCHEMA[normalized];
+  if (researchSchema) {
+    addSchema({
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      headline: researchSchema.headline,
+      name: researchSchema.name,
+      author: researchSchema.author.map(name => ({ "@type": "Person", name })),
+      datePublished: researchSchema.datePublished,
+      about: researchSchema.about,
+      url: canonical,
+      isPartOf: { "@type": "CollectionPage", name: "STT Research Papers｜研究論文典藏", url: STT_CANONICAL_ORIGIN + "/research" },
+      publisher: { "@type": "Organization", name: "STT Governance｜策略智庫智慧治理", url: STT_CANONICAL_ORIGIN + "/" },
     });
   }
 

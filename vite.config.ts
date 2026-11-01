@@ -4,7 +4,7 @@ import react from "@vitejs/plugin-react";
 import fs from "node:fs";
 import path from "node:path";
 import { defineConfig, type Plugin } from "vite";
-import { FORMAL_META, LANGUAGE_PAIRS, STT_CANONICAL_ORIGIN } from "./src/seo";
+import { BOOK_SCHEMA, FORMAL_META, LANGUAGE_PAIRS, RESEARCH_SCHEMA, STT_CANONICAL_ORIGIN } from "./src/seo";
 
 const FORMAL_HTML_FILES: Record<string, string> = Object.fromEntries(
   Object.keys(FORMAL_META).map(route => [route, route === "/" ? "index.html" : "seo-" + route.slice(1).replaceAll("/", "-") + ".html"]),
@@ -42,6 +42,40 @@ function schemaTags(route: string, label: string, image?: string, language: "zh-
         { "@type": "ListItem", position: 1, name: language === "zh-Hant-TW" ? "STT Governance｜策略智庫智慧治理" : "STT Governance", item: `${STT_CANONICAL_ORIGIN}${localizedHome}` },
         { "@type": "ListItem", position: 2, name: label, item: canonical },
       ],
+    });
+  }
+
+  const book = BOOK_SCHEMA[route];
+  if (book) {
+    schemas.push({
+      "@context": "https://schema.org",
+      "@type": "Book",
+      name: book.title,
+      alternateName: book.enTitle,
+      url: canonical,
+      image: `${STT_CANONICAL_ORIGIN}${book.image}`,
+      ...(book.author ? { author: { "@type": "Person", name: book.author } } : {}),
+      ...(book.year ? { datePublished: book.year } : {}),
+      ...(book.publisher ? { publisher: { "@type": "Organization", name: book.publisher } } : {}),
+      about: book.theme,
+      description: book.positioning,
+      isPartOf: { "@type": "CollectionPage", name: "STT Publications Library", url: STT_CANONICAL_ORIGIN + "/books" },
+    });
+  }
+
+  const research = RESEARCH_SCHEMA[route];
+  if (research) {
+    schemas.push({
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      headline: research.headline,
+      name: research.name,
+      author: research.author.map(name => ({ "@type": "Person", name })),
+      datePublished: research.datePublished,
+      about: research.about,
+      url: canonical,
+      isPartOf: { "@type": "CollectionPage", name: "STT Research Papers｜研究論文典藏", url: STT_CANONICAL_ORIGIN + "/research" },
+      publisher: { "@type": "Organization", name: "STT Governance｜策略智庫智慧治理", url: STT_CANONICAL_ORIGIN + "/" },
     });
   }
 
@@ -107,6 +141,7 @@ function formalSeoPages(): Plugin {
           '    <meta name="twitter:card" content="summary_large_image" />',
           `    <meta name="twitter:title" content="${escapeHtml(meta.title)}" />`,
           `    <meta name="twitter:description" content="${escapeHtml(meta.description)}" />`,
+          `    <meta name="twitter:image" content="${image}" />`,
           alternateTags,
           schemaTags(route, meta.label, meta.image, language),
         ].join("\n");
