@@ -65,6 +65,16 @@ export const GCSDA_META: Record<string,GcsdaMeta> = {
     "language": "en",
     "locale": "en_US"
   },
+  "/navigator": {
+    "title": "制度導航｜GCSDA",
+    "description": "以自然語言描述需求，由 GCSDA Institutional Navigator 協助前往會員、章程、治理、活動、研究與會務等正式網站頁面。"
+  },
+  "/en/navigator": {
+    "title": "Institutional Navigator | GCSDA",
+    "description": "Describe what you are looking for and the local GCSDA Institutional Navigator will direct you to the appropriate formal association page.",
+    "language": "en",
+    "locale": "en_US"
+  },
   "/en/membership": {
     "title": "Membership Framework | GCSDA",
     "description": "Understand GCSDA's membership application, qualification review and formal membership process. The governed application remains on the Traditional Chinese intake page.",
@@ -81,6 +91,8 @@ export const GCSDA_LANGUAGE_PAIRS:Record<string,{zh:string;en:string}>={
   "/governance":{zh:"/governance",en:"/en/governance"},
   "/en/governance":{zh:"/governance",en:"/en/governance"},
   "/membership":{zh:"/membership",en:"/en/membership"},
+  "/navigator":{zh:"/navigator",en:"/en/navigator"},
+  "/en/navigator":{zh:"/navigator",en:"/en/navigator"},
   "/en/membership":{zh:"/membership",en:"/en/membership"},
 };
 export function verifiedGcsdaOrigin(value?:string){
