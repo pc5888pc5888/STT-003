@@ -1,4 +1,4 @@
-# QA rerun: 2026-10-25 tablet baseline and canonical-route gate
+# QA rerun: 2026-11-01 multilingual navigation parity gate
 name: G10 dual-site rendered acceptance
 
 on:
@@ -81,6 +81,7 @@ jobs:
             {
               site:'stt',origin:'http://127.0.0.1:4173',
               routes:['/','/problems','/how-stt-works','/engagement','/insights','/about','/eric-chuang','/institutions','/start','/privacy','/professional-boundary',
+                '/en/problems','/en/insights','/ja/problems','/ja/insights','/ko/problems','/ko/insights',
                 '/problems/major-decision','/problems/owner-dependence','/problems/succession','/problems/family-ownership','/problems/strategic-legal','/problems/ai-governance','/problems/system-failure','/problems/founder-legacy']
             },
             {
@@ -229,6 +230,50 @@ jobs:
             const mem=await p.evaluate(()=>({state:document.querySelector('[data-membership-delivery]')?.getAttribute('data-membership-delivery')||null,form:!!document.querySelector('#gcsda-membership-form'),text:document.body.innerText,line:!!document.querySelector('a[href*="line.me"],a[href*="lin.ee"]')}));
             report.special.push({name:'GCSDA membership safe fallback when mail is unavailable',actual:mem,passed:mem.state==='fallback'&&!mem.form&&(mem.text.includes('LINE 會務受理')||mem.text.includes('LINE 會務聯絡'))&&mem.line});
             await context.close();
+          }
+
+          // Multilingual navigation parity: desktop and opened mobile menu must preserve all seven positions.
+          {
+            const locales=[
+              {code:'en',home:'/en',lang:'en',
+                labels:['What You’re Facing','How STT Works','Governance Engagement','Research & Publications','Eric Chuang, Ph.D.','Interviewee Area','About STT'],
+                hrefs:['/en/problems','/en/how-stt-works','/en/engagement','/en/insights','/eric-chuang','/humanistic-interview/','/en/about']},
+              {code:'ja',home:'/ja',lang:'ja',
+                labels:['いま直面している課題','STTの判断方法','ガバナンス委任','研究・出版','莊鈞翔博士','インタビュー対象者専用','STTについて'],
+                hrefs:['/ja/problems','/ja/how-stt-works','/ja/engagement','/ja/insights','/eric-chuang','/humanistic-interview/','/ja/about']},
+              {code:'ko',home:'/ko',lang:'ko',
+                labels:['현재 직면한 문제','STT의 판단 방식','거버넌스 위임','연구·출판','莊鈞翔 박사','인터뷰 대상자 전용','STT 소개'],
+                hrefs:['/ko/problems','/ko/how-stt-works','/ko/engagement','/ko/insights','/eric-chuang','/humanistic-interview/','/ko/about']}
+            ];
+            for(const spec of locales){
+              for(const [device,width,height] of [['desktop',1440,1000],['mobile',390,844]]){
+                const context=await browser.newContext({viewport:{width,height},reducedMotion:'reduce'});
+                const page=await context.newPage();
+                await page.goto('http://127.0.0.1:4173'+spec.home,{waitUntil:'networkidle',timeout:30000});
+                if(device==='mobile'){
+                  await page.locator('.stt-g0-menu-button').click();
+                  await page.waitForTimeout(100);
+                }
+                const state=await page.evaluate(({device})=>{
+                  const root=device==='mobile'?document.querySelector('.stt-g0-mobile-menu__primary'):document.querySelector('.stt-g0-desktop-nav');
+                  const links=[...(root?.querySelectorAll('a')||[])].map(a=>({text:(a.textContent||'').replace(/^\d{2}/,'').trim(),href:new URL(a.href).pathname}));
+                  const lang=document.documentElement.lang;
+                  const canonical=document.querySelector('link[rel="canonical"]')?.getAttribute('href')||null;
+                  const hreflangs=[...document.querySelectorAll('link[rel="alternate"][hreflang]')].map(x=>x.getAttribute('hreflang'));
+                  const overflow=document.documentElement.scrollWidth>innerWidth+1;
+                  const languageLinks=[...document.querySelectorAll(device==='mobile'?'.stt-g0-mobile-menu__secondary a':'.stt-g0-lang-cluster a')].map(a=>(a.textContent||'').trim()).filter(Boolean);
+                  return {links,lang,canonical,hreflangs,overflow,languageLinks};
+                },{device});
+                const navOkay=JSON.stringify(state.links.map(x=>x.text))===JSON.stringify(spec.labels)
+                  && JSON.stringify(state.links.map(x=>x.href))===JSON.stringify(spec.hrefs);
+                const languageUnique=new Set(state.languageLinks).size===state.languageLinks.length;
+                const metaOkay=state.lang===spec.lang && state.canonical?.endsWith(spec.home)
+                  && ['zh-Hant-TW','en','ja','ko','x-default'].every(x=>state.hreflangs.includes(x));
+                report.special.push({name:`multilingual ${spec.code} ${device} navigation parity`,actual:state,
+                  passed:navOkay&&languageUnique&&metaOkay&&!state.overflow});
+                await context.close();
+              }
+            }
           }
 
           await browser.close();
