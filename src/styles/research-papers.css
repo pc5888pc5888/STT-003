@@ -183,3 +183,14 @@
   .research-actions a{width:100%;justify-content:center}
 }
 @media(prefers-reduced-motion:reduce){.research-shell a,.research-shelf-cover{transition:none!important}}
+
+/* Accessibility: preserve strong contrast against navy primary reading actions. */
+#root .research-shell .research-hero-actions a.research-primary,
+#root .research-shell .research-actions a.research-primary {
+  color: #fff !important;
+  text-decoration: none;
+}
+#root .research-shell .research-hero-actions a.research-primary:hover,
+#root .research-shell .research-actions a.research-primary:hover {
+  color: #fff !important;
+}
