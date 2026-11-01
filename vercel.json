@@ -1,6 +1,42 @@
 {
   "rewrites": [
     {
+      "source": "/research",
+      "destination": "/seo-research.html"
+    },
+    {
+      "source": "/research/legal-service-sustainability",
+      "destination": "/seo-research-legal-service-sustainability.html"
+    },
+    {
+      "source": "/research/corporate-governance-compliance",
+      "destination": "/seo-research-corporate-governance-compliance.html"
+    },
+    {
+      "source": "/research/family-business-succession",
+      "destination": "/seo-research-family-business-succession.html"
+    },
+    {
+      "source": "/research/generational-entrepreneurs",
+      "destination": "/seo-research-generational-entrepreneurs.html"
+    },
+    {
+      "source": "/books/sustainable-family-governance",
+      "destination": "/seo-books-sustainable-family-governance.html"
+    },
+    {
+      "source": "/books/internal-compliance",
+      "destination": "/seo-books-internal-compliance.html"
+    },
+    {
+      "source": "/books/ai-governance",
+      "destination": "/seo-books-ai-governance.html"
+    },
+    {
+      "source": "/books/family-governance",
+      "destination": "/seo-books-family-governance.html"
+    },
+    {
       "source": "/ja/start",
       "destination": "/seo-ja-start.html"
     },
@@ -175,6 +211,51 @@
   ],
   "redirects": [
     {
+      "source": "/research/",
+      "destination": "/research",
+      "permanent": true
+    },
+    {
+      "source": "/research/legal-service-sustainability/",
+      "destination": "/research/legal-service-sustainability",
+      "permanent": true
+    },
+    {
+      "source": "/research/corporate-governance-compliance/",
+      "destination": "/research/corporate-governance-compliance",
+      "permanent": true
+    },
+    {
+      "source": "/research/family-business-succession/",
+      "destination": "/research/family-business-succession",
+      "permanent": true
+    },
+    {
+      "source": "/research/generational-entrepreneurs/",
+      "destination": "/research/generational-entrepreneurs",
+      "permanent": true
+    },
+    {
+      "source": "/books/sustainable-family-governance/",
+      "destination": "/books/sustainable-family-governance",
+      "permanent": true
+    },
+    {
+      "source": "/books/internal-compliance/",
+      "destination": "/books/internal-compliance",
+      "permanent": true
+    },
+    {
+      "source": "/books/ai-governance/",
+      "destination": "/books/ai-governance",
+      "permanent": true
+    },
+    {
+      "source": "/books/family-governance/",
+      "destination": "/books/family-governance",
+      "permanent": true
+    },
+    {
       "source": "/ja/start/",
       "destination": "/ja/start",
       "permanent": true
@@ -260,18 +341,8 @@
       "permanent": true
     },
     {
-      "source": "/books/internal-compliance",
-      "destination": "/books#internal-compliance",
-      "permanent": true
-    },
-    {
       "source": "/publications",
       "destination": "/books",
-      "permanent": true
-    },
-    {
-      "source": "/research",
-      "destination": "/insights",
       "permanent": true
     },
     {
@@ -316,12 +387,12 @@
     },
     {
       "source": "/internal-compliance",
-      "destination": "/books#internal-compliance",
+      "destination": "/books/internal-compliance",
       "permanent": true
     },
     {
       "source": "/internal-compliance/pillars",
-      "destination": "/books#internal-compliance",
+      "destination": "/books/internal-compliance",
       "permanent": true
     },
     {
@@ -331,7 +402,7 @@
     },
     {
       "source": "/internal-compliance/publication",
-      "destination": "/books#internal-compliance",
+      "destination": "/books/internal-compliance",
       "permanent": true
     },
     {
