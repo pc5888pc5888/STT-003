@@ -19,6 +19,7 @@ import { EnglishAbout, EnglishEngagement, EnglishHome, EnglishMethod, EnglishShe
 import { JapaneseAbout, JapaneseEngagement, JapaneseHome, JapaneseMethod, JapaneseShell, JapaneseStart } from "./pages/JapaneseFoundation";
 import { KoreanAbout, KoreanEngagement, KoreanHome, KoreanMethod, KoreanShell, KoreanStart } from "./pages/KoreanFoundation";
 import { ResearchOverview, ResearchPaperPage } from "./pages/ResearchPapers";
+import { LocalizedInsights, LocalizedProblems } from "./pages/LocalizedFoundationPages";
 
 type ShellProps = { children: ReactNode };
 
@@ -28,6 +29,8 @@ const STT_LINE_ADD_FRIEND_URL = "https://line.me/R/ti/p/%40783xkknh";
 
 const CHINESE_TO_ENGLISH: Record<string, string> = {
   "/": "/en",
+  "/problems": "/en/problems",
+  "/insights": "/en/insights",
   "/how-stt-works": "/en/how-stt-works",
   "/engagement": "/en/engagement",
   "/about": "/en/about",
@@ -36,6 +39,8 @@ const CHINESE_TO_ENGLISH: Record<string, string> = {
 
 const CHINESE_TO_JAPANESE: Record<string, string> = {
   "/": "/ja",
+  "/problems": "/ja/problems",
+  "/insights": "/ja/insights",
   "/how-stt-works": "/ja/how-stt-works",
   "/engagement": "/ja/engagement",
   "/about": "/ja/about",
@@ -44,6 +49,8 @@ const CHINESE_TO_JAPANESE: Record<string, string> = {
 
 const CHINESE_TO_KOREAN: Record<string, string> = {
   "/": "/ko",
+  "/problems": "/ko/problems",
+  "/insights": "/ko/insights",
   "/how-stt-works": "/ko/how-stt-works",
   "/engagement": "/ko/engagement",
   "/about": "/ko/about",
@@ -199,18 +206,24 @@ function AppRoutes() {
       <Route path="/" element={<Home />} />
       <Route path="/en" element={<EnglishHome />} />
       <Route path="/en/" element={<EnglishHome />} />
+      <Route path="/en/problems" element={<LocalizedProblems />} />
+      <Route path="/en/insights" element={<LocalizedInsights />} />
       <Route path="/en/how-stt-works" element={<EnglishMethod />} />
       <Route path="/en/engagement" element={<EnglishEngagement />} />
       <Route path="/en/about" element={<EnglishAbout />} />
       <Route path="/en/start" element={<EnglishStart />} />
       <Route path="/ja" element={<JapaneseHome />} />
       <Route path="/ja/" element={<JapaneseHome />} />
+      <Route path="/ja/problems" element={<LocalizedProblems />} />
+      <Route path="/ja/insights" element={<LocalizedInsights />} />
       <Route path="/ja/how-stt-works" element={<JapaneseMethod />} />
       <Route path="/ja/engagement" element={<JapaneseEngagement />} />
       <Route path="/ja/about" element={<JapaneseAbout />} />
       <Route path="/ja/start" element={<JapaneseStart />} />
       <Route path="/ko" element={<KoreanHome />} />
       <Route path="/ko/" element={<KoreanHome />} />
+      <Route path="/ko/problems" element={<LocalizedProblems />} />
+      <Route path="/ko/insights" element={<LocalizedInsights />} />
       <Route path="/ko/how-stt-works" element={<KoreanMethod />} />
       <Route path="/ko/engagement" element={<KoreanEngagement />} />
       <Route path="/ko/about" element={<KoreanAbout />} />
