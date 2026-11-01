@@ -49,6 +49,18 @@ jobs:
           const {chromium}=await import('/tmp/stt-visual-qa/node_modules/playwright/index.mjs');
           const browser=await chromium.launch({executablePath:process.env.CHROME_PATH,args:['--no-sandbox','--disable-dev-shm-usage']});
           const paths=['/research','/research/legal-service-sustainability','/research/corporate-governance-compliance','/research/family-business-succession','/research/generational-entrepreneurs','/books','/books/sustainable-family-governance','/books/internal-compliance','/books/ai-governance','/books/family-governance'];
+          const approvedPaperLinks={
+            '/research/legal-service-sustainability':'https://heyzine.com/flip-book/a46332e65b.html',
+            '/research/corporate-governance-compliance':'https://heyzine.com/flip-book/e98bb4535f.html',
+            '/research/family-business-succession':'https://heyzine.com/flip-book/beb87825ff.html',
+            '/research/generational-entrepreneurs':'https://heyzine.com/flip-book/5b35a9e836.html'
+          };
+          const approvedSeriesCovers={
+            '/research/legal-service-sustainability':'/research-covers/series-01.webp',
+            '/research/corporate-governance-compliance':'/research-covers/series-02.webp',
+            '/research/family-business-succession':'/research-covers/series-03.webp',
+            '/research/generational-entrepreneurs':'/research-covers/series-04.webp'
+          };
           const viewports=[{name:'desktop',width:1440,height:950},{name:'tablet',width:820,height:1050},{name:'mobile',width:390,height:844}];
           const report={screens:[],routes:[],errors:[]};
           for(const viewport of viewports){
@@ -79,8 +91,10 @@ jobs:
                   mainCount:document.querySelectorAll('main').length,
                   researchNav:!!document.querySelector('.stt-library-nav a[href="/research"]'),
                   heyzine:!!document.querySelector('a[href^="https://heyzine.com/flip-book/"]'),
+                  readingLinks:Array.from(document.querySelectorAll('a[href^="https://heyzine.com/flip-book/"]')).map(x=>x.href),
                   researchContent:!!document.querySelector('.research-numbered-list,.research-grid'),
-                  cssBackground:!!document.querySelector('.stt-publication-hero')
+                  researchHeroArt:document.querySelector('.research-detail-art')?.style.backgroundImage||null,
+                  bookHeroArt:document.querySelector('.stt-publication-hero')?getComputedStyle(document.querySelector('.stt-publication-hero'),'::before').backgroundImage:null
                 };
               });
               const isResearch=path.startsWith('/research');
@@ -93,6 +107,10 @@ jobs:
               if(!stats.researchNav)report.errors.push(viewport.name+' '+path+' missing research nav');
               if(isResearch && !stats.researchContent)report.errors.push(viewport.name+' '+path+' no substantive study content');
               if(isResearch && path!=='/research' && !stats.heyzine)report.errors.push(viewport.name+' '+path+' Heyzine missing');
+              if(approvedPaperLinks[path] && !stats.readingLinks.includes(approvedPaperLinks[path]))report.errors.push(viewport.name+' '+path+' wrong Heyzine edition');
+              if(approvedSeriesCovers[path] && !stats.imageSources.includes(approvedSeriesCovers[path]))report.errors.push(viewport.name+' '+path+' wrong cover');
+              if(approvedSeriesCovers[path] && !stats.researchHeroArt?.includes(approvedSeriesCovers[path]))report.errors.push(viewport.name+' '+path+' missing cover-derived hero motif');
+              if(path.startsWith('/books/') && !stats.bookHeroArt?.includes('/books/'))report.errors.push(viewport.name+' '+path+' missing book-cover derived motif');
               if(stats.horizontalOverflow>6)report.errors.push(viewport.name+' '+path+' horizontal scroll '+stats.horizontalOverflow);
               if(jsErrors.length)report.errors.push(viewport.name+' '+path+' JS '+jsErrors.join(' | '));
               report.routes.push({viewport:viewport.name,path,...stats,jsErrors});
