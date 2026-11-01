@@ -4,7 +4,7 @@ import react from "@vitejs/plugin-react";
 import fs from "node:fs";
 import path from "node:path";
 import { defineConfig, type Plugin } from "vite";
-import { FORMAL_META, STT_CANONICAL_ORIGIN } from "./src/seo";
+import { FORMAL_META, LANGUAGE_PAIRS, STT_CANONICAL_ORIGIN } from "./src/seo";
 
 const FORMAL_HTML_FILES: Record<string, string> = Object.fromEntries(
   Object.keys(FORMAL_META).map(route => [route, route === "/" ? "index.html" : "seo-" + route.slice(1).replaceAll("/", "-") + ".html"]),
@@ -17,7 +17,8 @@ function escapeHtml(value: string) {
     .replace(/"/g, "&quot;");
 }
 
-function schemaTags(route: string, label: string, image?: string) {
+function schemaTags(route: string, label: string, image?: string, language: "zh-Hant-TW" | "en" = "zh-Hant-TW") {
+  const isEnglish = language === "en";
   const canonical = `${STT_CANONICAL_ORIGIN}${route === "/" ? "/" : route}`;
   const schemas: unknown[] = [
     {
@@ -30,12 +31,12 @@ function schemaTags(route: string, label: string, image?: string) {
     },
   ];
 
-  if (route !== "/") {
+  if (route !== "/" && route !== "/en") {
     schemas.push({
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       itemListElement: [
-        { "@type": "ListItem", position: 1, name: "STT Governance｜策略智庫智慧治理", item: `${STT_CANONICAL_ORIGIN}/` },
+        { "@type": "ListItem", position: 1, name: isEnglish ? "STT Governance" : "STT Governance｜策略智庫智慧治理", item: isEnglish ? `${STT_CANONICAL_ORIGIN}/en` : `${STT_CANONICAL_ORIGIN}/` },
         { "@type": "ListItem", position: 2, name: label, item: canonical },
       ],
     });
@@ -80,11 +81,19 @@ function formalSeoPages(): Plugin {
 
         const canonical = `${STT_CANONICAL_ORIGIN}${route === "/" ? "/" : route}`;
         const image = `${STT_CANONICAL_ORIGIN}${meta.image ?? "/images/STT-Governance-Official-Logo.png"}`;
+        const language = meta.language ?? "zh-Hant-TW";
+        const locale = meta.locale ?? (language === "en" ? "en_US" : "zh_TW");
+        const languagePair = LANGUAGE_PAIRS[route];
+        const alternateTags = languagePair ? [
+          `    <link rel="alternate" hreflang="zh-Hant-TW" href="${STT_CANONICAL_ORIGIN}${languagePair.zh}" />`,
+          `    <link rel="alternate" hreflang="en" href="${STT_CANONICAL_ORIGIN}${languagePair.en}" />`,
+          `    <link rel="alternate" hreflang="x-default" href="${STT_CANONICAL_ORIGIN}${languagePair.zh}" />`,
+        ].join("\n") : "";
         const staticHead = [
           `    <meta name="robots" content="${escapeHtml(meta.robots ?? "index,follow")}" />`,
           `    <link rel="canonical" href="${canonical}" />`,
           '    <meta property="og:site_name" content="STT Governance｜策略智庫智慧治理" />',
-          '    <meta property="og:locale" content="zh_TW" />',
+          `    <meta property="og:locale" content="${locale}" />`,
           `    <meta property="og:type" content="${route === "/eric-chuang" ? "profile" : "website"}" />`,
           `    <meta property="og:title" content="${escapeHtml(meta.title)}" />`,
           `    <meta property="og:description" content="${escapeHtml(meta.description)}" />`,
@@ -93,11 +102,12 @@ function formalSeoPages(): Plugin {
           '    <meta name="twitter:card" content="summary_large_image" />',
           `    <meta name="twitter:title" content="${escapeHtml(meta.title)}" />`,
           `    <meta name="twitter:description" content="${escapeHtml(meta.description)}" />`,
-          schemaTags(route, meta.label, meta.image),
+          alternateTags,
+          schemaTags(route, meta.label, meta.image, language),
         ].join("\n");
 
         let html = baseHtml
-          .replace(/<html lang="[^"]*">/, '<html lang="zh-Hant-TW">')
+          .replace(/<html lang="[^"]*">/, `<html lang="${language}">`)
           .replace(/<title>[\s\S]*?<\/title>/, `<title>${escapeHtml(meta.title)}</title>`)
           .replace(
             /<meta\s+name="description"[\s\S]*?\/>/,
