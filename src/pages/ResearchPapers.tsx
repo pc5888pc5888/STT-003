@@ -86,9 +86,9 @@ export function ResearchOverview(){
       <h1>STT Research Papers｜研究論文典藏</h1>
       <p>研究不是履歷陳列，而是 STT 治理思想、方法與制度設計的可追溯來源。這裡整理研究脈絡，完整閱讀統一進入 Heyzine。</p>
     </div></section>
-    <main className="research-wrap"><div className="research-grid">{PAPERS.map(p=><PaperCard key={p.slug} paper={p}/>)}</div>
+    <div className="research-wrap"><div className="research-grid">{PAPERS.map(p=><PaperCard key={p.slug} paper={p}/>)}</div>
       <div className="research-back"><Link to="/insights">← 返回研究與出版</Link></div>
-    </main>
+    </div>
   </div>;
 }
 export function ResearchPaperPage(){
