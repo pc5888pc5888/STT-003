@@ -1,4 +1,4 @@
-# QA rerun: 2026-11-01 multilingual language-authority and hreflang dedupe gate
+# QA rerun: 2026-11-01 multilingual two-tier header collision gate
 name: G10 dual-site rendered acceptance
 
 on:
@@ -230,6 +230,42 @@ jobs:
             const mem=await p.evaluate(()=>({state:document.querySelector('[data-membership-delivery]')?.getAttribute('data-membership-delivery')||null,form:!!document.querySelector('#gcsda-membership-form'),text:document.body.innerText,line:!!document.querySelector('a[href*="line.me"],a[href*="lin.ee"]')}));
             report.special.push({name:'GCSDA membership safe fallback when mail is unavailable',actual:mem,passed:mem.state==='fallback'&&!mem.form&&(mem.text.includes('LINE 會務受理')||mem.text.includes('LINE 會務聯絡'))&&mem.line});
             await context.close();
+          }
+
+          // Multilingual desktop header geometry: no logo/nav/CTA/language collisions at common desktop widths.
+          {
+            for(const width of [1280,1440,1536]){
+              for(const spec of [
+                {code:'en',home:'/en'},
+                {code:'ja',home:'/ja'},
+                {code:'ko',home:'/ko'}
+              ]){
+                const context=await browser.newContext({viewport:{width,height:1000},reducedMotion:'reduce'});
+                const page=await context.newPage();
+                await page.goto('http://127.0.0.1:4173'+spec.home,{waitUntil:'networkidle',timeout:30000});
+                const state=await page.evaluate(()=>{
+                  const rect=e=>{const r=e?.getBoundingClientRect();return r?{left:r.left,right:r.right,top:r.top,bottom:r.bottom,width:r.width,height:r.height}:null};
+                  const brand=rect(document.querySelector('.stt-g0-brand'));
+                  const nav=rect(document.querySelector('.stt-g0-desktop-nav'));
+                  const cta=rect(document.querySelector('.stt-g0-primary-cta'));
+                  const lang=rect(document.querySelector('.stt-g0-lang-cluster'));
+                  const links=[...document.querySelectorAll('.stt-g0-desktop-nav .stt-g0-nav-link')].map(rect);
+                  const overlap=(a,b)=>!!a&&!!b&&a.left<b.right&&a.right>b.left&&a.top<b.bottom&&a.bottom>b.top;
+                  return {
+                    brand,nav,cta,lang,links,
+                    brandNavOverlap:overlap(brand,nav),
+                    ctaNavOverlap:overlap(cta,nav),
+                    langNavOverlap:overlap(lang,nav),
+                    navCount:links.length,
+                    headerOverflow:document.querySelector('.stt-g0-header')?.scrollWidth>innerWidth+1,
+                    documentOverflow:document.documentElement.scrollWidth>innerWidth+1
+                  };
+                });
+                report.special.push({name:`multilingual desktop header geometry ${spec.code} ${width}`,actual:state,
+                  passed:state.navCount===7&&!state.brandNavOverlap&&!state.ctaNavOverlap&&!state.langNavOverlap&&!state.headerOverflow&&!state.documentOverflow});
+                await context.close();
+              }
+            }
           }
 
           // Multilingual navigation parity: desktop and opened mobile menu must preserve all seven positions.
