@@ -20,9 +20,10 @@ export default function GovernedHero({ kicker, title, subtitle, lead, image, id,
   const picture = requestedPicture === INCOMPLETE_HOME_DERIVATIVE ? COMPLETE_HOME_ART : requestedPicture;
   const titleId = id || "page-title";
   const clearLeft = picture?.includes("/user-approved-six/");
+  const ownerOriginal = Boolean(picture?.includes("eric-page-owner-original.png"));
   const profileParity = false;
   return <>
-    <section className={`cis-hero gcsda-hero${route === "/" ? " gcsda-hero--home" : ""} cis-title-${lines.length}${picture ? " cis-with-image" : " cis-text-only"}${page?.portrait ? " cis-portrait" : ""}${clearLeft ? " cis-clear-left" : ""}${profileParity ? " cis-profile-parity" : ""}`} aria-labelledby={titleId} data-gcsda-hero="20261021.1">
+    <section className={`cis-hero gcsda-hero${route === "/" ? " gcsda-hero--home" : ""} cis-title-${lines.length}${picture ? " cis-with-image" : " cis-text-only"}${page?.portrait ? " cis-portrait" : ""}${clearLeft ? " cis-clear-left" : ""}${profileParity ? " cis-profile-parity" : ""}${ownerOriginal ? " cis-owner-original" : ""}`} aria-labelledby={titleId} data-gcsda-hero="20261021.1">
       <div className="cis-hero-inner">
         <div className="cis-hero-copy">
           {kicker && <p className="cis-kicker">{kicker}</p>}

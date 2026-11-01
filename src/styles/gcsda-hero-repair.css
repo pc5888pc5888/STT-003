@@ -856,3 +856,24 @@
   opacity:1!important;
   filter:none!important;
 }
+
+
+/* 2026-11-01 GCSDA OWNER ORIGINAL PORTRAIT RESTORE */
+#root .g4 .gcsda-hero.cis-hero.cis-owner-original{
+  background:linear-gradient(90deg,#fbfaf7 0%,#fbfaf7 46%,#f2eadf 100%)!important;
+}
+#root .g4 .gcsda-hero.cis-hero.cis-owner-original::before{
+  content:""!important;display:block!important;position:absolute!important;inset:0!important;z-index:1!important;pointer-events:none!important;
+  background:linear-gradient(90deg,#fff 0%,rgba(255,255,255,.99) 35%,rgba(255,255,255,.82) 49%,rgba(255,255,255,.18) 64%,rgba(255,255,255,0) 76%)!important;
+}
+#root .g4 .gcsda-hero.cis-hero.cis-owner-original .cis-hero-art{
+  background:linear-gradient(90deg,#fbfaf7 0%,#f2eadf 100%)!important;
+}
+#root .g4 .gcsda-hero.cis-hero.cis-owner-original .cis-hero-art::after{display:none!important;content:none!important}
+#root .g4 .gcsda-hero.cis-hero.cis-owner-original .cis-hero-art img{
+  object-fit:contain!important;object-position:right bottom!important;opacity:1!important;filter:none!important;transform:none!important;
+}
+@media(max-width:760px){
+  #root .g4 .gcsda-hero.cis-hero.cis-owner-original::before{display:none!important;content:none!important}
+  #root .g4 .gcsda-hero.cis-hero.cis-owner-original .cis-hero-art img{object-fit:contain!important;object-position:center bottom!important}
+}

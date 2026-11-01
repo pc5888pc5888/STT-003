@@ -32,13 +32,13 @@ export const PAGE_PRESENTATION: Record<string, PagePresentation> = {
       "創會理事長｜莊鈞翔博士"
     ],
     "type": 1,
-    "image": "/visual-bank/gcsda/founder-chairman-hero.webp",
+    "image": "/visual-approved/eric-page-owner-original.png",
     "originalTitle": "創會理事長｜莊鈞翔博士",
     "context": null,
     "portrait": true,
     "byline": "CHUANG CHUN HSIANG Ph.D.",
-    "imageWidth": 1672,
-    "imageHeight": 941
+    "imageWidth": 2048,
+    "imageHeight": 1152
   },
   "/governance": {
     "lines": [
