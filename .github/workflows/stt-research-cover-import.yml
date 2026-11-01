@@ -1,0 +1,53 @@
+name: STT Approved Research Covers - One-Time Import
+on:
+  push:
+    branches: [research-editorial-visual-20261101]
+    paths: ['.github/workflows/stt-research-cover-import.yml']
+permissions:
+  contents: write
+jobs:
+  import-published-covers:
+    runs-on: ubuntu-latest
+    timeout-minutes: 7
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Download cover previews from the four official STT Heyzine editions
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/stt-covers public/research-covers
+          curl -fLsS --retry 3 --max-time 30 -A 'Mozilla/5.0' 'https://cdnm.heyzine.com/files/uploaded/5b35a9e836f19fbb07d97ab74f7d0cf99140f57e.pdf-thumb.jpg' -o /tmp/stt-covers/series-01.jpg
+          curl -fLsS --retry 3 --max-time 30 -A 'Mozilla/5.0' 'https://cdnm.heyzine.com/files/uploaded/beb87825ff7d2e0a007c710bac8527db3b054920.pdf-thumb.jpg' -o /tmp/stt-covers/series-02.jpg
+          curl -fLsS --retry 3 --max-time 30 -A 'Mozilla/5.0' 'https://cdnm.heyzine.com/files/uploaded/e98bb4535f8d2555160578514a3de36c328fa7c5.pdf-thumb.jpg' -o /tmp/stt-covers/series-03.jpg
+          curl -fLsS --retry 3 --max-time 30 -A 'Mozilla/5.0' 'https://cdnm.heyzine.com/files/uploaded/a46332e65ba723f450400292da347c4deb157c04.pdf-thumb.jpg' -o /tmp/stt-covers/series-04.jpg
+      - name: Verify and encode local cover assets
+        run: |
+          python -m pip install --quiet Pillow
+          python - <<'PY'
+          from pathlib import Path
+          from PIL import Image
+          src=Path('/tmp/stt-covers')
+          dst=Path('public/research-covers')
+          for i in range(1,5):
+              name=f'series-{i:02d}'
+              with Image.open(src/f'{name}.jpg') as source:
+                  image=source.convert('RGB')
+                  if image.width < 170 or image.height < 220:
+                      raise ValueError(f'{name} invalid image size {image.size}')
+                  image.save(dst/f'{name}.webp',format='WEBP',quality=85,method=6)
+              assert (dst/f'{name}.webp').stat().st_size > 5000
+              print(name,image.size,(dst/f'{name}.webp').stat().st_size)
+          PY
+      - name: Commit only four verified cover assets to this feature branch
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add public/research-covers/series-01.webp public/research-covers/series-02.webp public/research-covers/series-03.webp public/research-covers/series-04.webp
+          git diff --cached --quiet && exit 0
+          git commit -m 'assets(stt): archive official research paper cover previews'
+          git push origin "HEAD:$GITHUB_REF_NAME"
