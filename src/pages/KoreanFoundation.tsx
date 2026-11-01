@@ -8,16 +8,20 @@ import { applyGovernedMetadata } from "../seo";
 const STT_LINE_ADD_FRIEND_URL = "https://line.me/R/ti/p/%40783xkknh";
 
 const KO_NAVIGATION = [
-  { label: "현재 직면한 문제", path: "/problems" },
+  { label: "현재 직면한 문제", path: "/ko/problems" },
   { label: "STT의 판단 방식", path: "/ko/how-stt-works" },
   { label: "거버넌스 위임", path: "/ko/engagement" },
-  { label: "연구·출판", path: "/insights" },
+  { label: "연구·출판", path: "/ko/insights" },
+  { label: "莊鈞翔 박사", path: "/eric-chuang" },
+  { label: "인터뷰 대상자 전용", path: "/humanistic-interview/" },
   { label: "STT 소개", path: "/ko/about" },
 ] as const;
 
 const KO_TO_ZH:Record<string,string>={
   "/ko":"/",
   "/ko/":"/",
+  "/ko/problems":"/problems",
+  "/ko/insights":"/insights",
   "/ko/how-stt-works":"/how-stt-works",
   "/ko/engagement":"/engagement",
   "/ko/about":"/about",
@@ -27,6 +31,8 @@ const KO_TO_ZH:Record<string,string>={
 const KO_TO_EN:Record<string,string>={
   "/ko":"/en",
   "/ko/":"/en",
+  "/ko/problems":"/en/problems",
+  "/ko/insights":"/en/insights",
   "/ko/how-stt-works":"/en/how-stt-works",
   "/ko/engagement":"/en/engagement",
   "/ko/about":"/en/about",
@@ -36,6 +42,8 @@ const KO_TO_EN:Record<string,string>={
 const KO_TO_JA:Record<string,string>={
   "/ko":"/ja",
   "/ko/":"/ja",
+  "/ko/problems":"/ja/problems",
+  "/ko/insights":"/ja/insights",
   "/ko/how-stt-works":"/ja/how-stt-works",
   "/ko/engagement":"/ja/engagement",
   "/ko/about":"/ja/about",
@@ -64,7 +72,7 @@ export function KoreanShell({children}:{children:ReactNode}){
           <img src={STT_OFFICIAL_LOGO_SRC} alt="STT Governance"/>
         </Link>
         <nav className="stt-g0-desktop-nav" aria-label="주요 내비게이션">
-          {KO_NAVIGATION.map(item=><NavLink key={item.path} to={item.path} className={({isActive})=>`stt-g0-nav-link${isActive?" is-active":""}`}>{item.label}</NavLink>)}
+          {KO_NAVIGATION.map(item=><NavLink key={item.path} to={item.path} reloadDocument={item.path==="/humanistic-interview/"} className={({isActive})=>`stt-g0-nav-link${isActive?" is-active":""}`}>{item.label}</NavLink>)}
         </nav>
         <Link to="/ko/start" className="stt-g0-primary-cta">거버넌스 판단 시작</Link>
         <div className="stt-g0-lang-cluster" aria-label="언어 전환">
@@ -79,7 +87,7 @@ export function KoreanShell({children}:{children:ReactNode}){
       {menuOpen&&<nav id="stt-ko-mobile-menu" className="stt-g0-mobile-menu" aria-label="모바일 내비게이션">
         <div className="stt-g0-mobile-menu__inner">
           <div className="stt-g0-mobile-menu__primary">
-            {KO_NAVIGATION.map((item,index)=><NavLink key={item.path} to={item.path}><span>{String(index+1).padStart(2,"0")}</span><strong>{item.label}</strong></NavLink>)}
+            {KO_NAVIGATION.map((item,index)=><NavLink key={item.path} to={item.path} reloadDocument={item.path==="/humanistic-interview/"}><span>{String(index+1).padStart(2,"0")}</span><strong>{item.label}</strong></NavLink>)}
           </div>
           <div className="stt-g0-mobile-menu__secondary">
             <Link to="/ko/start">거버넌스 판단 시작</Link>
