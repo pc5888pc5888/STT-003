@@ -1,6 +1,7 @@
 import { useMemo, useRef } from "react";
 import { Link, NavLink, Navigate, useLocation, useParams, useSearchParams } from "react-router-dom";
 import UnifiedTitleHero from "../components/UnifiedTitleHero";
+import NotFound from "../components/NotFound";
 import { BOOKS, SERIES, THEMES, WORKS, classifyTheme, isoDate, normalized, seriesHref, sourceLabel } from "../data/contentRegistry";
 import "../styles/publication-library.css";
 
@@ -89,7 +90,7 @@ export function BooksPage() {
 export function BookDetailPage() {
   const { slug = "" } = useParams();
   const book = BOOKS.find(item => item.slug === slug);
-  if (!book) return <Navigate to="/books" replace />;
+  if (!book) return <NotFound />;
   const readingLabel = book.isSample ? "線上試閱本書" : "線上翻閱本書";
   return <div className="stt-library stt-publication-detail">
     <section className={"stt-publication-hero book-"+book.slug}>
