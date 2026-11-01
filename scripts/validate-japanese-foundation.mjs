@@ -14,8 +14,10 @@ const vercel=JSON.parse(read("vercel.json"));
 
 const routes=[
   "/ja",
+  "/ja/problems",
   "/ja/how-stt-works",
   "/ja/engagement",
+  "/ja/insights",
   "/ja/about",
   "/ja/start",
 ];
@@ -38,6 +40,10 @@ requireToken(japanese,'fetch("/api/cooperation-submit"',"Japanese intake is not 
 requireToken(japanese,'source_account:"stt"',"Japanese intake attribution changed");
 requireToken(japanese,'landing_route:"/ja/start"',"Japanese intake landing route missing");
 requireToken(japanese,'https://line.me/R/ti/p/%40783xkknh',"Japanese LINE public URL changed");
+requireToken(japanese,'{ label: "いま直面している課題", path: "/ja/problems" }',"Japanese Problems navigation missing");
+requireToken(japanese,'{ label: "研究・出版", path: "/ja/insights" }',"Japanese Insights navigation missing");
+requireToken(japanese,'{ label: "莊鈞翔博士", path: "/eric-chuang" }',"Japanese founder navigation missing");
+requireToken(japanese,'{ label: "インタビュー対象者専用", path: "/humanistic-interview/" }',"Japanese interviewee navigation missing");
 
 const fetchCount=(japanese.match(/fetch\(/g)||[]).length;
 if(fetchCount!==1)errors.push(`Japanese layer must have exactly one fetch call; found ${fetchCount}`);
@@ -62,8 +68,10 @@ const rewrites=Array.isArray(vercel.rewrites)?vercel.rewrites:[];
 if(rewrites.some(item=>item?.source==="/ja/:path*"))errors.push("Broad /ja/:path* fallback is prohibited");
 const expected={
   "/ja":"/seo-ja.html",
+  "/ja/problems":"/seo-ja-problems.html",
   "/ja/how-stt-works":"/seo-ja-how-stt-works.html",
   "/ja/engagement":"/seo-ja-engagement.html",
+  "/ja/insights":"/seo-ja-insights.html",
   "/ja/about":"/seo-ja-about.html",
   "/ja/start":"/seo-ja-start.html",
 };
