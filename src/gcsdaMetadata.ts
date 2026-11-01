@@ -59,6 +59,12 @@ export const GCSDA_META: Record<string,GcsdaMeta> = {
     "language": "en",
     "locale": "en_US"
   },
+  "/en/founder-chairman": {
+    "title": "Founding Chairman | GCSDA",
+    "description": "Learn about GCSDA founding chairman Chuang Chun-Hsiang, Ph.D., the founding vision and the institutional boundary between the chairman's role and the association's formal governance.",
+    "language": "en",
+    "locale": "en_US"
+  },
   "/en/governance": {
     "title": "Institutional Governance | GCSDA",
     "description": "Understand GCSDA's institutional governance through its General Assembly, Board of Directors, Board of Supervisors, bylaws and formal procedures.",
@@ -75,6 +81,30 @@ export const GCSDA_META: Record<string,GcsdaMeta> = {
     "language": "en",
     "locale": "en_US"
   },
+  "/en/council": {
+    "title": "Strategy Governance Council | GCSDA",
+    "description": "Understand the Strategy Governance Council as an issue-led cross-disciplinary exchange mechanism that preserves professional and statutory governance boundaries.",
+    "language": "en",
+    "locale": "en_US"
+  },
+  "/en/events": {
+    "title": "Assemblies & Events | GCSDA",
+    "description": "Review how GCSDA distinguishes formation, assemblies, board meetings, programs and formal public records.",
+    "language": "en",
+    "locale": "en_US"
+  },
+  "/en/knowledge": {
+    "title": "Knowledge & Research | GCSDA",
+    "description": "Explore GCSDA knowledge domains across enterprise strategy, governance, compliance, risk control, sustainability and cross-disciplinary exchange.",
+    "language": "en",
+    "locale": "en_US"
+  },
+  "/en/charter": {
+    "title": "Charter & Notices | GCSDA",
+    "description": "Understand the institutional role of GCSDA's six-chapter, thirty-eight-article charter; the complete Traditional Chinese charter remains the formal published source.",
+    "language": "en",
+    "locale": "en_US"
+  },
   "/en/membership": {
     "title": "Membership Framework | GCSDA",
     "description": "Understand GCSDA's membership application, qualification review and formal membership process. The governed application remains on the Traditional Chinese intake page.",
@@ -88,12 +118,22 @@ export const GCSDA_LANGUAGE_PAIRS:Record<string,{zh:string;en:string}>={
   "/en":{zh:"/",en:"/en"},
   "/about":{zh:"/about",en:"/en/about"},
   "/en/about":{zh:"/about",en:"/en/about"},
+  "/founder-chairman":{zh:"/founder-chairman",en:"/en/founder-chairman"},
+  "/en/founder-chairman":{zh:"/founder-chairman",en:"/en/founder-chairman"},
   "/governance":{zh:"/governance",en:"/en/governance"},
   "/en/governance":{zh:"/governance",en:"/en/governance"},
+  "/council":{zh:"/council",en:"/en/council"},
+  "/en/council":{zh:"/council",en:"/en/council"},
   "/membership":{zh:"/membership",en:"/en/membership"},
+  "/en/membership":{zh:"/membership",en:"/en/membership"},
+  "/events":{zh:"/events",en:"/en/events"},
+  "/en/events":{zh:"/events",en:"/en/events"},
+  "/knowledge":{zh:"/knowledge",en:"/en/knowledge"},
+  "/en/knowledge":{zh:"/knowledge",en:"/en/knowledge"},
+  "/charter":{zh:"/charter",en:"/en/charter"},
+  "/en/charter":{zh:"/charter",en:"/en/charter"},
   "/navigator":{zh:"/navigator",en:"/en/navigator"},
   "/en/navigator":{zh:"/navigator",en:"/en/navigator"},
-  "/en/membership":{zh:"/membership",en:"/en/membership"},
 };
 export function verifiedGcsdaOrigin(value?:string){
  if(!value)return "";
@@ -107,7 +147,7 @@ export function applyGcsdaMetadata(path:string){
  function set(key:string,value:string,property=false){const attr=property?"property":"name";let el=document.head.querySelector<HTMLMetaElement>(`meta[${attr}="${key}"]`);if(!el){el=document.createElement("meta");el.setAttribute(attr,key);document.head.appendChild(el);}el.content=value;}
  const title=meta?.title||"找不到頁面｜GCSDA",description=meta?.description||"中華企業策略永續發展學會網站導覽。";
  document.title=title;set("description",description);set("robots",origin&&meta?"index,follow":"noindex,follow");
- const isFounder=path==="/founder-chairman";set("og:title",title,true);set("og:description",description,true);set("og:site_name","GCSDA｜中華企業策略永續發展學會",true);set("og:type",isFounder?"profile":"website",true);set("og:locale",locale,true);
+ const isFounder=path==="/founder-chairman"||path==="/en/founder-chairman";set("og:title",title,true);set("og:description",description,true);set("og:site_name","GCSDA｜中華企業策略永續發展學會",true);set("og:type",isFounder?"profile":"website",true);set("og:locale",locale,true);
  document.head.querySelectorAll('link[rel="canonical"],link[data-gcsda-language-alternate="true"]').forEach(el=>el.remove());
  const pair=GCSDA_LANGUAGE_PAIRS[path];
  if(origin&&pair){
@@ -118,7 +158,7 @@ export function applyGcsdaMetadata(path:string){
  document.getElementById("gcsda-organization-schema")?.remove();document.getElementById("gcsda-founder-schema")?.remove();
  if(origin&&meta){
   const link=document.createElement("link");link.rel="canonical";link.href=origin+path;document.head.appendChild(link);set("og:url",origin+path,true);set("og:image",origin+(isFounder?"/visual-bank/gcsda/founder-chairman-hero.webp":"/images/gcsda-logo.png"),true);set("og:image:alt",isFounder?"創會理事長莊鈞翔博士":"中華企業策略永續發展學會 GCSDA 標誌",true);
-  const schema=document.createElement("script");schema.id="gcsda-organization-schema";schema.type="application/ld+json";schema.text=JSON.stringify({"@context":"https://schema.org","@type":"Organization","name":"中華企業策略永續發展學會","alternateName":"GCSDA","url":origin,"logo":origin+"/images/gcsda-logo.png","inLanguage":language});document.head.appendChild(schema);if(isFounder){const person=document.createElement("script");person.id="gcsda-founder-schema";person.type="application/ld+json";person.text=JSON.stringify({"@context":"https://schema.org","@type":"Person","name":"莊鈞翔博士","url":origin+"/founder-chairman","image":origin+"/visual-bank/gcsda/founder-chairman-hero.webp","jobTitle":"創會理事長","affiliation":{"@type":"Organization","name":"中華企業策略永續發展學會","alternateName":"GCSDA","url":origin}});document.head.appendChild(person);}
+  const schema=document.createElement("script");schema.id="gcsda-organization-schema";schema.type="application/ld+json";schema.text=JSON.stringify({"@context":"https://schema.org","@type":"Organization","name":"中華企業策略永續發展學會","alternateName":"GCSDA","url":origin,"logo":origin+"/images/gcsda-logo.png","inLanguage":language});document.head.appendChild(schema);if(isFounder){const person=document.createElement("script");person.id="gcsda-founder-schema";person.type="application/ld+json";person.text=JSON.stringify({"@context":"https://schema.org","@type":"Person","name":"莊鈞翔博士","alternateName":"Chuang Chun-Hsiang, Ph.D.","url":origin+"/founder-chairman","image":origin+"/visual-bank/gcsda/founder-chairman-hero.webp","jobTitle":language==="en"?"Founding Chairman":"創會理事長","affiliation":{"@type":"Organization","name":"中華企業策略永續發展學會","alternateName":"GCSDA","url":origin}});document.head.appendChild(person);}
  }
  else{document.head.querySelectorAll('meta[property="og:url"],meta[property="og:image"],meta[property="og:image:alt"]').forEach(el=>el.remove());}
 }
