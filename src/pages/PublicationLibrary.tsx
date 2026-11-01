@@ -55,7 +55,7 @@ export function BooksPage() {
     <UnifiedTitleHero
       kicker="STT GOVERNANCE · BOOKS & PUBLICATIONS"
       title="電子書與出版"
-      lead="STT Publications Library 將正式出版品整理為可理解、可追溯的治理知識資產。先理解一本書處理的治理問題與思想位置，再進入正式線上翻閱或試閱。"
+      lead="STT Publications Library 將正式出版品整理為可理解、可追溯的治理知識資產。先理解一本書處理的治理問題與思想位置，再由正式外部入口前往閱讀。"
       image="/visual-bank/stt/user-approved-six/publications.png"
       imagePosition="center right"
       id="books-title"
@@ -79,7 +79,7 @@ export function BooksPage() {
           <div className="stt-book-tags" aria-label="治理主題">{book.theme.map(item=><span key={item}>{item}</span>)}</div>
           <div className="stt-book-card-actions">
             <Link className="stt-publication-primary-link" to={"/books/"+book.slug}>閱讀本書介紹 →</Link>
-            <a className="stt-publication-secondary-link" href={book.previewUrl} target="_blank" rel="noopener noreferrer">{book.isSample ? "快速進入線上試閱 ↗" : "快速進入線上翻閱 ↗"}</a>
+            <a className="stt-publication-secondary-link" href={book.previewUrl} target="_blank" rel="noopener noreferrer">{book.isSample ? "前往正式外部試閱 ↗" : "前往正式外部閱讀 ↗"}</a>
           </div>
         </div>
       </article>)}
@@ -145,14 +145,12 @@ export function BookDetailPage() {
       </section>
 
       <section className="stt-publication-reading" aria-labelledby="book-reading-title">
-        <p className="stt-library-kicker">OFFICIAL ONLINE READING</p>
-        <h2 id="book-reading-title">正式線上閱讀</h2>
-        <p>{book.isSample ? "本頁連結為正式線上試閱版本。" : "本頁連結為正式線上翻閱版本。"} 閱讀介面由 Heyzine 提供，內容仍屬本出版品之正式{book.isSample ? "試閱" : "閱讀"}版本。本站不提供 PDF 下載。</p>
+        <p className="stt-library-kicker">OFFICIAL EXTERNAL READING</p>
+        <h2 id="book-reading-title">正式外部閱讀入口</h2>
+        <p>本站不內嵌、不預覽電子書內容，也不提供 PDF 下載。需要閱讀或試閱時，請由下方正式外部入口前往 Heyzine。</p>
         <div className="stt-publication-reading-actions">
-          <a className="stt-publication-cta" href={book.previewUrl} target="_blank" rel="noopener noreferrer">{readingLabel} ↗</a>
-          <a href={book.previewUrl} target="_blank" rel="noopener noreferrer">另開閱讀視窗 ↗</a>
+          <a className="stt-publication-cta" href={book.previewUrl} target="_blank" rel="noopener noreferrer">{book.isSample ? "前往 Heyzine 正式試閱" : "前往 Heyzine 正式閱讀"} ↗</a>
         </div>
-        <div className="stt-publication-reader"><iframe title={book.title+" 線上閱讀"} src={book.previewUrl} loading="lazy" allowFullScreen /></div>
       </section>
 
       <section aria-labelledby="book-related-title">
