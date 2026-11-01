@@ -24,26 +24,25 @@
 
 @media(min-width:1121px){
   #root .g4 .g4-head .g4-headin{
-    width:min(1780px,calc(100% - 32px))!important;
+    width:min(1840px,calc(100% - 24px))!important;
     max-width:none!important;
-    height:132px!important;
-    min-height:132px!important;
+    height:92px!important;
+    min-height:92px!important;
     margin:0 auto!important;
-    padding:0 18px!important;
+    padding:0 12px!important;
     display:grid!important;
-    grid-template-columns:minmax(300px,1fr) auto auto!important;
-    grid-template-rows:76px 56px!important;
-    column-gap:22px!important;
-    row-gap:0!important;
+    grid-template-columns:minmax(240px,300px) minmax(0,1fr) auto auto!important;
+    grid-template-rows:92px!important;
+    column-gap:12px!important;
     align-items:center!important;
   }
 
   #root .g4 .g4-head .g4-brand{
     grid-column:1!important;
     grid-row:1!important;
-    width:min(360px,100%)!important;
-    max-width:360px!important;
-    height:68px!important;
+    width:min(290px,100%)!important;
+    max-width:290px!important;
+    height:66px!important;
     min-width:0!important;
     display:flex!important;
     align-items:center!important;
@@ -60,8 +59,60 @@
     object-position:left center!important;
   }
 
-  #root .g4 .g4-head .g4-head-cta{
+  #root .g4 .g4-head .g4-nav{
     grid-column:2!important;
+    grid-row:1!important;
+    align-self:stretch!important;
+    display:grid!important;
+    grid-template-columns:repeat(8,minmax(0,1fr))!important;
+    width:100%!important;
+    height:92px!important;
+    min-height:92px!important;
+    margin:0!important;
+    gap:0!important;
+    border-top:0!important;
+    background:transparent!important;
+  }
+
+  #root .g4 .g4-head .g4-nav>a:not(.g4-lang-switch){
+    position:relative!important;
+    width:100%!important;
+    min-width:0!important;
+    height:92px!important;
+    min-height:92px!important;
+    margin:0!important;
+    padding:0 6px!important;
+    display:flex!important;
+    align-items:center!important;
+    justify-content:center!important;
+    text-align:center!important;
+    white-space:normal!important;
+    color:var(--gcsda-header-ink)!important;
+    background:transparent!important;
+    border:0!important;
+    font-size:12.4px!important;
+    line-height:1.25!important;
+    text-decoration:none!important;
+  }
+
+  #root .g4 .g4-head .g4-nav>a:not(.g4-lang-switch):hover,
+  #root .g4 .g4-head .g4-nav>a.active:not(.g4-lang-switch){
+    color:var(--gcsda-header-gold)!important;
+    background:rgba(255,255,255,.14)!important;
+  }
+
+  #root .g4 .g4-head .g4-nav>a.active:not(.g4-lang-switch)::after{
+    content:""!important;
+    position:absolute!important;
+    left:18%!important;
+    right:18%!important;
+    bottom:12px!important;
+    height:1.5px!important;
+    background:#9b6e38!important;
+  }
+
+  #root .g4 .g4-head .g4-head-cta{
+    grid-column:3!important;
     grid-row:1!important;
     display:inline-flex!important;
     width:auto!important;
@@ -71,20 +122,20 @@
     justify-self:end!important;
     align-items:center!important;
     justify-content:center!important;
-    padding:10px 22px!important;
+    padding:10px 16px!important;
     border:1px solid rgba(155,110,56,.82)!important;
     border-radius:999px!important;
-    background:rgba(255,255,255,.42)!important;
+    background:rgba(255,255,255,.30)!important;
     color:#795226!important;
-    box-shadow:inset 0 0 0 1px rgba(255,255,255,.38)!important;
-    font-size:14px!important;
+    box-shadow:inset 0 0 0 1px rgba(255,255,255,.28)!important;
+    font-size:13px!important;
     text-decoration:none!important;
     white-space:nowrap!important;
   }
 
   #root .g4 .g4-head .g4-lang-top,
   #root .g4 .g4-head .g4-lang-switch{
-    grid-column:3!important;
+    grid-column:4!important;
     grid-row:1!important;
     display:inline-flex!important;
     align-items:center!important;
@@ -93,67 +144,15 @@
     min-width:42px!important;
     height:42px!important;
     margin:0!important;
-    padding-left:18px!important;
+    padding-left:12px!important;
     border:0!important;
     border-left:1px solid rgba(155,110,56,.22)!important;
     color:var(--gcsda-header-gold)!important;
-    font-size:12px!important;
+    font-size:11px!important;
     font-weight:600!important;
-    letter-spacing:.04em!important;
+    letter-spacing:.03em!important;
     text-decoration:none!important;
     white-space:nowrap!important;
-  }
-
-  #root .g4 .g4-head .g4-nav{
-    grid-column:1 / -1!important;
-    grid-row:2!important;
-    align-self:stretch!important;
-    display:grid!important;
-    grid-template-columns:repeat(8,minmax(0,1fr))!important;
-    width:100%!important;
-    height:56px!important;
-    min-height:56px!important;
-    margin:0!important;
-    gap:0!important;
-    border-top:1px solid rgba(155,110,56,.14)!important;
-    background:rgba(255,255,255,.10)!important;
-  }
-
-  #root .g4 .g4-head .g4-nav>a:not(.g4-lang-switch){
-    position:relative!important;
-    width:100%!important;
-    min-width:0!important;
-    height:56px!important;
-    min-height:56px!important;
-    margin:0!important;
-    padding:0 12px!important;
-    display:flex!important;
-    align-items:center!important;
-    justify-content:center!important;
-    text-align:center!important;
-    white-space:normal!important;
-    color:var(--gcsda-header-ink)!important;
-    background:transparent!important;
-    border:0!important;
-    font-size:14px!important;
-    line-height:1.35!important;
-    text-decoration:none!important;
-  }
-
-  #root .g4 .g4-head .g4-nav>a:not(.g4-lang-switch):hover,
-  #root .g4 .g4-head .g4-nav>a.active:not(.g4-lang-switch){
-    color:var(--gcsda-header-gold)!important;
-    background:rgba(255,255,255,.26)!important;
-  }
-
-  #root .g4 .g4-head .g4-nav>a.active:not(.g4-lang-switch)::after{
-    content:""!important;
-    position:absolute!important;
-    left:23%!important;
-    right:23%!important;
-    bottom:8px!important;
-    height:1.5px!important;
-    background:#9b6e38!important;
   }
 
   #root .g4 .g4-head .g4-menu{
@@ -161,28 +160,36 @@
   }
 }
 
-@media(min-width:1121px) and (max-width:1299px){
+@media(min-width:1121px) and (max-width:1399px){
   #root .g4 .g4-head .g4-headin{
-    width:calc(100% - 20px)!important;
-    padding:0 10px!important;
-    grid-template-columns:minmax(260px,1fr) auto auto!important;
-    column-gap:14px!important;
+    width:calc(100% - 16px)!important;
+    padding:0 8px!important;
+    grid-template-columns:minmax(190px,240px) minmax(0,1fr) auto!important;
+    column-gap:8px!important;
   }
 
   #root .g4 .g4-head .g4-brand{
-    width:min(320px,100%)!important;
-    max-width:320px!important;
+    width:min(230px,100%)!important;
+    max-width:230px!important;
+    height:58px!important;
   }
 
-  #root .g4 .g4-head .g4-nav>a:not(.g4-lang-switch){
-    padding:0 7px!important;
-    font-size:12.25px!important;
+  #root .g4 .g4-head .g4-nav,
+  #root .g4 .g4-head .g4-lang-top,
+  #root .g4 .g4-head .g4-lang-switch{
+    display:none!important;
   }
 
   #root .g4 .g4-head .g4-head-cta{
-    padding-left:16px!important;
-    padding-right:16px!important;
-    font-size:13px!important;
+    grid-column:2!important;
+    justify-self:end!important;
+  }
+
+  #root .g4 .g4-head .g4-menu{
+    grid-column:3!important;
+    grid-row:1!important;
+    display:inline-flex!important;
+    justify-self:end!important;
   }
 }
 
@@ -248,7 +255,6 @@
   }
 }
 
-
 /* HERO UNDER-HEADER EXPANSION — shared quality rule, independent GCSDA CIS. */
 @media(min-width:1121px){
   #root .g4 .g4-home,
@@ -257,27 +263,27 @@
   }
 
   #root .g4 .g4-home .g4-home-media{
-    top:-132px!important;
+    top:-92px!important;
     right:0!important;
     bottom:auto!important;
     left:0!important;
-    height:calc(100% + 132px)!important;
+    height:calc(100% + 92px)!important;
   }
 
   #root .g4 .g4-pagehead .g4-pagehead-media{
-    top:-132px!important;
+    top:-92px!important;
     right:0!important;
     bottom:auto!important;
     left:0!important;
-    height:calc(100% + 132px)!important;
+    height:calc(100% + 92px)!important;
   }
 
   #root .g4 .g4-pagehead .g4-pagehead-veil{
-    top:-132px!important;
+    top:-92px!important;
     right:0!important;
     bottom:auto!important;
     left:0!important;
-    height:calc(100% + 132px)!important;
+    height:calc(100% + 92px)!important;
   }
 
   #root .g4 .g4-head{
