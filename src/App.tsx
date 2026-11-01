@@ -172,10 +172,8 @@ function PublicShell({ children }: ShellProps) {
                 {SECONDARY_NAVIGATION.map((item) => <NavLink key={item.path} to={item.path}>{item.label}</NavLink>)}
                 <Link to="/start">開始治理判讀</Link>
                 <Link to={englishPath} hrefLang="en" lang="en">English</Link>
-            <Link to={japanesePath} hrefLang="ja" lang="ja">日本語</Link>
-            <Link to={koreanPath} hrefLang="ko" lang="ko">한국어</Link>
-                <Link to={koreanPath} hrefLang="ko" lang="ko">한국어</Link>
                 <Link to={japanesePath} hrefLang="ja" lang="ja">日本語</Link>
+                <Link to={koreanPath} hrefLang="ko" lang="ko">한국어</Link>
               </div>
             </div>
           </nav>
@@ -193,6 +191,8 @@ function PublicShell({ children }: ShellProps) {
             <a href={STT_LINE_ADD_FRIEND_URL} target="_blank" rel="noopener noreferrer">STT LINE 官方帳號（治理聯絡） ↗</a>
             <Link to="/navigator">治理導航</Link><Link to="/privacy">隱私</Link><Link to="/professional-boundary">專業服務邊界</Link>
             <Link to={englishPath} hrefLang="en" lang="en">English</Link>
+            <Link to={japanesePath} hrefLang="ja" lang="ja">日本語</Link>
+            <Link to={koreanPath} hrefLang="ko" lang="ko">한국어</Link>
           </nav>
         </div>
       </footer>
