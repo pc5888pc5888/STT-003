@@ -1,6 +1,30 @@
 {
   "rewrites": [
     {
+      "source": "/ko/insights",
+      "destination": "/seo-ko-insights.html"
+    },
+    {
+      "source": "/ko/problems",
+      "destination": "/seo-ko-problems.html"
+    },
+    {
+      "source": "/ja/insights",
+      "destination": "/seo-ja-insights.html"
+    },
+    {
+      "source": "/ja/problems",
+      "destination": "/seo-ja-problems.html"
+    },
+    {
+      "source": "/en/insights",
+      "destination": "/seo-en-insights.html"
+    },
+    {
+      "source": "/en/problems",
+      "destination": "/seo-en-problems.html"
+    },
+    {
       "source": "/research",
       "destination": "/seo-research.html"
     },
@@ -230,6 +254,36 @@
     }
   ],
   "redirects": [
+    {
+      "source": "/ko/insights/",
+      "destination": "/ko/insights",
+      "permanent": true
+    },
+    {
+      "source": "/ko/problems/",
+      "destination": "/ko/problems",
+      "permanent": true
+    },
+    {
+      "source": "/ja/insights/",
+      "destination": "/ja/insights",
+      "permanent": true
+    },
+    {
+      "source": "/ja/problems/",
+      "destination": "/ja/problems",
+      "permanent": true
+    },
+    {
+      "source": "/en/insights/",
+      "destination": "/en/insights",
+      "permanent": true
+    },
+    {
+      "source": "/en/problems/",
+      "destination": "/en/problems",
+      "permanent": true
+    },
     {
       "source": "/research/",
       "destination": "/research",
