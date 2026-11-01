@@ -55,9 +55,7 @@ function schemaTags(route: string, label: string, image?: string, language: "zh-
       image: `${STT_CANONICAL_ORIGIN}${book.image}`,
       ...(book.author ? { author: { "@type": "Person", name: book.author } } : {}),
       ...(book.year ? { datePublished: book.year } : {}),
-      ...(book.publisher ? { publisher: { "@type": "Organization", name: book.publisher } } : {
-        publisher: { "@type": "Organization", name: "STT Governance｜策略智庫智慧治理", url: STT_CANONICAL_ORIGIN + "/" }
-      }),
+      ...(book.publisher ? { publisher: { "@type": "Organization", name: book.publisher } } : {}),
       about: book.theme,
       description: book.positioning,
       isPartOf: { "@type": "CollectionPage", name: "STT Publications Library", url: STT_CANONICAL_ORIGIN + "/books" },
