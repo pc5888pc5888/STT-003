@@ -1,4 +1,4 @@
-# QA rerun: 2026-11-01 hero expansion after GCSDA gate alignment
+# QA rerun: 2026-11-01 single-row desktop navigation final acceptance
 name: G10 dual-site rendered acceptance
 
 on:
