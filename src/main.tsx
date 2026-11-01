@@ -23,6 +23,7 @@ import "./styles/interview-entry-navigation.css";
 import "./styles/stt-english-foundation.css";
 import "./styles/stt-governance-navigator.css";
 import "./styles/stt-japanese-foundation.css";
+import "./styles/stt-korean-foundation.css";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode><AppProviders><App /></AppProviders></React.StrictMode>
