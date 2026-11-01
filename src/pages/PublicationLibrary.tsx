@@ -8,6 +8,7 @@ import "../styles/publication-library.css";
 export function PublicationNavigation() {
   return <nav className="stt-library-nav" aria-label="研究與出版分類">
     <NavLink to="/insights" end>總覽</NavLink>
+    <NavLink to="/research">研究與論文</NavLink>
     <NavLink to="/books">電子書與出版</NavLink>
     <NavLink to="/columns" end>全部專欄與報導</NavLink>
     {SERIES.filter(item => item.route).map(item => <NavLink key={item.key} to={seriesHref(item)}>{item.label}</NavLink>)}

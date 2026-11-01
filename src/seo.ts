@@ -60,25 +60,25 @@ export const FORMAL_META: Record<string, MetaRecord> = {
   "/research/legal-service-sustainability": {
     title: "顧客關係管理對服務永續之探討｜STT Research Papers",
     description: "莊鈞翔博士論文研究：以 A 國際法律事務所為例，探討顧客關係管理、信任、服務創新與服務永續。",
-    image: "/visual-bank/stt/user-approved-six/columns.png",
+    image: "/research-covers/series-01.webp",
     label: "顧客關係管理對服務永續之探討",
   },
   "/research/corporate-governance-compliance": {
     title: "企業策略導入公司治理法遵精神｜STT Research Papers",
     description: "研究外部法律顧問團隊如何協助企業將公司治理、法遵、風險管理與企業策略整合進決策。",
-    image: "/visual-bank/stt/user-approved-six/columns.png",
+    image: "/research-covers/series-02.webp",
     label: "企業策略導入公司治理法遵精神",
   },
   "/research/family-business-succession": {
     title: "臺灣企業接班人的佈局規劃與傳承家族價值｜STT Research Papers",
     description: "研究臺灣家族企業接班、接班人培育、接班梯隊、家族價值與家族治理的制度化議題。",
-    image: "/visual-bank/stt/user-approved-six/columns.png",
+    image: "/research-covers/series-03.webp",
     label: "臺灣企業接班人的佈局規劃與傳承家族價值",
   },
   "/research/generational-entrepreneurs": {
     title: "不同世代企業家人格特質、創新能力與經營績效｜STT Research Papers",
     description: "研究不同世代企業家人格特質、創新能力、領導風格與企業經營績效之關係。",
-    image: "/visual-bank/stt/user-approved-six/columns.png",
+    image: "/research-covers/series-04.webp",
     label: "不同世代企業家人格特質、創新能力與企業經營績效",
   },
   "/about": {

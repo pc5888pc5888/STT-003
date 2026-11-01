@@ -196,3 +196,23 @@
   .stt-publication-reading-actions{display:grid}
   .stt-publication-reading-actions a{justify-content:center}
 }
+
+
+/* Approved publication-cover details used as restrained architectural imagery. */
+.stt-publication-hero{isolation:isolate}
+.stt-publication-hero::before{
+  content:"";position:absolute;inset:-18% -2% -14% auto;width:44%;
+  pointer-events:none;z-index:0;opacity:.105;
+  background-image:var(--stt-publication-art);
+  background-size:210% auto;background-position:76% 77%;background-repeat:no-repeat;
+  filter:saturate(.72) contrast(.92);
+  -webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 45%,#000 100%);
+  mask-image:linear-gradient(90deg,transparent 0%,#000 45%,#000 100%);
+}
+.stt-publication-hero::after{z-index:0;pointer-events:none}
+.stt-publication-hero__inner{z-index:1}
+.book-sustainable-family-governance{--stt-publication-art:url("/books/2026-sustainable-family-governance.jpg")}
+.book-internal-compliance{--stt-publication-art:url("/books/internal-compliance.jpg")}
+.book-ai-governance{--stt-publication-art:url("/books/ai-governance.webp")}
+.book-family-governance{--stt-publication-art:url("/books/family-governance.webp")}
+@media(max-width:760px){.stt-publication-hero::before{width:68%;opacity:.065;background-size:260% auto}}
