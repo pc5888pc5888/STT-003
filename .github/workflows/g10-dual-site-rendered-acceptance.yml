@@ -1,4 +1,4 @@
-# QA rerun: 2026-11-01 hero-under-header expansion and translucent navigation gate
+# QA rerun: 2026-11-01 hero expansion after GCSDA gate alignment
 name: G10 dual-site rendered acceptance
 
 on:
