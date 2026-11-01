@@ -1,4 +1,4 @@
-# QA rerun: 2026-11-01 dual-site visual quality gate with deterministic research-image wait
+# QA rerun: 2026-11-01 prohibit inline research and ebook previews
 name: G10 dual-site rendered acceptance
 
 on:
@@ -350,6 +350,34 @@ jobs:
                 passed:navOkay&&primary.length===8&&!state.overflow&&state.menuExpanded==='true'});
               await context.close();
             }
+          }
+
+          // Publication pages must never embed research papers or ebooks.
+          {
+            const publicationRoutes=[
+              '/research/legal-service-sustainability',
+              '/research/corporate-governance-compliance',
+              '/research/family-business-succession',
+              '/research/generational-entrepreneurs',
+              '/books/sustainable-family-governance',
+              '/books/internal-compliance',
+              '/books/ai-governance',
+              '/books/family-governance'
+            ];
+            const context=await browser.newContext({viewport:{width:1440,height:1000},reducedMotion:'reduce'});
+            const page=await context.newPage();
+            for(const route of publicationRoutes){
+              await page.goto('http://127.0.0.1:4173'+route,{waitUntil:'domcontentloaded',timeout:30000});
+              const state=await page.evaluate(()=>({
+                iframeCount:document.querySelectorAll('iframe').length,
+                researchPreviewCount:document.querySelectorAll('.research-embed').length,
+                ebookPreviewCount:document.querySelectorAll('.stt-publication-reader').length,
+                externalHeyzineLinks:[...document.querySelectorAll('a[href*="heyzine.com"]')].length
+              }));
+              report.special.push({name:`no inline publication preview ${route}`,actual:state,
+                passed:state.iframeCount===0&&state.researchPreviewCount===0&&state.ebookPreviewCount===0&&state.externalHeyzineLinks>=1});
+            }
+            await context.close();
           }
 
           // Research imagery must never be enlarged beyond source resolution.
