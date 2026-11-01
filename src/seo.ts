@@ -1,5 +1,6 @@
 import AUTHOR_PROFILE from "./data/authorProfile.json";
 import { RETAINED_META } from "./data/retainedRouteMetadata";
+import { BOOKS } from "./data/contentRegistry";
 export const STT_CANONICAL_ORIGIN = "https://stt-003.vercel.app";
 
 export type MetaRecord = {
@@ -44,6 +45,12 @@ export const FORMAL_META: Record<string, MetaRecord> = {
     image: "/visual-bank/stt/user-approved-six/columns.png",
     label: "研究與出版",
   },
+  ...Object.fromEntries(BOOKS.map((book) => [`/books/${book.slug}`, {
+    title: `${book.title}｜STT Publications`,
+    description: book.positioning,
+    image: book.image,
+    label: book.title,
+  }])),
   "/research": {
     title: "STT Research Papers｜研究論文典藏｜STT Governance",
     description: "STT Governance 研究論文典藏，整理家族治理、公司治理與法遵、法律服務永續、企業領導與世代接班等研究脈絡。",
@@ -209,6 +216,8 @@ function syncLanguageAlternates(pathname: string) {
   });
 }
 
+const BOOK_SCHEMA = Object.fromEntries(BOOKS.map((book) => [`/books/${book.slug}`, book]));
+
 const RESEARCH_SCHEMA: Record<string, { headline:string; name:string; author:string[]; datePublished:string; about:string[] }> = {
   "/research/legal-service-sustainability": {
     headline: "顧客關係管理對服務永續之探討：以 A 國際法律事務所為例",
@@ -266,6 +275,7 @@ export function applyGovernedMetadata(pathname: string) {
     upsertMeta('meta[name="twitter:card"]', { name: "twitter:card", content: "summary_large_image" });
     upsertMeta('meta[name="twitter:title"]', { name: "twitter:title", content: formal.title });
     upsertMeta('meta[name="twitter:description"]', { name: "twitter:description", content: formal.description });
+    upsertMeta('meta[name="twitter:image"]', { name: "twitter:image", content: `${STT_CANONICAL_ORIGIN}${formal.image ?? "/images/STT-Governance-Official-Logo.png"}` });
     upsertCanonical(canonical);
   } else {
     upsertMeta('meta[name="robots"]', { name: "robots", content: "noindex,follow" });
@@ -302,6 +312,30 @@ export function applyGovernedMetadata(pathname: string) {
           item: canonical,
         },
       ],
+    });
+  }
+
+  const bookSchema = BOOK_SCHEMA[normalized];
+  if (bookSchema) {
+    addSchema({
+      "@context": "https://schema.org",
+      "@type": "Book",
+      name: bookSchema.title,
+      alternateName: bookSchema.enTitle,
+      url: canonical,
+      image: `${STT_CANONICAL_ORIGIN}${bookSchema.image}`,
+      ...(bookSchema.author ? { author: { "@type": "Person", name: bookSchema.author } } : {}),
+      ...(bookSchema.year ? { datePublished: bookSchema.year } : {}),
+      ...(bookSchema.publisher ? { publisher: { "@type": "Organization", name: bookSchema.publisher } } : {
+        publisher: { "@type": "Organization", name: "STT Governance｜策略智庫智慧治理", url: STT_CANONICAL_ORIGIN + "/" }
+      }),
+      about: bookSchema.theme,
+      description: bookSchema.positioning,
+      isPartOf: {
+        "@type": "CollectionPage",
+        name: "STT Publications Library",
+        url: STT_CANONICAL_ORIGIN + "/books",
+      },
     });
   }
 
