@@ -30,7 +30,7 @@ for(const token of [
 for(const token of [
   'eyebrow=""',
   'title="創會理事長｜莊鈞翔博士"',
-  'subtitle="STT Governance 創辦人暨執行長"',
+  'subtitle="中華企業策略永續發展學會｜創會理事長"',
   '本章節僅臚列與本學會「創會宗旨、學術脈絡及核心治理」直接關聯之代表性資歷',
   '治理、策略與永續：長期問題的動態多面體',
   '21 項 Anthropic AI / Claude 核心技術學程'
@@ -54,7 +54,7 @@ for(const token of [
   '"byline": "CHUANG CHUN HSIANG Ph.D."'
 ]) if(!source.includes(token)) errors.push("founder identity "+token);
 
-if(!page.includes('subtitle="STT Governance 創辦人暨執行長"')) errors.push("founder STT role subtitle");
+if(!page.includes('subtitle="中華企業策略永續發展學會｜創會理事長"')) errors.push("founder GCSDA role subtitle");
 if(page.includes("治理總控者")) errors.push("legacy founder wording remains");
 if(!css.includes(".cis-profile-parity .cis-title-line") || !css.includes("white-space:nowrap!important")) errors.push("founder no-wrap rule");
 
