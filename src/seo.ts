@@ -8,8 +8,8 @@ export type MetaRecord = {
   image?: string;
   label: string;
   robots?: string;
-  language?: "zh-Hant-TW" | "en" | "ja";
-  locale?: "zh_TW" | "en_US" | "ja_JP";
+  language?: "zh-Hant-TW" | "en" | "ja" | "ko";
+  locale?: "zh_TW" | "en_US" | "ja_JP" | "ko_KR";
 };
 
 export const FORMAL_META: Record<string, MetaRecord> = {
@@ -167,6 +167,46 @@ export const FORMAL_META: Record<string, MetaRecord> = {
     language: "ja",
     locale: "ja_JP",
   },
+  "/ko": {
+    title: "STT Governance｜거버넌스 판단과 제도 설계",
+    description: "STT Governance는 중대한 의사결정이 되돌릴 수 없게 되기 전에 문제, 증거, 권한, 책임, 선택지를 정리하고 추적 가능한 거버넌스 구조를 설계합니다.",
+    image: "/visual-bank/stt/user-approved-six/home.png",
+    label: "홈",
+    language: "ko",
+    locale: "ko_KR",
+  },
+  "/ko/how-stt-works": {
+    title: "STT의 판단 방식｜거버넌스 판단 프로세스",
+    description: "사건 정의, 이해관계자와 권한, 증거, 중단 기준, 선택지, 판단, 제도 실행의 7단계로 중대한 의사결정의 판단 기반을 구축합니다.",
+    image: "/visual-bank/stt/user-approved-six/method.png",
+    label: "STT의 판단 방식",
+    language: "ko",
+    locale: "ko_KR",
+  },
+  "/ko/engagement": {
+    title: "거버넌스 위임｜STT Governance",
+    description: "초기 거버넌스 리뷰, 거버넌스 구조 설계, 연간 거버넌스 위임의 세 단계로 중대한 의사결정, 기업, 가족 거버넌스에 관여합니다.",
+    image: "/visual-approved/bank-14.png",
+    label: "거버넌스 위임",
+    language: "ko",
+    locale: "ko_KR",
+  },
+  "/ko/about": {
+    title: "STT Governance 소개｜거버넌스 판단과 제도 설계",
+    description: "STT Governance는 중대한 의사결정, 기업 거버넌스, 가족 거버넌스를 핵심으로 하는 고위 거버넌스 판단·제도 설계 플랫폼입니다.",
+    image: "/visual-bank/stt/user-approved-six/about-stt.png",
+    label: "STT 소개",
+    language: "ko",
+    locale: "ko_KR",
+  },
+  "/ko/start": {
+    title: "거버넌스 판단 시작｜STT Governance",
+    description: "현재 어떤 일이 일어나고 있는지, 가장 피하고 싶은 결과는 무엇인지, 적절히 처리될 경우 어떤 상태에 도달하고 싶은지 설명해 주세요.",
+    image: "/images/STT-Governance-Official-Logo.png",
+    label: "거버넌스 판단 시작",
+    language: "ko",
+    locale: "ko_KR",
+  },
 };
 
 function upsertMeta(selector: string, attributes: Record<string, string>) {
@@ -188,22 +228,27 @@ function upsertCanonical(href: string) {
   node.href = href;
 }
 
-export const LANGUAGE_PAIRS: Record<string, { zh: string; en?: string; ja?: string }> = {
-  "/": { zh: "/", en: "/en", ja: "/ja" },
-  "/en": { zh: "/", en: "/en", ja: "/ja" },
-  "/ja": { zh: "/", en: "/en", ja: "/ja" },
-  "/how-stt-works": { zh: "/how-stt-works", en: "/en/how-stt-works", ja: "/ja/how-stt-works" },
-  "/en/how-stt-works": { zh: "/how-stt-works", en: "/en/how-stt-works", ja: "/ja/how-stt-works" },
-  "/ja/how-stt-works": { zh: "/how-stt-works", en: "/en/how-stt-works", ja: "/ja/how-stt-works" },
-  "/engagement": { zh: "/engagement", en: "/en/engagement", ja: "/ja/engagement" },
-  "/en/engagement": { zh: "/engagement", en: "/en/engagement", ja: "/ja/engagement" },
-  "/ja/engagement": { zh: "/engagement", en: "/en/engagement", ja: "/ja/engagement" },
-  "/about": { zh: "/about", en: "/en/about", ja: "/ja/about" },
-  "/en/about": { zh: "/about", en: "/en/about", ja: "/ja/about" },
-  "/ja/about": { zh: "/about", en: "/en/about", ja: "/ja/about" },
-  "/start": { zh: "/start", en: "/en/start", ja: "/ja/start" },
-  "/en/start": { zh: "/start", en: "/en/start", ja: "/ja/start" },
-  "/ja/start": { zh: "/start", en: "/en/start", ja: "/ja/start" },
+export const LANGUAGE_PAIRS: Record<string, { zh: string; en?: string; ja?: string; ko?: string }> = {
+  "/": { zh: "/", en: "/en", ja: "/ja", ko: "/ko" },
+  "/en": { zh: "/", en: "/en", ja: "/ja", ko: "/ko" },
+  "/ja": { zh: "/", en: "/en", ja: "/ja", ko: "/ko" },
+  "/how-stt-works": { zh: "/how-stt-works", en: "/en/how-stt-works", ja: "/ja/how-stt-works", ko: "/ko/how-stt-works" },
+  "/en/how-stt-works": { zh: "/how-stt-works", en: "/en/how-stt-works", ja: "/ja/how-stt-works", ko: "/ko/how-stt-works" },
+  "/ja/how-stt-works": { zh: "/how-stt-works", en: "/en/how-stt-works", ja: "/ja/how-stt-works", ko: "/ko/how-stt-works" },
+  "/engagement": { zh: "/engagement", en: "/en/engagement", ja: "/ja/engagement", ko: "/ko/engagement" },
+  "/en/engagement": { zh: "/engagement", en: "/en/engagement", ja: "/ja/engagement", ko: "/ko/engagement" },
+  "/ja/engagement": { zh: "/engagement", en: "/en/engagement", ja: "/ja/engagement", ko: "/ko/engagement" },
+  "/about": { zh: "/about", en: "/en/about", ja: "/ja/about", ko: "/ko/about" },
+  "/en/about": { zh: "/about", en: "/en/about", ja: "/ja/about", ko: "/ko/about" },
+  "/ja/about": { zh: "/about", en: "/en/about", ja: "/ja/about", ko: "/ko/about" },
+  "/start": { zh: "/start", en: "/en/start", ja: "/ja/start", ko: "/ko/start" },
+  "/en/start": { zh: "/start", en: "/en/start", ja: "/ja/start", ko: "/ko/start" },
+  "/ja/start": { zh: "/start", en: "/en/start", ja: "/ja/start", ko: "/ko/start" },
+  "/ko": { zh: "/", en: "/en", ja: "/ja", ko: "/ko" },
+  "/ko/how-stt-works": { zh: "/how-stt-works", en: "/en/how-stt-works", ja: "/ja/how-stt-works", ko: "/ko/how-stt-works" },
+  "/ko/engagement": { zh: "/engagement", en: "/en/engagement", ja: "/ja/engagement", ko: "/ko/engagement" },
+  "/ko/about": { zh: "/about", en: "/en/about", ja: "/ja/about", ko: "/ko/about" },
+  "/ko/start": { zh: "/start", en: "/en/start", ja: "/ja/start", ko: "/ko/start" },
 };
 
 function syncLanguageAlternates(pathname: string) {
@@ -213,6 +258,7 @@ function syncLanguageAlternates(pathname: string) {
   const alternatives: Array<[string, string]> = [["zh-Hant-TW", pair.zh]];
   if (pair.en) alternatives.push(["en", pair.en]);
   if (pair.ja) alternatives.push(["ja", pair.ja]);
+  if (pair.ko) alternatives.push(["ko", pair.ko]);
   alternatives.push(["x-default", pair.zh]);
   alternatives.forEach(([hreflang, path]) => {
     const node = document.createElement("link");
@@ -240,9 +286,10 @@ export function applyGovernedMetadata(pathname: string) {
   const normalized = pathname !== "/" ? pathname.replace(/\/$/, "") : "/";
   const formal = FORMAL_META[normalized];
   const canonical = `${STT_CANONICAL_ORIGIN}${normalized === "/" ? "/" : normalized}`;
-  const language = formal?.language ?? (normalized === "/en" || normalized.startsWith("/en/") ? "en" : normalized === "/ja" || normalized.startsWith("/ja/") ? "ja" : "zh-Hant-TW");
+  const language = formal?.language ?? (normalized === "/en" || normalized.startsWith("/en/") ? "en" : normalized === "/ja" || normalized.startsWith("/ja/") ? "ja" : normalized === "/ko" || normalized.startsWith("/ko/") ? "ko" : "zh-Hant-TW");
   const isEnglish = language === "en";
   const isJapanese = language === "ja";
+  const isKorean = language === "ko";
   document.documentElement.lang = language;
   syncLanguageAlternates(normalized);
 
@@ -254,7 +301,7 @@ export function applyGovernedMetadata(pathname: string) {
     upsertMeta('meta[property="og:title"]', { property: "og:title", content: formal.title });
     upsertMeta('meta[property="og:description"]', { property: "og:description", content: formal.description });
     upsertMeta('meta[property="og:type"]', { property: "og:type", content: normalized === "/eric-chuang" ? "profile" : "website" });
-    upsertMeta('meta[property="og:locale"]', { property: "og:locale", content: formal.locale ?? (isEnglish ? "en_US" : isJapanese ? "ja_JP" : "zh_TW") });
+    upsertMeta('meta[property="og:locale"]', { property: "og:locale", content: formal.locale ?? (isEnglish ? "en_US" : isJapanese ? "ja_JP" : isKorean ? "ko_KR" : "zh_TW") });
     upsertMeta('meta[property="og:url"]', { property: "og:url", content: canonical });
     upsertMeta('meta[property="og:image"]', { property: "og:image", content: `${STT_CANONICAL_ORIGIN}${formal.image ?? "/images/STT-Governance-Official-Logo.png"}` });
     upsertMeta('meta[name="twitter:card"]', { name: "twitter:card", content: "summary_large_image" });
@@ -287,7 +334,7 @@ export function applyGovernedMetadata(pathname: string) {
           "@type": "ListItem",
           position: 1,
           name: language === "zh-Hant-TW" ? "STT Governance｜策略智庫智慧治理" : "STT Governance",
-          item: isEnglish ? `${STT_CANONICAL_ORIGIN}/en` : isJapanese ? `${STT_CANONICAL_ORIGIN}/ja` : `${STT_CANONICAL_ORIGIN}/`,
+          item: isEnglish ? `${STT_CANONICAL_ORIGIN}/en` : isJapanese ? `${STT_CANONICAL_ORIGIN}/ja` : isKorean ? `${STT_CANONICAL_ORIGIN}/ko` : `${STT_CANONICAL_ORIGIN}/`,
         },
         {
           "@type": "ListItem",
