@@ -38,7 +38,7 @@ for(const token of [
   '["Charter & Notices", "/en/charter"]',
 ]) requireToken(english,token,`English institutional navigation missing: ${token}`);
 requireToken(headerCss,'grid-template-columns:repeat(8,minmax(0,1fr))',"GCSDA desktop navigation must preserve eight equal institutional positions");
-requireToken(headerCss,'--gcsda-header-glass:rgba(255,253,249,.84)',"GCSDA translucent header visual contract missing");
+requireToken(headerCss,'--gcsda-header-glass:rgba(255,253,249,.76)',"GCSDA translucent header visual contract missing");
 requireToken(headerCss,'width:min(1780px,calc(100% - 32px))',"GCSDA wide desktop header contract missing");
 
 if(english.includes('fetch("/api/gcsda-membership-submit"'))errors.push("English edition must not duplicate the formal membership submission form");
