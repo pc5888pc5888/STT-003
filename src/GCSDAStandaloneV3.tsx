@@ -8,8 +8,13 @@ import { applyGcsdaMetadata } from "./gcsdaMetadata";
 import GCSDAInstitutionalNavigator from "./GCSDAInstitutionalNavigator";
 import {
   GCSDAEnglishAbout,
+  GCSDAEnglishCharter,
+  GCSDAEnglishCouncil,
+  GCSDAEnglishEvents,
+  GCSDAEnglishFounderChairman,
   GCSDAEnglishGovernance,
   GCSDAEnglishHome,
+  GCSDAEnglishKnowledge,
   GCSDAEnglishMembership,
   GCSDAEnglishShell,
 } from "./GCSDAEnglishFoundation";
@@ -92,8 +97,13 @@ const navItems = [
 const ZH_TO_EN:Record<string,string>={
   "/":"/en",
   "/about":"/en/about",
+  "/founder-chairman":"/en/founder-chairman",
   "/governance":"/en/governance",
+  "/council":"/en/council",
   "/membership":"/en/membership",
+  "/events":"/en/events",
+  "/knowledge":"/en/knowledge",
+  "/charter":"/en/charter",
 };
 
 const directory = [
@@ -620,8 +630,13 @@ function AppRoutes(){return <Routes>
   <Route path="/en" element={<GCSDAEnglishHome lineUrl={LINE_URL}/>}/>
   <Route path="/en/" element={<GCSDAEnglishHome lineUrl={LINE_URL}/>}/>
   <Route path="/en/about" element={<GCSDAEnglishAbout/>}/>
+  <Route path="/en/founder-chairman" element={<GCSDAEnglishFounderChairman/>}/>
   <Route path="/en/governance" element={<GCSDAEnglishGovernance/>}/>
+  <Route path="/en/council" element={<GCSDAEnglishCouncil/>}/>
   <Route path="/en/membership" element={<GCSDAEnglishMembership lineUrl={LINE_URL}/>}/>
+  <Route path="/en/events" element={<GCSDAEnglishEvents/>}/>
+  <Route path="/en/knowledge" element={<GCSDAEnglishKnowledge/>}/>
+  <Route path="/en/charter" element={<GCSDAEnglishCharter/>}/>
   <Route path="*" element={<NotFound/>}/>
 </Routes>}
 
