@@ -8,8 +8,8 @@ export type MetaRecord = {
   image?: string;
   label: string;
   robots?: string;
-  language?: "zh-Hant-TW" | "en";
-  locale?: "zh_TW" | "en_US";
+  language?: "zh-Hant-TW" | "en" | "ja";
+  locale?: "zh_TW" | "en_US" | "ja_JP";
 };
 
 export const FORMAL_META: Record<string, MetaRecord> = {
@@ -127,6 +127,46 @@ export const FORMAL_META: Record<string, MetaRecord> = {
     language: "en",
     locale: "en_US",
   },
+  "/ja": {
+    title: "STT Governance｜ガバナンス判断と制度設計",
+    description: "STT Governanceは、重大意思決定が不可逆になる前に、問題、証拠、権限、責任、選択肢を整理し、追跡可能なガバナンス構造を設計します。",
+    image: "/visual-bank/stt/user-approved-six/home.png",
+    label: "ホーム",
+    language: "ja",
+    locale: "ja_JP",
+  },
+  "/ja/how-stt-works": {
+    title: "STTの判断方法｜ガバナンス判断プロセス",
+    description: "出来事の定義、関係者と権限、証拠、レッドライン、選択肢、判断、制度実装という7段階で、重大意思決定の判断基盤を構築します。",
+    image: "/visual-bank/stt/user-approved-six/method.png",
+    label: "STTの判断方法",
+    language: "ja",
+    locale: "ja_JP",
+  },
+  "/ja/engagement": {
+    title: "ガバナンス委任｜STT Governance",
+    description: "初期ガバナンスレビュー、ガバナンス設計、年間ガバナンス委任という三つの深度で、重大意思決定、企業、ファミリーのガバナンスに関与します。",
+    image: "/visual-approved/bank-14.png",
+    label: "ガバナンス委任",
+    language: "ja",
+    locale: "ja_JP",
+  },
+  "/ja/about": {
+    title: "STT Governanceについて｜ガバナンス判断と制度設計",
+    description: "STT Governanceは、重大意思決定、企業ガバナンス、ファミリーガバナンスを中核とする高位のガバナンス判断・制度設計プラットフォームです。",
+    image: "/visual-bank/stt/user-approved-six/about-stt.png",
+    label: "STTについて",
+    language: "ja",
+    locale: "ja_JP",
+  },
+  "/ja/start": {
+    title: "ガバナンス判断を始める｜STT Governance",
+    description: "現在何が起きているか、最も避けたい結果は何か、適切に処理された場合にどのような状態を目指すかを説明してください。",
+    image: "/images/STT-Governance-Official-Logo.png",
+    label: "ガバナンス判断を始める",
+    language: "ja",
+    locale: "ja_JP",
+  },
 };
 
 function upsertMeta(selector: string, attributes: Record<string, string>) {
@@ -148,28 +188,33 @@ function upsertCanonical(href: string) {
   node.href = href;
 }
 
-export const LANGUAGE_PAIRS: Record<string, { zh: string; en: string }> = {
-  "/": { zh: "/", en: "/en" },
-  "/en": { zh: "/", en: "/en" },
-  "/how-stt-works": { zh: "/how-stt-works", en: "/en/how-stt-works" },
-  "/en/how-stt-works": { zh: "/how-stt-works", en: "/en/how-stt-works" },
-  "/engagement": { zh: "/engagement", en: "/en/engagement" },
-  "/en/engagement": { zh: "/engagement", en: "/en/engagement" },
-  "/about": { zh: "/about", en: "/en/about" },
-  "/en/about": { zh: "/about", en: "/en/about" },
-  "/start": { zh: "/start", en: "/en/start" },
-  "/en/start": { zh: "/start", en: "/en/start" },
+export const LANGUAGE_PAIRS: Record<string, { zh: string; en?: string; ja?: string }> = {
+  "/": { zh: "/", en: "/en", ja: "/ja" },
+  "/en": { zh: "/", en: "/en", ja: "/ja" },
+  "/ja": { zh: "/", en: "/en", ja: "/ja" },
+  "/how-stt-works": { zh: "/how-stt-works", en: "/en/how-stt-works", ja: "/ja/how-stt-works" },
+  "/en/how-stt-works": { zh: "/how-stt-works", en: "/en/how-stt-works", ja: "/ja/how-stt-works" },
+  "/ja/how-stt-works": { zh: "/how-stt-works", en: "/en/how-stt-works", ja: "/ja/how-stt-works" },
+  "/engagement": { zh: "/engagement", en: "/en/engagement", ja: "/ja/engagement" },
+  "/en/engagement": { zh: "/engagement", en: "/en/engagement", ja: "/ja/engagement" },
+  "/ja/engagement": { zh: "/engagement", en: "/en/engagement", ja: "/ja/engagement" },
+  "/about": { zh: "/about", en: "/en/about", ja: "/ja/about" },
+  "/en/about": { zh: "/about", en: "/en/about", ja: "/ja/about" },
+  "/ja/about": { zh: "/about", en: "/en/about", ja: "/ja/about" },
+  "/start": { zh: "/start", en: "/en/start", ja: "/ja/start" },
+  "/en/start": { zh: "/start", en: "/en/start", ja: "/ja/start" },
+  "/ja/start": { zh: "/start", en: "/en/start", ja: "/ja/start" },
 };
 
 function syncLanguageAlternates(pathname: string) {
   document.head.querySelectorAll('link[data-stt-language-alternate="true"]').forEach((node) => node.remove());
   const pair = LANGUAGE_PAIRS[pathname];
   if (!pair) return;
-  [
-    ["zh-Hant-TW", pair.zh],
-    ["en", pair.en],
-    ["x-default", pair.zh],
-  ].forEach(([hreflang, path]) => {
+  const alternatives: Array<[string, string]> = [["zh-Hant-TW", pair.zh]];
+  if (pair.en) alternatives.push(["en", pair.en]);
+  if (pair.ja) alternatives.push(["ja", pair.ja]);
+  alternatives.push(["x-default", pair.zh]);
+  alternatives.forEach(([hreflang, path]) => {
     const node = document.createElement("link");
     node.rel = "alternate";
     node.hreflang = hreflang;
@@ -195,8 +240,10 @@ export function applyGovernedMetadata(pathname: string) {
   const normalized = pathname !== "/" ? pathname.replace(/\/$/, "") : "/";
   const formal = FORMAL_META[normalized];
   const canonical = `${STT_CANONICAL_ORIGIN}${normalized === "/" ? "/" : normalized}`;
-  const isEnglish = formal?.language === "en" || normalized === "/en" || normalized.startsWith("/en/");
-  document.documentElement.lang = isEnglish ? "en" : "zh-Hant-TW";
+  const language = formal?.language ?? (normalized === "/en" || normalized.startsWith("/en/") ? "en" : normalized === "/ja" || normalized.startsWith("/ja/") ? "ja" : "zh-Hant-TW");
+  const isEnglish = language === "en";
+  const isJapanese = language === "ja";
+  document.documentElement.lang = language;
   syncLanguageAlternates(normalized);
 
   if (formal) {
@@ -207,7 +254,7 @@ export function applyGovernedMetadata(pathname: string) {
     upsertMeta('meta[property="og:title"]', { property: "og:title", content: formal.title });
     upsertMeta('meta[property="og:description"]', { property: "og:description", content: formal.description });
     upsertMeta('meta[property="og:type"]', { property: "og:type", content: normalized === "/eric-chuang" ? "profile" : "website" });
-    upsertMeta('meta[property="og:locale"]', { property: "og:locale", content: formal.locale ?? (isEnglish ? "en_US" : "zh_TW") });
+    upsertMeta('meta[property="og:locale"]', { property: "og:locale", content: formal.locale ?? (isEnglish ? "en_US" : isJapanese ? "ja_JP" : "zh_TW") });
     upsertMeta('meta[property="og:url"]', { property: "og:url", content: canonical });
     upsertMeta('meta[property="og:image"]', { property: "og:image", content: `${STT_CANONICAL_ORIGIN}${formal.image ?? "/images/STT-Governance-Official-Logo.png"}` });
     upsertMeta('meta[name="twitter:card"]', { name: "twitter:card", content: "summary_large_image" });
@@ -239,8 +286,8 @@ export function applyGovernedMetadata(pathname: string) {
         {
           "@type": "ListItem",
           position: 1,
-          name: isEnglish ? "STT Governance" : "STT Governance｜策略智庫智慧治理",
-          item: isEnglish ? `${STT_CANONICAL_ORIGIN}/en` : `${STT_CANONICAL_ORIGIN}/`,
+          name: language === "zh-Hant-TW" ? "STT Governance｜策略智庫智慧治理" : "STT Governance",
+          item: isEnglish ? `${STT_CANONICAL_ORIGIN}/en` : isJapanese ? `${STT_CANONICAL_ORIGIN}/ja` : `${STT_CANONICAL_ORIGIN}/`,
         },
         {
           "@type": "ListItem",
