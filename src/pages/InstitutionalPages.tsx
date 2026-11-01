@@ -66,7 +66,7 @@ export function EricPage(){
       kicker=""
       title="創辦人暨執行長｜莊鈞翔博士"
       subtitle="STT Governance 創辦人暨執行長"
-      image="/visual-approved/portrait-front.png"
+      image="/visual-approved/portrait-stt-20261101.webp"
       imageFit="contain"
       imagePosition="right bottom"
       id="eric-title"
