@@ -213,9 +213,3 @@
 .book-ai-governance{--stt-publication-art:url("/books/ai-governance.webp")}
 .book-family-governance{--stt-publication-art:url("/books/family-governance.webp")}
 @media(max-width:760px){.stt-publication-hero::before{width:68%;opacity:.065;background-size:260% auto}}
-
-
-/* Owner-supplied 2026-11-01 hero artwork: render the approved composition without re-layering text or cards. */
-.stt-owner-approved-hero{position:relative;width:100%;margin:0;background:#fbfaf7;border-bottom:1px solid #e0d5c4;overflow:hidden}
-.stt-owner-approved-hero img{display:block;width:100%;height:auto;max-width:none;margin:0}
-.stt-library-sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
