@@ -8,16 +8,20 @@ import { applyGovernedMetadata } from "../seo";
 const STT_LINE_ADD_FRIEND_URL = "https://line.me/R/ti/p/%40783xkknh";
 
 const EN_NAVIGATION = [
-  { label: "What You’re Facing", path: "/problems" },
+  { label: "What You’re Facing", path: "/en/problems" },
   { label: "How STT Works", path: "/en/how-stt-works" },
   { label: "Governance Engagement", path: "/en/engagement" },
-  { label: "Research & Publications", path: "/insights" },
+  { label: "Research & Publications", path: "/en/insights" },
+  { label: "Eric Chuang, Ph.D.", path: "/eric-chuang" },
+  { label: "Interviewee Area", path: "/humanistic-interview/" },
   { label: "About STT", path: "/en/about" },
 ] as const;
 
 const EN_TO_ZH: Record<string, string> = {
   "/en": "/",
   "/en/": "/",
+  "/en/problems": "/problems",
+  "/en/insights": "/insights",
   "/en/how-stt-works": "/how-stt-works",
   "/en/engagement": "/engagement",
   "/en/about": "/about",
@@ -27,6 +31,8 @@ const EN_TO_ZH: Record<string, string> = {
 const EN_TO_JA: Record<string, string> = {
   "/en": "/ja",
   "/en/": "/ja",
+  "/en/problems": "/ja/problems",
+  "/en/insights": "/ja/insights",
   "/en/how-stt-works": "/ja/how-stt-works",
   "/en/engagement": "/ja/engagement",
   "/en/about": "/ja/about",
@@ -36,6 +42,8 @@ const EN_TO_JA: Record<string, string> = {
 const EN_TO_KO: Record<string, string> = {
   "/en": "/ko",
   "/en/": "/ko",
+  "/en/problems": "/ko/problems",
+  "/en/insights": "/ko/insights",
   "/en/how-stt-works": "/ko/how-stt-works",
   "/en/engagement": "/ko/engagement",
   "/en/about": "/ko/about",
@@ -66,7 +74,7 @@ export function EnglishShell({ children }: { children: ReactNode }) {
           </Link>
           <nav className="stt-g0-desktop-nav" aria-label="Primary navigation">
             {EN_NAVIGATION.map((item) => (
-              <NavLink key={item.path} to={item.path} className={({ isActive }) => `stt-g0-nav-link${isActive ? " is-active" : ""}`}>
+              <NavLink key={item.path} to={item.path} reloadDocument={item.path === "/humanistic-interview/"} className={({ isActive }) => `stt-g0-nav-link${isActive ? " is-active" : ""}`}>
                 {item.label}
               </NavLink>
             ))}
@@ -86,7 +94,7 @@ export function EnglishShell({ children }: { children: ReactNode }) {
             <div className="stt-g0-mobile-menu__inner">
               <div className="stt-g0-mobile-menu__primary">
                 {EN_NAVIGATION.map((item, index) => (
-                  <NavLink key={item.path} to={item.path}><span>{String(index + 1).padStart(2, "0")}</span><strong>{item.label}</strong></NavLink>
+                  <NavLink key={item.path} to={item.path} reloadDocument={item.path === "/humanistic-interview/"}><span>{String(index + 1).padStart(2, "0")}</span><strong>{item.label}</strong></NavLink>
                 ))}
               </div>
               <div className="stt-g0-mobile-menu__secondary">
