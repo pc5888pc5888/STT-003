@@ -1,4 +1,4 @@
-# QA rerun: 2026-11-01 dual-site wide translucent header and navigation parity gate
+# QA rerun: 2026-11-01 dual-site visual quality gate with deterministic research-image wait
 name: G10 dual-site rendered acceptance
 
 on:
@@ -356,7 +356,9 @@ jobs:
           {
             const context=await browser.newContext({viewport:{width:1536,height:1000},reducedMotion:'reduce'});
             const page=await context.newPage();
-            await page.goto('http://127.0.0.1:4173/research/legal-service-sustainability',{waitUntil:'networkidle',timeout:30000});
+            await page.goto('http://127.0.0.1:4173/research/legal-service-sustainability',{waitUntil:'domcontentloaded',timeout:30000});
+            await page.locator('.research-governance-image').waitFor({state:'visible',timeout:15000});
+            await page.locator('.research-governance-image').evaluate(img=>img.complete?true:new Promise(resolve=>{img.addEventListener('load',()=>resolve(true),{once:true});img.addEventListener('error',()=>resolve(false),{once:true});}));
             const imageState=await page.evaluate(()=>{
               const img=document.querySelector('.research-governance-image');
               const r=img?.getBoundingClientRect();
