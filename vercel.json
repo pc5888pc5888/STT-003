@@ -101,6 +101,10 @@
       "destination": "/seo-institutions.html"
     },
     {
+      "source": "/navigator",
+      "destination": "/seo-navigator.html"
+    },
+    {
       "source": "/start",
       "destination": "/seo-start.html"
     },
@@ -150,6 +154,11 @@
     }
   ],
   "redirects": [
+    {
+      "source": "/navigator/",
+      "destination": "/navigator",
+      "permanent": true
+    },
     {
       "source": "/en/",
       "destination": "/en",
