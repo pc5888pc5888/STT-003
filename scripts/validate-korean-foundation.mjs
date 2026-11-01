@@ -15,7 +15,7 @@ const sharedCss=read("src/styles/stt-japanese-foundation.css");
 const vercel=JSON.parse(read("vercel.json"));
 const pkg=JSON.parse(read("package.json"));
 
-const routes=["/ko","/ko/how-stt-works","/ko/engagement","/ko/about","/ko/start"];
+const routes=["/ko","/ko/problems","/ko/how-stt-works","/ko/engagement","/ko/insights","/ko/about","/ko/start"];
 requireToken(pkg.scripts?.build??"", "validate-korean-foundation.mjs", "Korean gate is not wired into the build command");
 for(const route of routes){
   requireToken(app,`path="${route}"`,`Korean route missing: ${route}`);
@@ -36,6 +36,10 @@ requireToken(korean,'fetch("/api/cooperation-submit"',"Korean intake is not usin
 requireToken(korean,'source_account:"stt"',"Korean intake attribution changed");
 requireToken(korean,'landing_route:"/ko/start"',"Korean intake landing route missing");
 requireToken(korean,'https://line.me/R/ti/p/%40783xkknh',"Korean LINE public URL changed");
+requireToken(korean,'{ label: "현재 직면한 문제", path: "/ko/problems" }',"Korean Problems navigation missing");
+requireToken(korean,'{ label: "연구·출판", path: "/ko/insights" }',"Korean Insights navigation missing");
+requireToken(korean,'{ label: "莊鈞翔 박사", path: "/eric-chuang" }',"Korean founder navigation missing");
+requireToken(korean,'{ label: "인터뷰 대상자 전용", path: "/humanistic-interview/" }',"Korean interviewee navigation missing");
 
 const fetchCount=(korean.match(/fetch\(/g)||[]).length;
 if(fetchCount!==1)errors.push(`Korean layer must have exactly one fetch call; found ${fetchCount}`);
@@ -59,8 +63,10 @@ const rewrites=Array.isArray(vercel.rewrites)?vercel.rewrites:[];
 if(rewrites.some(item=>item?.source==="/ko/:path*"))errors.push("Broad /ko/:path* fallback is prohibited");
 const expected={
   "/ko":"/seo-ko.html",
+  "/ko/problems":"/seo-ko-problems.html",
   "/ko/how-stt-works":"/seo-ko-how-stt-works.html",
   "/ko/engagement":"/seo-ko-engagement.html",
+  "/ko/insights":"/seo-ko-insights.html",
   "/ko/about":"/seo-ko-about.html",
   "/ko/start":"/seo-ko-start.html",
 };
