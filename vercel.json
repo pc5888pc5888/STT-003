@@ -2,11 +2,23 @@
   "rewrites": [
     {
       "source": "/en",
-      "destination": "/index.html"
+      "destination": "/seo-en.html"
     },
     {
-      "source": "/en/:path*",
-      "destination": "/index.html"
+      "source": "/en/how-stt-works",
+      "destination": "/seo-en-how-stt-works.html"
+    },
+    {
+      "source": "/en/engagement",
+      "destination": "/seo-en-engagement.html"
+    },
+    {
+      "source": "/en/about",
+      "destination": "/seo-en-about.html"
+    },
+    {
+      "source": "/en/start",
+      "destination": "/seo-en-start.html"
     },
     {
       "source": "/problems/major-decision",
