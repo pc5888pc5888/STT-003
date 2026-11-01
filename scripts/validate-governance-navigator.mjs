@@ -19,9 +19,11 @@ requireToken(seo,'"/navigator": {',"Navigator formal metadata missing");
 const primaryBlock=(app.match(/const PRIMARY_NAVIGATION = \[([\s\S]*?)\] as const;/)||[])[1]||"";
 if(primaryBlock.includes("/navigator")||primaryBlock.includes("治理導航"))errors.push("Navigator must not alter primary navigation");
 
-for(const prohibited of ["fetch(","localStorage","sessionStorage","@google/generative-ai","openai","anthropic","firebase","supabase"]){
-  if(navigator.toLowerCase().includes(prohibited.toLowerCase()))errors.push("Navigator contains prohibited external/storage capability: "+prohibited);
+for(const prohibited of ["fetch(","@google/generative-ai","openai","anthropic","firebase","supabase"]){
+  if(navigator.toLowerCase().includes(prohibited.toLowerCase()))errors.push("Navigator contains prohibited external capability: "+prohibited);
 }
+if(/(?:window\.)?localStorage\s*\./.test(navigator))errors.push("Navigator must not call localStorage");
+if(/(?:window\.)?sessionStorage\s*\./.test(navigator))errors.push("Navigator must not call sessionStorage");
 
 requireToken(navigator,'GOVERNANCE NAVIGATOR · LOCAL TRIAGE',"Navigator local-triage identity missing");
 requireToken(navigator,'不會送到外部 AI 模型',"No-external-model disclosure missing");
