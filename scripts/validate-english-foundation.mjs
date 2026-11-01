@@ -46,10 +46,10 @@ for (const banned of ["@google/generative-ai", "openai", "anthropic", "firebase"
 }
 
 requireToken(seo, 'export const LANGUAGE_PAIRS', "LANGUAGE_PAIRS export missing");
-requireToken(seo, 'document.documentElement.lang = isEnglish ? "en" : "zh-Hant-TW";', "Runtime html lang governance missing");
+requireToken(seo, 'document.documentElement.lang = language;', "Runtime html lang governance missing");
 requireToken(seo, 'hreflang = hreflang', "Runtime hreflang assignment missing");
 requireToken(vite, 'LANGUAGE_PAIRS', "Static SEO language-pair support missing");
-requireToken(vite, 'const locale = meta.locale ?? (language === "en" ? "en_US" : "zh_TW");', "Static OG locale governance missing");
+requireToken(vite, 'const locale = meta.locale ?? (language === "en" ? "en_US" : language === "ja" ? "ja_JP" : "zh_TW");', "Static OG locale governance missing");
 requireToken(vite, '.replace(/<html lang="[^"]*">/, `<html lang="${language}">`)', "Static html lang governance missing");
 requireToken(css, '.stt-g0-lang-switch', "Language-switch styling missing");
 requireToken(css, 'grid-template-columns:340px minmax(0,1fr) auto auto!important', "Desktop language-switch header geometry missing");

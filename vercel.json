@@ -1,6 +1,26 @@
 {
   "rewrites": [
     {
+      "source": "/ja/start",
+      "destination": "/seo-ja-start.html"
+    },
+    {
+      "source": "/ja/about",
+      "destination": "/seo-ja-about.html"
+    },
+    {
+      "source": "/ja/engagement",
+      "destination": "/seo-ja-engagement.html"
+    },
+    {
+      "source": "/ja/how-stt-works",
+      "destination": "/seo-ja-how-stt-works.html"
+    },
+    {
+      "source": "/ja",
+      "destination": "/seo-ja.html"
+    },
+    {
       "source": "/en",
       "destination": "/seo-en.html"
     },
@@ -154,6 +174,31 @@
     }
   ],
   "redirects": [
+    {
+      "source": "/ja/start/",
+      "destination": "/ja/start",
+      "permanent": true
+    },
+    {
+      "source": "/ja/about/",
+      "destination": "/ja/about",
+      "permanent": true
+    },
+    {
+      "source": "/ja/engagement/",
+      "destination": "/ja/engagement",
+      "permanent": true
+    },
+    {
+      "source": "/ja/how-stt-works/",
+      "destination": "/ja/how-stt-works",
+      "permanent": true
+    },
+    {
+      "source": "/ja/",
+      "destination": "/ja",
+      "permanent": true
+    },
     {
       "source": "/navigator/",
       "destination": "/navigator",

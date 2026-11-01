@@ -1,0 +1,80 @@
+/* STT Japanese Foundation — additive multilingual layer. */
+#root .stt-g0-lang-cluster{
+  display:inline-flex;
+  align-items:center;
+  justify-content:flex-end;
+  gap:8px;
+  min-height:42px;
+  padding-left:10px;
+  border-left:1px solid var(--cis-line);
+  white-space:nowrap;
+}
+#root .stt-g0-lang-cluster a{
+  color:var(--cis-gold);
+  font:600 12px/1.4 var(--cis-ui);
+  letter-spacing:.04em;
+  text-decoration:none;
+}
+#root .stt-ja-shell .stt-g0-header__inner{
+  grid-template-columns:minmax(250px,1fr) auto auto auto;
+}
+#root .stt-ja-shell .stt-g0-nav-link{
+  font-family:var(--cis-serif);
+  letter-spacing:0;
+}
+#root .stt-ja-page{
+  font-family:var(--cis-serif);
+}
+#root .stt-ja-page .cis-lead,
+#root .stt-ja-page p,
+#root .stt-ja-page dd,
+#root .stt-ja-page li{
+  text-wrap:pretty;
+}
+#root .stt-ja-section .stt-inst-body>p{max-width:52em}
+#root .stt-ja-situation-grid article{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+#root .stt-ja-situation-grid article a{margin-top:auto}
+#root .stt-ja-process-line{
+  display:grid;
+  grid-template-columns:repeat(7,minmax(0,1fr));
+  gap:1px;
+  margin:28px 0;
+  border:1px solid var(--cis-line);
+  background:var(--cis-line);
+}
+#root .stt-ja-process-line span{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:72px;
+  padding:12px 8px;
+  background:var(--cis-white);
+  color:var(--cis-ink);
+  text-align:center;
+  font:600 12px/1.55 var(--cis-serif);
+}
+@media(max-width:1399px){
+  #root .stt-g0-lang-cluster{display:none}
+}
+@media(min-width:1400px){
+  #root .stt-g0-shell .stt-g0-header__inner{
+    grid-template-columns:340px minmax(0,1fr) auto auto!important;
+  }
+}
+@media(max-width:1120px){
+  #root .stt-g0-shell .stt-g0-header__inner{
+    grid-template-columns:minmax(120px,1fr) auto auto!important;
+  }
+}
+@media(max-width:760px){
+  #root .stt-ja-process-line{grid-template-columns:1fr}
+  #root .stt-ja-process-line span{
+    min-height:0;
+    justify-content:flex-start;
+    padding:12px 16px;
+  }
+}

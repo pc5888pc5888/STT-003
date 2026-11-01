@@ -17,8 +17,10 @@ function escapeHtml(value: string) {
     .replace(/"/g, "&quot;");
 }
 
-function schemaTags(route: string, label: string, image?: string, language: "zh-Hant-TW" | "en" = "zh-Hant-TW") {
+function schemaTags(route: string, label: string, image?: string, language: "zh-Hant-TW" | "en" | "ja" = "zh-Hant-TW") {
   const isEnglish = language === "en";
+  const isJapanese = language === "ja";
+  const localizedHome = isEnglish ? "/en" : isJapanese ? "/ja" : "/";
   const canonical = `${STT_CANONICAL_ORIGIN}${route === "/" ? "/" : route}`;
   const schemas: unknown[] = [
     {
@@ -36,7 +38,7 @@ function schemaTags(route: string, label: string, image?: string, language: "zh-
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       itemListElement: [
-        { "@type": "ListItem", position: 1, name: isEnglish ? "STT Governance" : "STT Governance｜策略智庫智慧治理", item: isEnglish ? `${STT_CANONICAL_ORIGIN}/en` : `${STT_CANONICAL_ORIGIN}/` },
+        { "@type": "ListItem", position: 1, name: language === "zh-Hant-TW" ? "STT Governance｜策略智庫智慧治理" : "STT Governance", item: `${STT_CANONICAL_ORIGIN}${localizedHome}` },
         { "@type": "ListItem", position: 2, name: label, item: canonical },
       ],
     });
@@ -82,13 +84,14 @@ function formalSeoPages(): Plugin {
         const canonical = `${STT_CANONICAL_ORIGIN}${route === "/" ? "/" : route}`;
         const image = `${STT_CANONICAL_ORIGIN}${meta.image ?? "/images/STT-Governance-Official-Logo.png"}`;
         const language = meta.language ?? "zh-Hant-TW";
-        const locale = meta.locale ?? (language === "en" ? "en_US" : "zh_TW");
+        const locale = meta.locale ?? (language === "en" ? "en_US" : language === "ja" ? "ja_JP" : "zh_TW");
         const languagePair = LANGUAGE_PAIRS[route];
         const alternateTags = languagePair ? [
           `    <link rel="alternate" hreflang="zh-Hant-TW" href="${STT_CANONICAL_ORIGIN}${languagePair.zh}" />`,
-          `    <link rel="alternate" hreflang="en" href="${STT_CANONICAL_ORIGIN}${languagePair.en}" />`,
+          languagePair.en ? `    <link rel="alternate" hreflang="en" href="${STT_CANONICAL_ORIGIN}${languagePair.en}" />` : "",
+          languagePair.ja ? `    <link rel="alternate" hreflang="ja" href="${STT_CANONICAL_ORIGIN}${languagePair.ja}" />` : "",
           `    <link rel="alternate" hreflang="x-default" href="${STT_CANONICAL_ORIGIN}${languagePair.zh}" />`,
-        ].join("\n") : "";
+        ].filter(Boolean).join("\n") : "";
         const staticHead = [
           `    <meta name="robots" content="${escapeHtml(meta.robots ?? "index,follow")}" />`,
           `    <link rel="canonical" href="${canonical}" />`,

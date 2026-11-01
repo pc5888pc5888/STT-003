@@ -22,10 +22,20 @@ const EN_TO_ZH: Record<string, string> = {
   "/en/start": "/start",
 };
 
+const EN_TO_JA: Record<string, string> = {
+  "/en": "/ja",
+  "/en/": "/ja",
+  "/en/how-stt-works": "/ja/how-stt-works",
+  "/en/engagement": "/ja/engagement",
+  "/en/about": "/ja/about",
+  "/en/start": "/ja/start",
+};
+
 export function EnglishShell({ children }: { children: ReactNode }) {
   const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
   const zhPath = EN_TO_ZH[location.pathname] ?? "/";
+  const jaPath = EN_TO_JA[location.pathname] ?? "/ja";
 
   useEffect(() => {
     setMenuOpen(false);
@@ -50,7 +60,10 @@ export function EnglishShell({ children }: { children: ReactNode }) {
             ))}
           </nav>
           <Link to="/en/start" className="stt-g0-primary-cta">Start a Governance Review</Link>
-          <Link to={zhPath} className="stt-g0-lang-switch" hrefLang="zh-Hant-TW" lang="zh-Hant-TW" aria-label="切換至繁體中文">繁中</Link>
+          <div className="stt-g0-lang-cluster" aria-label="Language switcher">
+          <Link to={zhPath} hrefLang="zh-Hant-TW" lang="zh-Hant-TW" aria-label="切換至繁體中文">繁中</Link>
+          <Link to={jaPath} hrefLang="ja" lang="ja" aria-label="日本語に切り替える">日本語</Link>
+        </div>
           <button type="button" className="stt-g0-menu-button" aria-label={menuOpen ? "Close menu" : "Open menu"} aria-expanded={menuOpen} aria-controls="stt-en-mobile-menu" onClick={() => setMenuOpen((value) => !value)}>
             {menuOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
           </button>
@@ -66,6 +79,7 @@ export function EnglishShell({ children }: { children: ReactNode }) {
               <div className="stt-g0-mobile-menu__secondary">
                 <Link to="/en/start">Start a Governance Review</Link>
                 <Link to={zhPath} hrefLang="zh-Hant-TW" lang="zh-Hant-TW">繁體中文</Link>
+                <Link to={jaPath} hrefLang="ja" lang="ja">日本語</Link>
               </div>
             </div>
           </nav>
@@ -85,6 +99,7 @@ export function EnglishShell({ children }: { children: ReactNode }) {
             <Link to="/en/start">Start a Governance Review</Link>
             <a href={STT_LINE_ADD_FRIEND_URL} target="_blank" rel="noopener noreferrer">STT Official LINE ↗</a>
             <Link to={zhPath} hrefLang="zh-Hant-TW" lang="zh-Hant-TW">Traditional Chinese site</Link>
+            <Link to={jaPath} hrefLang="ja" lang="ja">日本語</Link>
           </nav>
         </div>
       </footer>
