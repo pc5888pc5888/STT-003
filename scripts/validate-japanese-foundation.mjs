@@ -45,8 +45,8 @@ for(const banned of ["@google/generative-ai","openai","anthropic","firebase","su
   if(japanese.toLowerCase().includes(banned.toLowerCase()))errors.push(`Unapproved dependency/service reference in Japanese layer: ${banned}`);
 }
 
-requireToken(seo,'language?: "zh-Hant-TW" | "en" | "ja"',"Japanese runtime language type missing");
-requireToken(seo,'locale?: "zh_TW" | "en_US" | "ja_JP"',"Japanese locale type missing");
+requireToken(seo,'language?: "zh-Hant-TW" | "en" | "ja" | "ko"',"Japanese runtime language type missing");
+requireToken(seo,'locale?: "zh_TW" | "en_US" | "ja_JP" | "ko_KR"',"Japanese locale type missing");
 requireToken(seo,'if (pair.ja) alternatives.push(["ja", pair.ja]);',"Japanese runtime hreflang missing");
 requireToken(vite,'languagePair.ja ?',"Japanese static hreflang missing");
 requireToken(vite,'language === "ja" ? "ja_JP"',"Japanese static OG locale missing");

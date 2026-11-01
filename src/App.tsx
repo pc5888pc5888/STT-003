@@ -17,6 +17,7 @@ import { STT_OFFICIAL_LOGO_SRC } from "./sttLogo";
 import { applyGovernedMetadata } from "./seo";
 import { EnglishAbout, EnglishEngagement, EnglishHome, EnglishMethod, EnglishShell, EnglishStart } from "./pages/EnglishFoundation";
 import { JapaneseAbout, JapaneseEngagement, JapaneseHome, JapaneseMethod, JapaneseShell, JapaneseStart } from "./pages/JapaneseFoundation";
+import { KoreanAbout, KoreanEngagement, KoreanHome, KoreanMethod, KoreanShell, KoreanStart } from "./pages/KoreanFoundation";
 import { ResearchOverview, ResearchPaperPage } from "./pages/ResearchPapers";
 
 type ShellProps = { children: ReactNode };
@@ -39,6 +40,14 @@ const CHINESE_TO_JAPANESE: Record<string, string> = {
   "/engagement": "/ja/engagement",
   "/about": "/ja/about",
   "/start": "/ja/start",
+};
+
+const CHINESE_TO_KOREAN: Record<string, string> = {
+  "/": "/ko",
+  "/how-stt-works": "/ko/how-stt-works",
+  "/engagement": "/ko/engagement",
+  "/about": "/ko/about",
+  "/start": "/ko/start",
 };
 
 const PRIMARY_NAVIGATION = [
@@ -78,6 +87,7 @@ function PublicShell({ children }: ShellProps) {
   const publicationPage = location.pathname === "/books" || location.pathname.startsWith("/books/") || location.pathname === "/research" || location.pathname.startsWith("/research/") || location.pathname === "/columns" || location.pathname.startsWith("/columns/");
   const englishPath = CHINESE_TO_ENGLISH[location.pathname] ?? "/en";
   const japanesePath = CHINESE_TO_JAPANESE[location.pathname] ?? "/ja";
+  const koreanPath = CHINESE_TO_KOREAN[location.pathname] ?? "/ko";
 
   useLayoutEffect(() => {
     if (location.pathname === "/projects") return;
@@ -137,6 +147,7 @@ function PublicShell({ children }: ShellProps) {
           <div className="stt-g0-lang-cluster" aria-label="語言切換">
             <Link to={englishPath} hrefLang="en" lang="en" aria-label="Switch to English">EN</Link>
             <Link to={japanesePath} hrefLang="ja" lang="ja" aria-label="日本語に切り替える">日本語</Link>
+            <Link to={koreanPath} hrefLang="ko" lang="ko" aria-label="한국어로 전환">한국어</Link>
           </div>
           <button type="button" className="stt-g0-menu-button" aria-label={menuOpen ? "關閉選單" : "開啟選單"} aria-expanded={menuOpen} aria-controls="stt-g0-mobile-menu" onClick={() => setMenuOpen((value) => !value)}>
             {menuOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
@@ -155,6 +166,8 @@ function PublicShell({ children }: ShellProps) {
                 <Link to="/start">開始治理判讀</Link>
                 <Link to={englishPath} hrefLang="en" lang="en">English</Link>
             <Link to={japanesePath} hrefLang="ja" lang="ja">日本語</Link>
+            <Link to={koreanPath} hrefLang="ko" lang="ko">한국어</Link>
+                <Link to={koreanPath} hrefLang="ko" lang="ko">한국어</Link>
                 <Link to={japanesePath} hrefLang="ja" lang="ja">日本語</Link>
               </div>
             </div>
@@ -196,6 +209,12 @@ function AppRoutes() {
       <Route path="/ja/engagement" element={<JapaneseEngagement />} />
       <Route path="/ja/about" element={<JapaneseAbout />} />
       <Route path="/ja/start" element={<JapaneseStart />} />
+      <Route path="/ko" element={<KoreanHome />} />
+      <Route path="/ko/" element={<KoreanHome />} />
+      <Route path="/ko/how-stt-works" element={<KoreanMethod />} />
+      <Route path="/ko/engagement" element={<KoreanEngagement />} />
+      <Route path="/ko/about" element={<KoreanAbout />} />
+      <Route path="/ko/start" element={<KoreanStart />} />
       <Route path="/index.html" element={<Navigate to="/" replace />} />
       <Route path="/governance.html" element={<Navigate to="/problems" replace />} />
       <Route path="/problems" element={<Problems />} />
@@ -274,8 +293,10 @@ function AppFrame() {
   }, []);
   const isEnglish = location.pathname === "/en" || location.pathname.startsWith("/en/");
   const isJapanese = location.pathname === "/ja" || location.pathname.startsWith("/ja/");
+  const isKorean = location.pathname === "/ko" || location.pathname.startsWith("/ko/");
   if (isEnglish) return <EnglishShell><AppRoutes /></EnglishShell>;
   if (isJapanese) return <JapaneseShell><AppRoutes /></JapaneseShell>;
+  if (isKorean) return <KoreanShell><AppRoutes /></KoreanShell>;
   return <PublicShell><AppRoutes /></PublicShell>;
 }
 export default function App() { return <BrowserRouter><AppFrame /></BrowserRouter>; }
