@@ -211,7 +211,9 @@ export function ResearchPaperPage(){
           <p>{p.today}</p>
           <p className="research-governance-chain">研究命題 → 證據理解 → 治理判讀 → 制度設計</p>
         </div>
-        <div className="research-governance-image" style={{backgroundImage:"url("+p.cover+")"}} role="img" aria-label={p.title+"封面下方的治理主題圖像"} />
+        <figure className="research-governance-visual">
+          <img className="research-governance-image" src={p.cover} alt={p.title+"｜治理主題圖像"} loading="lazy" decoding="async" />
+        </figure>
       </section>
       <section aria-labelledby="paper-audience-title">
         <p className="research-section-kicker">READERS & RESEARCH CONTEXT</p>
