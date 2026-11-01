@@ -1,6 +1,26 @@
 {
   "rewrites": [
     {
+      "source": "/en",
+      "destination": "/seo-en.html"
+    },
+    {
+      "source": "/en/how-stt-works",
+      "destination": "/seo-en-how-stt-works.html"
+    },
+    {
+      "source": "/en/engagement",
+      "destination": "/seo-en-engagement.html"
+    },
+    {
+      "source": "/en/about",
+      "destination": "/seo-en-about.html"
+    },
+    {
+      "source": "/en/start",
+      "destination": "/seo-en-start.html"
+    },
+    {
       "source": "/problems/major-decision",
       "destination": "/seo-problems-major-decision.html"
     },
@@ -130,6 +150,31 @@
     }
   ],
   "redirects": [
+    {
+      "source": "/en/",
+      "destination": "/en",
+      "permanent": true
+    },
+    {
+      "source": "/en/how-stt-works/",
+      "destination": "/en/how-stt-works",
+      "permanent": true
+    },
+    {
+      "source": "/en/engagement/",
+      "destination": "/en/engagement",
+      "permanent": true
+    },
+    {
+      "source": "/en/about/",
+      "destination": "/en/about",
+      "permanent": true
+    },
+    {
+      "source": "/en/start/",
+      "destination": "/en/start",
+      "permanent": true
+    },
     {
       "source": "/humanistic-20q/:path*",
       "destination": "https://stt-003.vercel.app/humanistic-interview/",

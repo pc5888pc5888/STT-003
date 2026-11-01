@@ -14,12 +14,21 @@ import Engagement from "./pages/Engagement";
 import { AboutPage, EricPage, InstitutionsPage, PrivacyPage, ProfessionalBoundaryPage } from "./pages/InstitutionalPages";
 import { STT_OFFICIAL_LOGO_SRC } from "./sttLogo";
 import { applyGovernedMetadata } from "./seo";
+import { EnglishAbout, EnglishEngagement, EnglishHome, EnglishMethod, EnglishShell, EnglishStart } from "./pages/EnglishFoundation";
 
 type ShellProps = { children: ReactNode };
 
 const HUMANISTIC_INTERVIEW_URL = "/humanistic-interview/";
 const GCSDA_URL = "https://gcsda-governance.vercel.app/";
 const STT_LINE_ADD_FRIEND_URL = "https://line.me/R/ti/p/%40783xkknh";
+
+const CHINESE_TO_ENGLISH: Record<string, string> = {
+  "/": "/en",
+  "/how-stt-works": "/en/how-stt-works",
+  "/engagement": "/en/engagement",
+  "/about": "/en/about",
+  "/start": "/en/start",
+};
 
 const PRIMARY_NAVIGATION = [
   { label: "你正在面對什麼", path: "/problems" },
@@ -56,6 +65,7 @@ function PublicShell({ children }: ShellProps) {
   const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
   const publicationPage = location.pathname === "/books" || location.pathname === "/columns" || location.pathname.startsWith("/columns/");
+  const englishPath = CHINESE_TO_ENGLISH[location.pathname] ?? "/en";
 
   useLayoutEffect(() => {
     if (location.pathname === "/projects") return;
@@ -112,6 +122,7 @@ function PublicShell({ children }: ShellProps) {
             ))}
           </nav>
           <Link to="/start" className="stt-g0-primary-cta">開始治理判讀</Link>
+          <Link to={englishPath} className="stt-g0-lang-switch" hrefLang="en" lang="en" aria-label="Switch to English">EN</Link>
           <button type="button" className="stt-g0-menu-button" aria-label={menuOpen ? "關閉選單" : "開啟選單"} aria-expanded={menuOpen} aria-controls="stt-g0-mobile-menu" onClick={() => setMenuOpen((value) => !value)}>
             {menuOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
           </button>
@@ -127,6 +138,7 @@ function PublicShell({ children }: ShellProps) {
               <div className="stt-g0-mobile-menu__secondary">
                 {SECONDARY_NAVIGATION.map((item) => <NavLink key={item.path} to={item.path}>{item.label}</NavLink>)}
                 <Link to="/start">開始治理判讀</Link>
+                <Link to={englishPath} hrefLang="en" lang="en">English</Link>
               </div>
             </div>
           </nav>
@@ -143,6 +155,7 @@ function PublicShell({ children }: ShellProps) {
             <a href={GCSDA_URL} target="_blank" rel="noreferrer">GCSDA｜中華企業策略永續發展學會 ↗</a>
             <a href={STT_LINE_ADD_FRIEND_URL} target="_blank" rel="noopener noreferrer">STT LINE 官方帳號（治理聯絡） ↗</a>
             <Link to="/privacy">隱私</Link><Link to="/professional-boundary">專業服務邊界</Link>
+            <Link to={englishPath} hrefLang="en" lang="en">English</Link>
           </nav>
         </div>
       </footer>
@@ -154,6 +167,12 @@ function AppRoutes() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
+      <Route path="/en" element={<EnglishHome />} />
+      <Route path="/en/" element={<EnglishHome />} />
+      <Route path="/en/how-stt-works" element={<EnglishMethod />} />
+      <Route path="/en/engagement" element={<EnglishEngagement />} />
+      <Route path="/en/about" element={<EnglishAbout />} />
+      <Route path="/en/start" element={<EnglishStart />} />
       <Route path="/index.html" element={<Navigate to="/" replace />} />
       <Route path="/governance.html" element={<Navigate to="/problems" replace />} />
       <Route path="/problems" element={<Problems />} />
@@ -219,6 +238,7 @@ function AppRoutes() {
 }
 
 function AppFrame() {
+  const location = useLocation();
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const lenis = new Lenis({ duration: 1.1, smoothWheel: true, wheelMultiplier: 1, touchMultiplier: 1.2, lerp: 0.09 });
@@ -227,6 +247,7 @@ function AppFrame() {
     frame = requestAnimationFrame(raf);
     return () => { cancelAnimationFrame(frame); lenis.destroy(); };
   }, []);
-  return <PublicShell><AppRoutes /></PublicShell>;
+  const isEnglish = location.pathname === "/en" || location.pathname.startsWith("/en/");
+  return isEnglish ? <EnglishShell><AppRoutes /></EnglishShell> : <PublicShell><AppRoutes /></PublicShell>;
 }
 export default function App() { return <BrowserRouter><AppFrame /></BrowserRouter>; }
