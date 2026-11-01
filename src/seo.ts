@@ -142,7 +142,7 @@ function upsertCanonical(href: string) {
   node.href = href;
 }
 
-const LANGUAGE_PAIRS: Record<string, { zh: string; en: string }> = {
+export const LANGUAGE_PAIRS: Record<string, { zh: string; en: string }> = {
   "/": { zh: "/", en: "/en" },
   "/en": { zh: "/", en: "/en" },
   "/how-stt-works": { zh: "/how-stt-works", en: "/en/how-stt-works" },
@@ -225,7 +225,7 @@ export function applyGovernedMetadata(pathname: string) {
     logo: `${STT_CANONICAL_ORIGIN}/images/STT-Governance-Official-Logo.png`,
   });
 
-  if (formal && normalized !== "/") {
+  if (formal && normalized !== "/" && normalized !== "/en") {
     addSchema({
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
