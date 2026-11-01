@@ -9,6 +9,7 @@ import { BooksPage, PublishedWorksPage } from "./pages/PublicationLibrary";
 import Problems from "./pages/Problems";
 import ProblemDetail from "./pages/ProblemDetail";
 import Start from "./pages/Start";
+import GovernanceNavigator from "./pages/GovernanceNavigator";
 import Method from "./pages/Method";
 import Engagement from "./pages/Engagement";
 import { AboutPage, EricPage, InstitutionsPage, PrivacyPage, ProfessionalBoundaryPage } from "./pages/InstitutionalPages";
@@ -154,7 +155,7 @@ function PublicShell({ children }: ShellProps) {
             <a href={HUMANISTIC_INTERVIEW_URL}>受訪者專區｜二十題訪談準備</a>
             <a href={GCSDA_URL} target="_blank" rel="noreferrer">GCSDA｜中華企業策略永續發展學會 ↗</a>
             <a href={STT_LINE_ADD_FRIEND_URL} target="_blank" rel="noopener noreferrer">STT LINE 官方帳號（治理聯絡） ↗</a>
-            <Link to="/privacy">隱私</Link><Link to="/professional-boundary">專業服務邊界</Link>
+            <Link to="/navigator">治理導航</Link><Link to="/privacy">隱私</Link><Link to="/professional-boundary">專業服務邊界</Link>
             <Link to={englishPath} hrefLang="en" lang="en">English</Link>
           </nav>
         </div>
@@ -188,6 +189,7 @@ function AppRoutes() {
       <Route path="/about" element={<AboutPage />} />
       <Route path="/eric-chuang" element={<EricPage />} />
       <Route path="/institutions" element={<InstitutionsPage />} />
+      <Route path="/navigator" element={<GovernanceNavigator />} />
       <Route path="/start" element={<Start />} />
       <Route path="/privacy" element={<PrivacyPage />} />
       <Route path="/professional-boundary" element={<ProfessionalBoundaryPage />} />

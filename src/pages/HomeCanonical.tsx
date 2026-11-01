@@ -264,6 +264,23 @@ export default function HomeCanonical() {
         </div>
       </section>
 
+      <section className="stt-g1-section" aria-labelledby="governance-navigator-home-title">
+        <div className="stt-g1-shell">
+          <div className="stt-g1-split">
+            <div>
+              <p className="stt-g1-kicker">GOVERNANCE NAVIGATOR</p>
+              <h2 id="governance-navigator-home-title">不知道應該從哪裡開始？先辨識治理入口。</h2>
+            </div>
+            <p className="stt-g1-lead is-secondary">
+              用一兩句描述目前正在發生的情況，治理導航會協助你辨識較接近的治理主題與正式頁面；它不替代莊鈞翔博士的治理判讀，也不要求你先提供敏感資料。
+            </p>
+          </div>
+          <div className="stt-g1-actions">
+            <Link className="stt-g1-button is-primary" to="/navigator">開啟治理導航 →</Link>
+          </div>
+        </div>
+      </section>
+
       <section className="stt-g1-section stt-g1-band" aria-labelledby="stt-line-title">
         <div className="stt-g1-shell">
           <div className="stt-line-entry">

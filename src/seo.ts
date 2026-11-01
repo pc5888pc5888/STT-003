@@ -68,6 +68,12 @@ export const FORMAL_META: Record<string, MetaRecord> = {
     image: "/images/STT-Governance-Official-Logo.png",
     label: "開始治理判讀",
   },
+  "/navigator": {
+    title: "治理導航｜STT Governance",
+    description: "用自然語言描述目前情況，由 STT Governance Navigator 協助辨識較接近的治理主題與正式網站入口；導航不取代正式治理判讀。",
+    image: "/images/STT-Governance-Official-Logo.png",
+    label: "治理導航",
+  },
   "/privacy": {
     title: "隱私與資料使用｜STT Governance",
     description: "STT Governance 網站表單與網站資料使用說明。",
