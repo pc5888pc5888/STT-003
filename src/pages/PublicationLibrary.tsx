@@ -31,15 +31,16 @@ export function PublicationOverview() {
     <div className="stt-library-wrap">
       <PublicationNavigation />
       <section className="stt-library-section" aria-labelledby="reading-paths-title">
-        <p className="stt-library-kicker">READING PATHS</p><h2 id="reading-paths-title">從你想閱讀的內容開始。</h2>
+        <p className="stt-library-kicker">CONTENT TYPES</p><h2 id="reading-paths-title">依內容類型閱讀。</h2>
         <div className="stt-library-paths">
-          <Link className="stt-library-path" to="/books"><span>01 · BOOKS</span><h3>電子書與出版</h3><p>書籍資訊、正式封面與已提供的線上翻閱入口。</p><strong>進入書籍頁 →</strong></Link>
-          {SERIES.filter(item => item.route).map((item, index) => <Link className="stt-library-path" key={item.key} to={seriesHref(item)}><span>{String(index + 2).padStart(2, "0")} · {item.key.toUpperCase()}</span><h3>{item.label}</h3><p>{item.description}</p><strong>閱讀作品 →</strong></Link>)}
+          <Link className="stt-library-path" to="/research"><span>01 · RESEARCH</span><h3>研究與論文</h3><p>STT Research Papers｜研究論文典藏，建立研究、方法、制度與治理實務的可信脈絡。</p><strong>閱讀研究介紹 →</strong></Link>
+          <Link className="stt-library-path" to="/columns"><span>02 · COLUMNS</span><h3>專欄與觀點</h3><p>法律、人文、治理與外部發表作品，依主題與來源整理。</p><strong>閱讀專欄與觀點 →</strong></Link>
+          <Link className="stt-library-path" to="/books"><span>03 · BOOKS</span><h3>出版著作</h3><p>書籍資訊、正式封面與已提供的線上翻閱入口。</p><strong>進入出版著作 →</strong></Link>
         </div>
         <Link className="stt-library-text-link" to="/columns">搜尋全部專欄與報導 →</Link>
       </section>
       <section className="stt-library-section" aria-labelledby="themes-title">
-        <p className="stt-library-kicker">GOVERNANCE THEMES</p><h2 id="themes-title">也可以沿著治理主題閱讀。</h2>
+        <p className="stt-library-kicker">GOVERNANCE THEMES</p><h2 id="themes-title">依治理主題閱讀。</h2>
         <div className="stt-library-themes">{THEMES.map(item => <article id={item.anchor} key={item.key}><p className="stt-library-kicker">{item.en}</p><h3>{item.label}</h3><p>{item.description}</p><Link to={`/columns?theme=${item.key}`}>查看此主題內容 →</Link></article>)}</div>
       </section>
       <section className="stt-library-note" aria-label="發表來源說明"><h2>作品與發表來源，分別標示。</h2><p>書籍、法律專欄、人物故事與報導各有自己的閱讀入口。每篇作品保留作者、日期與原始發表連結；M 傳媒及其他第三方平台的文章，均標示為外部發表。</p></section>
