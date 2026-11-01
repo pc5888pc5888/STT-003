@@ -13,6 +13,26 @@
       "destination": "/gcsda-en.html"
     },
     {
+      "source": "/en/charter",
+      "destination": "/gcsda-en-charter.html"
+    },
+    {
+      "source": "/en/knowledge",
+      "destination": "/gcsda-en-knowledge.html"
+    },
+    {
+      "source": "/en/events",
+      "destination": "/gcsda-en-events.html"
+    },
+    {
+      "source": "/en/council",
+      "destination": "/gcsda-en-council.html"
+    },
+    {
+      "source": "/en/founder-chairman",
+      "destination": "/gcsda-en-founder-chairman.html"
+    },
+    {
       "source": "/en/about",
       "destination": "/gcsda-en-about.html"
     },
@@ -62,6 +82,31 @@
     }
   ],
   "redirects": [
+    {
+      "source": "/en/charter/",
+      "destination": "/en/charter",
+      "permanent": true
+    },
+    {
+      "source": "/en/knowledge/",
+      "destination": "/en/knowledge",
+      "permanent": true
+    },
+    {
+      "source": "/en/events/",
+      "destination": "/en/events",
+      "permanent": true
+    },
+    {
+      "source": "/en/council/",
+      "destination": "/en/council",
+      "permanent": true
+    },
+    {
+      "source": "/en/founder-chairman/",
+      "destination": "/en/founder-chairman",
+      "permanent": true
+    },
     {
       "source": "/navigator/",
       "destination": "/navigator",
