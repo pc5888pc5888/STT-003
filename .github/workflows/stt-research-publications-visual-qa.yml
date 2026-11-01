@@ -1,0 +1,116 @@
+name: STT Research and Publications Visual Acceptance
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'src/pages/ResearchPapers.tsx'
+      - 'src/styles/research-papers.css'
+      - 'src/pages/PublicationLibrary.tsx'
+      - 'src/styles/publication-library.css'
+      - 'public/research-covers/**'
+permissions:
+  contents: read
+jobs:
+  editorial-visual:
+    runs-on: ubuntu-latest
+    timeout-minutes: 16
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: TypeScript typecheck and production build
+        run: |
+          npm run lint
+          npm run build
+      - name: Prepare browser and fonts
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq fonts-noto-cjk
+          npm install --prefix /tmp/stt-visual-qa --no-save playwright
+      - name: Render and verify research and publications at desktop tablet mobile
+        run: |
+          set -euo pipefail
+          mkdir -p qa-evidence/screenshots
+          npx vite preview --host 127.0.0.1 --port 4173 >/tmp/stt-qa-preview.log 2>&1 &
+          PREVIEW_PID=$!
+          trap 'kill "$PREVIEW_PID" 2>/dev/null || true' EXIT
+          for i in $(seq 1 40); do
+            if curl --fail --silent http://127.0.0.1:4173/ >/dev/null; then break; fi
+            sleep 1
+          done
+          export CHROME_PATH="$(command -v google-chrome || command -v chromium || command -v chromium-browser)"
+          test -n "$CHROME_PATH"
+          node --input-type=module <<'JS'
+          import fs from 'node:fs';
+          const {chromium}=await import('/tmp/stt-visual-qa/node_modules/playwright/index.mjs');
+          const browser=await chromium.launch({executablePath:process.env.CHROME_PATH,args:['--no-sandbox','--disable-dev-shm-usage']});
+          const paths=['/research','/research/legal-service-sustainability','/research/corporate-governance-compliance','/research/family-business-succession','/research/generational-entrepreneurs','/books','/books/sustainable-family-governance','/books/internal-compliance','/books/ai-governance','/books/family-governance'];
+          const viewports=[{name:'desktop',width:1440,height:950},{name:'tablet',width:820,height:1050},{name:'mobile',width:390,height:844}];
+          const report={screens:[],routes:[],errors:[]};
+          for(const viewport of viewports){
+            const context=await browser.newContext({viewport:{width:viewport.width,height:viewport.height},deviceScaleFactor:1,reducedMotion:'reduce'});
+            for(let n=0;n<paths.length;n++){
+              const path=paths[n];
+              const page=await context.newPage();
+              const jsErrors=[];
+              page.on('pageerror',error=>jsErrors.push(String(error)));
+              const response=await page.goto('http://127.0.0.1:4173'+path,{waitUntil:'domcontentloaded',timeout:30000});
+              await page.locator('h1').waitFor({timeout:15000});
+              await page.waitForTimeout(200);
+              const stats=await page.evaluate(()=>{
+                const images=Array.from(document.querySelectorAll('.research-card__cover img,.research-shelf-cover img,.research-detail-cover img,.stt-publication-cover img,.stt-publication-card img'));
+                return {
+                  title:document.querySelector('h1')?.textContent?.trim()||'',
+                  titleCount:document.querySelectorAll('h1').length,
+                  imageCount:images.length,
+                  imageSources:images.map(x=>x.getAttribute('src')),
+                  loaded:images.every(x=>x.complete && x.naturalWidth>=170),
+                  horizontalOverflow:Math.round(document.documentElement.scrollWidth-innerWidth),
+                  canonical:document.querySelector('link[rel=canonical]')?.getAttribute('href'),
+                  mainCount:document.querySelectorAll('main').length,
+                  researchNav:!!document.querySelector('.stt-library-nav a[href="/research"]'),
+                  heyzine:!!document.querySelector('a[href^="https://heyzine.com/flip-book/"]'),
+                  researchContent:!!document.querySelector('.research-numbered-list,.research-grid'),
+                  cssBackground:!!document.querySelector('.stt-publication-hero')
+                };
+              });
+              const isResearch=path.startsWith('/research');
+              if(response?.status()!==200)report.errors.push(viewport.name+' '+path+' HTTP '+response?.status());
+              if(stats.titleCount!==1)report.errors.push(viewport.name+' '+path+' H1 count '+stats.titleCount);
+              if(stats.mainCount!==1)report.errors.push(viewport.name+' '+path+' main count '+stats.mainCount);
+              if(!stats.canonical?.endsWith(path))report.errors.push(viewport.name+' '+path+' missing canonical');
+              if(stats.imageCount===0)report.errors.push(viewport.name+' '+path+' missing cover images');
+              if(!stats.loaded)report.errors.push(viewport.name+' '+path+' failed images '+stats.imageSources.join(','));
+              if(!stats.researchNav)report.errors.push(viewport.name+' '+path+' missing research nav');
+              if(isResearch && !stats.researchContent)report.errors.push(viewport.name+' '+path+' no substantive study content');
+              if(isResearch && path!=='/research' && !stats.heyzine)report.errors.push(viewport.name+' '+path+' Heyzine missing');
+              if(stats.horizontalOverflow>6)report.errors.push(viewport.name+' '+path+' horizontal scroll '+stats.horizontalOverflow);
+              if(jsErrors.length)report.errors.push(viewport.name+' '+path+' JS '+jsErrors.join(' | '));
+              report.routes.push({viewport:viewport.name,path,...stats,jsErrors});
+              const screenshot=(viewport.name==='desktop' || (viewport.name==='tablet' && ['/research','/research/legal-service-sustainability','/books','/books/ai-governance'].includes(path)) || (viewport.name==='mobile' && ['/research','/research/family-business-succession','/books','/books/ai-governance'].includes(path)));
+              if(screenshot){
+                const name=viewport.name+'-'+String(n+1).padStart(2,'0')+'.png';
+                await page.screenshot({path:'qa-evidence/screenshots/'+name,fullPage:false,animations:'disabled'});
+                report.screens.push(name);
+              }
+              await page.close();
+            }
+            await context.close();
+          }
+          fs.writeFileSync('qa-evidence/report.json',JSON.stringify(report,null,2));
+          console.log('VISUAL_QA_SUMMARY',JSON.stringify({routes:report.routes.length,screens:report.screens.length,errors:report.errors}));
+          await browser.close();
+          if(report.errors.length)process.exit(1);
+          JS
+      - name: Archive browser evidence
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: stt-research-publications-visual-acceptance
+          path: qa-evidence/
+          if-no-files-found: warn
+          retention-days: 7
