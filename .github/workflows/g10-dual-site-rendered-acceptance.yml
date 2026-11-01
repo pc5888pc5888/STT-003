@@ -1,4 +1,4 @@
-# QA rerun: 2026-11-01 prohibit inline research and ebook previews
+# QA rerun: 2026-11-01 hero-under-header expansion and translucent navigation gate
 name: G10 dual-site rendered acceptance
 
 on:
@@ -348,6 +348,43 @@ jobs:
                 && JSON.stringify(primary.map(x=>x.href))===JSON.stringify(spec.hrefs);
               report.special.push({name:`GCSDA mobile eight-item navigation parity ${spec.code}`,actual:state,
                 passed:navOkay&&primary.length===8&&!state.overflow&&state.menuExpanded==='true'});
+              await context.close();
+            }
+          }
+
+          // Hero-under-header glass continuity: the visual must actually exist behind the translucent navigation.
+          {
+            const specs=[
+              {site:'stt',origin:'http://127.0.0.1:4173',route:'/insights',header:'.stt-g0-header',nav:'.stt-g0-desktop-nav',art:'.cis-hero-art'},
+              {site:'gcsda',origin:'http://127.0.0.1:4174',route:'/',header:'.g4-head',nav:'.g4-nav',art:'.g4-home-media'}
+            ];
+            for(const spec of specs){
+              const context=await browser.newContext({viewport:{width:1536,height:1000},reducedMotion:'reduce'});
+              const page=await context.newPage();
+              await page.goto(spec.origin+spec.route,{waitUntil:'domcontentloaded',timeout:30000});
+              const state=await page.evaluate(({header,nav,art})=>{
+                const h=document.querySelector(header),n=document.querySelector(nav),a=document.querySelector(art);
+                const hr=h?.getBoundingClientRect(),ar=a?.getBoundingClientRect();
+                const alphaOf=e=>{
+                  if(!e)return 1;
+                  const bg=getComputedStyle(e).backgroundColor||'';
+                  const m=bg.match(/rgba?\([^,]+,[^,]+,[^,]+(?:,\s*([\d.]+))?\)/);
+                  return m?.[1]!==undefined?Number(m[1]):1;
+                };
+                return {
+                  headerTop:hr?.top??null,
+                  headerBottom:hr?.bottom??null,
+                  artTop:ar?.top??null,
+                  artBottom:ar?.bottom??null,
+                  headerAlpha:alphaOf(h),
+                  navAlpha:alphaOf(n),
+                  headerBackdrop:h?(getComputedStyle(h).backdropFilter||getComputedStyle(h).webkitBackdropFilter||''):null,
+                  artBehindHeader:!!hr&&!!ar&&ar.top<=hr.top+1&&ar.bottom>=hr.bottom,
+                  overflow:document.documentElement.scrollWidth>innerWidth+1
+                };
+              },spec);
+              report.special.push({name:`hero-under-header glass continuity ${spec.site}`,actual:state,
+                passed:state.artBehindHeader&&state.headerAlpha<=.80&&state.navAlpha<=.15&&state.headerBackdrop!=='none'&&!state.overflow});
               await context.close();
             }
           }
