@@ -60,7 +60,7 @@ function splitBalancedTitle(title:string){
 const pageVisuals:Record<string,string|undefined>={
   "/":"/visual-bank/gcsda/001.webp",
   "/about":"/visual-bank/gcsda/002.webp",
-  "/founder-chairman":"/visual-approved/eric-page-owner-original.png",
+  "/founder-chairman":"/images/portrait-suit.png",
   "/governance":"/visual-bank/gcsda/003.webp",
   "/council":"/visual-bank/gcsda/004.webp",
   "/membership":"/visual-bank/gcsda/005.webp",
