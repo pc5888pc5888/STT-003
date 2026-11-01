@@ -1,4 +1,4 @@
-# QA rerun: 2026-11-01 multilingual navigation parity gate
+# QA rerun: 2026-11-01 multilingual language-authority and hreflang dedupe gate
 name: G10 dual-site rendered acceptance
 
 on:
@@ -268,7 +268,8 @@ jobs:
                   && JSON.stringify(state.links.map(x=>x.href))===JSON.stringify(spec.hrefs);
                 const languageUnique=new Set(state.languageLinks).size===state.languageLinks.length;
                 const metaOkay=state.lang===spec.lang && state.canonical?.endsWith(spec.home)
-                  && ['zh-Hant-TW','en','ja','ko','x-default'].every(x=>state.hreflangs.includes(x));
+                  && ['zh-Hant-TW','en','ja','ko','x-default'].every(x=>state.hreflangs.includes(x))
+                  && new Set(state.hreflangs).size===state.hreflangs.length;
                 report.special.push({name:`multilingual ${spec.code} ${device} navigation parity`,actual:state,
                   passed:navOkay&&languageUnique&&metaOkay&&!state.overflow});
                 await context.close();
