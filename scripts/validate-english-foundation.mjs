@@ -11,6 +11,9 @@ const english = read("src/pages/EnglishFoundation.tsx");
 const seo = read("src/seo.ts");
 const vite = read("vite.config.ts");
 const css = read("src/styles/stt-english-foundation.css");
+const methodCss = read("src/styles/stt-g3-method.css");
+const engagementCss = read("src/styles/stt-g4-engagement.css");
+const institutionalCss = read("src/styles/stt-institutional-pages.css");
 const vercel = JSON.parse(read("vercel.json"));
 
 const routes = [
@@ -51,6 +54,17 @@ requireToken(vite, '.replace(/<html lang="[^"]*">/, `<html lang="${language}">`)
 requireToken(css, '.stt-g0-lang-switch', "Language-switch styling missing");
 requireToken(css, 'grid-template-columns:340px minmax(0,1fr) auto auto!important', "Desktop language-switch header geometry missing");
 requireToken(css, 'grid-template-columns:minmax(0,1fr) auto auto!important', "Intermediate language-switch header geometry missing");
+requireToken(methodCss, "@media(max-width:980px)", "Method tablet breakpoint missing");
+requireToken(methodCss, "grid-template-columns:repeat(4,1fr)", "Method tablet index geometry missing");
+requireToken(methodCss, "@media(max-width:680px)", "Method mobile breakpoint missing");
+requireToken(methodCss, "grid-template-columns:repeat(2,1fr)", "Method mobile index geometry missing");
+requireToken(engagementCss, "@media(max-width:900px)", "Engagement tablet breakpoint missing");
+requireToken(engagementCss, "grid-template-columns:1fr;", "Engagement single-column responsive geometry missing");
+requireToken(engagementCss, "@media(max-width:640px)", "Engagement mobile breakpoint missing");
+requireToken(institutionalCss, "@media(max-width:720px)", "Institutional mobile breakpoint missing");
+requireToken(institutionalCss, ".stt-inst-grid{grid-template-columns:1fr}", "Institutional mobile card geometry missing");
+requireToken(css, "@media(max-width:760px)", "English mobile breakpoint missing");
+requireToken(css, ".stt-en-process-line{\n    grid-template-columns:1fr;", "English process-line mobile geometry missing");
 
 const rewrites = Array.isArray(vercel.rewrites) ? vercel.rewrites : [];
 if (rewrites.some((item) => item?.source === "/en/:path*")) errors.push("Broad /en/:path* fallback is prohibited");
@@ -90,4 +104,5 @@ console.log(JSON.stringify({
   coreChineseCtaRetained: true,
   humanisticRouteRetained: true,
   sttLineUrlRetained: true,
+  responsiveSourceLocks: true,
 }));
