@@ -83,14 +83,14 @@ export const PAGE_PRESENTATION: Record<string, PagePresentation> = {
       "創辦人暨執行長｜莊鈞翔博士"
     ],
     "type": 1,
-    "image": "/visual-approved/eric-page-owner-original.png",
+    "image": "/visual-approved/portrait-stt-20261102-hd.webp",
     "originalTitle": "創辦人暨執行長｜莊鈞翔博士",
     "context": null,
     "portrait": true,
     "byline": AUTHOR_PROFILE.englishName,
     "bylineBefore": false,
-    "imageWidth": 2048,
-    "imageHeight": 1152
+    "imageWidth": 3344,
+    "imageHeight": 1882
   },
   "/institutions": {
     "lines": [

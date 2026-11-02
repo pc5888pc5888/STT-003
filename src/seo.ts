@@ -90,7 +90,7 @@ export const FORMAL_META: Record<string, MetaRecord> = {
   "/eric-chuang": {
     title: "莊鈞翔博士｜治理判讀與制度設計｜STT Governance",
     description: "莊鈞翔博士為 STT Governance 創辦人暨執行長，研究與實務聚焦企業策略、公司治理與法遵、家族企業接班及 AI 治理。",
-    image: "/visual-approved/portrait-stt-20261101.webp",
+    image: "/visual-approved/portrait-stt-20261102-hd.webp",
     label: "莊鈞翔博士",
   },
   "/institutions": {
@@ -513,7 +513,7 @@ export function applyGovernedMetadata(pathname: string) {
       name: AUTHOR_PROFILE.chineseName,
       alternateName: AUTHOR_PROFILE.englishName,
       url: canonical,
-      image: `${STT_CANONICAL_ORIGIN}/visual-approved/portrait-stt-20261101.webp`,
+      image: `${STT_CANONICAL_ORIGIN}/visual-approved/portrait-stt-20261102-hd.webp`,
       jobTitle: AUTHOR_PROFILE.positions[0],
       affiliation: {
         "@type": "Organization",
