@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import { useLocation } from "react-router-dom";
 import { PAGE_PRESENTATION } from "../data/pagePresentation";
 import "../styles/gcsda-hero-repair.css";
+import "../styles/gcsda-founder-intact.css";
 
 type Props = { kicker: string; title: string; subtitle?: string; lead?: string; image?: string; id?: string; children?: ReactNode };
 
@@ -23,6 +24,32 @@ export default function GovernedHero({ kicker, title, subtitle, lead, image, id,
   const ownerOriginal = Boolean(picture?.includes("eric-page-owner-original.png") || picture?.includes("portrait-gcsda-20261101.webp") || picture?.includes("portrait-gcsda-20261102-hd.webp"));
   const profileParity = route === "/founder-chairman";
   const profileHires = Boolean(route === "/founder-chairman" && picture?.includes("portrait-gcsda-20261102-hd.webp"));
+
+  // Founder-only photo-safe rendering. The global cis-hero crop system is not used.
+  if (profileHires && picture) return <>
+    <section className="gcsda-intact-hero" aria-labelledby={titleId}>
+      <div className="gcsda-intact-hero__stage">
+        <img
+          className="gcsda-intact-hero__image"
+          src={picture}
+          alt="莊鈞翔博士雙手插袋肖像，完整保留原始照片構圖"
+          width={page?.imageWidth || 3344}
+          height={page?.imageHeight || 1882}
+          fetchPriority="high"
+          decoding="async"
+        />
+        <div className="gcsda-intact-hero__copy">
+          {kicker&&<p className="gcsda-intact-hero__kicker">{kicker}</p>}
+          <h1 id={titleId} className="gcsda-intact-hero__title">{lines.map((line,i)=><span key={i}>{line}</span>)}</h1>
+          {page?.byline&&<p className="gcsda-intact-hero__byline" lang="en">{page.byline}</p>}
+          {subtitle&&<p className="gcsda-intact-hero__subtitle">{subtitle}</p>}
+          {lead&&<p className="gcsda-intact-hero__lead">{lead}</p>}
+          {children&&<div className="gcsda-intact-hero__actions">{children}</div>}
+        </div>
+      </div>
+    </section>
+    {page?.context&&<div className="cis-context"><p>{page.context}</p></div>}
+  </>;
   return <>
     <section className={`cis-hero gcsda-hero${route === "/" ? " gcsda-hero--home" : ""} cis-title-${lines.length}${picture ? " cis-with-image" : " cis-text-only"}${page?.portrait ? " cis-portrait" : ""}${clearLeft ? " cis-clear-left" : ""}${profileParity ? " cis-profile-parity" : ""}${ownerOriginal ? " cis-owner-original" : ""}${profileHires ? " cis-profile-hires" : ""}`} aria-labelledby={titleId} data-gcsda-hero="20261021.1">
       <div className="cis-hero-inner">
