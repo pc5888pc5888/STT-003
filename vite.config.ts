@@ -13,14 +13,15 @@ export default defineConfig(({mode})=>{
   for(const [route,meta] of Object.entries(GCSDA_META)){
    const language=meta.language??"zh-Hant-TW",locale=meta.locale??"zh_TW";
    const pair=GCSDA_LANGUAGE_PAIRS[route];
+   const isFounder=route==="/founder-chairman"||route==="/en/founder-chairman";
    let html=base.replace(/<html lang="[^"]*">/, `<html lang="${language}">`).replace(/<title>[\s\S]*?<\/title>/,`<title>${esc(meta.title)}</title>`).replace(/<meta name="description"[^>]*>/,`<meta name="description" content="${esc(meta.description)}" />`);
-   const tags=[`<meta name="robots" content="${origin?"index,follow":"noindex,follow"}" />`,`<meta property="og:title" content="${esc(meta.title)}" />`,`<meta property="og:description" content="${esc(meta.description)}" />`,`<meta property="og:site_name" content="GCSDA｜中華企業策略永續發展學會" />`,`<meta property="og:locale" content="${locale}" />`,`<meta property="og:type" content="website" />`];
+   const tags=[`<meta name="robots" content="${origin?"index,follow":"noindex,follow"}" />`,`<meta property="og:title" content="${esc(meta.title)}" />`,`<meta property="og:description" content="${esc(meta.description)}" />`,`<meta property="og:site_name" content="GCSDA｜中華企業策略永續發展學會" />`,`<meta property="og:locale" content="${locale}" />`,`<meta property="og:type" content="${isFounder?"profile":"website"}" />`];
    if(origin&&pair)tags.push(
     `<link rel="alternate" hreflang="zh-Hant-TW" href="${origin+pair.zh}" />`,
     `<link rel="alternate" hreflang="en" href="${origin+pair.en}" />`,
     `<link rel="alternate" hreflang="x-default" href="${origin+pair.zh}" />`
    );
-   if(origin)tags.push(`<link rel="canonical" href="${origin+route}" />`,`<meta property="og:url" content="${origin+route}" />`,`<meta property="og:image" content="${origin}/images/gcsda-logo.png" />`,`<meta property="og:image:alt" content="中華企業策略永續發展學會 GCSDA 標誌" />`,`<script type="application/ld+json">${JSON.stringify({"@context":"https://schema.org","@type":"Organization","name":"中華企業策略永續發展學會","alternateName":"GCSDA","url":origin,"logo":origin+"/images/gcsda-logo.png","inLanguage":language})}</script>`);
+   if(origin){tags.push(`<link rel="canonical" href="${origin+route}" />`,`<meta property="og:url" content="${origin+route}" />`,`<meta property="og:image" content="${origin+(isFounder?"/images/portrait-gcsda-20261101.webp":"/images/gcsda-logo.png")}" />`,`<meta property="og:image:alt" content="${isFounder?"創會理事長莊鈞翔博士":"中華企業策略永續發展學會 GCSDA 標誌"}" />`,`<script type="application/ld+json">${JSON.stringify({"@context":"https://schema.org","@type":"Organization","name":"中華企業策略永續發展學會","alternateName":"GCSDA","url":origin,"logo":origin+"/images/gcsda-logo.png","inLanguage":language})}</script>`);if(isFounder)tags.push(`<script type="application/ld+json">${JSON.stringify({"@context":"https://schema.org","@type":"Person","name":"莊鈞翔博士","alternateName":"Chuang Chun-Hsiang, Ph.D.","url":origin+"/founder-chairman","image":origin+"/images/portrait-gcsda-20261101.webp","jobTitle":language==="en"?"Founding Chairman":"創會理事長","affiliation":{"@type":"Organization","name":"中華企業策略永續發展學會","alternateName":"GCSDA","url":origin}})}</script>`);}
    html=html.replace("</head>",tags.join("\n")+"\n</head>");fs.writeFileSync(path.join(root,fileForRoute(route)),html);
   }
   fs.writeFileSync(path.join(root,"sitemap.xml"),'<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'+(origin?Object.keys(GCSDA_META).map(route=>`<url><loc>${origin+route}</loc></url>`).join(""):"")+"</urlset>");
