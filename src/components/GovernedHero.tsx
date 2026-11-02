@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import { useLocation } from "react-router-dom";
 import { PAGE_PRESENTATION } from "../data/pagePresentation";
+import "../styles/stt-founder-intact.css";
 
 type Props = { kicker: string; title: string; subtitle?: string; lead?: string; image?: string; id?: string; children?: ReactNode };
 export default function GovernedHero({kicker,title,subtitle,lead,image,id,children}:Props){
@@ -13,6 +14,33 @@ export default function GovernedHero({kicker,title,subtitle,lead,image,id,childr
   const ownerOriginal=Boolean(picture?.includes("eric-page-owner-original.png") || picture?.includes("portrait-stt-20261101.webp" ) || picture?.includes("portrait-stt-20261102-hd.webp"));
   const profileParity=pathname==="/eric-chuang"||pathname==="/founder-chairman";
   const profileHires=Boolean(pathname==="/eric-chuang" && picture?.includes("portrait-stt-20261102-hd.webp"));
+
+  // Independent photo-safe component: no inherited cis-hero image crop rules.
+  if (profileHires && picture) return <>
+    <section className="stt-intact-hero" aria-labelledby={titleId}>
+      <div className="stt-intact-hero__stage">
+        <img
+          className="stt-intact-hero__image"
+          src={picture}
+          alt="莊鈞翔博士雙手交叉肖像，完整保留原始照片構圖"
+          width={page?.imageWidth || 3344}
+          height={page?.imageHeight || 1882}
+          fetchPriority="high"
+          decoding="async"
+        />
+        <div className="stt-intact-hero__copy">
+          {kicker&&<p className="stt-intact-hero__kicker">{kicker}</p>}
+          {page?.byline&&page.bylineBefore&&<p className="stt-intact-hero__byline" lang="en">{page.byline}</p>}
+          <h1 id={titleId} className="stt-intact-hero__title">{lines.map((line,i)=><span key={i}>{line}</span>)}</h1>
+          {page?.byline&&!page.bylineBefore&&<p className="stt-intact-hero__byline" lang="en">{page.byline}</p>}
+          {subtitle&&<p className="stt-intact-hero__subtitle">{subtitle}</p>}
+          {lead&&<p className="stt-intact-hero__lead">{lead}</p>}
+          {children&&<div className="stt-intact-hero__actions">{children}</div>}
+        </div>
+      </div>
+    </section>
+    {page?.context&&<div className="cis-context"><p>{page.context}</p></div>}
+  </>;
   return <>
     <section className={`cis-hero cis-title-${lines.length}${picture?" cis-with-image":" cis-text-only"}${page?.portrait?" cis-portrait":""}${clearLeft?" cis-clear-left":""}${profileParity?" cis-profile-parity":""}${ownerOriginal?" cis-owner-original":""}${profileHires?" cis-profile-hires":""}`} aria-labelledby={titleId}>
       <div className="cis-hero-inner">
