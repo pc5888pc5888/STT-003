@@ -10,7 +10,7 @@ export default function GovernedHero({kicker,title,subtitle,lead,image,id,childr
   const picture=image ?? page?.image ?? undefined;
   const titleId=id||"page-title";
   const clearLeft=Boolean(picture && (picture.includes("/user-approved-six/") || picture.includes("cooperation-hero-20260917")));
-  const ownerOriginal=Boolean(picture?.includes("eric-page-owner-original.png"));
+  const ownerOriginal=Boolean(picture?.includes("eric-page-owner-original.png") || picture?.includes("portrait-stt-20261101.webp"));
   const profileParity=pathname==="/eric-chuang"||pathname==="/founder-chairman";
   return <>
     <section className={`cis-hero cis-title-${lines.length}${picture?" cis-with-image":" cis-text-only"}${page?.portrait?" cis-portrait":""}${clearLeft?" cis-clear-left":""}${profileParity?" cis-profile-parity":""}${ownerOriginal?" cis-owner-original":""}`} aria-labelledby={titleId}>
