@@ -54,7 +54,7 @@ export const FORMAL_META: Record<string, MetaRecord> = {
   "/research": {
     title: "STT Research Papers｜研究論文典藏｜STT Governance",
     description: "STT Governance 研究論文典藏，整理家族治理、公司治理與法遵、法律服務永續、企業領導與世代接班等研究脈絡。",
-    image: "/visual-bank/stt/user-approved-six/columns.png",
+    image: "/visual-bank/stt/owner-approved-20261101/research.webp",
     label: "研究與論文",
   },
   "/research/legal-service-sustainability": {
@@ -90,7 +90,7 @@ export const FORMAL_META: Record<string, MetaRecord> = {
   "/eric-chuang": {
     title: "莊鈞翔博士｜治理判讀與制度設計｜STT Governance",
     description: "莊鈞翔博士為 STT Governance 創辦人暨執行長，研究與實務聚焦企業策略、公司治理與法遵、家族企業接班及 AI 治理。",
-    image: "/visual-bank/stt/eric-governance-principal-hero.webp",
+    image: "/visual-approved/portrait-stt-20261101.webp",
     label: "莊鈞翔博士",
   },
   "/institutions": {
@@ -513,7 +513,7 @@ export function applyGovernedMetadata(pathname: string) {
       name: AUTHOR_PROFILE.chineseName,
       alternateName: AUTHOR_PROFILE.englishName,
       url: canonical,
-      image: `${STT_CANONICAL_ORIGIN}/visual-bank/stt/eric-governance-principal-hero.webp`,
+      image: `${STT_CANONICAL_ORIGIN}/visual-approved/portrait-stt-20261101.webp`,
       jobTitle: AUTHOR_PROFILE.positions[0],
       affiliation: {
         "@type": "Organization",
