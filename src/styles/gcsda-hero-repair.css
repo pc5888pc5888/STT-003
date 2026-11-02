@@ -877,3 +877,21 @@
   #root .g4 .gcsda-hero.cis-hero.cis-owner-original::before{display:none!important;content:none!important}
   #root .g4 .gcsda-hero.cis-hero.cis-owner-original .cis-hero-art img{object-fit:contain!important;object-position:center bottom!important}
 }
+
+
+/* 2026-11-02: GCSDA exact owner photograph. Scoped full-frame, no crop or white veil. */
+@media(min-width:1201px){
+  #root .g4 .g4-founder-page .gcsda-hero.cis-hero.cis-profile-hires{min-height:0!important;height:auto!important;overflow:hidden!important;background:#fbfaf7!important;}
+  #root .g4 .g4-founder-page .gcsda-hero.cis-hero.cis-profile-hires .cis-hero-inner{position:relative!important;width:100%!important;max-width:none!important;min-height:0!important;height:auto!important;aspect-ratio:1672/941!important;display:block!important;padding:0!important;margin:0!important;}
+  #root .g4 .g4-founder-page .gcsda-hero.cis-hero.cis-profile-hires .cis-hero-art{position:absolute!important;inset:0!important;width:100%!important;max-width:none!important;height:100%!important;overflow:hidden!important;margin:0!important;background:none!important;}
+  #root .g4 .g4-founder-page .gcsda-hero.cis-hero.cis-profile-hires .cis-hero-art img{position:absolute!important;inset:0!important;display:block!important;width:100%!important;height:100%!important;max-width:none!important;max-height:none!important;object-fit:contain!important;object-position:center center!important;filter:none!important;transform:none!important;opacity:1!important;image-rendering:auto!important;}
+  #root .g4 .g4-founder-page .gcsda-hero.cis-hero.cis-profile-hires .cis-hero-copy{position:absolute!important;top:50%!important;left:clamp(36px,4vw,64px)!important;transform:translateY(-50%)!important;margin:0!important;width:min(47%,760px)!important;max-width:760px!important;padding:0!important;z-index:2!important;background:transparent!important;}
+}
+#root .g4 .g4-founder-page .gcsda-hero.cis-hero.cis-profile-hires::before,#root .g4 .g4-founder-page .gcsda-hero.cis-hero.cis-profile-hires .cis-hero-art::after{display:none!important;content:none!important;background:none!important;opacity:0!important;}
+@media(max-width:1200px){
+  #root .g4 .g4-founder-page .gcsda-hero.cis-hero.cis-profile-hires{min-height:0!important;height:auto!important;overflow:visible!important;background:#fbfaf7!important;}
+  #root .g4 .g4-founder-page .gcsda-hero.cis-hero.cis-profile-hires .cis-hero-inner{position:relative!important;display:flex!important;flex-direction:column!important;align-items:stretch!important;width:100%!important;max-width:none!important;aspect-ratio:auto!important;height:auto!important;min-height:0!important;margin:0!important;padding:0!important;gap:0!important;}
+  #root .g4 .g4-founder-page .gcsda-hero.cis-hero.cis-profile-hires .cis-hero-art{position:relative!important;inset:auto!important;order:0!important;display:block!important;flex:none!important;width:100%!important;max-width:none!important;height:auto!important;aspect-ratio:1672/941!important;overflow:hidden!important;margin:0!important;background:none!important;}
+  #root .g4 .g4-founder-page .gcsda-hero.cis-hero.cis-profile-hires .cis-hero-art img{position:relative!important;inset:auto!important;display:block!important;width:100%!important;height:auto!important;max-width:none!important;max-height:none!important;object-fit:contain!important;object-position:center!important;filter:none!important;transform:none!important;opacity:1!important;}
+  #root .g4 .g4-founder-page .gcsda-hero.cis-hero.cis-profile-hires .cis-hero-copy{position:relative!important;order:1!important;top:auto!important;left:auto!important;transform:none!important;align-self:stretch!important;width:100%!important;max-width:none!important;margin:0!important;padding:32px clamp(24px,4vw,44px) 40px!important;background:#fbfaf7!important;}
+}
