@@ -87,6 +87,30 @@ export const FORMAL_META: Record<string, MetaRecord> = {
     image: "/visual-bank/stt/user-approved-six/about-stt.png",
     label: "關於 STT",
   },
+  "/en/eric-chuang": {
+    title: "Eric Chuang, Ph.D. | STT Governance",
+    description: "Founder and CEO of STT Governance, focusing on governance interpretation, institutional design and major decisions.",
+    image: "/visual-approved/portrait-stt-20261102-hd.webp",
+    label: "Eric Chuang, Ph.D.",
+    language: "en",
+    locale: "en_US",
+  },
+  "/ja/eric-chuang": {
+    title: "莊鈞翔博士｜STT Governance",
+    description: "STT Governance創設者・CEO。重大意思決定、企業統治、家族承継、AIガバナンスの判断と制度設計。",
+    image: "/visual-approved/portrait-stt-20261102-hd.webp",
+    label: "莊鈞翔博士",
+    language: "ja",
+    locale: "ja_JP",
+  },
+  "/ko/eric-chuang": {
+    title: "좡쥔샹 박사 | STT Governance",
+    description: "STT Governance 창립자 겸 CEO. 중대한 의사결정, 기업 및 가족 거버넌스와 AI 거버넌스의 제도 설계.",
+    image: "/visual-approved/portrait-stt-20261102-hd.webp",
+    label: "좡쥔샹 박사",
+    language: "ko",
+    locale: "ko_KR",
+  },
   "/eric-chuang": {
     title: "莊鈞翔博士｜治理判讀與制度設計｜STT Governance",
     description: "莊鈞翔博士為 STT Governance 創辦人暨執行長，研究與實務聚焦企業策略、公司治理與法遵、家族企業接班及 AI 治理。",
@@ -314,6 +338,10 @@ function upsertCanonical(href: string) {
 }
 
 export const LANGUAGE_PAIRS: Record<string, { zh: string; en?: string; ja?: string; ko?: string }> = {
+  "/eric-chuang": { zh: "/eric-chuang", en: "/en/eric-chuang", ja: "/ja/eric-chuang", ko: "/ko/eric-chuang" },
+  "/en/eric-chuang": { zh: "/eric-chuang", en: "/en/eric-chuang", ja: "/ja/eric-chuang", ko: "/ko/eric-chuang" },
+  "/ja/eric-chuang": { zh: "/eric-chuang", en: "/en/eric-chuang", ja: "/ja/eric-chuang", ko: "/ko/eric-chuang" },
+  "/ko/eric-chuang": { zh: "/eric-chuang", en: "/en/eric-chuang", ja: "/ja/eric-chuang", ko: "/ko/eric-chuang" },
   "/": { zh: "/", en: "/en", ja: "/ja", ko: "/ko" },
   "/en": { zh: "/", en: "/en", ja: "/ja", ko: "/ko" },
   "/ja": { zh: "/", en: "/en", ja: "/ja", ko: "/ko" },
