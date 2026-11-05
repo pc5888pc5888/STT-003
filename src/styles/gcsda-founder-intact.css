@@ -128,3 +128,14 @@
   #root .g4-founder-page .gcsda-intact-hero__title span{white-space:normal}
   #root .g4-founder-page .gcsda-intact-hero__lead{max-width:42em}
 }
+
+/* English chairman: identical uncropped photograph, text wraps independently. */
+#root .g4-founder-page.g4-en-page .gcsda-intact-hero__title{
+  white-space:normal;
+  overflow-wrap:normal;
+  font-size:clamp(29px,2.8vw,45px);
+  line-height:1.25;
+}
+#root .g4-founder-page.g4-en-page .gcsda-intact-hero__copy{
+  width:min(47%,760px);
+}
