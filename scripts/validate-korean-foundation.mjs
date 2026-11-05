@@ -38,7 +38,7 @@ requireToken(korean,'landing_route:"/ko/start"',"Korean intake landing route mis
 requireToken(korean,'https://line.me/R/ti/p/%40783xkknh',"Korean LINE public URL changed");
 requireToken(korean,'{ label: "현재 직면한 문제", path: "/ko/problems" }',"Korean Problems navigation missing");
 requireToken(korean,'{ label: "연구·출판", path: "/ko/insights" }',"Korean Insights navigation missing");
-requireToken(korean,'{ label: "莊鈞翔 박사", path: "/eric-chuang" }',"Korean founder navigation missing");
+requireToken(korean,'{ label: "莊鈞翔 박사", path: "/ko/eric-chuang" }',"Korean founder navigation missing");
 requireToken(korean,'{ label: "인터뷰 대상자 전용", path: "/humanistic-interview/" }',"Korean interviewee navigation missing");
 
 const fetchCount=(korean.match(/fetch\(/g)||[]).length;
