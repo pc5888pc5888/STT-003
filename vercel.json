@@ -1,6 +1,18 @@
 {
   "rewrites": [
     {
+      "source": "/ko/eric-chuang",
+      "destination": "/seo-ko-eric-chuang.html"
+    },
+    {
+      "source": "/ja/eric-chuang",
+      "destination": "/seo-ja-eric-chuang.html"
+    },
+    {
+      "source": "/en/eric-chuang",
+      "destination": "/seo-en-eric-chuang.html"
+    },
+    {
       "source": "/ko/insights",
       "destination": "/seo-ko-insights.html"
     },
@@ -254,6 +266,21 @@
     }
   ],
   "redirects": [
+    {
+      "source": "/ko/eric-chuang/",
+      "destination": "/ko/eric-chuang",
+      "permanent": true
+    },
+    {
+      "source": "/ja/eric-chuang/",
+      "destination": "/ja/eric-chuang",
+      "permanent": true
+    },
+    {
+      "source": "/en/eric-chuang/",
+      "destination": "/en/eric-chuang",
+      "permanent": true
+    },
     {
       "source": "/ko/insights/",
       "destination": "/ko/insights",
