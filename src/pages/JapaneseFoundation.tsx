@@ -12,7 +12,7 @@ const JA_NAVIGATION = [
   { label: "STTの判断方法", path: "/ja/how-stt-works" },
   { label: "ガバナンス委任", path: "/ja/engagement" },
   { label: "研究・出版", path: "/ja/insights" },
-  { label: "莊鈞翔博士", path: "/eric-chuang" },
+  { label: "莊鈞翔博士", path: "/ja/eric-chuang" },
   { label: "インタビュー対象者専用", path: "/humanistic-interview/" },
   { label: "STTについて", path: "/ja/about" },
 ] as const;
@@ -26,6 +26,7 @@ const JA_TO_ZH:Record<string,string>={
   "/ja/engagement":"/engagement",
   "/ja/about":"/about",
   "/ja/start":"/start",
+  "/ja/eric-chuang": "/eric-chuang",
 };
 
 const JA_TO_EN:Record<string,string>={
@@ -37,6 +38,7 @@ const JA_TO_EN:Record<string,string>={
   "/ja/engagement":"/en/engagement",
   "/ja/about":"/en/about",
   "/ja/start":"/en/start",
+  "/ja/eric-chuang": "/en/eric-chuang",
 };
 
 const JA_TO_KO:Record<string,string>={
@@ -48,6 +50,7 @@ const JA_TO_KO:Record<string,string>={
   "/ja/engagement":"/ko/engagement",
   "/ja/about":"/ko/about",
   "/ja/start":"/ko/start",
+  "/ja/eric-chuang": "/ko/eric-chuang",
 };
 
 export function JapaneseShell({children}:{children:ReactNode}){
