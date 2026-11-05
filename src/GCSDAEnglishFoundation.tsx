@@ -31,7 +31,7 @@ const EN_TO_ZH: Record<string,string> = {
 const VISUALS: Record<string,string> = {
   "/en": "/visual-bank/gcsda/001.webp",
   "/en/about": "/visual-bank/gcsda/002.webp",
-  "/en/founder-chairman": "/visual-bank/gcsda/founder-chairman-hero.webp",
+  "/en/founder-chairman": "/images/portrait-gcsda-20261102-hd.webp",
   "/en/governance": "/visual-bank/gcsda/003.webp",
   "/en/council": "/visual-bank/gcsda/004.webp",
   "/en/membership": "/visual-bank/gcsda/005.webp",
