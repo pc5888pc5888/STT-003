@@ -1,6 +1,7 @@
 import { useMemo, useRef } from "react";
 import { Link, NavLink, Navigate, useLocation, useParams, useSearchParams } from "react-router-dom";
 import UnifiedTitleHero from "../components/UnifiedTitleHero";
+import ContentTypeHero from "../components/ContentTypeHero";
 import NotFound from "../components/NotFound";
 import { BOOKS, SERIES, THEMES, WORKS, classifyTheme, isoDate, normalized, seriesHref, sourceLabel } from "../data/contentRegistry";
 import "../styles/publication-library.css";
@@ -20,13 +21,6 @@ function LibraryHeading({ kicker, title, lead }: { kicker: string; title: string
     <p className="stt-library-kicker">{kicker}</p>
     <h1>{title}</h1><p className="stt-library-lead">{lead}</p>
   </header>;
-}
-
-function OwnerApprovedHero({ id, title, src, alt }: { id: string; title: string; src: string; alt: string }) {
-  return <section className="stt-owner-approved-hero" aria-labelledby={id}>
-    <h1 id={id} className="stt-library-sr-only">{title}</h1>
-    <img src={src} alt={alt} fetchPriority="high" decoding="async" />
-  </section>;
 }
 
 export function PublicationOverview() {
@@ -59,11 +53,13 @@ export function PublicationOverview() {
 
 export function BooksPage() {
   return <div className="stt-library">
-    <OwnerApprovedHero
+    <ContentTypeHero
       id="books-title"
+      image="/visual-bank/stt/content-types-20261105/books-hero.png"
+      kicker="STT GOVERNANCE · BOOKS & PUBLICATIONS"
       title="電子書與出版"
-      src="/visual-bank/stt/owner-approved-20261101/books.webp"
-      alt="STT Governance 電子書與出版"
+      thesis="治理知識，從研究走向實踐，以出版穿越時間。"
+      description="STT Publications Library 將正式出版品整理為可理解、可追溯的治理知識資產。先理解一本書處理的治理問題與思想位置，再由正式外部入口前往閱讀。"
     />
     <div className="stt-library-wrap">
     <PublicationNavigation />
@@ -220,11 +216,12 @@ export function PublishedWorksPage({ series: fixedSeries }: { series?: string })
   }
   function clearFilters() { setParams({}); }
   return <div className="stt-library">
-    {!fixedSeries && !seriesKey ? <OwnerApprovedHero
+    {!fixedSeries && !seriesKey ? <ContentTypeHero
       id="columns-title"
+      image="/visual-bank/stt/content-types-20261105/columns-hero.png"
+      kicker="STT GOVERNANCE · PUBLISHED WORKS"
       title="專欄與報導"
-      src="/visual-bank/stt/owner-approved-20261101/columns.webp"
-      alt="STT Governance 專欄與報導"
+      description="從系列、治理主題與關鍵字閱讀公開作品。每篇內容均保留其原始發表來源，不以單一媒體作為全部作品的分類。"
     /> : null}
     <div className="stt-library-wrap">
     {fixedSeries || seriesKey ? <LibraryHeading kicker="STT GOVERNANCE · PUBLISHED WORKS" title={selectedSeries?.label || "專欄與報導"} lead={selectedSeries?.description || "從系列、治理主題與關鍵字閱讀公開作品。每篇內容均保留其原始發表來源，不以單一媒體作為全部作品的分類。"} /> : null}

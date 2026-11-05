@@ -1,5 +1,6 @@
 import { Link, useParams } from "react-router-dom";
 import { PublicationNavigation } from "./PublicationLibrary";
+import ContentTypeHero from "../components/ContentTypeHero";
 import "../styles/research-papers.css";
 
 type Paper = {
@@ -108,10 +109,17 @@ function PaperCard({paper}:{paper:Paper}) {
 
 export function ResearchOverview(){
   return <div className="research-shell">
-    <section className="research-owner-approved-hero" aria-labelledby="research-overview-title">
-      <h1 id="research-overview-title" className="research-sr-only">STT Research Papers｜研究論文典藏</h1>
-      <img src="/visual-bank/stt/owner-approved-20261101/research.webp" alt="STT Research Papers 研究論文典藏" fetchPriority="high" decoding="async" />
-    </section>
+    <ContentTypeHero
+      id="research-overview-title"
+      image="/visual-bank/stt/content-types-20261105/research-hero.png"
+      kicker="STT RESEARCH PAPERS / RESEARCH SERIES 01–04"
+      englishTitle="STT Research Papers"
+      title="研究論文典藏"
+      thesis="以研究證據理解治理問題，以制度設計承接長期判斷。"
+      description="四篇研究分別討論專業服務與信任、企業策略與公司治理法遵、家族企業接班，以及跨世代領導與創新績效。每一篇均設有研究介紹、方法與主要發現，以及正式線上閱讀入口。"
+      anchorHref="#research-catalog"
+      anchorText="瀏覽四篇研究介紹 ↓"
+    />
     <div className="research-wrap">
       <PublicationNavigation />
       <section className="research-intro" aria-labelledby="research-intro-title">

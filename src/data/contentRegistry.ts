@@ -173,8 +173,8 @@ export const WORKS: PublishedWork[] = [
 ];
 
 export const CONTENT_META = {
-  "/books": { title: "電子書與出版｜STT Governance", label: "電子書與出版", description: "STT Governance 的電子書與治理出版，收錄書籍資訊、正式封面與已提供的線上閱讀入口。", image: "/books/internal-compliance.jpg" },
-  "/columns": { title: "專欄與報導｜STT Governance", label: "專欄與報導", description: "依系列與治理主題閱讀 STT Governance 的公開專欄與報導，逐篇標示作者、發表日期與原始來源。" },
+  "/books": { title: "電子書與出版｜STT Governance", label: "電子書與出版", description: "STT Governance 的電子書與治理出版，收錄書籍資訊、正式封面與已提供的線上閱讀入口。", image: "/visual-bank/stt/content-types-20261105/books-hero.png" },
+  "/columns": { title: "專欄與報導｜STT Governance", label: "專欄與報導", description: "依系列與治理主題閱讀 STT Governance 的公開專欄與報導，逐篇標示作者、發表日期與原始來源。", image: "/visual-bank/stt/content-types-20261105/columns-hero.png" },
   "/columns/legal": { title: "法律專欄｜STT Governance", label: "法律專欄", description: "法律專欄的獨立作品索引，依原始發表資料保留標題、作者、日期、摘要與原文連結。" },
   "/columns/humanistic": { title: "人文地景產專欄｜STT Governance", label: "人文地景產專欄", description: "人文地景產專欄的公開作品，呈現人物、地方與產業故事；與採訪前的二十題受訪程序分開。" },
   "/columns/news": { title: "報導與其他發表｜STT Governance", label: "報導與其他發表", description: "報導與其他公開發表的獨立索引，依各篇作品標示原始發表平台、作者、日期與原文連結。" },

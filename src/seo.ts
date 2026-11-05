@@ -54,7 +54,7 @@ export const FORMAL_META: Record<string, MetaRecord> = {
   "/research": {
     title: "STT Research Papers｜研究論文典藏｜STT Governance",
     description: "STT Governance 研究論文典藏，整理家族治理、公司治理與法遵、法律服務永續、企業領導與世代接班等研究脈絡。",
-    image: "/visual-bank/stt/owner-approved-20261101/research.webp",
+    image: "/visual-bank/stt/content-types-20261105/research-hero.png",
     label: "研究與論文",
   },
   "/research/legal-service-sustainability": {
