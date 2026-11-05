@@ -33,7 +33,7 @@ jobs:
         with:
           ref: ${{ matrix.branch }}
           fetch-depth: 1
-      - name: Apply the owner-authorized founder-only text change
+      - name: Apply the owner-authorized founder-only change
         env:
           EXPECTED_HERO_BLOB: ${{ matrix.hero_blob }}
         run: |
@@ -41,32 +41,45 @@ jobs:
           mkdir -p /tmp/founder-kicker-evidence
           python3 - <<'PY'
           import os, pathlib, subprocess, hashlib, json
-          site=os.environ['SITE']
-          p=pathlib.Path('src/components/GovernedHero.tsx')
-          assert subprocess.check_output(['git','hash-object',str(p)],text=True).strip()==os.environ['EXPECTED_HERO_BLOB'], 'Hero baseline changed; do not overwrite concurrent work'
-          before=p.read_text()
-          prefix=site+'-intact-hero'
+          site=os.environ['SITE'];p=pathlib.Path('src/components/GovernedHero.tsx')
+          assert subprocess.check_output(['git','hash-object',str(p)],text=True).strip()==os.environ['EXPECTED_HERO_BLOB'], 'Hero baseline changed; preserve concurrent work'
+          before=p.read_text();prefix=site+'-intact-hero'
           old='{kicker&&<p className="'+prefix+'__kicker">{kicker}</p>}'
           new='<p className="'+prefix+'__kicker cis-kicker" lang="en" data-founder-name-kicker="20261106">CHUANG CHUN HSIANG Ph.D.</p>'
           assert before.count(old)==1
           after=before.replace(old,new)
-          duplicate_lines=(['{page?.byline&&page.bylineBefore&&<p className="stt-intact-hero__byline" lang="en">{page.byline}</p>}', '{page?.byline&&!page.bylineBefore&&<p className="stt-intact-hero__byline" lang="en">{page.byline}</p>}'] if site=='stt' else ['{page?.byline&&<p className="gcsda-intact-hero__byline" lang="en">{page.byline}</p>}'])
-          for oldline in duplicate_lines:
+          duplicates=(['{page?.byline&&page.bylineBefore&&<p className="stt-intact-hero__byline" lang="en">{page.byline}</p>}', '{page?.byline&&!page.bylineBefore&&<p className="stt-intact-hero__byline" lang="en">{page.byline}</p>}'] if site=='stt' else ['{page?.byline&&<p className="gcsda-intact-hero__byline" lang="en">{page.byline}</p>}'])
+          for oldline in duplicates:
               assert after.count(oldline)==1
               after=after.replace('          '+oldline+'\n','')
-          # The non-founder rendering branch must remain byte-for-byte unchanged.
           generic='  return <>\n    <section className={`cis-hero'
           assert before.split(generic,1)[1]==after.split(generic,1)[1]
           assert after.count('data-founder-name-kicker="20261106"')==1
           p.write_text(after)
+          allowed=['src/components/GovernedHero.tsx']
+          if site=='gcsda':
+              css=pathlib.Path('src/styles/gcsda-founder-intact.css')
+              assert subprocess.check_output(['git','hash-object',str(css)],text=True).strip()=='88e5412a6c91a53e8f9fd6b4a6dcfe9909b0aef8'
+              css.write_text(css.read_text()+'''\n/* Owner-requested single name kicker: match STT homepage, not body paragraphs. */
+          #root .g4-founder-page .gcsda-intact-hero p.gcsda-intact-hero__kicker.cis-kicker[data-founder-name-kicker] {
+            font-family:"Noto Sans TC","Noto Sans CJK TC",Inter,system-ui,sans-serif!important;
+            font-size:11px!important;
+            font-weight:600!important;
+            line-height:1.8!important;
+            letter-spacing:.12em!important;
+            color:#886237!important;
+            margin:0 0 17px!important;
+          }
+          ''')
+              allowed.append(str(css))
           asset=pathlib.Path(f'public/visual-approved/portrait-{site}-20261106-8946x6330-original.png')
           expected={'stt':'a1b0d14bc6446a97431009baf0f0d1869fb3e62d5e6f4566b445b828d60b4e23','gcsda':'00304feb73988e4f737b8ed0eacb43b3d6e5d85d537b5a3f66212016d9a8da36'}
           assert hashlib.sha256(asset.read_bytes()).hexdigest()==expected[site]
           changed=subprocess.check_output(['git','diff','--name-only'],text=True).splitlines()
-          assert changed==['src/components/GovernedHero.tsx'], changed
+          assert sorted(changed)==sorted(allowed), changed
           pathlib.Path('/tmp/founder-kicker-evidence/change.patch').write_text(subprocess.check_output(['git','diff'],text=True))
           pathlib.Path('/tmp/founder-kicker-evidence/baseline.json').write_text(json.dumps({'site':site,'branch':os.environ['BRANCH'],'parent':subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip(),'originalImageSha256':expected[site],'changedFiles':changed},indent=2))
-          print(site, 'ONE_COMPONENT_CHANGED; ORIGINAL_PHOTO_UNCHANGED')
+          print(site,'SCOPED_KICKER_CHANGE; ORIGINAL_PHOTO_UNCHANGED')
           PY
       - name: Build without modifying dependencies
         run: |
@@ -80,23 +93,17 @@ jobs:
           import {chromium} from '/tmp/founder-kicker-browser/node_modules/playwright/index.mjs';
           import fs from 'node:fs';
           import crypto from 'node:crypto';
-          const site=process.env.SITE,base=process.env.TEST_BASE,phase=process.env.PHASE;
-          const name='CHUANG CHUN HSIANG Ph.D.';
+          const site=process.env.SITE,base=process.env.TEST_BASE,phase=process.env.PHASE,name='CHUANG CHUN HSIANG Ph.D.';
           const routes=site==='stt'?['/eric-chuang','/en/eric-chuang','/ja/eric-chuang','/ko/eric-chuang']:['/founder-chairman','/en/founder-chairman'];
           const imagePath=`/visual-approved/portrait-${site}-20261106-8946x6330-original.png`;
           const expected=site==='stt'?'a1b0d14bc6446a97431009baf0f0d1869fb3e62d5e6f4566b445b828d60b4e23':'00304feb73988e4f737b8ed0eacb43b3d6e5d85d537b5a3f66212016d9a8da36';
-          const browser=await chromium.launch({headless:true});
-          const result={site,phase,base,checks:[],failures:0};
-          const probe=await browser.newPage();
-          let ready=false;
+          const browser=await chromium.launch({headless:true}),result={site,phase,base,checks:[],failures:0};
+          const probe=await browser.newPage();let ready=false;
           for(let attempt=0;attempt<(phase==='live'?36:10);attempt++){
-            try{
-              await probe.goto(base+routes[0]+'?kicker-check=20261106-'+attempt,{waitUntil:'domcontentloaded',timeout:30000});
-              await probe.waitForSelector('[data-founder-name-kicker="20261106"]',{timeout:5000});
-              ready=true;break;
-            }catch{await new Promise(r=>setTimeout(r,phase==='live'?10000:1000));}
+            try{await probe.goto(base+routes[0]+'?kicker-check=20261106-'+attempt,{waitUntil:'domcontentloaded',timeout:30000});await probe.waitForSelector('[data-founder-name-kicker="20261106"]',{timeout:5000});ready=true;break;}
+            catch{await new Promise(r=>setTimeout(r,phase==='live'?10000:1000));}
           }
-          if(!ready)throw new Error('Requested founder-name revision is not available at '+base);
+          if(!ready)throw new Error('Requested revision is not available at '+base);
           const photoResponse=await probe.request.get(base+imagePath);
           result.imageSha256=crypto.createHash('sha256').update(await photoResponse.body()).digest('hex');
           if(!photoResponse.ok()||result.imageSha256!==expected)throw new Error('Original photo byte integrity failed');
@@ -104,41 +111,33 @@ jobs:
           const styles=['fontFamily','fontSize','fontWeight','lineHeight','letterSpacing','color'];
           for(const [width,height] of [[1536,795],[1440,900],[1024,768],[390,844]]){
             const page=await browser.newPage({viewport:{width,height},deviceScaleFactor:1});
-            let homeReference=null;
-            if(site==='stt'){
-              await page.goto(base+'/',{waitUntil:'networkidle',timeout:60000});
-              await page.evaluate(()=>document.fonts.ready);
-              homeReference=await page.locator('.cis-hero .cis-kicker').first().evaluate((el,styles)=>{const b=el.getBoundingClientRect(),s=getComputedStyle(el);return {x:b.x,y:b.y,...Object.fromEntries(styles.map(k=>[k,s[k]]))}},styles);
-            }
+            const referenceBase=site==='stt'?base:'https://stt-003.vercel.app';
+            await page.goto(referenceBase+'/',{waitUntil:'networkidle',timeout:60000});await page.evaluate(()=>document.fonts.ready);
+            const homeReference=await page.locator('.cis-hero .cis-kicker').first().evaluate((el,styles)=>{const b=el.getBoundingClientRect(),s=getComputedStyle(el),h=el.closest('section').querySelector('h1').getBoundingClientRect();return {x:b.x,y:b.y,gap:h.y-b.bottom,...Object.fromEntries(styles.map(k=>[k,s[k]]))}},styles);
             for(const route of routes){
               await page.goto(base+route,{waitUntil:'networkidle',timeout:60000});
               await page.locator('.'+site+'-intact-hero__image').evaluate(async img=>{await img.decode();await document.fonts.ready});
               const check=await page.evaluate(({site,name,styles})=>{
                 const hero=document.querySelector('.'+site+'-intact-hero'),k=hero.querySelector('[data-founder-name-kicker]'),h=hero.querySelector('h1'),img=hero.querySelector('img'),copy=hero.querySelector('.'+site+'-intact-hero__copy');
                 const rect=el=>{const b=el.getBoundingClientRect();return {x:b.x,y:b.y,right:b.right,bottom:b.bottom,width:b.width,height:b.height}};
-                const ks=getComputedStyle(k),is=getComputedStyle(img),kr=rect(k),hr=rect(h),ir=rect(img),cr=rect(copy);
-                const text=document.body.innerText;
-                const exactCount=text.split(name).length-1;
-                const caseInsensitiveCount=(text.match(/CHUANG\s+CHUN\s+HSIANG\s+Ph\.D\./gi)||[]).length;
-                const nodes=[...hero.querySelectorAll('p,h1')].filter(el=>el.getBoundingClientRect().height>0);
-                let textCollision=false;
+                const ks=getComputedStyle(k),is=getComputedStyle(img),kr=rect(k),hr=rect(h),ir=rect(img),cr=rect(copy),text=document.body.innerText;
+                const nodes=[...hero.querySelectorAll('p,h1')].filter(el=>el.getBoundingClientRect().height>0);let textCollision=false;
                 for(let i=0;i<nodes.length;i++)for(let j=i+1;j<nodes.length;j++){const a=rect(nodes[i]),b=rect(nodes[j]);if(Math.min(a.right,b.right)-Math.max(a.x,b.x)>1&&Math.min(a.bottom,b.bottom)-Math.max(a.y,b.y)>1)textCollision=true;}
-                return {name:k.textContent,exactCount,caseInsensitiveCount,kickerElements:hero.querySelectorAll('[data-founder-name-kicker]').length,bylineElements:hero.querySelectorAll('.'+site+'-intact-hero__byline').length,lang:k.lang,kickerBeforeHeading:!!(k.compareDocumentPosition(h)&Node.DOCUMENT_POSITION_FOLLOWING),kicker:kr,heading:hr,kickerGap:hr.y-kr.bottom,style:Object.fromEntries(styles.map(key=>[key,ks[key]])),h1:h.textContent,photo:{src:img.getAttribute('src'),naturalWidth:img.naturalWidth,naturalHeight:img.naturalHeight,...ir,objectFit:is.objectFit,filter:is.filter,transform:is.transform,opacity:is.opacity,clipPath:is.clipPath,maskImage:is.maskImage},textSafe:cr.y>=ir.bottom-1||cr.right<=ir.x+ir.width*.54,textCollision,horizontalOverflow:document.documentElement.scrollWidth>innerWidth+1};
+                return {name:k.textContent,exactCount:text.split(name).length-1,caseInsensitiveCount:(text.match(/CHUANG\s+CHUN\s+HSIANG\s+Ph\.D\./gi)||[]).length,kickerElements:hero.querySelectorAll('[data-founder-name-kicker]').length,bylineElements:hero.querySelectorAll('.'+site+'-intact-hero__byline').length,lang:k.lang,kickerBeforeHeading:!!(k.compareDocumentPosition(h)&Node.DOCUMENT_POSITION_FOLLOWING),kicker:kr,heading:hr,kickerGap:hr.y-kr.bottom,style:Object.fromEntries(styles.map(key=>[key,ks[key]])),h1:h.textContent,photo:{src:img.getAttribute('src'),naturalWidth:img.naturalWidth,naturalHeight:img.naturalHeight,...ir,objectFit:is.objectFit,filter:is.filter,transform:is.transform,opacity:is.opacity,clipPath:is.clipPath,maskImage:is.maskImage},textSafe:cr.y>=ir.bottom-1||cr.right<=ir.x+ir.width*.54,textCollision,horizontalOverflow:document.documentElement.scrollWidth>innerWidth+1};
               },{site,name,styles});
               check.homeReference=homeReference;
-              check.homeStyleMatch=!homeReference||styles.every(key=>check.style[key]===homeReference[key]);
-              check.homePositionMatch=!homeReference||width<=760||(Math.abs(check.kicker.x-homeReference.x)<=1&&Math.abs(check.kicker.y-homeReference.y)<=1);
+              check.homeStyleMatch=styles.every(key=>check.style[key]===homeReference[key]);
+              check.homePositionMatch=width<=760||(Math.abs(check.kicker.x-homeReference.x)<=1&&Math.abs(check.kicker.y-homeReference.y)<=1);
+              check.homeGapMatch=Math.abs(check.kickerGap-homeReference.gap)<=1;
               const im=check.photo;
-              check.passed=check.name===name&&check.exactCount===1&&check.caseInsensitiveCount===1&&check.kickerElements===1&&check.bylineElements===0&&check.lang==='en'&&check.kickerBeforeHeading&&check.kickerGap>=18&&check.kickerGap<=22&&Math.abs(check.kicker.x-check.heading.x)<=1&&check.style.fontSize==='11px'&&check.style.fontWeight==='600'&&check.homeStyleMatch&&check.homePositionMatch&&!check.textCollision&&!check.horizontalOverflow&&check.textSafe&&im.src===imagePath&&im.naturalWidth===8946&&im.naturalHeight===6330&&Math.abs(im.width/im.height-8946/6330)<0.002&&im.objectFit==='contain'&&im.filter==='none'&&im.transform==='none'&&im.opacity==='1'&&im.clipPath==='none'&&im.maskImage==='none';
-              result.checks.push({route,width,height,...check});
-              if(!check.passed)result.failures++;
+              check.passed=check.name===name&&check.exactCount===1&&check.caseInsensitiveCount===1&&check.kickerElements===1&&check.bylineElements===0&&check.lang==='en'&&check.kickerBeforeHeading&&check.homeGapMatch&&Math.abs(check.kicker.x-check.heading.x)<=1&&check.homeStyleMatch&&check.homePositionMatch&&!check.textCollision&&!check.horizontalOverflow&&check.textSafe&&im.src===imagePath&&im.naturalWidth===8946&&im.naturalHeight===6330&&Math.abs(im.width/im.height-8946/6330)<0.002&&im.objectFit==='contain'&&im.filter==='none'&&im.transform==='none'&&im.opacity==='1'&&im.clipPath==='none'&&im.maskImage==='none';
+              result.checks.push({route,width,height,...check});if(!check.passed)result.failures++;
               if(route===routes[0])await page.screenshot({path:`/tmp/founder-kicker-evidence/${phase}-${site}-${width}.png`,fullPage:false});
-              console.log(phase,site,route,width,check.passed?'PASS':'FAIL',JSON.stringify({occurrences:check.exactCount,homeStyle:check.homeStyleMatch,homePosition:check.homePositionMatch,gap:check.kickerGap,safe:check.textSafe}));
+              console.log(phase,site,route,width,check.passed?'PASS':'FAIL',JSON.stringify({occurrences:check.exactCount,style:check.homeStyleMatch,position:check.homePositionMatch,gap:check.kickerGap,homeGap:homeReference.gap,safe:check.textSafe}));
             }
             await page.close();
           }
-          fs.writeFileSync(`/tmp/founder-kicker-evidence/${phase}-${site}.json`,JSON.stringify(result,null,2));
-          await browser.close();
+          fs.writeFileSync(`/tmp/founder-kicker-evidence/${phase}-${site}.json`,JSON.stringify(result,null,2));await browser.close();
           if(result.failures)throw new Error(result.failures+' founder kicker checks failed');
           JS
       - name: Verify built pages before publication
@@ -148,14 +147,14 @@ jobs:
         run: |
           ./node_modules/.bin/vite preview --host 127.0.0.1 --port 4173 >/tmp/founder-kicker-evidence/server.log 2>&1 &
           node /tmp/verify-founder-kicker.mjs
-      - name: Publish only the verified founder component on its existing branch
+      - name: Publish only the verified founder change on its existing branch
         run: |
           set -euo pipefail
           git diff --check
-          test "$(git diff --name-only)" = 'src/components/GovernedHero.tsx'
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add src/components/GovernedHero.tsx
+          if test "$SITE" = gcsda; then git add src/styles/gcsda-founder-intact.css; fi
           git commit -m "Use CHUANG CHUN HSIANG Ph.D. once as homepage-style founder kicker ($SITE)"
           git push origin "HEAD:$BRANCH"
           git rev-parse HEAD | tee /tmp/founder-kicker-evidence/published-commit.txt
