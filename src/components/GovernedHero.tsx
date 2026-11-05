@@ -23,7 +23,7 @@ export default function GovernedHero({ kicker, title, subtitle, lead, image, id,
   const clearLeft = picture?.includes("/user-approved-six/");
   const ownerOriginal = Boolean(picture?.includes("eric-page-owner-original.png") || picture?.includes("portrait-gcsda-20261101.webp") || picture?.includes("portrait-gcsda-20261102-hd.webp"));
   const profileParity = route === "/founder-chairman";
-  const profileHires = Boolean(route === "/founder-chairman" && picture?.includes("portrait-gcsda-20261102-hd.webp"));
+  const profileHires = Boolean((route === "/founder-chairman" || route === "/en/founder-chairman") && picture?.includes("portrait-gcsda-20261102-hd.webp"));
 
   // Founder-only photo-safe rendering. The global cis-hero crop system is not used.
   if (profileHires && picture) return <>
