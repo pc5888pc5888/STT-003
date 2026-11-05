@@ -3,6 +3,15 @@ import { useLocation } from "react-router-dom";
 import { PAGE_PRESENTATION } from "../data/pagePresentation";
 import "../styles/stt-founder-intact.css";
 
+// Existing website copy: EricPage's description and EricLocalized's roleText.
+// These fallbacks apply only to the four STT founder profiles, not other heroes.
+const founderIntroductions: Record<string, string> = {
+  zh: "莊鈞翔博士為 STT Governance 創辦人暨執行長，並負責制度設計與重大決策判讀；研究與實務聚焦企業策略、公司治理與法遵、家族企業接班及 AI 治理。",
+  en: "Dr. Chuang Chun-Hsiang is the founder and CEO of STT Governance. His work focuses on enterprise strategy, corporate governance and compliance, family business succession, organizational decision-making and AI governance. The priority is to identify the real issue, evidence, decision authority, accountability, available options and unacceptable risks before decisions become irreversible.",
+  ja: "莊鈞翔博士はSTT Governanceの創設者兼CEOです。企業戦略、コーポレートガバナンスとコンプライアンス、ファミリー企業の事業承継、組織の意思決定、AIガバナンスを中心に活動しています。重大な決定が不可逆的な結果を招く前に、問題の本質、証拠、権限、責任、選択肢および許容できないリスクを明確にします。",
+  ko: "좡쥔샹 박사는 STT Governance의 창립자 겸 CEO입니다. 기업 전략, 기업지배구조와 준법, 가족기업 승계, 조직 의사결정, AI 거버넌스를 주요 영역으로 삼습니다. 중대한 결정이 되돌릴 수 없는 결과로 이어지기 전에 문제의 본질, 증거, 권한, 책임, 대안 및 수용할 수 없는 위험을 명확히 합니다."
+};
+
 // Scoped to translated founder profiles; Chinese typography and other heroes remain unchanged.
 const localizedProfileStyles = `
 #root .stt-eric-page .stt-intact-hero[data-profile-locale] .stt-intact-hero__title {
@@ -65,7 +74,7 @@ export default function GovernedHero({kicker,title,subtitle,lead,image,id,childr
           <p className="stt-intact-hero__kicker cis-kicker" lang="en" data-founder-name-kicker="20261106">CHUANG CHUN HSIANG Ph.D.</p>
           <h1 id={titleId} className="stt-intact-hero__title" aria-label={profileLocale ? title : undefined}>{lines.map((line,i)=><span key={i}>{line}</span>)}</h1>
           {subtitle&&<p className="stt-intact-hero__subtitle">{subtitle}</p>}
-          {lead&&<p className="stt-intact-hero__lead">{lead}</p>}
+          <p className="stt-intact-hero__lead">{lead || founderIntroductions[profileLocale || "zh"]}</p>
           {children&&<div className="stt-intact-hero__actions">{children}</div>}
         </div>
       </div>
