@@ -1,0 +1,82 @@
+name: Intake and founder layout inspection
+on:
+  push:
+    branches: [qa/flow-review-20261106]
+    paths: [.github/workflows/flow-review-20261106.yml]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Prepare isolated browser
+        run: |
+          npm install --prefix "$RUNNER_TEMP/audit" --no-save --package-lock=false playwright@1.49.1
+          sudo apt-get update -qq && sudo apt-get install -y -qq fonts-noto-cjk
+      - name: Collect relevant public source at verified commits
+        run: |
+          mkdir -p audit-evidence
+          python3 - <<'PY'
+          import urllib.request,json,pathlib,concurrent.futures
+          root=pathlib.Path('audit-evidence/source')
+          refs={'stt':'528bf56fa14bde8d632a4198b0af4098c29c4a52','gcsda':'774b1a9945baf51338e2d8ca09cd5a8c02307740'}
+          for site,ref in refs.items():
+              req=urllib.request.Request(f'https://api.github.com/repos/pc5888pc5888/STT-003/git/trees/{ref}?recursive=1',headers={'User-Agent':'STT-owner-authorized-qa'})
+              tree=json.load(urllib.request.urlopen(req,timeout=30));(root/site).mkdir(parents=True,exist_ok=True)
+              (root/site/'tree.json').write_text(json.dumps(tree))
+              wanted=[]
+              for x in tree['tree']:
+                  p=x['path']
+                  if x['type']!='blob':continue
+                  if (p.startswith(('src/','api/','lib/','scripts/','public/humanistic-interview/')) and p.endswith(('.tsx','.ts','.css','.mjs','.js','.json','.html'))) or p in ['vercel.json','package.json','vite.config.ts']:
+                      wanted.append(p)
+              def get(p):
+                  data=urllib.request.urlopen(f'https://raw.githubusercontent.com/pc5888pc5888/STT-003/{ref}/{p}',timeout=30).read()
+                  dest=root/site/p;dest.parent.mkdir(parents=True,exist_ok=True);dest.write_bytes(data)
+              with concurrent.futures.ThreadPoolExecutor(max_workers=12) as ex:list(ex.map(get,wanted))
+              print(site,ref,'source files',len(wanted))
+          PY
+      - name: Inspect public pages and trial scoped CSS in browser only
+        run: |
+          export CHROME_PATH="$(command -v google-chrome || command -v chromium)"
+          export QA_MODULE="$RUNNER_TEMP/audit/node_modules/playwright/index.mjs"
+          cat > "$RUNNER_TEMP/audit/inspect.mjs" <<'JS'
+          import fs from 'node:fs';
+          const {chromium}=await import(process.env.QA_MODULE);
+          const browser=await chromium.launch({headless:true,executablePath:process.env.CHROME_PATH,args:['--no-sandbox']});
+          const out='audit-evidence';const records=[];
+          const urls=[['stt-start','https://stt-003.vercel.app/start'],['stt-en-start','https://stt-003.vercel.app/en/start'],['stt-ja-start','https://stt-003.vercel.app/ja/start'],['stt-ko-start','https://stt-003.vercel.app/ko/start'],['stt-interview','https://stt-003.vercel.app/humanistic-interview/'],['gcsda-membership','https://gcsda-governance.vercel.app/membership'],['gcsda-en-membership','https://gcsda-governance.vercel.app/en/membership'],['gcsda-founder','https://gcsda-governance.vercel.app/founder-chairman']];
+          for(const [name,url] of urls){
+            const page=await browser.newPage({viewport:{width:1534,height:795},reducedMotion:'reduce'});const errors=[];page.on('pageerror',e=>errors.push(e.message));
+            const r=await page.goto(url,{waitUntil:'networkidle',timeout:45000});await page.evaluate(()=>document.fonts.ready);
+            const data=await page.evaluate(()=>({url:location.href,title:document.title,text:document.body.innerText,forms:[...document.querySelectorAll('form')].map(f=>({id:f.id,action:f.action,html:f.outerHTML})),controls:[...document.querySelectorAll('input,textarea,select,button')].map(e=>({tag:e.tagName,id:e.id,name:e.name,type:e.type,text:e.innerText,value:e.value,required:e.required,disabled:e.disabled,options:e.options?[...e.options].map(o=>({value:o.value,text:o.text})):undefined})),links:[...document.querySelectorAll('a')].map(a=>({text:a.innerText,href:a.href})),scripts:[...document.scripts].map(s=>s.src)}));
+            records.push({name,status:r.status(),errors,...data});await page.screenshot({path:out+'/'+name+'.png',fullPage:false});
+            if(name==='gcsda-founder'){
+              const el=page.locator('.g4-founder-credentials-intro');await el.scrollIntoViewIfNeeded();await el.screenshot({path:out+'/credentials-before.png'});
+              const before=await el.evaluate(el=>({html:el.outerHTML,styles:[el,...el.querySelectorAll('*')].map(e=>({tag:e.tagName,class:e.className,text:e.innerText,box:e.getBoundingClientRect().toJSON(),whiteSpace:getComputedStyle(e).whiteSpace,width:getComputedStyle(e).width,minWidth:getComputedStyle(e).minWidth,display:getComputedStyle(e).display}))}));
+              fs.writeFileSync(out+'/credentials-before.json',JSON.stringify(before,null,2));
+              await page.addStyleTag({content:'#root .g4 .g4-founder-editorial .g4-founder-credentials-intro > *{min-width:0!important;max-width:100%!important} #root .g4 .g4-founder-editorial .g4-founder-credentials-intro .g4-title,#root .g4 .g4-founder-editorial .g4-founder-credentials-intro .g4-title *{white-space:normal!important;max-width:100%!important;overflow-wrap:break-word!important;word-break:normal!important}'});
+              for(const [label,width,height] of [['desktop',1534,795],['tablet',1024,900],['mobile',390,844]]){
+                await page.setViewportSize({width,height});await el.scrollIntoViewIfNeeded();await page.screenshot({path:out+'/credentials-candidate-'+label+'.png',fullPage:false});
+              }
+            }
+            await page.close();
+          }
+          const health=[];
+          const c=await browser.newContext();
+          for(const origin of ['https://stt-003.vercel.app','https://gcsda-governance.vercel.app'])for(const endpoint of ['/api/cooperation-submit','/api/humanistic-submit','/api/membership-submit','/api/release']){
+            const r=await c.request.get(origin+endpoint);const type=r.headers()['content-type']||'';health.push({url:origin+endpoint,status:r.status(),type,body:type.includes('json')?await r.text():null});
+          }
+          fs.writeFileSync(out+'/inspection.json',JSON.stringify({checkedAt:new Date().toISOString(),scope:'read-only; no form submitted',records,health},null,2));
+          console.log(JSON.stringify(health,null,2));await browser.close();
+          JS
+          node "$RUNNER_TEMP/audit/inspect.mjs"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: intake-layout-inspection-20261106
+          path: audit-evidence/
+          retention-days: 7
+          if-no-files-found: error
