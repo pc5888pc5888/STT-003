@@ -1,0 +1,117 @@
+name: Founder locale visual evidence
+on:
+  push:
+    branches: [main]
+    paths:
+      - src/components/GovernedHero.tsx
+      - src/styles/stt-founder-intact.css
+      - .github/workflows/founder-locale-visual-qa.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  founder-visual:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Install isolated browser test dependency
+        run: npm install --prefix "$RUNNER_TEMP/founder-qa" --no-save --package-lock=false playwright@1.49.1
+      - name: Capture and measure the live founder pages
+        env:
+          EXPECTED_GIT_SHA: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          export CHROME_PATH="$(command -v google-chrome || command -v chromium)"
+          export QA_MODULE="$RUNNER_TEMP/founder-qa/node_modules/playwright/index.mjs"
+          mkdir -p founder-visual-evidence
+          cat > "$RUNNER_TEMP/founder-qa/capture.mjs" <<'JS'
+          import fs from 'node:fs';
+          import crypto from 'node:crypto';
+          const {chromium}=await import(process.env.QA_MODULE);
+          const out='founder-visual-evidence';
+          const base='https://stt-003.vercel.app';
+          const imagePath='/visual-approved/portrait-stt-20261102-hd.webp';
+          const routes=[['zh','/eric-chuang'],['en','/en/eric-chuang'],['ja','/ja/eric-chuang'],['ko','/ko/eric-chuang']];
+          const browser=await chromium.launch({headless:true,executablePath:process.env.CHROME_PATH,args:['--no-sandbox']});
+          const results=[];
+          try {
+            const probe=await browser.newPage();
+            let deployed=false;
+            for(let attempt=0;attempt<48;attempt++) {
+              await probe.goto(base+'/en/eric-chuang?profile_qa='+Date.now(),{waitUntil:'networkidle',timeout:45000});
+              if(await probe.locator('[data-founder-visual-version="20261105.2"]').count()) {deployed=true;break;}
+              await probe.waitForTimeout(5000);
+            }
+            if(!deployed) throw new Error('Updated visual component not present on live production URL');
+            const original=await probe.request.get(base+imagePath);
+            if(!original.ok()) throw new Error('Approved portrait did not load');
+            const imageBytes=await original.body();
+            fs.writeFileSync(out+'/approved-portrait.webp',imageBytes);
+            const imageSHA256=crypto.createHash('sha256').update(imageBytes).digest('hex');
+            await probe.close();
+            for(const [label,width,height] of [['desktop-user',1534,795],['desktop',1440,1000],['tablet',1024,900],['mobile',390,844]]) {
+              const context=await browser.newContext({viewport:{width,height},deviceScaleFactor:1,reducedMotion:'reduce'});
+              for(const [locale,route] of routes) {
+                const page=await context.newPage();
+                const errors=[];
+                page.on('pageerror',e=>errors.push(e.message));
+                const response=await page.goto(base+route,{waitUntil:'networkidle',timeout:45000});
+                await page.evaluate(async()=>{await document.fonts.ready;await Promise.all([...document.images].map(i=>i.decode().catch(()=>{})));scrollTo(0,0);});
+                await page.waitForTimeout(150);
+                const state=await page.evaluate(()=>{
+                  const hero=document.querySelector('.stt-intact-hero');
+                  const img=hero?.querySelector('img');
+                  const copy=hero?.querySelector('.stt-intact-hero__copy');
+                  const title=hero?.querySelector('h1');
+                  const rect=e=>e?.getBoundingClientRect().toJSON();
+                  const textRects=[];
+                  if(title){const walk=document.createTreeWalker(title,NodeFilter.SHOW_TEXT);let n;while((n=walk.nextNode())){if(!n.textContent.trim())continue;const r=document.createRange();r.selectNodeContents(n);textRects.push(...[...r.getClientRects()].map(x=>x.toJSON()));}}
+                  const style=img&&getComputedStyle(img);
+                  const ib=rect(img);let rendered=null;
+                  if(img&&ib&&img.naturalWidth){const scale=Math.min(ib.width/img.naturalWidth,ib.height/img.naturalHeight);const w=img.naturalWidth*scale,h=img.naturalHeight*scale;rendered={left:ib.x+(ib.width-w)/2,top:ib.y+(ib.height-h)/2,width:w,height:h,right:ib.x+(ib.width+w)/2,bottom:ib.y+(ib.height+h)/2};}
+                  return {path:location.pathname,lang:document.documentElement.lang,title:document.title,hero:rect(hero),copy:rect(copy),h1:rect(title),h1Text:title?.innerText,titleRects:textRects,header:rect(document.querySelector('header')),image:img?{src:img.getAttribute('src'),naturalWidth:img.naturalWidth,naturalHeight:img.naturalHeight,box:ib,rendered,fit:style.objectFit,position:style.objectPosition,filter:style.filter,opacity:style.opacity,transform:style.transform}:null,version:hero?.dataset.founderVisualVersion,globalCropHero:!!document.querySelector('.stt-eric-page .cis-hero'),horizontalOverflow:document.documentElement.scrollWidth>innerWidth+1,h1Count:document.querySelectorAll('main h1').length,alternates:[...document.querySelectorAll('a[hreflang]')].map(a=>({lang:a.hreflang,href:a.getAttribute('href')}))};
+                });
+                const failures=[];
+                if(response.status()!==200) failures.push('http-status');
+                if(state.version!=='20261105.2'||!state.image||state.globalCropHero) failures.push('incorrect-hero-component');
+                if(state.image){
+                  const im=state.image;
+                  if(im.src!==imagePath||im.naturalWidth!==3344||im.naturalHeight!==1882) failures.push('portrait-asset-or-dimensions');
+                  if(im.fit!=='contain'||im.opacity!=='1'||im.filter!=='none'||im.transform!=='none') failures.push('crop-or-image-effect');
+                  if(im.rendered&&state.hero&&(im.rendered.top<state.hero.y-1||im.rendered.bottom>state.hero.bottom+1)) failures.push('image-outside-hero');
+                  if(state.header&&im.rendered&&im.rendered.top<state.header.bottom-1) failures.push('image-hidden-by-header');
+                }
+                if(state.copy&&state.titleRects.some(r=>r.x<state.copy.x-1||r.right>state.copy.right+1)) failures.push('title-outside-copy');
+                if(width>1100&&state.image?.rendered&&state.copy&&state.copy.right>state.image.rendered.left+state.image.rendered.width*.55) failures.push('copy-enters-portrait-region');
+                if(width<=1100&&state.image?.rendered&&state.copy&&state.copy.y<state.image.rendered.bottom-1) failures.push('mobile-copy-over-photo');
+                if(state.horizontalOverflow) failures.push('horizontal-overflow');
+                if(state.h1Count!==1) failures.push('heading-count');
+                if(state.lang!==(locale==='zh'?'zh-Hant-TW':locale)) failures.push('wrong-document-language');
+                for(const [other,p] of routes.filter(([l])=>l!==locale)) {
+                  const code=other==='zh'?'zh-Hant-TW':other;
+                  if(!state.alternates.some(a=>a.lang===code&&a.href===p)) failures.push('locale-link-'+other);
+                }
+                if(errors.length) failures.push('page-errors');
+                await page.screenshot({path:out+'/'+locale+'-'+label+'.png',fullPage:false});
+                results.push({locale,route,viewport:{label,width,height},status:response.status(),imageSHA256,...state,errors,failures,passed:failures.length===0});
+                await page.close();
+              }
+              await context.close();
+            }
+            const report={checkedAt:new Date().toISOString(),expectedGitSHA:process.env.EXPECTED_GIT_SHA,scope:'STT founder profile visual and locale routing only; not whole-site QA',checks:results.length,failed:results.filter(r=>!r.passed).length,results};
+            fs.writeFileSync(out+'/report.json',JSON.stringify(report,null,2));
+            console.log(JSON.stringify(report,null,2));
+            if(report.failed) process.exitCode=1;
+          } catch(error) {
+            fs.writeFileSync(out+'/error.json',JSON.stringify({error:String(error),results},null,2));
+            throw error;
+          } finally {await browser.close();}
+          JS
+          node "$RUNNER_TEMP/founder-qa/capture.mjs"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: founder-locale-visual-evidence
+          path: founder-visual-evidence/
+          retention-days: 2
+          if-no-files-found: error

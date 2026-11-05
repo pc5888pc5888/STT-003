@@ -3,26 +3,58 @@ import { useLocation } from "react-router-dom";
 import { PAGE_PRESENTATION } from "../data/pagePresentation";
 import "../styles/stt-founder-intact.css";
 
+// Scoped to translated founder profiles; Chinese typography and other heroes remain unchanged.
+const localizedProfileStyles = `
+#root .stt-eric-page .stt-intact-hero[data-profile-locale] .stt-intact-hero__title {
+  width:100%;
+  max-width:100%;
+  min-width:0;
+  white-space:normal !important;
+  overflow-wrap:anywhere;
+  word-break:normal;
+  font-size:clamp(28px,2.65vw,41px);
+  line-height:1.3;
+}
+#root .stt-eric-page .stt-intact-hero[data-profile-locale] .stt-intact-hero__title span {
+  display:block;
+  width:100%;
+  max-width:100%;
+  min-width:0;
+  white-space:normal !important;
+  overflow-wrap:anywhere;
+}
+@media(max-width:1100px) {
+  #root .stt-eric-page .stt-intact-hero[data-profile-locale] .stt-intact-hero__title {
+    font-size:clamp(24px,4.2vw,36px);
+    line-height:1.45;
+  }
+}
+`;
+
 type Props = { kicker: string; title: string; subtitle?: string; lead?: string; image?: string; id?: string; children?: ReactNode };
 export default function GovernedHero({kicker,title,subtitle,lead,image,id,children}:Props){
   const {pathname}=useLocation();
-  const page=PAGE_PRESENTATION[pathname.replace(/\/$/,"")||"/"];
-  const lines=page?.lines||[title];
+  const route=pathname.replace(/\/$/,"")||"/";
+  const page=PAGE_PRESENTATION[route];
+  const profileLocale=route.match(/^\/(en|ja|ko)\/eric-chuang$/)?.[1];
+  const lines=profileLocale ? title.split(/\s*[|｜]\s*/) : (page?.lines||[title]);
   const picture=image ?? page?.image ?? undefined;
   const titleId=id||"page-title";
   const clearLeft=Boolean(picture && (picture.includes("/user-approved-six/") || picture.includes("cooperation-hero-20260917")));
   const ownerOriginal=Boolean(picture?.includes("eric-page-owner-original.png") || picture?.includes("portrait-stt-20261101.webp" ) || picture?.includes("portrait-stt-20261102-hd.webp"));
   const profileParity=pathname==="/eric-chuang"||pathname==="/founder-chairman";
-  const profileHires=Boolean(pathname==="/eric-chuang" && picture?.includes("portrait-stt-20261102-hd.webp"));
+  const profileHires=Boolean((route==="/eric-chuang" || profileLocale) && picture?.includes("portrait-stt-20261102-hd.webp"));
+  const portraitAlt=profileLocale==="en" ? "Portrait of Chuang Chun-Hsiang, Ph.D.; complete original composition" : profileLocale==="ja" ? "莊鈞翔博士の肖像。元の写真の構図を省略せず表示" : profileLocale==="ko" ? "좡쥔샹 박사의 초상. 원본 사진의 전체 구도" : "莊鈞翔博士雙手交叉肖像，完整保留原始照片構圖";
 
-  // Independent photo-safe component: no inherited cis-hero image crop rules.
+  // All four founder locales share the same photo-safe component and unchanged image.
   if (profileHires && picture) return <>
-    <section className="stt-intact-hero" aria-labelledby={titleId}>
+    {profileLocale&&<style>{localizedProfileStyles}</style>}
+    <section className="stt-intact-hero" aria-labelledby={titleId} data-profile-locale={profileLocale} data-founder-visual-version="20261105.2">
       <div className="stt-intact-hero__stage">
         <img
           className="stt-intact-hero__image"
           src={picture}
-          alt="莊鈞翔博士雙手交叉肖像，完整保留原始照片構圖"
+          alt={portraitAlt}
           width={page?.imageWidth || 3344}
           height={page?.imageHeight || 1882}
           fetchPriority="high"
@@ -31,7 +63,7 @@ export default function GovernedHero({kicker,title,subtitle,lead,image,id,childr
         <div className="stt-intact-hero__copy">
           {kicker&&<p className="stt-intact-hero__kicker">{kicker}</p>}
           {page?.byline&&page.bylineBefore&&<p className="stt-intact-hero__byline" lang="en">{page.byline}</p>}
-          <h1 id={titleId} className="stt-intact-hero__title">{lines.map((line,i)=><span key={i}>{line}</span>)}</h1>
+          <h1 id={titleId} className="stt-intact-hero__title" aria-label={profileLocale ? title : undefined}>{lines.map((line,i)=><span key={i}>{line}</span>)}</h1>
           {page?.byline&&!page.bylineBefore&&<p className="stt-intact-hero__byline" lang="en">{page.byline}</p>}
           {subtitle&&<p className="stt-intact-hero__subtitle">{subtitle}</p>}
           {lead&&<p className="stt-intact-hero__lead">{lead}</p>}
