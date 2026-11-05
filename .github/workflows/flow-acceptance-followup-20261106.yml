@@ -12,9 +12,7 @@ jobs:
     timeout-minutes: 8
     steps:
       - name: Prepare isolated browser
-        run: |
-          npm install --prefix "$RUNNER_TEMP/qa" --no-save --package-lock=false --no-audit --no-fund playwright@1.49.1
-          sudo timeout 75 apt-get install -y -qq fonts-noto-cjk
+        run: npm install --prefix "$RUNNER_TEMP/qa" --no-save --package-lock=false --no-audit --no-fund playwright@1.49.1
       - name: Retrieve the actual previously exported synthetic draft and scope the browser tests
         env:
           GH_TOKEN: ${{ github.token }}
