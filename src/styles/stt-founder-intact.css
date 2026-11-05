@@ -125,3 +125,90 @@
 #root .stt-eric-page .stt-intact-hero__image{aspect-ratio:8946 / 6330;clip-path:none;mask-image:none;border-radius:0;}
 #root .stt-eric-page .stt-intact-hero__copy{box-sizing:border-box;min-width:0;}
 #root .stt-eric-page .stt-intact-hero__title, #root .stt-eric-page .stt-intact-hero__title span{max-width:100%;overflow-wrap:anywhere;}
+
+/* 2026-11-06 owner correction: homepage-aligned title, restrained complete photo.
+ * Layout only. The original 8946x6330 PNG is unchanged.
+ * 219.8px = homepage offset 180px + kicker line 19.8px + gap 20px.
+ * The reading-field gradient ends at 45% of the photograph, before the person.
+ * No image generation, crop, resampling, filter, mask or transform.
+ */
+#root .stt-eric-page .stt-intact-hero {
+  --founder-layout-revision:20261106-home-aligned;
+  --founder-photo-height:clamp(520px,calc(100svh - 94px),760px);
+  --founder-photo-width:min(100%,calc(var(--founder-photo-height) * 1.4132701422));
+  --founder-copy-x:56px;
+  --founder-title-y:219.8px;
+}
+#root .stt-eric-page .stt-intact-hero .stt-intact-hero__stage {
+  display:grid;
+  grid-template-columns:minmax(0,1fr);
+  align-items:start;
+  justify-content:normal;
+  height:auto;
+  min-height:var(--founder-photo-height);
+  isolation:isolate;
+  background:#fbfaf7;
+}
+#root .stt-eric-page .stt-intact-hero .stt-intact-hero__image {
+  grid-area:1 / 1;
+  position:relative;
+  align-self:start;
+  justify-self:end;
+  width:var(--founder-photo-width);
+  height:auto;
+  max-width:100%;
+  max-height:none;
+  object-fit:contain;
+  object-position:right top;
+  z-index:0;
+}
+#root .stt-eric-page .stt-intact-hero .stt-intact-hero__stage::before {
+  content:"";
+  position:absolute;
+  top:0;
+  bottom:0;
+  left:calc(100% - var(--founder-photo-width) - 1px);
+  width:calc(var(--founder-photo-width) * .45 + 1px);
+  z-index:1;
+  pointer-events:none;
+  background:linear-gradient(90deg,#fbfaf7 0%,rgba(251,250,247,.92) 20%,rgba(251,250,247,.55) 55%,rgba(251,250,247,0) 100%);
+}
+#root .stt-eric-page .stt-intact-hero .stt-intact-hero__copy {
+  grid-area:1 / 1;
+  position:relative;
+  align-self:start;
+  top:auto;
+  left:auto;
+  transform:none;
+  width:min(46%,760px);
+  max-width:760px;
+  margin:0 0 48px var(--founder-copy-x);
+  padding:var(--founder-title-y) 0 0;
+  background:transparent;
+}
+@media(min-width:761px) and (max-width:1200px) {
+  #root .stt-eric-page .stt-intact-hero {
+    --founder-photo-height:clamp(480px,calc(100svh - 78px),640px);
+    --founder-copy-x:36px;
+    --founder-title-y:89.8px;
+  }
+  #root .stt-eric-page .stt-intact-hero .stt-intact-hero__title {font-size:clamp(28px,3.2vw,36px);line-height:1.45;}
+}
+@media(max-width:760px) {
+  #root .stt-eric-page .stt-intact-hero .stt-intact-hero__stage {display:flex;flex-direction:column;min-height:0;height:auto;}
+  #root .stt-eric-page .stt-intact-hero .stt-intact-hero__stage::before {display:none;}
+  #root .stt-eric-page .stt-intact-hero .stt-intact-hero__image {align-self:stretch;width:100%;height:auto;object-position:center;}
+  #root .stt-eric-page .stt-intact-hero .stt-intact-hero__copy {align-self:stretch;width:100%;max-width:none;margin:0;padding:30px 28px 36px;background:#fbfaf7;}
+}
+
+/* Keep translated profile kickers above, not inside, the shared title origin. */
+@media(min-width:761px){
+#root .stt-eric-page .stt-intact-hero .stt-intact-hero__kicker{
+  position:absolute;
+  top:calc(var(--founder-title-y) - 40px);
+  left:0;
+  margin:0;
+  font-size:11px!important;
+  line-height:1.8!important;
+}
+}
