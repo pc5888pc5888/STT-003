@@ -1,0 +1,110 @@
+name: Verify restored STT founder introduction
+on:
+  push:
+    branches: [main]
+    paths: [.github/workflows/verify-stt-founder-introduction-20261106.yml]
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: 21c387ba35138639bf9946b6d6ecf50ff93a890a
+          persist-credentials: false
+      - name: Verify unchanged source copy and original photo
+        run: |
+          mkdir -p /tmp/founder-intro-evidence
+          python3 - <<'PY'
+          import pathlib,re,json,hashlib,subprocess
+          hero=pathlib.Path('src/components/GovernedHero.tsx').read_text()
+          original=pathlib.Path('src/pages/InstitutionalPages.tsx').read_text()
+          localized=pathlib.Path('src/pages/EricLocalized.tsx').read_text()
+          leads=dict(re.findall(r'^  (zh|en|ja|ko): "([^"\n]+)"',hero,re.M))
+          assert len(leads)==4
+          assert leads['zh'] in original
+          for lang in ('en','ja','ko'):assert leads[lang] in localized
+          assert subprocess.check_output(['git','hash-object','src/pages/InstitutionalPages.tsx'],text=True).strip()=='973b0d62cd8f6816159072cbda58458c647fe343'
+          assert subprocess.check_output(['git','hash-object','src/pages/EricLocalized.tsx'],text=True).strip()=='859a4df1dc81448c7e5de2637dd0195e05697ece'
+          image=pathlib.Path('public/visual-approved/portrait-stt-20261106-8946x6330-original.png')
+          assert hashlib.sha256(image.read_bytes()).hexdigest()=='a1b0d14bc6446a97431009baf0f0d1869fb3e62d5e6f4566b445b828d60b4e23'
+          pathlib.Path('/tmp/founder-intro-evidence/expected.json').write_text(json.dumps(leads,ensure_ascii=False,indent=2))
+          print('Existing copy and original photo verified; no image, stylesheet, navigation or form changes.')
+          PY
+      - name: Render the actual public founder profiles
+        run: |
+          npm install --prefix /tmp/founder-intro-browser --no-audit --no-fund playwright@1.56.1
+          /tmp/founder-intro-browser/node_modules/.bin/playwright install --with-deps chromium > /tmp/founder-intro-evidence/browser-install.log 2>&1
+          node --input-type=module <<'JS'
+          import {chromium} from '/tmp/founder-intro-browser/node_modules/playwright/index.mjs';
+          import fs from 'node:fs';
+          import crypto from 'node:crypto';
+          const dir='/tmp/founder-intro-evidence/';
+          const leads=JSON.parse(fs.readFileSync(dir+'expected.json','utf8'));
+          const base='https://stt-003.vercel.app';
+          const imagePath='/visual-approved/portrait-stt-20261106-8946x6330-original.png';
+          const browser=await chromium.launch({headless:true});
+          const checks=[];
+          let failures=0;
+          try {
+            for(const [width,height] of [[1536,795],[1440,900],[1024,768],[390,844]]){
+              const context=await browser.newContext({viewport:{width,height},deviceScaleFactor:1});
+              const page=await context.newPage();
+              const errors=[];
+              page.on('pageerror',e=>errors.push(String(e)));
+              for(const [lang,text] of Object.entries(leads)){
+                errors.length=0;
+                const route=(lang==='zh'?'':'/'+lang)+'/eric-chuang';
+                const response=await page.goto(base+route,{waitUntil:'networkidle',timeout:60000});
+                await page.locator('.stt-intact-hero__image').evaluate(async img=>{await img.decode();await document.fonts.ready;});
+                const data=await page.evaluate(({text})=>{
+                  const hero=document.querySelector('.stt-intact-hero');
+                  const box=e=>{const r=e.getBoundingClientRect();return {x:r.x,y:r.y,width:r.width,height:r.height,right:r.right,bottom:r.bottom};};
+                  const lead=hero.querySelector('.stt-intact-hero__lead'),subtitle=hero.querySelector('.stt-intact-hero__subtitle'),title=hero.querySelector('h1'),kicker=hero.querySelector('[data-founder-name-kicker]'),image=hero.querySelector('img'),copy=hero.querySelector('.stt-intact-hero__copy');
+                  const style=getComputedStyle(image),b=box(image),c=box(copy),h=box(hero),l=lead?box(lead):null;
+                  const ls=lead?getComputedStyle(lead):null;
+                  return {
+                    introduction:lead?.textContent||'',introductionMatches:lead?.textContent===text,introductionCount:hero.querySelectorAll('.stt-intact-hero__lead').length,
+                    introductionVisible:!!lead&&ls.display!=='none'&&ls.visibility!=='hidden'&&Number(ls.opacity)>0&&l.height>0,
+                    introductionUnclipped:!!lead&&l.bottom<=h.bottom+1&&lead.scrollHeight<=lead.clientHeight+1,
+                    orderCorrect:!!lead&&box(kicker).bottom<=box(title).y+1&&box(title).bottom<=box(subtitle).y+1&&box(subtitle).bottom<=l.y+1,
+                    nameCount:document.body.innerText.split('CHUANG CHUN HSIANG Ph.D.').length-1,
+                    kicker:box(kicker),heading:box(title),subtitle:box(subtitle),lead:l,
+                    photo:{...b,src:image.getAttribute('src'),naturalWidth:image.naturalWidth,naturalHeight:image.naturalHeight,objectFit:style.objectFit,filter:style.filter,transform:style.transform},
+                    textSafe:c.y>=b.bottom-1||c.right<=b.x+b.width*.54,
+                    horizontalOverflow:document.documentElement.scrollWidth>innerWidth+1,
+                    bodySections:document.querySelectorAll('.stt-inst-section').length,
+                    title:document.title,htmlLang:document.documentElement.lang,
+                    introductionStyle:lead?{fontSize:ls.fontSize,lineHeight:ls.lineHeight,color:ls.color}:null
+                  };
+                },{text});
+                const passed=response.ok()&&data.introductionMatches&&data.introductionCount===1&&data.introductionVisible&&data.introductionUnclipped&&data.orderCorrect&&data.nameCount===1&&data.textSafe&&!data.horizontalOverflow&&data.photo.naturalWidth===8946&&data.photo.naturalHeight===6330&&data.photo.objectFit==='contain'&&data.photo.filter==='none'&&data.photo.transform==='none'&&Math.abs(data.photo.width/data.photo.height-8946/6330)<.002&&data.bodySections>=8&&errors.length===0;
+                checks.push({route,width,height,status:response.status(),...data,errors:[...errors],passed});
+                if(!passed)failures++;
+                await page.screenshot({path:dir+'live-'+lang+'-'+width+'.png',fullPage:false});
+                if(lang==='zh'&&width===390)await page.locator('.stt-intact-hero').screenshot({path:dir+'live-zh-mobile-complete.png'});
+                console.log(route,width,passed?'PASS':'FAIL','introduction visible:',data.introductionVisible,'unique name:',data.nameCount);
+              }
+              await context.close();
+            }
+            const context=await browser.newContext();
+            const response=await context.request.get(base+imagePath);
+            const bytes=await response.body();
+            const sha256=crypto.createHash('sha256').update(bytes).digest('hex');
+            if(!response.ok()||sha256!=='a1b0d14bc6446a97431009baf0f0d1869fb3e62d5e6f4566b445b828d60b4e23')failures++;
+            fs.writeFileSync(dir+'image-integrity.json',JSON.stringify({url:base+imagePath,bytes:bytes.length,sha256},null,2));
+            await context.close();
+          } finally {
+            fs.writeFileSync(dir+'live-report.json',JSON.stringify({base,commit:'21c387ba35138639bf9946b6d6ecf50ff93a890a',failures,checks},null,2));
+            await browser.close();
+          }
+          if(failures)throw new Error(failures+' checks failed; inspect evidence before claiming completion');
+          JS
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: stt-founder-introduction-live-20261106
+          path: /tmp/founder-intro-evidence/
+          retention-days: 30
