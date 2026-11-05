@@ -361,3 +361,17 @@
     gap:14px;
   }
 }
+
+/* 2026-11-06: constrain the professional-background heading to its own column.
+   Text, portraits, and other page sections are unchanged. */
+#root .g4 .g4-founder-editorial .g4-founder-credentials-intro > *{
+  min-width:0!important;
+  max-width:100%!important;
+}
+#root .g4 .g4-founder-editorial .g4-founder-credentials-intro .g4-title,
+#root .g4 .g4-founder-editorial .g4-founder-credentials-intro .g4-title *{
+  white-space:normal!important;
+  max-width:100%!important;
+  overflow-wrap:break-word!important;
+  word-break:normal!important;
+}
