@@ -19,6 +19,7 @@ import { EnglishAbout, EnglishEngagement, EnglishHome, EnglishMethod, EnglishShe
 import { JapaneseAbout, JapaneseEngagement, JapaneseHome, JapaneseMethod, JapaneseShell, JapaneseStart } from "./pages/JapaneseFoundation";
 import { KoreanAbout, KoreanEngagement, KoreanHome, KoreanMethod, KoreanShell, KoreanStart } from "./pages/KoreanFoundation";
 import { ResearchOverview, ResearchPaperPage } from "./pages/ResearchPapers";
+import EricLocalized from "./pages/EricLocalized";
 import { LocalizedInsights, LocalizedProblems } from "./pages/LocalizedFoundationPages";
 
 type ShellProps = { children: ReactNode };
@@ -34,6 +35,7 @@ const CHINESE_TO_ENGLISH: Record<string, string> = {
   "/how-stt-works": "/en/how-stt-works",
   "/engagement": "/en/engagement",
   "/about": "/en/about",
+  "/eric-chuang": "/en/eric-chuang",
   "/start": "/en/start",
 };
 
@@ -44,6 +46,7 @@ const CHINESE_TO_JAPANESE: Record<string, string> = {
   "/how-stt-works": "/ja/how-stt-works",
   "/engagement": "/ja/engagement",
   "/about": "/ja/about",
+  "/eric-chuang": "/ja/eric-chuang",
   "/start": "/ja/start",
 };
 
@@ -54,6 +57,7 @@ const CHINESE_TO_KOREAN: Record<string, string> = {
   "/how-stt-works": "/ko/how-stt-works",
   "/engagement": "/ko/engagement",
   "/about": "/ko/about",
+  "/eric-chuang": "/ko/eric-chuang",
   "/start": "/ko/start",
 };
 
@@ -242,6 +246,9 @@ function AppRoutes() {
       <Route path="/columns/humanistic" element={<PublishedWorksPage series="humanistic" />} />
       <Route path="/columns/news" element={<PublishedWorksPage series="news" />} />
       <Route path="/about" element={<AboutPage />} />
+      <Route path="/en/eric-chuang" element={<EricLocalized lang="en" />} />
+      <Route path="/ja/eric-chuang" element={<EricLocalized lang="ja" />} />
+      <Route path="/ko/eric-chuang" element={<EricLocalized lang="ko" />} />
       <Route path="/eric-chuang" element={<EricPage />} />
       <Route path="/institutions" element={<InstitutionsPage />} />
       <Route path="/navigator" element={<GovernanceNavigator />} />
