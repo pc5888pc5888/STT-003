@@ -1,0 +1,71 @@
+name: Scoped founder and interview repair
+on:
+  push:
+    branches: [qa/flow-review-20261106]
+    paths: [.github/workflows/scoped-flow-repair-20261106.yml]
+permissions:
+  contents: write
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Apply exact reviewed corrections atomically per site
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python3 - <<'PY'
+          import os,json,base64,urllib.request,subprocess,tempfile,pathlib
+          root='https://api.github.com/repos/pc5888pc5888/STT-003'
+          def api(path,body=None,method=None):
+              request=urllib.request.Request(root+path,data=None if body is None else json.dumps(body).encode(),headers={'Authorization':'Bearer '+os.environ['GH_TOKEN'],'Accept':'application/vnd.github+json','User-Agent':'STT-scoped-repair','Content-Type':'application/json'},method=method)
+              with urllib.request.urlopen(request,timeout=30) as response:return json.load(response)
+          def update(branch,expected,change,message):
+              ref='/git/refs/heads/'+branch
+              parent=api(ref)['object']['sha'];commit=api('/git/commits/'+parent)
+              source={}
+              for path,sha in expected.items():
+                  record=api('/contents/'+path+'?ref='+parent)
+                  if record['sha']!=sha:raise RuntimeError('Concurrent file change; no write performed: '+path)
+                  source[path]=base64.b64decode(record['content']).decode()
+              edited=change(source)
+              tree=api('/git/trees',{'base_tree':commit['tree']['sha'],'tree':[{'path':p,'mode':'100644','type':'blob','content':s} for p,s in edited.items()]})
+              result=api('/git/commits',{'message':message,'tree':tree['sha'],'parents':[parent]})
+              if api(ref)['object']['sha']!=parent:raise RuntimeError('Branch changed before publication; no ref update')
+              api(ref,{'sha':result['sha'],'force':False},'PATCH')
+              print(json.dumps({'branch':branch,'before':parent,'after':result['sha'],'files':list(edited)},ensure_ascii=False))
+          def stt(source):
+              path='public/humanistic-interview/interview.js';script=source[path]
+              needle='}'+chr(92)+'nfunction updateFinal'
+              assert script.count(needle)==1,'Exact syntax defect not found'
+              source[path]=script.replace(needle,'}\nfunction updateFinal')
+              with tempfile.TemporaryDirectory() as d:
+                  p=pathlib.Path(d)/'interview.js';p.write_text(source[path]);subprocess.run(['node','--check',str(p)],check=True)
+              gate='scripts/finalize-interview.mjs';text=source[gate]
+              assert "import { Script } from 'node:vm';" not in text
+              text=text.replace("import assert from 'node:assert/strict';","import assert from 'node:assert/strict';\nimport { Script } from 'node:vm';")
+              anchor="const script = fs.readFileSync(path.join(path.dirname(file), 'interview.js'), 'utf8');"
+              assert text.count(anchor)==1
+              source[gate]=text.replace(anchor,anchor+"\n// Parse the actual browser controller without executing it. Invalid syntax must block release.\nnew Script(script, { filename: 'humanistic-interview/interview.js' });")
+              return source
+          update('main',{'public/humanistic-interview/interview.js':'357b65b12b81a9490e82867f47c88ad6aa449dca','scripts/finalize-interview.mjs':'dbaa6fd2c5ded47ed74ef362463be0f33c5d3238'},stt,'fix(stt): restore interview controller execution and block invalid JavaScript at build')
+          def gcsda(source):
+              p='src/styles/gcsda-founder-editorial.css'
+              source[p]+='''
+          /* 2026-11-06: constrain the professional-background heading to its own column.
+             Text, portraits, and other page sections are unchanged. */
+          #root .g4 .g4-founder-editorial .g4-founder-credentials-intro > *{
+            min-width:0!important;
+            max-width:100%!important;
+          }
+          #root .g4 .g4-founder-editorial .g4-founder-credentials-intro .g4-title,
+          #root .g4 .g4-founder-editorial .g4-founder-credentials-intro .g4-title *{
+            white-space:normal!important;
+            max-width:100%!important;
+            overflow-wrap:break-word!important;
+            word-break:normal!important;
+          }
+          '''
+              return source
+          update('gcsda-release-20261005',{'src/styles/gcsda-founder-editorial.css':'075de0654f5867d4d0522c6f8a7bb0c758fe8a58'},gcsda,'fix(gcsda): prevent professional-background heading from overlapping adjacent text')
+          PY
