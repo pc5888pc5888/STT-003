@@ -18,23 +18,24 @@ export default function GovernedHero({ kicker, title, subtitle, lead, image, id,
   const page = PAGE_PRESENTATION[route];
   const lines = route === "/en/founder-chairman" ? ["Founding Chairman", "Chuang Chun-Hsiang, Ph.D."] : (page?.lines || [title]);
   const requestedPicture = image ?? page?.image ?? undefined;
-  const picture = requestedPicture === INCOMPLETE_HOME_DERIVATIVE ? COMPLETE_HOME_ART : requestedPicture;
+  const profileOriginal = route === "/founder-chairman" || route === "/en/founder-chairman";
+  const picture = profileOriginal ? "/visual-approved/portrait-gcsda-20261106-8946x6330-original.png" : (requestedPicture === INCOMPLETE_HOME_DERIVATIVE ? COMPLETE_HOME_ART : requestedPicture);
   const titleId = id || "page-title";
   const clearLeft = picture?.includes("/user-approved-six/");
   const ownerOriginal = Boolean(picture?.includes("eric-page-owner-original.png") || picture?.includes("portrait-gcsda-20261101.webp") || picture?.includes("portrait-gcsda-20261102-hd.webp"));
   const profileParity = route === "/founder-chairman";
-  const profileHires = Boolean((route === "/founder-chairman" || route === "/en/founder-chairman") && picture?.includes("portrait-gcsda-20261102-hd.webp"));
+  const profileHires = profileOriginal;
 
   // Founder-only photo-safe rendering. The global cis-hero crop system is not used.
   if (profileHires && picture) return <>
-    <section className="gcsda-intact-hero" aria-labelledby={titleId}>
+    <section className="gcsda-intact-hero" aria-labelledby={titleId} data-founder-visual-version="20261106-original-8946x6330">
       <div className="gcsda-intact-hero__stage">
         <img
           className="gcsda-intact-hero__image"
           src={picture}
           alt="莊鈞翔博士雙手插袋肖像，完整保留原始照片構圖"
-          width={page?.imageWidth || 3344}
-          height={page?.imageHeight || 1882}
+          width={8946}
+          height={6330}
           fetchPriority="high"
           decoding="async"
         />
