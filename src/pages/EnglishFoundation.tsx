@@ -12,7 +12,7 @@ const EN_NAVIGATION = [
   { label: "How STT Works", path: "/en/how-stt-works" },
   { label: "Governance Engagement", path: "/en/engagement" },
   { label: "Research & Publications", path: "/en/insights" },
-  { label: "Eric Chuang, Ph.D.", path: "/eric-chuang" },
+  { label: "Eric Chuang, Ph.D.", path: "/en/eric-chuang" },
   { label: "Interviewee Area", path: "/humanistic-interview/" },
   { label: "About STT", path: "/en/about" },
 ] as const;
@@ -25,6 +25,7 @@ const EN_TO_ZH: Record<string, string> = {
   "/en/how-stt-works": "/how-stt-works",
   "/en/engagement": "/engagement",
   "/en/about": "/about",
+  "/en/eric-chuang": "/eric-chuang",
   "/en/start": "/start",
 };
 
@@ -36,6 +37,7 @@ const EN_TO_JA: Record<string, string> = {
   "/en/how-stt-works": "/ja/how-stt-works",
   "/en/engagement": "/ja/engagement",
   "/en/about": "/ja/about",
+  "/en/eric-chuang": "/ja/eric-chuang",
   "/en/start": "/ja/start",
 };
 
@@ -47,6 +49,7 @@ const EN_TO_KO: Record<string, string> = {
   "/en/how-stt-works": "/ko/how-stt-works",
   "/en/engagement": "/ko/engagement",
   "/en/about": "/ko/about",
+  "/en/eric-chuang": "/ko/eric-chuang",
   "/en/start": "/ko/start",
 };
 
