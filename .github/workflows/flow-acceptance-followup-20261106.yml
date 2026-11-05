@@ -38,6 +38,7 @@ jobs:
           anchor='async function test(name,viewport,fn){'
           source=source.replace(anchor,anchor+"\n if(!['gcsda-membership','interview-mobile-draft-recovery'].includes(name))return;")
           source=source.replace("step(3).getByLabel('申請來源',{exact:true}).selectOption", "step(3).locator('select').selectOption")
+          source=source.replace("step(3).getByLabel('申請加入學會的原因',{exact:true})", "step(3).locator('textarea').first()")
           source=source.replace('let exportedDraft=null;',"let exportedDraft=fs.readFileSync(process.env.DRAFT_PATH);")
           old="await page.locator('#toolbar-submit').click();assert.equal(await page.locator('#answered-count').innerText(),'20 / 20');"
           new="for(let n=0;n<50;n++){const active=page.locator('.screen.active');if(await active.getAttribute('id')==='submit')break;const next=active.locator('button[data-next],button.q-next');assert.ok(await next.count(),'Missing visible journey control');await next.first().click();}assert.equal(await page.locator('#answered-count').innerText(),'20 / 20');"
