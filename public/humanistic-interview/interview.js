@@ -60,7 +60,8 @@ document.querySelectorAll('textarea[data-q]').forEach(t=>t.addEventListener('inp
 ['mid-note','participant-name','participant-email'].forEach(id=>document.getElementById(id)?.addEventListener('input',saveAll));
 function reviewHtml(limit){return Array.from({length:limit},(_,i)=>{const n=i+1,a=(answers[n]||'').trim();return `<button type="button" class="review-item ${a?'':'empty'}" data-jump-q="${n}"><strong>第 ${String(n).padStart(2,'0')} 題｜點一下即可修改</strong>${a?escapeHtml(a.slice(0,72))+(a.length>72?'…':''):'尚未填寫，點一下回去補上'}</button>`}).join('')}
 function updateReviews(){const a=document.getElementById('review-1-12'),b=document.getElementById('review-1-20');if(a)a.innerHTML=reviewHtml(12);if(b)b.innerHTML=reviewHtml(20)}
-function answeredTotal(){return Array.from({length:20},(_,i)=>(answers[i+1]||'').trim()).filter(Boolean).length}\nfunction updateFinal(){document.getElementById('answered-count').textContent=answeredTotal()+' / 20'}
+function answeredTotal(){return Array.from({length:20},(_,i)=>(answers[i+1]||'').trim()).filter(Boolean).length}
+function updateFinal(){document.getElementById('answered-count').textContent=answeredTotal()+' / 20'}
 function questionScreenIndex(n){return screens.findIndex(s=>Number(s.dataset.qscreen||0)===Number(n))}
 function jumpToQuestion(n,returnIndex){saveAll();editReturnIndex=returnIndex;const idx=questionScreenIndex(n);if(idx<0)return;showScreen(idx);document.getElementById('edit-context-'+n)?.classList.add('show');setTimeout(()=>document.getElementById('q'+n)?.focus(),250)}
 document.addEventListener('click',e=>{

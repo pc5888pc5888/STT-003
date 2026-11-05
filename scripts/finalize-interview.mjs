@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import assert from 'node:assert/strict';
+import { Script } from 'node:vm';
 import { createHash } from 'node:crypto';
 
 // Read-only production gate: the checked-in HTML is the only markup source.
@@ -9,6 +10,8 @@ const file = process.argv[2] || 'dist/humanistic-interview/index.html';
 const html = fs.readFileSync(file, 'utf8');
 const source = fs.readFileSync('public/humanistic-interview/index.html', 'utf8');
 const script = fs.readFileSync(path.join(path.dirname(file), 'interview.js'), 'utf8');
+// Parse the actual browser controller without executing it. Invalid syntax must block release.
+new Script(script, { filename: 'humanistic-interview/interview.js' });
 const version = script.match(/const DELIVERY_VERSION\s*=\s*['"]([^'"]+)['"]/)[1];
 const canonical = 'https://stt-003.vercel.app/humanistic-interview/';
 const images = s => [...s.matchAll(/data:image\/[^'"\s)<>]+/g)].map(m => createHash('sha256').update(m[0]).digest('hex'));
