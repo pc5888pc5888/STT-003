@@ -1,0 +1,152 @@
+name: Apply and verify approved original founder portraits
+on:
+  push:
+    branches: [main]
+    paths: [.github/workflows/apply-hires-portraits-20261106.yml]
+permissions:
+  contents: write
+concurrency:
+  group: portrait-original-layout-20261106
+  cancel-in-progress: false
+jobs:
+  verify-and-commit:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - site: stt
+            branch: main
+          - site: gcsda
+            branch: gcsda-release-20261005
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ matrix.branch }}
+          fetch-depth: 1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Apply only the portrait source and its photo-safe frame
+        env:
+          SITE: ${{ matrix.site }}
+        run: |
+          python3 - <<'PY'
+          import os,pathlib,hashlib,struct
+          site=os.environ['SITE']
+          image=pathlib.Path(f'public/visual-approved/portrait-{site}-20261106-8946x6330-original.png')
+          data=image.read_bytes()
+          expected={'stt':'a1b0d14bc6446a97431009baf0f0d1869fb3e62d5e6f4566b445b828d60b4e23','gcsda':'00304feb73988e4f737b8ed0eacb43b3d6e5d85d537b5a3f66212016d9a8da36'}
+          assert hashlib.sha256(data).hexdigest()==expected[site]
+          assert struct.unpack('>II',data[16:24])==(8946,6330)
+          hero=pathlib.Path('src/components/GovernedHero.tsx');s=hero.read_text()
+          if '20261106-8946x6330-original.png' not in s:
+              if site=='stt':
+                  replacements={
+                    'const picture=image ?? page?.image ?? undefined;':'const profileOriginal=route==="/eric-chuang" || Boolean(profileLocale);\n  const picture=profileOriginal ? "/visual-approved/portrait-stt-20261106-8946x6330-original.png" : (image ?? page?.image ?? undefined);',
+                    'const profileHires=Boolean((route==="/eric-chuang" || profileLocale) && picture?.includes("portrait-stt-20261102-hd.webp"));':'const profileHires=profileOriginal;',
+                    'width={page?.imageWidth || 3344}':'width={8946}',
+                    'height={page?.imageHeight || 1882}':'height={6330}',
+                    'data-founder-visual-version="20261105.2"':'data-founder-visual-version="20261106-original-8946x6330"'
+                  }
+              else:
+                  replacements={
+                    'const picture = requestedPicture === INCOMPLETE_HOME_DERIVATIVE ? COMPLETE_HOME_ART : requestedPicture;':'const profileOriginal = route === "/founder-chairman" || route === "/en/founder-chairman";\n  const picture = profileOriginal ? "/visual-approved/portrait-gcsda-20261106-8946x6330-original.png" : (requestedPicture === INCOMPLETE_HOME_DERIVATIVE ? COMPLETE_HOME_ART : requestedPicture);',
+                    'const profileHires = Boolean((route === "/founder-chairman" || route === "/en/founder-chairman") && picture?.includes("portrait-gcsda-20261102-hd.webp"));':'const profileHires = profileOriginal;',
+                    'width={page?.imageWidth || 3344}':'width={8946}',
+                    'height={page?.imageHeight || 1882}':'height={6330}',
+                    '<section className="gcsda-intact-hero" aria-labelledby={titleId}>':'<section className="gcsda-intact-hero" aria-labelledby={titleId} data-founder-visual-version="20261106-original-8946x6330">'
+                  }
+              for old,new in replacements.items():
+                  assert s.count(old)==1,(site,'Unexpected component baseline',old)
+                  s=s.replace(old,new)
+              hero.write_text(s)
+          css=pathlib.Path(f'src/styles/{site}-founder-intact.css');c=css.read_text()
+          marker='/* Exact 8946x6330 owner original, 2026-11-06. No image processing. */'
+          if marker not in c:
+              assert c.count('height:clamp(420px,calc(100svh - 76px),980px);')==1
+              c=c.replace('height:clamp(420px,calc(100svh - 76px),980px);','height:auto;')
+              assert c.count('height:100%;')==1
+              c=c.replace('height:100%;','height:auto;')
+              c=c.replace('white-space:nowrap;','white-space:normal;')
+              scope='#root .stt-eric-page' if site=='stt' else '#root .g4-founder-page'
+              c+='\n'+marker+'\n'+scope+f' .{site}-intact-hero__image'+'{aspect-ratio:8946 / 6330;clip-path:none;mask-image:none;border-radius:0;}\n'
+              c+=scope+f' .{site}-intact-hero__copy'+'{box-sizing:border-box;min-width:0;}\n'
+              c+=scope+f' .{site}-intact-hero__title, '+scope+f' .{site}-intact-hero__title span'+'{max-width:100%;overflow-wrap:anywhere;}\n'
+              if site=='gcsda':c+='@media(max-width:1100px){#root .g4-founder-page.g4-en-page .gcsda-intact-hero__copy{width:100%;}}\n'
+              css.write_text(c)
+          print(site,'original checksum and minimal portrait patch verified')
+          PY
+      - name: Run the existing build checks without changing dependencies
+        run: |
+          npm ci --no-audit --no-fund
+          npm run build
+      - name: Render the actual application at desktop, tablet and mobile sizes
+        env:
+          SITE: ${{ matrix.site }}
+        run: |
+          mkdir -p /tmp/portrait-browser-tools /tmp/portrait-evidence
+          npm install --prefix /tmp/portrait-browser-tools --no-audit --no-fund playwright@1.56.1
+          /tmp/portrait-browser-tools/node_modules/.bin/playwright install --with-deps chromium >/tmp/portrait-evidence/browser-install.log 2>&1
+          ./node_modules/.bin/vite preview --host 127.0.0.1 --port 4173 >/tmp/portrait-evidence/server.log 2>&1 &
+          node --input-type=module <<'JS'
+          import {chromium} from '/tmp/portrait-browser-tools/node_modules/playwright/index.mjs';
+          import fs from 'node:fs';
+          import crypto from 'node:crypto';
+          const site=process.env.SITE;
+          const routes=site==='stt'?['/eric-chuang','/en/eric-chuang','/ja/eric-chuang','/ko/eric-chuang']:['/founder-chairman','/en/founder-chairman'];
+          const expected=site==='stt'?'a1b0d14bc6446a97431009baf0f0d1869fb3e62d5e6f4566b445b828d60b4e23':'00304feb73988e4f737b8ed0eacb43b3d6e5d85d537b5a3f66212016d9a8da36';
+          const browser=await chromium.launch({headless:true});
+          const report=[];
+          let failures=0;
+          for(const [width,height] of [[1920,1080],[1440,900],[1024,768],[390,844]]){
+            const page=await browser.newPage({viewport:{width,height},deviceScaleFactor:1});
+            for(const route of routes){
+              await page.goto('http://127.0.0.1:4173'+route,{waitUntil:'networkidle',timeout:60000});
+              const selector='.'+site+'-intact-hero__image';
+              await page.waitForSelector(selector,{timeout:20000});
+              await page.locator(selector).evaluate(async img=>{await img.decode();await document.fonts.ready});
+              const evidence=await page.evaluate(({site,selector})=>{
+                const img=document.querySelector(selector),copy=document.querySelector('.'+site+'-intact-hero__copy');
+                const b=img.getBoundingClientRect(),t=copy.getBoundingClientRect(),s=getComputedStyle(img);
+                const below=t.top>=b.bottom-1;
+                const safeLeft=t.right<=b.left+b.width*0.54;
+                return {src:img.getAttribute('src'),naturalWidth:img.naturalWidth,naturalHeight:img.naturalHeight,rendered:{x:b.x,y:b.y,width:b.width,height:b.height},copy:{x:t.x,y:t.y,width:t.width,height:t.height},objectFit:s.objectFit,filter:s.filter,transform:s.transform,opacity:s.opacity,clipPath:s.clipPath,maskImage:s.maskImage,srcset:img.getAttribute('srcset'),h1:document.querySelector('h1')?.textContent,lang:document.documentElement.lang,title:document.title,horizontalOverflow:document.documentElement.scrollWidth>innerWidth+1,textSafe:below||safeLeft,ratioIntact:Math.abs(b.width/b.height-8946/6330)<0.002};
+              },{site,selector});
+              const response=await page.request.get('http://127.0.0.1:4173'+evidence.src);
+              const bytes=await response.body();evidence.sha256=crypto.createHash('sha256').update(bytes).digest('hex');
+              evidence.passed=response.ok()&&evidence.sha256===expected&&evidence.naturalWidth===8946&&evidence.naturalHeight===6330&&evidence.objectFit==='contain'&&evidence.filter==='none'&&evidence.transform==='none'&&evidence.opacity==='1'&&evidence.clipPath==='none'&&evidence.maskImage==='none'&&!evidence.srcset&&evidence.ratioIntact&&evidence.textSafe&&!evidence.horizontalOverflow;
+              if(!evidence.passed)failures++;
+              report.push({route,width,height,...evidence});
+              await page.screenshot({path:'/tmp/portrait-evidence/'+site+'-'+route.replaceAll('/','_')+'-'+width+'.png',fullPage:false});
+              console.log(route,width,evidence.passed?'PASS':'FAIL',evidence.h1);
+            }
+            await page.close();
+          }
+          await browser.close();
+          fs.writeFileSync('/tmp/portrait-evidence/report-'+site+'.json',JSON.stringify({site,failures,checks:report},null,2));
+          if(failures)throw new Error(failures+' portrait checks failed; publication blocked');
+          JS
+      - name: Commit only the verified portrait component and frame to its existing branch
+        env:
+          SITE: ${{ matrix.site }}
+          BRANCH: ${{ matrix.branch }}
+        run: |
+          set -euo pipefail
+          git diff --check
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add src/components/GovernedHero.tsx "src/styles/${SITE}-founder-intact.css"
+          git diff --cached --stat
+          if ! git diff --cached --quiet; then
+            git commit -m "Use untouched 8946x6330 $SITE founder original with uncropped responsive frame"
+            git push origin "HEAD:$BRANCH"
+          fi
+          echo "VERIFIED_COMMIT=$(git rev-parse HEAD)"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: original-portrait-${{ matrix.site }}-20261106
+          path: /tmp/portrait-evidence/
+          retention-days: 30
