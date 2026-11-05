@@ -1,0 +1,64 @@
+name: Import exact original portraits 20261106
+on:
+  push:
+    branches: [main]
+    paths: [.github/workflows/import-original-portraits-20261106.yml]
+permissions:
+  contents: write
+jobs:
+  import-originals:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - name: Download only the two publication-approved originals and verify exact bytes
+        shell: bash
+        env:
+          STT_SOURCE: 'https://oaisdmntprjapaneast.blob.core.windows.net/files/00000000-5db8-8209-8dd4-cb1e6e0cfa58/raw?se=2026-11-05T22%3A15%3A44Z&sp=r&sv=2026-02-06&sr=b&scid=01a1adb3-cf42-7927-9c59-22160b75f738&skoid=bb372dd6-3b2a-4af2-b355-c26497ba23cd&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-11-05T04%3A02%3A28Z&ske=2026-11-06T04%3A02%3A28Z&sks=b&skv=2026-02-06&sig=q/s6kX4yCwFfDBAAqTQEMcLnkOi9OeJ%2B8Ln%2B3/j6Ngg%3D'
+          GCSDA_SOURCE: 'https://oaisdmntprjapaneast.blob.core.windows.net/files/00000000-dd20-8209-ab54-8749ab9ad1a4/raw?se=2026-11-05T22%3A15%3A44Z&sp=r&sv=2026-02-06&sr=b&scid=01a1adb3-cf42-7927-9c59-22160b75f738&skoid=bb372dd6-3b2a-4af2-b355-c26497ba23cd&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2026-11-05T02%3A58%3A30Z&ske=2026-11-06T02%3A58%3A30Z&sks=b&skv=2026-02-06&sig=Sdfyv6L44RrHDkx/ZGihZCLZDy8lO3ezmmqQDD4crrk%3D'
+        run: |
+          set -euo pipefail
+          echo "::add-mask::$STT_SOURCE"
+          echo "::add-mask::$GCSDA_SOURCE"
+          mkdir -p /tmp/approved-portraits
+          curl --fail --silent --show-error --location --retry 2 "$STT_SOURCE" -o /tmp/approved-portraits/stt.png
+          curl --fail --silent --show-error --location --retry 2 "$GCSDA_SOURCE" -o /tmp/approved-portraits/gcsda.png
+          echo 'a1fac850ed1eb8599322c8bb87f4823eacf704100028654afaf27504b823eb1c  /tmp/approved-portraits/stt.png' | sha256sum -c -
+          echo '27b9b2acd78eae254d8fe44c8964596bd9c1562c25f4330c910f3afca60c92ea  /tmp/approved-portraits/gcsda.png' | sha256sum -c -
+          python - <<'PY'
+          import struct
+          from pathlib import Path
+          for site in ('stt','gcsda'):
+              data=Path('/tmp/approved-portraits/'+site+'.png').read_bytes()
+              assert data[:8] == b'\x89PNG\r\n\x1a\n'
+              size=struct.unpack('>II',data[16:24])
+              assert size==(2048,1449), (site,size)
+              print(site, len(data), size, 'ORIGINAL_BYTES_VERIFIED')
+          PY
+      - name: Add versioned originals without changing any page or deleting old assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          for item in 'main:stt' 'gcsda-release-20261005:gcsda'; do
+            branch="${item%%:*}"
+            site="${item##*:}"
+            git fetch origin "$branch" --depth=1
+            git checkout -B "$branch" "origin/$branch"
+            destination="public/visual-approved/portrait-${site}-20261106-original.png"
+            mkdir -p public/visual-approved
+            if test -e "$destination"; then
+              cmp /tmp/approved-portraits/$site.png "$destination"
+            else
+              cp /tmp/approved-portraits/$site.png "$destination"
+            fi
+            git add "$destination"
+            if ! git diff --cached --quiet; then
+              git commit -m "Add byte-identical approved $site portrait PNG 20261106"
+              git push origin "HEAD:$branch"
+            fi
+            echo "$branch $(git rev-parse HEAD)"
+          done
