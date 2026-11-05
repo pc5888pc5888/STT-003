@@ -233,7 +233,7 @@ export function GCSDAEnglishGovernance(){
 
 
 export function GCSDAEnglishFounderChairman(){
-  return <div className="g4-page g4-en-page">
+  return <div className="g4-page g4-en-page g4-founder-page">
     <GovernedHero
       kicker="FOUNDING CHAIRMAN"
       title="Founding Chairman | Chuang Chun-Hsiang, Ph.D."
