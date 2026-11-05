@@ -1,4 +1,4 @@
-name: Founder layout reference and visual preview 20261106
+name: Live founder layout verification 20261106
 on:
   push:
     branches: [main]
@@ -6,174 +6,31 @@ on:
 permissions:
   contents: read
 jobs:
-  inspect-preview:
+  live-layout:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 8
     env:
-      LAYOUT_PREVIEW: 'true'
+      LAYOUT_PREVIEW: 'false'
     steps:
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         with:
           node-version: '22'
-      - name: Verify scoped founder layout against the actual homepage
+      - name: Run reviewed live checks with the runner browser
         run: |
-          set -euo pipefail
-          mkdir -p /tmp/layout-tools /tmp/layout-evidence/source
-          npm install --prefix /tmp/layout-tools --no-audit --no-fund playwright@1.56.1
-          /tmp/layout-tools/node_modules/.bin/playwright install --with-deps chromium >/tmp/layout-evidence/browser-install.log 2>&1
-          node --input-type=module <<'JS'
-          import {chromium} from '/tmp/layout-tools/node_modules/playwright/index.mjs';
-          import fs from 'node:fs';
-          import crypto from 'node:crypto';
-          const out='/tmp/layout-evidence',preview=process.env.LAYOUT_PREVIEW==='true';
-          const revision='20261106-home-aligned';
-          const common=`
-          /* 2026-11-06 owner correction: homepage-aligned title, restrained complete photo.
-           * Layout only. The original 8946x6330 PNG is unchanged.
-           * 219.8px = homepage offset 180px + kicker line 19.8px + gap 20px.
-           * The reading-field gradient ends at 45% of the photograph, before the person.
-           * No image generation, crop, resampling, filter, mask or transform.
-           */
-          SCOPE {
-            --founder-layout-revision:20261106-home-aligned;
-            --founder-photo-height:clamp(520px,calc(100svh - 94px),760px);
-            --founder-photo-width:min(100%,calc(var(--founder-photo-height) * 1.4132701422));
-            --founder-copy-x:56px;
-            --founder-title-y:219.8px;
-          }
-          SCOPE PREFIX__stage {
-            display:grid;
-            grid-template-columns:minmax(0,1fr);
-            align-items:start;
-            justify-content:normal;
-            height:auto;
-            min-height:var(--founder-photo-height);
-            isolation:isolate;
-            background:#fbfaf7;
-          }
-          SCOPE PREFIX__image {
-            grid-area:1 / 1;
-            position:relative;
-            align-self:start;
-            justify-self:end;
-            width:var(--founder-photo-width);
-            height:auto;
-            max-width:100%;
-            max-height:none;
-            object-fit:contain;
-            object-position:right top;
-            z-index:0;
-          }
-          SCOPE PREFIX__stage::before {
-            content:"";
-            position:absolute;
-            top:0;
-            bottom:0;
-            left:calc(100% - var(--founder-photo-width) - 1px);
-            width:calc(var(--founder-photo-width) * .45 + 1px);
-            z-index:1;
-            pointer-events:none;
-            background:linear-gradient(90deg,#fbfaf7 0%,rgba(251,250,247,.92) 20%,rgba(251,250,247,.55) 55%,rgba(251,250,247,0) 100%);
-          }
-          SCOPE PREFIX__copy {
-            grid-area:1 / 1;
-            position:relative;
-            align-self:start;
-            top:auto;
-            left:auto;
-            transform:none;
-            width:min(46%,760px);
-            max-width:760px;
-            margin:0 0 48px var(--founder-copy-x);
-            padding:var(--founder-title-y) 0 0;
-            background:transparent;
-          }
-          @media(min-width:761px) and (max-width:1200px) {
-            SCOPE {
-              --founder-photo-height:clamp(480px,calc(100svh - HEADERpx),640px);
-              --founder-copy-x:36px;
-              --founder-title-y:TABLETYpx;
-            }
-            SCOPE PREFIX__title {font-size:clamp(28px,3.2vw,36px);line-height:1.45;}
-          }
-          @media(max-width:760px) {
-            SCOPE PREFIX__stage {display:flex;flex-direction:column;min-height:0;height:auto;}
-            SCOPE PREFIX__stage::before {display:none;}
-            SCOPE PREFIX__image {align-self:stretch;width:100%;height:auto;object-position:center;}
-            SCOPE PREFIX__copy {align-self:stretch;width:100%;max-width:none;margin:0;padding:30px 28px 36px;background:#fbfaf7;}
-          }
-          `;
-          const sites=[
-            {site:'stt',base:'https://stt-003.vercel.app',branch:'main',pageClass:'.stt-eric-page',header:78,tabletY:89.8,routes:['/eric-chuang','/en/eric-chuang','/ja/eric-chuang','/ko/eric-chuang'],hash:'a1b0d14bc6446a97431009baf0f0d1869fb3e62d5e6f4566b445b828d60b4e23',bytes:12545350},
-            {site:'gcsda',base:'https://gcsda-governance.vercel.app',branch:'gcsda-release-20261005',pageClass:'.g4-founder-page',header:93,tabletY:74.8,routes:['/founder-chairman','/en/founder-chairman'],hash:'00304feb73988e4f737b8ed0eacb43b3d6e5d85d537b5a3f66212016d9a8da36',bytes:12780472}
-          ];
-          const browser=await chromium.launch({headless:true});
-          const context=await browser.newContext();
-          const page=await context.newPage();
-          const report={checkedAt:new Date().toISOString(),preview,scope:'Founder hero layout and image integrity; not whole-site QA',home:[],checks:[],failures:[]};
-          const dimensions=[[1536,800],[1440,900],[1920,1080],[1280,720],[1024,768],[768,1024],[390,844],[320,740]];
-          for(const [width,height] of dimensions){
-            await page.setViewportSize({width,height});
-            await page.goto('https://stt-003.vercel.app/',{waitUntil:'networkidle',timeout:60000});
-            await page.evaluate(()=>document.fonts.ready);
-            const m=await page.evaluate(()=>{const h=document.querySelector('.cis-hero'),t=h.querySelector('h1'),b=h.getBoundingClientRect(),r=t.getBoundingClientRect();return {x:r.x,y:r.y,relativeY:r.y-b.y,heroTop:b.y,heroHeight:b.height,title:document.title,lang:document.documentElement.lang,canonical:document.querySelector('link[rel=canonical]')?.href}});
-            report.home.push({width,height,...m});
-            if([1536,1440,390].includes(width))await page.screenshot({path:out+'/home-'+width+'.png'});
-          }
-          for(const s of sites){
-            const {site,base,branch}=s;
-            const path='src/styles/'+site+'-founder-intact.css';
-            const raw=await fetch('https://raw.githubusercontent.com/pc5888pc5888/STT-003/'+branch+'/'+path);if(!raw.ok)throw new Error('Source '+raw.status);
-            let css=await raw.text();
-            const patch=common.replaceAll('SCOPE','#root '+s.pageClass+' .'+site+'-intact-hero').replaceAll('PREFIX','.'+site+'-intact-hero').replaceAll('HEADER',String(s.header)).replaceAll('TABLETY',String(s.tabletY));
-            if(!css.includes('--founder-layout-revision:20261106-home-aligned'))css+=patch;
-            fs.writeFileSync(out+'/source/'+site+'-founder-intact.css',css);
-            const asset='/visual-approved/portrait-'+site+'-20261106-8946x6330-original.png';
-            const ar=await context.request.get(base+asset,{timeout:60000}),bytes=await ar.body();
-            const hash=crypto.createHash('sha256').update(bytes).digest('hex');
-            const assetIntact=ar.ok()&&hash===s.hash&&bytes.length===s.bytes;
-            for(const [width,height] of dimensions){
-              await page.setViewportSize({width,height});
-              const reference=report.home.find(x=>x.width===width);
-              for(const route of s.routes){
-                const errors=[];const handler=e=>errors.push(e.message);page.on('pageerror',handler);
-                const response=await page.goto(base+route,{waitUntil:'networkidle',timeout:60000});
-                const sel='.'+site+'-intact-hero';
-                await page.locator(sel+'__image').evaluate(async i=>{await i.decode();await document.fonts.ready});
-                const before=await page.evaluate(()=>({text:document.body.innerText,links:[...document.querySelectorAll('a')].map(a=>a.href),title:document.title,description:document.querySelector('meta[name=description]')?.content,canonical:document.querySelector('link[rel=canonical]')?.href,lang:document.documentElement.lang}));
-                if(preview)await page.addStyleTag({content:patch});
-                else await page.waitForFunction(({sel,revision})=>getComputedStyle(document.querySelector(sel)).getPropertyValue('--founder-layout-revision').trim()===revision,{sel,revision},{timeout:30000});
-                const m=await page.evaluate(({sel})=>{
-                  const rect=e=>{const r=e.getBoundingClientRect();return {x:r.x,y:r.y,width:r.width,height:r.height,bottom:r.bottom,right:r.right}};
-                  const h=document.querySelector(sel),im=h.querySelector('img'),c=h.querySelector(sel+'__copy'),t=h.querySelector('h1'),b=rect(im),cb=rect(c),hb=rect(h),tb=rect(t),style=getComputedStyle(im);
-                  const texts=[];const walker=document.createTreeWalker(c,NodeFilter.SHOW_TEXT);while(walker.nextNode()){if(!walker.currentNode.textContent.trim())continue;const range=document.createRange();range.selectNodeContents(walker.currentNode);for(const r of range.getClientRects())texts.push({x:r.x,y:r.y,right:r.right,bottom:r.bottom});}
-                  const siblings=[...c.children].map(rect).filter(r=>r.height>0);
-                  return {hero:hb,image:b,copy:cb,titleBox:tb,relativeTitleY:tb.y-hb.y,naturalWidth:im.naturalWidth,naturalHeight:im.naturalHeight,src:im.getAttribute('src'),srcset:im.getAttribute('srcset'),objectFit:style.objectFit,filter:style.filter,transform:style.transform,maskImage:style.maskImage,clipPath:style.clipPath,opacity:style.opacity,revision:getComputedStyle(h).getPropertyValue('--founder-layout-revision').trim(),horizontalOverflow:document.documentElement.scrollWidth>innerWidth+1,textSafe:texts.every(r=>r.y>=b.bottom-1||r.bottom<=b.y+1||r.right<=b.x+b.width*.54),textWithinCopy:texts.every(r=>r.x>=cb.x-1&&r.right<=cb.right+1),textNonOverlapping:siblings.every((r,i)=>i===0||r.y>=siblings[i-1].bottom-1),allText:document.body.innerText,links:[...document.querySelectorAll('a')].map(a=>a.href),title:document.title,description:document.querySelector('meta[name=description]')?.content,canonical:document.querySelector('link[rel=canonical]')?.href,lang:document.documentElement.lang};
-                },{sel});
-                const contentUnchanged=before.text===m.allText&&JSON.stringify(before.links)===JSON.stringify(m.links)&&before.title===m.title&&before.description===m.description&&before.canonical===m.canonical&&before.lang===m.lang;
-                delete m.allText;delete m.links;
-                const titleAligned=width>1200?Math.abs(m.titleBox.x-reference.x)<1&&Math.abs(m.titleBox.y-reference.y)<1:Math.abs(m.titleBox.x-(width>760?36:28))<1;
-                const ratioIntact=Math.abs(m.image.width/m.image.height-8946/6330)<.002;
-                const completeImage=m.image.x>=-1&&m.image.right<=width+1&&m.image.y>=m.hero.y-1&&m.image.bottom<=m.hero.bottom+1;
-                const restrained=width<=760||m.image.height<=761;
-                const passed=response.ok()&&assetIntact&&m.src===asset&&m.naturalWidth===8946&&m.naturalHeight===6330&&!m.srcset&&m.objectFit==='contain'&&m.filter==='none'&&m.transform==='none'&&m.opacity==='1'&&m.maskImage==='none'&&m.clipPath==='none'&&ratioIntact&&completeImage&&restrained&&titleAligned&&m.textSafe&&m.textWithinCopy&&m.textNonOverlapping&&!m.horizontalOverflow&&contentUnchanged&&errors.length===0;
-                const entry={site,url:base+route,width,height,httpStatus:response.status(),assetHash:hash,assetBytes:bytes.length,assetIntact,titleAligned,ratioIntact,completeImage,restrained,contentUnchanged,passed,pageErrors:errors,...m};
-                report.checks.push(entry);if(!passed)report.failures.push(entry);
-                if(route===s.routes[0]&&[1536,1440,1024,768,390,320].includes(width))await page.screenshot({path:out+'/'+site+'-'+width+'.png'});
-                if(route===s.routes[1]&&[1280,390].includes(width))await page.screenshot({path:out+'/'+site+'-en-'+width+'.png'});
-                console.log(site,route,width,passed?'PASS':'FAIL',JSON.stringify({titleAligned,textSafe:m.textSafe,textWithinCopy:m.textWithinCopy,textNonOverlapping:m.textNonOverlapping,completeImage,contentUnchanged}));
-                page.off('pageerror',handler);
-                fs.writeFileSync(out+'/layout-report.json',JSON.stringify(report,null,2));
-              }
-            }
-          }
-          await browser.close();
-          if(report.failures.length)throw new Error(report.failures.length+' layout checks failed');
-          console.log('FOUNDER_LAYOUT_CHECKS_PASS',report.checks.length,'preview',preview);
-          JS
+          python3 - <<'PY'
+          import hashlib,subprocess,urllib.request,yaml
+          url='https://raw.githubusercontent.com/pc5888pc5888/STT-003/17524b6fd63db8ea4661c17c10259992a890784d/.github/workflows/founder-layout-reference-20261106.yml'
+          with urllib.request.urlopen(url,timeout=30) as r:data=r.read()
+          assert hashlib.sha1(b'blob '+str(len(data)).encode()+bytes([0])+data).hexdigest()=='6048f72f9c833b3de6611bf385d900eb9f2438fd'
+          steps=yaml.safe_load(data)['jobs']['inspect-preview']['steps']
+          script=next(s['run'] for s in steps if s.get('name')=='Verify scoped founder layout against the actual homepage')
+          script='\n'.join(line for line in script.splitlines() if 'playwright install --with-deps chromium' not in line)
+          script=script.replace('chromium.launch({headless:true})',"chromium.launch({headless:true,executablePath:'/usr/bin/google-chrome',args:['--no-sandbox']})")
+          subprocess.run(['bash','-e','-o','pipefail','-c',script],check=True)
+          PY
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()
         with:
-          name: founder-layout-reference-20261106
+          name: founder-layout-live-20261106
           path: /tmp/layout-evidence/
           retention-days: 30
