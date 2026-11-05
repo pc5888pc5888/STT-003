@@ -1,0 +1,63 @@
+name: Membership and mobile draft verification
+on:
+  push:
+    branches: [qa/flow-review-20261106]
+    paths: [.github/workflows/flow-acceptance-followup-20261106.yml]
+permissions:
+  contents: read
+  actions: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Prepare isolated browser
+        run: |
+          npm install --prefix "$RUNNER_TEMP/qa" --no-save --package-lock=false --no-audit --no-fund playwright@1.49.1
+          sudo timeout 75 apt-get install -y -qq fonts-noto-cjk
+      - name: Retrieve the actual previously exported synthetic draft and scope the browser tests
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python3 - <<'PY'
+          import urllib.request,json,os,io,zipfile,pathlib
+          class StopRedirect(urllib.request.HTTPRedirectHandler):
+              def redirect_request(self,req,fp,code,msg,headers,newurl):return None
+          request=urllib.request.Request('https://api.github.com/repos/pc5888pc5888/STT-003/actions/artifacts/13456518037/zip',headers={'Authorization':'Bearer '+os.environ['GH_TOKEN'],'User-Agent':'STT-scoped-qa'})
+          try:
+              response=urllib.request.build_opener(StopRedirect()).open(request,timeout=30)
+              data=response.read()
+          except urllib.error.HTTPError as e:
+              if e.code not in (301,302,303,307,308):raise
+              location=e.headers['Location']
+              if not location.startswith('https://'):raise RuntimeError('Unsafe artifact location')
+              data=urllib.request.urlopen(location,timeout=30).read()
+          archive=zipfile.ZipFile(io.BytesIO(data));draft=archive.read('interview-draft.json')
+          path=pathlib.Path(os.environ['RUNNER_TEMP'])/'qa';path.mkdir(exist_ok=True)
+          (path/'prior-draft.json').write_bytes(draft)
+          url='https://raw.githubusercontent.com/pc5888pc5888/STT-003/2d7fc345c947320adfa15ad1a39490242b18c513/scripts/qa/flow-acceptance-20261106.mjs'
+          source=urllib.request.urlopen(url,timeout=30).read().decode()
+          anchor='async function test(name,viewport,fn){'
+          source=source.replace(anchor,anchor+"\n if(!['gcsda-membership','interview-mobile-draft-recovery'].includes(name))return;")
+          source=source.replace("step(3).getByLabel('申請來源',{exact:true}).selectOption", "step(3).locator('select').selectOption")
+          source=source.replace('let exportedDraft=null;',"let exportedDraft=fs.readFileSync(process.env.DRAFT_PATH);")
+          old="await page.locator('#toolbar-submit').click();assert.equal(await page.locator('#answered-count').innerText(),'20 / 20');"
+          new="for(let n=0;n<50;n++){const active=page.locator('.screen.active');if(await active.getAttribute('id')==='submit')break;const next=active.locator('button[data-next],button.q-next');assert.ok(await next.count(),'Missing visible journey control');await next.first().click();}assert.equal(await page.locator('#answered-count').innerText(),'20 / 20');"
+          assert source.count(old)==1
+          source=source.replace(old,new)
+          (path/'followup.mjs').write_text(source)
+          PY
+      - name: Run remaining live checks
+        run: |
+          export QA_MODULE="$RUNNER_TEMP/qa/node_modules/playwright/index.mjs"
+          export CHROME_PATH="$(command -v google-chrome || command -v chromium)"
+          export DRAFT_PATH="$RUNNER_TEMP/qa/prior-draft.json"
+          node --check "$RUNNER_TEMP/qa/followup.mjs"
+          node "$RUNNER_TEMP/qa/followup.mjs"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: membership-mobile-draft-verified-20261106
+          path: flow-acceptance-evidence/
+          retention-days: 7
+          if-no-files-found: error
