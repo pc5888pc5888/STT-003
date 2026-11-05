@@ -38,25 +38,26 @@ export default function GovernedHero({kicker,title,subtitle,lead,image,id,childr
   const page=PAGE_PRESENTATION[route];
   const profileLocale=route.match(/^\/(en|ja|ko)\/eric-chuang$/)?.[1];
   const lines=profileLocale ? title.split(/\s*[|｜]\s*/) : (page?.lines||[title]);
-  const picture=image ?? page?.image ?? undefined;
+  const profileOriginal=route==="/eric-chuang" || Boolean(profileLocale);
+  const picture=profileOriginal ? "/visual-approved/portrait-stt-20261106-8946x6330-original.png" : (image ?? page?.image ?? undefined);
   const titleId=id||"page-title";
   const clearLeft=Boolean(picture && (picture.includes("/user-approved-six/") || picture.includes("cooperation-hero-20260917")));
   const ownerOriginal=Boolean(picture?.includes("eric-page-owner-original.png") || picture?.includes("portrait-stt-20261101.webp" ) || picture?.includes("portrait-stt-20261102-hd.webp"));
   const profileParity=pathname==="/eric-chuang"||pathname==="/founder-chairman";
-  const profileHires=Boolean((route==="/eric-chuang" || profileLocale) && picture?.includes("portrait-stt-20261102-hd.webp"));
+  const profileHires=profileOriginal;
   const portraitAlt=profileLocale==="en" ? "Portrait of Chuang Chun-Hsiang, Ph.D.; complete original composition" : profileLocale==="ja" ? "莊鈞翔博士の肖像。元の写真の構図を省略せず表示" : profileLocale==="ko" ? "좡쥔샹 박사의 초상. 원본 사진의 전체 구도" : "莊鈞翔博士雙手交叉肖像，完整保留原始照片構圖";
 
   // All four founder locales share the same photo-safe component and unchanged image.
   if (profileHires && picture) return <>
     {profileLocale&&<style>{localizedProfileStyles}</style>}
-    <section className="stt-intact-hero" aria-labelledby={titleId} data-profile-locale={profileLocale} data-founder-visual-version="20261105.2">
+    <section className="stt-intact-hero" aria-labelledby={titleId} data-profile-locale={profileLocale} data-founder-visual-version="20261106-original-8946x6330">
       <div className="stt-intact-hero__stage">
         <img
           className="stt-intact-hero__image"
           src={picture}
           alt={portraitAlt}
-          width={page?.imageWidth || 3344}
-          height={page?.imageHeight || 1882}
+          width={8946}
+          height={6330}
           fetchPriority="high"
           decoding="async"
         />
