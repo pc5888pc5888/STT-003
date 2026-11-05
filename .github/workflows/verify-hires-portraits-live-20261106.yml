@@ -1,0 +1,80 @@
+name: Verify live original founder portraits
+on:
+  push:
+    branches: [main]
+    paths: [.github/workflows/verify-hires-portraits-live-20261106.yml]
+permissions:
+  contents: read
+jobs:
+  live-portrait-evidence:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify the public website URLs without changing site content
+        run: |
+          mkdir -p /tmp/live-portrait-tools /tmp/live-portrait-evidence
+          npm install --prefix /tmp/live-portrait-tools --no-audit --no-fund playwright@1.56.1
+          /tmp/live-portrait-tools/node_modules/.bin/playwright install --with-deps chromium >/tmp/live-portrait-evidence/browser-install.log 2>&1
+          node --input-type=module <<'JS'
+          import {chromium} from '/tmp/live-portrait-tools/node_modules/playwright/index.mjs';
+          import fs from 'node:fs';
+          import crypto from 'node:crypto';
+          const sites=[
+            {site:'stt',base:'https://stt-003.vercel.app',routes:['/eric-chuang','/en/eric-chuang','/ja/eric-chuang','/ko/eric-chuang'],hash:'a1b0d14bc6446a97431009baf0f0d1869fb3e62d5e6f4566b445b828d60b4e23',size:12545350},
+            {site:'gcsda',base:'https://gcsda-governance.vercel.app',routes:['/founder-chairman','/en/founder-chairman'],hash:'00304feb73988e4f737b8ed0eacb43b3d6e5d85d537b5a3f66212016d9a8da36',size:12780472}
+          ];
+          const browser=await chromium.launch({headless:true});
+          const report={checkedAt:new Date().toISOString(),scope:'Portrait replacement only; not whole-site QA',checks:[],failures:0};
+          for(const {site,base,routes,hash,size} of sites){
+            const context=await browser.newContext();
+            const asset='/visual-approved/portrait-'+site+'-20261106-8946x6330-original.png';
+            const r=await context.request.get(base+asset,{timeout:60000});
+            const body=await r.body();
+            const assetHash=crypto.createHash('sha256').update(body).digest('hex');
+            const assetIntact=r.ok()&&assetHash===hash&&body.length===size;
+            for(const [width,height] of [[1920,1080],[1440,900],[1024,768],[390,844]]){
+              const page=await context.newPage();await page.setViewportSize({width,height});
+              for(const route of routes){
+                const errors=[];const onError=e=>errors.push(e.message);page.on('pageerror',onError);
+                const response=await page.goto(base+route,{waitUntil:'networkidle',timeout:60000});
+                const selector='.'+site+'-intact-hero__image';
+                await page.waitForSelector('[data-founder-visual-version="20261106-original-8946x6330"]',{timeout:30000});
+                await page.locator(selector).evaluate(async img=>{await img.decode();await document.fonts.ready});
+                const m=await page.evaluate(({site,selector})=>{
+                  const img=document.querySelector(selector),copy=document.querySelector('.'+site+'-intact-hero__copy'),hero=img.closest('section');
+                  const b=img.getBoundingClientRect(),c=copy.getBoundingClientRect(),s=getComputedStyle(img);
+                  const texts=[];const walker=document.createTreeWalker(copy,NodeFilter.SHOW_TEXT);
+                  while(walker.nextNode()){if(!walker.currentNode.textContent.trim())continue;const range=document.createRange();range.selectNodeContents(walker.currentNode);for(const r of range.getClientRects())texts.push({left:r.left,right:r.right,top:r.top,bottom:r.bottom});}
+                  const textSafe=texts.every(t=>t.top>=b.bottom-1||t.bottom<=b.top+1||t.right<=b.left+b.width*.54);
+                  const siblings=[...copy.children].map(e=>e.getBoundingClientRect()).filter(r=>r.height>0);
+                  const textNonOverlapping=siblings.every((r,i)=>i===0||r.top>=siblings[i-1].bottom-1);
+                  let ancestorEffects=false;for(let p=img.parentElement;p&&p!==document.body;p=p.parentElement){const q=getComputedStyle(p);if(q.filter!=='none'||Number(q.opacity)<1)ancestorEffects=true;}
+                  return {src:img.getAttribute('src'),naturalWidth:img.naturalWidth,naturalHeight:img.naturalHeight,rendered:{x:b.x,y:b.y,width:b.width,height:b.height},copy:{x:c.x,y:c.y,width:c.width,height:c.height},objectFit:s.objectFit,filter:s.filter,transform:s.transform,opacity:s.opacity,clipPath:s.clipPath,maskImage:s.maskImage,srcset:img.getAttribute('srcset'),ancestorEffects,version:hero.dataset.founderVisualVersion,h1:document.querySelector('h1')?.textContent,lang:document.documentElement.lang,title:document.title,horizontalOverflow:document.documentElement.scrollWidth>innerWidth+1,textSafe,textNonOverlapping,ratioIntact:Math.abs(b.width/b.height-8946/6330)<.002};
+                },{site,selector});
+                const passed=response.ok()&&assetIntact&&m.src===asset&&m.naturalWidth===8946&&m.naturalHeight===6330&&m.objectFit==='contain'&&m.filter==='none'&&m.transform==='none'&&m.opacity==='1'&&m.clipPath==='none'&&m.maskImage==='none'&&!m.srcset&&!m.ancestorEffects&&m.ratioIntact&&m.textSafe&&m.textNonOverlapping&&!m.horizontalOverflow&&errors.length===0;
+                const name=site+'-'+route.replaceAll('/','_')+'-'+width;
+                await page.locator('.'+site+'-intact-hero').screenshot({path:'/tmp/live-portrait-evidence/'+name+'-hero.png'});
+                if(route===routes[0]&&(width===1440||width===390)){await page.evaluate(()=>scrollTo(0,0));await page.screenshot({path:'/tmp/live-portrait-evidence/'+name+'-viewport.png'});}
+                report.checks.push({site,url:base+route,width,height,httpStatus:response.status(),assetHash,assetBytes:body.length,assetIntact,passed,pageErrors:errors,...m});
+                if(!passed)report.failures++;
+                console.log(site,route,width,passed?'PASS':'FAIL',JSON.stringify({textSafe:m.textSafe,textNonOverlapping:m.textNonOverlapping,assetIntact,pageErrors:errors}));
+                page.off('pageerror',onError);
+              }
+              await page.close();
+            }
+            await context.close();
+          }
+          await browser.close();
+          fs.writeFileSync('/tmp/live-portrait-evidence/live-report.json',JSON.stringify(report,null,2));
+          if(report.failures)throw new Error(report.failures+' live portrait verification failures');
+          console.log('LIVE_PORTRAIT_CHECKS_PASS',report.checks.length);
+          JS
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: live-original-portrait-evidence-20261106
+          path: /tmp/live-portrait-evidence/
+          retention-days: 30
