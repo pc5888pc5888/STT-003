@@ -16,7 +16,7 @@ export default function GovernedHero({ kicker, title, subtitle, lead, image, id,
   const { pathname } = useLocation();
   const route = pathname.replace(/\/$/, "") || "/";
   const page = PAGE_PRESENTATION[route];
-  const lines = page?.lines || [title];
+  const lines = route === "/en/founder-chairman" ? ["Founding Chairman", "Chuang Chun-Hsiang, Ph.D."] : (page?.lines || [title]);
   const requestedPicture = image ?? page?.image ?? undefined;
   const picture = requestedPicture === INCOMPLETE_HOME_DERIVATIVE ? COMPLETE_HOME_ART : requestedPicture;
   const titleId = id || "page-title";
