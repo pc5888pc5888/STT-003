@@ -232,3 +232,14 @@
   line-height:1.8!important;
 }
 }
+
+/* Owner-requested single name kicker: match STT homepage, not body paragraphs. */
+#root .g4-founder-page .gcsda-intact-hero p.gcsda-intact-hero__kicker.cis-kicker[data-founder-name-kicker] {
+  font-family:"Noto Sans TC","Noto Sans CJK TC",Inter,system-ui,sans-serif!important;
+  font-size:11px!important;
+  font-weight:600!important;
+  line-height:1.8!important;
+  letter-spacing:.12em!important;
+  color:#886237!important;
+  margin:0 0 17px!important;
+}
