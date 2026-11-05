@@ -1,0 +1,32 @@
+name: Live intake and draft acceptance
+on:
+  push:
+    branches: [qa/flow-review-20261106]
+    paths: [.github/workflows/flow-acceptance-20261106.yml]
+permissions:
+  contents: read
+jobs:
+  acceptance:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Prepare isolated browser
+        run: |
+          npm install --prefix "$RUNNER_TEMP/qa" --no-save --package-lock=false --no-audit --no-fund playwright@1.49.1
+          sudo timeout 75 apt-get install -y -qq fonts-noto-cjk
+      - name: Verify and run scoped acceptance script
+        env:
+          SOURCE_SHA: ${{ github.sha }}
+        run: |
+          export QA_MODULE="$RUNNER_TEMP/qa/node_modules/playwright/index.mjs"
+          export CHROME_PATH="$(command -v google-chrome || command -v chromium)"
+          curl --fail --silent --show-error --max-time 30 "https://raw.githubusercontent.com/pc5888pc5888/STT-003/$SOURCE_SHA/scripts/qa/flow-acceptance-20261106.mjs" -o "$RUNNER_TEMP/qa/check.mjs"
+          node --check "$RUNNER_TEMP/qa/check.mjs"
+          node "$RUNNER_TEMP/qa/check.mjs"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: live-flow-acceptance-20261106
+          path: flow-acceptance-evidence/
+          retention-days: 7
+          if-no-files-found: error
