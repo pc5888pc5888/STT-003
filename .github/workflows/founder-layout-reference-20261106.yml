@@ -26,7 +26,7 @@ jobs:
           for (const [branch,site] of [['main','stt'],['gcsda-release-20261005','gcsda']]) {
             for (const path of ['src/styles/'+site+'-founder-intact.css','src/styles/cis-page-system.css','src/components/GovernedHero.tsx','src/data/pagePresentation.ts']) {
               const r=await fetch('https://raw.githubusercontent.com/pc5888pc5888/STT-003/'+branch+'/'+path);
-              if(!r.ok())throw new Error(path+' '+r.status);
+              if(!r.ok)throw new Error(path+' '+r.status);
               fs.writeFileSync(out+'/source/'+site+'-'+path.replaceAll('/','_'),await r.text());
             }
           }
@@ -34,7 +34,6 @@ jobs:
           const context=await browser.newContext();
           const page=await context.newPage();
           const report={checkedAt:new Date().toISOString(),scope:'Read-only live inspection and CSS-only local preview; not a deployment',home:[],profiles:[]};
-          const rect=e=>{const r=e.getBoundingClientRect();return {x:r.x,y:r.y,width:r.width,height:r.height,bottom:r.bottom,right:r.right}};
           for(const [width,height] of [[1536,800],[1440,900],[1920,1080],[1280,720],[1024,768],[390,844]]) {
             await page.setViewportSize({width,height});
             await page.goto('https://stt-003.vercel.app/',{waitUntil:'networkidle',timeout:60000});
@@ -61,14 +60,14 @@ jobs:
               const measure=await page.evaluate(({site})=>{
                 const rect=e=>{const r=e.getBoundingClientRect();return {x:r.x,y:r.y,width:r.width,height:r.height,bottom:r.bottom,right:r.right}};
                 const h=document.querySelector('.'+site+'-intact-hero'),im=h.querySelector('img');
-                return {hero:rect(h),title:rect(h.querySelector('h1')),copy:rect(h.querySelector('.'+site+'-intact-hero__copy')),image:rect(im),naturalWidth:im.naturalWidth,naturalHeight:im.naturalHeight,overflow:document.documentElement.scrollWidth>innerWidth+1,styles:{image:getComputedStyle(im).cssText},copyHtml:h.querySelector('.'+site+'-intact-hero__copy').outerHTML};
+                return {hero:rect(h),title:rect(h.querySelector('h1')),copy:rect(h.querySelector('.'+site+'-intact-hero__copy')),image:rect(im),naturalWidth:im.naturalWidth,naturalHeight:im.naturalHeight,overflow:document.documentElement.scrollWidth>innerWidth+1,copyHtml:h.querySelector('.'+site+'-intact-hero__copy').outerHTML};
               },{site});
               report.profiles.push({site,width,height,css,anchor,...measure});
               if([1536,1440,1024,390].includes(width))await page.screenshot({path:out+'/'+site+'-preview-'+width+'.png'});
               console.log('PROFILE',site,width,JSON.stringify(measure));
             }
+            fs.writeFileSync(out+'/inspection.json',JSON.stringify(report,null,2));
           }
-          fs.writeFileSync(out+'/inspection.json',JSON.stringify(report,null,2));
           await browser.close();
           JS
       - uses: actions/upload-artifact@v4
