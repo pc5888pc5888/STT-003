@@ -1,0 +1,79 @@
+name: Founder layout reference and visual preview 20261106
+on:
+  push:
+    branches: [main]
+    paths: [.github/workflows/founder-layout-reference-20261106.yml]
+permissions:
+  contents: read
+jobs:
+  inspect-preview:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Measure the approved homepage and preview founder-only CSS
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/layout-tools /tmp/layout-evidence/source
+          npm install --prefix /tmp/layout-tools --no-audit --no-fund playwright@1.56.1
+          /tmp/layout-tools/node_modules/.bin/playwright install --with-deps chromium >/tmp/layout-evidence/browser-install.log 2>&1
+          node --input-type=module <<'JS'
+          import {chromium} from '/tmp/layout-tools/node_modules/playwright/index.mjs';
+          import fs from 'node:fs';
+          const out='/tmp/layout-evidence';
+          for (const [branch,site] of [['main','stt'],['gcsda-release-20261005','gcsda']]) {
+            for (const path of ['src/styles/'+site+'-founder-intact.css','src/styles/cis-page-system.css','src/components/GovernedHero.tsx','src/data/pagePresentation.ts']) {
+              const r=await fetch('https://raw.githubusercontent.com/pc5888pc5888/STT-003/'+branch+'/'+path);
+              if(!r.ok())throw new Error(path+' '+r.status);
+              fs.writeFileSync(out+'/source/'+site+'-'+path.replaceAll('/','_'),await r.text());
+            }
+          }
+          const browser=await chromium.launch({headless:true});
+          const context=await browser.newContext();
+          const page=await context.newPage();
+          const report={checkedAt:new Date().toISOString(),scope:'Read-only live inspection and CSS-only local preview; not a deployment',home:[],profiles:[]};
+          const rect=e=>{const r=e.getBoundingClientRect();return {x:r.x,y:r.y,width:r.width,height:r.height,bottom:r.bottom,right:r.right}};
+          for(const [width,height] of [[1536,800],[1440,900],[1920,1080],[1280,720],[1024,768],[390,844]]) {
+            await page.setViewportSize({width,height});
+            await page.goto('https://stt-003.vercel.app/',{waitUntil:'networkidle',timeout:60000});
+            await page.evaluate(async()=>{await document.fonts.ready;await Promise.all([...document.querySelectorAll('.cis-hero img')].map(i=>i.decode().catch(()=>{})))});
+            const home=await page.evaluate(()=>{
+              const rect=e=>{const r=e.getBoundingClientRect();return {x:r.x,y:r.y,width:r.width,height:r.height,bottom:r.bottom,right:r.right}};
+              const h=document.querySelector('.cis-hero'),t=h.querySelector('h1'),c=h.querySelector('.cis-hero-copy'),im=h.querySelector('img');
+              const matched=[];for(const sheet of document.styleSheets){try{const walk=rules=>{for(const rule of rules){if(rule.cssRules)walk(rule.cssRules);else if(rule.selectorText){try{if([h,t,c,im].some(e=>e.matches(rule.selectorText)))matched.push(rule.cssText)}catch{}}}};walk(sheet.cssRules)}catch{}}
+              return {hero:rect(h),title:rect(t),copy:rect(c),image:rect(im),header:rect(document.querySelector('header')),titleStyle:{fontSize:getComputedStyle(t).fontSize,lineHeight:getComputedStyle(t).lineHeight},matchedRules:matched,html:h.outerHTML,stylesheets:[...document.styleSheets].map(s=>s.href)};
+            });
+            const anchor={x:home.title.x,y:home.title.y-home.hero.y};
+            report.home.push({width,height,anchor,...home});
+            if([1536,1440,390].includes(width))await page.screenshot({path:out+'/home-'+width+'.png'});
+            console.log('HOME',width,height,JSON.stringify({anchor,hero:home.hero,title:home.title,copy:home.copy}));
+            for(const [site,base,route] of [['stt','https://stt-003.vercel.app','/eric-chuang'],['gcsda','https://gcsda-governance.vercel.app','/founder-chairman']]) {
+              await page.goto(base+route,{waitUntil:'networkidle',timeout:60000});
+              await page.locator('.'+site+'-intact-hero__image').evaluate(async i=>{await i.decode();await document.fonts.ready});
+              if(width===1536)await page.screenshot({path:out+'/'+site+'-before-'+width+'.png'});
+              const scope=site==='stt'?'#root .stt-eric-page':'#root .g4-founder-page';
+              const cls='.'+site+'-intact-hero';
+              const heroHeight=Math.min(820,height-home.hero.y-1);
+              const css=width>1100 ? `${scope} ${cls}__stage{height:${heroHeight}px;min-height:0;display:flex;align-items:center;justify-content:flex-end;overflow:visible;background:#fbfaf7;}${scope} ${cls}__image{width:auto;height:100%;max-width:100%;max-height:100%;object-fit:contain;object-position:right center;flex:none;}${scope} ${cls}__copy{top:${anchor.y}px;left:${anchor.x}px;transform:none;width:min(46%,760px);max-width:760px;} ${scope} ${cls}__title{margin:0;}` : `${scope} ${cls}__copy{padding-left:${anchor.x}px;padding-right:${anchor.x}px;}`;
+              await page.addStyleTag({content:css});
+              const measure=await page.evaluate(({site})=>{
+                const rect=e=>{const r=e.getBoundingClientRect();return {x:r.x,y:r.y,width:r.width,height:r.height,bottom:r.bottom,right:r.right}};
+                const h=document.querySelector('.'+site+'-intact-hero'),im=h.querySelector('img');
+                return {hero:rect(h),title:rect(h.querySelector('h1')),copy:rect(h.querySelector('.'+site+'-intact-hero__copy')),image:rect(im),naturalWidth:im.naturalWidth,naturalHeight:im.naturalHeight,overflow:document.documentElement.scrollWidth>innerWidth+1,styles:{image:getComputedStyle(im).cssText},copyHtml:h.querySelector('.'+site+'-intact-hero__copy').outerHTML};
+              },{site});
+              report.profiles.push({site,width,height,css,anchor,...measure});
+              if([1536,1440,1024,390].includes(width))await page.screenshot({path:out+'/'+site+'-preview-'+width+'.png'});
+              console.log('PROFILE',site,width,JSON.stringify(measure));
+            }
+          }
+          fs.writeFileSync(out+'/inspection.json',JSON.stringify(report,null,2));
+          await browser.close();
+          JS
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: founder-layout-reference-20261106
+          path: /tmp/layout-evidence/
+          retention-days: 30
