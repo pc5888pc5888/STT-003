@@ -62,10 +62,8 @@ export default function GovernedHero({kicker,title,subtitle,lead,image,id,childr
           decoding="async"
         />
         <div className="stt-intact-hero__copy">
-          {kicker&&<p className="stt-intact-hero__kicker">{kicker}</p>}
-          {page?.byline&&page.bylineBefore&&<p className="stt-intact-hero__byline" lang="en">{page.byline}</p>}
+          <p className="stt-intact-hero__kicker cis-kicker" lang="en" data-founder-name-kicker="20261106">CHUANG CHUN HSIANG Ph.D.</p>
           <h1 id={titleId} className="stt-intact-hero__title" aria-label={profileLocale ? title : undefined}>{lines.map((line,i)=><span key={i}>{line}</span>)}</h1>
-          {page?.byline&&!page.bylineBefore&&<p className="stt-intact-hero__byline" lang="en">{page.byline}</p>}
           {subtitle&&<p className="stt-intact-hero__subtitle">{subtitle}</p>}
           {lead&&<p className="stt-intact-hero__lead">{lead}</p>}
           {children&&<div className="stt-intact-hero__actions">{children}</div>}
