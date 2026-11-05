@@ -42,7 +42,7 @@ requireToken(english, 'landing_route:"/en/start"', "English intake landing route
 requireToken(english, 'https://line.me/R/ti/p/%40783xkknh', "English LINE public URL changed");
 requireToken(english, '{ label: "What You’re Facing", path: "/en/problems" }', "English Problems navigation missing");
 requireToken(english, '{ label: "Research & Publications", path: "/en/insights" }', "English Insights navigation missing");
-requireToken(english, '{ label: "Eric Chuang, Ph.D.", path: "/eric-chuang" }', "English founder navigation missing");
+requireToken(english, '{ label: "Eric Chuang, Ph.D.", path: "/en/eric-chuang" }', "English founder navigation missing");
 requireToken(english, '{ label: "Interviewee Area", path: "/humanistic-interview/" }', "English interviewee navigation missing");
 
 const fetchCount = (english.match(/fetch\(/g) || []).length;
