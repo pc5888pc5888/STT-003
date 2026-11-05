@@ -42,7 +42,7 @@ requireToken(japanese,'landing_route:"/ja/start"',"Japanese intake landing route
 requireToken(japanese,'https://line.me/R/ti/p/%40783xkknh',"Japanese LINE public URL changed");
 requireToken(japanese,'{ label: "いま直面している課題", path: "/ja/problems" }',"Japanese Problems navigation missing");
 requireToken(japanese,'{ label: "研究・出版", path: "/ja/insights" }',"Japanese Insights navigation missing");
-requireToken(japanese,'{ label: "莊鈞翔博士", path: "/eric-chuang" }',"Japanese founder navigation missing");
+requireToken(japanese,'{ label: "莊鈞翔博士", path: "/ja/eric-chuang" }',"Japanese founder navigation missing");
 requireToken(japanese,'{ label: "インタビュー対象者専用", path: "/humanistic-interview/" }',"Japanese interviewee navigation missing");
 
 const fetchCount=(japanese.match(/fetch\(/g)||[]).length;
