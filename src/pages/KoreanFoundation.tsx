@@ -12,7 +12,7 @@ const KO_NAVIGATION = [
   { label: "STT의 판단 방식", path: "/ko/how-stt-works" },
   { label: "거버넌스 위임", path: "/ko/engagement" },
   { label: "연구·출판", path: "/ko/insights" },
-  { label: "莊鈞翔 박사", path: "/eric-chuang" },
+  { label: "莊鈞翔 박사", path: "/ko/eric-chuang" },
   { label: "인터뷰 대상자 전용", path: "/humanistic-interview/" },
   { label: "STT 소개", path: "/ko/about" },
 ] as const;
@@ -26,6 +26,7 @@ const KO_TO_ZH:Record<string,string>={
   "/ko/engagement":"/engagement",
   "/ko/about":"/about",
   "/ko/start":"/start",
+  "/ko/eric-chuang": "/eric-chuang",
 };
 
 const KO_TO_EN:Record<string,string>={
@@ -37,6 +38,7 @@ const KO_TO_EN:Record<string,string>={
   "/ko/engagement":"/en/engagement",
   "/ko/about":"/en/about",
   "/ko/start":"/en/start",
+  "/ko/eric-chuang": "/en/eric-chuang",
 };
 
 const KO_TO_JA:Record<string,string>={
@@ -48,6 +50,7 @@ const KO_TO_JA:Record<string,string>={
   "/ko/engagement":"/ja/engagement",
   "/ko/about":"/ja/about",
   "/ko/start":"/ja/start",
+  "/ko/eric-chuang": "/ja/eric-chuang",
 };
 
 export function KoreanShell({children}:{children:ReactNode}){
