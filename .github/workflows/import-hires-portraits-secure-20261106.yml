@@ -1,0 +1,94 @@
+name: Import approved 8946x6330 originals securely
+on:
+  push:
+    branches: [main]
+    paths: [.github/workflows/import-hires-portraits-secure-20261106.yml]
+permissions:
+  contents: write
+concurrency:
+  group: portrait-original-import-20261106
+  cancel-in-progress: false
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - name: Receive only the two approved original PNG files through an ephemeral encrypted channel
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          python3 -m pip install --quiet cryptography
+          python3 -u - <<'PY'
+          import base64, hashlib, json, os, pathlib, struct, subprocess, time, urllib.request, urllib.error
+          from cryptography.hazmat.primitives.asymmetric import rsa, padding
+          from cryptography.hazmat.primitives import hashes, serialization
+          from cryptography.hazmat.primitives.ciphers.aead import AESGCM
+          repo='pc5888pc5888/STT-003'
+          branch='portrait-original-transfer-20261106-hires'
+          token=os.environ['GH_TOKEN']
+          def api(path, data=None):
+              req=urllib.request.Request('https://api.github.com/repos/'+repo+'/'+path, data=None if data is None else json.dumps(data).encode(), headers={'Authorization':'Bearer '+token,'Accept':'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28'}, method='GET' if data is None else 'POST')
+              with urllib.request.urlopen(req,timeout=30) as r:return json.load(r)
+          head=api('git/ref/heads/main')['object']['sha']
+          try:api('git/refs',{'ref':'refs/heads/'+branch,'sha':head})
+          except urllib.error.HTTPError as e:
+              if e.code!=422:raise
+          private=rsa.generate_private_key(public_exponent=65537,key_size=3072)
+          public=private.public_key().public_bytes(serialization.Encoding.PEM,serialization.PublicFormat.SubjectPublicKeyInfo)
+          run=os.environ['GITHUB_RUN_ID']
+          keypath='transfer/20261106-'+run+'-public.pem'
+          req=urllib.request.Request('https://api.github.com/repos/'+repo+'/contents/'+keypath,data=json.dumps({'message':'Publish ephemeral public key for approved portrait import','content':base64.b64encode(public).decode(),'branch':branch}).encode(),headers={'Authorization':'Bearer '+token,'Accept':'application/vnd.github+json'},method='PUT')
+          with urllib.request.urlopen(req,timeout=30) as r:json.load(r)
+          print('TRANSFER_READY',branch,keypath,flush=True)
+          cipherpath='transfer/20261106-'+run+'-encrypted.json'
+          envelope=None
+          for _ in range(120):
+              try:
+                  result=api('contents/'+cipherpath+'?ref='+branch)
+                  envelope=json.loads(base64.b64decode(result['content']))
+                  break
+              except urllib.error.HTTPError as e:
+                  if e.code!=404:raise
+              time.sleep(5)
+          if envelope is None:raise RuntimeError('No encrypted approved-asset package received; no website changes made')
+          key=private.decrypt(base64.b64decode(envelope['key']),padding.OAEP(mgf=padding.MGF1(algorithm=hashes.SHA256()),algorithm=hashes.SHA256(),label=None))
+          payload=json.loads(AESGCM(key).decrypt(base64.b64decode(envelope['nonce']),base64.b64decode(envelope['ciphertext']),b'STT-portrait-originals-20261106'))
+          expected={'stt':('a1b0d14bc6446a97431009baf0f0d1869fb3e62d5e6f4566b445b828d60b4e23',12545350),'gcsda':('00304feb73988e4f737b8ed0eacb43b3d6e5d85d537b5a3f66212016d9a8da36',12780472)}
+          dest=pathlib.Path('/tmp/approved-hires-originals');dest.mkdir(exist_ok=True)
+          for site,(digest,length) in expected.items():
+              url=payload[site]
+              print('::add-mask::'+url,flush=True)
+              req=urllib.request.Request(url,headers={'User-Agent':'ApprovedPortraitImport/1.0'})
+              try:
+                  with urllib.request.urlopen(req,timeout=90) as r:data=r.read()
+              except Exception:raise RuntimeError('Approved '+site+' download failed; source URL withheld') from None
+              assert len(data)==length,(site,'byte length mismatch')
+              assert hashlib.sha256(data).hexdigest()==digest,(site,'checksum mismatch')
+              assert data[:8]==b'\x89PNG\r\n\x1a\n' and struct.unpack('>II',data[16:24])==(8946,6330),(site,'PNG dimensions mismatch')
+              (dest/(site+'.png')).write_bytes(data)
+              print(site,'ORIGINAL_BYTES_VERIFIED',length,'8946x6330',digest,flush=True)
+          PY
+      - name: Preserve exact originals on each existing website branch without changing pages
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          for pair in 'main:stt' 'gcsda-release-20261005:gcsda'; do
+            branch="${pair%%:*}"
+            site="${pair##*:}"
+            git fetch origin "$branch" --depth=1
+            git checkout -B "$branch" "origin/$branch"
+            dest="public/visual-approved/portrait-${site}-20261106-8946x6330-original.png"
+            mkdir -p public/visual-approved
+            if test -e "$dest"; then cmp "/tmp/approved-hires-originals/$site.png" "$dest"; else cp "/tmp/approved-hires-originals/$site.png" "$dest"; fi
+            git add "$dest"
+            if ! git diff --cached --quiet; then
+              git commit -m "Preserve exact owner-uploaded $site 8946x6330 PNG; no image processing"
+              git push origin "HEAD:$branch"
+            fi
+            echo "IMPORTED $site $(git rev-parse HEAD)"
+          done
