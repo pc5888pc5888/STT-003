@@ -1,0 +1,96 @@
+name: Verify live founder subtitle removal
+on:
+  push:
+    branches: [main]
+    paths: [.github/workflows/verify-founder-subtitle-removal-20261106.yml]
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Prepare isolated browser verification
+        run: |
+          mkdir -p /tmp/founder-tools /tmp/founder-evidence
+          npm install --prefix /tmp/founder-tools --no-audit --no-fund playwright@1.56.1
+          /tmp/founder-tools/node_modules/.bin/playwright install --with-deps chromium >/tmp/founder-evidence/browser-install.log 2>&1
+      - name: Verify the two public websites without modifying pages or submitting forms
+        run: |
+          node --input-type=module <<'JS'
+          import {chromium} from '/tmp/founder-tools/node_modules/playwright/index.mjs';
+          import fs from 'node:fs';
+          import crypto from 'node:crypto';
+          const sites=[
+            {site:'stt',origin:'https://stt-003.vercel.app',routes:['/eric-chuang','/en/eric-chuang','/ja/eric-chuang','/ko/eric-chuang'],sha256:'a1b0d14bc6446a97431009baf0f0d1869fb3e62d5e6f4566b445b828d60b4e23',bytes:12545350,heading:'創辦人暨執行長｜莊鈞翔博士',intro:'莊鈞翔博士為 STT Governance 創辦人暨執行長，並負責制度設計與重大決策判讀；研究與實務聚焦企業策略、公司治理與法遵、家族企業接班及 AI 治理。'},
+            {site:'gcsda',origin:'https://gcsda-governance.vercel.app',routes:['/founder-chairman','/en/founder-chairman'],sha256:'00304feb73988e4f737b8ed0eacb43b3d6e5d85d537b5a3f66212016d9a8da36',bytes:12780472,heading:'創會理事長｜莊鈞翔博士',intro:'莊鈞翔博士為中華企業策略永續發展學會創會理事長。創會的核心，不是增加一個活動平台，而是讓企業、專業與學術在治理議題上形成可以持續累積的正式共同體。'}
+          ];
+          const sizes=[[1536,864],[1440,900],[1024,768],[390,844]];
+          const browser=await chromium.launch({headless:true});
+          const report={scope:'Founder subtitle removal only; not full-site acceptance',checkedAt:new Date().toISOString(),assets:[],checks:[],failures:0};
+          for(const config of sites){
+            const {site,origin,routes}=config;
+            const context=await browser.newContext({viewport:{width:1536,height:864},deviceScaleFactor:1});
+            const page=await context.newPage();
+            const prefix='.'+site+'-intact-hero';
+            let ready=false;
+            for(let attempt=0;attempt<18;attempt++){
+              const response=await page.goto(origin+routes[0]+'?verify=subtitle-removal-'+Date.now(),{waitUntil:'domcontentloaded',timeout:45000});
+              await page.waitForSelector(prefix+'__lead',{timeout:20000});
+              if(response.ok()&&await page.locator(prefix+'__subtitle').count()===0){ready=true;break;}
+              await page.waitForTimeout(10000);
+            }
+            if(!ready)throw new Error(site+' public site still contains the redundant subtitle');
+            const imagePath='/visual-approved/portrait-'+site+'-20261106-8946x6330-original.png';
+            const imageResponse=await context.request.get(origin+imagePath,{timeout:60000});
+            const imageBytes=await imageResponse.body();
+            const asset={site,url:origin+imagePath,status:imageResponse.status(),bytes:imageBytes.length,sha256:crypto.createHash('sha256').update(imageBytes).digest('hex')};
+            asset.passed=imageResponse.ok()&&asset.bytes===config.bytes&&asset.sha256===config.sha256;
+            report.assets.push(asset);
+            if(!asset.passed)report.failures++;
+            for(const [width,height] of sizes){
+              await page.setViewportSize({width,height});
+              for(const route of routes){
+                const errors=[];
+                const onError=error=>errors.push(String(error));
+                page.on('pageerror',onError);
+                const response=await page.goto(origin+route,{waitUntil:'networkidle',timeout:60000});
+                await page.locator(prefix+'__image').evaluate(async img=>{await img.decode();await document.fonts.ready;});
+                const evidence=await page.evaluate(({prefix})=>{
+                  const image=document.querySelector(prefix+'__image');
+                  const copy=document.querySelector(prefix+'__copy');
+                  const title=document.querySelector(prefix+'__title');
+                  const lead=document.querySelector(prefix+'__lead');
+                  const kicker=document.querySelector(prefix+'__kicker');
+                  const imgStyle=getComputedStyle(image);
+                  const box=element=>{const b=element.getBoundingClientRect();return {x:b.x,y:b.y,width:b.width,height:b.height,right:b.right,bottom:b.bottom};};
+                  const i=box(image),c=box(copy),h=box(title),l=box(lead),k=box(kicker);
+                  const text=document.body.innerText;
+                  return {url:location.href,title:document.title,lang:document.documentElement.lang,heading:title.textContent,kicker:kicker.textContent,exactNameCount:text.split('CHUANG CHUN HSIANG Ph.D.').length-1,subtitleCount:document.querySelectorAll(prefix+'__subtitle').length,introduction:lead.textContent,leadDirectlyAfterHeading:title.nextElementSibling===lead,bodySections:document.querySelectorAll('.stt-inst-section,.g4-section').length,source:image.getAttribute('src'),naturalWidth:image.naturalWidth,naturalHeight:image.naturalHeight,srcset:image.getAttribute('srcset'),objectFit:imgStyle.objectFit,filter:imgStyle.filter,transform:imgStyle.transform,opacity:imgStyle.opacity,clipPath:imgStyle.clipPath,maskImage:imgStyle.maskImage,imageBox:i,copyBox:c,headingBox:h,leadBox:l,kickerBox:k,ratioIntact:Math.abs(i.width/i.height-8946/6330)<0.002,textSafe:c.y>=i.bottom-1||c.right<=i.x+i.width*.54,ordered:k.bottom<=h.y+1&&h.bottom<=l.y+1,horizontalOverflow:document.documentElement.scrollWidth>innerWidth+1};
+                },{prefix});
+                evidence.httpStatus=response.status();
+                evidence.errors=errors;
+                evidence.passed=response.ok()&&evidence.subtitleCount===0&&evidence.kicker==='CHUANG CHUN HSIANG Ph.D.'&&evidence.exactNameCount===1&&evidence.introduction.length>40&&evidence.leadDirectlyAfterHeading&&evidence.source===imagePath&&evidence.naturalWidth===8946&&evidence.naturalHeight===6330&&evidence.objectFit==='contain'&&evidence.filter==='none'&&evidence.transform==='none'&&evidence.opacity==='1'&&evidence.clipPath==='none'&&evidence.maskImage==='none'&&!evidence.srcset&&evidence.ratioIntact&&evidence.textSafe&&evidence.ordered&&!evidence.horizontalOverflow&&errors.length===0;
+                if(route===routes[0])evidence.passed=evidence.passed&&evidence.heading===config.heading&&evidence.introduction===config.intro;
+                if(!evidence.passed)report.failures++;
+                report.checks.push({site,route,width,height,...evidence});
+                const name=site+'-'+route.replaceAll('/','_')+'-'+width;
+                await page.screenshot({path:'/tmp/founder-evidence/'+name+'-viewport.png',fullPage:false});
+                if(route===routes[0]&&(width===1536||width===390))await page.locator(prefix).screenshot({path:'/tmp/founder-evidence/'+name+'-hero.png'});
+                console.log(site,route,width,evidence.passed?'PASS':'FAIL','subtitle='+evidence.subtitleCount,'name='+evidence.exactNameCount,'intro='+evidence.introduction.length);
+                page.off('pageerror',onError);
+              }
+            }
+            await context.close();
+          }
+          await browser.close();
+          fs.writeFileSync('/tmp/founder-evidence/report.json',JSON.stringify(report,null,2));
+          if(report.failures)throw new Error(report.failures+' scoped verification checks failed');
+          console.log('PASS: 24 live viewport checks and both byte-identical original PNGs');
+          JS
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: live-founder-subtitle-removal-20261106
+          path: /tmp/founder-evidence/
+          retention-days: 30
