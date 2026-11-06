@@ -42,7 +42,6 @@ export default function GovernedHero({ kicker, title, subtitle, lead, image, id,
         <div className="gcsda-intact-hero__copy">
           <p className="gcsda-intact-hero__kicker cis-kicker" lang="en" data-founder-name-kicker="20261106">CHUANG CHUN HSIANG Ph.D.</p>
           <h1 id={titleId} className="gcsda-intact-hero__title">{lines.map((line,i)=><span key={i}>{line}</span>)}</h1>
-          {subtitle&&<p className="gcsda-intact-hero__subtitle">{subtitle}</p>}
           {lead&&<p className="gcsda-intact-hero__lead">{lead}</p>}
           {children&&<div className="gcsda-intact-hero__actions">{children}</div>}
         </div>
