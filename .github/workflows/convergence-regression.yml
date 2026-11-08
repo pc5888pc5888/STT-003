@@ -2,7 +2,7 @@ name: Dual-site convergence regression
 on:
   push:
     branches: [stt-convergence-20260923]
-    paths: [src/styles/convergence-accessibility.css, .github/workflows/convergence-regression.yml]
+    paths: [src/styles/convergence-accessibility.css, public/data/mmedia-catalog.json, .github/workflows/convergence-regression.yml]
   workflow_dispatch:
 permissions:
   contents: read
