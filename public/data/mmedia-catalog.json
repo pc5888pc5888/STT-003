@@ -14,28 +14,42 @@
     "verification": "All seven source fields exactly match the uploaded 212-record snapshot after restoring its original whitespace."
   },
   "schemaVersion": "2.0",
-  "syncedAt": "2026-11-06T19:30:49.517102+00:00",
+  "syncedAt": "2026-11-08T00:56:17.420Z",
   "sync": {
-    "method": "public-author-index-and-more",
-    "complete": true,
-    "pagesFetched": 44,
-    "observed": 269,
-    "retainedNotSeen": 1,
+    "method": "verified-public-author-card",
+    "complete": false,
+    "pagesFetched": 1,
+    "observed": 1,
+    "retainedNotSeen": 270,
     "changes": {
-      "added": 0,
+      "added": 1,
       "updated": 0,
       "reclassified": 0
     }
   },
   "stats": {
-    "total": 270,
-    "uniqueUrls": 270,
+    "total": 271,
+    "uniqueUrls": 271,
     "legal": 254,
-    "humanistic": 5,
+    "humanistic": 6,
     "news": 11,
     "pending": 0
   },
   "articles": [
+    {
+      "url": "https://94m.com.tw/articles/8dc056",
+      "title": "【 先到聖道山莊，再到草屯坐坐 】 從兒少照顧、日常生活到信仰，黃清塗想讓經驗留在土地上，也讓生命繼續開展  ｜財團法人基督教聖道兒少福利基金會執行長 黃清塗 專訪",
+      "date": "2026/11/06 19:19",
+      "category": "社會",
+      "author": "莊鈞翔博士",
+      "authorUrl": "https://94m.com.tw/editors/ed55fc",
+      "excerpt": "黃清塗想做的，從來不只是替受創兒少找到一處可以住下來的地方，他所關心的，是孩子住進來以後，能不能在一段不被催促的生活裡重新相信關係，也重新發現自己仍然可以選擇、可以參與、可以完成一些事情；而聖道多年累積的照顧經驗，又能不能走出一個機構，成為其他家庭、學校與工作現場未來遇到困難時，可以接續使用的力量。\r\n\r\n與塗哥相處愈久，本席愈能理解他所說的「發展及成就他人」並不是一個預先寫好的答案。孩子有孩子的速度，同仁也應有形成自己判斷的空間，而已經走到執行長位置的他，仍願意承認自己可以學習、可以修正，也可以在信仰裡繼續被帶往未知之處；或許正因如此，他想留下的從來不是一個凡事都依賴自己的組織，而是一群即使有一天不再需要事事問他，也知道為什麼要繼續把人照顧好的人。",
+      "id": "mmedia-8dc056",
+      "sourceArticleId": "8dc056",
+      "series": "humanistic",
+      "seriesTitle": "莊博士人文地景產專欄",
+      "source": "M傳媒"
+    },
     {
       "url": "https://94m.com.tw/articles/b54ac1",
       "title": "【 傳產與代工業的製程紀律 】用工安良率炸毀威權霸凌與惡意誣告的楚河漢界",
