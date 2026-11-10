@@ -1092,3 +1092,18 @@
   #root .stt-eric-page .cis-hero.cis-profile-hires .cis-hero-art img{position:relative!important;inset:auto!important;display:block!important;width:100%!important;height:auto!important;max-width:none!important;max-height:none!important;object-fit:contain!important;object-position:center!important;filter:none!important;transform:none!important;opacity:1!important;}
   #root .stt-eric-page .cis-hero.cis-profile-hires .cis-hero-copy{position:relative!important;order:1!important;top:auto!important;left:auto!important;transform:none!important;align-self:stretch!important;width:100%!important;max-width:none!important;margin:0!important;padding:32px clamp(24px,4vw,44px) 40px!important;background:#fbfaf7!important;}
 }
+
+/* Native engagement translations share the approved Chinese artwork. The copy
+   remains in layout flow so its height is included before the section index. */
+@media(min-width:761px){
+  #root .cis-hero.cis-localized-engagement .cis-hero-inner{
+    display:grid!important;aspect-ratio:auto!important;min-height:620px!important;height:auto!important;
+  }
+  #root .cis-hero.cis-localized-engagement .cis-hero-copy{
+    position:relative!important;inset:auto!important;transform:none!important;
+    width:min(760px,58%)!important;max-width:760px!important;
+    margin:80px 0 80px clamp(36px,4.1vw,56px)!important;padding:0!important;
+  }
+  #root .cis-hero.cis-localized-engagement .cis-hero-art{position:absolute!important;inset:0!important;height:100%!important}
+  #root .cis-hero.cis-localized-engagement .cis-hero-art img{height:100%!important;object-fit:cover!important;object-position:center!important}
+}

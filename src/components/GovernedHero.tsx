@@ -45,10 +45,12 @@ export default function GovernedHero({kicker,title,subtitle,lead,image,id,childr
   const {pathname}=useLocation();
   const route=pathname.replace(/\/$/,"")||"/";
   const page=PAGE_PRESENTATION[route];
+  const engagementLocale=route.match(/^\/(en|ja|ko)\/engagement$/)?.[1];
+  const visualPage=page ?? (engagementLocale ? PAGE_PRESENTATION["/engagement"] : undefined);
   const profileLocale=route.match(/^\/(en|ja|ko)\/eric-chuang$/)?.[1];
   const lines=profileLocale ? title.split(/\s*[|｜]\s*/) : (page?.lines||[title]);
   const profileOriginal=route==="/eric-chuang" || Boolean(profileLocale);
-  const picture=profileOriginal ? "/visual-approved/portrait-stt-20261106-8946x6330-original.png" : (image ?? page?.image ?? undefined);
+  const picture=profileOriginal ? "/visual-approved/portrait-stt-20261106-8946x6330-original.png" : (image ?? visualPage?.image ?? undefined);
   const titleId=id||"page-title";
   const clearLeft=Boolean(picture && (picture.includes("/user-approved-six/") || picture.includes("cooperation-hero-20260917")));
   const ownerOriginal=Boolean(picture?.includes("eric-page-owner-original.png") || picture?.includes("portrait-stt-20261101.webp" ) || picture?.includes("portrait-stt-20261102-hd.webp"));
@@ -81,7 +83,7 @@ export default function GovernedHero({kicker,title,subtitle,lead,image,id,childr
     {page?.context&&<div className="cis-context"><p>{page.context}</p></div>}
   </>;
   return <>
-    <section className={`cis-hero cis-title-${lines.length}${picture?" cis-with-image":" cis-text-only"}${page?.portrait?" cis-portrait":""}${clearLeft?" cis-clear-left":""}${profileParity?" cis-profile-parity":""}${ownerOriginal?" cis-owner-original":""}${profileHires?" cis-profile-hires":""}`} aria-labelledby={titleId}>
+    <section className={`cis-hero cis-title-${lines.length}${picture?" cis-with-image":" cis-text-only"}${page?.portrait?" cis-portrait":""}${clearLeft?" cis-clear-left":""}${profileParity?" cis-profile-parity":""}${ownerOriginal?" cis-owner-original":""}${profileHires?" cis-profile-hires":""}${engagementLocale?" cis-localized-engagement":""}`} aria-labelledby={titleId}>
       <div className="cis-hero-inner">
         <div className="cis-hero-copy">
           {kicker&&<p className="cis-kicker">{kicker}</p>}

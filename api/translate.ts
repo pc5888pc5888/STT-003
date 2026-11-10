@@ -72,8 +72,9 @@ export async function translateTexts(texts: string[], language: string, apiKey: 
           console.warn("Translation model cooling down", { model, retryAfterSeconds });
           continue;
         }
-        // Authentication and malformed requests will not improve on another model.
-        if ([400, 401, 403].includes(response.status)) throw Object.assign(error, { permanent: true });
+        // A model can reject an account/precondition while another available
+        // model still accepts the same public translation request.
+        if ([401, 403].includes(response.status)) throw Object.assign(error, { permanent: true });
         throw error;
       }
       const data = await response.json();

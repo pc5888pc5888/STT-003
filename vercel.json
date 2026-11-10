@@ -624,7 +624,7 @@
   "functions": {
     "api/translate.ts": {
       "includeFiles": "dist/translation-source.json",
-      "regions": ["hkg1"],
+      "regions": ["cle1"],
       "maxDuration": 120
     }
   }
