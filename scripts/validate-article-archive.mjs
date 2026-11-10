@@ -6,7 +6,7 @@ const assets = JSON.parse(fs.readFileSync('public/data/article-assets.json', 'ut
 const legacy = JSON.parse(fs.readFileSync('public/data/mmedia-catalog.json', 'utf8'));
 assert.equal(articles.length, 270);
 assert.equal(new Set(articles.map(x => x.id)).size, 270);
-assert.equal(assets.length, 308);
+assert.equal(assets.length, 309);
 const assetPaths = new Set(assets.map(x => x.path));
 for (const asset of assets) {
   const data = fs.readFileSync('public' + asset.path);
@@ -28,4 +28,4 @@ for (const entry of articles) {
   assert.equal([...article.html.matchAll(/<img\b/g)].length, article.bodyImageCount);
 }
 assert.ok(legacy.articles.some(x => x.id === 'mmedia-cee607'), 'Preserve legacy exception');
-console.log('Article archive: 270 documents, 308 original-image hashes, safe markup, IDs and legacy preservation PASS');
+console.log('Article archive: 270 documents, 309 original-image hashes, safe markup, IDs and legacy preservation PASS');
