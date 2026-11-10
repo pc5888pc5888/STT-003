@@ -27,7 +27,7 @@ function approvedText(text: string) {
 }
 
 export async function translateTexts(texts: string[], language: string, apiKey: string, fetcher: typeof fetch = fetch): Promise<string[]> {
-  const response = await fetcher("https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent", {
+  const response = await fetcher("https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:generateContent", {
     method: "POST",
     headers: { "Content-Type": "application/json", "x-goog-api-key": apiKey },
     signal: AbortSignal.timeout(45000),
