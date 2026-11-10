@@ -1,0 +1,2466 @@
+[
+  {
+    "path": "/article-images/15f9bb9d026abe5f.png",
+    "sha256": "f5673058fd5b7b46989dad6cc5b63be0201bf42341c4700372eb697897e7c77a",
+    "bytes": 928215,
+    "width": 891,
+    "height": 508,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/14536/IMG_9048.png"
+  },
+  {
+    "path": "/article-images/43a7e3d671a53feb.png",
+    "sha256": "da67ae764dca1200bd34995d661012e29f71c89062fbd00656a52083c96849fd",
+    "bytes": 2886892,
+    "width": 1672,
+    "height": 941,
+    "sourceUrl": "https://stt-003.vercel.app/mmedia/stt-human-landscape-public-20261108.png"
+  },
+  {
+    "path": "/article-images/9c74cf0e5d738c2c.png",
+    "sha256": "c00d6e1c8c48adedbe6ac5b322ba7981ceae28f096adf31f17feac97ca166bb7",
+    "bytes": 1921398,
+    "width": 1024,
+    "height": 1536,
+    "sourceUrl": "https://stt-003.vercel.app/mmedia/stt-author-eric-chuang.png"
+  },
+  {
+    "path": "/article-images/fd34cf6e61f32231.png",
+    "sha256": "43c7d8bb7f8e31c7cae3b82619e7720494b0c968ee976561232883d5fe85fa13",
+    "bytes": 40341,
+    "width": 1201,
+    "height": 200,
+    "sourceUrl": "https://stt-003.vercel.app/mmedia/stt-author-signature.png"
+  },
+  {
+    "path": "/article-images/f3ab1ee72c13ddda.png",
+    "sha256": "970883e9157927d7a2ad36cab099f8fc8f64540d93087c60a34cc08d95ed1506",
+    "bytes": 2593219,
+    "width": 1672,
+    "height": 941,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/14368/ChatGPT_%E5%9C%96%E5%83%8F_2026%E5%B9%B411%E6%9C%881%E6%97%A5_%E4%B8%8B%E5%8D%8801_47_31-6.png"
+  },
+  {
+    "path": "/article-images/8c8e3228fa2f2af8.jpg",
+    "sha256": "43312ed494d7b54e19cc33b448e1a6592ff7671005739718bf194163d348b8ff",
+    "bytes": 127117,
+    "width": 1024,
+    "height": 736,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/ckeditor/pictures/401/tune1.jpg"
+  },
+  {
+    "path": "/article-images/d9b9f9e66ac57f65.png",
+    "sha256": "87174cad69a868c42c185c17be3f2639e36e867d738bd91f5b5d6dbc8d3e7994",
+    "bytes": 121599,
+    "width": 543,
+    "height": 724,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/ckeditor/pictures/402/tune2.png"
+  },
+  {
+    "path": "/article-images/4b770b48d230c6da.png",
+    "sha256": "43d667e0131b996e08568e6b2372a1da5965530e4eebf18c74b8b4c74d18323c",
+    "bytes": 24564,
+    "width": 600,
+    "height": 100,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/ckeditor/pictures/410/9f3d929865fd52e57b53128a09cdfef2.png"
+  },
+  {
+    "path": "/article-images/9ea81196dfdd9b4f.png",
+    "sha256": "8e4bf54cf3cf25c28bb378f1b3f9c071aff246ac4aa5ff0601e3600ffeb7f036",
+    "bytes": 2484432,
+    "width": 1672,
+    "height": 941,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/14367/ChatGPT_%E5%9C%96%E5%83%8F_2026%E5%B9%B411%E6%9C%881%E6%97%A5_%E4%B8%8B%E5%8D%8801_47_30-5.png"
+  },
+  {
+    "path": "/article-images/908078cb5bc3fa1f.png",
+    "sha256": "176de159a25d5370bf96dfa4aa3c811839b11ccda8b5605df217b0a0963ef8c2",
+    "bytes": 2717484,
+    "width": 1672,
+    "height": 941,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/14366/ChatGPT_%E5%9C%96%E5%83%8F_2026%E5%B9%B411%E6%9C%881%E6%97%A5_%E4%B8%8B%E5%8D%8801_47_27-4.png"
+  },
+  {
+    "path": "/article-images/e2faafdd9858c14e.png",
+    "sha256": "4555b847903775b16bb2f970de6ec67d92663243f0d34ebae87b534d33207e5b",
+    "bytes": 2527314,
+    "width": 1672,
+    "height": 941,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/14365/ChatGPT_%E5%9C%96%E5%83%8F_2026%E5%B9%B411%E6%9C%881%E6%97%A5_%E4%B8%8B%E5%8D%8801_47_25-3.png"
+  },
+  {
+    "path": "/article-images/d748ff94282a31c8.png",
+    "sha256": "8faef1f1e63ab3879a1424af58df6b03b7bd7e37c5ad3350b7ec243acea7d90f",
+    "bytes": 2377020,
+    "width": 1672,
+    "height": 941,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/14364/ChatGPT_%E5%9C%96%E5%83%8F_2026%E5%B9%B411%E6%9C%881%E6%97%A5_%E4%B8%8B%E5%8D%8801_47_24-2.png"
+  },
+  {
+    "path": "/article-images/29e22a6ec3534ca0.png",
+    "sha256": "5d5c2f4bc2108f5afefbdfd693843d8fa2c9270174633f7303fa896751c95ee5",
+    "bytes": 2270061,
+    "width": 1672,
+    "height": 941,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/14363/%E7%A8%8B%E5%BA%8F%E9%9B%99%E8%BB%8C%E4%B8%8B%E7%9A%84%E8%81%B7%E5%A0%B4%E6%B3%95%E5%BA%AD-2.png"
+  },
+  {
+    "path": "/article-images/a0663986c1370313.png",
+    "sha256": "c8fd80adc0004a30df21f676e8950447b2c8325b803956d35561b8f78c083670",
+    "bytes": 2151467,
+    "width": 1672,
+    "height": 941,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/14362/ChatGPT_%E5%9C%96%E5%83%8F_2026%E5%B9%B411%E6%9C%881%E6%97%A5_%E4%B8%8B%E5%8D%8803_50_11-6.png"
+  },
+  {
+    "path": "/article-images/6c1a1c16e2033cf2.png",
+    "sha256": "907f944cdca6f037efe1c09b55ce241d411097313affcb607fe36f120288e051",
+    "bytes": 2252782,
+    "width": 1672,
+    "height": 941,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/14361/ChatGPT_%E5%9C%96%E5%83%8F_2026%E5%B9%B411%E6%9C%881%E6%97%A5_%E4%B8%8B%E5%8D%8803_50_10-5.png"
+  },
+  {
+    "path": "/article-images/aec5bba264954e91.png",
+    "sha256": "facad9299dece40e2abb66f5c7b67bc4c78db329edc16237ed891dd0c457d99f",
+    "bytes": 2109777,
+    "width": 1672,
+    "height": 941,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/14360/ChatGPT_%E5%9C%96%E5%83%8F_2026%E5%B9%B411%E6%9C%881%E6%97%A5_%E4%B8%8B%E5%8D%8803_50_10-4.png"
+  },
+  {
+    "path": "/article-images/ff6adc7fd48d2a92.png",
+    "sha256": "b03b00cf2c1ae0ca8b0af522f896b6f22afc2fabea8a12686881275f64c49ec4",
+    "bytes": 2189437,
+    "width": 1672,
+    "height": 941,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/14359/ChatGPT_%E5%9C%96%E5%83%8F_2026%E5%B9%B411%E6%9C%881%E6%97%A5_%E4%B8%8B%E5%8D%8803_50_09-3.png"
+  },
+  {
+    "path": "/article-images/505c2d5190034260.png",
+    "sha256": "43dca82a1ef878cf662e9c5466fa85525311c7eb2ed836e6937385ef8f6c72c7",
+    "bytes": 2360041,
+    "width": 1672,
+    "height": 941,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/14358/ChatGPT_%E5%9C%96%E5%83%8F_2026%E5%B9%B411%E6%9C%881%E6%97%A5_%E4%B8%8B%E5%8D%8803_50_08-2.png"
+  },
+  {
+    "path": "/article-images/ed255c42d2cbd1ce.png",
+    "sha256": "f25cc7669ed9347e57f653c1ecfe7f04a1285776419108448695315305ce6aae",
+    "bytes": 2191507,
+    "width": 1672,
+    "height": 941,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/14357/ChatGPT_%E5%9C%96%E5%83%8F_2026%E5%B9%B411%E6%9C%881%E6%97%A5_%E4%B8%8B%E5%8D%8803_50_07-1.png"
+  },
+  {
+    "path": "/article-images/63b5e62e3965bfe1.png",
+    "sha256": "a8b16f565b54e9c7ce310daa3d0e62e8d3cc9c6aac4b1dfe049b8289c1db6f01",
+    "bytes": 1925510,
+    "width": 1672,
+    "height": 941,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/13766/ChatGPT_%E5%9C%96%E5%83%8F_2026%E5%B9%B410%E6%9C%8811%E6%97%A5_%E4%B8%8B%E5%8D%8803_17_52-6.png"
+  },
+  {
+    "path": "/article-images/142acaf6c0b0aaa5.png",
+    "sha256": "8f83cfd700adf7f102691df11ce0adef382ec40d7a32e1ebb98ca4d132ec21bb",
+    "bytes": 26508,
+    "width": 512,
+    "height": 152,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/ckeditor/pictures/403/b8c167cca7d9794d98461bb99b3a0899.png"
+  },
+  {
+    "path": "/article-images/ebbf145bdef18581.png",
+    "sha256": "43f5ee956896f9333e7a92559daec9ca1123af4e8f94467faa8a9828ce05efef",
+    "bytes": 1986854,
+    "width": 1672,
+    "height": 941,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/13765/ChatGPT_%E5%9C%96%E5%83%8F_2026%E5%B9%B410%E6%9C%8811%E6%97%A5_%E4%B8%8B%E5%8D%8803_17_50-5.png"
+  },
+  {
+    "path": "/article-images/3169f1a538d30b02.png",
+    "sha256": "374d0d0353327b189651b4fb675d27f45d9a3e9caa8b99e0bb4dd09c684d72b4",
+    "bytes": 1858960,
+    "width": 1672,
+    "height": 941,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/13764/ChatGPT_%E5%9C%96%E5%83%8F_2026%E5%B9%B410%E6%9C%8811%E6%97%A5_%E4%B8%8B%E5%8D%8803_17_48-4.png"
+  },
+  {
+    "path": "/article-images/9d4d5cff9ea19939.png",
+    "sha256": "75fd42128e9bac120e3b7bc2bed2eef4f8e51ee8117d9d71815158ab8bf2366c",
+    "bytes": 2078854,
+    "width": 1672,
+    "height": 941,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/13763/ChatGPT_%E5%9C%96%E5%83%8F_2026%E5%B9%B410%E6%9C%8811%E6%97%A5_%E4%B8%8B%E5%8D%8803_17_45-3.png"
+  },
+  {
+    "path": "/article-images/22e586e1991c8a17.png",
+    "sha256": "7330cff7b75242583643aa74d83024daf36c232fba70811464d69eafa43b5e53",
+    "bytes": 2123063,
+    "width": 1672,
+    "height": 941,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/13762/ChatGPT_%E5%9C%96%E5%83%8F_2026%E5%B9%B410%E6%9C%8811%E6%97%A5_%E4%B8%8B%E5%8D%8803_17_43-2.png"
+  },
+  {
+    "path": "/article-images/b7b600c9476c8c8b.png",
+    "sha256": "168680f79311f0208dfe2da9ca7099a35bd133c7304904bfbd452268310654cd",
+    "bytes": 2035722,
+    "width": 1672,
+    "height": 941,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/13739/ChatGPT_%E5%9C%96%E5%83%8F_2026%E5%B9%B410%E6%9C%8811%E6%97%A5_%E4%B8%8B%E5%8D%8803_17_42-1.png"
+  },
+  {
+    "path": "/article-images/c958f0e2cf174084.png",
+    "sha256": "2b2d22f7014899af5f1072a5564e163d9d31463870e2e5b59af85eaa56b9f522",
+    "bytes": 2409372,
+    "width": 1672,
+    "height": 941,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/13737/ChatGPT_%E5%9C%96%E5%83%8F_2026%E5%B9%B410%E6%9C%8811%E6%97%A5_%E4%B8%8B%E5%8D%8803_27_28-9.png"
+  },
+  {
+    "path": "/article-images/c017064d0c3cc058.png",
+    "sha256": "0d62ce86ee7af148270131cca61ed9836b68998742dff652576befaa4734ca68",
+    "bytes": 2328965,
+    "width": 1672,
+    "height": 941,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/13736/ChatGPT_%E5%9C%96%E5%83%8F_2026%E5%B9%B410%E6%9C%8811%E6%97%A5_%E4%B8%8B%E5%8D%8803_27_24-7.png"
+  },
+  {
+    "path": "/article-images/b009d89c2503aaef.png",
+    "sha256": "ee676fa54da05c7c9a96855cf2630d78c8d7c1bb414b864b1a47b8c87031301b",
+    "bytes": 2299016,
+    "width": 1672,
+    "height": 941,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/13735/ChatGPT_%E5%9C%96%E5%83%8F_2026%E5%B9%B410%E6%9C%8811%E6%97%A5_%E4%B8%8B%E5%8D%8803_27_33-11.png"
+  },
+  {
+    "path": "/article-images/5a9a636011ad6558.png",
+    "sha256": "053e7c6b6ed5b56047fc29e2249c5e9e6c993e75aa298b5b466b7df822318a7d",
+    "bytes": 2332460,
+    "width": 1672,
+    "height": 941,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/13734/ChatGPT_%E5%9C%96%E5%83%8F_2026%E5%B9%B410%E6%9C%8811%E6%97%A5_%E4%B8%8B%E5%8D%8803_27_26-8.png"
+  },
+  {
+    "path": "/article-images/785b6318e79a1709.png",
+    "sha256": "3aa685f026e6b04821922e4b640c84b5fcdc52bee3c5246d93d6f1f5a6bcce59",
+    "bytes": 2477849,
+    "width": 1672,
+    "height": 941,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/13733/ChatGPT_%E5%9C%96%E5%83%8F_2026%E5%B9%B410%E6%9C%8811%E6%97%A5_%E4%B8%8B%E5%8D%8803_27_35-12.png"
+  },
+  {
+    "path": "/article-images/79b90b9e89ffcca9.png",
+    "sha256": "0dc964b9d873be88d0b353417739071aa1269ab41355b53e1a04557e3b8f780b",
+    "bytes": 2321522,
+    "width": 1672,
+    "height": 941,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/13732/ChatGPT_%E5%9C%96%E5%83%8F_2026%E5%B9%B410%E6%9C%8811%E6%97%A5_%E4%B8%8B%E5%8D%8803_27_31-10.png"
+  },
+  {
+    "path": "/article-images/60cd37397c6b636f.png",
+    "sha256": "ab0059e9f4dc465d0301d3984df563555c7e51e589b90a586af6619ab06d8bfb",
+    "bytes": 2373214,
+    "width": 1672,
+    "height": 941,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/13731/ChatGPT_%E5%9C%96%E5%83%8F_2026%E5%B9%B410%E6%9C%8811%E6%97%A5_%E4%B8%8B%E5%8D%8803_27_22-6.png"
+  },
+  {
+    "path": "/article-images/b5a8dccafb04a53a.png",
+    "sha256": "c8dc478b853570294a7ae0bc4926dfa63e65709797b4779b8eecfbc6c893f940",
+    "bytes": 2333323,
+    "width": 1672,
+    "height": 941,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/13730/ChatGPT_%E5%9C%96%E5%83%8F_2026%E5%B9%B410%E6%9C%8811%E6%97%A5_%E4%B8%8B%E5%8D%8803_27_18-4.png"
+  },
+  {
+    "path": "/article-images/abda28ebf5cdf5d9.png",
+    "sha256": "e7a195ba931f50df888e5a021f031991a392362f4c43d09e38635f4fe941d757",
+    "bytes": 2256781,
+    "width": 1672,
+    "height": 941,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/13682/ChatGPT_%E5%9C%96%E5%83%8F_2026%E5%B9%B410%E6%9C%8811%E6%97%A5_%E4%B8%8B%E5%8D%8803_27_20-5.png"
+  },
+  {
+    "path": "/article-images/4613bd2fbbd9d355.png",
+    "sha256": "9c921eca13476850d1360c6e48366ad4185a84ea700182534108c705d7e97377",
+    "bytes": 2403984,
+    "width": 1672,
+    "height": 941,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/13681/ChatGPT_%E5%9C%96%E5%83%8F_2026%E5%B9%B410%E6%9C%888%E6%97%A5_%E4%B8%8B%E5%8D%8802_51_01-3.png"
+  },
+  {
+    "path": "/article-images/48addcd3a3abb62e.png",
+    "sha256": "6858f207cd19e7c35c6cc7dfcaa98b16e5117d20cbfade47f5b2a2620115debb",
+    "bytes": 2362814,
+    "width": 1672,
+    "height": 941,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/13680/ChatGPT_%E5%9C%96%E5%83%8F_2026%E5%B9%B410%E6%9C%888%E6%97%A5_%E4%B8%8B%E5%8D%8802_51_00-2.png"
+  },
+  {
+    "path": "/article-images/5a6b0b9d94d47747.png",
+    "sha256": "0e67ac26bb25bdafc3462f5ea004fe1e63bae0717bfd43b767221e0f03a2be24",
+    "bytes": 2370384,
+    "width": 1672,
+    "height": 941,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/13658/ChatGPT_%E5%9C%96%E5%83%8F_2026%E5%B9%B410%E6%9C%888%E6%97%A5_%E4%B8%8B%E5%8D%8802_50_58-1(2).png"
+  },
+  {
+    "path": "/article-images/5dc20ac6e35893c4.png",
+    "sha256": "4c32427c3cfe2eb6f3255f003babc020cc0c564f889073f5f51622d73d526e0b",
+    "bytes": 2223389,
+    "width": 1672,
+    "height": 941,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/13505/Codex_%E5%9C%96%E5%83%8F_2026%E5%B9%B49%E6%9C%8826%E6%97%A5_%E4%B8%8B%E5%8D%8807_13_54-12.png"
+  },
+  {
+    "path": "/article-images/aea2f5303a209f8d.png",
+    "sha256": "85db1e603201e84793729a102dacb1fa01c0cb217c2581bdd7bdb7034d9f00f2",
+    "bytes": 2350101,
+    "width": 1672,
+    "height": 941,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/13504/Codex_%E5%9C%96%E5%83%8F_2026%E5%B9%B49%E6%9C%8826%E6%97%A5_%E4%B8%8B%E5%8D%8807_13_53-11.png"
+  },
+  {
+    "path": "/article-images/2e88c8a39a72756f.png",
+    "sha256": "c6a7a415522e5d8437d4ceee68f58f0f6910f8306d267d360b247b3a16c15b97",
+    "bytes": 2430417,
+    "width": 1672,
+    "height": 941,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/13503/Codex_%E5%9C%96%E5%83%8F_2026%E5%B9%B49%E6%9C%8826%E6%97%A5_%E4%B8%8B%E5%8D%8807_13_51-10.png"
+  },
+  {
+    "path": "/article-images/b1c68023aeba81cb.png",
+    "sha256": "175a2b7de7e793c480868ad49abee22da8d9cbb2dfb8e5e8de2116f4e81c81c0",
+    "bytes": 2340449,
+    "width": 1672,
+    "height": 941,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/13500/Codex_%E5%9C%96%E5%83%8F_2026%E5%B9%B49%E6%9C%8826%E6%97%A5_%E4%B8%8B%E5%8D%8807_13_50-9.png"
+  },
+  {
+    "path": "/article-images/c835153599e150e7.png",
+    "sha256": "d9b593945580164fc4d6ee5a64db0da3d4c323f62acfce423841bed0f9199443",
+    "bytes": 2230127,
+    "width": 1672,
+    "height": 941,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/13499/Codex_%E5%9C%96%E5%83%8F_2026%E5%B9%B49%E6%9C%8826%E6%97%A5_%E4%B8%8B%E5%8D%8807_13_48-8.png"
+  },
+  {
+    "path": "/article-images/23b167759257f5bf.png",
+    "sha256": "066c3060303faf532545b4a92262d21b1a206220210a0234e378ff6b85f9ec1b",
+    "bytes": 2038620,
+    "width": 1672,
+    "height": 941,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/13451/Codex_%E5%9C%96%E5%83%8F_2026%E5%B9%B49%E6%9C%8826%E6%97%A5_%E4%B8%8B%E5%8D%8807_13_47-7.png"
+  },
+  {
+    "path": "/article-images/122fb76c5480c966.png",
+    "sha256": "86a95b51d7aff97e5748a047e643d1eacc9ebf62bcabd60c6de350a601337b8c",
+    "bytes": 2191218,
+    "width": 1672,
+    "height": 941,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/13447/ChatGPT_%E5%9C%96%E5%83%8F_2026%E5%B9%B49%E6%9C%8830%E6%97%A5_%E4%B8%8B%E5%8D%8803_10_55(2).png"
+  },
+  {
+    "path": "/article-images/d6a09d1eb675a5c0.png",
+    "sha256": "d9c0eb995e23cf6267c332b4860443e1d13d8818540e58cfb0bd84b58f0d9617",
+    "bytes": 971313,
+    "width": 800,
+    "height": 600,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/ckeditor/pictures/408/3911f90a6fc8ec43d86d94e163a2da30.png"
+  },
+  {
+    "path": "/article-images/55620ea6cdaeb405.png",
+    "sha256": "9329e884b79b0733f560afb1a30d1aa6981a992d2e8497e3557dd9aad0a15acd",
+    "bytes": 457294,
+    "width": 512,
+    "height": 768,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/ckeditor/pictures/405/c189c167c8d72f0ec794f3a86994fe03.png"
+  },
+  {
+    "path": "/article-images/10e673d6a6891e0e.png",
+    "sha256": "90c4af90fb3e3e4f9d7bf3710a5bf64299084486bd9d4145b4dff1435001e6c8",
+    "bytes": 2019556,
+    "width": 1672,
+    "height": 941,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/13446/Codex_%E5%9C%96%E5%83%8F_2026%E5%B9%B49%E6%9C%8826%E6%97%A5_%E4%B8%8B%E5%8D%8807_13_45-6.png"
+  },
+  {
+    "path": "/article-images/8a5731d6f7c57462.png",
+    "sha256": "3cd2cb97195800dac752e2a5ec984a6dae7372c2b1a18bd8166a70344b84c9cf",
+    "bytes": 2298866,
+    "width": 1672,
+    "height": 941,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/13416/Codex_%E5%9C%96%E5%83%8F_2026%E5%B9%B49%E6%9C%8826%E6%97%A5_%E4%B8%8B%E5%8D%8807_13_44-5.png"
+  },
+  {
+    "path": "/article-images/b5e33c9f858b6a24.png",
+    "sha256": "9141753efed27b8dbfba225b6b29216ccd40cffe20e1890e312430354acd446d",
+    "bytes": 2275999,
+    "width": 1672,
+    "height": 941,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/13414/Codex_%E5%9C%96%E5%83%8F_2026%E5%B9%B49%E6%9C%8826%E6%97%A5_%E4%B8%8B%E5%8D%8807_13_41-4.png"
+  },
+  {
+    "path": "/article-images/5433fd44be155d0e.png",
+    "sha256": "9010c15958d1f783771b9b658515b9e379cc68d530de91e8901208c818df0972",
+    "bytes": 2144228,
+    "width": 1672,
+    "height": 941,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/13413/Codex_%E5%9C%96%E5%83%8F_2026%E5%B9%B49%E6%9C%8826%E6%97%A5_%E4%B8%8B%E5%8D%8807_13_40-3.png"
+  },
+  {
+    "path": "/article-images/62924965abd17733.png",
+    "sha256": "b70214618b854241ca0e4b2cbf9205eb292a2545613342e8ebd21e843ec4fcdd",
+    "bytes": 1974873,
+    "width": 1672,
+    "height": 941,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/13412/Codex_%E5%9C%96%E5%83%8F_2026%E5%B9%B49%E6%9C%8826%E6%97%A5_%E4%B8%8B%E5%8D%8807_13_38-2.png"
+  },
+  {
+    "path": "/article-images/c7d3186985062376.png",
+    "sha256": "853d2507b157a9a3268509bdabfff561d3505bf0b69591bcb389c23e7be3e535",
+    "bytes": 2240928,
+    "width": 1672,
+    "height": 941,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/13411/Codex_%E5%9C%96%E5%83%8F_2026%E5%B9%B49%E6%9C%8826%E6%97%A5_%E4%B8%8B%E5%8D%8807_13_37-1.png"
+  },
+  {
+    "path": "/article-images/ffc822e98b828047.png",
+    "sha256": "395f90ba2c3ee20c9bf062fd2d06cfc082e68b87dbf30c92f6a6ef1be246c425",
+    "bytes": 2298911,
+    "width": 1672,
+    "height": 941,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/13407/Codex_%E5%9C%96%E5%83%8F_2026%E5%B9%B49%E6%9C%8826%E6%97%A5_%E4%B8%8B%E5%8D%8807_12_31-6.png"
+  },
+  {
+    "path": "/article-images/41e7e403fbaa9802.png",
+    "sha256": "378c9ade279dbb9fa3d5557fae8c49a77db0b2e260203bd4d9b24ff59073c53f",
+    "bytes": 2202702,
+    "width": 1672,
+    "height": 941,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/13385/Codex_%E5%9C%96%E5%83%8F_2026%E5%B9%B49%E6%9C%8826%E6%97%A5_%E4%B8%8B%E5%8D%8807_12_30-5.png"
+  },
+  {
+    "path": "/article-images/76c4dc2d40338184.png",
+    "sha256": "0297b46ebe2c4453727aa822b1830dc8f35a5998326b5b9d03a87725ca3d480d",
+    "bytes": 2197455,
+    "width": 1672,
+    "height": 941,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/13384/Codex_%E5%9C%96%E5%83%8F_2026%E5%B9%B49%E6%9C%8826%E6%97%A5_%E4%B8%8B%E5%8D%8807_12_28-4.png"
+  },
+  {
+    "path": "/article-images/b5dc5872ee4d21da.png",
+    "sha256": "a4fbca50feb5a6b77cf24454018330f1d26f2a7c318600ed84745f8e1af5d69e",
+    "bytes": 2176507,
+    "width": 1672,
+    "height": 941,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/13383/Codex_%E5%9C%96%E5%83%8F_2026%E5%B9%B49%E6%9C%8826%E6%97%A5_%E4%B8%8B%E5%8D%8807_12_27-3.png"
+  },
+  {
+    "path": "/article-images/579307149a46f94c.png",
+    "sha256": "e3f9d7c6075a9af3975dcb18476b0b554a389bbf222e30e4071b18d71db9f2bd",
+    "bytes": 2296098,
+    "width": 1672,
+    "height": 941,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/13382/Codex_%E5%9C%96%E5%83%8F_2026%E5%B9%B49%E6%9C%8826%E6%97%A5_%E4%B8%8B%E5%8D%8807_12_25-2.png"
+  },
+  {
+    "path": "/article-images/e62bd2e467099d59.png",
+    "sha256": "8a13e86e00ee439bff79468bbe83335856091cbacea89a267070cf0d448983fa",
+    "bytes": 2407688,
+    "width": 1672,
+    "height": 941,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/13381/Codex_%E5%9C%96%E5%83%8F_2026%E5%B9%B49%E6%9C%8826%E6%97%A5_%E4%B8%8B%E5%8D%8807_12_24-1.png"
+  },
+  {
+    "path": "/article-images/df06e475782094ba.png",
+    "sha256": "36437696437ef4bb8294e88ed03d08912f14270e9a156424d4cded31427acb5b",
+    "bytes": 2377923,
+    "width": 1672,
+    "height": 941,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/13380/Codex_%E5%9C%96%E5%83%8F_2026%E5%B9%B49%E6%9C%8826%E6%97%A5_%E4%B8%8B%E5%8D%8807_11_52-5.png"
+  },
+  {
+    "path": "/article-images/c2e50b68141c67bc.png",
+    "sha256": "fdc6725659c61396ec89106479e4314293baea00b6cfc89e4178699d129f6a13",
+    "bytes": 2259331,
+    "width": 1672,
+    "height": 941,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/13363/Codex_%E5%9C%96%E5%83%8F_2026%E5%B9%B49%E6%9C%8826%E6%97%A5_%E4%B8%8B%E5%8D%8807_11_50-4.png"
+  },
+  {
+    "path": "/article-images/ba2c4ce5b584ba68.png",
+    "sha256": "eb214a9a9ddc2b3fe3993e8f8b9899130081b8328d46e3f67a26fe9ec96f609f",
+    "bytes": 2284106,
+    "width": 1672,
+    "height": 941,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/13362/Codex_%E5%9C%96%E5%83%8F_2026%E5%B9%B49%E6%9C%8826%E6%97%A5_%E4%B8%8B%E5%8D%8807_11_49-3.png"
+  },
+  {
+    "path": "/article-images/90285ebe0a7c642a.png",
+    "sha256": "e674865d790fd38d7411e4883da2d71d4b841a4f5ebb8bbfce742235fc95553a",
+    "bytes": 2239525,
+    "width": 1672,
+    "height": 941,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/13361/Codex_%E5%9C%96%E5%83%8F_2026%E5%B9%B49%E6%9C%8826%E6%97%A5_%E4%B8%8B%E5%8D%8807_11_47-2.png"
+  },
+  {
+    "path": "/article-images/04c04603f9df0256.png",
+    "sha256": "a3c04a015a77a52084cb23960842392022684cb2a2eaf2862d09207367e585ac",
+    "bytes": 2077178,
+    "width": 1672,
+    "height": 941,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/13357/Codex_%E5%9C%96%E5%83%8F_2026%E5%B9%B49%E6%9C%8826%E6%97%A5_%E4%B8%8B%E5%8D%8807_11_46-1.png"
+  },
+  {
+    "path": "/article-images/4f46ab21c27460d4.png",
+    "sha256": "9b82023ce6ea84385a5142bb937796307db6b71768b045a22500246f3c07cf0f",
+    "bytes": 2289182,
+    "width": 1672,
+    "height": 941,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/13356/Codex_%E5%9C%96%E5%83%8F_2026%E5%B9%B49%E6%9C%8826%E6%97%A5_%E4%B8%8B%E5%8D%8807_11_03.png"
+  },
+  {
+    "path": "/article-images/fdfd8a967d05b289.png",
+    "sha256": "15d3e2990a8d164fa335f51f384abbeece2dd943a7d10450811bdee9ec363804",
+    "bytes": 24377473,
+    "width": 6237,
+    "height": 3516,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/13087/%E8%8B%B1%E5%B3%B0%E5%B0%88%E6%AC%84%E4%BD%BF%E7%94%A8.png"
+  },
+  {
+    "path": "/article-images/4a0c294e4763a143.png",
+    "sha256": "ac363cefce12d53c545cde20b1da46c7d917de7e8135b6ab3580aac1d529ab49",
+    "bytes": 2227601,
+    "width": 1672,
+    "height": 941,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/13008/S__95281202.png"
+  },
+  {
+    "path": "/article-images/444307a46ca14563.png",
+    "sha256": "3c2a0c25dc5c9e7d5dafb07b97f3b379949d260283531425c37eaaabbde42e9a",
+    "bytes": 1938894,
+    "width": 1448,
+    "height": 1086,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/12762/12_ChatGPT_Image_2026%E5%B9%B48%E6%9C%8831%E6%97%A5_%E4%B8%8B%E5%8D%8804_19_52.png"
+  },
+  {
+    "path": "/article-images/03e281952d94143a.png",
+    "sha256": "3577b65aef12016053f70837117f37a61d0325bc06bf7de16d873a698113b049",
+    "bytes": 2280400,
+    "width": 1448,
+    "height": 1086,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/12761/11_ChatGPT_Image_2026%E5%B9%B48%E6%9C%8831%E6%97%A5_%E4%B8%8B%E5%8D%8804_19_29.png"
+  },
+  {
+    "path": "/article-images/c54c38f66794a467.png",
+    "sha256": "878fdd2efcaf7635665ac276fcde92c379e963c98fb8ce79ca43afa73b997625",
+    "bytes": 2231848,
+    "width": 1448,
+    "height": 1086,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/12760/10_ChatGPT_Image_2026%E5%B9%B48%E6%9C%8831%E6%97%A5_%E4%B8%8B%E5%8D%8804_19_06.png"
+  },
+  {
+    "path": "/article-images/11939b5c4f8eb408.png",
+    "sha256": "4b7f937374b85c2dc5b1c5e1f697e764546795324f8899dcd43e029672f1ee22",
+    "bytes": 2310827,
+    "width": 1448,
+    "height": 1086,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/12759/09_ChatGPT_Image_2026%E5%B9%B48%E6%9C%8831%E6%97%A5_%E4%B8%8B%E5%8D%8804_20_14.png"
+  },
+  {
+    "path": "/article-images/9843ebb4863c95e1.png",
+    "sha256": "223c292823b35cce4650440739498718246e023c3ed5937397f7149ec58c4d08",
+    "bytes": 2478471,
+    "width": 1448,
+    "height": 1086,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/12758/08_ChatGPT_Image_2026%E5%B9%B48%E6%9C%8831%E6%97%A5_%E4%B8%8B%E5%8D%8804_10_56.png"
+  },
+  {
+    "path": "/article-images/622b0045bd7b8526.png",
+    "sha256": "845600e3bc0fbba6394f439f0b75c2918430086711e4cbab985bef5024cb7479",
+    "bytes": 2206406,
+    "width": 1448,
+    "height": 1086,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/12756/07_9bdd023e-31bf-47d9-ad1e-6a0fb65a8fee(2).png"
+  },
+  {
+    "path": "/article-images/b82e3ec3bfe49d9d.png",
+    "sha256": "b15136fb70a4ffe913b590d7e5ea912b3e16050bc2ee293cdbc63e99087f762c",
+    "bytes": 2268573,
+    "width": 1448,
+    "height": 1086,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/12755/06_ChatGPT_Image_2026%E5%B9%B48%E6%9C%8831%E6%97%A5_%E4%B8%8B%E5%8D%8802_54_47.png"
+  },
+  {
+    "path": "/article-images/2697fa711328aeb2.png",
+    "sha256": "3074c7482298b596d173586455cc79d54007f468cc3a5d3f495d5ae8e15e0764",
+    "bytes": 2001559,
+    "width": 1448,
+    "height": 1086,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/12754/05_ChatGPT_Image_2026%E5%B9%B48%E6%9C%8831%E6%97%A5_%E4%B8%8B%E5%8D%8802_44_27.png"
+  },
+  {
+    "path": "/article-images/a0fa65b0c7b1cf8e.png",
+    "sha256": "52a2cfaf149e05fec38d8f743354c6fff6bf7394adb4335f258cf7b52e14abb5",
+    "bytes": 2128232,
+    "width": 1448,
+    "height": 1086,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/12753/04_STT_MMedia_Legal_Column_20260831_art-tax-12pct_CurrentVisual_Candidate_v1_0.png"
+  },
+  {
+    "path": "/article-images/d7153eb41aa126d3.png",
+    "sha256": "ff5208a547a6df2e3bf23820c62fe6b6691be91b47c125791eba387750ead033",
+    "bytes": 2290116,
+    "width": 1448,
+    "height": 1086,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/12752/03_ChatGPT_Image_2026%E5%B9%B48%E6%9C%8831%E6%97%A5_%E4%B8%8B%E5%8D%8804_04_52.png"
+  },
+  {
+    "path": "/article-images/305101fe6f68db1b.png",
+    "sha256": "62b5ce1314eadad8d5758513f33f0401b0287fed81f9865f57af1477e4dfd937",
+    "bytes": 2368213,
+    "width": 1672,
+    "height": 941,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/12751/02_ChatGPT_Image_2026%E5%B9%B48%E6%9C%8831%E6%97%A5_%E4%B8%8B%E5%8D%8802_03_10.png"
+  },
+  {
+    "path": "/article-images/f068f1915ab2672f.png",
+    "sha256": "68d110f191051fa8c5fa854facd3cd484901fd88a11f7396442382e7270d1493",
+    "bytes": 2307077,
+    "width": 1672,
+    "height": 941,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/12749/01_f60f449e-b733-41f7-ab57-7e99c1d2eac8.png"
+  },
+  {
+    "path": "/article-images/5db480a287232ec5.jpg",
+    "sha256": "f7323bedaa27ea7208b37331a5d5f2e92ebba3fd58258ee2124384d972ad5f60",
+    "bytes": 363421,
+    "width": 1672,
+    "height": 941,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/12672/S__93454343.jpg"
+  },
+  {
+    "path": "/article-images/ca3e111551d1ec90.png",
+    "sha256": "da5eea792e1e207931db707b719c684861c6a2db05a0d7ecbabe3c52a8f6fa8a",
+    "bytes": 1287938,
+    "width": 1672,
+    "height": 941,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/12619/S__93143055.png"
+  },
+  {
+    "path": "/article-images/f28590bc7d7bf118.png",
+    "sha256": "3511a98f2cc33a8493f17967734c3b7cc6385331e9482b8913c9c3bffe6fb19a",
+    "bytes": 2243158,
+    "width": 1536,
+    "height": 1024,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/12603/ChatGPT_Image_2026%E5%B9%B48%E6%9C%8823%E6%97%A5_%E4%B8%8B%E5%8D%8806_09_20__6_.png"
+  },
+  {
+    "path": "/article-images/da68e3e6d7f58be9.jpg",
+    "sha256": "99fd17a3311fbb1786b7a86634216089a1548f1effcf5917fd09631dcf3abcf0",
+    "bytes": 273517,
+    "width": 900,
+    "height": 625,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/ckeditor/pictures/404/c829d51d30a79a3093a1d2a2ef4ac682.jpg"
+  },
+  {
+    "path": "/article-images/4da5592fe8daffb6.jpg",
+    "sha256": "64fbe25e2454b4b9758befb978d13fccc54c5cbc1a123c5c9617c569ba817d64",
+    "bytes": 107823,
+    "width": 500,
+    "height": 963,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/ckeditor/pictures/407/700d2223f2e945aeffdfe8515b3cd1dd.jpg"
+  },
+  {
+    "path": "/article-images/e1fed12c1f45ca39.png",
+    "sha256": "bae55f0094cd88ef97dc2be16bfb4e5c8dccfd16bdde277fe5cde7ce210cb376",
+    "bytes": 49937,
+    "width": 800,
+    "height": 94,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/ckeditor/pictures/406/29599e2e9b5380ffa0e06722335f4fac.png"
+  },
+  {
+    "path": "/article-images/3bf5cdc0ed745d90.png",
+    "sha256": "99ad1e33dfc76537e4f0d65949754645e1aa125d2a7d42a96c9836aeed169128",
+    "bytes": 2340842,
+    "width": 1536,
+    "height": 1024,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/12602/ChatGPT_Image_2026%E5%B9%B48%E6%9C%8823%E6%97%A5_%E4%B8%8B%E5%8D%8806_09_20__5_.png"
+  },
+  {
+    "path": "/article-images/fdc634f26c3565b7.png",
+    "sha256": "0f3973c7ca923bb0e18c39611fbc4837c202f21e69e7a117b40d95f3a8d88498",
+    "bytes": 2449923,
+    "width": 1536,
+    "height": 1024,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/12601/ChatGPT_Image_2026%E5%B9%B48%E6%9C%8823%E6%97%A5_%E4%B8%8B%E5%8D%8806_09_19__4_.png"
+  },
+  {
+    "path": "/article-images/6a76c58090ef2cd0.png",
+    "sha256": "139c9929f16156dcfb324252eddbe8ec1d80c32ebe49610b7c53d00753c62e82",
+    "bytes": 2204161,
+    "width": 1536,
+    "height": 1024,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/12600/ChatGPT_Image_2026%E5%B9%B48%E6%9C%8823%E6%97%A5_%E4%B8%8B%E5%8D%8806_09_19__3_.png"
+  },
+  {
+    "path": "/article-images/81cc6de7ed215afa.png",
+    "sha256": "d51b5c4b31ec32e3c31d7be4a7d74e2519e7944b31b6206d3cd66ced4cdd5014",
+    "bytes": 2339329,
+    "width": 1536,
+    "height": 1024,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/12599/ChatGPT_Image_2026%E5%B9%B48%E6%9C%8823%E6%97%A5_%E4%B8%8B%E5%8D%8806_09_18__2_.png"
+  },
+  {
+    "path": "/article-images/a37cb428d6afc085.png",
+    "sha256": "733512ae59009af1a7509618388f8579b153163a65744b567af72fb86519c7ff",
+    "bytes": 2202602,
+    "width": 1536,
+    "height": 1024,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/12598/ChatGPT_Image_2026%E5%B9%B48%E6%9C%8823%E6%97%A5_%E4%B8%8B%E5%8D%8806_09_18__1_.png"
+  },
+  {
+    "path": "/article-images/90cd6eb90ff46a41.png",
+    "sha256": "1154acc9a020aaa82c6156eec9804bb00a8cad1e36ef726f6a9e100235bcd1b3",
+    "bytes": 2301122,
+    "width": 1402,
+    "height": 1122,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/12597/ChatGPT_Image_2026%E5%B9%B48%E6%9C%8823%E6%97%A5_%E4%B8%8B%E5%8D%8802_45_13.png"
+  },
+  {
+    "path": "/article-images/cd49b8bea2dd00f2.jpg",
+    "sha256": "f85d36750af086aab42585c7eedd91bf7c95d48da78a77dec65ff7a3917a5055",
+    "bytes": 418314,
+    "width": 1810,
+    "height": 1358,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/11920/S__89546792.jpg"
+  },
+  {
+    "path": "/article-images/dfeef4805eb401b9.jpg",
+    "sha256": "efef563cdc7831eefb9f41034eda96309edc7b581a5c99b5d61640e64df06d8b",
+    "bytes": 142070,
+    "width": 800,
+    "height": 533,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/ckeditor/pictures/409/60cc2272eef36b89c8b5ca94002d0dc8.jpg"
+  },
+  {
+    "path": "/article-images/f1082112c9fd2d6d.jpg",
+    "sha256": "a9f94d8327af5996638a31111619e20fb9ecbedd7a2c1edd5ed96e7c352f4a6c",
+    "bytes": 31577,
+    "width": 420,
+    "height": 536,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/ckeditor/pictures/411/aabc0a2279325386bd0c5de1390a476e.jpg"
+  },
+  {
+    "path": "/article-images/c1ddf792a7e51b95.jpg",
+    "sha256": "7fbcce376a30ed7fe29affd0ccae67ae0ec2afac54c7af45750421946165e955",
+    "bytes": 497421,
+    "width": 1810,
+    "height": 1358,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/11910/S__89464866_0(2).jpg"
+  },
+  {
+    "path": "/article-images/d006c80273fd3ca8.jpg",
+    "sha256": "ffb0dc91be9a6079ede75ff55b6df61881a5a88110201ef82458abf30e255a3f",
+    "bytes": 592363,
+    "width": 2262,
+    "height": 1698,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/11909/S__89464865_0.jpg"
+  },
+  {
+    "path": "/article-images/caa2a79e8c7ef5be.jpg",
+    "sha256": "9e2efb43ffd0c8de83e177ad6e2ce0a1e2b898c6477a82bf622aa1dba328fc4b",
+    "bytes": 420709,
+    "width": 1810,
+    "height": 1358,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/11906/S__89530449.jpg"
+  },
+  {
+    "path": "/article-images/3e80a595fa4095b0.jpg",
+    "sha256": "1cd23c9943f0292347fe359a8b154bc7cea28af27db6aa155ab727b7212336a4",
+    "bytes": 606965,
+    "width": 2262,
+    "height": 1698,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/11904/S__89464867_0(2).jpg"
+  },
+  {
+    "path": "/article-images/de260d6aae991fb1.png",
+    "sha256": "5f0de24177ba2a5032cf28de53239bf010d2822e33f0488dd09968d8bb438dfc",
+    "bytes": 451137,
+    "width": 1810,
+    "height": 1358,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/11903/%E4%BA%BA%E5%9C%A8%E9%9B%A2%E4%B8%96%E4%BB%A5%E5%89%8D%E5%8F%AF%E8%83%BD%E5%85%88%E5%A4%B1%E5%8E%BB%E7%AE%A1%E7%90%86%E8%B2%A1%E7%94%A2%E7%9A%84%E8%83%BD%E5%8A%9B.png"
+  },
+  {
+    "path": "/article-images/87559c02aa5c7f77.png",
+    "sha256": "550b91ef9508591c46b5365e525ef0f896d5b47906bf07732bded60a65464930",
+    "bytes": 432196,
+    "width": 1810,
+    "height": 1358,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/11902/%E8%80%81%E5%BE%8C%E6%9C%89%E6%88%BF%E4%B8%8D%E4%BB%A3%E8%A1%A8%E8%80%81%E5%BE%8C%E6%9C%89%E9%8C%A2.png"
+  },
+  {
+    "path": "/article-images/c0fc462ab16aae02.png",
+    "sha256": "e3762efae6d3bf72c9588f100f2ab1cbbc022acd6d4b87a3e0caeee79cd55a76",
+    "bytes": 2699183,
+    "width": 1448,
+    "height": 1086,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/11900/%E6%B5%B7%E5%A4%96%E6%9C%89%E8%B3%87%E7%94%A2%E4%B8%8D%E4%BB%A3%E8%A1%A8%E9%A2%A8%E9%9A%AA%E4%B9%9F%E9%9B%A2%E9%96%8B%E5%8F%B0%E7%81%A3.png"
+  },
+  {
+    "path": "/article-images/d9b0591273d508a7.jpg",
+    "sha256": "8e8c194f95334b35d3d7da770c194f87ce2489a27e53deddfd1bf3f299b2512c",
+    "bytes": 667407,
+    "width": 2262,
+    "height": 1698,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/11899/S__89464863_0.jpg"
+  },
+  {
+    "path": "/article-images/ecb9dac81a8efa8e.jpg",
+    "sha256": "4be9b31e5b42ea468fc25ec9e3683ef7939a3a12d02c6231242b2709bf08eccf",
+    "bytes": 604414,
+    "width": 2262,
+    "height": 1698,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/11898/S__89464862_0.jpg"
+  },
+  {
+    "path": "/article-images/3aea1c1d709ab6cb.jpg",
+    "sha256": "beeaedfc61518fe4c687f2a0f2e79d4a60734b764f9511010adb8fda21bff0d0",
+    "bytes": 670842,
+    "width": 2262,
+    "height": 1698,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/11897/S__89464861_0.jpg"
+  },
+  {
+    "path": "/article-images/e4b65a1885ab0df8.jpg",
+    "sha256": "27598dd5cb83585fd844ffce1dd0309d01120a0e00720b46e633385bac554bbd",
+    "bytes": 567652,
+    "width": 1810,
+    "height": 1358,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/11896/S__89464868_0.jpg"
+  },
+  {
+    "path": "/article-images/a5606bd5997ef9aa.jpg",
+    "sha256": "e9b2e26e8f10ddcba878220aa4292026f706caf33fbcff9d8beaf88e81d853ee",
+    "bytes": 579120,
+    "width": 2262,
+    "height": 1698,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/11895/S__89464860_0.jpg"
+  },
+  {
+    "path": "/article-images/6f30c85cf513ab28.png",
+    "sha256": "d634f73889d0dea111058edaedf8e9155a262cf97c272a8d1234b3a62c7e9c19",
+    "bytes": 418721,
+    "width": 1810,
+    "height": 1358,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/11894/%E7%9C%8B%E4%B8%8D%E8%A6%8B%E7%9A%84%E8%B2%A1%E7%94%A2%E5%BE%80%E5%BE%80%E6%9C%80%E5%AE%B9%E6%98%93%E5%9C%A8%E5%82%B3%E6%89%BF%E6%99%82%E6%B6%88%E5%A4%B1.png"
+  },
+  {
+    "path": "/article-images/08b54b4d89cf0131.png",
+    "sha256": "51560c99c86eaafe9426ff79e6984eedef439730f84eeedf4666d78df5c64f22",
+    "bytes": 482280,
+    "width": 1810,
+    "height": 1358,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/11893/%E5%AE%B6%E6%97%8F%E4%BC%81%E6%A5%AD%E7%9C%9F%E6%AD%A3%E8%A6%81%E5%82%B3%E6%89%BF%E7%9A%84%E4%B8%8D%E5%8F%AA%E6%98%AF%E8%82%A1%E4%BB%BD.png"
+  },
+  {
+    "path": "/article-images/b85d7a15abac574a.png",
+    "sha256": "83fd0a1d393cd6ed51c6d326f04e3793adcf1eda700122ccc7041722a00e2e5a",
+    "bytes": 479934,
+    "width": 1810,
+    "height": 1358,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/11892/%E7%B9%BC%E6%89%BF%E5%85%AC%E5%8F%B8%E8%82%A1%E6%AC%8A%E4%B8%8D%E7%AD%89%E6%96%BC%E7%B9%BC%E6%89%BF%E5%85%AC%E5%8F%B8%E6%8E%A7%E5%88%B6%E6%AC%8A.png"
+  },
+  {
+    "path": "/article-images/8be4de6e6b417da9.png",
+    "sha256": "f17f7f618938ce81cd0ad53bb95ff6c74e7b24a96374fdb137283fe2e7129410",
+    "bytes": 468258,
+    "width": 1810,
+    "height": 1358,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/11891/%E4%BF%A1%E8%A8%97%E4%B8%8D%E6%98%AF%E8%97%8F%E9%8C%A2%E5%B7%A5%E5%85%B7%E8%80%8C%E6%98%AF%E8%B2%AC%E4%BB%BB%E5%88%86%E5%B7%A5%E5%88%B6%E5%BA%A6.png"
+  },
+  {
+    "path": "/article-images/1c1c5efc9e69e6f5.png",
+    "sha256": "97ff95ea1da29b9261621571c83e7adbf6a98bb877fc149c521e8998eade9559",
+    "bytes": 457633,
+    "width": 1810,
+    "height": 1358,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/11870/%E9%80%80%E4%BC%91%E9%87%91%E5%B9%B4%E9%87%91%E8%88%87%E8%80%81%E5%BE%8C%E7%8F%BE%E9%87%91%E6%B5%81(2).png"
+  },
+  {
+    "path": "/article-images/b54c9fe05023b551.png",
+    "sha256": "74d838ff6657ad68720d9095b515c762fae697016974756e7c5239b2dcbc29f2",
+    "bytes": 467351,
+    "width": 1810,
+    "height": 1358,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/11861/%E4%BF%9D%E5%96%AE%E4%B8%8D%E6%98%AF%E9%81%BA%E5%9B%91%E4%B9%9F%E4%B8%8D%E6%98%AF%E8%87%AA%E5%8B%95%E7%9A%84%E8%B3%87%E7%94%A2%E9%98%B2%E7%81%AB%E7%89%86(2).png"
+  },
+  {
+    "path": "/article-images/a3fac7f7f0676887.png",
+    "sha256": "3dea10176ef943ba1e8c9f159f65f1b855c4fec06b6127fd9dbdc1cbb51f823c",
+    "bytes": 760816,
+    "width": 2557,
+    "height": 1440,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/11832/%E5%82%B5%E5%8B%99%E7%88%86%E7%99%BC%E6%99%82%E5%AE%B6%E5%BA%AD%E6%89%8D%E7%AC%AC%E4%B8%80%E6%AC%A1%E7%9C%8B%E8%A6%8B%E7%9C%9F%E6%AD%A3%E7%9A%84%E8%B3%87%E7%94%A2%E7%B5%90%E6%A7%8B(2).png"
+  },
+  {
+    "path": "/article-images/393fc9a114baa2d3.png",
+    "sha256": "b9585a591698d67a32c61f6da813f7abc273d148d9eba76df06c015f4caae939",
+    "bytes": 2014276,
+    "width": 1672,
+    "height": 941,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/11831/%E5%85%AC%E5%8F%B8%E6%98%AF%E5%85%AC%E5%8F%B8%E5%AE%B6%E5%BA%AD%E6%98%AF%E5%AE%B6%E5%BA%AD.png"
+  },
+  {
+    "path": "/article-images/47b9442d09792efb.png",
+    "sha256": "5aa9ca5fda197cf299c9c2d40888b926ed6b7772d3c06694fae20b490c11e2e8",
+    "bytes": 502066,
+    "width": 2092,
+    "height": 1178,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/11830/%E6%8A%8A%E6%88%BF%E5%AD%90%E7%A7%BB%E8%B5%B0%E4%B8%8D%E4%BB%A3%E8%A1%A8%E6%8A%8A%E9%A2%A8%E9%9A%AA%E7%A7%BB%E8%B5%B0__2_.png"
+  },
+  {
+    "path": "/article-images/ea42bff827984064.png",
+    "sha256": "86d4cb91e9b2f04f37d359e1a26af752f95b3b0d22ab824f2f3c27170ee7579a",
+    "bytes": 475230,
+    "width": 2090,
+    "height": 1177,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/11829/%E5%AE%B6%E4%BA%BA%E4%B9%8B%E9%96%93%E7%9A%84%E9%8C%A2%E6%B3%95%E5%BE%8B%E4%B8%8A%E5%88%B0%E5%BA%95%E5%8F%AB%E4%BB%80%E9%BA%BC(2).png"
+  },
+  {
+    "path": "/article-images/2a67784f7ea54c9d.png",
+    "sha256": "62e9a0eefa15b3c0773acdbf6d9c1ca83e0a4c11d031ce04a5c4291416c30758",
+    "bytes": 485736,
+    "width": 2090,
+    "height": 1177,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/11810/%E5%A9%9A%E5%A7%BB%E4%B8%8D%E6%98%AF%E5%85%B1%E5%90%8C%E5%82%B5%E5%8B%99%E4%BF%9D%E8%AD%89%E6%9B%B8(2).png"
+  },
+  {
+    "path": "/article-images/ea8431311fd4d56d.png",
+    "sha256": "33f731e12da8fb0293d26385437ae6735526ecde9e7613802d1276d5354316d4",
+    "bytes": 1787710,
+    "width": 1672,
+    "height": 941,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/11809/%E6%9B%BF%E5%AE%B6%E4%BA%BA%E4%BD%9C%E4%BF%9D%E4%B8%8D%E5%8F%AA%E6%98%AF%E7%B0%BD%E4%B8%80%E5%80%8B%E5%90%8D%E5%AD%97.png"
+  },
+  {
+    "path": "/article-images/7923802317033d35.png",
+    "sha256": "015c9dce4ad26b27de7909d156594d022b2a26a08ea12e368d266a228f0d22e4",
+    "bytes": 2242751,
+    "width": 1672,
+    "height": 941,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/11794/%E7%88%B6%E6%AF%8D%E5%87%BA%E9%8C%A2%E5%AD%90%E5%A5%B3%E7%99%BB%E8%A8%98%E4%B8%8D%E5%8F%AA%E6%98%AF%E5%B9%AB%E5%BF%99%E8%B2%B7%E6%88%BF.png"
+  },
+  {
+    "path": "/article-images/9b1a02b72989d052.png",
+    "sha256": "f4250987ce4be7bde2d81b6c29affcc5071f0540cb1e2da88d67934351b79e38",
+    "bytes": 2071302,
+    "width": 1672,
+    "height": 941,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/11793/%E8%B7%A8%E5%A2%83%E5%A9%9A%E5%A7%BB%E8%B2%B7%E5%8F%B0%E7%81%A3%E6%88%BF%E6%9C%80%E5%8D%B1%E9%9A%AA%E7%9A%84%E6%98%AF%E8%BA%AB%E5%88%86%E4%B8%8D%E4%B8%80%E8%87%B4.png"
+  },
+  {
+    "path": "/article-images/4021397c9d1d4ebf.png",
+    "sha256": "4137b1b2db74d8ca3cd19ba9202ff844f61c899ecd6ed6e20f0bf5d219a2ae3c",
+    "bytes": 2113625,
+    "width": 1672,
+    "height": 941,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/11792/%E6%B2%92%E6%9C%89%E7%99%BB%E8%A8%98%E7%9A%84%E4%BC%B4%E4%BE%B6%E6%9C%80%E9%9C%80%E8%A6%81%E7%9A%84%E6%98%AF%E5%A5%91%E7%B4%84%E6%B2%BB%E7%90%86.png"
+  },
+  {
+    "path": "/article-images/da3d652e9fac19d0.png",
+    "sha256": "02fcc332420edadec32ec0d606b0fcd2d665ccc20268d388c5b7560843a87d2b",
+    "bytes": 2034742,
+    "width": 1672,
+    "height": 941,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/11791/%E5%90%8C%E6%80%A7%E8%B2%B7%E6%88%BF%E9%83%A8%E6%98%AF%E4%BE%8B%E5%A4%96%E6%A2%9D%E6%AC%BE.png"
+  },
+  {
+    "path": "/article-images/3aaa28257d43ec62.png",
+    "sha256": "707facfbb96582d94b17fc6cbe60f82640967a2030bfeaa21f671cc16c34b38f",
+    "bytes": 2251975,
+    "width": 1672,
+    "height": 941,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/11790/%E8%B2%B8%E6%AC%BE%E6%88%90%E6%95%B8%E4%B8%8D%E6%98%AF%E8%B2%B7%E6%88%BF%E6%8A%80%E5%B7%A7%E8%80%8C%E6%98%AF%E5%AE%B6%E5%BA%AD%E8%B3%87%E7%94%A2%E9%85%8D%E7%BD%AE.png"
+  },
+  {
+    "path": "/article-images/c7b31685a61ac424.png",
+    "sha256": "5174be8bb44ccc66cacb4222efadd79d87120a7853b626bd1dbecbe5232c4614",
+    "bytes": 2200418,
+    "width": 1672,
+    "height": 941,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/11768/%E5%A9%9A%E5%BE%8C%E8%B2%B7%E6%88%BF%E4%B8%8D%E6%98%AF%E8%87%AA%E5%8B%95%E5%85%B1%E6%9C%89(2).png"
+  },
+  {
+    "path": "/article-images/689edae32931599a.png",
+    "sha256": "809f52752a5af5548526abd9010814f5ee522b707b9e7a11a9af902df0482f86",
+    "bytes": 2252938,
+    "width": 1672,
+    "height": 941,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/11738/%E7%B9%BC%E6%89%BF%E4%B8%8D%E6%98%AF%E6%8B%BF%E8%B3%87%E7%94%A2%E6%98%AF%E6%89%BF%E6%8E%A5%E8%B3%87%E7%94%A2%E8%B2%A0%E5%82%B5%E8%A1%A8(2).png"
+  },
+  {
+    "path": "/article-images/8d5db4aa131f450e.png",
+    "sha256": "bb26fa67e1aba3d2ec9b78406be94688fc369b6fd65747870fd816bcbf18f6cf",
+    "bytes": 2288438,
+    "width": 1672,
+    "height": 941,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/11720/%E7%A7%9F%E7%B4%84%E6%8F%9B%E5%90%8D%E8%88%87%E7%A7%9F%E9%87%91%E7%A8%85%E5%8B%99%E9%96%89%E7%92%B0(2).png"
+  },
+  {
+    "path": "/article-images/92d14e2c280d82c1.png",
+    "sha256": "a29e5894097641b044be76459ba0cd63fa0a3d75309b673fdb3b014ee4385e42",
+    "bytes": 628554,
+    "width": 822,
+    "height": 552,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/ckeditor/pictures/412/bc9ada27523244717f61c79cc2fb38bd.png"
+  },
+  {
+    "path": "/article-images/87e16c557afdb3b5.png",
+    "sha256": "723ee0267db9043644801e33700ec942745c8de45d94e7abf3dea63a795c5acb",
+    "bytes": 2187308,
+    "width": 1672,
+    "height": 941,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/11719/%E6%88%BF%E7%A7%9F%E6%94%AF%E6%8C%81%E6%88%BF%E8%B2%B8%E7%9A%84%E9%8A%80%E8%A1%8C%E5%AF%A9%E6%9F%A5(2).png"
+  },
+  {
+    "path": "/article-images/00f19d5e8ff720db.png",
+    "sha256": "317dad9007ba211f1e559fb9b4ee293aae8ea03a44f61f09236f0e0bed74a4c8",
+    "bytes": 2073979,
+    "width": 1672,
+    "height": 941,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/11717/%E5%85%84%E5%A6%B9%E7%94%A2%E6%AC%8A%E5%88%86%E9%85%8D%E7%9A%84%E6%B2%BB%E7%90%86%E9%81%B8%E6%93%87(2).png"
+  },
+  {
+    "path": "/article-images/6a3c6f934f33c5cd.png",
+    "sha256": "6c3d19baa1a58db0655e1c9011a9e67b6436df087ddb737f46568ddf51aa701b",
+    "bytes": 2145787,
+    "width": 1672,
+    "height": 941,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/11699/%E7%B9%BC%E6%89%BF%E6%88%BF%E7%94%A2%E7%9A%84%E7%A8%85%E5%8B%99%E7%9B%A4%E9%BB%9E(2).png"
+  },
+  {
+    "path": "/article-images/3849418a8ac3beb6.png",
+    "sha256": "69dc197265132324ac244e00f20a645c7dd996411223d2baa6006a92aae72850",
+    "bytes": 2033946,
+    "width": 1672,
+    "height": 941,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/11698/%E9%95%B7%E8%BC%A9%E9%9B%A2%E4%B8%96%E5%BE%8C%E7%9A%84%E6%88%BF%E8%B2%B8%E6%89%BF%E6%8E%A5(2).png"
+  },
+  {
+    "path": "/article-images/7ff32970f5372b79.png",
+    "sha256": "7c2e5b4f50320cbe84c05252ae02469db40bf9687ca5c03fce650ba127f0a1e9",
+    "bytes": 1650357,
+    "width": 1672,
+    "height": 941,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/11630/%E5%8F%AF%E8%A2%AB%E7%A8%BD%E6%A0%B8%E7%9A%84%E5%AE%9A%E9%8C%A8_Legal_AI_%E8%88%87%E9%87%8F%E5%88%91%E7%9A%84%E6%95%B8%E4%BD%8D%E6%B2%BB%E7%90%86.png"
+  },
+  {
+    "path": "/article-images/e5953d7ed9c4d320.png",
+    "sha256": "535c6679bf8e591eb10b6239a7962491b415f2d94286f35ac5a3d5c0acd9fc06",
+    "bytes": 1802934,
+    "width": 1672,
+    "height": 941,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/11629/%E5%9C%8B%E6%B0%91%E5%8F%83%E8%88%87%E5%AF%A9%E5%88%A4%E7%9A%84%E7%A8%8B%E5%BA%8F%E8%AA%A0%E5%AF%A6.png"
+  },
+  {
+    "path": "/article-images/bd2d981e9521c637.png",
+    "sha256": "e1dadb0274594044d7cef6268a2ce316a8c14eb3c1314546e84e241850134fc8",
+    "bytes": 1946177,
+    "width": 1672,
+    "height": 941,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/11625/%E5%8F%AF%E9%9D%A0%E6%80%A7%E4%B9%8B%E5%BE%8C%E9%87%8F%E5%88%91%E9%91%91%E5%AE%9A_%E8%87%AA%E7%94%B1%E5%BF%83%E8%AD%89%E8%88%87%E5%9C%8B%E5%AE%B6%E9%98%B2%E8%A1%9B%E7%95%B6%E8%B2%AC%E7%9A%84%E4%BF%A1%E4%BB%BB%E9%87%8D%E5%BB%BA.png"
+  },
+  {
+    "path": "/article-images/e9b1885c2dab7554.png",
+    "sha256": "9e7d37729c1e1aeb5b55e3e10135744580a7621191975e3805133cfb2af3b193",
+    "bytes": 1783603,
+    "width": 1672,
+    "height": 941,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/11624/%E5%9C%8B%E5%AE%B6%E6%9C%80%E7%B5%82%E6%AC%8A%E5%8A%9B%E7%9A%84%E6%86%B2%E6%94%BF%E9%82%8A%E7%95%8C%E8%88%87%E9%98%B2%E8%A1%9B%E5%BA%95%E7%B7%9A%E6%87%89%E5%A0%B1%E6%AD%A3%E7%BE%A9_%E7%A8%8B%E5%BA%8F%E7%B4%80%E5%BE%8B%E8%88%87%E8%A2%AB%E5%AE%B3%E8%80%85%E5%9C%B0%E4%BD%8D%E7%9A%84%E5%88%B6%E5%BA%A6%E9%87%8D%E6%A7%8B.png"
+  },
+  {
+    "path": "/article-images/e3ce38c5c6e3ccdf.jpg",
+    "sha256": "99ceb585f86463abaae0f4dea594b8150465a87b0838cc3a3c022fbec84c8bd3",
+    "bytes": 669376,
+    "width": 1942,
+    "height": 1199,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/11591/S__87302482_0.jpg"
+  },
+  {
+    "path": "/article-images/43461d5fe708012f.jpg",
+    "sha256": "3387ba432fdb7d876f7c4850e3a717439c250786f9f3a2ab0e3cc775742c5045",
+    "bytes": 719231,
+    "width": 1955,
+    "height": 1196,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/11588/S__87302483_0.jpg"
+  },
+  {
+    "path": "/article-images/31f60d18bd58273e.png",
+    "sha256": "1255e0841b2c7fe826970aa837fa064f77fc0e3e974f8c0865f92ac3e457a32f",
+    "bytes": 2842678,
+    "width": 1536,
+    "height": 1024,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/11585/S__87302335_0(2).png"
+  },
+  {
+    "path": "/article-images/cac23904da053d3d.jpg",
+    "sha256": "0b8a04d5977fb029616ed29151c549359c00c670982b34e7c669f92d82b86521",
+    "bytes": 698521,
+    "width": 1920,
+    "height": 1280,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/11584/S__87302337_0.jpg"
+  },
+  {
+    "path": "/article-images/279b718dd0e62aa3.png",
+    "sha256": "e39538d00e1a255d57cba1575230a97e52fef5e731b2c1602d60675fb0e2f4e0",
+    "bytes": 2500298,
+    "width": 1536,
+    "height": 1024,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/11582/ChatGPT_Image_2026%E5%B9%B46%E6%9C%8825%E6%97%A5_%E4%B8%8A%E5%8D%8811_24_55.png"
+  },
+  {
+    "path": "/article-images/7b10d0eb825fd25c.png",
+    "sha256": "007d67d77673adda45808d53dcf8abd52a515a14075c2aecd992e13fd39da1e8",
+    "bytes": 2658070,
+    "width": 1536,
+    "height": 1024,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/11420/%E9%9B%99%E5%B1%A4%E6%9E%B6%E6%A7%8B.png"
+  },
+  {
+    "path": "/article-images/9d7fa9b961837942.png",
+    "sha256": "9b2decc2c7fd1eaecd5fd5a7278fcd3e5d8e05c88c88fe3c4b76107118e21800",
+    "bytes": 2458228,
+    "width": 1536,
+    "height": 1024,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/11419/%E6%B3%95%E9%99%A2%E7%A0%B4%E9%98%B2.png"
+  },
+  {
+    "path": "/article-images/797d77947b9ce671.png",
+    "sha256": "410e1e53fadc5c46c9e9cee56de6520b8572005c2a9646b4894a45a00f921170",
+    "bytes": 2448033,
+    "width": 1536,
+    "height": 1024,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/11418/%E5%85%A8%E7%90%83%E6%9F%A5%E7%A8%85.png"
+  },
+  {
+    "path": "/article-images/6ee5a5e697099ac9.png",
+    "sha256": "5356bac9c6752662a3a9bc552c7c9a096eb955bf8a5023a9922560d43467faae",
+    "bytes": 2250534,
+    "width": 1536,
+    "height": 1024,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/11404/%E4%B8%BB%E6%AC%8A%E9%87%8D%E8%B3%BC.png"
+  },
+  {
+    "path": "/article-images/7dc6c740d7ca4874.png",
+    "sha256": "e2881727d0faf8830a1c2c69c69e66d47ff165cfe9fc0100ae5c1d1dc3291c5a",
+    "bytes": 376991,
+    "width": 1920,
+    "height": 1280,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/11372/1.png"
+  },
+  {
+    "path": "/article-images/cc16d6118e018889.jpg",
+    "sha256": "a6535d6022e78973ac18ab01b1d6dfdf3a07c2ed6c0ae7075475529895ca774f",
+    "bytes": 468314,
+    "width": 1920,
+    "height": 1280,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/11254/S__84549635_0.jpg"
+  },
+  {
+    "path": "/article-images/e6b8cba8b9ef0028.jpg",
+    "sha256": "3f36a541bde42f103b3e05f135ed0e2fa13b28966737f6a1a044326c58d2efbc",
+    "bytes": 496871,
+    "width": 1920,
+    "height": 1280,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/11253/S__84549636_0.jpg"
+  },
+  {
+    "path": "/article-images/baefc1ff9dfffcfe.jpg",
+    "sha256": "d59f54ea730a3ff57be15660f24e092841031db58d7b069c92046b420b634288",
+    "bytes": 462270,
+    "width": 1920,
+    "height": 1280,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/11252/S__84549637_0.jpg"
+  },
+  {
+    "path": "/article-images/a271608c80e40bf5.jpeg",
+    "sha256": "8de3a3231338030e54361739215e9abe6269239c5d8b404508428dcc7bcfe1c1",
+    "bytes": 344009,
+    "width": 1691,
+    "height": 930,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/11108/IMG_3349.jpeg"
+  },
+  {
+    "path": "/article-images/81879ce21ac87688.jpeg",
+    "sha256": "ed97b605b9d7ed7ec4026e7266fc5d0a0baa15acb135375e7997ec1d4edde0ae",
+    "bytes": 385385,
+    "width": 1731,
+    "height": 909,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/11105/IMG_3350.jpeg"
+  },
+  {
+    "path": "/article-images/a579151ae5ceb532.jpeg",
+    "sha256": "6c5649d0ec981434f62556bac02c1b4cf5ecd358aecc5f25f165f6508c9058ac",
+    "bytes": 424950,
+    "width": 1536,
+    "height": 1024,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/11098/IMG_3351.jpeg"
+  },
+  {
+    "path": "/article-images/eb9d0b6b7503ae3a.png",
+    "sha256": "70ba6345f3b7a3fc42b1121799a405e6b6b92e90a9efba2822cf1a9755cafa88",
+    "bytes": 2374017,
+    "width": 1660,
+    "height": 947,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/11061/BA811FCA-59A0-46FA-B95D-156F08A894BD(2).png"
+  },
+  {
+    "path": "/article-images/52f29854438020c2.jpg",
+    "sha256": "768352017e13254a3553b6dc06a08644bbe9bf7e7e401243dfe8717139e143fd",
+    "bytes": 635056,
+    "width": 1920,
+    "height": 1280,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/11041/S__82223232.jpg"
+  },
+  {
+    "path": "/article-images/bb94c45f6afabdf1.png",
+    "sha256": "d3a6a7e5f5a08f1d569cd119aafeccaa9e827019fff381b96f9228644d852ea8",
+    "bytes": 2393110,
+    "width": 1536,
+    "height": 1024,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/11027/FCU_logo(2).png"
+  },
+  {
+    "path": "/article-images/0a586655afae9881.jpg",
+    "sha256": "3ef20a9c4e3f9b390f0e0314dfa15d56c5c8a529dc80e6694bff11ec38d02d5f",
+    "bytes": 189857,
+    "width": 1020,
+    "height": 680,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/ckeditor/pictures/334/content_messageImage_1779636380751.jpg"
+  },
+  {
+    "path": "/article-images/4fa5b32fd103000c.png",
+    "sha256": "65bee621055324773525a4d84a3a8088d2d7d83e43f8d9d08b990ea6c17f4942",
+    "bytes": 1084613,
+    "width": 1020,
+    "height": 680,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/ckeditor/pictures/331/content_111.png"
+  },
+  {
+    "path": "/article-images/78cac3a5fc93e427.png",
+    "sha256": "a3738474dbc8cb7af824948fccad8dfb05413bc50f84d0da03b404bb888291ee",
+    "bytes": 787924,
+    "width": 1020,
+    "height": 574,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/ckeditor/pictures/332/content_222.png"
+  },
+  {
+    "path": "/article-images/0bcd5b14ae186f1b.png",
+    "sha256": "6a26553e02a80b1452a4eb2a64a49d46c19fe0cef98086ab94fb5b09a701ff6c",
+    "bytes": 2662723,
+    "width": 1536,
+    "height": 1024,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/10759/ChatGPT_Image_2026%E5%B9%B45%E6%9C%8812%E6%97%A5_%E4%B8%8A%E5%8D%8802_43_22.png"
+  },
+  {
+    "path": "/article-images/a5efc7e72ad60332.png",
+    "sha256": "ec7a7e512a16ff42d61d86ca59874899c3f7b671e8e152b7d898593a2a206b88",
+    "bytes": 2560174,
+    "width": 1536,
+    "height": 1024,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/10732/ChatGPT_Image_2026%E5%B9%B45%E6%9C%8810%E6%97%A5_%E4%B8%8B%E5%8D%8803_49_28(2).png"
+  },
+  {
+    "path": "/article-images/c83badc3e23d28e2.png",
+    "sha256": "04038c0ce81c7687c0c69b3781662fc068a8f3d48e213e8f37ab07df11763f23",
+    "bytes": 2315341,
+    "width": 1536,
+    "height": 1024,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/10731/_%E5%9B%9B%E8%90%AC%E9%BB%9E%E4%B8%8B%E7%9A%84%E4%BC%81%E6%A5%AD%E6%B1%BA%E7%AD%96%E8%B2%AC%E4%BB%BB%E9%87%8D%E6%A7%8B_.png"
+  },
+  {
+    "path": "/article-images/6e0e74baf6e8fbbd.jpg",
+    "sha256": "25516c16be46ee01ca8060af33188fbe3581d4d9b5347c98933bde802e99a4c9",
+    "bytes": 842855,
+    "width": 2744,
+    "height": 1568,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/10146/222.jpg"
+  },
+  {
+    "path": "/article-images/befdc2ca77fe4cee.jpg",
+    "sha256": "8a995974ce93a95f35092598e6caaf649333df5969c06be8f2b7820fba7c8a13",
+    "bytes": 1263968,
+    "width": 2744,
+    "height": 1568,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/10127/221.jpg"
+  },
+  {
+    "path": "/article-images/373b2d6a227b4d93.jpg",
+    "sha256": "d02b5f5ffbdb19475bfc269ed1080958465ef3202e93b078b9342434497ef34f",
+    "bytes": 752766,
+    "width": 2121,
+    "height": 1209,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/10126/220.jpg"
+  },
+  {
+    "path": "/article-images/cf2afbdb63ee4c11.jpg",
+    "sha256": "4dbc181fd679450e96d3dd2d35c687cc7e44afd99ceb2408958cb1f9a80950b4",
+    "bytes": 564251,
+    "width": 2120,
+    "height": 1213,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/10125/219.jpg"
+  },
+  {
+    "path": "/article-images/48de073b9a0bea39.jpg",
+    "sha256": "8606b30fd9a664b6649883f99c87bacab5890e7fea7b30cacb63ebedf0a7cce3",
+    "bytes": 637081,
+    "width": 2124,
+    "height": 1211,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/10124/217.jpg"
+  },
+  {
+    "path": "/article-images/ffaaab7cc1bc9144.jpg",
+    "sha256": "fc6e0592841191d28563bccfb17accb605940e4d546ecb3405f73b5f78f69b0a",
+    "bytes": 689254,
+    "width": 2118,
+    "height": 1208,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/10123/216.jpg"
+  },
+  {
+    "path": "/article-images/a93daa89276299dc.jpg",
+    "sha256": "f561a3cb549dcf127aa2baeba68b484bfcd370ea2676a1fd0e06fcaa5ff33009",
+    "bytes": 595512,
+    "width": 2120,
+    "height": 1209,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/10119/215.jpg"
+  },
+  {
+    "path": "/article-images/31ff41386804d908.jpg",
+    "sha256": "0fe06aa0957daeea0fa327a02e11f4897b40bcfa71be5fb517e139e27e7849ce",
+    "bytes": 642047,
+    "width": 2119,
+    "height": 1212,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/10094/214.jpg"
+  },
+  {
+    "path": "/article-images/4ff50437096b1ebd.jpg",
+    "sha256": "fc5e4da5fbd334eced36b13ef2f07bd2bf390c6f9382c398d04ee7aed06ef275",
+    "bytes": 640144,
+    "width": 2119,
+    "height": 1212,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/10093/213.jpg"
+  },
+  {
+    "path": "/article-images/3e846ef82dc03873.jpg",
+    "sha256": "c2018a82e9c4989e56cd82ab758769cece5b6be8adccf55da2a00a84f8836c76",
+    "bytes": 852111,
+    "width": 2119,
+    "height": 1207,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/10088/212.jpg"
+  },
+  {
+    "path": "/article-images/98495ff81a34b6f2.jpg",
+    "sha256": "c3b0f9525bfb3daea89768f6c999a8158cd35a8095cc4f98abeefb1c7bce3f05",
+    "bytes": 539270,
+    "width": 2121,
+    "height": 1211,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/10084/211.jpg"
+  },
+  {
+    "path": "/article-images/9b4348a2c6f173d6.jpg",
+    "sha256": "1ed9b0093308c8196ca1e62cf019069eed66ef2c702454e8d65ea515d5d00e39",
+    "bytes": 640076,
+    "width": 2117,
+    "height": 1202,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/10065/210.jpg"
+  },
+  {
+    "path": "/article-images/e05ce1f43022ff1b.jpg",
+    "sha256": "77b4a38873553cebd710f657c532b9c3a941be58b651ca9ae1279e7d5522cd84",
+    "bytes": 563008,
+    "width": 2123,
+    "height": 1215,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/9724/209.jpg"
+  },
+  {
+    "path": "/article-images/513f3ca59eb1b28f.jpg",
+    "sha256": "81099cff98c308a1cc4ffeb5fb0512d8bc49082dffc66e83ff660463fa667471",
+    "bytes": 603634,
+    "width": 2122,
+    "height": 1210,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/9608/208.jpg"
+  },
+  {
+    "path": "/article-images/9a7cef5941b21003.jpg",
+    "sha256": "28f829a260bc15302e48a7f4f222f6439972959ea0ba33b1174f31446ac631e0",
+    "bytes": 436995,
+    "width": 2121,
+    "height": 1212,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/9607/205.jpg"
+  },
+  {
+    "path": "/article-images/2b2fb4d2bd5df670.jpg",
+    "sha256": "41ef38b5a81b7bd3f97c80871ac0660803930334488322c27b3477f21141cd05",
+    "bytes": 612105,
+    "width": 2122,
+    "height": 1211,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/9606/206.jpg"
+  },
+  {
+    "path": "/article-images/d29be1414d4138f5.jpg",
+    "sha256": "6850e00f3227d91086f4bb7d7b7603b8804706752f6ab5617e3ab56776fbda70",
+    "bytes": 205854,
+    "width": 1420,
+    "height": 808,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/9534/204.jpg"
+  },
+  {
+    "path": "/article-images/d6178c92f0dbce55.jpg",
+    "sha256": "6df88cd1eaf7e074b2f0731c8e88f1a3dde9a79be0b80b05f0a82bc79651b3a6",
+    "bytes": 466467,
+    "width": 2127,
+    "height": 1215,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/9457/203.jpg"
+  },
+  {
+    "path": "/article-images/a9584217da8c5459.jpg",
+    "sha256": "40e0dce8a78b734c042993a8897fa274d2674cc6e53658eea3374ef85e5e3fc5",
+    "bytes": 246679,
+    "width": 1422,
+    "height": 808,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/9255/147.jpg"
+  },
+  {
+    "path": "/article-images/869de57f81bb7882.jpg",
+    "sha256": "14b234b7a5a3d13571d7bfb2123c2461f71e50d9ce42c1af8860a4a6e37e3ad0",
+    "bytes": 241821,
+    "width": 1422,
+    "height": 809,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/9251/148.jpg"
+  },
+  {
+    "path": "/article-images/e83d8dad95e6dd1d.jpg",
+    "sha256": "1d2b1832ebecec7da314ae12030ecda8b8f2064f81d8d1c2a6f779c3f2a9e294",
+    "bytes": 367347,
+    "width": 1419,
+    "height": 808,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/9249/146.jpg"
+  },
+  {
+    "path": "/article-images/2488aa9745a444d0.jpg",
+    "sha256": "86983e7df2ca7cd5e6071dbe79ee084d8a9ac940ac41fe2f030c6f56514c3314",
+    "bytes": 697632,
+    "width": 2120,
+    "height": 1212,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/9168/145.jpg"
+  },
+  {
+    "path": "/article-images/3754751fc0961a39.jpg",
+    "sha256": "db7775f090e50a0ab3a0fc6b2db73dfa9e97e28689c8eb8fd0fc93ff577c53eb",
+    "bytes": 400722,
+    "width": 2119,
+    "height": 1208,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/9154/143.jpg"
+  },
+  {
+    "path": "/article-images/37a37ba2209fa3f7.jpg",
+    "sha256": "b4a6210ef7a746d5a3638481a4b9fcd6a348e0e4ad481098b34c1c89addcd03e",
+    "bytes": 475729,
+    "width": 2124,
+    "height": 1213,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/9153/144.jpg"
+  },
+  {
+    "path": "/article-images/532c0858e2c6eb38.jpg",
+    "sha256": "a1f95b235c48c31dece567a7883c7b5efe5c3b179fadac1c02afff9e414c3dd3",
+    "bytes": 570848,
+    "width": 2117,
+    "height": 1207,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/8934/142.jpg"
+  },
+  {
+    "path": "/article-images/6d17b2ef4452d8df.jpg",
+    "sha256": "69e1e24582a506cf17525c72c011fc3aa7c0a0bc8da002cd4508bbcd69aea315",
+    "bytes": 243791,
+    "width": 1020,
+    "height": 660,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/ckeditor/pictures/309/content_S__66191370_0.jpg"
+  },
+  {
+    "path": "/article-images/27bb1241d7713b55.jpg",
+    "sha256": "92230e88153164dff93ce45840da742b50f106333c15c7f62ca766f758e1f327",
+    "bytes": 229286,
+    "width": 1020,
+    "height": 731,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/ckeditor/pictures/311/content_S__66224161.jpg"
+  },
+  {
+    "path": "/article-images/db5de3199dd6173c.jpg",
+    "sha256": "576994b51256a93beeea88c9caf03eb6a4781000a9dc625ff40132b94700bb5a",
+    "bytes": 459395,
+    "width": 1020,
+    "height": 1349,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/ckeditor/pictures/310/content_S__66191368_0.jpg"
+  },
+  {
+    "path": "/article-images/5515013c7beb6011.jpg",
+    "sha256": "1604d66127aa826776c10cfa57484070768ead1d121d0e4904d2ec2aed8c1513",
+    "bytes": 359587,
+    "width": 1513,
+    "height": 860,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/8177/141.jpg"
+  },
+  {
+    "path": "/article-images/a1a21834c9156be6.jpg",
+    "sha256": "19b55e0377e91ce12d52230ee8d2c33b64378a485559d8ef76ee62b9ec64c714",
+    "bytes": 361074,
+    "width": 1519,
+    "height": 862,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/8176/140.jpg"
+  },
+  {
+    "path": "/article-images/b7f7bf29a93ae54c.jpg",
+    "sha256": "485c127b3fbec937a205f6d2b4f18338bd81d4e2f6954ad28e583529fb28053d",
+    "bytes": 433697,
+    "width": 1421,
+    "height": 810,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/8074/136.jpg"
+  },
+  {
+    "path": "/article-images/7de3ce4e9e31fff2.jpg",
+    "sha256": "d475c24357964d7d990beb071f87a2337b6247f797428b56ed17d86086ac9b07",
+    "bytes": 249635,
+    "width": 1420,
+    "height": 808,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/8073/135.jpg"
+  },
+  {
+    "path": "/article-images/c0df40c636dbd47d.jpg",
+    "sha256": "ac345bc0f1d414ff868745d68ff2bf68b532b7f26b3baa0b364ca572abc8554a",
+    "bytes": 281876,
+    "width": 1422,
+    "height": 806,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/8072/134.jpg"
+  },
+  {
+    "path": "/article-images/9fb76c814eb574e4.jpg",
+    "sha256": "53821eba0f1480e07327eb75d6b46e1c576ef3e55c98aac32f339e728f066459",
+    "bytes": 362917,
+    "width": 1418,
+    "height": 807,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/7832/132.jpg"
+  },
+  {
+    "path": "/article-images/097b26baa3c41a5d.jpeg",
+    "sha256": "1683362fb0dd249a8a2720b016eecd5ba29c197d07bdd4df0b3726b518641082",
+    "bytes": 383111,
+    "width": 786,
+    "height": 1101,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/ckeditor/pictures/305/content_IMG_5550.jpeg"
+  },
+  {
+    "path": "/article-images/50a7f0c776d86ef0.jpg",
+    "sha256": "7f6afe6883b8481e6a3807e4359c79a90fefc91228ce08f48fec1db1e3743db5",
+    "bytes": 254069,
+    "width": 1421,
+    "height": 808,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/7744/131.jpg"
+  },
+  {
+    "path": "/article-images/96f522cd06a52bc3.jpg",
+    "sha256": "2e53399cba159806aba050b65edd1d4d6e85ce480f0a54b7b53b5e5461f68d07",
+    "bytes": 221338,
+    "width": 1419,
+    "height": 809,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/7728/130.jpg"
+  },
+  {
+    "path": "/article-images/a4777789a49ef9ed.jpg",
+    "sha256": "ea224bf4c405d8ec55a19282e0aead31fd113129d8bf9b37e7d9bf4453df5ee7",
+    "bytes": 542320,
+    "width": 1419,
+    "height": 808,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/7362/128.jpg"
+  },
+  {
+    "path": "/article-images/be7e73ad8d31cceb.jpg",
+    "sha256": "838379152ac671d6ff85a695b46b32bc5de99dc095c6ef5c1b11365ff25bae12",
+    "bytes": 196081,
+    "width": 1020,
+    "height": 503,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/ckeditor/pictures/297/content_S__59138053.jpg"
+  },
+  {
+    "path": "/article-images/70081870fef94df1.jpg",
+    "sha256": "5308efc24724fde4f33621c3482a81511f4c1d0261d6297299d31715075acdae",
+    "bytes": 214240,
+    "width": 1020,
+    "height": 448,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/ckeditor/pictures/298/content_S__59146245_0.jpg"
+  },
+  {
+    "path": "/article-images/8c0387c6d00603c0.jpg",
+    "sha256": "039b4e6d6c551134ff2ba3a0f4bdf6d0d9d3c3cfc098cf0509b640dbf6ae00ec",
+    "bytes": 227794,
+    "width": 1020,
+    "height": 680,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/ckeditor/pictures/302/content_S__59146244_0.jpg"
+  },
+  {
+    "path": "/article-images/e83b50b181c6c1a6.jpg",
+    "sha256": "556164313539f5eb6de2d78629726ba992f3127c00c69d78ca9d81e3a8d0dff1",
+    "bytes": 182405,
+    "width": 1020,
+    "height": 680,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/ckeditor/pictures/303/content_S__59146243_0.jpg"
+  },
+  {
+    "path": "/article-images/9b91d66b07218650.jpg",
+    "sha256": "aaea07506f12e0ccce9db8b576e73ef5ee9861affa768ec888a1bc21fa31cc46",
+    "bytes": 329064,
+    "width": 1420,
+    "height": 807,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/7313/126.jpg"
+  },
+  {
+    "path": "/article-images/d993012994d494cf.jpg",
+    "sha256": "32e9bd048d3741e263da1964875062f8752c32bb109906de8e6a5df407c97557",
+    "bytes": 243491,
+    "width": 1419,
+    "height": 807,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/7310/127.jpg"
+  },
+  {
+    "path": "/article-images/c8e6087ecdce2a96.jpg",
+    "sha256": "bafa0dbf22c4557ecd79048521ebe93e7c2fafccf305dbddb06e8929ce46280e",
+    "bytes": 324544,
+    "width": 1420,
+    "height": 807,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/7257/125(2).jpg"
+  },
+  {
+    "path": "/article-images/7f83b0fb0fa42da9.jpg",
+    "sha256": "b3323503a949dbabae3f64e2687db80dfe96d912a87664af807dcc1f92818265",
+    "bytes": 238644,
+    "width": 1420,
+    "height": 797,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/7206/124.jpg"
+  },
+  {
+    "path": "/article-images/4da9a854e6a8d939.jpg",
+    "sha256": "a5992570bd10fb01af573c966607bd79c1948312120143587abf57edb33931e0",
+    "bytes": 313479,
+    "width": 1418,
+    "height": 803,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/7205/122(2).jpg"
+  },
+  {
+    "path": "/article-images/169c0475ecd2a9ee.jpg",
+    "sha256": "d625b6f55efbc773794e2531c5b7bc4ae8449f56e6b5842ca6f82a39b50d1c60",
+    "bytes": 212122,
+    "width": 1417,
+    "height": 807,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/7119/121.jpg"
+  },
+  {
+    "path": "/article-images/bf192312cf843a52.jpg",
+    "sha256": "e7783e931f14bb6cc2bab3aec8c42de7941ba669651d886edd021fab789e8906",
+    "bytes": 227334,
+    "width": 1418,
+    "height": 807,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/7088/120.jpg"
+  },
+  {
+    "path": "/article-images/39f06a8a3421e3af.jpg",
+    "sha256": "551f4e17082db7033334be0d13b117ead4cbff0594736e34b33084d5a0bf34bc",
+    "bytes": 262001,
+    "width": 1419,
+    "height": 804,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/7049/119(2).jpg"
+  },
+  {
+    "path": "/article-images/619e41156d7e63d2.jpg",
+    "sha256": "9098d44387c8c4287186987c21074b700790609fa9b53ea4409eb6990409d676",
+    "bytes": 91255,
+    "width": 1020,
+    "height": 388,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/ckeditor/pictures/295/content_%E5%AD%B8%E6%9C%83logo%E9%95%B7%E7%9A%84jpg.jpg"
+  },
+  {
+    "path": "/article-images/4f8a0ad00aa83ede.jpg",
+    "sha256": "d0fc644ee3a4d9f11e2c2d502390ac788a6455f352607167d77418cdf6021b10",
+    "bytes": 233534,
+    "width": 1418,
+    "height": 806,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/7011/117.jpg"
+  },
+  {
+    "path": "/article-images/071cfd9e8647b029.jpg",
+    "sha256": "88f21b857e339b982827e605b650852cc380be131de40b5ff85649e94bf24db2",
+    "bytes": 234516,
+    "width": 1212,
+    "height": 692,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/6959/096.jpg"
+  },
+  {
+    "path": "/article-images/2cd455d592ac27b1.jpg",
+    "sha256": "9a4b885b0158fe9db0aef9e646814840ab7a4ecbab4b3e296033995e3b9184e1",
+    "bytes": 264277,
+    "width": 1214,
+    "height": 693,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/6958/097.jpg"
+  },
+  {
+    "path": "/article-images/5196974ee9b8a8d5.jpg",
+    "sha256": "f87610290e2058eedc1701b062055c749c1be860aee729b4492a85a66a8b2ac6",
+    "bytes": 288811,
+    "width": 1420,
+    "height": 801,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/6938/116.jpg"
+  },
+  {
+    "path": "/article-images/0d3eca5867920cd6.jpg",
+    "sha256": "ce451cd46619a1b4b702a68605bf02ee5023789c50fa4dcead6544ae1e1385ee",
+    "bytes": 271187,
+    "width": 1216,
+    "height": 689,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/6915/094.jpg"
+  },
+  {
+    "path": "/article-images/d59df638a4ce6cc8.jpg",
+    "sha256": "9f54c295b03ede6c4e31871383b5a1dc92db0890ed71541dd0d67ba59f6993dc",
+    "bytes": 460347,
+    "width": 1417,
+    "height": 805,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/6878/114.jpg"
+  },
+  {
+    "path": "/article-images/6e6fad8760a79870.jpeg",
+    "sha256": "87ee8cbb3be950be2f836f1bdeb9e932ac904b7143371230127ec85d3d315eb2",
+    "bytes": 425883,
+    "width": 1020,
+    "height": 1380,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/ckeditor/pictures/285/content_expansion_20251129123758544.jpeg"
+  },
+  {
+    "path": "/article-images/3d2baddd6093dbcb.jpg",
+    "sha256": "72068c81a2db0d5ffb139a2ef15d363681497dec59eda87e5b6ce1fad464ef68",
+    "bytes": 339079,
+    "width": 1020,
+    "height": 712,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/ckeditor/pictures/290/content_S__56418397.jpg"
+  },
+  {
+    "path": "/article-images/b9e9738a76e34d8b.jpg",
+    "sha256": "9d2603c9b503132f89d38efacb0a900e70bb3921b370ad20bfef99759ca638f9",
+    "bytes": 374029,
+    "width": 1020,
+    "height": 624,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/ckeditor/pictures/291/content_S__56418398.jpg"
+  },
+  {
+    "path": "/article-images/eac9266f835e7084.jpg",
+    "sha256": "631110d5273e9860d9e868eaf6b89294300b3e470202aa0378aa692c69760fc0",
+    "bytes": 222541,
+    "width": 1218,
+    "height": 692,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/6788/113.jpg"
+  },
+  {
+    "path": "/article-images/6a0d239f32677328.jpg",
+    "sha256": "fb40f273f95677c4b27a8e408db1b6383a3291fe39382661a009e1f64e736051",
+    "bytes": 193551,
+    "width": 1020,
+    "height": 680,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/ckeditor/pictures/283/content_S__55967774.jpg"
+  },
+  {
+    "path": "/article-images/fac8db4997ff86a2.jpg",
+    "sha256": "03bc042ac9c4d302e8a5f69af44b8c5feb1cc49b981b658ca71eecd9831d98b2",
+    "bytes": 286158,
+    "width": 1020,
+    "height": 665,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/ckeditor/pictures/282/content_S__55967753_0.jpg"
+  },
+  {
+    "path": "/article-images/46f49aecc456ae7e.jpg",
+    "sha256": "8e3d8485ae5738684c3ffb0ad724cb539cac041310cad0655c859f1a056ac43c",
+    "bytes": 337036,
+    "width": 1215,
+    "height": 690,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/6787/112.jpg"
+  },
+  {
+    "path": "/article-images/b0a62d4f568bcdb4.jpg",
+    "sha256": "04dc5988ea3fddce6f305465f840bf33b6674a51fc8c50a35fbcc8d5d38ce0de",
+    "bytes": 178250,
+    "width": 1020,
+    "height": 673,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/ckeditor/pictures/273/content_S__55967768_0.jpg"
+  },
+  {
+    "path": "/article-images/0fcda4b72caf83ff.jpg",
+    "sha256": "4abb6ccba5431a35a6a237a6d3f2ce61787a0aa06145413cd3fef24c4e4da9e0",
+    "bytes": 194441,
+    "width": 1020,
+    "height": 658,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/ckeditor/pictures/274/content_S__55967755_0.jpg"
+  },
+  {
+    "path": "/article-images/cf037c2d4fd0165a.jpg",
+    "sha256": "fe4e08ae711872b4f23473cb52164301cadacd8e407d928577fc0bce800f29e9",
+    "bytes": 133755,
+    "width": 1020,
+    "height": 603,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/ckeditor/pictures/279/content_S__55967773.jpg"
+  },
+  {
+    "path": "/article-images/00ecdd408f4cc0aa.jpg",
+    "sha256": "15b747b38d3b67039550f1f397cbcd71149db689ee6c74cd5eb09116f4ddae6f",
+    "bytes": 174968,
+    "width": 1020,
+    "height": 655,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/ckeditor/pictures/280/content_S__55967770_0.jpg"
+  },
+  {
+    "path": "/article-images/40864f72b31503b3.jpg",
+    "sha256": "7f1d0a3c3499018a347963eed20c9cfea96a667f00512994cc9dd0bd3afd031e",
+    "bytes": 198229,
+    "width": 1215,
+    "height": 694,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/6785/111jpg.jpg"
+  },
+  {
+    "path": "/article-images/add8c41622f244dd.jpg",
+    "sha256": "9deabec62c5e8acc7a6a16f9853e514f5380e4f9aa6244950ec424c2a8d2c8e0",
+    "bytes": 204969,
+    "width": 1214,
+    "height": 691,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/6752/109jpg.jpg"
+  },
+  {
+    "path": "/article-images/07e52917a8a569a3.jpg",
+    "sha256": "d1a8418cbc7a2c190f714ae5da73c8b22db4cceb4df819e163034c4dadc57a83",
+    "bytes": 283819,
+    "width": 1218,
+    "height": 696,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/6746/110jpg.jpg"
+  },
+  {
+    "path": "/article-images/5c4405c58e921248.jpg",
+    "sha256": "a9b635e670856f65ed82c59edd77a5c83dbf878ae4db738a45fd12e85e717dc2",
+    "bytes": 159292,
+    "width": 1215,
+    "height": 694,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/6728/108jpg.jpg"
+  },
+  {
+    "path": "/article-images/6afb6b4ba9b4c6d8.jpg",
+    "sha256": "80f5519712959b77fb0f92e1ee1b70a50ffe27d9353d17a5eb7893ba73b1e064",
+    "bytes": 166659,
+    "width": 1216,
+    "height": 690,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/6589/091.jpg"
+  },
+  {
+    "path": "/article-images/755a27708482ac07.jpg",
+    "sha256": "db8c186d6ad25b2053fda8e52f96982d0a62c1e6bfd61f2d5e2ffa4c091d2396",
+    "bytes": 144862,
+    "width": 1214,
+    "height": 690,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/6569/090.jpg"
+  },
+  {
+    "path": "/article-images/3f6ec70f0a7fb8a3.jpg",
+    "sha256": "b5b5e42d95ff9927689a8822b719e0f84813ca0640418b1c2f4de02004138da8",
+    "bytes": 150127,
+    "width": 1214,
+    "height": 689,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/6568/092.jpg"
+  },
+  {
+    "path": "/article-images/303ae3c18b223bcf.jpg",
+    "sha256": "628c157f659ab8728acdb0acb1afced0a66536f2f4292be3fd942eb06fd9b62f",
+    "bytes": 735783,
+    "width": 1936,
+    "height": 1101,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/6520/083.jpg"
+  },
+  {
+    "path": "/article-images/ec9092aaf71c4416.jpg",
+    "sha256": "7ae603e14a41c2d30e6a91cbc94ac6c8af3be410b87874fdc4c2772b27319d75",
+    "bytes": 487835,
+    "width": 1943,
+    "height": 1120,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/6429/082.jpg"
+  },
+  {
+    "path": "/article-images/8b1c89714acf898f.jpg",
+    "sha256": "02d4d32ad4566c0fb0a1138430a490bb217245bcea0ac69b7fd61a8affd74b76",
+    "bytes": 426090,
+    "width": 2003,
+    "height": 1134,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/6428/080.jpg"
+  },
+  {
+    "path": "/article-images/ec5f556b2411e47c.jpg",
+    "sha256": "c5a61ad383cdc1633b0a01ef59b7a9694b4f23ea6ef6b398a4befe584e3c94e6",
+    "bytes": 515812,
+    "width": 1944,
+    "height": 1116,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/6427/079.jpg"
+  },
+  {
+    "path": "/article-images/03273f807c62353d.jpg",
+    "sha256": "aa7011ab99e3033bf7cdc7cd645dbebadd192ed233e7b340083ad9d7274840a3",
+    "bytes": 499938,
+    "width": 2006,
+    "height": 1125,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/6404/081.jpg"
+  },
+  {
+    "path": "/article-images/51334603180f679c.jpg",
+    "sha256": "52f7dd0aad86684437b466a4950f0663affe8fd4ee4de3c685936aa930baf3ef",
+    "bytes": 207212,
+    "width": 1289,
+    "height": 750,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/6373/078.jpg"
+  },
+  {
+    "path": "/article-images/708daf7218b383ec.jpg",
+    "sha256": "56d0b1e19218be8f2554148a8ad2c106935a8a3914880eab89af0af3f108b24a",
+    "bytes": 774216,
+    "width": 2003,
+    "height": 1134,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/6350/111.jpg"
+  },
+  {
+    "path": "/article-images/40ce84582f18ee06.jpg",
+    "sha256": "1abfec40f6b8cf314b4c0f77fcb9474e2fa11f1196e386806d75b42ea9a2ca22",
+    "bytes": 235704,
+    "width": 1020,
+    "height": 708,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/ckeditor/pictures/259/content_LINE_ALBUM_%E8%87%BA%E4%B8%AD%E5%B8%82%E9%80%A2%E7%94%B2%E5%A4%A7%E5%AD%B8%E9%87%91%E8%9E%8D%E4%BF%9D%E9%9A%AA%E7%B3%BB%E5%8F%8B%E6%9C%83%E7%AC%AC%E5%9B%9B%E5%B1%86%E7%AC%AC%E4%B8%83%E6%AC%A1%E7%90%86%E7%9B%A3%E4%BA%8B%E6%9A%A8%E9%A1%A7%E5%95%8F%E6%9C%83%E8%AD%B0_251103_1.jpg"
+  },
+  {
+    "path": "/article-images/17dd0fe7809b2791.jpg",
+    "sha256": "1da1a4c581145abe877be75650c978c2e909e178c8fc32866274d61d15860f20",
+    "bytes": 638868,
+    "width": 2129,
+    "height": 1211,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/6338/075.jpg"
+  },
+  {
+    "path": "/article-images/923e0f9fa33ed26a.jpg",
+    "sha256": "0aa630eed6bf372c7074d4c6efa2747a2db37c3f00b4828cd0bb76d60276dc0b",
+    "bytes": 618685,
+    "width": 2036,
+    "height": 1200,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/6336/074.jpg"
+  },
+  {
+    "path": "/article-images/67da7af93858abc8.jpg",
+    "sha256": "d2ec8fb28bbfaa3a5409f61969ae2ff77145114f43f9be47374d63e278cd45e4",
+    "bytes": 720627,
+    "width": 2029,
+    "height": 1198,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/6337/073.jpg"
+  },
+  {
+    "path": "/article-images/1b54d48dd28ff5e3.jpg",
+    "sha256": "09aa6415446fbeb46a6b3759b9a0b80a8331c0ce47407fba08cff142c4ad54eb",
+    "bytes": 516617,
+    "width": 2013,
+    "height": 1171,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/6316/0777(2).jpg"
+  },
+  {
+    "path": "/article-images/613db2134067c351.jpg",
+    "sha256": "a8ffa3278666baa1fadd516a1a95d66f2bed4522666ce60088e0f120a7b22bc7",
+    "bytes": 525362,
+    "width": 2021,
+    "height": 1184,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/6243/077.jpg"
+  },
+  {
+    "path": "/article-images/0163e0e42dea46ba.jpg",
+    "sha256": "ceec35c88c2914c5042b75f8a9c6f7aab26abc8578b1477197ff4ecebb263989",
+    "bytes": 485872,
+    "width": 2130,
+    "height": 1211,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/6156/074.jpg"
+  },
+  {
+    "path": "/article-images/1deeddcb94dd16be.jpg",
+    "sha256": "00516f22edb3021fac2e91f156b0a2d1f3ba4d6b51c02b565730031461d520e8",
+    "bytes": 438770,
+    "width": 2109,
+    "height": 1210,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/6155/073.jpg"
+  },
+  {
+    "path": "/article-images/16d4be5ce12a6ff4.jpg",
+    "sha256": "d5b976a2a4961f5a72a469890c0eae41647395c5c081327f170cb9b5d3d5b926",
+    "bytes": 687439,
+    "width": 2125,
+    "height": 1212,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/6023/072.jpg"
+  },
+  {
+    "path": "/article-images/9f31f1b3f25e985d.jpg",
+    "sha256": "342ad7286f94dce09c803b27ea2af0362c78086003905f7be1ec3ef36bab7b9b",
+    "bytes": 589941,
+    "width": 2135,
+    "height": 1215,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/5975/067.jpg"
+  },
+  {
+    "path": "/article-images/efc9644a968bf075.jpg",
+    "sha256": "17ec58817b18bb0fa119389319f0ef8808f67d644f97cf879f5d271768ef5462",
+    "bytes": 398770,
+    "width": 2130,
+    "height": 1218,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/5972/068.jpg"
+  },
+  {
+    "path": "/article-images/f349e1ddb706987e.jpg",
+    "sha256": "1412f0db2a2d103802851ecf4db588f1ade25316e771836f13b7f49ea1225660",
+    "bytes": 709970,
+    "width": 2131,
+    "height": 1204,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/5957/071.jpg"
+  },
+  {
+    "path": "/article-images/af841195e5f8c340.jpg",
+    "sha256": "dfa123d033a5b4d120a84601b4432b186b3e6aec36339856097ce64d7d8316e7",
+    "bytes": 588030,
+    "width": 2127,
+    "height": 1211,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/5917/070.jpg"
+  },
+  {
+    "path": "/article-images/6b62a664dac3e74f.jpg",
+    "sha256": "f60bdf0b0b0ec2d577c048a7f9f20be73800dc2864cf7f95ecca60175cf8f62f",
+    "bytes": 862099,
+    "width": 2130,
+    "height": 1210,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/5846/064.jpg"
+  },
+  {
+    "path": "/article-images/f86a5e7e14ab390f.jpg",
+    "sha256": "e23b9ec2d43cd1a4b06f2e7017820db87caee28afb269ba05c2017e6a21f7e78",
+    "bytes": 459490,
+    "width": 2131,
+    "height": 1208,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/5845/066.jpg"
+  },
+  {
+    "path": "/article-images/68566bb6c14b3e18.jpg",
+    "sha256": "0bdac1ef00a690851192c824876d7848f22599636d443ec6fdf7289114d24ef9",
+    "bytes": 1162655,
+    "width": 2131,
+    "height": 1213,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/5824/065.jpg"
+  },
+  {
+    "path": "/article-images/beaeeba86c9a30cc.jpg",
+    "sha256": "4269c53abe5ba992e3c83d2a0759350b5019f6d3d13e466b24323fa924949f5c",
+    "bytes": 592397,
+    "width": 2129,
+    "height": 1210,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/5726/063.jpg"
+  },
+  {
+    "path": "/article-images/5c2235fee0828626.jpg",
+    "sha256": "aa428806fe96470368472948d2b8e63ad8865b2156f6fb96122ae19632b23fd1",
+    "bytes": 433164,
+    "width": 2132,
+    "height": 1212,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/5662/058.jpg"
+  },
+  {
+    "path": "/article-images/f0e39988a4167ac7.jpg",
+    "sha256": "4f8e8ebff284b63d7842d81e0e281869c607ed3cb370e510a61e52e9c5147fa8",
+    "bytes": 424075,
+    "width": 2126,
+    "height": 1212,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/5661/030.jpg"
+  },
+  {
+    "path": "/article-images/7df25b615cce93c1.jpg",
+    "sha256": "7a1d869d2ec9b1de50f72a94ac2848694272557d2b84f515b47202cd76b06afb",
+    "bytes": 625271,
+    "width": 2129,
+    "height": 1213,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/5660/061.jpg"
+  },
+  {
+    "path": "/article-images/81d8a11c6811de1f.jpg",
+    "sha256": "24965b58c564f78e246ecbec4ce0896d1108857beec176d782ff6d1430344cb3",
+    "bytes": 633673,
+    "width": 2127,
+    "height": 1211,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/5652/059.jpg"
+  },
+  {
+    "path": "/article-images/be3f7891a662d12e.jpg",
+    "sha256": "6606edae52493b7ac744b5e193f796be8bffa689a7a10231aa0e150a770f1912",
+    "bytes": 775864,
+    "width": 2128,
+    "height": 1211,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/5651/057.jpg"
+  },
+  {
+    "path": "/article-images/899f9ed05c168de3.jpg",
+    "sha256": "1b89f1f681e039cc44fa52f58069cd93d805c8e943d9e10e0f4f0a45567634c5",
+    "bytes": 643728,
+    "width": 2126,
+    "height": 1212,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/5650/060.jpg"
+  },
+  {
+    "path": "/article-images/feb8a98e55ea730d.jpg",
+    "sha256": "28f01d1b07f07a4b521af1200c597dd6b4139dd935166bcd8a6c573fd021de41",
+    "bytes": 543669,
+    "width": 2128,
+    "height": 1213,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/5598/053.jpg"
+  },
+  {
+    "path": "/article-images/68485b0b61f461b5.jpg",
+    "sha256": "ffcaf0f35fbc5328fa28360259aa72ec980c4bce53dbfb2948ae1123800ff8bc",
+    "bytes": 1022168,
+    "width": 2129,
+    "height": 1212,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/5548/052.jpg"
+  },
+  {
+    "path": "/article-images/22dc300e0765d9a8.jpg",
+    "sha256": "90d15838170209869b416da6de03b15fc104000102bff0ba6d2ca46480cb55bf",
+    "bytes": 588282,
+    "width": 2128,
+    "height": 1213,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/5544/055.jpg"
+  },
+  {
+    "path": "/article-images/d021139dfb44b4dd.jpg",
+    "sha256": "2f364d6121b5c294994373a2cece142e1d4fb49829ae7a5737da6f231ba3b402",
+    "bytes": 539471,
+    "width": 2126,
+    "height": 1208,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/5540/056.jpg"
+  },
+  {
+    "path": "/article-images/8c5ae3683c8a7c8a.jpg",
+    "sha256": "4e8b6be6cfeafb7808c58691b9fe4d685035e673ad6ddce10b29baac048f557e",
+    "bytes": 699632,
+    "width": 2130,
+    "height": 1213,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/5538/%E6%9C%AA%E5%91%BD%E5%90%8D.jpg"
+  },
+  {
+    "path": "/article-images/0541d8344fb629a1.jpg",
+    "sha256": "08d7eaef77ed463574b8dcd8bf161ecf4157a96070c98f5abfac355685f2ed50",
+    "bytes": 109060,
+    "width": 960,
+    "height": 1280,
+    "sourceUrl": "https://uploads.posu.tw/19/1948/img/LINE_ALBUM_2025%EF%BC%8F9%EF%BC%8F26%20%20--681%E6%AC%A1%E4%BE%8B%E6%9C%83_250928_2(2).jpg"
+  },
+  {
+    "path": "/article-images/8085b4a6d40e72db.jpg",
+    "sha256": "92c66f1d7b75c3bb1787576660e2d779bafbed4f0c0a0ba9f465c376922b3c23",
+    "bytes": 737063,
+    "width": 2128,
+    "height": 1212,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/5495/045.jpg"
+  },
+  {
+    "path": "/article-images/b57300f1e8453366.jpg",
+    "sha256": "6ece7bbd734559b99dfa7f94e2aa4a0a262ed990c106f1435dc39f20fea8b152",
+    "bytes": 569468,
+    "width": 2127,
+    "height": 1211,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/5443/050.jpg"
+  },
+  {
+    "path": "/article-images/11b064662e43dbd4.jpg",
+    "sha256": "f92654ea09ec9cd91a28166aa2b7ff2dee73df2b669e6785e17d27f5369621f2",
+    "bytes": 468888,
+    "width": 2124,
+    "height": 1212,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/5399/046.jpg"
+  },
+  {
+    "path": "/article-images/79492d45901791bf.jpg",
+    "sha256": "97fcd18add32dd111ed8fd07f3c5814dc9028f5f134ab02c684f816f88ea26b0",
+    "bytes": 605486,
+    "width": 2127,
+    "height": 1201,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/5380/007.jpg"
+  },
+  {
+    "path": "/article-images/15ad5e5173e5611a.jpg",
+    "sha256": "c4c60125569ba7bbdced932b2c10202e6edf30da4ff0db6a7e9a00d8716819ed",
+    "bytes": 577707,
+    "width": 2125,
+    "height": 1209,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/5379/013.jpg"
+  },
+  {
+    "path": "/article-images/9e228c2e927bb70c.jpg",
+    "sha256": "d9bebd75c49019faa005b5a521610ee5e0bcaa3f269e3e57c8ab28f7f11af789",
+    "bytes": 357999,
+    "width": 2127,
+    "height": 1203,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/5371/008.jpg"
+  },
+  {
+    "path": "/article-images/a88d90528797f7f3.jpg",
+    "sha256": "c2d7709d1fcc30206e9292550f514cabb44d831af55f9f9d4d69c06ac3e7647d",
+    "bytes": 518708,
+    "width": 2125,
+    "height": 1208,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/5275/044.jpg"
+  },
+  {
+    "path": "/article-images/810e5116b10a5f11.jpg",
+    "sha256": "0aba9f5dae4c4d4cbb9543caac478811ec3434edf156ff7ea6edf9164d21137c",
+    "bytes": 532284,
+    "width": 2123,
+    "height": 1203,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/5244/043.jpg"
+  },
+  {
+    "path": "/article-images/7398922ffbbe2350.jpg",
+    "sha256": "2f56ad16c1f305bf4769eb9fe04051c47821b7795ae6d9d8ccdeebc31ee006fa",
+    "bytes": 537527,
+    "width": 2128,
+    "height": 1208,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/5240/039.jpg"
+  },
+  {
+    "path": "/article-images/b841f06500edbe32.jpg",
+    "sha256": "a30773e55e144ec9e8bc593cbd7b76d500018800bcdee48ce15ede733a1fc3d8",
+    "bytes": 681586,
+    "width": 2128,
+    "height": 1212,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/5208/042(2).jpg"
+  },
+  {
+    "path": "/article-images/2b43aa8d06a376e1.jpg",
+    "sha256": "a83d6b44f94ae1388b4a6baff57494de6d51559306da805cd264bf99b26bb0b6",
+    "bytes": 501942,
+    "width": 2132,
+    "height": 1216,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/5207/040.jpg"
+  },
+  {
+    "path": "/article-images/dbfd45899df9a792.jpg",
+    "sha256": "42e1e764e2f2ee7fd1c8937e8523806355fc2606d31a322df06bd0d49eb3e4cc",
+    "bytes": 555191,
+    "width": 2127,
+    "height": 1213,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/5160/011.jpg"
+  },
+  {
+    "path": "/article-images/ed61bdff594d24f2.jpg",
+    "sha256": "e7165567ff057dbdaec0e83d07f9eaa2ac6a2b3c44a5cb53dcd4530e1fbc715c",
+    "bytes": 1509934,
+    "width": 2128,
+    "height": 1210,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/5047/032.jpg"
+  },
+  {
+    "path": "/article-images/ea54a451b514f578.jpg",
+    "sha256": "76662fb29dab7fd2ed96d69b8334df248b2d8084f0b41bcb5bbeec1a930b0690",
+    "bytes": 1014475,
+    "width": 2128,
+    "height": 1211,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/5023/033(2).jpg"
+  },
+  {
+    "path": "/article-images/2ade24a82469b32d.jpg",
+    "sha256": "4939522d19a8e95f605ded96849ddfeef9ff2424a5396fc17f8427025fc54567",
+    "bytes": 460806,
+    "width": 2127,
+    "height": 1204,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/5008/034.jpg"
+  },
+  {
+    "path": "/article-images/75ddaa74f483edd3.jpg",
+    "sha256": "6a1ea1b87eaa8fa7f0ff87dc83b66a279efd8f4b21b84ca65bb2c2fb442c0357",
+    "bytes": 590069,
+    "width": 2127,
+    "height": 1208,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/4934/035(2).jpg"
+  },
+  {
+    "path": "/article-images/0bcc7e30b26cb420.jpg",
+    "sha256": "ca8174cfa440e738b0b0c6df88ff439da8e84b35532a298d29e01b78850205dd",
+    "bytes": 695525,
+    "width": 2127,
+    "height": 1210,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/4857/031.jpg"
+  },
+  {
+    "path": "/article-images/31d9863e904e45ee.jpg",
+    "sha256": "01dbc4fe6cb40945c047f50f59893ffae0f9eb41ee5026e66491c647f299df98",
+    "bytes": 796151,
+    "width": 2125,
+    "height": 1206,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/4619/028.jpg"
+  },
+  {
+    "path": "/article-images/2b435e5979d883a3.jpg",
+    "sha256": "09b53ef75e394f8b82799e5905072dba99ddbb98998141f457e88ba3fb44c5eb",
+    "bytes": 426555,
+    "width": 2125,
+    "height": 1212,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/4618/029.jpg"
+  },
+  {
+    "path": "/article-images/5635a2346dc37dd3.jpg",
+    "sha256": "f253a9d7f731ad773610037a206ad533745c6e7abadc285050281eb22d3f6934",
+    "bytes": 813580,
+    "width": 2127,
+    "height": 1207,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/4617/027.jpg"
+  },
+  {
+    "path": "/article-images/40bcf832c653c14d.jpg",
+    "sha256": "c93563e729423a7ad23c95befde03ab585975b9e408c728b0150cfa504264d67",
+    "bytes": 544650,
+    "width": 2129,
+    "height": 1212,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/4566/026.jpg"
+  },
+  {
+    "path": "/article-images/ea9d425140f8dd82.jpg",
+    "sha256": "4b50134d71fb61ffd2c2d931a126251c21d59e244c07841bbe9147836e356951",
+    "bytes": 462944,
+    "width": 2128,
+    "height": 1206,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/4565/022.jpg"
+  },
+  {
+    "path": "/article-images/c2819c70fe378afb.jpg",
+    "sha256": "344582ac782ec2adf458e360e7885fa73044f4ce7b4b4f3f2d7cbe454be0d7d2",
+    "bytes": 489079,
+    "width": 2126,
+    "height": 1212,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/4470/024.jpg"
+  },
+  {
+    "path": "/article-images/3f81ac52320ead7e.jpg",
+    "sha256": "5f11a7f94933cdace9c58c735a319fdc3d58f56ff4c3b8eed22a0eeae2d5f432",
+    "bytes": 408169,
+    "width": 2128,
+    "height": 1192,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/4469/023.jpg"
+  },
+  {
+    "path": "/article-images/174bb41f0e9d0d48.jpg",
+    "sha256": "9ef545e6e2f14f2d548cea58edd40bcc04b89c65061a2ab2e3f813aa92b2f9f0",
+    "bytes": 401659,
+    "width": 2126,
+    "height": 1208,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/4468/025.jpg"
+  },
+  {
+    "path": "/article-images/cacf31653e52819c.jpg",
+    "sha256": "678499c493e03c1c6357f527a8e3c0cff353824a2a038d26c7be94982f9088e4",
+    "bytes": 592244,
+    "width": 2127,
+    "height": 1210,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/4426/015.jpg"
+  },
+  {
+    "path": "/article-images/294278072c4ef268.jpg",
+    "sha256": "35630d38c060f811d66c72cb90eaeafa6d128ad8156618e62c6d7d9f0648838d",
+    "bytes": 492298,
+    "width": 2123,
+    "height": 1209,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/4323/001.jpg"
+  },
+  {
+    "path": "/article-images/ee15f36e3fa0bb2d.jpg",
+    "sha256": "5d3544cf4612141c4ecf34e09fe9a375cf1e601bf67a2db8ffa4260ab8fdbabc",
+    "bytes": 440949,
+    "width": 2128,
+    "height": 1206,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/4287/002.jpg"
+  },
+  {
+    "path": "/article-images/da3b027dfedda7f2.jpg",
+    "sha256": "c6f8f4fd6c7fe184ba589e53d142c1fe77f7bfc0af338abb80a4be573afefced",
+    "bytes": 660891,
+    "width": 2120,
+    "height": 1212,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/4276/019.jpg"
+  },
+  {
+    "path": "/article-images/3c5f2e56884b4df1.jpg",
+    "sha256": "0d830fc673c7d8b2465918f8675186eda11f1f097a6a9ff424f0242764945993",
+    "bytes": 382130,
+    "width": 2127,
+    "height": 1208,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/4159/016.jpg"
+  },
+  {
+    "path": "/article-images/3d8e7f719142c594.jpg",
+    "sha256": "5b155b0d94d7705074654ee546d8fa6a391f6a73288060f756aa1942b3967f21",
+    "bytes": 392462,
+    "width": 2126,
+    "height": 1208,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/4158/004.jpg"
+  },
+  {
+    "path": "/article-images/bbd2c2b7c3d2bb20.jpg",
+    "sha256": "ac1f29829317471f8ba88ae8c1963c78de8f7f27dfbb0c28e74d2c5e133b03f8",
+    "bytes": 678015,
+    "width": 2125,
+    "height": 1209,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/4121/009.jpg"
+  },
+  {
+    "path": "/article-images/a26d3031f66beb68.jpg",
+    "sha256": "09f54eef81a8d992eb62b88a2dd7d562f58acd1b744725d0b1699a3914983b98",
+    "bytes": 452322,
+    "width": 2126,
+    "height": 1204,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/4105/017.jpg"
+  },
+  {
+    "path": "/article-images/009ec784fd8f0134.jpg",
+    "sha256": "909a003647d83e86d06f0edcfe9905d730242d74979274b1c45edd8a8a39d8cd",
+    "bytes": 485664,
+    "width": 2124,
+    "height": 1210,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/4104/006.jpg"
+  },
+  {
+    "path": "/article-images/fc2c0360b080f7b7.jpg",
+    "sha256": "9a42eefcb3cd582cdd449af0d03ad4f01740374560e5a68efe24df45a140781a",
+    "bytes": 529432,
+    "width": 2120,
+    "height": 1210,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/4103/014.jpg"
+  },
+  {
+    "path": "/article-images/1add778a2ca68c88.jpg",
+    "sha256": "ee7064406cace0a13831cd0aa4805aad6842e3ee94131e93d490772e50cc185a",
+    "bytes": 479238,
+    "width": 2129,
+    "height": 1204,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/4088/021.jpg"
+  },
+  {
+    "path": "/article-images/95f0af23b27adac8.jpg",
+    "sha256": "04a62066593c3ef67a09dc8a82c544ddc17775d2bdf578e9ecb8a9f568a254ca",
+    "bytes": 433578,
+    "width": 2127,
+    "height": 1211,
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/4054/020.jpg"
+  }
+]

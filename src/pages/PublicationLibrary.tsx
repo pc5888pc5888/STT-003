@@ -195,13 +195,15 @@ export function PublishedWorksPage({ series: fixedSeries }: { series?: string })
   const selectedTheme = THEMES.find(item => item.key === themeKey);
   const query = params.get("q") || "";
   const source = params.get("source") || "";
+  const year = params.get("year") || "";
+  const years = [...new Set(WORKS.map(work => work.date.slice(0, 4)))].sort().reverse();
   const order = params.get("order") === "oldest" ? "oldest" : "newest";
   const publishers = [...new Set(WORKS.flatMap(work => work.sources.map(item => item.publisher)))].sort();
   const filtered = useMemo(() => {
     const needle = normalized(query);
-    return WORKS.filter(work => (!seriesKey || work.series === seriesKey) && (!themeKey || classifyTheme(work) === themeKey) && (!source || work.sources.some(item => item.publisher === source)) && (!needle || normalized(`${work.title} ${work.excerpt} ${work.author} ${work.category}`).includes(needle)))
+    return WORKS.filter(work => (!year || work.date.startsWith(year)) && (!seriesKey || work.series === seriesKey) && (!themeKey || classifyTheme(work) === themeKey) && (!source || work.sources.some(item => item.publisher === source)) && (!needle || normalized(`${work.title} ${work.excerpt} ${work.author} ${work.category}`).includes(needle)))
       .sort((a, b) => (order === "oldest" ? 1 : -1) * ((isoDate(a.date) || "").localeCompare(isoDate(b.date) || "") || a.id.localeCompare(b.id)));
-  }, [seriesKey, themeKey, source, query, order]);
+  }, [seriesKey, themeKey, source, query, order, year]);
   const pageSize = 12, pageCount = Math.max(1, Math.ceil(filtered.length / pageSize));
   const requested = Number(params.get("page") || 1);
   const page = Math.min(pageCount, Math.max(1, Number.isFinite(requested) ? Math.floor(requested) : 1));
@@ -231,20 +233,23 @@ export function PublishedWorksPage({ series: fixedSeries }: { series?: string })
       <label className="stt-library-search">搜尋作品<input type="search" aria-label="搜尋作品" value={query} onChange={event => update("q", event.target.value)} placeholder="標題、作者或關鍵字" /></label>
       <label>治理主題<select aria-label="治理主題" value={themeKey} onChange={event => update("theme", event.target.value)}><option value="">全部主題</option>{THEMES.map(item => <option key={item.key} value={item.key}>{item.label}</option>)}{themeKey && !selectedTheme && <option value={themeKey}>未辨識的主題</option>}</select></label>
       {publishers.length > 1 && <label>發表來源<select aria-label="發表來源" value={source} onChange={event => update("source", event.target.value)}><option value="">全部來源</option>{publishers.map(item => <option key={item} value={item}>{item}</option>)}</select></label>}
+      <label>發表年度<select aria-label="發表年度" value={year} onChange={event => update("year", event.target.value)}><option value="">全部年度</option>{years.map(item => <option key={item} value={item}>{item}</option>)}</select></label>
       <label>排序<select aria-label="排序" value={order} onChange={event => update("order", event.target.value)}><option value="newest">最新優先</option><option value="oldest">最早優先</option></select></label>
     </section>
     <section className="stt-library-results" ref={listRef} aria-label="作品清單">
-      <div className="stt-library-results-head"><p role="status" aria-live="polite" data-result-count={filtered.length}>{selectedTheme ? `${selectedTheme.label} · ` : ""}{query ? `搜尋「${query}」 · ` : ""}共 {filtered.length} 則{filtered.length > 0 ? ` · 顯示 ${(page - 1) * pageSize + 1}–${Math.min(page * pageSize, filtered.length)} 則` : ""}</p>{(query || themeKey || source || (!fixedSeries && seriesKey)) && <button type="button" onClick={clearFilters}>清除篩選</button>}</div>
+      <div className="stt-library-results-head"><p role="status" aria-live="polite" data-result-count={filtered.length}>{selectedTheme ? `${selectedTheme.label} · ` : ""}{query ? `搜尋「${query}」 · ` : ""}共 {filtered.length} 則{filtered.length > 0 ? ` · 顯示 ${(page - 1) * pageSize + 1}–${Math.min(page * pageSize, filtered.length)} 則` : ""}</p>{(query || themeKey || source || year || (!fixedSeries && seriesKey)) && <button type="button" onClick={clearFilters}>清除篩選</button>}</div>
       {visible.map(work => <article className="stt-work" key={work.id} data-work-id={work.id} data-series={work.series}>
         <div className="stt-work-meta"><span>{work.author}</span><time dateTime={isoDate(work.date)}>{work.date}</time><span>{SERIES.find(item => item.key === work.series)?.label}</span></div>
-        <h2><a href={work.sources[0].url} target="_blank" rel="noopener noreferrer">{work.title}<span className="stt-library-sr-only">（另開原文分頁）</span></a></h2>
+        <h2 data-preserve-source>{work.articlePath ? <Link to={work.articlePath}>{work.title}</Link> : <a href={work.sources[0].url} target="_blank" rel="noopener noreferrer">{work.title}<span className="stt-library-sr-only">（另開原文分頁）</span></a>}</h2>
+        {work.articlePath && <Link className="stt-library-text-link" to={work.articlePath}>閱讀 STT 全文 →</Link>}
+        {work.sourceUnavailable && <p className="stt-work-excerpt">保留既有作品紀錄。原刊網址目前轉至媒體首頁，全文待來源補齊。</p>}
         {work.excerpt && <><p className="stt-work-excerpt">{work.excerpt.length > 180 ? work.excerpt.slice(0, 180) + "…" : work.excerpt}</p>{work.excerpt.length > 180 && <details className="stt-work-summary"><summary>展開完整摘要</summary><p>{work.excerpt}</p></details>}</>}
         <div className="stt-work-sources">{work.sources.map(item => <div key={item.url}><span>{sourceLabel(item)}</span><a href={item.url} target="_blank" rel="noopener noreferrer">閱讀原文<span aria-hidden="true"> ↗</span><span className="stt-library-sr-only"> · {item.publisher}（另開分頁）</span></a></div>)}</div>
       </article>)}
       {visible.length === 0 && <div className="stt-library-empty"><h2>目前沒有符合條件的作品。</h2><p>調整關鍵字或清除篩選，即可重新瀏覽本區內容。</p><button type="button" onClick={clearFilters}>重新瀏覽</button></div>}
       {pageCount > 1 && <nav className="stt-library-pagination" aria-label="作品分頁"><button type="button" disabled={page <= 1} onClick={() => update("page", String(page - 1), true)}>上一頁</button>{pages.map((n, i) => <span key={n}>{i > 0 && n - pages[i - 1] > 1 && <span aria-hidden="true">…</span>}<button type="button" aria-label={`第 ${n} 頁`} aria-current={n === page ? "page" : undefined} onClick={() => update("page", String(n), true)}>{n}</button></span>)}<button type="button" disabled={page >= pageCount} onClick={() => update("page", String(page + 1), true)}>下一頁</button></nav>}
     </section>
-    <aside className="stt-library-note"><p>此處提供公開作品的標題、摘要與原文入口。第三方發表的完整內容及使用條件，以原始來源為準；本站不因收錄而成為該媒體的所有人。</p>{fixedSeries === "legal" && <Link to="/professional-boundary">專業服務與資訊邊界 →</Link>}</aside>
+    <aside className="stt-library-note"><p>此處收錄作者的公開作品與原刊來源。已完成全文收錄者可直接在 STT 閱讀；外部第三方媒體仍維持獨立機構與責任邊界。</p>{fixedSeries === "legal" && <Link to="/professional-boundary">專業服務與資訊邊界 →</Link>}</aside>
     <div className="stt-library-ending"><Link to="/insights">← 返回研究與出版總覽</Link><Link to="/books">電子書與出版 →</Link></div>
   </div></div>;
 }

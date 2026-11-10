@@ -1,3 +1,4 @@
+import { ARTICLE_BY_PATH, articleSchema } from "./src/data/articleArchive";
 import AUTHOR_PROFILE from "./src/data/authorProfile.json";
 import tailwindcss from "@tailwindcss/vite";
 import react from "@vitejs/plugin-react";
@@ -45,6 +46,7 @@ function schemaTags(route: string, label: string, image?: string, language: "zh-
     });
   }
 
+  if (ARTICLE_BY_PATH[route]) schemas.push(articleSchema(ARTICLE_BY_PATH[route]));
   const book = BOOK_SCHEMA[route];
   if (book) {
     schemas.push({
@@ -133,7 +135,7 @@ function formalSeoPages(): Plugin {
           `    <link rel="canonical" href="${canonical}" />`,
           '    <meta property="og:site_name" content="STT Governance｜策略智庫智慧治理" />',
           `    <meta property="og:locale" content="${locale}" />`,
-          `    <meta property="og:type" content="${route === "/eric-chuang" ? "profile" : "website"}" />`,
+          `    <meta property="og:type" content="${ARTICLE_BY_PATH[route] ? "article" : route === "/eric-chuang" ? "profile" : "website"}" />`,
           `    <meta property="og:title" content="${escapeHtml(meta.title)}" />`,
           `    <meta property="og:description" content="${escapeHtml(meta.description)}" />`,
           `    <meta property="og:url" content="${canonical}" />`,

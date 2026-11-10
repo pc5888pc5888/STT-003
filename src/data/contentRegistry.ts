@@ -1,3 +1,4 @@
+import { ARTICLE_INDEX } from "./articleArchive";
 import legacy from "../../public/data/mmedia-catalog.json";
 import additions from "../../public/data/additional-publications.json";
 
@@ -5,7 +6,7 @@ export type Theme = "family" | "corporate" | "ai" | "civilization";
 export type PublicationSource = { publisher: string; url: string; relation: "external" | "stt" };
 export type PublishedWork = {
   id: string; title: string; excerpt: string; date: string; author: string;
-  category: string; series: string; theme?: Theme; sources: PublicationSource[];
+  category: string; series: string; theme?: Theme; articlePath?: string; sourceUnavailable?: boolean; sources: PublicationSource[];
 };
 export type SeriesRecord = { key: string; label: string; description: string; route?: string };
 export type BookRecord = {
@@ -164,10 +165,15 @@ export const SERIES: SeriesRecord[] = [
 
 const sourceName = (value: string) => value === "M傳媒" ? "M 傳媒" : value;
 export const WORKS: PublishedWork[] = [
-  ...legacy.articles.map(article => ({
-    id: article.id, title: article.title, excerpt: article.excerpt, date: article.date,
+  ...legacy.articles.filter(article => !ARTICLE_INDEX.some(item => `mmedia-${item.id}` === article.id)).map(article => ({
+    id: article.id, title: article.title, excerpt: article.excerpt, date: article.date, sourceUnavailable: article.id === "mmedia-cee607",
     author: article.author, category: article.category, series: article.series,
     sources: [{ publisher: sourceName(article.source || legacy.source.publisher), url: article.url, relation: "external" as const }],
+  })),
+  ...ARTICLE_INDEX.map(article => ({
+    id: `mmedia-${article.id}`, title: article.title, excerpt: article.excerpt, date: article.date,
+    author: article.author, category: article.category, series: article.series, articlePath: article.path,
+    sources: [{ publisher: "M 傳媒", url: article.sourceUrl, relation: "external" as const }],
   })),
   ...(additions.works as PublishedWork[]),
 ];

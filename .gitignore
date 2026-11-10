@@ -21,3 +21,6 @@ temp/
 .env.*
 !.env.example
 .git/
+
+# Exact original article images are verified from the manifest during build.
+/public/article-images/

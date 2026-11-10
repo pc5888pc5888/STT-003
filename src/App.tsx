@@ -5,6 +5,7 @@ import Lenis from "lenis";
 import Home from "./pages/HomeCanonical";
 import NotFound from "./components/NotFound";
 import Columns from "./pages/Columns";
+import ArticleArchive from "./pages/ArticleArchive";
 import { BookDetailPage, BooksPage, PublishedWorksPage } from "./pages/PublicationLibrary";
 import Problems from "./pages/Problems";
 import ProblemDetail from "./pages/ProblemDetail";
@@ -82,6 +83,7 @@ function ExternalRedirect({ url }: { url: string }) {
 
 function enforceHeadingTypography(root: ParentNode) {
   root.querySelectorAll<HTMLElement>("h1,h2,h3").forEach((heading) => {
+    if (heading.closest("[data-preserve-source]")) return;
     const walker = document.createTreeWalker(heading, NodeFilter.SHOW_TEXT);
     let node: Node | null;
     while ((node = walker.nextNode())) {
@@ -92,7 +94,7 @@ function enforceHeadingTypography(root: ParentNode) {
   });
 }
 
-function PublicShell({ children }: ShellProps) {
+export function PublicShell({ children }: ShellProps) {
   const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
   const publicationPage = location.pathname === "/books" || location.pathname.startsWith("/books/") || location.pathname === "/research" || location.pathname.startsWith("/research/") || location.pathname === "/columns" || location.pathname.startsWith("/columns/");
@@ -242,6 +244,7 @@ function AppRoutes() {
       <Route path="/books" element={<BooksPage />} />
       <Route path="/books/:slug" element={<BookDetailPage />} />
       <Route path="/columns" element={<PublishedWorksPage />} />
+      <Route path="/columns/articles/:id" element={<ArticleArchive />} />
       <Route path="/columns/legal" element={<PublishedWorksPage series="legal" />} />
       <Route path="/columns/humanistic" element={<PublishedWorksPage series="humanistic" />} />
       <Route path="/columns/news" element={<PublishedWorksPage series="news" />} />

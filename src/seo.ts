@@ -1,3 +1,4 @@
+import { ARTICLE_INDEX, ARTICLE_BY_PATH, articleSchema } from "./data/articleArchive";
 import AUTHOR_PROFILE from "./data/authorProfile.json";
 import { RETAINED_META } from "./data/retainedRouteMetadata";
 import { BOOKS } from "./data/contentRegistry";
@@ -15,6 +16,7 @@ export type MetaRecord = {
 
 export const FORMAL_META: Record<string, MetaRecord> = {
   ...RETAINED_META,
+  ...Object.fromEntries(ARTICLE_INDEX.map(article => [article.path, { title: `${article.title}｜STT Governance`, label: article.title, description: (article.excerpt || article.title).slice(0, 160), image: article.cover.src }])),
   "/": {
     title: "STT Governance｜策略智庫智慧治理",
     description: "STT Governance 協助企業、家族與重大決策者，在結果尚未不可逆之前，釐清問題、證據、權力、責任與選項，建立可承擔、可追溯的治理結構。",
@@ -453,7 +455,7 @@ export function applyGovernedMetadata(pathname: string) {
     upsertMeta('meta[property="og:site_name"]', { property: "og:site_name", content: "STT Governance｜策略智庫智慧治理" });
     upsertMeta('meta[property="og:title"]', { property: "og:title", content: formal.title });
     upsertMeta('meta[property="og:description"]', { property: "og:description", content: formal.description });
-    upsertMeta('meta[property="og:type"]', { property: "og:type", content: normalized === "/eric-chuang" ? "profile" : "website" });
+    upsertMeta('meta[property="og:type"]', { property: "og:type", content: ARTICLE_BY_PATH[normalized] ? "article" : normalized === "/eric-chuang" ? "profile" : "website" });
     upsertMeta('meta[property="og:locale"]', { property: "og:locale", content: formal.locale ?? (isEnglish ? "en_US" : isJapanese ? "ja_JP" : isKorean ? "ko_KR" : "zh_TW") });
     upsertMeta('meta[property="og:url"]', { property: "og:url", content: canonical });
     upsertMeta('meta[property="og:image"]', { property: "og:image", content: `${STT_CANONICAL_ORIGIN}${formal.image ?? "/images/STT-Governance-Official-Logo.png"}` });
@@ -517,6 +519,8 @@ export function applyGovernedMetadata(pathname: string) {
       isPartOf: { "@type": "CollectionPage", name: "STT Publications Library", url: STT_CANONICAL_ORIGIN + "/books" },
     });
   }
+
+  if (ARTICLE_BY_PATH[normalized]) addSchema(articleSchema(ARTICLE_BY_PATH[normalized]));
 
   const researchSchema = RESEARCH_SCHEMA[normalized];
   if (researchSchema) {

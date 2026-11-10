@@ -4,7 +4,8 @@ import fs from "fs";
 
 async function startServer() {
   const app = express();
-  const port = Number(process.env.PORT || 3000);
+  const portArg = process.argv.indexOf("--port");
+  const port = Number(process.env.PORT || (portArg >= 0 ? process.argv[portArg + 1] : 3000));
   const distPath = path.resolve(process.cwd(), "dist");
 
   app.disable("x-powered-by");

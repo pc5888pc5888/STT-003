@@ -1,6 +1,10 @@
 {
   "rewrites": [
     {
+      "source": "/columns/articles/:id",
+      "destination": "/seo-columns-articles-:id.html"
+    },
+    {
       "source": "/ko/eric-chuang",
       "destination": "/seo-ko-eric-chuang.html"
     },
@@ -266,6 +270,11 @@
     }
   ],
   "redirects": [
+    {
+      "source": "/columns/articles/:id/",
+      "destination": "/columns/articles/:id",
+      "permanent": true
+    },
     {
       "source": "/ko/eric-chuang/",
       "destination": "/ko/eric-chuang",
