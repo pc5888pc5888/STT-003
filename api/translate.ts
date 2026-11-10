@@ -11,6 +11,7 @@ let sourceCorpus = "";
 const cache = new Map<string, string>();
 const pending = new Map<string, Promise<string[]>>();
 const requests = new Map<string, { count: number; until: number }>();
+const providerCooldowns = new Map<string, number>();
 
 function reply(res: any, status: number, body: unknown) {
   res.setHeader("Cache-Control", "no-store");
@@ -27,7 +28,7 @@ function approvedText(text: string) {
   return sourceSet.has(text) || sourceCorpus.includes(text);
 }
 
-export async function translateTexts(texts: string[], language: string, apiKey: string, fetcher: typeof fetch = fetch): Promise<string[]> {
+export async function translateTexts(texts: string[], language: string, apiKey: string, fetcher: typeof fetch = fetch, cooldowns = providerCooldowns): Promise<string[]> {
   const options: RequestInit = {
     method: "POST",
     headers: { "Content-Type": "application/json", "x-goog-api-key": apiKey },
@@ -40,8 +41,15 @@ export async function translateTexts(texts: string[], language: string, apiKey: 
   // Use the current lightweight model. A separate deadline for each attempt
   // prevents a slow first request from consuming the fallback's entire budget.
   const models = ["gemini-3.5-flash-lite", "gemini-3.6-flash", "gemini-3.1-flash-lite"];
+  const sharedCooldowns = process.env.VERCEL ? getCache({ namespace: "stt-translation-models", keyHashFunction: key => key }) : undefined;
+  await Promise.all(models.map(async model => {
+    const until = await sharedCooldowns?.get(model).catch(() => undefined);
+    if (typeof until === "number" && until > (cooldowns.get(model) || 0)) cooldowns.set(model, until);
+  }));
   let lastError: unknown;
+  let quotaError: unknown;
   for (const model of models) {
+    if ((cooldowns.get(model) || 0) > Date.now()) continue;
     const started = Date.now();
     try {
       const response = await fetcher(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`, { ...options, signal: AbortSignal.timeout(30000) });
@@ -52,7 +60,12 @@ export async function translateTexts(texts: string[], language: string, apiKey: 
         if (response.status === 429) {
           const retry = detail.error?.details?.find((item: { retryDelay?: string }) => item.retryDelay)?.retryDelay;
           const retryAfterSeconds = Math.min(300, Math.max(60, Math.ceil(parseFloat(retry || "60"))));
-          throw Object.assign(error, { permanent: true, retryAfterSeconds });
+          const until = Date.now() + retryAfterSeconds * 1000;
+          cooldowns.set(model, until);
+          await sharedCooldowns?.set(model, until, { ttl: retryAfterSeconds, name: "Translation model cooldown" }).catch(() => {});
+          quotaError = Object.assign(error, { retryAfterSeconds });
+          console.warn("Translation model cooling down", { model, retryAfterSeconds });
+          continue;
         }
         // Authentication and malformed requests will not improve on another model.
         if ([400, 401, 403].includes(response.status)) throw Object.assign(error, { permanent: true });
@@ -72,7 +85,9 @@ export async function translateTexts(texts: string[], language: string, apiKey: 
       lastError = error;
     }
   }
-  throw lastError;
+  if (lastError) throw lastError;
+  const waits = models.map(model => (cooldowns.get(model) || 0) - Date.now()).filter(wait => wait > 0);
+  throw Object.assign(quotaError || new Error("TRANSLATION_BUSY"), { retryAfterSeconds: Math.max(1, Math.ceil(Math.min(...waits) / 1000)) });
 }
 
 async function reusableTranslation(input: string[], language: string, apiKey: string) {

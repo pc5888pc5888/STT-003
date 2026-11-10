@@ -31,11 +31,19 @@ await assert.rejects(() => translateTexts(["企業治理"], "en", "test-credenti
 await assert.rejects(() => translateTexts(["企業治理"], "en", "test-credential", async () => new Response(JSON.stringify({ candidates: [{ finishReason: "STOP", content: { parts: [{ text: '{"translations":[]}' }] } }] }))), /INCOMPLETE_TRANSLATION/);
 
 let throttledCalls = 0;
-await assert.rejects(() => translateTexts(["企業治理"], "en", "test-credential", (async () => {
+const cooldowns = new Map<string, number>();
+const throttledProvider = (async () => {
   throttledCalls++;
   return new Response(JSON.stringify({ error: { status: "RESOURCE_EXHAUSTED", details: [{ retryDelay: "65s" }] } }), { status: 429 });
-}) as typeof fetch), (error: any) => error.message === "TRANSLATION_BUSY" && error.retryAfterSeconds === 65);
-assert.equal(throttledCalls, 1, "A quota response must not cause immediate additional provider calls");
+}) as typeof fetch;
+await assert.rejects(() => translateTexts(["企業治理"], "en", "test-credential", throttledProvider, cooldowns), (error: any) => error.message === "TRANSLATION_BUSY" && error.retryAfterSeconds >= 64);
+assert.equal(throttledCalls, 3);
+await assert.rejects(() => translateTexts(["企業治理"], "en", "test-credential", throttledProvider, cooldowns), /TRANSLATION_BUSY/);
+assert.equal(throttledCalls, 3, "Models in their cooldown must not receive another request");
+const oneCooldown = new Map<string, number>();
+let routedCalls = 0;
+await translateTexts(["企業治理"], "ja", "test-credential", (async (url: unknown, options: any) => ++routedCalls === 1 ? new Response(JSON.stringify({ error: { status: "RESOURCE_EXHAUSTED", details: [{ retryDelay: "65s" }] } }), { status: 429 }) : provider(url, options)) as typeof fetch, oneCooldown);
+assert.equal(routedCalls, 2, "One throttled model must not stall the remaining available model");
 
 const previous = process.env.STT_TRANSLATION_API_KEY;
 process.env.STT_TRANSLATION_API_KEY = "test-credential";
