@@ -1,0 +1,13 @@
+#root .stt-page-language-trigger{font:inherit;color:inherit;letter-spacing:inherit;background:none;border:0;padding:0;cursor:pointer;text-decoration:none}
+#root .stt-g0-lang-cluster .stt-page-language-trigger{font:600 11px/1.4 var(--cis-ui);color:#825d32;letter-spacing:.03em;white-space:nowrap}
+#root .stt-g0-mobile-menu__secondary .stt-page-language-trigger{font-size:13px;color:var(--stt-g0-ink-2);border-bottom:1px solid var(--stt-g0-line);padding-bottom:4px}
+#root .stt-g0-footer__links .stt-page-language-trigger{font-size:12px;color:var(--stt-g0-muted)}
+@media(min-width:1121px) and (max-width:1399px){#root .stt-g0-lang-cluster .stt-page-language-trigger{font-size:10px}}
+.stt-page-language-dialog{box-sizing:border-box;width:min(540px,calc(100% - 32px));max-height:calc(100dvh - 48px);overflow:auto;margin:auto;padding:32px;border:1px solid #c9b78c;border-radius:8px;background:#fcfaf5;color:#332b22;box-shadow:0 20px 80px #211b1840}
+.stt-page-language-dialog::backdrop{background:#201b1855}
+.stt-page-language-dialog h2{margin:0 0 18px;font:600 24px/1.4 Georgia,serif;color:#483927}
+.stt-page-language-dialog p{font:400 15px/1.8 sans-serif;margin:0 0 18px}
+.stt-page-language-dialog a,.stt-page-language-dialog button{box-sizing:border-box;display:block;width:100%;padding:13px 16px;margin:12px 0 0;border:1px solid #a88a50;border-radius:3px;text-align:center;text-decoration:none;font:500 14px/1.5 sans-serif;cursor:pointer}
+.stt-page-language-dialog a{background:#66502c;color:#fff}
+.stt-page-language-dialog button{background:transparent;color:#584b39}
+.stt-page-language-trigger:focus-visible,.stt-page-language-dialog :focus-visible{outline:2px solid #a88a50;outline-offset:4px}

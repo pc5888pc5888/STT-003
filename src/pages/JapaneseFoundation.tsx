@@ -1,3 +1,4 @@
+import { PageLanguageLink } from "../components/PageLanguageLink";
 import { FormEvent, useEffect, useRef, useState, type ReactNode } from "react";
 import { Link, NavLink, useLocation, useSearchParams } from "react-router-dom";
 import { Menu, X } from "lucide-react";
@@ -17,48 +18,9 @@ const JA_NAVIGATION = [
   { label: "STTについて", path: "/ja/about" },
 ] as const;
 
-const JA_TO_ZH:Record<string,string>={
-  "/ja":"/",
-  "/ja/":"/",
-  "/ja/problems":"/problems",
-  "/ja/insights":"/insights",
-  "/ja/how-stt-works":"/how-stt-works",
-  "/ja/engagement":"/engagement",
-  "/ja/about":"/about",
-  "/ja/start":"/start",
-  "/ja/eric-chuang": "/eric-chuang",
-};
-
-const JA_TO_EN:Record<string,string>={
-  "/ja":"/en",
-  "/ja/":"/en",
-  "/ja/problems":"/en/problems",
-  "/ja/insights":"/en/insights",
-  "/ja/how-stt-works":"/en/how-stt-works",
-  "/ja/engagement":"/en/engagement",
-  "/ja/about":"/en/about",
-  "/ja/start":"/en/start",
-  "/ja/eric-chuang": "/en/eric-chuang",
-};
-
-const JA_TO_KO:Record<string,string>={
-  "/ja":"/ko",
-  "/ja/":"/ko",
-  "/ja/problems":"/ko/problems",
-  "/ja/insights":"/ko/insights",
-  "/ja/how-stt-works":"/ko/how-stt-works",
-  "/ja/engagement":"/ko/engagement",
-  "/ja/about":"/ko/about",
-  "/ja/start":"/ko/start",
-  "/ja/eric-chuang": "/ko/eric-chuang",
-};
-
 export function JapaneseShell({children}:{children:ReactNode}){
   const location=useLocation();
   const [menuOpen,setMenuOpen]=useState(false);
-  const zhPath=JA_TO_ZH[location.pathname]??"/";
-  const enPath=JA_TO_EN[location.pathname]??"/en";
-  const koPath=JA_TO_KO[location.pathname]??"/ko";
 
   useEffect(()=>{
     setMenuOpen(false);
@@ -79,9 +41,9 @@ export function JapaneseShell({children}:{children:ReactNode}){
         </nav>
         <Link to="/ja/start" className="stt-g0-primary-cta">ガバナンス判断を始める</Link>
         <div className="stt-g0-lang-cluster" aria-label="言語切替">
-          <Link to={zhPath} hrefLang="zh-Hant-TW" lang="zh-Hant-TW">繁中</Link>
-          <Link to={enPath} hrefLang="en" lang="en">EN</Link>
-          <Link to={koPath} hrefLang="ko" lang="ko">한국어</Link>
+          <PageLanguageLink hrefLang="zh-Hant-TW" lang="zh-Hant-TW">繁中</PageLanguageLink>
+          <PageLanguageLink hrefLang="en" lang="en">EN</PageLanguageLink>
+          <PageLanguageLink hrefLang="ko" lang="ko">한국어</PageLanguageLink>
         </div>
         <button type="button" className="stt-g0-menu-button" aria-label={menuOpen?"メニューを閉じる":"メニューを開く"} aria-expanded={menuOpen} aria-controls="stt-ja-mobile-menu" onClick={()=>setMenuOpen(v=>!v)}>
           {menuOpen?<X aria-hidden="true"/>:<Menu aria-hidden="true"/>}
@@ -94,9 +56,9 @@ export function JapaneseShell({children}:{children:ReactNode}){
           </div>
           <div className="stt-g0-mobile-menu__secondary">
             <Link to="/ja/start">ガバナンス判断を始める</Link>
-            <Link to={zhPath} hrefLang="zh-Hant-TW" lang="zh-Hant-TW">繁體中文</Link>
-            <Link to={enPath} hrefLang="en" lang="en">English</Link>
-            <Link to={koPath} hrefLang="ko" lang="ko">한국어</Link>
+            <PageLanguageLink hrefLang="zh-Hant-TW" lang="zh-Hant-TW">繁體中文</PageLanguageLink>
+            <PageLanguageLink hrefLang="en" lang="en">English</PageLanguageLink>
+            <PageLanguageLink hrefLang="ko" lang="ko">한국어</PageLanguageLink>
           </div>
         </div>
       </nav>}
@@ -116,9 +78,9 @@ export function JapaneseShell({children}:{children:ReactNode}){
           <Link to="/ja/about">STTについて</Link>
           <Link to="/ja/start">ガバナンス判断を始める</Link>
           <a href={STT_LINE_ADD_FRIEND_URL} target="_blank" rel="noopener noreferrer">STT 公式LINE ↗</a>
-          <Link to={zhPath} hrefLang="zh-Hant-TW" lang="zh-Hant-TW">繁體中文</Link>
-          <Link to={enPath} hrefLang="en" lang="en">English</Link>
-          <Link to={koPath} hrefLang="ko" lang="ko">한국어</Link>
+          <PageLanguageLink hrefLang="zh-Hant-TW" lang="zh-Hant-TW">繁體中文</PageLanguageLink>
+          <PageLanguageLink hrefLang="en" lang="en">English</PageLanguageLink>
+          <PageLanguageLink hrefLang="ko" lang="ko">한국어</PageLanguageLink>
         </nav>
       </div>
     </footer>

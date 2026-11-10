@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import UnifiedTitleHero from "../components/UnifiedTitleHero";
 import AUTHOR_PROFILE from "../data/authorProfile.json";
+import { AUTHOR_PROFILE_TRANSLATIONS } from "../data/authorProfileTranslations";
 
 type Language = "en" | "ja" | "ko";
 const data = {
@@ -42,6 +43,7 @@ const data = {
 
 export default function EricLocalized({lang}:{lang:Language}) {
   const t = data[lang];
+  const translated = AUTHOR_PROFILE_TRANSLATIONS[lang];
   useEffect(() => {
     document.title = t.title + " | STT Governance";
     const meta = document.querySelector<HTMLMetaElement>('meta[name="description"]');
@@ -56,8 +58,8 @@ export default function EricLocalized({lang}:{lang:Language}) {
     <section className="stt-inst-section"><div className="stt-inst-shell"><p className="stt-inst-kicker">CORE GOVERNANCE DOMAINS</p><h2>{t.domains}</h2><div className="stt-inst-body"><div className="stt-inst-grid stt-eric-domain-grid">{t.areas.map(([name,detail],i)=><article key={name}><span className="stt-eric-domain-number">{String(i+1).padStart(2,"0")}</span><h3>{name}</h3><p>{detail}</p></article>)}</div></div></div></section>
     <section className="stt-inst-section"><div className="stt-inst-shell"><p className="stt-inst-kicker">AI GOVERNANCE & TECHNICAL PRACTICE</p><h2>{t.technical}</h2><div className="stt-inst-body"><p>{t.technicalText}</p></div></div></section>
     <section className="stt-inst-section"><div className="stt-inst-shell"><p className="stt-inst-kicker">HUMAN AUTHORITY</p><h2>{t.human}</h2><div className="stt-inst-body"><p>{t.humanText}</p></div></div></section>
-    <section className="stt-inst-section"><div className="stt-inst-shell"><p className="stt-inst-kicker">CURRENT POSITIONS</p><h2>{t.positions}</h2><div className="stt-inst-body"><div className="stt-eric-position-list">{AUTHOR_PROFILE.positions.map(position=><div className="stt-eric-position-row" key={position}><b>POSITION</b><div lang="zh-Hant">{position}</div></div>)}</div><p className="stt-eric-position-note">{t.positionNote}</p></div></div></section>
-    <section className="stt-inst-section"><div className="stt-inst-shell"><p className="stt-inst-kicker">RESEARCH & PUBLICATIONS</p><h2>{t.publications}</h2><div className="stt-inst-body"><p>{t.publicationText}</p><div className="stt-eric-publication-list">{AUTHOR_PROFILE.publications.map(title=><div className="stt-eric-publication-row" key={title}><b>PUBLICATION</b><div lang="zh-Hant">{title}</div></div>)}</div><Link to={"/"+lang+"/insights"}>{t.more} →</Link></div></div></section>
+    <section className="stt-inst-section"><div className="stt-inst-shell"><p className="stt-inst-kicker">CURRENT POSITIONS</p><h2>{t.positions}</h2><div className="stt-inst-body"><div className="stt-eric-position-list">{AUTHOR_PROFILE.positions.map(position=><div className="stt-eric-position-row" key={position}><b>POSITION</b><div lang={translated[position] ? lang : "zh-Hant"}>{translated[position] ?? position}</div></div>)}</div><p className="stt-eric-position-note">{t.positionNote}</p></div></div></section>
+    <section className="stt-inst-section"><div className="stt-inst-shell"><p className="stt-inst-kicker">RESEARCH & PUBLICATIONS</p><h2>{t.publications}</h2><div className="stt-inst-body"><p>{t.publicationText}</p><div className="stt-eric-publication-list">{AUTHOR_PROFILE.publications.map(title=><div className="stt-eric-publication-row" key={title}><b>PUBLICATION</b><div lang={translated[title] ? lang : "zh-Hant"}>{translated[title] ?? title}</div></div>)}</div><Link to={"/"+lang+"/insights"}>{t.more} →</Link></div></div></section>
     <section className="stt-inst-section"><div className="stt-inst-shell"><p className="stt-inst-kicker">GOVERNANCE INTAKE</p><h2>{t.intake}</h2><div className="stt-inst-body"><p>{t.intakeText}</p><Link to={"/"+lang+"/start"}>{t.action} →</Link></div></div></section>
   </div>;
 }

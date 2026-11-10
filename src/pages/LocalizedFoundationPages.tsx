@@ -140,7 +140,7 @@ export function LocalizedInsights() {
               <article key={title}>
                 <h2>{title}</h2>
                 <p>{description}</p>
-                <Link to={href}>{title} →</Link>
+                <Link to={href} lang="zh-Hant">{title} → <span>{locale === "en" ? "(Chinese original)" : locale === "ja" ? "（中国語原文）" : "(중국어 원문)"}</span></Link>
               </article>
             ))}
           </div>

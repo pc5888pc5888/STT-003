@@ -1,3 +1,4 @@
+import { PageLanguageLink } from "../components/PageLanguageLink";
 import { FormEvent, useEffect, useRef, useState, type ReactNode } from "react";
 import { Link, NavLink, useLocation, useSearchParams } from "react-router-dom";
 import { Menu, X } from "lucide-react";
@@ -17,48 +18,9 @@ const EN_NAVIGATION = [
   { label: "About STT", path: "/en/about" },
 ] as const;
 
-const EN_TO_ZH: Record<string, string> = {
-  "/en": "/",
-  "/en/": "/",
-  "/en/problems": "/problems",
-  "/en/insights": "/insights",
-  "/en/how-stt-works": "/how-stt-works",
-  "/en/engagement": "/engagement",
-  "/en/about": "/about",
-  "/en/eric-chuang": "/eric-chuang",
-  "/en/start": "/start",
-};
-
-const EN_TO_JA: Record<string, string> = {
-  "/en": "/ja",
-  "/en/": "/ja",
-  "/en/problems": "/ja/problems",
-  "/en/insights": "/ja/insights",
-  "/en/how-stt-works": "/ja/how-stt-works",
-  "/en/engagement": "/ja/engagement",
-  "/en/about": "/ja/about",
-  "/en/eric-chuang": "/ja/eric-chuang",
-  "/en/start": "/ja/start",
-};
-
-const EN_TO_KO: Record<string, string> = {
-  "/en": "/ko",
-  "/en/": "/ko",
-  "/en/problems": "/ko/problems",
-  "/en/insights": "/ko/insights",
-  "/en/how-stt-works": "/ko/how-stt-works",
-  "/en/engagement": "/ko/engagement",
-  "/en/about": "/ko/about",
-  "/en/eric-chuang": "/ko/eric-chuang",
-  "/en/start": "/ko/start",
-};
-
 export function EnglishShell({ children }: { children: ReactNode }) {
   const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
-  const zhPath = EN_TO_ZH[location.pathname] ?? "/";
-  const jaPath = EN_TO_JA[location.pathname] ?? "/ja";
-  const koPath = EN_TO_KO[location.pathname] ?? "/ko";
 
   useEffect(() => {
     setMenuOpen(false);
@@ -84,9 +46,9 @@ export function EnglishShell({ children }: { children: ReactNode }) {
           </nav>
           <Link to="/en/start" className="stt-g0-primary-cta">Start a Governance Review</Link>
           <div className="stt-g0-lang-cluster" aria-label="Language switcher">
-          <Link to={zhPath} hrefLang="zh-Hant-TW" lang="zh-Hant-TW" aria-label="切換至繁體中文">繁中</Link>
-          <Link to={jaPath} hrefLang="ja" lang="ja" aria-label="日本語に切り替える">日本語</Link>
-          <Link to={koPath} hrefLang="ko" lang="ko" aria-label="한국어로 전환">한국어</Link>
+          <PageLanguageLink hrefLang="zh-Hant-TW" lang="zh-Hant-TW" aria-label="切換至繁體中文">繁中</PageLanguageLink>
+          <PageLanguageLink hrefLang="ja" lang="ja" aria-label="日本語に切り替える">日本語</PageLanguageLink>
+          <PageLanguageLink hrefLang="ko" lang="ko" aria-label="한국어로 전환">한국어</PageLanguageLink>
         </div>
           <button type="button" className="stt-g0-menu-button" aria-label={menuOpen ? "Close menu" : "Open menu"} aria-expanded={menuOpen} aria-controls="stt-en-mobile-menu" onClick={() => setMenuOpen((value) => !value)}>
             {menuOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
@@ -102,9 +64,9 @@ export function EnglishShell({ children }: { children: ReactNode }) {
               </div>
               <div className="stt-g0-mobile-menu__secondary">
                 <Link to="/en/start">Start a Governance Review</Link>
-                <Link to={zhPath} hrefLang="zh-Hant-TW" lang="zh-Hant-TW">繁體中文</Link>
-                <Link to={jaPath} hrefLang="ja" lang="ja">日本語</Link>
-                <Link to={koPath} hrefLang="ko" lang="ko">한국어</Link>
+                <PageLanguageLink hrefLang="zh-Hant-TW" lang="zh-Hant-TW">繁體中文</PageLanguageLink>
+                <PageLanguageLink hrefLang="ja" lang="ja">日本語</PageLanguageLink>
+                <PageLanguageLink hrefLang="ko" lang="ko">한국어</PageLanguageLink>
               </div>
             </div>
           </nav>
@@ -123,9 +85,9 @@ export function EnglishShell({ children }: { children: ReactNode }) {
             <Link to="/en/about">About STT</Link>
             <Link to="/en/start">Start a Governance Review</Link>
             <a href={STT_LINE_ADD_FRIEND_URL} target="_blank" rel="noopener noreferrer">STT Official LINE ↗</a>
-            <Link to={zhPath} hrefLang="zh-Hant-TW" lang="zh-Hant-TW">Traditional Chinese site</Link>
-            <Link to={jaPath} hrefLang="ja" lang="ja">日本語</Link>
-            <Link to={koPath} hrefLang="ko" lang="ko">한국어</Link>
+            <PageLanguageLink hrefLang="zh-Hant-TW" lang="zh-Hant-TW">Traditional Chinese site</PageLanguageLink>
+            <PageLanguageLink hrefLang="ja" lang="ja">日本語</PageLanguageLink>
+            <PageLanguageLink hrefLang="ko" lang="ko">한국어</PageLanguageLink>
           </nav>
         </div>
       </footer>

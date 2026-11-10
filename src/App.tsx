@@ -1,3 +1,4 @@
+import { PageLanguageLink } from "./components/PageLanguageLink";
 import { useEffect, useLayoutEffect, useState, type ReactNode } from "react";
 import { BrowserRouter, Link, Navigate, NavLink, Route, Routes, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
@@ -28,39 +29,6 @@ type ShellProps = { children: ReactNode };
 const HUMANISTIC_INTERVIEW_URL = "/humanistic-interview/";
 const GCSDA_URL = "https://gcsda-governance.vercel.app/";
 const STT_LINE_ADD_FRIEND_URL = "https://line.me/R/ti/p/%40783xkknh";
-
-const CHINESE_TO_ENGLISH: Record<string, string> = {
-  "/": "/en",
-  "/problems": "/en/problems",
-  "/insights": "/en/insights",
-  "/how-stt-works": "/en/how-stt-works",
-  "/engagement": "/en/engagement",
-  "/about": "/en/about",
-  "/eric-chuang": "/en/eric-chuang",
-  "/start": "/en/start",
-};
-
-const CHINESE_TO_JAPANESE: Record<string, string> = {
-  "/": "/ja",
-  "/problems": "/ja/problems",
-  "/insights": "/ja/insights",
-  "/how-stt-works": "/ja/how-stt-works",
-  "/engagement": "/ja/engagement",
-  "/about": "/ja/about",
-  "/eric-chuang": "/ja/eric-chuang",
-  "/start": "/ja/start",
-};
-
-const CHINESE_TO_KOREAN: Record<string, string> = {
-  "/": "/ko",
-  "/problems": "/ko/problems",
-  "/insights": "/ko/insights",
-  "/how-stt-works": "/ko/how-stt-works",
-  "/engagement": "/ko/engagement",
-  "/about": "/ko/about",
-  "/eric-chuang": "/ko/eric-chuang",
-  "/start": "/ko/start",
-};
 
 const PRIMARY_NAVIGATION = [
   { label: "你正在面對什麼", path: "/problems" },
@@ -98,9 +66,6 @@ export function PublicShell({ children }: ShellProps) {
   const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
   const publicationPage = location.pathname === "/books" || location.pathname.startsWith("/books/") || location.pathname === "/research" || location.pathname.startsWith("/research/") || location.pathname === "/columns" || location.pathname.startsWith("/columns/");
-  const englishPath = CHINESE_TO_ENGLISH[location.pathname] ?? "/en";
-  const japanesePath = CHINESE_TO_JAPANESE[location.pathname] ?? "/ja";
-  const koreanPath = CHINESE_TO_KOREAN[location.pathname] ?? "/ko";
 
   useLayoutEffect(() => {
     if (location.pathname === "/projects") return;
@@ -158,9 +123,9 @@ export function PublicShell({ children }: ShellProps) {
           </nav>
           <Link to="/start" className="stt-g0-primary-cta">開始治理判讀</Link>
           <div className="stt-g0-lang-cluster" aria-label="語言切換">
-            <Link to={englishPath} hrefLang="en" lang="en" aria-label="Switch to English">EN</Link>
-            <Link to={japanesePath} hrefLang="ja" lang="ja" aria-label="日本語に切り替える">日本語</Link>
-            <Link to={koreanPath} hrefLang="ko" lang="ko" aria-label="한국어로 전환">한국어</Link>
+            <PageLanguageLink hrefLang="en" lang="en" aria-label="Switch to English">EN</PageLanguageLink>
+            <PageLanguageLink hrefLang="ja" lang="ja" aria-label="日本語に切り替える">日本語</PageLanguageLink>
+            <PageLanguageLink hrefLang="ko" lang="ko" aria-label="한국어로 전환">한국어</PageLanguageLink>
           </div>
           <button type="button" className="stt-g0-menu-button" aria-label={menuOpen ? "關閉選單" : "開啟選單"} aria-expanded={menuOpen} aria-controls="stt-g0-mobile-menu" onClick={() => setMenuOpen((value) => !value)}>
             {menuOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
@@ -177,9 +142,9 @@ export function PublicShell({ children }: ShellProps) {
               <div className="stt-g0-mobile-menu__secondary">
                 {SECONDARY_NAVIGATION.map((item) => <NavLink key={item.path} to={item.path}>{item.label}</NavLink>)}
                 <Link to="/start">開始治理判讀</Link>
-                <Link to={englishPath} hrefLang="en" lang="en">English</Link>
-                <Link to={japanesePath} hrefLang="ja" lang="ja">日本語</Link>
-                <Link to={koreanPath} hrefLang="ko" lang="ko">한국어</Link>
+                <PageLanguageLink hrefLang="en" lang="en">English</PageLanguageLink>
+                <PageLanguageLink hrefLang="ja" lang="ja">日本語</PageLanguageLink>
+                <PageLanguageLink hrefLang="ko" lang="ko">한국어</PageLanguageLink>
               </div>
             </div>
           </nav>
@@ -196,9 +161,9 @@ export function PublicShell({ children }: ShellProps) {
             <a href={GCSDA_URL} target="_blank" rel="noreferrer">GCSDA｜中華企業策略永續發展學會 ↗</a>
             <a href={STT_LINE_ADD_FRIEND_URL} target="_blank" rel="noopener noreferrer">STT LINE 官方帳號（治理聯絡） ↗</a>
             <Link to="/navigator">治理導航</Link><Link to="/privacy">隱私</Link><Link to="/professional-boundary">專業服務邊界</Link>
-            <Link to={englishPath} hrefLang="en" lang="en">English</Link>
-            <Link to={japanesePath} hrefLang="ja" lang="ja">日本語</Link>
-            <Link to={koreanPath} hrefLang="ko" lang="ko">한국어</Link>
+            <PageLanguageLink hrefLang="en" lang="en">English</PageLanguageLink>
+            <PageLanguageLink hrefLang="ja" lang="ja">日本語</PageLanguageLink>
+            <PageLanguageLink hrefLang="ko" lang="ko">한국어</PageLanguageLink>
           </nav>
         </div>
       </footer>
