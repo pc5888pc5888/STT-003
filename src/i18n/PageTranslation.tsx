@@ -26,7 +26,7 @@ function saveCache() {
 }
 function segments(text: string) {
   const result: string[] = [];
-  for (let start = 0; start < text.length; start += 8000) result.push(text.slice(start, start + 8000));
+  for (let start = 0; start < text.length; start += 3000) result.push(text.slice(start, start + 3000));
   return result;
 }
 
@@ -96,7 +96,7 @@ export function PageTranslationProvider({ children }: { children: ReactNode }) {
         if (missing.length) setState({ language, status: "loading", progress: 0 });
         for (let i = 0; i < missing.length;) {
           const batch: string[] = []; let count = 0;
-          while (i < missing.length && batch.length < 80 && count + missing[i].length <= 9000) { count += missing[i].length; batch.push(missing[i++]); }
+          while (i < missing.length && batch.length < 80 && count + missing[i].length <= 3500) { count += missing[i].length; batch.push(missing[i++]); }
           const response = await fetch("/api/translate", { method: "POST", headers: { "Content-Type": "application/json" }, signal: controller.signal, body: JSON.stringify({ language, texts: batch }) });
           const result = await response.json();
           if (!response.ok || !Array.isArray(result.translations) || result.translations.length !== batch.length || result.translations.some((value: unknown) => typeof value !== "string" || !value)) throw new Error("Translation incomplete");
