@@ -2462,5 +2462,13 @@
     "width": 2127,
     "height": 1211,
     "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/elcitra/image/4054/020.jpg"
+  },
+  {
+    "path": "/article-images/99847b8249d56aa2.png",
+    "sourceUrl": "https://chuyi-mmedia.s3.ap-southeast-1.amazonaws.com/uploads/ckeditor/pictures/413/content_tune2.png",
+    "sha256": "99847b8249d56aa2249aa53b96499f57f74cd376469a88de2d79b9c0cd5f1b89",
+    "bytes": 330592,
+    "width": 543,
+    "height": 724
   }
 ]
