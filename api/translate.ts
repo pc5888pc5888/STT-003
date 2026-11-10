@@ -95,8 +95,10 @@ export default async function handler(req: any, res: any) {
       const ip = String(req.headers["x-forwarded-for"] ?? "unknown").split(",")[0];
       const now = Date.now();
       const count = requests.get(ip);
-      if (count && count.until > now && count.count >= 30) return reply(res, 429, { error: "TRANSLATION_BUSY" });
-      requests.set(ip, count && count.until > now ? { ...count, count: count.count + 1 } : { count: 1, until: now + 60000 });
+      const characters = missing.reduce((sum, key) => sum + normalized[keys.indexOf(key)].length, 0);
+      // Limit uncached source volume, so small batches do not penalize long articles.
+      if (count && count.until > now && count.count + characters > 75000) return reply(res, 429, { error: "TRANSLATION_BUSY" });
+      requests.set(ip, count && count.until > now ? { ...count, count: count.count + characters } : { count: characters, until: now + 60000 });
       if (requests.size > 1000) for (const [key, value] of requests) if (value.until < now) requests.delete(key);
       const input = missing.map(key => normalized[keys.indexOf(key)]);
       const groupKey = createHash("sha256").update(missing.join(",")).digest("hex");
