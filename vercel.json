@@ -624,7 +624,7 @@
   "functions": {
     "api/translate.ts": {
       "includeFiles": "dist/translation-source.json",
-      "maxDuration": 60
+      "maxDuration": 120
     }
   }
 }

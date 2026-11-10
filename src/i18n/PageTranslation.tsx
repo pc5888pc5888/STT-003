@@ -24,9 +24,9 @@ function loadCache() {
 function saveCache() {
   try { localStorage.setItem("stt-public-translations-v1", JSON.stringify([...cache].slice(-2000))); } catch { /* Storage may be unavailable. */ }
 }
-function segments(text: string) {
+function segments(text: string, limit: number) {
   const result: string[] = [];
-  for (let start = 0; start < text.length; start += 3000) result.push(text.slice(start, start + 3000));
+  for (let start = 0; start < text.length; start += limit) result.push(text.slice(start, start + limit));
   return result;
 }
 
@@ -34,6 +34,7 @@ export function PageTranslationProvider({ children }: { children: ReactNode }) {
   const location = useLocation();
   const navigate = useNavigate();
   const [state, setState] = useState<State>(empty);
+  const [retry, setRetry] = useState(0);
   const records = useRef(new Map<Text, { original: string; translated?: string }>());
   const active = useRef(0);
   const selected = new URLSearchParams(location.search).get("lang");
@@ -44,6 +45,7 @@ export function PageTranslationProvider({ children }: { children: ReactNode }) {
     records.current.clear();
   }
   function select(next: PageLanguage) {
+    if (next === language) { setRetry(value => value + 1); return; }
     const params = new URLSearchParams(location.search);
     if (next === "zh-Hant-TW") params.delete("lang"); else params.set("lang", next);
     navigate({ pathname: location.pathname, search: params.toString(), hash: location.hash }, { replace: true });
@@ -86,7 +88,7 @@ export function PageTranslationProvider({ children }: { children: ReactNode }) {
         const original = previous && node.nodeValue === previous.translated ? previous.original : node.nodeValue ?? "";
         if (!hasChineseText(original)) continue;
         records.current.set(node, { original, translated: previous?.translated });
-        nodes.push({ node, original, parts: segments(normalizeTranslationText(original)) });
+        nodes.push({ node, original, parts: segments(normalizeTranslationText(original), language === "ko" ? 1400 : 3000) });
       }
       const unique = [...new Set(nodes.flatMap(item => item.parts))];
       const missing = unique.filter(text => !cache.has(language + ":" + text));
@@ -94,15 +96,26 @@ export function PageTranslationProvider({ children }: { children: ReactNode }) {
       observer.observe(root!, { childList: true, subtree: true, characterData: true });
       try {
         if (missing.length) setState({ language, status: "loading", progress: 0 });
+        const batches: string[][] = [];
         for (let i = 0; i < missing.length;) {
           const batch: string[] = []; let count = 0;
-          while (i < missing.length && batch.length < 80 && count + missing[i].length <= 3500) { count += missing[i].length; batch.push(missing[i++]); }
-          const response = await fetch("/api/translate", { method: "POST", headers: { "Content-Type": "application/json" }, signal: controller.signal, body: JSON.stringify({ language, texts: batch }) });
-          const result = await response.json();
-          if (!response.ok || !Array.isArray(result.translations) || result.translations.length !== batch.length || result.translations.some((value: unknown) => typeof value !== "string" || !value)) throw new Error("Translation incomplete");
+          while (i < missing.length && batch.length < 80 && count + missing[i].length <= (language === "ko" ? 1500 : 3500)) { count += missing[i].length; batch.push(missing[i++]); }
+          batches.push(batch);
+        }
+        let completed = 0;
+        for (let start = 0; start < batches.length; start += 2) {
+          const results = await Promise.all(batches.slice(start, start + 2).map(async batch => {
+            const response = await fetch("/api/translate", { method: "POST", headers: { "Content-Type": "application/json" }, signal: controller.signal, body: JSON.stringify({ language, texts: batch }) });
+            const result = await response.json();
+            if (!response.ok || !Array.isArray(result.translations) || result.translations.length !== batch.length || result.translations.some((value: unknown) => typeof value !== "string" || !value)) throw new Error("Translation incomplete");
+            return { batch, translations: result.translations as string[] };
+          }));
           if (active.current !== job) return;
-          batch.forEach((text, index) => cache.set(language + ":" + text, result.translations[index]));
-          setState({ language, status: "loading", progress: Math.round(i * 100 / missing.length) });
+          for (const { batch, translations } of results) {
+            batch.forEach((text, index) => cache.set(language + ":" + text, translations[index]));
+            completed += batch.length;
+          }
+          setState({ language, status: "loading", progress: Math.round(completed * 100 / missing.length) });
         }
         if (active.current !== job || controller.signal.aborted) return;
         observer.disconnect();
@@ -111,8 +124,8 @@ export function PageTranslationProvider({ children }: { children: ReactNode }) {
           if (!node.isConnected) continue;
           const previous = records.current.get(node);
           if (node.nodeValue !== original && node.nodeValue !== previous?.translated) { rerun = true; continue; }
-          // English words separated by inline emphasis need spacing even when Chinese did not.
-          const gap = language === "en" ? " " : "";
+          // English and Korean words need spacing across inline emphasis.
+          const gap = language === "en" || language === "ko" ? " " : "";
           const text = (original.match(/^\s*/)?.[0] || gap) + parts.map(part => cache.get(language + ":" + part)).join(" ") + (original.match(/\s*$/)?.[0] || gap);
           node.nodeValue = text;
           records.current.set(node, { original, translated: text });
@@ -141,7 +154,7 @@ export function PageTranslationProvider({ children }: { children: ReactNode }) {
     };
     document.addEventListener("click", continueLanguage, true);
     return () => { active.current++; controller.abort(); clearTimeout(timer); observer.disconnect(); document.removeEventListener("click", continueLanguage, true); restore(); };
-  }, [location.pathname, location.search, language, navigate]);
+  }, [location.pathname, location.search, language, navigate, retry]);
   return <Context.Provider value={{ ...state, select }}>{children}</Context.Provider>;
 }
 
@@ -150,6 +163,7 @@ export function PageTranslationStatus() {
   if (!state.language) return null;
   return <div className="stt-translation-status" data-stt-no-translate="true" translate="no" role="status" aria-live="polite">
     <span>{state.status === "loading" ? `正在翻譯為 ${names[state.language]}… ${state.progress}%` : state.status === "error" ? "翻譯暫未完成，已保留中文原文。" : `${names[state.language]} · AI 翻譯｜以繁體中文原文為準`}</span>
+    {state.status === "error" && <button type="button" onClick={() => state.select(state.language!)}>重新翻譯</button>}
     <button type="button" onClick={() => state.select("zh-Hant-TW")}>繁體中文</button>
   </div>;
 }
