@@ -8,6 +8,7 @@ import { articleReadingView, ARTICLE_COPYRIGHT, COLUMN_ARTWORK } from '../data/a
 
 export function ArticleContent({ article: source }: { article: ArticleDocument }) {
   const article = articleReadingView(source);
+  const intro = article.intro!;
   const artwork = COLUMN_ARTWORK[article.series as keyof typeof COLUMN_ARTWORK];
   const series = SERIES.find(item => item.key === article.series);
   const related = ARTICLE_INDEX.filter(item => item.series === article.series && item.id !== article.id).slice(0, 3);
@@ -15,15 +16,19 @@ export function ArticleContent({ article: source }: { article: ArticleDocument }
     <nav className="stt-archive-breadcrumb" aria-label="文章導覽"><Link to="/insights">研究與出版</Link><span aria-hidden="true">／</span><Link to="/columns">專欄與報導</Link><span aria-hidden="true">／</span><Link to={series?.route || '/columns'}>{series?.label}</Link></nav>
     <article aria-labelledby="archive-title">
       <header className="stt-archive-heading">
-        <p className="stt-archive-kicker">STT GOVERNANCE · ARTICLES</p>
-        <h1 id="archive-title">{article.title}</h1>
-        <div className="stt-archive-byline"><Link to="/eric-chuang">{article.author}</Link><span>原刊日期 <time dateTime={isoDate(article.date)}>{article.date}</time></span><span>原刊於 M 傳媒</span></div>
-        <a className="stt-archive-source" href={article.sourceUrl} target="_blank" rel="noopener noreferrer">查看 M 傳媒原刊 ↗<span className="stt-library-sr-only">（另開分頁）</span></a>
+        <p className="stt-archive-kicker">{series?.label || '專欄與報導'}</p>
+        <h1 id="archive-title">{intro.title}</h1>
+        {intro.subtitles.map((text, index) => <p className="stt-archive-subtitle" key={index}>{text}</p>)}
+        <div className="stt-archive-heading-rule" aria-hidden="true" />
+        {intro.subjects.map((text, index) => <p className="stt-archive-interview" key={index}>{text}</p>)}
+        <p className="stt-archive-author"><span>作者</span><span aria-hidden="true">｜</span><Link to="/eric-chuang">莊鈞翔 博士</Link></p>
+        <div className="stt-archive-publication"><span>原刊日期 <time dateTime={isoDate(article.date)}>{article.date}</time></span><a className="stt-archive-source" href={article.sourceUrl} target="_blank" rel="noopener noreferrer">原刊於 M 傳媒 ↗<span className="stt-library-sr-only">（另開分頁）</span></a></div>
       </header>
       <figure className="stt-archive-cover"><img src={article.cover.src} alt={article.cover.alt} width={article.cover.width} height={article.cover.height} decoding="async" fetchPriority="high" /></figure>
       {article.toc.length > 1 && <details className="stt-archive-toc"><summary>本文目錄</summary><nav aria-label="本文目錄"><ul>{article.toc.map(item => <li key={item.id}><a href={'#' + item.id}>{item.title}</a></li>)}</ul></nav></details>}
       {article.css && <style>{article.css}</style>}
       <div className="stt-article-body" data-article-id={article.id} dangerouslySetInnerHTML={{ __html: article.html }} />
+      {intro.editorialNotes.length > 0 && <aside className="stt-archive-editorial-note" aria-label="編輯說明">{intro.editorialNotes.map((text, index) => <p key={index}>{text}</p>)}</aside>}
       <footer className="stt-archive-copyright"><p>{ARTICLE_COPYRIGHT}</p></footer>
       {artwork && <figure className="stt-archive-column-artwork"><img {...artwork} loading="lazy" decoding="async" /></figure>}
     </article>

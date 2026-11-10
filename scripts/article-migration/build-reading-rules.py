@@ -9,6 +9,7 @@ from html.parser import HTMLParser
 import json
 from pathlib import Path
 import re
+from article_intro import extract_intro
 
 VOID = set('area base br col embed hr img input link meta param source track wbr'.split())
 BLOCK = set('p div section article table h1 h2 h3 h4 h5 h6 header footer blockquote'.split())
@@ -68,7 +69,7 @@ def outer_blank_parent(node, source):
         node = node.parent
     return node
 
-rules, review = {}, []
+rules, review, intro_review = {}, [], []
 for file in sorted(Path('public/data/articles').glob('*.json')):
     article = json.loads(file.read_text())
     source = article['html']
@@ -132,6 +133,24 @@ for file in sorted(Path('public/data/articles').glob('*.json')):
         bylines = [i for i, n in enumerate(prefix) if re.search(r'撰稿|採訪|專欄作者|莊\s*鈞\s*翔|本文由作者|Eric Chuang', n.text, re.I)]
         for node in prefix[:(max(bylines) + 1 if bylines else 1)]:
             edits.append((node.open_end - 1, node.open_end - 1, ' data-stt-intro="true"'))
+    # Replace the source's many incompatible heading templates with one shared header.
+    starts = {a for a, b, value in edits if value == ' data-stt-intro="true"'}
+    intro_nodes = [n for n in parsed.nodes if n.open_end - 1 in starts]
+    if article['id'] == '678767':
+        intro_nodes = [next(n for n in parsed.nodes if n.tag == 'p')]
+    if article['id'] == '4ae15d':
+        body_start = next(n.start for n in parsed.nodes if n.tag == 'h3' and n.text.startswith('序言'))
+        intro_nodes = [n for n in parsed.nodes if n.start < body_start and n.tag in {'p', 'h2', 'h3', 'hr'}]
+    intro_nodes = [n for n in intro_nodes if not any(other.start < n.start and other.end >= n.end for other in intro_nodes)]
+    intro = extract_intro(article, intro_nodes, source)
+    edits = [edit for edit in edits if edit[2] != ' data-stt-intro="true"']
+    for node in intro_nodes:
+        edits.append((node.start, node.end, ''))
+    for node in parsed.nodes:
+        if node.attrs.get('class') == 'stt-source-document-title':
+            edits.append((node.start, node.end, ''))
+        if node.tag == 'p' and node.attrs.get('class') == 'byline' and normalized(node.text).upper() == 'CORPORATE GOVERNANCE STRATEGIST & ARCHITECT OF INTERNAL COMPLIANCE':
+            edits.append((node.start, node.end, ''))
     edits.sort()
     for a, b in zip(edits, edits[1:]):
         assert a[1] <= b[0], (article['id'], a, b)
@@ -139,13 +158,20 @@ for file in sorted(Path('public/data/articles').glob('*.json')):
     for start, end, replacement in reversed(edits):
         result = result[:start] + replacement + result[end:]
     Parser(result)
+    # The existing endnotes often already contain the introduction's AI disclosure.
+    # Keep those original endnotes and append a disclosure only when it is absent.
+    if re.search(r'本文(?:由|以)[^。]{0,160}AI[^。]{0,160}(?:審|輔助|作者)', visible(result)):
+        intro['editorialNotes'] = []
+    intro_review.append({'id': article['id'], **intro, 'removedBlocks': len(intro_nodes)})
     removed_ids = [t['id'] for t in article['toc'] if not re.search(r'\bid="' + re.escape(t['id']) + '"', result)]
     def units(index):
         return len(source[:index].encode('utf-16-le')) // 2
     rules[article['id']] = {'sourceSha256': hashlib.sha256(source.encode()).hexdigest(),
                             'sourceLength': units(len(source)), 'resultSha256': hashlib.sha256(result.encode()).hexdigest(),
-                            'edits': [[units(a), units(b), text] for a, b, text in edits], 'removedTocIds': removed_ids}
+                            'edits': [[units(a), units(b), text] for a, b, text in edits], 'removedTocIds': removed_ids,
+                            'intro': intro}
 
 Path('src/data/articleReadingRules.json').write_text(json.dumps(rules, ensure_ascii=False, separators=(',', ':')) + '\n')
 Path('/tmp/stt-reading-review.json').write_text(json.dumps(review, ensure_ascii=False, indent=2))
+Path('/tmp/stt-intro-review.json').write_text(json.dumps(intro_review, ensure_ascii=False, indent=2))
 print(f'Generated reading rules for {len(rules)} articles; removed author tails in {len(review)} articles.')

@@ -7,9 +7,15 @@ type ReadingRule = {
   resultSha256: string;
   edits: Array<[number, number, string]>;
   removedTocIds: string[];
+  intro: {
+    title: string;
+    subtitles: string[];
+    subjects: string[];
+    editorialNotes: string[];
+  };
 };
 export const ARTICLE_READING_RULES = rulesData as unknown as Record<string, ReadingRule>;
-type ReadingDocument = ArticleDocument & { readingView?: true };
+type ReadingDocument = ArticleDocument & { readingView?: true; intro?: ReadingRule['intro'] };
 
 /** Display-only projection: source prose and the original import stay intact. */
 export function articleReadingView(article: ReadingDocument): ReadingDocument {
@@ -20,7 +26,7 @@ export function articleReadingView(article: ReadingDocument): ReadingDocument {
   for (const [start, end, replacement] of [...rule.edits].reverse()) {
     html = html.slice(0, start) + replacement + html.slice(end);
   }
-  return { ...article, html, toc: article.toc.filter(item => !rule.removedTocIds.includes(item.id)), readingView: true };
+  return { ...article, html, intro: rule.intro, toc: article.toc.filter(item => !rule.removedTocIds.includes(item.id)), readingView: true };
 }
 
 export const ARTICLE_COPYRIGHT = '© 2026 莊鈞翔博士 CHUANG CHUN HSIANG Ph.D.｜STT Group Strategic Think Tank 策略智庫數位集團｜版權所有 Strategy・Governance・Compliance';
