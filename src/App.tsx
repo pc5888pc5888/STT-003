@@ -1,3 +1,4 @@
+import { PageTranslationProvider, PageTranslationStatus } from "./i18n/PageTranslation";
 import { PageLanguageLink } from "./components/PageLanguageLink";
 import { useEffect, useLayoutEffect, useState, type ReactNode } from "react";
 import { BrowserRouter, Link, Navigate, NavLink, Route, Routes, useLocation } from "react-router-dom";
@@ -150,6 +151,7 @@ export function PublicShell({ children }: ShellProps) {
           </nav>
         )}
       </header>
+      <PageTranslationStatus />
       <main id="main-content" tabIndex={-1} className="stt-g0-main">{children}</main>
       <footer className="stt-g0-footer">
         <div className="stt-g0-footer__inner">
@@ -171,7 +173,7 @@ export function PublicShell({ children }: ShellProps) {
   );
 }
 
-function AppRoutes() {
+export function AppRoutes() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
@@ -287,4 +289,4 @@ function AppFrame() {
   if (isKorean) return <KoreanShell><AppRoutes /></KoreanShell>;
   return <PublicShell><AppRoutes /></PublicShell>;
 }
-export default function App() { return <BrowserRouter><AppFrame /></BrowserRouter>; }
+export default function App() { return <BrowserRouter><PageTranslationProvider><AppFrame /></PageTranslationProvider></BrowserRouter>; }

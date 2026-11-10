@@ -167,6 +167,8 @@ function formalSeoPages(): Plugin {
 }
 
 export default defineConfig({
+  // Legacy VITE_ credentials remain server-only; only explicitly public settings may be bundled.
+  envPrefix: "STT_PUBLIC_",
   base: "/",
   build: {
     rollupOptions: {
