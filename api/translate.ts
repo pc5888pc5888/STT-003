@@ -1,7 +1,8 @@
 import fs from "node:fs";
 import path from "node:path";
 import { createHash } from "node:crypto";
-import { normalizeTranslationText } from "../src/i18n/translationText";
+// Keep this entry self-contained for Vercel's native ESM function runtime.
+const normalizeTranslationText = (value: string) => value.replace(/\s+/g, " ").trim();
 
 const languages: Record<string, string> = { en: "English", ja: "Japanese", ko: "Korean" };
 let sourceSet: Set<string> | undefined;
