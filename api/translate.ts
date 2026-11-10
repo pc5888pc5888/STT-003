@@ -49,6 +49,11 @@ export async function translateTexts(texts: string[], language: string, apiKey: 
         const detail = await response.json().catch(() => ({}));
         const error = new Error(response.status === 429 ? "TRANSLATION_BUSY" : "TRANSLATION_PROVIDER_UNAVAILABLE");
         Object.assign(error, { providerStatus: response.status, providerCode: detail.error?.status, providerReason: detail.error?.details?.find((item: { reason?: string }) => item.reason)?.reason });
+        if (response.status === 429) {
+          const retry = detail.error?.details?.find((item: { retryDelay?: string }) => item.retryDelay)?.retryDelay;
+          const retryAfterSeconds = Math.min(300, Math.max(60, Math.ceil(parseFloat(retry || "60"))));
+          throw Object.assign(error, { permanent: true, retryAfterSeconds });
+        }
         // Authentication and malformed requests will not improve on another model.
         if ([400, 401, 403].includes(response.status)) throw Object.assign(error, { permanent: true });
         throw error;
@@ -101,7 +106,7 @@ export default async function handler(req: any, res: any) {
       const count = requests.get(ip);
       const characters = missing.reduce((sum, key) => sum + normalized[keys.indexOf(key)].length, 0);
       // Limit uncached source volume, so small batches do not penalize long articles.
-      if (count && count.until > now && count.count + characters > 75000) return reply(res, 429, { error: "TRANSLATION_BUSY" });
+      if (count && count.until > now && count.count + characters > 75000) { res.setHeader("Retry-After", "60"); return reply(res, 429, { error: "TRANSLATION_BUSY", retryAfterSeconds: 60 }); }
       requests.set(ip, count && count.until > now ? { ...count, count: count.count + characters } : { count: characters, until: now + 60000 });
       if (requests.size > 1000) for (const [key, value] of requests) if (value.until < now) requests.delete(key);
       const input = missing.map(key => normalized[keys.indexOf(key)]);
@@ -123,8 +128,9 @@ export default async function handler(req: any, res: any) {
     return reply(res, 200, { language, translations: keys.map(key => cache.get(key)) });
   } catch (error) {
     const code = error instanceof Error ? error.message : "TRANSLATION_UNAVAILABLE";
-    const provider = error as { providerStatus?: number; providerCode?: string; providerReason?: string };
+    const provider = error as { providerStatus?: number; providerCode?: string; providerReason?: string; retryAfterSeconds?: number };
     console.error("Translation failed", { code, providerStatus: provider.providerStatus, providerCode: provider.providerCode, providerReason: provider.providerReason });
-    return reply(res, code === "TRANSLATION_BUSY" ? 429 : 503, { error: ["TRANSLATION_BUSY", "INCOMPLETE_TRANSLATION"].includes(code) ? code : "TRANSLATION_UNAVAILABLE" });
+    if (code === "TRANSLATION_BUSY") res.setHeader("Retry-After", String(provider.retryAfterSeconds || 60));
+    return reply(res, code === "TRANSLATION_BUSY" ? 429 : 503, { retryAfterSeconds: provider.retryAfterSeconds, error: ["TRANSLATION_BUSY", "INCOMPLETE_TRANSLATION"].includes(code) ? code : "TRANSLATION_UNAVAILABLE" });
   }
 }

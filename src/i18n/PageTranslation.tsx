@@ -120,7 +120,11 @@ export function PageTranslationProvider({ children }: { children: ReactNode }) {
             try {
               const response = await fetch("/api/translate", { method: "POST", headers: { "Content-Type": "application/json" }, signal: controller.signal, body: JSON.stringify({ language, texts: batch }) });
               const result = await response.json();
-              if (!response.ok || !Array.isArray(result.translations) || result.translations.length !== batch.length || result.translations.some((value: unknown) => typeof value !== "string" || !value)) throw new Error("Translation incomplete");
+              if (!response.ok) throw Object.assign(new Error(result.error || "Translation incomplete"), {
+                retryAfterMs: response.status === 429 ? Math.max(60, Number(result.retryAfterSeconds) || 60) * 1000 : 15000 * (attempt + 1),
+                permanent: response.status >= 400 && response.status < 500 && response.status !== 429,
+              });
+              if (!Array.isArray(result.translations) || result.translations.length !== batch.length || result.translations.some((value: unknown) => typeof value !== "string" || !value)) throw new Error("Translation incomplete");
               if (active.current !== job || controller.signal.aborted) return;
               batch.forEach((text, index) => cache.set(language + ":" + text, result.translations[index]));
               // Preserve each successful batch even if its concurrent neighbour fails.
@@ -130,8 +134,9 @@ export function PageTranslationProvider({ children }: { children: ReactNode }) {
               break;
             } catch (error) {
               if (controller.signal.aborted || active.current !== job) return;
-              if (attempt === 2) failures.push(error);
-              else await new Promise(resolve => setTimeout(resolve, 1000 * (attempt + 1)));
+              const failure = error as { permanent?: boolean; retryAfterMs?: number };
+              if (attempt === 2 || failure.permanent) { failures.push(error); break; }
+              await new Promise(resolve => setTimeout(resolve, failure.retryAfterMs || 15000 * (attempt + 1)));
             }
             }
           }

@@ -30,6 +30,13 @@ assert.notEqual(attemptSignals[0], attemptSignals[1], "Fallback must have a fres
 await assert.rejects(() => translateTexts(["企業治理"], "en", "test-credential", async () => new Response(JSON.stringify({ candidates: [{ finishReason: "MAX_TOKENS" }] }))), /INCOMPLETE_TRANSLATION/);
 await assert.rejects(() => translateTexts(["企業治理"], "en", "test-credential", async () => new Response(JSON.stringify({ candidates: [{ finishReason: "STOP", content: { parts: [{ text: '{"translations":[]}' }] } }] }))), /INCOMPLETE_TRANSLATION/);
 
+let throttledCalls = 0;
+await assert.rejects(() => translateTexts(["企業治理"], "en", "test-credential", (async () => {
+  throttledCalls++;
+  return new Response(JSON.stringify({ error: { status: "RESOURCE_EXHAUSTED", details: [{ retryDelay: "65s" }] } }), { status: 429 });
+}) as typeof fetch), (error: any) => error.message === "TRANSLATION_BUSY" && error.retryAfterSeconds === 65);
+assert.equal(throttledCalls, 1, "A quota response must not cause immediate additional provider calls");
+
 const previous = process.env.STT_TRANSLATION_API_KEY;
 process.env.STT_TRANSLATION_API_KEY = "test-credential";
 const originalFetch = globalThis.fetch;
