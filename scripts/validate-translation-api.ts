@@ -24,7 +24,7 @@ await translateTexts(["企業治理"], "ko", "test-credential", (async (url: str
   return provider(url, options);
 }) as typeof fetch);
 assert(attemptedModels[0].includes("gemini-3.5-flash-lite"));
-assert(attemptedModels[1].includes("gemini-3.1-flash-lite"));
+assert(attemptedModels[1].includes("gemini-3.6-flash"));
 assert.notEqual(attemptSignals[0], attemptSignals[1], "Fallback must have a fresh timeout");
 
 await assert.rejects(() => translateTexts(["企業治理"], "en", "test-credential", async () => new Response(JSON.stringify({ candidates: [{ finishReason: "MAX_TOKENS" }] }))), /INCOMPLETE_TRANSLATION/);

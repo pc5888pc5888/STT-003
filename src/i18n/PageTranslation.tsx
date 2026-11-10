@@ -116,6 +116,7 @@ export function PageTranslationProvider({ children }: { children: ReactNode }) {
         async function worker() {
           while (cursor < batches.length && active.current === job && !controller.signal.aborted) {
             const batch = batches[cursor++];
+            for (let attempt = 0; attempt < 3; attempt++) {
             try {
               const response = await fetch("/api/translate", { method: "POST", headers: { "Content-Type": "application/json" }, signal: controller.signal, body: JSON.stringify({ language, texts: batch }) });
               const result = await response.json();
@@ -126,7 +127,13 @@ export function PageTranslationProvider({ children }: { children: ReactNode }) {
               saveCache();
               completed += batch.length;
               setState({ language, status: "loading", progress: Math.round(completed * 100 / missing.length) });
-            } catch (error) { failures.push(error); }
+              break;
+            } catch (error) {
+              if (controller.signal.aborted || active.current !== job) return;
+              if (attempt === 2) failures.push(error);
+              else await new Promise(resolve => setTimeout(resolve, 1000 * (attempt + 1)));
+            }
+            }
           }
         }
         await Promise.all([worker(), worker()]);
