@@ -94,7 +94,7 @@ export function PageTranslationProvider({ children }: { children: ReactNode }) {
         const original = previous && node.nodeValue === previous.translated ? previous.original : node.nodeValue ?? "";
         if (!hasChineseText(original)) continue;
         records.current.set(node, { original, translated: previous?.translated });
-        nodes.push({ node, original, parts: segments(normalizeTranslationText(original), 1000) });
+        nodes.push({ node, original, parts: segments(normalizeTranslationText(original), 2500) });
       }
       const unique = [...new Set(nodes.flatMap(item => item.parts))];
       const missing = unique.filter(text => !cache.has(language + ":" + text));
@@ -109,7 +109,7 @@ export function PageTranslationProvider({ children }: { children: ReactNode }) {
         const batches: string[][] = [];
         for (let i = 0; i < missing.length;) {
           const batch: string[] = []; let count = 0;
-          while (i < missing.length && batch.length < 80 && count + missing[i].length <= 1200) { count += missing[i].length; batch.push(missing[i++]); }
+          while (i < missing.length && batch.length < 80 && count + missing[i].length <= 3000) { count += missing[i].length; batch.push(missing[i++]); }
           batches.push(batch);
         }
         let completed = 0;
@@ -143,7 +143,8 @@ export function PageTranslationProvider({ children }: { children: ReactNode }) {
             }
           }
         }
-        await Promise.all([worker(), worker()]);
+        // Serial requests avoid exhausting the provider quota while reading a long column.
+        await worker();
         if (failures.length) throw failures[0];
         if (active.current !== job || controller.signal.aborted) return;
         observer.disconnect();
@@ -158,7 +159,15 @@ export function PageTranslationProvider({ children }: { children: ReactNode }) {
           node.nodeValue = text;
           records.current.set(node, { original, translated: text });
         }
-        document.documentElement.lang = language!; saveCache();
+        document.documentElement.lang = language!;
+        // Keep the current page most recent so reloading a long article does not
+        // evict its own translations from the bounded persistent cache.
+        for (const source of unique) {
+          const key = language + ":" + source;
+          const value = cache.get(key);
+          if (value !== undefined) { cache.delete(key); cache.set(key, value); }
+        }
+        saveCache();
         setState({ language, status: "ready", progress: 100 });
       } catch {
         if (!controller.signal.aborted && active.current === job) { observer.disconnect(); restore(); document.documentElement.lang = "zh-Hant-TW"; setState({ language, status: "error", progress: 0 }); }
