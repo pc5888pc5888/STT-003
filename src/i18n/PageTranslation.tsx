@@ -59,7 +59,7 @@ export function PageTranslationProvider({ children }: { children: ReactNode }) {
     loadCache();
     const fixedPublication = isPublicationPage(location.pathname);
     // Reviewed publication copy takes precedence over any older machine-translation cache.
-    if (fixedPublication) for (const [source, translated] of publicationCopyEntries(language)) cache.set(language + ":" + source, translated);
+    for (const [source, translated] of publicationCopyEntries(language)) cache.set(language + ":" + source, translated);
     const root = document.getElementById("root");
     if (!root) return;
     const controller = new AbortController();
@@ -92,7 +92,7 @@ export function PageTranslationProvider({ children }: { children: ReactNode }) {
         const original = previous && node.nodeValue === previous.translated ? previous.original : node.nodeValue ?? "";
         if (!hasChineseText(original)) continue;
         records.current.set(node, { original, translated: previous?.translated });
-        nodes.push({ node, original, parts: segments(normalizeTranslationText(original), language === "ko" ? 1400 : 3000) });
+        nodes.push({ node, original, parts: segments(normalizeTranslationText(original), 1000) });
       }
       const unique = [...new Set(nodes.flatMap(item => item.parts))];
       const missing = unique.filter(text => !cache.has(language + ":" + text));
@@ -107,24 +107,30 @@ export function PageTranslationProvider({ children }: { children: ReactNode }) {
         const batches: string[][] = [];
         for (let i = 0; i < missing.length;) {
           const batch: string[] = []; let count = 0;
-          while (i < missing.length && batch.length < 80 && count + missing[i].length <= (language === "ko" ? 1500 : 3500)) { count += missing[i].length; batch.push(missing[i++]); }
+          while (i < missing.length && batch.length < 80 && count + missing[i].length <= 1200) { count += missing[i].length; batch.push(missing[i++]); }
           batches.push(batch);
         }
         let completed = 0;
-        for (let start = 0; start < batches.length; start += 2) {
-          const results = await Promise.all(batches.slice(start, start + 2).map(async batch => {
-            const response = await fetch("/api/translate", { method: "POST", headers: { "Content-Type": "application/json" }, signal: controller.signal, body: JSON.stringify({ language, texts: batch }) });
-            const result = await response.json();
-            if (!response.ok || !Array.isArray(result.translations) || result.translations.length !== batch.length || result.translations.some((value: unknown) => typeof value !== "string" || !value)) throw new Error("Translation incomplete");
-            return { batch, translations: result.translations as string[] };
-          }));
-          if (active.current !== job) return;
-          for (const { batch, translations } of results) {
-            batch.forEach((text, index) => cache.set(language + ":" + text, translations[index]));
-            completed += batch.length;
+        let cursor = 0;
+        const failures: unknown[] = [];
+        async function worker() {
+          while (cursor < batches.length && active.current === job && !controller.signal.aborted) {
+            const batch = batches[cursor++];
+            try {
+              const response = await fetch("/api/translate", { method: "POST", headers: { "Content-Type": "application/json" }, signal: controller.signal, body: JSON.stringify({ language, texts: batch }) });
+              const result = await response.json();
+              if (!response.ok || !Array.isArray(result.translations) || result.translations.length !== batch.length || result.translations.some((value: unknown) => typeof value !== "string" || !value)) throw new Error("Translation incomplete");
+              if (active.current !== job || controller.signal.aborted) return;
+              batch.forEach((text, index) => cache.set(language + ":" + text, result.translations[index]));
+              // Preserve each successful batch even if its concurrent neighbour fails.
+              saveCache();
+              completed += batch.length;
+              setState({ language, status: "loading", progress: Math.round(completed * 100 / missing.length) });
+            } catch (error) { failures.push(error); }
           }
-          setState({ language, status: "loading", progress: Math.round(completed * 100 / missing.length) });
         }
+        await Promise.all([worker(), worker()]);
+        if (failures.length) throw failures[0];
         if (active.current !== job || controller.signal.aborted) return;
         observer.disconnect();
         // Update all text only after the complete page is available. Do not replace DOM elements or event handlers.

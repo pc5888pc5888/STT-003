@@ -16,6 +16,17 @@ assert.deepEqual(await translateTexts(["企業治理", "莊鈞翔博士"], "en",
 let transientCalls = 0;
 await translateTexts(["企業治理"], "en", "test-credential", (async (url: unknown, options: any) => ++transientCalls === 1 ? new Response("", { status: 503 }) : provider(url, options)) as typeof fetch);
 assert.equal(transientCalls, 2, "A temporary provider failure should recover once");
+const attemptedModels: string[] = [];
+const attemptSignals: AbortSignal[] = [];
+await translateTexts(["企業治理"], "ko", "test-credential", (async (url: string, options: any) => {
+  attemptedModels.push(url); attemptSignals.push(options.signal);
+  if (attemptedModels.length === 1) throw new DOMException("timeout", "TimeoutError");
+  return provider(url, options);
+}) as typeof fetch);
+assert(attemptedModels[0].includes("gemini-3.5-flash-lite"));
+assert(attemptedModels[1].includes("gemini-3.1-flash-lite"));
+assert.notEqual(attemptSignals[0], attemptSignals[1], "Fallback must have a fresh timeout");
+
 await assert.rejects(() => translateTexts(["企業治理"], "en", "test-credential", async () => new Response(JSON.stringify({ candidates: [{ finishReason: "MAX_TOKENS" }] }))), /INCOMPLETE_TRANSLATION/);
 await assert.rejects(() => translateTexts(["企業治理"], "en", "test-credential", async () => new Response(JSON.stringify({ candidates: [{ finishReason: "STOP", content: { parts: [{ text: '{"translations":[]}' }] } }] }))), /INCOMPLETE_TRANSLATION/);
 
