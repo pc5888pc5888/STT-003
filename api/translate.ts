@@ -40,7 +40,7 @@ export async function translateTexts(texts: string[], language: string, apiKey: 
   };
   // Use the current lightweight model. A separate deadline for each attempt
   // prevents a slow first request from consuming the fallback's entire budget.
-  const models = ["gemini-3.5-flash-lite", "gemini-3.6-flash", "gemini-3.1-flash-lite"];
+  const models = ["gemini-3.5-flash-lite", "gemini-3.8-flash", "gemini-3.1-flash-lite"];
   const sharedCooldowns = process.env.VERCEL ? getCache({ namespace: "stt-translation-models", keyHashFunction: key => key }) : undefined;
   await Promise.all(models.map(async model => {
     const until = await sharedCooldowns?.get(model).catch(() => undefined);
@@ -52,7 +52,12 @@ export async function translateTexts(texts: string[], language: string, apiKey: 
     if ((cooldowns.get(model) || 0) > Date.now()) continue;
     const started = Date.now();
     try {
-      const response = await fetcher(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`, { ...options, signal: AbortSignal.timeout(30000) });
+      const modelOptions = model === "gemini-3.8-flash" ? JSON.parse(options.body as string) : undefined;
+      if (modelOptions) {
+        delete modelOptions.generationConfig.temperature;
+        modelOptions.generationConfig.thinkingConfig = { thinkingLevel: "low" };
+      }
+      const response = await fetcher(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`, { ...options, ...(modelOptions ? { body: JSON.stringify(modelOptions) } : {}), signal: AbortSignal.timeout(30000) });
       if (!response.ok) {
         const detail = await response.json().catch(() => ({}));
         const error = new Error(response.status === 429 ? "TRANSLATION_BUSY" : "TRANSLATION_PROVIDER_UNAVAILABLE");
@@ -90,16 +95,28 @@ export async function translateTexts(texts: string[], language: string, apiKey: 
   throw Object.assign(quotaError || new Error("TRANSLATION_BUSY"), { retryAfterSeconds: Math.max(1, Math.ceil(Math.min(...waits) / 1000)) });
 }
 
-async function reusableTranslation(input: string[], language: string, apiKey: string) {
+export async function reusableTranslation(input: string[], language: string, apiKey: string,
+  shared = process.env.VERCEL ? getCache({ namespace: "stt-translation", keyHashFunction: key => key }) : undefined,
+  translator = translateTexts) {
   const key = "translation-v2:" + language + ":" + createHash("sha256").update(JSON.stringify(input)).digest("hex");
   // This is the existing host's shared cache; it requires no separate account
   // or credentials. Cache outages must not prevent translation.
-  const shared = process.env.VERCEL ? getCache({ namespace: "stt-translation", keyHashFunction: key => key }) : undefined;
   const saved = await shared?.get(key).catch(() => undefined);
-  if (Array.isArray(saved) && saved.length === input.length && saved.every(value => typeof value === "string" && value.trim())) return saved as string[];
-  const translated = await translateTexts(input, language, apiKey);
-  await shared?.set(key, translated, { ttl: 2592000, tags: ["stt-public-translations"], name: "STT public translation" }).catch(() => {});
-  return translated;
+  const segmentKeys = input.map(text => "segment-v1:" + language + ":" + createHash("sha256").update(text).digest("hex"));
+  const values: Array<string | undefined> = Array.isArray(saved) && saved.length === input.length && saved.every(value => typeof value === "string" && value.trim())
+    ? saved : await Promise.all(segmentKeys.map(async key => {
+      const value = await shared?.get(key).catch(() => undefined);
+      return typeof value === "string" && value.trim() ? value : undefined;
+    }));
+  const missing = input.map((_, index) => index).filter(index => !values[index]);
+  if (missing.length) {
+    const translated = await translator(missing.map(index => input[index]), language, apiKey);
+    missing.forEach((index, offset) => { values[index] = translated[offset]; });
+  }
+  // Reuse individual paragraphs across visitors, pages, and different batch
+  // boundaries. Also migrate older whole-batch cache entries when they are read.
+  await Promise.all(segmentKeys.map((key, index) => shared?.set(key, values[index]!, { ttl: 2592000, tags: ["stt-public-translations"], name: "STT public paragraph" }).catch(() => {})));
+  return values as string[];
 }
 
 export default async function handler(req: any, res: any) {

@@ -1031,6 +1031,21 @@
   color:#704b20!important;
 }
 
+/* Text-only heroes must size themselves from the copy in every language.
+   Absolute positioning was allowing long leads to overlap the next section. */
+#root .cis-hero.cis-text-only{height:auto!important;min-height:0!important}
+#root .cis-hero.cis-text-only .cis-hero-inner{
+  display:block!important;width:100%!important;max-width:none!important;
+  height:auto!important;min-height:0!important;aspect-ratio:auto!important;
+  margin:0!important;padding:clamp(56px,7vw,100px) clamp(24px,4.1vw,56px) 64px!important;
+}
+#root .cis-hero.cis-text-only:not(.cis-profile-parity) .cis-hero-copy{
+  position:relative!important;inset:auto!important;transform:none!important;
+  width:min(100%,960px)!important;max-width:960px!important;margin:0!important;padding:0!important;
+}
+#root .cis-hero.cis-text-only .cis-title-line{white-space:normal!important;overflow-wrap:break-word}
+@media(max-width:760px){#root .cis-hero.cis-text-only .cis-hero-inner{padding:48px 24px!important}}
+
 /* 2026-11-01 governed LINE relationship entry: website remains the formal intake layer. */
 #root .stt-line-entry{display:grid;grid-template-columns:minmax(0,1fr) 188px;gap:46px;align-items:center;padding:34px 36px;border:1px solid var(--cis-line);background:var(--cis-white)}
 #root .stt-line-entry__copy h2{margin-bottom:12px!important}

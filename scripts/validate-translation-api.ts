@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import fs from "node:fs";
-import handler, { translateTexts } from "../api/translate";
+import handler, { translateTexts, reusableTranslation } from "../api/translate";
 
 const source = JSON.parse(fs.readFileSync("dist/translation-source.json", "utf8")) as string[];
 assert(source.length > 20000);
@@ -24,8 +24,17 @@ await translateTexts(["企業治理"], "ko", "test-credential", (async (url: str
   return provider(url, options);
 }) as typeof fetch);
 assert(attemptedModels[0].includes("gemini-3.5-flash-lite"));
-assert(attemptedModels[1].includes("gemini-3.6-flash"));
+assert(attemptedModels[1].includes("gemini-3.8-flash"));
 assert.notEqual(attemptSignals[0], attemptSignals[1], "Fallback must have a fresh timeout");
+const sharedEntries = new Map<string, unknown>();
+const shared = { get: async (key: string) => sharedEntries.get(key), set: async (key: string, value: unknown) => { sharedEntries.set(key, value); } } as any;
+const translatedBatches: string[][] = [];
+const translate = async (texts: string[]) => { translatedBatches.push(texts); return texts.map(text => "Translation: " + text); };
+await reusableTranslation(["企業治理", "家族傳承"], "ja", "test-credential", shared, translate);
+await reusableTranslation(["家族傳承", "契約治理", "企業治理"], "ja", "test-credential", shared, translate);
+assert.deepEqual(translatedBatches, [["企業治理", "家族傳承"], ["契約治理"]], "New visitors and different batch boundaries must reuse shared paragraphs");
+await reusableTranslation(["企業治理"], "ko", "test-credential", shared, translate);
+assert.equal(translatedBatches.length, 3, "Language cache entries must stay separate");
 
 await assert.rejects(() => translateTexts(["企業治理"], "en", "test-credential", async () => new Response(JSON.stringify({ candidates: [{ finishReason: "MAX_TOKENS" }] }))), /INCOMPLETE_TRANSLATION/);
 await assert.rejects(() => translateTexts(["企業治理"], "en", "test-credential", async () => new Response(JSON.stringify({ candidates: [{ finishReason: "STOP", content: { parts: [{ text: '{"translations":[]}' }] } }] }))), /INCOMPLETE_TRANSLATION/);

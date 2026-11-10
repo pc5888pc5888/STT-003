@@ -100,19 +100,36 @@ export function PageTranslationProvider({ children }: { children: ReactNode }) {
       const missing = unique.filter(text => !cache.has(language + ":" + text));
       if (!nodes.length) { running = false; observer.observe(root!, { childList: true, subtree: true, characterData: true }); return; }
       observer.observe(root!, { childList: true, subtree: true, characterData: true });
+      function applyAvailable() {
+        if (active.current !== job || controller.signal.aborted) return;
+        observer.disconnect();
+        for (const { node, original, parts } of nodes) {
+          if (!node.isConnected || parts.some(part => !cache.has(language + ":" + part))) continue;
+          const previous = records.current.get(node);
+          if (node.nodeValue !== original && node.nodeValue !== previous?.translated) { rerun = true; continue; }
+          const gap = language === "en" || language === "ko" ? " " : "";
+          const text = (original.match(/^\s*/)?.[0] || gap) + parts.map(part => cache.get(language + ":" + part)).join(" ") + (original.match(/\s*$/)?.[0] || gap);
+          node.nodeValue = text;
+          records.current.set(node, { original, translated: text });
+        }
+        observer.observe(root!, { childList: true, subtree: true, characterData: true });
+      }
+      const progress = () => Math.round(unique.filter(text => cache.has(language + ":" + text)).length * 100 / unique.length);
       try {
         if (fixedPublication && missing.length) {
           console.error("Missing publication translations", missing);
           throw new Error("Publication translation coverage is incomplete");
         }
-        if (missing.length) setState({ language, status: "loading", progress: 0 });
+        // The reader can start with completed paragraphs immediately. A later
+        // footer or provider failure must never discard the translated article.
+        applyAvailable();
+        if (missing.length) setState({ language, status: "loading", progress: progress() });
         const batches: string[][] = [];
         for (let i = 0; i < missing.length;) {
           const batch: string[] = []; let count = 0;
           while (i < missing.length && batch.length < 80 && count + missing[i].length <= 3000) { count += missing[i].length; batch.push(missing[i++]); }
           batches.push(batch);
         }
-        let completed = 0;
         let cursor = 0;
         const failures: unknown[] = [];
         async function worker() {
@@ -120,7 +137,7 @@ export function PageTranslationProvider({ children }: { children: ReactNode }) {
             const batch = batches[cursor++];
             for (let attempt = 0; attempt < 3; attempt++) {
             try {
-              const response = await fetch("/api/translate", { method: "POST", headers: { "Content-Type": "application/json" }, signal: controller.signal, body: JSON.stringify({ language, texts: batch }) });
+              const response = await fetch("/api/translate", { method: "POST", headers: { "Content-Type": "application/json" }, signal: AbortSignal.any([controller.signal, AbortSignal.timeout(105000)]), body: JSON.stringify({ language, texts: batch }) });
               const result = await response.json();
               if (!response.ok) throw Object.assign(new Error(result.error || "Translation incomplete"), {
                 retryAfterMs: response.status === 429 ? Math.max(60, Number(result.retryAfterSeconds) || 60) * 1000 : 15000 * (attempt + 1),
@@ -129,10 +146,10 @@ export function PageTranslationProvider({ children }: { children: ReactNode }) {
               if (!Array.isArray(result.translations) || result.translations.length !== batch.length || result.translations.some((value: unknown) => typeof value !== "string" || !value)) throw new Error("Translation incomplete");
               if (active.current !== job || controller.signal.aborted) return;
               batch.forEach((text, index) => cache.set(language + ":" + text, result.translations[index]));
-              // Preserve each successful batch even if its concurrent neighbour fails.
+              applyAvailable();
+              // Preserve each successful batch even if a later paragraph fails.
               saveCache();
-              completed += batch.length;
-              setState({ language, status: "loading", progress: Math.round(completed * 100 / missing.length) });
+              setState({ language, status: "loading", progress: progress() });
               break;
             } catch (error) {
               if (controller.signal.aborted || active.current !== job) return;
@@ -147,18 +164,7 @@ export function PageTranslationProvider({ children }: { children: ReactNode }) {
         await worker();
         if (failures.length) throw failures[0];
         if (active.current !== job || controller.signal.aborted) return;
-        observer.disconnect();
-        // Update all text only after the complete page is available. Do not replace DOM elements or event handlers.
-        for (const { node, original, parts } of nodes) {
-          if (!node.isConnected) continue;
-          const previous = records.current.get(node);
-          if (node.nodeValue !== original && node.nodeValue !== previous?.translated) { rerun = true; continue; }
-          // English and Korean words need spacing across inline emphasis.
-          const gap = language === "en" || language === "ko" ? " " : "";
-          const text = (original.match(/^\s*/)?.[0] || gap) + parts.map(part => cache.get(language + ":" + part)).join(" ") + (original.match(/\s*$/)?.[0] || gap);
-          node.nodeValue = text;
-          records.current.set(node, { original, translated: text });
-        }
+        applyAvailable();
         document.documentElement.lang = language!;
         // Keep the current page most recent so reloading a long article does not
         // evict its own translations from the bounded persistent cache.
@@ -170,7 +176,7 @@ export function PageTranslationProvider({ children }: { children: ReactNode }) {
         saveCache();
         setState({ language, status: "ready", progress: 100 });
       } catch {
-        if (!controller.signal.aborted && active.current === job) { observer.disconnect(); restore(); document.documentElement.lang = "zh-Hant-TW"; setState({ language, status: "error", progress: 0 }); }
+        if (!controller.signal.aborted && active.current === job) { applyAvailable(); saveCache(); setState({ language, status: "error", progress: progress() }); }
       } finally {
         running = false;
         if (!controller.signal.aborted && active.current === job) { observer.observe(root!, { childList: true, subtree: true, characterData: true }); if (rerun) timer = setTimeout(() => void translate(), 180); }
@@ -199,8 +205,8 @@ export function PageTranslationStatus() {
   const state = usePageTranslation();
   if (!state.language) return null;
   return <div className="stt-translation-status" data-stt-no-translate="true" translate="no" role="status" aria-live="polite">
-    <span>{state.status === "loading" ? `正在翻譯為 ${names[state.language]}… ${state.progress}%` : state.status === "error" ? "翻譯暫未完成，已保留中文原文。" : `${names[state.language]} · AI 翻譯｜以繁體中文原文為準`}</span>
-    {state.status === "error" && <button type="button" onClick={() => state.select(state.language!)}>重新翻譯</button>}
+    <span>{state.status === "loading" ? `正在翻譯為 ${names[state.language]}… ${state.progress}%` : state.status === "error" ? `翻譯已完成 ${state.progress}%；其餘段落暫保留原文。` : `${names[state.language]} · AI 翻譯｜以繁體中文原文為準`}</span>
+    {state.status === "error" && <button type="button" onClick={() => state.select(state.language!)}>繼續翻譯</button>}
     <button type="button" onClick={() => state.select("zh-Hant-TW")}>繁體中文</button>
   </div>;
 }
