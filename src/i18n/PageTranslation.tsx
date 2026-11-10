@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { hasChineseText, normalizeTranslationText } from "./translationText";
 import { nativeLanguagePath, type PageLanguage } from "./pageLanguage";
 import { isPublicationPage, publicationCopyEntries } from "./publicationCopy";
+import { columnCopy } from "./columnCopy";
 
 type ForeignLanguage = "en" | "ja" | "ko";
 type State = { language: ForeignLanguage | null; status: "idle" | "loading" | "ready" | "error"; progress: number };
@@ -60,6 +61,7 @@ export function PageTranslationProvider({ children }: { children: ReactNode }) {
     const fixedPublication = isPublicationPage(location.pathname);
     // Reviewed publication copy takes precedence over any older machine-translation cache.
     for (const [source, translated] of publicationCopyEntries(language)) cache.set(language + ":" + source, translated);
+    for (const [source, translated] of Object.entries(columnCopy[language])) cache.set(language + ":" + source, translated);
     const root = document.getElementById("root");
     if (!root) return;
     const controller = new AbortController();
