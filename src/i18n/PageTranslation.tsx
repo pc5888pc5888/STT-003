@@ -111,7 +111,9 @@ export function PageTranslationProvider({ children }: { children: ReactNode }) {
           if (!node.isConnected) continue;
           const previous = records.current.get(node);
           if (node.nodeValue !== original && node.nodeValue !== previous?.translated) { rerun = true; continue; }
-          const text = (original.match(/^\s*/)?.[0] ?? "") + parts.map(part => cache.get(language + ":" + part)).join(" ") + (original.match(/\s*$/)?.[0] ?? "");
+          // English words separated by inline emphasis need spacing even when Chinese did not.
+          const gap = language === "en" ? " " : "";
+          const text = (original.match(/^\s*/)?.[0] || gap) + parts.map(part => cache.get(language + ":" + part)).join(" ") + (original.match(/\s*$/)?.[0] || gap);
           node.nodeValue = text;
           records.current.set(node, { original, translated: text });
         }

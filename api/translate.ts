@@ -27,7 +27,7 @@ function approvedText(text: string) {
 }
 
 export async function translateTexts(texts: string[], language: string, apiKey: string, fetcher: typeof fetch = fetch): Promise<string[]> {
-  const response = await fetcher("https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:generateContent", {
+  const options: RequestInit = {
     method: "POST",
     headers: { "Content-Type": "application/json", "x-goog-api-key": apiKey },
     signal: AbortSignal.timeout(45000),
@@ -36,7 +36,15 @@ export async function translateTexts(texts: string[], language: string, apiKey: 
       contents: [{ role: "user", parts: [{ text: JSON.stringify({ texts }) }] }],
       generationConfig: { temperature: 0, maxOutputTokens: 32768, responseMimeType: "application/json", responseSchema: { type: "OBJECT", properties: { translations: { type: "ARRAY", items: { type: "STRING" } } }, required: ["translations"] } },
     }),
-  });
+  };
+  const endpoint = "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite:generateContent";
+  let response = await fetcher(endpoint, options);
+  // Retry a transient service failure once, within the same 45-second deadline.
+  if ([502, 503, 504].includes(response.status)) {
+    await response.body?.cancel();
+    await new Promise(resolve => setTimeout(resolve, 700));
+    response = await fetcher(endpoint, options);
+  }
   if (!response.ok) {
     const detail = await response.json().catch(() => ({}));
     const error = new Error(response.status === 429 ? "TRANSLATION_BUSY" : "TRANSLATION_PROVIDER_UNAVAILABLE");
