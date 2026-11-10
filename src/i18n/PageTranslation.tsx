@@ -142,6 +142,7 @@ export function PageTranslationProvider({ children }: { children: ReactNode }) {
               if (!response.ok) throw Object.assign(new Error(result.error || "Translation incomplete"), {
                 retryAfterMs: response.status === 429 ? Math.max(60, Number(result.retryAfterSeconds) || 60) * 1000 : 15000 * (attempt + 1),
                 permanent: response.status >= 400 && response.status < 500 && response.status !== 429,
+                splitBatch: response.status === 503,
               });
               if (!Array.isArray(result.translations) || result.translations.length !== batch.length || result.translations.some((value: unknown) => typeof value !== "string" || !value)) throw new Error("Translation incomplete");
               if (active.current !== job || controller.signal.aborted) return;
@@ -153,7 +154,12 @@ export function PageTranslationProvider({ children }: { children: ReactNode }) {
               break;
             } catch (error) {
               if (controller.signal.aborted || active.current !== job) return;
-              const failure = error as { permanent?: boolean; retryAfterMs?: number };
+              const failure = error as { permanent?: boolean; retryAfterMs?: number; splitBatch?: boolean };
+              if (failure.splitBatch && batch.length > 1 && batch.join("").length > 1200) {
+                const middle = Math.ceil(batch.length / 2);
+                batches.splice(cursor, 0, batch.slice(0, middle), batch.slice(middle));
+                break;
+              }
               if (attempt === 2 || failure.permanent) { failures.push(error); break; }
               await new Promise(resolve => setTimeout(resolve, failure.retryAfterMs || 15000 * (attempt + 1)));
             }
