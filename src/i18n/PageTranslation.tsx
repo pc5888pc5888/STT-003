@@ -16,15 +16,31 @@ let cacheLoaded = false;
 const isForeign = (value: unknown): value is ForeignLanguage => value === "en" || value === "ja" || value === "ko";
 
 function loadCache() {
-  if (cacheLoaded) return;
-  cacheLoaded = true;
   try {
-    const saved = JSON.parse(localStorage.getItem("stt-public-translations-v1") ?? "[]");
-    for (const [key, value] of saved) if (typeof key === "string" && typeof value === "string") cache.set(key, value);
+    if (!cacheLoaded) {
+      cacheLoaded = true;
+      const saved = JSON.parse(localStorage.getItem("stt-public-translations-v1") ?? "[]");
+      for (const [key, value] of saved) if (typeof key === "string" && typeof value === "string") cache.set(key, value);
+    }
+    for (const language of ["en", "ja", "ko"]) {
+      const entries = JSON.parse(localStorage.getItem("stt-public-translations-v2-" + language) ?? "[]");
+      for (const [key, value] of entries) if (typeof key === "string" && key.startsWith(language + ":") && typeof value === "string") cache.set(key, value);
+    }
   } catch { /* Persistent storage is optional. */ }
 }
-function saveCache() {
-  try { localStorage.setItem("stt-public-translations-v1", JSON.stringify([...cache].slice(-2000))); } catch { /* Storage may be unavailable. */ }
+function saveCache(language: ForeignLanguage, sources: string[]) {
+  try {
+    const storageKey = "stt-public-translations-v2-" + language;
+    const saved = new Map<string, string>(JSON.parse(localStorage.getItem(storageKey) ?? "[]"));
+    // Merge only this page's completed work into the latest storage value.
+    // Another tab or language must not be overwritten by this tab's old snapshot.
+    for (const source of sources) {
+      const key = language + ":" + source;
+      const value = cache.get(key);
+      if (value !== undefined) { saved.delete(key); saved.set(key, value); }
+    }
+    localStorage.setItem(storageKey, JSON.stringify([...saved].slice(-2000)));
+  } catch { /* Storage may be unavailable. */ }
 }
 function segments(text: string, limit: number) {
   const result: string[] = [];
@@ -149,7 +165,7 @@ export function PageTranslationProvider({ children }: { children: ReactNode }) {
               batch.forEach((text, index) => cache.set(language + ":" + text, result.translations[index]));
               applyAvailable();
               // Preserve each successful batch even if a later paragraph fails.
-              saveCache();
+              saveCache(language!, batch);
               setState({ language, status: "loading", progress: progress() });
               break;
             } catch (error) {
@@ -179,10 +195,10 @@ export function PageTranslationProvider({ children }: { children: ReactNode }) {
           const value = cache.get(key);
           if (value !== undefined) { cache.delete(key); cache.set(key, value); }
         }
-        saveCache();
+        saveCache(language!, unique);
         setState({ language, status: "ready", progress: 100 });
       } catch {
-        if (!controller.signal.aborted && active.current === job) { applyAvailable(); saveCache(); setState({ language, status: "error", progress: progress() }); }
+        if (!controller.signal.aborted && active.current === job) { applyAvailable(); saveCache(language!, unique); setState({ language, status: "error", progress: progress() }); }
       } finally {
         running = false;
         if (!controller.signal.aborted && active.current === job) { observer.observe(root!, { childList: true, subtree: true, characterData: true }); if (rerun) timer = setTimeout(() => void translate(), 180); }
