@@ -40,7 +40,7 @@ export async function translateTexts(texts: string[], language: string, apiKey: 
   };
   // Use the current lightweight model. A separate deadline for each attempt
   // prevents a slow first request from consuming the fallback's entire budget.
-  const models = ["gemini-3.5-flash-lite", "gemini-3.8-flash", "gemini-3.1-flash-lite"];
+  const models = ["gemini-3.1-flash-lite", "gemini-3.5-flash-lite", "gemini-3.8-flash"];
   const sharedCooldowns = process.env.VERCEL ? getCache({ namespace: "stt-translation-models", keyHashFunction: key => key }) : undefined;
   await Promise.all(models.map(async model => {
     const until = await sharedCooldowns?.get(model).catch(() => undefined);

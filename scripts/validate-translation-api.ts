@@ -23,8 +23,8 @@ await translateTexts(["企業治理"], "ko", "test-credential", (async (url: str
   if (attemptedModels.length === 1) throw new DOMException("timeout", "TimeoutError");
   return provider(url, options);
 }) as typeof fetch);
-assert(attemptedModels[0].includes("gemini-3.5-flash-lite"));
-assert(attemptedModels[1].includes("gemini-3.8-flash"));
+assert(attemptedModels[0].includes("gemini-3.1-flash-lite"));
+assert(attemptedModels[1].includes("gemini-3.5-flash-lite"));
 assert.notEqual(attemptSignals[0], attemptSignals[1], "Fallback must have a fresh timeout");
 const sharedEntries = new Map<string, unknown>();
 const shared = { get: async (key: string) => sharedEntries.get(key), set: async (key: string, value: unknown) => { sharedEntries.set(key, value); } } as any;

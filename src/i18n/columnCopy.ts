@@ -1,6 +1,7 @@
 // Editorial corrections take precedence over previously cached machine output.
 export const columnCopy: Record<"en" | "ja" | "ko", Record<string, string>> = {
   en: {
+    "傳產與代工業的製程紀律": "Process Discipline in Traditional Manufacturing and Contract Manufacturing",
     "家，是從有人願意留下來開始": "A Home Begins When Someone Is Willing to Stay",
     "留一點空白，讓孩子重新長出自己的力量": "Leave Room for Children to Regain Their Own Strength",
     "讓走過的路，成為後來的人可以接續的經驗": "Turn the Path Already Travelled into Experience Others Can Build On",
@@ -11,6 +12,7 @@ export const columnCopy: Record<"en" | "ja" | "ko", Record<string, string>> = {
     "最後想留下的，不是自己的名字，而是別人還能繼續往前": "What He Hopes to Leave Behind Is the Ability of Others to Keep Moving Forward, Rather Than His Own Name",
   },
   ja: {
+    "傳產與代工業的製程紀律": "従来型製造業と受託製造業の工程規律",
     "家，是從有人願意留下來開始": "家は、そこにとどまろうとする人がいることから始まる",
     "留一點空白，讓孩子重新長出自己的力量": "余白を残し、子どもが自分の力を取り戻せるようにする",
     "讓走過的路，成為後來的人可以接續的經驗": "歩んできた道を、後に続く人が受け継げる経験にする",
@@ -21,6 +23,7 @@ export const columnCopy: Record<"en" | "ja" | "ko", Record<string, string>> = {
     "最後想留下的，不是自己的名字，而是別人還能繼續往前": "最後に残したいのは自分の名前ではなく、他の人が前に進み続けられる力",
   },
   ko: {
+    "傳產與代工業的製程紀律": "전통 제조업과 위탁생산업의 공정 규율",
     "家，是從有人願意留下來開始": "가정은 기꺼이 곁에 머무는 사람이 있을 때 시작된다",
     "留一點空白，讓孩子重新長出自己的力量": "아이들이 스스로 힘을 되찾을 수 있도록 여백을 남겨 두다",
     "讓走過的路，成為後來的人可以接續的經驗": "걸어온 길을 뒤따르는 사람들이 이어 갈 수 있는 경험으로 남기다",
