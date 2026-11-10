@@ -2,6 +2,7 @@ import { createContext, useContext, useEffect, useRef, useState, type ReactNode 
 import { useLocation, useNavigate } from "react-router-dom";
 import { hasChineseText, normalizeTranslationText } from "./translationText";
 import { nativeLanguagePath, type PageLanguage } from "./pageLanguage";
+import { isPublicationPage, publicationCopyEntries } from "./publicationCopy";
 
 type ForeignLanguage = "en" | "ja" | "ko";
 type State = { language: ForeignLanguage | null; status: "idle" | "loading" | "ready" | "error"; progress: number };
@@ -56,6 +57,9 @@ export function PageTranslationProvider({ children }: { children: ReactNode }) {
     restore();
     if (!language) { setState(empty); document.documentElement.lang = /^\/(en|ja|ko)(\/|$)/.exec(location.pathname)?.[1] ?? "zh-Hant-TW"; return; }
     loadCache();
+    const fixedPublication = isPublicationPage(location.pathname);
+    // Reviewed publication copy takes precedence over any older machine-translation cache.
+    if (fixedPublication) for (const [source, translated] of publicationCopyEntries(language)) cache.set(language + ":" + source, translated);
     const root = document.getElementById("root");
     if (!root) return;
     const controller = new AbortController();
@@ -95,6 +99,10 @@ export function PageTranslationProvider({ children }: { children: ReactNode }) {
       if (!nodes.length) { running = false; observer.observe(root!, { childList: true, subtree: true, characterData: true }); return; }
       observer.observe(root!, { childList: true, subtree: true, characterData: true });
       try {
+        if (fixedPublication && missing.length) {
+          console.error("Missing publication translations", missing);
+          throw new Error("Publication translation coverage is incomplete");
+        }
         if (missing.length) setState({ language, status: "loading", progress: 0 });
         const batches: string[][] = [];
         for (let i = 0; i < missing.length;) {
