@@ -159,16 +159,20 @@
   #root .institutional-footer .institutional-footer__links a {min-height:44px;}
 }
 
-/* Original approved logo artwork blends into the translucent navigation surface. */
+/* Remove only the original logo's white paper during rendering; keep its artwork. */
 #root :is(.stt-g0-brand,.g4-brand) {
   background:transparent!important;
   box-shadow:none!important;
 }
 #root :is(.stt-g0-brand,.g4-brand) img {
   background:transparent!important;
-  mix-blend-mode:multiply;
+  mix-blend-mode:normal;
   object-fit:contain!important;
   filter:none!important;
+}
+/* STT is already transparent; only the GCSDA original includes white paper. */
+#root .g4-brand img {
+  filter:url('/brand-paper-filter.svg#remove-white-paper')!important;
 }
 
 /* Full-width publication headings must exclude the scrollbar gutter. */
