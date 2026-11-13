@@ -76,6 +76,9 @@ for file in sorted(Path('public/data/articles').glob('*.json')):
     parsed = Parser(source)
     edits = []
     candidates = [n for n in parsed.nodes if MARKER.search(n.text) and not any(MARKER.search(c.text) for c in n.children)]
+    # This template uses a portrait/signature footer without an author-heading label.
+    # Its responsibility notes precede this shell and must remain in the article.
+    candidates.extend(n for n in parsed.nodes if 'author-shell' in n.attrs.get('class', '').split())
     cutoff = len(source)
     if candidates:
         # One historical article repeats an English role label in its introduction.
