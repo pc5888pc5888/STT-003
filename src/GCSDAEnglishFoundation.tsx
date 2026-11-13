@@ -118,18 +118,19 @@ export function GCSDAEnglishShell({
 
     <main id="main-content" tabIndex={-1}>{children}</main>
 
-    <footer className="g4-footer">
+    <footer id="site-footer" className="g4-footer institutional-footer">
       <div className="g4-wrap g4-footergrid">
-        <div>
+        <div className="institutional-footer__brand">
           <b>GCSDA｜中華企業策略永續發展學會</b>
           <p>GCSDA is an independent professional association. Its membership, bylaws, board governance, institutional records and responsibilities remain under GCSDA's own formal procedures.</p>
         </div>
-        <div>
+        <nav className="institutional-footer__links" aria-label="Footer navigation">
+          {EN_NAV.map(([label,path])=><Link key={path} to={path}>{label}</Link>)}
           <Link to="/en/navigator">Institutional Navigator</Link>
           <Link to={zhPath} hrefLang="zh-Hant-TW" lang="zh-Hant-TW">Traditional Chinese</Link>
           <a href={lineUrl} target="_blank" rel="noopener noreferrer">GCSDA Official LINE ↗</a>
           <a href={sttUrl} target="_blank" rel="noreferrer">STT Governance ↗</a>
-        </div>
+        </nav>
       </div>
     </footer>
   </div>;
