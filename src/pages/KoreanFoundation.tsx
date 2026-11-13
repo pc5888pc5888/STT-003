@@ -66,13 +66,13 @@ export function KoreanShell({children}:{children:ReactNode}){
 
     <main id="main-content" tabIndex={-1} className="stt-g0-main">{children}</main>
 
-    <footer className="stt-g0-footer">
+    <footer id="site-footer" className="stt-g0-footer institutional-footer">
       <div className="stt-g0-footer__inner">
-        <div className="stt-g0-footer__brand">
+        <div className="stt-g0-footer__brand institutional-footer__brand">
           <strong>STT Governance｜策略智庫智慧治理</strong>
           <span>거버넌스 판단과 제도 설계</span>
         </div>
-        <nav className="stt-g0-footer__links" aria-label="푸터 내비게이션">
+        <nav className="stt-g0-footer__links institutional-footer__links" aria-label="푸터 내비게이션">
           <Link to="/ko/how-stt-works">STT의 판단 방식</Link>
           <Link to="/ko/engagement">거버넌스 위임</Link>
           <Link to="/ko/about">STT 소개</Link>

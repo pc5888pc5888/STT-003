@@ -26,6 +26,8 @@ import "./styles/stt-japanese-foundation.css";
 import "./styles/stt-korean-foundation.css";
 import "./styles/stt-header-refinement.css";
 
+import "./styles/institutional-layout.css";
+
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode><AppProviders><App /></AppProviders></React.StrictMode>
 );

@@ -153,10 +153,10 @@ export function PublicShell({ children }: ShellProps) {
       </header>
       <PageTranslationStatus />
       <main id="main-content" tabIndex={-1} className="stt-g0-main">{children}</main>
-      <footer className="stt-g0-footer">
+      <footer id="site-footer" className="stt-g0-footer institutional-footer">
         <div className="stt-g0-footer__inner">
-          <div className="stt-g0-footer__brand"><strong>STT Governance｜策略智庫智慧治理</strong><span>治理判讀與制度設計</span></div>
-          <nav className="stt-g0-footer__links" aria-label="頁尾導覽">
+          <div className="stt-g0-footer__brand institutional-footer__brand"><strong>STT Governance｜策略智庫智慧治理</strong><span>治理判讀與制度設計</span></div>
+          <nav className="stt-g0-footer__links institutional-footer__links" aria-label="頁尾導覽">
             <Link to="/eric-chuang">莊鈞翔博士</Link><Link to="/institutions">機構合作</Link><Link to="/insights">研究與出版</Link>
             <Link to="/books">電子書與出版</Link><Link to="/columns/legal">法律專欄</Link><Link to="/columns/humanistic">人文地景產專欄</Link>
             <a href={HUMANISTIC_INTERVIEW_URL}>受訪者專區｜二十題訪談準備</a>

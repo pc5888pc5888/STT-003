@@ -73,13 +73,13 @@ export function EnglishShell({ children }: { children: ReactNode }) {
         )}
       </header>
       <main id="main-content" tabIndex={-1} className="stt-g0-main">{children}</main>
-      <footer className="stt-g0-footer">
+      <footer id="site-footer" className="stt-g0-footer institutional-footer">
         <div className="stt-g0-footer__inner">
-          <div className="stt-g0-footer__brand">
+          <div className="stt-g0-footer__brand institutional-footer__brand">
             <strong>STT Governance｜策略智庫智慧治理</strong>
             <span>Governance Judgment & Institutional Design</span>
           </div>
-          <nav className="stt-g0-footer__links" aria-label="Footer navigation">
+          <nav className="stt-g0-footer__links institutional-footer__links" aria-label="Footer navigation">
             <Link to="/en/how-stt-works">How STT Works</Link>
             <Link to="/en/engagement">Governance Engagement</Link>
             <Link to="/en/about">About STT</Link>

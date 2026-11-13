@@ -66,13 +66,13 @@ export function JapaneseShell({children}:{children:ReactNode}){
 
     <main id="main-content" tabIndex={-1} className="stt-g0-main">{children}</main>
 
-    <footer className="stt-g0-footer">
+    <footer id="site-footer" className="stt-g0-footer institutional-footer">
       <div className="stt-g0-footer__inner">
-        <div className="stt-g0-footer__brand">
+        <div className="stt-g0-footer__brand institutional-footer__brand">
           <strong>STT Governance｜策略智庫智慧治理</strong>
           <span>ガバナンス判断と制度設計</span>
         </div>
-        <nav className="stt-g0-footer__links" aria-label="フッターナビゲーション">
+        <nav className="stt-g0-footer__links institutional-footer__links" aria-label="フッターナビゲーション">
           <Link to="/ja/how-stt-works">STTの判断方法</Link>
           <Link to="/ja/engagement">ガバナンス委任</Link>
           <Link to="/ja/about">STTについて</Link>
