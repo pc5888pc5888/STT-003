@@ -1,0 +1,28 @@
+#root .stt-public-profiles {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0 1.5rem;
+  margin-block: 0.5rem 1rem;
+  scroll-margin-top: 8rem;
+}
+#root .stt-public-profiles a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35em;
+  min-height: 44px;
+  margin: 0;
+  padding: 0;
+  color: #805b30;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  text-decoration: underline;
+  text-decoration-color: #ba9e78;
+  text-underline-offset: 0.24em;
+}
+#root .stt-public-profiles a:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+#root .stt-public-profiles a:hover { text-decoration-color: currentColor; }
+#root .institutional-footer__brand .stt-public-profiles { margin: 0; }

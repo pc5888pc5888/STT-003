@@ -1,3 +1,4 @@
+import PublicProfileLinks from "../components/PublicProfileLinks";
 import { PageLanguageLink } from "../components/PageLanguageLink";
 import { FormEvent, useEffect, useRef, useState, type ReactNode } from "react";
 import { Link, NavLink, useLocation, useSearchParams } from "react-router-dom";
@@ -78,6 +79,7 @@ export function EnglishShell({ children }: { children: ReactNode }) {
           <div className="stt-g0-footer__brand institutional-footer__brand">
             <strong>STT Governance｜策略智庫智慧治理</strong>
             <span>Governance Judgment & Institutional Design</span>
+            <PublicProfileLinks />
           </div>
           <nav className="stt-g0-footer__links institutional-footer__links" aria-label="Footer navigation">
             <Link to="/en/how-stt-works">How STT Works</Link>

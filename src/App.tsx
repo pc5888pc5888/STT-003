@@ -1,3 +1,4 @@
+import PublicProfileLinks from "./components/PublicProfileLinks";
 import { PageTranslationProvider, PageTranslationStatus } from "./i18n/PageTranslation";
 import { PageLanguageLink } from "./components/PageLanguageLink";
 import { useEffect, useLayoutEffect, useState, type ReactNode } from "react";
@@ -155,7 +156,7 @@ export function PublicShell({ children }: ShellProps) {
       <main id="main-content" tabIndex={-1} className="stt-g0-main">{children}</main>
       <footer id="site-footer" className="stt-g0-footer institutional-footer">
         <div className="stt-g0-footer__inner">
-          <div className="stt-g0-footer__brand institutional-footer__brand"><strong>STT Governance｜策略智庫智慧治理</strong><span>治理判讀與制度設計</span></div>
+          <div className="stt-g0-footer__brand institutional-footer__brand"><strong>STT Governance｜策略智庫智慧治理</strong><span>治理判讀與制度設計</span><PublicProfileLinks /></div>
           <nav className="stt-g0-footer__links institutional-footer__links" aria-label="頁尾導覽">
             <Link to="/eric-chuang">莊鈞翔博士</Link><Link to="/institutions">機構合作</Link><Link to="/insights">研究與出版</Link>
             <Link to="/books">電子書與出版</Link><Link to="/columns/legal">法律專欄</Link><Link to="/columns/humanistic">人文地景產專欄</Link>

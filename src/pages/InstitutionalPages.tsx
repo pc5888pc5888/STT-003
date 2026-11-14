@@ -1,3 +1,4 @@
+import PublicProfileLinks from "../components/PublicProfileLinks";
 import { useEffect, type ReactNode } from "react";
 import { Link } from "react-router-dom";
 import UnifiedTitleHero from "../components/UnifiedTitleHero";
@@ -137,6 +138,7 @@ export function EricPage(){
     <Section kicker="PUBLIC INTERPRETATION" title="公開判讀與第三方專欄">
       <p>公開專欄與第三方媒體發表用來呈現研究如何進入現實事件；M 傳媒屬外部第三方媒體，僅標示為發表來源。</p>
       <a href={M_MEDIA_URL} target="_blank" rel="noreferrer">M 傳媒｜外部第三方發表來源 ↗</a>
+      <PublicProfileLinks id="author-platforms" />
     </Section>
 
     <Section kicker="GOVERNANCE INTAKE" title="最後需要被回答的，不是誰給答案，而是誰能承擔決定">

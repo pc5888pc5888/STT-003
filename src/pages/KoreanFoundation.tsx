@@ -1,3 +1,4 @@
+import PublicProfileLinks from "../components/PublicProfileLinks";
 import { PageLanguageLink } from "../components/PageLanguageLink";
 import { FormEvent, useEffect, useRef, useState, type ReactNode } from "react";
 import { Link, NavLink, useLocation, useSearchParams } from "react-router-dom";
@@ -71,6 +72,7 @@ export function KoreanShell({children}:{children:ReactNode}){
         <div className="stt-g0-footer__brand institutional-footer__brand">
           <strong>STT Governance｜策略智庫智慧治理</strong>
           <span>거버넌스 판단과 제도 설계</span>
+            <PublicProfileLinks />
         </div>
         <nav className="stt-g0-footer__links institutional-footer__links" aria-label="푸터 내비게이션">
           <Link to="/ko/how-stt-works">STT의 판단 방식</Link>

@@ -1,3 +1,4 @@
+import PublicProfileLinks from "../components/PublicProfileLinks";
 import { PageLanguageLink } from "../components/PageLanguageLink";
 import { FormEvent, useEffect, useRef, useState, type ReactNode } from "react";
 import { Link, NavLink, useLocation, useSearchParams } from "react-router-dom";
@@ -71,6 +72,7 @@ export function JapaneseShell({children}:{children:ReactNode}){
         <div className="stt-g0-footer__brand institutional-footer__brand">
           <strong>STT Governance｜策略智庫智慧治理</strong>
           <span>ガバナンス判断と制度設計</span>
+            <PublicProfileLinks />
         </div>
         <nav className="stt-g0-footer__links institutional-footer__links" aria-label="フッターナビゲーション">
           <Link to="/ja/how-stt-works">STTの判断方法</Link>

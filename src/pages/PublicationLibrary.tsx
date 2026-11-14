@@ -1,3 +1,4 @@
+import PublicProfileLinks from "../components/PublicProfileLinks";
 import { useMemo, useRef } from "react";
 import { Link, NavLink, Navigate, useLocation, useParams, useSearchParams } from "react-router-dom";
 import UnifiedTitleHero from "../components/UnifiedTitleHero";
@@ -229,6 +230,7 @@ export function PublishedWorksPage({ series: fixedSeries }: { series?: string })
     {fixedSeries || seriesKey ? <LibraryHeading kicker="STT GOVERNANCE · PUBLISHED WORKS" title={selectedSeries?.label || "專欄與報導"} lead={selectedSeries?.description || "從系列、治理主題與關鍵字閱讀公開作品。每篇內容均保留其原始發表來源，不以單一媒體作為全部作品的分類。"} /> : null}
     <PublicationNavigation />
     {!fixedSeries && <nav className="stt-library-series" aria-label="作品系列"><Link to="/columns" aria-current={!seriesKey ? "page" : undefined}>全部作品</Link>{SERIES.filter(item => WORKS.some(work => work.series === item.key)).map(item => <Link key={item.key} to={seriesHref(item)}>{item.label}</Link>)}</nav>}
+    <PublicProfileLinks id="column-platforms" />
     <section className="stt-library-tools" aria-label="作品篩選">
       <label className="stt-library-search">搜尋作品<input type="search" aria-label="搜尋作品" value={query} onChange={event => update("q", event.target.value)} placeholder="標題、作者或關鍵字" /></label>
       <label>治理主題<select aria-label="治理主題" value={themeKey} onChange={event => update("theme", event.target.value)}><option value="">全部主題</option>{THEMES.map(item => <option key={item.key} value={item.key}>{item.label}</option>)}{themeKey && !selectedTheme && <option value={themeKey}>未辨識的主題</option>}</select></label>
