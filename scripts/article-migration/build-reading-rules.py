@@ -82,6 +82,9 @@ for file in sorted(Path('public/data/articles').glob('*.json')):
     # Match the historical promotional footer of this book announcement.
     if article['id'] == '3fba5a':
         candidates.extend(n for n in parsed.nodes if n.tag == 'p' and ''.join(n.text.split()) == '延伸閱讀')
+    # Remove only the three audited legacy promotional footers.
+    if article['id'] in {'8754db', 'c9e732', '678767'}:
+        candidates.extend(n for n in parsed.nodes if n.tag == 'p' and ''.join(n.text.split()).startswith('中華企業永續策略續發展學會'))
     cutoff = len(source)
     if candidates:
         # One historical article repeats an English role label in its introduction.
@@ -181,3 +184,4 @@ Path('src/data/articleReadingRules.json').write_text(json.dumps(rules, ensure_as
 Path('/tmp/stt-reading-review.json').write_text(json.dumps(review, ensure_ascii=False, indent=2))
 Path('/tmp/stt-intro-review.json').write_text(json.dumps(intro_review, ensure_ascii=False, indent=2))
 print(f'Generated reading rules for {len(rules)} articles; removed author tails in {len(review)} articles.')
+
