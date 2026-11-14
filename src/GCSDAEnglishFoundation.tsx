@@ -1,3 +1,4 @@
+import InstitutionalFooter from "./components/InstitutionalFooter";
 import { useEffect, useState, type ReactNode } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
@@ -58,8 +59,12 @@ export function GCSDAEnglishShell({
   useEffect(()=>{
     applyGcsdaMetadata(loc.pathname);
     setOpen(false);
-    window.scrollTo({top:0,behavior:"auto"});
-  },[loc.pathname]);
+    if (loc.hash === "#site-footer") {
+      document.getElementById("site-footer")?.scrollIntoView({ behavior: "instant" });
+    } else {
+      window.scrollTo({top:0,behavior:"auto"});
+    }
+  },[loc.pathname, loc.hash]);
 
   useEffect(()=>{
     if(!open)return;
@@ -118,21 +123,37 @@ export function GCSDAEnglishShell({
 
     <main id="main-content" tabIndex={-1}>{children}</main>
 
-    <footer id="site-footer" className="g4-footer institutional-footer">
-      <div className="g4-wrap g4-footergrid">
-        <div className="institutional-footer__brand">
-          <b>GCSDA｜中華企業策略永續發展學會</b>
-          <p>GCSDA is an independent professional association. Its membership, bylaws, board governance, institutional records and responsibilities remain under GCSDA's own formal procedures.</p>
-        </div>
-        <nav className="institutional-footer__links" aria-label="Footer navigation">
-          {EN_NAV.map(([label,path])=><Link key={path} to={path}>{label}</Link>)}
-          <Link to="/en/navigator">Institutional Navigator</Link>
-          <Link to={zhPath} hrefLang="zh-Hant-TW" lang="zh-Hant-TW">Traditional Chinese</Link>
-          <a href={lineUrl} target="_blank" rel="noopener noreferrer">GCSDA Official LINE ↗</a>
-          <a href={sttUrl} target="_blank" rel="noreferrer">STT Governance ↗</a>
-        </nav>
-      </div>
-    </footer>
+    <InstitutionalFooter
+      name="GCSDA｜中華企業策略永續發展學會"
+      description="GCSDA is an independent professional association. Its membership, bylaws, board governance, institutional records and responsibilities remain under GCSDA's own formal procedures."
+      navigationLabel="Footer navigation"
+      utilitiesLabel="Site information"
+      languageLabel="Languages"
+      groups={[
+        { title: "Association governance", links: <>
+            <Link to="/en/about">About</Link>
+            <Link to="/en/founder-chairman">Founding Chairman</Link>
+            <Link to="/en/governance">Institutional Governance</Link>
+            <Link to="/en/council">Strategy Governance Council</Link>
+          </> },
+        { title: "Membership & records", links: <>
+            <Link to="/en/membership">Membership</Link>
+            <Link to="/en/events">Assemblies & Events</Link>
+            <Link to="/en/knowledge">Knowledge & Research</Link>
+            <Link to="/en/charter">Charter & Notices</Link>
+          </> },
+        { title: "Contact & links", links: <>
+            <a href={lineUrl} target="_blank" rel="noopener noreferrer">GCSDA Official LINE ↗</a>
+            <a href={sttUrl} target="_blank" rel="noreferrer">STT Governance ↗</a>
+          </> },
+      ]}
+      utilities={<>
+        <Link to="/en/navigator">Institutional Navigator</Link>
+      </>}
+      languages={<>
+        <Link to={zhPath} hrefLang="zh-Hant-TW" lang="zh-Hant-TW">Traditional Chinese</Link>
+      </>}
+    />
   </div>;
 }
 

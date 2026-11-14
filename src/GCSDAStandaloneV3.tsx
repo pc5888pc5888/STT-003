@@ -1,3 +1,4 @@
+import InstitutionalFooter from "./components/InstitutionalFooter";
 // GCSDA independent institutional CIS; shared STT/GCSDA responsive and editorial design contract, with independent brand assets, content, routes and legal identity.
 import GovernedHero from "./components/GovernedHero";
 import "./styles/cis-page-system.css";
@@ -256,8 +257,12 @@ function Shell({children}:{children:ReactNode}){
     meta.content=pageDescriptions[loc.pathname]||"中華企業策略永續發展學會官方網站。";
     applyGcsdaMetadata(loc.pathname);
     setOpen(false);
-    window.scrollTo({top:0,behavior:"auto"});
-  },[loc.pathname]);
+    if (loc.hash === "#site-footer") {
+      document.getElementById("site-footer")?.scrollIntoView({ behavior: "instant" });
+    } else {
+      window.scrollTo({top:0,behavior:"auto"});
+    }
+  },[loc.pathname, loc.hash]);
   useEffect(()=>{
     if(!open) return;
     const panel=document.querySelector<HTMLElement>("#gcsda-mobile-menu");
@@ -277,7 +282,38 @@ function Shell({children}:{children:ReactNode}){
     document.addEventListener("keydown",key);
     return()=>{document.removeEventListener("keydown",key);document.body.style.overflow=oldOverflow;if(main)main.inert=false;};
   },[open]);
-  return <div className="g4"><a className="site-skip-link" href="#main-content">跳至主要內容</a><header className="g4-head"><div className="g4-wrap g4-headin"><Link className="g4-brand" to="/" aria-label="GCSDA｜中華企業策略永續發展學會 首頁"><img src={GCSDA_HEADER_LOGO_DATA} alt="GCSDA｜中華企業策略永續發展學會" /></Link><nav className="g4-nav" aria-label="主要導覽">{navItems.map(([l,p])=><NavLink key={p} className={({isActive})=>isActive?"active":""} to={p}>{l}</NavLink>)}</nav><Link className="g4-join g4-head-cta" to="/membership">會員與入會</Link><Link className="g4-lang-top" to={englishPath} hrefLang="en" lang="en" aria-label="Switch to English">EN</Link><button className="g4-menu" onClick={()=>setOpen(true)} aria-label="開啟選單" aria-expanded={open} aria-controls="gcsda-mobile-menu"><Menu/></button></div></header>{open&&<div className="g4-drawer" onClick={()=>setOpen(false)}><div id="gcsda-mobile-menu" role="dialog" aria-modal="true" aria-label="網站導覽" className="g4-drawerpanel" onClick={e=>e.stopPropagation()}><button className="g4-close" onClick={()=>setOpen(false)} aria-label="關閉選單"><X/></button>{navItems.map(([l,p])=><Link key={p} to={p} onClick={()=>setOpen(false)}>{l}</Link>)}<Link to={englishPath} hrefLang="en" lang="en" onClick={()=>setOpen(false)}>English</Link><a href={LINE_URL} target="_blank" rel="noopener noreferrer" onClick={()=>setOpen(false)}>GCSDA LINE 官方帳號 ↗</a><a className="g4-drawer-stt" href={STT_URL} target="_blank" rel="noreferrer" onClick={()=>setOpen(false)}>STT Governance ↗</a></div></div>}<main id="main-content" tabIndex={-1}>{children}</main><footer id="site-footer" className="g4-footer institutional-footer"><div className="g4-wrap g4-footergrid"><div className="institutional-footer__brand"><b>GCSDA｜中華企業策略永續發展學會</b><p>依法成立之全國性專業社團，以公司治理法遵、企業策略、風險控管、跨界交流與永續發展為核心，逐步累積正式組織與治理知識。</p></div><nav className="institutional-footer__links" aria-label="頁尾導覽">{navItems.map(([label,path])=><Link key={path} to={path}>{label}</Link>)}<Link to="/navigator">制度導航</Link><Link to={englishPath} hrefLang="en" lang="en">English</Link><a href={LINE_URL} target="_blank" rel="noopener noreferrer">GCSDA LINE 官方帳號（會務聯絡） ↗</a><a href={STT_URL} target="_blank" rel="noreferrer">STT Governance ↗</a><Link to="/privacy">隱私</Link></nav></div></footer></div>
+  return <div className="g4"><a className="site-skip-link" href="#main-content">跳至主要內容</a><header className="g4-head"><div className="g4-wrap g4-headin"><Link className="g4-brand" to="/" aria-label="GCSDA｜中華企業策略永續發展學會 首頁"><img src={GCSDA_HEADER_LOGO_DATA} alt="GCSDA｜中華企業策略永續發展學會" /></Link><nav className="g4-nav" aria-label="主要導覽">{navItems.map(([l,p])=><NavLink key={p} className={({isActive})=>isActive?"active":""} to={p}>{l}</NavLink>)}</nav><Link className="g4-join g4-head-cta" to="/membership">會員與入會</Link><Link className="g4-lang-top" to={englishPath} hrefLang="en" lang="en" aria-label="Switch to English">EN</Link><button className="g4-menu" onClick={()=>setOpen(true)} aria-label="開啟選單" aria-expanded={open} aria-controls="gcsda-mobile-menu"><Menu/></button></div></header>{open&&<div className="g4-drawer" onClick={()=>setOpen(false)}><div id="gcsda-mobile-menu" role="dialog" aria-modal="true" aria-label="網站導覽" className="g4-drawerpanel" onClick={e=>e.stopPropagation()}><button className="g4-close" onClick={()=>setOpen(false)} aria-label="關閉選單"><X/></button>{navItems.map(([l,p])=><Link key={p} to={p} onClick={()=>setOpen(false)}>{l}</Link>)}<Link to={englishPath} hrefLang="en" lang="en" onClick={()=>setOpen(false)}>English</Link><a href={LINE_URL} target="_blank" rel="noopener noreferrer" onClick={()=>setOpen(false)}>GCSDA LINE 官方帳號 ↗</a><a className="g4-drawer-stt" href={STT_URL} target="_blank" rel="noreferrer" onClick={()=>setOpen(false)}>STT Governance ↗</a></div></div>}<main id="main-content" tabIndex={-1}>{children}</main><InstitutionalFooter
+      name="GCSDA｜中華企業策略永續發展學會"
+      description="依法成立之全國性專業社團，以公司治理法遵、企業策略、風險控管、跨界交流與永續發展為核心，逐步累積正式組織與治理知識。"
+      navigationLabel="頁尾導覽"
+      utilitiesLabel="網站資訊"
+      languageLabel="語言"
+      groups={[
+        { title: "學會與治理", links: <>
+            <Link to="/about">關於學會</Link>
+            <Link to="/founder-chairman">創會理事長</Link>
+            <Link to="/governance">組織治理</Link>
+            <Link to="/council">策略治理聯席會</Link>
+          </> },
+        { title: "會務與紀錄", links: <>
+            <Link to="/membership">會員與入會</Link>
+            <Link to="/events">活動與大會</Link>
+            <Link to="/knowledge">知識與研究</Link>
+            <Link to="/charter">章程與公告</Link>
+          </> },
+        { title: "聯絡與平台", links: <>
+            <a href={LINE_URL} target="_blank" rel="noopener noreferrer">GCSDA LINE 官方帳號（會務聯絡） ↗</a>
+            <a href={STT_URL} target="_blank" rel="noreferrer">STT Governance ↗</a>
+          </> },
+      ]}
+      utilities={<>
+        <Link to="/navigator">制度導航</Link>
+        <Link to="/privacy">隱私</Link>
+      </>}
+      languages={<>
+        <Link to={englishPath} hrefLang="en" lang="en">English</Link>
+      </>}
+    /></div>
 }
 
 function PageHead({eyebrow,title,subtitle,lead}:{eyebrow:string;title:string;subtitle?:string;lead:string}){const {pathname}=useLocation();return <GovernedHero kicker={eyebrow} title={title} subtitle={subtitle} lead={lead} image={pageVisuals[pathname]}/>;}
