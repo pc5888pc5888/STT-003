@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import { ARTICLE_INDEX, type ArticleDocument } from '../data/articleArchive';
 import { SERIES, isoDate } from '../data/contentRegistry';
 import NotFound from '../components/NotFound';
+import ArticleShare from './ArticleShare';
 import '../styles/article-archive.css';
 import { articleReadingView, ARTICLE_COPYRIGHT, COLUMN_ARTWORK } from '../data/articleReadingView';
 
@@ -31,6 +32,7 @@ export function ArticleContent({ article: source }: { article: ArticleDocument }
       {intro.editorialNotes.length > 0 && <aside className="stt-archive-editorial-note" aria-label="編輯說明">{intro.editorialNotes.map((text, index) => <p key={index}>{text}</p>)}</aside>}
       <footer className="stt-archive-copyright"><p>{ARTICLE_COPYRIGHT}</p></footer>
       {artwork && <figure className="stt-archive-column-artwork"><img {...artwork} loading="lazy" decoding="async" /></figure>}
+      <ArticleShare key={article.id} path={article.path} />
     </article>
     <aside className="stt-archive-related" aria-labelledby="related-title"><h2 id="related-title">繼續閱讀</h2><ul>{related.map(item => <li key={item.id}><Link to={item.path}>{item.title}</Link></li>)}</ul><div className="stt-archive-actions"><Link to={series?.route || '/columns'}>返回{series?.label || '專欄總覽'} →</Link><Link to="/books">研究與出版著作 →</Link><Link to="/start">開始治理判讀 →</Link></div></aside>
   </div>;
