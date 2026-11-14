@@ -1,4 +1,5 @@
-import PublicProfileLinks from "../components/PublicProfileLinks";
+import InstitutionalFooter from "../components/InstitutionalFooter";
+import { PublicProfileAnchors } from "../components/PublicProfileLinks";
 import { PageLanguageLink } from "../components/PageLanguageLink";
 import { FormEvent, useEffect, useRef, useState, type ReactNode } from "react";
 import { Link, NavLink, useLocation, useSearchParams } from "react-router-dom";
@@ -67,25 +68,41 @@ export function KoreanShell({children}:{children:ReactNode}){
 
     <main id="main-content" tabIndex={-1} className="stt-g0-main">{children}</main>
 
-    <footer id="site-footer" className="stt-g0-footer institutional-footer">
-      <div className="stt-g0-footer__inner">
-        <div className="stt-g0-footer__brand institutional-footer__brand">
-          <strong>STT Governance｜策略智庫智慧治理</strong>
-          <span>거버넌스 판단과 제도 설계</span>
-            <PublicProfileLinks />
-        </div>
-        <nav className="stt-g0-footer__links institutional-footer__links" aria-label="푸터 내비게이션">
-          <Link to="/ko/how-stt-works">STT의 판단 방식</Link>
-          <Link to="/ko/engagement">거버넌스 위임</Link>
-          <Link to="/ko/about">STT 소개</Link>
-          <Link to="/ko/start">거버넌스 판단 시작</Link>
-          <a href={STT_LINE_ADD_FRIEND_URL} target="_blank" rel="noopener noreferrer">STT 공식 LINE ↗</a>
+    <InstitutionalFooter
+        name="STT Governance｜策略智庫智慧治理"
+        description="거버넌스 판단과 제도 설계"
+        navigationLabel="푸터 내비게이션"
+        utilitiesLabel="사이트 정보"
+        languageLabel="언어"
+        groups={[
+          { title: "STT 소개 및 협력", links: <>
+              <Link to="/ko/about">STT 소개</Link>
+              <Link to="/ko/how-stt-works">STT의 판단 방식</Link>
+              <Link to="/ko/engagement">거버넌스 위임</Link>
+              <Link to="/ko/start">거버넌스 판단 시작</Link>
+            </> },
+          { title: "출판 및 칼럼", links: <>
+              <Link to="/ko/insights">연구·출판</Link>
+              <Link to="/books?lang=ko">도서·출판물</Link>
+              <Link to="/columns/legal?lang=ko">법률 칼럼</Link>
+              <Link to="/columns/humanistic?lang=ko">인물·지역·산업 칼럼</Link>
+            </> },
+          { title: "연락처 및 외부 채널", links: <>
+              <a href={STT_LINE_ADD_FRIEND_URL} target="_blank" rel="noopener noreferrer">STT 공식 LINE ↗</a>
+              <PublicProfileAnchors />
+            </> },
+        ]}
+        utilities={<>
+          <Link to="/navigator?lang=ko">거버넌스 안내</Link>
+          <Link to="/privacy?lang=ko">개인정보 보호</Link>
+          <Link to="/professional-boundary?lang=ko">전문 서비스의 범위</Link>
+        </>}
+        languages={<>
           <PageLanguageLink hrefLang="zh-Hant-TW" lang="zh-Hant-TW">繁體中文</PageLanguageLink>
           <PageLanguageLink hrefLang="en" lang="en">English</PageLanguageLink>
           <PageLanguageLink hrefLang="ja" lang="ja">日本語</PageLanguageLink>
-        </nav>
-      </div>
-    </footer>
+        </>}
+      />
   </div>;
 }
 

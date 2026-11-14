@@ -1,4 +1,5 @@
-import PublicProfileLinks from "../components/PublicProfileLinks";
+import InstitutionalFooter from "../components/InstitutionalFooter";
+import { PublicProfileAnchors } from "../components/PublicProfileLinks";
 import { PageLanguageLink } from "../components/PageLanguageLink";
 import { FormEvent, useEffect, useRef, useState, type ReactNode } from "react";
 import { Link, NavLink, useLocation, useSearchParams } from "react-router-dom";
@@ -67,25 +68,41 @@ export function JapaneseShell({children}:{children:ReactNode}){
 
     <main id="main-content" tabIndex={-1} className="stt-g0-main">{children}</main>
 
-    <footer id="site-footer" className="stt-g0-footer institutional-footer">
-      <div className="stt-g0-footer__inner">
-        <div className="stt-g0-footer__brand institutional-footer__brand">
-          <strong>STT Governance｜策略智庫智慧治理</strong>
-          <span>ガバナンス判断と制度設計</span>
-            <PublicProfileLinks />
-        </div>
-        <nav className="stt-g0-footer__links institutional-footer__links" aria-label="フッターナビゲーション">
-          <Link to="/ja/how-stt-works">STTの判断方法</Link>
-          <Link to="/ja/engagement">ガバナンス委任</Link>
-          <Link to="/ja/about">STTについて</Link>
-          <Link to="/ja/start">ガバナンス判断を始める</Link>
-          <a href={STT_LINE_ADD_FRIEND_URL} target="_blank" rel="noopener noreferrer">STT 公式LINE ↗</a>
+    <InstitutionalFooter
+        name="STT Governance｜策略智庫智慧治理"
+        description="ガバナンス判断と制度設計"
+        navigationLabel="フッターナビゲーション"
+        utilitiesLabel="サイト情報"
+        languageLabel="言語"
+        groups={[
+          { title: "STTと連携", links: <>
+              <Link to="/ja/about">STTについて</Link>
+              <Link to="/ja/how-stt-works">STTの判断方法</Link>
+              <Link to="/ja/engagement">ガバナンス委任</Link>
+              <Link to="/ja/start">ガバナンス判断を始める</Link>
+            </> },
+          { title: "出版・コラム", links: <>
+              <Link to="/ja/insights">研究・出版</Link>
+              <Link to="/books?lang=ja">書籍・出版物</Link>
+              <Link to="/columns/legal?lang=ja">法律コラム</Link>
+              <Link to="/columns/humanistic?lang=ja">人物・地域・産業コラム</Link>
+            </> },
+          { title: "連絡先・外部サイト", links: <>
+              <a href={STT_LINE_ADD_FRIEND_URL} target="_blank" rel="noopener noreferrer">STT 公式LINE ↗</a>
+              <PublicProfileAnchors />
+            </> },
+        ]}
+        utilities={<>
+          <Link to="/navigator?lang=ja">ガバナンスナビ</Link>
+          <Link to="/privacy?lang=ja">プライバシー</Link>
+          <Link to="/professional-boundary?lang=ja">専門サービスの範囲</Link>
+        </>}
+        languages={<>
           <PageLanguageLink hrefLang="zh-Hant-TW" lang="zh-Hant-TW">繁體中文</PageLanguageLink>
           <PageLanguageLink hrefLang="en" lang="en">English</PageLanguageLink>
           <PageLanguageLink hrefLang="ko" lang="ko">한국어</PageLanguageLink>
-        </nav>
-      </div>
-    </footer>
+        </>}
+      />
   </div>;
 }
 

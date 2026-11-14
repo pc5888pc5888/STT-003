@@ -1,4 +1,5 @@
-import PublicProfileLinks from "./components/PublicProfileLinks";
+import InstitutionalFooter from "./components/InstitutionalFooter";
+import { PublicProfileAnchors } from "./components/PublicProfileLinks";
 import { PageTranslationProvider, PageTranslationStatus } from "./i18n/PageTranslation";
 import { PageLanguageLink } from "./components/PageLanguageLink";
 import { useEffect, useLayoutEffect, useState, type ReactNode } from "react";
@@ -154,22 +155,41 @@ export function PublicShell({ children }: ShellProps) {
       </header>
       <PageTranslationStatus />
       <main id="main-content" tabIndex={-1} className="stt-g0-main">{children}</main>
-      <footer id="site-footer" className="stt-g0-footer institutional-footer">
-        <div className="stt-g0-footer__inner">
-          <div className="stt-g0-footer__brand institutional-footer__brand"><strong>STT Governance｜策略智庫智慧治理</strong><span>治理判讀與制度設計</span><PublicProfileLinks /></div>
-          <nav className="stt-g0-footer__links institutional-footer__links" aria-label="頁尾導覽">
-            <Link to="/eric-chuang">莊鈞翔博士</Link><Link to="/institutions">機構合作</Link><Link to="/insights">研究與出版</Link>
-            <Link to="/books">電子書與出版</Link><Link to="/columns/legal">法律專欄</Link><Link to="/columns/humanistic">人文地景產專欄</Link>
-            <a href={HUMANISTIC_INTERVIEW_URL}>受訪者專區｜二十題訪談準備</a>
-            <a href={GCSDA_URL} target="_blank" rel="noreferrer">GCSDA｜中華企業策略永續發展學會 ↗</a>
-            <a href={STT_LINE_ADD_FRIEND_URL} target="_blank" rel="noopener noreferrer">STT LINE 官方帳號（治理聯絡） ↗</a>
-            <Link to="/navigator">治理導航</Link><Link to="/privacy">隱私</Link><Link to="/professional-boundary">專業服務邊界</Link>
-            <PageLanguageLink hrefLang="en" lang="en">English</PageLanguageLink>
-            <PageLanguageLink hrefLang="ja" lang="ja">日本語</PageLanguageLink>
-            <PageLanguageLink hrefLang="ko" lang="ko">한국어</PageLanguageLink>
-          </nav>
-        </div>
-      </footer>
+      <InstitutionalFooter
+        name="STT Governance｜策略智庫智慧治理"
+        description="治理判讀與制度設計"
+        navigationLabel="頁尾導覽"
+        utilitiesLabel="網站資訊"
+        languageLabel="語言"
+        groups={[
+          { title: "認識與合作", links: <>
+              <Link to="/eric-chuang">莊鈞翔博士</Link>
+              <Link to="/institutions">機構合作</Link>
+              <a href={HUMANISTIC_INTERVIEW_URL}>受訪者專區｜二十題訪談準備</a>
+            </> },
+          { title: "著作與專欄", links: <>
+              <Link to="/insights">研究與出版</Link>
+              <Link to="/books">電子書與出版</Link>
+              <Link to="/columns/legal">法律專欄</Link>
+              <Link to="/columns/humanistic">人文地景產專欄</Link>
+            </> },
+          { title: "聯絡與平台", links: <>
+              <a href={STT_LINE_ADD_FRIEND_URL} target="_blank" rel="noopener noreferrer">STT LINE 官方帳號（治理聯絡） ↗</a>
+              <PublicProfileAnchors />
+              <a href={GCSDA_URL} target="_blank" rel="noreferrer">GCSDA｜中華企業策略永續發展學會 ↗</a>
+            </> },
+        ]}
+        utilities={<>
+          <Link to="/navigator">治理導航</Link>
+          <Link to="/privacy">隱私</Link>
+          <Link to="/professional-boundary">專業服務邊界</Link>
+        </>}
+        languages={<>
+          <PageLanguageLink hrefLang="en" lang="en">English</PageLanguageLink>
+          <PageLanguageLink hrefLang="ja" lang="ja">日本語</PageLanguageLink>
+          <PageLanguageLink hrefLang="ko" lang="ko">한국어</PageLanguageLink>
+        </>}
+      />
     </div>
   );
 }

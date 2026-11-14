@@ -1,4 +1,5 @@
-import PublicProfileLinks from "../components/PublicProfileLinks";
+import InstitutionalFooter from "../components/InstitutionalFooter";
+import { PublicProfileAnchors } from "../components/PublicProfileLinks";
 import { PageLanguageLink } from "../components/PageLanguageLink";
 import { FormEvent, useEffect, useRef, useState, type ReactNode } from "react";
 import { Link, NavLink, useLocation, useSearchParams } from "react-router-dom";
@@ -74,25 +75,41 @@ export function EnglishShell({ children }: { children: ReactNode }) {
         )}
       </header>
       <main id="main-content" tabIndex={-1} className="stt-g0-main">{children}</main>
-      <footer id="site-footer" className="stt-g0-footer institutional-footer">
-        <div className="stt-g0-footer__inner">
-          <div className="stt-g0-footer__brand institutional-footer__brand">
-            <strong>STT Governance｜策略智庫智慧治理</strong>
-            <span>Governance Judgment & Institutional Design</span>
-            <PublicProfileLinks />
-          </div>
-          <nav className="stt-g0-footer__links institutional-footer__links" aria-label="Footer navigation">
-            <Link to="/en/how-stt-works">How STT Works</Link>
-            <Link to="/en/engagement">Governance Engagement</Link>
-            <Link to="/en/about">About STT</Link>
-            <Link to="/en/start">Start a Governance Review</Link>
-            <a href={STT_LINE_ADD_FRIEND_URL} target="_blank" rel="noopener noreferrer">STT Official LINE ↗</a>
-            <PageLanguageLink hrefLang="zh-Hant-TW" lang="zh-Hant-TW">Traditional Chinese site</PageLanguageLink>
-            <PageLanguageLink hrefLang="ja" lang="ja">日本語</PageLanguageLink>
-            <PageLanguageLink hrefLang="ko" lang="ko">한국어</PageLanguageLink>
-          </nav>
-        </div>
-      </footer>
+      <InstitutionalFooter
+        name="STT Governance｜策略智庫智慧治理"
+        description="Governance Judgment & Institutional Design"
+        navigationLabel="Footer navigation"
+        utilitiesLabel="Site information"
+        languageLabel="Languages"
+        groups={[
+          { title: "About & engagement", links: <>
+              <Link to="/en/about">About STT</Link>
+              <Link to="/en/how-stt-works">How STT Works</Link>
+              <Link to="/en/engagement">Governance Engagement</Link>
+              <Link to="/en/start">Start a Governance Review</Link>
+            </> },
+          { title: "Publications & columns", links: <>
+              <Link to="/en/insights">Research & Publications</Link>
+              <Link to="/books?lang=en">Books & Publications</Link>
+              <Link to="/columns/legal?lang=en">Legal Column</Link>
+              <Link to="/columns/humanistic?lang=en">People, Place & Industry</Link>
+            </> },
+          { title: "Contact & platforms", links: <>
+              <a href={STT_LINE_ADD_FRIEND_URL} target="_blank" rel="noopener noreferrer">STT Official LINE ↗</a>
+              <PublicProfileAnchors />
+            </> },
+        ]}
+        utilities={<>
+          <Link to="/navigator?lang=en">Governance navigator</Link>
+          <Link to="/privacy?lang=en">Privacy</Link>
+          <Link to="/professional-boundary?lang=en">Professional boundaries</Link>
+        </>}
+        languages={<>
+          <PageLanguageLink hrefLang="zh-Hant-TW" lang="zh-Hant-TW">Traditional Chinese site</PageLanguageLink>
+          <PageLanguageLink hrefLang="ja" lang="ja">日本語</PageLanguageLink>
+          <PageLanguageLink hrefLang="ko" lang="ko">한국어</PageLanguageLink>
+        </>}
+      />
     </div>
   );
 }
