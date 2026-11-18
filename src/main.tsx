@@ -11,6 +11,8 @@ import "./styles/gcsda-header-refinement.css";
 
 import "./styles/institutional-layout.css";
 
+import "./styles/portrait-closing.css";
+
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <AppProviders>
