@@ -1,0 +1,102 @@
+/* The owner-supplied artwork is served unchanged at its original aspect ratio.
+   A soft reading surface covers the embedded STT lettering so each institution
+   can render its own selectable, accessible text over the same composition. */
+#root main .portrait-closing {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 47.314453125vw;
+  padding: 0;
+  border-top: 1px solid #dfd1bd;
+  background: #fcf5eb;
+  isolation: isolate;
+  scroll-margin-top: 92px;
+}
+.portrait-closing__art {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+#root .portrait-closing__art img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: none;
+  margin: 0;
+  object-fit: contain;
+}
+.portrait-closing__art::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, #fcf8f1 0%, #fcf5eb 48%, #fcf3e7 55%, transparent 63%);
+}
+#root .portrait-closing__copy {
+  width: 45%;
+  margin-left: 6.65%;
+  padding: clamp(56px, 6vw, 132px) 0;
+  text-align: left;
+}
+#root main .portrait-closing .portrait-closing__eyebrow {
+  margin: 0 0 clamp(24px, 2.8vw, 50px);
+  color: #80572f !important;
+  font: 600 clamp(12px, 1.05vw, 21px)/1.5 var(--cis-ui, "Noto Sans TC", sans-serif) !important;
+  letter-spacing: .15em !important;
+  text-indent: 0;
+  text-align: left;
+}
+.portrait-closing__eyebrow::after {
+  content: "";
+  display: block;
+  width: clamp(38px, 3.5vw, 70px);
+  height: 2px;
+  margin-top: clamp(12px, 1.2vw, 24px);
+  background: #997348;
+}
+#root main .portrait-closing h2 {
+  margin: 0 !important;
+  max-width: none;
+  font: 500 clamp(28px, 3vw, 62px)/1.45 var(--cis-serif, "Noto Serif TC", serif) !important;
+  letter-spacing: 0 !important;
+  text-align: left !important;
+  color: #2b2721;
+  text-wrap: pretty;
+}
+#root main .portrait-closing .portrait-closing__lead {
+  margin: clamp(22px, 2.6vw, 50px) 0 0;
+  max-width: 43em;
+  font: 400 clamp(16px, 1.4vw, 28px)/1.85 var(--cis-serif, "Noto Serif TC", serif) !important;
+  text-indent: 0;
+  text-align: left;
+  color: #5c554c !important;
+}
+#root main .portrait-closing .portrait-closing__action {
+  display: inline-flex;
+  align-items: center;
+  min-height: 48px;
+  padding: 12px 24px;
+  margin-top: clamp(24px, 3vw, 56px);
+  border: 1px solid #805b30;
+  border-radius: 3px;
+  background: #805b30 !important;
+  color: #fffaf1 !important;
+  font: 400 clamp(16px, 1.2vw, 24px)/1.5 var(--cis-serif, "Noto Serif TC", serif) !important;
+  text-decoration: none;
+}
+#root main .portrait-closing .portrait-closing__action:hover { background: #674622 !important; }
+#root main .portrait-closing .portrait-closing__action:focus-visible { outline: 2px solid #674622; outline-offset: 4px; }
+#root main .portrait-closing h2 > span { display: block; }
+@media (max-width: 760px) {
+  #root main .portrait-closing h2 > span { display: inline; }
+  #root main .portrait-closing { display: flex; flex-direction: column; align-items: stretch; }
+  #root .portrait-closing__copy { order: -1; width: auto; margin: 0 24px; padding: 40px 0 0; }
+  #root main .portrait-closing h2 { font-size: clamp(27px, 5vw, 36px) !important; }
+  #root main .portrait-closing .portrait-closing__lead { margin-top: 22px; font-size: 17px !important; }
+  .portrait-closing__art { position: relative; z-index: 0; margin-top: 20px; }
+  .portrait-closing__art::after {
+    background: linear-gradient(180deg, #fcf5eb, transparent 22%), linear-gradient(90deg, #fcf5eb 0%, #fcf5eb 55%, transparent 63%);
+  }
+}

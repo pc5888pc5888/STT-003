@@ -306,16 +306,15 @@ export default function HomeCanonical() {
         </div>
       </section>
 
-      <section className="stt-g1-final">
-        <div className="stt-g1-shell">
-          <p className="stt-g1-kicker">GOVERNANCE ENGAGEMENT</p>
-          <h2>如果一件事情的錯誤成本已經不能只靠直覺承擔，就應先完成判讀。</h2>
-          <p className="stt-g1-lead is-narrow">
-            先告訴 STT 現在發生了什麼、你最不希望接下來發生什麼，以及希望事情最後變成什麼。
-          </p>
-          <div className="stt-g1-actions">
-            <Link className="stt-g1-button is-primary" to="/start">開始治理判讀 →</Link>
-          </div>
+      <section id="governance-engagement" className="portrait-closing" aria-labelledby="engagement-heading">
+        <div className="portrait-closing__art" aria-hidden="true">
+          <img src="/visual-approved/closing/stt-engagement-20261118.jpg" width="2048" height="969" alt="" loading="lazy" decoding="async" />
+        </div>
+        <div className="portrait-closing__copy">
+          <p className="portrait-closing__eyebrow">GOVERNANCE ENGAGEMENT</p>
+          <h2 id="engagement-heading"><span>如果一件事情的錯誤成本</span><span>已經不能只靠直覺承擔，</span><span>就應先完成判讀。</span></h2>
+          <p className="portrait-closing__lead">先告訴 STT 現在發生了什麼、你最不希望接下來發生什麼，以及希望事情最後變成什麼。</p>
+          <Link className="portrait-closing__action" to="/start">開始治理判讀 →</Link>
         </div>
       </section>
     </div>
