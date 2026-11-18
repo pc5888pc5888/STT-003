@@ -1,3 +1,4 @@
+import GCSDAHomeClosing from "./components/GCSDAHomeClosing";
 import InstitutionalFooter from "./components/InstitutionalFooter";
 import { useEffect, useState, type ReactNode } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
@@ -200,6 +201,7 @@ export function GCSDAEnglishHome({lineUrl}:{lineUrl:string}){
         <a href={lineUrl} target="_blank" rel="noopener noreferrer">GCSDA Official LINE ↗</a>
       </div>
     </Section>
+    <GCSDAHomeClosing lang="en" />
   </div>;
 }
 

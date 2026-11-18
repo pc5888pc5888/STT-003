@@ -100,3 +100,27 @@
     background: linear-gradient(180deg, #fcf5eb, transparent 22%), linear-gradient(90deg, #fcf5eb 0%, #fcf5eb 55%, transparent 63%);
   }
 }
+
+/* Locale-specific line breaking keeps the shared portrait boundary clear. */
+#root main .portrait-closing:lang(en) h2 {
+  font-size: clamp(28px, 2.6vw, 54px) !important;
+  line-height: 1.3 !important;
+  overflow-wrap: break-word;
+}
+#root main .portrait-closing:lang(ja) h2,
+#root main .portrait-closing:lang(ko) h2 {
+  font-size: clamp(26px, 2.7vw, 56px) !important;
+  line-height: 1.5 !important;
+}
+#root main .portrait-closing:lang(ko) h2,
+#root main .portrait-closing:lang(ko) .portrait-closing__lead {
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+@media (max-width: 760px) {
+  #root main .portrait-closing:lang(en) h2,
+  #root main .portrait-closing:lang(ja) h2,
+  #root main .portrait-closing:lang(ko) h2 {
+    font-size: clamp(27px, 5vw, 36px) !important;
+  }
+}
