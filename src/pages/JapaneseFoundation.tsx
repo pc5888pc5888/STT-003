@@ -1,3 +1,4 @@
+import HomeClosing from "../components/HomeClosing";
 import InstitutionalFooter from "../components/InstitutionalFooter";
 import { PublicProfileAnchors } from "../components/PublicProfileLinks";
 import { PageLanguageLink } from "../components/PageLanguageLink";
@@ -151,6 +152,7 @@ export function JapaneseHome(){
       <p>AIは調査、比較、追跡、作業草案を支援できます。しかし、証拠の採否、権限付与、実行可否、結果責任は、人間の意思決定者とガバナンス手続に残ります。</p>
       <Link to="/ja/about">STT Governanceについて →</Link>
     </Section>
+      <HomeClosing lang="ja" />
   </div>;
 }
 

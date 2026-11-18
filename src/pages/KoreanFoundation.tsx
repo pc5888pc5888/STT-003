@@ -1,3 +1,4 @@
+import HomeClosing from "../components/HomeClosing";
 import InstitutionalFooter from "../components/InstitutionalFooter";
 import { PublicProfileAnchors } from "../components/PublicProfileLinks";
 import { PageLanguageLink } from "../components/PageLanguageLink";
@@ -151,6 +152,7 @@ export function KoreanHome(){
       <p>AI는 조사, 비교, 추적, 초안 작성에 도움을 줄 수 있습니다. 그러나 증거의 채택, 권한 부여, 실행 허용, 결과 책임은 인간 의사결정자와 거버넌스 절차에 남습니다.</p>
       <Link to="/ko/about">STT Governance 소개 →</Link>
     </Section>
+      <HomeClosing lang="ko" />
   </div>;
 }
 

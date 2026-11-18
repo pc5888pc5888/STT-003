@@ -1,3 +1,4 @@
+import HomeClosing from "../components/HomeClosing";
 import GovernedHero from "../components/GovernedHero";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
@@ -306,17 +307,7 @@ export default function HomeCanonical() {
         </div>
       </section>
 
-      <section id="governance-engagement" className="portrait-closing" aria-labelledby="engagement-heading">
-        <div className="portrait-closing__art" aria-hidden="true">
-          <img src="/visual-approved/closing/stt-engagement-20261118.jpg" width="2048" height="969" alt="" loading="lazy" decoding="async" />
-        </div>
-        <div className="portrait-closing__copy">
-          <p className="portrait-closing__eyebrow">GOVERNANCE ENGAGEMENT</p>
-          <h2 id="engagement-heading"><span>如果一件事情的錯誤成本</span><span>已經不能只靠直覺承擔，</span><span>就應先完成判讀。</span></h2>
-          <p className="portrait-closing__lead">先告訴 STT 現在發生了什麼、你最不希望接下來發生什麼，以及希望事情最後變成什麼。</p>
-          <Link className="portrait-closing__action" to="/start">開始治理判讀 →</Link>
-        </div>
-      </section>
+      <HomeClosing lang="zh-Hant" />
     </div>
   );
 }

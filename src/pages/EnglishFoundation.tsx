@@ -1,3 +1,4 @@
+import HomeClosing from "../components/HomeClosing";
 import InstitutionalFooter from "../components/InstitutionalFooter";
 import { PublicProfileAnchors } from "../components/PublicProfileLinks";
 import { PageLanguageLink } from "../components/PageLanguageLink";
@@ -162,6 +163,7 @@ export function EnglishHome() {
         <p>AI may support research, comparison, tracking and working drafts. Whether evidence is accepted, authority is granted, action is permitted and consequences are assumed remains a human governance responsibility.</p>
         <Link to="/en/about">About STT Governance →</Link>
       </Section>
+      <HomeClosing lang="en" />
     </div>
   );
 }
