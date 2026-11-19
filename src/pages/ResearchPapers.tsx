@@ -5,6 +5,7 @@ import "../styles/research-papers.css";
 
 type Paper = {
   slug:string; series:string; theme:string; title:string; english:string; author:string; identity:string; year:string; heyzine:string; cover:string; audience:string[];
+  publication?: { journal:string; volumeIssue:string; pages:string; citation:string; sourceUrl:string };
   positioning:string; problem:string; abstract:string; propositions:string[]; method:string; findings:string[]; today:string; related:{label:string;href:string}[];
 };
 const PAPERS: Paper[] = [
@@ -44,7 +45,8 @@ const PAPERS: Paper[] = [
     slug:"family-business-succession", series:"03", theme:"家族治理 × 接班 × 世代 × 家族價值",
     title:"臺灣企業接班人的佈局規劃與傳承家族價值",
     english:"Factors for Successful Succession of Taiwanese Family Businesses",
-    author:"紀又綺、莊鈞翔", identity:"紀又綺｜逢甲大學會計研究所碩士；莊鈞翔｜逢甲大學商學博士學位學程博士生", year:"2024 年 1 月",
+    author:"紀又綺、莊鈞翔", identity:"紀又綺｜逢甲大學會計研究所碩士；莊鈞翔｜逢甲大學商學博士學位學程博士生", year:"2023 年 6 月",
+    publication:{journal:"《會計與公司治理》",volumeIssue:"第 18 卷第 1 期",pages:"73–101",citation:"紀又綺、莊鈞翔（2023）。〈臺灣企業接班人的佈局規劃與傳承家族價值〉。《會計與公司治理》，18（1），73–101。",sourceUrl:"https://lawdata.com.tw/tw/detail.aspx?no=497758"},
     heyzine:"https://heyzine.com/flip-book/beb87825ff.html", cover:"/research-covers/series-03.webp",
     audience:["家族企業創辦人與接班人","家族辦公室與企業治理成員","關注家族價值與跨世代傳承者"],
     positioning:"把企業接班從『誰來接』提升為家族價值、治理制度、人才梯隊與權力移轉的整體設計。",
@@ -159,7 +161,8 @@ export function ResearchPaperPage(){
           <dl className="research-meta">
             <div><dt>作者</dt><dd>{p.author}</dd></div>
             <div><dt>研究身份與學術來源</dt><dd>{p.identity}</dd></div>
-            <div><dt>研究年份</dt><dd>{p.year}</dd></div>
+            <div><dt>{p.publication ? "正式發表日期" : "研究年份"}</dt><dd>{p.year}</dd></div>
+             {p.publication && <div><dt>刊登期刊</dt><dd>{p.publication.journal} {p.publication.volumeIssue}，頁 {p.publication.pages}</dd></div>}
           </dl>
           <p className="research-hero-thesis">{p.positioning}</p>
           <div className="research-hero-actions"><a className="research-primary" href={p.heyzine} target="_blank" rel="noopener noreferrer">線上閱讀研究全文 ↗</a><a href="#research-structure">先閱讀研究介紹 ↓</a></div>
@@ -194,6 +197,12 @@ export function ResearchPaperPage(){
         <h2 id="paper-method-title">研究方法與資料範圍</h2>
         <p>{p.method}</p>
       </section>
+      {p.publication && <section aria-labelledby="paper-publication-title">
+        <p className="research-section-kicker">ACADEMIC PUBLICATION RECORD</p>
+        <h2 id="paper-publication-title">正式期刊書目與學術引用</h2>
+        <p>{p.publication.citation}</p>
+        <p><a href={p.publication.sourceUrl} target="_blank" rel="noopener noreferrer">查核正式期刊書目 ↗</a></p>
+      </section>}
       <section aria-labelledby="paper-findings-title">
         <p className="research-section-kicker">KEY RESEARCH FINDINGS</p>
         <h2 id="paper-findings-title">主要研究發現</h2>
