@@ -5,7 +5,7 @@ import "../styles/research-papers.css";
 
 type Paper = {
   slug:string; series:string; theme:string; title:string; english:string; author:string; identity:string; year:string; heyzine:string; cover:string; audience:string[];
-  publication?: { journal:string; volumeIssue:string; pages:string; citation:string; sourceUrl:string };
+  publication?: { journal:string; volumeIssue:string; pages?:string; citation:string; sourceUrl:string };
   positioning:string; problem:string; abstract:string; propositions:string[]; method:string; findings:string[]; today:string; related:{label:string;href:string}[];
 };
 const PAPERS: Paper[] = [
@@ -29,7 +29,8 @@ const PAPERS: Paper[] = [
     slug:"corporate-governance-compliance", series:"02", theme:"公司治理 × 法遵 × 風險管理 × 法律策略",
     title:"企業策略導入公司治理法遵精神：以外部法律顧問團隊協助為例",
     english:"Integrating the Spirit of Corporate Governance and Legal Compliance into Business Strategy: The Assistance of External Legal Advisory Teams",
-    author:"莊鈞翔", identity:"逢甲大學商學博士學位學程博士生｜研究論文", year:"2024 年 1 月",
+    author:"莊鈞翔", identity:"逢甲大學商學博士學位學程博士生｜研究論文", year:"2023 年 10 月",
+    publication:{journal:"《僑光學報》",volumeIssue:"第 46 期",citation:"莊鈞翔（2023）。〈企業策略導入公司治理法遵精神：以外部法律顧問團隊協助為例〉。《僑光學報》，第 46 期。",sourceUrl:"https://lib.ocu.edu.tw/wSite/lp?ctNode=885&idPath=290_775_895_782_885&mp=1"},
     heyzine:"https://heyzine.com/flip-book/e98bb4535f.html", cover:"/research-covers/series-02.webp",
     audience:["董事會、企業治理與策略決策者","法遵、法務、風險與內稽管理者","外部法律顧問與跨專業治理團隊"],
     positioning:"把公司治理與法遵由事後處理，前移到企業策略、風險辨識、內控管理與決策形成的前端。",
@@ -161,8 +162,8 @@ export function ResearchPaperPage(){
           <dl className="research-meta">
             <div><dt>作者</dt><dd>{p.author}</dd></div>
             <div><dt>研究身份與學術來源</dt><dd>{p.identity}</dd></div>
-            <div><dt>{p.publication ? "正式發表日期" : "研究年份"}</dt><dd>{p.year}</dd></div>
-             {p.publication && <div><dt>刊登期刊</dt><dd>{p.publication.journal} {p.publication.volumeIssue}，頁 {p.publication.pages}</dd></div>}
+            <div><dt>{p.publication ? "正式發表日期" : "學位論文日期"}</dt><dd>{p.year}</dd></div>
+             {p.publication && <div><dt>刊登期刊</dt><dd>{p.publication.journal} {p.publication.volumeIssue}{p.publication.pages ? `，頁 ${p.publication.pages}` : ""}</dd></div>}
           </dl>
           <p className="research-hero-thesis">{p.positioning}</p>
           <div className="research-hero-actions"><a className="research-primary" href={p.heyzine} target="_blank" rel="noopener noreferrer">線上閱讀研究全文 ↗</a><a href="#research-structure">先閱讀研究介紹 ↓</a></div>
@@ -201,6 +202,7 @@ export function ResearchPaperPage(){
         <p className="research-section-kicker">ACADEMIC PUBLICATION RECORD</p>
         <h2 id="paper-publication-title">正式期刊書目與學術引用</h2>
         <p>{p.publication.citation}</p>
+        <p className="research-evidence-note">STT 網站閱讀版封面另印有「2024 年 1 月」；此日期與原刊正式刊期不同，正式發表日期以上列期刊書目為準。</p>
         <p><a href={p.publication.sourceUrl} target="_blank" rel="noopener noreferrer">查核正式期刊書目 ↗</a></p>
       </section>}
       <section aria-labelledby="paper-findings-title">
