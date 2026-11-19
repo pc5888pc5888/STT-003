@@ -516,30 +516,30 @@ export const phdPapers = [
     id: "phd1",
     title: "臺灣企業接班人的佈局規劃與傳承家族價值",
     enTitle: "Factors for Successful Succession of Taiwanese Family Businesses",
-    description: "本研究深入探討臺灣家族企業在傳承過程中的關鍵成功因素，分析如何透過精確的佈局規劃，將創辦人的家族價值與經營理念，系統化地轉移至下下一代接班人，確保企業基業長青並維持核心競爭力。",
-    type: "博士論文",
-    cover: "/images/paper_succession_family.png",
-    previewUrl: "https://heyzine.com/flip-book/ff46f2b661.html",
+    description: "本篇為敘述式文獻分析，討論臺灣家族企業接班人培育、接班梯隊、策略團隊與家族價值延續；未進行企業管理者深度訪談或量化因果驗證。",
+    type: "期刊論文",
+    cover: "/research-covers/series-03.webp",
+    previewUrl: "https://heyzine.com/flip-book/eba7786a8a.html",
     downloadUrl: "/papers/phd1.txt"
   },
   {
     id: "phd2",
     title: "企業策略導入公司治理法遵精神：以外部法律顧問團隊協助為例",
     enTitle: "Introducing corporate governance in law compliance into business strategy: a case study of external legal advisory teams",
-    description: "探討企業如何將法律合規精神內化至核心策略中，而非僅視其為外部限制決策精神。透過外部專業團隊的深度協助，將法務防護網轉化為企業競爭優勢，建立穩健的風險治理結構與策略執行地圖。",
-    type: "博士論文",
-    cover: "/images/paper_corporate_governance.png",
-    previewUrl: "https://heyzine.com/flip-book/dec98b2e5b.html",
+    description: "本文透過十二位律師與法務的半結構式訪談，探討外部法律顧問團隊如何協助企業進行風險預防、公司治理與策略規劃；不宣稱已完成企業績效的量化因果驗證。",
+    type: "期刊論文",
+    cover: "/research-covers/series-02.webp",
+    previewUrl: "https://heyzine.com/flip-book/df41ab25a0.html",
     downloadUrl: "/papers/phd2.txt"
   },
   {
     id: "phd3",
     title: "顧客關係管理對服務永續之探討：以 A 國際法律事務所為例",
     enTitle: "Discussion on Customer Relationship Management in Service Sustainability: A Case Study of A International Attorney Firm",
-    description: "以大型國際專業服務機構為研究對象，分析高階專業服務業在顧客關係管理中的獨特性與挑戰。本研究提出透過精準的關係治理，提升服務的永續性與品牌信任感，為知識型產業提供可執行的管理範式。",
+    description: "逢甲大學博士學位論文；以 A 國際法律事務所為質性個案，訪談八位律師與法務，探討專業分工、顧客資訊管理、溝通、顧客保留與服務永續。",
     type: "博士論文",
-    cover: "/images/paper_customer_relationship.png",
-    previewUrl: "https://heyzine.com/flip-book/5a08b85184.html",
+    cover: "/research-covers/series-01.webp",
+    previewUrl: "https://heyzine.com/flip-book/1631fcf2b8.html",
     downloadUrl: "/papers/phd3.txt"
   }
 ];
@@ -549,10 +549,10 @@ export const masterPapers = [
     id: "m1",
     title: "不同世代企業家人格特質、創新能力對企業經營績效之影響-以領導風格為中介變數",
     enTitle: "The Relationship among Personality Traits of Different Generation Entrepreneurs, Innovation Ability and Performance – Leadership Style as an Intermediary Variable",
-    description: "跨世代研究不同背景企業家的心理特質與創新路徑，實證分析領導風格如何中介人格特質對業績的影響。為家族企業轉型與職業經理人選任提供量化依據與策略建議。",
+    description: "嶺東科技大學 2017 年碩士論文；以中部地區國際扶輪社會員有效問卷 100 份分析人格特質、創新能力、領導風格與經營績效的統計關聯及中介效果，具樣本限制。",
     type: "碩士論文",
-    cover: "/images/paper_personality_innovation.png",
-    previewUrl: "https://heyzine.com/flip-book/b7ec1c6436.html",
+    cover: "/research-covers/series-04.webp",
+    previewUrl: "https://heyzine.com/flip-book/0793d084ff.html",
     downloadUrl: "/papers/m1.txt"
   }
 ];
