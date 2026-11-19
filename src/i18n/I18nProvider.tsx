@@ -63,7 +63,7 @@ function resolveTranslation(tree: TranslationTree, key: string): unknown {
 
 const I18nContext = createContext<I18nContextValue | null>(null);
 
-export function I18nProvider({ children }: { children: ReactNode }) {
+export function I18nProvider({ children, manageDocumentLanguage = true }: { children: ReactNode; manageDocumentLanguage?: boolean }) {
   const [locale, setLocaleState] = useState<SupportedLocale>(detectInitialLocale);
 
   const setLocale = (nextLocale: SupportedLocale) => {
@@ -74,9 +74,10 @@ export function I18nProvider({ children }: { children: ReactNode }) {
   };
 
   useEffect(() => {
+    if (!manageDocumentLanguage) return;
     document.documentElement.lang = locale;
     document.documentElement.dataset.sttLocale = locale;
-  }, [locale]);
+  }, [locale, manageDocumentLanguage]);
 
   const value = useMemo<I18nContextValue>(() => {
     const t = (key: string, fallback?: string) => {

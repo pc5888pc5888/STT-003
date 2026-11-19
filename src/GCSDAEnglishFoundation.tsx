@@ -150,6 +150,7 @@ export function GCSDAEnglishShell({
       ]}
       utilities={<>
         <Link to="/en/navigator">Institutional Navigator</Link>
+        <Link to="/privacy" hrefLang="zh-Hant-TW" aria-label="Privacy notice (Traditional Chinese)">Privacy</Link>
       </>}
       languages={<>
         <Link to={zhPath} hrefLang="zh-Hant-TW" lang="zh-Hant-TW">Traditional Chinese</Link>
@@ -169,7 +170,7 @@ function Section({kicker,title,children,soft=false}:{kicker:string;title:string;
 }
 
 export function GCSDAEnglishHome({lineUrl}:{lineUrl:string}){
-  return <div className="g4-page g4-en-page">
+  return <div className="g4-en-page">
     <GovernedHero
       kicker="GCSDA · INSTITUTIONAL ENGLISH EDITION · TAIWAN"
       title="Strategy, governance and sustainability as a shared professional language."
