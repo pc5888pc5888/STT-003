@@ -401,7 +401,7 @@ function syncLanguageAlternates(pathname: string) {
 
 export const BOOK_SCHEMA = Object.fromEntries(BOOKS.map((book) => [`/books/${book.slug}`, book]));
 
-export const RESEARCH_SCHEMA: Record<string, { headline:string; name:string; author:string[]; datePublished:string; about:string[] }> = {
+export const RESEARCH_SCHEMA: Record<string, { headline:string; name:string; author:string[]; datePublished:string; about:string[]; journal?: { title:string; volume:string; issue:string; pageStart:number; pageEnd:number; publisher:string; sourceUrl:string } }> = {
   "/research/legal-service-sustainability": {
     headline: "顧客關係管理對服務永續之探討：以 A 國際法律事務所為例",
     name: "Discussion on Customer Relationship Management in Service Sustainability: A Case Study of A International Attorney Firm",
@@ -415,7 +415,8 @@ export const RESEARCH_SCHEMA: Record<string, { headline:string; name:string; aut
   "/research/family-business-succession": {
     headline: "臺灣企業接班人的佈局規劃與傳承家族價值",
     name: "Factors for Successful Succession of Taiwanese Family Businesses",
-    author: ["紀又綺","莊鈞翔"], datePublished: "2024-01", about: ["家族企業","接班","家族治理","家族價值"]
+    author: ["紀又綺","莊鈞翔"], datePublished: "2023-06", about: ["家族企業","接班","家族治理","家族價值"],
+    journal: { title: "會計與公司治理", volume: "18", issue: "1", pageStart: 73, pageEnd: 101, publisher: "財團法人逢甲會計教育基金會", sourceUrl: "https://lawdata.com.tw/tw/detail.aspx?no=497758" }
   },
   "/research/generational-entrepreneurs": {
     headline: "不同世代企業家人格特質、創新能力對企業經營績效之影響－以領導風格為中介變數",
@@ -533,8 +534,12 @@ export function applyGovernedMetadata(pathname: string) {
       datePublished: researchSchema.datePublished,
       about: researchSchema.about,
       url: canonical,
-      isPartOf: { "@type": "CollectionPage", name: "STT Research Papers｜研究論文典藏", url: STT_CANONICAL_ORIGIN + "/research" },
-      publisher: { "@type": "Organization", name: "STT Governance｜策略智庫智慧治理", url: STT_CANONICAL_ORIGIN + "/" },
+      isPartOf: researchSchema.journal ? [
+        { "@type": "PublicationIssue", issueNumber: researchSchema.journal.issue, isPartOf: { "@type": "PublicationVolume", volumeNumber: researchSchema.journal.volume, isPartOf: { "@type": "Periodical", name: researchSchema.journal.title } } },
+        { "@type": "CollectionPage", name: "STT Research Papers｜研究論文典藏", url: STT_CANONICAL_ORIGIN + "/research" },
+      ] : { "@type": "CollectionPage", name: "STT Research Papers｜研究論文典藏", url: STT_CANONICAL_ORIGIN + "/research" },
+      ...(researchSchema.journal ? { pageStart: researchSchema.journal.pageStart, pageEnd: researchSchema.journal.pageEnd, sameAs: researchSchema.journal.sourceUrl } : {}),
+      publisher: researchSchema.journal ? { "@type": "Organization", name: researchSchema.journal.publisher } : { "@type": "Organization", name: "STT Governance｜策略智庫智慧治理", url: STT_CANONICAL_ORIGIN + "/" },
     });
   }
 
