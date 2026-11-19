@@ -401,15 +401,15 @@ function syncLanguageAlternates(pathname: string) {
 
 export const BOOK_SCHEMA = Object.fromEntries(BOOKS.map((book) => [`/books/${book.slug}`, book]));
 
-export const RESEARCH_SCHEMA: Record<string, { headline:string; name:string; author:string[]; datePublished:string; about:string[]; journal?: { title:string; volume?:string; issue:string; pageStart?:number; pageEnd?:number; publisher:string; sourceUrl:string } }> = {
+export const RESEARCH_SCHEMA: Record<string, { headline:string; name:string; author:string[]; datePublished:string; about:string[]; institution?:string; journal?: { title:string; volume?:string; issue:string; pageStart?:number; pageEnd?:number; publisher:string; sourceUrl:string } }> = {
   "/research/legal-service-sustainability": {
     headline: "顧客關係管理對服務永續之探討：以 A 國際法律事務所為例",
     name: "Discussion on Customer Relationship Management in Service Sustainability: A Case Study of A International Attorney Firm",
-    author: ["莊鈞翔"], datePublished: "2024-01", about: ["顧客關係管理","法律服務","服務永續","信任"]
+    author: ["莊鈞翔"], datePublished: "2024-01", about: ["顧客關係管理","法律服務","服務永續","信任"], institution: "逢甲大學"
   },
   "/research/corporate-governance-compliance": {
     headline: "企業策略導入公司治理法遵精神：以外部法律顧問團隊協助為例",
-    name: "Integrating the Spirit of Corporate Governance and Legal Compliance into Business Strategy: The Assistance of External Legal Advisory Teams",
+    name: "Introducing corporate governance in law compliance into business strategy: a case study of external legal advisory teams",
     author: ["莊鈞翔"], datePublished: "2023-10", about: ["公司治理","法遵","企業策略","法律風險"],
     journal: { title: "僑光學報", issue: "46", publisher: "僑光科技大學", sourceUrl: "https://lib.ocu.edu.tw/wSite/lp?ctNode=885&idPath=290_775_895_782_885&mp=1" }
   },
@@ -422,7 +422,7 @@ export const RESEARCH_SCHEMA: Record<string, { headline:string; name:string; aut
   "/research/generational-entrepreneurs": {
     headline: "不同世代企業家人格特質、創新能力對企業經營績效之影響－以領導風格為中介變數",
     name: "The Relationship among Personality Traits of Different Generation Entrepreneurs, Innovation Ability and Performance – Leadership Style as an Intermediary Variable",
-    author: ["莊鈞翔"], datePublished: "2017-06", about: ["企業家","人格特質","創新能力","領導風格","經營績效"]
+    author: ["莊鈞翔"], datePublished: "2017-06", about: ["企業家","人格特質","創新能力","領導風格","經營績效"], institution: "嶺東科技大學"
   },
 };
 
@@ -532,7 +532,7 @@ export function applyGovernedMetadata(pathname: string) {
       headline: researchSchema.headline,
       name: researchSchema.name,
       author: researchSchema.author.map(name => ({ "@type": "Person", name })),
-      datePublished: researchSchema.datePublished,
+      ...(researchSchema.journal ? { datePublished: researchSchema.datePublished } : { dateCreated: researchSchema.datePublished }),
       about: researchSchema.about,
       url: canonical,
       isPartOf: researchSchema.journal ? [
@@ -540,7 +540,7 @@ export function applyGovernedMetadata(pathname: string) {
         { "@type": "CollectionPage", name: "STT Research Papers｜研究論文典藏", url: STT_CANONICAL_ORIGIN + "/research" },
       ] : { "@type": "CollectionPage", name: "STT Research Papers｜研究論文典藏", url: STT_CANONICAL_ORIGIN + "/research" },
       ...(researchSchema.journal ? { ...(researchSchema.journal.pageStart != null ? { pageStart: researchSchema.journal.pageStart } : {}), ...(researchSchema.journal.pageEnd != null ? { pageEnd: researchSchema.journal.pageEnd } : {}), sameAs: researchSchema.journal.sourceUrl } : {}),
-      publisher: researchSchema.journal ? { "@type": "Organization", name: researchSchema.journal.publisher } : { "@type": "Organization", name: "STT Governance｜策略智庫智慧治理", url: STT_CANONICAL_ORIGIN + "/" },
+      publisher: researchSchema.journal ? { "@type": "Organization", name: researchSchema.journal.publisher } : researchSchema.institution ? { "@type": "CollegeOrUniversity", name: researchSchema.institution } : { "@type": "Organization", name: "STT Governance｜策略智庫智慧治理", url: STT_CANONICAL_ORIGIN + "/" },
     });
   }
 
