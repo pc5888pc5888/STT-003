@@ -401,7 +401,7 @@ function syncLanguageAlternates(pathname: string) {
 
 export const BOOK_SCHEMA = Object.fromEntries(BOOKS.map((book) => [`/books/${book.slug}`, book]));
 
-export const RESEARCH_SCHEMA: Record<string, { headline:string; name:string; author:string[]; datePublished:string; about:string[]; journal?: { title:string; volume:string; issue:string; pageStart:number; pageEnd:number; publisher:string; sourceUrl:string } }> = {
+export const RESEARCH_SCHEMA: Record<string, { headline:string; name:string; author:string[]; datePublished:string; about:string[]; journal?: { title:string; volume?:string; issue:string; pageStart?:number; pageEnd?:number; publisher:string; sourceUrl:string } }> = {
   "/research/legal-service-sustainability": {
     headline: "顧客關係管理對服務永續之探討：以 A 國際法律事務所為例",
     name: "Discussion on Customer Relationship Management in Service Sustainability: A Case Study of A International Attorney Firm",
@@ -410,7 +410,8 @@ export const RESEARCH_SCHEMA: Record<string, { headline:string; name:string; aut
   "/research/corporate-governance-compliance": {
     headline: "企業策略導入公司治理法遵精神：以外部法律顧問團隊協助為例",
     name: "Integrating the Spirit of Corporate Governance and Legal Compliance into Business Strategy: The Assistance of External Legal Advisory Teams",
-    author: ["莊鈞翔"], datePublished: "2024-01", about: ["公司治理","法遵","企業策略","法律風險"]
+    author: ["莊鈞翔"], datePublished: "2023-10", about: ["公司治理","法遵","企業策略","法律風險"],
+    journal: { title: "僑光學報", issue: "46", publisher: "僑光科技大學", sourceUrl: "https://lib.ocu.edu.tw/wSite/lp?ctNode=885&idPath=290_775_895_782_885&mp=1" }
   },
   "/research/family-business-succession": {
     headline: "臺灣企業接班人的佈局規劃與傳承家族價值",
@@ -535,10 +536,10 @@ export function applyGovernedMetadata(pathname: string) {
       about: researchSchema.about,
       url: canonical,
       isPartOf: researchSchema.journal ? [
-        { "@type": "PublicationIssue", issueNumber: researchSchema.journal.issue, isPartOf: { "@type": "PublicationVolume", volumeNumber: researchSchema.journal.volume, isPartOf: { "@type": "Periodical", name: researchSchema.journal.title } } },
+        { "@type": "PublicationIssue", issueNumber: researchSchema.journal.issue, isPartOf: researchSchema.journal.volume ? { "@type": "PublicationVolume", volumeNumber: researchSchema.journal.volume, isPartOf: { "@type": "Periodical", name: researchSchema.journal.title } } : { "@type": "Periodical", name: researchSchema.journal.title } },
         { "@type": "CollectionPage", name: "STT Research Papers｜研究論文典藏", url: STT_CANONICAL_ORIGIN + "/research" },
       ] : { "@type": "CollectionPage", name: "STT Research Papers｜研究論文典藏", url: STT_CANONICAL_ORIGIN + "/research" },
-      ...(researchSchema.journal ? { pageStart: researchSchema.journal.pageStart, pageEnd: researchSchema.journal.pageEnd, sameAs: researchSchema.journal.sourceUrl } : {}),
+      ...(researchSchema.journal ? { ...(researchSchema.journal.pageStart != null ? { pageStart: researchSchema.journal.pageStart } : {}), ...(researchSchema.journal.pageEnd != null ? { pageEnd: researchSchema.journal.pageEnd } : {}), sameAs: researchSchema.journal.sourceUrl } : {}),
       publisher: researchSchema.journal ? { "@type": "Organization", name: researchSchema.journal.publisher } : { "@type": "Organization", name: "STT Governance｜策略智庫智慧治理", url: STT_CANONICAL_ORIGIN + "/" },
     });
   }
