@@ -202,6 +202,7 @@ export function ResearchPaperPage(){
         <p className="research-section-kicker">ACADEMIC PUBLICATION RECORD</p>
         <h2 id="paper-publication-title">正式期刊書目與學術引用</h2>
         <p>{p.publication.citation}</p>
+        {p.series === "02" && <p className="research-evidence-note">此處英文篇名依原論文末頁刊載；STT 閱讀版封面採用編輯英譯，兩者請以原論文正式英文篇名作學術引用。</p>}
         <p><a href={p.publication.sourceUrl} target="_blank" rel="noopener noreferrer">查核正式期刊書目 ↗</a></p>
       </section>}
       <section aria-labelledby="paper-findings-title">
