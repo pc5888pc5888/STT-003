@@ -85,7 +85,7 @@ html:lang(ko) #root main {
 }
 
 /* This standalone statement is not a prose paragraph. */
-#root main .stt-inst-body > .stt-eric-quote {
+#root main .stt-inst-body > p.stt-eric-quote {
   text-indent: 0 !important;
   text-align: left !important;
 }
