@@ -1,7 +1,7 @@
 /* Reading paragraphs only: keep headings, captions, quotations and controls intact. */
 #root main {
   --stt-prose-indent: 2em;
-  --stt-prose-justify: inter-character;
+  --stt-prose-justify: auto;
   --stt-prose-word-break: normal;
   --stt-prose-hyphens: manual;
 }
