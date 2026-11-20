@@ -1,0 +1,91 @@
+/* Reading paragraphs only: keep headings, captions, quotations and controls intact. */
+#root main {
+  --stt-prose-indent: 2em;
+  --stt-prose-justify: inter-character;
+  --stt-prose-word-break: normal;
+  --stt-prose-hyphens: manual;
+}
+
+html:lang(en) #root main {
+  --stt-prose-indent: 0;
+  --stt-prose-justify: inter-word;
+  --stt-prose-hyphens: auto;
+}
+
+html:lang(ja) #root main {
+  --stt-prose-indent: 1em;
+}
+
+html:lang(ko) #root main {
+  --stt-prose-indent: 0;
+  --stt-prose-justify: inter-word;
+  --stt-prose-word-break: keep-all;
+}
+
+/* Imported articles include Word margins and inline styles. Normalize the reading
+   column, rather than changing the archived source or flattening its emphasis. */
+#root main :is(
+  .stt-archive .stt-article-body p:not(:where(
+    blockquote p, figure p, figcaption p, table p, li p, header p, footer p,
+    .fn, .gov-title, .ref-label, .ref-book, .pq, .stt-pullquote,
+    .jd, .fixed-note, .byline, .gov-ref, .legal-group-label,
+    .stt-rec-title, .stt-quote-text, .stt-quote-sig, .quote-signature,
+    .legal-check-date, [data-stt-prose-role="heading"],
+    :is(.fn, .gov-title, .ref-label, .ref-book, .pq, .stt-pullquote,
+      .jd, .fixed-note, .byline, .gov-ref, .legal-group-label,
+      .stt-rec-title, .stt-quote-text, .stt-quote-sig,
+      .quote-signature, .legal-check-date) p,
+    [align="center" i], [align="right" i],
+    [style*="text-align: center" i], [style*="text-align:center" i],
+    [style*="text-align: right" i], [style*="text-align:right" i],
+    [style*="text-align: end" i], [style*="text-align:end" i],
+    [align="center" i] p, [align="right" i] p,
+    [style*="text-align: center" i] p, [style*="text-align:center" i] p,
+    [style*="text-align: right" i] p, [style*="text-align:right" i] p
+  )),
+  .stt-archive .stt-article-body :is(.law-text, .law-note, .lc, .item-body, .strat-body, .stt-law-intro, .stt-abstract, .box-intro, .stt-legal-note):not(:has(p)),
+  .stt-inst-body > p:not(.stt-eric-quote),
+  .stt-g1-lead,
+  .stt-g3-foundations__intro,
+  .stt-g3-ai-boundary__grid > div:last-child > p,
+  .stt-g4-boundary__grid > div:last-child > p,
+  .research-intro > p:not(.research-section-kicker),
+  .research-body > section > p:not(.research-section-kicker):not(:has(> a:only-child)),
+  .research-governance-copy > p:not(.research-section-kicker, .research-governance-chain),
+  .stt-publication-body > section > p:not(.stt-library-kicker, .stt-publication-chain)
+) {
+  text-indent: var(--stt-prose-indent) !important;
+  text-align: justify !important;
+  text-align-last: start !important;
+  text-justify: var(--stt-prose-justify) !important;
+  word-break: var(--stt-prose-word-break) !important;
+  overflow-wrap: break-word !important;
+  line-break: strict;
+  hyphens: var(--stt-prose-hyphens);
+  white-space: normal;
+  text-wrap: wrap;
+  letter-spacing: normal !important;
+  line-height: 1.9 !important;
+  margin-inline: 0 !important;
+  margin-block: 0 1em !important;
+
+  /* Word exports carry different sizes on nested spans. Keep the reading size
+     consistent so 2em really equals two characters; retain bold and italics. */
+  & :is(span, font, strong, b, em, i, a, u) {
+    font-size: inherit !important;
+    line-height: inherit !important;
+    word-break: inherit !important;
+    overflow-wrap: inherit !important;
+    hyphens: inherit;
+  }
+}
+
+#root main .stt-article-body p:empty {
+  margin: 0 !important;
+}
+
+/* This standalone statement is not a prose paragraph. */
+#root main .stt-inst-body > .stt-eric-quote {
+  text-indent: 0 !important;
+  text-align: left !important;
+}

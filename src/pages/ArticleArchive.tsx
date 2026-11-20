@@ -6,6 +6,7 @@ import NotFound from '../components/NotFound';
 import ArticleShare from './ArticleShare';
 import '../styles/article-archive.css';
 import { articleReadingView, ARTICLE_COPYRIGHT, COLUMN_ARTWORK } from '../data/articleReadingView';
+import { normalizeArticleParagraphIndentation } from '../data/articleTypography';
 
 export function ArticleContent({ article: source }: { article: ArticleDocument }) {
   const article = articleReadingView(source);
@@ -28,7 +29,7 @@ export function ArticleContent({ article: source }: { article: ArticleDocument }
       <figure className="stt-archive-cover"><img src={article.cover.src} alt={article.cover.alt} width={article.cover.width} height={article.cover.height} decoding="async" fetchPriority="high" /></figure>
       {article.toc.length > 1 && <details className="stt-archive-toc"><summary>本文目錄</summary><nav aria-label="本文目錄"><ul>{article.toc.map(item => <li key={item.id}><a href={'#' + item.id}>{item.title}</a></li>)}</ul></nav></details>}
       {article.css && <style>{article.css}</style>}
-      <div className="stt-article-body" data-article-id={article.id} dangerouslySetInnerHTML={{ __html: article.html }} />
+      <div className="stt-article-body" data-article-id={article.id} dangerouslySetInnerHTML={{ __html: normalizeArticleParagraphIndentation(article.html) }} />
       {intro.editorialNotes.length > 0 && <aside className="stt-archive-editorial-note" aria-label="編輯說明">{intro.editorialNotes.map((text, index) => <p key={index}>{text}</p>)}</aside>}
       <footer className="stt-archive-copyright"><p>{ARTICLE_COPYRIGHT}</p></footer>
       {artwork && <figure className="stt-archive-column-artwork"><img {...artwork} loading="lazy" decoding="async" /></figure>}

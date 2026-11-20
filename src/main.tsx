@@ -29,6 +29,7 @@ import "./styles/stt-header-refinement.css";
 import "./styles/institutional-layout.css";
 
 import "./styles/portrait-closing.css";
+import "./styles/stt-prose.css";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode><AppProviders><App /></AppProviders></React.StrictMode>
