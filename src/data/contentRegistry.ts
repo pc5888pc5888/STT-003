@@ -165,15 +165,15 @@ export const SERIES: SeriesRecord[] = [
 
 const sourceName = (value: string) => value === "M傳媒" ? "M 傳媒" : value;
 export const WORKS: PublishedWork[] = [
-  ...legacy.articles.filter(article => !ARTICLE_INDEX.some(item => `mmedia-${item.id}` === article.id)).map(article => ({
+  ...legacy.articles.filter(article => !ARTICLE_INDEX.some(item => item.sourceRelation !== "stt" && `mmedia-${item.id}` === article.id)).map(article => ({
     id: article.id, title: article.title, excerpt: article.excerpt, date: article.date, sourceUnavailable: article.id === "mmedia-cee607",
     author: article.author, category: article.category, series: article.series,
     sources: [{ publisher: sourceName(article.source || legacy.source.publisher), url: article.url, relation: "external" as const }],
   })),
   ...ARTICLE_INDEX.map(article => ({
-    id: `mmedia-${article.id}`, title: article.title, excerpt: article.excerpt, date: article.date,
+    id: `${article.sourceRelation === "stt" ? "stt" : "mmedia"}-${article.id}`, title: article.title, excerpt: article.excerpt, date: article.date,
     author: article.author, category: article.category, series: article.series, articlePath: article.path,
-    sources: [{ publisher: "M 傳媒", url: article.sourceUrl, relation: "external" as const }],
+    sources: [{ publisher: article.sourcePublisher || (article.sourceRelation === "stt" ? "STT Governance｜策略智庫智慧治理" : "M 傳媒"), url: article.sourceUrl, relation: article.sourceRelation || "external" }],
   })),
   ...(additions.works as PublishedWork[]),
 ];

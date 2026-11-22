@@ -13,6 +13,7 @@ export function ArticleContent({ article: source }: { article: ArticleDocument }
   const intro = article.intro!;
   const artwork = COLUMN_ARTWORK[article.series as keyof typeof COLUMN_ARTWORK];
   const series = SERIES.find(item => item.key === article.series);
+  const isSttPublication = article.sourceRelation === 'stt';
   const related = ARTICLE_INDEX.filter(item => item.series === article.series && item.id !== article.id).slice(0, 3);
   return <div className="stt-archive" data-preserve-source>
     <nav className="stt-archive-breadcrumb" aria-label="文章導覽"><Link to="/insights">研究與出版</Link><span aria-hidden="true">／</span><Link to="/columns">專欄與報導</Link><span aria-hidden="true">／</span><Link to={series?.route || '/columns'}>{series?.label}</Link></nav>
@@ -24,7 +25,7 @@ export function ArticleContent({ article: source }: { article: ArticleDocument }
         <div className="stt-archive-heading-rule" aria-hidden="true" />
         {intro.subjects.map((text, index) => <p className="stt-archive-interview" key={index}>{text}</p>)}
         <p className="stt-archive-author"><span>作者</span><span aria-hidden="true">｜</span><Link to="/eric-chuang">莊鈞翔 博士</Link></p>
-        <div className="stt-archive-publication"><span>原刊日期 <time dateTime={isoDate(article.date)}>{article.date}</time></span><a className="stt-archive-source" href={article.sourceUrl} target="_blank" rel="noopener noreferrer">原刊於 M 傳媒 ↗<span className="stt-library-sr-only">（另開分頁）</span></a></div>
+        <div className="stt-archive-publication"><span>{isSttPublication ? '發表日期' : '原刊日期'} <time dateTime={isoDate(article.date)}>{article.date}</time></span>{isSttPublication ? <span className="stt-archive-source">{article.sourcePublisher || 'STT Governance｜策略智庫智慧治理'}</span> : <a className="stt-archive-source" href={article.sourceUrl} target="_blank" rel="noopener noreferrer">原刊於 {article.sourcePublisher || 'M 傳媒'} ↗<span className="stt-library-sr-only">（另開分頁）</span></a>}</div>
       </header>
       <figure className="stt-archive-cover"><img src={article.cover.src} alt={article.cover.alt} width={article.cover.width} height={article.cover.height} decoding="async" fetchPriority="high" /></figure>
       {article.toc.length > 1 && <details className="stt-archive-toc"><summary>本文目錄</summary><nav aria-label="本文目錄"><ul>{article.toc.map(item => <li key={item.id}><a href={'#' + item.id}>{item.title}</a></li>)}</ul></nav></details>}

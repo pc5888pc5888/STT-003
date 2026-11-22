@@ -1,0 +1,110 @@
+[
+  {
+    "id": "01",
+    "title": "當市場劇烈波動，國家可以介入到什麼程度？",
+    "subtitle": "2026年限空措施的制度目的、法律授權與金融安定邊界",
+    "source": "raw/01.txt",
+    "preview": "preview/01.html",
+    "image": "news/01.png",
+    "paragraphs": 138,
+    "characters": 14772,
+    "htmlBytes": 85066,
+    "sha256": "8f5aaaf8a40b597f59f51e0af3f63b91258995bfa42bf6c927f56171ecd3da86"
+  },
+  {
+    "id": "02",
+    "title": "限制放空，究竟降低了風險，還是改變了風險的去向？",
+    "subtitle": "價格發現、法人避險、期現貨傳導與金融監理的第二層效果",
+    "source": "raw/02.txt",
+    "preview": "preview/02.html",
+    "image": "news/02.png",
+    "paragraphs": 150,
+    "characters": 16917,
+    "htmlBytes": 91631,
+    "sha256": "539a85ed2e62f4f7517bb771b5af97326bd499a986c4f0ad379fff4df24ee359"
+  },
+  {
+    "id": "03",
+    "title": "國安基金出手，國家承擔的是市場責任還是價格責任？",
+    "subtitle": "公共資金、安定市場任務與政府金融干預的責任分配",
+    "source": "raw/03.txt",
+    "preview": "preview/03.html",
+    "image": "news/03.png",
+    "paragraphs": 139,
+    "characters": 17529,
+    "htmlBytes": 93441,
+    "sha256": "fcbbc383bea5eb7ec348c1ba77faaccf67d04548a3e5eb1a7d228b77bfbd0bf5"
+  },
+  {
+    "id": "04",
+    "title": "當國家限制信用，誰決定資金可以流向哪裡？",
+    "subtitle": "中央銀行、金融機構與信用分配權限的法律秩序",
+    "source": "raw/04.txt",
+    "preview": "preview/04.html",
+    "image": "news/04.png",
+    "paragraphs": 164,
+    "characters": 16225,
+    "htmlBytes": 90080,
+    "sha256": "cebe93574ad3e6e87db7d8da02f9f8d132fb5994e24f40d5e0940b0703861e2c"
+  },
+  {
+    "id": "05",
+    "title": "信用管制之下，既有契約的風險應由誰承擔？",
+    "subtitle": "政策變更、銀行授信、交易履約與人民信賴的法律界線",
+    "source": "raw/05.txt",
+    "preview": "preview/05.html",
+    "image": "news/05.png",
+    "paragraphs": 174,
+    "characters": 17621,
+    "htmlBytes": 94642,
+    "sha256": "e61289189a0b32fbd89d76ace37bec40d73021040e58c70c3cc85de96a4f6fe5"
+  },
+  {
+    "id": "06",
+    "title": "限空與信用管制，是否正在改變企業的資本選擇？",
+    "subtitle": "政策風險、企業流動性、股權控制與董事會的重大決策責任",
+    "source": "raw/06.txt",
+    "preview": "preview/06.html",
+    "image": "news/06.png",
+    "paragraphs": 171,
+    "characters": 15516,
+    "htmlBytes": 89052,
+    "sha256": "4ac5f835a6da3032ff5526664277b58a3a29f007cc3afe4789eced6d0cb9100d"
+  },
+  {
+    "id": "07",
+    "title": "國家為了穩定市場，究竟將風險分配給了誰？",
+    "subtitle": "限空、信用管制與國家金融干預的利益及成本配置",
+    "source": "raw/07.txt",
+    "preview": "preview/07.html",
+    "image": "news/07.png",
+    "paragraphs": 156,
+    "characters": 14200,
+    "htmlBytes": 84489,
+    "sha256": "56b3846599a31f62c3cf5cb83c0d063e176eff3b125088bb48236dd6f1e707d1"
+  },
+  {
+    "id": "08",
+    "title": "一項金融政策是否有效，究竟由誰提出證據？",
+    "subtitle": "國家金融監理的資料治理、實證檢驗與政策責任",
+    "source": "raw/08.txt",
+    "preview": "preview/08.html",
+    "image": "news/08.png",
+    "paragraphs": 172,
+    "characters": 15206,
+    "htmlBytes": 87397,
+    "sha256": "74fd7b8f62417f84a58625061a4d21b146edcee57303934d97c2e352f6184712"
+  },
+  {
+    "id": "09",
+    "title": "國家治理不能永遠依靠臨時煞車",
+    "subtitle": "從限空、信用管制到可預測、可問責、可退場的國家金融治理制度",
+    "source": "raw/09.txt",
+    "preview": "preview/09.html",
+    "image": "news/09.png",
+    "paragraphs": 161,
+    "characters": 14543,
+    "htmlBytes": 85421,
+    "sha256": "d83082f460b29ab01cf42d817dec9641d90d76beee446d84434b9b9162bb3fcf"
+  }
+]
