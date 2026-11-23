@@ -10,6 +10,7 @@ assert.deepEqual(nativeImport.map(x => x.id), Array.from({ length: 9 }, (_, i) =
 const nativeById = new Map(nativeImport.map(x => [x.id, x]));
 assert.equal(articles.length, 279);
 assert.equal(new Set(articles.map(x => x.id)).size, 279);
+assert.equal(new Set(articles.map(x => x.path)).size, 279);
 assert.equal(articles.filter(x => x.sourceRelation === 'stt').length, 9);
 assert.equal(articles.filter(x => x.sourceRelation !== 'stt').length, 270);
 assert.equal(assets.length, 318);
@@ -24,10 +25,13 @@ assert.equal(files.length, articles.length);
 for (const entry of articles) {
   const article = JSON.parse(fs.readFileSync(`public/data/articles/${entry.id}.json`, 'utf8'));
   assert.equal(article.title, entry.title);
-  assert.equal(article.path, '/columns/articles/' + entry.id);
+  assert.equal(article.path, entry.path);
   if (article.sourceRelation === 'stt') {
     const approved = nativeById.get(article.id);
     assert.ok(approved, `Unregistered STT article: ${article.id}`);
+    const canonicalPath = '/columns/articles/' + approved.number.padStart(6, '0');
+    assert.equal(article.path, canonicalPath);
+    assert.equal(approved.path, canonicalPath);
     assert.equal(article.sourcePublisher, 'STT Governance｜策略智庫智慧治理');
     assert.equal(article.sourceUrl, 'https://stt-003.vercel.app' + article.path);
     assert.equal(article.title, approved.title);
@@ -43,6 +47,7 @@ for (const entry of articles) {
     assert.equal(originalImage.length, approved.imageBytes);
     assert.equal(crypto.createHash('sha256').update(originalImage).digest('hex'), approved.imageSha256);
   } else {
+    assert.equal(article.path, '/columns/articles/' + entry.id);
     assert.equal(new URL(article.sourceUrl).hostname, '94m.com.tw');
   }
   assert.ok(assetPaths.has(article.cover.src), article.cover.src);

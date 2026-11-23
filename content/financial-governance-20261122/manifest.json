@@ -18,7 +18,7 @@
     "imageBytes": 3271484,
     "width": 1672,
     "height": 941,
-    "path": "/columns/articles/financial-governance-01"
+    "path": "/columns/articles/000001"
   },
   {
     "id": "financial-governance-02",
@@ -39,7 +39,7 @@
     "imageBytes": 3475344,
     "width": 1672,
     "height": 941,
-    "path": "/columns/articles/financial-governance-02"
+    "path": "/columns/articles/000002"
   },
   {
     "id": "financial-governance-03",
@@ -60,7 +60,7 @@
     "imageBytes": 3635959,
     "width": 1672,
     "height": 941,
-    "path": "/columns/articles/financial-governance-03"
+    "path": "/columns/articles/000003"
   },
   {
     "id": "financial-governance-04",
@@ -81,7 +81,7 @@
     "imageBytes": 3354465,
     "width": 1672,
     "height": 941,
-    "path": "/columns/articles/financial-governance-04"
+    "path": "/columns/articles/000004"
   },
   {
     "id": "financial-governance-05",
@@ -102,7 +102,7 @@
     "imageBytes": 3497642,
     "width": 1672,
     "height": 941,
-    "path": "/columns/articles/financial-governance-05"
+    "path": "/columns/articles/000005"
   },
   {
     "id": "financial-governance-06",
@@ -123,7 +123,7 @@
     "imageBytes": 3347738,
     "width": 1672,
     "height": 941,
-    "path": "/columns/articles/financial-governance-06"
+    "path": "/columns/articles/000006"
   },
   {
     "id": "financial-governance-07",
@@ -144,7 +144,7 @@
     "imageBytes": 3414004,
     "width": 1672,
     "height": 941,
-    "path": "/columns/articles/financial-governance-07"
+    "path": "/columns/articles/000007"
   },
   {
     "id": "financial-governance-08",
@@ -165,7 +165,7 @@
     "imageBytes": 3455438,
     "width": 1672,
     "height": 941,
-    "path": "/columns/articles/financial-governance-08"
+    "path": "/columns/articles/000008"
   },
   {
     "id": "financial-governance-09",
@@ -186,6 +186,6 @@
     "imageBytes": 3308412,
     "width": 1672,
     "height": 941,
-    "path": "/columns/articles/financial-governance-09"
+    "path": "/columns/articles/000009"
   }
 ]

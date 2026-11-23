@@ -92,7 +92,7 @@ for item in catalog:
     assert sha((ROOT / 'public' / image_path.lstrip('/')).read_bytes()) == image_sha
     assets.append({'path': image_path, 'sourceUrl': ORIGIN + image_path, 'sha256': image_sha,
                    'bytes': len(image_bytes), 'width': width, 'height': height})
-    article_path = '/columns/articles/' + article_id
+    article_path = '/columns/articles/' + number.zfill(6)
     record = {
         'id': article_id, 'title': title, 'author': '莊鈞翔博士', 'date': '2026/11/22',
         'category': '法律', 'series': 'legal',

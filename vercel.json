@@ -271,6 +271,96 @@
   ],
   "redirects": [
     {
+      "source": "/columns/articles/financial-governance-01",
+      "destination": "/columns/articles/000001",
+      "permanent": true
+    },
+    {
+      "source": "/columns/articles/financial-governance-01/",
+      "destination": "/columns/articles/000001",
+      "permanent": true
+    },
+    {
+      "source": "/columns/articles/financial-governance-02",
+      "destination": "/columns/articles/000002",
+      "permanent": true
+    },
+    {
+      "source": "/columns/articles/financial-governance-02/",
+      "destination": "/columns/articles/000002",
+      "permanent": true
+    },
+    {
+      "source": "/columns/articles/financial-governance-03",
+      "destination": "/columns/articles/000003",
+      "permanent": true
+    },
+    {
+      "source": "/columns/articles/financial-governance-03/",
+      "destination": "/columns/articles/000003",
+      "permanent": true
+    },
+    {
+      "source": "/columns/articles/financial-governance-04",
+      "destination": "/columns/articles/000004",
+      "permanent": true
+    },
+    {
+      "source": "/columns/articles/financial-governance-04/",
+      "destination": "/columns/articles/000004",
+      "permanent": true
+    },
+    {
+      "source": "/columns/articles/financial-governance-05",
+      "destination": "/columns/articles/000005",
+      "permanent": true
+    },
+    {
+      "source": "/columns/articles/financial-governance-05/",
+      "destination": "/columns/articles/000005",
+      "permanent": true
+    },
+    {
+      "source": "/columns/articles/financial-governance-06",
+      "destination": "/columns/articles/000006",
+      "permanent": true
+    },
+    {
+      "source": "/columns/articles/financial-governance-06/",
+      "destination": "/columns/articles/000006",
+      "permanent": true
+    },
+    {
+      "source": "/columns/articles/financial-governance-07",
+      "destination": "/columns/articles/000007",
+      "permanent": true
+    },
+    {
+      "source": "/columns/articles/financial-governance-07/",
+      "destination": "/columns/articles/000007",
+      "permanent": true
+    },
+    {
+      "source": "/columns/articles/financial-governance-08",
+      "destination": "/columns/articles/000008",
+      "permanent": true
+    },
+    {
+      "source": "/columns/articles/financial-governance-08/",
+      "destination": "/columns/articles/000008",
+      "permanent": true
+    },
+    {
+      "source": "/columns/articles/financial-governance-09",
+      "destination": "/columns/articles/000009",
+      "permanent": true
+    },
+    {
+      "source": "/columns/articles/financial-governance-09/",
+      "destination": "/columns/articles/000009",
+      "permanent": true
+    },
+    {
       "source": "/columns/articles/:id/",
       "destination": "/columns/articles/:id",
       "permanent": true

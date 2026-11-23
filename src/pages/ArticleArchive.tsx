@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, Navigate, useLocation, useParams } from 'react-router-dom';
 import { ARTICLE_INDEX, type ArticleDocument } from '../data/articleArchive';
 import { SERIES, isoDate } from '../data/contentRegistry';
 import NotFound from '../components/NotFound';
@@ -47,8 +47,12 @@ function embeddedArticle(id: string | undefined): ArticleDocument | undefined {
   try { const data = JSON.parse(node.textContent) as ArticleDocument; return data.id === id ? data : undefined; } catch { return undefined; }
 }
 export default function ArticleArchive() {
-  const { id } = useParams();
-  const known = ARTICLE_INDEX.some(item => item.id === id);
+  const { id: routeId } = useParams();
+  const { search, hash } = useLocation();
+  const requestedPath = `/columns/articles/${routeId}`;
+  const record = ARTICLE_INDEX.find(item => item.path === requestedPath || item.id === routeId);
+  const id = record?.id;
+  const known = Boolean(record);
   const [article, setArticle] = useState<ArticleDocument | undefined>(() => embeddedArticle(id));
   const [failed, setFailed] = useState(false);
   useEffect(() => {
@@ -64,6 +68,7 @@ export default function ArticleArchive() {
     return () => controller.abort();
   }, [id, known]);
   if (!known) return <NotFound />;
+  if (record && record.path !== requestedPath) return <Navigate replace to={record.path + search + hash} />;
   if (failed) return <section className="stt-archive"><h1>文章暫時無法載入</h1><p>請重新載入此頁，或返回專欄總覽。</p><button onClick={() => window.location.reload()}>重新載入</button><Link to="/columns">返回專欄總覽</Link></section>;
   if (!article || article.id !== id) return <div className="stt-archive" role="status">正在載入文章…</div>;
   return <ArticleContent article={article} />;
