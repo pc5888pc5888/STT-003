@@ -18,6 +18,10 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - name: Verify M Media catalog source mapping and archival invariants
+        run: |
+          python3 -m pip install --quiet beautifulsoup4==4.13.4
+          python3 -m unittest discover -s tests -p 'test_mmedia_sync.py' -v
       - name: Snapshot and build
         run: |
           mkdir -p /tmp/convergence-evidence

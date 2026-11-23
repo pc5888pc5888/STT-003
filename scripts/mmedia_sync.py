@@ -15,7 +15,7 @@ OWNER_ASSIGNMENTS = ROOT / 'data/mmedia-owner-series.json'
 AUTHOR = 'https://94m.com.tw/editors/ed55fc'
 ORIGIN = 'https://94m.com.tw'
 FIELDS = ('url', 'title', 'date', 'category', 'author', 'authorUrl', 'excerpt')
-SERIES = {'法律': 'legal', '社會': 'humanistic', '熱門社會': 'humanistic', 'M-news': 'news', 'M-NEWS': 'news', 'Ｍ-NEWS': 'news'}
+SERIES = {'法律': 'legal', '法務達人': 'legal', '社會': 'humanistic', '熱門社會': 'humanistic', 'M-news': 'news', 'M-NEWS': 'news', 'Ｍ-NEWS': 'news'}
 TITLES = {'legal': '莊博士法律新聞專欄', 'humanistic': '莊博士人文地景產專欄', 'news': '莊博士新聞採訪專欄'}
 HUMANISTIC_LABEL = '人文地景產專欄'
 

@@ -18,6 +18,8 @@ class ArchiveTests(unittest.TestCase):
     def test_new_record_and_duplicate_are_idempotent(self):
         row={**self.rows[0],'url':'https://94m.com.tw/articles/testonly-new','title':'Test fixture, never published'}
         result=sync.merge(self.data,[row,row],self.now,1); self.assertEqual(result['stats']['total'],self.n+1)
+    def test_public_source_category_fawudaren_is_legal(self):
+        self.assertEqual(sync.series_for({'url':'https://94m.com.tw/articles/0d9b45','category':'法務達人','title':'金融治理'}),'legal')
     def test_unknown_category_is_pending_not_guessed(self):
         row={**self.rows[0],'url':'https://94m.com.tw/articles/testonly-pending','category':'焦點','title':'未知分類測試文章'}
         before=len(self.data.get('pending',[]))
