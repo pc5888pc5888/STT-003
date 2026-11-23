@@ -1,13 +1,13 @@
 {
-  "generatedAt": "2026-10-05T01:30:13.811Z",
+  "generatedAt": "2026-11-23T00:40:54.879Z",
   "sites": [
     {
       "site": "stt",
       "route": "/",
       "label": "desktop",
       "http": 200,
-      "title": "STT Governance｜重大決策・企業治理・家族治理",
-      "h1": "讓重要的事，走得更遠。",
+      "title": "STT Governance｜策略智庫智慧治理",
+      "h1": "讓重要的事，走得更遠",
       "h1Count": 1,
       "heroClass": "cis-hero cis-title-1 cis-with-image cis-clear-left",
       "heroImage": "/visual-bank/stt/user-approved-six/home.png",
@@ -18,440 +18,30 @@
       ],
       "heroImageRect": {
         "left": 0,
-        "top": 93,
-        "right": 1440,
-        "bottom": 1111.90625,
-        "width": 1440,
-        "height": 1018.90625
-      },
-      "heroImageFit": "contain",
-      "copyRect": {
-        "left": 52,
-        "top": 273,
-        "right": 570.390625,
-        "bottom": 564.515625,
-        "width": 518.390625,
-        "height": 291.515625
-      },
-      "copyBg": "rgba(0, 0, 0, 0)",
-      "heroGradient": "linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255) 30%, rgba(255, 255, 255, 0.99) 38%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.34) 70%, rgba(255, 255, 255, 0.12) 77%, rgba(255, 255, 255, 0) 82%)",
-      "brandRect": {
-        "left": 52,
-        "top": 11,
-        "right": 392,
-        "bottom": 81,
-        "width": 340,
-        "height": 70
-      },
-      "brandNatural": [
-        3181,
-        891
-      ],
-      "brandOptical": {
-        "sourceBox": {
-          "left": 22,
-          "top": 165,
-          "width": 1123,
-          "height": 591
-        },
-        "visibleLeftMarkHeight": 46.43097643097643,
-        "visibleLeftMarkTop": 12.962962962962962
-      },
-      "overflow": false,
-      "broken": [],
-      "canonical": "https://stt-003.vercel.app/",
-      "robotsMeta": "index,follow",
-      "organizationSchema": null,
-      "expectedImage": "/visual-bank/stt/user-approved-six/home.png",
-      "hasExpected": true,
-      "imageLoaded": true,
-      "heroImageSha256": "d87b1039a686ad6a92be4eb2aadbc6d32111278ffd59869137e77e939708ff39",
-      "desktopCopyInReadingZone": true,
-      "mobileSeparated": true,
-      "gradientGeometry": true,
-      "errors": []
-    },
-    {
-      "site": "stt",
-      "route": "/problems",
-      "label": "desktop",
-      "http": 200,
-      "title": "你正在面對什麼｜STT Governance",
-      "h1": "你正在面對什麼",
-      "h1Count": 1,
-      "heroClass": "cis-hero cis-title-1 cis-with-image cis-clear-left",
-      "heroImage": "/visual-bank/stt/user-approved-six/problems.png",
-      "heroImageLoaded": true,
-      "heroImageNatural": [
-        1491,
-        1055
-      ],
-      "heroImageRect": {
-        "left": 0,
-        "top": 93,
-        "right": 1440,
-        "bottom": 1111.90625,
-        "width": 1440,
-        "height": 1018.90625
-      },
-      "heroImageFit": "contain",
-      "copyRect": {
-        "left": 52,
-        "top": 273,
-        "right": 570.390625,
-        "bottom": 493.015625,
-        "width": 518.390625,
-        "height": 220.015625
-      },
-      "copyBg": "rgba(0, 0, 0, 0)",
-      "heroGradient": "linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255) 30%, rgba(255, 255, 255, 0.99) 38%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.34) 70%, rgba(255, 255, 255, 0.12) 77%, rgba(255, 255, 255, 0) 82%)",
-      "brandRect": {
-        "left": 52,
-        "top": 11,
-        "right": 392,
-        "bottom": 81,
-        "width": 340,
-        "height": 70
-      },
-      "brandNatural": [
-        3181,
-        891
-      ],
-      "brandOptical": {
-        "sourceBox": {
-          "left": 22,
-          "top": 165,
-          "width": 1123,
-          "height": 591
-        },
-        "visibleLeftMarkHeight": 46.43097643097643,
-        "visibleLeftMarkTop": 12.962962962962962
-      },
-      "overflow": false,
-      "broken": [],
-      "canonical": "https://stt-003.vercel.app/problems",
-      "robotsMeta": "index,follow",
-      "organizationSchema": null,
-      "expectedImage": "/visual-bank/stt/user-approved-six/problems.png",
-      "hasExpected": true,
-      "imageLoaded": true,
-      "heroImageSha256": "964923d0ba8ddc9589fcd8a254d6daca2f71643d2e6702236bff2902d38850c9",
-      "desktopCopyInReadingZone": true,
-      "mobileSeparated": true,
-      "gradientGeometry": true,
-      "errors": []
-    },
-    {
-      "site": "stt",
-      "route": "/how-stt-works",
-      "label": "desktop",
-      "http": 200,
-      "title": "STT 如何判讀｜治理判讀方法",
-      "h1": "如何判讀",
-      "h1Count": 1,
-      "heroClass": "cis-hero cis-title-1 cis-with-image cis-clear-left",
-      "heroImage": "/visual-bank/stt/user-approved-six/method.png",
-      "heroImageLoaded": true,
-      "heroImageNatural": [
-        1491,
-        1055
-      ],
-      "heroImageRect": {
-        "left": 0,
-        "top": 93,
-        "right": 1440,
-        "bottom": 1111.90625,
-        "width": 1440,
-        "height": 1018.90625
-      },
-      "heroImageFit": "contain",
-      "copyRect": {
-        "left": 52,
-        "top": 273,
-        "right": 570.390625,
-        "bottom": 493.015625,
-        "width": 518.390625,
-        "height": 220.015625
-      },
-      "copyBg": "rgba(0, 0, 0, 0)",
-      "heroGradient": "linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255) 30%, rgba(255, 255, 255, 0.99) 38%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.34) 70%, rgba(255, 255, 255, 0.12) 77%, rgba(255, 255, 255, 0) 82%)",
-      "brandRect": {
-        "left": 52,
-        "top": 11,
-        "right": 392,
-        "bottom": 81,
-        "width": 340,
-        "height": 70
-      },
-      "brandNatural": [
-        3181,
-        891
-      ],
-      "brandOptical": {
-        "sourceBox": {
-          "left": 22,
-          "top": 165,
-          "width": 1123,
-          "height": 591
-        },
-        "visibleLeftMarkHeight": 46.43097643097643,
-        "visibleLeftMarkTop": 12.962962962962962
-      },
-      "overflow": false,
-      "broken": [],
-      "canonical": "https://stt-003.vercel.app/how-stt-works",
-      "robotsMeta": "index,follow",
-      "organizationSchema": null,
-      "expectedImage": "/visual-bank/stt/user-approved-six/method.png",
-      "hasExpected": true,
-      "imageLoaded": true,
-      "heroImageSha256": "e64be189148c76ce2dd5b13efba5a9512e2cb003692f87991c95d35322602753",
-      "desktopCopyInReadingZone": true,
-      "mobileSeparated": true,
-      "gradientGeometry": true,
-      "errors": []
-    },
-    {
-      "site": "stt",
-      "route": "/engagement",
-      "label": "desktop",
-      "http": 200,
-      "title": "治理委任｜STT Governance",
-      "h1": "當一件事情值得被正式治理，就不應只停留在一次諮詢。",
-      "h1Count": 1,
-      "heroClass": "cis-hero cis-title-2 cis-text-only",
-      "heroImage": null,
-      "heroImageLoaded": null,
-      "heroImageNatural": null,
-      "heroImageRect": null,
-      "heroImageFit": null,
-      "copyRect": {
-        "left": 200,
-        "top": 153,
-        "right": 1070,
-        "bottom": 381.859375,
-        "width": 870,
-        "height": 228.859375
-      },
-      "copyBg": "rgba(0, 0, 0, 0)",
-      "heroGradient": "none",
-      "brandRect": {
-        "left": 52,
-        "top": 11,
-        "right": 392,
-        "bottom": 81,
-        "width": 340,
-        "height": 70
-      },
-      "brandNatural": [
-        3181,
-        891
-      ],
-      "brandOptical": {
-        "sourceBox": {
-          "left": 22,
-          "top": 165,
-          "width": 1123,
-          "height": 591
-        },
-        "visibleLeftMarkHeight": 46.43097643097643,
-        "visibleLeftMarkTop": 12.962962962962962
-      },
-      "overflow": false,
-      "broken": [],
-      "canonical": "https://stt-003.vercel.app/engagement",
-      "robotsMeta": "index,follow",
-      "organizationSchema": null,
-      "expectedImage": null,
-      "hasExpected": true,
-      "imageLoaded": true,
-      "heroImageSha256": null,
-      "desktopCopyInReadingZone": true,
-      "mobileSeparated": true,
-      "gradientGeometry": true,
-      "errors": []
-    },
-    {
-      "site": "stt",
-      "route": "/insights",
-      "label": "desktop",
-      "http": 200,
-      "title": "研究與出版｜STT Governance",
-      "h1": "判讀不是臨時形成的意見，而是長期累積的制度研究。",
-      "h1Count": 1,
-      "heroClass": "cis-hero cis-title-2 cis-with-image cis-clear-left",
-      "heroImage": "/visual-bank/stt/user-approved-six/columns.png",
-      "heroImageLoaded": true,
-      "heroImageNatural": [
-        1491,
-        1055
-      ],
-      "heroImageRect": {
-        "left": 0,
-        "top": 93,
-        "right": 1440,
-        "bottom": 1111.90625,
-        "width": 1440,
-        "height": 1018.90625
-      },
-      "heroImageFit": "contain",
-      "copyRect": {
-        "left": 52,
-        "top": 273,
-        "right": 570.390625,
-        "bottom": 535,
-        "width": 518.390625,
-        "height": 262
-      },
-      "copyBg": "rgba(0, 0, 0, 0)",
-      "heroGradient": "linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255) 30%, rgba(255, 255, 255, 0.99) 38%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.34) 70%, rgba(255, 255, 255, 0.12) 77%, rgba(255, 255, 255, 0) 82%)",
-      "brandRect": {
-        "left": 52,
-        "top": 11,
-        "right": 392,
-        "bottom": 81,
-        "width": 340,
-        "height": 70
-      },
-      "brandNatural": [
-        3181,
-        891
-      ],
-      "brandOptical": {
-        "sourceBox": {
-          "left": 22,
-          "top": 165,
-          "width": 1123,
-          "height": 591
-        },
-        "visibleLeftMarkHeight": 46.43097643097643,
-        "visibleLeftMarkTop": 12.962962962962962
-      },
-      "overflow": false,
-      "broken": [],
-      "canonical": "https://stt-003.vercel.app/insights",
-      "robotsMeta": "index,follow",
-      "organizationSchema": null,
-      "expectedImage": "/visual-bank/stt/user-approved-six/columns.png",
-      "hasExpected": true,
-      "imageLoaded": true,
-      "heroImageSha256": "03cc644c1f32e05252ebc4defae7149dd6ddc0a8a36f7965436f0c2dff284417",
-      "desktopCopyInReadingZone": true,
-      "mobileSeparated": true,
-      "gradientGeometry": true,
-      "errors": []
-    },
-    {
-      "site": "stt",
-      "route": "/about",
-      "label": "desktop",
-      "http": 200,
-      "title": "關於 STT Governance｜治理判讀與制度設計",
-      "h1": "STT Governance不是一般顧問公司，而是高位階治理文明平台。",
-      "h1Count": 1,
-      "heroClass": "cis-hero cis-title-3 cis-with-image cis-clear-left",
-      "heroImage": "/visual-bank/stt/user-approved-six/about-stt.png",
-      "heroImageLoaded": true,
-      "heroImageNatural": [
-        1491,
-        1055
-      ],
-      "heroImageRect": {
-        "left": 0,
-        "top": 93,
-        "right": 1440,
-        "bottom": 1111.90625,
-        "width": 1440,
-        "height": 1018.90625
-      },
-      "heroImageFit": "contain",
-      "copyRect": {
-        "left": 52,
-        "top": 273,
-        "right": 570.390625,
-        "bottom": 662.09375,
-        "width": 518.390625,
-        "height": 389.09375
-      },
-      "copyBg": "rgba(0, 0, 0, 0)",
-      "heroGradient": "linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255) 30%, rgba(255, 255, 255, 0.99) 38%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.34) 70%, rgba(255, 255, 255, 0.12) 77%, rgba(255, 255, 255, 0) 82%)",
-      "brandRect": {
-        "left": 52,
-        "top": 11,
-        "right": 392,
-        "bottom": 81,
-        "width": 340,
-        "height": 70
-      },
-      "brandNatural": [
-        3181,
-        891
-      ],
-      "brandOptical": {
-        "sourceBox": {
-          "left": 22,
-          "top": 165,
-          "width": 1123,
-          "height": 591
-        },
-        "visibleLeftMarkHeight": 46.43097643097643,
-        "visibleLeftMarkTop": 12.962962962962962
-      },
-      "overflow": false,
-      "broken": [],
-      "canonical": "https://stt-003.vercel.app/about",
-      "robotsMeta": "index,follow",
-      "organizationSchema": null,
-      "expectedImage": "/visual-bank/stt/user-approved-six/about-stt.png",
-      "hasExpected": true,
-      "imageLoaded": true,
-      "heroImageSha256": "6ae927ed6e822b3699005a734b169f7b098cd353fe6c688f381730c41da1d33d",
-      "desktopCopyInReadingZone": true,
-      "mobileSeparated": true,
-      "gradientGeometry": true,
-      "errors": []
-    },
-    {
-      "site": "stt",
-      "route": "/eric-chuang",
-      "label": "desktop",
-      "http": 200,
-      "title": "莊鈞翔博士｜治理判讀與制度設計｜STT Governance",
-      "h1": "莊鈞翔博士",
-      "h1Count": 1,
-      "heroClass": "cis-hero cis-title-1 cis-with-image cis-portrait",
-      "heroImage": "/visual-approved/eric-page-owner-original.png",
-      "heroImageLoaded": true,
-      "heroImageNatural": [
-        2048,
-        1152
-      ],
-      "heroImageRect": {
-        "left": 0,
-        "top": 93,
+        "top": 1,
         "right": 1440,
         "bottom": 903,
         "width": 1440,
-        "height": 810
+        "height": 902
       },
-      "heroImageFit": "contain",
+      "heroImageFit": "cover",
       "copyRect": {
-        "left": 52,
-        "top": 380.1875,
-        "right": 570.390625,
-        "bottom": 615.796875,
-        "width": 518.390625,
-        "height": 235.609375
+        "left": 56,
+        "top": 273,
+        "right": 816,
+        "bottom": 571.953125,
+        "width": 760,
+        "height": 298.953125
       },
       "copyBg": "rgba(0, 0, 0, 0)",
       "heroGradient": "linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255) 30%, rgba(255, 255, 255, 0.99) 38%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.34) 70%, rgba(255, 255, 255, 0.12) 77%, rgba(255, 255, 255, 0) 82%)",
       "brandRect": {
-        "left": 52,
-        "top": 11,
-        "right": 392,
-        "bottom": 81,
-        "width": 340,
-        "height": 70
+        "left": 24,
+        "top": 13,
+        "right": 314,
+        "bottom": 79,
+        "width": 290,
+        "height": 66
       },
       "brandNatural": [
         3181,
@@ -464,8 +54,411 @@
           "width": 1123,
           "height": 591
         },
-        "visibleLeftMarkHeight": 46.43097643097643,
-        "visibleLeftMarkTop": 12.962962962962962
+        "visibleLeftMarkHeight": 43.77777777777778,
+        "visibleLeftMarkTop": 12.222222222222221
+      },
+      "overflow": false,
+      "broken": [],
+      "canonical": "https://stt-003.vercel.app/",
+      "robotsMeta": "index,follow",
+      "organizationSchema": null,
+      "expectedImage": "/visual-bank/stt/user-approved-six/home.png",
+      "hasExpected": true,
+      "imageLoaded": true,
+      "heroImageSha256": "d87b1039a686ad6a92be4eb2aadbc6d32111278ffd59869137e77e939708ff39",
+      "desktopCopyInReadingZone": false,
+      "mobileSeparated": true,
+      "gradientGeometry": true,
+      "errors": []
+    },
+    {
+      "site": "stt",
+      "route": "/problems",
+      "label": "desktop",
+      "http": 200,
+      "title": "你正在面對什麼｜STT Governance",
+      "h1": "你正在面對什麼",
+      "h1Count": 1,
+      "heroClass": "cis-hero cis-title-1 cis-with-image cis-clear-left",
+      "heroImage": "/visual-bank/stt/user-approved-six/problems.png",
+      "heroImageLoaded": true,
+      "heroImageNatural": [
+        1491,
+        1055
+      ],
+      "heroImageRect": {
+        "left": 0,
+        "top": 1,
+        "right": 1440,
+        "bottom": 903,
+        "width": 1440,
+        "height": 902
+      },
+      "heroImageFit": "cover",
+      "copyRect": {
+        "left": 56,
+        "top": 273,
+        "right": 816,
+        "bottom": 500.453125,
+        "width": 760,
+        "height": 227.453125
+      },
+      "copyBg": "rgba(0, 0, 0, 0)",
+      "heroGradient": "linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255) 30%, rgba(255, 255, 255, 0.99) 38%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.34) 70%, rgba(255, 255, 255, 0.12) 77%, rgba(255, 255, 255, 0) 82%)",
+      "brandRect": {
+        "left": 24,
+        "top": 13,
+        "right": 314,
+        "bottom": 79,
+        "width": 290,
+        "height": 66
+      },
+      "brandNatural": [
+        3181,
+        891
+      ],
+      "brandOptical": {
+        "sourceBox": {
+          "left": 22,
+          "top": 165,
+          "width": 1123,
+          "height": 591
+        },
+        "visibleLeftMarkHeight": 43.77777777777778,
+        "visibleLeftMarkTop": 12.222222222222221
+      },
+      "overflow": false,
+      "broken": [],
+      "canonical": "https://stt-003.vercel.app/problems",
+      "robotsMeta": "index,follow",
+      "organizationSchema": null,
+      "expectedImage": "/visual-bank/stt/user-approved-six/problems.png",
+      "hasExpected": true,
+      "imageLoaded": true,
+      "heroImageSha256": "964923d0ba8ddc9589fcd8a254d6daca2f71643d2e6702236bff2902d38850c9",
+      "desktopCopyInReadingZone": false,
+      "mobileSeparated": true,
+      "gradientGeometry": true,
+      "errors": []
+    },
+    {
+      "site": "stt",
+      "route": "/how-stt-works",
+      "label": "desktop",
+      "http": 200,
+      "title": "STT 如何判讀｜治理判讀方法",
+      "h1": "如何判讀",
+      "h1Count": 1,
+      "heroClass": "cis-hero cis-title-1 cis-with-image cis-clear-left",
+      "heroImage": "/visual-bank/stt/user-approved-six/method.png",
+      "heroImageLoaded": true,
+      "heroImageNatural": [
+        1491,
+        1055
+      ],
+      "heroImageRect": {
+        "left": 0,
+        "top": 1,
+        "right": 1440,
+        "bottom": 903,
+        "width": 1440,
+        "height": 902
+      },
+      "heroImageFit": "cover",
+      "copyRect": {
+        "left": 56,
+        "top": 273,
+        "right": 816,
+        "bottom": 500.453125,
+        "width": 760,
+        "height": 227.453125
+      },
+      "copyBg": "rgba(0, 0, 0, 0)",
+      "heroGradient": "linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255) 30%, rgba(255, 255, 255, 0.99) 38%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.34) 70%, rgba(255, 255, 255, 0.12) 77%, rgba(255, 255, 255, 0) 82%)",
+      "brandRect": {
+        "left": 24,
+        "top": 13,
+        "right": 314,
+        "bottom": 79,
+        "width": 290,
+        "height": 66
+      },
+      "brandNatural": [
+        3181,
+        891
+      ],
+      "brandOptical": {
+        "sourceBox": {
+          "left": 22,
+          "top": 165,
+          "width": 1123,
+          "height": 591
+        },
+        "visibleLeftMarkHeight": 43.77777777777778,
+        "visibleLeftMarkTop": 12.222222222222221
+      },
+      "overflow": false,
+      "broken": [],
+      "canonical": "https://stt-003.vercel.app/how-stt-works",
+      "robotsMeta": "index,follow",
+      "organizationSchema": null,
+      "expectedImage": "/visual-bank/stt/user-approved-six/method.png",
+      "hasExpected": true,
+      "imageLoaded": true,
+      "heroImageSha256": "e64be189148c76ce2dd5b13efba5a9512e2cb003692f87991c95d35322602753",
+      "desktopCopyInReadingZone": false,
+      "mobileSeparated": true,
+      "gradientGeometry": true,
+      "errors": []
+    },
+    {
+      "site": "stt",
+      "route": "/engagement",
+      "label": "desktop",
+      "http": 200,
+      "title": "治理委任｜STT Governance",
+      "h1": "當一件事情值得被正式治理，就不應只停留在一次諮詢",
+      "h1Count": 1,
+      "heroClass": "cis-hero cis-title-2 cis-with-image",
+      "heroImage": "/visual-approved/bank-14.png",
+      "heroImageLoaded": true,
+      "heroImageNatural": [
+        1672,
+        941
+      ],
+      "heroImageRect": {
+        "left": 0,
+        "top": 1,
+        "right": 1440,
+        "bottom": 903,
+        "width": 1440,
+        "height": 902
+      },
+      "heroImageFit": "cover",
+      "copyRect": {
+        "left": 56,
+        "top": 273,
+        "right": 816,
+        "bottom": 566.6875,
+        "width": 760,
+        "height": 293.6875
+      },
+      "copyBg": "rgba(0, 0, 0, 0)",
+      "heroGradient": "linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255) 30%, rgba(255, 255, 255, 0.99) 38%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.34) 70%, rgba(255, 255, 255, 0.12) 77%, rgba(255, 255, 255, 0) 82%)",
+      "brandRect": {
+        "left": 24,
+        "top": 13,
+        "right": 314,
+        "bottom": 79,
+        "width": 290,
+        "height": 66
+      },
+      "brandNatural": [
+        3181,
+        891
+      ],
+      "brandOptical": {
+        "sourceBox": {
+          "left": 22,
+          "top": 165,
+          "width": 1123,
+          "height": 591
+        },
+        "visibleLeftMarkHeight": 43.77777777777778,
+        "visibleLeftMarkTop": 12.222222222222221
+      },
+      "overflow": false,
+      "broken": [],
+      "canonical": "https://stt-003.vercel.app/engagement",
+      "robotsMeta": "index,follow",
+      "organizationSchema": null,
+      "expectedImage": null,
+      "hasExpected": true,
+      "imageLoaded": true,
+      "heroImageSha256": "bae6aee4524894890358a1cafec7298e7905c98a70813efd14338cb7f4783fae",
+      "desktopCopyInReadingZone": false,
+      "mobileSeparated": true,
+      "gradientGeometry": true,
+      "errors": []
+    },
+    {
+      "site": "stt",
+      "route": "/insights",
+      "label": "desktop",
+      "http": 200,
+      "title": "研究與出版｜STT Governance",
+      "h1": "判讀不是臨時形成的意見，而是長期累積的制度研究",
+      "h1Count": 1,
+      "heroClass": "cis-hero cis-title-2 cis-with-image cis-clear-left",
+      "heroImage": "/visual-bank/stt/user-approved-six/columns.png",
+      "heroImageLoaded": true,
+      "heroImageNatural": [
+        1491,
+        1055
+      ],
+      "heroImageRect": {
+        "left": 0,
+        "top": 1,
+        "right": 1440,
+        "bottom": 903,
+        "width": 1440,
+        "height": 902
+      },
+      "heroImageFit": "cover",
+      "copyRect": {
+        "left": 56,
+        "top": 273,
+        "right": 816,
+        "bottom": 566.6875,
+        "width": 760,
+        "height": 293.6875
+      },
+      "copyBg": "rgba(0, 0, 0, 0)",
+      "heroGradient": "linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255) 30%, rgba(255, 255, 255, 0.99) 38%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.34) 70%, rgba(255, 255, 255, 0.12) 77%, rgba(255, 255, 255, 0) 82%)",
+      "brandRect": {
+        "left": 24,
+        "top": 13,
+        "right": 314,
+        "bottom": 79,
+        "width": 290,
+        "height": 66
+      },
+      "brandNatural": [
+        3181,
+        891
+      ],
+      "brandOptical": {
+        "sourceBox": {
+          "left": 22,
+          "top": 165,
+          "width": 1123,
+          "height": 591
+        },
+        "visibleLeftMarkHeight": 43.77777777777778,
+        "visibleLeftMarkTop": 12.222222222222221
+      },
+      "overflow": false,
+      "broken": [],
+      "canonical": "https://stt-003.vercel.app/insights",
+      "robotsMeta": "index,follow",
+      "organizationSchema": null,
+      "expectedImage": "/visual-bank/stt/user-approved-six/columns.png",
+      "hasExpected": true,
+      "imageLoaded": true,
+      "heroImageSha256": "03cc644c1f32e05252ebc4defae7149dd6ddc0a8a36f7965436f0c2dff284417",
+      "desktopCopyInReadingZone": false,
+      "mobileSeparated": true,
+      "gradientGeometry": true,
+      "errors": []
+    },
+    {
+      "site": "stt",
+      "route": "/about",
+      "label": "desktop",
+      "http": 200,
+      "title": "關於 STT Governance｜治理判讀與制度設計",
+      "h1": "STT Governance不是一般顧問公司，而是高位階治理文明平台",
+      "h1Count": 1,
+      "heroClass": "cis-hero cis-title-3 cis-with-image cis-clear-left",
+      "heroImage": "/visual-bank/stt/user-approved-six/about-stt.png",
+      "heroImageLoaded": true,
+      "heroImageNatural": [
+        1491,
+        1055
+      ],
+      "heroImageRect": {
+        "left": 0,
+        "top": 1,
+        "right": 1440,
+        "bottom": 903,
+        "width": 1440,
+        "height": 902
+      },
+      "heroImageFit": "cover",
+      "copyRect": {
+        "left": 56,
+        "top": 273,
+        "right": 816,
+        "bottom": 687.109375,
+        "width": 760,
+        "height": 414.109375
+      },
+      "copyBg": "rgba(0, 0, 0, 0)",
+      "heroGradient": "linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255) 30%, rgba(255, 255, 255, 0.99) 38%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.34) 70%, rgba(255, 255, 255, 0.12) 77%, rgba(255, 255, 255, 0) 82%)",
+      "brandRect": {
+        "left": 24,
+        "top": 13,
+        "right": 314,
+        "bottom": 79,
+        "width": 290,
+        "height": 66
+      },
+      "brandNatural": [
+        3181,
+        891
+      ],
+      "brandOptical": {
+        "sourceBox": {
+          "left": 22,
+          "top": 165,
+          "width": 1123,
+          "height": 591
+        },
+        "visibleLeftMarkHeight": 43.77777777777778,
+        "visibleLeftMarkTop": 12.222222222222221
+      },
+      "overflow": false,
+      "broken": [],
+      "canonical": "https://stt-003.vercel.app/about",
+      "robotsMeta": "index,follow",
+      "organizationSchema": null,
+      "expectedImage": "/visual-bank/stt/user-approved-six/about-stt.png",
+      "hasExpected": true,
+      "imageLoaded": true,
+      "heroImageSha256": "6ae927ed6e822b3699005a734b169f7b098cd353fe6c688f381730c41da1d33d",
+      "desktopCopyInReadingZone": false,
+      "mobileSeparated": true,
+      "gradientGeometry": true,
+      "errors": []
+    },
+    {
+      "site": "stt",
+      "route": "/eric-chuang",
+      "label": "desktop",
+      "http": 200,
+      "title": "莊鈞翔博士｜治理判讀與制度設計｜STT Governance",
+      "h1": "創辦人暨執行長｜莊鈞翔博士",
+      "h1Count": 1,
+      "heroClass": null,
+      "heroImage": null,
+      "heroImageLoaded": null,
+      "heroImageNatural": null,
+      "heroImageRect": null,
+      "heroImageFit": null,
+      "copyRect": null,
+      "copyBg": null,
+      "heroGradient": null,
+      "brandRect": {
+        "left": 24,
+        "top": 13,
+        "right": 314,
+        "bottom": 79,
+        "width": 290,
+        "height": 66
+      },
+      "brandNatural": [
+        3181,
+        891
+      ],
+      "brandOptical": {
+        "sourceBox": {
+          "left": 22,
+          "top": 165,
+          "width": 1123,
+          "height": 591
+        },
+        "visibleLeftMarkHeight": 43.77777777777778,
+        "visibleLeftMarkTop": 12.222222222222221
       },
       "overflow": false,
       "broken": [],
@@ -475,7 +468,7 @@
       "expectedImage": null,
       "hasExpected": true,
       "imageLoaded": true,
-      "heroImageSha256": "891c3d1b19ba4ac32792543928473f0938fae0bfe529d1ac46e3dabf34f780fe",
+      "heroImageSha256": null,
       "desktopCopyInReadingZone": true,
       "mobileSeparated": true,
       "gradientGeometry": true,
@@ -487,7 +480,7 @@
       "label": "desktop",
       "http": 200,
       "title": "機構合作｜STT Governance",
-      "h1": "跨專業治理整合，先建立共同的判讀架構。",
+      "h1": "跨專業治理整合，先建立共同的判讀架構",
       "h1Count": 1,
       "heroClass": "cis-hero cis-title-2 cis-text-only",
       "heroImage": null,
@@ -496,22 +489,22 @@
       "heroImageRect": null,
       "heroImageFit": null,
       "copyRect": {
-        "left": 200,
-        "top": 153,
-        "right": 1070,
-        "bottom": 453.359375,
-        "width": 870,
-        "height": 300.359375
+        "left": 56,
+        "top": 273,
+        "right": 816,
+        "bottom": 605.046875,
+        "width": 760,
+        "height": 332.046875
       },
       "copyBg": "rgba(0, 0, 0, 0)",
       "heroGradient": "none",
       "brandRect": {
-        "left": 52,
-        "top": 11,
-        "right": 392,
-        "bottom": 81,
-        "width": 340,
-        "height": 70
+        "left": 24,
+        "top": 13,
+        "right": 314,
+        "bottom": 79,
+        "width": 290,
+        "height": 66
       },
       "brandNatural": [
         3181,
@@ -524,8 +517,8 @@
           "width": 1123,
           "height": 591
         },
-        "visibleLeftMarkHeight": 46.43097643097643,
-        "visibleLeftMarkTop": 12.962962962962962
+        "visibleLeftMarkHeight": 43.77777777777778,
+        "visibleLeftMarkTop": 12.222222222222221
       },
       "overflow": false,
       "broken": [],
@@ -547,7 +540,7 @@
       "label": "desktop",
       "http": 200,
       "title": "開始治理判讀｜STT Governance",
-      "h1": "先把正在發生的事情說清楚。",
+      "h1": "先把正在發生的事情說清楚",
       "h1Count": 1,
       "heroClass": "cis-hero cis-title-1 cis-text-only",
       "heroImage": null,
@@ -556,22 +549,22 @@
       "heroImageRect": null,
       "heroImageFit": null,
       "copyRect": {
-        "left": 200,
-        "top": 153,
-        "right": 1070,
-        "bottom": 306.734375,
-        "width": 870,
-        "height": 153.734375
+        "left": 56,
+        "top": 273,
+        "right": 816,
+        "bottom": 467.3125,
+        "width": 760,
+        "height": 194.3125
       },
       "copyBg": "rgba(0, 0, 0, 0)",
       "heroGradient": "none",
       "brandRect": {
-        "left": 52,
-        "top": 11,
-        "right": 392,
-        "bottom": 81,
-        "width": 340,
-        "height": 70
+        "left": 24,
+        "top": 13,
+        "right": 314,
+        "bottom": 79,
+        "width": 290,
+        "height": 66
       },
       "brandNatural": [
         3181,
@@ -584,8 +577,8 @@
           "width": 1123,
           "height": 591
         },
-        "visibleLeftMarkHeight": 46.43097643097643,
-        "visibleLeftMarkTop": 12.962962962962962
+        "visibleLeftMarkHeight": 43.77777777777778,
+        "visibleLeftMarkTop": 12.222222222222221
       },
       "overflow": false,
       "broken": [],
@@ -616,22 +609,22 @@
       "heroImageRect": null,
       "heroImageFit": null,
       "copyRect": {
-        "left": 200,
-        "top": 153,
-        "right": 1070,
-        "bottom": 339.875,
-        "width": 870,
-        "height": 186.875
+        "left": 56,
+        "top": 273,
+        "right": 816,
+        "bottom": 467.3125,
+        "width": 760,
+        "height": 194.3125
       },
       "copyBg": "rgba(0, 0, 0, 0)",
       "heroGradient": "none",
       "brandRect": {
-        "left": 52,
-        "top": 11,
-        "right": 392,
-        "bottom": 81,
-        "width": 340,
-        "height": 70
+        "left": 24,
+        "top": 13,
+        "right": 314,
+        "bottom": 79,
+        "width": 290,
+        "height": 66
       },
       "brandNatural": [
         3181,
@@ -644,8 +637,8 @@
           "width": 1123,
           "height": 591
         },
-        "visibleLeftMarkHeight": 46.43097643097643,
-        "visibleLeftMarkTop": 12.962962962962962
+        "visibleLeftMarkHeight": 43.77777777777778,
+        "visibleLeftMarkTop": 12.222222222222221
       },
       "overflow": false,
       "broken": [],
@@ -676,22 +669,22 @@
       "heroImageRect": null,
       "heroImageFit": null,
       "copyRect": {
-        "left": 200,
-        "top": 153,
-        "right": 1070,
-        "bottom": 373.015625,
-        "width": 870,
-        "height": 220.015625
+        "left": 56,
+        "top": 273,
+        "right": 816,
+        "bottom": 500.453125,
+        "width": 760,
+        "height": 227.453125
       },
       "copyBg": "rgba(0, 0, 0, 0)",
       "heroGradient": "none",
       "brandRect": {
-        "left": 52,
-        "top": 11,
-        "right": 392,
-        "bottom": 81,
-        "width": 340,
-        "height": 70
+        "left": 24,
+        "top": 13,
+        "right": 314,
+        "bottom": 79,
+        "width": 290,
+        "height": 66
       },
       "brandNatural": [
         3181,
@@ -704,8 +697,8 @@
           "width": 1123,
           "height": 591
         },
-        "visibleLeftMarkHeight": 46.43097643097643,
-        "visibleLeftMarkTop": 12.962962962962962
+        "visibleLeftMarkHeight": 43.77777777777778,
+        "visibleLeftMarkTop": 12.222222222222221
       },
       "overflow": false,
       "broken": [],
@@ -726,8 +719,8 @@
       "route": "/",
       "label": "tablet",
       "http": 200,
-      "title": "STT Governance｜重大決策・企業治理・家族治理",
-      "h1": "讓重要的事，走得更遠。",
+      "title": "STT Governance｜策略智庫智慧治理",
+      "h1": "讓重要的事，走得更遠",
       "h1Count": 1,
       "heroClass": "cis-hero cis-title-1 cis-with-image cis-clear-left",
       "heroImage": "/visual-bank/stt/user-approved-six/home.png",
@@ -738,438 +731,431 @@
       ],
       "heroImageRect": {
         "left": 0,
-        "top": 83,
+        "top": 77,
         "right": 820,
-        "bottom": 663.203125,
-        "width": 820,
-        "height": 580.203125
-      },
-      "heroImageFit": "contain",
-      "copyRect": {
-        "left": 36,
-        "top": 133,
-        "right": 355.796875,
-        "bottom": 612.078125,
-        "width": 319.796875,
-        "height": 479.078125
-      },
-      "copyBg": "rgba(0, 0, 0, 0)",
-      "heroGradient": "linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255) 30%, rgba(255, 255, 255, 0.99) 38%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.34) 70%, rgba(255, 255, 255, 0.12) 77%, rgba(255, 255, 255, 0) 82%)",
-      "brandRect": {
-        "left": 24,
-        "top": 12,
-        "right": 274,
-        "bottom": 70,
-        "width": 250,
-        "height": 58
-      },
-      "brandNatural": [
-        3181,
-        891
-      ],
-      "brandOptical": {
-        "sourceBox": {
-          "left": 22,
-          "top": 165,
-          "width": 1123,
-          "height": 591
-        },
-        "visibleLeftMarkHeight": 38.47138047138047,
-        "visibleLeftMarkTop": 10.74074074074074
-      },
-      "overflow": false,
-      "broken": [],
-      "canonical": "https://stt-003.vercel.app/",
-      "robotsMeta": "index,follow",
-      "organizationSchema": null,
-      "expectedImage": "/visual-bank/stt/user-approved-six/home.png",
-      "hasExpected": true,
-      "imageLoaded": true,
-      "heroImageSha256": "d87b1039a686ad6a92be4eb2aadbc6d32111278ffd59869137e77e939708ff39",
-      "desktopCopyInReadingZone": true,
-      "mobileSeparated": true,
-      "gradientGeometry": true,
-      "errors": []
-    },
-    {
-      "site": "stt",
-      "route": "/problems",
-      "label": "tablet",
-      "http": 200,
-      "title": "你正在面對什麼｜STT Governance",
-      "h1": "你正在面對什麼",
-      "h1Count": 1,
-      "heroClass": "cis-hero cis-title-1 cis-with-image cis-clear-left",
-      "heroImage": "/visual-bank/stt/user-approved-six/problems.png",
-      "heroImageLoaded": true,
-      "heroImageNatural": [
-        1491,
-        1055
-      ],
-      "heroImageRect": {
-        "left": 0,
-        "top": 83,
-        "right": 820,
-        "bottom": 663.203125,
-        "width": 820,
-        "height": 580.203125
-      },
-      "heroImageFit": "contain",
-      "copyRect": {
-        "left": 36,
-        "top": 133,
-        "right": 355.796875,
-        "bottom": 430.6875,
-        "width": 319.796875,
-        "height": 297.6875
-      },
-      "copyBg": "rgba(0, 0, 0, 0)",
-      "heroGradient": "linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255) 30%, rgba(255, 255, 255, 0.99) 38%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.34) 70%, rgba(255, 255, 255, 0.12) 77%, rgba(255, 255, 255, 0) 82%)",
-      "brandRect": {
-        "left": 24,
-        "top": 12,
-        "right": 274,
-        "bottom": 70,
-        "width": 250,
-        "height": 58
-      },
-      "brandNatural": [
-        3181,
-        891
-      ],
-      "brandOptical": {
-        "sourceBox": {
-          "left": 22,
-          "top": 165,
-          "width": 1123,
-          "height": 591
-        },
-        "visibleLeftMarkHeight": 38.47138047138047,
-        "visibleLeftMarkTop": 10.74074074074074
-      },
-      "overflow": false,
-      "broken": [],
-      "canonical": "https://stt-003.vercel.app/problems",
-      "robotsMeta": "index,follow",
-      "organizationSchema": null,
-      "expectedImage": "/visual-bank/stt/user-approved-six/problems.png",
-      "hasExpected": true,
-      "imageLoaded": true,
-      "heroImageSha256": "964923d0ba8ddc9589fcd8a254d6daca2f71643d2e6702236bff2902d38850c9",
-      "desktopCopyInReadingZone": true,
-      "mobileSeparated": true,
-      "gradientGeometry": true,
-      "errors": []
-    },
-    {
-      "site": "stt",
-      "route": "/how-stt-works",
-      "label": "tablet",
-      "http": 200,
-      "title": "STT 如何判讀｜治理判讀方法",
-      "h1": "如何判讀",
-      "h1Count": 1,
-      "heroClass": "cis-hero cis-title-1 cis-with-image cis-clear-left",
-      "heroImage": "/visual-bank/stt/user-approved-six/method.png",
-      "heroImageLoaded": true,
-      "heroImageNatural": [
-        1491,
-        1055
-      ],
-      "heroImageRect": {
-        "left": 0,
-        "top": 83,
-        "right": 820,
-        "bottom": 663.203125,
-        "width": 820,
-        "height": 580.203125
-      },
-      "heroImageFit": "contain",
-      "copyRect": {
-        "left": 36,
-        "top": 133,
-        "right": 355.796875,
-        "bottom": 410.890625,
-        "width": 319.796875,
-        "height": 277.890625
-      },
-      "copyBg": "rgba(0, 0, 0, 0)",
-      "heroGradient": "linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255) 30%, rgba(255, 255, 255, 0.99) 38%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.34) 70%, rgba(255, 255, 255, 0.12) 77%, rgba(255, 255, 255, 0) 82%)",
-      "brandRect": {
-        "left": 24,
-        "top": 12,
-        "right": 274,
-        "bottom": 70,
-        "width": 250,
-        "height": 58
-      },
-      "brandNatural": [
-        3181,
-        891
-      ],
-      "brandOptical": {
-        "sourceBox": {
-          "left": 22,
-          "top": 165,
-          "width": 1123,
-          "height": 591
-        },
-        "visibleLeftMarkHeight": 38.47138047138047,
-        "visibleLeftMarkTop": 10.74074074074074
-      },
-      "overflow": false,
-      "broken": [],
-      "canonical": "https://stt-003.vercel.app/how-stt-works",
-      "robotsMeta": "index,follow",
-      "organizationSchema": null,
-      "expectedImage": "/visual-bank/stt/user-approved-six/method.png",
-      "hasExpected": true,
-      "imageLoaded": true,
-      "heroImageSha256": "e64be189148c76ce2dd5b13efba5a9512e2cb003692f87991c95d35322602753",
-      "desktopCopyInReadingZone": true,
-      "mobileSeparated": true,
-      "gradientGeometry": true,
-      "errors": []
-    },
-    {
-      "site": "stt",
-      "route": "/engagement",
-      "label": "tablet",
-      "http": 200,
-      "title": "治理委任｜STT Governance",
-      "h1": "當一件事情值得被正式治理，就不應只停留在一次諮詢。",
-      "h1Count": 1,
-      "heroClass": "cis-hero cis-title-2 cis-text-only",
-      "heroImage": null,
-      "heroImageLoaded": null,
-      "heroImageNatural": null,
-      "heroImageRect": null,
-      "heroImageFit": null,
-      "copyRect": {
-        "left": 32,
-        "top": 143,
-        "right": 788,
-        "bottom": 366.265625,
-        "width": 756,
-        "height": 223.265625
-      },
-      "copyBg": "rgba(0, 0, 0, 0)",
-      "heroGradient": "none",
-      "brandRect": {
-        "left": 24,
-        "top": 12,
-        "right": 274,
-        "bottom": 70,
-        "width": 250,
-        "height": 58
-      },
-      "brandNatural": [
-        3181,
-        891
-      ],
-      "brandOptical": {
-        "sourceBox": {
-          "left": 22,
-          "top": 165,
-          "width": 1123,
-          "height": 591
-        },
-        "visibleLeftMarkHeight": 38.47138047138047,
-        "visibleLeftMarkTop": 10.74074074074074
-      },
-      "overflow": false,
-      "broken": [],
-      "canonical": "https://stt-003.vercel.app/engagement",
-      "robotsMeta": "index,follow",
-      "organizationSchema": null,
-      "expectedImage": null,
-      "hasExpected": true,
-      "imageLoaded": true,
-      "heroImageSha256": null,
-      "desktopCopyInReadingZone": true,
-      "mobileSeparated": true,
-      "gradientGeometry": true,
-      "errors": []
-    },
-    {
-      "site": "stt",
-      "route": "/insights",
-      "label": "tablet",
-      "http": 200,
-      "title": "研究與出版｜STT Governance",
-      "h1": "判讀不是臨時形成的意見，而是長期累積的制度研究。",
-      "h1Count": 1,
-      "heroClass": "cis-hero cis-title-2 cis-with-image cis-clear-left",
-      "heroImage": "/visual-bank/stt/user-approved-six/columns.png",
-      "heroImageLoaded": true,
-      "heroImageNatural": [
-        1491,
-        1055
-      ],
-      "heroImageRect": {
-        "left": 0,
-        "top": 83,
-        "right": 820,
-        "bottom": 663.203125,
-        "width": 820,
-        "height": 580.203125
-      },
-      "heroImageFit": "contain",
-      "copyRect": {
-        "left": 36,
-        "top": 133,
-        "right": 355.796875,
-        "bottom": 500.921875,
-        "width": 319.796875,
-        "height": 367.921875
-      },
-      "copyBg": "rgba(0, 0, 0, 0)",
-      "heroGradient": "linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255) 30%, rgba(255, 255, 255, 0.99) 38%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.34) 70%, rgba(255, 255, 255, 0.12) 77%, rgba(255, 255, 255, 0) 82%)",
-      "brandRect": {
-        "left": 24,
-        "top": 12,
-        "right": 274,
-        "bottom": 70,
-        "width": 250,
-        "height": 58
-      },
-      "brandNatural": [
-        3181,
-        891
-      ],
-      "brandOptical": {
-        "sourceBox": {
-          "left": 22,
-          "top": 165,
-          "width": 1123,
-          "height": 591
-        },
-        "visibleLeftMarkHeight": 38.47138047138047,
-        "visibleLeftMarkTop": 10.74074074074074
-      },
-      "overflow": false,
-      "broken": [],
-      "canonical": "https://stt-003.vercel.app/insights",
-      "robotsMeta": "index,follow",
-      "organizationSchema": null,
-      "expectedImage": "/visual-bank/stt/user-approved-six/columns.png",
-      "hasExpected": true,
-      "imageLoaded": true,
-      "heroImageSha256": "03cc644c1f32e05252ebc4defae7149dd6ddc0a8a36f7965436f0c2dff284417",
-      "desktopCopyInReadingZone": true,
-      "mobileSeparated": true,
-      "gradientGeometry": true,
-      "errors": []
-    },
-    {
-      "site": "stt",
-      "route": "/about",
-      "label": "tablet",
-      "http": 200,
-      "title": "關於 STT Governance｜治理判讀與制度設計",
-      "h1": "STT Governance不是一般顧問公司，而是高位階治理文明平台。",
-      "h1Count": 1,
-      "heroClass": "cis-hero cis-title-3 cis-with-image cis-clear-left",
-      "heroImage": "/visual-bank/stt/user-approved-six/about-stt.png",
-      "heroImageLoaded": true,
-      "heroImageNatural": [
-        1491,
-        1055
-      ],
-      "heroImageRect": {
-        "left": 0,
-        "top": 83,
-        "right": 820,
-        "bottom": 663.203125,
-        "width": 820,
-        "height": 580.203125
-      },
-      "heroImageFit": "contain",
-      "copyRect": {
-        "left": 36,
-        "top": 133,
-        "right": 355.796875,
-        "bottom": 616.875,
-        "width": 319.796875,
-        "height": 483.875
-      },
-      "copyBg": "rgba(0, 0, 0, 0)",
-      "heroGradient": "linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255) 30%, rgba(255, 255, 255, 0.99) 38%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.34) 70%, rgba(255, 255, 255, 0.12) 77%, rgba(255, 255, 255, 0) 82%)",
-      "brandRect": {
-        "left": 24,
-        "top": 12,
-        "right": 274,
-        "bottom": 70,
-        "width": 250,
-        "height": 58
-      },
-      "brandNatural": [
-        3181,
-        891
-      ],
-      "brandOptical": {
-        "sourceBox": {
-          "left": 22,
-          "top": 165,
-          "width": 1123,
-          "height": 591
-        },
-        "visibleLeftMarkHeight": 38.47138047138047,
-        "visibleLeftMarkTop": 10.74074074074074
-      },
-      "overflow": false,
-      "broken": [],
-      "canonical": "https://stt-003.vercel.app/about",
-      "robotsMeta": "index,follow",
-      "organizationSchema": null,
-      "expectedImage": "/visual-bank/stt/user-approved-six/about-stt.png",
-      "hasExpected": true,
-      "imageLoaded": true,
-      "heroImageSha256": "6ae927ed6e822b3699005a734b169f7b098cd353fe6c688f381730c41da1d33d",
-      "desktopCopyInReadingZone": true,
-      "mobileSeparated": true,
-      "gradientGeometry": true,
-      "errors": []
-    },
-    {
-      "site": "stt",
-      "route": "/eric-chuang",
-      "label": "tablet",
-      "http": 200,
-      "title": "莊鈞翔博士｜治理判讀與制度設計｜STT Governance",
-      "h1": "莊鈞翔博士",
-      "h1Count": 1,
-      "heroClass": "cis-hero cis-title-1 cis-with-image cis-portrait",
-      "heroImage": "/visual-approved/eric-page-owner-original.png",
-      "heroImageLoaded": true,
-      "heroImageNatural": [
-        2048,
-        1152
-      ],
-      "heroImageRect": {
-        "left": 0,
-        "top": 83,
-        "right": 820,
-        "bottom": 544.25,
+        "bottom": 538.25,
         "width": 820,
         "height": 461.25
       },
-      "heroImageFit": "contain",
+      "heroImageFit": "cover",
       "copyRect": {
         "left": 36,
-        "top": 200.015625,
-        "right": 355.796875,
-        "bottom": 427.21875,
-        "width": 319.796875,
-        "height": 227.203125
+        "top": 127,
+        "right": 511.59375,
+        "bottom": 410.828125,
+        "width": 475.59375,
+        "height": 283.828125
       },
       "copyBg": "rgba(0, 0, 0, 0)",
       "heroGradient": "linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255) 30%, rgba(255, 255, 255, 0.99) 38%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.34) 70%, rgba(255, 255, 255, 0.12) 77%, rgba(255, 255, 255, 0) 82%)",
       "brandRect": {
-        "left": 24,
-        "top": 12,
-        "right": 274,
-        "bottom": 70,
+        "left": 20,
+        "top": 9,
+        "right": 270,
+        "bottom": 67,
+        "width": 250,
+        "height": 58
+      },
+      "brandNatural": [
+        3181,
+        891
+      ],
+      "brandOptical": {
+        "sourceBox": {
+          "left": 22,
+          "top": 165,
+          "width": 1123,
+          "height": 591
+        },
+        "visibleLeftMarkHeight": 38.47138047138047,
+        "visibleLeftMarkTop": 10.74074074074074
+      },
+      "overflow": false,
+      "broken": [],
+      "canonical": "https://stt-003.vercel.app/",
+      "robotsMeta": "index,follow",
+      "organizationSchema": null,
+      "expectedImage": "/visual-bank/stt/user-approved-six/home.png",
+      "hasExpected": true,
+      "imageLoaded": true,
+      "heroImageSha256": "d87b1039a686ad6a92be4eb2aadbc6d32111278ffd59869137e77e939708ff39",
+      "desktopCopyInReadingZone": false,
+      "mobileSeparated": true,
+      "gradientGeometry": true,
+      "errors": []
+    },
+    {
+      "site": "stt",
+      "route": "/problems",
+      "label": "tablet",
+      "http": 200,
+      "title": "你正在面對什麼｜STT Governance",
+      "h1": "你正在面對什麼",
+      "h1Count": 1,
+      "heroClass": "cis-hero cis-title-1 cis-with-image cis-clear-left",
+      "heroImage": "/visual-bank/stt/user-approved-six/problems.png",
+      "heroImageLoaded": true,
+      "heroImageNatural": [
+        1491,
+        1055
+      ],
+      "heroImageRect": {
+        "left": 0,
+        "top": 77,
+        "right": 820,
+        "bottom": 538.25,
+        "width": 820,
+        "height": 461.25
+      },
+      "heroImageFit": "cover",
+      "copyRect": {
+        "left": 36,
+        "top": 127,
+        "right": 511.59375,
+        "bottom": 372.46875,
+        "width": 475.59375,
+        "height": 245.46875
+      },
+      "copyBg": "rgba(0, 0, 0, 0)",
+      "heroGradient": "linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255) 30%, rgba(255, 255, 255, 0.99) 38%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.34) 70%, rgba(255, 255, 255, 0.12) 77%, rgba(255, 255, 255, 0) 82%)",
+      "brandRect": {
+        "left": 20,
+        "top": 9,
+        "right": 270,
+        "bottom": 67,
+        "width": 250,
+        "height": 58
+      },
+      "brandNatural": [
+        3181,
+        891
+      ],
+      "brandOptical": {
+        "sourceBox": {
+          "left": 22,
+          "top": 165,
+          "width": 1123,
+          "height": 591
+        },
+        "visibleLeftMarkHeight": 38.47138047138047,
+        "visibleLeftMarkTop": 10.74074074074074
+      },
+      "overflow": false,
+      "broken": [],
+      "canonical": "https://stt-003.vercel.app/problems",
+      "robotsMeta": "index,follow",
+      "organizationSchema": null,
+      "expectedImage": "/visual-bank/stt/user-approved-six/problems.png",
+      "hasExpected": true,
+      "imageLoaded": true,
+      "heroImageSha256": "964923d0ba8ddc9589fcd8a254d6daca2f71643d2e6702236bff2902d38850c9",
+      "desktopCopyInReadingZone": false,
+      "mobileSeparated": true,
+      "gradientGeometry": true,
+      "errors": []
+    },
+    {
+      "site": "stt",
+      "route": "/how-stt-works",
+      "label": "tablet",
+      "http": 200,
+      "title": "STT 如何判讀｜治理判讀方法",
+      "h1": "如何判讀",
+      "h1Count": 1,
+      "heroClass": "cis-hero cis-title-1 cis-with-image cis-clear-left",
+      "heroImage": "/visual-bank/stt/user-approved-six/method.png",
+      "heroImageLoaded": true,
+      "heroImageNatural": [
+        1491,
+        1055
+      ],
+      "heroImageRect": {
+        "left": 0,
+        "top": 77,
+        "right": 820,
+        "bottom": 538.25,
+        "width": 820,
+        "height": 461.25
+      },
+      "heroImageFit": "cover",
+      "copyRect": {
+        "left": 36,
+        "top": 127,
+        "right": 511.59375,
+        "bottom": 339.328125,
+        "width": 475.59375,
+        "height": 212.328125
+      },
+      "copyBg": "rgba(0, 0, 0, 0)",
+      "heroGradient": "linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255) 30%, rgba(255, 255, 255, 0.99) 38%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.34) 70%, rgba(255, 255, 255, 0.12) 77%, rgba(255, 255, 255, 0) 82%)",
+      "brandRect": {
+        "left": 20,
+        "top": 9,
+        "right": 270,
+        "bottom": 67,
+        "width": 250,
+        "height": 58
+      },
+      "brandNatural": [
+        3181,
+        891
+      ],
+      "brandOptical": {
+        "sourceBox": {
+          "left": 22,
+          "top": 165,
+          "width": 1123,
+          "height": 591
+        },
+        "visibleLeftMarkHeight": 38.47138047138047,
+        "visibleLeftMarkTop": 10.74074074074074
+      },
+      "overflow": false,
+      "broken": [],
+      "canonical": "https://stt-003.vercel.app/how-stt-works",
+      "robotsMeta": "index,follow",
+      "organizationSchema": null,
+      "expectedImage": "/visual-bank/stt/user-approved-six/method.png",
+      "hasExpected": true,
+      "imageLoaded": true,
+      "heroImageSha256": "e64be189148c76ce2dd5b13efba5a9512e2cb003692f87991c95d35322602753",
+      "desktopCopyInReadingZone": false,
+      "mobileSeparated": true,
+      "gradientGeometry": true,
+      "errors": []
+    },
+    {
+      "site": "stt",
+      "route": "/engagement",
+      "label": "tablet",
+      "http": 200,
+      "title": "治理委任｜STT Governance",
+      "h1": "當一件事情值得被正式治理，就不應只停留在一次諮詢",
+      "h1Count": 1,
+      "heroClass": "cis-hero cis-title-2 cis-with-image",
+      "heroImage": "/visual-approved/bank-14.png",
+      "heroImageLoaded": true,
+      "heroImageNatural": [
+        1672,
+        941
+      ],
+      "heroImageRect": {
+        "left": 0,
+        "top": 77,
+        "right": 820,
+        "bottom": 538.25,
+        "width": 820,
+        "height": 461.25
+      },
+      "heroImageFit": "cover",
+      "copyRect": {
+        "left": 36,
+        "top": 127,
+        "right": 511.59375,
+        "bottom": 376.25,
+        "width": 475.59375,
+        "height": 249.25
+      },
+      "copyBg": "rgba(0, 0, 0, 0)",
+      "heroGradient": "linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255) 30%, rgba(255, 255, 255, 0.99) 38%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.34) 70%, rgba(255, 255, 255, 0.12) 77%, rgba(255, 255, 255, 0) 82%)",
+      "brandRect": {
+        "left": 20,
+        "top": 9,
+        "right": 270,
+        "bottom": 67,
+        "width": 250,
+        "height": 58
+      },
+      "brandNatural": [
+        3181,
+        891
+      ],
+      "brandOptical": {
+        "sourceBox": {
+          "left": 22,
+          "top": 165,
+          "width": 1123,
+          "height": 591
+        },
+        "visibleLeftMarkHeight": 38.47138047138047,
+        "visibleLeftMarkTop": 10.74074074074074
+      },
+      "overflow": false,
+      "broken": [],
+      "canonical": "https://stt-003.vercel.app/engagement",
+      "robotsMeta": "index,follow",
+      "organizationSchema": null,
+      "expectedImage": null,
+      "hasExpected": true,
+      "imageLoaded": true,
+      "heroImageSha256": "bae6aee4524894890358a1cafec7298e7905c98a70813efd14338cb7f4783fae",
+      "desktopCopyInReadingZone": false,
+      "mobileSeparated": true,
+      "gradientGeometry": true,
+      "errors": []
+    },
+    {
+      "site": "stt",
+      "route": "/insights",
+      "label": "tablet",
+      "http": 200,
+      "title": "研究與出版｜STT Governance",
+      "h1": "判讀不是臨時形成的意見，而是長期累積的制度研究",
+      "h1Count": 1,
+      "heroClass": "cis-hero cis-title-2 cis-with-image cis-clear-left",
+      "heroImage": "/visual-bank/stt/user-approved-six/columns.png",
+      "heroImageLoaded": true,
+      "heroImageNatural": [
+        1491,
+        1055
+      ],
+      "heroImageRect": {
+        "left": 0,
+        "top": 77,
+        "right": 820,
+        "bottom": 538.25,
+        "width": 820,
+        "height": 461.25
+      },
+      "heroImageFit": "cover",
+      "copyRect": {
+        "left": 36,
+        "top": 127,
+        "right": 511.59375,
+        "bottom": 376.25,
+        "width": 475.59375,
+        "height": 249.25
+      },
+      "copyBg": "rgba(0, 0, 0, 0)",
+      "heroGradient": "linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255) 30%, rgba(255, 255, 255, 0.99) 38%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.34) 70%, rgba(255, 255, 255, 0.12) 77%, rgba(255, 255, 255, 0) 82%)",
+      "brandRect": {
+        "left": 20,
+        "top": 9,
+        "right": 270,
+        "bottom": 67,
+        "width": 250,
+        "height": 58
+      },
+      "brandNatural": [
+        3181,
+        891
+      ],
+      "brandOptical": {
+        "sourceBox": {
+          "left": 22,
+          "top": 165,
+          "width": 1123,
+          "height": 591
+        },
+        "visibleLeftMarkHeight": 38.47138047138047,
+        "visibleLeftMarkTop": 10.74074074074074
+      },
+      "overflow": false,
+      "broken": [],
+      "canonical": "https://stt-003.vercel.app/insights",
+      "robotsMeta": "index,follow",
+      "organizationSchema": null,
+      "expectedImage": "/visual-bank/stt/user-approved-six/columns.png",
+      "hasExpected": true,
+      "imageLoaded": true,
+      "heroImageSha256": "03cc644c1f32e05252ebc4defae7149dd6ddc0a8a36f7965436f0c2dff284417",
+      "desktopCopyInReadingZone": false,
+      "mobileSeparated": true,
+      "gradientGeometry": true,
+      "errors": []
+    },
+    {
+      "site": "stt",
+      "route": "/about",
+      "label": "tablet",
+      "http": 200,
+      "title": "關於 STT Governance｜治理判讀與制度設計",
+      "h1": "STT Governance不是一般顧問公司，而是高位階治理文明平台",
+      "h1Count": 1,
+      "heroClass": "cis-hero cis-title-3 cis-with-image cis-clear-left",
+      "heroImage": "/visual-bank/stt/user-approved-six/about-stt.png",
+      "heroImageLoaded": true,
+      "heroImageNatural": [
+        1491,
+        1055
+      ],
+      "heroImageRect": {
+        "left": 0,
+        "top": 77,
+        "right": 820,
+        "bottom": 538.25,
+        "width": 820,
+        "height": 461.25
+      },
+      "heroImageFit": "cover",
+      "copyRect": {
+        "left": 36,
+        "top": 127,
+        "right": 511.59375,
+        "bottom": 528.984375,
+        "width": 475.59375,
+        "height": 401.984375
+      },
+      "copyBg": "rgba(0, 0, 0, 0)",
+      "heroGradient": "linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255) 30%, rgba(255, 255, 255, 0.99) 38%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.34) 70%, rgba(255, 255, 255, 0.12) 77%, rgba(255, 255, 255, 0) 82%)",
+      "brandRect": {
+        "left": 20,
+        "top": 9,
+        "right": 270,
+        "bottom": 67,
+        "width": 250,
+        "height": 58
+      },
+      "brandNatural": [
+        3181,
+        891
+      ],
+      "brandOptical": {
+        "sourceBox": {
+          "left": 22,
+          "top": 165,
+          "width": 1123,
+          "height": 591
+        },
+        "visibleLeftMarkHeight": 38.47138047138047,
+        "visibleLeftMarkTop": 10.74074074074074
+      },
+      "overflow": false,
+      "broken": [],
+      "canonical": "https://stt-003.vercel.app/about",
+      "robotsMeta": "index,follow",
+      "organizationSchema": null,
+      "expectedImage": "/visual-bank/stt/user-approved-six/about-stt.png",
+      "hasExpected": true,
+      "imageLoaded": true,
+      "heroImageSha256": "6ae927ed6e822b3699005a734b169f7b098cd353fe6c688f381730c41da1d33d",
+      "desktopCopyInReadingZone": false,
+      "mobileSeparated": true,
+      "gradientGeometry": true,
+      "errors": []
+    },
+    {
+      "site": "stt",
+      "route": "/eric-chuang",
+      "label": "tablet",
+      "http": 200,
+      "title": "莊鈞翔博士｜治理判讀與制度設計｜STT Governance",
+      "h1": "創辦人暨執行長｜莊鈞翔博士",
+      "h1Count": 1,
+      "heroClass": null,
+      "heroImage": null,
+      "heroImageLoaded": null,
+      "heroImageNatural": null,
+      "heroImageRect": null,
+      "heroImageFit": null,
+      "copyRect": null,
+      "copyBg": null,
+      "heroGradient": null,
+      "brandRect": {
+        "left": 20,
+        "top": 9,
+        "right": 270,
+        "bottom": 67,
         "width": 250,
         "height": 58
       },
@@ -1195,7 +1181,7 @@
       "expectedImage": null,
       "hasExpected": true,
       "imageLoaded": true,
-      "heroImageSha256": "891c3d1b19ba4ac32792543928473f0938fae0bfe529d1ac46e3dabf34f780fe",
+      "heroImageSha256": null,
       "desktopCopyInReadingZone": true,
       "mobileSeparated": true,
       "gradientGeometry": true,
@@ -1207,7 +1193,7 @@
       "label": "tablet",
       "http": 200,
       "title": "機構合作｜STT Governance",
-      "h1": "跨專業治理整合，先建立共同的判讀架構。",
+      "h1": "跨專業治理整合，先建立共同的判讀架構",
       "h1Count": 1,
       "heroClass": "cis-hero cis-title-2 cis-text-only",
       "heroImage": null,
@@ -1216,20 +1202,20 @@
       "heroImageRect": null,
       "heroImageFit": null,
       "copyRect": {
-        "left": 32,
-        "top": 143,
-        "right": 788,
-        "bottom": 437.765625,
-        "width": 756,
-        "height": 294.765625
+        "left": 36,
+        "top": 127,
+        "right": 511.59375,
+        "bottom": 461.9375,
+        "width": 475.59375,
+        "height": 334.9375
       },
       "copyBg": "rgba(0, 0, 0, 0)",
       "heroGradient": "none",
       "brandRect": {
-        "left": 24,
-        "top": 12,
-        "right": 274,
-        "bottom": 70,
+        "left": 20,
+        "top": 9,
+        "right": 270,
+        "bottom": 67,
         "width": 250,
         "height": 58
       },
@@ -1267,7 +1253,7 @@
       "label": "tablet",
       "http": 200,
       "title": "開始治理判讀｜STT Governance",
-      "h1": "先把正在發生的事情說清楚。",
+      "h1": "先把正在發生的事情說清楚",
       "h1Count": 1,
       "heroClass": "cis-hero cis-title-1 cis-text-only",
       "heroImage": null,
@@ -1276,20 +1262,20 @@
       "heroImageRect": null,
       "heroImageFit": null,
       "copyRect": {
-        "left": 32,
-        "top": 143,
-        "right": 788,
-        "bottom": 291.125,
-        "width": 756,
-        "height": 148.125
+        "left": 36,
+        "top": 127,
+        "right": 511.59375,
+        "bottom": 306.1875,
+        "width": 475.59375,
+        "height": 179.1875
       },
       "copyBg": "rgba(0, 0, 0, 0)",
       "heroGradient": "none",
       "brandRect": {
-        "left": 24,
-        "top": 12,
-        "right": 274,
-        "bottom": 70,
+        "left": 20,
+        "top": 9,
+        "right": 270,
+        "bottom": 67,
         "width": 250,
         "height": 58
       },
@@ -1336,20 +1322,20 @@
       "heroImageRect": null,
       "heroImageFit": null,
       "copyRect": {
-        "left": 32,
-        "top": 143,
-        "right": 788,
-        "bottom": 324.265625,
-        "width": 756,
-        "height": 181.265625
+        "left": 36,
+        "top": 127,
+        "right": 511.59375,
+        "bottom": 339.328125,
+        "width": 475.59375,
+        "height": 212.328125
       },
       "copyBg": "rgba(0, 0, 0, 0)",
       "heroGradient": "none",
       "brandRect": {
-        "left": 24,
-        "top": 12,
-        "right": 274,
-        "bottom": 70,
+        "left": 20,
+        "top": 9,
+        "right": 270,
+        "bottom": 67,
         "width": 250,
         "height": 58
       },
@@ -1396,20 +1382,20 @@
       "heroImageRect": null,
       "heroImageFit": null,
       "copyRect": {
-        "left": 32,
-        "top": 143,
-        "right": 788,
-        "bottom": 357.40625,
-        "width": 756,
-        "height": 214.40625
+        "left": 36,
+        "top": 127,
+        "right": 511.59375,
+        "bottom": 372.46875,
+        "width": 475.59375,
+        "height": 245.46875
       },
       "copyBg": "rgba(0, 0, 0, 0)",
       "heroGradient": "none",
       "brandRect": {
-        "left": 24,
-        "top": 12,
-        "right": 274,
-        "bottom": 70,
+        "left": 20,
+        "top": 9,
+        "right": 270,
+        "bottom": 67,
         "width": 250,
         "height": 58
       },
@@ -1446,8 +1432,8 @@
       "route": "/",
       "label": "mobile",
       "http": 200,
-      "title": "STT Governance｜重大決策・企業治理・家族治理",
-      "h1": "讓重要的事，走得更遠。",
+      "title": "STT Governance｜策略智庫智慧治理",
+      "h1": "讓重要的事，走得更遠",
       "h1Count": 1,
       "heroClass": "cis-hero cis-title-1 cis-with-image cis-clear-left",
       "heroImage": "/visual-bank/stt/user-approved-six/home.png",
@@ -1458,28 +1444,28 @@
       ],
       "heroImageRect": {
         "left": 0,
-        "top": 83,
+        "top": 77,
         "right": 390,
-        "bottom": 358.953125,
+        "bottom": 352.953125,
         "width": 390,
         "height": 275.953125
       },
       "heroImageFit": "contain",
       "copyRect": {
         "left": 0,
-        "top": 358.953125,
+        "top": 352.953125,
         "right": 390,
-        "bottom": 779.53125,
+        "bottom": 781.546875,
         "width": 390,
-        "height": 420.578125
+        "height": 428.59375
       },
       "copyBg": "rgb(251, 250, 247)",
       "heroGradient": "linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255) 30%, rgba(255, 255, 255, 0.99) 38%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.34) 70%, rgba(255, 255, 255, 0.12) 77%, rgba(255, 255, 255, 0) 82%)",
       "brandRect": {
-        "left": 24,
-        "top": 12,
-        "right": 274,
-        "bottom": 70,
+        "left": 20,
+        "top": 9,
+        "right": 270,
+        "bottom": 67,
         "width": 250,
         "height": 58
       },
@@ -1528,28 +1514,28 @@
       ],
       "heroImageRect": {
         "left": 0,
-        "top": 83,
+        "top": 77,
         "right": 390,
-        "bottom": 358.953125,
+        "bottom": 352.953125,
         "width": 390,
         "height": 275.953125
       },
       "heroImageFit": "contain",
       "copyRect": {
         "left": 0,
-        "top": 358.953125,
+        "top": 352.953125,
         "right": 390,
-        "bottom": 667.921875,
+        "bottom": 667.140625,
         "width": 390,
-        "height": 308.96875
+        "height": 314.1875
       },
       "copyBg": "rgb(251, 250, 247)",
       "heroGradient": "linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255) 30%, rgba(255, 255, 255, 0.99) 38%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.34) 70%, rgba(255, 255, 255, 0.12) 77%, rgba(255, 255, 255, 0) 82%)",
       "brandRect": {
-        "left": 24,
-        "top": 12,
-        "right": 274,
-        "bottom": 70,
+        "left": 20,
+        "top": 9,
+        "right": 270,
+        "bottom": 67,
         "width": 250,
         "height": 58
       },
@@ -1598,28 +1584,28 @@
       ],
       "heroImageRect": {
         "left": 0,
-        "top": 83,
+        "top": 77,
         "right": 390,
-        "bottom": 358.953125,
+        "bottom": 352.953125,
         "width": 390,
         "height": 275.953125
       },
       "heroImageFit": "contain",
       "copyRect": {
         "left": 0,
-        "top": 358.953125,
+        "top": 352.953125,
         "right": 390,
-        "bottom": 637.53125,
+        "bottom": 636.75,
         "width": 390,
-        "height": 278.578125
+        "height": 283.796875
       },
       "copyBg": "rgb(251, 250, 247)",
       "heroGradient": "linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255) 30%, rgba(255, 255, 255, 0.99) 38%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.34) 70%, rgba(255, 255, 255, 0.12) 77%, rgba(255, 255, 255, 0) 82%)",
       "brandRect": {
-        "left": 24,
-        "top": 12,
-        "right": 274,
-        "bottom": 70,
+        "left": 20,
+        "top": 9,
+        "right": 270,
+        "bottom": 67,
         "width": 250,
         "height": 58
       },
@@ -1657,29 +1643,39 @@
       "label": "mobile",
       "http": 200,
       "title": "治理委任｜STT Governance",
-      "h1": "當一件事情值得被正式治理，就不應只停留在一次諮詢。",
+      "h1": "當一件事情值得被正式治理，就不應只停留在一次諮詢",
       "h1Count": 1,
-      "heroClass": "cis-hero cis-title-2 cis-text-only",
-      "heroImage": null,
-      "heroImageLoaded": null,
-      "heroImageNatural": null,
-      "heroImageRect": null,
-      "heroImageFit": null,
-      "copyRect": {
-        "left": 24,
-        "top": 121,
-        "right": 366,
-        "bottom": 370.40625,
-        "width": 342,
-        "height": 249.40625
+      "heroClass": "cis-hero cis-title-2 cis-with-image",
+      "heroImage": "/visual-approved/bank-14.png",
+      "heroImageLoaded": true,
+      "heroImageNatural": [
+        1672,
+        941
+      ],
+      "heroImageRect": {
+        "left": 0,
+        "top": 77,
+        "right": 390,
+        "bottom": 296.484375,
+        "width": 390,
+        "height": 219.484375
       },
-      "copyBg": "rgba(0, 0, 0, 0)",
-      "heroGradient": "none",
+      "heroImageFit": "contain",
+      "copyRect": {
+        "left": 0,
+        "top": 296.484375,
+        "right": 390,
+        "bottom": 663.15625,
+        "width": 390,
+        "height": 366.671875
+      },
+      "copyBg": "rgb(251, 250, 247)",
+      "heroGradient": "linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255) 30%, rgba(255, 255, 255, 0.99) 38%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.34) 70%, rgba(255, 255, 255, 0.12) 77%, rgba(255, 255, 255, 0) 82%)",
       "brandRect": {
-        "left": 24,
-        "top": 12,
-        "right": 274,
-        "bottom": 70,
+        "left": 20,
+        "top": 9,
+        "right": 270,
+        "bottom": 67,
         "width": 250,
         "height": 58
       },
@@ -1705,7 +1701,7 @@
       "expectedImage": null,
       "hasExpected": true,
       "imageLoaded": true,
-      "heroImageSha256": null,
+      "heroImageSha256": "bae6aee4524894890358a1cafec7298e7905c98a70813efd14338cb7f4783fae",
       "desktopCopyInReadingZone": true,
       "mobileSeparated": true,
       "gradientGeometry": true,
@@ -1717,7 +1713,7 @@
       "label": "mobile",
       "http": 200,
       "title": "研究與出版｜STT Governance",
-      "h1": "判讀不是臨時形成的意見，而是長期累積的制度研究。",
+      "h1": "判讀不是臨時形成的意見，而是長期累積的制度研究",
       "h1Count": 1,
       "heroClass": "cis-hero cis-title-2 cis-with-image cis-clear-left",
       "heroImage": "/visual-bank/stt/user-approved-six/columns.png",
@@ -1728,28 +1724,28 @@
       ],
       "heroImageRect": {
         "left": 0,
-        "top": 83,
+        "top": 77,
         "right": 390,
-        "bottom": 358.953125,
+        "bottom": 352.953125,
         "width": 390,
         "height": 275.953125
       },
       "heroImageFit": "contain",
       "copyRect": {
         "left": 0,
-        "top": 358.953125,
+        "top": 352.953125,
         "right": 390,
-        "bottom": 674.359375,
+        "bottom": 719.625,
         "width": 390,
-        "height": 315.40625
+        "height": 366.671875
       },
       "copyBg": "rgb(251, 250, 247)",
       "heroGradient": "linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255) 30%, rgba(255, 255, 255, 0.99) 38%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.34) 70%, rgba(255, 255, 255, 0.12) 77%, rgba(255, 255, 255, 0) 82%)",
       "brandRect": {
-        "left": 24,
-        "top": 12,
-        "right": 274,
-        "bottom": 70,
+        "left": 20,
+        "top": 9,
+        "right": 270,
+        "bottom": 67,
         "width": 250,
         "height": 58
       },
@@ -1787,7 +1783,7 @@
       "label": "mobile",
       "http": 200,
       "title": "關於 STT Governance｜治理判讀與制度設計",
-      "h1": "STT Governance不是一般顧問公司，而是高位階治理文明平台。",
+      "h1": "STT Governance不是一般顧問公司，而是高位階治理文明平台",
       "h1Count": 1,
       "heroClass": "cis-hero cis-title-3 cis-with-image cis-clear-left",
       "heroImage": "/visual-bank/stt/user-approved-six/about-stt.png",
@@ -1798,28 +1794,28 @@
       ],
       "heroImageRect": {
         "left": 0,
-        "top": 83,
+        "top": 77,
         "right": 390,
-        "bottom": 358.953125,
+        "bottom": 352.953125,
         "width": 390,
         "height": 275.953125
       },
       "heroImageFit": "contain",
       "copyRect": {
         "left": 0,
-        "top": 358.953125,
+        "top": 352.953125,
         "right": 390,
-        "bottom": 812.421875,
+        "bottom": 827.203125,
         "width": 390,
-        "height": 453.46875
+        "height": 474.25
       },
       "copyBg": "rgb(251, 250, 247)",
       "heroGradient": "linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255) 30%, rgba(255, 255, 255, 0.99) 38%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.34) 70%, rgba(255, 255, 255, 0.12) 77%, rgba(255, 255, 255, 0) 82%)",
       "brandRect": {
-        "left": 24,
-        "top": 12,
-        "right": 274,
-        "bottom": 70,
+        "left": 20,
+        "top": 9,
+        "right": 270,
+        "bottom": 67,
         "width": 250,
         "height": 58
       },
@@ -1857,39 +1853,22 @@
       "label": "mobile",
       "http": 200,
       "title": "莊鈞翔博士｜治理判讀與制度設計｜STT Governance",
-      "h1": "莊鈞翔博士",
+      "h1": "創辦人暨執行長｜莊鈞翔博士",
       "h1Count": 1,
-      "heroClass": "cis-hero cis-title-1 cis-with-image cis-portrait",
-      "heroImage": "/visual-approved/eric-page-owner-original.png",
-      "heroImageLoaded": true,
-      "heroImageNatural": [
-        2048,
-        1152
-      ],
-      "heroImageRect": {
-        "left": 0,
-        "top": 83,
-        "right": 390,
-        "bottom": 302.375,
-        "width": 390,
-        "height": 219.375
-      },
-      "heroImageFit": "contain",
-      "copyRect": {
-        "left": 0,
-        "top": 302.375,
-        "right": 390,
-        "bottom": 564.125,
-        "width": 390,
-        "height": 261.75
-      },
-      "copyBg": "rgb(251, 250, 247)",
-      "heroGradient": "linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255) 30%, rgba(255, 255, 255, 0.99) 38%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0.34) 70%, rgba(255, 255, 255, 0.12) 77%, rgba(255, 255, 255, 0) 82%)",
+      "heroClass": null,
+      "heroImage": null,
+      "heroImageLoaded": null,
+      "heroImageNatural": null,
+      "heroImageRect": null,
+      "heroImageFit": null,
+      "copyRect": null,
+      "copyBg": null,
+      "heroGradient": null,
       "brandRect": {
-        "left": 24,
-        "top": 12,
-        "right": 274,
-        "bottom": 70,
+        "left": 20,
+        "top": 9,
+        "right": 270,
+        "bottom": 67,
         "width": 250,
         "height": 58
       },
@@ -1915,7 +1894,7 @@
       "expectedImage": null,
       "hasExpected": true,
       "imageLoaded": true,
-      "heroImageSha256": "891c3d1b19ba4ac32792543928473f0938fae0bfe529d1ac46e3dabf34f780fe",
+      "heroImageSha256": null,
       "desktopCopyInReadingZone": true,
       "mobileSeparated": true,
       "gradientGeometry": true,
@@ -1927,7 +1906,7 @@
       "label": "mobile",
       "http": 200,
       "title": "機構合作｜STT Governance",
-      "h1": "跨專業治理整合，先建立共同的判讀架構。",
+      "h1": "跨專業治理整合，先建立共同的判讀架構",
       "h1Count": 1,
       "heroClass": "cis-hero cis-title-2 cis-text-only",
       "heroImage": null,
@@ -1937,19 +1916,19 @@
       "heroImageFit": null,
       "copyRect": {
         "left": 24,
-        "top": 121,
+        "top": 115,
         "right": 366,
-        "bottom": 407.015625,
+        "bottom": 411.34375,
         "width": 342,
-        "height": 286.015625
+        "height": 296.34375
       },
       "copyBg": "rgba(0, 0, 0, 0)",
       "heroGradient": "none",
       "brandRect": {
-        "left": 24,
-        "top": 12,
-        "right": 274,
-        "bottom": 70,
+        "left": 20,
+        "top": 9,
+        "right": 270,
+        "bottom": 67,
         "width": 250,
         "height": 58
       },
@@ -1987,7 +1966,7 @@
       "label": "mobile",
       "http": 200,
       "title": "開始治理判讀｜STT Governance",
-      "h1": "先把正在發生的事情說清楚。",
+      "h1": "先把正在發生的事情說清楚",
       "h1Count": 1,
       "heroClass": "cis-hero cis-title-1 cis-text-only",
       "heroImage": null,
@@ -1997,19 +1976,19 @@
       "heroImageFit": null,
       "copyRect": {
         "left": 24,
-        "top": 121,
+        "top": 115,
         "right": 366,
-        "bottom": 272.796875,
+        "bottom": 272.015625,
         "width": 342,
-        "height": 151.796875
+        "height": 157.015625
       },
       "copyBg": "rgba(0, 0, 0, 0)",
       "heroGradient": "none",
       "brandRect": {
-        "left": 24,
-        "top": 12,
-        "right": 274,
-        "bottom": 70,
+        "left": 20,
+        "top": 9,
+        "right": 270,
+        "bottom": 67,
         "width": 250,
         "height": 58
       },
@@ -2057,19 +2036,19 @@
       "heroImageFit": null,
       "copyRect": {
         "left": 24,
-        "top": 121,
+        "top": 115,
         "right": 366,
-        "bottom": 303.1875,
+        "bottom": 302.40625,
         "width": 342,
-        "height": 182.1875
+        "height": 187.40625
       },
       "copyBg": "rgba(0, 0, 0, 0)",
       "heroGradient": "none",
       "brandRect": {
-        "left": 24,
-        "top": 12,
-        "right": 274,
-        "bottom": 70,
+        "left": 20,
+        "top": 9,
+        "right": 270,
+        "bottom": 67,
         "width": 250,
         "height": 58
       },
@@ -2117,19 +2096,19 @@
       "heroImageFit": null,
       "copyRect": {
         "left": 24,
-        "top": 121,
+        "top": 115,
         "right": 366,
-        "bottom": 363.96875,
+        "bottom": 363.1875,
         "width": 342,
-        "height": 242.96875
+        "height": 248.1875
       },
       "copyBg": "rgba(0, 0, 0, 0)",
       "heroGradient": "none",
       "brandRect": {
-        "left": 24,
-        "top": 12,
-        "right": 274,
-        "bottom": 70,
+        "left": 20,
+        "top": 9,
+        "right": 270,
+        "bottom": 67,
         "width": 250,
         "height": 58
       },
@@ -4032,8 +4011,8 @@
         "complete": true,
         "naturalWidth": 990,
         "naturalHeight": 1400,
-        "renderedWidth": 430,
-        "renderedHeight": 608,
+        "renderedWidth": 184,
+        "renderedHeight": 300,
         "objectFit": "contain",
         "aspectRatio": "auto"
       },
@@ -4043,8 +4022,8 @@
         "complete": true,
         "naturalWidth": 990,
         "naturalHeight": 1400,
-        "renderedWidth": 430,
-        "renderedHeight": 608,
+        "renderedWidth": 184,
+        "renderedHeight": 300,
         "objectFit": "contain",
         "aspectRatio": "auto"
       },
@@ -4054,8 +4033,8 @@
         "complete": true,
         "naturalWidth": 1448,
         "naturalHeight": 2048,
-        "renderedWidth": 430,
-        "renderedHeight": 608,
+        "renderedWidth": 184,
+        "renderedHeight": 300,
         "objectFit": "contain",
         "aspectRatio": "auto"
       },
@@ -4065,8 +4044,8 @@
         "complete": true,
         "naturalWidth": 1448,
         "naturalHeight": 2048,
-        "renderedWidth": 430,
-        "renderedHeight": 608,
+        "renderedWidth": 184,
+        "renderedHeight": 300,
         "objectFit": "contain",
         "aspectRatio": "auto"
       }
@@ -4076,12 +4055,12 @@
     {
       "site": "stt",
       "brandRect": {
-        "left": 52,
-        "top": 11,
-        "right": 392,
-        "bottom": 81,
-        "width": 340,
-        "height": 70
+        "left": 24,
+        "top": 13,
+        "right": 314,
+        "bottom": 79,
+        "width": 290,
+        "height": 66
       },
       "brandNatural": [
         3181,
@@ -4094,8 +4073,8 @@
           "width": 1123,
           "height": 591
         },
-        "visibleLeftMarkHeight": 46.43097643097643,
-        "visibleLeftMarkTop": 12.962962962962962
+        "visibleLeftMarkHeight": 43.77777777777778,
+        "visibleLeftMarkTop": 12.222222222222221
       }
     },
     {
